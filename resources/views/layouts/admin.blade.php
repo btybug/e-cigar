@@ -29,7 +29,7 @@
    {!! Html::style("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
 
 
-    <link rel="stylesheet" href="{{asset('public/public/admin_assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css')}}">
