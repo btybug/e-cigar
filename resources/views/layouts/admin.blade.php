@@ -152,7 +152,7 @@
 
 <script src="{{asset('public/js/DataTables/datatables.js')}}"></script>
 
-{!! Html::script("public/admin_assets/js/helpers.js")!!}
+{{--{!! Html::script("public/admin_assets/js/helpers.js")!!}--}}
 
 {!! Html::script("public/admin_assets/js/jquery.datetimepicker.full.min.js")!!}
 

@@ -115,7 +115,7 @@
                 <div class="box-body chat" id="chat-box">
                     <!-- chat item -->
                     <div class="item">
-                        <img src="admin_theme/dist/img/user4-128x128.jpg" alt="user image" class="online">
+                        <img src="public/admin_theme/dist/img/user4-128x128.jpg" alt="user image" class="online">
 
                         <p class="message">
                             <a href="#" class="name">
@@ -142,7 +142,7 @@
                     <!-- /.item -->
                     <!-- chat item -->
                     <div class="item">
-                        <img src="admin_theme/dist/img/user3-128x128.jpg" alt="user image" class="offline">
+                        <img src="public/admin_theme/dist/img/user3-128x128.jpg" alt="user image" class="offline">
 
                         <p class="message">
                             <a href="#" class="name">
@@ -157,7 +157,7 @@
                     <!-- /.item -->
                     <!-- chat item -->
                     <div class="item">
-                        <img src="admin_theme/dist/img/user2-160x160.jpg" alt="user image" class="offline">
+                        <img src="public/admin_theme/dist/img/user2-160x160.jpg" alt="user image" class="offline">
 
                         <p class="message">
                             <a href="#" class="name">
@@ -524,11 +524,11 @@
 @stop
 @section('css')
     <!-- jvectormap -->
-    {!! Html::style("admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
+    {!! Html::style("public/admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
     @stop
 @section('js')
     <!-- jvectormap -->
-    {!! Html::script("admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
-    {!! Html::script("admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
-    {!! Html::script("admin_theme/dist/js/pages/dashboard.js")!!}
+    {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
+    {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
+    {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js")!!}
     @stop
