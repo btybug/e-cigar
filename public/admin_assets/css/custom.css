@@ -1,0 +1,111 @@
+#translations-table tbody tr{
+    cursor: pointer;
+}
+.custom_margin_left_5{
+    margin-left: 5px;
+}
+.custom_text{
+    cursor: pointer;
+}
+.margin-left{
+    margin-left: 10px;
+}
+.glyph-custom{
+    color: #ffffff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.glyf-success-custom {
+    background-color: #07EB40;
+}
+.glyf-danger-custom {
+    background-color: #FF0000;
+}
+.dataTables_wrapper {
+    background-color: #efefef;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #d2d2d2;
+    margin: 20px 0;
+    border-top: 3px solid #d2d6de;
+}
+div.dataTables_wrapper div.dataTables_length select {
+    border-radius: 4px;
+}
+.form-control:focus {
+    border-color: transparent;
+    box-shadow: none;
+}
+div.dataTables_wrapper div.dataTables_filter input {
+    border-radius: 4px;
+}
+.nav-tabs-custom {
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    background: #fff;
+    box-shadow: 0 0 5px #d2d2d2;
+    border-radius: 3px;
+}
+.box{
+    box-shadow: 0 0 5px #d2d2d2;
+}
+.form-control {
+    border-radius: 4px;
+}
+.modal-header {
+  overflow: hidden;
+}
+.modal-header .modal-title{
+  float: left;
+}
+.modal-footer .btn{
+    background-color: transparent;
+    border: 1px solid #fafafa;
+    border-radius: 2px;
+}
+.modal-footer .btn.focus, .modal-footer .btn:focus,.modal-footer .btn:hover {
+    color: #fafafa;
+    text-decoration: none;
+}
+.modal-header .close {
+    font-size: 16px;
+}
+
+.p0{
+    padding: 0!important;
+}
+.p15{
+    padding: 15px;
+}
+.mt15{
+    margin-top: 15px;
+}
+.tr-style{
+    background-color: #3c8dbc;
+    color:#ffffff;
+    font-weight: 700;
+}
+.table-style tbody tr:hover:not(.tr-style){
+    transition: 0.3s ease;
+    background-color: #3c8dbc38;
+}
+.get_input_value{
+    outline: none;
+    padding: 2px 3px;
+    color: #ffffff;
+    background-color: #3c8dbc;
+    border-radius: 3px;
+    border: 1px solid #000000;
+    font-weight: 700;
+}
+.token.atrule, .token.attr-value, .token.keyword {
+    color: #07a;
+}
+.alert-messages{
+    position: absolute;
+    z-index: 9999;
+    left: 36%;
+    width: 40%;
+    box-shadow: -9px 19px 18px #888888ab;
+}

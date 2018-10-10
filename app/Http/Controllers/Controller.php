@@ -9,5 +9,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
+    protected $view;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function view(string $path)
+    {
+        return $this->view.'.'.$path;
+    }
 }
