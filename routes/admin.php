@@ -17,6 +17,10 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/new', 'Admin\StoreController@getNewCategory')->name('admin_store_categories_new');
     });
 });
+Route::group(['prefix' => 'roles'], function () {
+    Route::get('/', 'Admin\RolesController@index')->name('admin_roles');
+
+});
 Route::get('/blog', 'Admin\BlogController@index')->name('admin_blog');
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
