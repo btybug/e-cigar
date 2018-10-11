@@ -23,7 +23,7 @@
                             <ul class="navbar-nav">
 
                                 <li class="nav-item"><div class="nav-link">Welcome Guest!</div></li>
-                                <li class="nav-item"> <a href="http://laravelcommerce.com/login" class="nav-link -before"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Login/Register</a> </li>
+                                <li class="nav-item"> <a href="{!! route('login') !!}" class="nav-link -before"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Login/Register</a> </li>
                             </ul>
                         </div>
                     </nav></div>
