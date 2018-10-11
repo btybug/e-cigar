@@ -33,18 +33,20 @@
         $(function () {
          $('#users-table').DataTable({
                 ajax:  "{!! route('dt_all_users') !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
                 columns: [
                     {data: 'id',name: 'id'},
                     {data: 'name', name: 'name'},
                     {data: 'last_name',name: 'last_name'},
-                    {data: 'email', name: 'email'},
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},
                     {data: 'country', name: 'country'},
                     {data: 'gender', name: 'gender'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'action', name: 'action'}
+                    // {data: 'action', name: 'action'}
                 ]
             });
         });
