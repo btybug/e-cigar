@@ -81,6 +81,18 @@
             </li>
             <li class="treeview">
                 <a href="#">
+                    <i class="fa fa-bath"></i>
+                    <span>Inventory </span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
                     <i class="fa fa-forumbee"></i>
                     <span>Forum</span>
                     <span class="pull-right-container">
