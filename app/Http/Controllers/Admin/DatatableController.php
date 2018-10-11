@@ -59,7 +59,10 @@ class DatatableController extends Controller
 
         return Datatables::of($query)->addColumn('actions', function ($role) {
             return '<a href="'.route('admin_edit_role',$role->id).'" class="btn btn-warning events-modal" >Edit</a>';
-        })->rawColumns(['actions'])->make(true);
+        })->addColumn('access', function ($role) {
+            return 'Admin Panel';
+        })
+            ->rawColumns(['actions','access'])->make(true);
     }
     
 //    public function getAllCompetitions($sport_id = null, $region_id = null)

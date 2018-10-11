@@ -17,6 +17,7 @@
                     <th>Title</th>
                     <th>SLug</th>
                     <th>Description</th>
+                    <th>Access</th>
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
@@ -38,6 +39,7 @@
                     {data: 'title', name: 'title'},
                     {data: 'slug',name: 'slug'},
                     {data: 'description', name: 'description'},
+                    {data: 'access', name: 'access'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
