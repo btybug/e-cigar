@@ -6,8 +6,9 @@
     <section class="content-header">
         <h1> Admin Profile </h1>
         <ol class="breadcrumb">
-            <li><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li class="active">Admin Profile </li>
+            <li><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i>
+                    Dashboard</a></li>
+            <li class="active">Admin Profile</li>
         </ol>
     </section>
 
@@ -17,9 +18,11 @@
             <div class="col-md-3">
 
                 <!-- Profile Image -->
-                <div class="box box-primary">
+                <div class="box box-primary mar-0">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png" alt="Václav profile picture">
+                        <img class="profile-user-img img-responsive img-circle"
+                             src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"
+                             alt="Václav profile picture">
 
                         <h3 class="profile-username text-center">Václav Kutiš</h3>
 
@@ -42,28 +45,46 @@
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
-
+                <ul class="admin-profile-left">
+                    <li>
+                        <a href="#">Profile</a>
+                    </li>
+                    <li>
+                        <a href="#">Password</a>
+                    </li>
+                    <li>
+                        <a href="#">Logs</a>
+                    </li>
+                    <li>
+                        <a href="#">Favourites</a>
+                    </li>
+                </ul>
                 <!-- /.box -->
             </div>
             <!-- /.col -->
             <div class="col-md-9">
                 <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
-                        <li><a href="#passwordDiv" data-toggle="tab">Password</a></li>
-                    </ul>
+                    {{--<ul class="nav nav-tabs">--}}
+                        {{--<li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>--}}
+                        {{--<li><a href="#passwordDiv" data-toggle="tab">Password</a></li>--}}
+                    {{--</ul>--}}
                     <div class="tab-content">
                         <div class=" active tab-pane" id="profile">
                             <!-- The timeline -->
-                            <form method="POST" action="http://demo0.laravelcommerce.com/admin/updateProfile" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data"><input name="_token" type="hidden" value="EPR3S7xjpRJpLaBWjrK2inveDp79PyO1CZih33bg">
+                            <form method="POST" action="http://demo0.laravelcommerce.com/admin/updateProfile"
+                                  accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data"><input
+                                        name="_token" type="hidden" value="EPR3S7xjpRJpLaBWjrK2inveDp79PyO1CZih33bg">
                                 <input class="form-control" id="myid" name="myid" type="hidden" value="1">
-                                <input class="form-control" id="oldImage" name="oldImage" type="hidden" value="resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png">
+                                <input class="form-control" id="oldImage" name="oldImage" type="hidden"
+                                       value="resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png">
                                 <div class="form-group">
                                     <label for="inputName" class="col-sm-2 control-label">First Name</label>
 
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="first_name" name="first_name" type="text" value="Václav">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        <input class="form-control" id="first_name" name="first_name" type="text"
+                                               value="Václav">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                           Please enter your first name.</span>
                                     </div>
                                 </div>
@@ -71,8 +92,10 @@
                                     <label for="inputEmail" class="col-sm-2 control-label">Last Name</label>
 
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="last_name" name="last_name" type="text" value="Kutiš">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        <input class="form-control" id="last_name" name="last_name" type="text"
+                                               value="Kutiš">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                           Please enter your last name.</span>
                                     </div>
                                 </div>
@@ -83,7 +106,8 @@
 
                                     <div class="col-sm-10">
                                         <input id="newImage" name="newImage" type="file"><br>
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                        Please upload small size image.</span>
                                     </div>
                                 </div>
@@ -92,8 +116,10 @@
                                     <label for="inputName" class="col-sm-2 control-label">Address </label>
 
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="address" name="address" type="text" value="address">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        <input class="form-control" id="address" name="address" type="text"
+                                               value="address">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                           Please enter your address.</span>
                                     </div>
                                 </div>
@@ -103,7 +129,8 @@
 
                                     <div class="col-sm-10">
                                         <input class="form-control" id="city" name="city" type="text" value="Nivada">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter your city.</span>
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter your city.</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -352,7 +379,8 @@
                                             <option value="239">Zimbabwe</option>
                                             <option value="240">fdf</option>
                                         </select>
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter your country.</span>
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter your country.</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -361,7 +389,8 @@
                                         <select class="form-control zoneContent" name="state">
                                             <option value="">Select Zone</option>
                                         </select>
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter your state.</span>
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter your state.</span>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -375,8 +404,10 @@
                                     <label for="inputExperience" class="col-sm-2 control-label">Phone</label>
 
                                     <div class="col-sm-10">
-                                        <input class="form-control" id="phone" name="phone" type="text" value="0312 6545 874">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
+                                        <input class="form-control" id="phone" name="phone" type="text"
+                                               value="0312 6545 874">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">
                          Please enter your phone number.</span>
                                     </div>
                                 </div>
@@ -392,12 +423,18 @@
                         <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="passwordDiv">
-                            <form method="POST" action="http://demo0.laravelcommerce.com/admin/updateAdminPassword" accept-charset="UTF-8" onsubmit="return validatePasswordForm()" id="updateAdminPassword" name="updateAdminPassword" class="form-horizontal" enctype="multipart/form-data"><input name="_token" type="hidden" value="EPR3S7xjpRJpLaBWjrK2inveDp79PyO1CZih33bg">
+                            <form method="POST" action="http://demo0.laravelcommerce.com/admin/updateAdminPassword"
+                                  accept-charset="UTF-8" onsubmit="return validatePasswordForm()"
+                                  id="updateAdminPassword" name="updateAdminPassword" class="form-horizontal"
+                                  enctype="multipart/form-data"><input name="_token" type="hidden"
+                                                                       value="EPR3S7xjpRJpLaBWjrK2inveDp79PyO1CZih33bg">
                                 <div class="form-group">
                                     <label for="password" class="col-sm-2 control-label">New Password</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="New Password">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter minimum 6 characters.</span>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                               placeholder="New Password">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter minimum 6 characters.</span>
                                         <span style="display: none" class="help-block"></span>
                                     </div>
                                 </div>
@@ -405,8 +442,10 @@
                                 <div class="form-group">
                                     <label for="re-password" class="col-sm-2 control-label">Re-Enter Password</label>
                                     <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="re_password" name="re_password" placeholder="Re-Enter Password">
-                                        <span class="help-block" style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter minimum 6 characters.</span>
+                                        <input type="password" class="form-control" id="re_password" name="re_password"
+                                               placeholder="Re-Enter Password">
+                                        <span class="help-block"
+                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter minimum 6 characters.</span>
                                         <span style="display: none" class="help-block"></span>
                                     </div>
                                 </div>
@@ -429,6 +468,9 @@
         <!-- /.row -->
 
     </section>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
 @stop

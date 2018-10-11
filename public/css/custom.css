@@ -12,6 +12,19 @@
 .list-tabs-head .head #flag-select{
     width: auto;
 }
-.tabs_content{
-
+.admin-profile-left{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 2px solid #424242;
+}
+.admin-profile-left li a{
+    display: block;
+    background-color: #fff;
+    border: 1px solid #EEEEEE;
+    padding: 10px;
+    font-size: 16px;
+}
+.mar-0{
+    margin: 0;
 }
