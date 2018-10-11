@@ -17,7 +17,7 @@
                     <th>SLug</th>
                     <th>Description</th>
                     <th>Created At</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
             </table>
@@ -38,7 +38,7 @@
                     {data: 'slug',name: 'slug'},
                     {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'action', name: 'action'}
+                    {data: 'actions', name: 'actions'}
                 ]
             });
         });

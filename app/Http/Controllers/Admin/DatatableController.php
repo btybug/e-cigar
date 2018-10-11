@@ -33,7 +33,7 @@ class DatatableController extends Controller
     {
         return Datatables::of(Category::query())
             ->make(true);
-            }
+    }
 
     public function getAllRoles()
     {
