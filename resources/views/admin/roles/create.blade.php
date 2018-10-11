@@ -3,7 +3,8 @@
 
 @stop
 @section('content')
-    <div class="col-md-3">
+
+    <div class="col-md-6">
         {!! Form::open(['class'=>'form-horizontal']) !!}
 
         <fieldset>
@@ -16,6 +17,13 @@
                 <label class="col-md-4 control-label" for="passwordinput">Title</label>
                 <div class="col-md-4">
                     {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                </div>
+            </div>
+            <!-- Password input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="passwordinput">Type</label>
+                <div class="col-md-4">
+                    {!! Form::select('type',['Admin Panel'=>'backend','Front Site'=>'frontend'],null,['class'=>'form-control input-md']) !!}
                 </div>
             </div>
 
@@ -36,46 +44,14 @@
         {!! Form::close() !!}
 
     </div>
-    <div class="col-md-9">
+    <div class="col-md-6">
     <div id="treeview_json"></div>
     </div>
 @stop
 @section('js')
 <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
 <script>
-    var tree = [
-  {
-    text: "Parent 1",
-    nodes: [
-      {
-        text: "Child 1",
-        nodes: [
-          {
-            text: "Grandchild 1"
-          },
-          {
-            text: "Grandchild 2"
-          }
-        ]
-      },
-      {
-        text: "Child 2"
-      }
-    ]
-  },
-  {
-    text: "Parent 2"
-  },
-  {
-    text: "Parent 3"
-  },
-  {
-    text: "Parent 4"
-  },
-  {
-    text: "Parent 5"
-  }
-]
+    var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
     $('#treeview_json').treeview({
         data: tree,
         showCheckbox: true,

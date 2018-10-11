@@ -40,7 +40,7 @@ Route::group(['prefix' => 'orders'], function () {
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
 
-Route::group(['prefix' => 'tools'], function () {
+Route::group(['prefix' => '/tools'], function () {
     Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
     Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
 });

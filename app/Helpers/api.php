@@ -65,3 +65,71 @@ function BBgetTimeFormat($time)
 
     return date("H:i:s", strtotime($time));
 }
+
+
+function getModuleRoutes($method, $sub)
+{
+    $routes = array();
+    $new_array = [];
+    $routeCollection = \Route::getRoutes();
+    foreach ($routeCollection as $value) {
+        $routes[$value->methods()[0]][$value->uri()] =  ['url'=>$value->uri(),'text'=>$value->getName()];
+//        if (!isset($routes[$value->methods()[0]][$value->getPrefix()])) {
+//            $routes[$value->methods()[0]][] = ['url'=>$value->uri(),'text'=>$value->getName()];
+//        }
+    }
+    if (!isset($routes[$method]['admin'])) {
+        $routes[$method]['admin'] = [];
+    }
+    ksort($routes[$method]);
+    $routes[$method] = (keysort($routes[$method], $sub));
+
+    if(isset($routes[$method][$sub]))
+       return collect($routes[$method][$sub]);
+
+}
+
+ function keysort($array, $url, $count = 0)
+{
+    foreach ($array as $key => $value) {
+        $count++;
+        if (is_child($url, $key)) {
+            $array[$url]['nodes'][$key] = $value;
+            unset($array[$key]);
+        }
+    }
+    if (isset($array[$url]['nodes']) && count($array[$url]['nodes'])) {
+        foreach ($array[$url]['nodes'] as $k => $v) {
+            $array[$url]['nodes'] = keysort($array[$url]['nodes'], $k);
+        }
+    }
+    return $array;
+}
+
+
+ function is_child($parent, $child)
+{
+    if ($parent == $child) return false;
+    $parent = clean_urls($parent);
+    $child = clean_urls($child);
+    return (array_sort_with_count($child, count($parent)) == $parent);
+}
+
+
+ function clean_urls($url)
+{
+    if (isset($url[0]) && $url[0] == '/') {
+        $url = substr($url, 1);
+    }
+    return explode('/', $url);
+}
+
+
+function array_sort_with_count(array $array, $count)
+{
+    $cunk = array_chunk($array, $count);
+    if (count($cunk)) {
+        return $cunk[0];
+    }
+    return false;
+}
