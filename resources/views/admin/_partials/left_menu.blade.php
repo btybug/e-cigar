@@ -103,7 +103,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_tools')}}"><i class="fa fa-circle-o"></i> Show</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                    <li><a href="{{ route('admin_tools_tags') }}"><i class="fa fa-circle-o"></i> Tags</a></li>
                 </ul>
             </li>
         </ul>

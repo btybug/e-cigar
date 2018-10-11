@@ -24,7 +24,11 @@ Route::group(['prefix' => 'roles'], function () {
 Route::get('/blog', 'Admin\BlogController@index')->name('admin_blog');
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
-Route::get('/tools', 'Admin\ToolsController@index')->name('admin_tools');
+
+Route::group(['prefix' => 'tools'], function () {
+    Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
+    Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
+});
 
 
 //MEDIA
