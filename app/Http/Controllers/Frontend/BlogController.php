@@ -11,6 +11,6 @@ class BlogController extends Controller
     protected $view='frontend.blog';
     public function index()
     {
-        return view($this->view('index'));
+        return $this->view('index');
     }
 }

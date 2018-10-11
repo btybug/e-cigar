@@ -10,6 +10,6 @@ class ShopController extends Controller
     protected $view='frontend.shop';
     public function index()
     {
-        return view($this->view('index'));
+        return $this->view('index');
     }
 }

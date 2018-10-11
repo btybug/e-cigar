@@ -34,4 +34,9 @@ class AdminController extends Controller
     {
         return view('admin.passport');
     }
+
+    public function roles()
+    {
+        return view('');
+    }
 }

@@ -17,6 +17,6 @@ class ToolsController extends Controller
 
     public function index()
     {
-        return view($this->view('index'));
+        return $this->view('index');
     }
 }

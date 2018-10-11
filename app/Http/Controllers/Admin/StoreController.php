@@ -18,12 +18,12 @@ class StoreController extends Controller
 
     public function index()
     {
-        return view($this->view('index'));
+        return $this->view('index');
     }
 
     public function newProduct()
     {
-        return view($this->view('new'));
+        return $this->view('new');
     }
 
     public function getCategories()
@@ -31,11 +31,11 @@ class StoreController extends Controller
 //        $category = Category::first();
 //        $translation = $category->translate('am');
 //        dd($category->name,$translation->name);
-        return view($this->view('categories.index'));
+        return $this->view('categories.index');
     }
 
     public function getNewCategory()
     {
-        return view($this->view('categories.new'));
+        return $this->view('categories.new');
     }
 }
