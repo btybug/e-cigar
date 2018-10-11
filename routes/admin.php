@@ -26,7 +26,13 @@ Route::group(['prefix' => 'roles-mebership'], function () {
     Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
     Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
 });
-Route::get('/blog', 'Admin\BlogController@index')->name('admin_blog');
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', 'Admin\BlogController@index')->name('admin_blog');
+    Route::get('/create', 'Admin\BlogController@create')->name('admin_blog_create');
+    Route::get('/edit/{id}', 'Admin\BlogController@edit')->name('admin_blog_edit');
+});
+
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
 

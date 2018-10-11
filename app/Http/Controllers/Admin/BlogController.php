@@ -19,4 +19,14 @@ class BlogController extends Controller
     {
         return $this->view('index');
     }
+
+    public function create()
+    {
+        return $this->view('new');
+    }
+
+    public function edit($id)
+    {
+        return $this->view('edit');
+    }
 }
