@@ -13,4 +13,31 @@ class UserController extends Controller
     {
         return $this->view('index');
     }
+
+    public function getProfile()
+    {
+        return $this->view('profile');
+    }
+
+    public function getFavourites()
+    {
+        return $this->view('favourites');
+    }
+
+    public function getAddress()
+    {
+        return $this->view('address');
+    }
+
+    public function getOrders()
+    {
+        return $this->view('orders');
+    }
+
+    public function getTickets()
+    {
+        return $this->view('tickets');
+    }
+
+
 }
