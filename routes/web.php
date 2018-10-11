@@ -18,6 +18,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/blog', 'Frontend/BlogController@index')->name('blog');
-Route::get('/forum', 'Frontend/ForumController@index')->name('forum');
-Route::get('/shop', 'ShopController@index')->name('shop');
+Route::get('/blog', 'Frontend\BlogController@index')->name('blog');
+Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
+Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
