@@ -23,8 +23,9 @@
 @stop
 @section('content')
     <div class="tab-content tabs_content">
-        <div id="home" class="tab-pane  fade in active">
+        <div id="home" class="tab-pane fade in active">
             <div class="text-right btn-save">
+                <button type="submit" class="btn btn-danger btn-view">View Product</button>
                 <button type="submit" class="btn btn-info">Save</button>
             </div>
             <div class="row">
@@ -47,14 +48,16 @@
                                 <div class="form-group row">
                                     <label class="col-sm-3">Short Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control"  name="" id="" cols="30" rows="2" placeholder="Description"></textarea>
+                                        <textarea class="form-control" name="" id="" cols="30" rows="2"
+                                                  placeholder="Description"></textarea>
 
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3">Long Description</label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control"  name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                                        <textarea class="form-control" name="" id="" cols="30" rows="10"
+                                                  placeholder="Description"></textarea>
 
                                     </div>
                                 </div>
@@ -80,7 +83,48 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-
+                    <div class="view-product-wall">
+                        <div class="status-wall wall">
+                            <div class="row">
+                                <label class="col-sm-3">Status</label>
+                                <div class="col-sm-9">
+                                    <select name="" id="" class="form-control">
+                                        <option value="">Published</option>
+                                        <option value="">UnPublish</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tag-wall wall">
+                            <div class="row">
+                                <label class="col-sm-3">Tags</label>
+                                <div class="col-sm-9">
+                                    <input type="text" value="tag1" data-role="tagsinput" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-wall wall">
+                            <h6>Category</h6>
+                            <div class="cat-checkbox">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Parent</label>
+                                </div>
+                                <div class="child-checkbox">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="">Child1</label>
+                                    </div>
+                                </div>
+                                <div class="child-checkbox">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" value="">Child2</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="">Parent 2</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -175,10 +219,12 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
+    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script>
         $(document).ready(function () {
             $('#flag-select').flagStrap({

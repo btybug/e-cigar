@@ -1,30 +1,62 @@
-.list-tabs-head .tab-content .form-group{
-    margin-top:10px;
+.list-tabs-head .tab-content .form-group {
+    margin-top: 10px;
 }
-.list-tabs-head .tab-content .btn-save{
-    margin-top:10px;
+
+.list-tabs-head .tab-content .btn-save {
+    margin-top: 10px;
 }
+
 .list-tabs-head .head {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.list-tabs-head .head #flag-select{
+
+.list-tabs-head .head #flag-select {
     width: auto;
 }
-.admin-profile-left{
+
+.admin-profile-left {
     list-style: none;
     padding: 0;
     margin: 0;
     border-top: 2px solid #424242;
 }
-.admin-profile-left li a{
+
+.admin-profile-left li a {
     display: block;
     background-color: #fff;
     border: 1px solid #EEEEEE;
     padding: 10px;
     font-size: 16px;
 }
-.mar-0{
+
+.mar-0 {
     margin: 0;
+}
+.tabs_content .btn-save{
+    margin-bottom:20px;
+}
+.tabs_content .btn-save .btn-view {
+    margin-right: 10px;
+}
+
+.tabs_content .view-product-wall .wall {
+    border: 1px solid #b9b9b9;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: #e2e2e266;
+}
+.tabs_content .view-product-wall h6 {
+    display: inline-block;
+    max-width: 100%;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 5px;
+}
+.tabs_content .view-product-wall .child-checkbox{
+    margin-left:15px;
+}
+.tabs_content .view-product-wall .bootstrap-tagsinput{
+    width: 100%;
 }
