@@ -9,6 +9,6 @@ class ForumController extends Controller
 {
    public function index()
    {
-       dd('asdfsd');
+       return view('frontend.forum');
    }
 }
