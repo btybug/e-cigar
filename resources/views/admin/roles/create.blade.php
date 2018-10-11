@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-    <div class="col-md-6">
+    <div class="col-md-3">
         {!! Form::open(['class'=>'form-horizontal']) !!}
 
         <fieldset>
@@ -36,7 +36,7 @@
         {!! Form::close() !!}
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-9">
 
     </div>
 @stop
