@@ -27,7 +27,7 @@
 
             <li><a href="{{route('admin_dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
-            {{--<li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>--}}
+            <li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-group"></i>
@@ -51,9 +51,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_store_categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
-                    <li><a href="{{route('admin_store_categories_new')}}"><i class="fa fa-circle-o"></i> New Category</a></li>
                     <li><a href="{{route('admin_store')}}"><i class="fa fa-circle-o"></i> Products</a></li>
-                    <li><a href="{{route('admin_store_new')}}"><i class="fa fa-circle-o"></i> New product</a></li>
                 </ul>
             </li>
             <li class="treeview">
