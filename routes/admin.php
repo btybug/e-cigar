@@ -8,6 +8,7 @@
 
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+Route::get('/languages', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_users');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
