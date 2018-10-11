@@ -3,27 +3,6 @@
 
 @stop
 @section('content')
-    <!-- <div class="row">
-        <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Categories</h2></div>
-            <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_store_categories_new') !!}">Add new</a></div>
-        </div>
-        <div class="col-xs-12">
-            <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Icon</th>
-                    <th>Added/Last Modified Date</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-    </div> -->
     <div class="row">
         <div class="col-md-4">
         <div id="tree1"></div>
@@ -33,7 +12,28 @@
             <a class="btn btn-primary pull-right" href="{!! route('admin_store_categories_new') !!}">Add new</a></div>
             
             <div class="content-area">
-            
+                {!! Form::model(null) !!}
+                <div class="form-group">
+                    <label>Category Name</label>
+                    {!! Form::text('name',null,['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    <label>Parent</label>
+                    {!! Form::select('parent_id',[''=>'No Parent'],null,['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    <label>Image</label>
+                    {!! Form::file('image',['class'=>'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::submit('Save',['class' => 'btn btn-success']) !!}
+                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
