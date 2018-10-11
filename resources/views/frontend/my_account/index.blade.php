@@ -3,16 +3,16 @@
     <div class="container mt-5">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Home</a>
+                <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">first</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Profile</a>
+                <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">second</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">Messages</a>
+                <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">third</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Settings</a>
+                <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">forth</a>
             </li>
         </ul>
 
