@@ -64,8 +64,19 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Show</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                    <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bath"></i>
+                    <span>Orders</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                 </ul>
             </li>
             <li class="treeview">

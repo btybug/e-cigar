@@ -33,6 +33,10 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('/edit/{id}', 'Admin\BlogController@edit')->name('admin_blog_edit');
 });
 
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/', 'Admin\OrdersController@index')->name('admin_orders');
+});
+
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
 
