@@ -154,7 +154,7 @@
                                         <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=three">Home Page 3</a> </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="http://laravelcommerce.com/shop">Shop</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('shop') !!}">Shop</a> </li>
 
                                 <li class="nav-item dropdown mega-dropdown open">
                                     <a href="javascript:void(0);" class="nav-link dropdown-toggle">
