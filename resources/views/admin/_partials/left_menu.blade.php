@@ -50,8 +50,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_store')}}"><i class="fa fa-circle-o"></i> Show</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                    <li><a href="{{route('admin_store_categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+                    <li><a href="{{route('admin_store_categories_new')}}"><i class="fa fa-circle-o"></i> New Category</a></li>
+                    <li><a href="{{route('admin_store')}}"><i class="fa fa-circle-o"></i> Products</a></li>
+                    <li><a href="{{route('admin_store_new')}}"><i class="fa fa-circle-o"></i> New product</a></li>
                 </ul>
             </li>
             <li class="treeview">

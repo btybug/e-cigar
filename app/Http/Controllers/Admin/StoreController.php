@@ -19,4 +19,19 @@ class StoreController extends Controller
     {
         return view($this->view('index'));
     }
+
+    public function newProduct()
+    {
+        return view($this->view('new'));
+    }
+
+    public function getCategories()
+    {
+        return view($this->view('categories.index'));
+    }
+
+    public function getNewCategory()
+    {
+        return view($this->view('categories.new'));
+    }
 }
