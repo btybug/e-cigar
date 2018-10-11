@@ -11,6 +11,7 @@
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
 
     <link href={{asset("public/frontend/css/header.css")}} rel="stylesheet" />
+    <link href={{asset("public/frontend/css/tabs.css")}} rel="stylesheet" />
 
     @yield('css')
 </head>
