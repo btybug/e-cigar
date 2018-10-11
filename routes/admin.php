@@ -30,8 +30,9 @@ Route::get('/tools', 'Admin\ToolsController@index')->name('admin_tools');
 //MEDIA
 
 
-Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
+//Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
 Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
+Route::get('/media', 'Admin\MediaController@index')->name('admin_media');
 Route::post('/settings', 'Admin\Media\IndexController@postSettings');
 
 

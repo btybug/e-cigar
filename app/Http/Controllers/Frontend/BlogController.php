@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     protected $view='frontend.blog';
+
     public function index()
     {
         return $this->view('index');
