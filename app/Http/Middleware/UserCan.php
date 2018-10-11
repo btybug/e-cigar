@@ -16,7 +16,7 @@ class UserCan
     public function handle($request, Closure $next)
     {
         $url = $request->path();
-//        dd(self::getModuleRoutes('PATCH','admin'));
+       // dd(self::getModuleRoutes('GET','admin'));
         return $next($request);
     }
 
