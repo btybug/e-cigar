@@ -20,8 +20,8 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/new', 'Admin\StoreController@getNewCategory')->name('admin_store_categories_new');
     });
 });
-Route::group(['prefix' => 'roles'], function () {
-    Route::get('/', 'Admin\RolesController@index')->name('admin_roles');
+Route::group(['prefix' => 'roles-mebership'], function () {
+    Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');
     Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
 });
 Route::get('/blog', 'Admin\BlogController@index')->name('admin_blog');
