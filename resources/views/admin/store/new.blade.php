@@ -125,7 +125,7 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
-    <link rel="stylesheet" href="{{asset('public/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
