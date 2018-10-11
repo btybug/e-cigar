@@ -38,9 +38,7 @@
                     {data: 'description',name: 'description'},
                     {data: 'image', name: 'image'},
                     {data: 'icon', name: 'icon'},
-                    {data: 'country', name: 'country'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'updated_at', name: 'updated_at'}
+                    {data: 'created_at', name: 'created_at'}
                 ]
             });
         });

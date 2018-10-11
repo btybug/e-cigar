@@ -14,6 +14,7 @@ use App\Models\Teams;
 use App\Models\Translations;
 use App\Models\TranslationsEntry;
 use App\User;
+use function foo\func;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -32,6 +33,19 @@ class DatatableController extends Controller
     public function getAllCategories()
     {
         return Datatables::of(Category::query())
+            ->editColumn('image',function () {
+                return '';
+            })
+            ->editColumn('icon',function () {
+                return '';
+            })
+            ->editColumn('created_at',function () {
+                return '';
+            })
+            ->addColumn('actions', function ($category) {
+            return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $category->id . '">Delete</a>
+                    <a href="javascript:void(0)" class="btn btn-warning events-modal" data-object="competitions"  data-id="' . $category->id . '">Edit</a>';
+        })->rawColumns(['actions','image','icon','created_at'])
             ->make(true);
     }
 
@@ -43,4 +57,18 @@ class DatatableController extends Controller
             return '<a href="javascript:void(0)" class="btn btn-warning events-modal" data-object="competitions"  data-id="' . $comp->id . '">Edit</a>';
         })->rawColumns(['actions'])->make(true);
     }
+    
+//    public function getAllCompetitions($sport_id = null, $region_id = null)
+//    {
+//        $query = Competitions::query();
+//        if ($sport_id) {
+//            $query = $query->where('sport_id', $sport_id);
+//        }
+//        if ($region_id) {
+//            $query = $query->where('region_id', $region_id);
+//        }
+//        return Datatables::of($query)->addColumn('actions', function ($comp) {
+//            return '<a href="javascript:void(0)" class="btn btn-warning events-modal" data-object="competitions"  data-id="' . $comp->id . '">Edit</a>';
+//        })->rawColumns(['actions'])->make(true);
+//    }
 }

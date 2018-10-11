@@ -40,3 +40,28 @@ function media_button(bool $multiple = false, $slug = 'drive')
     $_MEDIA_BUTTON = true;
     return view('media.button', compact(['multiple', 'slug']));
 }
+
+function BBgetDateFormat($date, $format = null)
+{
+    if (!$date) null;
+
+    if (!is_numeric($date))
+        $date = strtotime($date);
+
+    if ($format) {
+        return date($format, $date);
+    }
+
+    return date('m/d/Y', $date);
+}
+
+/**
+ * @param $time
+ * @return bool|string
+ */
+function BBgetTimeFormat($time)
+{
+    if (!$time) null;
+
+    return date("H:i:s", strtotime($time));
+}

@@ -28,9 +28,6 @@ class StoreController extends Controller
 
     public function getCategories()
     {
-//        $category = Category::first();
-//        $translation = $category->translate('am');
-//        dd($category->name,$translation->name);
         return $this->view('categories.index');
     }
 
