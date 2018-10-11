@@ -21,3 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/blog', 'Frontend\BlogController@index')->name('blog');
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/my-account', 'Frontend\UserController@index')->name('my_account');
+});
