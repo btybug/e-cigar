@@ -2,15 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Competitions;
-use App\Models\MarketType;
-use App\Models\Matches;
-use App\Models\Regions;
-use App\Models\SelectionType;
-use App\Models\Sports;
-use App\Models\Teams;
-use App\Models\Translations;
-use App\Models\TranslationsEntry;
+use App\Models\Category;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,6 +16,12 @@ class DatatableController extends Controller
     {
 
         return Datatables::of(User::query())
+            ->make(true);
+    }
+
+    public function getAllCategories()
+    {
+        return Datatables::of(Category::query())
             ->make(true);
     }
 }

@@ -12,7 +12,7 @@ class Controller extends BaseController
     protected $view;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function view(string $path,$data=[],$mergeData)
+    public function view(string $path,$data=[],$mergeData=[])
     {
         return view($this->view.'.'.$path,$data,$mergeData);
     }
