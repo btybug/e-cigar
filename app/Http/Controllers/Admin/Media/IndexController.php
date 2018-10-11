@@ -23,7 +23,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('media.index');
+        $settings=[];
+        return view('media.index',compact('settings'));
     }
 
     public function getSettings()

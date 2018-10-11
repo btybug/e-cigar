@@ -53,8 +53,8 @@ class DatatableController extends Controller
     {
         $query = Roles::query();
 
-        return Datatables::of($query)->addColumn('actions', function ($comp) {
-            return '<a href="javascript:void(0)" class="btn btn-warning events-modal" data-object="competitions"  data-id="' . $comp->id . '">Edit</a>';
+        return Datatables::of($query)->addColumn('actions', function ($role) {
+            return '<a href="'.route('admin_edit_role',$role->id).'" class="btn btn-warning events-modal" >Edit</a>';
         })->rawColumns(['actions'])->make(true);
     }
     

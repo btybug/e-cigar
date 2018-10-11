@@ -19,7 +19,7 @@ Route::group(['prefix' => 'store'], function () {
 });
 Route::group(['prefix' => 'roles'], function () {
     Route::get('/', 'Admin\RolesController@index')->name('admin_roles');
-
+    Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
 });
 Route::get('/blog', 'Admin\BlogController@index')->name('admin_blog');
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
@@ -35,8 +35,8 @@ Route::group(['prefix' => 'tools'], function () {
 
 
 //Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
+Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
 Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
-Route::get('/media', 'Admin\MediaController@index')->name('admin_media');
 Route::post('/settings', 'Admin\Media\IndexController@postSettings');
 
 
