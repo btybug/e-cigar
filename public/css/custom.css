@@ -4,3 +4,11 @@
 .list-tabs-head .tab-content .btn-save{
     margin-top:10px;
 }
+.list-tabs-head .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.list-tabs-head .head #flag-select{
+    width: auto;
+}

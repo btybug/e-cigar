@@ -1,12 +1,25 @@
 @extends('layouts.admin')
 @section('content-header')
-<div class="list-tabs-head">
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#home">Info</a></li>
-        <li><a data-toggle="tab" href="#menu1">Price</a></li>
-        <li><a data-toggle="tab" href="#menu2">Tax& shippings</a></li>
-        <li><a data-toggle="tab" href="#menu3">Related & Bundles</a></li>
-    </ul>
+
+    <div class="list-tabs-head">
+    <div class="head">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">Info</a></li>
+            <li><a data-toggle="tab" href="#menu1">Price</a></li>
+            <li><a data-toggle="tab" href="#menu2">Tax& shippings</a></li>
+            <li><a data-toggle="tab" href="#menu3">Related & Bundles</a></li>
+        </ul>
+        <div id="flag-select"
+        data-input-name="country"
+        data-selected-country="GB"
+        data-button-size="btn-sm"
+        data-button-type="btn-warning"
+        data-scrollable="true"
+        data-scrollable-height="250px">
+
+        </div>
+    </div>
+
     <div class="tab-content">
         <div id="home" class="tab-pane fade in active">
             <form action="">
@@ -105,13 +118,32 @@
             </form>
         </div>
     </div>
-</div>
+    </div>
 @stop
 @section('content')
 
 @stop
 @section('css')
+    <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css')}}">
 @stop
 @section('js')
+    <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#flag-select').flagStrap({
+                countries: {
+                    "AM": "Armenia",
+                    "GB": "United Kingdom",
+                    "RU": "Russia"
+                },
+                buttonSize: "btn-sm",
+                buttonType: "btn-info",
+                labelMargin: "10px",
+                scrollable: false,
+                scrollableHeight: "350px"
+            });
+        });
+
+    </script>
 @stop
