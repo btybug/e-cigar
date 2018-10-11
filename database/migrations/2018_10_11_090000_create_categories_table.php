@@ -23,6 +23,11 @@ class CreateCategoriesTable extends Migration
 
             $table->index('parent_id');
             $table->index('user_id');
+
+            $table->foreign('parent_id')->references('id')
+                ->on('categories')->onDelete('CASCADE');
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('CASCADE');
         });
     }
 

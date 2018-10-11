@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 
 class StoreController extends Controller
 {
@@ -27,6 +28,9 @@ class StoreController extends Controller
 
     public function getCategories()
     {
+//        $category = Category::first();
+//        $translation = $category->translate('am');
+//        dd($category->name,$translation->name);
         return view($this->view('categories.index'));
     }
 
