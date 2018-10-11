@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
+    protected $view='frontend.shop';
     public function index()
     {
-        return view('frontend.shop');
+        return view($this->view('index'));
     }
 }

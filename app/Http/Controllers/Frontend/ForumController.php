@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class ForumController extends Controller
 {
-   public function index()
-   {
-       return view('frontend.forum');
-   }
+    protected $view='frontend.forum';
+    public function index()
+    {
+        return view($this->view('index'));
+    }
 }
