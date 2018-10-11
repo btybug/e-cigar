@@ -1,1 +1,4 @@
-<h1>Blog</h1>
+@extends('layouts.frontend')
+@section('content')
+
+    @stop
