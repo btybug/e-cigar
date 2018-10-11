@@ -9,7 +9,7 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Form Name</legend>
+                <legend>Edit Role</legend>
 
                 <!-- Password input-->
                 <div class="form-group">
@@ -21,7 +21,7 @@
 
                 <!-- Password input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="passwordinput">Password Input</label>
+                    <label class="col-md-4 control-label" for="passwordinput">Description</label>
                     <div class="col-md-4">
                         {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
                     </div>

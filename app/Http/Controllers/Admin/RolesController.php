@@ -27,4 +27,8 @@ class RolesController extends Controller
         $role=Roles::find($request->id);
         return $this->view('edit',compact('role'));
     }
+    public function create()
+    {
+        return $this->view('create');
+    }
 }
