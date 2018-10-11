@@ -13,23 +13,53 @@
             
             <div class="content-area">
                 {!! Form::model(null) !!}
-                <div class="form-group">
-                    <label>Category Name</label>
-                    {!! Form::text('name',null,['class'=>'form-control']) !!}
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">EN</a></li>
+                    <li><a data-toggle="tab" href="#menu1">RU</a></li>
+                    <li><a data-toggle="tab" href="#menu2">AM</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div id="menu2" class="tab-pane fade">
+                        <div class="form-group">
+                            <label>Category Name</label>
+                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
                     <label>Parent</label>
                     {!! Form::select('parent_id',[''=>'No Parent'],null,['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
-                    <label>Description</label>
-                    {!! Form::textarea('description',null,['class'=>'form-control']) !!}
-                </div>
-                <div class="form-group">
                     <label>Image</label>
                     {!! Form::file('image',['class'=>'form-control']) !!}
                 </div>
-
                 <div class="form-group">
                     {!! Form::submit('Save',['class' => 'btn btn-success']) !!}
                 </div>
