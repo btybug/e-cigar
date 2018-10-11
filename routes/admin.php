@@ -8,7 +8,10 @@
 
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
-Route::get('/users', 'Admin\UserController@index')->name('admin_users');
+Route::group(['prefix' => 'users'], function () {
+    Route::get('/', 'Admin\UserController@index')->name('admin_users');
+    Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
+});
 Route::group(['prefix' => 'store'], function () {
     Route::get('/', 'Admin\StoreController@index')->name('admin_store');
     Route::get('/new', 'Admin\StoreController@newProduct')->name('admin_store_new');

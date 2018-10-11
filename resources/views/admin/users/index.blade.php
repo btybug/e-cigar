@@ -46,7 +46,7 @@
                     {data: 'gender', name: 'gender'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
-                    // {data: 'action', name: 'action'}
+                     {data: 'actions', name: 'actions'}
                 ]
             });
         });

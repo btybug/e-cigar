@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -18,5 +20,11 @@ class UserController extends Controller
     public function index()
     {
         return $this->view('index');
+    }
+
+    public function edit(Request $request)
+    {
+        $user=User::find($request->id);
+        return $this->view('edit');
     }
 }
