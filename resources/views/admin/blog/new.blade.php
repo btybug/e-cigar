@@ -1,13 +1,10 @@
 @extends('layouts.admin')
 @section('content-header')
-
     <div class="list-tabs-head">
         <div class="head">
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#home">Info</a></li>
-                <li><a data-toggle="tab" href="#menu1">Price</a></li>
-                <li><a data-toggle="tab" href="#menu2">Tax& shippings</a></li>
-                <li><a data-toggle="tab" href="#menu3">Related & Bundles</a></li>
+                <li><a data-toggle="tab" href="#menu1">SEO</a></li>
             </ul>
             <div id="flag-select"
                  data-input-name="country"
@@ -141,64 +138,6 @@
                                     <label class="col-sm-3">Price</label>
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control" placeholder="Price">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-
-                </div>
-            </div>
-        </div>
-        <div id="menu2" class="tab-pane fade">
-            <div class="text-right btn-save">
-                <button type="submit" class="btn btn-info">Save</button>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <label class="col-sm-3">Tax& shippings</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Tax& shippings">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-
-                </div>
-            </div>
-        </div>
-        <div id="menu3" class="tab-pane fade">
-            <div class="text-right btn-save">
-                <button type="submit" class="btn btn-info">Save</button>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <label class="col-sm-3">Related & Bundles</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Related & Bundles">
                                     </div>
                                 </div>
                             </div>
