@@ -9,7 +9,6 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
-
     <link href={{asset("public/frontend/css/main.css")}} rel="stylesheet" />
 
     @yield('css')
