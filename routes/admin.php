@@ -8,7 +8,14 @@
 
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
-Route::get('/languages', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
+
+Route::group(['prefix' => 'languages'], function () {
+    Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
+    Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
+    Route::get('/edit/{id}', 'Admin\SettingsController@getEditLanguages')->name('admin_settings_languages_edit');
+});
+
+
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_users');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');

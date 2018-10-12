@@ -20,4 +20,9 @@ class SettingsController extends Controller
     {
         return $this->view('languages');
     }
+
+    public function getLanguagesNew()
+    {
+        return $this->view('new_languages');
+    }
 }
