@@ -65,23 +65,27 @@ function BBgetTimeFormat($time)
 
     return date("H:i:s", strtotime($time));
 }
-function userCan($permission){
-    if(!Auth::check())return false;
-    $role=Auth::user()->role;
-    if($role->slug=='superadmin')return true;
+
+function userCan($permission)
+{
+    if (!Auth::check()) return false;
+    $role = Auth::user()->role;
+    if ($role->slug == 'superadmin') return true;
     return $role->hasAccess($permission);
 }
 
-function getModuleRoutes($method, $sub)
+function getModuleRoutes($method, $sub, $permissions = [])
 {
     $routes = array();
     $new_array = [];
     $routeCollection = \Route::getRoutes();
     foreach ($routeCollection as $value) {
-        $routes[$value->methods()[0]][$value->uri()] =  ['url'=>$value->uri(),'text'=>$value->getName()];
-//        if (!isset($routes[$value->methods()[0]][$value->getPrefix()])) {
-//            $routes[$value->methods()[0]][] = ['url'=>$value->uri(),'text'=>$value->getName()];
-//        }
+        if (isset($permissions[$value->getName()])) {
+
+            $routes[$value->methods()[0]][$value->uri()] = ['url' => $value->uri(), 'text' => $value->getName(), 'state' => ['checked' => true]];
+        } else {
+            $routes[$value->methods()[0]][$value->uri()] = ['url' => $value->uri(), 'text' => $value->getName()];
+        }
     }
     if (!isset($routes[$method]['admin'])) {
         $routes[$method]['admin'] = [];
@@ -94,7 +98,7 @@ function getModuleRoutes($method, $sub)
 
 }
 
- function keysort($array, $url, $count = 0)
+function keysort($array, $url, $count = 0)
 {
     foreach ($array as $key => $value) {
         $count++;
@@ -112,7 +116,7 @@ function getModuleRoutes($method, $sub)
 }
 
 
- function is_child($parent, $child)
+function is_child($parent, $child)
 {
     if ($parent == $child) return false;
     $parent = clean_urls($parent);
@@ -121,7 +125,7 @@ function getModuleRoutes($method, $sub)
 }
 
 
- function clean_urls($url)
+function clean_urls($url)
 {
     if (isset($url[0]) && $url[0] == '/') {
         $url = substr($url, 1);

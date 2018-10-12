@@ -44,79 +44,100 @@
         </form>
 
     </div>
-    <div class="col-md-6">
-    <div id="treeview_json"></div>
+    <div class="col-md-3">
+        <legend>Pages</legend>
+
+        <div id="treeview_json"></div>
+    </div>
+    <div class="col-md-3">
+        <legend>Forms</legend>
+
+        <div id="treeview_json2"></div>
     </div>
 @stop
 @section('js')
-<script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
-<script>
-    window.AjaxCall = function postSendAjax(url, data, success, error) {
-        $.ajax({
-            type: "post",
-            url: url,
-            cache: false,
-            datatype: "json",
-            data: data,
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-            },
-            success: function(data) {
-                if (success) {
-                    success(data);
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script>
+        window.AjaxCall = function postSendAjax(url, data, success, error) {
+            $.ajax({
+                type: "post",
+                url: url,
+                cache: false,
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function(data) {
+                    if (success) {
+                        success(data);
+                    }
+                    return data;
+                },
+                error: function(errorThrown) {
+                    if (error) {
+                        error(errorThrown);
+                    }
+                    return errorThrown;
                 }
-                return data;
-            },
-            error: function(errorThrown) {
-                if (error) {
-                    error(errorThrown);
+            });
+        };
+        var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
+        var tree2 =[{!! getModuleRoutes('POST','admin',[])->toJson(1) !!}]
+        $('#treeview_json').treeview({
+            data: tree,
+            showCheckbox: true,
+            onNodeChecked: function(event, node) {
+                if(typeof node.parentId !== "undefined") {
+                    checkParent(node.parentId, "#treeview_json2")
                 }
-                return errorThrown;
+            },
+            onNodeUnchecked: function (event, node) {
+                unCheckChildren(node.nodeId, "#treeview_json2")
             }
         });
-    };
-    var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
-    $('#treeview_json').treeview({
-        data: tree,
-        showCheckbox: true,
-        onNodeChecked: function(event, node) {
-            if(typeof node.parentId !== "undefined") {
-                checkParent(node.parentId)
+        $('#treeview_json2').treeview({
+            data: tree2,
+            showCheckbox: true,
+            onNodeChecked: function(event, node) {
+                if(typeof node.parentId !== "undefined") {
+                    checkParent(node.parentId, "#treeview_json2")
+                }
+            },
+            onNodeUnchecked: function (event, node) {
+                unCheckChildren(node.nodeId, "#treeview_json2")
             }
-        },
-        onNodeUnchecked: function (event, node) {
-            unCheckChildren(node.nodeId)
-        }
-});
-    function checkParent(id) {
-        let parrentId = id;
-        $('#treeview_json').treeview('checkNode', [ parrentId, { silent: true } ]);
-        if(parrentId){
-           let parent = $('#treeview_json').treeview('getNode', parrentId);
-           let pId = parent.parentId
-            checkParent(pId)
-        }
-
-    }
-    function unCheckChildren(id){
-        let currentNode = $('#treeview_json').treeview('getNode', id);
-        $('#treeview_json').treeview('uncheckNode', [ id, { silent: true } ]);
-        if (currentNode.nodes){
-            Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId))
-        }
-
-
-    }
-    $("form").on("submit", function (e) {
-        e.preventDefault()
-        let formData = $("form").serializeArray();
-        let treeData = $('#treeview_json').data('treeview').getChecked();
-        AjaxCall("/admin/roles-mebership/create", {formData, treeData}, function(res) {
-            if(!res.error){
-               // window.location.href='{!! route('admin_role_membership') !!}'
-            };
         });
-    })
+        function checkParent(id, selecetor) {
+            let parrentId = id;
+            $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
+            if(parrentId){
+                let parent = $('#treeview_json').treeview('getNode', parrentId);
+                let pId = parent.parentId
+                checkParent(pId)
+            }
 
-</script>
+        }
+        function unCheckChildren(id, selecetor){
+            let currentNode = $('#treeview_json').treeview('getNode', id);
+            $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
+            if (currentNode.nodes){
+                Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId))
+            }
+
+
+        }
+        $("form").on("submit", function (e) {
+            e.preventDefault()
+            let formData = $("form").serializeArray();
+            let treeData = $('#treeview_json').data('treeview').getChecked();
+            let treeData2 = $('#treeview_json2').data('treeview').getChecked();
+            AjaxCall("/admin/roles-mebership/create", {formData, treeData, treeData2}, function(res) {
+                if(!res.error){
+                   window.location.href='{!! route('admin_role_membership') !!}'
+                };
+            });
+        })
+
+    </script>
 @stop

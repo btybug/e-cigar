@@ -33,6 +33,7 @@ Route::group(['prefix' => 'roles-mebership'], function () {
     Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
     Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
     Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
+    Route::post('/edit', 'Admin\RolesController@postEdit')->name('post_admin_edit_role');
 });
 
 Route::group(['prefix' => 'blog'], function () {
@@ -91,6 +92,6 @@ Route::get('{locale}', function($locale) {
 //Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
 Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
 Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
-Route::post('/settings', 'Admin\Media\IndexController@postSettings');
+Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
 
 
