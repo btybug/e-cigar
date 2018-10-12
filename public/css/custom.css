@@ -60,3 +60,20 @@
 .tabs_content .view-product-wall .bootstrap-tagsinput{
     width: 100%;
 }
+.tabs_content .tab_lang {
+    border: none;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs_content .tab_lang li a{
+    margin: 0;
+    border-radius: 0;
+    border: none;
+}
+.tabs_content .tab_lang li a.active,.tabs_content .tab_lang li a:hover,
+.tabs_content .tab_lang li a:focus{
+    border-radius: 0;
+    border: none;
+}

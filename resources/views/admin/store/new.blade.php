@@ -34,9 +34,40 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-3">Info</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="info">
+                                    <div class="col-sm-2">
+                                        <ul class="nav nav-tabs tab_lang">
+                                            <li class="active"><a data-toggle="tab" href="#infoAM">AM</a></li>
+                                            <li><a data-toggle="tab" href="#infoEN">EN</a></li>
+                                            <li><a data-toggle="tab" href="#infoRU">RU</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <div class="tab-content">
+                                            <div id="infoAM" class="tab-pane fade in active">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3">Info</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" placeholder="info am">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="infoEN" class="tab-pane fade">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3">Info</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" placeholder="info en">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="infoRU" class="tab-pane fade">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3">Info</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" placeholder="info ru">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
