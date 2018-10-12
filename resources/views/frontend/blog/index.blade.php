@@ -23,7 +23,7 @@
                     <div class="form-group col-12 col-md-4">
                         <label class="col-sm-12 col-lg-4 col-form-label">Limit</label>
                         <select class="col-sm-12 col-lg-4 form-control sortbynews" name="limit">
-                            <option value="16" selected="" "="">16</option>
+                            <option value="16" selected="">16</option>
                             <option value="32">32</option>
                             <option value="64">64</option>
                         </select>
@@ -45,15 +45,15 @@
                                 <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
                             </span>
 
-                            <div class="blog-block">
+                            <span class="d-block blog-block">
                                 <span class="blog-title">About &amp; Contact Pages </span>
 
 
-                                <div class="blog-text">
-                                    <p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+                                <span class="d-block blog-text">
+                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                </span>
                                 <span class="blog-link">Readmore</span>
-                            </div>
+                            </span>
                         </a>
                     </article>
                 </div>
@@ -69,15 +69,15 @@
                                 <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
                             </span>
 
-                            <div class="blog-block">
+                            <span class="d-block blog-block">
                                 <span class="blog-title">About &amp; Contact Pages </span>
 
 
-                                <div class="blog-text">
-                                    <p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+                                <span class="d-block blog-text">
+                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                </span>
                                 <span class="blog-link">Readmore</span>
-                            </div>
+                            </span>
                         </a>
                     </article>
                 </div>
@@ -93,15 +93,15 @@
                                 <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
                             </span>
 
-                            <div class="blog-block">
+                            <span class="d-block blog-block">
                                 <span class="blog-title">About &amp; Contact Pages </span>
 
 
-                                <div class="blog-text">
-                                    <p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+                                <span class="d-block blog-text">
+                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                </span>
                                 <span class="blog-link">Readmore</span>
-                            </div>
+                            </span>
                         </a>
                     </article>
                 </div>
@@ -117,15 +117,15 @@
                                 <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
                             </span>
 
-                            <div class="blog-block">
+                            <span class="d-block blog-block">
                                 <span class="blog-title">About &amp; Contact Pages </span>
 
 
-                                <div class="blog-text">
-                                    <p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+                                <span class="d-block blog-text">
+                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                </span>
                                 <span class="blog-link">Readmore</span>
-                            </div>
+                            </span>
                         </a>
                     </article>
                 </div>
@@ -141,42 +141,19 @@
                                 <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
                             </span>
 
-                            <div class="blog-block">
+                            <span class="d-block blog-block">
                                 <span class="blog-title">About &amp; Contact Pages </span>
 
 
-                                <div class="blog-text">
-                                    <p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
+                                <span class="d-block blog-text">
+                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                </span>
                                 <span class="blog-link">Readmore</span>
-                            </div>
+                            </span>
                         </a>
                     </article>
                 </div>
-                <div class="blog-post">
-                    <article>
-                        <a href="http://e-cigar.loc/blog/test" class="d-block blog-post_link">
-                            <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
 
-                            <span class="blog-date">
-                                <strong>22</strong>Aug
-                            </span>
-
-                                <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
-                            </span>
-
-                            <div class="blog-block">
-                                <span class="blog-title">About &amp; Contact Pages </span>
-
-
-                                <div class="blog-text">
-                                    <p><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                </div>
-                                <span class="blog-link">Readmore</span>
-                            </div>
-                        </a>
-                    </article>
-                </div>
 
             </div>
             <div class="mx-auto pt-5">

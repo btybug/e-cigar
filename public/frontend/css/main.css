@@ -3120,6 +3120,11 @@ body[dir="ltr"] .breadcum-area {
     font-weight: normal;
 }
 
+.blog-area .blogs .blog-post .blog-block .blog-text .txt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+}
+
 .blog-area .blogs .blog-post .blog-block .blog-text p img {
     display: none;
 }
