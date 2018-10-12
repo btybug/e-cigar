@@ -30,8 +30,8 @@
                 <button type="submit" class="btn btn-danger btn-view">View Product</button>
                 <button type="submit" class="btn btn-info">Save</button>
             </div>
-            <div class="row">
-                <div class="col-md-9">
+            <div class="row sortable-panels">
+                <div class="col-md-9 ">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12">
@@ -167,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 ">
                     <div class="view-product-wall">
                         <div class="status-wall wall">
                             <div class="row">
@@ -351,6 +351,9 @@
     
     </script>
     <script>
-
+        $( function() {
+    $( ".sortable-panels" ).sortable();
+    $( ".sortable-panels" ).disableSelection();
+  } );
     </script>
 @stop
