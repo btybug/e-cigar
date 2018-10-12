@@ -109,3 +109,12 @@ div.dataTables_wrapper div.dataTables_filter input {
     width: 40%;
     box-shadow: -9px 19px 18px #888888ab;
 }
+.main-header nav .navbar-custom-menu{
+    display: flex;
+    align-items: center;
+}
+.main-header nav .navbar-custom-menu #flag-select{
+    width: auto;
+    float: left;
+    margin-right: 5px;
+}

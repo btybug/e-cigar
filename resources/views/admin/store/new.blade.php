@@ -9,15 +9,6 @@
                 <li><a data-toggle="tab" href="#menu2">Tax& shippings</a></li>
                 <li><a data-toggle="tab" href="#menu3">Related & Bundles</a></li>
             </ul>
-            <div id="flag-select"
-                 data-input-name="country"
-                 data-selected-country="GB"
-                 data-button-size="btn-sm"
-                 data-button-type="btn-warning"
-                 data-scrollable="true"
-                 data-scrollable-height="250px">
-
-            </div>
         </div>
     </div>
 @stop
@@ -249,28 +240,10 @@
     </div>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
-    <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-    <script>
-        $(document).ready(function () {
-            $('#flag-select').flagStrap({
-                countries: {
-                    "AM": "Armenia",
-                    "GB": "United Kingdom",
-                    "RU": "Russia"
-                },
-                buttonSize: "btn-sm",
-                buttonType: "btn-info",
-                labelMargin: "10px",
-                scrollable: false,
-                scrollableHeight: "350px"
-            });
-        });
 
-    </script>
 @stop

@@ -20,6 +20,9 @@
 {!! Html::style("public/admin_theme/dist/css/skins/_all-skins.min.css") !!}
 <!-- Morris chart -->
 {!! Html::style("public/admin_theme/bower_components/morris.js/morris.css") !!}
+<!-- Flagstrap -->
+{!! Html::style("public/admin_theme/flagstrap/css/flags.css") !!}
+
 
 <!-- Date Picker -->
 {!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
@@ -177,7 +180,7 @@
         });
     </script>
 @endif
-
+<script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
 <script src="{{asset('public/admin_assets/js/custom.js')}}"></script>
 @yield('js')
 @stack('javascript')
