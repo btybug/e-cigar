@@ -1,0 +1,42 @@
+.author-info{
+    margin-top: 20px;
+}
+.author-info .main{
+    padding: 30px;
+    background-color: #353535;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.author-info img{
+    border-radius: 50%;
+    margin-left: 10px;
+    width: 110px;
+    height: 110px;
+}
+.author-info h6 a{
+    color: #b1b1b1;
+}
+.author-info h6 a:hover{
+    color: #fff;
+}
+.author-info h6 a{
+    text-decoration: none;
+}
+.author-info .text p{
+    color: #fff;
+    font-size: 14px;
+}
+.author-info .text .icons{
+    font-size: 14px;
+}
+.author-info .text{
+    margin-top: 5px;
+}
+.author-info .icons i{
+    color: #b1b1b1;
+    margin-left: 15px;
+}
+.author-info .icons i:hover{
+    color: #fff;
+}
