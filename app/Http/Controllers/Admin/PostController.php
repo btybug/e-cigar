@@ -35,6 +35,6 @@ class PostController extends Controller
 
             $article->save();
         $posts = Posts::all();
-        return $this->view('index',compact('posts'));
+        return redirect($this->view('index'));
     }
 }
