@@ -14,4 +14,9 @@ class BlogController extends Controller
     {
         return $this->view('index');
     }
+
+    public function getSingle($post_id)
+    {
+        return $this->view('single_post');
+    }
 }

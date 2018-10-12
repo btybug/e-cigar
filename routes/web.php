@@ -18,7 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/blog', 'Frontend\BlogController@index')->name('blog');
+Route::group(['prefix' => 'blog'], function () {
+    Route::get('/', 'Frontend\BlogController@index')->name('blog');
+    Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
+});
+
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
 
