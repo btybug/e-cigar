@@ -25,6 +25,7 @@ Route::group(['prefix' => 'blog'], function () {
 
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
+Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
 
 Route::group(['prefix' => 'my-account','middleware' => ['auth']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');

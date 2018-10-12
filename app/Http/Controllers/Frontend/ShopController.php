@@ -12,4 +12,9 @@ class ShopController extends Controller
     {
         return $this->view('index');
     }
+
+    public function getCart()
+    {
+        return $this->view('cart');
+    }
 }
