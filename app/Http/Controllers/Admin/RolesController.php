@@ -31,4 +31,9 @@ class RolesController extends Controller
     {
         return $this->view('create');
     }
+
+    public function postCreate(Request $request)
+    {
+        dd($request->all());
+    }
 }

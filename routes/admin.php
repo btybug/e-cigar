@@ -24,6 +24,7 @@ Route::group(['prefix' => 'store'], function () {
 Route::group(['prefix' => 'roles-mebership'], function () {
     Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');
     Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
+    Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
     Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
 });
 
