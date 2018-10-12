@@ -16,6 +16,17 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
+
+        \Blade::directive('ok', function($expression)
+        {
+            return "<?php if(userCan($expression)): ?>";
+        });
+
+        \Blade::directive('endok', function($expression)
+        {
+            return '<?php endif; ?>';
+        });
+
     }
 
     /**

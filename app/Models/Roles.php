@@ -21,11 +21,16 @@ class Roles extends Model
      * @var array
      */
     protected $fillable = [
-        'title','slug','type','description'
+        'title', 'slug', 'type', 'description'
     ];
 
     public function permissions()
     {
-        return $this->belongsToMany(Permissions::class,'role_permission','role_id','permission_id');
-}
+        return $this->belongsToMany(Permissions::class, 'role_permission', 'role_id', 'permission_id');
+    }
+
+    public function hasAccess($route)
+    {
+        return $this->permissions()->where('slug',$route)->exists();
+    }
 }

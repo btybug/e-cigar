@@ -4,7 +4,8 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="{!! url('public/admin_theme/dist/img/user2-160x160.jpg') !!}" class="img-circle" alt="User Image">
+                <img src="{!! url('public/admin_theme/dist/img/user2-160x160.jpg') !!}" class="img-circle"
+                     alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>Alexander Pierce</p>
@@ -24,10 +25,14 @@
         <!-- /.search form -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-
+            @ok('admin_dashboard')
             <li><a href="{{route('admin_dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            @endok
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
+            @ok('admin_media')
             <li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>
+            @endok
+            @ok('admin_users')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-group"></i>
@@ -38,10 +43,15 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_users')}}"><i class="fa fa-circle-o"></i> Show</a></li>
-                    <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a></li>
+                    @ok('admin_role_membership')
+                    <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
+                    </li>
+                    @endok
                     <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_store')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dropbox"></i>
@@ -51,10 +61,14 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    @ok('admin_store')
                     <li><a href="{{route('admin_store_categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+                    @endok
                     <li><a href="{{route('admin_store')}}"><i class="fa fa-circle-o"></i> Products</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_blog')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt"></i>
@@ -67,6 +81,8 @@
                     <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_orders')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-bath"></i>
@@ -79,6 +95,8 @@
                     <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_stock')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-bath"></i>
@@ -91,6 +109,8 @@
                     <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_forum')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-forumbee"></i>
@@ -104,6 +124,8 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_tickets')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-ticket"></i>
@@ -117,6 +139,8 @@
                     <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_tools')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-wrench"></i>
@@ -130,6 +154,8 @@
                     <li><a href="{{ route('admin_tools_tags') }}"><i class="fa fa-circle-o"></i> Tags</a></li>
                 </ul>
             </li>
+            @endok
+            @ok('admin_settings_languages')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-cog"></i>
@@ -139,9 +165,11 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a></li>
+                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a>
+                    </li>
                 </ul>
             </li>
+            @endok
         </ul>
     </section>
     <!-- /.sidebar -->

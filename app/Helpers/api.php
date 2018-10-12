@@ -65,7 +65,11 @@ function BBgetTimeFormat($time)
 
     return date("H:i:s", strtotime($time));
 }
-
+function userCan($permission){
+    if(!Auth::check())return false;
+    $role=Auth::user()->role;
+    return $role->hasAccess($permission);
+}
 
 function getModuleRoutes($method, $sub)
 {

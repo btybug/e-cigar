@@ -37,7 +37,7 @@ class RolesController extends Controller
     public function postCreate(Request $request)
     {
         $formData = $request->formData;
-        $treeData = $request->treeData;
+        $treeData = $request->get('treeData',[]);
         $permissions = [];
         $data = [];
         foreach ($formData as $column) {

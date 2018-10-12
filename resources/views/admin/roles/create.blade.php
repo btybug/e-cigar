@@ -112,7 +112,9 @@
         let formData = $("form").serializeArray();
         let treeData = $('#treeview_json').data('treeview').getChecked();
         AjaxCall("/admin/roles-mebership/create", {formData, treeData}, function(res) {
-
+            if(!res.error){
+               // window.location.href='{!! route('admin_role_membership') !!}'
+            };
         });
     })
 
