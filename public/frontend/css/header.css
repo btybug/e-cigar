@@ -738,6 +738,10 @@ body[dir="ltr"] .breadcum-area {
     left: 0;
 }
 
+.header-area {
+    margin-bottom: 60px;
+}
+
 .header-area .header-mini {
     background-color: #293f4b;
     padding-top: 0.3125rem;
