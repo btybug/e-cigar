@@ -69,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label>Image</label>
-                    {!! Form::file('image',['class'=>'form-control']) !!}
+                    {!! media_button() !!}
                 </div>
                 <div class="form-group">
                     {!! Form::submit('Save',['class' => 'btn btn-success']) !!}
