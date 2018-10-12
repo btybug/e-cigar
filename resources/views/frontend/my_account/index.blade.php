@@ -14,16 +14,16 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#home" role="tab" aria-controls="home">Profile</a>
+                            <a class="nav-link active" data-toggle="tab" href="{!! route('my_account_profile') !!}" role="tab" aria-controls="home">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Password</a>
+                            <a class="nav-link" data-toggle="tab" href="#pp" role="tab" aria-controls="profile">Password</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#messages" role="tab" aria-controls="messages">Logs</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#settings" role="tab" aria-controls="settings">Favourites</a>
+                            <a class="nav-link" data-toggle="tab" href="{!! route('my_account_favourites') !!}" role="tab" aria-controls="settings">Favourites</a>
                         </li>
                     </ul>
                 </div>
