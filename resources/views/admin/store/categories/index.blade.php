@@ -125,17 +125,17 @@ $("#tree1").tree({
   saveState: true,
   dragAndDrop: true,
   onDragStop: function(e, node) {
-    var tree_json = $("#tree1").tree("toJson");
-    AjaxCall("/url", tree_json, function(res) {
+    let id = e.id
+    let parentId = e.parent.id
+    // var tree_json = $("#tree1").tree("toJson");
+    AjaxCall("/url", {id, parentId}, function(res) {
       console.log(res);
     });
   }
 });
 
 $("#tree1").bind("tree.click", function(e) {
-  var node = e.node;
-  console.log(e.node)
-  AjaxCall("/url", node.id, function(res) {
+  AjaxCall("/url", {id: e.node.id}, function(res) {
     console.log(res);
   });
 });
