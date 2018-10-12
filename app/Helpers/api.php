@@ -142,3 +142,14 @@ function array_sort_with_count(array $array, $count)
     }
     return false;
 }
+
+function get_pluck($data,$key,$name){
+    $result = [];
+    if(count($data)){
+        foreach ($data as $datum){
+            $result[$datum->{$key}] = $datum->{$name};
+        }
+    }
+
+    return $result;
+}

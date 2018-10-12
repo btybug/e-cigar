@@ -12,22 +12,29 @@ class Category extends Translatable
      * @var string
      */
     protected $table = 'categories';
+
     public $translationModel = CategoryTranslation::class;
+
     public $translatedAttributes = ['name', 'description'];
     /**
      * @var array
      */
     protected $guarded = ['id'];
 
+    public static function boot()
+    {
+        parent::boot();
+        self::callBoot(self::class);
+    }
 
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     public static function recursiveItems($iems, $i = 0, $data = [])

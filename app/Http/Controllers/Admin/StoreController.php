@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
@@ -29,11 +30,16 @@ class StoreController extends Controller
     public function getCategories()
     {
         $categories = Category::whereNull('parent_id')->get();
-        return $this->view('categories.index',compact('categories'));
+        $allCategories = Category::all();
+        $model = Category::find(1);
+        return $this->view('categories.index',compact('categories','model','allCategories'));
     }
 
-    public function getNewCategory()
+    public function postCreateOrUpdateCategory(Request $request)
     {
-        return $this->view('categories.new');
+        Category::updateOrCreate(['id' => $request->id], $request->except('_token','translatable'));
+        return redirect()->back();
     }
+
+
 }
