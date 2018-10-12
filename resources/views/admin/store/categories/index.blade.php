@@ -57,6 +57,17 @@
                     {!! Form::select('parent_id',[''=>'No Parent'],null,['class'=>'form-control']) !!}
                 </div>
                 <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-10">
+                    <label>Icon</label>
+                    {!! Form::text('name',null,['class'=>'form-control icon-picker']) !!}
+                    </div>
+                    <div class="col-md-2">
+                    <i id="font-show-area"></i>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label>Image</label>
                     {!! Form::file('image',['class'=>'form-control']) !!}
                 </div>
@@ -70,7 +81,13 @@
 @stop
 @section('js')
 <script src="https://mbraak.github.io/jqTree/tree.jquery.js"></script>
+<script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
+    $('.icon-picker').iconpicker();
+    $("body").on("click", ".iconpicker-item", function(){
+        let value = $(".icon-picker").val()
+        $("#font-show-area").attr("class", value)
+    })
         window.AjaxCall = function postSendAjax(url, data, success, error) {
   $.ajax({
     type: "post",
@@ -153,4 +170,12 @@ $("#tree1").bind("tree.click", function(e) {
 @stop
 @section("css")
 <link rel="stylesheet" href="https://mbraak.github.io/jqTree/jqtree.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+<link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+<style>
+#font-show-area {
+    font-size: 50px;
+    margin-top: 15px;
+}
+</style>
 @stop
