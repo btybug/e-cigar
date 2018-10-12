@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Posts;
+use App\Models\PostsTranslation;
 
 class BlogController extends Controller
 {
@@ -17,7 +19,8 @@ class BlogController extends Controller
 
     public function index()
     {
-        return $this->view('index');
+        $posts = PostsTranslation::all();
+        return $this->view('index',compact('posts'));
     }
 
     public function create()

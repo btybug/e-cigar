@@ -27,8 +27,8 @@ class PostController extends Controller
                 $article->translateOrNew($locale)->post_title = "{$request->post_title} {$locale}";
                 $article->translateOrNew($locale)->short_description = "{$request->short_description} {$locale}";
                 $article->translateOrNew($locale)->long_description = "{$request->long_description} {$locale}";
-                $article->translateOrNew($locale)->status = "{$request->status} {$locale}";
-                $article->translateOrNew($locale)->tags = "{$request->tags} {$locale}";
+                $article->translateOrNew($locale)->status = "{$request->status}";
+                $article->translateOrNew($locale)->tags = "{$request->tags}";
 
             }
 

@@ -12,15 +12,30 @@
             <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>#</th>
+                    <th>URL</th>
                     <th>Title</th>
-                    <th>Long Description</th>
                     <th>Short Description</th>
-                    <th>Image</th>
+                    <th>Long Description</th>
+                    <th>Status</th>
+                    <th>Tags</th>
                     <th>Added/Last Modified Date</th>
-                    <th>Actions</th>
                 </tr>
                 </thead>
+                <tbody>
+                @if(isset($posts))
+                    @foreach($posts as $post)
+                    <tr>
+                        <td>{{$post->post_url}}</td>
+                        <td>{{$post->post_title}}</td>
+                        <td>{{$post->short_description}}</td>
+                        <td>{{$post->long_description}}</td>
+                        <td>{{$post->status}}</td>
+                        <td>{{$post->tags}}</td>
+                        <td>{{$post->created_at}}</td>
+                    </tr>
+                    @endforeach
+                @endif
+                </tbody>
             </table>
         </div>
     </div>
