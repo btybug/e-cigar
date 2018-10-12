@@ -36,4 +36,5 @@ Route::group(['prefix' => 'my-account','middleware' => ['auth']], function () {
     Route::get('/address', 'Frontend\UserController@getAddress')->name('my_account_address');
     Route::get('/orders', 'Frontend\UserController@getOrders')->name('my_account_orders');
     Route::get('/tickets', 'Frontend\UserController@getTickets')->name('my_account_tickets');
+    Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
 });

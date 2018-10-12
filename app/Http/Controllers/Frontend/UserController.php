@@ -49,4 +49,9 @@ class UserController extends Controller
         return $this->view('password');
     }
 
+    public function getVerification()
+    {
+        return $this->view('verification');
+    }
+
 }
