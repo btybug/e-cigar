@@ -34,11 +34,11 @@ function is_enabled_media_modal()
 
 }
 
-function media_button(bool $multiple = false, $slug = 'drive')
+function media_button(string $name,bool $multiple = false, $slug = 'drive')
 {
     global $_MEDIA_BUTTON;
     $_MEDIA_BUTTON = true;
-    return view('media.button', compact(['multiple', 'slug']));
+    return view('media.button', compact(['multiple', 'slug','name']));
 }
 
 function BBgetDateFormat($date, $format = null)
