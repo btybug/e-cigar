@@ -38,7 +38,7 @@
                                 <div class="form-group row">
                                     {{Form::label('purl', 'Post Url',['class' => 'col-sm-3'])}}
                                     <div class="col-sm-9">
-                                        {{Form::text('post_url', null,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
+                                        {{Form::text('post_url', @$editable_post->post_url,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
                                     </div>
                                 </div>
 
@@ -53,7 +53,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title[am]', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
+                                                    {{Form::text('post_title[am]', @$editable_post->getTranslation('am')->post_title,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title[en]', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
+                                                    {{Form::text('post_title[en]',@$editable_post->getTranslation('en')->post_title,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title[ru]', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
+                                                    {{Form::text('post_title[ru]', @$editable_post->getTranslation('ru')->post_title,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('sh_desc_am', 'Short Description',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description[am]', null,['class' =>'form-control','id'=>'sh_desc_am','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
+                                                    {{Form::textarea('short_description[am]', @$editable_post->getTranslation('am')->short_description,['class' =>'form-control','id'=>'sh_desc_am','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -96,7 +96,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('sh_desc_en', 'Short Description',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description[en]', null,['class' =>'form-control','id'=>'sh_desc_en','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
+                                                    {{Form::textarea('short_description[en]',@$editable_post->getTranslation('en')->short_description,['class' =>'form-control','id'=>'sh_desc_en','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('sh_desc_ru', 'Short Description[ru]',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description[ru]', null,['class' =>'form-control','id'=>'sh_desc_ru','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
+                                                    {{Form::textarea('short_description[ru]',@$editable_post->getTranslation('ru')->short_description,['class' =>'form-control','id'=>'sh_desc_ru','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
                                                 <div class="form-group row">
                                                     {{Form::label('lg_desc_am', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description[am]',null,['class' =>'form-control','id'=>'lg_desc_am','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
+                                                        {{Form::textarea('long_description[am]',@$editable_post->getTranslation('am')->long_description,['class' =>'form-control','id'=>'lg_desc_am','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@
                                                 <div class="form-group row">
                                                     {{Form::label('lg_desc_en', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description[en]',null,['class' =>'form-control','id'=>'lg_desc_en','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
+                                                        {{Form::textarea('long_description[en]',@$editable_post->getTranslation('en')->long_description,['class' =>'form-control','id'=>'lg_desc_en','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@
                                                 <div class="form-group row">
                                                     {{Form::label('lg_desc_ru', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description[ru]',null,['class' =>'form-control','id'=>'lg_desc_ru','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
+                                                        {{Form::textarea('long_description[ru]',@$editable_post->getTranslation('ru')->long_description,['class' =>'form-control','id'=>'lg_desc_ru','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -171,12 +171,10 @@
                     <div class="view-product-wall">
                         <div class="author-wall wall">
                             <div class="row">
-                                <label for="author" class="col-sm-3">Author</label>
+                                {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    <select class="form-control" id="author" name="author">
-                                        <option value="man1">man 1</option>
-                                        <option value="man2">man 2</option>
-                                    </select>
+                                    {!! Form::select('author',['man1' => 'Man1','man2' => 'Man2',],$editable_post->author,
+                                                ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
                         </div>
@@ -184,16 +182,19 @@
                             <div class="row">
                                 {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('status',['published' => 'Published','unpublished' => 'UnPublish',],null,
+                                    {!! Form::select('status',['published' => 'Published','unpublished' => 'UnPublish',],$editable_post->status,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
                         </div>
+                        @if(isset($editable_post))
+                            {{Form::hidden('ident',$editable_post->id,['class' =>'form-control','id'=>'id'])}}
+                        @endif
                         <div class="tag-wall wall">
                             <div class="row">
                                 {{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {{Form::text('tags', 'tag1',['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
+                                    {{Form::text('tags', $editable_post->tags,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
                                 </div>
                             </div>
                         </div>

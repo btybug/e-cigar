@@ -33,7 +33,7 @@
                         <td>{{$post->status}}</td>
                         <td>{{$post->tags}}</td>
                         <td>{{$post->created_at}}</td>
-                        <td><a href="{{route('admin_post_delete',$post->id)}}"><i class="fa fa-trash"></i></a></td>
+                        <td><a href="{{route('admin_post_delete',$post->id)}}"><i class="fa fa-trash"></i></a> &nbsp;<a href="{{route('admin_post_edit',$post->id)}}"><i class="fa fa-edit"></i></a></td>
                     </tr>
                     @endforeach
                 @endif

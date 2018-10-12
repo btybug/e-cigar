@@ -62,6 +62,7 @@ Route::group(['prefix' => '/tools'], function () {
 
 Route::post('/create-new', 'Admin\PostController@newPost')->name('admin_new_post');
 Route::get('/delete/{id}', 'Admin\PostController@delete')->name('admin_post_delete');
+Route::get('/edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
 
 //Route::get('{locale}', function($locale) {
 //    app()->setLocale($locale);

@@ -43,4 +43,10 @@ class PostController extends Controller
         Posts::find($id)->delete();
         return redirect('admin/blog');
     }
+
+    public function edit($id)
+    {
+        $editable_post = Posts::find($id);
+        return $this->view('new',compact('editable_post'));
+    }
 }
