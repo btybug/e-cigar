@@ -43,7 +43,7 @@
                                     {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
                                 </div>
                             </div>
-                        </form>
+                        {!! Form::close() !!}
                         <div class="form-bg mt-5 ">
                             <div class="change">
                                 <span>Password Change</span>
