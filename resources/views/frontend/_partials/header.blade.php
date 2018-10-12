@@ -28,7 +28,9 @@
                                 <div class="dropdown-menu dropdown-menu-right">
                                     <a href="{!! url('my-account') !!}" class="dropdown-item">Edit Profile</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="{!! url('logout') !!}" class="dropdown-item">Log Out</a>
+                                    {!! Form::open(['url'=>route('logout')]) !!}
+                                    <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                                    {!! Form::close() !!}
                                 </div>
                             @else
                                 <ul class="navbar-nav">
