@@ -28,7 +28,8 @@ class StoreController extends Controller
 
     public function getCategories()
     {
-        return $this->view('categories.index');
+        $categories = Category::whereNull('parent_id')->get();
+        return $this->view('categories.index',compact('categories'));
     }
 
     public function getNewCategory()

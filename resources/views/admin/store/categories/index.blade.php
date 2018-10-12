@@ -113,18 +113,8 @@
   });
 };
 
-var data = [
-  {
-    name: "node1",
-    id: 1,
-    children: [{ name: "child1", id: 2 }, { name: "child2", id: 3 }]
-  },
-  {
-    name: "node2",
-    id: 4,
-    children: [{ name: "child3", id: 5 }]
-  }
-];
+var data = {!! json_encode(\App\Models\Category::recursiveItems($categories),true) !!};
+
 $("#tree1").tree({
   data: data,
   //   dataUrl: {
@@ -144,6 +134,7 @@ $("#tree1").tree({
 
 $("#tree1").bind("tree.click", function(e) {
   var node = e.node;
+  console.log(e.node)
   AjaxCall("/url", node.id, function(res) {
     console.log(res);
   });
