@@ -240,7 +240,7 @@
         });
 
     </script>
-    <script src="/public/tinymce/tinymce.min.js"></script>
+    <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>tinymce.init({ selector: '#lg_desc' });</script>
     <script>
 
