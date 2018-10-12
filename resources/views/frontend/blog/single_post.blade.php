@@ -23,3 +23,6 @@
         </div>
 
 @stop
+@section('content')
+    <link href={{asset("public/frontend/css/blog-single.css")}} rel="stylesheet" />
+@stop
