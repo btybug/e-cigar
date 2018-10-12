@@ -85,7 +85,7 @@ class MediaItemsApiController extends Controller
                         'original_name' => $originalName,
                         'real_name' => $realName,
                         'extension' => $item->getClientOriginalExtension(),
-                        'size' => $item->getClientSize(),
+                        'size' => \File::size($folder->path().DIRECTORY_SEPARATOR.$originalName),
                         'folder_id' => $folder->id
                     ]);
                 }
