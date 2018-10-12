@@ -14,8 +14,10 @@ class RolesTableSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert([
+
             'title' =>'Super Admin',
             'slug'=>'superadmin',
+            'type'=>'backend',
             'description' =>'this role can all'
         ]);
     }
