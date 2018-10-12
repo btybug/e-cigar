@@ -14,6 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 class Posts extends Model
 {
     use \Dimsav\Translatable\Translatable;
-    public $translatedAttributes = ['info', 'product_name', 'short_description', 'long_description'];
+    public $translatedAttributes = ['post_title', 'short_description', 'long_description'];
 
 }

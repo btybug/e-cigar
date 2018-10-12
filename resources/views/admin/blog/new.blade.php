@@ -53,7 +53,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
+                                                    {{Form::text('post_title[am]', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
+                                                    {{Form::text('post_title[en]', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
+                                                    {{Form::text('post_title[ru]', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +88,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
+                                                    {{Form::textarea('short_description[am]', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -96,15 +96,15 @@
                                             <div class="form-group row">
                                                 {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
+                                                    {{Form::textarea('short_description[en]', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="shortdescRU" class="tab-pane fade ">
                                             <div class="form-group row">
-                                                {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
+                                                {{Form::label('sh_desc', 'Short Description[ru]',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
+                                                    {{Form::textarea('short_description[ru]', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +121,7 @@
                                                 <div class="form-group row">
                                                     {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
+                                                        {{Form::textarea('long_description[am]',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,7 +129,7 @@
                                                 <div class="form-group row">
                                                     {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
+                                                        {{Form::textarea('long_description[en]',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -137,7 +137,7 @@
                                                 <div class="form-group row">
                                                     {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
+                                                        {{Form::textarea('long_description[ru]',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
                                                     </div>
                                                 </div>
                                             </div>

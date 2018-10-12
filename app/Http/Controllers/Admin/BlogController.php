@@ -19,7 +19,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $posts = PostsTranslation::all();
+        $posts = Posts::all();
         return $this->view('index',compact('posts'));
     }
 
