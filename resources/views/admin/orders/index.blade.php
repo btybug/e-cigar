@@ -29,7 +29,7 @@
     <script>
         $(function () {
             {{--$('#categories-table').DataTable({--}}
-            {{--ajax:  "{!! route('dt_all_categories') !!}",--}}
+            {{--ajax:  "{!! route('datatable_all_categories') !!}",--}}
             {{--"processing": true,--}}
             {{--"serverSide": true,--}}
             {{--"bPaginate": true,--}}

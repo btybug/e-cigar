@@ -84,6 +84,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapDataTableRoutes()
     {
         Route::middleware('admin')
+            ->prefix('admin')
             ->namespace($this->namespace)
             ->group(base_path('routes/datatable.php'));
     }

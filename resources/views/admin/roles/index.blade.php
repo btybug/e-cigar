@@ -30,7 +30,7 @@
     <script>
         $(function () {
             $('#users-table').DataTable({
-                ajax:  "{!! route('dt_all_roles') !!}",
+                ajax:  "{!! route('datatable_all_roles') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,

@@ -132,7 +132,8 @@
             let formData = $("form").serializeArray();
             let treeData = $('#treeview_json').data('treeview').getChecked();
             let treeData2 = $('#treeview_json2').data('treeview').getChecked();
-            AjaxCall("/admin/roles-mebership/create", {formData, treeData, treeData2}, function(res) {
+            treeData= $.merge(treeData,treeData2)
+            AjaxCall("{!! route('post_admin_create_role') !!}", {formData, treeData}, function(res) {
                 if(!res.error){
                    window.location.href='{!! route('admin_role_membership') !!}'
                 };

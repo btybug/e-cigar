@@ -133,9 +133,9 @@
             let treeData = $('#treeview_json').data('treeview').getChecked();
             let treeData2 = $('#treeview_json2').data('treeview').getChecked();
             treeData= $.merge(treeData,treeData2)
-            AjaxCall("/admin/roles-mebership/edit", {formData, treeData, treeData2}, function(res) {
+            AjaxCall("{!! route('post_admin_edit_role') !!}", {formData, treeData}, function(res) {
                 if(!res.error){
-                    // window.location.href='{!! route('admin_role_membership') !!}'
+                     window.location.href='{!! route('admin_role_membership') !!}'
                 };
             });
         })

@@ -32,7 +32,7 @@
     <script>
         $(function () {
          $('#users-table').DataTable({
-                ajax:  "{!! route('dt_all_users') !!}",
+                ajax:  "{!! route('datatable_all_users') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,

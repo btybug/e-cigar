@@ -18,6 +18,14 @@ Route::group(['prefix' => 'languages'], function () {
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_users');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
+
+    Route::group(['prefix' => 'roles-mebership'], function () {
+        Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');
+        Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
+        Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
+        Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
+        Route::post('/edit', 'Admin\RolesController@postEdit')->name('post_admin_edit_role');
+    });
 });
 Route::group(['prefix' => 'store'], function () {
     Route::get('/', 'Admin\StoreController@index')->name('admin_store');
@@ -27,13 +35,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/new', 'Admin\StoreController@getNewCategory')->name('admin_store_categories_new');
     });
 });
-Route::group(['prefix' => 'roles-mebership'], function () {
-    Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');
-    Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
-    Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
-    Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
-    Route::post('/edit', 'Admin\RolesController@postEdit')->name('post_admin_edit_role');
-});
+
 
 Route::group(['prefix' => 'blog'], function () {
     Route::get('/', 'Admin\BlogController@index')->name('admin_blog');
