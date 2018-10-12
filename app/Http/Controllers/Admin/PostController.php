@@ -20,6 +20,8 @@ class PostController extends Controller
 
     public function newPost(Request $request,$locale = null)
     {
+        if (!isset($request->ident))
+        {
             $article = new \App\Models\Posts();
             $article->post_url = "{$request->post_url}";
             $article->status = "{$request->status}";
@@ -34,8 +36,12 @@ class PostController extends Controller
             }
 
             $article->save();
-        $posts = Posts::all();
-        return redirect('admin/blog');
+            $posts = Posts::all();
+            return redirect('admin/blog');
+        }else{
+            dd($request->ident);
+        }
+
     }
 
     public function delete($id)
