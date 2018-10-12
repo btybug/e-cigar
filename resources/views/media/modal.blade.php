@@ -61,9 +61,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="text" class="pull-left" placeholder="upload file name">
+                    <input type="text" class="pull-left file-realtive-url" placeholder="upload file name">
                     <button type="button" class="btn btn-success upload-btn">Upload</button>
-                    <button type="button" class="btn btn-info">Open</button>
+                    <button type="button" class="btn btn-info open-btn">Open</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -75,7 +75,7 @@
     <div class="icon">
         <i class="fa fa-folder" aria-hidden="true"></i>
         <span>{name}</span>
-        <ul class="list-unstyled list-inline text-center icons">
+        <ul class="list-unstyled list-inline text-center icons ">
             <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
             <li class="text-center"><a href="#" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
             <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
@@ -87,7 +87,7 @@
         <a href="#" >
             <img src="{url}" alt="">
         </a>
-        <ul class="list-unstyled list-inline text-center icons">
+        <ul class="list-unstyled list-inline text-center icons item-for-upload" data-relative-url="{relative_path}">
             <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
             <li class="text-center">
                 <a href="{url}" target="_blank" data-lightbox="folder-set" data-title="{name}">

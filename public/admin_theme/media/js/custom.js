@@ -1,27 +1,25 @@
-$(document).ready(function () {
-
+$(document).ready(function() {
     var url = {
-        getFolderCildrens: '/api/api-media/get-folder-childs',
-        jsTree: '/api/api-media/jstree'
+        getFolderCildrens: "/api/api-media/get-folder-childs",
+        jsTree: "/api/api-media/jstree"
     };
-    postSendAjax = function (url, data, success, error) {
-
+    postSendAjax = function(url, data, success, error) {
         $.ajax({
-            type: 'post',
+            type: "post",
             url: url,
             cache: false,
             datatype: "json",
             data: data,
             headers: {
-                'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
             },
-            success: function (data) {
+            success: function(data) {
                 if (success) {
                     success(data);
                 }
                 return data;
             },
-            error: function (errorThrown) {
+            error: function(errorThrown) {
                 if (error) {
                     error(errorThrown);
                 }
@@ -30,66 +28,89 @@ $(document).ready(function () {
         });
     };
 
-
-    $("#jstree_html").on('changed.jstree', function (e, data) {
-        var i, j, r = [];
-        for (i = 0, j = data.selected.length; i < j; i++) {
-            r = (data.instance.get_node(data.selected[i]).id);
-        }
-        var jsondata = {'folder_id': r, files: 1, access_token: 'string'}
-        postSendAjax(url.getFolderCildrens, jsondata, getfolder)
-    }).jstree(
-        {
-            'core': {
-                'data': {
-                    "type": "POST",
-                    "url": url.jsTree,
-                    "dataType": "json", // needed only if you do not supply JSON headers
-                    "data": {'folder_id': 1},
+    $("#jstree_html")
+        .on("changed.jstree", function(e, data) {
+            var i,
+                j,
+                r = [];
+            for (i = 0, j = data.selected.length; i < j; i++) {
+                r = data.instance.get_node(data.selected[i]).id;
+            }
+            var jsondata = { folder_id: r, files: 1, access_token: "string" };
+            postSendAjax(url.getFolderCildrens, jsondata, getfolder);
+        })
+        .jstree({
+            core: {
+                data: {
+                    type: "POST",
+                    url: url.jsTree,
+                    dataType: "json", // needed only if you do not supply JSON headers
+                    data: { folder_id: 1 },
                     headers: {
-                        'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr(
+                            "content"
+                        )
                     },
-                    success: function (data) {
-                        $('.media-modal-main-content').empty();
+                    success: function(data) {
+                        $(".media-modal-main-content").empty();
                         listFolders(data.children);
                         listFiles(data.items);
                     }
                 }
             }
-        }
-    );
-    var getfolder = function (data) {
+        });
+    var getfolder = function(data) {
         lists(data.data);
     };
 
     function listFolders(data) {
-        $.each(data, function (k, v) {
-            var folder = $('#media-modal-folder').html();
-            folder = folder.replace('{name}', v.name);
-            $('.media-modal-main-content').append(folder);
+        $.each(data, function(k, v) {
+            var folder = $("#media-modal-folder").html();
+            folder = folder.replace("{name}", v.name);
+            $(".media-modal-main-content").append(folder);
         });
     }
 
     function listFiles(data) {
-        $.each(data, function (k, v) {
-            var folder = $('#media-modal-files').html();
-            folder = folder.replace('{name}', v.real_name);
+        $.each(data, function(k, v) {
+            var folder = $("#media-modal-files").html();
+            folder = folder.replace("{name}", v.real_name);
+            folder = folder.replace("{relative_path}", v.relativeUrl);
             folder = folder.replace(/{url}/g, v.url);
-            $('.media-modal-main-content').append(folder);
+
+            $(".media-modal-main-content").append(folder);
         });
     }
 
     function lists(data) {
-        $('.media-modal-main-content').empty();
+        $(".media-modal-main-content").empty();
         listFolders(data.childs);
         listFiles(data.items);
     }
 
-    $(".upload-btn").click(function () {
+    $(".upload-btn").click(function() {
         $(".media-modal-content-upload").css("display", "block");
         $(".media-modal-main-content").css("display", "none");
     });
 
+    $("body").on("click", ".item-for-upload", function(e) {
+        e.preventDefault();
+        $(".item-for-upload").removeClass("active");
+        $(this).addClass("active");
+        $("body")
+            .find(".file-realtive-url")
+            .val($(this).attr("data-relative-url"));
+    });
+    $("body").on("click", ".open-btn", function(e) {
+        e.preventDefault();
+        let value = $("body")
+            .find(".file-realtive-url")
+            .val();
+        $("body")
+            .find(".modal-input-path")
+            .val(value);
+        $("#myModal").modal("hide");
+    });
     // $("#input-ru").fileinput({
     //     browseLabel: 'Select Folder...',
     //     previewFileIcon: '<i class="fa fa-file"></i>',
