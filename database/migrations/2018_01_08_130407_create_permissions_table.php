@@ -17,7 +17,7 @@ class CreatePermissionsTable extends Migration
             $table->increments('id')->unsigned();
             $table->string('slug')->unique();
             $table->string('type');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

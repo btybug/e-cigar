@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="col-md-6">
-        {!! Form::open(['class'=>'form-horizontal']) !!}
+        <form action="" class="form-horizontal">
 
         <fieldset>
 
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="passwordinput">Type</label>
                 <div class="col-md-4">
-                    {!! Form::select('type',['Admin Panel'=>'backend','Front Site'=>'frontend'],null,['class'=>'form-control input-md']) !!}
+                    {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
                 </div>
             </div>
 
@@ -37,11 +37,11 @@
             <!-- Button -->
             <div class="form-group">
                 <div class="col-md-4">
-                    <button id="singlebutton" name="singlebutton" class="btn btn-primary save-role">Save</button>
+                    <button id="singlebutton" class="btn btn-primary save-role">Save</button>
                 </div>
             </div>
         </fieldset>
-        {!! Form::close() !!}
+        </form>
 
     </div>
     <div class="col-md-6">
@@ -109,7 +109,7 @@
     }
     $("form").on("submit", function (e) {
         e.preventDefault()
-        let formData = $("form").serialize()
+        let formData = $("form").serializeArray();
         let treeData = $('#treeview_json').data('treeview').getChecked();
         AjaxCall("/admin/roles-mebership/create", {formData, treeData}, function(res) {
 
