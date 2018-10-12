@@ -232,17 +232,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ #discount{
+    background-color: #f9f9f9;
+}
+#tab-discount .table-bordered>tbody>tr>td, #tab-discount .table-bordered>tbody>tr>th, #tab-discount .table-bordered>tfoot>tr>td, #tab-discount .table-bordered>tfoot>tr>th, #tab-discount .table-bordered>thead>tr>td, #tab-discount .table-bordered>thead>tr>th{
+    border: 1px solid #ddd;
+}
