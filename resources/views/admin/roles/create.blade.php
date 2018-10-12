@@ -56,11 +56,11 @@
         data: tree,
         showCheckbox: true,
         onNodeChecked: function(event, node) {
-            console.log(1)
+            console.log(node)
             // $('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
         },
         onNodeUnchecked: function (event, node) {
-            console.log(111)
+            console.log(node)
             // $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
         }
 });
