@@ -10,7 +10,10 @@ class Translatable extends Model
 
     public static function callBoot()
     {
-        self::updated(function ($model) {
+
+
+        self::updated(function ($model){
+
             $translatableData = \Request::get('translatable');
             if($translatableData && count($translatableData)){
                 foreach ($translatableData as $locale => $translateData){
@@ -23,7 +26,12 @@ class Translatable extends Model
                         }
                     }
                 }
-//                $model->save();
+
+                if(! is_enabled_model_boot()){
+                    $model->save();
+                    global $_MODEL_BOOTED;
+                    $_MODEL_BOOTED = true;
+                }
             }
         });
 

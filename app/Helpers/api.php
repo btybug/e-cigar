@@ -6,6 +6,7 @@
  * Time: 10:39
  */
 $_MEDIA_BUTTON = false;
+$_MODEL_BOOTED = false;
 function getAlertIconByClass($class = 'success')
 {
     $icon = '';
@@ -25,6 +26,13 @@ function getAlertIconByClass($class = 'success')
             break;
     }
     return $icon;
+}
+
+function is_enabled_model_boot()
+{
+    global $_MODEL_BOOTED;
+    return $_MODEL_BOOTED;
+
 }
 
 function is_enabled_media_modal()

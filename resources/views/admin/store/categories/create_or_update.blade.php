@@ -56,7 +56,7 @@
 </div>
 <div class="form-group">
     <label>Image</label>
-    {!! media_button() !!}
+    {!! media_button('image') !!}
 </div>
 <div class="form-group">
     {!! Form::submit('Save',['class' => 'btn btn-success']) !!}
