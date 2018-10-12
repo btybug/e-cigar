@@ -12993,4 +12993,17 @@ a.text-dark:focus, a.text-dark:hover {
     padding-right: 0;
     width: 100%;
 }
-/*Vertical tabs my account*/
+/*End Vertical tabs my account*/
+
+/*page order*/
+
+.order-table th, .order-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+.order-table_btn {
+    min-width: 100px;
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+}
+/*End page order*/
