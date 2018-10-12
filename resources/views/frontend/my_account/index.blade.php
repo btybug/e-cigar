@@ -25,6 +25,16 @@
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="{!! route('my_account_favourites') !!}" role="tab" aria-controls="settings">Favourites</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-controls="orders">My orders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-controls="card">My Card</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-controls="address-book">Address book
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -34,6 +44,9 @@
                     <div class="tab-pane" id="profile" role="tabpanel">..2..</div>
                     <div class="tab-pane" id="messages" role="tabpanel">..3..</div>
                     <div class="tab-pane" id="settings" role="tabpanel">..4..</div>
+                    <div class="tab-pane" id="orders" role="tabpanel">..5..</div>
+                    <div class="tab-pane" id="card" role="tabpanel">..6..</div>
+                    <div class="tab-pane" id="address-book" role="tabpanel">..7..</div>
                 </div>
             </div>
         </div>
