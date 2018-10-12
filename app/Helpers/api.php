@@ -68,6 +68,7 @@ function BBgetTimeFormat($time)
 function userCan($permission){
     if(!Auth::check())return false;
     $role=Auth::user()->role;
+    if($role->slug=='superadmin')return true;
     return $role->hasAccess($permission);
 }
 
