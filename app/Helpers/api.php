@@ -6,7 +6,7 @@
  * Time: 10:39
  */
 $_MEDIA_BUTTON = false;
-$_MODEL_BOOTED = false;
+global $_MODEL_BOOTED;
 function getAlertIconByClass($class = 'success')
 {
     $icon = '';
@@ -30,8 +30,7 @@ function getAlertIconByClass($class = 'success')
 
 function is_enabled_model_boot()
 {
-    global $_MODEL_BOOTED;
-    return $_MODEL_BOOTED;
+ return Config::get('model_boot',false);
 
 }
 

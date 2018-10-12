@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models\Common;
 
 
@@ -7,50 +8,67 @@ use Illuminate\Database\Eloquent\Model;
 class Translatable extends Model
 {
     use \Dimsav\Translatable\Translatable;
-
-    public static function callBoot()
+//TODO::ai kov
+//    public static function callBoot()
+//    {
+//        static::updated(function ($model) {
+//            $translatableData = \Request::get('translatable');
+//            if ($translatableData && count($translatableData)) {
+//                foreach ($translatableData as $locale => $translateData) {
+//                    //here need check locales later
+//                    if (count($translateData)) {
+//                        foreach ($translateData as $column => $translate) {
+//                            if ($translate) {
+//                                $model->translateOrNew($locale)->{$column} = ($translate);
+//                            }
+//                        }
+//                    }
+//                }
+//                $model->save();
+//            }
+//        });
+//
+//        self::created(function ($model) {
+//            $translatableData = \Request::get('translatable');
+//            if ($translatableData && count($translatableData)) {
+//                foreach ($translatableData as $locale => $translateData) {
+//                    //here need check locales later
+//                    if (count($translateData)) {
+//                        foreach ($translateData as $column => $translate) {
+//                            if ($translate) {
+//                                $model->translateOrNew($locale)->{$column} = ($translate);
+//                            }
+//                        }
+//
+//                    }
+//                }
+//            }
+//        });
+//
+//    }
+//TODO::gordz anel sovory
+    public static function updateOrCreate(int $id=null, array $data)
     {
+        $model=self::find($id);
+        $data['user_id']=\Auth::id();
+        $translatableData = \Request::get('translatable');
+        if(!$model){
+            $model=new static();
 
-
-        self::updated(function ($model){
-
-            $translatableData = \Request::get('translatable');
-            if($translatableData && count($translatableData)){
-                foreach ($translatableData as $locale => $translateData){
+        }
+        $model->update($data);
+            if ($translatableData && count($translatableData)) {
+                foreach ($translatableData as $locale => $translateData) {
                     //here need check locales later
-                    if(count($translateData)){
-                        foreach ($translateData as $column => $translate){
-                            if($translate){
+                    if (count($translateData)) {
+                        foreach ($translateData as $column => $translate) {
+                            if ($translate) {
                                 $model->translateOrNew($locale)->{$column} = ($translate);
                             }
                         }
                     }
                 }
-
-                if(! is_enabled_model_boot()){
-                    $model->save();
-                    global $_MODEL_BOOTED;
-                    $_MODEL_BOOTED = true;
-                }
+                $model->save();
             }
-        });
-
-        self::created(function ($model) {
-            $translatableData = \Request::get('translatable');
-            if($translatableData && count($translatableData)){
-                foreach ($translatableData as $locale => $translateData){
-                    //here need check locales later
-                    if(count($translateData)){
-                        foreach ($translateData as $column => $translate){
-                            if($translate){
-                                $model->translateOrNew($locale)->{$column} = ($translate);
-                            }
-                        }
-
-                    }
-                }
-            }
-        });
-
-    }
+        }
 }

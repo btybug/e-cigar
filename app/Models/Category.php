@@ -21,11 +21,12 @@ class Category extends Translatable
      */
     protected $guarded = ['id'];
 
-    public static function boot()
-    {
-        parent::boot();
-        self::callBoot();
-    }
+//    public static function boot()
+//    {
+//
+//        parent::boot();
+//        self::callBoot();
+//    }
 
     public function children()
     {
@@ -42,9 +43,9 @@ class Category extends Translatable
         if (count($iems)) {
             $item = $iems[$i];
             $data[$i] = [
-               'id' => $item->id,
-               'name' => $item->name,
-               'parent_id' => $item->parent_id,
+                'id' => $item->id,
+                'name' => $item->name,
+                'parent_id' => $item->parent_id,
                 'children' => []
             ];
 

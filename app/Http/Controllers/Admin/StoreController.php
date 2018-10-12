@@ -37,7 +37,7 @@ class StoreController extends Controller
 
     public function postCreateOrUpdateCategory(Request $request)
     {
-        Category::updateOrCreate(['id' => $request->id], $request->except('_token','translatable'));
+        Category::updateOrCreate($request->id, $request->except('_token','translatable'));
         return redirect()->back();
     }
 
