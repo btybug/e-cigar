@@ -80,17 +80,12 @@
         data: tree,
         showCheckbox: true,
         onNodeChecked: function(event, node) {
-            if(node.parentId) {
+            if(typeof node.parentId !== "undefined") {
                 checkParent(node.parentId)
-
             }
-
-            // $('#checkable-output').prepend('<p>' + node.text + ' was checked</p>');
         },
         onNodeUnchecked: function (event, node) {
-            console.log(node)
             unCheckChildren(node.nodeId)
-            // $('#checkable-output').prepend('<p>' + node.text + ' was unchecked</p>');
         }
 });
     function checkParent(id) {
@@ -116,7 +111,7 @@
         e.preventDefault()
         let formData = $("form").serialize()
         let treeData = $('#treeview_json').data('treeview').getChecked();
-        AjaxCall("/admin/roles-mebership/create", {formData, treeData}, function(res)=> {
+        AjaxCall("/admin/roles-mebership/create", {formData, treeData}, function(res) {
 
         });
     })
