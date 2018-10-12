@@ -10,31 +10,31 @@
     <div id="en" class="tab-pane fade in active">
         <div class="form-group">
             <label>Category Name</label>
-            {!! Form::text('translatable[en][name]',null,['class'=>'form-control']) !!}
+            {!! Form::text('translatable[en][name]',get_translated($model,'en','name'),['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             <label>Description</label>
-            {!! Form::textarea('translatable[en][description]',null,['class'=>'form-control']) !!}
+            {!! Form::textarea('translatable[en][description]',get_translated($model,'en','description'),['class'=>'form-control']) !!}
         </div>
     </div>
     <div id="ru" class="tab-pane fade">
         <div class="form-group">
             <label>Category Name</label>
-            {!! Form::text('translatable[ru][name]',null,['class'=>'form-control']) !!}
+            {!! Form::text('translatable[ru][name]',get_translated($model,'ru','name'),['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             <label>Description</label>
-            {!! Form::textarea('translatable[ru][description]',null,['class'=>'form-control']) !!}
+            {!! Form::textarea('translatable[ru][description]',get_translated($model,'ru','description'),['class'=>'form-control']) !!}
         </div>
     </div>
     <div id="am" class="tab-pane fade">
         <div class="form-group">
             <label>Category Name</label>
-            {!! Form::text('translatable[am][name]',null,['class'=>'form-control']) !!}
+            {!! Form::text('translatable[am][name]',get_translated($model,'am','name'),['class'=>'form-control']) !!}
         </div>
         <div class="form-group">
             <label>Description</label>
-            {!! Form::textarea('translatable[am][description]',null,['class'=>'form-control']) !!}
+            {!! Form::textarea('translatable[am][description]',get_translated($model,'am','description'),['class'=>'form-control']) !!}
         </div>
     </div>
 </div>

@@ -24,7 +24,7 @@ class Category extends Translatable
     public static function boot()
     {
         parent::boot();
-        self::callBoot(self::class);
+        self::callBoot();
     }
 
     public function children()

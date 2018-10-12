@@ -153,3 +153,7 @@ function get_pluck($data,$key,$name){
 
     return $result;
 }
+
+function get_translated($model,$locale,$column){
+    return ($model->getTranslation($locale)) ? $model->getTranslation($locale)->{$column} : null;
+}
