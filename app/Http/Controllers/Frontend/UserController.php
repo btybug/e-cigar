@@ -11,7 +11,8 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->view('index');
+        $user=\Auth::user();
+        return $this->view('index',compact('user'));
     }
 
     public function getFavourites()

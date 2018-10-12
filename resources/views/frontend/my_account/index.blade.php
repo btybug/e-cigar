@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 <div class="my-account">
                     <div class="container">
-                        <form>
+                       {!! Form::model($user) !!}
                             <div class="form-row">
                                 <div class="col-sm-6">
                                     <div class="row">
@@ -17,18 +17,18 @@
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control">
+                                            {!! Form::text('name',null,['class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <label for="username" class="col-sm-4">
-                                            First Name
+                                            Last Name
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control">
+                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -40,7 +40,7 @@
                                 </label>
 
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
                                 </div>
                             </div>
                         </form>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="avatar d-flex">
                             <span>Avatar</span>
-                            <img src="/public/images/girl2.png" alt="">
+                            <img src="/public/images/{!!$user->gender!!}.png" alt="">
                         </div>
                         <div class="bat">
                             <button type="button" class="btn btn-primary">Change Avatar</button>
