@@ -221,7 +221,7 @@ class Folders extends Model
     public function url($file = null,$url = true)
     {
         $parents = \DB::select('SELECT T2.id, T2.name,T2.prefix FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM drive_folders WHERE id = _id) AS parent_id, @l := @l + 1 AS lvl FROM (SELECT @r := ' . $this->id . ', @l := 0) vars, drive_folders m WHERE @r <> 0) T1 JOIN drive_folders T2 ON T1._id = T2.id ORDER BY T1.lvl DESC;');
-        $path = ($url)?'media/':'public/media/';
+        $path = ($url)?'public/media/':'public/media/';
         foreach ($parents as $parent) {
             $prefix = null;
             if ($parent->prefix) $prefix = "($parent->prefix)";
