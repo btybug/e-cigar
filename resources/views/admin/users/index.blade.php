@@ -20,6 +20,7 @@
                     <th>Country</th>
                     <th>Gender</th>
                     <th>Status</th>
+                    <th>Verification Type</th>
                     <th>Registered</th>
                     <th>Actions</th>
                 </tr>
@@ -45,6 +46,7 @@
                     {data: 'country', name: 'country'},
                     {data: 'gender', name: 'gender'},
                     {data: 'status', name: 'status'},
+                    {data: 'verification_type', name: 'verification_type'},
                     {data: 'created_at', name: 'created_at'},
                      {data: 'actions', name: 'actions'}
                 ]
