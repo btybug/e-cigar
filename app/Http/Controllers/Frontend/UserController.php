@@ -14,11 +14,6 @@ class UserController extends Controller
         return $this->view('index');
     }
 
-    public function getProfile()
-    {
-        return $this->view('profile');
-    }
-
     public function getFavourites()
     {
         return $this->view('favourites');
@@ -52,6 +47,11 @@ class UserController extends Controller
     public function getVerification()
     {
         return $this->view('verification');
+    }
+
+    public function getPayments()
+    {
+        return $this->view('payment');
     }
 
 }

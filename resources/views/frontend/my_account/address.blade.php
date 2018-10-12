@@ -1,4 +1,15 @@
 @extends('layouts.frontend')
 @section('content')
-    my account address
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                @include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account_address'])
+            </div>
+            <div class="col-md-8">
+
+            </div>
+        </div>
+
+    </div>
+
 @stop
