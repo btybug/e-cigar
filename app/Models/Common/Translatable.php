@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Translatable extends Model
 {
     use \Dimsav\Translatable\Translatable;
+
 //TODO::ai kov
 //    public static function callBoot()
 //    {
@@ -47,28 +48,24 @@ class Translatable extends Model
 //
 //    }
 //TODO::gordz anel sovory
-    public static function updateOrCreate(int $id=null, array $data)
+    public static function updateOrCreate(int $id = null, array $data)
     {
-        $model=self::find($id);
-        $data['user_id']=\Auth::id();
+        $model = self::find($id)??new static();
+        $model->user_id = \Auth::id();
         $translatableData = \Request::get('translatable');
-        if(!$model){
-            $model=new static();
-
-        }
         $model->update($data);
-            if ($translatableData && count($translatableData)) {
-                foreach ($translatableData as $locale => $translateData) {
-                    //here need check locales later
-                    if (count($translateData)) {
-                        foreach ($translateData as $column => $translate) {
-                            if ($translate) {
-                                $model->translateOrNew($locale)->{$column} = ($translate);
-                            }
+        if ($translatableData && count($translatableData)) {
+            foreach ($translatableData as $locale => $translateData) {
+                //here need check locales later
+                if (count($translateData)) {
+                    foreach ($translateData as $column => $translate) {
+                        if ($translate) {
+                            $model->translateOrNew($locale)->{$column} = ($translate);
                         }
                     }
                 }
-                $model->save();
             }
         }
+        return $model->save();
+    }
 }
