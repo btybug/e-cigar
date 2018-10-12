@@ -57,6 +57,33 @@ Route::group(['prefix' => '/tools'], function () {
     Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
 });
 
+Route::post('/create', function ($locale = null) {
+    $article = new \App\Models\Posts();
+    $article->online = true;
+    $article->save();
+
+    foreach (['en', 'nl', 'fr', 'de'] as $locale) {
+        $article->translateOrNew($locale)->info = "Info {$locale}";
+        $article->translateOrNew($locale)->product_name = "Product name {$locale}";
+        $article->translateOrNew($locale)->short_description = "Short Description {$locale}";
+        $article->translateOrNew($locale)->long_description = "Long Description {$locale}";
+        $article->translateOrNew($locale)->status = "Status";
+        $article->translateOrNew($locale)->status = "Tags";
+    }
+
+    $article->save();
+
+    echo 'Created an article with some translations!';
+})->name('admin_new_post');
+
+Route::get('{locale}', function($locale) {
+    app()->setLocale($locale);
+
+    $article = Article::first();
+
+    return view('admin.blog.index')->with(compact('article'));
+});
+
 
 //MEDIA
 
