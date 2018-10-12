@@ -61,13 +61,13 @@ Route::group(['prefix' => '/tools'], function () {
 
 Route::post('/create', 'Admin\PostController@newPost')->name('admin_new_post');
 
-Route::get('{locale}', function($locale) {
-    app()->setLocale($locale);
-
-    $article = Article::first();
-
-    return view('admin.blog.index')->with(compact('article'));
-});
+//Route::get('{locale}', function($locale) {
+//    app()->setLocale($locale);
+//
+//    $article = Article::first();
+//
+//    return view('admin.blog.index')->with(compact('article'));
+//});
 
 
 //MEDIA
