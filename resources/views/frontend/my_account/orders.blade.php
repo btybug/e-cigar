@@ -18,6 +18,7 @@
                 <th class="text-capitalize">number of products</th>
                 <th class="text-capitalize">Total amount</th>
                 <th class="text-capitalize">status</th>
+                <th class="text-capitalize">action</th>
             </tr>
             </thead>
             <tbody>
@@ -27,6 +28,9 @@
                 <td>5</td>
                 <td>36$</td>
                 <td>
+                    <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
+                </td>
+                <td>
                     <div class="mb-2">
                         <button type="button" class="btn btn-dark order-table_btn">View</button></div>
                     <div>
@@ -37,8 +41,11 @@
             <tr>
                 <td>#4949</td>
                 <td>12/10/09</td>
-                <td>8</td>
+                <td>5</td>
                 <td>36$</td>
+                <td>
+                    <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
+                </td>
                 <td>
                     <div class="mb-2">
                         <button type="button" class="btn btn-dark order-table_btn">View</button></div>
@@ -46,21 +53,40 @@
                         <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td>#4949</td>
+                <td>12/10/09</td>
+                <td>5</td>
+                <td>36$</td>
+                <td>
+                    <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
+                </td>
+                <td>
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-dark order-table_btn">View</button></div>
+                    <div>
+                        <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>#4949</td>
+                <td>12/10/09</td>
+                <td>5</td>
+                <td>36$</td>
+                <td>
+                    <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
+                </td>
+                <td>
+                    <div class="mb-2">
+                        <button type="button" class="btn btn-dark order-table_btn">View</button></div>
+                    <div>
+                        <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
+                    </div>
+                </td>
+            </tr>
 
-            </tr>
-            <tr>
-                <td>#4949</td>
-                <td>12/10/09</td>
-                <td>18</td>
-                <td>36$</td>
-                <td>
-                    <div class="mb-2">
-                        <button type="button" class="btn btn-dark order-table_btn">View</button></div>
-                    <div>
-                        <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
-                    </div>
-                </td>
-            </tr>
             </tbody>
         </table>
 
