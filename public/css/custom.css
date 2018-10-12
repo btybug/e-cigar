@@ -72,7 +72,9 @@
     display: flex;
     flex-direction: column;
 }
-
+.tabs_content .tab_lang_horizontal{
+    margin-bottom:10px;
+}
 .tabs_content .tab_lang li a {
     margin: 0;
     border-radius: 0;

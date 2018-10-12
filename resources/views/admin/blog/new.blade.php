@@ -34,51 +34,137 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group row">
                                     {{Form::label('purl', 'Post Url',['class' => 'col-sm-3'])}}
                                     <div class="col-sm-9">
                                         {{Form::text('post_url', null,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
-                                    <div class="col-sm-9">
-                                        {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title'])}}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
-                                    <div class="col-sm-9">
-                                        {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description'])}}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
-                                    <div class="col-sm-9">
-                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description'])}}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3">Featured image</label>
 
-                                    <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-success">Image</button>
+                                <div class="form-group">
+                                    <ul class="nav nav-tabs tab_lang_horizontal">
+                                        <li class="active"><a data-toggle="tab" href="#posttitleAM">AM</a></li>
+                                        <li><a data-toggle="tab" href="#posttitleEN">EN</a></li>
+                                        <li><a data-toggle="tab" href="#posttitleRU">RU</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="posttitleAM" class="tab-pane fade in active">
+                                            <div class="form-group row">
+                                                {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
+                                                    {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="posttitleEN" class="tab-pane fade">
+                                            <div class="form-group row">
+                                                {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
+                                                    {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="posttitleRU" class="tab-pane fade">
+                                            <div class="form-group row">
+                                                {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
+                                                    {{Form::text('post_title', null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <ul class="nav nav-tabs tab_lang_horizontal">
+                                        <li class="active"><a data-toggle="tab" href="#shortdescAM">AM</a></li>
+                                        <li><a data-toggle="tab" href="#shortdescEN">EN</a></li>
+                                        <li><a data-toggle="tab" href="#shortdescRU">RU</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div id="shortdescAM" class="tab-pane fade in active">
+                                            <div class="form-group row">
+                                                {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
+                                                    {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="shortdescEN" class="tab-pane fade ">
+                                            <div class="form-group row">
+                                                {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
+                                                    {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="shortdescRU" class="tab-pane fade ">
+                                            <div class="form-group row">
+                                                {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
+                                                    {{Form::textarea('short_description', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <ul class="nav nav-tabs tab_lang_horizontal">
+                                            <li class="active"><a data-toggle="tab" href="#longdescAM">AM</a></li>
+                                            <li><a data-toggle="tab" href="#longdescEN">EN</a></li>
+                                            <li><a data-toggle="tab" href="#longdescRU">RU</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="longdescAM" class="tab-pane fade in active">
+                                                <div class="form-group row">
+                                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
+                                                    <div class="col-sm-9">
+                                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="longdescEN" class="tab-pane fade">
+                                                <div class="form-group row">
+                                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
+                                                    <div class="col-sm-9">
+                                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="longdescRU" class="tab-pane fade">
+                                                <div class="form-group row">
+                                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
+                                                    <div class="col-sm-9">
+                                                        {{Form::textarea('long_description',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3">Featured image</label>
+
+                                        <div class="col-sm-9">
+                                            <button type="submit" class="btn btn-success">Image</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3">Gallery images</label>
+                                        <div class="col-sm-9">
+                                            <button type="submit" class="btn btn-success">Image</button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3">Gallery images</label>
-                                    <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-success">Image</button>
-                                    </div>
+                                <div class="col-sm-6">
+
                                 </div>
                             </div>
-                            <div class="col-sm-6">
 
-                            </div>
+
                         </div>
-
-
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -104,20 +190,24 @@
                             <h6>Category</h6>
                             <div class="cat-checkbox">
                                 <div class="checkbox">
-                                    <label>{!! Form::checkbox('Parent','parent',null, array('id'=>'parent'))  !!}Parent</label>
+                                    <label>{!! Form::checkbox('Parent','parent',null, array('id'=>'parent'))  !!}
+                                        Parent</label>
                                 </div>
                                 <div class="child-checkbox">
                                     <div class="checkbox">
-                                        <label>{!! Form::checkbox('Child1','child1',null, array('id'=>'child1'))  !!}Child1</label>
+                                        <label>{!! Form::checkbox('Child1','child1',null, array('id'=>'child1'))  !!}
+                                            Child1</label>
                                     </div>
                                 </div>
                                 <div class="child-checkbox">
                                     <div class="checkbox">
-                                        <label>{!! Form::checkbox('Child2','child2',null, array('id'=>'child2'))  !!}Child2</label>
+                                        <label>{!! Form::checkbox('Child2','child2',null, array('id'=>'child2'))  !!}
+                                            Child2</label>
                                     </div>
                                 </div>
                                 <div class="checkbox">
-                                    <label>{!! Form::checkbox('Parent3','parent3',null, array('id'=>'parent3'))  !!}Parent 2</label>
+                                    <label>{!! Form::checkbox('Parent3','parent3',null, array('id'=>'parent3'))  !!}
+                                        Parent 2</label>
                                 </div>
                             </div>
                         </div>
