@@ -169,6 +169,26 @@
                 </div>
                 <div class="col-md-3 ">
                     <div class="view-product-wall">
+                        <div class="author-wall wall">
+                            <div class="row">
+                                <label for="author" class="col-sm-3">Author</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="author" name="author">
+                                        <option value="man1">man 1</option>
+                                        <option value="man2">man 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-wall wall">
+                            <div class="row">
+                                {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    {!! Form::select('status',['published' => 'Published','unpublished' => 'UnPublish',],null,
+                                                ['class' => 'form-control','id'=> 'status']) !!}
+                                </div>
+                            </div>
+                        </div>
                         <div class="status-wall wall">
                             <div class="row">
                                 {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
@@ -348,7 +368,7 @@
     '//www.tinymce.com/css/codepen.min.css'
   ]
  });
-    
+
     </script>
     <script>
         $( function() {
