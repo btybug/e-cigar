@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\Requests\VerificationRequest;
+use App\Models\Media\Folders;
+use App\Models\Media\Items;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,8 +14,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $user=\Auth::user();
-        return $this->view('index',compact('user'));
+        $user = \Auth::user();
+        return $this->view('index', compact('user'));
     }
 
     public function getFavourites()
@@ -55,4 +58,28 @@ class UserController extends Controller
         return $this->view('payment');
     }
 
+    public function postVerification(VerificationRequest $request)
+    {
+        $item = $request->file('verification_image');
+        $user = \Auth::user();
+        $folder = Folders::where('name', 'drive')->first();
+        if ($folder && \File::isDirectory($folder->path())) {
+            $realName = $user->id . '.' . $request->get('verification_type');
+            $originalName = md5(uniqid()) . '.' . $item->getClientOriginalExtension();
+            if ($item->move($folder->path(), $originalName)) {
+                $item = Items::create([
+                    'original_name' => $originalName,
+                    'real_name' => $realName,
+                    'extension' => $item->getClientOriginalExtension(),
+                    'size' => \File::size($folder->path() . DIRECTORY_SEPARATOR . $originalName),
+                    'folder_id' => $folder->id
+                ]);
+            }
+        }
+        $user->verification_image=$item->relativeUrl;
+        $user->verification_type=$request->get('verification_type');
+        $user->save();
+        return redirect()->back();
+    }
 }
+

@@ -5,29 +5,41 @@
             <div class="col-md-4">
                 @include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account_verification'])
             </div>
-            <div class="col-md-8">
-                {!! Form::open(['file'=>true]) !!}
+            <div class="col-md-8 registration-area">
+                {!! Form::open(['files'=>true]) !!}
                 <div class="form-group row">
                     <label class="col-2 col-form-label" for="select">Document Type</label>
                     <div class="col-10">
-                        <select id="verification_type" name="verification_type" class="custom-select">
-                            <option value="">Select Type</option>
-                            <option value="Passport">Passport</option>
-                            <option value="Driving license">Driving license</option>
-                            <option value="National ID">National ID</option>
-                        </select>
+                        {!! Form::select('verification_type',[
+                        null=>'Select Type',
+                        'passport'=>'Passport',
+                        'driving_license'=>'Driving license',
+                        'national_id'=>'National ID'
+                        ],null,['class'=>($errors->has('verification_type') ? 'custom-select form-control is-invalid' : 'custom-select '),'id'=>'verification_type']) !!}
+                        @if ($errors->has('verification_type'))
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('verification_type') }}</strong>
+                                </span>
+                        @endif
+                        <input type="hidden" class="form-control{{ $errors->has('verification_image') ? ' is-invalid' : '' }}">
+                        @if ($errors->has('verification_image'))
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('verification_image') }}</strong>
+                                </span>
+                        @endif
                     </div>
                 </div>
                 <div class="upload d-none">
                 <div class="form-group row">
                     <label for="text" class="col-2 col-form-label">Upload Image</label>
                     <div class="col-10">
-                        <input id="text" name="text" type="file" class="form-control here">
+                        {!! Form::file('verification_image',['class'=>($errors->has('verification_image') ? ' is-invalid' : '')]) !!}
+
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="offset-2 col-10">
-                        <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
                 </div>

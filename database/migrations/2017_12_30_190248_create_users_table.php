@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->enum('gender',['male','female']);
             $table->tinyInteger('status')->default(0);
             $table->integer('role_id')->nullable()->unsigned();
+            $table->string('verification_type',20)->nullable();
+            $table->string('verification_image')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
