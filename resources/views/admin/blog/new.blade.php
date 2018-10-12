@@ -86,25 +86,25 @@
                                     <div class="tab-content">
                                         <div id="shortdescAM" class="tab-pane fade in active">
                                             <div class="form-group row">
-                                                {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
+                                                {{Form::label('sh_desc_am', 'Short Description',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description[am]', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
+                                                    {{Form::textarea('short_description[am]', null,['class' =>'form-control','id'=>'sh_desc_am','cols'=>30,'rows'=>2,'placeholder' => 'Description am'])}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="shortdescEN" class="tab-pane fade ">
                                             <div class="form-group row">
-                                                {{Form::label('sh_desc', 'Short Description',['class' => 'col-sm-3'])}}
+                                                {{Form::label('sh_desc_en', 'Short Description',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description[en]', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
+                                                    {{Form::textarea('short_description[en]', null,['class' =>'form-control','id'=>'sh_desc_en','cols'=>30,'rows'=>2,'placeholder' => 'Description en'])}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="shortdescRU" class="tab-pane fade ">
                                             <div class="form-group row">
-                                                {{Form::label('sh_desc', 'Short Description[ru]',['class' => 'col-sm-3'])}}
+                                                {{Form::label('sh_desc_ru', 'Short Description[ru]',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('short_description[ru]', null,['class' =>'form-control','id'=>'sh_desc','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
+                                                    {{Form::textarea('short_description[ru]', null,['class' =>'form-control','id'=>'sh_desc_ru','cols'=>30,'rows'=>2,'placeholder' => 'Description ru'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -119,25 +119,25 @@
                                         <div class="tab-content">
                                             <div id="longdescAM" class="tab-pane fade in active">
                                                 <div class="form-group row">
-                                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
+                                                    {{Form::label('lg_desc_am', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description[am]',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
+                                                        {{Form::textarea('long_description[am]',null,['class' =>'form-control','id'=>'lg_desc_am','cols'=>30,'rows'=>10,'placeholder' => 'Description am'])}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div id="longdescEN" class="tab-pane fade">
                                                 <div class="form-group row">
-                                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
+                                                    {{Form::label('lg_desc_en', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description[en]',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
+                                                        {{Form::textarea('long_description[en]',null,['class' =>'form-control','id'=>'lg_desc_en','cols'=>30,'rows'=>10,'placeholder' => 'Description en'])}}
                                                     </div>
                                                 </div>
                                             </div>
                                             <div id="longdescRU" class="tab-pane fade">
                                                 <div class="form-group row">
-                                                    {{Form::label('lg_desc', 'Long Description',['class' => 'col-sm-3'])}}
+                                                    {{Form::label('lg_desc_ru', 'Long Description',['class' => 'col-sm-3'])}}
                                                     <div class="col-sm-9">
-                                                        {{Form::textarea('long_description[ru]',null,['class' =>'form-control','id'=>'lg_desc','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
+                                                        {{Form::textarea('long_description[ru]',null,['class' =>'form-control','id'=>'lg_desc_ru','cols'=>30,'rows'=>10,'placeholder' => 'Description ru'])}}
                                                     </div>
                                                 </div>
                                             </div>

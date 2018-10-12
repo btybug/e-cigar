@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class PostController extends Controller
 {
@@ -33,7 +34,7 @@ class PostController extends Controller
             }
 
             $article->save();
-
-        return $this->view('index');
+        $posts = Posts::all();
+        return $this->view('index',compact('posts'));
     }
 }
