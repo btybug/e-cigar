@@ -1,9 +1,9 @@
 <div class="tabs-outer">
     <div class="text-center tabs-top">
         <div class="img-outer">
-            <img src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png" alt="">
+            <img src="/public/images/{!!Auth::user()->gender!!}.png" alt="">
         </div>
-        <h4 class="mb-3">Name</h4>
+        <h4 class="mb-3">{!!Auth::user()->name!!}</h4>
         <h5 class="font-weight-normal">Position</h5>
     </div>
 
