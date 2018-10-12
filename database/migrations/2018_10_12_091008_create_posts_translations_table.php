@@ -17,15 +17,9 @@ class CreatePostsTranslationsTable extends Migration
             $table->increments('id');
             $table->integer('posts_id')->unsigned();
             $table->string('locale')->index();
-
-            $table->string('post_url')->nullable();
             $table->string('post_title');
             $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
-            $table->string('status')->nullable();
-            $table->text('tags')->nullable();
-            $table->timestamps();
-
             $table->unique(['posts_id','locale']);
             $table->foreign('posts_id')->references('id')->on('posts')->onDelete('cascade');
         });

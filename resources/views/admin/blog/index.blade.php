@@ -26,9 +26,9 @@
                     @foreach($posts as $post)
                     <tr>
                         <td>{{$post->post_url}}</td>
-                        <td>{{$post->post_title}}</td>
-                        <td>{{$post->short_description}}</td>
-                        <td>{{$post->long_description}}</td>
+                        <td>{{$post->getTranslation('en')->post_title}}</td>
+                        <td>{{$post->getTranslation('en')->short_description}}</td>
+                        <td>{{$post->getTranslation('en')->long_description}}</td>
                         <td>{{$post->status}}</td>
                         <td>{{$post->tags}}</td>
                         <td>{{$post->created_at}}</td>

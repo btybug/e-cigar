@@ -15,7 +15,10 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('online');
+            $table->string('post_url')->nullable();
+            $table->string('author')->nullable();
+            $table->string('status')->nullable();
+            $table->text('tags')->nullable();
             $table->timestamps();
         });
     }
