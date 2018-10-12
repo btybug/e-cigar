@@ -60,7 +60,8 @@ Route::group(['prefix' => '/tools'], function () {
     Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
 });
 
-Route::post('/create', 'Admin\PostController@newPost')->name('admin_new_post');
+Route::post('/create-new', 'Admin\PostController@newPost')->name('admin_new_post');
+Route::get('/delete/{id}', 'Admin\PostController@delete')->name('admin_post_delete');
 
 //Route::get('{locale}', function($locale) {
 //    app()->setLocale($locale);

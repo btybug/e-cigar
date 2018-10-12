@@ -35,6 +35,12 @@ class PostController extends Controller
 
             $article->save();
         $posts = Posts::all();
-        return $this->view('index',compact('posts'));
+        return redirect('admin/blog');
+    }
+
+    public function delete($id)
+    {
+        Posts::find($id)->delete();
+        return redirect('admin/blog');
     }
 }

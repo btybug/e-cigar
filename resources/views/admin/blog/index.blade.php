@@ -19,6 +19,7 @@
                     <th>Status</th>
                     <th>Tags</th>
                     <th>Added/Last Modified Date</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                         <td>{{$post->status}}</td>
                         <td>{{$post->tags}}</td>
                         <td>{{$post->created_at}}</td>
+                        <td><a href="{{route('admin_post_delete',$post->id)}}"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     @endforeach
                 @endif
