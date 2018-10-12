@@ -39,7 +39,11 @@ class PostController extends Controller
             $posts = Posts::all();
             return redirect('admin/blog');
         }else{
-            dd($request->ident);
+            dd($request->all());
+            $posts = new \App\Models\Posts();
+            $post = $posts->find($request->ident);
+            dd($post);
+
         }
 
     }
