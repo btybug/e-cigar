@@ -20,11 +20,22 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbar_collapse_0">
-                            <ul class="navbar-nav">
-
-                                <li class="nav-item"><div class="nav-link">Welcome Guest!</div></li>
-                                <li class="nav-item"> <a href="{!! route('login') !!}" class="nav-link -before"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Login/Register</a> </li>
-                            </ul>
+                            @if(Auth::check())
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="{!! url('public/images/other.png') !!}" width="20px" alt=""/>
+                                    <span class="d-none d-md-inline">{!! Auth::user()->name !!}</span> <b class="caret"></b>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a href="{!! url('my-account') !!}" class="dropdown-item">Edit Profile</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{!! url('logout') !!}" class="dropdown-item">Log Out</a>
+                                </div>
+                            @else
+                                <ul class="navbar-nav">
+                                    <li class="nav-item"><div class="nav-link">Welcome Guest!</div></li>
+                                    <li class="nav-item"> <a href="{!! route('login') !!}" class="nav-link -before"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Login/Register</a> </li>
+                                </ul>
+                            @endif
                         </div>
                     </nav></div>
 
