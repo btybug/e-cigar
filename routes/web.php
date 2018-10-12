@@ -30,6 +30,8 @@ Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
 Route::group(['prefix' => 'my-account','middleware' => ['auth']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
     Route::get('/profile', 'Frontend\UserController@getProfile')->name('my_account_profile');
+    Route::get('/logs', 'Frontend\UserController@getLogs')->name('my_account_logs');
+    Route::get('/password', 'Frontend\UserController@getPassword')->name('my_account_password');
     Route::get('/favourites', 'Frontend\UserController@getFavourites')->name('my_account_favourites');
     Route::get('/address', 'Frontend\UserController@getAddress')->name('my_account_address');
     Route::get('/orders', 'Frontend\UserController@getOrders')->name('my_account_orders');

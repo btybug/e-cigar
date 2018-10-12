@@ -39,5 +39,14 @@ class UserController extends Controller
         return $this->view('tickets');
     }
 
+    public function getLogs()
+    {
+        return $this->view('logs');
+    }
+
+    public function getPassword()
+    {
+        return $this->view('password');
+    }
 
 }
