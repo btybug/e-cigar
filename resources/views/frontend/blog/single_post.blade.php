@@ -23,6 +23,6 @@
         </div>
 
 @stop
-@section('content')
+@section('css')
     <link href={{asset("public/frontend/css/blog-single.css?v=".rand(111,999))}} rel="stylesheet" />
 @stop
