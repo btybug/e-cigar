@@ -36,7 +36,7 @@ class Items extends Model
      *
      * @var array
      */
-    protected $appends = array('type', 'url');
+    protected $appends = array('type', 'url','relativeUrl');
     protected $dates = ['created_at', 'updated_at'];
 
     public static function migrate()
@@ -163,6 +163,10 @@ class Items extends Model
     public function getUrlAttribute()
     {
         return $this->folder->url() . '/' . $this->original_name;
+    }
+    public function getRelativeUrlAttribute()
+    {
+        return str_replace('http://'.$_SERVER['SERVER_NAME'],'',$this->folder->url()) . '/' . $this->original_name;
     }
 
     public function folder()
