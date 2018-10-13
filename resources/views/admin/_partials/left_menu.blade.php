@@ -67,6 +67,9 @@
                     @ok('admin_store')
                     <li><a href="{{route('admin_store_categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     @endok
+                    @ok('admin_store_attributes')
+                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
+                    @endok
                     <li><a href="{{route('admin_store')}}"><i class="fa fa-circle-o"></i> Products</a></li>
                 </ul>
             </li>

@@ -53,7 +53,7 @@ class Translatable extends Model
         $model = self::find($id)??new static();
         $data['user_id'] = \Auth::id();
         $translatableData = \Request::get('translatable');
-        
+
         (isset($model->id)) ? $model->update($data) : $model->fill($data) ;
 
         if ($translatableData && count($translatableData)) {

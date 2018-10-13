@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Attributes;
 use App\Models\Category;
 use App\Models\Competitions;
 use App\Models\MarketType;
@@ -75,6 +76,29 @@ class DatatableController extends Controller
             return 'Admin Panel';
         })
             ->rawColumns(['actions','access'])->make(true);
+    }
+
+    public function getAllAttributes()
+    {
+        return Datatables::of(Attributes::whereNull('parent_id'))
+            ->editColumn('name',function ($attr) {
+                return $attr->name;
+            })
+            ->editColumn('image',function ($attr) {
+                return ($attr->image) ? "<img src='$attr->image' width='50px'/>" : "No image";
+            })
+            ->editColumn('icon',function ($attr) {
+                return ($attr->icon) ? "<i class='$attr->icon'></i>" : "No Icon";
+            })
+            ->editColumn('created_at',function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($attr) {
+                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $attr->id . '">Delete</a>
+                    <a href="'.route("admin_store_attributes_edit",$attr->id).'" class="btn btn-warning">Edit</a>
+                    <a href="'.route("admin_store_attributes_options",$attr->id).'" class="btn btn-primary">Options</a>';
+            })->rawColumns(['actions','image','icon','created_at'])
+            ->make(true);
     }
     
 //    public function getAllCompetitions($sport_id = null, $region_id = null)
