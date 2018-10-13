@@ -79,7 +79,7 @@ class DatatableController extends Controller
             if($role->slug!='superadmin' && $role->slug!='customer')
             return '<a href="'.route('admin_edit_role',$role->id).'" class="btn btn-warning events-modal" >Edit</a>';
         })->addColumn('access', function ($role) {
-            return 'Admin Panel';
+            return ($role->type=='backend')?'Admin Panel':'Frontend Pages';
         })
             ->rawColumns(['actions','access'])->make(true);
     }
