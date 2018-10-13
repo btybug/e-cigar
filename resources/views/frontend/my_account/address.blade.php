@@ -114,6 +114,7 @@
                                     <button type="button" class="btn btn-secondary">2</button>
                                     <button type="button" class="btn btn-secondary">2</button>
                                 </div>
+                                <button type="button" class="btn btn-success add-new">+Add New</button>
                             </div>
                             <div class="col-md-9">
                                 <form class="form-horizontal">
@@ -171,6 +172,9 @@
             width: 135px;
             border: 1px solid;
             margin-bottom: 3px;
+        }
+        .add-new{
+            width: 135px;
         }
     </style>
     @stop
