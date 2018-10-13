@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Addresses;
 use App\Models\Roles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -33,6 +34,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role()
     {
         return $this->belongsTo(Roles::class,'role_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Addresses::class,'user_id');
     }
 
 }

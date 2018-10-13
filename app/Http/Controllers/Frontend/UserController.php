@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
+use App\Models\Addresses;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+
+    }
     protected $view = 'frontend.my_account';
 
     public function index()
@@ -25,7 +30,19 @@ class UserController extends Controller
 
     public function getAddress()
     {
-        return $this->view('address');
+        $user=\Auth::user();
+        $billing_address=$user->addresses()->where('type','billing_address')->first();
+        $default_shipping=$user->addresses()->where('type','default_shipping')->first();
+        $address=$user->addresses()->whereNull('type')->get();
+        return $this->view('address',compact('billing_address','default_shipping','address'));
+    }
+
+    public function postAddress(Request $request)
+    {
+        $data=$request->except('_token');
+        $data['user_id']=\Auth::id();
+        Addresses::updateOrCreate(['id'=>$request->get('id',null),'user_id'=>$data['user_id']],$data);
+        return redirect()->back();
     }
 
     public function getOrders()
