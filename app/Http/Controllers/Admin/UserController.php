@@ -21,6 +21,10 @@ class UserController extends Controller
     {
         return $this->view('index');
     }
+    public function showStaff()
+    {
+        return $this->view('staff');
+    }
 
     public function edit(Request $request)
     {

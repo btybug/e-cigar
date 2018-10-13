@@ -16,7 +16,8 @@ Route::group(['prefix' => 'languages'], function () {
 
 
 Route::group(['prefix' => 'users'], function () {
-    Route::get('/', 'Admin\UserController@index')->name('admin_users');
+    Route::get('/', 'Admin\UserController@index')->name('admin_customers');
+    Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
 
     Route::group(['prefix' => 'roles-mebership'], function () {

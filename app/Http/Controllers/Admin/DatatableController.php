@@ -26,10 +26,22 @@ class DatatableController extends Controller
     public function getAllUsers()
     {
 
-        return Datatables::of(User::query())
+        return Datatables::of(User::where('role_id',null))
             ->addColumn('actions', function ($user) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
                     <a href="'.route('admin_users_edit',$user->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getAllStaff()
+    {
+
+         return Datatables::of(User::where('role_id','!=',null))
+            ->addColumn('actions', function ($user) {
+                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
+                    <a href="'.route('admin_users_edit',$user->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+            })->addColumn('role', function ($user) {
+                return $user->role->title;
             })->rawColumns(['actions'])
             ->make(true);
     }

@@ -32,7 +32,7 @@
             @ok('admin_media')
             <li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>
             @endok
-            @ok('admin_users')
+            @ok('admin_customers')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-group"></i>
@@ -42,7 +42,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_users')}}"><i class="fa fa-circle-o"></i> Show</a></li>
+                    @ok('admin_customers')
+                    <li><a href="{{route('admin_staff')}}"><i class="fa fa-circle-o"></i>Staff</a></li>
+                    @endok
+                    <li><a href="{{route('admin_customers')}}"><i class="fa fa-circle-o"></i>Customers</a></li>
                     @ok('admin_role_membership')
                     <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
                     </li>
