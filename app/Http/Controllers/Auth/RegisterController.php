@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Roles;
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -76,6 +76,7 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'gender' => $data['gender'],
             'status' => 0,
+            'role_id' => Roles::where('slug','customer')->first()->id,
             'password' => Hash::make($data['password']),
         ]);
     }
