@@ -39,18 +39,6 @@ Route::group(['prefix' => 'store'], function () {
         Route::post('/create-or-update', 'Admin\StoreController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
         Route::post('/delete', 'Admin\StoreController@postDeleteCategory')->name('admin_store_categories_delete');
     });
-
-    Route::group(['prefix' => 'attributes'], function () {
-        Route::get('/', 'Admin\AttributesController@getAttributes')->name('admin_store_attributes');
-        Route::get('/new', 'Admin\AttributesController@getAttributesCreate')->name('admin_store_attributes_new');
-        Route::post('/new', 'Admin\AttributesController@postAttributesCreate')->name('admin_store_attributes_new');
-        Route::post('/options-show-form', 'Admin\AttributesController@postAttributesOptionsForm')->name('admin_store_attributes_options_form');
-        Route::post('/options/{id}/save', 'Admin\AttributesController@postAttributesOptions')->name('admin_store_attributes_options');
-        Route::get('/edit/{id}', 'Admin\AttributesController@getAttributesEdit')->name('admin_store_attributes_edit');
-        Route::post('/edit/{id}', 'Admin\AttributesController@postAttributesEdit')->name('admin_store_attributes_post_edit');
-
-        Route::post('/delete', 'Admin\AttributesController@postAttributesDelete')->name('admin_store_attributes_delete');
-    });
 });
 
 
@@ -67,6 +55,25 @@ Route::group(['prefix' => 'orders'], function () {
 Route::group(['prefix' => 'inventory'], function () {
     Route::get('/stock', 'Admin\InventoryController@stock')->name('admin_stock');
     Route::get('/stock/new', 'Admin\InventoryController@stockNew')->name('admin_stock_new');
+    Route::group(['prefix' => 'attributes'], function () {
+        Route::get('/', 'Admin\AttributesController@getAttributes')->name('admin_store_attributes');
+        Route::get('/new', 'Admin\AttributesController@getAttributesCreate')->name('admin_store_attributes_new');
+        Route::post('/new', 'Admin\AttributesController@postAttributesCreate')->name('admin_store_attributes_new');
+        Route::post('/options-show-form', 'Admin\AttributesController@postAttributesOptionsForm')->name('admin_store_attributes_options_form');
+        Route::post('/options/{id}/save', 'Admin\AttributesController@postAttributesOptions')->name('admin_store_attributes_options');
+        Route::get('/edit/{id}', 'Admin\AttributesController@getAttributesEdit')->name('admin_store_attributes_edit');
+        Route::post('/edit/{id}', 'Admin\AttributesController@postAttributesEdit')->name('admin_store_attributes_post_edit');
+
+        Route::post('/delete', 'Admin\AttributesController@postAttributesDelete')->name('admin_store_attributes_delete');
+    });
+
+    Route::group(['prefix' => 'options'], function () {
+        Route::get('/', 'Admin\OptionsController@getIndex')->name('admin_stock_options');
+    });
+
+    Route::group(['prefix' => 'tags'], function () {
+        Route::get('/', 'Admin\TagsController@getIndex')->name('admin_stock_tags');
+    });
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');

@@ -60,7 +60,7 @@
             <div class="col-xs-12">
                 <div class="col-md-6 pull-left"><h2>Options </h2></div>
             </div>
-            @include('admin.store.attributes.options')
+            @include('admin.inventory.attributes.options')
         @endif
     </div>
 @stop
@@ -99,7 +99,7 @@
         $("body").on("click", ".attr-option", function () {
             var id = $(this).data('item-id');
             var parentId = $(this).data('parent-id');
-            AjaxCall("/admin/store/attributes/options-show-form", {id: id,parentId:parentId}, function (res) {
+            AjaxCall("/admin/inventory/attributes/options-show-form", {id: id,parentId:parentId}, function (res) {
                 if(! res.error){
                     $(".options-form").html(res.html);
                     $('.icon-picker').iconpicker();

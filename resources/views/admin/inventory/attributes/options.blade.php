@@ -17,7 +17,7 @@
     @endif
 </div>
 <div class="col-md-9 options-form">
-    @include('admin.store.attributes.options_form')
+    @include('admin.inventory.attributes.options_form')
 </div>
 
 

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class AttributesController extends Controller
 {
-    protected $view = 'admin.store.attributes';
+    protected $view = 'admin.inventory.attributes';
 
     public function getAttributes()
     {
