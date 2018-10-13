@@ -76,6 +76,7 @@ class DatatableController extends Controller
         $query = Roles::query();
 
         return Datatables::of($query)->addColumn('actions', function ($role) {
+            if($role->slug!='superadmin' && $role->slug!='customer')
             return '<a href="'.route('admin_edit_role',$role->id).'" class="btn btn-warning events-modal" >Edit</a>';
         })->addColumn('access', function ($role) {
             return 'Admin Panel';
