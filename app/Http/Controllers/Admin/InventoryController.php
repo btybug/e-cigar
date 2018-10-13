@@ -19,4 +19,9 @@ class InventoryController extends Controller
     {
         return $this->view('stock');
     }
+
+    public function stockNew()
+    {
+        return $this->view('stock_new');
+    }
 }

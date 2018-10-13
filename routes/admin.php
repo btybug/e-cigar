@@ -66,6 +66,7 @@ Route::group(['prefix' => 'orders'], function () {
 
 Route::group(['prefix' => 'inventory'], function () {
     Route::get('/stock', 'Admin\InventoryController@stock')->name('admin_stock');
+    Route::get('/stock/new', 'Admin\InventoryController@stockNew')->name('admin_stock_new');
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
