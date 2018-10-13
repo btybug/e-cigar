@@ -48,6 +48,7 @@
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li><a data-toggle="tab" href="#media">Media</a></li>
                     <li><a data-toggle="tab" href="#attributes">Attributes</a></li>
+                    <li><a data-toggle="tab" href="#options">Options</a></li>
                 </ul>
                 <!-- /.box -->
             </div>
@@ -62,6 +63,9 @@
                     </div>
                     <div id="attributes" class="tab-pane fade">
                         attributes
+                    </div>
+                    <div id="options" class="tab-pane fade">
+                        options
                     </div>
                 </div>
             </div>
