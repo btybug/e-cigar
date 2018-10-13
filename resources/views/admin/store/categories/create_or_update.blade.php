@@ -1,3 +1,12 @@
+@if($model)
+    {!! Form::model($model,['url' => route('admin_store_categories_delete')]) !!}
+    {!! Form::hidden('id',null) !!}
+    <div class="form-group">
+        {!! Form::submit('delete',['class' => 'btn btn-danger']) !!}
+    </div>
+@endif
+{!! Form::close() !!}
+
 {!! Form::model($model,['url' => route('admin_store_categories_new_or_update')]) !!}
 {!! Form::hidden('id',null) !!}
 <ul class="nav nav-tabs">

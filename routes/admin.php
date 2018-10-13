@@ -33,7 +33,10 @@ Route::group(['prefix' => 'store'], function () {
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'Admin\StoreController@getCategories')->name('admin_store_categories');
+        Route::post('/get-form', 'Admin\StoreController@postCategoryForm')->name('admin_store_categories_form');
+        Route::post('/update-parent', 'Admin\StoreController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
         Route::post('/create-or-update', 'Admin\StoreController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
+        Route::post('/delete', 'Admin\StoreController@postDeleteCategory')->name('admin_store_categories_delete');
     });
 });
 

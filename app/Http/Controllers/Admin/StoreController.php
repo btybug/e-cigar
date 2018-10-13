@@ -31,13 +31,45 @@ class StoreController extends Controller
     {
         $categories = Category::whereNull('parent_id')->get();
         $allCategories = Category::all();
-        $model = Category::find(1);
+
         return $this->view('categories.index',compact('categories','model','allCategories'));
+    }
+
+    public function postCategoryForm (Request $request)
+    {
+        $id = $request->get('id',0);
+        $model = Category::find($id);
+        $allCategories = Category::where('id','!=',$id)->get();
+        $html = \View("admin.store.categories.create_or_update",compact(['allCategories','model']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function postCategoryUpdateParent (Request $request)
+    {
+        $model = Category::find($request->get('id'));
+        if($model){
+            $model->parent_id = $request->get('parentId');
+            $model->save();
+        }
+
+        return \Response::json(['error' => false]);
     }
 
     public function postCreateOrUpdateCategory(Request $request)
     {
+//        dd($request->all());
         Category::updateOrCreate($request->id, $request->except('_token','translatable'));
+        return redirect()->back();
+    }
+
+    public function postDeleteCategory (Request $request)
+    {
+        $model = Category::find($request->get('id'));
+        if($model){
+            $model->delete();
+        }
+
         return redirect()->back();
     }
 
