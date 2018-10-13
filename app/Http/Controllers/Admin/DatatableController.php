@@ -101,8 +101,7 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($attr) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $attr->id . '">Delete</a>
-                    <a href="'.route("admin_store_attributes_edit",$attr->id).'" class="btn btn-warning">Edit</a>
-                    <a href="'.route("admin_store_attributes_options",$attr->id).'" class="btn btn-primary">Options</a>';
+                    <a href="'.route("admin_store_attributes_edit",$attr->id).'" class="btn btn-warning">Edit</a>';
             })->rawColumns(['actions','image','icon','created_at'])
             ->make(true);
     }

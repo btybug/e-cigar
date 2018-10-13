@@ -38,7 +38,8 @@ class AttributesController extends Controller
     public function getAttributesEdit ($id)
     {
         $model = Attributes::findOrFail($id);
-        return $this->view('create_edit_form',compact(['model']));
+        $optionModel = null;
+        return $this->view('create_edit_form',compact(['model','optionModel']));
     }
 
     public function postAttributesEdit(Request $request,$id)
@@ -47,10 +48,21 @@ class AttributesController extends Controller
         return redirect()->route('admin_store_attributes');
     }
 
-    public function getAttributesOptions ($id)
+    public function postAttributesOptions(Request $request,$id)
     {
         $model = Attributes::findOrFail($id);
-        $options = $model->children;
-        return $this->view('options.list',compact(['model','options']));
+
+        Attributes::updateOrCreate($request->id, $request->except('_token','translatable'));
+        return redirect()->back();
     }
+
+    public function postAttributesOptionsForm(Request $request)
+    {
+        $model = Attributes::findOrFail($request->parentId);
+        $optionModel = Attributes::find($request->id);
+
+        $html = \View("admin.store.attributes.options_form",compact(['optionModel','model']))->render();
+        return \Response::json(['error' => false,'html' => $html]);
+    }
+
 }

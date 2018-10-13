@@ -56,6 +56,12 @@
             </div>
             {!! Form::close() !!}
         </div>
+        @if($model)
+            <div class="col-xs-12">
+                <div class="col-md-6 pull-left"><h2>Options </h2></div>
+            </div>
+            @include('admin.store.attributes.options')
+        @endif
     </div>
 @stop
 @section('js')
@@ -66,6 +72,41 @@
             let value = $(".icon-picker").val()
             $("#font-show-area").attr("class", value)
         })
+        window.AjaxCall = function postSendAjax(url, data, success, error) {
+            $.ajax({
+                type: "post",
+                url: url,
+                cache: false,
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (success) {
+                        success(data);
+                    }
+                    return data;
+                },
+                error: function (errorThrown) {
+                    if (error) {
+                        error(errorThrown);
+                    }
+                    return errorThrown;
+                }
+            });
+        };
+        $("body").on("click", ".attr-option", function () {
+            var id = $(this).data('item-id');
+            var parentId = $(this).data('parent-id');
+            AjaxCall("/admin/store/attributes/options-show-form", {id: id,parentId:parentId}, function (res) {
+                if(! res.error){
+                    $(".options-form").html(res.html);
+                    $('.icon-picker').iconpicker();
+                }
+            });
+        });
+
     </script>
 @stop
 @section("css")
