@@ -53,7 +53,7 @@
                 <!-- /.box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="tab-content">
                     <div id="basic" class="tab-pane fade in active">
                        BAsic
