@@ -11,7 +11,7 @@
                        {!! Form::model($user) !!}
                             <div class="form-row">
                                 <div class="col-sm-6">
-                                    <div class="row">
+                                    <div class="form-group row">
                                         <label for="username" class="col-sm-4">
                                             First Name
                                             <span class="required">*</span>
@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <div class="row">
+                                    <div class="form-group row">
                                         <label for="username" class="col-sm-4">
                                             Last Name
                                             <span class="required">*</span>
@@ -43,6 +43,41 @@
                                     {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
                                 </div>
                             </div>
+                        <div class="form-row mt-3">
+                            <div class="col-sm-4">
+                                <div class="form-group row">
+                                    <label for="username" class="col-sm-4">
+                                        Gender
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        {!! Form::text('gender',null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group row">
+                                    <label for="username" class="col-sm-3">
+                                        Country
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        {!! Form::text('country',null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group row">
+                                    <label for="username" class="col-sm-4">
+                                        Phone
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-sm-8">
+                                        {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {!! Form::close() !!}
                         <div class="form-bg mt-5 ">
                             <div class="change">
