@@ -16,6 +16,7 @@
                     <th>Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
+                    <th>Membership</th>
                     <th>Phone</th>
                     <th>Country</th>
                     <th>Gender</th>
@@ -42,6 +43,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'last_name',name: 'last_name'},
                     {data: 'email', name: 'email'},
+                    {data: 'membership', name: 'membership'},
                     {data: 'phone', name: 'phone'},
                     {data: 'country', name: 'country'},
                     {data: 'gender', name: 'gender'},

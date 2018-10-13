@@ -27,17 +27,22 @@ class DatatableController extends Controller
     public function getAllUsers()
     {
 
-        return Datatables::of(User::where('role_id',null))
+        return Datatables::of(User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNull('role_id')
+            ->orWhere('roles.type','frontend')->select('users.*','roles.title'))
             ->addColumn('actions', function ($user) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
                     <a href="'.route('admin_users_edit',$user->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+            })->addColumn('membership', function ($user) {
+                return ($user->role)?$user->role->title:'No Membership';
             })->rawColumns(['actions'])
             ->make(true);
     }
     public function getAllStaff()
     {
 
-         return Datatables::of(User::where('role_id','!=',null))
+         return Datatables::of(User::join('roles', 'users.role_id', '=', 'roles.id')
+             ->where('roles.type','backend')->select('users.*','roles.title'))
             ->addColumn('actions', function ($user) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
                     <a href="'.route('admin_users_edit',$user->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
