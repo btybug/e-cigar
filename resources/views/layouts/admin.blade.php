@@ -20,8 +20,7 @@
 {!! Html::style("public/admin_theme/dist/css/skins/_all-skins.min.css") !!}
 <!-- Morris chart -->
 {!! Html::style("public/admin_theme/bower_components/morris.js/morris.css") !!}
-<!-- Flagstrap -->
-{!! Html::style("public/admin_theme/flagstrap/css/flags.css") !!}
+
     <link href="{{ mix('comments.css', '../laravel-comments/public') }}" rel="stylesheet">
 
 
@@ -237,7 +236,7 @@
         });
     };
 </script>
-<script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
+
 <script src="{{asset('public/admin_assets/js/custom.js')}}"></script>
 
 @yield('js')

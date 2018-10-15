@@ -163,16 +163,4 @@ window.onload = function () {
 
         return sendAjax('post', url, json_for_ajax, successMethodForEntry(that));
     });
-    $('#flag-select').flagStrap({
-        countries: {
-            "AM": "Armenia",
-            "GB": "United Kingdom",
-            "RU": "Russia"
-        },
-        buttonSize: "btn-sm",
-        buttonType: "btn-info",
-        labelMargin: "10px",
-        scrollable: false,
-        scrollableHeight: "350px"
-    });
 };
