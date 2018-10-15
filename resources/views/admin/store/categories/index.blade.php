@@ -100,5 +100,19 @@
             font-size: 50px;
             margin-top: 15px;
         }
+        #tree1{
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 4px #ccc;
+        }
+        #tree1 ul.jqtree-tree li.jqtree-selected > .jqtree-element{
+            padding: 10px 5px;
+        }
+        #tree1 ul.jqtree-tree li.jqtree_common:not(:last-of-type){
+            border-bottom: 1px solid #ccc;
+        }
+        #tree1 ul.jqtree-tree .jqtree-element{
+            padding: 10px 5px;
+        }
     </style>
 @stop
