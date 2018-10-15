@@ -37,6 +37,7 @@
                                         <th>Native</th>
                                         <th>Icon</th>
                                         <th>Code</th>
+                                        <th>Shared</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -52,6 +53,7 @@
                                             <td>{!! $language->original_name !!}</td>
                                             <td><span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span></td>
                                             <td>{!! $language->code !!}</td>
+                                            <td>{!! ($language->shared) ? "YES" : "NO" !!}</td>
                                             <td>
                                                 <a href="{!! route('admin_settings_languages_edit',$language->id) !!}" title="{!! $language->name !!}" href="#" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
