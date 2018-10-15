@@ -15,7 +15,7 @@
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Social APPs</a>
             </li>
         </ul>
-        <div class="tab-content" style="padding-top: 30px" id="myTabContent">
+        <div class="tab-content tab-content-store-settings" id="myTabContent">
             <div class="tab-pane fade active in" id="general" role="tabpanel" aria-labelledby="general-tab">
                 <form>
                     <div class="form-group">
@@ -110,7 +110,7 @@
 
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <table class="table table-bordered table-responsive" style="background: #eee">
+                <table class="table table-responsive table--store-settings">
                     <tbody>
                     <tr>
                         <td>
@@ -139,63 +139,27 @@
                             <button type="button" class="btn btn-danger">-</button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <label for="ShippingZones">Shipping to</label>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <select id="ShippingZones" class="form-control">
-                                    <option selected>Shipping Zones</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td>
-                            <label for="TaxRate">Tax Rate</label>
-                        </td>
-                        <td>
-                            <div class="form-group">
-                                <select id="TaxRate" class="form-control">
-                                    <option selected>Tax Rate</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td colspan="4" class="text-right">
-                            <button type="button" class="btn btn-danger">-</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="text-right">
-                            <button type="button" class="btn btn-primary">+</button>
-                        </td>
-                    </tr>
-                    <tr style="background: #adc7d6">
+                    <tr class="bg-my-light-blue">
                         <td>Shipping Zone - <span>Armenia</span></td>
                         <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
                     </tr>
-                    <tr style="background: #EBD7E1">
+                    <tr class="bg-my-light-pink">
                         <th>Order Amount</th>
                         <th>Courier</th>
                         <th>Cost</th>
                         <th>Time</th>
                     </tr>
                     <tr>
-                        <td rowspan="2">
-                            <div class="form-group">
-                                <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                                <span>To</span>
-                                <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                            </div>
+                        <td rowspan="3">
+                            <input type="number" min="1" max="5" class="form-control table--store-settings_input-inline">
+                            <span>To</span>
+                            <input type="number" min="1" max="50" class="form-control table--store-settings_input-inline">
                         </td>
                         <td>
-                            <div class="form-group">
-                                <select id="PosType" class="form-control">
-                                    <option selected>Normal Post</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+                            <select id="PosType" class="form-control">
+                                <option selected>Normal Post</option>
+                                <option>...</option>
+                            </select>
                         </td>
                         <td>
                             <span class="form-control">
@@ -210,7 +174,7 @@
                         <td class="text-right">
                             <button type="button" class="btn btn-danger">-</button>
                         </td>
-                        <td class="text-right">
+                        <td rowspan="2" class="text-right">
                             <button type="button" class="btn btn-primary">+</button>
                         </td>
                     </tr>
@@ -238,25 +202,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-right">
+                        <td colspan="4" class="text-right">
                             <button type="button" class="btn btn-primary">+</button>
                         </td>
                     </tr>
                     <tr>
-                        <td rowspan="2">
-                            <div class="form-group">
-                                <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                                <span>To</span>
-                                <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                            </div>
+                        <td rowspan="3">
+                            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
+                            <span>To</span>
+                            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
                         </td>
                         <td>
-                            <div class="form-group">
-                                <select id="PosType" class="form-control">
-                                    <option selected>Normal Post</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+                            <select id="PosType" class="form-control">
+                                <option selected>Normal Post</option>
+                                <option>...</option>
+                            </select>
                         </td>
                         <td>
                             <span class="form-control">
@@ -271,18 +231,16 @@
                         <td class="text-right">
                             <button type="button" class="btn btn-danger">-</button>
                         </td>
-                        <td class="text-right">
+                        <td rowspan="2" class="text-right">
                             <button type="button" class="btn btn-primary">+</button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-group">
-                                <select id="dhl" class="form-control">
-                                    <option selected>DHL</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+                            <select id="dhl" class="form-control">
+                                <option selected>DHL</option>
+                                <option>...</option>
+                            </select>
                         </td>
                         <td>
                             <span class="form-control">
@@ -303,11 +261,11 @@
                             <button type="button" class="btn btn-primary">+</button>
                         </td>
                     </tr>
-                    <tr style="background: #adc7d6">
+                    <tr class="bg-my-light-blue">
                         <td>Shipping Zone - <span>Armenia</span></td>
                         <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
                     </tr>
-                    <tr style="background: #EBD7E1">
+                    <tr class="bg-my-light-pink">
                         <th>Order Amount</th>
                         <th>Courier</th>
                         <th>Cost</th>
@@ -319,6 +277,13 @@
         </div>
     </div>
 @stop
+
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop
+
 @section('js')
 
 @stop
+
+
