@@ -17,9 +17,11 @@ class BlogController extends Controller
         return $this->view('index',compact('posts'));
     }
 
-    public function getSingle($post_id)
+    public function getSingle($post_url)
     {
-        $post = Posts::find($post_id);
+        $post = Posts::where('post_url',$post_url)->first();
+        if(! $post) abort(404);
+
         return $this->view('single_post',compact('post'));
     }
 }

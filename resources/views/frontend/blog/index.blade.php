@@ -36,7 +36,7 @@
                 @foreach($posts as $post)
                 <div class="blog-post">
                     <article>
-                        <a href="{!! route('blog_post',$post->id) !!}" class="d-block blog-post_link">
+                        <a href="{!! post_url($post) !!}" class="d-block blog-post_link">
                             <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
 
                             <span class="blog-date">
@@ -51,7 +51,7 @@
 
 
                                 <span class="d-block blog-text">
-                                    <span class="txt"><strong>Lorem Ipsum</strong>{!! $post->short_description !!}</span>
+                                    <span class="txt">{!! $post->short_description !!}</span>
                                 </span>
                                 <span class="blog-link">Readmore</span>
                             </span>
