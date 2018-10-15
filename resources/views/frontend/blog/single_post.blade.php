@@ -144,10 +144,13 @@
 
 @section("js")
     <script>
-        new Comments.default({
-            el: '#my-comments',
-            pageId: {!! $post->id !!},
+        $(function () {
+            new Comments.default({
+                el: '#my-comments',
+                pageId: {!! $post->id !!},
+            })
         })
+
     </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
 <script>
