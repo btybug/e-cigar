@@ -120,7 +120,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 /*create Email Templates*/
-.table.table--email-temp {
+.table--email-temp {
     border: 1px solid #367fa9;
     border-collapse: unset;
     border-radius: 10px 10px 0 0;
