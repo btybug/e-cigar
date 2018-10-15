@@ -15,8 +15,8 @@
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Social APPs</a>
             </li>
         </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active in" id="general" role="tabpanel" aria-labelledby="general-tab">
+        <div class="tab-content" style="padding-top: 30px" id="myTabContent">
+            <div class="tab-pane fade active in" id="general" role="tabpanel" aria-labelledby="general-tab">
                 <form>
                     <div class="form-group">
                         <label for="Site name">Site Name</label>
@@ -93,6 +93,7 @@
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><p>Social APPs</p></div>
         </div>
+
 
 
 
