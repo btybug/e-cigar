@@ -338,3 +338,10 @@
     height: 150px;
     overflow: auto;
 }
+.coupons_new_page .panel-heading .dis-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.coupons_new_page .p-0{
+    padding: 0;
+}

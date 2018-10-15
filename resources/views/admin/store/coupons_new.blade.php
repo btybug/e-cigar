@@ -6,7 +6,22 @@
     <div class="coupons_new_page">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-pencil"></i> Add Coupon</h3>
+                    <div class="row">
+                        <div class="row required col-sm-7">
+                            <label class="col-sm-2 control-label" for="input-name">Coupon Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="name" value="" placeholder="Coupon Name"
+                                       id="input-name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-5 p-0">
+                            <div class="button-save  text-right">
+                                <button type="submit" class="btn btn-info">Save</button>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div class="panel-body">
                     <form action="" method="post" enctype="" id="form-coupon" class="form-horizontal">
@@ -15,13 +30,7 @@
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab-general">
-                                <div class="form-group required">
-                                    <label class="col-sm-2 control-label" for="input-name">Coupon Name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="name" value="" placeholder="Coupon Name"
-                                               id="input-name" class="form-control">
-                                    </div>
-                                </div>
+
                                 <div class="form-group required">
                                     <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip"
                                                                                                  title=""
