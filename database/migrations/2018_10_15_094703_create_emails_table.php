@@ -17,7 +17,7 @@ class CreateEmailsTable extends Migration
             $table->increments('id');
             $table->string('title')->unique();
             $table->string('slug')->unique();
-            $table->integer('mail_template_id')->unsigned();
+            $table->integer('mail_templates_id')->unsigned();
             $table->tinyInteger('is_core')->default(0);
             $table->text('description')->nullable();
             $table->timestamps();
