@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use DB;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -103,7 +104,16 @@ class StoreController extends Controller
 
     public function getCategory(Request $request)
     {
-        return Category::where('name',$request->name)->get();
+        return DB::table('categories')
+            ->Join('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->select('categories.*', 'categories_translations.*')
+            ->where('name', 'like', '%' . $request->name . '%')
+            ->get();
+    }
+
+    public function saveTags(Request $request)
+    {
+       dd($request->all());
     }
 
     public function getProducts(Request $request)

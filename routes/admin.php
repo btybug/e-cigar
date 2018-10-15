@@ -138,6 +138,7 @@ Route::group(['prefix' => 'media'], function () {
 
 Route::post('/get-categories', 'Admin\StoreController@getCategories')->name('admin_store_coupons_get_categories');
 Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');
+Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 
 
 

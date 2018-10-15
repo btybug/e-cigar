@@ -13,7 +13,6 @@ class SiteLanguagesTableSeeder extends Seeder
     {
         DB::table('site_languages')->insert([
             [
-
                 'name' =>'United Kingdom',
                 'original_name'=>'United Kingdom',
                 'code'=>'GB',
