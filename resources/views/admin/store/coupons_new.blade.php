@@ -120,7 +120,7 @@
                                     <label class="col-sm-2 control-label" for="input-date-start">Date Start</label>
                                     <div class="col-sm-3">
                                         <div class="input-group date">
-                                            <input type="text" name="date_start" value="2018-10-15"
+                                            <input type="text" name="date_start" 
                                                    placeholder="Date Start" data-date-format="YYYY-MM-DD"
                                                    id="input-date-start" class="form-control">
                                             <span class="input-group-btn">
@@ -132,7 +132,7 @@
                                     <label class="col-sm-2 control-label" for="input-date-end">Date End</label>
                                     <div class="col-sm-3">
                                         <div class="input-group date">
-                                            <input type="text" name="date_end" value="2018-11-15" placeholder="Date End"
+                                            <input type="text" name="date_end"  placeholder="Date End"
                                                    data-date-format="YYYY-MM-DD" id="input-date-end"
                                                    class="form-control">
                                             <span class="input-group-btn">
@@ -179,5 +179,24 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
-
+<script>
+$('#input-date-start').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    // minYear: 1901,
+    // maxYear: parseInt(moment().format('YYYY'),10)
+  }, function(start, end, label) {
+    var years = moment().diff(start, 'years');
+    // alert("You are " + years + " years old!");
+  });
+$('#input-date-end').daterangepicker({
+    singleDatePicker: true,
+    showDropdowns: true,
+    // minYear: 1901,
+    // maxYear: parseInt(moment().format('YYYY'),10)
+  }, function(start, end, label) {
+    var years = moment().diff(start, 'years');
+    // alert("You are " + years + " years old!");
+  });
+</script>
 @stop
