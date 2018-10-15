@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use App\User;
 use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class PostController extends Controller
@@ -61,6 +62,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $editable_post = Posts::find($id);
-        return $this->view('new',compact('editable_post'));
+        $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.type','backend')->select('users.*','roles.title')->get();
+        return $this->view('new',compact('editable_post','authors'));
     }
 }

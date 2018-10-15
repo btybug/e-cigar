@@ -182,7 +182,7 @@
                                         }
                                     }
                                     @endphp
-                                    {!! Form::select('author',@$auths,isset($editable_post)? $editable_post->author : null,
+                                    {!! Form::select('author',@$auths,isset($editable_post)?  : null,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
