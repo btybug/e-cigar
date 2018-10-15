@@ -12,12 +12,15 @@ Route::group(['prefix' => 'settings'], function () {
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
         Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
+        Route::post('/new-or-update', 'Admin\SettingsController@postLanguages')->name('admin_settings_languages_new_post');
     });
 
     Route::get('/edit/{id}', 'Admin\SettingsController@getEditLanguages')->name('admin_settings_languages_edit');
     Route::get('/mail-templates', 'Admin\SettingsController@getMailTemplates')->name('admin_mail_templates');
     Route::get('/update-or-create/mail-templates/{id?}', 'Admin\SettingsController@getCreateMailTemplates')->name('admin_mail_create_templates');
     Route::post('/update-or-create/mail-templates/{id?}', 'Admin\SettingsController@postCreateOrUpdate')->name('    post_admin_mail_create_templates');
+    Route::post('/get-country', 'Admin\SettingsController@postCountryGetWithCode')->name('post_admin_settings_get_country');
+    Route::post('/get-languages', 'Admin\SettingsController@postLanguageGetWithCode')->name('post_admin_settings_get_languages');
 });
 
 

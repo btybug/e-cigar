@@ -15,9 +15,14 @@ class CreateCountriesTable extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 2)
-                ->index();
+            $table->string('code', 2);
             $table->string('name', 75);
+            $table->string('native', 50);
+            $table->string('phone', 15);
+            $table->string('continent', 2);
+            $table->string('capital', 50);
+            $table->string('currency', 30);
+            $table->string('languages', 30);
         });
     }
 

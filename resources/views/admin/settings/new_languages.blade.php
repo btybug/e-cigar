@@ -18,29 +18,23 @@
                                 <div class="box box-info">
                                     <!-- form start -->
                                     <div class="box-body">
-                                        {!! Form::model($model,['class' => 'form-horizontal form-validate']) !!}
+                                        {!! Form::model($model,['class' => 'form-horizontal form-validate','url' => route('admin_settings_languages_new_post')]) !!}
+                                            {!! Form::hidden('id',null) !!}
                                             <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">Name
+                                                <label for="code" class="col-sm-2 col-md-3 control-label">Name
                                                 </label>
                                                 <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text('name',null,['class' => 'form-control','id' => 'name']) !!}
+                                                    {!! Form::select('code',['' => 'Select'] + $languages,null,['class' => 'form-control','id' => 'code']) !!}
                                                     <span class="help-block">Language name such as &quot;English&quot;</span>
+                                                    {!! Form::hidden('name',null,['id' => 'lang-name']) !!}
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="original_name" class="col-sm-2 col-md-3 control-label">Original Name
                                                 </label>
                                                 <div class="col-sm-10 col-md-4">
-                                                    {!! Form::text('original_name',null,['class' => 'form-control','id' => 'original_name']) !!}
+                                                    <div class="form-control original_name"></div>
                                                     <span class="help-block">Language name such as &quot;España&quot;</span>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="name" class="col-sm-2 col-md-3 control-label">Code</label>
-                                                <div class="col-sm-10 col-md-4">
-                                                    <div class="form-control code-place"></div>
-                                                    <span class="help-block">Language code such as &quot;en&quot; for english.</span>
                                                 </div>
                                             </div>
 
@@ -112,5 +106,15 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
-
+    <script>
+        $("body").on("change","#code", function (e) {
+           var code = $(this).val();
+            AjaxCall("{!! route('post_admin_settings_get_languages') !!}", {code, code}, function(res) {
+                if(!res.error){
+                    $("#lang-name").val(res.data.name);
+                    $(".lang-place").html(`<img src='/public/flags/${res.data.code.toLowerCase()}.png' alt='${res.data.name}' />`);
+                };
+            });
+        })
+    </script>
 @stop

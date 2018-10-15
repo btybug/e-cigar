@@ -58,30 +58,6 @@
 @section('js')
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
-        window.AjaxCall = function postSendAjax(url, data, success, error) {
-            $.ajax({
-                type: "post",
-                url: url,
-                cache: false,
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function(data) {
-                    if (success) {
-                        success(data);
-                    }
-                    return data;
-                },
-                error: function(errorThrown) {
-                    if (error) {
-                        error(errorThrown);
-                    }
-                    return errorThrown;
-                }
-            });
-        };
         var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
         var tree2 =[{!! getModuleRoutes('POST','admin',[])->toJson(1) !!}]
         $('#treeview_json').treeview({

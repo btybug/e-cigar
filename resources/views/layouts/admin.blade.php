@@ -183,6 +183,32 @@
         });
     </script>
 @endif
+<script>
+    window.AjaxCall = function postSendAjax(url, data, success, error) {
+        $.ajax({
+            type: "post",
+            url: url,
+            cache: false,
+            datatype: "json",
+            data: data,
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            },
+            success: function(data) {
+                if (success) {
+                    success(data);
+                }
+                return data;
+            },
+            error: function(errorThrown) {
+                if (error) {
+                    error(errorThrown);
+                }
+                return errorThrown;
+            }
+        });
+    };
+</script>
 <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
 <script src="{{asset('public/admin_assets/js/custom.js')}}"></script>
 
