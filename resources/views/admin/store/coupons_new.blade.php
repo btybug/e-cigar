@@ -177,8 +177,12 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
 @stop
 @section('js')
+<script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
+<script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/bootstrap-tagsinput.js"></script>
 <script>
 $('#input-date-start').daterangepicker({
     singleDatePicker: true,
@@ -198,5 +202,84 @@ $('#input-date-end').daterangepicker({
     var years = moment().diff(start, 'years');
     // alert("You are " + years + " years old!");
   });
+
+    const  postSendAjax = function(url, data, success, error) {
+        $.ajax({
+            type: "post",
+            url: url,
+            cache: false,
+            datatype: "json",
+            data: data,
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            },
+            success: function(data) {
+                if (success) {
+                    success(data);
+                }
+                return data;
+            },
+            error: function(errorThrown) {
+                if (error) {
+                    error(errorThrown);
+                }
+                return errorThrown;
+            }
+        });
+    };
+    var userList = null;
+    $.ajax({
+    url: "/admin/get-categories",
+    type: "POST",
+    dataType: "json",
+    headers: {
+      "X-CSRF-TOKEN": $("input[name='_token']").val()
+    },
+    success: function(data) {
+      userList = data;
+    }
+  });
+    $("#input-category").tagsinput({
+    maxTags: 5,
+    confirmKeys: [13, 32, 44],
+    typeaheadjs: {
+      // name: "citynames",
+      displayKey: "name",
+      valueKey: "name",
+      source: function(query, processSync, processAsync) {
+        return $.ajax({
+          url: "/admin/get-categories",
+          type: "POST",
+          data: { query: query },
+          dataType: "json",
+          headers: {
+            "X-CSRF-TOKEN": $("input[name='_token']").val()
+          },
+          success: function(json) {
+            return processAsync(json);
+          }
+        });
+      },
+      templates: {
+        empty: ['<div class="empty-message">', "No results", "</div>"].join(
+          "\n"
+        ),
+        header: "<h4>Friends</h4><hr>",
+        suggestion: function(data) {
+          return `<div class="user-search-result"><span> ${data.name} </span></div>`;
+        }
+      }
+    }
+  });
+  $("#input-category").on("beforeItemAdd", function(event) {
+    checkUser = userList.some(item => {
+      return item.name === event.item;
+    });
+    event.cancel = !checkUser;
+  });
+    // postSendAjax("/admin/get-categories", {name: "fasdfad"}, function(res){
+
+    //     console.log(res)
+    // })
 </script>
 @stop
