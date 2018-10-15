@@ -1,5 +1,5 @@
 <?php
-
+dd(1);
 $options = ['namespace' => 'Hazzard\Comments\Http\Controllers'];
 
 if (version_compare(app()->version(), '5.2.0') >= 0) {
