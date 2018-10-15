@@ -18,7 +18,7 @@ class SiteLanguagesTableSeeder extends Seeder
                 'original_name'=>'United Kingdom',
                 'code'=>'GB',
                 'direction' =>'ltr',
-                'default' =>0,
+                'default' =>1,
                 'shared' =>1,
             ]
         ]);
