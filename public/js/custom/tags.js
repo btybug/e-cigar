@@ -1,5 +1,5 @@
 const makeHtml = data => {
-    return `<div class="single-tags col-md-2" style=" margin: 5px;">
+    return `<div class="single-tags">
                     <div class="single-tags-text">
                         <p>${data}</p>
                     </div>
