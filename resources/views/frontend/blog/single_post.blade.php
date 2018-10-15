@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="comments">
+                           {{-- <div id="comments">
                                 <div id="respond" class="comment-respond">
                                     <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small>
                                             <a rel="nofollow" id="cancel-comment-reply-link" href="/featured-news/dale-webster-takes-a-break-after-14642-consecutive-days/#respond" style="display:none;">Cancel Reply</a></small>
@@ -123,7 +123,8 @@
                                         <input type="hidden" id="ak_js" name="ak_js" value="1539328157045">
                                     </form>
                                 </div>
-                            </div>
+                            </div>--}}
+                            <div id="my-comments"></div>
                         </article>
                     </div>
                 </div>
@@ -144,6 +145,12 @@
 @stop
 
 @section("js")
+    <script>
+        new Comments.default({
+            el: '#my-comments',
+            pageId: {!! $post->id !!}
+        })
+    </script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
 <script>
 $("#share").jsSocials({

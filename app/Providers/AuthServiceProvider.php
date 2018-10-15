@@ -24,7 +24,10 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        \Gate::define('moderate-comments', function ($user) {
+            // Add your own logic here...
+            return (bool) $user->is_admin === true;
+        });
         //
     }
 }

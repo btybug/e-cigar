@@ -10,18 +10,20 @@
     <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
+    <link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">
+
 
     @yield('css')
+    <script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>
+
 </head>
 <body>
-
 @include('frontend._partials.header')
 @yield('content')
 @include('frontend._partials.footer')
 
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
 <script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
-
 
 @yield('js')
 </body>

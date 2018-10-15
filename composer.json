@@ -9,6 +9,7 @@
         "barryvdh/laravel-ide-helper": "^2.5",
         "dimsav/laravel-translatable": "^9.2",
         "fideloper/proxy": "^4.0",
+        "hazzard/laravel-comments": "*@dev",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
@@ -62,6 +63,12 @@
         "sort-packages": true,
         "optimize-autoloader": true
     },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./laravel-comments"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
