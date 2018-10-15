@@ -34,7 +34,7 @@
                                 <div class="gp-entry-cats">
                                     <a href="#">Sport</a>
                                 </div>
-                                <h1 class="gp-entry-title"> Dale Webster takes a break after 14642 consecutive days</h1>
+                                <h1 class="gp-entry-title">{!! $post->post_title !!}</h1>
                                 <div class="gp-entry-meta"> <span class="gp-post-meta gp-meta-avatar">
                                     <a href="http://socialize.ghostpool.com/author/socialize/">
                                         <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpthumb.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-50 photo" height="50" width="50">
@@ -44,7 +44,7 @@
                                         <span class="gp-post-meta-row-1">
                                             <span class="gp-post-meta gp-meta-author">
                                                 By
-                                                <a href="http://socialize.ghostpool.com/author/socialize/">GhostPool</a>
+                                                <a href="http://socialize.ghostpool.com/author/socialize/">{{$post->author}}</a>
                                             </span>
                                             on
                                             <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">June 7, 2015</time>

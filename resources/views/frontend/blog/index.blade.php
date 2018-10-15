@@ -33,9 +33,10 @@
             </div>
             <div class="blogs blogs-4x" id="listing-news" style="">
 
+                @foreach($posts as $post)
                 <div class="blog-post">
                     <article>
-                        <a href="http://e-cigar.loc/blog/test" class="d-block blog-post_link">
+                        <a href="{!! route('blog_post',$post->id) !!}" class="d-block blog-post_link">
                             <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
 
                             <span class="blog-date">
@@ -46,115 +47,18 @@
                             </span>
 
                             <span class="d-block blog-block">
-                                <span class="blog-title">About &amp; Contact Pages </span>
+                                <span class="blog-title">{!! $post->post_title !!} </span>
 
 
                                 <span class="d-block blog-text">
-                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                                    <span class="txt"><strong>Lorem Ipsum</strong>{!! $post->short_description !!}</span>
                                 </span>
                                 <span class="blog-link">Readmore</span>
                             </span>
                         </a>
                     </article>
                 </div>
-                <div class="blog-post">
-                    <article>
-                        <a href="http://e-cigar.loc/blog/test" class="d-block blog-post_link">
-                            <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
-
-                            <span class="blog-date">
-                                <strong>22</strong>Aug
-                            </span>
-
-                                <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
-                            </span>
-
-                            <span class="d-block blog-block">
-                                <span class="blog-title">About &amp; Contact Pages </span>
-
-
-                                <span class="d-block blog-text">
-                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
-                                </span>
-                                <span class="blog-link">Readmore</span>
-                            </span>
-                        </a>
-                    </article>
-                </div>
-                <div class="blog-post">
-                    <article>
-                        <a href="http://e-cigar.loc/blog/test" class="d-block blog-post_link">
-                            <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
-
-                            <span class="blog-date">
-                                <strong>22</strong>Aug
-                            </span>
-
-                                <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
-                            </span>
-
-                            <span class="d-block blog-block">
-                                <span class="blog-title">About &amp; Contact Pages </span>
-
-
-                                <span class="d-block blog-text">
-                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
-                                </span>
-                                <span class="blog-link">Readmore</span>
-                            </span>
-                        </a>
-                    </article>
-                </div>
-                <div class="blog-post">
-                    <article>
-                        <a href="http://e-cigar.loc/blog/test" class="d-block blog-post_link">
-                            <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
-
-                            <span class="blog-date">
-                                <strong>22</strong>Aug
-                            </span>
-
-                                <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
-                            </span>
-
-                            <span class="d-block blog-block">
-                                <span class="blog-title">About &amp; Contact Pages </span>
-
-
-                                <span class="d-block blog-text">
-                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
-                                </span>
-                                <span class="blog-link">Readmore</span>
-                            </span>
-                        </a>
-                    </article>
-                </div>
-                <div class="blog-post">
-                    <article>
-                        <a href="http://e-cigar.loc/blog/test" class="d-block blog-post_link">
-                            <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
-
-                            <span class="blog-date">
-                                <strong>22</strong>Aug
-                            </span>
-
-                                <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
-                            </span>
-
-                            <span class="d-block blog-block">
-                                <span class="blog-title">About &amp; Contact Pages </span>
-
-
-                                <span class="d-block blog-text">
-                                    <span class="txt"><strong>Lorem Ipsum</strong>&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
-                                </span>
-                                <span class="blog-link">Readmore</span>
-                            </span>
-                        </a>
-                    </article>
-                </div>
-
-
+                @endforeach
             </div>
             <div class="mx-auto pt-5">
                 <nav aria-label="...">

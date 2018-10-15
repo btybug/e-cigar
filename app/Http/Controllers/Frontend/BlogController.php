@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Posts;
 use View;
 use Illuminate\Http\Request;
 
@@ -12,11 +13,13 @@ class BlogController extends Controller
 
     public function index()
     {
-        return $this->view('index');
+        $posts = Posts::all();
+        return $this->view('index',compact('posts'));
     }
 
     public function getSingle($post_id)
     {
-        return $this->view('single_post');
+        $post = Posts::find($post_id);
+        return $this->view('single_post',compact('post'));
     }
 }
