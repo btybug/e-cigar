@@ -100,6 +100,11 @@
             font-size: 50px;
             margin-top: 15px;
         }
+        .category-form-place{
+            padding: 15px;
+            background-color: white;
+            box-shadow: 0 0 4px #ccc;
+        }
         #tree1{
             background-color: #ffffff;
             border: 1px solid #ccc;
