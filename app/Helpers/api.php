@@ -40,13 +40,16 @@ function is_enabled_media_modal()
     return $_MEDIA_BUTTON;
 
 }
-
-function media_button(string $name,$model=null,bool $multiple = false, $slug = 'drive')
-{
+function enableMedia(){
     global $_MEDIA_BUTTON;
     $_MEDIA_BUTTON = true;
+}
+function media_button(string $name,$model=null,bool $multiple = false, $slug = 'drive')
+{
+    enableMedia();
     return view('media.button', compact(['multiple', 'slug','name','model']));
 }
+
 
 function BBgetDateFormat($date, $format = null)
 {

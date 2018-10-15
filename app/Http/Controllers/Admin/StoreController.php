@@ -31,7 +31,7 @@ class StoreController extends Controller
     {
         $categories = Category::whereNull('parent_id')->get();
         $allCategories = Category::all();
-
+        enableMedia();
         return $this->view('categories.index',compact('categories','model','allCategories'));
     }
 

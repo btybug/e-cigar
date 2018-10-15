@@ -24,4 +24,9 @@ class MailTemplates extends Translatable
     public $translationModel = MailTemplatesTranslations::class;
     protected $fillable = ['type'];
     public $translatedAttributes = ['title', 'subject', 'content'];
+    public static $types=[
+        'registration'=>'Registration',
+        'email_confirmation'=>'Email Confirmation',
+        'new_post'=>'New Post',
+        'order'=>'Order'];
 }

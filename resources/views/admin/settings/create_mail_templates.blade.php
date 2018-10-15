@@ -17,12 +17,7 @@
                     <div class="form-group row">
                         {{Form::label('type', 'Type',['class' => 'col-sm-3'])}}
                         <div class="col-sm-9">
-                            {{Form::select('type',[
-                            'registration'=>'Registration',
-                            'email_confirmation'=>'Email Confirmation',
-                            'new_post'=>'New Post',
-                            'order'=>'Order'
-                            ] ,null,['class' =>'form-control','id'=>'type'])}}
+                            {{Form::select('type',\App\Models\MailTemplates::$types ,null,['class' =>'form-control','id'=>'type'])}}
                         </div>
                     </div>
                     <div class="form-group">
