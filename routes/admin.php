@@ -50,6 +50,7 @@ Route::group(['prefix' => 'store'], function () {
 
     Route::group(['prefix' => 'coupons'], function () {
         Route::get('/', 'Admin\StoreController@getCoupons')->name('admin_store_coupons');
+        Route::get('/new', 'Admin\StoreController@getCouponsNew')->name('admin_store_coupons_new');
     });
 
     Route::group(['prefix' => 'settings'], function () {

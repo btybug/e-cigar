@@ -93,4 +93,9 @@ class StoreController extends Controller
     {
         return $this->view('coupons');
     }
+
+    public function getCouponsNew()
+    {
+        return $this->view('coupons_new');
+    }
 }
