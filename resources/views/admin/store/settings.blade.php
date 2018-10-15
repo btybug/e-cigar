@@ -6,16 +6,16 @@
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item active">
-                <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
+                <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Mail Templates</a>
+                <a class="nav-link" id="mail-tab" data-toggle="tab" href="#mail" role="tab" aria-controls="mail" aria-selected="false">Mail Templates</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Social APPs</a>
             </li>
         </ul>
-        <div class="tab-content" style="padding-top: 30px" id="myTabContent">
+        <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active in" id="general" role="tabpanel" aria-labelledby="general-tab">
                 <form>
                     <div class="form-group">
@@ -76,9 +76,27 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">2</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">3</div>
+            <div class="tab-pane fade" id="mail" role="tabpanel" aria-labelledby="mail-tab">
+                <form>
+                    <div class="form-group">
+                        <label for="Site name">Username</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="Site name">Password</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><p>Social APPs</p></div>
         </div>
+
+
+
+
     </div>
 @stop
 @section('js')
