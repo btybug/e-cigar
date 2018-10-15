@@ -9,43 +9,32 @@
 
 {!! Form::model($model,['url' => route('admin_store_categories_new_or_update')]) !!}
 {!! Form::hidden('id',null) !!}
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#en">EN</a></li>
-    <li><a data-toggle="tab" href="#ru">RU</a></li>
-    <li><a data-toggle="tab" href="#am">AM</a></li>
-</ul>
+
+@if(count(get_languages()))
+    <ul class="nav nav-tabs">
+    @foreach(get_languages() as $language)
+            <li class="@if($loop->first) active @endif"><a data-toggle="tab" href="#{{ strtolower($language->code) }}">
+                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
+    @endforeach
+    </ul>
+@endif
+
 
 <div class="tab-content">
-    <div id="en" class="tab-pane fade in active">
-        <div class="form-group">
-            <label>Category Name</label>
-            {!! Form::text('translatable[en][name]',get_translated($model,'en','name'),['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            {!! Form::textarea('translatable[en][description]',get_translated($model,'en','description'),['class'=>'form-control']) !!}
-        </div>
-    </div>
-    <div id="ru" class="tab-pane fade">
-        <div class="form-group">
-            <label>Category Name</label>
-            {!! Form::text('translatable[ru][name]',get_translated($model,'ru','name'),['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            {!! Form::textarea('translatable[ru][description]',get_translated($model,'ru','description'),['class'=>'form-control']) !!}
-        </div>
-    </div>
-    <div id="am" class="tab-pane fade">
-        <div class="form-group">
-            <label>Category Name</label>
-            {!! Form::text('translatable[am][name]',get_translated($model,'am','name'),['class'=>'form-control']) !!}
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            {!! Form::textarea('translatable[am][description]',get_translated($model,'am','description'),['class'=>'form-control']) !!}
-        </div>
-    </div>
+    @if(count(get_languages()))
+        @foreach(get_languages() as $language)
+            <div id="{{ strtolower($language->code) }}" class="tab-pane fade  @if($loop->first) in active @endif">
+                <div class="form-group">
+                    <label>Category Name</label>
+                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
+                </div>
+            </div>
+        @endforeach
+    @endif
 </div>
 
 <div class="form-group">

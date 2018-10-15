@@ -14,13 +14,8 @@
         </a>
 
         <div class="navbar-custom-menu">
-            <div id="flag-select"
-                 data-input-name="country"
-                 data-selected-country="GB"
-                 data-button-size="btn-sm"
-                 data-button-type="btn-warning"
-                 data-scrollable="true"
-                 data-scrollable-height="250px">
+            <div>
+                {!! Form::select('select_local',get_languages_pluck(),app()->getLocale(),['class' => 'form-control']) !!}
             </div>
             <ul class="nav navbar-nav">
                 <!-- Messages: style can be found in dropdown.less-->

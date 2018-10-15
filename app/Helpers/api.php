@@ -171,3 +171,11 @@ function get_translated($model,$locale,$column){
 function post_url($post){
     return ($post->url) ? "/blog/".$post->url : "#";
 }
+
+function get_languages(){
+    return \App\Models\SiteLanguages::all();
+}
+
+function get_languages_pluck(){
+    return \App\Models\SiteLanguages::pluck('name','code')->all();
+}
