@@ -12,17 +12,17 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('artisan/migrate',function (){
-    dd(Artisan::call('migrate'));
-});
-Route::get('artisan/migrate-refresh',function (){
-    dd(Artisan::call('migrate:refresh', [
-        '--seed' => true,
-    ]));
-});
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::get('artisan/migrate',function (){
+//    dd(Artisan::call('migrate'));
+//});
+//Route::get('artisan/migrate-refresh',function (){
+//    dd(Artisan::call('migrate:refresh', [
+//        '--seed' => true,
+//    ]));
+//});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 Route::group([
     'prefix' => 'api-media',

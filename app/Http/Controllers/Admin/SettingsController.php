@@ -100,4 +100,15 @@ class SettingsController extends Controller
 
         return redirect()->back();
     }
+
+    public function getEmails()
+    {
+       return $this->view('emails.index');
+    }
+
+    public function getEmailsManage()
+    {
+        $templates=MailTemplates::all()->pluck('title','id');
+        return $this->view('emails.manage',compact('templates'));
+    }
 }
