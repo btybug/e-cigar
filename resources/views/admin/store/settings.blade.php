@@ -109,13 +109,214 @@
                 </form>
 
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab"><p>Social APPs</p></div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <table class="table table-bordered table-responsive" style="background: #eee">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label for="ShippingZones">Shipping to</label>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select id="ShippingZones" class="form-control">
+                                    <option selected>Shipping Zones</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <label for="TaxRate">Tax Rate</label>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select id="TaxRate" class="form-control">
+                                    <option selected>Tax Rate</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td colspan="4" class="text-right">
+                            <button type="button" class="btn btn-danger">-</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="ShippingZones">Shipping to</label>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select id="ShippingZones" class="form-control">
+                                    <option selected>Shipping Zones</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <label for="TaxRate">Tax Rate</label>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select id="TaxRate" class="form-control">
+                                    <option selected>Tax Rate</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td colspan="4" class="text-right">
+                            <button type="button" class="btn btn-danger">-</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            <button type="button" class="btn btn-primary">+</button>
+                        </td>
+                    </tr>
+                    <tr style="background: #adc7d6">
+                        <td>Shipping Zone - <span>Armenia</span></td>
+                        <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
+                    </tr>
+                    <tr style="background: #EBD7E1">
+                        <th>Order Amount</th>
+                        <th>Courier</th>
+                        <th>Cost</th>
+                        <th>Time</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            <div class="form-group">
+                                <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
+                                <span>To</span>
+                                <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select id="PosType" class="form-control">
+                                    <option selected>Normal Post</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                5
+                            </span>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                3 days
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-danger">-</button>
+                        </td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-primary">+</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <select id="dhl" class="form-control">
+                                    <option selected>DHL</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                5
+                            </span>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                1 day
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-danger">-</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            <button type="button" class="btn btn-primary">+</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">
+                            <div class="form-group">
+                                <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
+                                <span>To</span>
+                                <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <select id="PosType" class="form-control">
+                                    <option selected>Normal Post</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                5
+                            </span>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                3 days
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-danger">-</button>
+                        </td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-primary">+</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <select id="dhl" class="form-control">
+                                    <option selected>DHL</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                5
+                            </span>
+                        </td>
+                        <td>
+                            <span class="form-control">
+                                1 day
+                            </span>
+                        </td>
+                        <td class="text-right">
+                            <button type="button" class="btn btn-danger">-</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="text-right">
+                            <button type="button" class="btn btn-primary">+</button>
+                        </td>
+                    </tr>
+                    <tr style="background: #adc7d6">
+                        <td>Shipping Zone - <span>Armenia</span></td>
+                        <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
+                    </tr>
+                    <tr style="background: #EBD7E1">
+                        <th>Order Amount</th>
+                        <th>Courier</th>
+                        <th>Cost</th>
+                        <th>Time</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-
-
-
-
     </div>
 @stop
 @section('js')
