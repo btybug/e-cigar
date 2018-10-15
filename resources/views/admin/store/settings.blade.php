@@ -19,12 +19,12 @@
             <div class="tab-pane fade active in" id="general" role="tabpanel" aria-labelledby="general-tab">
                 <form>
                     <div class="form-group">
-                        <label for="Site name">Site Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+                        <label for="SiteName">Site Name</label>
+                        <input type="text" class="form-control" id="SiteName" aria-describedby="name" placeholder="Enter name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">Site Logo</label>
-                        <input type="file" class="form-control" id="exampleInputPassword1">
+                        <label for="siteLogo">Site Logo</label>
+                        <input type="file" class="form-control" id="siteLogo">
                     </div>
                     <div class="form-group">
                         <label for="Site name">E-Mail Address</label>
@@ -79,12 +79,32 @@
             <div class="tab-pane fade" id="mail" role="tabpanel" aria-labelledby="mail-tab">
                 <form>
                     <div class="form-group">
-                        <label for="Site name">Username</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username">
+                        <label for="Site name">Mail Engine</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Password</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Password">
+                        <label for="Site name">Mail Parameters</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mail Parameters">
+                    </div>
+                    <div class="form-group">
+                        <label for="Site name">SMTP Hostname</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Hostname">
+                    </div>
+                    <div class="form-group">
+                        <label for="Site name">SMTP Username</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="Site name">SMTP Password</label>
+                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="Site name">SMTP Port</label>
+                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Port">
+                    </div>
+                    <div class="form-group">
+                        <label for="Site name">SMTP Timeout</label>
+                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Timeout">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
