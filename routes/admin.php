@@ -9,9 +9,7 @@
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 
 Route::group(['prefix' => 'settings'], function () {
-    Route::get('artisan/migrate',function (){
-        dd(Artisan::call('migrate'));
-    });
+
     Route::get('/languages', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
     Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
     Route::get('/edit/{id}', 'Admin\SettingsController@getEditLanguages')->name('admin_settings_languages_edit');

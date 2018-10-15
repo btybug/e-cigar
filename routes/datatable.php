@@ -5,6 +5,7 @@
  * Date: 31.12.2017
  * Time: 00:09
  */
+
 Route::group(['prefix'=>'datatables'],function(){
     Route::get('/users/get-all','Admin\DatatableController@getAllUsers')->name('datatable_all_users');
     Route::get('/users/staff','Admin\DatatableController@getAllStaff')->name('datatable_all_staff');
