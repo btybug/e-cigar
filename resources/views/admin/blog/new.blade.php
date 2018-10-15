@@ -395,7 +395,11 @@
         initTinyMce("#lg_desc_am")
         initTinyMce("#lg_desc_en")
         initTinyMce("#lg_desc_ru")
-
+        $('#form').submit(function() {
+            tinyMCE.triggerSave()
+        // DO STUFF...
+        return true; // return false to cancel form action
+        });
     </script>
     <script>
 
