@@ -17,15 +17,19 @@
                                    <a href="#" rel="next"></a>
                                    <a href="#" class="gp-share-button"></a>
                                </div>
-                               <div id="gp-share-icons">
+                               <div id="gp-share-icons-hide" style="display: none">
                                    <h3>Share This Post</h3>
-                                   <div class="gp-share-icons">
-                                       <a href="#" title="Twitter" class="gp-share-twitter"></a>
+                                   <div class="gp-share-icons" style="display: inline-block">
+                                        <div id="share"></div>
+                                       <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
                                        <a href="#" title="Facebook" class="gp-share-facebook"></a>
                                        <a href="#" title="Google+" class="gp-share-google-plus"></a>
                                        <a href="#" title="LinkedIn" class="gp-share-linkedin"></a>
                                        <a href="#" class="gp-share-tumblr"></a>
-                                       <a href="" title="Email" class="gp-share-email"></a>
+                                       <a href="" title="Email" class="gp-share-email"></a> -->
+                                   </div>
+                                   <div class="hide-icons" style="display: inline-block; float: right; margin-top: 10px;">
+                                    <i class="fa fa-times"></i>
                                    </div>
                                </div>
                                <div class="gp-clear"></div>
@@ -66,13 +70,13 @@
                             </div>
                             <div id="gp-share-icons">
                                 <h3>Share This Post</h3>
-                                <div class="gp-share-icons">
-                                    <a href="#" title="Twitter" class="gp-share-twitter"></a>
+                                <div class="gp-share-icons-on-footer">
+                                    <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
                                     <a href="#" title="Facebook" class="gp-share-facebook"></a>
                                     <a href="#" title="Google+" class="gp-share-google-plus"></a>
                                     <a href="#" title="Pinterest" class="gp-share-pinterest" target="_blank"></a>
                                     <a href="#" title="Tumblr" class="gp-share-tumblr"></a>
-                                    <a href="" title="Email" class="gp-share-email"></a>
+                                    <a href="" title="Email" class="gp-share-email"></a> -->
                                 </div>
                             </div>
                             <div class="gp-author-info">
@@ -84,14 +88,7 @@
                                         Credibly embrace multidisciplinary paradigms and synergistic services. Phosfluorescently fabricate customer directed technologies after value-added infrastructures.
                                     </div>
                                     <div class="gp-author-social-icons">
-                                        <a href="#" class="gp-twitter-icon"></a>
-                                        <a href="#" class="gp-facebook-icon"></a>
-                                        <a href="#" class="gp-pinterest-icon"></a>
-                                        <a href="#" class="gp-youtube-icon"></a>
-                                        <a href="#" class="gp-vimeo-icon"></a>
-                                        <a href="#" class="gp-flickr-icon"></a>
-                                        <a href="#" class="gp-linkedin-icon"></a>
-                                        <a href="#" class="gp-instagram-icon"></a>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -136,4 +133,31 @@
 @stop
 @section('css')
     <link href={{asset("public/frontend/css/blog-single.css?v=".rand(111,999))}} rel="stylesheet" />
+    
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
+   <style>
+   .hide-icons {
+       cursor: pointer;
+   }
+   </style>
+@stop
+
+@section("js")
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+<script>
+$("#share").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+$(".gp-author-social-icons").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+$(".gp-share-icons-on-footer").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+$("body").on("click", ".gp-share-button, .hide-icons", function(){
+    $("#gp-share-icons-hide").toggle()
+})
+</script>
+
 @stop
