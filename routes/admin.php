@@ -9,9 +9,11 @@
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 
 Route::group(['prefix' => 'settings'], function () {
+    Route::group(['prefix' => 'languages'], function () {
+        Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
+        Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
+    });
 
-    Route::get('/languages', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
-    Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
     Route::get('/edit/{id}', 'Admin\SettingsController@getEditLanguages')->name('admin_settings_languages_edit');
     Route::get('/mail-templates', 'Admin\SettingsController@getMailTemplates')->name('admin_mail_templates');
     Route::get('/update-or-create/mail-templates/{id?}', 'Admin\SettingsController@getCreateMailTemplates')->name('admin_mail_create_templates');
