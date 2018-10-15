@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
+use Yajra\DataTables\Facades\DataTables;
+use App\User;
 use App\Models\PostsTranslation;
 
 class BlogController extends Controller
@@ -25,7 +27,9 @@ class BlogController extends Controller
 
     public function create()
     {
-        return $this->view('new');
+        $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.type','backend')->select('users.*','roles.title')->get();
+        return $this->view('new',compact('authors'));
     }
 
     public function edit($id)

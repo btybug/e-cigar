@@ -173,7 +173,13 @@
                             <div class="row">
                                 {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('author',['man1' => 'Man1','man2' => 'Man2',],isset($editable_post)? $editable_post->author : null,
+                                    @php
+                                        foreach ($authors as $author)
+                                    {
+                                            $auths[$author->id] =  $author->name;
+                                    }
+                                    @endphp
+                                    {!! Form::select('author',$auths,isset($editable_post)? $editable_post->author : null,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
