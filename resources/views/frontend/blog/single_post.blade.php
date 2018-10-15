@@ -54,9 +54,7 @@
                                             <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">{!! BBgetDateFormat(@$post->created_at) !!}</time>
                                         </span>
                                         <span class="gp-post-meta-row-2">
-                                            <span class="gp-post-meta gp-meta-comments">
-                                                <a href="http://socialize.ghostpool.com/featured-news/dale-webster-takes-a-break-after-14642-consecutive-days/#respond" class="comments-link">No Comments</a>
-                                            </span> / <span class="gp-post-meta gp-meta-views">4282 views</span> </span> </span>
+                                            <span class="gp-post-meta gp-meta-views">4282 views</span> </span> </span>
                                 </div>
                             </header>
                             <div class="gp-entry-content gp-image-above">
