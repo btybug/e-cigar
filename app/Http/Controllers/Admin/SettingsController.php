@@ -25,7 +25,8 @@ class SettingsController extends Controller
 
     public function getLanguagesNew()
     {
-        return $this->view('new_languages');
+        $model = null;
+        return $this->view('new_languages',compact(['model']));
     }
 
     public function getMailTemplates()
