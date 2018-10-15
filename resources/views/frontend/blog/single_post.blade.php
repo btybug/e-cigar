@@ -34,7 +34,7 @@
                                 <div class="gp-entry-cats">
                                     <a href="#">Sport</a>
                                 </div>
-                                <h1 class="gp-entry-title">{!! $post->post_title !!}</h1>
+                                <h1 class="gp-entry-title">{!! @$post->post_title !!}</h1>
                                 <div class="gp-entry-meta"> <span class="gp-post-meta gp-meta-avatar">
                                     <a href="http://socialize.ghostpool.com/author/socialize/">
                                         <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpthumb.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-50 photo" height="50" width="50">
@@ -44,10 +44,10 @@
                                         <span class="gp-post-meta-row-1">
                                             <span class="gp-post-meta gp-meta-author">
                                                 By
-                                                <a href="http://socialize.ghostpool.com/author/socialize/">{{$post->author_get->name}}</a>
+                                                <a href="http://socialize.ghostpool.com/author/socialize/">{{@$post->author_get->name}}</a>
                                             </span>
                                             on
-                                            <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">{!! BBgetDateFormat($post->created_at) !!}</time>
+                                            <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">{!! BBgetDateFormat(@$post->created_at) !!}</time>
                                         </span>
                                         <span class="gp-post-meta-row-2">
                                             <span class="gp-post-meta gp-meta-comments">
@@ -57,7 +57,7 @@
                             </header>
                             <div class="gp-entry-content gp-image-above">
                                 <div class="gp-entry-text" itemprop="text">
-                                    {!! $post->long_description !!}
+                                    {!! @$post->long_description !!}
                                 </div>
                             </div>
                             <div class="gp-entry-tags">
