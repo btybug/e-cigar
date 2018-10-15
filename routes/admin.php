@@ -39,6 +39,22 @@ Route::group(['prefix' => 'store'], function () {
         Route::post('/create-or-update', 'Admin\StoreController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
         Route::post('/delete', 'Admin\StoreController@postDeleteCategory')->name('admin_store_categories_delete');
     });
+
+    Route::group(['prefix' => 'shipping-zones'], function () {
+        Route::get('/', 'Admin\StoreController@getShippingZones')->name('admin_store_shipping_zones');
+    });
+
+    Route::group(['prefix' => 'tax-rate'], function () {
+        Route::get('/', 'Admin\StoreController@getTaxRate')->name('admin_store_tax');
+    });
+
+    Route::group(['prefix' => 'coupons'], function () {
+        Route::get('/', 'Admin\StoreController@getCoupons')->name('admin_store_coupons');
+    });
+
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/', 'Admin\StoreController@getSettings')->name('admin_store_settings');
+    });
 });
 
 

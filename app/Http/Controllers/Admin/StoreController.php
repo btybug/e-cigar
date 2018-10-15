@@ -74,4 +74,23 @@ class StoreController extends Controller
     }
 
 
+    public function getShippingZones()
+    {
+        return $this->view('shipping_zones');
+    }
+
+    public function getTaxRate()
+    {
+        return $this->view('tax_rate');
+    }
+
+    public function getSettings()
+    {
+        return $this->view('settings');
+    }
+
+    public function getCoupons()
+    {
+        return $this->view('coupons');
+    }
 }
