@@ -15,7 +15,7 @@ class CreateMailTemplatesTranslationsTable extends Migration
     {
         Schema::create('mail_templates_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('template_id');
+            $table->integer('template_id')->unsigned();
             $table->string('title');
             $table->string('subject');
             $table->string('locale')->index();

@@ -17,7 +17,7 @@ class MailTemplates extends Translatable
     /**
      * @var string
      */
-    protected $table = 'mail_template';
+    protected $table = 'mail_templates';
     /**
      * @var array
      */
