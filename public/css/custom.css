@@ -365,40 +365,6 @@
     padding-left: 0;
 }
 
-/*admin store settings*/
-.tab-content-store-settings {
-    padding-top: 30px;
-}
-
-.bg-my-light-blue {
-    background: #adc7d6;
-}
-
-.bg-my-light-pink {
-    background: #EBD7E1;
-}
-
-.table--store-settings {
-    background: #eee;
-}
-
-.table--store-settings_input-inline {
-    display: inline-block;
-    width: auto;
-}
-
-.table.table--store-settings td,
-.table.table--store-settings th {
-    border: 1px solid #ddd;
-    vertical-align: middle;
-}
-
-.table.table--store-settings .btn,
-.table.table--store-settings .btn {
-    min-width: 34px;
-}
-
-/*End admin store settings*/
 /*start inventory tags*/
 .inventory_tags .bootstrap-tagsinput{
     width: 100%;

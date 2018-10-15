@@ -12,7 +12,10 @@
                 <a class="nav-link" id="mail-tab" data-toggle="tab" href="#mail" role="tab" aria-controls="mail" aria-selected="false">Mail Settings</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Social APPs</a>
+                <a class="nav-link" id="shipping-tab" data-toggle="tab" href="#shipping" role="tab" aria-controls="shipping" aria-selected="false">Shipping</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="socialApps-tab" data-toggle="tab" href="#socialApps" role="tab" aria-controls="socialApps" aria-selected="false">Social APPs</a>
             </li>
         </ul>
         <div class="tab-content tab-content-store-settings" id="myTabContent">
@@ -99,7 +102,7 @@
                     </div>
                     <div class="form-group">
                         <label for="SMTPPort">SMTP Port</label>
-                        <input type="password" class="SMTPPort" id="SMTPPort" aria-describedby="SMTPPort" placeholder="SMTP Port">
+                        <input type="password" class="SMTPPort form-control" id="SMTPPort" aria-describedby="SMTPPort" placeholder="SMTP Port">
                     </div>
                     <div class="form-group">
                         <label for="SMTPTimeout">SMTP Timeout</label>
@@ -109,7 +112,7 @@
                 </form>
 
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
                 <table class="table table-responsive table--store-settings">
                     <tbody>
                     <tr>
@@ -117,26 +120,22 @@
                             <label for="ShippingZones">Shipping to</label>
                         </td>
                         <td>
-                            <div class="form-group">
-                                <select id="ShippingZones" class="form-control">
-                                    <option selected>Shipping Zones</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+                            <select id="ShippingZones" class="form-control">
+                                <option selected>Shipping Zones</option>
+                                <option>...</option>
+                            </select>
                         </td>
                         <td>
                             <label for="TaxRate">Tax Rate</label>
                         </td>
                         <td>
-                            <div class="form-group">
-                                <select id="TaxRate" class="form-control">
-                                    <option selected>Tax Rate</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+                            <select id="TaxRate" class="form-control">
+                                <option selected>Tax Rate</option>
+                                <option>...</option>
+                            </select>
                         </td>
                         <td colspan="4" class="text-right">
-                            <button type="button" class="btn btn-danger">-</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr class="bg-my-light-blue">
@@ -150,7 +149,7 @@
                         <th>Time</th>
                     </tr>
                     <tr>
-                        <td rowspan="3">
+                        <td rowspan="3" class="table--store-settings_vert-top">
                             <input type="number" min="1" max="5" class="form-control table--store-settings_input-inline">
                             <span>To</span>
                             <input type="number" min="1" max="50" class="form-control table--store-settings_input-inline">
@@ -172,20 +171,18 @@
                             </span>
                         </td>
                         <td class="text-right">
-                            <button type="button" class="btn btn-danger">-</button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
                         </td>
                         <td rowspan="2" class="text-right">
-                            <button type="button" class="btn btn-primary">+</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <div class="form-group">
-                                <select id="dhl" class="form-control">
-                                    <option selected>DHL</option>
-                                    <option>...</option>
-                                </select>
-                            </div>
+                            <select id="dhl" class="form-control">
+                                <option selected>DHL</option>
+                                <option>...</option>
+                            </select>
                         </td>
                         <td>
                             <span class="form-control">
@@ -198,16 +195,16 @@
                             </span>
                         </td>
                         <td class="text-right">
-                            <button type="button" class="btn btn-danger">-</button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-right">
-                            <button type="button" class="btn btn-primary">+</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
-                        <td rowspan="3">
+                        <td rowspan="3" class="table--store-settings_vert-top">
                             <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
                             <span>To</span>
                             <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
@@ -229,10 +226,10 @@
                             </span>
                         </td>
                         <td class="text-right">
-                            <button type="button" class="btn btn-danger">-</button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
                         </td>
                         <td rowspan="2" class="text-right">
-                            <button type="button" class="btn btn-primary">+</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -253,12 +250,12 @@
                             </span>
                         </td>
                         <td class="text-right">
-                            <button type="button" class="btn btn-danger">-</button>
+                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4" class="text-right">
-                            <button type="button" class="btn btn-primary">+</button>
+                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr class="bg-my-light-blue">
