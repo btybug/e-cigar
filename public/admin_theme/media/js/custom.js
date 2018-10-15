@@ -166,7 +166,7 @@ $("body").on("click", ".remove-item-for-media", function() {
     let id = $(this).attr("data-item-id");
     postSendAjax(
         "/api/api-media/transfer-item",
-        { folder_id: _global_folder_id, item_id: id },
+        { folder_id: 2, item_id: id, slug: "trush" },
         function(res) {
             console.log(res);
         }
