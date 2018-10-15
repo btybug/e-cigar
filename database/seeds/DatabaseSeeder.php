@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
              UsersTableSeeder::class,
              DriveFoldersTableSeeder::class,
              CountriesTableSeeder::class,
-             LanguagesTableSeeder::class
+             LanguagesTableSeeder::class,
+             SiteLanguagesTableSeeder::class
          ]);
     }
 }

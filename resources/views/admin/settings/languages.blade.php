@@ -34,61 +34,31 @@
                                     <tr>
                                         <th>Default</th>
                                         <th>Language</th>
+                                        <th>Native</th>
                                         <th>Icon</th>
                                         <th>Code</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                <input type="radio" name="languages_id" value="1"  class="default_language"  >
-                                            </label>
-                                        </td>
-                                        <!--<td>1</td>-->
-                                        <td>English</td>
-                                        <td><img src="http://demo0.laravelcommerce.com//resources/assets/images/language_flags/1486556365.503984030_english.jpg" width="25px" alt=""></td>
-                                        <td>en</td>
-                                        <td>
-                                            <a data-toggle="tooltip" data-placement="bottom" title=" English" href="#" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    @foreach($languages as $language)
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    <input type="radio" name="languages_id" value="{!! $language->id !!}" @if($language->default) checked @endif class="default_language">
+                                                </label>
+                                            </td>
+                                            <td>{!! $language->name !!}</td>
+                                            <td>{!! $language->original_name !!}</td>
+                                            <td><span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span></td>
+                                            <td>{!! $language->code !!}</td>
+                                            <td>
+                                                <a href="{!! route('admin_settings_languages_edit',$language->id) !!}" title="{!! $language->name !!}" href="#" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-
-                                            <a data-toggle="tooltip" data-placement="bottom" title=" English" id="deleteLanguageId" languages_id ="1" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                <input type="radio" name="languages_id" value="6"  class="default_language"  >
-                                            </label>
-                                        </td>
-                                        <!--<td>6</td>-->
-                                        <td>Indonesia</td>
-                                        <td><img src="http://demo0.laravelcommerce.com//" width="25px" alt=""></td>
-                                        <td>in</td>
-                                        <td>
-                                            <a data-toggle="tooltip" data-placement="bottom" title=" Indonesia" href="#" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-
-                                            <a data-toggle="tooltip" data-placement="bottom" title=" Indonesia" id="deleteLanguageId" languages_id ="6" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label>
-                                                <input type="radio" name="languages_id" value="8"  class="default_language"  checked  >
-                                            </label>
-                                        </td>
-                                        <!--<td>8</td>-->
-                                        <td>Español</td>
-                                        <td><img src="http://demo0.laravelcommerce.com//" width="25px" alt=""></td>
-                                        <td>es</td>
-                                        <td>
-                                            <a data-toggle="tooltip" data-placement="bottom" title=" Español" href="#" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
-                                        </td>
-                                    </tr>
+                                                <a data-toggle="tooltip" data-placement="bottom" title=" English" id="deleteLanguageId" languages_id ="1" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                                 <div class="col-xs-12 text-right">

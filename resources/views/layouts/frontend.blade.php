@@ -11,7 +11,7 @@
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
     <link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
     @yield('css')
     <script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>

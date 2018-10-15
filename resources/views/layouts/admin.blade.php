@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
     <!--Media Button Stiles-->
 

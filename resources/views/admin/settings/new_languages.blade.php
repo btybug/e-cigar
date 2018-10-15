@@ -24,16 +24,17 @@
                                                 <label for="code" class="col-sm-2 col-md-3 control-label">Name
                                                 </label>
                                                 <div class="col-sm-10 col-md-4">
-                                                    {!! Form::select('code',['' => 'Select'] + $languages,null,['class' => 'form-control','id' => 'code']) !!}
+                                                    {!! Form::select('code',['' => 'Select'] + $countries,null,['class' => 'form-control','id' => 'code']) !!}
                                                     <span class="help-block">Language name such as &quot;English&quot;</span>
                                                     {!! Form::hidden('name',null,['id' => 'lang-name']) !!}
+                                                    {!! Form::hidden('original_name',null,['id' => 'original_name']) !!}
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="original_name" class="col-sm-2 col-md-3 control-label">Original Name
                                                 </label>
                                                 <div class="col-sm-10 col-md-4">
-                                                    <div class="form-control original_name"></div>
+                                                    <div class="form-control original_name">{!! @$model->original_name !!}</div>
                                                     <span class="help-block">Language name such as &quot;España&quot;</span>
                                                 </div>
                                             </div>
@@ -43,8 +44,8 @@
                                                        class="col-sm-2 col-md-3 control-label">Direction</label>
                                                 <div class="col-sm-10 col-md-4">
                                                     {!! Form::select('direction',[
-                                                        'rtl' => 'Right To Left',
-                                                        'ltr' => 'Left To Right'
+                                                        'ltr' => 'Left To Right',
+                                                        'rtl' => 'Right To Left'
                                                     ],null,['class' => 'form-control','id' => 'direction']) !!}
                                                     <span class="help-block">Language Direction</span>
                                                 </div>
@@ -53,7 +54,11 @@
                                             <div class="form-group">
                                                 <label for="name" class="col-sm-2 col-md-3 control-label">Icon</label>
                                                 <div class="col-sm-10 col-md-4">
-                                                    <div class="form-control lang-place"></div>
+                                                    <div class="form-control lang-place">
+                                                        @if($model)
+                                                            <span class="flag-icon flag-icon-{{ strtolower($model->code) }}"></span>
+                                                        @endif
+                                                    </div>
                                                     <span class="help-block">Language Flag</span>
                                                 </div>
                                             </div>
@@ -109,10 +114,12 @@
     <script>
         $("body").on("change","#code", function (e) {
            var code = $(this).val();
-            AjaxCall("{!! route('post_admin_settings_get_languages') !!}", {code, code}, function(res) {
+            AjaxCall("{!! route('post_admin_settings_get_country') !!}", {code, code}, function(res) {
                 if(!res.error){
-                    $("#lang-name").val(res.data.name);
-                    $(".lang-place").html(`<img src='/public/flags/${res.data.code.toLowerCase()}.png' alt='${res.data.name}' />`);
+                    $("#lang-name").val(res.country.name);
+                    $("#original_name").val(res.country.native);
+                    $(".original_name").html(res.country.native);
+                    $(".lang-place").html(`<span class="flag-icon flag-icon-${res.country.code.toLowerCase()}"></span>`);
                 };
             });
         })

@@ -24,20 +24,28 @@ class SettingsController extends Controller
     public function getLanguages()
     {
         $languages = SiteLanguages::all();
-        return $this->view('languages');
+        return $this->view('languages',compact(['languages']));
     }
 
     public function getLanguagesNew()
     {
         $model = null;
-        $languages = Languages::pluck('name','code')->all();
+        $countries = Countries::pluck('name','code')->all();
 
-        return $this->view('new_languages',compact(['model','languages']));
+        return $this->view('new_languages',compact(['model','countries']));
+    }
+
+    public function getLanguagesEdit($id)
+    {
+        $model = SiteLanguages::findOrFail($id);
+        $countries = Countries::pluck('name','code')->all();
+
+        return $this->view('new_languages',compact(['model','countries']));
     }
 
     public function postLanguages(Request $request)
     {
-        $language = SiteLanguages::updateOrCreate($request->except("_token"),['id' =>$request->id]);
+        $language = SiteLanguages::updateOrCreate(['id' =>$request->id],$request->except("_token"));
 
         return redirect()->route('admin_settings_languages');
     }
@@ -67,7 +75,7 @@ class SettingsController extends Controller
     {
        $country = Countries::where('code',$request->code)->first();
        if($country) {
-           return \Response::json(['error' => false,'data' => $country]);
+           return \Response::json(['error' => false,'country' => $country]);
        }
 
         return \Response::json(['error' => true,'message' => "Error"]);
