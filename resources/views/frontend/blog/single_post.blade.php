@@ -146,6 +146,7 @@
     <script>
         new Comments.default({
             el: '#my-comments',
+            pageId: {!! $post->id !!},
             commentableId: {{ $post->id }},
             commentableType: 'App.Models.Posts'
         })
