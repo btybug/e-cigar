@@ -85,12 +85,18 @@
                     </ul>
                 </nav>
             </div>
-
+            <div id="my-comments"></div>
         </div>
     </div>
     @stop
 
 @section("js")
+    <script>
+        new Comments.default({
+            el: '#my-comments',
+            pageId: 'blog',
+        })
+    </script>
 <script>
     $("body").on("click", ".change-view-blog", function (e) {
         e.preventDefault()
