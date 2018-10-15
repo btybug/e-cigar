@@ -55,9 +55,9 @@
                                             <td>{!! $language->code !!}</td>
                                             <td>{!! ($language->shared) ? "YES" : "NO" !!}</td>
                                             <td>
-                                                <a href="{!! route('admin_settings_languages_edit',$language->id) !!}" title="{!! $language->name !!}" href="#" class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a href="{!! route('admin_settings_languages_edit',$language->id) !!}" data-toggle="tooltip" data-placement="bottom"  title="{!! $language->name !!}"  class="badge bg-light-blue"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
 
-                                                <a data-toggle="tooltip" data-placement="bottom" title=" English" id="deleteLanguageId" languages_id ="1" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                <a href="{!! route('admin_settings_languages_delete',$language->id) !!}" data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}" class="badge bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

@@ -13,6 +13,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
         Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
         Route::post('/new-or-update', 'Admin\SettingsController@postLanguages')->name('admin_settings_languages_new_post');
+        Route::get('/delete/{id}', 'Admin\SettingsController@getLanguagesDelete')->name('admin_settings_languages_delete');
         Route::group(['prefix' => 'edit'], function () {
             Route::get('/{id}', 'Admin\SettingsController@getLanguagesEdit')->name('admin_settings_languages_edit');
         });

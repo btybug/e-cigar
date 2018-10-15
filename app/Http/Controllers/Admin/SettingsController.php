@@ -90,4 +90,14 @@ class SettingsController extends Controller
 
         return \Response::json(['error' => true,'message' => "Error"]);
     }
+
+    public function getLanguagesDelete(Request $request, $id)
+    {
+        $lang = SiteLanguages::findOrFail($id);
+        if($lang && $lang->default == 0){
+            $lang->delete();
+        }
+
+        return redirect()->back();
+    }
 }
