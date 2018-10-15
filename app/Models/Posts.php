@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
 {
+    protected $table = 'posts';
+    protected $fillable = ['post_url'];
+
     use \Dimsav\Translatable\Translatable;
     public $translatedAttributes = ['post_title', 'short_description', 'long_description'];
 

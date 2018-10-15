@@ -39,11 +39,15 @@ class PostController extends Controller
             $posts = Posts::all();
             return redirect('admin/blog');
         }else{
-            dd($request->all());
-            $posts = new \App\Models\Posts();
-            $post = $posts->find($request->ident);
-            dd($post);
-
+            $posts = Posts::find($request->ident);
+            $posts->update($request->except('_token','ident','post_title','short_description','long_description'));
+            foreach (['am', 'en', 'ru'] as $locale) {
+                $posts->translateOrNew($locale)->post_title = "{$request->post_title[$locale]}";
+                $posts->translateOrNew($locale)->short_description = "{$request->short_description[$locale]}";
+                $posts->translateOrNew($locale)->long_description = "{$request->long_description[$locale]}";
+            }
+            $posts->save();
+            return redirect()->back();
         }
 
     }
