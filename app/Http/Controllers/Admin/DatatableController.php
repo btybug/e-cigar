@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Attributes;
 use App\Models\Category;
 use App\Models\Competitions;
+use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
 use App\Models\Regions;
@@ -103,6 +104,16 @@ class DatatableController extends Controller
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $attr->id . '">Delete</a>
                     <a href="'.route("admin_store_attributes_edit",$attr->id).'" class="btn btn-warning">Edit</a>';
             })->rawColumns(['actions','image','icon','created_at'])
+            ->make(true);
+    }
+
+    public function getAllMailTemplates()
+    {
+        return Datatables::of(MailTemplates::query())
+            ->addColumn('actions', function ($template) {
+                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $template->id . '">Delete</a>
+                    <a href="#" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+            })->rawColumns(['actions'])
             ->make(true);
     }
     

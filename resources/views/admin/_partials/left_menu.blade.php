@@ -177,8 +177,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a>
-                    </li>
+                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a></li>
+                    @ok('admin_mail_templates')
+                    <li><a href="{{route('admin_mail_templates')}}"><i class="fa fa-circle-o"></i> Mail Templates</a></li>
+                    @endok
                 </ul>
             </li>
             @endok

@@ -25,4 +25,14 @@ class SettingsController extends Controller
     {
         return $this->view('new_languages');
     }
+
+    public function getMailTemplates()
+    {
+        return $this->view('mail_templates');
+    }
+
+    public function getCreateMailTemplates()
+    {
+        return $this->view('create_mail_templates');
+    }
 }

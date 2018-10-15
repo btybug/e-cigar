@@ -8,10 +8,12 @@
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 
-Route::group(['prefix' => 'languages'], function () {
-    Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
+Route::group(['prefix' => 'settings'], function () {
+    Route::get('/languages', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
     Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
     Route::get('/edit/{id}', 'Admin\SettingsController@getEditLanguages')->name('admin_settings_languages_edit');
+    Route::get('/mail-templates', 'Admin\SettingsController@getMailTemplates')->name('admin_mail_templates');
+    Route::get('/create/mail-templates', 'Admin\SettingsController@getCreateMailTemplates')->name('admin_mail_create_templates');
 });
 
 
@@ -118,8 +120,11 @@ Route::get('blog/edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit
 
 
 //Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
-Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
-Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
-Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
+Route::group(['prefix' => 'media'], function () {
+    Route::get('/', 'Admin\Media\IndexController@index')->name('admin_media');
+    Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
+    Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
+});
+
 
 
