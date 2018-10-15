@@ -15,10 +15,10 @@ use Illuminate\Database\Eloquent\Model;
 class Posts extends Model
 {
     protected $table = 'posts';
-    protected $fillable = ['post_url'];
+    protected $fillable = ['url'];
 
     use \Dimsav\Translatable\Translatable;
-    public $translatedAttributes = ['post_title', 'short_description', 'long_description'];
+    public $translatedAttributes = ['title', 'short_description', 'long_description'];
 
     public function author ()
     {

@@ -413,11 +413,17 @@
         initTinyMce("#lg_desc_am")
         initTinyMce("#lg_desc_en")
         initTinyMce("#lg_desc_ru")
-        $('#form').submit(function() {
-            tinyMCE.triggerSave()
+        /*$('form').submit(function(e) {
+            tinymce.get().forEach(item => {
+                console.log(item.id)
+                let html = item.getBody().innerHTML
+                $(`#${item.id}`).val(html)
+                console.log($(`#${item.id}`).val())
+            })
         // DO STUFF...
-        return true; // return false to cancel form action
-        });
+            e.preventDefault()
+        return false; // return false to cancel form action
+        });*/
     </script>
     <script>
 

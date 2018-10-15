@@ -47,7 +47,7 @@
                             </span>
 
                             <span class="d-block blog-block">
-                                <span class="blog-title">{!! $post->post_title !!} </span>
+                                <span class="blog-title">{!! $post->title !!} </span>
 
 
                                 <span class="d-block blog-text">

@@ -19,7 +19,7 @@ class BlogController extends Controller
 
     public function getSingle($post_url)
     {
-        $post = Posts::where('post_url',$post_url)->first();
+        $post = Posts::where('url',$post_url)->first();
         if(! $post) abort(404);
 
         return $this->view('single_post',compact('post'));

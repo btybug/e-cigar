@@ -166,5 +166,5 @@ function get_translated($model,$locale,$column){
 }
 
 function post_url($post){
-    return ($post->post_url) ? "/blog/".$post->post_url : "#";
+    return ($post->url) ? "/blog/".$post->url : "#";
 }
