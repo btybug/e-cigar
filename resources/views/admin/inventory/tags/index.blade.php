@@ -4,10 +4,10 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-xs-12">
+        <!-- <div class="col-xs-12">
             <div class="col-md-6 pull-left"><h2>Tags</h2></div>
             <div class="col-md-6 "><a class="btn btn-primary pull-right" href="#">Add new</a></div>
-        </div>
+        </div> -->
         <div class="col-xs-12">
             <!-- <table id="attributes-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
@@ -22,9 +22,9 @@
                 </thead>
             </table> -->
             <div>
-            <form >
+            <form id="form-tags" >
             <div class="col-md-10">
-                <input type="text" id="add-new-tags" class="form-control " placeholder="Add new tags">
+                <input type="text" id="add-new-tags" class="form-control " placeholder="Add new tags" required>
                 </div>
                     <button type="submit" class="btn btn-submit ">Add new Tag</button>
                 </div>
@@ -36,6 +36,9 @@
             </div>
         </div>
     </div>
+@stop
+@section("css")
+<link rel="stylesheet" href="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 @stop
 @section('js')
     <!-- <script>
@@ -57,51 +60,6 @@
         });
 
     </script> -->
-    <script>
-    const makeHtml = (data) => {
-           return `<div class="single-tags col-md-2" style=" margin: 5px;">
-                    <div class="single-tags-text">
-                        <p>${data}</p>
-                    </div>
-                    <div class="remove-tag">
-                        <i class="fa fa-times"></i>
-                    </div>
-                </div>`
-        }
-        const  makeAllHtml  =  (data) => {
-            $(".tags").empty()
-            data.forEach(item => {
-                $(".tags").append( makeHtml(item))
-             })
-        }
-        const firstData = JSON.parse(localStorage.getItem('tags'))
-        if (firstData) {
-            makeAllHtml(firstData)
-        }
-        
-        $("form").submit(function(e){
-            e.preventDefault()
-            let value = $("#add-new-tags").val()
-            let allData = JSON.parse(localStorage.getItem('tags'));
-            if (allData === null) {
-                let arr = []
-                localStorage.setItem("tags" , JSON.stringify([value]));
-                makeAllHtml(arr)
-                return
-            }
-            allData.push(value)
-            makeAllHtml(allData)
-            localStorage.setItem("tags" , JSON.stringify(allData));
-
-        })
-
-        $("body").on("click", ".remove-tag", function(){
-            let value = $(this).closest(".single-tags").find(".single-tags-text").text().trim()
-            let allData = JSON.parse(localStorage.getItem('tags'));
-            let index = allData.indexOf(value)
-            allData.splice( index, 1 );
-            makeAllHtml(allData)
-            localStorage.setItem("tags" , JSON.stringify(allData));
-        })
-    </script>
+    <script src="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+   <script src="/public/js/custom/tags.js"></script>
 @stop
