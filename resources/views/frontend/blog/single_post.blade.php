@@ -44,10 +44,10 @@
                                         <span class="gp-post-meta-row-1">
                                             <span class="gp-post-meta gp-meta-author">
                                                 By
-                                                <a href="http://socialize.ghostpool.com/author/socialize/">{{$post->author}}</a>
+                                                <a href="http://socialize.ghostpool.com/author/socialize/">{{$post->author_get->name}}</a>
                                             </span>
                                             on
-                                            <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">June 7, 2015</time>
+                                            <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">{!! BBgetDateFormat($post->created_at) !!}</time>
                                         </span>
                                         <span class="gp-post-meta-row-2">
                                             <span class="gp-post-meta gp-meta-comments">
@@ -55,24 +55,9 @@
                                             </span> / <span class="gp-post-meta gp-meta-views">4282 views</span> </span> </span>
                                 </div>
                             </header>
-                            <div class="gp-post-thumbnail gp-entry-featured">
-                                <div class="gp-image-above">
-                                    <img src="http://socialize.ghostpool.com/wp-content/uploads/photodune-1744106-surfer-on-blue-ocean-wave-m-1050x600.jpg" data-rel="http://socialize.ghostpool.com/wp-content/uploads/photodune-1744106-surfer-on-blue-ocean-wave-m-2100x1200.jpg" width="1050" height="600" alt="Dale Webster takes a break after 14642 consecutive days" class="gp-post-image">
-                                </div>
-                            </div>
                             <div class="gp-entry-content gp-image-above">
                                 <div class="gp-entry-text" itemprop="text">
-                                    <p>Collaboratively fashion user-centric technology after transparent growth strategies. Collaboratively benchmark market positioning niches before technically sound e-commerce. Objectively impact quality interfaces via unique technologies. Seamlessly facilitate standardized leadership skills for.</p><p>Compellingly aggregate real-time convergence rather than technically sound leadership skills. Rapidiously mesh backend networks and focused e-tailers. Continually <em>integrate</em> performance based mindshare for standards compliant value. Monotonectally cultivate customized <a href="#">total linkage through market-driven collaboration</a> and idea-sharing. Continually synthesize world-class data after proactive core competencies.</p><p>Continually cultivate go forward deliverables without prospective catalysts for change. Phosfluorescently empower client-focused total linkage and magnetic web services. Credibly implement quality systems with prospective markets. Authoritatively generate process-centric customer service rather than <span style="text-decoration: underline;">strategic bandwidth</span>. Completely actualize just in time initiatives via ubiquitous “outside the box” thinking.&nbsp;Appropriately reinvent premium e-tailers before high-payoff methodologies. Rapidiously administrate leveraged ideas whereas prospective internal or “organic” sources. Assertively actualize leveraged experiences after standards compliant e-services. Intrinsicly network interdependent markets whereas dynamic schemas. Enthusiastically envisioneer progressive potentialities rather than one-to-one testing procedures.</p>
-                                    <p>Continually parallel task inexpensive convergence after backward-compatible e-tailers. Uniquely brand B2B systems and visionary quality vectors. Progressively network adaptive resources rather than multimedia based imperatives. Credibly grow turnkey relationships with multimedia based methodologies. Globally iterate economically sound leadership skills vis-a-vis dynamic meta-services.&nbsp;Uniquely engineer <strong>market-driven</strong> internal or “organic” sources before interactive schemas. Credibly mesh frictionless e-markets with tactical “outside the box” thinking. Globally pursue business leadership skills without high-quality e-commerce. Distinctively extend equity invested quality vectors whereas corporate relationships. Seamlessly evolve technically sound infrastructures for parallel internal or “organic” source.</p>
-                                    <p>
-                                        <strong>Efficiently orchestrate top-line functionalities with unique e-markets. Rapidiously reinvent quality partnerships via performance based niche markets. Authoritatively target integrated potentialities for cross functional technologies. Assertively architect B2B markets.</strong>
-                                    </p>
-                                    <p>
-                                        Completely parallel task ubiquitous processes with strategic expertise. Appropriately architect excellent markets before sticky initiatives.
-                                        Synergistically disseminate front-end best practices before empowered systems. Distinctively transform excellent systems vis-a-vis viral partnerships.
-                                        Professionally utilize ethical markets whereas maintainable supply chains.&nbsp;Collaboratively evisculate customer directed solutions with wireless bandwidth.
-                                        Appropriately productivate leveraged architectures vis-a-vis distinctive niche markets.
-                                    </p>
+                                    {!! $post->long_description !!}
                                 </div>
                             </div>
                             <div class="gp-entry-tags">

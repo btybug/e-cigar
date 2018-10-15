@@ -9,6 +9,7 @@
 namespace App\Models;
 
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Posts extends Model
@@ -19,4 +20,8 @@ class Posts extends Model
     use \Dimsav\Translatable\Translatable;
     public $translatedAttributes = ['post_title', 'short_description', 'long_description'];
 
+    public function author_get ()
+    {
+        return $this->belongsTo(User::class,'author');
+    }
 }
