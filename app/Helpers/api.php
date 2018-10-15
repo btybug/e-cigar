@@ -179,3 +179,8 @@ function get_languages(){
 function get_languages_pluck(){
     return \App\Models\SiteLanguages::pluck('name','code')->all();
 }
+
+function get_default_language(){
+    $lang = \App\Models\SiteLanguages::where('default',1)->first();
+    return $lang;
+}

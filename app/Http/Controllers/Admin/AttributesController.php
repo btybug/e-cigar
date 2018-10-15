@@ -66,7 +66,7 @@ class AttributesController extends Controller
         $model = Attributes::findOrFail($request->parentId);
         $optionModel = Attributes::find($request->id);
 
-        $html = \View("admin.store.attributes.options_form",compact(['optionModel','model']))->render();
+        $html = \View("admin.inventory.attributes.options_form",compact(['optionModel','model']))->render();
         return \Response::json(['error' => false,'html' => $html]);
     }
 

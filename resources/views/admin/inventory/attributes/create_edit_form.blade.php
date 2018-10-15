@@ -10,31 +10,26 @@
         </div>
         <div class="col-xs-12">
             {!! Form::model($model) !!}
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#en">EN</a></li>
-                <li><a data-toggle="tab" href="#ru">RU</a></li>
-                <li><a data-toggle="tab" href="#am">AM</a></li>
-            </ul>
+            @if(count(get_languages()))
+                <ul class="nav nav-tabs">
+                    @foreach(get_languages() as $language)
+                        <li class="@if($loop->first) active @endif"><a data-toggle="tab" href="#{{ strtolower($language->code) }}">
+                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
+                    @endforeach
+                </ul>
+            @endif
 
             <div class="tab-content">
-                <div id="en" class="tab-pane fade in active">
-                    <div class="form-group">
-                        <label>Attribute Name</label>
-                        {!! Form::text('translatable[en][name]',get_translated($model,'en','name'),['class'=>'form-control']) !!}
-                    </div>
-                </div>
-                <div id="ru" class="tab-pane fade">
-                    <div class="form-group">
-                        <label>Attribute Name</label>
-                        {!! Form::text('translatable[ru][name]',get_translated($model,'ru','name'),['class'=>'form-control']) !!}
-                    </div>
-                </div>
-                <div id="am" class="tab-pane fade">
-                    <div class="form-group">
-                        <label>Attribute Name</label>
-                        {!! Form::text('translatable[am][name]',get_translated($model,'am','name'),['class'=>'form-control']) !!}
-                    </div>
-                </div>
+                @if(count(get_languages()))
+                    @foreach(get_languages() as $language)
+                        <div id="{{ strtolower($language->code) }}" class="tab-pane fade  @if($loop->first) in active @endif">
+                            <div class="form-group">
+                                <label>Attribute Name</label>
+                                {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
             <div class="form-group">
                 <div class="row">
@@ -72,30 +67,7 @@
             let value = $(".icon-picker").val()
             $("#font-show-area").attr("class", value)
         })
-        window.AjaxCall = function postSendAjax(url, data, success, error) {
-            $.ajax({
-                type: "post",
-                url: url,
-                cache: false,
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (success) {
-                        success(data);
-                    }
-                    return data;
-                },
-                error: function (errorThrown) {
-                    if (error) {
-                        error(errorThrown);
-                    }
-                    return errorThrown;
-                }
-            });
-        };
+
         $("body").on("click", ".attr-option", function () {
             var id = $(this).data('item-id');
             var parentId = $(this).data('parent-id');

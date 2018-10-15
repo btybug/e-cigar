@@ -15,9 +15,22 @@
     @else
         No Options
     @endif
+    <div class="col-md-12">
+        {!! Form::model($optionModel,['url' => route('admin_store_attributes_options',$model->id)]) !!}
+        {!! Form::hidden('id',null) !!}
+        {!! Form::hidden('parent_id',$model->id) !!}
+        <div class="col-md-8">
+            {!! Form::text('translatable['.strtolower(get_default_language()->code).'][name]',null,['class'=>'form-control']) !!}
+        </div>
+        <div class="col-md-4">
+            {!! Form::submit('Add',['class' => 'btn btn-primary']) !!}
+        </div>
+        {!! Form::close() !!}
+    </div>
 </div>
+
 <div class="col-md-9 options-form">
-    @include('admin.inventory.attributes.options_form')
+    {{--@include('admin.inventory.attributes.options_form')--}}
 </div>
 
 
