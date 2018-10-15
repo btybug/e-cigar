@@ -9,19 +9,22 @@
 namespace App\Models;
 
 
+use App\Models\Common\Translatable;
+use App\Models\Translations\PostsTranslation;
 use App\User;
-use Illuminate\Database\Eloquent\Model;
 
-class Posts extends Model
+class Posts extends Translatable
 {
     protected $table = 'posts';
-    protected $fillable = ['url'];
 
-    use \Dimsav\Translatable\Translatable;
+    public $translationModel = PostsTranslation::class;
+
+    protected $guarded = ['id'];
+
     public $translatedAttributes = ['title', 'short_description', 'long_description'];
 
     public function author ()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

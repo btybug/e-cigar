@@ -9,6 +9,7 @@ use App\Models\Emails;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
+use App\Models\Posts;
 use App\Models\Regions;
 use App\Models\Roles;
 use App\Models\SelectionType;
@@ -126,7 +127,31 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
-    
+
+    public function getAllPosts()
+    {
+        return Datatables::of(Posts::query())
+            ->editColumn('title',function ($post) {
+                return $post->title;
+            })->editColumn('short_description',function ($post) {
+                return $post->short_description;
+            })
+            ->editColumn('url',function ($post) {
+                return "<a href='/blog/".$post->url."' target='_blank'>blog/".$post->url."</a>";
+            })
+            ->editColumn('user_id',function ($post) {
+                return $post->author->name;
+            })
+            ->editColumn('created_at',function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-danger' href='".route("admin_post_delete",$post->id)."'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='".route("admin_post_edit",$post->id)."'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions','url','short_description','created_at'])
+            ->make(true);
+    }
+
 //    public function getAllCompetitions($sport_id = null, $region_id = null)
 //    {
 //        $query = Competitions::query();

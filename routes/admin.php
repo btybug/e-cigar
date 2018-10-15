@@ -76,9 +76,11 @@ Route::group(['prefix' => 'store'], function () {
 
 
 Route::group(['prefix' => 'blog'], function () {
-    Route::get('/', 'Admin\BlogController@index')->name('admin_blog');
-    Route::get('/create', 'Admin\BlogController@create')->name('admin_blog_create');
-    Route::get('/edit/{id}', 'Admin\BlogController@edit')->name('admin_blog_edit');
+    Route::get('/', 'Admin\PostController@index')->name('admin_blog');
+    Route::get('create', 'Admin\PostController@create')->name('admin_blog_create');
+    Route::get('delete/{id}', 'Admin\PostController@getDelete')->name('admin_post_delete');
+    Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
+    Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
 });
 
 Route::group(['prefix' => 'orders'], function () {
@@ -117,9 +119,6 @@ Route::group(['prefix' => '/tools'], function () {
     Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
 });
 
-Route::post('blog/create-new', 'Admin\PostController@newPost')->name('admin_new_post');
-Route::get('blog/delete/{id}', 'Admin\PostController@delete')->name('admin_post_delete');
-Route::get('blog/edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
 
 //Route::get('{locale}', function($locale) {
 //    app()->setLocale($locale);

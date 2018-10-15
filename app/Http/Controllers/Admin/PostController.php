@@ -19,51 +19,39 @@ class PostController extends Controller
 {
     protected $view = 'admin.blog';
 
-    public function newPost(Request $request,$locale = null)
+    public function index()
     {
-        if (!isset($request->ident))
-        {
-            $article = new \App\Models\Posts();
-            $article->url = "{$request->url}";
-            $article->status = "{$request->status}";
-            $article->user_id = "{$request->author}";
-            $article->tags = "{$request->tags}";
-            $article->save();
-
-            foreach (['am', 'en', 'ru'] as $locale) {
-                $article->translateOrNew($locale)->title = "{$request->title[$locale]}";
-                $article->translateOrNew($locale)->short_description = "{$request->short_description[$locale]}";
-                $article->translateOrNew($locale)->long_description = "{$request->long_description[$locale]}";
-            }
-
-            $article->save();
-            $posts = Posts::all();
-            return redirect('admin/blog');
-        }else{
-            $posts = Posts::find($request->ident);
-            $posts->update($request->except('_token','ident','title','short_description','long_description'));
-            foreach (['am', 'en', 'ru'] as $locale) {
-                $posts->translateOrNew($locale)->title = "{$request->title[$locale]}";
-                $posts->translateOrNew($locale)->short_description = "{$request->short_description[$locale]}";
-                $posts->translateOrNew($locale)->long_description = "{$request->long_description[$locale]}";
-            }
-            $posts->save();
-            return redirect()->back();
-        }
-
+        return $this->view('index');
     }
 
-    public function delete($id)
+    public function create()
     {
-        Posts::find($id)->delete();
-        return redirect('admin/blog');
+        $post = null;
+        $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
+        return $this->view('new',compact('authors','post'));
+    }
+
+    public function newPost(Request $request,$locale = null)
+    {
+        $data = $request->except('_token','translatable');
+        Posts::updateOrCreate($request->id, $data);
+
+        return redirect()->route('admin_blog');
+    }
+
+    public function getDelete($id)
+    {
+        $post = Posts::findOrFail($id);
+        $post->delete();
+        return redirect()->route('admin_blog');
     }
 
     public function edit($id)
     {
-        $editable_post = Posts::find($id);
+        $post = Posts::findOrFail($id);
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('roles.type','backend')->select('users.*','roles.title')->get();
-        return $this->view('new',compact('editable_post','authors'));
+            ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
+        return $this->view('new',compact('post','authors'));
     }
 }
