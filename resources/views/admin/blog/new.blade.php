@@ -208,29 +208,38 @@
                             </div>
                         </div>
                         <div class="category-wall wall">
-                            <h6>Category</h6>
-                            <div class="cat-checkbox">
-                                <div class="checkbox">
-                                    <label>{!! Form::checkbox('Parent','parent',null, array('id'=>'parent'))  !!}
-                                        Parent</label>
-                                </div>
-                                <div class="child-checkbox">
-                                    <div class="checkbox">
-                                        <label>{!! Form::checkbox('Child1','child1',null, array('id'=>'child1'))  !!}
-                                            Child1</label>
+                                <div class="row">
+                                    <label class="col-sm-3 control-label" for="input-category"><span
+                                                data-toggle="tooltip" title=""
+                                                data-original-title="Choose all products under selected category.">Category</span></label>
+                                    <div class="col-sm-9">
+                                        <input type="text" name="category" value="" placeholder="Category"
+                                               id="input-category" class="form-control" autocomplete="off">
+                                        <ul class="dropdown-menu"></ul>
+                                        <div id="coupon-category" class="well well-sm view-coupon"></div>
                                     </div>
                                 </div>
-                                <div class="child-checkbox">
-                                    <div class="checkbox">
-                                        <label>{!! Form::checkbox('Child2','child2',null, array('id'=>'child2'))  !!}
-                                            Child2</label>
-                                    </div>
-                                </div>
-                                <div class="checkbox">
-                                    <label>{!! Form::checkbox('Parent3','parent3',null, array('id'=>'parent3'))  !!}
-                                        Parent 2</label>
-                                </div>
-                            </div>
+                                {{--<div class="checkbox">--}}
+                                    {{--<label>{!! Form::checkbox('Parent','parent',null, array('id'=>'parent'))  !!}--}}
+                                        {{--Parent</label>--}}
+                                {{--</div>--}}
+                                {{--<div class="child-checkbox">--}}
+                                    {{--<div class="checkbox">--}}
+                                        {{--<label>{!! Form::checkbox('Child1','child1',null, array('id'=>'child1'))  !!}--}}
+                                            {{--Child1</label>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="child-checkbox">--}}
+                                    {{--<div class="checkbox">--}}
+                                        {{--<label>{!! Form::checkbox('Child2','child2',null, array('id'=>'child2'))  !!}--}}
+                                            {{--Child2</label>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="checkbox">--}}
+                                    {{--<label>{!! Form::checkbox('Parent3','parent3',null, array('id'=>'parent3'))  !!}--}}
+                                        {{--Parent 2</label>--}}
+                                {{--</div>--}}
+
                         </div>
                     </div>
                 </div>
