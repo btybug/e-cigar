@@ -108,11 +108,15 @@
         #tree1 ul.jqtree-tree li.jqtree-selected > .jqtree-element{
             padding: 10px 5px;
         }
-        #tree1 ul.jqtree-tree li.jqtree_common:not(:last-of-type){
-            border-bottom: 1px solid #ccc;
-        }
         #tree1 ul.jqtree-tree .jqtree-element{
             padding: 10px 5px;
+            border-bottom: 1px solid #ccc;
+        }
+        #tree1 ul.jqtree-tree .jqtree-title {
+            outline: none;
+        }
+        #tree1 ul.jqtree-tree .jqtree-toggler{
+            color: #3c8dbc;
         }
     </style>
 @stop
