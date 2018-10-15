@@ -70,6 +70,5 @@ $("body").on("click", ".remove-tag", function() {
 });
 
 $("#add-new-tags").tagsinput({
-    maxTags: 5,
     confirmKeys: [13, 32, 44]
 });
