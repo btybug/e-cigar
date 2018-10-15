@@ -24,14 +24,14 @@ class PostController extends Controller
         if (!isset($request->ident))
         {
             $article = new \App\Models\Posts();
-            $article->post_url = "{$request->post_url}";
+            $article->url = "{$request->url}";
             $article->status = "{$request->status}";
-            $article->author = "{$request->author}";
+            $article->user_id = "{$request->author}";
             $article->tags = "{$request->tags}";
             $article->save();
 
             foreach (['am', 'en', 'ru'] as $locale) {
-                $article->translateOrNew($locale)->post_title = "{$request->post_title[$locale]}";
+                $article->translateOrNew($locale)->title = "{$request->title[$locale]}";
                 $article->translateOrNew($locale)->short_description = "{$request->short_description[$locale]}";
                 $article->translateOrNew($locale)->long_description = "{$request->long_description[$locale]}";
             }
@@ -41,9 +41,9 @@ class PostController extends Controller
             return redirect('admin/blog');
         }else{
             $posts = Posts::find($request->ident);
-            $posts->update($request->except('_token','ident','post_title','short_description','long_description'));
+            $posts->update($request->except('_token','ident','title','short_description','long_description'));
             foreach (['am', 'en', 'ru'] as $locale) {
-                $posts->translateOrNew($locale)->post_title = "{$request->post_title[$locale]}";
+                $posts->translateOrNew($locale)->title = "{$request->title[$locale]}";
                 $posts->translateOrNew($locale)->short_description = "{$request->short_description[$locale]}";
                 $posts->translateOrNew($locale)->long_description = "{$request->long_description[$locale]}";
             }

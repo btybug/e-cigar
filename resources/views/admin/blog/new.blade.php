@@ -38,7 +38,7 @@
                                 <div class="form-group row">
                                     {{Form::label('purl', 'Post Url',['class' => 'col-sm-3'])}}
                                     <div class="col-sm-9">
-                                        <label>blog/</label>{{Form::text('post_url', isset($editable_post) ? $editable_post->post_url : null,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
+                                        <label>blog/</label>{{Form::text('url', isset($editable_post) ? $editable_post->url : null,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
                                     </div>
                                 </div>
 
@@ -53,7 +53,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title[am]', isset($editable_post)? $editable_post->getTranslation('am')->post_title : null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
+                                                    {{Form::text('title[am]', isset($editable_post)? $editable_post->getTranslation('am')->title : null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title am'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title[en]',isset($editable_post)? $editable_post->getTranslation('en')->post_title : null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
+                                                    {{Form::text('title[en]',isset($editable_post)? $editable_post->getTranslation('en')->title : null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title en'])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                             <div class="form-group row">
                                                 {{Form::label('ptitle', 'Post title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('post_title[ru]',isset($editable_post)? $editable_post->getTranslation('ru')->post_title : null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
+                                                    {{Form::text('title[ru]',isset($editable_post)? $editable_post->getTranslation('ru')->title : null,['class' =>'form-control','id'=>'ptitle','placeholder' => 'Some Title ru'])}}
                                                 </div>
                                             </div>
                                         </div>

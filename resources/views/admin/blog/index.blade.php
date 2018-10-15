@@ -26,8 +26,8 @@
                 @if(isset($posts))
                     @foreach($posts as $post)
                     <tr>
-                        <td>{{$post->post_url}}</td>
-                        <td>{{$post->getTranslation('en')->post_title}}</td>
+                        <td>{{$post->url}}</td>
+                        <td>{{$post->getTranslation('en')->title}}</td>
                         <td>{{$post->getTranslation('en')->short_description}}</td>
                         <td>{{$post->getTranslation('en')->long_description}}</td>
                         <td>{{$post->status}}</td>

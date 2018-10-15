@@ -20,8 +20,8 @@ class Posts extends Model
     use \Dimsav\Translatable\Translatable;
     public $translatedAttributes = ['post_title', 'short_description', 'long_description'];
 
-    public function author_get ()
+    public function author ()
     {
-        return $this->belongsTo(User::class,'author');
+        return $this->belongsTo(User::class,'user_id');
     }
 }
