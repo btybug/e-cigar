@@ -51,7 +51,6 @@ class Translatable extends Model
     public static function updateOrCreate(int $id = null, array $data)
     {
         $model = self::find($id)??new static();
-        $data['user_id'] = \Auth::id();
         $translatableData = \Request::get('translatable');
 
         (isset($model->id)) ? $model->update($data) : $model->fill($data) ;

@@ -59,7 +59,9 @@ class StoreController extends Controller
     public function postCreateOrUpdateCategory(Request $request)
     {
 //        dd($request->all());
-        Category::updateOrCreate($request->id, $request->except('_token','translatable'));
+        $data = $request->except('_token','translatable')
+        $data['user_id'] = \Auth::id();
+        Category::updateOrCreate($request->id, $data);
         return redirect()->back();
     }
 
