@@ -38,7 +38,7 @@
                                             <i class="fa fa-eye" aria-hidden="true"></i>
                                         </a>
                                     </li>
-                                    <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                    <li class="text-center"><a href="#"><i class="fa fa-remove" aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -49,8 +49,10 @@
                             <div class="upload-space">
                                     <label class="control-label">Upload Image</label>
                                     <div class="file-loading">
-                                        <input id="input-ru" name="inputru[]" type="file" multiple>
+                                        <input id="item" name="item[]" type="file" multiple>
                                     </div>
+                                    <input name="folder_id" data-selectmenu="folder_id" type="hidden" value="1">
+
 
                                 </label>
                                 <div id="errorBlock" class="help-block"></div>
@@ -94,7 +96,7 @@
                     <i class="fa fa-eye" aria-hidden="true"></i>
                 </a>
             </li>
-            <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+            <li class="text-center"><a href="#" data-item-id={data-item-id} class="remove-item-for-media"><i class="fas fa-exchange-alt"></i></a></li>
         </ul>
     </div>
 </script>

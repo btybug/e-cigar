@@ -80,10 +80,27 @@
     <script src="{!! url('public/admin_theme/media/js/custom.js') !!}"></script>
     <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
     <script>
-        $("#input-ru").fileinput({
-            language: "ru",
-            uploadUrl: "/file-upload-batch/2",
-            allowedFileExtensions: ["jpg", "png", "gif"]
+        // $("#input-ru").fileinput({
+        //     language: "ru",
+        //     uploadUrl: "/api/api-media/upload",
+        //     allowedFileExtensions: ["jpg", "png", "gif"]
+        // });
+
+        
+    $(function(){
+        $("#item").fileinput({
+           maxFileCount: 5,
+           uploadUrl: "/api/api-media/upload",
+            allowedFileExtensions: ["jpg", "png", "gif"],
+           uploadExtraData: function(){
+            return {'_token':$("meta[name='csrf-token']").attr('content'), "folder_id": _global_folder_id }
+           }
+       });
+        $('#item').on('filebatchuploadsuccess', function(event, data, previewId, index) {
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+            alert (extra.bdInteli + " " +  response.uploaded);
         });
+    })
     </script>
 @endif

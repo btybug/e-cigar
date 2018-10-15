@@ -169,6 +169,11 @@
 
 <!--Media Button JS-->
 @if(is_enabled_media_modal())
+    <style>
+    .close {
+        opacity: 1;
+    }
+    </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
@@ -176,11 +181,33 @@
     <script src="{!! url('public/admin_theme/media/js/custom.js') !!}"></script>
     <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
     <script>
-        $("#input-ru").fileinput({
-            language: "ru",
-            uploadUrl: "/file-upload-batch/2",
-            allowedFileExtensions: ["jpg", "png", "gif"]
-        });
+        // $("#input-ru").fileinput({
+        //     language: "ru",
+        //     uploadUrl: "/api/api-media/upload",
+        //     allowedFileExtensions: ["jpg", "png", "gif"]
+        // });
+        console.log(_global_folder_id)
+        $(function(){
+       $("#item").fileinput({
+           maxFileCount: 5,
+           uploadUrl: "/api/api-media/upload",
+            allowedFileExtensions: ["jpg", "png", "gif"],
+            uploadExtraData: function(){
+            return {'_token':$("meta[name='csrf-token']").attr('content'), "folder_id": _global_folder_id }
+           }
+       })
+    }).on('fileuploaded', function(event, data, id, index) {
+        toggleUploadDivs()
+        $(".jstree-clicked").click()
+        
+    })
+    function toggleUploadDivs(){
+        $("body").find(".media-modal-main-content").show()
+        $("body").find(".media-modal-content-upload").hide()
+    }
+    $("body").on("click", ".fileinput-remove", function(){
+        toggleUploadDivs()
+    })
     </script>
 @endif
 <script>

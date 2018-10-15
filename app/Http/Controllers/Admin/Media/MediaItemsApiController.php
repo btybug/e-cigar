@@ -67,7 +67,6 @@ class MediaItemsApiController extends Controller
 
     public function uploadFile(Request $request)
     {
-
         $validator = \Validator::make($request->all(), [
             'folder_id' => 'required_without_all:slug|integer|exists:drive_folders,id',
             'item.*' => 'required',
