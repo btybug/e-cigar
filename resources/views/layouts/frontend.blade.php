@@ -17,7 +17,7 @@
 
     @yield('css')
 
-    <script src="/public/vendor/comments/comments.js"></script>
+
     {{--<script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>--}}
 
 </head>
@@ -28,7 +28,7 @@
 
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
 <script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
-
+<script src="/public/vendor/comments/comments.js"></script>
 @yield('js')
 </body>
 </html>
