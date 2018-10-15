@@ -10,7 +10,7 @@
 | the IoC container for the system binding all of the various parts.
 |
 */
-
+defined('DS') or define('DS', DIRECTORY_SEPARATOR);
 $app = new Illuminate\Foundation\Application(
     dirname(__DIR__)
 );

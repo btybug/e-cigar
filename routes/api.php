@@ -30,7 +30,6 @@ Route::group([
 ], function () {
     //Js Tree Api
     Route::post('/jstree', 'Admin\Media\MediaApiController@getFolderChildrenJsTree');
-
     Route::post('/get-folder-childs', 'Admin\Media\MediaApiController@getFolderChilds');
     Route::post('/get-create-folder-child', 'Admin\Media\MediaApiController@getCreateFolderChild');
     Route::post('/get-edit-folder', 'Admin\Media\MediaApiController@getEditFolder');
@@ -42,7 +41,6 @@ Route::group([
     Route::post('/get-media-uploaders-settings', 'Admin\Media\MediaApiController@getUploaderSettings');
     Route::post('/get-media-uploader-rendered', 'Admin\Media\MediaApiController@getFolderUploader');
     Route::post('/download-folder', 'Admin\Media\MediaApiController@getDownload');
-
 //ITEMS API
     Route::post('/get-sort-item', 'Admin\Media\MediaItemsApiController@getSortItems');
     Route::post('/get-remove-item', 'Admin\Media\MediaItemsApiController@getDeleteItems');
@@ -51,6 +49,4 @@ Route::group([
     Route::post('/rename-item', 'Admin\Media\MediaItemsApiController@renameFile');
     Route::post('/copy-item', 'Admin\Media\MediaItemsApiController@getCopyItems');
     Route::post('/transfer-item', 'Admin\Media\MediaItemsApiController@getTransferItems');
-
-
 });

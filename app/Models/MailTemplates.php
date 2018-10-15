@@ -22,7 +22,7 @@ class MailTemplates extends Translatable
      * @var array
      */
     public $translationModel = MailTemplatesTranslations::class;
-    protected $fillable = ['type'];
+    protected $fillable = ['type','is_core'];
     public $translatedAttributes = ['title', 'subject', 'content'];
     public static $types=[
         'registration'=>'Registration',

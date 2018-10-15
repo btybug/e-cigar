@@ -9,6 +9,7 @@
 namespace App\Models;
 
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Roles extends Model
@@ -32,5 +33,10 @@ class Roles extends Model
     public function hasAccess($route)
     {
         return $this->permissions()->where('slug',$route)->exists();
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class,'role_id');
     }
 }
