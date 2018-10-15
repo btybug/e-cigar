@@ -257,7 +257,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-right">
+                        <td colspan="4" class="text-right">
                             <button type="button" class="btn btn-primary">+</button>
                         </td>
                     </tr>

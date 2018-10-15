@@ -377,4 +377,9 @@
     border: 1px solid #ddd;
     vertical-align: middle;
 }
+
+.table.table--store-settings .btn,
+.table.table--store-settings .btn {
+    min-width: 34px;
+}
 /*End admin store settings*/
