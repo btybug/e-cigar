@@ -56,7 +56,7 @@
                             <button type="button" class="btn btn-default" data-role="btnUploader">Uploader</button>
                         </div>
                     </div>
-                    <div class="row collapse" data-targetiuploder="folder">
+                    <div class="row collapse show-uploder" data-targetiuploder="folder">
                         <div class="col-lg-12 m-b-15"></div>
                     </div>
                     <div class="row {!! $settings['rightcontainer']??null !!}">
@@ -556,4 +556,9 @@
     {!! Html::script("public/js/bootstrap-select/js/bootstrap-select.min.js") !!}
     {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
     {!! Html::script("public/js/media_button.js") !!}
+    <script>
+    $("body").on("click", ".fileinput-remove", function(){
+        $("body").find(".show-uploder").removeClass("in")
+    })
+    </script>
 @stop
