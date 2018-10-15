@@ -47,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'name' => $this->name,
             'email' => $this->email,
             'url' => 'URL',    // optional
-            'avatar' => 'gravatar', // optional
+            'avatar' => '/public/images/'.$this->gender.'.png', // optional
         ];
     }
 
