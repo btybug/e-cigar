@@ -147,24 +147,22 @@
         new Comments.default({
             el: '#my-comments',
             pageId: {!! $post->id !!},
-            commentableId: {{ $post->id }},
-            commentableType: 'App.Models.Posts'
         })
     </script>
-{{--<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>--}}
-{{--<script>--}}
-{{--$("#share").jsSocials({--}}
-            {{--shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]--}}
-{{--});--}}
-{{--$(".gp-author-social-icons").jsSocials({--}}
-            {{--shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]--}}
-{{--});--}}
-{{--$(".gp-share-icons-on-footer").jsSocials({--}}
-            {{--shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]--}}
-{{--});--}}
-{{--$("body").on("click", ".gp-share-button, .hide-icons", function(){--}}
-    {{--$("#gp-share-icons-hide").toggle()--}}
-{{--})--}}
-{{--</script>--}}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+<script>
+$("#share").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+$(".gp-author-social-icons").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+$(".gp-share-icons-on-footer").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+});
+$("body").on("click", ".gp-share-button, .hide-icons", function(){
+    $("#gp-share-icons-hide").toggle()
+})
+</script>
 
 @stop
