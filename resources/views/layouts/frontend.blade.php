@@ -10,11 +10,15 @@
     <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
-    <link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">
+    {{--<link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">--}}
+    {{----}}
+    <link href="/public/vendor/comments/comments.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
     @yield('css')
-    <script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>
+
+    <script src="/public/vendor/comments/comments.js"></script>
+    {{--<script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>--}}
 
 </head>
 <body>
