@@ -27,86 +27,84 @@
                         <input type="file" class="form-control" id="siteLogo">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">E-Mail Address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter E-Mail Address">
+                        <label for="email">E-Mail Address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter E-Mail Address">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Password</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Password">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Enter Password">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">1st line address</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Address">
+                        <label for="firstAddress">1st line address</label>
+                        <input type="text" class="form-control" id="firstAddress" aria-describedby="firstAddress" placeholder="Enter Address">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">2nd line address</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Address">
+                        <label for="secondAddress">2nd line address</label>
+                        <input type="text" class="form-control" id="secondAddress" aria-describedby="secondAddress" placeholder="Enter Address">
                     </div>
                     <div class="form-group">
-                        <label for="inputState">City</label>
-                        <select id="inputState" class="form-control">
+                        <label for="city">City</label>
+                        <select id="city" class="form-control">
                             <option selected>Choose...</option>
                             <option>...</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="inputState">Country</label>
-                        <select id="inputState" class="form-control">
+                        <label for="country">Country</label>
+                        <select id="country" class="form-control">
                             <option selected>Choose...</option>
                             <option>...</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Post Code</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Post Code">
+                        <label for="postCode">Post Code</label>
+                        <input type="text" class="form-control" id="postCode" aria-describedby="postCode" placeholder="Enter Post Code">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Meta Title</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Your Store">
+                        <label for="metaTitle">Meta Title</label>
+                        <input type="text" class="form-control" id="metaTitle" aria-describedby="metaTitle" placeholder="Your Store">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Meta Tag Description</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="My Store">
+                        <label for="metaTagDesc">Meta Tag Description</label>
+                        <input type="text" class="form-control" id="metaTagDesc" aria-describedby="metaTagDesc" placeholder="My Store">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Meta Tag Keywords</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Meta Tag Keywords">
+                        <label for="metaTagKeywords">Meta Tag Keywords</label>
+                        <input type="text" class="form-control" id="metaTagKeywords" aria-describedby="metaTagKeywords" placeholder="Meta Tag Keywords">
                     </div>
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
             <div class="tab-pane fade" id="mail" role="tabpanel" aria-labelledby="mail-tab">
                 <form>
                     <div class="form-group">
-                        <label for="Site name">Mail Engine</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                        <label for="MailEngine">Mail Engine</label>
+                        <input type="email" class="form-control" id="MailEngine" aria-describedby="MailEngine" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">Mail Parameters</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mail Parameters">
+                        <label for="MailParameters">Mail Parameters</label>
+                        <input type="text" class="form-control" id="MailParameters" aria-describedby="MailParameters" placeholder="Mail Parameters">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">SMTP Hostname</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Hostname">
+                        <label for="SMTPHostname">SMTP Hostname</label>
+                        <input type="text" class="form-control" id="SMTPHostname" aria-describedby="SMTPHostname" placeholder="SMTP Hostname">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">SMTP Username</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Username">
+                        <label for="SMTPUsername">SMTP Username</label>
+                        <input type="text" class="form-control" id="SMTPUsername" aria-describedby="SMTPUsername" placeholder="SMTP Username">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">SMTP Password</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Password">
+                        <label for="SMTPPassword">SMTP Password</label>
+                        <input type="password" class="form-control" id="SMTPPassword" aria-describedby="SMTPPassword" placeholder="SMTP Password">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">SMTP Port</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Port">
+                        <label for="SMTPPort">SMTP Port</label>
+                        <input type="password" class="SMTPPort" id="SMTPPort" aria-describedby="SMTPPort" placeholder="SMTP Port">
                     </div>
                     <div class="form-group">
-                        <label for="Site name">SMTP Timeout</label>
-                        <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="SMTP Timeout">
+                        <label for="SMTPTimeout">SMTP Timeout</label>
+                        <input type="password" class="form-control" id="SMTPTimeout" aria-describedby="SMTPTimeout" placeholder="SMTP Timeout">
                     </div>
-
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
