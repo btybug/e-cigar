@@ -136,5 +136,8 @@ Route::group(['prefix' => 'media'], function () {
     Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
 });
 
+Route::post('/get-categories', 'Admin\StoreController@getCategories')->name('admin_store_coupons_get_categories');
+Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');
+
 
 

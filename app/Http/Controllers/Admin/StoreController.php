@@ -100,4 +100,17 @@ class StoreController extends Controller
     {
         return $this->view('coupons_new');
     }
+
+    public function getCategory(Request $request)
+    {
+        return Category::where('name',$request->name)->get();
+    }
+
+    public function getProducts(Request $request)
+    {
+        dd($request->all());
+        return $this->view('coupons_new');
+    }
+
+
 }
