@@ -46,15 +46,18 @@ class AttributesController extends Controller
 
     public function postAttributesEdit(Request $request,$id)
     {
-        Attributes::updateOrCreate($id, $request->except('_token','translatable'));
+        $data = $request->except('_token','translatable');
+        $data['user_id'] = \Auth::id();
+        Attributes::updateOrCreate($id, $data);
         return redirect()->route('admin_store_attributes');
     }
 
     public function postAttributesOptions(Request $request,$id)
     {
         $model = Attributes::findOrFail($id);
-
-        Attributes::updateOrCreate($request->id, $request->except('_token','translatable'));
+        $data = $request->except('_token','translatable');
+        $data['user_id'] = \Auth::id();
+        Attributes::updateOrCreate($request->id, $data);
         return redirect()->back();
     }
 
