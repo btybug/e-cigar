@@ -17,7 +17,6 @@ Route::get('artisan/migrate',function (){
 });
 Route::get('artisan/migrate-refresh',function (){
     dd(Artisan::call('migrate:refresh', [
-        '--force' => true,
         '--seed' => true,
     ]));
 });
