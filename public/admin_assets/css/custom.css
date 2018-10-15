@@ -119,3 +119,30 @@ div.dataTables_wrapper div.dataTables_filter input {
     margin-right: 5px;
 }
 
+/*create Email Templates*/
+.table.table--email-temp {
+    border: 1px solid #367fa9;
+    border-collapse: unset;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden;
+}
+.table.table--email-temp th,
+.table.table--email-temp td {
+    border: 0;
+}
+
+.table--email-temp_top {
+    background: #367fa9;
+    color: #fff;
+}
+
+.table--email-temp_bottom {
+    background: #D9EDF7
+}
+
+.table--email-temp_icon {
+    color: #38B69A;
+    font-size: 18px;
+    font-weight: bold;
+}
+/*End create Email Templates*/

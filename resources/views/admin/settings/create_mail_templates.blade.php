@@ -13,7 +13,7 @@
         <div id="home" class="tab-pane tab_info fade in active">
 
             <div class="row sortable-panels">
-                <div class="col-md-9 ">
+                <div class="col-md-12">
                     <div class="form-group row">
                         {{Form::label('type', 'Type',['class' => 'col-sm-3'])}}
                         <div class="col-sm-9">
@@ -97,16 +97,48 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+    <div class="col-md-4">
+        <table class="table table-striped table--email-temp">
+            <thead>
+            <tr class="table--email-temp_top">
+                <th colspan="3">Email Field Details</th>
+            </tr>
+            <tr class="table--email-temp_bottom">
+                <th></th>
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                <td>site_name</td>
+                <td>Your site name</td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                <td>site_url</td>
+                <td>Your site URL</td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                <td>ticket_user</td>
+                <td>Name of ticket user</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     {!! Form::close() !!}
 
     <div class="tab-content tabs_content col-md-4">
 
     </div>
 @stop
+
 
 @section('js')
     <script src="/public/js/tinymce/tinymce.min.js"></script>
