@@ -33,9 +33,13 @@ class SettingsController extends Controller
         return $this->view('mail_templates');
     }
 
-    public function getCreateMailTemplates()
+    public function getCreateMailTemplates($id=null)
     {
-        return $this->view('create_mail_templates');
+        $model=null;
+        if($id){
+            $model=MailTemplates::findOrFail($id);
+        }
+        return $this->view('create_mail_templates',compact('model'));
     }
 
     public function postCreateOrUpdate(Request $request)

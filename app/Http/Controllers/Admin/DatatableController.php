@@ -112,7 +112,7 @@ class DatatableController extends Controller
         return Datatables::of(MailTemplates::query())
             ->addColumn('actions', function ($template) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $template->id . '">Delete</a>
-                    <a href="#" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+                    <a href="'.route('admin_mail_create_templates',$template->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
             })->rawColumns(['actions'])
             ->make(true);
     }

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-    {!! Form::open() !!}
+    {!! Form::model($model) !!}
 
     <div class="col-md-12">
         <div class="text-right btn-save">
@@ -34,19 +34,19 @@
                                             <div class="form-group row">
                                                 {{Form::label('title_am', 'Title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('translatable[am][title]',null ,['class' =>'form-control','id'=>'title_am','placeholder' => __('Title')])}}
+                                                    {{Form::text('translatable[am][title]',get_translated($model,'am','title') ,['class' =>'form-control','id'=>'title_am','placeholder' => __('Title')])}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 {{Form::label('subject_am', 'Subject',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('translatable[am][subject]',null ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                    {{Form::text('translatable[am][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 {{Form::label('content_am', 'Content',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('translatable[am][content]',null ,['class' =>'form-control','id'=>'content_am','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                    {{Form::textarea('translatable[am][content]',get_translated($model,'am','content') ,['class' =>'form-control','id'=>'content_am','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -54,19 +54,19 @@
                                             <div class="form-group row">
                                                 {{Form::label('title_en', 'Title',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('translatable[en][title]',null ,['class' =>'form-control','id'=>'title_en','placeholder' => __('Title')])}}
+                                                    {{Form::text('translatable[en][title]',get_translated($model,'en','title') ,['class' =>'form-control','id'=>'title_en','placeholder' => __('Title')])}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 {{Form::label('subject_en', 'Subject',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('translatable[en][subject]',null ,['class' =>'form-control','id'=>'subject_en','placeholder' => __('Subject')])}}
+                                                    {{Form::text('translatable[en][subject]',get_translated($model,'en','subject') ,['class' =>'form-control','id'=>'subject_en','placeholder' => __('Subject')])}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 {{Form::label('content_en', 'Content',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('translatable[en][content]',null ,['class' =>'form-control','id'=>'content_en','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                    {{Form::textarea('translatable[en][content]',get_translated($model,'en','content') ,['class' =>'form-control','id'=>'content_en','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                 </div>
                                             </div>
                                         </div>
@@ -74,19 +74,19 @@
                                             <div class="form-group row">
                                                 {{Form::label('title_ru', __('Title'),['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('translatable[ru][title]',null ,['class' =>'form-control','id'=>'title_ru','placeholder' => __('Title')])}}
+                                                    {{Form::text('translatable[ru][title]',get_translated($model,'ru','title') ,['class' =>'form-control','id'=>'title_ru','placeholder' => __('Title')])}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 {{Form::label('subject_ru', __('Subject'),['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::text('translatable[ru][subject]',null ,['class' =>'form-control','id'=>'subject_ru','placeholder' => __('Subject')])}}
+                                                    {{Form::text('translatable[ru][subject]',get_translated($model,'ru','subject') ,['class' =>'form-control','id'=>'subject_ru','placeholder' => __('Subject')])}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 {{Form::label('content_ru', __('Content'),['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {{Form::textarea('translatable[ru][content]',null ,['class' =>'form-control','id'=>'content_ru','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                    {{Form::textarea('translatable[ru][content]',get_translated($model,'ru','content') ,['class' =>'form-control','id'=>'content_ru','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                 </div>
                                             </div>
                                         </div>
