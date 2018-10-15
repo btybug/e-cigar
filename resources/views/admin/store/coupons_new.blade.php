@@ -6,12 +6,14 @@
     <div class="coupons_new_page">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <div class="row">
-                        <div class="row required col-sm-7">
-                            <label class="col-sm-2 control-label" for="input-name">Coupon Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="name" value="" placeholder="Coupon Name"
-                                       id="input-name" class="form-control">
+                    <div class="dis-flex">
+                        <div class="col-sm-7 pl-0">
+                            <div class="row required">
+                                <label class="col-sm-2 control-label" for="input-name">Coupon Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" value="" placeholder="Coupon Name"
+                                           id="input-name" class="form-control">
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-5 p-0">

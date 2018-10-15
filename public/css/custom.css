@@ -341,7 +341,11 @@
 .coupons_new_page .panel-heading .dis-flex{
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .coupons_new_page .p-0{
     padding: 0;
+}
+.coupons_new_page .pl-0{
+    padding-left: 0;
 }
