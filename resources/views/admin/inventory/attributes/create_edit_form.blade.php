@@ -53,7 +53,7 @@
         </div>
         @if($model)
             <div class="col-xs-12">
-                <div class="col-md-6 pull-left"><h2>Options </h2></div>
+                <div class="col-md-6 pull-left"><h2>Options {{ $model->name }} </h2></div>
             </div>
             @include('admin.inventory.attributes.options')
         @endif
