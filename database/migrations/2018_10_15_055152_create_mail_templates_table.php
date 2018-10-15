@@ -15,10 +15,7 @@ class CreateMailTemplatesTable extends Migration
     {
         Schema::create('mail_templates', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');
-            $table->text('subject');
             $table->text('type');
-            $table->longText('content');
             $table->timestamps();
         });
     }

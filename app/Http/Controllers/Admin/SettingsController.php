@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\MailTemplates;
+use Illuminate\Http\Request;
 
 class SettingsController extends Controller
 {
@@ -34,5 +36,12 @@ class SettingsController extends Controller
     public function getCreateMailTemplates()
     {
         return $this->view('create_mail_templates');
+    }
+
+    public function postCreateOrUpdate(Request $request)
+    {
+        $data=$request->all();
+        MailTemplates::updateOrCreate($request->id,$data);
+        return redirect()->route('admin_mail_templates');
     }
 }
