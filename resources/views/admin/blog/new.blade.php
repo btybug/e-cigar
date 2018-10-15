@@ -38,7 +38,7 @@
                                 <div class="form-group row">
                                     {{Form::label('purl', 'Post Url',['class' => 'col-sm-3'])}}
                                     <div class="col-sm-9">
-                                        {{Form::text('post_url', isset($editable_post) ? $editable_post->post_url : null,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
+                                        <label>blog/</label>{{Form::text('post_url', isset($editable_post) ? $editable_post->post_url : null,['class' =>'form-control','id'=>'purl','placeholder' => ''])}}
                                     </div>
                                 </div>
 
