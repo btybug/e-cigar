@@ -113,7 +113,11 @@
                                         <input type="text" name="category" value="" placeholder="Category"
                                                id="input-category" class="form-control" autocomplete="off">
                                         <ul class="dropdown-menu"></ul>
-                                        <div id="coupon-category" class="well well-sm view-coupon"></div>
+                                        <div id="coupon-category" class="well well-sm view-coupon">
+                                        <ul class="coupon-category-list">
+                                        </ul>
+                                        </div>
+                                        <input type="hidden" name="category_names" value="" id="category-names">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -203,30 +207,7 @@ $('#input-date-end').daterangepicker({
     // alert("You are " + years + " years old!");
   });
 
-    const  postSendAjax = function(url, data, success, error) {
-        $.ajax({
-            type: "post",
-            url: url,
-            cache: false,
-            datatype: "json",
-            data: data,
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-            },
-            success: function(data) {
-                if (success) {
-                    success(data);
-                }
-                return data;
-            },
-            error: function(errorThrown) {
-                if (error) {
-                    error(errorThrown);
-                }
-                return errorThrown;
-            }
-        });
-    };
+   
     var userList = null;
     $.ajax({
     url: "/admin/get-categories",
@@ -264,7 +245,7 @@ $('#input-date-end').daterangepicker({
         empty: ['<div class="empty-message">', "No results", "</div>"].join(
           "\n"
         ),
-        header: "<h4>Friends</h4><hr>",
+        header: "<h4>Categoris</h4><hr>",
         suggestion: function(data) {
           return `<div class="user-search-result"><span> ${data.name} </span></div>`;
         }
@@ -272,14 +253,39 @@ $('#input-date-end').daterangepicker({
     }
   });
   $("#input-category").on("beforeItemAdd", function(event) {
-    checkUser = userList.some(item => {
-      return item.name === event.item;
-    });
-    event.cancel = !checkUser;
-  });
-    // postSendAjax("/admin/get-categories", {name: "fasdfad"}, function(res){
+    event.cancel = true;
+    let valueCatergorayName = $("#category-names").val()
+    if (!valueCatergorayName.includes(event.item)) {
+        $(".coupon-category-list").append(makeSearchHtml(event.item))
+        if ($("#category-names").val().trim()) {
+            let arr = JSON.parse($("#category-names").val())
+            arr.push(event.item)
+            $("#category-names").val(JSON.stringify(arr))
 
-    //     console.log(res)
-    // })
+            console.log(1)
+            return
+        }
+        console.log(2)
+            let elm = [event.item]
+            $("#category-names").val(JSON.stringify(elm))
+            return
+        
+    }
+  });
+  function makeSearchHtml(data){
+      
+      return `<li>${data}<span class="remove-search-tag"><i class="fa fa-trash"></i></span></li>`
+
+  }
+  $("body").on("click", ".remove-search-tag", function(){
+      let text = $(this).closest("li").text()
+      let arr = JSON.parse($("#category-names").val())
+      let index = arr.indexOf(text)
+      arr.splice(index,1)
+      $("#category-names").val(JSON.stringify(arr))
+      $(this).closest("li").remove()
+
+  })
+    
 </script>
 @stop
