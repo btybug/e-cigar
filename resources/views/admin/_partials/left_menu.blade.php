@@ -86,8 +86,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
-                </ul>
-                <ul class="treeview-menu">
                     <li><a href="{{route('admin_blog_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>
                 </ul>
             </li>
