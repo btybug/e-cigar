@@ -37,7 +37,7 @@ class StoreBlogPost extends FormRequest
     public function messages()
     {
         return [
-            'url.required' => 'A Icon is required',
+            'url.required' => 'A URL is required',
             'translatable.*.title.required'  => 'A title is required',
             'translatable.*.short_description.required'  => 'A short description is required',
             'translatable.*.long_description.required'  => 'A long description is required',
