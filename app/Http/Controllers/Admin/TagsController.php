@@ -39,4 +39,11 @@ class TagsController extends Controller
         return \Response::json(['error' => false,'data' => Tags::all()]);
     }
 
+    public function postSearch(Request $request)
+    {
+        $tags = Tags::where('name',"LIKE","%".$request->q."%")->get();
+
+        return \Response::json(['error' => false,'data' => $tags]);
+    }
+
 }
