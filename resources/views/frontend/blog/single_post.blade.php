@@ -148,6 +148,30 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://viima.github.io/jquery-comments/demo/js/jquery-comments.js"></script>
     <script>
+         window.AjaxCall = function postSendAjax(url, data, success, error) {
+            $.ajax({
+                type: "post",
+                url: url,
+                cache: false,
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function(data) {
+                    if (success) {
+                        success(data);
+                    }
+                    return data;
+                },
+                error: function(errorThrown) {
+                    if (error) {
+                        error(errorThrown);
+                    }
+                    return errorThrown;
+                }
+            });
+        };
         var commentsArray = [
 {
    "id": 1,
@@ -358,7 +382,12 @@ var usersArray = [
 
 $('#comments-container').comments({
     getComments: function(success, error) {
-        
+        // AjaxCall("/url", {}, function(res){
+        //     if (!res.error) {
+        //         success(res.data);
+        //     }
+
+        // })
         success(commentsArray);
     }
 });

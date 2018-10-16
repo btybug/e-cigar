@@ -119,11 +119,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tag-wall wall">
+                        <!-- <div class="tag-wall wall">
                             <div class="row">
                                 {{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
                                     {{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="tag-wall wall">
+                            <div class="row">
+                                <label class="col-sm-3 control-label" for="input-category"><span
+                                            data-toggle="tooltip" title=""
+                                            data-original-title="Choose all products under selected category.">Tags</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="" value="" placeholder="Tags"
+                                           id="input-tags" class="form-control" autocomplete="off">
+                                    <ul class="dropdown-menu"></ul>
+                                    <div id="coupon-category" class="well well-sm view-coupon">
+                                        <ul class="coupon-tags-list">
+                                        </ul>
+                                    </div>
+                                    <input type="hidden" class="search-hidden-input" value="" id="tags-names">
+
                                 </div>
                             </div>
                         </div>
@@ -140,7 +158,7 @@
                                         <ul class="coupon-category-list">
                                         </ul>
                                     </div>
-                                    <input type="hidden" value="" id="category-names">
+                                    <input type="hidden" class="search-hidden-input" value="" id="category-names">
 
                                 </div>
                             </div>
@@ -276,6 +294,7 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
+
     <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
@@ -324,86 +343,6 @@
             $(".sortable-panels").disableSelection();
         });
     </script>
-    <script>
-        var userList = null;
-        $.ajax({
-            url: "/admin/get-categories",
-            type: "POST",
-            dataType: "json",
-            headers: {
-                "X-CSRF-TOKEN": $("input[name='_token']").val()
-            },
-            success: function (data) {
-                userList = data;
-            }
-        });
-        $("#input-category").tagsinput({
-            maxTags: 5,
-            confirmKeys: [13, 32, 44],
-            typeaheadjs: {
-                // name: "citynames",
-                displayKey: "name",
-                valueKey: "name",
-                source: function (query, processSync, processAsync) {
-                    return $.ajax({
-                        url: "/admin/get-categories",
-                        type: "POST",
-                        data: {query: query},
-                        dataType: "json",
-                        headers: {
-                            "X-CSRF-TOKEN": $("input[name='_token']").val()
-                        },
-                        success: function (json) {
-                            return processAsync(json);
-                        }
-                    });
-                },
-                templates: {
-                    empty: ['<div class="empty-message">', "No results", "</div>"].join(
-                        "\n"
-                    ),
-                    header: "<h4>Categoris</h4><hr>",
-                    suggestion: function (data) {
-                        return `<div class="user-search-result"><span> ${data.name} </span></div>`;
-                    }
-                }
-            }
-        });
-        $("#input-category").on("beforeItemAdd", function (event) {
-            event.cancel = true;
-            let valueCatergorayName = $("#category-names").val()
-            if (!valueCatergorayName.includes(event.item)) {
-                $(".coupon-category-list").append(makeSearchHtml(event.item))
-                if ($("#category-names").val().trim()) {
-                    let arr = JSON.parse($("#category-names").val())
-                    arr.push(event.item)
-                    $("#category-names").val(JSON.stringify(arr))
-
-                    console.log(1)
-                    return
-                }
-                console.log(2)
-                let elm = [event.item]
-                $("#category-names").val(JSON.stringify(elm))
-                return
-
-            }
-        });
-
-        function makeSearchHtml(data) {
-
-            return `<li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>${data}</li>`
-
-        }
-
-        $("body").on("click", ".remove-search-tag", function () {
-            let text = $(this).closest("li").text()
-            let arr = JSON.parse($("#category-names").val())
-            let index = arr.indexOf(text)
-            arr.splice(index, 1)
-            $("#category-names").val(JSON.stringify(arr))
-            $(this).closest("li").remove()
-
-        })
-    </script>
+    <script src="/public/admin_theme/blog_new.js"></script>
+  
 @stop

@@ -1,9 +1,36 @@
+window.AjaxCall = function postSendAjax(url, data, success, error) {
+    $.ajax({
+        type: "post",
+        url: url,
+        cache: false,
+        datatype: "json",
+        data: data,
+        headers: {
+            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+        },
+        success: function(data) {
+            if (success) {
+                success(data);
+            }
+            return data;
+        },
+        error: function(errorThrown) {
+            if (error) {
+                error(errorThrown);
+            }
+            return errorThrown;
+        }
+    });
+};
+
 const makeHtml = data => {
     return `<div class="single-tags label label-primary">
                     <div class="single-tags-text">
-                        <p>${data}</p>
+                        <p>${data.name}</p>
                     </div>
-                    <div class="remove-tag label label-danger">
+                    <div class="remove-tag label label-danger" data-id=${
+                        data.id
+                    }>
                         <i class="fa fa-times"></i>
                     </div>
                 </div>`;
@@ -14,14 +41,14 @@ const makeAllHtml = data => {
         $(".tags").append(makeHtml(item));
     });
 };
-const firstData = JSON.parse(localStorage.getItem("tags"));
-if (firstData) {
-    makeAllHtml(firstData);
-}
+AjaxCall("/admin/inventory/tags/save", {}, function(res) {
+    if (!res.error && res.data) {
+        makeAllHtml(res.data);
+    }
+});
+
 $("#add-new-tags").keypress(function(event) {
     var code = event.keyCode || event.which;
-    console.log(111);
-
     if (
         code == 32 &&
         $(this)
@@ -41,32 +68,38 @@ $("form").submit(function(e) {
         alert("Please fill the form");
         return;
     }
-    let allData = JSON.parse(localStorage.getItem("tags"));
-    if (allData === null) {
-        let arr = value.split(",");
-        localStorage.setItem("tags", JSON.stringify([value]));
-        makeAllHtml(arr);
-        return;
-    }
+    AjaxCall("/admin/inventory/tags/save", { tags: value }, function(res) {
+        if (!res.error && res.data) {
+            makeAllHtml(res.data);
+        }
+    });
+    // let allData = JSON.parse(localStorage.getItem("tags"));
+    // if (allData === null) {
+    //     let arr = value.split(",");
+    //     localStorage.setItem("tags", JSON.stringify([value]));
+    //     makeAllHtml(arr);
+    //     return;
+    // }
 
-    let newData = [...new Set([...allData, ...value.split(",")])];
-    makeAllHtml(newData);
-    localStorage.setItem("tags", JSON.stringify(newData));
+    // let newData = [...new Set([...allData, ...value.split(",")])];
+    // makeAllHtml(newData);
+    // localStorage.setItem("tags", JSON.stringify(newData));
 
     $("#add-new-tags").tagsinput("removeAll");
 });
 
 $("body").on("click", ".remove-tag", function() {
-    let value = $(this)
-        .closest(".single-tags")
-        .find(".single-tags-text")
-        .text()
-        .trim();
-    let allData = JSON.parse(localStorage.getItem("tags"));
-    let index = allData.indexOf(value);
-    allData.splice(index, 1);
-    makeAllHtml(allData);
-    localStorage.setItem("tags", JSON.stringify(allData));
+    let value = $(this).attr("data-id");
+    AjaxCall("/admin/inventory/tags/delete", { id: value }, function(res) {
+        if (!res.error && res.data) {
+            makeAllHtml(res.data);
+        }
+    });
+    // let allData = JSON.parse(localStorage.getItem("tags"));
+    // let index = allData.indexOf(value);
+    // allData.splice(index, 1);
+    // makeAllHtml(allData);
+    // localStorage.setItem("tags", JSON.stringify(allData));
 });
 
 $("#add-new-tags").tagsinput({
