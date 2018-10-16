@@ -106,10 +106,10 @@ class StoreController extends Controller
     public function getCategory(Request $request)
     {
         $lang = Lang::getLocale();
-        return Category::join('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->select('categories.*', 'categories_translations.*')
-            ->where('name', 'like', '%' . $request->get('query') . '%')
-            ->where('locale',$lang)
+        return Category::LeftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->select('categories.*', 'categories_translations.name')
+            ->where('categories_translations.name', 'like', '%' . $request->get('query') . '%')
+            ->where('categories_translations.locale',$lang)
             ->get();
     }
 
