@@ -9,7 +9,6 @@
 namespace App\Models;
 
 
-
 use Actuallymab\LaravelComment\Commentable;
 
 class Comment extends \Actuallymab\LaravelComment\Models\Comment
@@ -19,4 +18,14 @@ class Comment extends \Actuallymab\LaravelComment\Models\Comment
     protected $canBeRated = true;
 
     protected $mustBeApproved = true;
+
+    public function children()
+    {
+        return $this->where('commentable_type', self::class)->where('commentable_id', $this->id);
+    }
+
+    public function commentTree()
+    {
+        return $this->hasMany(self::class,'commentable_id')->where('commentable_type', self::class)->with('commentTree');
+    }
 }
