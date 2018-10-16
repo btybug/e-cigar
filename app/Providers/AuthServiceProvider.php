@@ -24,10 +24,16 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        /**
+         * Determine if the current user can access the admin panel.
+         *
+         * @param  User $user
+         * @return bool
+         */
         \Gate::define('moderate-comments', function ($user) {
             // Add your own logic here...
             return (bool) $user->is_admin === true;
         });
-        //
     }
 }
