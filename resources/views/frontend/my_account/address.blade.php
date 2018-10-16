@@ -14,6 +14,21 @@
                                 {!! Form::model($billing_address,['class'=>'form-horizontal']) !!}
                                 <div class="form-group">
                                     <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
                                         <label for="text" class="control-label col-sm-4">Company name</label>
                                         <div class="col-sm-8">
                                             {!! Form::text('company',null,['class'=>'form-control']) !!}
@@ -78,6 +93,21 @@
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 {!! Form::model($default_shipping,['class'=>'form-horizontal']) !!}
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label for="text" class="control-label col-sm-4">Company name</label>
@@ -156,6 +186,21 @@
                                 </div>
                                 <div class="col-md-9">
                                     <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label for="text" class="control-label col-sm-4">Name</label>
+                                                <div class="col-sm-8">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="row">
                                                 <label for="text" class="control-label col-sm-4">Company name</label>
