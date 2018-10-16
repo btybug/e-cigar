@@ -17,32 +17,161 @@
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade active in show" id="address" role="tabpanel" aria-labelledby="pricing-tab">
-            <form>
-
-                <div>
-                    <h2 class="mb-3">Shipping Address</h2>
-                    <div class="form-group">
-                        <label for="companyName">Company Name</label>
-                        <input type="text" class="form-control" id="companyName" aria-describedby="CompanyName" placeholder="Company Name">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="container">
+                        <h2>Billing Address</h2>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {!! Form::open(['class'=>'form-horizontal']) !!}
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Company name</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('company',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">City</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Country</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('country',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Post Code</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                {!! Form::hidden('type','billing_address') !!}
+                                {!! Form::hidden('id') !!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="firstAddress">1st line Address</label>
-                        <input type="text" class="form-control" id="firstAddress" aria-describedby="firstAddress" placeholder="1st line Address">
-                    </div>
-                    <div class="form-group">
-                        <label for="secondAddress">2nd line Address</label>
-                        <input type="text" class="form-control" id="secondAddress" aria-describedby="secondAddress" placeholder="2nd line Address">
-                    </div>
-
-
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+                <div class="col-md-6">
+                    <div class="container">
+                        <h2>Default Shipping</h2>
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                {!! Form::open(['class'=>'form-horizontal']) !!}
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                        <div class="col-sm-8">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Company name</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('company',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">City</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Country</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('country',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Post Code</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                {!! Form::hidden('type','default_shipping') !!}
+                                {!! Form::hidden('id') !!}
 
-            </form>
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="designs" role="tabpanel" aria-labelledby="designs-tab">
             ..2..
