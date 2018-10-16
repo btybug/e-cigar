@@ -19,6 +19,15 @@
                 <button type="button" class="btn btn-danger btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row sortable-panels">
                 <div class="col-md-9 ">
                     <div class="form-group">

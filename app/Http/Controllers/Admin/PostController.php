@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBlogPost;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use App\User;
@@ -32,15 +33,8 @@ class PostController extends Controller
         return $this->view('new',compact('authors','post'));
     }
 
-    public function newPost(Request $request,$locale = null)
+    public function newPost(StoreBlogPost $request,$locale = null)
     {
-        $this->validate($request, [
-            'url' => 'required|unique',
-            'title' => 'required',
-            'short_description' => 'required',
-            'long_description' => 'required',
-        ]);
-
         $data = $request->except('_token','translatable');
         Posts::updateOrCreate($request->id, $data);
 

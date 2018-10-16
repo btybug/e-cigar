@@ -13,7 +13,7 @@ class StoreCategoryPost extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreCategoryPost extends FormRequest
     public function rules()
     {
         return [
-            //
+            'icon' => 'required|string|min:5',
+            "translatable"    => "required|array|min:1",
+            "translatable.*.name"  => "required|string|min:3",
+            "translatable.*.description"  => "required|string|min:3"
         ];
     }
 }

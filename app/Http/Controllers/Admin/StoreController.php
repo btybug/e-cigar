@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use DB;
 use Lang;
@@ -58,9 +59,8 @@ class StoreController extends Controller
         return \Response::json(['error' => false]);
     }
 
-    public function postCreateOrUpdateCategory(Request $request)
+    public function postCreateOrUpdateCategory(StoreCategoryPost $request)
     {
-//        dd($request->all());
         $data = $request->except('_token','translatable');
         $data['user_id'] = \Auth::id();
         Category::updateOrCreate($request->id, $data);
