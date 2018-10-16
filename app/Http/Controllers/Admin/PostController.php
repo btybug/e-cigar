@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogPost;
+use App\Models\Comment;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use App\User;

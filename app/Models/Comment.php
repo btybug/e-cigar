@@ -25,6 +25,16 @@ class Comment extends \Actuallymab\LaravelComment\Models\Comment
         return $this->where('commentable_type', self::class)->where('commentable_id', $this->id);
     }
 
+    public function childrens()
+    {
+        return $this->hasMany(self::class, 'commentable_id')->where('commentable_id', $this->id)->where('commentable_type', self::class);
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class, 'commentable_id');
+    }
+
     public function commentTree()
     {
         return $this->hasMany(self::class, 'commentable_id')->where('commentable_type', self::class)->with('commentTree');
@@ -42,6 +52,24 @@ class Comment extends \Actuallymab\LaravelComment\Models\Comment
        return $this->belongsTo(User::class,'commented_id') ;
     }
 
+    public static function recursiveItemsToOneArray ($comments, $i = 0, $data = [])
+    {
+        if (count($comments)) {
+            $comment = $comments[$i];
+            $data[] = $comment;
+
+            if (isset($comment->commentTree) && count($comment->commentTree)) {
+                $data = self::recursiveItemsToOneArray($comment->commentTree, 0, $data);
+            }
+
+            $i = $i + 1;
+            if ($i != count($comments)) {
+                $data = self::recursiveItemsToOneArray($comments, $i, $data);
+            }
+
+            return $data;
+        }
+    }
 
 
 

@@ -12,13 +12,13 @@
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Post Title</th>
-                    <th>Post URL</th>
                     <th>Author</th>
-                    <th>Message</th>
-                    <th>Status</th>
-                    <th>Added/Last Modified Date</th>
+                    <th>Comment</th>
+                    <th>Replies</th>
+                    {{--<th>Author</th>--}}
+                    {{--<th>Message</th>--}}
+                    {{--<th>Status</th>--}}
+                    {{--<th>Added/Last Modified Date</th>--}}
                     <th>Action</th>
                 </tr>
                 </thead>
@@ -35,13 +35,13 @@
                 "serverSide": true,
                 "bPaginate": true,
                 columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'post_title', name: 'title'},
-                    {data: 'post_url', name: 'title'},
-                    {data: 'user_id', name: 'user_id'},
-                    {data: 'message', name: 'message'},
-                    {data: 'status', name: 'status'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'author', name: 'author'},
+                    {data: 'comment', name: 'comment'},
+                    {data: 'replies', name: 'replies'},
+//                    {data: 'user_id', name: 'user_id'},
+//                    {data: 'message', name: 'message'},
+//                    {data: 'status', name: 'status'},
+//                    {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
             });
