@@ -14,6 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/send-mail', function () {
+
+
+  $res=  Mail::send('test',[],function ($m)  {
+        $m->from('hello@app.com', 'Your Application');
+
+        $m->to('hakobyan.sahak88@gmail.com', 'Sahak')->subject('Your Reminder!');
+    });
+  dd($res);
+});
 
 Auth::routes();
 Auth::routes(['verify' => true]);
