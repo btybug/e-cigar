@@ -36,8 +36,10 @@
                                     @if(count(get_languages()))
                                         <ul class="nav nav-tabs tab_lang_horizontal">
                                             @foreach(get_languages() as $language)
-                                                <li class="@if($loop->first) active @endif"><a data-toggle="tab" href="#{{ strtolower($language->code) }}">
-                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
+                                                <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                               href="#{{ strtolower($language->code) }}">
+                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                    </a></li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -45,7 +47,8 @@
                                     <div class="tab-content">
                                         @if(count(get_languages()))
                                             @foreach(get_languages() as $language)
-                                                <div id="{{ strtolower($language->code) }}" class="tab-pane fade  @if($loop->first) in active @endif">
+                                                <div id="{{ strtolower($language->code) }}"
+                                                     class="tab-pane fade  @if($loop->first) in active @endif">
                                                     <div class="form-group">
                                                         <label>Title</label>
                                                         {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($post,strtolower($language->code),'title'),['class'=>'form-control']) !!}
@@ -116,22 +119,22 @@
                             </div>
                         </div>
                         <div class="category-wall wall">
-                                <div class="row">
-                                    <label class="col-sm-3 control-label" for="input-category"><span
-                                                data-toggle="tooltip" title=""
-                                                data-original-title="Choose all products under selected category.">Category</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="" value="" placeholder="Category"
-                                               id="input-category" class="form-control" autocomplete="off">
-                                        <ul class="dropdown-menu"></ul>
-                                        <div id="coupon-category" class="well well-sm view-coupon">
+                            <div class="row">
+                                <label class="col-sm-3 control-label" for="input-category"><span
+                                            data-toggle="tooltip" title=""
+                                            data-original-title="Choose all products under selected category.">Category</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="" value="" placeholder="Category"
+                                           id="input-category" class="form-control" autocomplete="off">
+                                    <ul class="dropdown-menu"></ul>
+                                    <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list">
-
-                                        </div>
-                                        <input type="hidden"  value="" id="category-names">
-
+                                        </ul>
                                     </div>
+                                    <input type="hidden" value="" id="category-names">
+
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -208,7 +211,7 @@
                                            name="" value="0">
                                     <label for="seo_meta-robots-nofollow_0">Follow</label>
                                     <input type="radio" id="seo_meta-robots-nofollow_1"
-                                                                                                           name=""  value="1">
+                                           name="" value="1">
                                     <label for="seo_meta-robots-nofollow_1">Nofollow</label>
                                 </td>
                             </tr>
@@ -270,7 +273,7 @@
 
     <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
-        function initTinyMce(e){
+        function initTinyMce(e) {
             tinymce.init({
                 selector: e,
                 height: 500,
@@ -288,6 +291,7 @@
                 ]
             });
         }
+
         initTinyMce(".tinyMcArea")
         /*$('form').submit(function(e) {
             tinymce.get().forEach(item => {
@@ -312,83 +316,85 @@
         });
     </script>
     <script>
-    var userList = null;
-    $.ajax({
-    url: "/admin/get-categories",
-    type: "POST",
-    dataType: "json",
-    headers: {
-      "X-CSRF-TOKEN": $("input[name='_token']").val()
-    },
-    success: function(data) {
-      userList = data;
-    }
-  });
-    $("#input-category").tagsinput({
-    maxTags: 5,
-    confirmKeys: [13, 32, 44],
-    typeaheadjs: {
-      // name: "citynames",
-      displayKey: "name",
-      valueKey: "name",
-      source: function(query, processSync, processAsync) {
-        return $.ajax({
-          url: "/admin/get-categories",
-          type: "POST",
-          data: { query: query },
-          dataType: "json",
-          headers: {
-            "X-CSRF-TOKEN": $("input[name='_token']").val()
-          },
-          success: function(json) {
-            return processAsync(json);
-          }
+        var userList = null;
+        $.ajax({
+            url: "/admin/get-categories",
+            type: "POST",
+            dataType: "json",
+            headers: {
+                "X-CSRF-TOKEN": $("input[name='_token']").val()
+            },
+            success: function (data) {
+                userList = data;
+            }
         });
-      },
-      templates: {
-        empty: ['<div class="empty-message">', "No results", "</div>"].join(
-          "\n"
-        ),
-        header: "<h4>Categoris</h4><hr>",
-        suggestion: function(data) {
-          return `<div class="user-search-result"><span> ${data.name} </span></div>`;
+        $("#input-category").tagsinput({
+            maxTags: 5,
+            confirmKeys: [13, 32, 44],
+            typeaheadjs: {
+                // name: "citynames",
+                displayKey: "name",
+                valueKey: "name",
+                source: function (query, processSync, processAsync) {
+                    return $.ajax({
+                        url: "/admin/get-categories",
+                        type: "POST",
+                        data: {query: query},
+                        dataType: "json",
+                        headers: {
+                            "X-CSRF-TOKEN": $("input[name='_token']").val()
+                        },
+                        success: function (json) {
+                            return processAsync(json);
+                        }
+                    });
+                },
+                templates: {
+                    empty: ['<div class="empty-message">', "No results", "</div>"].join(
+                        "\n"
+                    ),
+                    header: "<h4>Categoris</h4><hr>",
+                    suggestion: function (data) {
+                        return `<div class="user-search-result"><span> ${data.name} </span></div>`;
+                    }
+                }
+            }
+        });
+        $("#input-category").on("beforeItemAdd", function (event) {
+            event.cancel = true;
+            let valueCatergorayName = $("#category-names").val()
+            if (!valueCatergorayName.includes(event.item)) {
+                $(".coupon-category-list").append(makeSearchHtml(event.item))
+                if ($("#category-names").val().trim()) {
+                    let arr = JSON.parse($("#category-names").val())
+                    arr.push(event.item)
+                    $("#category-names").val(JSON.stringify(arr))
+
+                    console.log(1)
+                    return
+                }
+                console.log(2)
+                let elm = [event.item]
+                $("#category-names").val(JSON.stringify(elm))
+                return
+
+            }
+        });
+
+        function makeSearchHtml(data) {
+
+            return `<li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>${data}</li>`
+
         }
-      }
-    }
-  });
-  $("#input-category").on("beforeItemAdd", function(event) {
-    event.cancel = true;
-    let valueCatergorayName = $("#category-names").val()
-    if (!valueCatergorayName.includes(event.item)) {
-        $(".coupon-category-list").append(makeSearchHtml(event.item))
-        if ($("#category-names").val().trim()) {
+
+        $("body").on("click", ".remove-search-tag", function () {
+            let text = $(this).closest("li").text()
             let arr = JSON.parse($("#category-names").val())
-            arr.push(event.item)
+            let index = arr.indexOf(text)
+            arr.splice(index, 1)
             $("#category-names").val(JSON.stringify(arr))
+            $(this).closest("li").remove()
 
-            console.log(1)
-            return
-        }
-        console.log(2)
-            let elm = [event.item]
-            $("#category-names").val(JSON.stringify(elm))
-            return
-        
-    }
-  });
-  function makeSearchHtml(data){
-      
-      return `<li>${data}<span class="remove-search-tag"><i class="fa fa-trash"></i></span></li>`
-
-  }
-  $("body").on("click", ".remove-search-tag", function(){
-      let text = $(this).closest("li").text()
-      let arr = JSON.parse($("#category-names").val())
-      let index = arr.indexOf(text)
-      arr.splice(index,1)
-      $("#category-names").val(JSON.stringify(arr))
-      $(this).closest("li").remove()
-
-  })
+        })
     </script>
 @stop

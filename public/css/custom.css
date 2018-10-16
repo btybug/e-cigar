@@ -461,3 +461,11 @@
     margin: 0 !important;
 }
 /*end inventory attributes*/
+.coupon-category-list{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.coupon-category-list .remove-search-tag{
+    margin-right: 4px;
+}
