@@ -24,21 +24,21 @@
 </div>
 <div class="form-group">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
             <label>Icon</label>
             {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1 text-center font-icon-added">
             <i id="font-show-area"></i>
         </div>
     </div>
 </div>
-<div class="form-group">
+<div class="form-group ">
     <label>Image</label>
     {!! media_button('image',$model) !!}
 </div>
-<div class="form-group">
-    {!! Form::submit('Save',['class' => 'btn btn-success']) !!}
+<div class="form-group bord-top text-right">
+    {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
 </div>
 {!! Form::close() !!}
 
