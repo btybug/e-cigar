@@ -4,8 +4,70 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5439d940776dca2e876909974de67f08",
+    "content-hash": "06b38c4303d2cf1ed13c56e590432037",
     "packages": [
+        {
+            "name": "actuallymab/laravel-comment",
+            "version": "v0.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/actuallymab/laravel-comment.git",
+                "reference": "278b246af18aaf4dca9e7c52b6fda6bc802ad1aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/actuallymab/laravel-comment/zipball/278b246af18aaf4dca9e7c52b6fda6bc802ad1aa",
+                "reference": "278b246af18aaf4dca9e7c52b6fda6bc802ad1aa",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.7.*",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "~1.4",
+                "mockery/mockery": "~0.9.0",
+                "orchestra/database": "3.7.x@dev",
+                "orchestra/testbench": "~3.7",
+                "phpunit/phpunit": "~7.0",
+                "squizlabs/php_codesniffer": "^2.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "\\Actuallymab\\LaravelComment\\LaravelCommentServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Actuallymab\\LaravelComment\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mehmet Aydin Bahadir",
+                    "email": "mehmet.aydin.bahadir@gmail.com",
+                    "homepage": "http://www.actuallymab.me",
+                    "role": "Software Engineer"
+                }
+            ],
+            "description": "Just another comment system for laravel projects.",
+            "homepage": "https://github.com/actuallymab/laravel-comment",
+            "keywords": [
+                "actuallymab",
+                "laravel-comment"
+            ],
+            "time": "2018-09-10T19:07:20+00:00"
+        },
         {
             "name": "barryvdh/laravel-ide-helper",
             "version": "v2.5.1",
@@ -848,286 +910,6 @@
             "time": "2018-02-07T20:20:57+00:00"
         },
         {
-            "name": "google/recaptcha",
-            "version": "1.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/google/recaptcha.git",
-                "reference": "e7add3be59211482ecdb942288f52da64a35f61a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/google/recaptcha/zipball/e7add3be59211482ecdb942288f52da64a35f61a",
-                "reference": "e7add3be59211482ecdb942288f52da64a35f61a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.2.20|^2.12",
-                "php-coveralls/php-coveralls": "^2.1",
-                "phpunit/phpunit": "^4.8.36|^5.7.27|^6.59|^7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "ReCaptcha\\": "src/ReCaptcha"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Client library for reCAPTCHA, a free service that protects websites from spam and abuse.",
-            "homepage": "https://www.google.com/recaptcha/",
-            "keywords": [
-                "Abuse",
-                "captcha",
-                "recaptcha",
-                "spam"
-            ],
-            "time": "2018-08-05T09:31:53+00:00"
-        },
-        {
-            "name": "guzzlehttp/guzzle",
-            "version": "6.3.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/407b0cb880ace85c9b63c5f9551db498cb2d50ba",
-                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/promises": "^1.0",
-                "guzzlehttp/psr7": "^1.4",
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
-                "psr/log": "^1.0"
-            },
-            "suggest": {
-                "psr/log": "Required for using the Log middleware"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.3-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/functions_include.php"
-                ],
-                "psr-4": {
-                    "GuzzleHttp\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle is a PHP HTTP client library",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "client",
-                "curl",
-                "framework",
-                "http",
-                "http client",
-                "rest",
-                "web service"
-            ],
-            "time": "2018-04-22T15:46:56+00:00"
-        },
-        {
-            "name": "guzzlehttp/promises",
-            "version": "v1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/promises.git",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Promise\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Guzzle promises library",
-            "keywords": [
-                "promise"
-            ],
-            "time": "2016-12-20T10:07:11+00:00"
-        },
-        {
-            "name": "guzzlehttp/psr7",
-            "version": "1.4.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/psr7.git",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "psr/http-message": "~1.0"
-            },
-            "provide": {
-                "psr/http-message-implementation": "1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                },
-                {
-                    "name": "Tobias Schultze",
-                    "homepage": "https://github.com/Tobion"
-                }
-            ],
-            "description": "PSR-7 message implementation that also provides common utility methods",
-            "keywords": [
-                "http",
-                "message",
-                "request",
-                "response",
-                "stream",
-                "uri",
-                "url"
-            ],
-            "time": "2017-03-20T17:10:46+00:00"
-        },
-        {
-            "name": "hazzard/laravel-comments",
-            "version": "dev-master",
-            "dist": {
-                "type": "path",
-                "url": "./laravel-comments",
-                "reference": "90085d91b5d6104ee088db2ba8e2f726de5a2773",
-                "shasum": null
-            },
-            "require": {
-                "google/recaptcha": "^1.1",
-                "laravel/framework": "^5.1.9",
-                "openclassrooms/akismet": "^2.0",
-                "s9e/text-formatter": "^0.9.1"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.4",
-                "orchestra/testbench": "~3.4.0",
-                "phpunit/phpunit": "~5.7"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Hazzard\\Comments\\CommentsServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Hazzard\\Comments\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Hazzard\\Comments\\Tests\\": "tests"
-                }
-            },
-            "authors": [
-                {
-                    "name": "Cretu Eusebiu",
-                    "email": "me@cretueusebiu.com",
-                    "homepage": "https://hazzardweb.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Comment system for Laravel.",
-            "homepage": "https://codecanyon.net/item/ajax-comment-system-for-laravel/12660889",
-            "support": {
-                "email": "hazzardweb@gmail.com"
-            }
-        },
-        {
             "name": "jakub-onderka/php-console-color",
             "version": "v0.2",
             "source": {
@@ -1821,58 +1603,6 @@
             "time": "2018-10-10T09:24:14+00:00"
         },
         {
-            "name": "openclassrooms/akismet",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/OpenClassrooms/Akismet.git",
-                "reference": "b1bd35128f5dfe028481adf338d5eb752a09b90e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/OpenClassrooms/Akismet/zipball/b1bd35128f5dfe028481adf338d5eb752a09b90e",
-                "reference": "b1bd35128f5dfe028481adf338d5eb752a09b90e",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/guzzle": "~6.2",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.5",
-                "satooshi/php-coveralls": "dev-master"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "OpenClassrooms\\Akismet\\": "src/",
-                    "OpenClassrooms\\Akismet\\Tests\\": "tests/",
-                    "OpenClassrooms\\Akismet\\Doubles\\": "tests/Doubles/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "OpenClassrooms",
-                    "email": "tech@openclassrooms.com"
-                },
-                {
-                    "name": "arnaud lefevre",
-                    "email": "arnaud.lefevre@openclassrooms.com"
-                }
-            ],
-            "description": "Akismet Library",
-            "time": "2016-12-14T10:33:12+00:00"
-        },
-        {
             "name": "opis/closure",
             "version": "3.1.1",
             "source": {
@@ -2026,56 +1756,6 @@
                 "psr"
             ],
             "time": "2017-02-14T16:28:37+00:00"
-        },
-        {
-            "name": "psr/http-message",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP messages",
-            "homepage": "https://github.com/php-fig/http-message",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/log",
@@ -2327,71 +2007,6 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
-        },
-        {
-            "name": "s9e/text-formatter",
-            "version": "0.9.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/s9e/TextFormatter.git",
-                "reference": "077c510109f3011dec68a5bcbaeb93a1f9138128"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/s9e/TextFormatter/zipball/077c510109f3011dec68a5bcbaeb93a1f9138128",
-                "reference": "077c510109f3011dec68a5bcbaeb93a1f9138128",
-                "shasum": ""
-            },
-            "require": {
-                "ext-dom": "*",
-                "ext-filter": "*",
-                "lib-pcre": ">=7.2",
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "matthiasmullie/minify": "*",
-                "php": ">=5.3.3",
-                "s9e/regexp-builder": ">=1.3.0"
-            },
-            "suggest": {
-                "ext-curl": "Improves the performance of the MediaEmbed plugin and some JavaScript minifiers",
-                "ext-intl": "Allows international URLs to be accepted by the URL filter",
-                "ext-json": "Enables the generation of a JavaScript parser",
-                "ext-mbstring": "Improves the performance of the PHP renderer",
-                "ext-tokenizer": "Improves the performance of the PHP renderer",
-                "ext-xsl": "Enables the XSLT renderer",
-                "ext-zlib": "Enables gzip compression when scraping content via the MediaEmbed plugin"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "s9e\\TextFormatter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Multi-purpose text formatting and markup library. Plugins offer support for BBCodes, Markdown, emoticons, HTML, embedding media (YouTube, etc...), enhanced typography and more.",
-            "homepage": "https://github.com/s9e/TextFormatter/",
-            "keywords": [
-                "bbcode",
-                "bbcodes",
-                "blog",
-                "censor",
-                "embed",
-                "emoji",
-                "emoticons",
-                "engine",
-                "forum",
-                "html",
-                "markdown",
-                "markup",
-                "media",
-                "parser",
-                "shortcodes"
-            ],
-            "time": "2017-05-10T19:37:30+00:00"
         },
         {
             "name": "seld/jsonlint",
@@ -5396,9 +5011,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "hazzard/laravel-comments": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

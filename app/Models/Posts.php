@@ -9,12 +9,19 @@
 namespace App\Models;
 
 
+use Actuallymab\LaravelComment\Commentable;
 use App\Models\Common\Translatable;
 use App\Models\Translations\PostsTranslation;
 use App\User;
 
 class Posts extends Translatable
 {
+    use Commentable;
+
+    protected $canBeRated = true;
+
+    protected $mustBeApproved = true;
+
     protected $table = 'posts';
 
     public $translationModel = PostsTranslation::class;

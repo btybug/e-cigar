@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
 use App\Models\Roles;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable,CanComment;
 
 
     /**

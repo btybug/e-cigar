@@ -17,12 +17,21 @@ Route::get('/', function () {
 Route::get('/send-mail', function () {
 
 
-  $res=  Mail::send('test',[],function ($m)  {
-        $m->from('hello@app.com', 'Your Application');
+    $user = App\User::find(1);
+    $product = \App\Models\Posts::find(1);
 
-        $m->to('hakobyan.sahak88@gmail.com', 'Sahak')->subject('Your Reminder!');
-    });
-  dd($res);
+// $user->comment(Commentable $model, $comment = '', $rate = 0);
+    $user->comment($product, 'Lorem ipsum ..', 3);
+    dd($product->comments);
+//
+//// approve it -- if you are admin or you don't use mustBeApproved option, it is not necessary
+//    $product->comments[0]->approve();
+//
+//// get avg rating -- it calculates approved average rate.
+//    $product->averageRate();
+//
+//// get total comment count -- it calculates approved comments count.
+//    $product->totalCommentCount();
 });
 
 Auth::routes();
