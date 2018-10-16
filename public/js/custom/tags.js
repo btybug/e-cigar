@@ -1,9 +1,9 @@
 const makeHtml = data => {
-    return `<div class="single-tags">
+    return `<div class="single-tags label label-primary">
                     <div class="single-tags-text">
                         <p>${data}</p>
                     </div>
-                    <div class="remove-tag">
+                    <div class="remove-tag label label-danger">
                         <i class="fa fa-times"></i>
                     </div>
                 </div>`;
