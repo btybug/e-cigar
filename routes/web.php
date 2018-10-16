@@ -42,6 +42,11 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
 
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/', 'Frontend\ProductsController@index')->name('products');
+    Route::get('/{p_id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+});
+
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
 Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
