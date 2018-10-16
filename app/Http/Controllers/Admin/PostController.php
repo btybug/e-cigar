@@ -34,6 +34,13 @@ class PostController extends Controller
 
     public function newPost(Request $request,$locale = null)
     {
+        $this->validate($request, [
+            'url' => 'required|unique',
+            'title' => 'required',
+            'short_description' => 'required',
+            'long_description' => 'required',
+        ]);
+
         $data = $request->except('_token','translatable');
         Posts::updateOrCreate($request->id, $data);
 
