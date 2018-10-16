@@ -114,7 +114,7 @@
 
 
                         <li class="wishlist-header">
-                            <a href="{!! route('favorites') !!}">
+                            <a href="{!! route('my_account_favourites') !!}">
                                 <span class="badge badge-secondary" id="wishlist-count">0</span>                            <span class="fa-stack fa-lg">
                               <i class="fa fa-shopping-bag fa-stack-2x"></i>
                               <i class="fa fa-heart fa-stack-2x"></i>
