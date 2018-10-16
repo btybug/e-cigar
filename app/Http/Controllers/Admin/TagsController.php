@@ -41,9 +41,7 @@ class TagsController extends Controller
 
     public function postSearch(Request $request)
     {
-        $tags = Tags::where('name',"LIKE","%".$request->q."%")->get();
-
-        return \Response::json(['error' => false,'data' => $tags]);
+        return Tags::where('name',"LIKE","%".$request->q."%")->get();
     }
 
     public function postDelete(Request $request)
