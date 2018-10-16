@@ -27,7 +27,8 @@ class StoreController extends Controller
 
     public function newProduct()
     {
-        return $this->view('new');
+        $model = new Category();
+        return $this->view('new',compact('model'));
     }
 
     public function getCategories()

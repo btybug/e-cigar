@@ -14,11 +14,22 @@
 @stop
 @section('content')
     <div class="tab-content tabs_content">
+        {!! Form::open(['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+        {!! Form::hidden('id',null) !!}
         <div id="home" class="tab-pane fade in active">
             <div class="text-right btn-save">
                 <button type="submit" class="btn btn-danger btn-view">View Product</button>
-                <button type="submit" class="btn btn-info">Save</button>
+                {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="row">
                 <div class="col-md-9">
                     <div class="form-group">
@@ -62,9 +73,33 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-3">Product Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="Product Name">
+                                    <div class="col-sm-10">
+                                        <div class="tab-content">
+                                            <div id="infoAM" class="tab-pane fade in active">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3">Product Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" placeholder="Product Name AM">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="infoEN" class="tab-pane fade">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3">Product Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" placeholder="Product Name EN">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="infoRU" class="tab-pane fade">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-3">Product Name</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" placeholder="Product Name RU">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -367,6 +402,7 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
 @stop
 @section('css')
