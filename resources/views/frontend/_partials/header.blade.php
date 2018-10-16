@@ -114,7 +114,7 @@
 
 
                         <li class="wishlist-header">
-                            <a href="http://laravelcommerce.com/wishlist">
+                            <a href="{!! route('favorites') !!}">
                                 <span class="badge badge-secondary" id="wishlist-count">0</span>                            <span class="fa-stack fa-lg">
                               <i class="fa fa-shopping-bag fa-stack-2x"></i>
                               <i class="fa fa-heart fa-stack-2x"></i>
@@ -123,7 +123,7 @@
                         </li>
 
                         <li class="cart-header dropdown head-cart-content">
-                            <a href="#" id="dropdownMenuButton" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="{!!route('shop_my_cart')  !!}" id="dropdownMenuButton" {{--class="dropdown-toggle"--}}{{-- aria-haspopup="true" aria-expanded="false"--}}>
                                 <span class="badge badge-secondary">0</span>
                                 <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                                 <!--<img class="img-fluid" src="http://laravelcommerce.com/public/images/shopping_cart.png" alt="icon">-->
@@ -167,7 +167,7 @@
                                         <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=three">Home Page 3</a> </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('shop') !!}">Shop</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('frontend_products') !!}">Products</a> </li>
 
                                 <li class="nav-item dropdown mega-dropdown open">
                                     <a href="javascript:void(0);" class="nav-link dropdown-toggle">
@@ -364,26 +364,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown open">
-                                    <a class="nav-link dropdown-toggle" href="http://laravelcommerce.com/news">News</a>
-
-                                    <ul class="dropdown-menu" aria-expanded="false">
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=app-features">App Features</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=introduction">Introduction</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=platforms">Platforms</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=screen-shots">Screen Shots</a>
-                                        </li>
-                                    </ul>
+                                    <a class="nav-link" href="{!! route('blog') !!}">Blog</a>
                                 </li>
                                 <li class="nav-item dropdown open">
                                     <a href="" class="nav-link dropdown-toggle">Info Pages</a>
