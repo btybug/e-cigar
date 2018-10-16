@@ -10,12 +10,14 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AttributesPost;
 use App\Models\Attributes;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class AttributesController extends Controller
 {
+
     protected $view = 'admin.inventory.attributes';
 
     public function getAttributes()
@@ -29,7 +31,7 @@ class AttributesController extends Controller
         return $this->view('create_edit_form',compact(['model']));
     }
 
-    public function postAttributesCreate(Request $request)
+    public function postAttributesCreate(AttributesPost $request)
     {
         $data = $request->except('_token','translatable');
         $data['user_id'] = \Auth::id();
@@ -37,7 +39,7 @@ class AttributesController extends Controller
         return redirect()->route('admin_store_attributes');
     }
 
-    public function getAttributesEdit ($id)
+    public function getAttributesEdit($id)
     {
         $model = Attributes::findOrFail($id);
         $optionModel = null;
