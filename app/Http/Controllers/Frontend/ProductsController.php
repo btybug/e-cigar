@@ -13,11 +13,14 @@ class ProductsController extends Controller
 
     public function index()
     {
-        return $this->view('index');
+        $posts = Posts::all();
+        return $this->view('index',compact('posts'));
     }
 
-    public function getSingle($p_id)
+    public function getSingle($post_url)
     {
-        return $this->view('single');
+        $post = Posts::where('url',$post_url)->first();
+        if(! $post) abort(404);
+        return $this->view('single',compact('post'));
     }
 }
