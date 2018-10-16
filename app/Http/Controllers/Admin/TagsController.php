@@ -50,6 +50,7 @@ class TagsController extends Controller
     {
         $tag = Tags::find($request->id);
         if($tag){
+            $tag->delete();
             return \Response::json(['error' => false,'data' => Tags::all()]);
         }
 
