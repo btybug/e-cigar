@@ -61,6 +61,16 @@ class PostController extends Controller
         return $this->view('comments.index');
     }
 
+    public function getCommentSettings()
+    {
+        return $this->view('comments.settings');
+    }
+
+    public function getCommentsEdit($id)
+    {
+        return $this->view('comments.edit');
+    }
+
     public function getCommentsDelete($id)
     {
 //        $post = Posts::findOrFail($id);
