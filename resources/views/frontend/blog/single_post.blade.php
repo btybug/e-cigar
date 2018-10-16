@@ -382,13 +382,13 @@ var usersArray = [
 
 $('#comments-container').comments({
     getComments: function(success, error) {
-        // AjaxCall("/url", {}, function(res){
-        //     if (!res.error) {
-        //         success(res.data);
-        //     }
+         AjaxCall("/get-comments/{!! $post->id !!}", {}, function(res){
+             if (!res.error) {
+                 success(res.data);
+             }
 
-        // })
-        success(commentsArray);
+         })
+//        success(commentsArray);
     }
 });
     </script>

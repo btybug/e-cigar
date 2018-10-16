@@ -9,7 +9,6 @@
 namespace App\Models;
 
 
-use Actuallymab\LaravelComment\Commentable;
 use App\Models\Common\Translatable;
 use App\Models\Translations\PostsTranslation;
 use App\User;

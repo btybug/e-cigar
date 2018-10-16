@@ -14,24 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/send-mail', function () {
-
-dd(\App\Models\Comment::all());
-    $user = App\User::find(1);
-    $product = \App\Models\Posts::find(1);
-
-// $user->comment(Commentable $model, $comment = '', $rate = 0);
-    $user->comment($product, 'Lorem ipsum ..', 3);
-    dd($product->comments);
-//
-//// approve it -- if you are admin or you don't use mustBeApproved option, it is not necessary
-//    $product->comments[0]->approve();
-//
-//// get avg rating -- it calculates approved average rate.
-//    $product->averageRate();
-//
-//// get total comment count -- it calculates approved comments count.
-//    $product->totalCommentCount();
+Route::post('/get-comments/{id}', function ($id) {
+    $product = \App\Models\Posts::find($id);
+    return ['error'=>false,'data'=>$product->makeReady()->toArray()];
 });
 
 Auth::routes();
