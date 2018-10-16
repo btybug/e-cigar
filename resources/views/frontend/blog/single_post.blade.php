@@ -2,131 +2,161 @@
 @section('content')
         <div id="gp-inner-container" style="transform: none;">
             <div class="container">
-                <div id="gp-left-column">
-                    <div id="gp-content">
-                        <article>
-                           <div id="gp-post-navigation">
-                        <div id="gp-breadcrumbs">
-                            <span>
-                                <span><a href="http://socialize.ghostpool.com/">Home</a> / <span>
-                            <a href="#">Featured News</a> / <span class="breadcrumb_last">Dale Webster takes a break after 14642 consecutive days</span></span></span>
-                            </span>
-                        </div>
-                               <div id="gp-post-links">
-                                   <a href="#" rel="prev"></a>
-                                   <a href="#" rel="next"></a>
-                                   <a href="#" class="gp-share-button"></a>
-                               </div>
-                               <div id="gp-share-icons-hide" style="display: none">
-                                   <h3>Share This Post</h3>
-                                   <div class="gp-share-icons" style="display: inline-block">
-                                        <div id="share"></div>
-                                       <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
-                                       <a href="#" title="Facebook" class="gp-share-facebook"></a>
-                                       <a href="#" title="Google+" class="gp-share-google-plus"></a>
-                                       <a href="#" title="LinkedIn" class="gp-share-linkedin"></a>
-                                       <a href="#" class="gp-share-tumblr"></a>
-                                       <a href="" title="Email" class="gp-share-email"></a> -->
-                                   </div>
-                                   <div class="hide-icons" style="display: inline-block; float: right; margin-top: 10px;">
-                                    <i class="fa fa-times"></i>
-                                   </div>
-                               </div>
-                               <div class="gp-clear"></div>
-                           </div>
-                            <header class="gp-entry-header">
-                                <div class="gp-entry-cats">
-                                    <a href="#">Sport</a>
-                                </div>
-                                <h1 class="gp-entry-title">{!! $post->title !!}</h1>
-                                <div class="gp-entry-meta"> <span class="gp-post-meta gp-meta-avatar">
-                                    <a href="http://socialize.ghostpool.com/author/socialize/">
-                                        <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpthumb.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-50 photo" height="50" width="50">
-                                    </a>
-                                    </span>
-                                    <span class="gp-post-meta-rows">
-                                        <span class="gp-post-meta-row-1">
-                                            <span class="gp-post-meta gp-meta-author">
-                                                By
-                                                <a href="http://socialize.ghostpool.com/author/socialize/">{{$post->author->name}}</a>
-                                            </span>
-                                            on
-                                            <time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">{!! BBgetDateFormat(@$post->created_at) !!}</time>
-                                        </span>
-                                        <span class="gp-post-meta-row-2">
-                                            <span class="gp-post-meta gp-meta-views">4282 views</span> </span> </span>
-                                </div>
-                            </header>
-                            <div class="gp-entry-content gp-image-above">
-                                <div class="gp-entry-text" itemprop="text">
-                                    {!! $post->long_description !!}
-                                </div>
-                            </div>
-                            <div class="gp-entry-tags">
-                                <a href="http://socialize.ghostpool.com/tag/sport/" rel="tag">sport</a>
-                                <a href="http://socialize.ghostpool.com/tag/surf/" rel="tag">surf</a>
-                            </div>
-                            <div id="gp-share-icons">
-                                <h3>Share This Post</h3>
-                                <div class="gp-share-icons-on-footer">
-                                    <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
-                                    <a href="#" title="Facebook" class="gp-share-facebook"></a>
-                                    <a href="#" title="Google+" class="gp-share-google-plus"></a>
-                                    <a href="#" title="Pinterest" class="gp-share-pinterest" target="_blank"></a>
-                                    <a href="#" title="Tumblr" class="gp-share-tumblr"></a>
-                                    <a href="" title="Email" class="gp-share-email"></a> -->
-                                </div>
-                            </div>
-                            <div class="gp-author-info">
-                                <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-110 photo" height="110" width="110">
-                                <div class="gp-author-meta"><div class="gp-author-name">
-                                        <a href="#">GhostPool</a>
-                                    </div>
-                                    <div class="gp-author-desc">
-                                        Credibly embrace multidisciplinary paradigms and synergistic services. Phosfluorescently fabricate customer directed technologies after value-added infrastructures.
-                                    </div>
-                                    <div class="gp-author-social-icons">
-                                       
-                                    </div>
-                                </div>
-                            </div>
-                           {{-- <div id="comments">
-                                <div id="respond" class="comment-respond">
-                                    <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small>
-                                            <a rel="nofollow" id="cancel-comment-reply-link" href="/featured-news/dale-webster-takes-a-break-after-14642-consecutive-days/#respond" style="display:none;">Cancel Reply</a></small>
-                                    </h3>
-                                    <form method="post" id="commentform" class="comment-form">
-                                        <p class="comment-notes">
-                                            Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-                                        <p class="comment-form-comment">
-                                            <label for="comment">Comment</label>
-                                            <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-                                        </p>
-                                        <p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:
-                                            <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt;
-                                            </code>
-                                        </p>
-                                        <p class="comment-form-author">
-                                            <input id="author" name="author" type="text" value="" size="30" placeholder="Name *" aria-required="true"></p>
-                                        <p class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="Email *" aria-required="true"></p>
-                                        <p class="comment-form-url">
-                                            <input id="url" name="url" type="text" value="" size="30" placeholder="Website"></p>
-                                        <p class="form-submit">
-                                            <input name="submit" type="submit" id="submit" class="submit" value="Post Comment">
-                                            <input type="hidden" name="comment_post_ID" value="3513" id="comment_post_ID">
-                                            <input type="hidden" name="comment_parent" id="comment_parent" value="0"></p>
-                                        <p style="display: none;">
-                                            <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="c69e824df6">
-                                        </p>
-                                        <input type="hidden" id="ak_js" name="ak_js" value="1539328157045">
-                                    </form>
-                                </div>
-                            </div>--}}
-                            <div id="my-comments"></div>
-                        </article>
+                {{--<div id="gp-left-column">--}}
+                    {{--<div id="gp-content">--}}
+                        {{--<article>--}}
+                           {{--<div id="gp-post-navigation">--}}
+                        {{--<div id="gp-breadcrumbs">--}}
+                            {{--<span>--}}
+                                {{--<span><a href="http://socialize.ghostpool.com/">Home</a> / <span>--}}
+                            {{--<a href="#">Featured News</a> / <span class="breadcrumb_last">Dale Webster takes a break after 14642 consecutive days</span></span></span>--}}
+                            {{--</span>--}}
+                        {{--</div>--}}
+                               {{--<div id="gp-post-links">--}}
+                                   {{--<a href="#" rel="prev"></a>--}}
+                                   {{--<a href="#" rel="next"></a>--}}
+                                   {{--<a href="#" class="gp-share-button"></a>--}}
+                               {{--</div>--}}
+                               {{--<div id="gp-share-icons-hide" style="display: none">--}}
+                                   {{--<h3>Share This Post</h3>--}}
+                                   {{--<div class="gp-share-icons" style="display: inline-block">--}}
+                                        {{--<div id="share"></div>--}}
+                                       {{--<!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>--}}
+                                       {{--<a href="#" title="Facebook" class="gp-share-facebook"></a>--}}
+                                       {{--<a href="#" title="Google+" class="gp-share-google-plus"></a>--}}
+                                       {{--<a href="#" title="LinkedIn" class="gp-share-linkedin"></a>--}}
+                                       {{--<a href="#" class="gp-share-tumblr"></a>--}}
+                                       {{--<a href="" title="Email" class="gp-share-email"></a> -->--}}
+                                   {{--</div>--}}
+                                   {{--<div class="hide-icons" style="display: inline-block; float: right; margin-top: 10px;">--}}
+                                    {{--<i class="fa fa-times"></i>--}}
+                                   {{--</div>--}}
+                               {{--</div>--}}
+                               {{--<div class="gp-clear"></div>--}}
+                           {{--</div>--}}
+                            {{--<header class="gp-entry-header">--}}
+                                {{--<div class="gp-entry-cats">--}}
+                                    {{--<a href="#">Sport</a>--}}
+                                {{--</div>--}}
+                                {{--<h1 class="gp-entry-title">{!! $post->title !!}</h1>--}}
+                                {{--<div class="gp-entry-meta"> <span class="gp-post-meta gp-meta-avatar">--}}
+                                    {{--<a href="http://socialize.ghostpool.com/author/socialize/">--}}
+                                        {{--<img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpthumb.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-50 photo" height="50" width="50">--}}
+                                    {{--</a>--}}
+                                    {{--</span>--}}
+                                    {{--<span class="gp-post-meta-rows">--}}
+                                        {{--<span class="gp-post-meta-row-1">--}}
+                                            {{--<span class="gp-post-meta gp-meta-author">--}}
+                                                {{--By--}}
+                                                {{--<a href="http://socialize.ghostpool.com/author/socialize/">{{$post->author->name}}</a>--}}
+                                            {{--</span>--}}
+                                            {{--on--}}
+                                            {{--<time class="gp-post-meta gp-meta-date" itemprop="datePublished" datetime="2015-06-07T14:18:24+00:00">{!! BBgetDateFormat(@$post->created_at) !!}</time>--}}
+                                        {{--</span>--}}
+                                        {{--<span class="gp-post-meta-row-2">--}}
+                                            {{--<span class="gp-post-meta gp-meta-views">4282 views</span> </span> </span>--}}
+                                {{--</div>--}}
+                            {{--</header>--}}
+                            {{--<div class="gp-entry-content gp-image-above">--}}
+                                {{--<div class="gp-entry-text" itemprop="text">--}}
+                                    {{--{!! $post->long_description !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="gp-entry-tags">--}}
+                                {{--<a href="http://socialize.ghostpool.com/tag/sport/" rel="tag">sport</a>--}}
+                                {{--<a href="http://socialize.ghostpool.com/tag/surf/" rel="tag">surf</a>--}}
+                            {{--</div>--}}
+                            {{--<div id="gp-share-icons">--}}
+                                {{--<h3>Share This Post</h3>--}}
+                                {{--<div class="gp-share-icons-on-footer">--}}
+                                    {{--<!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>--}}
+                                    {{--<a href="#" title="Facebook" class="gp-share-facebook"></a>--}}
+                                    {{--<a href="#" title="Google+" class="gp-share-google-plus"></a>--}}
+                                    {{--<a href="#" title="Pinterest" class="gp-share-pinterest" target="_blank"></a>--}}
+                                    {{--<a href="#" title="Tumblr" class="gp-share-tumblr"></a>--}}
+                                    {{--<a href="" title="Email" class="gp-share-email"></a> -->--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="gp-author-info">--}}
+                                {{--<img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-110 photo" height="110" width="110">--}}
+                                {{--<div class="gp-author-meta"><div class="gp-author-name">--}}
+                                        {{--<a href="#">GhostPool</a>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="gp-author-desc">--}}
+                                        {{--Credibly embrace multidisciplinary paradigms and synergistic services. Phosfluorescently fabricate customer directed technologies after value-added infrastructures.--}}
+                                    {{--</div>--}}
+                                    {{--<div class="gp-author-social-icons">--}}
+                                       {{----}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                           {{-- <div id="comments">--}}
+                                {{--<div id="respond" class="comment-respond">--}}
+                                    {{--<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small>--}}
+                                            {{--<a rel="nofollow" id="cancel-comment-reply-link" href="/featured-news/dale-webster-takes-a-break-after-14642-consecutive-days/#respond" style="display:none;">Cancel Reply</a></small>--}}
+                                    {{--</h3>--}}
+                                    {{--<form method="post" id="commentform" class="comment-form">--}}
+                                        {{--<p class="comment-notes">--}}
+                                            {{--Your email address will not be published. Required fields are marked <span class="required">*</span></p>--}}
+                                        {{--<p class="comment-form-comment">--}}
+                                            {{--<label for="comment">Comment</label>--}}
+                                            {{--<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>--}}
+                                        {{--</p>--}}
+                                        {{--<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:--}}
+                                            {{--<code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt;--}}
+                                            {{--</code>--}}
+                                        {{--</p>--}}
+                                        {{--<p class="comment-form-author">--}}
+                                            {{--<input id="author" name="author" type="text" value="" size="30" placeholder="Name *" aria-required="true"></p>--}}
+                                        {{--<p class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="Email *" aria-required="true"></p>--}}
+                                        {{--<p class="comment-form-url">--}}
+                                            {{--<input id="url" name="url" type="text" value="" size="30" placeholder="Website"></p>--}}
+                                        {{--<p class="form-submit">--}}
+                                            {{--<input name="submit" type="submit" id="submit" class="submit" value="Post Comment">--}}
+                                            {{--<input type="hidden" name="comment_post_ID" value="3513" id="comment_post_ID">--}}
+                                            {{--<input type="hidden" name="comment_parent" id="comment_parent" value="0"></p>--}}
+                                        {{--<p style="display: none;">--}}
+                                            {{--<input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="c69e824df6">--}}
+                                        {{--</p>--}}
+                                        {{--<input type="hidden" id="ak_js" name="ak_js" value="1539328157045">--}}
+                                    {{--</form>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div id="my-comments"></div>--}}
+                        {{--</article>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+
+                <ul class="nav nav-pills nav-fill ml-0" role="tablist" id="singleProductTab">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="pricing-tab" data-toggle="tab" href="#pricing" role="tab" aria-controls="pricing" aria-selected="true" aria-expanded="true">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="designs-tab" data-toggle="tab" href="#designs" role="tab" aria-controls="designs" aria-selected="false">Designs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="artWork-tab" data-toggle="tab" href="#artWork" role="tab" aria-controls="artWork" aria-selected="false">Art Work</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews <span>(2)</span></a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade active in show" id="pricing" role="tabpanel" aria-labelledby="pricing-tab">
+                        ..1..
+                    </div>
+                    <div class="tab-pane fade" id="designs" role="tabpanel" aria-labelledby="designs-tab">
+                        ..2..
+                    </div>
+                    <div class="tab-pane fade" id="artWork" role="tabpanel" aria-labelledby="artWork-tab">
+                        ..3..
+                    </div>
+                    <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                        ..4..
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
 
 @stop
