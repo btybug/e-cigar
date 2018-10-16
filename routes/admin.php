@@ -116,6 +116,7 @@ Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'tags'], function () {
         Route::get('/', 'Admin\TagsController@getIndex')->name('admin_stock_tags');
+        Route::post('/save', 'Admin\TagsController@tagsSave')->name('admin_stock_tags_save');
     });
 });
 
