@@ -21,7 +21,6 @@ class BlogController extends Controller
     {
         $post = Posts::where('url',$post_url)->first();
         if(! $post) abort(404);
-
         return $this->view('single_post',compact('post'));
     }
 }

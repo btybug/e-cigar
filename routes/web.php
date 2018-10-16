@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 Route::get('/send-mail', function () {
 
-
+dd(\App\Models\Comment::all());
     $user = App\User::find(1);
     $product = \App\Models\Posts::find(1);
 
@@ -45,6 +45,7 @@ Route::group(['prefix' => 'blog'], function () {
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
 Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
+Route::get('/check-out', 'Frontend\ShopController@getCheckOut')->name('shop_check_out');
 
 Route::group(['prefix' => 'my-account','middleware' => ['auth','verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');

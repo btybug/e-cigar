@@ -192,7 +192,7 @@
                             </div>
 
                             <div class="buttons">
-                                <a href="http://demo.laravelcommerce.com/checkout" class="btn btn-block btn-secondary">Proceed
+                                <a href="{!! route('shop_check_out') !!}" class="btn btn-block btn-secondary">Proceed
                                     To Checkout</a>
                             </div>
                         </div>
