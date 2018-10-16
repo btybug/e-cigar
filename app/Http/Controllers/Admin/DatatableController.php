@@ -152,6 +152,30 @@ class DatatableController extends Controller
             ->make(true);
     }
 
+    public function getAllPostComments()
+    {
+        return Datatables::of(Posts::query())
+            ->editColumn('title',function ($post) {
+                return $post->title;
+            })->editColumn('message',function ($post) {
+                return $post->short_description;
+            })
+            ->editColumn('url',function ($post) {
+                return "<a href='/blog/".$post->url."' target='_blank'>blog/".$post->url."</a>";
+            })
+            ->editColumn('user_id',function ($post) {
+                return $post->author->name;
+            })
+            ->editColumn('created_at',function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($comment) {
+                return "<a class='badge btn-danger' href='".route("admin_post_comment_delete",$comment->id)."'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='".route("admin_post_comment_edit",$comment->id)."'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions','url','short_description','created_at'])
+            ->make(true);
+    }
+
 //    public function getAllCompetitions($sport_id = null, $region_id = null)
 //    {
 //        $query = Competitions::query();

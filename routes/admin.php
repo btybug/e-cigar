@@ -81,6 +81,11 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('delete/{id}', 'Admin\PostController@getDelete')->name('admin_post_delete');
     Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
     Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
+    Route::group(['prefix' => 'comments'], function () {
+        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
+        Route::get('/delete/{id}', 'Admin\PostController@getCommentsDelete')->name('admin_post_comment_delete');
+    });
+
 });
 
 Route::group(['prefix' => 'orders'], function () {

@@ -61,4 +61,17 @@ class PostController extends Controller
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
         return $this->view('new',compact('post','authors'));
     }
+
+    public function getComments()
+    {
+        return $this->view('comments.index');
+    }
+
+    public function getCommentsDelete($id)
+    {
+//        $post = Posts::findOrFail($id);
+//        $post->delete();
+//        return redirect()->route('admin_blog');
+    }
+
 }
