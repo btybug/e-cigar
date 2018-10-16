@@ -48,7 +48,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-sm-12 col-lg-3 spaceright-0">
-                    <a href="http://laravelcommerce.com" class="logo">
+                    <a href="{!! url('/') !!}" class="logo">
                         <strong>E</strong>COMMERCE
                     </a>
                 </div>
