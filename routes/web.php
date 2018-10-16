@@ -51,7 +51,6 @@ Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
 Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
 Route::get('/check-out', 'Frontend\ShopController@getCheckOut')->name('shop_check_out');
-Route::get('/products', 'Frontend\ProductController@index')->name('frontend_products');
 Route::get('/favorites', 'Frontend\ProductController@favorites')->name('favorites');
 
 Route::group(['prefix' => 'my-account','middleware' => ['auth','verified']], function () {
