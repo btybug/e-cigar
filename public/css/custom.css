@@ -418,6 +418,7 @@
 }
 .inventory_attributes .bg-light.bord-top{
     border-top: 1px solid #cacaca;
+    cursor: pointer;
 }
 .inventory_attributes .nav-tabs {
     margin-bottom: 25px;
@@ -432,7 +433,14 @@
     font-size: 30px !important;
     margin: 0 !important;
 }
-/*end inventory attributes*/
+.inventory_attributes .option-edit-form-head{
+display: flex;
+    justify-content: space-between;
+}
+.inventory_attributes .option-edit-form-head .btn-trash{
+    align-self: flex-start;
+}
+    /*end inventory attributes*/
 .coupon-category-list{
     list-style: none;
     padding: 0;

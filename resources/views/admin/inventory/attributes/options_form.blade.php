@@ -2,12 +2,15 @@
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('parent_id',$model->id) !!}
 @if(count(get_languages()))
-    <ul class="nav nav-tabs">
-        @foreach(get_languages() as $language)
-            <li class="@if($loop->first) active @endif"><a data-toggle="tab" href="#{{ strtolower($language->code) }}Option">
-                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
-        @endforeach
-    </ul>
+    <div class="option-edit-form-head">
+        <ul class="nav nav-tabs">
+            @foreach(get_languages() as $language)
+                <li class="@if($loop->first) active @endif"><a data-toggle="tab" href="#{{ strtolower($language->code) }}Option">
+                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
+            @endforeach
+        </ul>
+        <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-trash" data-item-id=""><i class="fa fa-trash"></i></a>
+    </div>
 @endif
 
 <div class="tab-content">
