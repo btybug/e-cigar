@@ -449,3 +449,56 @@ display: flex;
 .coupon-category-list .remove-search-tag{
     margin-right: 4px;
 }
+.payment_tab .payment_methods {
+    margin: 0 !important;
+    border-bottom: 1px solid #e6e6e6;
+    padding: 0 !important;
+}
+
+.payment_tab .payment_methods li {
+    list-style: none !important;
+    padding: 1em !important;
+    border-bottom: 1px solid #e6e6e6;
+    margin-left: 0;
+}
+.payment_tab .payment_methods li label {
+    width: 92%;
+    padding-top: 0 !important;
+    margin-left: .618em;
+    font-weight: bold;
+}
+.payment_tab .payment_methods li .payment_box {
+    padding: 1em;
+    margin: 1em -1em -1em -1em;
+    background-color: #f5f5f4;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#f5f5f4), to(#f1f1f0));
+    background-image: -webkit-linear-gradient(top, #f5f5f4, #f1f1f0);
+    background-image: -moz-linear-gradient(top, #f5f5f4, #f1f1f0);
+    background-image: -ms-linear-gradient(top, #f5f5f4, #f1f1f0);
+    background-image: -o-linear-gradient(top, #f5f5f4, #f1f1f0);
+    background-image: linear-gradient(to bottom, #f5f5f4, #f1f1f0);
+    border-top: 1px solid #e6e6e6;
+}
+.payment_tab .payment_methods li p {
+    margin-bottom: 0;
+}
+.payment_tab .payment_methods li label {
+    width: 92%;
+    padding-top: 0 !important;
+    margin-left: .618em;
+    font-weight: bold;
+}
+.payment_tab .payment_methods li img {
+    float: right;
+    border: 0;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+

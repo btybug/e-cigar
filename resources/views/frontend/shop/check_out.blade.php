@@ -6,7 +6,7 @@
             <a class="nav-link active" id="address-tab" data-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true" aria-expanded="true">Address</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="designs-tab" data-toggle="tab" href="#designs" role="tab" aria-controls="designs" aria-selected="false">Designs</a>
+            <a class="nav-link" id="payment-tab" data-toggle="tab" href="#payment" role="tab" aria-controls="payment" aria-selected="false">Payment</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" id="artWork-tab" data-toggle="tab" href="#artWork" role="tab" aria-controls="artWork" aria-selected="false">Art Work</a>
@@ -173,8 +173,43 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="designs" role="tabpanel" aria-labelledby="designs-tab">
-            ..2..
+        <div class="tab-pane fade payment_tab" id="payment" role="tabpanel" aria-labelledby="payment-tab">
+            <div class="row">
+                <div class="col-md-4">
+                        <ul class="payment_methods methods">
+                            <li class="payment_method_bacs">
+                                <input id="payment_method_bacs" type="radio" class="input-radio" name="payment_method" value="bacs" checked="checked" data-order_button_text="">
+
+                                <label for="payment_method_bacs">
+                                    Direct Bank Transfer 	</label>
+                                <div class="payment_box payment_method_bacs">
+                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                </div>
+                            </li>
+                            <li class="payment_method_cheque">
+                                <input id="payment_method_cheque" type="radio" class="input-radio" name="payment_method" value="cheque" data-order_button_text="">
+
+                                <label for="payment_method_cheque">
+                                    Cheque Payment 	</label>
+                                <div class="payment_box payment_method_cheque" style="display:none;">
+                                    <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
+                                </div>
+                            </li>
+                            <li class="payment_method_paypal">
+                                <input id="payment_method_paypal" type="radio" class="input-radio" name="payment_method" value="paypal" data-order_button_text="Proceed to PayPal">
+
+                                <label for="payment_method_paypal">
+                                    PayPal <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/AM_mc_vs_ms_ae_UK.png" alt="PayPal Acceptance Mark"><a href="https://www.paypal.com/gb/webapps/mpp/paypal-popup" class="about_paypal">What is PayPal?</a>	</label>
+                                <div class="payment_box payment_method_paypal" style="display:none;">
+                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
+                                </div>
+                            </li>
+                        </ul>
+                </div>
+                <div class="col-md-8">
+
+                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="artWork" role="tabpanel" aria-labelledby="artWork-tab">
             ..3..
@@ -184,4 +219,7 @@
         </div>
     </div>
 </div>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
