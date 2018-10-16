@@ -109,7 +109,7 @@ class StoreController extends Controller
         $lang = Lang::getLocale();
         return Category::LeftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select('categories.*', 'categories_translations.name')
-            ->where('categories_translations.name', 'like', '%' . $request->get('query') . '%')
+            ->where('categories_translations.name', 'like', '%' . $request->get('q') . '%')
             ->where('categories_translations.locale',$lang)
             ->get();
     }
