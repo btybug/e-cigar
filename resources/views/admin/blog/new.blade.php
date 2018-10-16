@@ -128,7 +128,7 @@
                                         <ul class="coupon-category-list">
 
                                         </div>
-                                        <input type="hidden" name="category_names" value="" id="category-names">
+                                        <input type="hidden"  value="" id="category-names">
 
                                     </div>
                                 </div>
