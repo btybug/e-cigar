@@ -26,11 +26,11 @@
             <div id="{{ strtolower($language->code) }}" class="tab-pane fade  @if($loop->first) in active @endif">
                 <div class="form-group">
                     <label>Category Name</label>
-                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>true]) !!}
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
+                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control','required'=>true]) !!}
                 </div>
             </div>
         @endforeach
@@ -45,7 +45,7 @@
     <div class="row">
         <div class="col-md-10">
             <label>Icon</label>
-            {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
+            {!! Form::text('icon',null,['class'=>'form-control icon-picker','required'=>true]) !!}
         </div>
         <div class="col-md-2">
             <i id="font-show-area"></i>
