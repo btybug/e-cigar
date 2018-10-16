@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use DB;
+use Lang;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
@@ -104,10 +105,12 @@ class StoreController extends Controller
 
     public function getCategory(Request $request)
     {
+        $lang = Lang::getLocale();
         return DB::table('categories')
             ->Join('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select('categories.*', 'categories_translations.*')
-            ->where('name', 'like', '%' . $request->name . '%')
+            ->where('name', 'like', '%' . 'm' . '%')
+            ->where('locale',$lang)
             ->get();
     }
 
