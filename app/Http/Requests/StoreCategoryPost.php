@@ -30,4 +30,13 @@ class StoreCategoryPost extends FormRequest
             "translatable.*.description"  => "required|string|min:3"
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'icon.required' => 'A Icon is required',
+            'translatable.*.name.required'  => 'A name is required',
+            'translatable.*.description.required'  => 'A description is required',
+        ];
+    }
 }

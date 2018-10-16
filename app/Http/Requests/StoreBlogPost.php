@@ -31,4 +31,16 @@ class StoreBlogPost extends FormRequest
             "translatable.*.long_description"  => "required|string|min:3",
         ];
     }
+
+
+
+    public function messages()
+    {
+        return [
+            'url.required' => 'A Icon is required',
+            'translatable.*.title.required'  => 'A title is required',
+            'translatable.*.short_description.required'  => 'A short description is required',
+            'translatable.*.long_description.required'  => 'A long description is required',
+        ];
+    }
 }
