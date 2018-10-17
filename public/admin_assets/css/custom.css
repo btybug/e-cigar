@@ -186,3 +186,9 @@ div.dataTables_wrapper div.dataTables_filter input {
     font-weight: bold;
 }
 /*End create Email Templates*/
+
+/*new shipping zone*/
+.panel-body--new-shipping-zone .form-control:focus {
+    border-color: #3c8dbc;
+}
+/*End new shipping zone*/
