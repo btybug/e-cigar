@@ -38,6 +38,7 @@ class ShippingZonePost extends FormRequest
         return [
             'name.required' => 'A name is required',
             'description.required'  => 'A description is required',
+            'tax.integer' => 'Ilease input iteger Tax value',
             'country.required'  => 'A country is required',
         ];
     }
