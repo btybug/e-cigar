@@ -31,9 +31,8 @@ class AttributesPost extends FormRequest
 
     public function messages()
     {
-        return [
-            'icon.required' => 'A icon is required',
-            "translatable.*.name.required"  => "A name is required",
-        ];
+//        return [
+//            'icon.required' => 'A icon is required',
+//        ];
     }
 }
