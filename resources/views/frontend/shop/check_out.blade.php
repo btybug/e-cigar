@@ -223,7 +223,7 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
-@section('js')payment_method
+@section('js')
     <script>
         $(document).ready(function () {
             $('body').on('change','.payment_methods input[type=radio][name=payment_method]',function () {
