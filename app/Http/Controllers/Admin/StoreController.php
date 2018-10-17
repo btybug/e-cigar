@@ -12,8 +12,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
-use App\Models\Countries;
 use DB;
+use PragmaRX\Countries\Package\Countries;
 use Lang;
 use Illuminate\Http\Request;
 
@@ -126,9 +126,9 @@ class StoreController extends Controller
         return $this->view('coupons_new');
     }
 
-    public function newShippingZones()
+    public function newShippingZones(Countries $countries)
     {
-        $countries = [];
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
