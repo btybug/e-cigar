@@ -24,9 +24,8 @@ class AttributesPost extends FormRequest
     public function rules()
     {
         return [
-            'icon' => 'required|string|min:3',
-            'name' => 'required|string|min:3',
-            "translatable.*.name"  => "required|string|min:3",
+            'icon' => 'required',
+            "translatable.*.name"  => "required",
         ];
     }
 
@@ -34,7 +33,6 @@ class AttributesPost extends FormRequest
     {
         return [
             'icon.required' => 'A icon is required',
-            'name.required'  => 'A name is required',
             "translatable.*.name.required"  => "A name is required",
         ];
     }
