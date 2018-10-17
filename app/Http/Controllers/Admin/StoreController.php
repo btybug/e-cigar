@@ -168,12 +168,11 @@ class StoreController extends Controller
         foreach ($regions as $key => $region)
         {
             $posible = array();
-            if (strpos($region, $request->id) !=false) {
-                   /* $posible[$key] = $region;*/
-                   dd($region);
+            if (strpos( $request->id,$region) !=false) {
+                $posible[] = $region;
             }
         }
-        dd($regions);
+       return \Response::json(['error'=>false,'data'=>$regions]);
     }
 
 

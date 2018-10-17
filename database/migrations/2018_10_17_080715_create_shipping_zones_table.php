@@ -15,12 +15,12 @@ class CreateShippingZonesTable extends Migration
     {
         Schema::create('shipping_zones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->string('tax');
-            $table->integer('percentage');
-            $table->string('country');
-            $table->string('region');
+            $table->string('name')->nullable();
+            $table->string('description')->nullable();
+            $table->string('tax')->nullable();
+            $table->integer('percentage')->nullable();
+            $table->string('country')->nullable();
+            $table->string('region')->nullable();
             $table->timestamps();
         });
     }
