@@ -223,19 +223,19 @@
                                                                   value="88.0000" placeholder="Price"
                                                                   class="form-control"/></td>
                                     <td class="text-left" style="width: 20%;">
-                                        <div class="input-group date">
+                                        <div class="input-group ">
                                             <input type="text" name="product_discount[0][date_start]" value=""
                                                    placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                                   class="form-control"/>
+                                                   class="form-control date"/>
                                             <span class="input-group-btn">
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
                                     </td>
                                     <td class="text-left" style="width: 20%;">
-                                        <div class="input-group date">
+                                        <div class="input-group ">
                                             <input type="text" name="product_discount[0][date_end]" value=""
                                                    placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                                   class="form-control"/>
+                                                   class="form-control date"/>
                                             <span class="input-group-btn">
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
@@ -263,19 +263,19 @@
                                                                   value="77.0000" placeholder="Price"
                                                                   class="form-control"/></td>
                                     <td class="text-left" style="width: 20%;">
-                                        <div class="input-group date">
+                                        <div class="input-group ">
                                             <input type="text" name="product_discount[1][date_start]" value=""
                                                    placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                                   class="form-control"/>
+                                                   class="form-control date"/>
                                             <span class="input-group-btn">
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
                                     </td>
                                     <td class="text-left" style="width: 20%;">
-                                        <div class="input-group date">
+                                        <div class="input-group ">
                                             <input type="text" name="product_discount[1][date_end]" value=""
                                                    placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                                   class="form-control"/>
+                                                   class="form-control date"/>
                                             <span class="input-group-btn">
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
@@ -303,19 +303,19 @@
                                                                   value="66.0000" placeholder="Price"
                                                                   class="form-control"/></td>
                                     <td class="text-left" style="width: 20%;">
-                                        <div class="input-group date">
+                                        <div class="input-group ">
                                             <input type="text" name="product_discount[2][date_start]" value=""
                                                    placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                                   class="form-control"/>
+                                                   class="form-control date"/>
                                             <span class="input-group-btn">
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
                                     </td>
                                     <td class="text-left" style="width: 20%;">
-                                        <div class="input-group date">
+                                        <div class="input-group ">
                                             <input type="text" name="product_discount[2][date_end]" value=""
                                                    placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                                   class="form-control"/>
+                                                   class="form-control date"/>
                                             <span class="input-group-btn">
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
@@ -425,15 +425,14 @@
             html += '  <td class="text-right"><input type="text" name="product_discount[' + discount_row + '][quantity]" value="" placeholder="Quantity" class="form-control" /></td>';
             html += '  <td class="text-right"><input type="text" name="product_discount[' + discount_row + '][priority]" value="" placeholder="Priority" class="form-control" /></td>';
             html += '  <td class="text-right"><input type="text" name="product_discount[' + discount_row + '][price]" value="" placeholder="Price" class="form-control" /></td>';
-            html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_discount[' + discount_row + '][date_start]" value="" placeholder="Date Start" data-date-format="YYYY-MM-DD" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-            html += '  <td class="text-left" style="width: 20%;"><div class="input-group date"><input type="text" name="product_discount[' + discount_row + '][date_end]" value="" placeholder="Date End" data-date-format="YYYY-MM-DD" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+            html += '  <td class="text-left" style="width: 20%;"><div class="input-group "><input type="text" name="product_discount[' + discount_row + '][date_start]" value="" placeholder="Date Start" data-date-format="YYYY-MM-DD" class="form-control date" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+            html += '  <td class="text-left" style="width: 20%;"><div class="input-group "><input type="text" name="product_discount[' + discount_row + '][date_end]" value="" placeholder="Date End" data-date-format="YYYY-MM-DD" class="form-control date" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
             html += '  <td class="text-left"><button type="button" onclick="$(\'#discount-row' + discount_row + '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
             html += '</tr>';
 
             $('#discount tbody').append(html);
 
             $('#tab-discount .date').datetimepicker({
-                pickTime: false
             });
 
             discount_row++;
@@ -441,7 +440,6 @@
 
         $('#tab-discount .date').datetimepicker({
             language: 'en-gb',
-            pickTime: false
         });
         //--></script>
 @stop
