@@ -113,7 +113,7 @@
 
             </div>
             <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
-                <table class="table table-responsive table--store-settings">
+                <table id="discount" class="table table-responsive table--store-settings">
                     <tbody>
                     <tr>
                         <td>
@@ -125,14 +125,14 @@
                                 <option>...</option>
                             </select>
                         </td>
-                        <td>
-                            <label for="TaxRate">Tax Rate</label>
-                        </td>
-                        <td></td>
-                        <td colspan="4" class="text-right">
+                        <td class="text-right">
                             <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
+                    </tbody>
+                </table>
+                <table class="table table-responsive table--store-settings">
+                    <tbody>
                     <tr class="bg-my-light-blue">
                         <td>Shipping Zone - <span>Armenia</span></td>
                         <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
@@ -196,16 +196,6 @@
                             <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
-                    <tr class="bg-my-light-blue">
-                        <td>Shipping Zone - <span>Armenia</span></td>
-                        <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
-                    </tr>
-                    <tr class="bg-my-light-pink">
-                        <th>Order Amount</th>
-                        <th>Courier</th>
-                        <th>Cost</th>
-                        <th colspan="3">Time</th>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -218,7 +208,6 @@
 @stop
 
 @section('js')
-
 @stop
 
 
