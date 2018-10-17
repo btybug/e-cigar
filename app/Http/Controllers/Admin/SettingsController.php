@@ -15,7 +15,7 @@ use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\SiteLanguages;
 use Illuminate\Http\Request;
-use PragmaRX\Countries\Package\Countries as Erkir;
+use PragmaRX\Countries\Package\Countries;
 
 class SettingsController extends Controller
 {
@@ -23,21 +23,13 @@ class SettingsController extends Controller
 
     public function getLanguages()
     {
-        $countries = new Erkir();
-        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-
-        dd($countries);
         $languages = SiteLanguages::all();
         return $this->view('languages',compact(['languages']));
     }
 
     public function getLanguagesNew()
     {
-        $countries = new Erkir();
 
-        $all = $countries->where('name.common', 'Armenia')->first()->hydrateStates()->states;
-        dd($all);
-        $model = null;
         $countries = Countries::pluck('name','code')->all();
 
         return $this->view('new_languages',compact(['model','countries']));

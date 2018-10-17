@@ -167,6 +167,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
