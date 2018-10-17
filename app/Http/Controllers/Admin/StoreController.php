@@ -95,7 +95,8 @@ class StoreController extends Controller
 
     public function getSettings()
     {
-        return $this->view('settings');
+        $shipping_zones = ShippingZones::all();
+        return $this->view('settings',compact('shipping_zones'));
     }
 
     public function getCoupons()
