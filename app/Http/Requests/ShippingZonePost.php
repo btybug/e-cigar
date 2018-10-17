@@ -24,7 +24,7 @@ class ShippingZonePost extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique',
+            'name' => 'required',
             "description"    => "required|string|min:3",
             "country"  => "required|string|min:3",
         ];
