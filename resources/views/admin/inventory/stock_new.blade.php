@@ -55,8 +55,50 @@
             <!-- /.col -->
             <div class="col-md-12">
                 <div class="tab-content">
-                    <div id="basic" class="tab-pane fade in active">
+                    <div id="basic" class="tab-pane fade basic-details-tab in active">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list">
+                                            <ul>
+                                                <li><a href="#">Product name</a></li>
+                                                <li><a href="#">Product ID</a></li>
+                                                <li><a href="#">SKU</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="all-list">
+                                            <h5>Packaging Size</h5>
+                                            <ul>
+                                                <li><a href="#">Length</a></li>
+                                                <li><a href="#">Width</a></li>
+                                                <li><a href="#">Height</a></li>
+                                                <li><a href="#">Weight</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="basic-center basic-wall">
 
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="basic-right basic-wall">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                Barcode
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="form-control">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="media" class="tab-pane basic-details-tab fade">
                         <div class="container-fluid p-25">
