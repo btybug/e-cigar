@@ -123,6 +123,11 @@
 
 @section('js')
 <script>
+    let count = $('#ShippingZones').length;
+    if (count > 1)
+    {
+
+    }
 $("body").on("click", ".add-new-option", function () {
     const id = Date.now()
    let html = `<tr class="container-for-table-remove">

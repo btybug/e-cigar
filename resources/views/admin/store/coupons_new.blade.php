@@ -70,19 +70,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label"><span data-toggle="tooltip" title=""
-                                                                                data-original-title="Customer must be logged in to use the coupon.">Customer Login</span></label>
-                                    <div class="col-sm-10">
-                                        <label class="radio-inline"> <input type="radio" name="logged" value="1">
-                                            Yes
-                                        </label>
-                                        <label class="radio-inline"> <input type="radio" name="logged" value="0"
-                                                                            checked="checked">
-                                            No
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="col-sm-2 control-label">Free Shipping</label>
                                     <div class="col-sm-10">
                                         <label class="radio-inline"> <input type="radio" name="shipping" value="1">
@@ -105,21 +92,7 @@
                                         <div id="coupon-product" class="well well-sm view-coupon"></div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label" for="input-category"><span
-                                                data-toggle="tooltip" title=""
-                                                data-original-title="Choose all products under selected category.">Category</span></label>
-                                    <div class="col-sm-10">
-                                        <input type="text" name="category" value="" placeholder="Category"
-                                               id="input-category" class="form-control" autocomplete="off">
-                                        <ul class="dropdown-menu"></ul>
-                                        <div id="coupon-category" class="well well-sm view-coupon">
-                                        <ul class="coupon-category-list">
-                                        </ul>
-                                        </div>
-                                        <input type="hidden" value="" id="category-names">
-                                    </div>
-                                </div>
+                                
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-date-start">Date Start</label>
                                     <div class="col-sm-3">
