@@ -31,7 +31,7 @@ class AttributesController extends Controller
         return $this->view('create_edit_form',compact(['model']));
     }
 
-    public function postAttributesCreate(AttributesPost $request)
+    public function postAttributesCreate(Request $request)
     {
         $data = $request->except('_token','translatable');
         $data['user_id'] = \Auth::id();
