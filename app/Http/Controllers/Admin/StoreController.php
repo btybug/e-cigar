@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
+use App\Models\Countries;
 use DB;
 use Lang;
 use Illuminate\Http\Request;
@@ -127,7 +128,8 @@ class StoreController extends Controller
 
     public function newShippingZones()
     {
-        return $this->view('new_shipping_zone');
+        $countries = Countries::all();
+        return $this->view('new_shipping_zone',compact('countries'));
     }
 
 
