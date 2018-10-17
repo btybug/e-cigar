@@ -54,6 +54,7 @@
                     <li><a data-toggle="tab" href="#attributes">Attributes</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#price">Price</a></li>
+                    <li><a data-toggle="tab" href="#variations">Variations</a></li>
                 </ul>
             </div>
 
@@ -478,6 +479,9 @@
                                 </tfoot>
                             </table>
                         </div>
+                    </div>
+                    <div id="variations" class="tab-pane stock-variations-tab fade">
+                        variations
                     </div>
                 </div>
             </div>
