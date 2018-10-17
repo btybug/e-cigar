@@ -32,6 +32,6 @@ class CreateShippingZonesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shippingZones');
+        Schema::dropIfExists('shipping_zones');
     }
 }
