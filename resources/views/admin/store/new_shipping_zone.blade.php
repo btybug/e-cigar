@@ -4,10 +4,11 @@
 @stop
 @section('content')
     <div id="content">
+        {!! Form::model($shipping_zone,['url'=> route('admin_store_shipping_zone_save'),'class' => 'form-horizontal','files' => true ]) !!}
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <button type="submit" form="form-geo-zone" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Save"><i class="fa fa-save"></i></button>
+                    <button type="submit" class="btn btn-primary" data-original-title="Save"><i class="fa fa-save"></i></button>
                     <a href="#" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i class="fa fa-reply"></i></a></div>
                 <h1>Geo Zones</h1>
                 <ul class="breadcrumb">
@@ -21,32 +22,25 @@
                     <h3 class="panel-title"><i class="fa fa-pencil"></i> Add Geo Zone</h3>
                 </div>
                 <div class="panel-body panel-body--new-shipping-zone">
-                    <form action="https://demo.opencart.com/admin/index.php?route=localisation/geo_zone/add&amp;user_token=5ZIhyLUuRBv9guwPRjMVyzvQT7RwHXEo" method="post" enctype="multipart/form-data" id="form-geo-zone" class="form-horizontal">
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-name">Geo Zone Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" value="" placeholder="Geo Zone Name" id="input-name" class="form-control">
+                                {!! Form::text('name',null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-description">Description</label>
                             <div class="col-sm-10">
-                                <input type="text" name="description" value="" placeholder="Description" id="input-description" class="form-control">
+                                {!! Form::text('description',null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
                             </div>
                         </div>
                             <div class="form-group row required">
                                 <label class="col-sm-2 control-label" for="input-tax">Tax</label>
                                 <div class="col-sm-5">
-                                    <input type="text" name="description" value=""  id="input-tax" class="form-control">
+                                    {!! Form::text('tax',null,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
                                 </div>
                                 <div class="col-sm-5">
-                                    <select id="pecentage" class="form-control">
-                                        <option selected="">Pecentage</option>
-                                        <option>...</option>
-                                        <option>...</option>
-                                        <option>...</option>
-                                        <option>...</option>
-                                    </select>
+                                    {!! Form::select('percentage',['percentage' => 'percentage'],['percentage'],['id' => 'pecentage', 'class'=>'form-control']) !!}
                                 </div>
                             </div>
 
@@ -65,33 +59,27 @@
                                 <tfoot>
                                 <tr>
                                     <td>
-                                        <select id="country" class="form-control">
-                                            <option selected="">Choose...</option>
-                                            @foreach($countries as $country)
-                                                <option value="">{!! $country !!}</option>
-                                            @endforeach
-                                        </select>
+                                        {!! Form::select('country',[$countries],[],['id' => 'pecentage', 'class'=>'form-control']) !!}
                                     </td>
                                     <td>
                                         <div>
-                                            <input type="text" name="" value="" placeholder="Category" id="input-category" class="form-control" autocomplete="off">
+                                            {!! Form::text('region',null,['placeholder'=>'Region','id' => 'input-region','class' => 'form-control','autocomplete' => 'off']) !!}
                                             <ul class="dropdown-menu"></ul>
                                             <div id="coupon-category" class="well well-sm view-coupon">
                                                 <ul class="coupon-category-list">
                                                 </ul>
                                             </div>
                                             <input type="hidden" class="search-hidden-input" value="" id="category-names">
-
                                         </div>
                                     </td>
                                 </tr>
                                 </tfoot>
                             </table>
                         </fieldset>
-                    </form>
                 </div>
             </div>
         </div>
+        {!!   Form::close()   !!}
     </div>
 @stop
 @section('js')

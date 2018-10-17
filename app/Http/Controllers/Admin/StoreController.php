@@ -134,16 +134,21 @@ class StoreController extends Controller
 
     public function getShippingNew()
     {
-//        $countries = new qaq();
-//        dd($countries);
-//        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+        $shipping_zone = null;
         $countries = [];
-        return $this->view('new_shipping_zone',compact('countries'));
+        return $this->view('new_shipping_zone',compact('countries','shipping_zone'));
     }
 
     public function getregions(Countries $countries)
     {
         dd($countries);
+        return $this->view('new_shipping_zone',compact('countries'));
+    }
+
+    public function saveShippingNew(Request $request)
+    {
+        dd($request->all());
+
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
