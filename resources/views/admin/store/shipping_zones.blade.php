@@ -7,7 +7,7 @@
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <a href="{!! route('admin_store_new_shipping_zones') !!}">
+                    <a href="{!! route('admin_store_new_shipping_zones') !!}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Add New">
                         <i class="fa fa-plus"></i>
                     </a>
                     <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-geo-zone').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
