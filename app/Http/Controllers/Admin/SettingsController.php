@@ -116,4 +116,8 @@ class SettingsController extends Controller
     {
         return $this->view('general.index');
     }
+    public function getStore()
+    {
+        return $this->view('store.index');
+    }
 }

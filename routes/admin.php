@@ -20,6 +20,9 @@ Route::group(['prefix' => 'settings'], function () {
         Route::group(['prefix' => 'general'], function () {
             Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
         });
+        Route::group(['prefix' => 'store'], function () {
+            Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+        });
     });
     Route::group(['prefix' => 'emails'], function () {
         Route::get('/', 'Admin\SettingsController@getEmails')->name('admin_emails');
