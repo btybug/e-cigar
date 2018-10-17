@@ -28,20 +28,20 @@
 @section('js')
     <script>
         $(function () {
-            {{--$('#categories-table').DataTable({--}}
-            {{--ajax:  "{!! route('datatable_all_categories') !!}",--}}
-            {{--"processing": true,--}}
-            {{--"serverSide": true,--}}
-            {{--"bPaginate": true,--}}
-            {{--columns: [--}}
-            {{--{data: 'id',name: 'id'},--}}
-            {{--{data: 'name', name: 'name'},--}}
-            {{--{data: 'description',name: 'description'},--}}
-            {{--{data: 'image', name: 'image'},--}}
-            {{--{data: 'icon', name: 'icon'},--}}
-            {{--{data: 'created_at', name: 'created_at'}--}}
-            {{--]--}}
-            {{--});--}}
+            $('#categories-table').DataTable({
+            ajax:  "{!! route('datatable_all_coupons') !!}",
+            "processing": true,
+            "serverSide": true,
+            "bPaginate": true,
+            columns: [
+            {data: 'id',name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'description',name: 'description'},
+            {data: 'image', name: 'image'},
+            {data: 'icon', name: 'icon'},
+            {data: 'created_at', name: 'created_at'}
+            ]
+            });
         });
 
     </script>

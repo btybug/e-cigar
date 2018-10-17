@@ -116,7 +116,7 @@
             <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
                 <table id="discount" class="table table-responsive table--store-settings">
                     <tbody class="all-options">
-                    <tr>
+                    <tr  data-table-id="20">
                         <td>
                             <label for="ShippingZones">Shipping to</label>
                         </td>
@@ -124,7 +124,7 @@
                             <select id="ShippingZones" class="form-control">
                                 <option selected>Shipping Zones</option>
                                 @foreach($shipping_zones as $zone)
-                                    <option value="{!! $zone->tax !!}">{!! $zone->name !!}</option>
+                                    <option data-name="{!! $zone->name  !!}" value="{!! $zone->tax !!}">{!! $zone->name !!}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -134,7 +134,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <table class="table table-responsive table--store-settings">
+                <table class="table table-responsive table--store-settings" data-table-id="20">
                 <tr class="bg-my-light-blue">
                         <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
                         <td colspan="5">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
@@ -230,7 +230,7 @@
                 @endforeach`
 $("body").on("click", ".add-new-option", function () {
     const id = Date.now()
-   let html = `<tr class="container-for-table-remove">
+   let html = `<tr class="container-for-table-remove" data-table-id="${id}">
    <td>
       <label for="ShippingZones">Shipping to</label>
    </td>
@@ -245,7 +245,7 @@ $("body").on("click", ".add-new-option", function () {
    </td>
 </tr>`
 let html2 = `
-<table class="table table-responsive table--store-settings container-for-table-remove">
+<table class="table table-responsive table--store-settings container-for-table-remove" data-table-id="${id}">
                 <tr class="bg-my-light-blue">
                 <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
                 <td colspan="3">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
@@ -430,9 +430,14 @@ $(this).closest("table").append(html)
 $('body').on('change','#ShippingZones',function (e) {
     e.preventDefault();
     let val = $(this).val();
-    let text = $(`#ShippingZones option[value=${val}]`).text();
-    $('#shipzone').text(text);
-    $('#taxzone').text(val);
+    let id = $(this).closest("tr").attr("data-table-id")
+
+    let text = $(this).closest("tr").find("#ShippingZones :selected").text();
+
+    console.log($(`table[data-table-id="${id}"]`))
+    $(`table[data-table-id="${id}"]`).find('.shipzone').text(text);
+    console.log($(`table[data-table-id="${id}"]`).find('.shipzone').text())
+    $(`table[data-table-id="${id}"]`).find('.taxzone').text(val);
 
 });
 </script>

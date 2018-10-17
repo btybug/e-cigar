@@ -92,7 +92,7 @@
                                         <div id="coupon-product" class="well well-sm view-coupon"></div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-date-start">Date Start</label>
                                     <div class="col-sm-3">
