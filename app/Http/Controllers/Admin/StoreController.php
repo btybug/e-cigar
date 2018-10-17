@@ -14,7 +14,7 @@ use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\ShippingZones;
 use DB;
-use PragmaRX\Countries\Package\Countries as qaq;
+use PragmaRX\Countries\Package\Countries;
 use Lang;
 use Illuminate\Http\Request;
 
@@ -134,10 +134,10 @@ class StoreController extends Controller
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
-    public function getShippingNew()
+    public function getShippingNew(Countries $countries)
     {
         $shipping_zone = null;
-        $countries = [];
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
         return $this->view('new_shipping_zone',compact('countries','shipping_zone'));
     }
 
@@ -154,11 +154,11 @@ class StoreController extends Controller
         return redirect(route('admin_store_shipping_zones'));
     }
 
-    public function editShippingZone(Request $request)
+    public function editShippingZone(Countries $countries,$id)
     {
-        $data = $request->except('_token');
-        ShippingZones::updateOrCreate($request->id,$data);
-        return redirect(route('admin_store_shipping_zones'));
+        $shipping_zone = ShippingZones::find($id);
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+        return $this->view('new_shipping_zone',compact('countries','shipping_zone'));
     }
 
 
