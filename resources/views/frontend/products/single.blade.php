@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
  <div class="container">
-  <div class="row mb-5">
+   <div class="row mb-5">
    <div class="col-md-3">
     <a href="#" class="d-inline-block woocommerce-main-image zoom">
      <img width="100%" src="http://ukprintplus.co.uk/wp-content/uploads/2015/08/2-side-appointment-400-400x300.jpg" class="attachment-single-product-thumb wp-post-image" alt="">
@@ -51,6 +51,7 @@
   </div>
  </div>
 @stop
+
 @section('css')
  <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
  <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
