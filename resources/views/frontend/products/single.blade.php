@@ -14,17 +14,6 @@
       <li class="mb-2"><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
       <li class="single-product_btns_share"><a href="#" class="btn btn-outline-dark">share</a>
        <div id="share" class="share-social"></div>
-       {{--<ul class="share-social d-flex">--}}
-        {{--<li>--}}
-         {{--<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-         {{--<a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>--}}
-        {{--</li>--}}
-        {{--<li>--}}
-         {{--<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>--}}
-        {{--</li>--}}
-       {{--</ul>--}}
       </li>
      </ul>
     </div>
