@@ -135,7 +135,8 @@
                                     <h3>Courier</h3>
                                     @if(count($model->children))
                                         @foreach($model->children as $item)
-                                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                            <div class="form-group row bord-top bg-light attr-option"
+                                                 data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
                                                 <div class="col-sm-1">
                                                     <input type="radio" id="radio-{!! $item->id !!}" name="radio_item">
                                                 </div>
@@ -153,7 +154,8 @@
                                     <select name="" id="" class="form-control">
                                         @if(count($model->children))
                                             @foreach($model->children as $item)
-                                                <option class="form-group attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                <option class="form-group attr-option" data-item-id="{!! $item->id !!}"
+                                                        data-parent-id="{!! $model->id !!}">
                                                     {!! $item->name !!}
 
                                                 </option>
@@ -168,7 +170,8 @@
                                     <h3>Courier</h3>
                                     @if(count($model->children))
                                         @foreach($model->children as $item)
-                                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                            <div class="form-group row bord-top bg-light attr-option"
+                                                 data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
                                                 <div class="col-sm-1">
                                                     <input type="checkbox" id="checkbox-{!! $item->id !!}">
                                                 </div>
@@ -184,15 +187,21 @@
                                 <div class="display-as-wall d-none" data-displayas="multi_select_tag">
                                     <h3>Courier</h3>
                                     <div class="multi_select_tag_wall">
-                                        @if(count($model->children))
-                                            @foreach($model->children as $item)
-                                                <div class="form-group attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
-                                                    <span class="label label-primary">{!! $item->name !!}</span>
+                                        <div class="row">
+                                            <label class="col-sm-3 control-label" for="input-category">Tags</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" name="" value="" placeholder="Tags"
+                                                       id="input-category" class="form-control" autocomplete="off">
+                                                <ul class="dropdown-menu"></ul>
+                                                <div id="coupon-category" class="well well-sm view-coupon">
+                                                    <ul class="coupon-category-list">
+                                                    </ul>
                                                 </div>
-                                            @endforeach
-                                        @else
-                                            No Options
-                                        @endif
+                                                <input type="hidden" class="search-hidden-input" value=""
+                                                       id="category-names">
+
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -209,9 +218,9 @@
     <script>
 
         $('body').on('change', '.inventory_attributes .display_as-select', function () {
-                $(".display-as-wall").addClass("d-none")
-                console.log($(this).val())
-                $(`[data-displayas="${$(this).val()}"]`).removeClass("d-none")
+            $(".display-as-wall").addClass("d-none")
+            console.log($(this).val())
+            $(`[data-displayas="${$(this).val()}"]`).removeClass("d-none")
 
         });
         $('.icon-picker').iconpicker();

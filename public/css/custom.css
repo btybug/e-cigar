@@ -450,16 +450,13 @@ display: flex;
 .inventory_attributes .right_col .d-none{
     display: none !important;
 }
-.inventory_attributes .right_col .multi_select_tag_wall{
-    display: flex;
-    flex-wrap: wrap;
+
+.inventory_attributes .right_col .multi_select_tag_wall >.row{
+  width: 100%;
 }
-.inventory_attributes .right_col .multi_select_tag_wall .form-group{
-    margin-right:5px;
-    margin-bottom:5px;
-    padding: 0;
-    font-size: 15px;
-    cursor: pointer;
+.inventory_attributes .right_col .multi_select_tag_wall .view-coupon{
+    height: 150px;
+    overflow: auto;
 }
     /*end inventory attributes*/
 .coupon-category-list{
