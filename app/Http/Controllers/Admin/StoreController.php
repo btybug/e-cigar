@@ -83,7 +83,8 @@ class StoreController extends Controller
 
     public function getShippingZones()
     {
-        return $this->view('shipping_zones');
+        $zones = ShippingZones::all();
+        return $this->view('shipping_zones',compact('zones'));
     }
 
     public function getTaxRate()
@@ -150,8 +151,17 @@ class StoreController extends Controller
     {
         $data = $request->except('_token');
         ShippingZones::updateOrCreate($request->id,$data);
-        return redirect()->back();
+        return redirect(route('admin_store_shipping_zones'));
     }
+
+    public function editShippingZone(Request $request)
+    {
+        $data = $request->except('_token');
+        ShippingZones::updateOrCreate($request->id,$data);
+        return redirect(route('admin_store_shipping_zones'));
+    }
+
+
 
 
 }

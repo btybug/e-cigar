@@ -38,28 +38,31 @@
                                     <td class="text-left">
                                         <a href="#">Description</a>
                                     </td>
+                                    <td class="text-left">
+                                        <a href="#">Country</a>
+                                    </td>
+                                    <td class="text-left">
+                                        <a href="#">Region</a>
+                                    </td>
                                     <td class="text-right">Action</td>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td class="text-center">
-                                        <input type="checkbox" name="selected[]" value="4">
-                                    </td>
-                                    <td class="text-left">UK Shipping</td>
-                                    <td class="text-left">UK Shipping Zones</td>
-                                    <td class="text-right">
-                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="fa fa-pencil"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">
-                                        <input type="checkbox" name="selected[]" value="3">
-                                    </td>
-                                    <td class="text-left">UK VAT Zone</td>
-                                    <td class="text-left">UK VAT</td>
-                                    <td class="text-right">
-                                        <a href="#" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="fa fa-pencil"></i></a></td>
-                                </tr>
+                                @if(isset($zones))
+                                    @foreach($zones as $zone)
+                                    <tr>
+                                        <td class="text-center">
+                                            <input type="checkbox" name="selected[]" value="4">
+                                        </td>
+                                        <td class="text-left">{!! $zone->name !!}</td>
+                                        <td class="text-left">{!! $zone->description !!}</td>
+                                        <td class="text-left">{!! $zone->country !!}</td>
+                                        <td class="text-left">{!! $zone->region !!}</td>
+                                        <td class="text-right">
+                                            <a href="{!! route('admin_store_shipping_zones_edit',$zone->id) !!}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="fa fa-pencil"></i></a></td>
+                                    </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

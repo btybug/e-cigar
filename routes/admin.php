@@ -62,6 +62,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/', 'Admin\StoreController@getShippingZones')->name('admin_store_shipping_zones');
         Route::get('/new-shipping-zones', 'Admin\StoreController@newShippingZones')->name('admin_store_new_shipping_zones');
         Route::get('/new', 'Admin\StoreController@getShippingNew')->name('admin_store_shipping_zones_new');
+        Route::get('/edit-shipping-zone/{id}', 'Admin\StoreController@editShippingZone')->name('admin_store_shipping_zones_edit');
         Route::post('/save-shipping-zone', 'Admin\StoreController@saveShippingNew')->name('admin_store_shipping_zone_save');
     });
 
