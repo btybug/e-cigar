@@ -128,12 +128,7 @@
                         <td>
                             <label for="TaxRate">Tax Rate</label>
                         </td>
-                        <td>
-                            <select id="TaxRate" class="form-control">
-                                <option selected>Tax Rate</option>
-                                <option>...</option>
-                            </select>
-                        </td>
+                        <td></td>
                         <td colspan="4" class="text-right">
                             <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
@@ -170,11 +165,8 @@
                                 3 days
                             </span>
                         </td>
-                        <td class="text-right">
+                        <td colspan="2" class="text-right">
                             <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                        <td class="text-right">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -195,68 +187,12 @@
                                 1 day
                             </span>
                         </td>
-                        <td class="text-right">
+                        <td colspan="2" class="text-right">
                             <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-right">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table--store-settings_vert-top">
-                            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                            <span>To</span>
-                            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                        </td>
-                        <td>
-                            <select id="PosType" class="form-control">
-                                <option selected>Normal Post</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                        </td>
-                        <td class="text-right">
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                        <td class="text-right">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <select id="dhl" class="form-control">
-                                <option selected>DHL</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                        </td>
-                        <td class="text-right">
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="text-right">
+                        <td colspan="6" class="text-right">
                             <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
