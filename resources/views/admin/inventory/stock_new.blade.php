@@ -55,7 +55,37 @@
             <!-- /.col -->
             <div class="col-md-12">
                 <div class="tab-content">
-                    <div id="basic" class="tab-pane basic-details-tab fade in active">
+                    <div id="basic" class="tab-pane fade in active">
+
+                    </div>
+                    <div id="media" class="tab-pane basic-details-tab fade">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list">
+                                            <ul>
+                                                <li><a href="#">Feature image</a></li>
+                                                <li><a href="#">Other images</a></li>
+                                                <li><a href="#">Videos</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="basic-center basic-wall">
+                                        Strawbery
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="basic-right basic-wall">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="attributes" class="tab-pane basic-details-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
@@ -90,36 +120,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="media" class="tab-pane basic-details-tab fade">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="basic-left basic-wall">
-                                        <div class="all-list">
-                                            <ul>
-                                                <li><a href="#">Feature image</a></li>
-                                                <li><a href="#">Other images</a></li>
-                                                <li><a href="#">Videos</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="basic-center basic-wall">
-                                        Strawbery
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="basic-right basic-wall">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="attributes" class="tab-pane fade">
-                        attributes
                     </div>
                     <div id="options" class="tab-pane fade">
                         options
