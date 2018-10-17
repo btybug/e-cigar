@@ -133,7 +133,7 @@
                             <div class="right-main-content">
                                 <div class="display-as-wall " data-displayas="radio">
                                     <h3>Courier</h3>
-                                    @if(count($model->children))
+                                    @if($model && count($model->children))
                                         @foreach($model->children as $item)
                                             <div class="form-group row bord-top bg-light attr-option"
                                                  data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
@@ -152,7 +152,7 @@
                                 <div class="display-as-wall d-none" data-displayas="select_menu">
                                     <h3>Courier</h3>
                                     <select name="" id="" class="form-control">
-                                        @if(count($model->children))
+                                        @if($model &&  count($model->children))
                                             @foreach($model->children as $item)
                                                 <option class="form-group attr-option" data-item-id="{!! $item->id !!}"
                                                         data-parent-id="{!! $model->id !!}">
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="display-as-wall d-none" data-displayas="multi_select">
                                     <h3>Courier</h3>
-                                    @if(count($model->children))
+                                    @if($model &&  count($model->children))
                                         @foreach($model->children as $item)
                                             <div class="form-group row bord-top bg-light attr-option"
                                                  data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
