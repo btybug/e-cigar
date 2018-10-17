@@ -261,7 +261,7 @@ $("body").on("click", ".option-elm", function(){
         if (!res.error) {
             $(".list").empty()
             res.data.forEach(item => {
-                let html = `<li class="attributes-item"><a href="#">${item.name}</a></li>`
+                let html = `<li class="badge attributes-item"><a href="#">${item.name}</a></li>`
                 $(".list").append(html)
             })
         }
@@ -278,7 +278,7 @@ $("body").on("click", ".attributes-item", function(){
 $("body").on("click", ".restore-item", function(){
     let text = $(this).parent().text()
     $(this).parent().remove()
-    let html = `<li class="attributes-item"><a href="#">${text}</a></li>`
+    let html = `<li class="badge attributes-item"><a href="#">${text}</a></li>`
                 $(".list").append(html)
 })
 
