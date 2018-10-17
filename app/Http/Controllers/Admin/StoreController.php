@@ -165,15 +165,16 @@ class StoreController extends Controller
     public function findRegion(Request $request)
     {
         $coontries = new Countries();
+        $posible = array();
         $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal')->toArray();
-        foreach ($regions as $key => $region)
+        foreach ($regions as $region)
         {
-            $posible = array();
-            if (strpos( $request->id,$region) !=false) {
+            if (preg_match("/(" . $request->id . ")/i",$region))
+            {
                 $posible[] = $region;
             }
         }
-       return \Response::json(['error'=>false,'data'=>$regions]);
+       return \Response::json(['error'=>false,'data'=>$posible]);
     }
 
 

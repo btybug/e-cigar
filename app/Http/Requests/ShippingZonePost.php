@@ -26,6 +26,7 @@ class ShippingZonePost extends FormRequest
         return [
             'name' => 'required',
             "description"    => "required|string|min:3",
+            "tax"    => "integer",
             "country"  => "required|string|min:3",
         ];
     }
