@@ -11,6 +11,7 @@ use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
 use App\Models\Posts;
+use App\Models\Products;
 use App\Models\Regions;
 use App\Models\Roles;
 use App\Models\SelectionType;
@@ -106,6 +107,19 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($attr) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $attr->id . '">Delete</a>
                     <a href="'.route("admin_store_attributes_edit",$attr->id).'" class="btn btn-warning">Edit</a>';
+            })->rawColumns(['actions','image','icon','created_at'])
+            ->make(true);
+    }
+
+    public function getAllProducts()
+    {
+        return Datatables::of(Products::query())
+            ->editColumn('created_at',function ($product) {
+                return BBgetDateFormat($product->created_at);
+            })
+            ->addColumn('actions', function ($product) {
+                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $product->id . '">Delete</a>
+                    <a href="'.route("admin_store_products_edit",$product->id).'" class="btn btn-warning">Edit</a>';
             })->rawColumns(['actions','image','icon','created_at'])
             ->make(true);
     }

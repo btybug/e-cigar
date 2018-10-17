@@ -14,11 +14,11 @@
 @stop
 @section('content')
     <div class="tab-content tabs_content">
-        {!! Form::open(['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+        {!! Form::open(['url' => route('admin_store_new_product'), 'id' => 'post_form','files' => true]) !!}
         {!! Form::hidden('id',null) !!}
-        <div id="home" class="tab-pane fade in active">
+        <div id="home" class="tab-pane tab_info fade in active">
             <div class="text-right btn-save">
-                <button type="submit" class="btn btn-danger btn-view">View Product</button>
+                <button type="button" class="btn btn-danger btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
             @if ($errors->any())
@@ -30,154 +30,130 @@
                     </ul>
                 </div>
             @endif
-            <div class="row">
-                <div class="col-md-9">
+            <div class="row sortable-panels">
+                <div class="col-md-9 ">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group row">
-                                    <div class="col-sm-2">
-                                        <ul class="nav nav-tabs tab_lang">
-                                            <li class="active"><a data-toggle="tab" href="#infoAM">AM</a></li>
-                                            <li><a data-toggle="tab" href="#infoEN">EN</a></li>
-                                            <li><a data-toggle="tab" href="#infoRU">RU</a></li>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @if(count(get_languages()))
+                                        <ul class="nav nav-tabs tab_lang_horizontal">
+                                            @foreach(get_languages() as $language)
+                                                <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                               href="#{{ strtolower($language->code) }}">
+                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                    </a></li>
+                                            @endforeach
                                         </ul>
+                                    @endif
+
+                                    <div class="tab-content">
+                                        @if(count(get_languages()))
+                                            @foreach(get_languages() as $language)
+                                                <div id="{{ strtolower($language->code) }}"
+                                                     class="tab-pane fade  @if($loop->first) in active @endif">
+                                                    <div class="form-group">
+                                                        <label>Title</label>
+                                                        {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($model,strtolower($language->code),'title'),['class'=>'form-control']) !!}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Short Description</label>
+                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Long Description</label>
+                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
-                                    <div class="col-sm-10">
-                                        <div class="tab-content">
-                                            <div id="infoAM" class="tab-pane fade in active">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3">Info</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" placeholder="info am">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="infoEN" class="tab-pane fade">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3">Info</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" placeholder="info en">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="infoRU" class="tab-pane fade">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3">Info</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" placeholder="info ru">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-group row">
+                                        <label class="col-sm-3">Featured image</label>
+                                        <div class="col-sm-9">
+                                            {{--{!! media_button('image') !!}--}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-3">Gallery images</label>
+                                        <div class="col-sm-9">
+                                            {{--{!! media_button('gallery',null,true) !!}--}}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-10">
-                                        <div class="tab-content">
-                                            <div id="infoAM" class="tab-pane fade in active">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3">Product Name</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" placeholder="Product Name AM">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="infoEN" class="tab-pane fade">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3">Product Name</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" placeholder="Product Name EN">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="infoRU" class="tab-pane fade">
-                                                <div class="form-group row">
-                                                    <label class="col-sm-3">Product Name</label>
-                                                    <div class="col-sm-9">
-                                                        <input type="text" class="form-control" placeholder="Product Name RU">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3">Short Description</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" name="" id="" cols="30" rows="2"
-                                                  placeholder="Description"></textarea>
+                                <div class="col-sm-6">
 
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3">Long Description</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" name="" id="" cols="30" rows="10"
-                                                  placeholder="Description"></textarea>
-
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3">Featured image</label>
-                                    <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-success">Image</button>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-3">Gallery images</label>
-                                    <div class="col-sm-9">
-                                        <button type="submit" class="btn btn-success">Image</button>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
 
-                            </div>
+
                         </div>
-
-
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 ">
                     <div class="view-product-wall">
-                        <div class="status-wall wall">
+                        <div class="author-wall wall">
                             <div class="row">
-                                <label class="col-sm-3">Status</label>
+                                {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    <select name="" id="" class="form-control">
-                                        <option value="">Published</option>
-                                        <option value="">UnPublish</option>
-                                    </select>
+                                    {!! Form::select('user_id',$authors,null,
+                                                ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
                         </div>
+                        <div class="status-wall wall">
+                            <div class="row">
+                                {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    {!! Form::select('status',['published' => 'Published','draft' => 'Draft','pending' => 'Pending'],null,
+                                                ['class' => 'form-control','id'=> 'status']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    <!-- <div class="tag-wall wall">
+                            <div class="row">
+                                {{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}
+                            <div class="col-sm-9">
+{{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
+                            </div>
+                        </div>
+                    </div> -->
                         <div class="tag-wall wall">
                             <div class="row">
-                                <label class="col-sm-3">Tags</label>
+                                <label class="col-sm-3 control-label" for="input-category"><span
+                                            data-toggle="tooltip" title=""
+                                            data-original-title="Choose all products under selected category.">Tags</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" value="tag1" data-role="tagsinput" class="form-control"/>
+                                    <input type="text" name="" value="" placeholder="Tags"
+                                           id="input-tags" class="form-control" autocomplete="off">
+                                    <ul class="dropdown-menu"></ul>
+                                    <div id="coupon-category" class="well well-sm view-coupon">
+                                        <ul class="coupon-tags-list">
+                                        </ul>
+                                    </div>
+                                    <input type="hidden" class="search-hidden-input" value="" id="tags-names">
+
                                 </div>
                             </div>
                         </div>
                         <div class="category-wall wall">
-                            <h6>Category</h6>
-                            <div class="cat-checkbox">
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">Parent</label>
-                                </div>
-                                <div class="child-checkbox">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Child1</label>
+                            <div class="row">
+                                <label class="col-sm-3 control-label" for="input-category"><span
+                                            data-toggle="tooltip" title=""
+                                            data-original-title="Choose all products under selected category.">Category</span></label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="" value="" placeholder="Category"
+                                           id="input-category" class="form-control" autocomplete="off">
+                                    <ul class="dropdown-menu"></ul>
+                                    <div id="coupon-category" class="well well-sm view-coupon">
+                                        <ul class="coupon-category-list">
+                                        </ul>
                                     </div>
-                                </div>
-                                <div class="child-checkbox">
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" value="">Child2</label>
-                                    </div>
-                                </div>
-                                <div class="checkbox">
-                                    <label><input type="checkbox" value="">Parent 2</label>
+                                    <input type="hidden" class="search-hidden-input" value="" id="category-names">
+
                                 </div>
                             </div>
                         </div>
@@ -432,8 +408,7 @@
 
             $('#discount tbody').append(html);
 
-            $('#tab-discount .date').datetimepicker({
-            });
+            $('#tab-discount .date').datetimepicker({});
 
             discount_row++;
         }
