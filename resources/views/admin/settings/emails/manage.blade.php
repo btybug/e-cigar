@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
+    <p>{!! $model->title !!}</p>
     {!! Form::model($model) !!}
 
     <div class="col-md-12">
