@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
+use App\Models\ShippingZones;
 use DB;
 use PragmaRX\Countries\Package\Countries as qaq;
 use Lang;
@@ -82,7 +83,7 @@ class StoreController extends Controller
 
     public function getShippingZones()
     {
-        return $this->view('shipping_zones');
+        return $this->view('shippingZones');
     }
 
     public function getTaxRate()
@@ -147,9 +148,8 @@ class StoreController extends Controller
 
     public function saveShippingNew(Request $request)
     {
-//        $countries = new qaq();
-//        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-
+        $data = $request->except('_token');
+        ShippingZones::updateOrCreate($request->id,$data);
         return $this->view('new_shipping_zone',compact('countries'));
     }
 

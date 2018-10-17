@@ -12,7 +12,7 @@ namespace App\Models;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class shipping_zones extends Model
+class ShippingZones extends Model
 {
     /**
      * @var string
@@ -25,5 +25,10 @@ class shipping_zones extends Model
         'name', 'description', 'tax', 'percentage','country','region'
     ];
 
-
+    public static function updateOrCreate(int $id = null, array $data)
+    {
+        $model = self::find($id)??new static();
+        (isset($model->id)) ? $model->update($data) : $model->fill($data) ;
+        return $model->save();
+    }
 }

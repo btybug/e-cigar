@@ -40,7 +40,7 @@
                                     {!! Form::text('tax',null,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
                                 </div>
                                 <div class="col-sm-5">
-                                    {!! Form::select('percentage',['percentage' => 'percentage'],['percentage'],['id' => 'pecentage', 'class'=>'form-control']) !!}
+                                    {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],['percentage'],['id' => 'pecentage', 'class'=>'form-control']) !!}
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@
                                 <tfoot>
                                 <tr>
                                     <td>
-                                        {!! Form::select('country',[$countries],[],['id' => 'pecentage', 'class'=>'form-control']) !!}
+                                        {!! Form::select('country',['adfga' => 'aga', 'asdfg' => 'v'],[],['id' => 'pecentage', 'class'=>'form-control']) !!}
                                     </td>
                                     <td>
                                         <div>
