@@ -18,6 +18,15 @@
                 </ul>
             </div>
         </div>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="container-fluid"> <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="fa fa-pencil"></i> Add Geo Zone</h3>
@@ -91,11 +100,11 @@
             let val = $(this).val();
             console.log(country,val)
             AjaxCall("/admin/store/shipping-zones/find-region", {id: val,country: country}, function (res) {
-                /*if(!res.error){
+                if(!res.error){
                     res.data.forEach(item => {
                         $("#category").append(`<option>${item}</option>`)
                 })
-                })*/
+                })
             })
         });
     </script>

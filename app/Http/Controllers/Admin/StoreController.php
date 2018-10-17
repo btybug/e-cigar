@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ShippingZonePost;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\ShippingZones;
@@ -147,7 +148,7 @@ class StoreController extends Controller
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
-    public function saveShippingNew(Request $request)
+    public function saveShippingNew(ShippingZonePost $request)
     {
         $data = $request->except('_token');
         ShippingZones::updateOrCreate($request->id,$data);
