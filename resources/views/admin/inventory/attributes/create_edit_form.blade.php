@@ -4,8 +4,8 @@
 @stop
 @section('content')
 
-    <div class="inventory_attributes">
-        <div class="row">
+    <div class="inventory_attributes container-fluid">
+        <div class="row dis-flex-wrap">
             <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -49,7 +49,8 @@
                                         <div id="{{ strtolower($language->code) }}"
                                              class="tab-pane fade  @if($loop->first) in active @endif">
                                             <div class="form-group">
-                                                <label class="col-sm-2 control-label"><span data-toggle="tooltip" title=""
+                                                <label class="col-sm-2 control-label"><span data-toggle="tooltip"
+                                                                                            title=""
                                                                                             data-original-title="Attribute Name Title">Attribute Name</span></label>
                                                 <div class="col-sm-10">
                                                     {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
@@ -60,7 +61,8 @@
                                 @endif
                             </div>
                             <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip" title=""
+                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                              title=""
                                                                                               data-original-title="Icon Title">Icon</span></label>
                                 <div class="col-sm-9">
                                     {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
@@ -70,14 +72,16 @@
                                 </div>
                             </div>
                             <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip" title=""
+                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                              title=""
                                                                                               data-original-title="Available for blog Desc">Available for blog</span></label>
                                 <div class="col-sm-10">
                                     {!! Form::select("name",['Blog','Tickets','Products','Stock'],null,['class'=>'form-control']) !!}
                                 </div>
                             </div>
                             <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip" title=""
+                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                              title=""
                                                                                               data-original-title="Image Title">Image</span></label>
                                 <div class="col-sm-10">
                                     {!! media_button('image',$model) !!}
@@ -108,7 +112,30 @@
                 @endif
             </div>
             <div class="col-md-3">
+                <div class="right_col">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-7 pl-0">
+                                    Display as
+                                </div>
+                                <div class="col-sm-5 p-0">
+                                    <select name="" id="" class="form-control">
+                                        <option value="">Radio</option>
+                                        <option value="">Select menu</option>
+                                        <option value="">Multi select</option>
+                                        <option value="">Multi select tag</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="right-main-content">
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

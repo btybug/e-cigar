@@ -440,6 +440,14 @@ display: flex;
 .inventory_attributes .option-edit-form-head .btn-trash{
     align-self: flex-start;
 }
+.inventory_attributes .right_col,.inventory_attributes .right_col .panel.panel-default{
+    height: 100%;
+}
+.inventory_attributes .dis-flex-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+
     /*end inventory attributes*/
 .coupon-category-list{
     list-style: none;
