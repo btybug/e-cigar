@@ -223,3 +223,16 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
+@section('js')payment_method
+    <script>
+        $(document).ready(function () {
+            $('body').on('change','.payment_methods input[type=radio][name=payment_method]',function () {
+                if($(this).is(':checked')){
+                    $('.payment_box').slideUp();
+                    $(this).closest('li').find('.payment_box').slideDown();
+                }
+            })
+        });
+
+    </script>
+@stop
