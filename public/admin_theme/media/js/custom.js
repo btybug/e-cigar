@@ -3,6 +3,15 @@ var url = {
     getFolderCildrens: "/api/api-media/get-folder-childs",
     jsTree: "/api/api-media/jstree"
 };
+var globalArr = [];
+var multiple = false;
+var inputId = "";
+$("body").on("click", ".bestbetter-modal-open button", function() {
+    let value = $(this).attr("data-multiple");
+    id = $(this).attr("id");
+    multiple = JSON.parse(value);
+    $(".img").removeClass("active");
+});
 postSendAjax = function(url, data, success, error) {
     $.ajax({
         type: "post",
@@ -75,10 +84,8 @@ function listFolders(data) {
 function listFiles(data) {
     $.each(data, function(k, v) {
         var folder = $("#media-modal-files").html();
-        console.log(v);
         folder = folder.replace("{name}", v.real_name);
-        folder = folder.replace("{data-item-id}", v.id);
-        folder = folder.replace("{relative_path}", v.relativeUrl);
+        folder = folder.replace(/{data-item-id}/g, v.id);
         folder = folder.replace("{relative_path}", v.relativeUrl);
         folder = folder.replace(/{url}/g, v.url);
 
@@ -98,77 +105,75 @@ $(".upload-btn").click(function() {
 });
 
 $("body").on("click", ".item-for-upload", function(e) {
+    let tempStr = "";
+
+    globalArr = [];
     e.preventDefault();
-    $(".item-for-upload").removeClass("active");
-    $(this).addClass("active");
+    if (multiple) {
+        $(this)
+            .closest(".img")
+            .toggleClass("active");
+    } else {
+        $(".img").removeClass("active");
+        $(this)
+            .closest(".img")
+            .addClass("active");
+    }
+
+    $(".img.active").each(function() {
+        let value = $(this)
+            .find(".item-for-upload")
+            .attr("data-relative-url");
+        tempStr += value + ",";
+        globalArr.push(value);
+    });
     $("body")
         .find(".file-realtive-url")
-        .val($(this).attr("data-relative-url"));
+        .val(tempStr);
 });
+const makePreviewImgThumb = (item, multiple) => {
+    return `<div class="img-thumb-container"  style="margin: 10px;"><img src="${item}" width=200 > <span data-src="${item}" class="remove-thumb-img" data-is-multiple="${multiple}"><i  class="fa fa-trash"></i> </span></div>`;
+};
 $("body").on("click", ".open-btn", function(e) {
     e.preventDefault();
-    let value = $("body")
-        .find(".file-realtive-url")
-        .val();
-    $("body")
-        .find(".modal-input-path")
-        .val(value);
+
+    if (multiple) {
+        let realInput = $(`.${id}`);
+        let name = realInput.attr("name");
+        let parrent = realInput.parent();
+        globalArr.forEach(item => {
+            parrent.append(
+                `<input type="hidden" class="multipale-hidden-inputs" name="${name}" value="${item}">`
+            );
+            $(".multiple-image-placeholder").append(
+                makePreviewImgThumb(item, multiple)
+            );
+        });
+    } else {
+        $(`.${id}`).val(globalArr[0]);
+    }
+
     $("#myModal").modal("hide");
 });
-// $("#input-ru").fileinput({
-//     browseLabel: 'Select Folder...',
-//     previewFileIcon: '<i class="fa fa-file"></i>',
-//     allowedPreviewTypes: null, // set to empty, null or false to disable preview for all types
-//     previewFileIconSettings: {
-//         'doc': '<i class="fa fa-file-word-o text-primary"></i>',
-//         'xls': '<i class="fa fa-file-excel-o text-success"></i>',
-//         'ppt': '<i class="fa fa-file-powerpoint-o text-danger"></i>',
-//         'jpg': '<i class="fa fa-file-photo-o text-warning"></i>',
-//         'pdf': '<i class="fa fa-file-pdf-o text-danger"></i>',
-//         'zip': '<i class="fa fa-file-archive-o text-muted"></i>',
-//         'htm': '<i class="fa fa-file-code-o text-info"></i>',
-//         'txt': '<i class="fa fa-file-text-o text-info"></i>',
-//         'mov': '<i class="fa fa-file-movie-o text-warning"></i>',
-//         'mp3': '<i class="fa fa-file-audio-o text-warning"></i>',
-//     },
-//     previewFileExtSettings: {
-//         'doc': function(ext) {
-//             return ext.match(/(doc|docx)$/i);
-//         },
-//         'xls': function(ext) {
-//             return ext.match(/(xls|xlsx)$/i);
-//         },
-//         'ppt': function(ext) {
-//             return ext.match(/(ppt|pptx)$/i);
-//         },
-//         'jpg': function(ext) {
-//             return ext.match(/(jp?g|png|gif|bmp)$/i);
-//         },
-//         'zip': function(ext) {
-//             return ext.match(/(zip|rar|tar|gzip|gz|7z)$/i);
-//         },
-//         'htm': function(ext) {
-//             return ext.match(/(php|js|css|htm|html)$/i);
-//         },
-//         'txt': function(ext) {
-//             return ext.match(/(txt|ini|md)$/i);
-//         },
-//         'mov': function(ext) {
-//             return ext.match(/(avi|mpg|mkv|mov|mp4|3gp|webm|wmv)$/i);
-//         },
-//         'mp3': function(ext) {
-//             return ext.match(/(mp3|wav)$/i);
-//         },
-//     }
-// });
 
-$("body").on("click", ".remove-item-for-media", function() {
-    let id = $(this).attr("data-item-id");
-    postSendAjax(
-        "/api/api-media/transfer-item",
-        { folder_id: 2, item_id: id, slug: "trush" },
-        function(res) {
-            console.log(res);
+$("body").on("click", ".remove-thumb-img", function(e) {
+    e.preventDefault();
+    let src = $(this).attr("data-src");
+    $(".multipale-hidden-inputs").each(function() {
+        if ($(this).val() === src) {
+            $(this).remove();
         }
-    );
+    });
+    $(this)
+        .closest(".img-thumb-container")
+        .remove();
 });
+
+// $("body").on("click", ".remove-item-for-media", function() {
+//     let id = $(this).attr("data-item-id");
+//     postSendAjax(
+//         "/api/api-media/transfer-item",
+//         { folder_id: 2, item_id: id, slug: "trush" },
+//         function(res) {}
+//     );
+// });

@@ -23,4 +23,9 @@
             Modal
         </button>
     </div>
+    @if($multiple)
+    <div class="multiple-image-placeholder">
+
+    </div>
+    @endif
 </div>

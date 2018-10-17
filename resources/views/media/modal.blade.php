@@ -89,7 +89,7 @@
         <a href="#" >
             <img src="{url}" alt="">
         </a>
-        <ul class="list-unstyled list-inline text-center icons item-for-upload" data-relative-url="{relative_path}">
+        <ul class="list-unstyled list-inline text-center icons item-for-upload" data-item-id={data-item-id} data-relative-url="{relative_path}">
             <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
             <li class="text-center">
                 <a href="{url}" target="_blank" data-lightbox="folder-set" data-title="{name}">
