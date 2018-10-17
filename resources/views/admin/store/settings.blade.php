@@ -3,6 +3,7 @@
 
 @stop
 @section('content')
+{{--    {!! dd($shipping_zones->toArray()) !!}--}}
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item active">
@@ -135,8 +136,8 @@
                 </table>
                 <table class="table table-responsive table--store-settings">
                 <tr class="bg-my-light-blue">
-                        <td>Shipping Zone - <span id="shipzone">Armenia</span></td>
-                        <td colspan="5">Tax Rate - <span id="taxzone">ArmeniaVaT20</span></td>
+                        <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
+                        <td colspan="5">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
                     </tr>
                     <tbody>
                     
@@ -224,6 +225,9 @@
 
 @section('js')
 <script>
+    let datax = `@foreach($shipping_zones as $zone)
+             <option value="{!! $zone->tax !!}">{!! $zone->name !!}</option>
+                @endforeach`
 $("body").on("click", ".add-new-option", function () {
     const id = Date.now()
    let html = `<tr class="container-for-table-remove">
@@ -233,7 +237,7 @@ $("body").on("click", ".add-new-option", function () {
    <td>
       <select id="ShippingZones" class="form-control">
          <option selected="">Shipping Zones</option>
-         <option>...</option>
+         ${datax}
       </select>
    </td>
    <td class="text-right">
@@ -243,8 +247,8 @@ $("body").on("click", ".add-new-option", function () {
 let html2 = `
 <table class="table table-responsive table--store-settings container-for-table-remove">
                 <tr class="bg-my-light-blue">
-                <td>Shipping Zone - <span>Armenia</span></td>
-                <td colspan="3">Tax Rate - <span>ArmeniaVaT20</span></td>
+                <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
+                <td colspan="3">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
                 <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
                     </tr>
                     <tbody>
