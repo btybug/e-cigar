@@ -50,11 +50,12 @@
                                 <tr>
                                     <td>
                                         <select id="country" class="form-control">
-                                            <option selected="">Choose...</option>
-                                            <option>...</option>
-                                            <option>...</option>
-                                            <option>...</option>
-                                            <option>...</option>
+                                    @if(isset($countries) && count($countries))
+                                                <option selected="">Choose...</option>
+                                            @foreach($countries as $country)
+                                                <option>{!! $country !!}</option>
+                                            @endforeach
+                                    @endif
                                         </select>
                                     </td>
                                     <td class="text-left">
