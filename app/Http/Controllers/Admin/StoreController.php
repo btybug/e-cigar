@@ -134,7 +134,7 @@ class StoreController extends Controller
 
     public function getregions(Countries $countries)
     {
-        $countries = $countries->all()->pluck('name.common','name.common','cca3')->toArray();
+        dd($countries);
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
