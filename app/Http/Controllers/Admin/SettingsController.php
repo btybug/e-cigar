@@ -31,8 +31,8 @@ class SettingsController extends Controller
 
     public function getLanguagesNew()
     {
-
-        $countries = Countries::pluck('name','code')->all();
+        $model= null;
+        $countries = Languages::pluck('name','code')->all();
 
         return $this->view('new_languages',compact(['model','countries']));
     }
@@ -71,16 +71,6 @@ class SettingsController extends Controller
         $data=$request->all();
         MailTemplates::updateOrCreate($request->id,$data);
         return redirect()->route('admin_mail_templates');
-    }
-
-    public function postCountryGetWithCode(Request $request)
-    {
-       $country = Countries::where('code',$request->code)->first();
-       if($country) {
-           return \Response::json(['error' => false,'country' => $country]);
-       }
-
-        return \Response::json(['error' => true,'message' => "Error"]);
     }
 
     public function postLanguageGetWithCode(Request $request)

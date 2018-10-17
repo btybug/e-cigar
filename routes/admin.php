@@ -25,6 +25,7 @@ Route::group(['prefix' => 'settings'], function () {
             Route::get('/{id}', 'Admin\SettingsController@getLanguagesEdit')->name('admin_settings_languages_edit');
         });
 
+        Route::post('/get-languages', 'Admin\SettingsController@postLanguageGetWithCode')->name('post_admin_settings_get_languages');
     });
     Route::group(['prefix' => 'emails'], function () {
         Route::get('/', 'Admin\SettingsController@getEmails')->name('admin_emails');

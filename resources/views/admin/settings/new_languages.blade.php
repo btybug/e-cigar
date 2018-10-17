@@ -114,12 +114,12 @@
     <script>
         $("body").on("change","#code", function (e) {
            var code = $(this).val();
-            AjaxCall("{!! route('post_admin_settings_get_country') !!}", {code, code}, function(res) {
+            AjaxCall("{!! route('post_admin_settings_get_languages') !!}", {code, code}, function(res) {
                 if(!res.error){
-                    $("#lang-name").val(res.country.name);
-                    $("#original_name").val(res.country.native);
-                    $(".original_name").html(res.country.native);
-                    $(".lang-place").html(`<span class="flag-icon flag-icon-${res.country.code.toLowerCase()}"></span>`);
+                    $("#lang-name").val(res.data.name);
+                    $("#original_name").val(res.data.native);
+                    $(".original_name").html(res.data.native);
+                    $(".lang-place").html(`<span class="flag-icon flag-icon-${res.data.code.toLowerCase()}"></span>`);
                 };
             });
         })
