@@ -128,7 +128,7 @@ class StoreController extends Controller
 
     public function newShippingZones()
     {
-        $countries = Countries::all();
+        $countries = [];
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
