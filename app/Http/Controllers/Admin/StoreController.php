@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use DB;
-use PragmaRX\Countries\Package\Countries;
+use PragmaRX\Countries\Package\Countries as qaq;
 use Lang;
 use Illuminate\Http\Request;
 
@@ -134,7 +134,7 @@ class StoreController extends Controller
 
     public function getShippingNew()
     {
-        $countries = new Countries();
+        $countries = new qaq();
         $countries = $countries->all()->pluck('name.common','name.common')->toArray();
         return $this->view('new_shipping_zone',compact('countries'));
     }
