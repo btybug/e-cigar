@@ -447,7 +447,9 @@ display: flex;
     display: flex;
     flex-wrap: wrap;
 }
-
+.inventory_attributes .right_col .d-none{
+    display: none !important;
+}
     /*end inventory attributes*/
 .coupon-category-list{
     list-style: none;

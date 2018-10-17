@@ -120,18 +120,43 @@
                                     Display as
                                 </div>
                                 <div class="col-sm-5 p-0">
-                                    <select name="" id="" class="form-control">
-                                        <option value="">Radio</option>
-                                        <option value="">Select menu</option>
-                                        <option value="">Multi select</option>
-                                        <option value="">Multi select tag</option>
+                                    <select name="" id="" class="form-control display_as-select">
+                                        <option value="radio">Radio</option>
+                                        <option value="select_menu">Select menu</option>
+                                        <option value="multi_select">Multi select</option>
+                                        <option value="multi_select_tag">Multi select tag</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="right-main-content">
-
+                                <div class="display-as-wall " data-displayas="radio">
+                                    <h3>Courir</h3>
+                                    @if(count($model->children))
+                                        @foreach($model->children as $item)
+                                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                <div class="col-sm-1">
+                                                    <input type="checkbox" id="{!! $item->id !!}">
+                                                </div>
+                                                <div class="col-sm-11">
+                                                    <label for="{!! $item->id !!}"> {!! $item->name !!}</label>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        No Options
+                                    @endif
+                                </div>
+                                <div class="display-as-wall d-none" data-displayas="select_menu">
+                                    2
+                                </div>
+                                <div class="display-as-wall d-none" data-displayas="multi_select">
+                                    3
+                                </div>
+                                <div class="display-as-wall d-none" data-displayas="multi_select_tag">
+                                    4
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -143,6 +168,13 @@
 @section('js')
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
+
+        $('body').on('change', '.inventory_attributes .display_as-select', function () {
+                $(".display-as-wall").addClass("d-none")
+                console.log($(this).val())
+                $(`[data-displayas="${$(this).val()}"]`).removeClass("d-none")
+
+        });
         $('.icon-picker').iconpicker();
         $("body").on("click", ".iconpicker-item", function () {
             let value = $(".icon-picker").val()
@@ -165,11 +197,11 @@
             AjaxCall("/admin/inventory/attributes/options-delete", {id: id}, function (res) {
                 if (!res.error) {
                     $(".options-form").html('');
-                     $("body").find('.attr-option').each(function () {
-                         if ($(this).attr('data-item-id') == id)  {
-                             $(this).remove()
-                         }
-                     })
+                    $("body").find('.attr-option').each(function () {
+                        if ($(this).attr('data-item-id') == id) {
+                            $(this).remove()
+                        }
+                    })
                     // $('.icon-picker').iconpicker();
                 }
             });
