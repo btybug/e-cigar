@@ -132,15 +132,15 @@
                         <div class="panel-body">
                             <div class="right-main-content">
                                 <div class="display-as-wall " data-displayas="radio">
-                                    <h3>Courir</h3>
+                                    <h3>Courier</h3>
                                     @if(count($model->children))
                                         @foreach($model->children as $item)
                                             <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
                                                 <div class="col-sm-1">
-                                                    <input type="checkbox" id="{!! $item->id !!}">
+                                                    <input type="radio" id="radio-{!! $item->id !!}" name="radio_item">
                                                 </div>
                                                 <div class="col-sm-11">
-                                                    <label for="{!! $item->id !!}"> {!! $item->name !!}</label>
+                                                    <label for="radio-{!! $item->id !!}"> {!! $item->name !!}</label>
                                                 </div>
                                             </div>
                                         @endforeach
@@ -149,13 +149,52 @@
                                     @endif
                                 </div>
                                 <div class="display-as-wall d-none" data-displayas="select_menu">
-                                    2
+                                    <h3>Courier</h3>
+                                    <select name="" id="" class="form-control">
+                                        @if(count($model->children))
+                                            @foreach($model->children as $item)
+                                                <option class="form-group attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                    {!! $item->name !!}
+
+                                                </option>
+                                            @endforeach
+                                        @else
+                                            No Options
+                                        @endif
+                                    </select>
+
                                 </div>
                                 <div class="display-as-wall d-none" data-displayas="multi_select">
-                                    3
+                                    <h3>Courier</h3>
+                                    @if(count($model->children))
+                                        @foreach($model->children as $item)
+                                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                <div class="col-sm-1">
+                                                    <input type="checkbox" id="checkbox-{!! $item->id !!}">
+                                                </div>
+                                                <div class="col-sm-11">
+                                                    <label for="checkbox-{!! $item->id !!}"> {!! $item->name !!}</label>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        No Options
+                                    @endif
                                 </div>
                                 <div class="display-as-wall d-none" data-displayas="multi_select_tag">
-                                    4
+                                    <h3>Courier</h3>
+                                    <div class="multi_select_tag_wall">
+                                        @if(count($model->children))
+                                            @foreach($model->children as $item)
+                                                <div class="form-group attr-option" data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                    <span class="label label-primary">{!! $item->name !!}</span>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            No Options
+                                        @endif
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
