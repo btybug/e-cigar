@@ -163,7 +163,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="basic-center basic-wall">
-                                        Strawbery
+                                        
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -183,7 +183,7 @@
                                             <ul>
                                                 @if(count($attributes))
                                                     @foreach($attributes as $attribute)
-                                                        <li data-id="{{ $attribute->id }}"><a
+                                                        <li data-id="{{ $attribute->id }}" class="option-elm"><a
                                                                     href="#">{{ $attribute->name }}</a></li>
                                                     @endforeach
                                                 @endif
@@ -197,7 +197,10 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="basic-center basic-wall">
-                                        Strawbery
+                                        <ul class="choset-attributes">
+
+
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -227,4 +230,57 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
+<script>
+    window.AjaxCall = function postSendAjax(url, data, success, error) {
+            $.ajax({
+                type: "post",
+                url: url,
+                cache: false,
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function(data) {
+                    if (success) {
+                        success(data);
+                    }
+                    return data;
+                },
+                error: function(errorThrown) {
+                    if (error) {
+                        error(errorThrown);
+                    }
+                    return errorThrown;
+                }
+            });
+        };
+$("body").on("click", ".option-elm", function(){
+    let id = $(this).attr("data-id")
+    AjaxCall("/admin/inventory/attributes/get-attr", {id}, function(res){
+        if (!res.error) {
+            $(".list").empty()
+            res.data.forEach(item => {
+                let html = `<li class="attributes-item"><a href="#">${item.name}</a></li>`
+                $(".list").append(html)
+            })
+        }
+    })
+})
+$("body").on("click", ".attributes-item", function(){
+    // AJax petqa
+    let text = $(this).children().text()
+
+    $(".choset-attributes").append(`<li>${text} <span class="restore-item"><i class="fa fa-trash"></i></span> </li>`)
+    $(this).remove()
+})
+
+$("body").on("click", ".restore-item", function(){
+    let text = $(this).parent().text()
+    $(this).parent().remove()
+    let html = `<li class="attributes-item"><a href="#">${text}</a></li>`
+                $(".list").append(html)
+})
+
+</script>
 @stop
