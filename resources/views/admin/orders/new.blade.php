@@ -6,5 +6,5 @@
 
 @stop
 @section('js')
-  
+
 @stop

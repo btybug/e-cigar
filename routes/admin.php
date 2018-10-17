@@ -123,7 +123,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/options/{id}/save', 'Admin\AttributesController@postAttributesOptions')->name('admin_store_attributes_options');
         Route::get('/edit/{id}', 'Admin\AttributesController@getAttributesEdit')->name('admin_store_attributes_edit');
         Route::post('/edit/{id}', 'Admin\AttributesController@postAttributesEdit')->name('admin_store_attributes_post_edit');
-
+        Route::post('/get-attr', 'Admin\AttributesController@getOptions')->name('admin_store_attributes_options_by_id');
         Route::post('/delete', 'Admin\AttributesController@postAttributesDelete')->name('admin_store_attributes_delete');
     });
 

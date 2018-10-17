@@ -83,4 +83,14 @@ class AttributesController extends Controller
 
         return \Response::json(['error' => true]);
     }
+
+    public function getOptions(Request $request)
+    {
+        $attr = Attributes::find($request->id);
+        if($attr){
+            return \Response::json(['error' => false,'data' => $attr->children]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
 }
