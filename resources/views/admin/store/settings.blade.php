@@ -196,6 +196,11 @@
                             <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="5" class="text-center table--store-settings_add-options">
+                            <span><i class="fa fa-plus"></i></span> Add more option
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -208,6 +213,7 @@
 @stop
 
 @section('js')
+
 @stop
 
 

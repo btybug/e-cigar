@@ -157,6 +157,10 @@ div.dataTables_wrapper div.dataTables_filter input {
 .table.table--store-settings .table--store-settings_vert-top {
     vertical-align: top;
 }
+
+.table--store-settings_add-options {
+    cursor: pointer;
+}
 /*End admin store settings*/
 
 /*create Email Templates*/
