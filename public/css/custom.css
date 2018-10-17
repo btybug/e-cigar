@@ -20,7 +20,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    border-top: 2px solid #424242;
+    /*border-top: 2px solid #424242;*/
 }
 
 .admin-profile-left li a {
@@ -566,11 +566,31 @@ display: flex;
     padding:25px 0;
 }
 /*end basic details tab*/
-
-
-
-
-
+.stock-new-tab .logistic-right{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.stock-new-tab .logistic-right .head{
+    padding:10px 15px;
+    border-bottom: 1px solid #ccc;
+}
+.stock-new-tab .logistic-right .logistic-right-content{
+    padding: 20px;
+}
+.stock-new-tab .logistic-right .sumbit-logistic{
+    margin-top:auto;
+    padding: 20px;
+}
+.stock-price-tab {
+    padding: 25px 0;
+}
+.stock-price-tab .table.table-striped{
+    background-color: #fff !important;
+}
+.stock-price-tab .table-bordered > tbody > tr > td, .stock-price-tab .table-bordered > tbody > tr > th, .stock-price-tab .table-bordered > tfoot > tr > td, .stock-price-tab .table-bordered > tfoot > tr > th, .stock-price-tab .table-bordered > thead > tr > td, .stock-price-tab .table-bordered > thead > tr > th {
+    border: 1px solid #ddd;
+}
 
 
 
