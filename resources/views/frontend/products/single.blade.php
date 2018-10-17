@@ -13,17 +13,18 @@
      <ul class="single-product_btns text-right">
       <li class="mb-2"><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
       <li class="single-product_btns_share"><a href="#" class="btn btn-outline-dark">share</a>
-       <ul class="share-social d-flex">
-        <li>
-         <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-        </li>
-        <li>
-         <a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
-        </li>
-        <li>
-         <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-        </li>
-       </ul>
+       <div id="share" class="share-social"></div>
+       {{--<ul class="share-social d-flex">--}}
+        {{--<li>--}}
+         {{--<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+         {{--<a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+         {{--<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>--}}
+        {{--</li>--}}
+       {{--</ul>--}}
       </li>
      </ul>
     </div>
@@ -62,71 +63,15 @@
  </div>
 @stop
 @section('css')
- <style>
-  .single-product_btns li .btn {
-   min-width: 150px;
-  }
-
-  .single-product_btns_share {
-   position: relative;
-   display: inline-block;
-  }
-
-  .single-product_btns_share .share-social {
-   top: 100%;
-   right: 0;
-   position: absolute;
-   padding: 10px 60px;
-   background: #fff;
-   box-shadow: 0 5px 20px rgba(0,0,0,.2);
-   opacity:0;
-   visibility: hidden;
-
-  }
-
-  .single-product_btns_share .share-social i{
-   font-size: 18px;
-
-  }
-
-
-  .single-product_btns_share .share-social li{
-   margin-right: 10px;
-
-  }
-
-
-  .single-product_btns_share .share-social li:last-child {
-   margin-right: 0;
-
-  }
-
-  .single-product_btns_share:hover .share-social {
-   opacity:1;
-   visibility: visible;
-  }
-
-  .single-product_btns_share .share-social:before {
-   position: absolute;
-   top: -10px;
-   right: 10px;
-   content: '';
-   display: inline-block;
-   width: 0;
-   height: 0;
-   border-style: solid;
-   border-width: 0 5px 10px 5px;
-   border-color: transparent transparent #fff transparent;
-  }
-
-
-  .single-product_btns_share:hover > a {
-   background: #212529;
-   color: #fff;
-  }
- </style>
+ <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+ <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
 @stop
 
 @section("js")
-
+ <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+ <script>
+ $("#share").jsSocials({
+ shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+ });
+ </script>
 @stop
