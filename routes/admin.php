@@ -13,7 +13,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
     });
     Route::group(['prefix' => 'store'], function () {
-        Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+        Route::get('/general', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+        Route::get('/shipping', 'Admin\SettingsController@getStoreShipping')->name('admin_settings_shipping');
     });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');

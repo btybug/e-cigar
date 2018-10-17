@@ -120,4 +120,9 @@ class SettingsController extends Controller
     {
         return $this->view('store.index');
     }
+
+    public function getStoreShipping()
+    {
+        return $this->view('store.shipping');
+    }
 }
