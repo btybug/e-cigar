@@ -22,7 +22,9 @@
                         <td>
                             <select id="ShippingZones" class="form-control">
                                 <option selected>Shipping Zones</option>
-                                <option>...</option>
+                                @foreach($shipping_zones as $zone)
+                                    <option value="{!! $zone->tax !!}" >{!! $zone->name !!}</option>
+                                @endforeach
                             </select>
                         </td>
                         <td class="text-right">
@@ -33,8 +35,8 @@
                 </table>
                 <table class="table table-responsive table--store-settings">
                 <tr class="bg-my-light-blue">
-                        <td>Shipping Zone - <span>Armenia</span></td>
-                        <td colspan="5">Tax Rate - <span>ArmeniaVaT20</span></td>
+                        <td>Shipping Zone - <span id="shipzone">Armenia</span></td>
+                        <td colspan="5">Tax Rate - <span id="taxzone">ArmeniaVaT20</span></td>
                     </tr>
                     <tbody>
                     
@@ -320,6 +322,14 @@ $("body").on("click", ".add-new-order-filed", function (e) {
 $(this).closest("table").append(html)
 })
 
+    $('body').on('change','#ShippingZones',function (e) {
+        e.preventDefault();
+       let val = $(this).val();
+       let text = $(`#ShippingZones option[value=${val}]`).text();
+       $('#shipzone').text(text);
+       $('#taxzone').text(val);
+
+    });
 </script>
 @stop
 

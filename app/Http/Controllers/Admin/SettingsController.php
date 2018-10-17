@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Languages;
 use App\Models\MailTemplates;
+use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -123,6 +124,7 @@ class SettingsController extends Controller
 
     public function getStoreShipping()
     {
-        return $this->view('store.shipping');
+        $shipping_zones = ShippingZones::all();
+        return $this->view('store.shipping',compact('shipping_zones'));
     }
 }
