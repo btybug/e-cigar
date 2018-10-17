@@ -13,7 +13,7 @@ class CreateShippingZonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('shippingZones', function (Blueprint $table) {
+        Schema::create('shipping_zones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');

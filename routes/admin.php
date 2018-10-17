@@ -72,6 +72,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/new', 'Admin\StoreController@getShippingNew')->name('admin_store_shipping_zones_new');
         Route::get('/edit-shipping-zone/{id}', 'Admin\StoreController@editShippingZone')->name('admin_store_shipping_zones_edit');
         Route::post('/save-shipping-zone', 'Admin\StoreController@saveShippingNew')->name('admin_store_shipping_zone_save');
+        Route::post('/find-region', 'Admin\StoreController@findRegion')->name('admin_store_shipping_zone_region_find');
     });
 
     Route::group(['prefix' => 'tax-rate'], function () {

@@ -26,22 +26,22 @@
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-name">Geo Zone Name</label>
                             <div class="col-sm-10">
-                                {!! Form::text('name',$shipping_zone->name,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
+                                {!! Form::text('name',$shipping_zone->name??null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group required">
                             <label class="col-sm-2 control-label" for="input-description">Description</label>
                             <div class="col-sm-10">
-                                {!! Form::text('description',$shipping_zone->description,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
+                                {!! Form::text('description',$shipping_zone->description??null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
                             </div>
                         </div>
                             <div class="form-group row required">
                                 <label class="col-sm-2 control-label" for="input-tax">Tax</label>
                                 <div class="col-sm-5">
-                                    {!! Form::text('tax',$shipping_zone->tax,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
+                                    {!! Form::text('tax',$shipping_zone->tax??null,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
                                 </div>
                                 <div class="col-sm-5">
-                                    {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],[$shipping_zone->percentage],['id' => 'pecentage', 'class'=>'form-control']) !!}
+                                    {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],[$shipping_zone->percentage??null],['id' => 'pecentage', 'class'=>'form-control']) !!}
                                 </div>
                             </div>
 
@@ -60,11 +60,11 @@
                                 <tfoot>
                                 <tr>
                                     <td>
-                                        {!! Form::select('country',[$countries],[$shipping_zone->country],['id' => 'pecentage', 'class'=>'form-control']) !!}
+                                        {!! Form::select('country',[$countries],[$shipping_zone->country??null],['id' => 'country', 'class'=>'form-control']) !!}
                                     </td>
                                     <td>
                                         <div>
-                                            {!! Form::text('region',$shipping_zone->region,['placeholder'=>'Region','id' => 'input-region','class' => 'form-control','autocomplete' => 'off']) !!}
+                                            {!! Form::text('region',$shipping_zone->region??null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
                                             <ul class="dropdown-menu"></ul>
                                             <div id="coupon-category" class="well well-sm view-coupon">
                                                 <ul class="coupon-category-list">
@@ -85,17 +85,18 @@
 @stop
 @section('js')
     <script>
-       /* $("body").on("change", "#country", function (e) {
+        $("body").on("change", "#region", function (e) {
             e.preventDefault()
-            let val = $(this).val()
-            AjaxCall("/url", {id: val}, function (res) {
-                if(!res.error){
+            let country = $('#country').val();
+            let val = $(this).val();
+            console.log(country,val)
+            AjaxCall("/admin/store/shipping-zones/find-region", {id: val,country: country}, function (res) {
+                /*if(!res.error){
                     res.data.forEach(item => {
                         $("#category").append(`<option>${item}</option>`)
                 })
-                }
+                })*/
             })
-        })*/
-
+        });
     </script>
 @stop

@@ -161,6 +161,21 @@ class StoreController extends Controller
         return $this->view('new_shipping_zone',compact('countries','shipping_zone'));
     }
 
+    public function findRegion(Request $request)
+    {
+        $coontries = new Countries();
+        $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal');
+        foreach ($regions as $key => $region)
+        {
+            $posible = array();
+            if (strpos($region, $request->id) !=false) {
+                   /* $posible[$key] = $region;*/
+                   dd($region);
+            }
+        }
+        dd($regions);
+    }
+
 
 
 
