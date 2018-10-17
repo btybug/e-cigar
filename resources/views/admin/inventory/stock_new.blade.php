@@ -62,8 +62,11 @@
                                     <div class="basic-left basic-wall">
                                         <div class="all-list">
                                             <ul>
-                                                <li><a href="#">Flavour</a></li>
-                                                <li><a href="#">Flavour</a></li>
+                                                @if(count($attributes))
+                                                    @foreach($attributes as $attribute)
+                                                        <li data-id="{{ $attribute->id }}"><a href="#">{{ $attribute->name }}</a></li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
