@@ -165,7 +165,7 @@ class StoreController extends Controller
     public function findRegion(Request $request)
     {
         $coontries = new Countries();
-        $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal');
+        $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal')->toArray();
         foreach ($regions as $key => $region)
         {
             $posible = array();

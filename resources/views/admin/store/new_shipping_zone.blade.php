@@ -76,7 +76,7 @@
                                             {!! Form::text('region',$shipping_zone->region??null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
                                             <ul class="dropdown-menu"></ul>
                                             <div id="coupon-category" class="well well-sm view-coupon">
-                                                <ul class="coupon-category-list">
+                                                <ul class="coupon-category-list" style="list-style: none">
                                                 </ul>
                                             </div>
                                             <input type="hidden" class="search-hidden-input" value="" id="category-names">
@@ -94,18 +94,32 @@
 @stop
 @section('js')
     <script>
-        $("body").on("change", "#region", function (e) {
+        $("body").on("input", "#region", function (e) {
             e.preventDefault()
             let country = $('#country').val();
             let val = $(this).val();
-            console.log(country,val)
+            $("#coupon-category").show()
+
             AjaxCall("/admin/store/shipping-zones/find-region", {id: val,country: country}, function (res) {
                 if(!res.error){
-                    res.data.forEach(item => {
-                        $("#category").append(`<option>${item}</option>`)
-                })
-                })
+                    $('.coupon-category-list').empty()
+                    console.log(res)
+                    Object.values(res.data).forEach(item => {
+                        if(item !== null){
+                        $('.coupon-category-list').append(`<li class="region-item">${item}</li>`);
+
+                        }
+                    })
+                }
             })
-        });
+        })
+
+        $("body").on("click", ".region-item", function(){
+            let value = $(this).text()
+            $("#region").val(value)
+            $('.coupon-category-list').empty()
+            $("#coupon-category").hide()
+
+        })
     </script>
 @stop
