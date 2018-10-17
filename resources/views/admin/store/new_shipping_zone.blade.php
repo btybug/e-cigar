@@ -96,7 +96,7 @@
 @stop
 @section('js')
     <script>
-        $("body").on("change", "#country", function (e) {
+       /* $("body").on("change", "#country", function (e) {
             e.preventDefault()
             let val = $(this).val()
             AjaxCall("/url", {id: val}, function (res) {
@@ -106,7 +106,7 @@
                 })
                 }
             })
-        })
+        })*/
 
     </script>
 @stop
