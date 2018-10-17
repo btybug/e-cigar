@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Attributes;
 
 class InventoryController extends Controller
 {
@@ -22,6 +23,7 @@ class InventoryController extends Controller
 
     public function stockNew()
     {
-        return $this->view('stock_new');
+        $attributes = Attributes::all();
+        return $this->view('stock_new',compact(['attributes']));
     }
 }
