@@ -9,6 +9,12 @@
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 
 Route::group(['prefix' => 'settings'], function () {
+    Route::group(['prefix' => 'general'], function () {
+        Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
+    });
+    Route::group(['prefix' => 'store'], function () {
+        Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+    });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
         Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
@@ -17,12 +23,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::group(['prefix' => 'edit'], function () {
             Route::get('/{id}', 'Admin\SettingsController@getLanguagesEdit')->name('admin_settings_languages_edit');
         });
-        Route::group(['prefix' => 'general'], function () {
-            Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
-        });
-        Route::group(['prefix' => 'store'], function () {
-            Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
-        });
+
     });
     Route::group(['prefix' => 'emails'], function () {
         Route::get('/', 'Admin\SettingsController@getEmails')->name('admin_emails');
