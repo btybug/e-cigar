@@ -177,7 +177,10 @@ class StoreController extends Controller
        return \Response::json(['error'=>false,'data'=>$posible]);
     }
 
+    public function getDatatable(Request $request)
+    {
 
+    }
 
 
 }
