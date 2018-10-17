@@ -10,7 +10,16 @@
             <button type="submit" class="btn btn-info">Save</button>
         </div>
     </div>
+    <div class="col-md-8">
+        <div class="form-group row">
+            {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
+            <div class="col-sm-9">
+                {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
+            </div>
+        </div>
+    </div>
     <div class="tab-content tabs_content col-md-8">
+
         <div id="home" class="tab-pane tab_info fade in active">
 
             <div class="row sortable-panels">
@@ -82,6 +91,37 @@
             <thead>
             <tr class="table--email-temp_top">
                 <th colspan="3">Email Field Details</th>
+            </tr>
+            <tr class="table--email-temp_bottom">
+                <th></th>
+                <th>Property</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                <td>site_name</td>
+                <td>Your site name</td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                <td>site_url</td>
+                <td>Your site URL</td>
+            </tr>
+            <tr>
+                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                <td>ticket_user</td>
+                <td>Name of ticket user</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <table class="table table-striped table--email-temp">
+            <thead>
+            <tr class="table--email-temp_top">
+                <th colspan="3">Specific Data</th>
             </tr>
             <tr class="table--email-temp_bottom">
                 <th></th>
