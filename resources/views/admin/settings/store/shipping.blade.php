@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
                 <a class="nav-link" id="general-tab"  href="{!! route('admin_settings_store') !!}" role="tab" aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
