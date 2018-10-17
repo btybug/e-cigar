@@ -9,9 +9,10 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Common\Translatable;
+use App\Models\Translations\EmailsTranslations;
 
-class Emails extends Model
+class Emails extends Translatable
 {
     /**
      * @var string
@@ -20,12 +21,8 @@ class Emails extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'title', 'slug', 'mail_template_id','description','is_core'
-    ];
+    public $translationModel = EmailsTranslations::class;
+    protected $fillable = ['slug'];
+    public $translatedAttributes = ['title', 'subject', 'content'];
 
-    public function template()
-    {
-        return $this->belongsTo(MailTemplates::class,'mail_template_id');
-    }
 }

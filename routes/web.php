@@ -14,8 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::post('/get-comments/{id}', function ($id) {
-    $product = \App\Models\Posts::find($id);
+Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
+    $product = \App\Models\Posts::find($request->id);
     return ['error'=>false,'data'=>$product->makeReady()->toArray()];
 });
 

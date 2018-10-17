@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Emails;
 use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\ShippingZones;
@@ -60,9 +61,9 @@ class SettingsController extends Controller
     {
         $model=null;
         if($id){
-            $model=MailTemplates::findOrFail($id);
+            $model=Emails::findOrFail($id);
         }
-        return $this->view('create_mail_templates',compact('model'));
+        return $this->view('emails.manage',compact('model'));
     }
 
     public function postCreateOrUpdate(Request $request)
@@ -107,11 +108,7 @@ class SettingsController extends Controller
        return $this->view('emails.index');
     }
 
-    public function getEmailsManage()
-    {
-        $templates=MailTemplates::all()->pluck('title','id');
-        return $this->view('emails.manage',compact('templates'));
-    }
+
 
     public function getGeneral()
     {

@@ -8,7 +8,7 @@
         <div class="col-xs-12">
             <div class="col-md-6 pull-left"><h2>Emails</h2></div>
         </div>
-        <div><a class="btn btn-info pull-right" href="{!! route('admin_emails_manage') !!}">Create Email</a></div>
+        <div><a class="btn btn-info pull-right" href="{!! route('admin_mail_create_templates') !!}">Create Email</a></div>
         <div class="col-xs-12">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
@@ -16,9 +16,6 @@
                     <th>#</th>
                     <th>Title</th>
                     <th>Slug</th>
-                    <th>Template</th>
-                    <th>Is Core</th>
-                    <th>Description</th>
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
@@ -39,9 +36,6 @@
                     {data: 'id',name: 'id'},
                     {data: 'title', name: 'title'},
                     {data: 'slug',name: 'slug'},
-                    {data: 'template', name: 'template'},
-                    {data: 'is_core', name: 'is_core'},
-                    {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
              RolesTableSeeder::class,
              UsersTableSeeder::class,
              DriveFoldersTableSeeder::class,
-             CountriesTableSeeder::class,
              LanguagesTableSeeder::class,
-             SiteLanguagesTableSeeder::class
+             SiteLanguagesTableSeeder::class,
+             EmailsTableSeeder::class
          ]);
     }
 }

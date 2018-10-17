@@ -124,21 +124,11 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-    public function getAllMailTemplates()
-    {
-        return Datatables::of(MailTemplates::query())
-            ->addColumn('actions', function ($template) {
-                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $template->id . '">Delete</a>
-                    <a href="'.route('admin_mail_create_templates',$template->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
-            })->rawColumns(['actions'])
-            ->make(true);
-    }
     public function getAllEmails()
     {
         return Datatables::of(Emails::query())
             ->addColumn('actions', function ($email) {
-                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $email->id . '">Delete</a>
-                    <a href="'.route('admin_mail_create_templates',$email->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+                return '<a href="'.route('admin_mail_create_templates',$email->id).'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
             })->rawColumns(['actions'])
             ->make(true);
     }

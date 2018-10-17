@@ -4,9 +4,9 @@ namespace App\Models\Translations;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MailTemplatesTranslations extends Model
+class EmailsTranslations extends Model
 {
-    protected $table = 'mail_templates_translations';
+    protected $table = 'email_translations';
     public $timestamps = false;
     protected $fillable = ['title', 'subject','content'];
 }

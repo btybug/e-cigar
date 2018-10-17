@@ -148,6 +148,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script type="text/javascript" src="http://viima.github.io/jquery-comments/demo/js/jquery-comments.js"></script>
     <script>
+
          window.AjaxCall = function postSendAjax(url, data, success, error) {
             $.ajax({
                 type: "post",
@@ -174,17 +175,25 @@
         };
 
 
-$('#comments-container').comments({
-    getComments: function(success, error) {
-         AjaxCall("/get-comments/{!! $post->id !!}", {}, function(res){
-             if (!res.error) {
-                 success(res.data);
-             }
+const  comment = {
+     init: function(data}){
+         $('#comments-container').comments({
+             getComments: function(success, error) {
+                 AjaxC0all(`/get-comments`, data, function(res){
+                     if (!res.error) {
+                         success(res.data);
+                     }
 
-         })
-//        success(commentsArray);
-    }
-});
+                 })
+             }
+         });
+     }
+}
+ comment.innit({
+     'comentable':'Posts',
+     'id':'1'
+ })
+
 
 document.querySelector(".jquery-comments .save").addEventListener("click", function(e){
     e.stopPropagation();

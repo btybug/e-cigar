@@ -6,10 +6,12 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
-                <a class="nav-link" id="general-tab"  href="{!! route('admin_settings_store') !!}" role="tab" aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
+                <a class="nav-link" id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
+                   aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" id="shipping-tab"  href="{!! route('admin_settings_shipping') !!}" role="tab" aria-controls="shipping" aria-selected="false">Shipping</a>
+                <a class="nav-link" id="shipping-tab" href="{!! route('admin_settings_shipping') !!}" role="tab"
+                   aria-controls="shipping" aria-selected="false">Shipping</a>
             </li>
         </ul>
         <div class="" id="myTabContent">
@@ -28,7 +30,8 @@
                             </select>
                         </td>
                         <td class="text-right">
-                            <button type="button" class="btn btn-primary add-new-option"><i class="fa fa-plus-circle"></i></button>
+                            <button type="button" class="btn btn-primary add-new-option"><i
+                                        class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -48,9 +51,11 @@
                     </tr>
                     <tr>
                         <td class="table--store-settings_vert-top">
-                            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
+                            <input type="number" min="1" max="5" class="form-control"
+                                   style="display: inline-block; width: auto">
                             <span>To</span>
-                            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
+                            <input type="number" min="1" max="50" class="form-control"
+                                   style="display: inline-block; width: auto">
                         </td>
                         <td>
                             <select id="PosType" class="form-control">
@@ -69,7 +74,8 @@
                             </span>
                         </td>
                         <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                        class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -91,12 +97,14 @@
                             </span>
                         </td>
                         <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                        class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
                     <tr class="add-new-ship-filed-container">
                         <td colspan="6" class="text-right">
-                            <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
+                            <button type="button" class="btn btn-primary add-new-ship-filed"><i
+                                        class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     </tbody>
