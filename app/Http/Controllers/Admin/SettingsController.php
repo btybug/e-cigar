@@ -23,6 +23,10 @@ class SettingsController extends Controller
 
     public function getLanguages()
     {
+        $countries = new Erkir();
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+
+        dd($countries);
         $languages = SiteLanguages::all();
         return $this->view('languages',compact(['languages']));
     }
