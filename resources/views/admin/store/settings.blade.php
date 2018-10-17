@@ -114,7 +114,7 @@
             </div>
             <div class="tab-pane fade" id="shipping" role="tabpanel" aria-labelledby="shipping-tab">
                 <table id="discount" class="table table-responsive table--store-settings">
-                    <tbody>
+                    <tbody class="all-options">
                     <tr>
                         <td>
                             <label for="ShippingZones">Shipping to</label>
@@ -126,7 +126,7 @@
                             </select>
                         </td>
                         <td class="text-right">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
+                            <button type="button" class="btn btn-primary add-new-option"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     </tbody>
@@ -166,7 +166,7 @@
                             </span>
                         </td>
                         <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
+                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -188,19 +188,24 @@
                             </span>
                         </td>
                         <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button>
+                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
                         </td>
                     </tr>
+                    <tfoot>
+                    
                     <tr>
                         <td colspan="6" class="text-right">
-                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
+                            <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="5" class="text-center table--store-settings_add-options">
+                        <td colspan="5" class="text-center table--store-settings_add-options add-new-ship-filed">
                             <span><i class="fa fa-plus"></i></span> Add more option
                         </td>
                     </tr>
+
+
+                    </tfoot>
                     </tbody>
                 </table>
             </div>
@@ -213,7 +218,139 @@
 @stop
 
 @section('js')
+<script>
+$("body").on("click", ".add-new-option", function () {
+    const id = Date.now()
+   let html = `<tr class="container-for-table-remove">
+   <td>
+      <label for="ShippingZones">Shipping to</label>
+   </td>
+   <td>
+      <select id="ShippingZones" class="form-control">
+         <option selected="">Shipping Zones</option>
+         <option>...</option>
+      </select>
+   </td>
+   <td class="text-right">
+      <button type="button" data-table-id=${id} class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button>
+   </td>
+</tr>`
+let html2 = `<table class="table table-responsive table--store-settings container-for-table-remove" >
+   <tbody>
+      <tr class="bg-my-light-blue">
+         <td>Shipping Zone - <span>Armenia</span></td>
+         <td colspan="3">Tax Rate - <span>ArmeniaVaT20</span></td>
+         <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
+      </tr>
+      <tr class="bg-my-light-pink">
+         <th>Order Amount</th>
+         <th>Courier</th>
+         <th>Cost</th>
+         <th colspan="3">Time</th>
+      </tr>
+      <tr>
+         <td class="table--store-settings_vert-top">
+            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
+            <span>To</span>
+            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
+         </td>
+         <td>
+            <select id="PosType" class="form-control">
+               <option selected="">Normal Post</option>
+               <option>...</option>
+            </select>
+         </td>
+         <td>
+            <span class="form-control">
+            5
+            </span>
+         </td>
+         <td>
+            <span class="form-control">
+            3 days
+            </span>
+         </td>
+         <td colspan="2" class="text-right">
+            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+         </td>
+      </tr>
+      <tr>
+         <td></td>
+         <td>
+            <select id="dhl" class="form-control">
+               <option selected="">DHL</option>
+               <option>...</option>
+            </select>
+         </td>
+         <td>
+            <span class="form-control">
+            5
+            </span>
+         </td>
+         <td>
+            <span class="form-control">
+            1 day
+            </span>
+         </td>
+         <td colspan="2" class="text-right">
+            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+         </td>
+      </tr>
+   </tbody>
+   <tfoot>
+      <tr>
+         <td colspan="6" class="text-right">
+            <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
+         </td>
+      </tr>
+      <tr>
+         <td colspan="5" class="text-center table--store-settings_add-options add-new-ship-filed">
+            <span><i class="fa fa-plus"></i></span> Add more option
+         </td>
+      </tr>
+   </tfoot>
+</table>`
+$(".all-options").append(html)
+$("#shipping").append(html2)
+})
 
+$("body").on("click", ".remove-ship-filed", function(){
+    $(this).closest("tr").remove()
+})
+$("body").on("click", ".add-new-ship-filed", function(){
+
+let html = `<tr>
+   <td></td>
+   <td>
+      <select id="dhl" class="form-control">
+         <option selected="">DHL</option>
+         <option>...</option>
+      </select>
+   </td>
+   <td>
+      <span class="form-control">
+      5
+      </span>
+   </td>
+   <td>
+      <span class="form-control">
+      1 day
+      </span>
+   </td>
+   <td colspan="2" class="text-right">
+      <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+   </td>
+</tr>`
+$(this).closest("table").find("tbody").append(html)
+})
+
+$("body").on("click", ".delete-all-option", function (e) {
+    console.log()
+    let id =  $(this).attr("data-table-id")
+    $("body").find(`[data-table-id="${id}"]`).closest(".container-for-table-remove").remove()
+})
+
+</script>
 @stop
 
 
