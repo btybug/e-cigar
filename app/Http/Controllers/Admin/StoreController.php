@@ -125,5 +125,10 @@ class StoreController extends Controller
         return $this->view('coupons_new');
     }
 
+    public function newShippingZones()
+    {
+        return $this->view('new_shipping_zone');
+    }
+
 
 }

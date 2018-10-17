@@ -35,7 +35,7 @@ class AttributesPost extends FormRequest
         return [
             'icon.required' => 'A icon is required',
             'name.required'  => 'A name is required',
-            "translatable.*.name"  => "A name is required",
+            "translatable.*.name.required"  => "A name is required",
         ];
     }
 }

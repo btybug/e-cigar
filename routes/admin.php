@@ -58,6 +58,7 @@ Route::group(['prefix' => 'store'], function () {
 
     Route::group(['prefix' => 'shipping-zones'], function () {
         Route::get('/', 'Admin\StoreController@getShippingZones')->name('admin_store_shipping_zones');
+        Route::get('/new-shipping-zone', 'Admin\StoreController@newShippingZones')->name('admin_store_new_shipping_zones');
     });
 
     Route::group(['prefix' => 'tax-rate'], function () {
