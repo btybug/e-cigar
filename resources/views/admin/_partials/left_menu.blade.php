@@ -186,6 +186,9 @@
                     @ok('admin_mail_templates')
                     <li><a href="{{route('admin_mail_templates')}}"><i class="fa fa-circle-o"></i> Mail Templates</a></li>
                     @endok
+                    @ok('admin_settings_general')
+                    <li><a href="{{route('admin_settings_general')}}"><i class="fa fa-circle-o"></i> General</a></li>
+                    @endok
 
                 </ul>
             </li>

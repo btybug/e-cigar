@@ -111,4 +111,9 @@ class SettingsController extends Controller
         $templates=MailTemplates::all()->pluck('title','id');
         return $this->view('emails.manage',compact('templates'));
     }
+
+    public function getGeneral()
+    {
+        return $this->view('general.index');
+    }
 }
