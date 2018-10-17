@@ -108,6 +108,7 @@ Route::group(['prefix' => 'blog'], function () {
 
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/', 'Admin\OrdersController@index')->name('admin_orders');
+    Route::get('/new', 'Admin\OrdersController@getNew')->name('admin_orders_new');
 });
 
 Route::group(['prefix' => 'inventory'], function () {
