@@ -34,6 +34,24 @@
                                 <input type="text" name="description" value="" placeholder="Description" id="input-description" class="form-control">
                             </div>
                         </div>
+                        <div class="row">
+                            <label class="col-sm-2 control-label" for="input-tax">Tax</label>
+                            <div class="form-group col-sm-5 required">
+
+                                    <input type="text" name="description" value=""  id="input-tax" class="form-control">
+
+                            </div>
+                            <div class="form-group col-sm-5 required">
+                                <select id="pecentage" class="form-control">
+                                    <option selected="">Pecentage</option>
+                                    <option>...</option>
+                                    <option>...</option>
+                                    <option>...</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <fieldset>
                             <legend>Geo Zones</legend>
                             <table id="zone-to-geo-zone" class="table table-striped table-bordered table-hover">
@@ -50,21 +68,24 @@
                                 <tr>
                                     <td>
                                         <select id="country" class="form-control">
-                                    @if(isset($countries) && count($countries))
-                                                <option selected="">Choose...</option>
-                                            @foreach($countries as $country)
-                                                <option>{!! $country !!}</option>
-                                            @endforeach
-                                    @endif
-                                        </select>
-                                    </td>
-                                    <td class="text-left">
-                                        <select id="category" class="form-control">
                                             <option selected="">Choose...</option>
                                             <option>...</option>
                                             <option>...</option>
                                             <option>...</option>
+                                            <option>...</option>
                                         </select>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <input type="text" name="" value="" placeholder="Category" id="input-category" class="form-control" autocomplete="off">
+                                            <ul class="dropdown-menu"></ul>
+                                            <div id="coupon-category" class="well well-sm view-coupon">
+                                                <ul class="coupon-category-list">
+                                                </ul>
+                                            </div>
+                                            <input type="hidden" class="search-hidden-input" value="" id="category-names">
+
+                                        </div>
                                     </td>
                                 </tr>
                                 </tfoot>
