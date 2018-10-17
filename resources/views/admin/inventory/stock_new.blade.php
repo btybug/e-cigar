@@ -58,43 +58,90 @@
                     <div id="basic" class="tab-pane fade basic-details-tab in active">
                         <div class="container-fluid p-25">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <div class="basic-left basic-wall">
-                                        <div class="all-list">
-                                            <ul>
-                                                <li><a href="#">Product name</a></li>
-                                                <li><a href="#">Product ID</a></li>
-                                                <li><a href="#">SKU</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="all-list">
-                                            <h5>Packaging Size</h5>
-                                            <ul>
-                                                <li><a href="#">Length</a></li>
-                                                <li><a href="#">Width</a></li>
-                                                <li><a href="#">Height</a></li>
-                                                <li><a href="#">Weight</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="basic-center basic-wall">
-
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="basic-right basic-wall">
                                         <div class="row">
-                                            <div class="col-sm-4">
-                                                Barcode
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <div class="form-control">
+                                            <div class="col-md-6">
+                                                <form action="" class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="product_name" class="control-label col-sm-4">Product name</label>
+                                                            <div class="col-sm-8">
+                                                                <input class="form-control" name="product_name" id="product_name" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="product_id" class="control-label col-sm-4">Product ID</label>
+                                                            <div class="col-sm-8">
+                                                                <input class="form-control" name="product_id" id="product_id" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="sku" class="control-label col-sm-4">SKU</label>
+                                                            <div class="col-sm-8">
+                                                                <input class="form-control" name="sku" id="sku" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="sku" class="control-label col-sm-4">Barcode</label>
+                                                            <div class="col-sm-8">
+                                                                <div class="form-control">
 
-                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <fieldset>
+                                                        <legend>Packaging Size</legend>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_length" class="control-label col-sm-4">Length</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control" name="packaging_length" id="packaging_length" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_width" class="control-label col-sm-4">Width</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control" name="packaging_width" id="packaging_width" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_height" class="control-label col-sm-4">Height</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control" name="packaging_height" id="packaging_height" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_weight" class="control-label col-sm-4">Weight</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control" name="packaging_weight" id="packaging_weight" type="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+
+
+                                                </form>
+
+                                            </div>
+                                            <div class="col-md-6">
+
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -136,13 +183,15 @@
                                             <ul>
                                                 @if(count($attributes))
                                                     @foreach($attributes as $attribute)
-                                                        <li data-id="{{ $attribute->id }}"><a href="#">{{ $attribute->name }}</a></li>
+                                                        <li data-id="{{ $attribute->id }}"><a
+                                                                    href="#">{{ $attribute->name }}</a></li>
                                                     @endforeach
                                                 @endif
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block"><i class="fa fa-plus"></i>Add new option</a>
+                                            <a href="#" class="btn btn-info btn-block"><i class="fa fa-plus"></i>Add new
+                                                option</a>
                                         </div>
                                     </div>
                                 </div>
