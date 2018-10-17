@@ -134,7 +134,9 @@ class StoreController extends Controller
 
     public function getShippingNew()
     {
-        dd(4446465);
+        $countries = new Countries();
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+        return $this->view('new_shipping_zone',compact('countries'));
     }
 
     public function getregions(Countries $countries)
