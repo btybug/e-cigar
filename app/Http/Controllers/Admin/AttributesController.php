@@ -72,4 +72,15 @@ class AttributesController extends Controller
         return \Response::json(['error' => false,'html' => $html]);
     }
 
+    public function postAttributesOptionDelete(Request $request)
+    {
+        $model = Attributes::find($request->id);
+
+        if($model){
+            $model->delete();
+            return \Response::json(['error' => false]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
 }

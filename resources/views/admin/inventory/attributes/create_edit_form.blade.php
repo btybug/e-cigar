@@ -160,6 +160,21 @@
             });
         });
 
+        $("body").on("click", ".delete-option", function () {
+            var id = $(this).data('item-id');
+            AjaxCall("/admin/inventory/attributes/options-delete", {id: id}, function (res) {
+                if (!res.error) {
+                    $(".options-form").html('');
+                     $("body").find('.attr-option').each(function () {
+                         if ($(this).attr('data-item-id') == id)  {
+                             $(this).remove()
+                         }
+                     })
+                    // $('.icon-picker').iconpicker();
+                }
+            });
+        });
+
     </script>
 @stop
 @section("css")

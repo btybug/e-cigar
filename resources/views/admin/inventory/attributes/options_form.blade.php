@@ -9,7 +9,7 @@
                         <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
             @endforeach
         </ul>
-        <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-trash" data-item-id=""><i class="fa fa-trash"></i></a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-trash delete-option" data-item-id="{{ $optionModel->id }}"><i class="fa fa-trash"></i></a>
     </div>
 @endif
 

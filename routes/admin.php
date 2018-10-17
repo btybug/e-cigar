@@ -104,6 +104,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/new', 'Admin\AttributesController@getAttributesCreate')->name('admin_store_attributes_new');
         Route::post('/new', 'Admin\AttributesController@postAttributesCreate')->name('admin_store_attributes_new');
         Route::post('/options-show-form', 'Admin\AttributesController@postAttributesOptionsForm')->name('admin_store_attributes_options_form');
+        Route::post('/options-delete', 'Admin\AttributesController@postAttributesOptionDelete')->name('admin_store_attributes_option_delete');
         Route::post('/options/{id}/save', 'Admin\AttributesController@postAttributesOptions')->name('admin_store_attributes_options');
         Route::get('/edit/{id}', 'Admin\AttributesController@getAttributesEdit')->name('admin_store_attributes_edit');
         Route::post('/edit/{id}', 'Admin\AttributesController@postAttributesEdit')->name('admin_store_attributes_post_edit');
