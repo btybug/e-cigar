@@ -80,13 +80,13 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3">Featured image</label>
                                         <div class="col-sm-9">
-                                            <button type="submit" class="btn btn-success">Image</button>
+                                            {!! media_button('image') !!}
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3">Gallery images</label>
                                         <div class="col-sm-9">
-                                            <button type="submit" class="btn btn-success">Image</button>
+                                          {!! media_button('gallery',null,true) !!}
                                         </div>
                                     </div>
                                 </div>

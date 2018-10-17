@@ -47,7 +47,8 @@ function enableMedia(){
 function media_button(string $name,$model=null,bool $multiple = false, $slug = 'drive')
 {
     enableMedia();
-    return view('media.button', compact(['multiple', 'slug','name','model']));
+    $uniqId=uniqid('media_');
+    return view('media.button', compact(['multiple', 'slug','name','model','uniqId']));
 }
 
 
