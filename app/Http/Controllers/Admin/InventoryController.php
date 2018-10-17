@@ -23,7 +23,7 @@ class InventoryController extends Controller
 
     public function stockNew()
     {
-        $attributes = Attributes::all();
+        $attributes = Attributes::whereNull('parent_id')->get();
         return $this->view('stock_new',compact(['attributes']));
     }
 }
