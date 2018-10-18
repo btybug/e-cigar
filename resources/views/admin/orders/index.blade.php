@@ -6,7 +6,14 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="col-md-6 pull-left"><h2>Orders</h2></div>
-            <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_orders_new') !!}">Add new</a></div>
+            <div class="col-md-6">
+                <div class="pull-right">
+                    <a class="btn btn-info" href="{!! route('admin_orders_new') !!}">Add new</a>
+                    <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
+                    <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="Print Shipping List"><i class="fa fa-truck"></i></a>
+                    <a href="https://demo.opencart.com/admin/index.php?route=sale/order&amp;user_token=qrdym7jfe8IAJBo84RMx4PEZ9O2lQxml" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
+                </div>
+            </div>
 
     {{--<div class="row">--}}
         {{--<div class="col-xs-12">--}}
