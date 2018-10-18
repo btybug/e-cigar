@@ -115,8 +115,14 @@ class AttributesController extends Controller
 
     public function getOptionsAutocomplate(Request $request,$id)
     {
+        $lang = Lang::getLocale();
         $attr = Attributes::find($id);
-        $likes=$attr->children()->where('name', 'like', '%' . $request->get('q') . '%')->get();
+
+        $likes= $attr->children()->LeftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+            ->select('attributes.*', 'attributes_translations.name')
+            ->where('attributes_translations.name', 'like', '%' . $request->get('q') . '%')
+            ->where('attributes_translations.locale',$lang)
+            ->get();
         return ($attr) ? $likes : [];
     }
 
