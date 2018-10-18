@@ -40,10 +40,10 @@
                             <div class="col-sm-12">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item active">
-                                        <a class="nav-link" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true" aria-expanded="true">Tab-1</a>
+                                        <a class="nav-link" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true" aria-expanded="true">To User</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="mail" aria-selected="false">Tab-2</a>
+                                        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="mail" aria-selected="false">To Admin</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content tab-content-store-settings">
