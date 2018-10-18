@@ -160,7 +160,8 @@
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block get-all-attributes-tab-event"><i class="fa fa-plus"></i>Add new
+                                            <a href="#" class="btn btn-info btn-block get-all-attributes-tab-event"><i
+                                                        class="fa fa-plus"></i>Add new
                                                 option</a>
                                         </div>
                                     </div>
@@ -173,7 +174,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -305,7 +306,8 @@
                                                 <div class="row">
                                                     <label for="logistic-quantity" class="control-label col-sm-4">Quantity</label>
                                                     <div class="col-sm-8">
-                                                        <input class="form-control" name="logistic-quantity" id="logistic-quantity" type="text">
+                                                        <input class="form-control" name="logistic-quantity"
+                                                               id="logistic-quantity" type="text">
                                                     </div>
                                                 </div>
                                             </div>
@@ -478,12 +480,134 @@
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block get-all-attributes"><i class="fa fa-plus"></i>Add new
+                                            <a href="#" class="btn btn-info btn-block get-all-attributes"><i
+                                                        class="fa fa-plus"></i>Add new
                                                 option</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-9">
+                                    <div class="basic-center basic-wall">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="variation_id"
+                                                                           class="control-label col-sm-4">Variation
+                                                                        ID</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control" name="variation_id"
+                                                                               id="variation_id" type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="variation_image"
+                                                                           class="control-label col-sm-4">Image</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="variation_image"
+                                                                               id="variation_image" type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="variation_quantity"
+                                                                           class="control-label col-sm-4">Quantity</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="variation_quantity"
+                                                                               id="variation_quantity" type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="variation_quantity_alert"
+                                                                           class="control-label col-sm-4">Quantity
+                                                                        Alert</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="variation_quantity_alert"
+                                                                               id="variation_quantity_alert"
+                                                                               type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-6 col-xs-12">
+                                                                <div class="row">
+                                                                    <label for="variation_reg_price"
+                                                                           class="control-label col-sm-4">Regular
+                                                                        Price</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="variation_reg_price"
+                                                                               id="variation_reg_price" type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="discount-price">
+                                                        <h4>Discount price</h4>
+                                                        <a href="#" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></a>
+                                                    </div>
+                                                    <table class="table table-bordered">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>From</th>
+                                                            <th>To</th>
+                                                            <th>Discount price</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                     <div class="table-responsive variations-table">
 
                                     </div>
@@ -503,7 +627,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Add Options</h4>
                 </div>
                 <div class="modal-body">
@@ -525,17 +650,20 @@
 
         $("body").on("click", ".get-all-attributes-tab-event", function () {
             let arr = []
-            $(".get-all-attributes-tab").children().each(function(){
+            $(".get-all-attributes-tab").children().each(function () {
                 arr.push($(this).attr("data-id"))
             })
             AjaxCall("/admin/inventory/attributes/get-all", {arr}, function (res) {
                 if (!res.error) {
                     $("#attributesModal .modal-body .all-list").empty();
-                    res.data.forEach(item => {
+                    res.data.forEach(item = > {
                         let html = `  <li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}</a> <a class="btn btn-primary add-attribute-event" data-id="${item.id}">ADD</a></li>`
-                        $("#attributesModal .modal-body .all-list").append(html)
-                    });
+                        $("#attributesModal .modal-body .all-list"
+                ).
+                    append(html)
+                })
+                    ;
                     $("#attributesModal").modal();
                 }
             })
@@ -543,7 +671,7 @@
 
         $("body").on("click", ".add-attribute-event", function () {
             let id = $(this).data('id')
-            AjaxCall("/admin/inventory/attributes/get-attribute", {id:id}, function (res) {
+            AjaxCall("/admin/inventory/attributes/get-attribute", {id: id}, function (res) {
                 if (!res.error) {
                     let id = res.data.id
                     AjaxCall("/admin/inventory/attributes/get-options-by-id", {id}, function (res2) {
@@ -556,21 +684,23 @@
                                                 </div>
                                                 </li>`);
                             $(".choset-attributes").append(`<div style="height: 50px" class="attributes-container-${id} main-attr-container"></div>`)
-                            res2.data.forEach(item => {
+                            res2.data.forEach(item = > {
                                 let html = `<li class="btn btn-primary attributes-item">
 <a href="#" class="title-attr">${item.name}</a>
 <span class="restore-item badge"><i class="fa fa-trash" ></i></span>
 </li>`
-                                $(`.attributes-container-${id}`).append(html)
+                                $(`.attributes-container-${id}`
+                        ).
+                            append(html)
                         })
                         }
                     })
-                   
+
                 }
             })
             $(this).parent().remove()
         });
-        $("body").on("click", ".remove-all-attributes", function(){
+        $("body").on("click", ".remove-all-attributes", function () {
             let id = $(this).closest("li").attr("data-id")
             $("body").find(`.attributes-container-${id}`).remove()
             $(this).closest("li").remove()
@@ -578,17 +708,20 @@
 
         $("body").on("click", ".get-all-attributes", function () {
             let arr = []
-            $(".attribute-list-items").children().each(function(){
+            $(".attribute-list-items").children().each(function () {
                 arr.push($(this).attr("data-id"))
             })
             AjaxCall("/admin/inventory/attributes/get-all", {arr}, function (res) {
                 if (!res.error) {
                     $("#attributesModal .modal-body .all-list").empty();
-                    res.data.forEach(item => {
+                    res.data.forEach(item = > {
                         let html = `  <li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}</a> <a class="btn btn-primary add-attribute" data-id="${item.id}">ADD</a></li>`
-                        $("#attributesModal .modal-body .all-list").append(html)
-                    });
+                        $("#attributesModal .modal-body .all-list"
+                ).
+                    append(html)
+                })
+                    ;
                     $("#attributesModal").modal();
                 }
             })
@@ -596,7 +729,7 @@
 
         $("body").on("click", ".add-attribute", function () {
             let id = $(this).data('id')
-            AjaxCall("/admin/inventory/attributes/get-attribute", {id:id}, function (res) {
+            AjaxCall("/admin/inventory/attributes/get-attribute", {id: id}, function (res) {
                 if (!res.error) {
                     $(".attribute-list-items").append(`<li data-id="${res.data.id}" class="option-elm-variations"><a
                                                 href="#">${res.data.name}</a></li>`);
@@ -610,7 +743,7 @@
             AjaxCall("/admin/inventory/attributes/get-options-by-id", {id}, function (res) {
                 if (!res.error) {
                     $(".list-attributes-options").empty()
-                    res.data.forEach(item => {
+                    res.data.forEach(item = > {
                         let html = `<li class="badge attributes-item"><a href="#">${item.name}</a></li>`
                         $(".list-attributes-options"
                 ).
@@ -619,7 +752,7 @@
                 }
             })
         });
-        
+
         $("body").on("click", ".option-elm-variations", function () {
             let id = $(this).attr("data-id")
             AjaxCall("/admin/inventory/attributes/get-variations-table", {id}, function (res) {

@@ -610,7 +610,11 @@ color: white;
 .stock-page .attributes_tab .basic-center .attributes-item{
     margin-right: 5px;
 }
-
+.stock-page .stock-variations-tab .discount-price{
+display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 
