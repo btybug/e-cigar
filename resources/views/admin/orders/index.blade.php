@@ -52,54 +52,76 @@
             </ul>
             <div class="tab-content tab-content-store-settings">
                 <div class="tab-pane fade active in" id="general" role="tabpanel" aria-labelledby="general-tab">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order Details</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order Details</h3>
+                                </div>
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Store"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
+                                        <td><a href="https://demo.opencart.com/" target="_blank">Your Store</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-calendar fa-fw"></i></button></td>
+                                        <td>17/10/2018</td>
+                                    </tr>
+                                    <tr>
+                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Payment Method"><i class="fa fa-credit-card fa-fw"></i></button></td>
+                                        <td>Cash On Delivery</td>
+                                    </tr>
+                                    <tr>
+                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Shipping Method"><i class="fa fa-truck fa-fw"></i></button></td>
+                                        <td>Flat Shipping Rate</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <table class="table">
-                            <tbody>
-                            <tr>
-                                <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Store"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
-                                <td><a href="https://demo.opencart.com/" target="_blank">Your Store</a></td>
-                            </tr>
-                            <tr>
-                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-calendar fa-fw"></i></button></td>
-                                <td>17/10/2018</td>
-                            </tr>
-                            <tr>
-                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Payment Method"><i class="fa fa-credit-card fa-fw"></i></button></td>
-                                <td>Cash On Delivery</td>
-                            </tr>
-                            <tr>
-                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Shipping Method"><i class="fa fa-truck fa-fw"></i></button></td>
-                                <td>Flat Shipping Rate</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-user"></i> Customer Details</h3>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-user"></i> Customer Details</h3>
+                                </div>
+                                <table class="table">
+                                    <tbody><tr>
+                                        <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>
+                                        <td> sddc sdvdsvc
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-group fa-fw"></i></button></td>
+                                        <td>Default</td>
+                                    </tr>
+                                    <tr>
+                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
+                                        <td><a href="mailto:focusbenj@gmail.com">focusbenj@gmail.com</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Telephone"><i class="fa fa-phone fa-fw"></i></button></td>
+                                        <td>08069386824</td>
+                                    </tr>
+                                    </tbody></table>
+                            </div>
                         </div>
-                        <table class="table">
-                            <tbody><tr>
-                                <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>
-                                <td> sddc sdvdsvc
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-group fa-fw"></i></button></td>
-                                <td>Default</td>
-                            </tr>
-                            <tr>
-                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
-                                <td><a href="mailto:focusbenj@gmail.com">focusbenj@gmail.com</a></td>
-                            </tr>
-                            <tr>
-                                <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Telephone"><i class="fa fa-phone fa-fw"></i></button></td>
-                                <td>08069386824</td>
-                            </tr>
-                            </tbody></table>
+                        <div class="col-md-4">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-user"></i>  Shipping address</h3>
+                                </div>
+                                <table class="table">
+                                    <tbody>
+                                    <tr>
+                                        <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>
+                                        <td> sddc sdvdsvc
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane tabe-pane--see-order fade" id="seeOrder" role="tabpanel" aria-labelledby="seeOrder-tab">
