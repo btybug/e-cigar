@@ -332,7 +332,7 @@
                         </div>
                     </div>
                     <div id="price" class="tab-pane stock-price-tab fade">
-                        <div class="table-responsive variations-table">
+                        <div class="table-responsive">
                             <table id="discount" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
@@ -497,152 +497,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <div class="table-responsive">
-                                        <table id="discount" class="table table-striped table-bordered table-hover">
-                                            <thead>
-                                            <tr>
-                                                <td class="text-left">Customer Group</td>
-                                                <td class="text-right">Quantity</td>
-                                                <td class="text-right">Priority</td>
-                                                <td class="text-right">Price</td>
-                                                <td class="text-left">Date Start</td>
-                                                <td class="text-left">Date End</td>
-                                                <td></td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr id="discount-row0">
-                                                <td class="text-left"><select name="product_discount[0][customer_group_id]"
-                                                                              class="form-control">
-                                                        <option value="1" selected="selected">Default</option>
-                                                    </select></td>
-                                                <td class="text-right"><input type="text"
-                                                                              name="product_discount[0][quantity]"
-                                                                              value="10" placeholder="Quantity"
-                                                                              class="form-control"/></td>
-                                                <td class="text-right"><input type="text"
-                                                                              name="product_discount[0][priority]" value="1"
-                                                                              placeholder="Priority" class="form-control"/>
-                                                </td>
-                                                <td class="text-right"><input type="text" name="product_discount[0][price]"
-                                                                              value="88.0000" placeholder="Price"
-                                                                              class="form-control"/></td>
-                                                <td class="text-left" style="width: 20%;">
-                                                    <div class="input-group ">
-                                                        <input type="text" name="product_discount[0][date_start]" value=""
-                                                               placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                                               class="form-control date"/>
-                                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                                </td>
-                                                <td class="text-left" style="width: 20%;">
-                                                    <div class="input-group ">
-                                                        <input type="text" name="product_discount[0][date_end]" value=""
-                                                               placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                                               class="form-control date"/>
-                                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <button type="button" onclick="$('#discount-row0').remove();"
-                                                            data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                                                class="fa fa-minus-circle"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr id="discount-row1">
-                                                <td class="text-left"><select name="product_discount[1][customer_group_id]"
-                                                                              class="form-control">
-                                                        <option value="1" selected="selected">Default</option>
-                                                    </select></td>
-                                                <td class="text-right"><input type="text"
-                                                                              name="product_discount[1][quantity]"
-                                                                              value="20" placeholder="Quantity"
-                                                                              class="form-control"/></td>
-                                                <td class="text-right"><input type="text"
-                                                                              name="product_discount[1][priority]" value="1"
-                                                                              placeholder="Priority" class="form-control"/>
-                                                </td>
-                                                <td class="text-right"><input type="text" name="product_discount[1][price]"
-                                                                              value="77.0000" placeholder="Price"
-                                                                              class="form-control"/></td>
-                                                <td class="text-left" style="width: 20%;">
-                                                    <div class="input-group ">
-                                                        <input type="text" name="product_discount[1][date_start]" value=""
-                                                               placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                                               class="form-control date"/>
-                                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                                </td>
-                                                <td class="text-left" style="width: 20%;">
-                                                    <div class="input-group ">
-                                                        <input type="text" name="product_discount[1][date_end]" value=""
-                                                               placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                                               class="form-control date"/>
-                                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <button type="button" onclick="$('#discount-row1').remove();"
-                                                            data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                                                class="fa fa-minus-circle"></i></button>
-                                                </td>
-                                            </tr>
-                                            <tr id="discount-row2">
-                                                <td class="text-left"><select name="product_discount[2][customer_group_id]"
-                                                                              class="form-control">
-                                                        <option value="1" selected="selected">Default</option>
-                                                    </select></td>
-                                                <td class="text-right"><input type="text"
-                                                                              name="product_discount[2][quantity]"
-                                                                              value="30" placeholder="Quantity"
-                                                                              class="form-control"/></td>
-                                                <td class="text-right"><input type="text"
-                                                                              name="product_discount[2][priority]" value="1"
-                                                                              placeholder="Priority" class="form-control"/>
-                                                </td>
-                                                <td class="text-right"><input type="text" name="product_discount[2][price]"
-                                                                              value="66.0000" placeholder="Price"
-                                                                              class="form-control"/></td>
-                                                <td class="text-left" style="width: 20%;">
-                                                    <div class="input-group ">
-                                                        <input type="text" name="product_discount[2][date_start]" value=""
-                                                               placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                                               class="form-control date"/>
-                                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                                </td>
-                                                <td class="text-left" style="width: 20%;">
-                                                    <div class="input-group ">
-                                                        <input type="text" name="product_discount[2][date_end]" value=""
-                                                               placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                                               class="form-control date"/>
-                                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                                </td>
-                                                <td class="text-left">
-                                                    <button type="button" onclick="$('#discount-row2').remove();"
-                                                            data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                                                class="fa fa-minus-circle"></i></button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <td colspan="6"></td>
-                                                <td class="text-left">
-                                                    <button type="button" onclick="addDiscount();" data-toggle="tooltip"
-                                                            title="Add Discount" class="btn btn-primary"><i
-                                                                class="fa fa-plus-circle"></i></button>
-                                                </td>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
+                                    <div class="table-responsive variations-table">
+
                                     </div>
                                 </div>
                             </div>
@@ -726,9 +582,9 @@
         
         $("body").on("click", ".option-elm-variations", function () {
             let id = $(this).attr("data-id")
-            AjaxCall("/url", {id}, function (res) {
+            AjaxCall("/admin/inventory/attributes/get-variations-table", {id}, function (res) {
                 if (!res.error) {
-                    $(".variations-table").empty().append(res.data)
+                    $(".variations-table").empty().append(res.html)
                 }
             })
         });

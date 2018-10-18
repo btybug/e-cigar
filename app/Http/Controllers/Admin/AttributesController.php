@@ -96,7 +96,7 @@ class AttributesController extends Controller
 
     public function postAllAttributes(Request $request)
     {
-        $attr = Attributes::whereNotIn('id', $request->get('arr',[]))->get();
+        $attr = Attributes::whereNull('parent_id')->whereNotIn('id', $request->get('arr',[]))->get();
         return \Response::json(['error' => false,'data' => $attr]);
     }
 
@@ -105,6 +105,18 @@ class AttributesController extends Controller
         $attr = Attributes::find($request->id);
         if($attr){
             return \Response::json(['error' => false,'data' => $attr]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
+
+    public function getVariationsTable(Request $request)
+    {
+        $attr = Attributes::find($request->id);
+        if($attr){
+            $options = $attr->children()->get()->pluck('name','id');
+            $html = \View('admin.inventory.attributes.variations_table',compact(['options']))->render();
+            return \Response::json(['error' => false,'html' => $html]);
         }
 
         return \Response::json(['error' => true]);
