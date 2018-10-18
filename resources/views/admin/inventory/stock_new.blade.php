@@ -165,7 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <div class="basic-center basic-wall">
                                         <ul class="choset-attributes">
 
@@ -173,13 +173,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="basic-right basic-wall">
-                                        <ul class="list-attributes-options">
-
-                                        </ul>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -551,13 +545,28 @@
             let id = $(this).data('id')
             AjaxCall("/admin/inventory/attributes/get-attribute", {id:id}, function (res) {
                 if (!res.error) {
-                    $(".get-all-attributes-tab").append(`<li data-id="${res.data.id}" class="option-elm-attributes"><a
-                                                href="#">${res.data.name}</a></li>`);
+                    let id = res.data.id
+                    AjaxCall("/admin/inventory/attributes/get-options-by-id", {id}, function (res2) {
+                        if (!res2.error) {
+                            $(".get-all-attributes-tab").append(`<li style="display: flex" data-id="${res.data.id}" class="option-elm-attributes"><a
+                                                href="#">${res.data.name}</a> <button><i class="fa fa-money"></i></button><button  class="remove-all-attributes"><i class="fa fa-trash"></i></button> </li>`);
+                            $(".choset-attributes").append(`<div style="height: 50px" class="attributes-container-${id}"></div>`)
+                            res2.data.forEach(item => {
+                                let html = `<li class="badge attributes-item"><a href="#">${item.name}</a><button class="restore-item"><i class="fa fa-trash" ></i></button> </li>`
+                                $(`.attributes-container-${id}`).append(html)
+                        })
+                        }
+                    })
+                   
                 }
             })
             $(this).parent().remove()
         });
-
+        $("body").on("click", ".remove-all-attributes", function(){
+            let id = $(this).closest("li").attr("data-id")
+            $("body").find(`.attributes-container-${id}`).remove()
+            $(this).closest("li").remove()
+        })
 
         $("body").on("click", ".get-all-attributes", function () {
             let arr = []
@@ -612,19 +621,19 @@
             })
         });
 
-        $("body").on("click", ".attributes-item", function () {
-            // AJax petqa
-            let text = $(this).children().text()
+        // $("body").on("click", ".attributes-item", function () {
+        //     // AJax petqa
+        //     let text = $(this).children().text()
 
-            $(".choset-attributes").append(`<li>${text} <span class="restore-item"><i class="fa fa-trash"></i></span> </li>`)
-            $(this).remove()
-        })
+        //     $(".choset-attributes").append(`<li>${text} <span class="restore-item"><i class="fa fa-trash"></i></span> </li>`)
+        //     $(this).remove()
+        // })
 
         $("body").on("click", ".restore-item", function () {
-            let text = $(this).parent().text()
-            $(this).parent().remove()
-            let html = `<li class="badge attributes-item"><a href="#">${text}</a></li>`
-            $(".list").append(html)
+            // let text = $(this).parent().text()
+            $(this).closest("li").remove()
+            // let html = `<li class="badge attributes-item"><a href="#">${text}</a></li>`
+            // $(".list").append(html)
         })
 
     </script>
