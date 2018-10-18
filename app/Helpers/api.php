@@ -186,6 +186,24 @@ function get_default_language(){
     return $lang;
 }
 
-function reset_password_link($user){
-    return url(config('app.url').route('password.reset', $this->token, false));
+function reset_password_link($token){
+    return url(config('app.url').route('password.reset', $token, false));
+}
+function app_name(){
+
+}
+function app_url(){
+
+}
+function app_blog_url(){
+
+}
+function receiver_name(){
+
+}
+function receiver_last_name(){
+
+}
+function receiver_last_phone(){
+
 }

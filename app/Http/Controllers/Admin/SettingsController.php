@@ -116,4 +116,9 @@ class SettingsController extends Controller
         $shipping_zones = ShippingZones::all();
         return $this->view('store.shipping',compact('shipping_zones'));
     }
+
+    public function getStorePaymentsGateways()
+    {
+        return  $this->view('store.payments_gateways');
+    }
 }
