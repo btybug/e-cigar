@@ -622,5 +622,27 @@ display: flex;
 .geo-zone-page .text-left{
     text-align: left;
 }
+.payment_gateways_tab{
+     box-shadow: 0 0 5px #d2d2d2;
+     padding: 15px;
+     display: block;
+     background: #fff;
+     height: 100%;
+}
+.payment_gateways_tab .list_paymant{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.payment_gateways_tab .list_paymant .item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f7f7f7;
+    box-shadow: 0 0 4px #a5a5a5;
+    margin-bottom: 10px;
+    color: #000;
+}
 
 

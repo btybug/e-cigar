@@ -14,7 +14,8 @@
                    aria-controls="shipping" aria-selected="false">Shipping</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}" role="tab"
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}"
+                   role="tab"
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
             </li>
         </ul>
@@ -23,7 +24,20 @@
 
             </div>
         </div>
+        <div class="payment_gateways_tab">
+            <ul class="list_paymant">
+                <li class="item">
+                    <div class="title">Cash Paymant</div>
+                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                </li>
+                <li class="item">
+                    <div class="title">Paypal</div>
+                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                </li>
+            </ul>
+        </div>
     </div>
+
 @stop
 
 @section('css')
