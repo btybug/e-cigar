@@ -472,7 +472,7 @@
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-5">
                                     <div class="basic-left basic-wall">
                                         <div class="all-list-attrs" style="min-height:300px;">
                                             <ul class="attribute-list-items">
@@ -480,13 +480,19 @@
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block get-all-attributes"><i
-                                                        class="fa fa-plus"></i>Add new
-                                                option</a>
+                                            <div class="col-md-6">
+                                                <a href="#" class="btn btn-info btn-block get-variation"><i
+                                                            class="fa fa-plus"></i>More
+                                                    option</a>
+                                            </div><div class="col-md-6">
+                                                <a href="#" class="btn btn-warning btn-block get-all-variations"><i
+                                                            class="fa fa-plus"></i>Link all
+                                                    option</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-7">
                                     <div class="basic-center basic-wall">
                                         <div class="container-fluid">
                                             <div class="row">
