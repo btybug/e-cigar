@@ -116,6 +116,7 @@ Route::group(['prefix' => 'orders'], function () {
 Route::group(['prefix' => 'inventory'], function () {
     Route::get('/stock', 'Admin\InventoryController@stock')->name('admin_stock');
     Route::get('/stock/new', 'Admin\InventoryController@stockNew')->name('admin_stock_new');
+    Route::post('/stock/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
     Route::group(['prefix' => 'attributes'], function () {
         Route::get('/', 'Admin\AttributesController@getAttributes')->name('admin_store_attributes');
         Route::get('/new', 'Admin\AttributesController@getAttributesCreate')->name('admin_store_attributes_new');

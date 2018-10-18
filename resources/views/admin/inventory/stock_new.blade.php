@@ -160,7 +160,7 @@
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block get-all-attributes-tab-event"><i
+                                            <a href="javascript:void(0)" class="btn btn-info btn-block get-all-attributes-tab-event"><i
                                                         class="fa fa-plus"></i>Add new
                                                 option</a>
                                         </div>
@@ -481,11 +481,11 @@
                                         </div>
                                         <div class="button-add text-center">
                                             <div class="col-md-6">
-                                                <a href="#" class="btn btn-info btn-block get-variation"><i
+                                                <a href="javascript:void(0)" class="btn btn-info btn-block get-variation"><i
                                                             class="fa fa-plus"></i>More
                                                     option</a>
                                             </div><div class="col-md-6">
-                                                <a href="#" class="btn btn-warning btn-block get-all-variations"><i
+                                                <a href="javascript:void(0)" class="btn btn-warning btn-block get-all-variations"><i
                                                             class="fa fa-plus"></i>Link all
                                                     option</a>
                                             </div>

@@ -329,35 +329,10 @@ $("body").on("click", ".remvoe-variations-select", function() {
 });
 
 $("body").on("click", ".get-all-variations", function() {
-    // let html = "";
-    // if (
-    //     Object.keys(attributesJson).length === 0 ||
-    //     $(".list-attrs-single-item").length ===
-    //         nestedObjectToArray(attributesJson).length
-    // )
-    //     return false;
-    // Object.entries(attributesJson).forEach(([key, val]) => {
-    //     let keys = Object.keys(attributesJson);
-    //     let nextIndex = keys.indexOf(key) + 1;
-    //     let nextItem = keys[nextIndex];
-    //     if (!nextItem) return false;
-
-    //     val.forEach(item2 => {
-    //         attributesJson[nextItem].forEach(item3 => {
-    //             console.log(item2);
-    //             console.log(item3);
-    //         });
-    //     });
-    // });
-    // console.log(html);
-    // $(".all-list-attrs").append(
-    //     `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
-    // );
-    AjaxCall("/url", { data: attributesJson }, function(res) {
-        // HTMLmakeSelectVaritionOptions
-        //   $(".all-list-attrs").append(
-        //     `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
-        // );
+    AjaxCall("/admin/inventory/stock/link-all", { data: attributesJson}, function(res) {
+        if(! res.error){
+            $(".all-list-attrs").html(res.html);
+        }
         console.log(res);
     });
 });

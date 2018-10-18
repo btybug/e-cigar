@@ -23,23 +23,6 @@ class AttributesController extends Controller
     public function getAttributes()
     {
 
-//        $data = [
-//          'color' => ['black','red'],
-//          'size' => ['x','L','M']
-//        ];
-//        $arPhrases = array_first($data);
-//        array_shift($data);
-//        foreach ($data as $i => $v){
-//            $notFullCount = count($arPhrases);
-//            foreach ($arPhrases as $phrase) {
-//                foreach ($data[$i] as $newPart) {
-//                    $arPhrases[] = $phrase."-".$newPart;
-//                }
-//            }
-//            $arPhrases = array_slice($arPhrases, $notFullCount);
-//        }
-//
-//        dd($arPhrases);
         return $this->view('index');
     }
 
