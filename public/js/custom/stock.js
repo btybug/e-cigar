@@ -329,6 +329,7 @@ $("body").on("click", ".remvoe-variations-select", function() {
 });
 
 $("body").on("click", ".get-all-variations", function() {
+    $(".all-list-attrs").empty();
     AjaxCall("/admin/inventory/stock/link-all", { data: attributesJson}, function(res) {
         if(! res.error){
             $(".all-list-attrs").html(res.html);
