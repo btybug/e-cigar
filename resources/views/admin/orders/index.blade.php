@@ -108,18 +108,45 @@
                         </div>
                         <div class="col-md-4">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title"><i class="fa fa-user"></i>  Shipping address</h3>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item active">
+                                        <div class="panel-heading" style="border-right: 1px solid #ddd;">
+                                            <a class="nav-link" id="shippingAddress-tab" data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress" aria-selected="true" aria-expanded="true">
+                                                <span class="panel-title"><i class="fa fa-user"></i>Shipping address</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <div class="panel-heading">
+                                            <a class="nav-link" id="billingAddress-tab" data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress" aria-selected="true" aria-expanded="true">
+                                                <span class="panel-title"><i class="fa fa-user"></i>Billing address</span>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" style="min-height: 120px; padding: 0 5px">
+                                    <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel" aria-labelledby="shippingAddress-tab">
+                                        Shipping address
+                                        ...
+                                        ....
+                                    </div>
+                                    <div class="tab-pane fade" id="billingAddress" role="tabpanel" aria-labelledby="billingAddress-tab">
+                                        Billing address
+                                        ....
+                                        .....
+                                    </div>
                                 </div>
-                                <table class="table">
-                                    <tbody>
-                                    <tr>
-                                        <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>
-                                        <td> sddc sdvdsvc
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+
+                                {{--<table class="table">--}}
+                                    {{--<tbody>--}}
+                                    {{--<tr>--}}
+                                        {{--<td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>--}}
+                                        {{--<td>--}}
+                                            {{--sddc sdvdsvc--}}
+                                        {{--</td>--}}
+                                    {{--</tr>--}}
+                                    {{--</tbody>--}}
+                                {{--</table>--}}
                             </div>
                         </div>
                     </div>
