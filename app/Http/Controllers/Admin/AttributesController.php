@@ -93,4 +93,20 @@ class AttributesController extends Controller
 
         return \Response::json(['error' => true]);
     }
+
+    public function postAllAttributes(Request $request)
+    {
+        $attr = Attributes::all();
+        return \Response::json(['error' => false,'data' => $attr]);
+    }
+
+    public function getAttributeByID(Request $request)
+    {
+        $attr = Attributes::find($request->id);
+        if($attr){
+            return \Response::json(['error' => false,'data' => $attr]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
 }

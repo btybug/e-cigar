@@ -480,18 +480,18 @@
                             </table>
                         </div>
                     </div>
-                    <div id="variations" class="tab-pane stock-variations-tab fade">
+                    <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="basic-left basic-wall">
-                                        <div class="all-list" style="min-height:300px;">
-                                            <ul>
+                                        <div class="all-list-attrs" style="min-height:300px;">
+                                            <ul class="attribute-list-items">
 
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block"><i class="fa fa-plus"></i>Add new
+                                            <a href="#" class="btn btn-info btn-block get-all-attributes"><i class="fa fa-plus"></i>Add new
                                                 option</a>
                                         </div>
                                     </div>
@@ -655,42 +655,62 @@
         <!-- /.row -->
 
     </section>
+
+    <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Options</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all-list">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <script>
-        window.AjaxCall = function postSendAjax(url, data, success, error) {
-            $.ajax({
-                type: "post",
-                url: url,
-                cache: false,
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (success) {
-                        success(data);
-                    }
-                    return data;
-                },
-                error: function (errorThrown) {
-                    if (error) {
-                        error(errorThrown);
-                    }
-                    return errorThrown;
+
+        $("body").on("click", ".get-all-attributes", function () {
+            AjaxCall("/admin/inventory/attributes/get-all", {}, function (res) {
+                if (!res.error) {
+                    $("#attributesModal .modal-body .all-list").empty();
+                    res.data.forEach(item => {
+                        let html = `  <li data-id="${item.id}" class="option-elm"><a
+                                                href="#">${item.name}</a> <a class="btn btn-primary add-attribute" data-id="${item.id}">ADD</a></li>`
+                        $("#attributesModal .modal-body .all-list").append(html)
+                    });
+                    $("#attributesModal").modal();
                 }
-            });
-        };
+            })
+        });
+
+        $("body").on("click", ".add-attribute", function () {
+            let id = $(this).data('id')
+            AjaxCall("/admin/inventory/attributes/get-attribute", {id:id}, function (res) {
+                if (!res.error) {
+                    $(".attribute-list-items").append(`<li data-id="${res.data.id}" class="option-elm"><a
+                                                href="#">${res.data.name}</a></li>`);
+                }
+            })
+            $(this).parent().remove()
+        })
+
         $("body").on("click", ".option-elm", function () {
             let id = $(this).attr("data-id")
-            AjaxCall("/admin/inventory/attributes/get-attr", {id}, function (res) {
+            AjaxCall("/admin/inventory/attributes/get-options-by-id", {id}, function (res) {
                 if (!res.error) {
                     $(".list").empty()
-                    res.data.forEach(item = > {
+                    res.data.forEach(item => {
                         let html = `<li class="badge attributes-item"><a href="#">${item.name}</a></li>`
                         $(".list"
                 ).
@@ -698,7 +718,8 @@
                 })
                 }
             })
-        })
+        });
+
         $("body").on("click", ".attributes-item", function () {
             // AJax petqa
             let text = $(this).children().text()
