@@ -681,7 +681,11 @@
     <script>
 
         $("body").on("click", ".get-all-attributes", function () {
-            AjaxCall("/admin/inventory/attributes/get-all", {}, function (res) {
+            let arr = []
+            $(".attribute-list-items").children().each(function(){
+                arr.push($(this).attr("data-id"))
+            })
+            AjaxCall("/admin/inventory/attributes/get-all", {arr}, function (res) {
                 if (!res.error) {
                     $("#attributesModal .modal-body .all-list").empty();
                     res.data.forEach(item => {
