@@ -240,7 +240,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 .order-notes .added span{
     text-decoration: underline dashed;
 }
-.order-notes .added button{
+.order-notes .added button {
     background: none;
     border: none;
     color: red;

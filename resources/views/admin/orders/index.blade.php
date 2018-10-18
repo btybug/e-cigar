@@ -263,7 +263,6 @@
 
         </div>
         <div class="col-md-2" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
-            {{--<h3 style="color: red">"Here comes order actions column"</h3>--}}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">Order Actions</h3>
@@ -279,7 +278,6 @@
             </select>
         </div>
         <div class="col-md-2" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
-            {{--<h3 style="color: red">"Here comes order notes column"</h3>--}}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">Order Notes</h3>
