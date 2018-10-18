@@ -15,6 +15,18 @@ class CreateCouponsTable extends Migration
     {
         Schema::create('coupons', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
+            $table->string('code')->nullable()->unique();
+            $table->string('type')->nullable();
+            $table->integer('discount')->nullable();
+            $table->integer('total_amount')->nullable();
+            $table->string('shipping_type')->nullable();
+            $table->longText('products')->nullable();
+            $table->string('start_date')->nullable();
+            $table->string('end_date')->nullable();
+            $table->string('user_per_coupon')->nullable();
+            $table->string('user_per_customer')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

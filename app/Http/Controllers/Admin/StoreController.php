@@ -10,10 +10,13 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CouponsRequest;
 use App\Http\Requests\ShippingZonePost;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
+use App\Models\Coupons;
 use App\Models\ShippingZones;
+use Carbon\Carbon;
 use DB;
 use PragmaRX\Countries\Package\Countries;
 use Lang;
@@ -106,7 +109,26 @@ class StoreController extends Controller
 
     public function getCouponsNew()
     {
-        return $this->view('coupons_new');
+        $coupons = null;
+        return $this->view('coupons_new',compact('coupons'));
+    }
+    public function CouponsSave(CouponsRequest $request)
+    {
+        $data = $request->except('_token');
+        Coupons::updateOrCreate($request->id, $data);
+        return redirect(route('admin_store_coupons'));
+    }
+
+    public function Delete($id)
+    {
+        Coupons::find($id)->delete();
+        return redirect(route('admin_store_coupons'));
+    }
+
+    public function Edit($id)
+    {
+        $coupons = Coupons::find($id);
+        return $this->view('coupons_new',compact('coupons'));
     }
 
     public function getCategory(Request $request)

@@ -6,6 +6,7 @@ use App\Models\Attributes;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Competitions;
+use App\Models\Coupons;
 use App\Models\Emails;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
@@ -191,34 +192,13 @@ class DatatableController extends Controller
 
     public function getAllCoupons()
     {
-        dd('dfgdf');
-        $comments =  Comment::with('commentTree')->where('commentable_type',Posts::class)->get();
-        $data = Comment::recursiveItemsToOneArray($comments);
-
+        $coupons =  Coupons::all();
+        $data = Comment::recursiveItemsToOneArray($coupons);
         return Datatables::of($data)
-            ->editColumn('author',function ($comment) {
-                $user = $comment->user;
-                return '<strong>
-                            <img alt="" src="/public/admin_theme/dist/img/user2-160x160.jpg" class="img" height="32" width="32"> '.$user->name.'</strong>
-                            <br>
-                            <a href="mailto:'.$user->email.'">'.$user->email.'</a><br>';
-            })
-            ->editColumn('comment',function ($comment) {
-                $str = 'Submitted on '.BBgetDateFormat($comment->created_at).' at '.BBgetTimeFormat($comment->created_at);
-                if($comment->parent){
-                    $str .= ' | In reply to '.$comment->parent->user->name;
-                }
-                $str .= '<br>';
-                $str .= '<div>' .$comment->comment. '</div>';
-                return $str;
-            })
-            ->editColumn('replies',function ($comment) {
-                return '<span class="comment-count">'.count($comment->childrens).'</span>';
-            })
-            ->addColumn('actions', function ($comment) {
-                return "<a class='badge btn-danger' href='".route("admin_post_comment_delete",$comment['id'])."'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='".route("admin_post_comment_edit",$comment['id'])."'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions','author','comment','replies'])
+            ->addColumn('actions', function ($coupons) {
+                return "<a class='badge btn-danger' href='".route("admin_store_coupons_delete",$coupons['id'])."'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='".route("admin_store_coupons_edit",$coupons['id'])."'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions','name','code','replies'])
             ->make(true);
     }
 

@@ -14,10 +14,14 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Description</th>
-                    <th>Image</th>
-                    <th>Icon</th>
-                    <th>Added/Last Modified Date</th>
+                    <th>Code</th>
+                    <th>type</th>
+                    <th>Discount</th>
+                    <th>Total Amount</th>
+                    <th>Shipping type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -36,10 +40,15 @@
             columns: [
             {data: 'id',name: 'id'},
             {data: 'name', name: 'name'},
-            {data: 'description',name: 'description'},
-            {data: 'image', name: 'image'},
-            {data: 'icon', name: 'icon'},
-            {data: 'created_at', name: 'created_at'}
+            {data: 'code',name: 'Code'},
+            {data: 'type', name: 'type'},
+            {data: 'discount', name: 'discount'},
+            {data: 'total_amount', name: 'total_amount'},
+            {data: 'shipping_type', name: 'shipping_type'},
+            {data: 'start_date', name: 'start_date'},
+            {data: 'end_date', name: 'end_date'},
+            {data: 'status', name: 'status'},
+            {data: 'actions', name: 'actions'}
             ]
             });
         });

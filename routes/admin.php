@@ -78,6 +78,10 @@ Route::group(['prefix' => 'store'], function () {
     Route::group(['prefix' => 'coupons'], function () {
         Route::get('/', 'Admin\StoreController@getCoupons')->name('admin_store_coupons');
         Route::get('/new', 'Admin\StoreController@getCouponsNew')->name('admin_store_coupons_new');
+        Route::get('/delete/{id}', 'Admin\StoreController@Delete')->name('admin_store_coupons_delete');
+        Route::get('/edit/{id}', 'Admin\StoreController@Edit')->name('admin_store_coupons_edit');
+        Route::post('/coupons-save', 'Admin\StoreController@CouponsSave')->name('admin_store_coupons_save');
+
     });
 
     Route::group(['prefix' => 'settings'], function () {
