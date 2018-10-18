@@ -331,7 +331,7 @@
 
                 </ul>
                 <div class="tab-content" style="position: absolute; z-index: 999; width: 100%;">
-                    <div class="tab-pane fade" id="changeStatusBtn" role="tabpanel" aria-labelledby="changeStatusBtn-tab" style="padding: 30px 0; box-shadow: 0 0 6px #848080; background: #fff;">
+                    <div class="tab-pane fade" id="changeStatusBtn" role="tabpanel" aria-labelledby="changeStatusBtn-tab" style="padding: 30px 10px 15px; box-shadow: 0 0 6px #848080; background: #fff;">
                         <div class="form-group" style="margin-bottom: 20px; overflow: hidden">
                             <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
                             <div class="col-sm-8">
@@ -345,23 +345,31 @@
                         <div class="form-group" style="overflow: hidden">
                             <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
                             <div class="col-sm-6">
-                                <input class="form-control " type="number">
-
+                                <input class="form-control" type="number">
                             </div>
                         </div>
+                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                            <button type="button" class="btn btn-primary">Change</button>
+                        </div>
                     </div>
-                    <div class="tab-pane fade" id="costumerNoteBtn" role="tabpanel" aria-labelledby="costumerNodeBtn-tab" style="padding: 5px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
+                    <div class="tab-pane fade" id="costumerNoteBtn" role="tabpanel" aria-labelledby="costumerNoteBtn-tab" style="padding: 15px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
                         <div class="text-center">
                             <h4 style="margin:0 0 10px">My Note Here</h4>
                             <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
                         </div>
+                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                            <button type="button" class="btn btn-primary">Add Note</button>
+                        </div>
 
                     </div>
 
-                    <div class="tab-pane fade" id="internalNoteBtn" role="tabpanel" aria-labelledby="internalNoteBtn-tab" style="padding: 5px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
+                    <div class="tab-pane fade" id="internalNoteBtn" role="tabpanel" aria-labelledby="internalNoteBtn-tab" style="padding: 15px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
                         <div class="text-center">
                             <h4 style="margin:0 0 10px">My Note Here</h4>
                             <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                        </div>
+                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                            <button type="button" class="btn btn-primary">Add Note</button>
                         </div>
 
                     </div>
