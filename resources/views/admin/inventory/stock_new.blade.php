@@ -155,17 +155,12 @@
                                 <div class="col-md-3">
                                     <div class="basic-left basic-wall">
                                         <div class="all-list">
-                                            <ul>
-                                                @if(count($attributes))
-                                                    @foreach($attributes as $attribute)
-                                                        <li data-id="{{ $attribute->id }}" class="option-elm"><a
-                                                                    href="#">{{ $attribute->name }}</a></li>
-                                                    @endforeach
-                                                @endif
+                                            <ul class="get-all-attributes-tab">
+
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
-                                            <a href="#" class="btn btn-info btn-block"><i class="fa fa-plus"></i>Add new
+                                            <a href="#" class="btn btn-info btn-block get-all-attributes-tab-event"><i class="fa fa-plus"></i>Add new
                                                 option</a>
                                         </div>
                                     </div>
@@ -180,10 +175,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="basic-right basic-wall">
-                                        <ul class="list">
-                                            <li><a href="#">Apple</a></li>
-                                            <li><a href="#">Banana</a></li>
-                                            <li><a href="#">Strawbery</a></li>
+                                        <ul class="list-attributes-options">
+
                                         </ul>
                                     </div>
                                 </div>
@@ -536,6 +529,36 @@
 @section('js')
     <script>
 
+        $("body").on("click", ".get-all-attributes-tab-event", function () {
+            let arr = []
+            $(".get-all-attributes-tab").children().each(function(){
+                arr.push($(this).attr("data-id"))
+            })
+            AjaxCall("/admin/inventory/attributes/get-all", {arr}, function (res) {
+                if (!res.error) {
+                    $("#attributesModal .modal-body .all-list").empty();
+                    res.data.forEach(item => {
+                        let html = `  <li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}</a> <a class="btn btn-primary add-attribute-event" data-id="${item.id}">ADD</a></li>`
+                        $("#attributesModal .modal-body .all-list").append(html)
+                    });
+                    $("#attributesModal").modal();
+                }
+            })
+        });
+
+        $("body").on("click", ".add-attribute-event", function () {
+            let id = $(this).data('id')
+            AjaxCall("/admin/inventory/attributes/get-attribute", {id:id}, function (res) {
+                if (!res.error) {
+                    $(".get-all-attributes-tab").append(`<li data-id="${res.data.id}" class="option-elm-attributes"><a
+                                                href="#">${res.data.name}</a></li>`);
+                }
+            })
+            $(this).parent().remove()
+        });
+
+
         $("body").on("click", ".get-all-attributes", function () {
             let arr = []
             $(".attribute-list-items").children().each(function(){
@@ -563,16 +586,16 @@
                 }
             })
             $(this).parent().remove()
-        })
+        });
 
-        $("body").on("click", ".option-elm", function () {
+        $("body").on("click", ".option-elm-attributes", function () {
             let id = $(this).attr("data-id")
             AjaxCall("/admin/inventory/attributes/get-options-by-id", {id}, function (res) {
                 if (!res.error) {
-                    $(".list").empty()
+                    $(".list-attributes-options").empty()
                     res.data.forEach(item => {
                         let html = `<li class="badge attributes-item"><a href="#">${item.name}</a></li>`
-                        $(".list"
+                        $(".list-attributes-options"
                 ).
                     append(html)
                 })
