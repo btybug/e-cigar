@@ -198,8 +198,8 @@ div.dataTables_wrapper div.dataTables_filter input {
 /*End new shipping zone*/
 
 /*admin orders*/
-.tabe-pane--see-order .table.table-bordered tr > td,
-.tabe-pane--see-order .table.table-bordered tr > th {
+.table.table--order-dtls.table-bordered tr > td,
+table.table--order-dtls.table-bordered tr > th {
     border-color: #ddd;
 }
 

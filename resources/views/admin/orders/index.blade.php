@@ -150,28 +150,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane tabe-pane--see-order fade" id="seeOrder" role="tabpanel" aria-labelledby="seeOrder-tab">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-info-circle"></i> Order (#3875)</h3>
-                        </div>
-                        <div class="panel-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <td style="width: 50%;" class="text-left">Payment Address</td>
-                                    <td style="width: 50%;" class="text-left">Shipping Address</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="text-left">sddc sdvdsvc<br>22esdwd<br>dcac 12134<br>Lagos<br>Nigeria</td>
-                                    <td class="text-left">sddc sdvdsvc<br>22esdwd<br>dcac 12134<br>Lagos<br>Nigeria</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered table--order-dtls" style="background: #fff">
                                 <thead>
                                 <tr>
                                     <td class="text-left">Product</td>
@@ -201,6 +182,30 @@
                                 <tr>
                                     <td colspan="4" class="text-right">Total</td>
                                     <td class="text-right">$105.00</td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane tabe-pane--see-order fade" id="seeOrder" role="tabpanel" aria-labelledby="seeOrder-tab">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-info-circle"></i> Order (#3875)</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <td style="width: 50%;" class="text-left">Payment Address</td>
+                                    <td style="width: 50%;" class="text-left">Shipping Address</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="text-left">sddc sdvdsvc<br>22esdwd<br>dcac 12134<br>Lagos<br>Nigeria</td>
+                                    <td class="text-left">sddc sdvdsvc<br>22esdwd<br>dcac 12134<br>Lagos<br>Nigeria</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -318,7 +323,7 @@
                 </div>
                 <div class="order-notes">
                     <div style="height: 800px; overflow: auto">
-                        <div class="status-outer" style="border-left: 3px solid green">
+                        <div class="status-outer" style="border-left: 5px solid green">
                             <div class="status">
                                 <div>
                                     <p>
@@ -336,7 +341,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid #3c8dbc">
+                        <div class="status-outer" style="border-left: 5px solid #ad0000">
                             <div class="status">
                                 <div>
                                     <p>
@@ -351,7 +356,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid #3d4d5d">
+                        <div class="status-outer" style="border-left: 5px solid #ad0000">
                             <div class="status">
                                 <div>
                                     <p>
@@ -365,7 +370,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid #ad0000">
+                        <div class="status-outer" style="border-left: 5px solid green">
                             <div class="status">
                                 <div>
                                     <p>
@@ -385,7 +390,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid green">
+                        <div class="status-outer" style="border-left: 5px solid green">
                             <div class="status">
                                 <div>
                                     <p>
@@ -403,7 +408,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid #3c8dbc">
+                        <div class="status-outer" style="border-left: 5px solid #ad0000">
                             <div class="status">
                                 <div>
                                     <p>
@@ -418,7 +423,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid #3d4d5d">
+                        <div class="status-outer" style="border-left: 5px solid #ad0000">
                             <div class="status">
                                 <div>
                                     <p>
@@ -432,7 +437,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 3px solid #ad0000">
+                        <div class="status-outer" style="border-left: 5px solid green">
                             <div class="status">
                                 <div>
                                     <p>
