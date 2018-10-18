@@ -27,11 +27,17 @@
         <div class="payment_gateways_tab">
             <ul class="list_paymant">
                 <li class="item">
-                    <div class="title">Cash Paymant</div>
+                    <div class="chek-title">
+                        <input id="cash_paymant" class="gateways_inp" type="checkbox">
+                        <label for="cash_paymant" class="title">Cash Paymant</label>
+                    </div>
                     <a href="{!! route('admin_settings_payment_gateways_settings') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
                 <li class="item">
-                    <div class="title">Paypal</div>
+                    <div class="chek-title">
+                        <input id="paypal" type="checkbox" class="gateways_inp">
+                        <label for="paypal" class="title">Paypal</label>
+                    </div>
                     <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
             </ul>
@@ -42,4 +48,16 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop
+@section('js')
+    <script>
+        $('body').on('change','.payment_gateways_tab .list_paymant .item .gateways_inp',function () {
+            if ($(this).is(':checked')) {
+                $(this).closest('.item').addClass('active')
+            }else {
+                $(this).closest('.item').removeClass('active')
+            }
+        });
+
+    </script>
 @stop
