@@ -311,81 +311,146 @@
 
 
         </div>
-        <div class="col-md-2" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
+        <div class="col-md-4" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title text-center">Order Actions</h3>
-                </div>
-            </div>
-            <select id="OrderActions" class="form-control">
-                <option selected>Actions</option>
-                <option>New Order</option>
-                <option>Cancelled Order</option>
-                <option>Processing Order</option>
-                <option>Completed Order</option>
-                <option>...</option>
-            </select>
-        </div>
-        <div class="col-md-2" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">Order Notes</h3>
+                    <h3 class="panel-title text-center">Order History</h3>
                 </div>
                 <div class="order-notes">
-                    <div style="height: 500px; overflow: auto">
-                        <div class="status-outer">
+                    <div style="height: 800px; overflow: auto">
+                        <div class="status-outer" style="border-left: 3px solid green">
                             <div class="status">
-                                <p>Order status changed from processing to Processing.</p>
-                            </div>
-                            <div class="added d-flex">
-                                <span>added on October 15 2018 at 5:33 am by Abokamal</span>
-                                <button class="btn btn-primary">
-                                    <i>Delete Note</i>
-                                </button>
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:11</span>
+                                    </p>
+
+                                    <p>
+                                        Order <span style="font-weight: bold">submitted </span>
+                                    </p>
+                                    <p>
+                                        Status <span style="font-weight: bold">processing</span>
+                                    </p>
+
+                                </div>
                             </div>
                         </div>
-                        <div class="status-outer">
+                        <div class="status-outer" style="border-left: 3px solid #3c8dbc">
                             <div class="status">
-                                <p>Order status changed from On Hold to Processing.</p>
-                            </div>
-                            <div class="added d-flex">
-                                <span>added on October 15 2018 at 5:33 am by Abokamal</span>
-                                <button class="btn btn-primary">
-                                    <i>Delete Note</i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="status-outer">
-                            <div class="status1">
-                                <p>Awaiting BACS payment Order status changed from Pending Payment to On Hold.</p>
-                            </div>
-                            <div class="added d-flex">
-                                <span>added on October 15 2018 at 5:33 am by Haseeb</span>
-                                <button class="btn btn-primary">
-                                    <i>Delete Note</i>
-                                </button>
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:11</span>
+                                    </p>
+                                    <p>order status changed to <span style="font-weight: bold"> processing </span></p>
+                                    <p>
+                                        <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                        admin massage
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="status-outer">
-                            <div class="status1">
-                                <p>Barcode generated successfully: <em>http://ukprintplus.co.uk/? ws barcode=10530</em></p>
-                            </div>
-                            <div class="added d-flex" style=" border-bottom: 1px solid gainsboro; padding-bottom: 20px;">
-                                <span>added on October 15 2018 at 5:33 am by Haseeb</span>
-                                <button class="btn btn-primary">
-                                    <i>Delete Note</i>
-                                </button>
+                        <div class="status-outer" style="border-left: 3px solid #3d4d5d">
+                            <div class="status">
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:15</span>
+                                    </p>
+                                    <p>order status changed to <span style="font-weight: bold">pending </span></p>
+                                    <p>
+                                        #094039404
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="add-note">
-                        <h6>Add note</h6>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                        <div class="status-outer" style="border-left: 3px solid #ad0000">
+                            <div class="status">
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:15</span>
+                                    </p>
+                                    <p>
+                                        Order <span style="font-weight: bold">submitted </span>
+                                    </p>
+                                    <p>
+                                        Status <span style="font-weight: bold">processing</span>
+                                    </p>
+
+                                    <p>
+                                        added by <span style="font-weight: bold">abokamal </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-flex">
-                            <button class="btn btn-outline-secondary">Costumer Note</button>
-                            <button class="btn btn-outline-secondary ml-2">Add</button>
+                        <div class="status-outer" style="border-left: 3px solid green">
+                            <div class="status">
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:11</span>
+                                    </p>
+
+                                    <p>
+                                        Order <span style="font-weight: bold">submitted </span>
+                                    </p>
+                                    <p>
+                                        Status <span style="font-weight: bold">processing</span>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-outer" style="border-left: 3px solid #3c8dbc">
+                            <div class="status">
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:11</span>
+                                    </p>
+                                    <p>order status changed to <span style="font-weight: bold"> processing </span></p>
+                                    <p>
+                                        <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                        admin massage
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-outer" style="border-left: 3px solid #3d4d5d">
+                            <div class="status">
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:15</span>
+                                    </p>
+                                    <p>order status changed to <span style="font-weight: bold">pending </span></p>
+                                    <p>
+                                        #094039404
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-outer" style="border-left: 3px solid #ad0000">
+                            <div class="status">
+                                <div>
+                                    <p>
+                                        on <span style="text-decoration: underline">11/11/2011</span>
+                                        at <span style="text-decoration: underline">11:15</span>
+                                    </p>
+                                    <p>
+                                        Order <span style="font-weight: bold">submitted </span>
+                                    </p>
+                                    <p>
+                                        Status <span style="font-weight: bold">processing</span>
+                                    </p>
+
+                                    <p>
+                                        added by <span style="font-weight: bold">abokamal </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
