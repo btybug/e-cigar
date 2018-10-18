@@ -332,7 +332,7 @@
                         </div>
                     </div>
                     <div id="price" class="tab-pane stock-price-tab fade">
-                        <div class="table-responsive">
+                        <div class="table-responsive variations-table">
                             <table id="discount" class="table table-striped table-bordered table-hover">
                                 <thead>
                                 <tr>
@@ -689,7 +689,7 @@
                 if (!res.error) {
                     $("#attributesModal .modal-body .all-list").empty();
                     res.data.forEach(item => {
-                        let html = `  <li data-id="${item.id}" class="option-elm"><a
+                        let html = `  <li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}</a> <a class="btn btn-primary add-attribute" data-id="${item.id}">ADD</a></li>`
                         $("#attributesModal .modal-body .all-list").append(html)
                     });
@@ -702,7 +702,7 @@
             let id = $(this).data('id')
             AjaxCall("/admin/inventory/attributes/get-attribute", {id:id}, function (res) {
                 if (!res.error) {
-                    $(".attribute-list-items").append(`<li data-id="${res.data.id}" class="option-elm"><a
+                    $(".attribute-list-items").append(`<li data-id="${res.data.id}" class="option-elm-variations"><a
                                                 href="#">${res.data.name}</a></li>`);
                 }
             })
@@ -720,6 +720,15 @@
                 ).
                     append(html)
                 })
+                }
+            })
+        });
+        
+        $("body").on("click", ".option-elm-variations", function () {
+            let id = $(this).attr("data-id")
+            AjaxCall("/url", {id}, function (res) {
+                if (!res.error) {
+                    $(".variations-table").empty().append(res.data)
                 }
             })
         });
