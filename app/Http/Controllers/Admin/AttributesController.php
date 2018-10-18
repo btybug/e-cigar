@@ -116,7 +116,7 @@ class AttributesController extends Controller
     public function getOptionsAutocomplate(Request $request,$id)
     {
         $attr = Attributes::find($id);
-        $likes=Attributes::where('name', 'like', '%' . $request->get('q') . '%')->get();
+        $likes=$attr->children()->where('name', 'like', '%' . $request->get('q') . '%')->get();
         return ($attr) ? $likes : [];
     }
 
