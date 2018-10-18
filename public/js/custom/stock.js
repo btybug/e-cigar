@@ -1,69 +1,60 @@
 const attributesJson = {};
 function makeSearchItem(basicData) {
-    // basicData = {
-    //     input: "input",
-    //     name: "name",
-    //     url: "url",
-    //     title: "title",
-    //     inputValues: "inputValues",
-    //     containerForAppend: "containerForAppend",
-    //     inputValues: "inputValues"
-    // };
+    var userList = null;
+    $.ajax({
+        url: basicData.url,
+        type: "POST",
+        dataType: "json",
+        headers: {
+            "X-CSRF-TOKEN": $("input[name='_token']").val()
+        },
+        success: function(data) {
+            userList = data;
+        }
+    });
     $(basicData.input).tagsinput({
         maxTags: 5,
-        confirmKeys: [13, 32, 44]
-        // typeaheadjs: {
-        //     displayKey: basicData.name,
-        //     valueKey: basicData.name,
-        //     source: function(query, processSync, processAsync) {
-        //         return $.ajax({
-        //             url: basicData.url,
-        //             type: "POST",
-        //             basicData: { q: query },
-        //             dataType: "json",
-        //             headers: {
-        //                 "X-CSRF-TOKEN": $("input[name='_token']").val()
-        //             },
-        //             success: function(json) {
-        //                 return processAsync(json);
-        //             }
-        //         });
-        //     },
-        //     templates: {
-        //         empty: [
-        //             '<div class="empty-message">',
-        //             "No results",
-        //             "</div>"
-        //         ].join("\n"),
-        //         header: `<h4>${basicData.title}</h4><hr>`,
-        //         suggestion: function(data) {
-        //             return `<div class="user-search-result"><span> ${
-        //                 data[basicData.name]
-        //             } </span></div>`;
-        //         }
-        //     }
-        // }
+        confirmKeys: [13, 32, 44],
+        typeaheadjs: {
+            displayKey: basicData.name,
+            valueKey: basicData.name,
+            source: function(query, processSync, processAsync) {
+                return $.ajax({
+                    url: basicData.url,
+                    type: "POST",
+                    data: { q: query },
+                    dataType: "json",
+                    headers: {
+                        "X-CSRF-TOKEN": $("input[name='_token']").val()
+                    },
+                    success: function(json) {
+                        return processAsync(json);
+                    }
+                });
+            },
+            templates: {
+                empty: [
+                    '<div class="empty-message">',
+                    "No results",
+                    "</div>"
+                ].join("\n"),
+                header: `<h4>${basicData.title}</h4><hr>`,
+                suggestion: function(data) {
+                    return `<div class="user-search-result"><span> ${
+                        data[basicData.name]
+                    } </span></div>`;
+                }
+            }
+        }
     });
-    // $(basicData.input).on("beforeItemAdd", function(event) {
-    //     event.cancel = true;
-    //     let valueCatergorayName = $(basicData.inputValues).val();
-    //     if (!valueCatergorayName.includes(event.item)) {
-    //         $(basicData.containerForAppend).append(makeSearchHtml(event.item));
-    //         if (
-    //             $(basicData.inputValues)
-    //                 .val()
-    //                 .trim()
-    //         ) {
-    //             let arr = JSON.parse($(basicData.inputValues).val());
-    //             arr.push(event.item);
-    //             $(basicData.inputValues).val(JSON.stringify(arr));
-    //             return;
-    //         }
-    //         let elm = [event.item];
-    //         $(basicData.inputValues).val(JSON.stringify(elm));
-    //         return;
-    //     }
-    // });
+    $(basicData.input).on("beforeItemAdd", function(event) {
+        console.log(userList);
+        checkUser = userList.some(item => {
+            return item.name === event.item;
+        });
+        event.cancel = !checkUser;
+        console.log(event.cancel);
+    });
     $(basicData.input).on("itemAdded", function() {
         let id = $(this).attr("data-id");
         addAttributeToJSON(id);
@@ -140,8 +131,7 @@ $("body").on("click", ".add-attribute-event", function() {
                         makeSearchItem({
                             input: `.attributes-item-input-${id}`,
                             name: "name",
-                            url:
-                                "/admin/inventory/attributes/get-options-by-id",
+                            url: `/admin/inventory/attributes/get-options-by-id/${id}`,
                             title: "Attributes",
                             inputValues: "#tags-names",
                             containerForAppend: ".coupon-tags-list"
@@ -339,30 +329,37 @@ $("body").on("click", ".remvoe-variations-select", function() {
 });
 
 $("body").on("click", ".get-all-variations", function() {
-    let html = "";
-    if (
-        Object.keys(attributesJson).length === 0 ||
-        $(".list-attrs-single-item").length ===
-            nestedObjectToArray(attributesJson).length
-    )
-        return false;
-    Object.entries(attributesJson).forEach(([key, val]) => {
-        let keys = Object.keys(attributesJson);
-        let nextIndex = keys.indexOf(key) + 1;
-        let nextItem = keys[nextIndex];
-        if (!nextItem) return false;
+    // let html = "";
+    // if (
+    //     Object.keys(attributesJson).length === 0 ||
+    //     $(".list-attrs-single-item").length ===
+    //         nestedObjectToArray(attributesJson).length
+    // )
+    //     return false;
+    // Object.entries(attributesJson).forEach(([key, val]) => {
+    //     let keys = Object.keys(attributesJson);
+    //     let nextIndex = keys.indexOf(key) + 1;
+    //     let nextItem = keys[nextIndex];
+    //     if (!nextItem) return false;
 
-        val.forEach(item2 => {
-            attributesJson[nextItem].forEach(item3 => {
-                console.log(item2);
-                console.log(item3);
-            });
-        });
+    //     val.forEach(item2 => {
+    //         attributesJson[nextItem].forEach(item3 => {
+    //             console.log(item2);
+    //             console.log(item3);
+    //         });
+    //     });
+    // });
+    // console.log(html);
+    // $(".all-list-attrs").append(
+    //     `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
+    // );
+    AjaxCall("/url", { data: attributesJson }, function(res) {
+        // HTMLmakeSelectVaritionOptions
+        //   $(".all-list-attrs").append(
+        //     `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
+        // );
+        console.log(res);
     });
-    console.log(html);
-    $(".all-list-attrs").append(
-        `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
-    );
 });
 
 // val.forEach((item, index) => {
@@ -431,7 +428,8 @@ function nestedObjectToArray(obj) {
         obj.map(function(item) {
             result = result.concat(nestedObjectToArray(item));
         });
-    } else {
+    }
+    {
         Object.keys(obj).map(function(key) {
             if (obj[key]) {
                 var chunk = nestedObjectToArray(obj[key]);

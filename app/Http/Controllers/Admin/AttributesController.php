@@ -115,7 +115,7 @@ class AttributesController extends Controller
 
     public function getOptionsAutocomplate(Request $request,$id)
     {
-        $lang = Lang::getLocale();
+        $lang = \Lang::getLocale();
         $attr = Attributes::find($id);
 
         $likes= $attr->children()->LeftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
