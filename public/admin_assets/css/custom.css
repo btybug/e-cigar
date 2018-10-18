@@ -283,6 +283,8 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 
 .tabe-pane--edit-order .form-group {
+    margin-bottom: 0;
+    overflow: hidden;
     padding-top: 15px;
     padding-bottom: 15px;
 }
