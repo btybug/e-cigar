@@ -49,9 +49,9 @@
             </div>
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
-                    <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
+                    <li ><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li><a data-toggle="tab" href="#media">Media</a></li>
-                    <li><a data-toggle="tab" href="#attributes">Attributes</a></li>
+                    <li class="active"><a data-toggle="tab" href="#attributes">Attributes</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#price">Price</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
@@ -61,7 +61,7 @@
             <!-- /.col -->
             <div class="col-md-12">
                 <div class="tab-content">
-                    <div id="basic" class="tab-pane fade basic-details-tab in active">
+                    <div id="basic" class="tab-pane fade basic-details-tab ">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-12">
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="attributes" class="tab-pane basic-details-tab fade attributes_tab">
+                    <div id="attributes" class="tab-pane basic-details-tab in active fade attributes_tab">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
@@ -475,9 +475,9 @@
                                 <div class="col-md-5">
                                     <div class="basic-left basic-wall">
                                         <div class="all-list-attrs" style="min-height:300px;">
-                                            <ul class="attribute-list-items">
+                                            <!-- <ul class="attribute-list-items">
 
-                                            </ul>
+                                            </ul> -->
                                         </div>
                                         <div class="button-add text-center">
                                             <div class="col-md-6">

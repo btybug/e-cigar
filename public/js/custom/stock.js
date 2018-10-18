@@ -1,3 +1,4 @@
+const attributesJson = {};
 function makeSearchItem(basicData) {
     // basicData = {
     //     input: "input",
@@ -10,38 +11,38 @@ function makeSearchItem(basicData) {
     // };
     $(basicData.input).tagsinput({
         maxTags: 5,
-        confirmKeys: [13, 32, 44],
-        typeaheadjs: {
-            displayKey: basicData.name,
-            valueKey: basicData.name,
-            source: function(query, processSync, processAsync) {
-                return $.ajax({
-                    url: basicData.url,
-                    type: "POST",
-                    basicData: { q: query },
-                    dataType: "json",
-                    headers: {
-                        "X-CSRF-TOKEN": $("input[name='_token']").val()
-                    },
-                    success: function(json) {
-                        return processAsync(json);
-                    }
-                });
-            },
-            templates: {
-                empty: [
-                    '<div class="empty-message">',
-                    "No results",
-                    "</div>"
-                ].join("\n"),
-                header: `<h4>${basicData.title}</h4><hr>`,
-                suggestion: function(data) {
-                    return `<div class="user-search-result"><span> ${
-                        data[basicData.name]
-                    } </span></div>`;
-                }
-            }
-        }
+        confirmKeys: [13, 32, 44]
+        // typeaheadjs: {
+        //     displayKey: basicData.name,
+        //     valueKey: basicData.name,
+        //     source: function(query, processSync, processAsync) {
+        //         return $.ajax({
+        //             url: basicData.url,
+        //             type: "POST",
+        //             basicData: { q: query },
+        //             dataType: "json",
+        //             headers: {
+        //                 "X-CSRF-TOKEN": $("input[name='_token']").val()
+        //             },
+        //             success: function(json) {
+        //                 return processAsync(json);
+        //             }
+        //         });
+        //     },
+        //     templates: {
+        //         empty: [
+        //             '<div class="empty-message">',
+        //             "No results",
+        //             "</div>"
+        //         ].join("\n"),
+        //         header: `<h4>${basicData.title}</h4><hr>`,
+        //         suggestion: function(data) {
+        //             return `<div class="user-search-result"><span> ${
+        //                 data[basicData.name]
+        //             } </span></div>`;
+        //         }
+        //     }
+        // }
     });
     // $(basicData.input).on("beforeItemAdd", function(event) {
     //     event.cancel = true;
@@ -63,7 +64,10 @@ function makeSearchItem(basicData) {
     //         return;
     //     }
     // });
-
+    $(basicData.input).on("itemAdded", function() {
+        let id = $(this).attr("data-id");
+        addAttributeToJSON(id);
+    });
     function makeSearchHtml(data) {
         return `<li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>${data}</li>`;
     }
@@ -106,12 +110,12 @@ $("body").on("click", ".add-attribute-event", function() {
                 function(res2) {
                     if (!res2.error) {
                         $(".get-all-attributes-tab")
-                            .append(`<li style="display: flex" data-id="${
+                            .append(`<li style="display: flex" data-option-container="${id}" data-id="${
                             res.data.id
                         }" class="option-elm-attributes"><a
                                                 href="#">${res.data.name}</a>
                                                 <div class="buttons">
-                                                <button class="btn btn-sm btn-success"><i class="fa fa-money"></i></button>
+                                                <button class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></button>
                                                 <button  class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                                 </div>
                                                 </li>`);
@@ -130,7 +134,7 @@ $("body").on("click", ".add-attribute-event", function() {
                                         </li>`;
                         });
                         $(`.attributes-container-${id}`).append(
-                            `<input class="attributes-item-input-${id}"  value="${value}"> `
+                            `<input data-id=${id} class="attributes-item-input-${id}"  value="${value}"> `
                         );
                         // Tags
                         makeSearchItem({
@@ -257,49 +261,187 @@ $("body").on("click", ".restore-item", function() {
     // $(".list").append(html)
 });
 
-var discount_row = 3;
+$("body").on("click", ".all-option-add-variations", function() {
+    let id = $(this)
+        .closest(".option-elm-attributes")
+        .attr("data-id");
+    if ($(this).hasClass("btn-success")) {
+        $(this)
+            .removeClass("btn-success")
+            .addClass("btn-primary");
+        addAttributeToJSON(id);
+    } else {
+        $(this)
+            .removeClass("btn-primary")
+            .addClass("btn-success");
+        addAttributeToJSON(id, true);
+    }
+});
 
-function addDiscount() {
-    html = '<tr id="discount-row' + discount_row + '">';
-    html +=
-        '  <td class="text-left"><select name="product_discount[' +
-        discount_row +
-        '][customer_group_id]" class="form-control">';
-    html += '    <option value="1">Default</option>';
-    html += "  </select></td>";
-    html +=
-        '  <td class="text-right"><input type="text" name="product_discount[' +
-        discount_row +
-        '][quantity]" value="" placeholder="Quantity" class="form-control" /></td>';
-    html +=
-        '  <td class="text-right"><input type="text" name="product_discount[' +
-        discount_row +
-        '][priority]" value="" placeholder="Priority" class="form-control" /></td>';
-    html +=
-        '  <td class="text-right"><input type="text" name="product_discount[' +
-        discount_row +
-        '][price]" value="" placeholder="Price" class="form-control" /></td>';
-    html +=
-        '  <td class="text-left" style="width: 20%;"><div class="input-group "><input type="text" name="product_discount[' +
-        discount_row +
-        '][date_start]" value="" placeholder="Date Start" data-date-format="YYYY-MM-DD" class="form-control date" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-    html +=
-        '  <td class="text-left" style="width: 20%;"><div class="input-group "><input type="text" name="product_discount[' +
-        discount_row +
-        '][date_end]" value="" placeholder="Date End" data-date-format="YYYY-MM-DD" class="form-control date" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
-    html +=
-        '  <td class="text-left"><button type="button" onclick="$(\'#discount-row' +
-        discount_row +
-        '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
-    html += "</tr>";
+function addAttributeToJSON(id, remove = false) {
+    let mainContainer = $("body").find(`[data-option-container="${id}"]`);
+    let className = mainContainer
+        .find(".all-option-add-variations")
+        .hasClass("btn-primary");
+    console.log(className);
+    let text = mainContainer.find("a").text();
+    let classInputContainer = `.attributes-container-${id}`;
+    let inputOptions = $(classInputContainer).find(
+        `.attributes-item-input-${id}`
+    );
+    let inputOptionsValue = inputOptions.val();
 
-    $("#discount tbody").append(html);
+    if (!remove && className) {
+        attributesJson[text] = inputOptionsValue.split(",");
+    } else {
+        delete attributesJson[text];
+    }
 
-    $("#tab-discount .date").datetimepicker({});
-
-    discount_row++;
+    console.log(attributesJson);
 }
 
-$("#tab-discount .date").datetimepicker({
-    language: "en-gb"
+function HTMLmakeSelectVaritionOptions(name, data, text = "") {
+    let value = "";
+    data.forEach(
+        item =>
+            (value += `<option ${
+                text === item ? "selected" : ""
+            }>${item}</option>`)
+    );
+    return `<div class="form-group">
+        <label for="exampleFormControlSelect1">${name}</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          ${value}
+        </select>
+      </div>`;
+}
+
+$("body").on("click", ".get-variation", function() {
+    let html = "";
+    if (
+        Object.keys(attributesJson).length === 0 ||
+        $(".list-attrs-single-item").length ===
+            nestedObjectToArray(attributesJson).length
+    )
+        return false;
+    Object.entries(attributesJson).forEach(([key, val]) => {
+        html += HTMLmakeSelectVaritionOptions(key, val);
+    });
+    $(".all-list-attrs").append(
+        `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
+    );
 });
+
+$("body").on("click", ".remvoe-variations-select", function() {
+    $(this)
+        .closest(".list-attrs-single-item")
+        .remove();
+});
+
+$("body").on("click", ".get-all-variations", function() {
+    let html = "";
+    if (
+        Object.keys(attributesJson).length === 0 ||
+        $(".list-attrs-single-item").length ===
+            nestedObjectToArray(attributesJson).length
+    )
+        return false;
+    Object.entries(attributesJson).forEach(([key, val]) => {
+        let keys = Object.keys(attributesJson);
+        let nextIndex = keys.indexOf(key) + 1;
+        let nextItem = keys[nextIndex];
+        if (!nextItem) return false;
+
+        val.forEach(item2 => {
+            attributesJson[nextItem].forEach(item3 => {
+                console.log(item2);
+                console.log(item3);
+            });
+        });
+    });
+    console.log(html);
+    $(".all-list-attrs").append(
+        `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
+    );
+});
+
+// val.forEach((item, index) => {
+//     // console.log(item)
+//     // console.log(index)
+//     // console.log(val)
+//     html += HTMLmakeSelectVaritionOptions(key, val, item);
+//     console.log(HTMLmakeSelectVaritionOptions(key, val, item));
+// });
+// // console.log(html);
+// var discount_row = 3;
+
+// function addDiscount() {
+//     html = '<tr id="discount-row' + discount_row + '">';
+//     html +=
+//         '  <td class="text-left"><select name="product_discount[' +
+//         discount_row +
+//         '][customer_group_id]" class="form-control">';
+//     html += '    <option value="1">Default</option>';
+//     html += "  </select></td>";
+//     html +=
+//         '  <td class="text-right"><input type="text" name="product_discount[' +
+//         discount_row +
+//         '][quantity]" value="" placeholder="Quantity" class="form-control" /></td>';
+//     html +=
+//         '  <td class="text-right"><input type="text" name="product_discount[' +
+//         discount_row +
+//         '][priority]" value="" placeholder="Priority" class="form-control" /></td>';
+//     html +=
+//         '  <td class="text-right"><input type="text" name="product_discount[' +
+//         discount_row +
+//         '][price]" value="" placeholder="Price" class="form-control" /></td>';
+//     html +=
+//         '  <td class="text-left" style="width: 20%;"><div class="input-group "><input type="text" name="product_discount[' +
+//         discount_row +
+//         '][date_start]" value="" placeholder="Date Start" data-date-format="YYYY-MM-DD" class="form-control date" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+//     html +=
+//         '  <td class="text-left" style="width: 20%;"><div class="input-group "><input type="text" name="product_discount[' +
+//         discount_row +
+//         '][date_end]" value="" placeholder="Date End" data-date-format="YYYY-MM-DD" class="form-control date" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div></td>';
+//     html +=
+//         '  <td class="text-left"><button type="button" onclick="$(\'#discount-row' +
+//         discount_row +
+//         '\').remove();" data-toggle="tooltip" title="Remove" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+//     html += "</tr>";
+
+//     $("#discount tbody").append(html);
+
+//     $("#tab-discount .date").datetimepicker({});
+
+//     discount_row++;
+// }
+
+// $("#tab-discount .date").datetimepicker({
+//     language: "en-gb"
+// });
+
+// HELPERSSSSSSSSSSSSSSSSS
+
+function nestedObjectToArray(obj) {
+    if (typeof obj !== "object") {
+        return [obj];
+    }
+    var result = [];
+    if (obj.constructor === Array) {
+        obj.map(function(item) {
+            result = result.concat(nestedObjectToArray(item));
+        });
+    } else {
+        Object.keys(obj).map(function(key) {
+            if (obj[key]) {
+                var chunk = nestedObjectToArray(obj[key]);
+                chunk.map(function(item) {
+                    result.push(key + "-" + item);
+                });
+            } else {
+                result.push(key);
+            }
+        });
+    }
+    return result;
+}
