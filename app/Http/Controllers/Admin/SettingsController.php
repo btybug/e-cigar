@@ -16,6 +16,7 @@ use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
+use App\Services\ShortCodes;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -63,7 +64,8 @@ class SettingsController extends Controller
         if($id){
             $model=Emails::findOrFail($id);
         }
-        return $this->view('emails.manage',compact('model'));
+       $shortcodes= new ShortCodes();
+        return $this->view('emails.manage',compact('model','shortcodes'));
     }
 
     public function postCreateOrUpdate(Request $request)

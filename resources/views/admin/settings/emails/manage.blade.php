@@ -131,39 +131,34 @@
         </div>
     </div>
     <div class="col-md-4">
+        @if($shortcodes->relatedShortcoders[$model->slug])
         <table class="table table-striped table--email-temp">
             <thead>
             <tr class="table--email-temp_top">
-                <th colspan="3">Email Field Details</th>
+                <th colspan="3">Specific shortcodes for this type</th>
             </tr>
             <tr class="table--email-temp_bottom">
                 <th></th>
-                <th>Property</th>
+                <th>Code</th>
                 <th>Description</th>
             </tr>
             </thead>
             <tbody>
+
+            @foreach($shortcodes->relatedShortcoders[$model->slug] as $shortcode)
             <tr>
                 <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td>site_name</td>
-                <td>Your site name</td>
+                <td><b>{!! '['.$shortcode['code'].']' !!}</b></td>
+                <td>{!! $shortcode['description'] !!}</td>
             </tr>
-            <tr>
-                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td>site_url</td>
-                <td>Your site URL</td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td>ticket_user</td>
-                <td>Name of ticket user</td>
-            </tr>
+            @endforeach
             </tbody>
         </table>
+        @endif
         <table class="table table-striped table--email-temp">
             <thead>
             <tr class="table--email-temp_top">
-                <th colspan="3">Specific Data</th>
+                <th colspan="3">Common Shortcodes</th>
             </tr>
             <tr class="table--email-temp_bottom">
                 <th></th>
@@ -172,21 +167,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td>site_name</td>
-                <td>Your site name</td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td>site_url</td>
-                <td>Your site URL</td>
-            </tr>
-            <tr>
-                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td>ticket_user</td>
-                <td>Name of ticket user</td>
-            </tr>
+            @foreach($shortcodes->mailShortcodes as $shortcode)
+                <tr>
+                    <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                    <td><b>{!! '['.$shortcode['code'].']' !!}</b></td>
+                    <td>{!! $shortcode['description'] !!}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
 

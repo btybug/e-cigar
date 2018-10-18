@@ -185,3 +185,7 @@ function get_default_language(){
     $lang = \App\Models\SiteLanguages::where('default',1)->first();
     return $lang;
 }
+
+function reset_password_link($user){
+    return url(config('app.url').route('password.reset', $this->token, false));
+}

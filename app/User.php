@@ -52,4 +52,14 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    public function sendEmailVerificationNotification ()
+    {
+        
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+
+    }
+
 }
