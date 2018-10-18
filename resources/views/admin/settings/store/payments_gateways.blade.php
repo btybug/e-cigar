@@ -28,7 +28,7 @@
             <ul class="list_paymant">
                 <li class="item">
                     <div class="title">Cash Paymant</div>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                    <a href="{!! route('admin_settings_payment_gateways_settings') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
                 <li class="item">
                     <div class="title">Paypal</div>

@@ -121,4 +121,9 @@ class SettingsController extends Controller
     {
         return  $this->view('store.payments_gateways');
     }
+
+    public function getStorePaymentsGatewaysSettings()
+    {
+        return  $this->view('store.payments_gateways.settings');
+    }
 }
