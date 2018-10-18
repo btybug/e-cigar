@@ -198,8 +198,94 @@ div.dataTables_wrapper div.dataTables_filter input {
 /*End new shipping zone*/
 
 /*admin orders*/
-.tabe-pane--see-order .table > tr > td,
-.tabe-pane--see-order .table > tr > th {
+.tabe-pane--see-order .table.table-bordered tr > td,
+.tabe-pane--see-order .table.table-bordered tr > th {
     border-color: #ddd;
 }
+
+.order-notes .head{
+    justify-content: space-between;
+    border-bottom: 1px solid gainsboro;
+    padding-top: 10px;
+}
+.order-notes p{
+    font-size: 14px;
+    margin-top: 15px;
+}
+.order-notes span{
+    font-size: 12px;
+}
+.order-notes .status p{
+    background-color: #f1efef;
+    border-radius: 3px;
+    padding: 8px;
+    line-height: 1.3;
+}
+.order-notes .status{
+    position: relative;
+}
+.order-notes .status:before{
+    content: "";
+    width: 18px;
+    height: 18px;
+    background-color: #f1efef;
+    position: absolute;
+    top: 42px;
+    left: 22px;
+    transform: rotate(45deg);
+
+}
+.order-notes .added span{
+    text-decoration: underline dashed;
+}
+.order-notes .added button{
+    background: none;
+    border: none;
+    color: red;
+    text-decoration: underline;
+}
+.order-notes .added button:hover{
+    background: none !important;
+    border: none !important;
+    color: red !important;
+    text-decoration: underline !important;
+}
+.order-notes .added button:focus{
+    box-shadow: none !important;
+}
+.order-notes .status1 p{
+    background-color: #f1efef;
+    border-radius: 3px;
+    padding: 8px;
+    line-height: 1.3;
+}
+.order-notes .status1{
+    position: relative;
+}
+.order-notes .status1:before{
+    content: "";
+    width: 13px;
+    height: 13px;
+    background-color: #f1efef;
+    position: absolute;
+    top: 63px;
+    left: 36px;
+    transform: rotate(45deg);
+
+}
+.order-notes .status1 em:hover{
+    color: #2e9eca;
+    text-decoration: underline;
+}
+.order-notes .add-note{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.order-notes textarea{
+    height: 100px;
+}
+.order-notes textarea:focus{
+    box-shadow: none !important;
+}
+
 /*End admin orders*/

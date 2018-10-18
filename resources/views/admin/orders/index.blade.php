@@ -37,7 +37,10 @@
                     <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true" aria-expanded="true">Order Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="mail-tab" data-toggle="tab" href="#mail" role="tab" aria-controls="mail" aria-selected="false">See Order</a>
+                    <a class="nav-link" id="seeOrder-tab" data-toggle="tab" href="#seeOrder" role="tab" aria-controls="seeOrder" aria-selected="false">See Order</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="editOrder-tab" data-toggle="tab" href="#editOrder" role="tab" aria-controls="editOrder" aria-selected="false">Edit Order</a>
                 </li>
             </ul>
             <div class="tab-content tab-content-store-settings">
@@ -92,7 +95,7 @@
                             </tbody></table>
                     </div>
                 </div>
-                <div class="tab-pane tabe-pane--see-order fade" id="mail" role="tabpanel" aria-labelledby="mail-tab">
+                <div class="tab-pane tabe-pane--see-order fade" id="seeOrder" role="tabpanel" aria-labelledby="seeOrder-tab">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title"><i class="fa fa-info-circle"></i> Order (#3875)</h3>
@@ -154,19 +157,79 @@
 
 
         </div>
-        <div class="col-md-2" style="border-left: 2px solid #ddd; height: 100%">
-            <h3 style="color: red">"Here comes order actions column"</h3>
+        <div class="col-md-2" style="border-left: 2px solid #ddd; height: 868px; overflow: auto">
+            {{--<h3 style="color: red">"Here comes order actions column"</h3>--}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Order Actions</h3>
+                </div>
+            </div>
             <select id="OrderActions" class="form-control">
-                <option selected>Order Actions</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
-                <option>...</option>
+                <option selected>Actions</option>
+                <option>New Order</option>
+                <option>Cancelled Order</option>
+                <option>Processing Order</option>
+                <option>Completed Order</option>
                 <option>...</option>
             </select>
         </div>
-        <div class="col-md-2">
-            <h3 style="color: red">"Here comes order notes column"</h3>
+        <div class="col-md-2" style="border-left: 2px solid #ddd; height: 868px; overflow: auto">
+            {{--<h3 style="color: red">"Here comes order notes column"</h3>--}}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">Order Notes</h3>
+                </div>
+                <div class="order-notes">
+                    <div>
+                        <div class="status">
+                            <p>Order status changed from processing to Processing.</p>
+                        </div>
+                        <div class="added d-flex">
+                            <span>added on October 15 2018 at 5:33 am by Abokamal</span>
+                            <button class="btn btn-primary">
+                                <i>Delete Note</i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="status">
+                        <p>Order status changed from On Hold to Processing.</p>
+                    </div>
+                    <div class="added d-flex">
+                        <span>added on October 15 2018 at 5:33 am by Abokamal</span>
+                        <button class="btn btn-primary">
+                            <i>Delete Note</i>
+                        </button>
+                    </div>
+                    <div class="status1">
+                        <p>Awaiting BACS payment Order status changed from Pending Payment to On Hold.</p>
+                    </div>
+                    <div class="added d-flex">
+                        <span>added on October 15 2018 at 5:33 am by Haseeb</span>
+                        <button class="btn btn-primary">
+                            <i>Delete Note</i>
+                        </button>
+                    </div>
+                    <div class="status1">
+                        <p>Barcode generated successfully: <em>http://ukprintplus.co.uk/? ws barcode=10530</em></p>
+                    </div>
+                    <div class="added d-flex" style=" border-bottom: 1px solid gainsboro; padding-bottom: 20px;">
+                        <span>added on October 15 2018 at 5:33 am by Haseeb</span>
+                        <button class="btn btn-primary">
+                            <i>Delete Note</i>
+                        </button>
+                    </div>
+                    <div class="add-note">
+                        <h6>Add note</h6>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                        <div class="d-flex">
+                            <button class="btn btn-outline-secondary">Costumer Note</button>
+                            <button class="btn btn-outline-secondary ml-2">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
