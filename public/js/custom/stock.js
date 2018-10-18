@@ -1,3 +1,74 @@
+function makeSearchItem(basicData) {
+    // basicData = {
+    //     input: "input",
+    //     name: "name",
+    //     url: "url",
+    //     title: "title",
+    //     inputValues: "inputValues",
+    //     containerForAppend: "containerForAppend",
+    //     inputValues: "inputValues"
+    // };
+    $(basicData.input).tagsinput({
+        maxTags: 5,
+        confirmKeys: [13, 32, 44],
+        typeaheadjs: {
+            displayKey: basicData.name,
+            valueKey: basicData.name,
+            source: function(query, processSync, processAsync) {
+                return $.ajax({
+                    url: basicData.url,
+                    type: "POST",
+                    basicData: { q: query },
+                    dataType: "json",
+                    headers: {
+                        "X-CSRF-TOKEN": $("input[name='_token']").val()
+                    },
+                    success: function(json) {
+                        return processAsync(json);
+                    }
+                });
+            },
+            templates: {
+                empty: [
+                    '<div class="empty-message">',
+                    "No results",
+                    "</div>"
+                ].join("\n"),
+                header: `<h4>${basicData.title}</h4><hr>`,
+                suggestion: function(data) {
+                    return `<div class="user-search-result"><span> ${
+                        data[basicData.name]
+                    } </span></div>`;
+                }
+            }
+        }
+    });
+    // $(basicData.input).on("beforeItemAdd", function(event) {
+    //     event.cancel = true;
+    //     let valueCatergorayName = $(basicData.inputValues).val();
+    //     if (!valueCatergorayName.includes(event.item)) {
+    //         $(basicData.containerForAppend).append(makeSearchHtml(event.item));
+    //         if (
+    //             $(basicData.inputValues)
+    //                 .val()
+    //                 .trim()
+    //         ) {
+    //             let arr = JSON.parse($(basicData.inputValues).val());
+    //             arr.push(event.item);
+    //             $(basicData.inputValues).val(JSON.stringify(arr));
+    //             return;
+    //         }
+    //         let elm = [event.item];
+    //         $(basicData.inputValues).val(JSON.stringify(elm));
+    //         return;
+    //     }
+    // });
+
+    function makeSearchHtml(data) {
+        return `<li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>${data}</li>`;
+    }
+}
+
 $("body").on("click", ".get-all-attributes-tab-event", function() {
     let arr = [];
     $(".get-all-attributes-tab")
@@ -47,12 +118,29 @@ $("body").on("click", ".add-attribute-event", function() {
                         $(".choset-attributes").append(
                             `<div style="height: 50px" class="attributes-container-${id} main-attr-container"></div>`
                         );
+                        console.log(res2.data);
+                        let value = "";
                         res2.data.forEach(item => {
+                            value += item.name + ",";
                             let html = `<li class="btn btn-primary attributes-item">
-<a href="#" class="title-attr">${item.name}</a>
-<span class="restore-item badge"><i class="fa fa-trash" ></i></span>
-</li>`;
-                            $(`.attributes-container-${id}`).append(html);
+                                          <a href="#" class="title-attr">${
+                                              item.name
+                                          }</a>
+                                           <span class="restore-item badge"><i class="fa fa-trash" ></i></span>
+                                        </li>`;
+                        });
+                        $(`.attributes-container-${id}`).append(
+                            `<input class="attributes-item-input-${id}"  value="${value}"> `
+                        );
+                        // Tags
+                        makeSearchItem({
+                            input: `.attributes-item-input-${id}`,
+                            name: "name",
+                            url:
+                                "/admin/inventory/attributes/get-options-by-id",
+                            title: "Attributes",
+                            inputValues: "#tags-names",
+                            containerForAppend: ".coupon-tags-list"
                         });
                     }
                 }
