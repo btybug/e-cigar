@@ -317,6 +317,58 @@
 
         </div>
         <div class="col-md-4" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
+            <div style="position: relative">
+                <ul class="nav nav-tabs orderchanges-tabs" role="tablist" style="margin-bottom: 20px; border: none">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" id="changeStatusBtn-tab" data-toggle="tab" href="#changeStatusBtn" role="tab" aria-controls="changeStatusBtn" aria-selected="false" style="border-radius: 4px">Change Status</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" id="costumerNoteBtn-tab" data-toggle="tab" href="#costumerNoteBtn" role="tab" aria-controls="costumerNoteBtn" aria-selected="false" style="border-radius: 4px">+ Costumer Note</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary" id="internalNoteBtn-tab" data-toggle="tab" href="#internalNoteBtn" role="tab" aria-controls="internalNoteBtn" aria-selected="false" style="border-radius: 4px">Inter Note</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content" style="position: absolute; z-index: 999; width: 100%;">
+                    <div class="tab-pane fade" id="changeStatusBtn" role="tabpanel" aria-labelledby="changeStatusBtn-tab" style="padding: 30px 0; box-shadow: 0 0 6px #848080; background: #fff;">
+                        <div class="form-group" style="margin-bottom: 20px; overflow: hidden">
+                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
+                            <div class="col-sm-8">
+                                <select name="changeStatusSelect" id="input-store" class="form-control">
+                                    <option value="0" selected="selected">Shipping</option>
+                                    <option value="0" selected="selected">...</option>
+                                    <option value="0" selected="selected">...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="overflow: hidden">
+                            <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
+                            <div class="col-sm-6">
+                                <input class="form-control " type="number">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="costumerNoteBtn" role="tabpanel" aria-labelledby="costumerNodeBtn-tab" style="padding: 5px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
+                        <div class="text-center">
+                            <h4 style="margin:0 0 10px">My Note Here</h4>
+                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="internalNoteBtn" role="tabpanel" aria-labelledby="internalNoteBtn-tab" style="padding: 5px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
+                        <div class="text-center">
+                            <h4 style="margin:0 0 10px">My Note Here</h4>
+                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">Order History</h3>

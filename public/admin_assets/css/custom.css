@@ -289,4 +289,14 @@ table.table--order-dtls.table-bordered tr > th {
     padding-bottom: 15px;
 }
 
+.nav-tabs.orderchanges-tabs li.active a,
+.nav-tabs.orderchanges-tabs li:hover a {
+    background: #3c8dbc;
+    color: #fff;
+}
+
+.nav-tabs.orderchanges-tabs li:hover a {
+    border-width: 1px;
+}
+
 /*End admin orders*/
