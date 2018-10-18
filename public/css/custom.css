@@ -615,6 +615,12 @@ display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
+.geo-zone-page .view-coupon{
+    height: 150px;
+    overflow: auto;
+}
+.geo-zone-page .text-left{
+    text-align: left;
+}
 
 

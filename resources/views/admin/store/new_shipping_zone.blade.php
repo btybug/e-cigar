@@ -3,14 +3,16 @@
 
 @stop
 @section('content')
-    <div id="content">
+    <div id="content" class="geo-zone-page">
         {!! Form::model($shipping_zone,['url'=> route('admin_store_shipping_zone_save'),'class' => 'form-horizontal','files' => true ]) !!}
         {!! Form::hidden('id',null) !!}
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary" data-original-title="Save"><i class="fa fa-save"></i></button>
-                    <a href="#" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i class="fa fa-reply"></i></a></div>
+                    <button type="submit" class="btn btn-primary" data-original-title="Save"><i class="fa fa-save"></i>
+                    </button>
+                    <a href="#" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i
+                                class="fa fa-reply"></i></a></div>
                 <h1>Geo Zones</h1>
                 <ul class="breadcrumb">
                     <li><a href="#">Home</a></li>
@@ -27,53 +29,53 @@
                 </ul>
             </div>
         @endif
-        <div class="container-fluid"> <div class="panel panel-default">
+        <div class="container-fluid">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="fa fa-pencil"></i> Add Geo Zone</h3>
                 </div>
                 <div class="panel-body panel-body--new-shipping-zone">
-                        <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-name">Geo Zone Name</label>
-                            <div class="col-sm-10">
-                                {!! Form::text('name',$shipping_zone->name??null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
-                            </div>
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-name">Geo Zone Name</label>
+                        <div class="col-sm-10">
+                            {!! Form::text('name',$shipping_zone->name??null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
                         </div>
-                        <div class="form-group required">
-                            <label class="col-sm-2 control-label" for="input-description">Description</label>
-                            <div class="col-sm-10">
-                                {!! Form::text('description',$shipping_zone->description??null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
-                            </div>
+                    </div>
+                    <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-description">Description</label>
+                        <div class="col-sm-10">
+                            {!! Form::text('description',$shipping_zone->description??null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
                         </div>
-                            <div class="form-group row required">
-                                <label class="col-sm-2 control-label" for="input-tax">Tax</label>
-                                <div class="col-sm-5">
-                                    {!! Form::text('tax',$shipping_zone->tax??null,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
-                                </div>
-                                <div class="col-sm-5">
-                                    {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],[$shipping_zone->percentage??null],['id' => 'pecentage', 'class'=>'form-control']) !!}
-                                </div>
-                            </div>
+                    </div>
+                    <div class="form-group row required">
+                        <label class="col-sm-2 control-label" for="input-tax">Tax</label>
+                        <div class="col-sm-5">
+                            {!! Form::text('tax',$shipping_zone->tax??null,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
+                        </div>
+                        <div class="col-sm-5">
+                            {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],[$shipping_zone->percentage??null],['id' => 'pecentage', 'class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-1">
 
-
-                        <fieldset>
-                            <legend>Geo Zones</legend>
-                            <table id="zone-to-geo-zone" class="table table-striped table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <td class="text-left">Country</td>
-                                    <td class="text-left">Category</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                                <tfoot>
-                                <tr>
-                                    <td>
-                                        {!! Form::select('country',[$countries],[$shipping_zone->country??null],['id' => 'country', 'class'=>'form-control']) !!}
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {!! Form::text('region',$shipping_zone->region??null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label">Payment
+                                            Options</label>
+                                        <div class="col-sm-10">
+                                            {!! Form::text('payment_options',null,['placeholder'=>'Payment Options','class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="row">
+                                        <label class="col-sm-2 control-label text-left">Tag It</label>
+                                        <div class="col-sm-10">
+                                            {!! Form::text('tags',null,['placeholder'=>'Tag','class' => 'form-control']) !!}
                                             <ul class="dropdown-menu"></ul>
                                             <div id="coupon-category" class="well well-sm view-coupon">
                                                 <ul class="coupon-category-list" style="list-style: none">
@@ -81,16 +83,51 @@
                                             </div>
                                             <input type="hidden" class="search-hidden-input" value="" id="category-names">
                                         </div>
-                                    </td>
-                                </tr>
-                                </tfoot>
-                            </table>
-                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend>Geo Zones</legend>
+                        <table id="zone-to-geo-zone" class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <td class="text-left">Country</td>
+                                <td class="text-left">Category</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td>
+                                    {!! Form::select('country',[$countries],[$shipping_zone->country??null],['id' => 'country', 'class'=>'form-control']) !!}
+                                </td>
+                                <td>
+                                    <div>
+                                        {!! Form::text('region',$shipping_zone->region??null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
+                                        <ul class="dropdown-menu"></ul>
+                                        <div id="coupon-category" class="well well-sm view-coupon">
+                                            <ul class="coupon-category-list" style="list-style: none">
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" class="search-hidden-input" value="" id="category-names">
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </fieldset>
                 </div>
             </div>
         </div>
         {!!   Form::close()   !!}
     </div>
+@stop
+@section("css")
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <script>
@@ -100,21 +137,23 @@
             let val = $(this).val();
             $("#coupon-category").show()
 
-            AjaxCall("/admin/store/shipping-zones/find-region", {id: val,country: country}, function (res) {
-                if(!res.error){
+            AjaxCall("/admin/store/shipping-zones/find-region", {id: val, country: country}, function (res) {
+                if (!res.error) {
                     $('.coupon-category-list').empty()
                     console.log(res)
-                    Object.values(res.data).forEach(item => {
-                        if(item !== null){
+                    Object.values(res.data).forEach(item = > {
+                        if(item !== null
+                )
+                    {
                         $('.coupon-category-list').append(`<li class="region-item">${item}</li>`);
 
-                        }
-                    })
+                    }
+                })
                 }
             })
         })
 
-        $("body").on("click", ".region-item", function(){
+        $("body").on("click", ".region-item", function () {
             let value = $(this).text()
             $("#region").val(value)
             $('.coupon-category-list').empty()
