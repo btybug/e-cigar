@@ -56,36 +56,17 @@
                             {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],[$shipping_zone->percentage??null],['id' => 'pecentage', 'class'=>'form-control']) !!}
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-1">
-
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <label class="col-sm-2 control-label">Payment
-                                            Options</label>
-                                        <div class="col-sm-10">
-                                            {!! Form::text('payment_options',null,['placeholder'=>'Payment Options','class' => 'form-control']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
-                                    <div class="row">
-                                        <label class="col-sm-2 control-label text-left">Tag It</label>
-                                        <div class="col-sm-10">
-                                            {!! Form::text('tags',null,['placeholder'=>'Tag','class' => 'form-control']) !!}
-                                            <ul class="dropdown-menu"></ul>
-                                            <div id="coupon-category" class="well well-sm view-coupon">
-                                                <ul class="coupon-category-list" style="list-style: none">
-                                                </ul>
-                                            </div>
-                                            <input type="hidden" class="search-hidden-input" value="" id="category-names">
-                                        </div>
-                                    </div>
-                                </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 control-label" for="input-description">Payment
+                            Options</label>
+                        <div class="col-sm-10">
+                            {!! Form::text('tags',null,['placeholder'=>'Tag','class' => 'form-control']) !!}
+                            <ul class="dropdown-menu"></ul>
+                            <div id="coupon-category" class="well well-sm view-coupon">
+                                <ul class="coupon-category-list" style="list-style: none">
+                                </ul>
                             </div>
+                            <input type="hidden" class="search-hidden-input" value="" id="category-names">
                         </div>
                     </div>
 
