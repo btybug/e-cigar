@@ -12,7 +12,7 @@
         </ol>
     </section>
 
-    <section class="content">
+    <section class="content stock-page">
 
         <div class="row">
             <div class="col-md-3">
@@ -149,12 +149,12 @@
                             </div>
                         </div>
                     </div>
-                    <div id="attributes" class="tab-pane basic-details-tab fade">
+                    <div id="attributes" class="tab-pane basic-details-tab fade attributes_tab">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="basic-left basic-wall">
-                                        <div class="all-list">
+                                        <div class="all-list-attributes">
                                             <ul class="get-all-attributes-tab">
 
                                             </ul>
@@ -549,10 +549,18 @@
                     AjaxCall("/admin/inventory/attributes/get-options-by-id", {id}, function (res2) {
                         if (!res2.error) {
                             $(".get-all-attributes-tab").append(`<li style="display: flex" data-id="${res.data.id}" class="option-elm-attributes"><a
-                                                href="#">${res.data.name}</a> <button><i class="fa fa-money"></i></button><button  class="remove-all-attributes"><i class="fa fa-trash"></i></button> </li>`);
-                            $(".choset-attributes").append(`<div style="height: 50px" class="attributes-container-${id}"></div>`)
+                                                href="#">${res.data.name}</a>
+                                                <div class="buttons">
+                                                <button class="btn btn-sm btn-success"><i class="fa fa-money"></i></button>
+                                                <button  class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                </div>
+                                                </li>`);
+                            $(".choset-attributes").append(`<div style="height: 50px" class="attributes-container-${id} main-attr-container"></div>`)
                             res2.data.forEach(item => {
-                                let html = `<li class="badge attributes-item"><a href="#">${item.name}</a><button class="restore-item"><i class="fa fa-trash" ></i></button> </li>`
+                                let html = `<li class="btn btn-primary attributes-item">
+<a href="#" class="title-attr">${item.name}</a>
+<span class="restore-item badge"><i class="fa fa-trash" ></i></span>
+</li>`
                                 $(`.attributes-container-${id}`).append(html)
                         })
                         }
