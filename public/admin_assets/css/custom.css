@@ -277,6 +277,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 }
 .order-notes textarea{
     height: 100px;
+    resize: none;
 }
 .order-notes textarea:focus{
     box-shadow: none !important;
@@ -292,6 +293,5 @@ div.dataTables_wrapper div.dataTables_filter input {
 .status-outer {
     padding:0 3px;
 }
-
 
 /*End admin orders*/

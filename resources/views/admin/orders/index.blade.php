@@ -262,7 +262,7 @@
 
 
         </div>
-        <div class="col-md-2" style="border-left: 2px solid #ddd; height: 868px; overflow: auto">
+        <div class="col-md-2" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
             {{--<h3 style="color: red">"Here comes order actions column"</h3>--}}
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -278,14 +278,14 @@
                 <option>...</option>
             </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
             {{--<h3 style="color: red">"Here comes order notes column"</h3>--}}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">Order Notes</h3>
                 </div>
                 <div class="order-notes">
-                    <div style="border-left: 2px solid #ddd; height: 500px; overflow: auto">
+                    <div style="height: 500px; overflow: auto">
                         <div class="status-outer">
                             <div class="status">
                                 <p>Order status changed from processing to Processing.</p>
