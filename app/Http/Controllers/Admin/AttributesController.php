@@ -96,7 +96,7 @@ class AttributesController extends Controller
 
     public function postAllAttributes(Request $request)
     {
-        $attr = Attributes::all();
+        $attr = Attributes::whereNotIn('id', $request->get('arr',[]))->get();
         return \Response::json(['error' => false,'data' => $attr]);
     }
 
