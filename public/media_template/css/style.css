@@ -367,7 +367,7 @@ body.full-height-layout #page-wrapper {
 }
 #page-wrapper {
   /*min-height: auto;*/
-  height: 100vh;
+  height: calc(100vh - 120px);
   overflow: auto;
 }
 body.boxed-layout #wrapper {
