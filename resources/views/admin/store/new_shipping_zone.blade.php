@@ -122,7 +122,7 @@
                                     <div class="form-group required">
                                         <label class="col-sm-2 control-label" for="input-name"> Delivery cost</label>
                                         <div class="col-sm-10">
-                                            {!! Form::select('delivery_cost',['Based on Order amount'=>'Based on Order amount','Based on weight'=>'Based on weight'],null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
+                                            {!! Form::select('delivery_cost',['Based on Order amount'=>'Based on Order amount','Based on weight'=>'Based on weight'],null,['id' => 'input-name','class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                 </td>
