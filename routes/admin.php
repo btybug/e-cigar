@@ -21,7 +21,7 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::post('/payment-gateways/enable', 'Admin\SettingsController@postStorePaymentsGatewaysEnable')->name('post_admin_payment_gateways_enable');
         Route::group(['prefix' => 'couriers'], function () {
-            Route::get('/', 'Admin\SettingsController@getCouriers')->name('admin_settings_courier');
+            Route::get('/', 'Admin\SettingsController@getCouriers')->name('admin_settings_couriers');
             Route::get('/pick-up', 'Admin\SettingsController@getCouriersPickUp')->name('admin_settings_courier_pick_up');
             Route::get('/dhl', 'Admin\SettingsController@getCouriersDHL')->name('admin_settings_courier_dhl');
             Route::get('/local-email', 'Admin\SettingsController@getCouriersLocalEmail')->name('admin_settings_courier_local_email');
