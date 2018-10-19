@@ -138,7 +138,7 @@ class SettingsController extends Controller
 
     public function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
     {
-        $data[$request->get('key')] = $request->get('onOff');
+        $data[$request->get('key')] = ( $request->get('onOff')=='true')?1:0;
         $settings->updateOrCreateSettings('payments_gateways', $data);
         return 1;
     }
