@@ -326,4 +326,8 @@ table.table--order-dtls.table-bordered tr > th {
     min-height: 120px; padding: 0 5px;
 }
 
+.dropdown-close {
+    cursor: pointer;
+}
+
 /*End admin orders*/
