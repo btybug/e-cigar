@@ -60,6 +60,8 @@ $(document).ready(function() {
     var deletebuttonclass = null;
 
     var getfolderli = function(datajosn) {
+        if (!datajosn) return false;
+        console.log(datajosn);
         var htmlli = $('<li data-treefolder="' + datajosn.id + '"></li>');
         var dragdiv = $("<div></div>");
         var htmla = $(
@@ -604,38 +606,40 @@ $(document).ready(function() {
                     alert(JSON.stringify(datajson.message));
                 }
             };
-
-            bootbox.dialog({
-                title: "Delete " + editfodlername,
-                message: deleteoption,
-                buttons: {
-                    confirm: {
-                        label: "Save",
-                        className: "btn-success",
-                        callback: function() {
-                            var jsondata = {
-                                folder_id: editfodlerid,
-                                trash: 0,
-                                access_token: "string"
-                            };
-                            if (
-                                $('[data-selectmenu="delete"]').val() == "trash"
-                            ) {
-                                jsondata["trash"] = 1;
-                            }
-                            postSendAjax(
-                                "/api/api-media/get-remove-folder",
-                                jsondata,
-                                deleteFolder
-                            );
-                        }
-                    },
-                    cancel: {
-                        label: "cancel",
-                        className: "btn-danger"
-                    }
-                }
-            });
+            var jsondata = {
+                folder_id: editfodlerid,
+                trash: 0,
+                access_token: "string"
+            };
+            if ($('[data-selectmenu="delete"]').val() == "trash") {
+                jsondata["trash"] = 1;
+            }
+            postSendAjax(
+                "/api/api-media/get-remove-folder",
+                jsondata,
+                deleteFolder
+            );
+            // bootbox.dialog({
+            //     title: "Delete " + editfodlername,
+            //     message: deleteoption,
+            //     buttons: {
+            //         confirm: {
+            //             label: "Save",
+            //             className: "btn-success",
+            //             callback: function() {
+            //                 if (
+            //                     $('[data-selectmenu="delete"]').val() == "trash"
+            //                 ) {
+            //                     jsondata["trash"] = 1;
+            //                 }
+            //             }
+            //         },
+            //         cancel: {
+            //             label: "cancel",
+            //             className: "btn-danger"
+            //         }
+            //     }
+            // });
 
             $("[data-selectmenu]").selectpicker();
         });
