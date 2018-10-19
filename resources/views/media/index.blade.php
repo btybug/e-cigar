@@ -2,10 +2,10 @@
 @section('content')
     <div id="page-wrapper" class="gray-bg">
 
-        <div class="wrapper wrapper-content">
-            <div class="row">
+        <div class="wrapper wrapper-content h-100">
+            <div class="row dis-flex">
                 <div class="col-lg-3">
-                    <div class="ibox float-e-margins">
+                    <div class="ibox scrollbar_custom float-e-margins over-auto">
                         <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
                             <div class="file-manager">
                                 {{--<h5>Show:</h5>--}}
@@ -51,374 +51,377 @@
                     </div>
                 </div>
                 <div class="col-lg-9 animated fadeInRight">
-                    <div class="row">
-                        <div class="col-lg-12 m-b-10 text-right">
-                            <button type="button" class="btn btn-default" data-role="btnUploader">Uploader</button>
+                    <div class="over-auto scrollbar_custom">
+                        <div class="row m-0">
+                            <div class="col-lg-12 m-b-10 text-right">
+                                <button type="button" class="btn btn-default" data-role="btnUploader">Uploader</button>
+                            </div>
+                        </div>
+                        <div class="row m-0 collapse show-uploder" data-targetiuploder="folder">
+                            <div class="col-lg-12 m-b-15"></div>
+                        </div>
+                        <div class="row m-0 {!! $settings['rightcontainer']??null !!}">
+                            <div class="col-lg-12 " data-media="folderitem">
+                            </div>
+                            <div class="col-lg-12 hide">
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-file"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br/>
+                                                <small>Added: Jan 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p1.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                Italy street.jpg
+                                                <br/>
+                                                <small>Added: Jan 6, 2014</small>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p2.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                My feel.png
+                                                <br/>
+                                                <small>Added: Jan 7, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-music"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Michal Jackson.mp3
+                                                <br/>
+                                                <small>Added: Jan 22, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p3.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br/>
+                                                <small>Added: Fab 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="img-responsive fa fa-film"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Monica's birthday.mpg4
+                                                <br/>
+                                                <small>Added: Fab 18, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <a href="#">
+                                        <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Annual report 2014.xls
+                                                <br/>
+                                                <small>Added: Fab 22, 2014</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-file"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br/>
+                                                <small>Added: Jan 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p1.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                Italy street.jpg
+                                                <br/>
+                                                <small>Added: Jan 6, 2014</small>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p2.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                My feel.png
+                                                <br/>
+                                                <small>Added: Jan 7, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-music"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Michal Jackson.mp3
+                                                <br/>
+                                                <small>Added: Jan 22, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p3.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br/>
+                                                <small>Added: Fab 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="img-responsive fa fa-film"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Monica's birthday.mpg4
+                                                <br/>
+                                                <small>Added: Fab 18, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <a href="#">
+                                        <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Annual report 2014.xls
+                                                <br/>
+                                                <small>Added: Fab 22, 2014</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-file"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br/>
+                                                <small>Added: Jan 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p1.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                Italy street.jpg
+                                                <br/>
+                                                <small>Added: Jan 6, 2014</small>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p2.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                My feel.png
+                                                <br/>
+                                                <small>Added: Jan 7, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-music"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Michal Jackson.mp3
+                                                <br/>
+                                                <small>Added: Jan 22, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="image">
+                                                <img alt="image" class="img-responsive"
+                                                     src="{!! url('public/media_template/img/p3.jpg')!!}">
+                                            </div>
+                                            <div class="file-name">
+                                                Document_2014.doc
+                                                <br/>
+                                                <small>Added: Fab 11, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                        <a href="#">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="img-responsive fa fa-film"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Monica's birthday.mpg4
+                                                <br/>
+                                                <small>Added: Fab 18, 2014</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="file-box">
+                                    <a href="#">
+                                        <div class="file {!! $settings['thumbnailclass']??null !!}">
+                                            <span class="corner"></span>
+
+                                            <div class="icon">
+                                                <i class="fa fa-bar-chart-o"></i>
+                                            </div>
+                                            <div class="file-name">
+                                                Annual report 2014.xls
+                                                <br/>
+                                                <small>Added: Fab 22, 2014</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                            </div>
+
+
                         </div>
                     </div>
-                    <div class="row collapse show-uploder" data-targetiuploder="folder">
-                        <div class="col-lg-12 m-b-15"></div>
-                    </div>
-                    <div class="row {!! $settings['rightcontainer']??null !!}">
-                        <div class="col-lg-12 " data-media="folderitem">
-                        </div>
-                        <div class="col-lg-12 hide">
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
 
-                                        <div class="icon">
-                                            <i class="fa fa-file"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br/>
-                                            <small>Added: Jan 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p1.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            Italy street.jpg
-                                            <br/>
-                                            <small>Added: Jan 6, 2014</small>
-                                        </div>
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p2.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            My feel.png
-                                            <br/>
-                                            <small>Added: Jan 7, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-music"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Michal Jackson.mp3
-                                            <br/>
-                                            <small>Added: Jan 22, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p3.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br/>
-                                            <small>Added: Fab 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="img-responsive fa fa-film"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Monica's birthday.mpg4
-                                            <br/>
-                                            <small>Added: Fab 18, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <a href="#">
-                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-bar-chart-o"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Annual report 2014.xls
-                                            <br/>
-                                            <small>Added: Fab 22, 2014</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-file"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br/>
-                                            <small>Added: Jan 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p1.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            Italy street.jpg
-                                            <br/>
-                                            <small>Added: Jan 6, 2014</small>
-                                        </div>
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p2.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            My feel.png
-                                            <br/>
-                                            <small>Added: Jan 7, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-music"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Michal Jackson.mp3
-                                            <br/>
-                                            <small>Added: Jan 22, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p3.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br/>
-                                            <small>Added: Fab 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="img-responsive fa fa-film"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Monica's birthday.mpg4
-                                            <br/>
-                                            <small>Added: Fab 18, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <a href="#">
-                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-bar-chart-o"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Annual report 2014.xls
-                                            <br/>
-                                            <small>Added: Fab 22, 2014</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-file"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br/>
-                                            <small>Added: Jan 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p1.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            Italy street.jpg
-                                            <br/>
-                                            <small>Added: Jan 6, 2014</small>
-                                        </div>
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p2.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            My feel.png
-                                            <br/>
-                                            <small>Added: Jan 7, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-music"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Michal Jackson.mp3
-                                            <br/>
-                                            <small>Added: Jan 22, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="image">
-                                            <img alt="image" class="img-responsive"
-                                                 src="{!! url('public/media_template/img/p3.jpg')!!}">
-                                        </div>
-                                        <div class="file-name">
-                                            Document_2014.doc
-                                            <br/>
-                                            <small>Added: Fab 11, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                    <a href="#">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="img-responsive fa fa-film"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Monica's birthday.mpg4
-                                            <br/>
-                                            <small>Added: Fab 18, 2014</small>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="file-box">
-                                <a href="#">
-                                    <div class="file {!! $settings['thumbnailclass']??null !!}">
-                                        <span class="corner"></span>
-
-                                        <div class="icon">
-                                            <i class="fa fa-bar-chart-o"></i>
-                                        </div>
-                                        <div class="file-name">
-                                            Annual report 2014.xls
-                                            <br/>
-                                            <small>Added: Fab 22, 2014</small>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-
-                        </div>
-
-
-                    </div>
                 </div>
             </div>
         </div>

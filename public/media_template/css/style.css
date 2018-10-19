@@ -1322,3 +1322,57 @@ ul.notes li div {
   min-height: 0 !important;
   height: calc(100vh - 101px) !important;
 }
+#page-wrapper .h-100{
+  height:100% !important;
+}
+#page-wrapper .dis-flex{
+  display: flex;
+  flex-wrap: wrap;
+  height:100% ;
+}
+#page-wrapper .over-auto{
+  height: 100%;
+  overflow: auto;
+}
+#page-wrapper .ibox.over-auto{
+  background-color: #fff;
+}
+
+#page-wrapper .m-0{
+  margin:0;
+}
+#page-wrapper .scrollbar_custom::-webkit-scrollbar {
+  width: 8px;
+}
+
+#page-wrapper .scrollbar_custom::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+#page-wrapper .scrollbar_custom::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
