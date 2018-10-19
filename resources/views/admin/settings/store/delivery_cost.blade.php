@@ -39,7 +39,14 @@
                 <li class="item">
                     <div class="chek-title">
                         <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">1</label>
+                        <label for="cash_paymant" class="title">Based on Order amount</label>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
+                        <label for="cash_paymant" class="title">Based on weight</label>
                     </div>
                     <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
