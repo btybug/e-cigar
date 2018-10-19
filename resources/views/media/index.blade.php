@@ -560,5 +560,8 @@
     $("body").on("click", ".fileinput-remove", function(){
         $("body").find(".show-uploder").removeClass("in")
     })
+    $("body").on("click", ".file-drop-zone", function() {
+    $(".btn.btn-file>input[type='file']").click();
+});
     </script>
 @stop
