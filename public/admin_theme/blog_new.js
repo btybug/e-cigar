@@ -8,6 +8,18 @@ function makeSearchItem(basicData) {
     //     containerForAppend: "containerForAppend",
     //     inputValues: "inputValues"
     // };
+    var userList = null;
+    $.ajax({
+        url: basicData.url,
+        type: "POST",
+        dataType: "json",
+        headers: {
+            "X-CSRF-TOKEN": $("input[name='_token']").val()
+        },
+        success: function(data) {
+            userList = data.map(item => item.name);
+        }
+    });
     $(basicData.input).tagsinput({
         maxTags: 5,
         confirmKeys: [13, 32, 44],
@@ -45,8 +57,11 @@ function makeSearchItem(basicData) {
     });
     $(basicData.input).on("beforeItemAdd", function(event) {
         event.cancel = true;
-        let valueCatergorayName = event.item
-        if (!valueCatergorayName.includes(event.item)) {
+        let valueCatergorayName = $(basicData.inputValues).val();
+        if (
+            !valueCatergorayName.includes(event.item) &&
+            userList.includes(event.item)
+        ) {
             $(basicData.containerForAppend).append(makeSearchHtml(event.item));
             if (
                 $(basicData.inputValues)
