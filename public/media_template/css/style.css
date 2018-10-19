@@ -367,7 +367,7 @@ body.full-height-layout #page-wrapper {
 }
 #page-wrapper {
   /*min-height: auto;*/
-  height: calc(100vh - 120px);
+  height: calc(100vh - 146px);
   overflow: auto;
 }
 body.boxed-layout #wrapper {
@@ -427,7 +427,7 @@ a:focus {
   overflow-x: hidden;
 }
 .wrapper {
-  padding: 0 20px;
+  /*padding: 0 20px;*/
 }
 .wrapper-content {
   padding: 20px 10px 40px;
@@ -1317,4 +1317,8 @@ ul.notes li div {
 }
 .middle-wrapper {
    padding: 0!important;
+}
+.content-wrapper{
+  min-height: 0 !important;
+  height: calc(100vh - 101px) !important;
 }
