@@ -106,8 +106,8 @@ $("body").on("click", ".add-attribute-event", function() {
                         }" class="option-elm-attributes"><a
                                                 href="#">${res.data.name}</a>
                                                 <div class="buttons">
-                                                <button class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></button>
-                                                <button  class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                                <a href="javascript:void(0)" class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></a>
+                                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                 </div>
                                                 </li>`);
                         $(".choset-attributes").append(
