@@ -117,8 +117,15 @@
                     <div class="tab-pane fade" id="delivery-cost" role="tabpanel" aria-labelledby="delivery-cost">
                         <table class="table table-responsive table--store-settings" data-table-id="20">
                             <tr class="bg-my-light-blue">
-                                <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
-                                <td colspan="5">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
+
+                                <td colspan="6">
+                                    <div class="form-group required">
+                                        <label class="col-sm-2 control-label" for="input-name"> Delivery cost</label>
+                                        <div class="col-sm-10">
+                                            {!! Form::select('delivery_cost',['Based on Order amount'=>'Based on Order amount','Based on weight'=>'Based on weight'],null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             <tbody>
 
