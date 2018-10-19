@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\Emails;
 use App\Models\Languages;
 use App\Models\MailTemplates;
+use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
 use App\Services\ShortCodes;
@@ -122,8 +123,14 @@ class SettingsController extends Controller
         return  $this->view('store.payments_gateways');
     }
 
-    public function getStorePaymentsGatewaysSettings()
+    public function getStorePaymentsGatewaysSettings(Settings $settings)
     {
-        return  $this->view('store.payments_gateways.settings');
+        $model=$settings->getEditableData('payments_gateways');
+        return  $this->view('store.payments_gateways.settings',compact('model'));
+    }
+    public function postStorePaymentsGatewaysSettings(Request $request,Settings $settings)
+    {
+        $settings->updateOrCreateSettings('payments_gateways',$request->except('_token'));
+        return redirect()->back();
     }
 }

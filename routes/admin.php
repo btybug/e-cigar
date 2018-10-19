@@ -16,7 +16,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/general', 'Admin\SettingsController@getStore')->name('admin_settings_store');
         Route::get('/shipping', 'Admin\SettingsController@getStoreShipping')->name('admin_settings_shipping');
         Route::get('/payment-gateways', 'Admin\SettingsController@getStorePaymentsGateways')->name('admin_settings_payment_gateways');
-        Route::get('/payment-gateways/settings', 'Admin\SettingsController@getStorePaymentsGatewaysSettings')->name('admin_settings_payment_gateways_settings');
+        Route::get('/payment-gateways/stripe', 'Admin\SettingsController@getStorePaymentsGatewaysSettings')->name('admin_payment_gateways_stripe');
+        Route::post('/payment-gateways/stripe', 'Admin\SettingsController@postStorePaymentsGatewaysSettings')->name('post_admin_payment_gateways_stripe');
     });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');

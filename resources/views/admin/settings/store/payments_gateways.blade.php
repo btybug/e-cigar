@@ -31,7 +31,7 @@
                         <input id="cash_paymant" class="gateways_inp" type="checkbox">
                         <label for="cash_paymant" class="title">Cash Paymant</label>
                     </div>
-                    <a href="{!! route('admin_settings_payment_gateways_settings') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                    <a href="{!! route('admin_payment_gateways_stripe') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
                 <li class="item">
                     <div class="chek-title">
