@@ -18,6 +18,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/blog/get-all','Admin\DatatableController@getAllPosts')->name('datatable_all_posts');
     Route::get('/coupons/get-all','Admin\DatatableController@getAllCoupons')->name('datatable_all_coupons');
     Route::get('/blog/comments/get-all','Admin\DatatableController@getAllPostComments')->name('datatable_all_post_comments');
+    Route::get('/stock/get-all','Admin\DatatableController@getAllStocks')->name('datatable_all_stocks');
 });
 
 

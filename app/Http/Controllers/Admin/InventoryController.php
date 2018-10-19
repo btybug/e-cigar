@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 
@@ -25,9 +26,16 @@ class InventoryController extends Controller
 
     public function stockNew()
     {
+        $model = null;
+        return $this->view('stock_new',compact(['attributes','model']));
+    }
 
-        $attributes = Attributes::whereNull('parent_id')->get();
-        return $this->view('stock_new',compact(['attributes']));
+    public function postStock(Request $request)
+    {
+        $data = $request->except('_token','translatable');
+        $data['user_id'] = \Auth::id();
+        Stock::updateOrCreate($request->id,$data);
+        return redirect()->route('admin_stock');
     }
 
     public function linkAll (Request $request)

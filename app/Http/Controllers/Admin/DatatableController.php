@@ -17,6 +17,7 @@ use App\Models\Regions;
 use App\Models\Roles;
 use App\Models\SelectionType;
 use App\Models\Sports;
+use App\Models\Stock;
 use App\Models\Teams;
 use App\Models\Translations;
 use App\Models\TranslationsEntry;
@@ -197,6 +198,22 @@ class DatatableController extends Controller
                 return "<a class='badge btn-danger' href='".route("admin_store_coupons_delete",$coupons->id)."'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='".route("admin_store_coupons_edit",$coupons->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions','name','code','replies'])
+            ->make(true);
+    }
+
+    public function getAllStocks()
+    {
+        return Datatables::of(Stock::query())
+            ->editColumn('image',function ($stock) {
+                return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
+            })
+            ->editColumn('created_at',function ($stock) {
+                return BBgetDateFormat($stock->created_at).' '.BBgetTimeFormat($stock->created_at);
+            })
+            ->addColumn('actions', function ($coupons) {
+                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions','name','image'])
             ->make(true);
     }
 

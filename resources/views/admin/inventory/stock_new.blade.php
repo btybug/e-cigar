@@ -49,8 +49,8 @@
             </div>
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
-                    <li><a data-toggle="tab" href="#basic">Basic Details</a></li>
-                    <li class="active"><a data-toggle="tab" href="#media">Media</a></li>
+                    <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
+                    <li ><a data-toggle="tab" href="#media">Media</a></li>
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
@@ -58,32 +58,53 @@
             </div>
 
             <!-- /.col -->
+            {!! Form::model(null,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
+            <div class="col-md-12">
+                {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
+            </div>
             <div class="col-md-12">
                 <div class="tab-content">
-                    <div id="basic" class="tab-pane fade basic-details-tab ">
+                    <div id="basic" class="tab-pane fade in active basic-details-tab ">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="basic-center basic-wall">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <form action="" class="form-horizontal">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="product_name" class="control-label col-sm-4">Product
-                                                                name</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="product_name"
-                                                                       id="product_name" type="text">
+                                                @if(count(get_languages()))
+                                                    <ul class="nav nav-tabs">
+                                                        @foreach(get_languages() as $language)
+                                                            <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                                           href="#{{ strtolower($language->code) }}">
+                                                                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                </a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                                <div class="tab-content">
+                                                    @if(count(get_languages()))
+                                                        @foreach(get_languages() as $language)
+                                                            <div id="{{ strtolower($language->code) }}"
+                                                                 class="tab-pane fade  @if($loop->first) in active @endif">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label"><span data-toggle="tooltip"
+                                                                                                                title=""
+                                                                                                                data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                    <div class="col-sm-10">
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <label for="product_id" class="control-label col-sm-4">Product
                                                                 Type</label>
                                                             <div class="col-sm-8">
-                                                                {!! Form::select('type',['' => 'Select type'],null,['class' => 'form-control select-stock-type']) !!}
+                                                                {!! Form::select('type',['' => 'Select type'] + \App\Models\Stock::TYPES,null,
+                                                                ['class' => 'form-control select-stock-type']) !!}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -112,12 +133,10 @@
                                                             <label for="feature_image"
                                                                    class="control-label col-sm-4">Feature image</label>
                                                             <div class="col-sm-8">
-                                                                <button class="btn btn-sm btn-primary">Upload</button>
+                                                                {!! media_button('image',$model) !!}
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
-
                                             </div>
                                             <div class="col-md-6">
 
@@ -129,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="media" class="tab-pane basic-details-tab media-new-tab fade in active">
+                    <div id="media" class="tab-pane basic-details-tab media-new-tab fade ">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
@@ -146,7 +165,7 @@
                                     <div class="basic-center basic-wall">
                                         <div class="tab-content">
                                             <div id="mediaotherimage" class="tab-pane fade ">
-                                                Other Image
+                                                {!! media_button('other_images',$model,true) !!}
                                             </div>
                                             <div id="mediavideos" class="tab-pane fade in active">
                                                 <div class="media-videos">
@@ -227,7 +246,7 @@
                                                                            class="control-label col-sm-4">Length</label>
                                                                     <div class="col-sm-8">
                                                                         <input class="form-control"
-                                                                               name="packaging_length"
+                                                                               name=""
                                                                                id="packaging_length" type="text">
                                                                     </div>
                                                                 </div>
@@ -238,7 +257,7 @@
                                                                            class="control-label col-sm-4">Width</label>
                                                                     <div class="col-sm-8">
                                                                         <input class="form-control"
-                                                                               name="packaging_width"
+                                                                               name=""
                                                                                id="packaging_width" type="text">
                                                                     </div>
                                                                 </div>
@@ -249,7 +268,7 @@
                                                                            class="control-label col-sm-4">Height</label>
                                                                     <div class="col-sm-8">
                                                                         <input class="form-control"
-                                                                               name="packaging_height"
+                                                                               name=""
                                                                                id="packaging_height" type="text">
                                                                     </div>
                                                                 </div>
@@ -260,7 +279,7 @@
                                                                            class="control-label col-sm-4">Weight</label>
                                                                     <div class="col-sm-8">
                                                                         <input class="form-control"
-                                                                               name="packaging_weight"
+                                                                               name=""
                                                                                id="packaging_weight" type="text">
                                                                     </div>
                                                                 </div>
@@ -307,6 +326,7 @@
                 </div>
 
             </div>
+            {!! Form::close() !!}
         </div>
         <!-- /.col -->
         </div>
@@ -342,4 +362,24 @@
     <script src="/public/js/custom/stock.js"></script>
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+            function guid() {
+                return "ss".replace(/s/g, s4);
+            }
+
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(7)
+                    .substring(1);
+            }
+
+           $("body").on('change','.select-stock-type',function () {
+               var type = $(this).val();
+               var generatedString = type + '-' + guid();
+               $('#sku').val(generatedString);
+               $('#stock-sku').html(generatedString);
+           })
+        });
+    </script>
 @stop
