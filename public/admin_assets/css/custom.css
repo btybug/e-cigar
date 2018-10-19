@@ -200,9 +200,16 @@ div.dataTables_wrapper div.dataTables_filter input {
 /*End new shipping zone*/
 
 /*admin orders*/
+.table--order-dtls {
+    background: #fff;
+}
+
 .table.table--order-dtls.table-bordered tr > td,
 table.table--order-dtls.table-bordered tr > th {
     border-color: #ddd;
+}
+.table--see-order .half-col {
+    width: 50%;
 }
 
 .order-notes .head {
@@ -233,6 +240,7 @@ table.table--order-dtls.table-bordered tr > th {
 /*border-width: 18px 9px 0 9px;*/
 /*border-color: #f1efef transparent transparent transparent;*/
 /*}*/
+
 
 .order-notes {
     padding: 10px;
@@ -333,8 +341,74 @@ table.table--order-dtls.table-bordered tr > th {
     cursor: pointer;
 }
 
+
 /*End admin orders*/
 
 .file-caption-main {
     display: none !important;
 }
+
+.order-main-cnt_right-col {
+    border-left: 2px solid #ddd;
+    min-height: 868px;
+    overflow: auto
+}
+
+.order-main-cnt_control-btns {
+    width: 100%;
+    display: flex;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.order-main-cnt_control-btns .dropdown-inner {
+    background: #fff;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    padding: 15px 10px;
+    box-shadow: 0 0 6px #848080;
+}
+
+
+.order-main-cnt_control-btns .dropdown-inner .form-group {
+    overflow: hidden;
+}
+
+.order-main-cnt_control-btns .dropdown-inner .confirm-btn-outer {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+}
+
+.order-main-cnt_control-btns .dropdown-inner .dropdown-heading {
+    margin:0 0 10px;
+}
+
+.order-main-cnt_control-btns .dropdown-inner textarea {
+    width: 100%;
+    resize: none;
+}
+
+.order-notes {
+    height: 800px;
+    overflow: auto;
+}
+
+.order-notes_message .underlined {
+    text-decoration: underline;
+}
+
+.order-notes_message .text-bold {
+    font-weight: bold;
+}
+
+.order-notes_message-status-1 {
+    border-left: 5px solid green;
+}
+
+.order-notes_message-status-2 {
+    border-left: 5px solid #ad0000;
+}
+
+
+/*End admin orders*/

@@ -39,7 +39,7 @@
         {{--</div>--}}
     {{--</div>--}}
 
-    <div class="row">
+    <div class="row order-main-cnt">
         <div class="col-md-8">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item active">
@@ -138,23 +138,12 @@
                                         .....
                                     </div>
                                 </div>
-
-                                {{--<table class="table">--}}
-                                    {{--<tbody>--}}
-                                    {{--<tr>--}}
-                                        {{--<td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>--}}
-                                        {{--<td>--}}
-                                            {{--sddc sdvdsvc--}}
-                                        {{--</td>--}}
-                                    {{--</tr>--}}
-                                    {{--</tbody>--}}
-                                {{--</table>--}}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <table class="table table-bordered table--order-dtls" style="background: #fff">
+                            <table class="table table-bordered table--order-dtls">
                                 <thead>
                                 <tr>
                                     <td class="text-left">Product</td>
@@ -197,11 +186,11 @@
                             <h3 class="panel-title"><i class="fa fa-info-circle"></i> Order (#3875)</h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table--see-order">
                                 <thead>
                                 <tr>
-                                    <td style="width: 50%;" class="text-left">Payment Address</td>
-                                    <td style="width: 50%;" class="text-left">Shipping Address</td>
+                                    <td class="text-left half-col">Payment Address</td>
+                                    <td class="text-left half-col">Shipping Address</td>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -314,13 +303,13 @@
 
             </div>
         </div>
-        <div class="col-md-4" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
-            <div style="width: 100%; display: flex; position: relative; margin-bottom: 30px">
+        <div class="col-md-4 order-main-cnt_right-col">
+            <div class="order-main-cnt_control-btns">
                 <div class="my-dropdown">
                     <button class="btn btn-primary dropdown-btn">Change Status</button>
-                    <div class="dropdown-inner" style="background: #fff; position: absolute; z-index: 999; width: 100%; padding: 15px 10px; box-shadow: 0 0 6px #848080;">
+                    <div class="dropdown-inner">
                         <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
-                        <div class="form-group" style="overflow: hidden">
+                        <div class="form-group">
                             <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
                             <div class="col-sm-8">
                                 <select name="changeStatusSelect" id="input-store" class="form-control">
@@ -330,13 +319,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group" style="overflow: hidden">
+                        <div class="form-group">
                             <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
                             <div class="col-sm-6">
                                 <input class="form-control" type="number">
                             </div>
                         </div>
-                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                        <div class="text-center confirm-btn-outer">
                             <button type="button" class="btn btn-primary">Change</button>
                         </div>
                     </div>
@@ -345,13 +334,13 @@
 
                 <div class="my-dropdown">
                     <button class="btn btn-primary btn dropdown-btn">+ Costumer Note</button>
-                    <div class="dropdown-inner" style="background: #fff; position: absolute; z-index: 999; width: 100%; padding: 15px 10px; box-shadow: 0 0 6px #848080;">
+                    <div class="dropdown-inner">
                         <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
                         <div class="text-center">
-                            <h4 style="margin:0 0 10px">My Note Here</h4>
-                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                            <h4 class="dropdown-heading">My Note Here</h4>
+                            <textarea name="myNote" rows="5"></textarea>
                         </div>
-                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                        <div class="text-center confirm-btn-outer">
                             <button type="button" class="btn btn-primary">Add Note</button>
                         </div>
                     </div>
@@ -359,13 +348,13 @@
 
                 <div class="my-dropdown">
                     <button class="btn btn-primary btn dropdown-btn">Internal Note</button>
-                    <div class="dropdown-inner" style="background: #fff; position: absolute; z-index: 999; width: 100%; padding: 15px 10px; box-shadow: 0 0 6px #848080;">
+                    <div class="dropdown-inner">
                         <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
                         <div class="text-center">
-                            <h4 style="margin:0 0 10px">Internal Note</h4>
-                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                            <h4 class="dropdown-heading">Internal Note</h4>
+                            <textarea name="myNote" rows="5"></textarea>
                         </div>
-                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                        <div class="text-center confirm-btn-outer">
                             <button type="button" class="btn btn-primary">Add Note</button>
                         </div>
                     </div>
@@ -378,140 +367,116 @@
                     <h3 class="panel-title text-center">Order History</h3>
                 </div>
                 <div class="order-notes">
-                    <div style="height: 800px; overflow: auto">
-                        <div class="status-outer" style="border-left: 5px solid green">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:11</span>
-                                    </p>
+                    <div class="order-notes_message order-notes_message-status-1">
+                        <p>
+                            on <span class="underlined">11/11/2011</span>
+                            at <span class="underlined">11:11</span>
+                        </p>
 
-                                    <p>
-                                        Order <span style="font-weight: bold">submitted </span>
-                                    </p>
-                                    <p>
-                                        Status <span style="font-weight: bold">processing</span>
-                                    </p>
+                        <p>
+                            Order <span class="text-bold">submitted </span>
+                        </p>
+                        <p>
+                            Status <span class="font-bold">processing</span>
+                        </p>
+                    </div>
+                    <div class="order-notes_message order-notes_message-status-2">
+                        <div>
+                            <p>
+                                on <span class="underlined">11/11/2011</span>
+                                at <span class="underlined">11:11</span>
+                            </p>
+                            <p>order status changed to <span class="font-bold"> processing </span></p>
+                            <p>
+                                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                admin massage
+                            </p>
+                        </div>
+                    </div>
+                    <div class="order-notes_message order-notes_message-status-2">
+                            <div>
+                                <p>
+                                    on <span class="underlined">11/11/2011</span>
+                                    at <span class="underlined">11:15</span>
+                                </p>
+                                <p>order status changed to <span class="text-bold">pending </span></p>
+                                <p>
+                                    #094039404
+                                </p>
+                            </div>
+                        </div>
+                    <div class="order-notes_message order-notes_message-status-1">
+                            <div>
+                                <p>
+                                    on <span class="underlined">11/11/2011</span>
+                                    at <span class="underlined">11:15</span>
+                                </p>
+                                <p>
+                                    Order <span class="text-bold">submitted </span>
+                                </p>
+                                <p>
+                                    Status <span class="text-bold">processing</span>
+                                </p>
 
-                                </div>
+                                <p>
+                                    added by <span class="text-bold">abokamal </span>
+                                </p>
                             </div>
                         </div>
-                        <div class="status-outer" style="border-left: 5px solid #ad0000">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:11</span>
-                                    </p>
-                                    <p>order status changed to <span style="font-weight: bold"> processing </span></p>
-                                    <p>
-                                        <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                        admin massage
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="status-outer" style="border-left: 5px solid #ad0000">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:15</span>
-                                    </p>
-                                    <p>order status changed to <span style="font-weight: bold">pending </span></p>
-                                    <p>
-                                        #094039404
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="status-outer" style="border-left: 5px solid green">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:15</span>
-                                    </p>
-                                    <p>
-                                        Order <span style="font-weight: bold">submitted </span>
-                                    </p>
-                                    <p>
-                                        Status <span style="font-weight: bold">processing</span>
-                                    </p>
+                    <div class="order-notes_message order-notes_message-status-1">
+                        <p>
+                            on <span class="underlined">11/11/2011</span>
+                            at <span class="underlined">11:11</span>
+                        </p>
 
-                                    <p>
-                                        added by <span style="font-weight: bold">abokamal </span>
-                                    </p>
-                                </div>
-                            </div>
+                        <p>
+                            Order <span class="text-bold">submitted </span>
+                        </p>
+                        <p>
+                            Status <span class="font-bold">processing</span>
+                        </p>
+                    </div>
+                    <div class="order-notes_message order-notes_message-status-2">
+                        <div>
+                            <p>
+                                on <span class="underlined">11/11/2011</span>
+                                at <span class="underlined">11:11</span>
+                            </p>
+                            <p>order status changed to <span class="font-bold"> processing </span></p>
+                            <p>
+                                <i class="fa fa-quote-left" aria-hidden="true"></i>
+                                admin massage
+                            </p>
                         </div>
-                        <div class="status-outer" style="border-left: 5px solid green">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:11</span>
-                                    </p>
+                    </div>
+                    <div class="order-notes_message order-notes_message-status-2">
+                        <div>
+                            <p>
+                                on <span class="underlined">11/11/2011</span>
+                                at <span class="underlined">11:15</span>
+                            </p>
+                            <p>order status changed to <span class="text-bold">pending </span></p>
+                            <p>
+                                #094039404
+                            </p>
+                        </div>
+                    </div>
+                    <div class="order-notes_message order-notes_message-status-1">
+                        <div>
+                            <p>
+                                on <span class="underlined">11/11/2011</span>
+                                at <span class="underlined">11:15</span>
+                            </p>
+                            <p>
+                                Order <span class="text-bold">submitted </span>
+                            </p>
+                            <p>
+                                Status <span class="text-bold">processing</span>
+                            </p>
 
-                                    <p>
-                                        Order <span style="font-weight: bold">submitted </span>
-                                    </p>
-                                    <p>
-                                        Status <span style="font-weight: bold">processing</span>
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="status-outer" style="border-left: 5px solid #ad0000">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:11</span>
-                                    </p>
-                                    <p>order status changed to <span style="font-weight: bold"> processing </span></p>
-                                    <p>
-                                        <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                        admin massage
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="status-outer" style="border-left: 5px solid #ad0000">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:15</span>
-                                    </p>
-                                    <p>order status changed to <span style="font-weight: bold">pending </span></p>
-                                    <p>
-                                        #094039404
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="status-outer" style="border-left: 5px solid green">
-                            <div class="status">
-                                <div>
-                                    <p>
-                                        on <span style="text-decoration: underline">11/11/2011</span>
-                                        at <span style="text-decoration: underline">11:15</span>
-                                    </p>
-                                    <p>
-                                        Order <span style="font-weight: bold">submitted </span>
-                                    </p>
-                                    <p>
-                                        Status <span style="font-weight: bold">processing</span>
-                                    </p>
-
-                                    <p>
-                                        added by <span style="font-weight: bold">abokamal </span>
-                                    </p>
-                                </div>
-                            </div>
+                            <p>
+                                added by <span class="text-bold">abokamal </span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -557,7 +522,6 @@
             });
 
         });
-
 
     </script>
 @stop
