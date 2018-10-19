@@ -163,8 +163,9 @@ class StoreController extends Controller
     {
         $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
         $shipping_zone = null;
+        $shipping_zones = ShippingZones::all();
         $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments'));
+        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments','shipping_zones'));
     }
 
     public function getregions(Countries $countries)
@@ -183,10 +184,10 @@ class StoreController extends Controller
     public function editShippingZone(Countries $countries,$id,Settings $settings)
     {
         $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
-
+        $shipping_zones = ShippingZones::all();
         $shipping_zone = ShippingZones::find($id);
         $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments'));
+        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments','shipping_zones'));
     }
 
     public function findRegion(Request $request)
