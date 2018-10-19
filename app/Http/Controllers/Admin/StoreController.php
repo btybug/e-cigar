@@ -180,11 +180,13 @@ class StoreController extends Controller
         return redirect(route('admin_store_shipping_zones'));
     }
 
-    public function editShippingZone(Countries $countries,$id)
+    public function editShippingZone(Countries $countries,$id,Settings $settings)
     {
+        $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
+
         $shipping_zone = ShippingZones::find($id);
         $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-        return $this->view('new_shipping_zone',compact('countries','shipping_zone'));
+        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments'));
     }
 
     public function findRegion(Request $request)
