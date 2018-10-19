@@ -541,7 +541,21 @@
 
             </div>
         </div>
+
         {!! Form::close() !!}
+    </div>
+    <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Options</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all-list"><li data-id="1" class="option-elm-modal"><a href="#">Courier</a> <a class="btn btn-primary add-attribute-event" data-id="1">ADD</a></li><li data-id="5" class="option-elm-modal"><a href="#">rfffff</a> <a class="btn btn-primary add-attribute-event" data-id="5">ADD</a></li><li data-id="6" class="option-elm-modal"><a href="#">Flavours</a> <a class="btn btn-primary add-attribute-event" data-id="6">ADD</a></li><li data-id="11" class="option-elm-modal"><a href="#">Size</a> <a class="btn btn-primary add-attribute-event" data-id="11">ADD</a></li><li data-id="15" class="option-elm-modal"><a href="#">Nicotine strength</a> <a class="btn btn-primary add-attribute-event" data-id="15">ADD</a></li><li data-id="21" class="option-elm-modal"><a href="#">PG/ VG</a> <a class="btn btn-primary add-attribute-event" data-id="21">ADD</a></li><li data-id="25" class="option-elm-modal"><a href="#">Flavor Type</a> <a class="btn btn-primary add-attribute-event" data-id="25">ADD</a></li></div>
+                </div>
+            </div>
+        </div>
     </div>
 @stop
 @section('css')
@@ -588,5 +602,13 @@
         $('#tab-discount .date').datetimepicker({
             language: 'en-gb',
         });
+
         //--></script>
+    <script>
+
+
+        $("body").on("click", ".get-all-attributes-tab-event", function() {
+                    $("#attributesModal").modal();
+        });
+    </script>
 @stop

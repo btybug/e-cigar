@@ -412,3 +412,8 @@ table.table--order-dtls.table-bordered tr > th {
 
 
 /*End admin orders*/
+
+
+.modal-backdrop {
+    background-color: transparent !important;
+}
