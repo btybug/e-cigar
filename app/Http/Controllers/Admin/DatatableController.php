@@ -192,12 +192,10 @@ class DatatableController extends Controller
 
     public function getAllCoupons()
     {
-        $coupons =  Coupons::all();
-        $data = Comment::recursiveItemsToOneArray($coupons);
-        return Datatables::of($data)
+        return Datatables::of(Coupons::query())
             ->addColumn('actions', function ($coupons) {
-                return "<a class='badge btn-danger' href='".route("admin_store_coupons_delete",$coupons['id'])."'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='".route("admin_store_coupons_edit",$coupons['id'])."'><i class='fa fa-edit'></i></a>";
+                return "<a class='badge btn-danger' href='".route("admin_store_coupons_delete",$coupons->id)."'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='".route("admin_store_coupons_edit",$coupons->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions','name','code','replies'])
             ->make(true);
     }
