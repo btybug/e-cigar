@@ -143,10 +143,16 @@ class SettingsController extends Controller
         $settings->updateOrCreateSettings('active_payments_gateways', $data);
         return 1;
     }
+    public function postCouriersEnable(Request $request, Settings $settings)
+    {
+        $data[$request->get('key')] = ( $request->get('onOff')=='true')?1:0;
+        $settings->updateOrCreateSettings('active_couriers', $data);
+        return 1;
+    }
 
     public function getCouriers(Settings $settings)
     {
-        $model = $settings->getEditableData('curiers');
+        $model = $settings->getEditableData('active_couriers');
         return $this->view('store.couriers',compact('model'));
     }
 

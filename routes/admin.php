@@ -25,6 +25,8 @@ Route::group(['prefix' => 'settings'], function () {
             Route::get('/pick-up', 'Admin\SettingsController@getCouriersPickUp')->name('admin_settings_courier_pick_up');
             Route::get('/dhl', 'Admin\SettingsController@getCouriersDHL')->name('admin_settings_courier_dhl');
             Route::get('/local-email', 'Admin\SettingsController@getCouriersLocalEmail')->name('admin_settings_courier_local_email');
+
+            Route::post('/enable', 'Admin\SettingsController@postCouriersEnable')->name('post_admin_couriers_enable');
         });
         Route::get('/delivery-cost', 'Admin\SettingsController@getDeliveryCost')->name('admin_settings_delivery');
     });

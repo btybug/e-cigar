@@ -77,15 +77,15 @@
         });
         $('.gateways_inp').on('change',function () {
             var data={key:$(this).attr('name'),onOff:$(this).prop( "checked")}
-            {{--$.ajax({--}}
-                {{--type: "post",--}}
-                {{--url: '{!! route('post_admin_payment_gateways_enable') !!}',--}}
-                {{--datatype: "json",--}}
-                {{--data: data,--}}
-                {{--headers: {--}}
-                    {{--"X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")--}}
-                {{--}--}}
-            {{--});--}}
+            $.ajax({
+                type: "post",
+                url: '{!! route('post_admin_couriers_enable') !!}',
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                }
+            });
         });
 
     </script>

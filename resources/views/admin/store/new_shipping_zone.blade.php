@@ -144,10 +144,7 @@
                                            style="display: inline-block; width: auto">
                                 </td>
                                 <td>
-                                    <select id="PosType" class="form-control">
-                                        <option selected>Normal Post</option>
-                                        <option>...</option>
-                                    </select>
+                                    {!! Form::select('courier',$active_couriers,null,['class'=>'form-control']) !!}
                                 </td>
                                 <td>
                             <span class="form-control">
