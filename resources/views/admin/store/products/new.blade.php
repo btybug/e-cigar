@@ -396,19 +396,16 @@
                             <ul class="get-all-attributes-tab" style="padding-left:0">
                                 <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;" class="option-elm-attributes"><a href="#">text</a>
                                     <div class="buttons">
-                                        <button class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></button>
                                         <button class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </li>
                                 <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;" class="option-elm-attributes"><a href="#">text</a>
                                     <div class="buttons">
-                                        <button class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></button>
                                         <button class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </li>
                                 <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;" class="option-elm-attributes"><a href="#">text</a>
                                     <div class="buttons">
-                                        <button class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></button>
                                         <button class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                     </div>
                                 </li>
