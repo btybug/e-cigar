@@ -615,6 +615,18 @@ display: flex;
     justify-content: space-between;
     align-items: center;
 }
+.stock-page .media-new-tab .media-list{
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+.stock-page .media-new-tab .media-list li a{
+    border: none;
+}
+.stock-page .media-new-tab .media-list li.active a{
+    background-color: #000;
+    color: white;
+}
 .geo-zone-page .view-coupon{
     height: 150px;
     overflow: auto;
