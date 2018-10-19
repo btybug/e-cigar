@@ -8,6 +8,7 @@
                 <li><a data-toggle="tab" href="#price">Price</a></li>
                 <li><a data-toggle="tab" href="#menu2">Tax& shippings</a></li>
                 <li><a data-toggle="tab" href="#menu3">Related & Bundles</a></li>
+                <li><a data-toggle="tab" href="#stocks">Stocks</a></li>
             </ul>
         </div>
     </div>
@@ -378,6 +379,21 @@
                 </div>
             </div>
         </div>
+        <div id="stocks" class="tab-pane fade">
+            <div class="text-right btn-save">
+                <button type="submit" class="btn btn-info">Save</button>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Select Stocks</label>
+                    {!! Form::select('stocks[]',['' => 'select stocks'],null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-9">
+                    UI here
+                </div>
+
+            </div>
+        </div>
         {!! Form::close() !!}
     </div>
 @stop
@@ -385,6 +401,15 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     {{--<link rel="stylesheet" href="{{asset('public/admin_theme/datetimepicker/bootstrap-datetimepicker.min.css')}}">--}}
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <style>
+        .fade.in {
+            opacity: 1;
+            display: block;
+        }
+        .fade{
+            display: none;
+        }
+    </style>
 @stop
 @section('js')
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
