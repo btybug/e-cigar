@@ -1,6 +1,9 @@
     @if(count($results))
         @foreach($results as $key => $items)
             <div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">
+                <div>
+                    <button class="variation-select"><i class="fa fa-list"></i></button>
+                </div>
                 @foreach($data as $generalKey => $options)
                     @php
                     $linked = $items[$loop->index];
