@@ -51,9 +51,8 @@
                 <ul class="nav nav-tabs admin-profile-left">
                     <li><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li class="active"><a data-toggle="tab" href="#media">Media</a></li>
-                    <li><a data-toggle="tab" href="#attributes">Attributes</a></li>
+                    <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
-                    <li><a data-toggle="tab" href="#price">Price</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
                 </ul>
             </div>
@@ -82,10 +81,9 @@
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <label for="product_id" class="control-label col-sm-4">Product
-                                                                ID</label>
+                                                                Type</label>
                                                             <div class="col-sm-8">
-                                                                <input class="form-control" name="product_id"
-                                                                       id="product_id" type="text">
+                                                                {!! Form::select('type',['' => 'Select type'],null,['class' => 'form-control select-stock-type']) !!}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -93,8 +91,8 @@
                                                         <div class="row">
                                                             <label for="sku" class="control-label col-sm-4">SKU</label>
                                                             <div class="col-sm-8">
-                                                                <input class="form-control" name="sku" id="sku"
-                                                                       type="text">
+                                                                <div id="stock-sku"></div>
+                                                                {!! Form::hidden('sku',null,['id' => 'sku']) !!}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -183,359 +181,156 @@
 
                         </div>
                     </div>
-                </div>
-                <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">
-                    <div class="container-fluid p-25">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="basic-left basic-wall">
-                                    <div class="all-list-attributes">
-                                        <ul class="get-all-attributes-tab">
+                    <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list-attributes">
+                                            <ul class="get-all-attributes-tab">
+
+                                            </ul>
+                                        </div>
+                                        <div class="button-add text-center">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-info btn-block get-all-attributes-tab-event"><i
+                                                        class="fa fa-plus"></i>Add new
+                                                option</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="basic-center basic-wall">
+                                        <ul class="choset-attributes">
+
 
                                         </ul>
                                     </div>
-                                    <div class="button-add text-center">
-                                        <a href="javascript:void(0)"
-                                           class="btn btn-info btn-block get-all-attributes-tab-event"><i
-                                                    class="fa fa-plus"></i>Add new
-                                            option</a>
-                                    </div>
                                 </div>
+
                             </div>
-                            <div class="col-md-9">
-                                <div class="basic-center basic-wall">
-                                    <ul class="choset-attributes">
-
-
-                                    </ul>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                </div>
-                <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
-                    <div class="container-fluid p-25">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div class="basic-left basic-wall">
-                                    <form action="" class="form-horizontal">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="warehouse" class="control-label col-sm-4">Warehouse</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="warehouse"
-                                                                       id="warehouse" type="text">
+                    <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="basic-left basic-wall">
+                                        <form action="" class="form-horizontal">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <fieldset>
+                                                            <legend>Packaging Size</legend>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="packaging_length"
+                                                                           class="control-label col-sm-4">Length</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="packaging_length"
+                                                                               id="packaging_length" type="text">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="quantity" class="control-label col-sm-4">Quantity</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="quantity"
-                                                                       id="quantity" type="text">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="packaging_width"
+                                                                           class="control-label col-sm-4">Width</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="packaging_width"
+                                                                               id="packaging_width" type="text">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="quantity_alert"
-                                                                   class="control-label col-sm-4">Quantity
-                                                                Alert</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="quantity_alert"
-                                                                       id="quantity_alert" type="text">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="packaging_height"
+                                                                           class="control-label col-sm-4">Height</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="packaging_height"
+                                                                               id="packaging_height" type="text">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="shipping_notes"
-                                                                   class="control-label col-sm-4">Shipping
-                                                                Notes</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="shipping_notes"
-                                                                       id="shipping_notes" type="text">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="packaging_weight"
+                                                                           class="control-label col-sm-4">Weight</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input class="form-control"
+                                                                               name="packaging_weight"
+                                                                               id="packaging_weight" type="text">
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="warnings" class="control-label col-sm-4">Warnings</label>
-                                                            <div class="col-sm-8">
-                                                                <input class="form-control" name="warnings"
-                                                                       id="warnings" type="text">
-                                                            </div>
-                                                        </div>
+                                                        </fieldset>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <fieldset>
-                                                        <legend>Packaging Size</legend>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_length"
-                                                                       class="control-label col-sm-4">Length</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name="packaging_length"
-                                                                           id="packaging_length" type="text">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_width"
-                                                                       class="control-label col-sm-4">Width</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name="packaging_width"
-                                                                           id="packaging_width" type="text">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_height"
-                                                                       class="control-label col-sm-4">Height</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name="packaging_height"
-                                                                           id="packaging_height" type="text">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_weight"
-                                                                       class="control-label col-sm-4">Weight</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name="packaging_weight"
-                                                                           id="packaging_weight" type="text">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="basic-right basic-wall logistic-right">
-                                    <div class="head">
-                                        <h4>Order Request</h4>
+                                        </form>
                                     </div>
-                                    <div class="logistic-right-content">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="logistic-quantity"
-                                                       class="control-label col-sm-4">Quantity</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="logistic-quantity"
-                                                           id="logistic-quantity" type="text">
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="basic-right basic-wall logistic-right">
+                                        <div class="head">
+                                            <h4>Order Request</h4>
+                                        </div>
+                                        <div class="logistic-right-content">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="logistic-quantity"
+                                                           class="control-label col-sm-4">Quantity</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" name="logistic-quantity"
+                                                               id="logistic-quantity" type="text">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="sumbit-logistic text-right">
-                                        <input type="submit" value="Submit" class="btn btn-info">
+                                        <div class="sumbit-logistic text-right">
+                                            <input type="submit" value="Submit" class="btn btn-info">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="price" class="tab-pane stock-price-tab fade">
-                    <div class="table-responsive">
-                        <table id="discount" class="table table-striped table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <td class="text-left">Customer Group</td>
-                                <td class="text-right">Quantity</td>
-                                <td class="text-right">Priority</td>
-                                <td class="text-right">Price</td>
-                                <td class="text-left">Date Start</td>
-                                <td class="text-left">Date End</td>
-                                <td></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr id="discount-row0">
-                                <td class="text-left"><select name="product_discount[0][customer_group_id]"
-                                                              class="form-control">
-                                        <option value="1" selected="selected">Default</option>
-                                    </select></td>
-                                <td class="text-right"><input type="text"
-                                                              name="product_discount[0][quantity]"
-                                                              value="10" placeholder="Quantity"
-                                                              class="form-control"/></td>
-                                <td class="text-right"><input type="text"
-                                                              name="product_discount[0][priority]" value="1"
-                                                              placeholder="Priority" class="form-control"/>
-                                </td>
-                                <td class="text-right"><input type="text" name="product_discount[0][price]"
-                                                              value="88.0000" placeholder="Price"
-                                                              class="form-control"/></td>
-                                <td class="text-left" style="width: 20%;">
-                                    <div class="input-group ">
-                                        <input type="text" name="product_discount[0][date_start]" value=""
-                                               placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                               class="form-control date"/>
-                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                </td>
-                                <td class="text-left" style="width: 20%;">
-                                    <div class="input-group ">
-                                        <input type="text" name="product_discount[0][date_end]" value=""
-                                               placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                               class="form-control date"/>
-                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                </td>
-                                <td class="text-left">
-                                    <button type="button" onclick="$('#discount-row0').remove();"
-                                            data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                                class="fa fa-minus-circle"></i></button>
-                                </td>
-                            </tr>
-                            <tr id="discount-row1">
-                                <td class="text-left"><select name="product_discount[1][customer_group_id]"
-                                                              class="form-control">
-                                        <option value="1" selected="selected">Default</option>
-                                    </select></td>
-                                <td class="text-right"><input type="text"
-                                                              name="product_discount[1][quantity]"
-                                                              value="20" placeholder="Quantity"
-                                                              class="form-control"/></td>
-                                <td class="text-right"><input type="text"
-                                                              name="product_discount[1][priority]" value="1"
-                                                              placeholder="Priority" class="form-control"/>
-                                </td>
-                                <td class="text-right"><input type="text" name="product_discount[1][price]"
-                                                              value="77.0000" placeholder="Price"
-                                                              class="form-control"/></td>
-                                <td class="text-left" style="width: 20%;">
-                                    <div class="input-group ">
-                                        <input type="text" name="product_discount[1][date_start]" value=""
-                                               placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                               class="form-control date"/>
-                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                </td>
-                                <td class="text-left" style="width: 20%;">
-                                    <div class="input-group ">
-                                        <input type="text" name="product_discount[1][date_end]" value=""
-                                               placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                               class="form-control date"/>
-                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                </td>
-                                <td class="text-left">
-                                    <button type="button" onclick="$('#discount-row1').remove();"
-                                            data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                                class="fa fa-minus-circle"></i></button>
-                                </td>
-                            </tr>
-                            <tr id="discount-row2">
-                                <td class="text-left"><select name="product_discount[2][customer_group_id]"
-                                                              class="form-control">
-                                        <option value="1" selected="selected">Default</option>
-                                    </select></td>
-                                <td class="text-right"><input type="text"
-                                                              name="product_discount[2][quantity]"
-                                                              value="30" placeholder="Quantity"
-                                                              class="form-control"/></td>
-                                <td class="text-right"><input type="text"
-                                                              name="product_discount[2][priority]" value="1"
-                                                              placeholder="Priority" class="form-control"/>
-                                </td>
-                                <td class="text-right"><input type="text" name="product_discount[2][price]"
-                                                              value="66.0000" placeholder="Price"
-                                                              class="form-control"/></td>
-                                <td class="text-left" style="width: 20%;">
-                                    <div class="input-group ">
-                                        <input type="text" name="product_discount[2][date_start]" value=""
-                                               placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                               class="form-control date"/>
-                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                </td>
-                                <td class="text-left" style="width: 20%;">
-                                    <div class="input-group ">
-                                        <input type="text" name="product_discount[2][date_end]" value=""
-                                               placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                               class="form-control date"/>
-                                        <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                                </td>
-                                <td class="text-left">
-                                    <button type="button" onclick="$('#discount-row2').remove();"
-                                            data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                                class="fa fa-minus-circle"></i></button>
-                                </td>
-                            </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="6"></td>
-                                <td class="text-left">
-                                    <button type="button" onclick="addDiscount();" data-toggle="tooltip"
-                                            title="Add Discount" class="btn btn-primary"><i
-                                                class="fa fa-plus-circle"></i></button>
-                                </td>
-                            </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-                <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
-                    <div class="container-fluid p-25">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="basic-left basic-wall">
-                                    <div class="all-list-attrs" style="min-height:300px;">
-                                        <!-- <ul class="attribute-list-items">
+                    <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list-attrs" style="min-height:300px;">
+                                            <!-- <ul class="attribute-list-items">
 
-                                        </ul> -->
-                                    </div>
-                                    <div class="button-add text-center">
-                                        <div class="col-md-6">
-                                            <a href="javascript:void(0)" class="btn btn-info btn-block get-variation"><i
-                                                        class="fa fa-plus"></i>More
-                                                option</a>
+                                            </ul> -->
                                         </div>
-                                        <div class="col-md-6">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-warning btn-block get-all-variations"><i
-                                                        class="fa fa-plus"></i>Link all
-                                                option</a>
+                                        <div class="button-add text-center">
+                                            <div class="col-md-6">
+                                                <a href="javascript:void(0)" class="btn btn-info btn-block get-variation"><i
+                                                            class="fa fa-plus"></i>More
+                                                    option</a>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-warning btn-block get-all-variations"><i
+                                                            class="fa fa-plus"></i>Link all
+                                                    option</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7 variation-settings">
+                                <div class="col-md-7 variation-settings">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- /.col -->
