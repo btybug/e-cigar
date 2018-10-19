@@ -18,7 +18,7 @@ function makeSearchItem(basicData) {
                 return $.ajax({
                     url: basicData.url,
                     type: "POST",
-                    basicData: { q: query },
+                    data: { q: query },
                     dataType: "json",
                     headers: {
                         "X-CSRF-TOKEN": $("input[name='_token']").val()
@@ -45,7 +45,7 @@ function makeSearchItem(basicData) {
     });
     $(basicData.input).on("beforeItemAdd", function(event) {
         event.cancel = true;
-        let valueCatergorayName = $(basicData.inputValues).val();
+        let valueCatergorayName = event.item
         if (!valueCatergorayName.includes(event.item)) {
             $(basicData.containerForAppend).append(makeSearchHtml(event.item));
             if (
