@@ -106,7 +106,9 @@
 @stop
 @section('js')
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
-
+    <script>
+        $('.icon-picker').iconpicker();
+    </script>
 @stop
 @section("css")
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
