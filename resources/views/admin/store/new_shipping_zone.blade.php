@@ -60,7 +60,7 @@
                         <label class="col-sm-2 control-label" for="input-description">Payment
                             Options</label>
                         <div class="col-sm-10">
-                            {!! Form::text('tags',null,['placeholder'=>'Tag','class' => 'form-control']) !!}
+                            {!! Form::select('tags',$activePayments,null,['class' => 'form-control']) !!}
                             <ul class="dropdown-menu"></ul>
                             <div id="coupon-category" class="well well-sm view-coupon">
                                 <ul class="coupon-category-list" style="list-style: none">

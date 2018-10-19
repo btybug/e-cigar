@@ -15,6 +15,7 @@ use App\Http\Requests\ShippingZonePost;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\Coupons;
+use App\Models\Settings;
 use App\Models\ShippingZones;
 use Carbon\Carbon;
 use DB;
@@ -158,11 +159,12 @@ class StoreController extends Controller
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
-    public function getShippingNew(Countries $countries)
+    public function getShippingNew(Countries $countries,Settings $settings)
     {
+        $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
         $shipping_zone = null;
         $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-        return $this->view('new_shipping_zone',compact('countries','shipping_zone'));
+        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments'));
     }
 
     public function getregions(Countries $countries)

@@ -120,7 +120,7 @@ class SettingsController extends Controller
 
     public function getStorePaymentsGateways(Settings $settings)
     {
-        $model = $settings->getEditableData('payments_gateways');
+        $model = $settings->getEditableData('active_payments_gateways');
         return $this->view('store.payments_gateways',compact('model'));
     }
 
@@ -140,7 +140,7 @@ class SettingsController extends Controller
     public function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
     {
         $data[$request->get('key')] = ( $request->get('onOff')=='true')?1:0;
-        $settings->updateOrCreateSettings('payments_gateways', $data);
+        $settings->updateOrCreateSettings('active_payments_gateways', $data);
         return 1;
     }
 
