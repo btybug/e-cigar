@@ -61,59 +61,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-6 col-xs-12">
-                            <div class="row">
-                                <label for="variation_reg_price"
-                                       class="control-label col-sm-4">Regular
-                                    Price</label>
-                                <div class="col-sm-8">
-                                    <input class="form-control"
-                                           name="variation_reg_price"
-                                           id="variation_reg_price" type="text">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="discount-price">
-                    <h4>Discount price</h4>
-                    <a href="#" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></a>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>From</th>
-                        <th>To</th>
-                        <th>Discount price</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                    </tr>
-                    <tr>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                    </tr>
-                    <tr>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

@@ -216,7 +216,6 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="basic-left basic-wall">
-                                        <form action="" class="form-horizontal">
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-12">
@@ -270,30 +269,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="basic-right basic-wall logistic-right">
-                                        <div class="head">
-                                            <h4>Order Request</h4>
-                                        </div>
-                                        <div class="logistic-right-content">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="logistic-quantity"
-                                                           class="control-label col-sm-4">Quantity</label>
-                                                    <div class="col-sm-8">
-                                                        <input class="form-control" name="logistic-quantity"
-                                                               id="logistic-quantity" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="sumbit-logistic text-right">
-                                            <input type="submit" value="Submit" class="btn btn-info">
-                                        </div>
                                     </div>
                                 </div>
                             </div>
