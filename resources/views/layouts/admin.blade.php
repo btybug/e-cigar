@@ -179,12 +179,6 @@
     <script src="{!! url('public/admin_theme/media/js/custom.js') !!}"></script>
     <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
     <script>
-        // $("#input-ru").fileinput({
-        //     language: "ru",
-        //     uploadUrl: "/api/api-media/upload",
-        //     allowedFileExtensions: ["jpg", "png", "gif"]
-        // });
-        console.log(_global_folder_id)
         $(function(){
        $("#item").fileinput({
            maxFileCount: 5,
@@ -196,7 +190,27 @@
        })
     }).on('fileuploaded', function(event, data, id, index) {
         toggleUploadDivs()
-        $(".jstree-clicked").click()
+        $(".jstree-clicked").click();
+        $("#jstree_html").jstree('destroy');
+        $("#jstree_html").jstree({
+        core: {
+            data: {
+                type: "POST",
+                url: "/api/api-media/jstree",
+                dataType: "json", // needed only if you do not supply JSON headers
+                data: { folder_id: 1 },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function(data) {
+                    $(".media-modal-main-content").empty();
+                    listFolders(data.children);
+                    listFiles(data.items);
+                }
+            }
+        }
+    });
+
         
     })
     function toggleUploadDivs(){
@@ -206,6 +220,10 @@
     $("body").on("click", ".fileinput-remove", function(){
         toggleUploadDivs()
     })
+    $("body").on("click", ".file-drop-zone", function() {
+    $(".btn.btn-file>input[type='file']").click();
+});
+
     </script>
 @endif
 <script>

@@ -74,22 +74,50 @@
         //     uploadUrl: "/api/api-media/upload",
         //     allowedFileExtensions: ["jpg", "png", "gif"]
         // });
-
-        
-    $(function(){
-        $("#item").fileinput({
+        $(function(){
+       $("#item").fileinput({
            maxFileCount: 5,
            uploadUrl: "/api/api-media/upload",
             allowedFileExtensions: ["jpg", "png", "gif"],
-           uploadExtraData: function(){
+            uploadExtraData: function(){
             return {'_token':$("meta[name='csrf-token']").attr('content'), "folder_id": _global_folder_id }
            }
-       });
-        $('#item').on('filebatchuploadsuccess', function(event, data, previewId, index) {
-            var form = data.form, files = data.files, extra = data.extra,
-                response = data.response, reader = data.reader;
-            alert (extra.bdInteli + " " +  response.uploaded);
-        });
+       })
+    }).on('fileuploaded', function(event, data, id, index) {
+        toggleUploadDivs()
+        $(".jstree-clicked").click();
+        $("#jstree_html").jstree('destroy');
+        $("#jstree_html").jstree({
+        core: {
+            data: {
+                type: "POST",
+                url: "/api/api-media/jstree",
+                dataType: "json", // needed only if you do not supply JSON headers
+                data: { folder_id: 1 },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function(data) {
+                    $(".media-modal-main-content").empty();
+                    listFolders(data.children);
+                    listFiles(data.items);
+                }
+            }
+        }
+    });
+
+        
     })
+    function toggleUploadDivs(){
+        $("body").find(".media-modal-main-content").show()
+        $("body").find(".media-modal-content-upload").hide()
+    }
+    $("body").on("click", ".fileinput-remove", function(){
+        toggleUploadDivs()
+    })
+    $("body").on("click", ".file-drop-zone", function() {
+    $(".btn.btn-file>input[type='file']").click();
+});
+
     </script>
 @endif
