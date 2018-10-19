@@ -14,6 +14,8 @@
                     <a href="https://demo.opencart.com/admin/index.php?route=sale/order&amp;user_token=qrdym7jfe8IAJBo84RMx4PEZ9O2lQxml" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
                 </div>
             </div>
+        </div>
+    </div>
 
     {{--<div class="row">--}}
         {{--<div class="col-xs-12">--}}
@@ -107,10 +109,10 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="panel panel-default">
-                                <ul class="nav nav-tabs" role="tablist">
+                            <div class="panel panel-default panel--orders-addresses">
+                                <ul class="nav nav-tabs nav-addresses" role="tablist">
                                     <li class="nav-item active">
-                                        <div class="panel-heading" style="border-right: 1px solid #ddd;">
+                                        <div class="panel-heading">
                                             <a class="nav-link" id="shippingAddress-tab" data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress" aria-selected="true" aria-expanded="true">
                                                 <span class="panel-title"><i class="fa fa-user"></i>Shipping address</span>
                                             </a>
@@ -124,7 +126,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                                <div class="tab-content" style="min-height: 120px; padding: 0 5px">
+                                <div class="tab-content tab-content--addresses">
                                     <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel" aria-labelledby="shippingAddress-tab">
                                         Shipping address
                                         ...
@@ -311,28 +313,14 @@
                 </div>
 
             </div>
-
-
-
-
         </div>
         <div class="col-md-4" style="border-left: 2px solid #ddd; min-height: 868px; overflow: auto">
-            <div style="position: relative">
-                <ul class="nav nav-tabs orderchanges-tabs" role="tablist" style="margin-bottom: 20px; border: none">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary" id="changeStatusBtn-tab" data-toggle="tab" href="#changeStatusBtn" role="tab" aria-controls="changeStatusBtn" aria-selected="false" style="border-radius: 4px">Change Status</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary" id="costumerNoteBtn-tab" data-toggle="tab" href="#costumerNoteBtn" role="tab" aria-controls="costumerNoteBtn" aria-selected="false" style="border-radius: 4px">+ Costumer Note</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-primary" id="internalNoteBtn-tab" data-toggle="tab" href="#internalNoteBtn" role="tab" aria-controls="internalNoteBtn" aria-selected="false" style="border-radius: 4px">Inter Note</a>
-                    </li>
-
-                </ul>
-                <div class="tab-content" style="position: absolute; z-index: 999; width: 100%;">
-                    <div class="tab-pane fade" id="changeStatusBtn" role="tabpanel" aria-labelledby="changeStatusBtn-tab" style="padding: 30px 10px 15px; box-shadow: 0 0 6px #848080; background: #fff;">
-                        <div class="form-group" style="margin-bottom: 20px; overflow: hidden">
+            <div style="width: 100%; display: flex; position: relative; margin-bottom: 30px">
+                <div class="my-dropdown">
+                    <button class="btn btn-primary dropdown-btn">Change Status</button>
+                    <div class="dropdown-inner" style="background: #fff; position: absolute; z-index: 999; width: 100%; padding: 15px 10px; box-shadow: 0 0 6px #848080;">
+                        <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
+                        <div class="form-group" style="overflow: hidden">
                             <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
                             <div class="col-sm-8">
                                 <select name="changeStatusSelect" id="input-store" class="form-control">
@@ -352,31 +340,39 @@
                             <button type="button" class="btn btn-primary">Change</button>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="costumerNoteBtn" role="tabpanel" aria-labelledby="costumerNoteBtn-tab" style="padding: 15px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
-                        <div class="text-center">
-                            <h4 style="margin:0 0 10px">My Note Here</h4>
-                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
-                        </div>
-                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
-                            <button type="button" class="btn btn-primary">Add Note</button>
-                        </div>
-
-                    </div>
-
-                    <div class="tab-pane fade" id="internalNoteBtn" role="tabpanel" aria-labelledby="internalNoteBtn-tab" style="padding: 15px 10px; box-shadow: 0 0 6px #848080; background: #fff;">
-                        <div class="text-center">
-                            <h4 style="margin:0 0 10px">My Note Here</h4>
-                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
-                        </div>
-                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
-                            <button type="button" class="btn btn-primary">Add Note</button>
-                        </div>
-
-                    </div>
                 </div>
 
 
+                <div class="my-dropdown">
+                    <button class="btn btn-primary btn dropdown-btn">+ Costumer Note</button>
+                    <div class="dropdown-inner" style="background: #fff; position: absolute; z-index: 999; width: 100%; padding: 15px 10px; box-shadow: 0 0 6px #848080;">
+                        <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
+                        <div class="text-center">
+                            <h4 style="margin:0 0 10px">My Note Here</h4>
+                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                        </div>
+                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                            <button type="button" class="btn btn-primary">Add Note</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="my-dropdown">
+                    <button class="btn btn-primary btn dropdown-btn">Internal Note</button>
+                    <div class="dropdown-inner" style="background: #fff; position: absolute; z-index: 999; width: 100%; padding: 15px 10px; box-shadow: 0 0 6px #848080;">
+                        <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
+                        <div class="text-center">
+                            <h4 style="margin:0 0 10px">Internal Note</h4>
+                            <textarea name="myNote" rows="5" style="width: 100%; resize: none"></textarea>
+                        </div>
+                        <div class="text-center" style="border-top: 1px solid #eee; padding-top: 10px">
+                            <button type="button" class="btn btn-primary">Add Note</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title text-center">Order History</h3>
@@ -526,11 +522,8 @@
     </div>
 
 
-
-
-
-
 @stop
+
 @section('js')
     <script>
         $(function () {
@@ -548,7 +541,23 @@
             {{--{data: 'created_at', name: 'created_at'}--}}
             {{--]--}}
             {{--});--}}
+
+            $('.dropdown-btn').on('click', function () {
+                $('.dropdown-btn').each(function () {
+                    if ($('.dropdown-btn').next('.dropdown-inner').hasClass('show')) {
+                        $('.dropdown-inner').removeClass('show');
+                    }
+                });
+
+                $(this).next('.dropdown-inner').addClass('show');
+            });
+
+            $('.dropdown-close').on('click', function () {
+                $(this).closest('.dropdown-inner').removeClass('show');
+            });
+
         });
+
 
     </script>
 @stop

@@ -299,4 +299,31 @@ table.table--order-dtls.table-bordered tr > th {
     border-width: 1px;
 }
 
+.dropdown-inner {
+    display: none;
+    left: 0;
+    right: 0;
+    margin:0 auto;
+}
+
+.dropdown-inner.show-inner {
+    display: block;
+}
+
+.my-dropdown {
+    margin-right: 15px;
+}
+
+.my-dropdown:last-child {
+    margin-right: 0;
+}
+
+.panel--orders-addresses .nav-addresses .nav-item:first-child {
+    border-right: 1px solid #ddd;
+}
+
+.panel--orders-addresses .tab-content--addresses {
+    min-height: 120px; padding: 0 5px;
+}
+
 /*End admin orders*/
