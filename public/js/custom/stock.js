@@ -318,7 +318,9 @@ $("body").on("click", ".get-variation", function() {
         html += HTMLmakeSelectVaritionOptions(key, val);
     });
     $(".all-list-attrs").append(
-        `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
+        `<div class="list-attrs-single-item" style="display: flex; justify-content: space-between;"><div>
+        <button class="variation-select"><i class="fa fa-list"></i></button>
+     </div> ${html} <div><button class="remvoe-variations-select"><i class="fa fa-trash"></i></button></div> <div>`
     );
 });
 
@@ -330,11 +332,25 @@ $("body").on("click", ".remvoe-variations-select", function() {
 
 $("body").on("click", ".get-all-variations", function() {
     $(".all-list-attrs").empty();
-    AjaxCall("/admin/inventory/stock/link-all", { data: attributesJson}, function(res) {
-        if(! res.error){
-            $(".all-list-attrs").html(res.html);
+    AjaxCall(
+        "/admin/inventory/stock/link-all",
+        { data: attributesJson },
+        function(res) {
+            if (!res.error) {
+                $(".all-list-attrs").html(res.html);
+            }
+            console.log(res);
         }
-        console.log(res);
+    );
+});
+
+$("body").on("click", ".variation-select", function() {
+    AjaxCall("/admin/inventory/stock/variation-form", {}, function(res) {
+        if (!res.error) {
+            $(".variation-settings")
+                .empty()
+                .append(res.html);
+        }
     });
 });
 

@@ -492,7 +492,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-md-7 variation-settings">
                                     <div class="basic-center basic-wall">
                                         <div class="container-fluid">
                                             <div class="row">
