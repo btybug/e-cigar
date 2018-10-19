@@ -124,6 +124,7 @@ class SettingsController extends Controller
         return $this->view('store.payments_gateways',compact('model'));
     }
 
+
     public function getStorePaymentsGatewaysSettings(Settings $settings)
     {
         $model = $settings->getEditableData('payments_gateways');
@@ -142,5 +143,17 @@ class SettingsController extends Controller
         $settings->updateOrCreateSettings('payments_gateways', $data);
         return 1;
     }
+
+    public function getCuriers(Settings $settings)
+    {
+        $model = $settings->getEditableData('curiers');
+        return $this->view('store.couriers',compact('model'));
+    }
+    public function getDeliveryCost(Settings $settings)
+    {
+        $model = $settings->getEditableData('deliverycost');
+        return $this->view('store.delivery_cost',compact('model'));
+    }
+
 
 }

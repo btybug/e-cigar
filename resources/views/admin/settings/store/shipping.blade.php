@@ -17,6 +17,16 @@
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_curiers') !!}"
+                   role="tab"
+                   aria-controls="shipping" aria-selected="false">Curiers</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
+                   role="tab"
+                   aria-controls="shipping" aria-selected="false">Delivery Cost</a>
+            </li>
         </ul>
         <div class="" id="myTabContent">
         {{--<table id="discount" class="table table-responsive table--store-settings">

@@ -13,7 +13,7 @@
                 <a class="nav-link" id="shipping-tab" href="{!! route('admin_settings_shipping') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Shipping</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
@@ -23,7 +23,7 @@
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Curiers</a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item active">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Delivery Cost</a>
@@ -39,25 +39,10 @@
                 <li class="item">
                     <div class="chek-title">
                         <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">Cash Paymant</label>
+                        <label for="cash_paymant" class="title">1</label>
                     </div>
                     <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <input id="stripe_paymant" @if($model->stripe) checked @endif name="stripe" class="gateways_inp" type="checkbox">
-                        <label for="stripe_paymant"  class="title">Stripe</label>
-                    </div>
-                    <a href="{!! route('admin_payment_gateways_stripe') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <input id="paypal" type="checkbox" name="paypal" @if($model->paypal) checked @endif value="paypal" class="gateways_inp">
-                        <label for="paypal" class="title">Paypal</label>
-                    </div>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
-
             </ul>
         </div>
     </div>
@@ -76,18 +61,18 @@
                 $(this).closest('.item').removeClass('active')
             }
         });
-            $('.gateways_inp').on('change',function () {
-                var data={key:$(this).attr('name'),onOff:$(this).prop( "checked")}
-                $.ajax({
-                    type: "post",
-                    url: '{!! route('post_admin_payment_gateways_enable') !!}',
-                    datatype: "json",
-                    data: data,
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    }
-                });
-                });
+        $('.gateways_inp').on('change',function () {
+            var data={key:$(this).attr('name'),onOff:$(this).prop( "checked")}
+            {{--$.ajax({--}}
+            {{--type: "post",--}}
+            {{--url: '{!! route('post_admin_payment_gateways_enable') !!}',--}}
+            {{--datatype: "json",--}}
+            {{--data: data,--}}
+            {{--headers: {--}}
+            {{--"X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")--}}
+            {{--}--}}
+            {{--});--}}
+        });
 
     </script>
 @stop
