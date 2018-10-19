@@ -144,10 +144,26 @@ class SettingsController extends Controller
         return 1;
     }
 
-    public function getCuriers(Settings $settings)
+    public function getCouriers(Settings $settings)
     {
         $model = $settings->getEditableData('curiers');
         return $this->view('store.couriers',compact('model'));
+    }
+
+    public function getCouriersPickUp(Settings $settings)
+    {
+        $model = $settings->getEditableData('couriers');
+        return $this->view('store.couriers.pick_up',compact('model'));
+    }
+    public function getCouriersDHL(Settings $settings)
+    {
+        $model = $settings->getEditableData('couriers');
+        return $this->view('store.couriers.dhl',compact('model'));
+    }
+    public function getCouriersLocalEmail(Settings $settings)
+    {
+        $model = $settings->getEditableData('couriers');
+        return $this->view('store.couriers.local_email',compact('model'));
     }
     public function getDeliveryCost(Settings $settings)
     {

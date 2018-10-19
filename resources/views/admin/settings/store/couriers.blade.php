@@ -19,9 +19,9 @@
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_curiers') !!}"
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_courier') !!}"
                    role="tab"
-                   aria-controls="shipping" aria-selected="false">Curiers</a>
+                   aria-controls="shipping" aria-selected="false">Courier </a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
@@ -38,10 +38,24 @@
             <ul class="list_paymant">
                 <li class="item">
                     <div class="chek-title">
-                        <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">1</label>
+                        <input id="cash_paymant" @if($model->pick_up) checked @endif  name="pick_up" class="gateways_inp" type="checkbox">
+                        <label for="cash_paymant" class="title">Pick up</label>
                     </div>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                    <a href="{!! route('admin_settings_courier_pick_up') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <input id="cash_paymant" @if($model->dhl) checked @endif  name="dhl" class="gateways_inp" type="checkbox">
+                        <label for="cash_paymant" class="title">DHL</label>
+                    </div>
+                    <a href="{!! route('admin_settings_courier_dhl') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <input id="cash_paymant" @if($model->local_mail) checked @endif  name="local_mail" class="gateways_inp" type="checkbox">
+                        <label for="cash_paymant" class="title">Local Mail</label>
+                    </div>
+                    <a href="{!! route('admin_settings_courier_local_email') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
             </ul>
         </div>

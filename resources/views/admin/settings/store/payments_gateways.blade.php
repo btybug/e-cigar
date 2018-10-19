@@ -19,9 +19,9 @@
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_curiers') !!}"
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_couriers') !!}"
                    role="tab"
-                   aria-controls="shipping" aria-selected="false">Curiers</a>
+                   aria-controls="shipping" aria-selected="false">Couriers</a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
