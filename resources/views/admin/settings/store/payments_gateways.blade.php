@@ -28,21 +28,21 @@
             <ul class="list_paymant">
                 <li class="item">
                     <div class="chek-title">
-                        <input id="cash_paymant" name="cash" class="gateways_inp" type="checkbox">
+                        <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
                         <label for="cash_paymant" class="title">Cash Paymant</label>
                     </div>
                     <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
                 <li class="item">
                     <div class="chek-title">
-                        <input id="stripe_paymant" name="stripe" class="gateways_inp" type="checkbox">
+                        <input id="stripe_paymant" @if($model->stripe) checked @endif name="stripe" class="gateways_inp" type="checkbox">
                         <label for="stripe_paymant"  class="title">Stripe</label>
                     </div>
                     <a href="{!! route('admin_payment_gateways_stripe') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
                 <li class="item">
                     <div class="chek-title">
-                        <input id="paypal" type="checkbox" name="paypal" value="paypal" class="gateways_inp">
+                        <input id="paypal" type="checkbox" name="paypal" @if($model->paypal) checked @endif value="paypal" class="gateways_inp">
                         <label for="paypal" class="title">Paypal</label>
                     </div>
                     <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>

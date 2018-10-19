@@ -28,28 +28,28 @@ class SettingsController extends Controller
     public function getLanguages()
     {
         $languages = SiteLanguages::all();
-        return $this->view('languages',compact(['languages']));
+        return $this->view('languages', compact(['languages']));
     }
 
     public function getLanguagesNew()
     {
-        $model= null;
-        $countries = Languages::pluck('name','code')->all();
+        $model = null;
+        $countries = Languages::pluck('name', 'code')->all();
 
-        return $this->view('new_languages',compact(['model','countries']));
+        return $this->view('new_languages', compact(['model', 'countries']));
     }
 
     public function getLanguagesEdit($id)
     {
         $model = SiteLanguages::findOrFail($id);
-        $countries = Countries::pluck('name','code')->all();
+        $countries = Countries::pluck('name', 'code')->all();
 
-        return $this->view('new_languages',compact(['model','countries']));
+        return $this->view('new_languages', compact(['model', 'countries']));
     }
 
     public function postLanguages(Request $request)
     {
-        $language = SiteLanguages::updateOrCreate(['id' =>$request->id],$request->except("_token"));
+        $language = SiteLanguages::updateOrCreate(['id' => $request->id], $request->except("_token"));
 
         return redirect()->route('admin_settings_languages');
     }
@@ -59,37 +59,37 @@ class SettingsController extends Controller
         return $this->view('mail_templates');
     }
 
-    public function getCreateMailTemplates($id=null)
+    public function getCreateMailTemplates($id = null)
     {
-        $model=null;
-        if($id){
-            $model=Emails::findOrFail($id);
+        $model = null;
+        if ($id) {
+            $model = Emails::findOrFail($id);
         }
-       $shortcodes= new ShortCodes();
-        return $this->view('emails.manage',compact('model','shortcodes'));
+        $shortcodes = new ShortCodes();
+        return $this->view('emails.manage', compact('model', 'shortcodes'));
     }
 
     public function postCreateOrUpdate(Request $request)
     {
-        $data=$request->all();
-        MailTemplates::updateOrCreate($request->id,$data);
+        $data = $request->all();
+        MailTemplates::updateOrCreate($request->id, $data);
         return redirect()->route('admin_mail_templates');
     }
 
     public function postLanguageGetWithCode(Request $request)
     {
-       $lang = Languages::where('code',$request->code)->first();
-       if($lang) {
-           return \Response::json(['error' => false,'data' => $lang]);
-       }
+        $lang = Languages::where('code', $request->code)->first();
+        if ($lang) {
+            return \Response::json(['error' => false, 'data' => $lang]);
+        }
 
-        return \Response::json(['error' => true,'message' => "Error"]);
+        return \Response::json(['error' => true, 'message' => "Error"]);
     }
 
     public function getLanguagesDelete(Request $request, $id)
     {
         $lang = SiteLanguages::findOrFail($id);
-        if($lang && $lang->default == 0){
+        if ($lang && $lang->default == 0) {
             $lang->delete();
         }
 
@@ -98,15 +98,15 @@ class SettingsController extends Controller
 
     public function getEmails()
     {
-       return $this->view('emails.index');
+        return $this->view('emails.index');
     }
-
 
 
     public function getGeneral()
     {
         return $this->view('general.index');
     }
+
     public function getStore()
     {
         return $this->view('store.index');
@@ -115,29 +115,32 @@ class SettingsController extends Controller
     public function getStoreShipping()
     {
         $shipping_zones = ShippingZones::all();
-        return $this->view('store.shipping',compact('shipping_zones'));
+        return $this->view('store.shipping', compact('shipping_zones'));
     }
 
-    public function getStorePaymentsGateways()
+    public function getStorePaymentsGateways(Settings $settings)
     {
-        return  $this->view('store.payments_gateways');
+        $model = $settings->getEditableData('payments_gateways');
+        return $this->view('store.payments_gateways',compact('model'));
     }
 
     public function getStorePaymentsGatewaysSettings(Settings $settings)
     {
-        $model=$settings->getEditableData('payments_gateways');
-        return  $this->view('store.payments_gateways.settings',compact('model'));
+        $model = $settings->getEditableData('payments_gateways');
+        return $this->view('store.payments_gateways.settings', compact('model'));
     }
-    public function postStorePaymentsGatewaysSettings(Request $request,Settings $settings)
+
+    public function postStorePaymentsGatewaysSettings(Request $request, Settings $settings)
     {
-        $settings->updateOrCreateSettings('payments_gateways',$request->except('_token'));
+        $settings->updateOrCreateSettings('payments_gateways', $request->except('_token'));
         return redirect()->back();
     }
-    public function postStorePaymentsGatewaysEnable(Request $request,Settings $settings)
+
+    public function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
     {
-        $data[$request->get('key')]=$request->get('onOff');
-        $settings->updateOrCreateSettings('payments_gateways',$request->except('_token'));
-        return redirect()->back();
+        $data[$request->get('key')] = $request->get('onOff');
+        $settings->updateOrCreateSettings('payments_gateways', $data);
+        return 1;
     }
 
 }
