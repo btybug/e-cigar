@@ -34,21 +34,21 @@ class InventoryController extends Controller
     {
         $data = $request->get('data');
         if(count($data)){
-            $arPhrases = array_first($data);
+            $firstKeyArray = array_first($data);
             array_shift($data);
             foreach ($data as $i => $v){
-                $notFullCount = count($arPhrases);
-                foreach ($arPhrases as $phrase) {
+                $notFullCount = count($firstKeyArray);
+                foreach ($firstKeyArray as $phrase) {
                     foreach ($data[$i] as $newPart) {
-                        $arPhrases[] = $phrase."-".$newPart;
+                        $firstKeyArray[] = $phrase."-".$newPart;
                     }
                 }
-                $arPhrases = array_slice($arPhrases, $notFullCount);
+                $firstKeyArray = array_slice($firstKeyArray, $notFullCount);
             }
 
             $results = [];
-            if(count($arPhrases)){
-                foreach ($arPhrases as $string){
+            if(count($firstKeyArray)){
+                foreach ($firstKeyArray as $string){
                     $results[] = explode('-', $string);
                 }
             }
@@ -58,5 +58,11 @@ class InventoryController extends Controller
         }
 
         return \Response::json(['error' => true]);
+    }
+
+    public function variationForm(Request $request)
+    {
+        $html = \View('admin.inventory._partials.variation_form')->render();
+        return \Response::json(['error' => false,'html' => $html]);
     }
 }
