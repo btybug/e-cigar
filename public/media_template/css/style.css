@@ -366,7 +366,9 @@ body.full-height-layout #page-wrapper {
   height: 100%;
 }
 #page-wrapper {
-  min-height: auto;
+  /*min-height: auto;*/
+  height: 100vh;
+  overflow: auto;
 }
 body.boxed-layout #wrapper {
   background-color: #2f4050;
@@ -432,14 +434,14 @@ a:focus {
 }
 #page-wrapper {
   padding: 0 15px;
-  min-height: 568px;
+  /*min-height: 568px;*/
   position: relative !important;
 }
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
     margin: 0 auto;
-    min-height: 2002px;
+    /*min-height: 2002px;*/
   }
 }
 .title-action {
@@ -1292,7 +1294,7 @@ ul.notes li div {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 0;
-    min-height: 1000px;
+    /*min-height: 1000px;*/
   }
   .ibox-tools {
     float: none;

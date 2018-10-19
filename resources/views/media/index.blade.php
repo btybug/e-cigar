@@ -8,11 +8,11 @@
                     <div class="ibox float-e-margins">
                         <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
                             <div class="file-manager">
-                                <h5>Show:</h5>
-                                <a href="#" class="file-control active">Ale</a>
-                                <a href="#" class="file-control">Documents</a>
-                                <a href="#" class="file-control">Audio</a>
-                                <a href="#" class="file-control">Images</a>
+                                {{--<h5>Show:</h5>--}}
+                                {{--<a href="#" class="file-control active">Ale</a>--}}
+                                {{--<a href="#" class="file-control">Documents</a>--}}
+                                {{--<a href="#" class="file-control">Audio</a>--}}
+                                {{--<a href="#" class="file-control">Images</a>--}}
                                 <div class="hr-line-dashed"></div>
                                 <button class="btn btn-primary btn-block {!! $settings['uploadbutton']??null !!}">
                                     Upload Files
@@ -34,17 +34,17 @@
                                 <ul class="folder-list" style="padding: 0;" data-media="folder">
 
                                 </ul>
-                                <h5 class="tag-title">Tags</h5>
-                                <ul class="tag-list" style="padding: 0">
-                                    <li><a href="">Family</a></li>
-                                    <li><a href="">Work</a></li>
-                                    <li><a href="">Home</a></li>
-                                    <li><a href="">Children</a></li>
-                                    <li><a href="">Holidays</a></li>
-                                    <li><a href="">Music</a></li>
-                                    <li><a href="">Photography</a></li>
-                                    <li><a href="">Film</a></li>
-                                </ul>
+                                {{--<h5 class="tag-title">Tags</h5>--}}
+                                {{--<ul class="tag-list" style="padding: 0">--}}
+                                    {{--<li><a href="">Family</a></li>--}}
+                                    {{--<li><a href="">Work</a></li>--}}
+                                    {{--<li><a href="">Home</a></li>--}}
+                                    {{--<li><a href="">Children</a></li>--}}
+                                    {{--<li><a href="">Holidays</a></li>--}}
+                                    {{--<li><a href="">Music</a></li>--}}
+                                    {{--<li><a href="">Photography</a></li>--}}
+                                    {{--<li><a href="">Film</a></li>--}}
+                                {{--</ul>--}}
                                 <div class="clearfix"></div>
                             </div>
                         </div>
