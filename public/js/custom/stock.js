@@ -435,3 +435,29 @@ function nestedObjectToArray(obj) {
     }
     return result;
 }
+
+// MEDIAAAAAAAAAAAAAAAAAAAA
+
+const HTMLyoutubeLinkToIframe = data => {
+    let videoId = data.split("v=")[1];
+    let ampersandPosition = videoId.indexOf("&");
+    if (ampersandPosition != -1) {
+        videoId = videoId.substring(0, ampersandPosition);
+    }
+    if ($(`[value="${videoId}"]`).length !== 0) return false;
+    return `<div class="video-single-item" style="display: flex"><iframe width="200" height="200"
+    src="https://www.youtube.com/embed/${videoId}">
+    </iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="video-url[]" value="${videoId}"> </div>`;
+};
+
+$("body").on("click", ".add-video-url", function() {
+    let link = $(".video-url-link").val();
+    $(".video-url-link").val("");
+    $(".media-videos-preview").append(HTMLyoutubeLinkToIframe(link));
+});
+
+$("body").on("click", ".remove-video-single-item", function() {
+    $(this)
+        .closest(".video-single-item")
+        .remove();
+});

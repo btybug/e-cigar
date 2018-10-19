@@ -50,8 +50,8 @@
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
                     <li ><a data-toggle="tab" href="#basic">Basic Details</a></li>
-                    <li><a data-toggle="tab" href="#media">Media</a></li>
-                    <li class="active"><a data-toggle="tab" href="#attributes">Attributes</a></li>
+                    <li class="active"><a data-toggle="tab" href="#media">Media</a></li>
+                    <li ><a data-toggle="tab" href="#attributes">Attributes</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#price">Price</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
@@ -122,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="media" class="tab-pane basic-details-tab fade">
+                    <div id="media" class="tab-pane basic-details-tab fade in active">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
@@ -138,7 +138,24 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="basic-center basic-wall">
+                                        <div class="media-videos">
+                                            <div class="input-group " style="display: flex">
+                                                <input type="text" class="form-control video-url-link" placeholder="Video Url" aria-label="Video Url" aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary add-video-url" type="button">Add Link</button>
+                                                </div>
+                                            </div>
+                                            <div class="media-videos-preview" style="display: flex">
 
+
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -149,7 +166,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="attributes" class="tab-pane basic-details-tab in active fade attributes_tab">
+                    <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-3">
