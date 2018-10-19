@@ -133,4 +133,11 @@ class SettingsController extends Controller
         $settings->updateOrCreateSettings('payments_gateways',$request->except('_token'));
         return redirect()->back();
     }
+    public function postStorePaymentsGatewaysEnable(Request $request,Settings $settings)
+    {
+        $data[$request->get('key')]=$request->get('onOff');
+        $settings->updateOrCreateSettings('payments_gateways',$request->except('_token'));
+        return redirect()->back();
+    }
+
 }

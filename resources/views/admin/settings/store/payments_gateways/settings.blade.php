@@ -6,6 +6,18 @@
     <div class="container">
         {!! Form::model($model,['class'=>'form-horizontal'])!!}
             <div class="form-group">
+                <label for="text" class="control-label col-xs-4">Payment Name</label>
+                <div class="col-xs-8">
+                    {!! Form::text('stripe_payment_name',null,['class'=>'form-control']) !!}
+                </div>
+            </div>
+        <div class="form-group">
+                <label for="text" class="control-label col-xs-4">Image</label>
+                <div class="col-xs-8">
+                    {!! media_button('stripe_image',$model) !!}
+                </div>
+            </div>
+        <div class="form-group">
                 <label for="text" class="control-label col-xs-4">Stripe Key</label>
                 <div class="col-xs-8">
                     {!! Form::text('stripe_key',null,['class'=>'form-control']) !!}
