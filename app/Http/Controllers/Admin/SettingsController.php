@@ -106,10 +106,9 @@ class SettingsController extends Controller
     }
 
 
-    public function getGeneral(Countries $countries)
+    public function getGeneral()
     {
-        $zones = ShippingZones::all();
-        return $this->view('store.general', compact('zones'));
+        return $this->view('store.general');
     }
 
 
