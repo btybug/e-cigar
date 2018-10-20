@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
-                <a class="nav-link" id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
+                <a class="nav-link " id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
             <li class="nav-item active">
@@ -29,212 +29,80 @@
             </li>
         </ul>
         <div class="" id="myTabContent">
-        {{--<table id="discount" class="table table-responsive table--store-settings">
-                    <tbody class="all-options">
-                    <tr>
-                        <td>
-                            <label for="ShippingZones">Shipping to</label>
-                        </td>
-                        <td>
-                            <select id="ShippingZones" class="form-control">
-                                <option selected>Shipping Zones</option>
-                                @foreach($shipping_zones as $zone)
-                                    <option value="{!! $zone->tax !!}" >{!! $zone->name !!}</option>
-                                @endforeach
-                            </select>
-                        </td>
-                        <td class="text-right">
-                            <button type="button" class="btn btn-primary add-new-option"><i
-                                        class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table table-responsive table--store-settings">
-                <tr class="bg-my-light-blue">
-                        <td>Shipping Zone - <span id="shipzone">Armenia</span></td>
-                        <td colspan="5">Tax Rate - <span id="taxzone">ArmeniaVaT20</span></td>
-                    </tr>
-                    <tbody>
-                    
-                    <tr class="bg-my-light-pink">
-                        <th>Order Amount</th>
-                        <th>Courier</th>
-                        <th>Cost</th>
-                        <th colspan="3">Time</th>
-                    </tr>
-                    <tr>
-                        <td class="table--store-settings_vert-top">
-                            <input type="number" min="1" max="5" class="form-control"
-                                   style="display: inline-block; width: auto">
-                            <span>To</span>
-                            <input type="number" min="1" max="50" class="form-control"
-                                   style="display: inline-block; width: auto">
-                        </td>
-                        <td>
-                            <select id="PosType" class="form-control">
-                                <option selected>Normal Post</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i
-                                        class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <select id="dhl" class="form-control">
-                                <option selected>DHL</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i
-                                        class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="add-new-ship-filed-container">
-                        <td colspan="6" class="text-right">
-                            <button type="button" class="btn btn-primary add-new-ship-filed"><i
-                                        class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    </tbody>
-
-                    <tfoot>
-                    
-                 
-                    <tr>
-                        <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
-                            <span><i class="fa fa-plus"></i></span> Add more option
-                        </td>
-                    </tr>
-
-
-                    </tfoot>
-                </table>--}}
-            <table id="discount" class="table table-responsive table--store-settings">
-                <tbody class="all-options">
-                <tr  data-table-id="20">
-                    <td>
-                        <label for="ShippingZones">Shipping to</label>
-                    </td>
-                    <td>
-                        <select id="ShippingZones" class="form-control">
-                            <option selected>Shipping Zones</option>
-                            @foreach($shipping_zones as $zone)
-                                <option data-name="{!! $zone->name  !!}" value="{!! $zone->tax !!}">{!! $zone->name !!}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td class="text-right">
-                        <button type="button" class="btn btn-primary add-new-option"><i class="fa fa-plus-circle"></i></button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <table class="table table-responsive table--store-settings" data-table-id="20">
-                <tr class="bg-my-light-blue">
-                    <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
-                    <td colspan="5">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
-                </tr>
-                <tbody>
-
-                <tr class="bg-my-light-pink">
-                    <th>Order Amount</th>
-                    <th>Courier</th>
-                    <th>Cost</th>
-                    <th colspan="3">Time</th>
-                </tr>
-                <tr>
-                    <td class="table--store-settings_vert-top">
-                        <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                        <span>To</span>
-                        <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                    </td>
-                    <td>
-                        <select id="PosType" class="form-control">
-                            <option selected>Normal Post</option>
-                            <option>...</option>
-                        </select>
-                    </td>
-                    <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                    </td>
-                    <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                    </td>
-                    <td colspan="2" class="text-right">
-                        <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>
-                        <select id="dhl" class="form-control">
-                            <option selected>DHL</option>
-                            <option>...</option>
-                        </select>
-                    </td>
-                    <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                    </td>
-                    <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                    </td>
-                    <td colspan="2" class="text-right">
-                        <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                    </td>
-                </tr>
-                <tr class="add-new-ship-filed-container">
-                    <td colspan="6" class="text-right">
-                        <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
-                    </td>
-                </tr>
-                </tbody>
-
-                <tfoot>
-
-
-                <tr>
-                    <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
-                        <span><i class="fa fa-plus"></i></span> Add more option
-                    </td>
-                </tr>
-
-
-                </tfoot>
-            </table>
+            <div class="" aria-labelledby="general-tab">
+                <div id="content">
+                    <div class="page-header">
+                        <div class="container-fluid">
+                            <div class="pull-right">
+                                <a href="{!! route('admin_store_shipping_zones_new') !!}" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                                <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-geo-zone').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
+                            </div>
+                            <h1>Geo Zones</h1>
+                            <ul class="breadcrumb">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Geo Zones</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-list"></i> Geo Zone List</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form action="#" method="post" enctype="multipart/form-data" id="form-geo-zone">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                            <tr>
+                                                <td style="width: 1px;" class="text-center">
+                                                    <input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);"></td>
+                                                <td class="text-left">
+                                                    <a href="#" class="asc">Geo Zone Name</a>
+                                                </td>
+                                                <td class="text-left">
+                                                    <a href="#">Description</a>
+                                                </td>
+                                                <td class="text-left">
+                                                    <a href="#">Country</a>
+                                                </td>
+                                                <td class="text-left">
+                                                    <a href="#">Region</a>
+                                                </td>
+                                                <td class="text-right">Action</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @if(isset($zones))
+                                                @foreach($zones as $zone)
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <input type="checkbox" name="selected[]" value="4">
+                                                        </td>
+                                                        <td class="text-left">{!! $zone->name !!}</td>
+                                                        <td class="text-left">{!! $zone->description !!}</td>
+                                                        <td class="text-left">{!! $zone->country !!}</td>
+                                                        <td class="text-left">{!! $zone->region !!}</td>
+                                                        <td class="text-right">
+                                                            <a href="{!! route('admin_store_shipping_zones_edit',$zone->id) !!}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="Edit"><i class="fa fa-pencil"></i></a></td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                                <div class="row">
+                                    <div class="col-sm-6 text-left"></div>
+                                    <div class="col-sm-6 text-right">Showing 1 to 2 of 2 (1 Pages)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop
@@ -242,305 +110,3 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
-
-@section('js')
-    <script>
-        let datax = `@foreach($shipping_zones as $zone)
-            <option value="{!! $zone->tax !!}">{!! $zone->name !!}</option>
-                @endforeach`
-        $("body").on("click", ".add-new-option", function () {
-            const id = Date.now()
-            let html = `<tr class="container-for-table-remove" data-table-id="${id}">
-   <td>
-      <label for="ShippingZones">Shipping to</label>
-   </td>
-   <td>
-      <select id="ShippingZones" class="form-control">
-         <option selected="">Shipping Zones</option>
-         ${datax}
-      </select>
-   </td>
-   <td class="text-right">
-      <button type="button" data-table-id=${id} class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button>
-   </td>
-</tr>`
-            let html2 = `
-<table class="table table-responsive table--store-settings container-for-table-remove" data-table-id="${id}">
-                <tr class="bg-my-light-blue">
-                <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
-                <td colspan="3">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
-                <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
-                    </tr>
-                    <tbody>
-
-                    <tr class="bg-my-light-pink">
-                        <th>Order Amount</th>
-                        <th>Courier</th>
-                        <th>Cost</th>
-                        <th colspan="3">Time</th>
-                    </tr>
-                    <tr>
-                        <td class="table--store-settings_vert-top">
-                            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                            <span>To</span>
-                            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                        </td>
-                        <td>
-                            <select id="PosType" class="form-control">
-                                <option selected>Normal Post</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <select id="dhl" class="form-control">
-                                <option selected>DHL</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="add-new-ship-filed-container">
-                        <td colspan="6" class="text-right">
-                            <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
-                            <span><i class="fa fa-plus"></i></span> Add more option
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>`
-            $(".all-options").append(html)
-            $("#myTabContent").append(html2)
-        })
-
-        $("body").on("click", ".remove-ship-filed", function(){
-            $(this).closest("tr").remove()
-        })
-        $("body").on("click", ".add-new-ship-filed", function(){
-
-            let html = `<tr>
-   <td></td>
-   <td>
-      <select id="dhl" class="form-control">
-         <option selected="">DHL</option>
-         <option>...</option>
-      </select>
-   </td>
-   <td>
-      <span class="form-control">
-      5
-      </span>
-   </td>
-   <td>
-      <span class="form-control">
-      1 day
-      </span>
-   </td>
-   <td colspan="2" class="text-right">
-      <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-   </td>
-</tr>`
-            $(this).closest("tbody").find(".add-new-ship-filed-container").before(html)
-        })
-
-        $("body").on("click", ".delete-all-option", function (e) {
-            console.log()
-            let id =  $(this).attr("data-table-id")
-            $("body").find(`[data-table-id="${id}"]`).closest(".container-for-table-remove").remove()
-        })
-        $("body").on("click", ".add-new-order-filed", function (e) {
-            // console.log(e)
-            let html = `  <tbody>
-
-   <tr class="bg-my-light-pink">
-      <th>Order Amount</th>
-      <th>Courier</th>
-      <th>Cost</th>
-      <th colspan="3">Time</th>
-   </tr>
-   <tr>
-      <td class="table--store-settings_vert-top">
-         <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-         <span>To</span>
-         <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-      </td>
-      <td>
-         <select id="PosType" class="form-control">
-            <option selected="">Normal Post</option>
-            <option>...</option>
-         </select>
-      </td>
-      <td>
-         <span class="form-control">
-         5
-         </span>
-      </td>
-      <td>
-         <span class="form-control">
-         3 days
-         </span>
-      </td>
-      <td colspan="2" class="text-right">
-         <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-      </td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>
-         <select id="dhl" class="form-control">
-            <option selected="">DHL</option>
-            <option>...</option>
-         </select>
-      </td>
-      <td>
-         <span class="form-control">
-         5
-         </span>
-      </td>
-      <td>
-         <span class="form-control">
-         1 day
-         </span>
-      </td>
-      <td colspan="2" class="text-right">
-         <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-      </td>
-   </tr>
-   <tr class="add-new-ship-filed-container">
-      <td colspan="6" class="text-right">
-         <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
-      </td>
-   </tr>
-</tbody>`
-            $(this).closest("table").append(html)
-        })
-
-        $('body').on('change','#ShippingZones',function (e) {
-            console.log(1111)
-            e.preventDefault();
-            let val = $(this).val();
-            let text = $(this).closest("tr").find("#ShippingZones :selected").text();
-            let id = $(this).closest("tr").attr("data-table-id")
-
-            let html2 = `
-<table class="table table-responsive table--store-settings container-for-table-remove" data-table-id="${id}">
-                <tr class="bg-my-light-blue">
-                <td>Shipping Zone - <span class="shipzone">${val}</span></td>
-                <td colspan="3">Tax Rate - <span class="taxzone">${text}</span></td>
-                <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
-                    </tr>
-                    <tbody>
-
-                    <tr class="bg-my-light-pink">
-                        <th>Order Amount</th>
-                        <th>Courier</th>
-                        <th>Cost</th>
-                        <th colspan="3">Time</th>
-                    </tr>
-                    <tr>
-                        <td class="table--store-settings_vert-top">
-                            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                            <span>To</span>
-                            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                        </td>
-                        <td>
-                            <select id="PosType" class="form-control">
-                                <option selected>Normal Post</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <select id="dhl" class="form-control">
-                                <option selected>DHL</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="add-new-ship-filed-container">
-                        <td colspan="6" class="text-right">
-                            <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
-                            <span><i class="fa fa-plus"></i></span> Add more option
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>`
-
-
-            // console.log($(`table[data-table-id="${id}"]`))
-            // $(`table[data-table-id="${id}"]`).find('.shipzone').text(text);
-            // console.log($(`table[data-table-id="${id}"]`).find('.shipzone').text())
-            // $(`table[data-table-id="${id}"]`).find('.taxzone').text(val);
-            $("#myTabContent").append(html2)
-
-        });
-    </script>
-@stop
-
-
