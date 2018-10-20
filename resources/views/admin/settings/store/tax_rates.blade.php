@@ -33,7 +33,7 @@
             </li>
         </ul>
         <div class="" id="myTabContent">
-
+            <button class="btn btn-success">Create new</button>
         </div>
     </div>
 @stop

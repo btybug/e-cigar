@@ -57,7 +57,7 @@
                                     {!! Form::text('description',$shipping_zone->description??null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
                                 </div>
                             </div>
-                       
+
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
