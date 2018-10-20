@@ -57,6 +57,10 @@
                     </div>
                     <a href="{!! route('admin_settings_courier_local_email') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tax_rates') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
+                </li>
             </ul>
         </div>
     </div>

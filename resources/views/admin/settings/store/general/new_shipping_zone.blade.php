@@ -57,15 +57,7 @@
                                     {!! Form::text('description',$shipping_zone->description??null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
                                 </div>
                             </div>
-                            <div class="form-group row required">
-                                <label class="col-sm-2 control-label" for="input-tax">Tax</label>
-                                <div class="col-sm-5">
-                                    {!! Form::text('tax',$shipping_zone->tax??null,['placeholder'=>'Tax','id' => 'input-tax','class' => 'form-control']) !!}
-                                </div>
-                                <div class="col-sm-5">
-                                    {!! Form::select('percentage',[1 =>'percentage', 2 => 'other'],[$shipping_zone->percentage??null],['id' => 'pecentage', 'class'=>'form-control']) !!}
-                                </div>
-                            </div>
+                       
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>

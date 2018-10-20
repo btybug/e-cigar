@@ -24,6 +24,9 @@ Route::group(['prefix' => 'settings'], function () {
             Route::post('/save-shipping-zone', 'Admin\SettingsController@saveShippingNew')->name('admin_store_shipping_zone_save');
             Route::post('/find-region', 'Admin\SettingsController@findRegion')->name('admin_store_shipping_zone_region_find');
         });
+        Route::group(['prefix' => 'tax-rates'], function () {
+            Route::get('/', 'Admin\SettingsController@getTaxRates')->name('admin_settings_tax_rates');
+        });
         Route::post('/payment-gateways/enable', 'Admin\SettingsController@postStorePaymentsGatewaysEnable')->name('post_admin_payment_gateways_enable');
         Route::group(['prefix' => 'couriers'], function () {
             Route::get('/', 'Admin\SettingsController@getCouriers')->name('admin_settings_couriers');
