@@ -28,6 +28,11 @@
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Delivery Cost</a>
             </li>
+
+            <li class="nav-item ">
+                <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tax_rates') !!}" role="tab"
+                   aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
+            </li>
         </ul>
         <div class="" id="myTabContent">
             <div class="" aria-labelledby="general-tab">
@@ -56,10 +61,6 @@
                         <label for="cash_paymant" class="title">Local Mail</label>
                     </div>
                     <a href="{!! route('admin_settings_courier_local_email') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
-                <li class="nav-item ">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tax_rates') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
                 </li>
             </ul>
         </div>
