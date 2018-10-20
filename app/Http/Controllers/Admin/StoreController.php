@@ -153,21 +153,9 @@ class StoreController extends Controller
         return $this->view('coupons_new');
     }
 
-    public function newShippingZones(Countries $countries)
-    {
-        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-        return $this->view('new_shipping_zone',compact('countries'));
-    }
 
-    public function getShippingNew(Countries $countries,Settings $settings)
-    {
-        $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
-        $active_couriers=$settings->where('section','active_couriers')->where('val',1)->pluck('key','key');
-        $shipping_zone = null;
-        $shipping_zones = ShippingZones::all();
-        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
-        return $this->view('new_shipping_zone',compact('countries','shipping_zone','activePayments','shipping_zones','active_couriers'));
-    }
+
+
 
     public function getregions(Countries $countries)
     {
@@ -175,7 +163,7 @@ class StoreController extends Controller
         return $this->view('new_shipping_zone',compact('countries'));
     }
 
-    public function saveShippingNew(ShippingZonePost $request)
+    public function saveShippingNew(Request $request)
     {
         $data = $request->except('_token');
         ShippingZones::updateOrCreate($request->id,$data);

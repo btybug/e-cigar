@@ -13,7 +13,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
     });
     Route::group(['prefix' => 'store'], function () {
-        Route::get('/general', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+
         Route::get('/shipping', 'Admin\SettingsController@getStoreShipping')->name('admin_settings_shipping');
         Route::get('/payment-gateways', 'Admin\SettingsController@getStorePaymentsGateways')->name('admin_settings_payment_gateways');
         Route::get('/payment-gateways/stripe', 'Admin\SettingsController@getStorePaymentsGatewaysSettings')->name('admin_payment_gateways_stripe');
@@ -29,6 +29,14 @@ Route::group(['prefix' => 'settings'], function () {
             Route::post('/enable', 'Admin\SettingsController@postCouriersEnable')->name('post_admin_couriers_enable');
         });
         Route::get('/delivery-cost', 'Admin\SettingsController@getDeliveryCost')->name('admin_settings_delivery');
+   Route::group(['prefix'=>'general'],function(){
+       Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+       Route::get('/new-shipping-zones', 'Admin\SettingsController@newShippingZones')->name('admin_store_new_shipping_zones');
+       Route::get('/new', 'Admin\SettingsController@getShippingNew')->name('admin_store_shipping_zones_new');
+       Route::get('/edit-shipping-zone/{id}', 'Admin\SettingsController@editShippingZone')->name('admin_store_shipping_zones_edit');
+       Route::post('/save-shipping-zone', 'Admin\SettingsController@saveShippingNew')->name('admin_store_shipping_zone_save');
+       Route::post('/find-region', 'Admin\SettingsController@findRegion')->name('admin_store_shipping_zone_region_find');
+   });
     });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
@@ -77,12 +85,12 @@ Route::group(['prefix' => 'store'], function () {
     });
 
     Route::group(['prefix' => 'shipping-zones'], function () {
-        Route::get('/', 'Admin\StoreController@getShippingZones')->name('admin_store_shipping_zones');
-        Route::get('/new-shipping-zones', 'Admin\StoreController@newShippingZones')->name('admin_store_new_shipping_zones');
-        Route::get('/new', 'Admin\StoreController@getShippingNew')->name('admin_store_shipping_zones_new');
-        Route::get('/edit-shipping-zone/{id}', 'Admin\StoreController@editShippingZone')->name('admin_store_shipping_zones_edit');
-        Route::post('/save-shipping-zone', 'Admin\StoreController@saveShippingNew')->name('admin_store_shipping_zone_save');
-        Route::post('/find-region', 'Admin\StoreController@findRegion')->name('admin_store_shipping_zone_region_find');
+//        Route::get('/', 'Admin\StoreController@getShippingZones')->name('admin_store_shipping_zones');
+//        Route::get('/new-shipping-zones', 'Admin\StoreController@newShippingZones')->name('admin_store_new_shipping_zones');
+//        Route::get('/new', 'Admin\StoreController@getShippingNew')->name('admin_store_shipping_zones_new');
+//        Route::get('/edit-shipping-zone/{id}', 'Admin\StoreController@editShippingZone')->name('admin_store_shipping_zones_edit');
+//        Route::post('/save-shipping-zone', 'Admin\StoreController@saveShippingNew')->name('admin_store_shipping_zone_save');
+//        Route::post('/find-region', 'Admin\StoreController@findRegion')->name('admin_store_shipping_zone_region_find');
     });
 
     Route::group(['prefix' => 'tax-rate'], function () {

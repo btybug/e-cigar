@@ -102,9 +102,53 @@ class SettingsController extends Controller
     }
 
 
-    public function getGeneral()
+    public function getGeneral(Countries $countries)
     {
-        return $this->view('general.index');
+        $zones = ShippingZones::all();
+        return $this->view('store.general',compact('zones'));
+    }
+    public function newShippingZones(Countries $countries)
+    {
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+        return $this->view('store.general.new_shipping_zone',compact('countries'));
+    }
+    public function getShippingNew(Countries $countries,Settings $settings)
+    {
+        $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
+        $active_couriers=$settings->where('section','active_couriers')->where('val',1)->pluck('key','key');
+        $shipping_zone = null;
+        $shipping_zones = ShippingZones::all();
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+        return $this->view('store.general.new_shipping_zone',compact('countries','shipping_zone','activePayments','shipping_zones','active_couriers'));
+    }
+    public function editShippingZone(Countries $countries,$id,Settings $settings)
+    {
+        $activePayments=$settings->where('section','active_payments_gateways')->where('val',1)->pluck('key','key');
+        $active_couriers=$settings->where('section','active_couriers')->where('val',1)->pluck('key','key');
+        $shipping_zones = ShippingZones::all();
+        $shipping_zone = ShippingZones::find($id);
+        $countries = $countries->all()->pluck('name.common','name.common')->toArray();
+        return $this->view('store.general.new_shipping_zone',compact('countries','shipping_zone','activePayments','shipping_zones','active_couriers'));
+    }
+    public function saveShippingNew(Request $request)
+    {
+        $data = $request->except('_token');
+        ShippingZones::updateOrCreate($request->id,$data);
+        return redirect(route('admin_store_shipping_zones'));
+    }
+    public function findRegion(Request $request)
+    {
+        $coontries = new Countries();
+        $posible = array();
+        $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal')->toArray();
+        foreach ($regions as $region)
+        {
+            if (preg_match("/(" . $request->id . ")/i",$region))
+            {
+                $posible[] = $region;
+            }
+        }
+        return \Response::json(['error'=>false,'data'=>$posible]);
     }
 
     public function getStore()
