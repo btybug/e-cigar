@@ -158,8 +158,8 @@ class SettingsController extends Controller
 
     public function getStoreShipping()
     {
-        $shipping_zones = ShippingZones::all();
-        return $this->view('store.shipping', compact('shipping_zones'));
+        $zones = ShippingZones::all();
+        return $this->view('store.shipping', compact('zones'));
     }
 
     public function getStorePaymentsGateways(Settings $settings)

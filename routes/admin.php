@@ -13,8 +13,6 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
     });
     Route::group(['prefix' => 'store'], function () {
-
-
         Route::get('/payment-gateways', 'Admin\SettingsController@getStorePaymentsGateways')->name('admin_settings_payment_gateways');
         Route::get('/payment-gateways/stripe', 'Admin\SettingsController@getStorePaymentsGatewaysSettings')->name('admin_payment_gateways_stripe');
         Route::post('/payment-gateways/stripe', 'Admin\SettingsController@postStorePaymentsGatewaysSettings')->name('post_admin_payment_gateways_stripe');
