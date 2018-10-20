@@ -11,7 +11,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Couriers;
+use App\Models\DeliveryCostOptions;
+use App\Models\DeliveryCostsTypes;
 use App\Models\Emails;
+use App\Models\GeoZones;
 use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\Settings;
@@ -108,37 +112,67 @@ class SettingsController extends Controller
         return $this->view('store.general', compact('zones'));
     }
 
-    public function newShippingZones(Countries $countries)
+
+    public function getGeoZones()
     {
-        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        return $this->view('store.general.new_shipping_zone', compact('countries'));
+        return $this->view('store.shipping');
     }
 
-    public function getShippingNew(Countries $countries, Settings $settings)
+    public function geoZoneForm(Countries $countries, Settings $settings, $id = null)
     {
         $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'key');
-        $active_couriers = $settings->where('section', 'active_couriers')->where('val', 1)->pluck('key', 'key');
-        $shipping_zone = null;
-        $shipping_zones = ShippingZones::all();
+        $active_couriers = Settings::LeftJoin('couriers', 'settings.key', '=', 'couriers.id')
+            ->where('settings.section', 'active_couriers')
+            ->where('settings.val', '1')
+            ->select('couriers.*')
+            ->LeftJoin('courier_translations', 'couriers.id', '=', 'courier_translations.couriers_id')
+            ->where('courier_translations.locale', app()->getLocale())
+            ->select('couriers.*', 'courier_translations.name')
+            ->pluck('name', 'id');
+        $geo_zone = GeoZones::find($id);
+        $delivery_types = DeliveryCostsTypes::all()->pluck('title', 'id');
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        return $this->view('store.general.new_shipping_zone', compact('countries', 'shipping_zone', 'activePayments', 'shipping_zones', 'active_couriers'));
+        return $this->view('store.general.new_shipping_zone', compact('countries', 'geo_zone', 'activePayments', 'active_couriers', 'delivery_types'));
     }
 
-    public function editShippingZone(Countries $countries, $id, Settings $settings)
-    {
-        $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'key');
-        $active_couriers = $settings->where('section', 'active_couriers')->where('val', 1)->pluck('key', 'key');
-        $shipping_zones = ShippingZones::all();
-        $shipping_zone = ShippingZones::find($id);
-        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        return $this->view('store.general.new_shipping_zone', compact('countries', 'shipping_zone', 'activePayments', 'shipping_zones', 'active_couriers'));
-    }
 
-    public function saveShippingNew(Request $request)
+    public function saveGeoZone(Request $request)
     {
-        $data = $request->except('_token');
-        ShippingZones::updateOrCreate($request->id, $data);
-        return redirect(route('admin_store_shipping_zones'));
+        $v = \Validator::make($request->all(), [
+            'name' => 'required|max:190',
+            'description' => 'required',
+            'payment_options' => 'required',
+            'delivery_cost' => 'required|array',
+            'country' => 'required',
+            'regions' => 'required',
+            'delivery_cost.*.delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
+            'delivery_cost.*.min' => 'required|integer|min:0',
+            'delivery_cost.*.max' => 'required|integer',
+            'delivery_cost.*.options' => 'required|array',
+            'delivery_cost.*.options.*.courier_id' => 'required|exists:couriers,id',
+            'delivery_cost.*.options.*.cost' => 'required|between:0,99.999999',
+            'delivery_cost.*.options.*.time' => 'required',
+        ]);
+        $data = $request->except('_token', 'delivery_cost');
+        $delivery_costs = $request->get('delivery_cost');
+        $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
+        foreach ($delivery_costs as $key=>$delivery_cost) {
+            $options = $delivery_cost['options'];
+            unset($delivery_cost['options']);
+            if (!$request->id) $key=null;
+            $delivery = $geo_zone->deliveries()->updateOrCreate(['id'=>$key],$delivery_cost);
+            foreach ($options as $key => $value) {
+                $options[$key]['delivery_cost_id'] = $delivery->id;
+                if ($request->id) {
+                    DeliveryCostOptions::updateOrCreate(['id' => $key], $value);
+                }
+            }
+            if (!$request->id) {
+                \DB::table('delivery_cost_options')->insert($options);
+            }
+        }
+
+        return redirect()->back();
     }
 
     public function findRegion(Request $request)
@@ -159,11 +193,6 @@ class SettingsController extends Controller
         return $this->view('store.index');
     }
 
-    public function getStoreShipping()
-    {
-        $zones = ShippingZones::all();
-        return $this->view('store.shipping', compact('zones'));
-    }
 
     public function getStorePaymentsGateways(Settings $settings)
     {
@@ -201,25 +230,20 @@ class SettingsController extends Controller
     public function getCouriers(Settings $settings)
     {
         $model = $settings->getEditableData('active_couriers');
-        return $this->view('store.couriers', compact('model'));
+        $couriers = Couriers::all();
+        return $this->view('store.couriers', compact('model', 'couriers'));
     }
 
-    public function getCouriersPickUp(Settings $settings)
+    public function getCouriersEdit($id)
     {
-        $model = $settings->getEditableData('couriers');
-        return $this->view('store.couriers.pick_up', compact('model'));
+        $model = Couriers::find($id);
+        return $this->view('store.couriers.edit', compact('model'));
     }
 
-    public function getCouriersDHL(Settings $settings)
+    public function getCouriersSave(Request $request)
     {
-        $model = $settings->getEditableData('couriers');
-        return $this->view('store.couriers.dhl', compact('model'));
-    }
-
-    public function getCouriersLocalEmail(Settings $settings)
-    {
-        $model = $settings->getEditableData('couriers');
-        return $this->view('store.couriers.local_email', compact('model'));
+        Couriers::updateOrCreate($request->id, $request->except('_token'));
+        return redirect()->route('admin_settings_couriers');
     }
 
     public function getDeliveryCost(Settings $settings)

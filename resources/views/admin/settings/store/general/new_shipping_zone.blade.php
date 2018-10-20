@@ -4,8 +4,7 @@
 @stop
 @section('content')
     <div id="content" class="geo-zone-page">
-        {!! Form::model($shipping_zone,['url'=> route('admin_store_shipping_zone_save'),'class' => 'form-horizontal','files' => true ]) !!}
-        {!! Form::hidden('id',null) !!}
+        {!! Form::model($geo_zone,['url'=> route('admin_settings_geo_zone_save',($geo_zone)?$geo_zone->id:null),'class' => 'form-horizontal','files' => true ]) !!}
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
@@ -48,13 +47,13 @@
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-name">Geo Zone Name</label>
                                 <div class="col-sm-10">
-                                    {!! Form::text('name',$shipping_zone->name??null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
+                                    {!! Form::text('name',null,['placeholder'=>'Geo Zone Name','id' => 'input-name','class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-description">Description</label>
                                 <div class="col-sm-10">
-                                    {!! Form::text('description',$shipping_zone->description??null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
+                                    {!! Form::text('description',null,['placeholder'=>'Description','id' => 'input-description','class' => 'form-control']) !!}
                                 </div>
                             </div>
 
@@ -62,7 +61,7 @@
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
                                 <div class="col-sm-10">
-                                    {!! Form::select('tags',$activePayments,null,['class' => 'form-control']) !!}
+                                    {!! Form::select('payment_options',$activePayments,null,['class' => 'form-control']) !!}
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list" style="list-style: none">
@@ -78,7 +77,7 @@
                                     <thead>
                                     <tr>
                                         <td class="text-left">Country</td>
-                                        <td class="text-left">Category</td>
+                                        <td class="text-left">Regions</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +85,11 @@
                                     <tfoot>
                                     <tr>
                                         <td>
-                                            {!! Form::select('country',[$countries],[$shipping_zone->country??null],['id' => 'country', 'class'=>'form-control']) !!}
+                                            {!! Form::select('country',$countries,null,['id' => 'country', 'class'=>'form-control']) !!}
                                         </td>
                                         <td>
                                             <div>
-                                                {!! Form::text('region',$shipping_zone->region??null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
+                                                {!! Form::text('regions',null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
                                                 <ul class="dropdown-menu"></ul>
                                                 <div id="coupon-category" class="well well-sm view-coupon">
                                                     <ul class="coupon-category-list" style="list-style: none">
@@ -107,96 +106,141 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="delivery-cost" role="tabpanel" aria-labelledby="delivery-cost">
-                        <table class="table table-responsive table--store-settings" data-table-id="20">
-                            <tr class="bg-my-light-blue">
+                        @if($geo_zone)
+                            @foreach($geo_zone->deliveries as $delivery)
+                                <table class="table table-responsive table--store-settings" data-table-id="20">
+                                    <tr class="bg-my-light-blue">
 
-                                <td colspan="6">
-                                    <div class="form-group required">
-                                        <label class="col-sm-2 control-label" for="input-name"> Delivery cost</label>
-                                        <div class="col-sm-10">
-                                            {!! Form::select('delivery_cost',['Based on Order amount'=>'Based on Order amount','Based on weight'=>'Based on weight'],null,['id' => 'input-name','class' => 'form-control']) !!}
+                                        <td colspan="6">
+                                            <div class="form-group required">
+                                                <label class="col-sm-2 control-label" for="input-name"> Delivery
+                                                    cost</label>
+                                                <div class="col-sm-10">
+                                                    {!! Form::select('delivery_cost['.$delivery->id.'][delivery_cost_types_id]',$delivery_types,$delivery->delivery_cost_types_id,['id' => 'input-name','class' => 'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tbody>
+
+                                    <tr class="bg-my-light-pink">
+                                        <th>Order Amount</th>
+                                        <th>Courier</th>
+                                        <th>Cost</th>
+                                        <th colspan="3">Time</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="table--store-settings_vert-top">
+                                            {!! Form::number('delivery_cost['.$delivery->id.'][min]',$delivery->min,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+                                            <span>To</span>
+                                            {!! Form::number('delivery_cost['.$delivery->id.'][max]',$delivery->max,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+                                        </td>
+                                        @foreach($delivery->options as $option)
+                                            <td>
+                                                {!! Form::select('delivery_cost['.$delivery->id.'][options]['.$option->id.'][courier_id]',$active_couriers,$option->courier_id,['class'=>'form-control']) !!}
+                                            </td>
+                                            <td>
+                                                {!! Form::number('delivery_cost['.$delivery->id.'][options]['.$option->id.'][cost]',$option->cost,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
+
+                                            </td>
+                                            <td>
+                                                {!! Form::text('delivery_cost['.$delivery->id.'][options]['.$option->id.'][time]',$option->time,['class'=>'form-control','placeholder'=>'3 day']) !!}
+
+                                            </td>
+                                            <td colspan="2" class="text-right">
+                                                <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                                            class="fa fa-minus-circle"></i></button>
+                                            </td>
+                                        @endforeach
+                                    </tr>
+                                    <tr class="add-new-ship-filed-container">
+                                        <td colspan="6" class="text-right">
+                                            <button type="button" class="btn btn-primary add-new-ship-filed"><i
+                                                        class="fa fa-plus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                    <tfoot>
+
+
+                                    <tr>
+                                        <td colspan="5"
+                                            class="text-center table--store-settings_add-options add-new-order-filed">
+                                            <span><i class="fa fa-plus"></i></span> Add more option
+                                        </td>
+                                    </tr>
+
+
+                                    </tfoot>
+                                </table>
+                            @endforeach
+                        @else
+                            <table class="table table-responsive table--store-settings" data-table-id="20">
+                                <tr class="bg-my-light-blue">
+
+                                    <td colspan="6">
+                                        <div class="form-group required">
+                                            <label class="col-sm-2 control-label" for="input-name"> Delivery
+                                                cost</label>
+                                            <div class="col-sm-10">
+                                                {!! Form::select('delivery_cost[0][delivery_cost_types_id]',$delivery_types,null,['id' => 'input-name','class' => 'form-control']) !!}
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tbody>
+                                    </td>
+                                </tr>
+                                <tbody>
 
-                            <tr class="bg-my-light-pink">
-                                <th>Order Amount</th>
-                                <th>Courier</th>
-                                <th>Cost</th>
-                                <th colspan="3">Time</th>
-                            </tr>
-                            <tr>
-                                <td class="table--store-settings_vert-top">
-                                    <input type="number" min="1" max="5" class="form-control"
-                                           style="display: inline-block; width: auto">
-                                    <span>To</span>
-                                    <input type="number" min="1" max="50" class="form-control"
-                                           style="display: inline-block; width: auto">
-                                </td>
-                                <td>
-                                    {!! Form::select('courier',$active_couriers,null,['class'=>'form-control']) !!}
-                                </td>
-                                <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                                </td>
-                                <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                                </td>
-                                <td colspan="2" class="text-right">
-                                    <button type="button" class="btn btn-danger remove-ship-filed"><i
-                                                class="fa fa-minus-circle"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <select id="dhl" class="form-control">
-                                        <option selected>DHL</option>
-                                        <option>...</option>
-                                    </select>
-                                </td>
-                                <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                                </td>
-                                <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                                </td>
-                                <td colspan="2" class="text-right">
-                                    <button type="button" class="btn btn-danger remove-ship-filed"><i
-                                                class="fa fa-minus-circle"></i></button>
-                                </td>
-                            </tr>
-                            <tr class="add-new-ship-filed-container">
-                                <td colspan="6" class="text-right">
-                                    <button type="button" class="btn btn-primary add-new-ship-filed"><i
-                                                class="fa fa-plus-circle"></i></button>
-                                </td>
-                            </tr>
-                            </tbody>
+                                <tr class="bg-my-light-pink">
+                                    <th>Order Amount</th>
+                                    <th>Courier</th>
+                                    <th>Cost</th>
+                                    <th colspan="3">Time</th>
+                                </tr>
+                                <tr>
+                                    <td class="table--store-settings_vert-top">
+                                        {!! Form::number('delivery_cost[0][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+                                        <span>To</span>
+                                        {!! Form::number('delivery_cost[0][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+                                    </td>
+                                        <td>
+                                            {!! Form::select('delivery_cost[0][options][0][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
+                                        </td>
+                                        <td>
+                                            {!! Form::number('delivery_cost[0][options][0][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
 
-                            <tfoot>
+                                        </td>
+                                        <td>
+                                            {!! Form::text('delivery_cost[0][options][0][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
+
+                                        </td>
+                                        <td colspan="2" class="text-right">
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                                        class="fa fa-minus-circle"></i></button>
+                                        </td>
+                                </tr>
+                                <tr class="add-new-ship-filed-container">
+                                    <td colspan="6" class="text-right">
+                                        <button type="button" class="btn btn-primary add-new-ship-filed"><i
+                                                    class="fa fa-plus-circle"></i></button>
+                                    </td>
+                                </tr>
+                                </tbody>
+
+                                <tfoot>
 
 
-                            <tr>
-                                <td colspan="5"
-                                    class="text-center table--store-settings_add-options add-new-order-filed">
-                                    <span><i class="fa fa-plus"></i></span> Add more option
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td colspan="5"
+                                        class="text-center table--store-settings_add-options add-new-order-filed">
+                                        <span><i class="fa fa-plus"></i></span> Add more option
+                                    </td>
+                                </tr>
 
 
-                            </tfoot>
-                        </table>
+                                </tfoot>
+                            </table>
+                        @endif
                     </div>
                 </div>
 
@@ -241,9 +285,7 @@
         })
     </script>
     <script>
-        let datax = `@foreach($shipping_zones as $zone)
-            <option value="{!! $zone->tax !!}">{!! $zone->name !!}</option>
-                @endforeach`
+        let datax = '';
         $("body").on("click", ".add-new-option", function () {
             const id = Date.now()
             let html = `<tr class="container-for-table-remove" data-table-id="${id}">
@@ -341,10 +383,10 @@
             $("#myTabContent").append(html2)
         })
 
-        $("body").on("click", ".remove-ship-filed", function(){
+        $("body").on("click", ".remove-ship-filed", function () {
             $(this).closest("tr").remove()
         })
-        $("body").on("click", ".add-new-ship-filed", function(){
+        $("body").on("click", ".add-new-ship-filed", function () {
 
             let html = `<tr>
    <td></td>
@@ -373,7 +415,7 @@
 
         $("body").on("click", ".delete-all-option", function (e) {
             console.log()
-            let id =  $(this).attr("data-table-id")
+            let id = $(this).attr("data-table-id")
             $("body").find(`[data-table-id="${id}"]`).closest(".container-for-table-remove").remove()
         })
         $("body").on("click", ".add-new-order-filed", function (e) {
@@ -443,7 +485,7 @@
             $(this).closest("table").append(html)
         })
 
-        $('body').on('change','#ShippingZones',function (e) {
+        $('body').on('change', '#ShippingZones', function (e) {
             console.log(1111)
             e.preventDefault();
             let val = $(this).val();

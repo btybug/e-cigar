@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Competitions;
 use App\Models\Coupons;
 use App\Models\Emails;
+use App\Models\GeoZones;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
@@ -214,6 +215,18 @@ class DatatableController extends Controller
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions','name','image'])
+            ->make(true);
+    }
+    public function getAllGeoZones()
+    {
+        return Datatables::of(GeoZones::query())
+            ->editColumn('created_at',function ($geo_zone) {
+                return BBgetDateFormat($geo_zone->created_at).' '.BBgetTimeFormat($geo_zone->created_at);
+            })
+            ->addColumn('actions', function ($geo_zone) {
+                return "<a class='badge btn-danger' href='".route('admin_settings_geo_zones_new',$geo_zone->id)."'><i class='fa fa-edit'></i></a>
+                    <a class='badge btn-warning' href='#'><i class='fa fa-delete'></i></a>";
+            })->rawColumns(['actions'])
             ->make(true);
     }
 

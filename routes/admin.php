@@ -17,11 +17,9 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/payment-gateways/stripe', 'Admin\SettingsController@getStorePaymentsGatewaysSettings')->name('admin_payment_gateways_stripe');
         Route::post('/payment-gateways/stripe', 'Admin\SettingsController@postStorePaymentsGatewaysSettings')->name('post_admin_payment_gateways_stripe');
         Route::group(['prefix' => 'shipping'], function () {
-            Route::get('/', 'Admin\SettingsController@getStoreShipping')->name('admin_settings_shipping');
-            Route::get('/new-shipping-zones', 'Admin\SettingsController@newShippingZones')->name('admin_store_new_shipping_zones');
-            Route::get('/new', 'Admin\SettingsController@getShippingNew')->name('admin_store_shipping_zones_new');
-            Route::get('/edit-shipping-zone/{id}', 'Admin\SettingsController@editShippingZone')->name('admin_store_shipping_zones_edit');
-            Route::post('/save-shipping-zone', 'Admin\SettingsController@saveShippingNew')->name('admin_store_shipping_zone_save');
+            Route::get('/', 'Admin\SettingsController@getGeoZones')->name('admin_settings_shipping');
+            Route::get('/new/{id?}', 'Admin\SettingsController@geoZoneForm')->name('admin_settings_geo_zones_new');
+            Route::post('/save-geo-zone/{id?}', 'Admin\SettingsController@saveGeoZone')->name('admin_settings_geo_zone_save');
             Route::post('/find-region', 'Admin\SettingsController@findRegion')->name('admin_store_shipping_zone_region_find');
         });
         Route::group(['prefix' => 'tax-rates'], function () {
@@ -30,9 +28,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::post('/payment-gateways/enable', 'Admin\SettingsController@postStorePaymentsGatewaysEnable')->name('post_admin_payment_gateways_enable');
         Route::group(['prefix' => 'couriers'], function () {
             Route::get('/', 'Admin\SettingsController@getCouriers')->name('admin_settings_couriers');
-            Route::get('/pick-up', 'Admin\SettingsController@getCouriersPickUp')->name('admin_settings_courier_pick_up');
-            Route::get('/dhl', 'Admin\SettingsController@getCouriersDHL')->name('admin_settings_courier_dhl');
-            Route::get('/local-email', 'Admin\SettingsController@getCouriersLocalEmail')->name('admin_settings_courier_local_email');
+            Route::get('/edit/{id}', 'Admin\SettingsController@getCouriersEdit')->name('admin_settings_courier_edit');
+            Route::post('/save/{id?}', 'Admin\SettingsController@getCouriersSave')->name('admin_settings_courier_save');
 
             Route::post('/enable', 'Admin\SettingsController@postCouriersEnable')->name('post_admin_couriers_enable');
         });

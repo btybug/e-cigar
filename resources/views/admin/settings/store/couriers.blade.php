@@ -36,34 +36,24 @@
         </ul>
         <div class="" id="myTabContent">
             <div class="" aria-labelledby="general-tab">
-
+                <div class="payment_gateways_tab">
+                    <ul class="list_paymant">
+                        @foreach($couriers as $courier)
+                            <li class="item @if($model->{$courier->id}) active @endif">
+                                <div class="chek-title">
+                                    <input id="cash_paymant" @if($model->{$courier->id}) checked
+                                           @endif  name="{!! $courier->id !!}" class="gateways_inp" type="checkbox">
+                                    <label for="cash_paymant" class="title">{!! $courier->name !!}</label>
+                                </div>
+                                <a href="{!! route('admin_settings_courier_edit',$courier->id) !!}"
+                                   class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="payment_gateways_tab">
-            <ul class="list_paymant">
-                <li class="item">
-                    <div class="chek-title">
-                        <input id="cash_paymant" @if($model->pick_up) checked @endif  name="pick_up" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">Pick up</label>
-                    </div>
-                    <a href="{!! route('admin_settings_courier_pick_up') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <input id="cash_paymant" @if($model->dhl) checked @endif  name="dhl" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">DHL</label>
-                    </div>
-                    <a href="{!! route('admin_settings_courier_dhl') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <input id="cash_paymant" @if($model->local_mail) checked @endif  name="local_mail" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">Local Mail</label>
-                    </div>
-                    <a href="{!! route('admin_settings_courier_local_email') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
-            </ul>
-        </div>
+
     </div>
 
 @stop
@@ -73,15 +63,15 @@
 @stop
 @section('js')
     <script>
-        $('body').on('change','.payment_gateways_tab .list_paymant .item .gateways_inp',function () {
+        $('body').on('change', '.payment_gateways_tab .list_paymant .item .gateways_inp', function () {
             if ($(this).is(':checked')) {
                 $(this).closest('.item').addClass('active')
-            }else {
+            } else {
                 $(this).closest('.item').removeClass('active')
             }
         });
-        $('.gateways_inp').on('change',function () {
-            var data={key:$(this).attr('name'),onOff:$(this).prop( "checked")}
+        $('.gateways_inp').on('change', function () {
+            var data = {key: $(this).attr('name'), onOff: $(this).prop("checked")}
             $.ajax({
                 type: "post",
                 url: '{!! route('post_admin_couriers_enable') !!}',

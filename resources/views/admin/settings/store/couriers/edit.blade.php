@@ -30,9 +30,10 @@
                             </ul>
                         </div>
                     @endif
+
                     <div class="panel-body">
                         <div>
-                            {!! Form::model($model,['class'=>'form-horizontal']) !!}
+                            {!! Form::model($model,['class'=>'form-horizontal','url'=>route('admin_settings_courier_save',($model)?$model->id:null)]) !!}
                             @if(count(get_languages()))
                                 <ul class="nav nav-tabs">
                                     @foreach(get_languages() as $language)
@@ -53,7 +54,15 @@
                                                                                             title=""
                                                                                             data-original-title="Couriers Name ">Couriers Name</span></label>
                                                 <div class="col-sm-10">
-                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',null,['class'=>'form-control']) !!}
+                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label"><span data-toggle="tooltip"
+                                                                                            title=""
+                                                                                            data-original-title="Couriers Name ">Description</span></label>
+                                                <div class="col-sm-10">
+                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -77,17 +86,6 @@
                                                                                               data-original-title="Image Title">Image</span></label>
                                 <div class="col-sm-10">
                                     {!! media_button('image',$model) !!}
-                                </div>
-                            </div>
-                            <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                              title=""
-                                                                                              data-original-title="Icon Title">Description</span></label>
-                                <div class="col-sm-9">
-                                    {!! Form::textarea('description',null,['class'=>'form-control']) !!}
-                                </div>
-                                <div class="col-sm-1 text-center font-icon-added">
-                                    <i id="font-show-area"></i>
                                 </div>
                             </div>
                             <div class="form-group">

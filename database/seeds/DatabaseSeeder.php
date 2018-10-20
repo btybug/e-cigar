@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
              DriveFoldersTableSeeder::class,
              LanguagesTableSeeder::class,
              SiteLanguagesTableSeeder::class,
-             EmailsTableSeeder::class
+             EmailsTableSeeder::class,
+             CouriersTableSeeder::class,
+             DeliveryCostsTypesTableSeeder::class
          ]);
     }
 }
