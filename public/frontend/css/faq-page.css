@@ -1,10 +1,9 @@
 .faq-page section.novi-background {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#055bbe+0,84c450+100 */
-    background: rgb(5, 91, 190); /* Old browsers */
-    background: -moz-linear-gradient(left, rgb(5, 91, 190) 0%, rgb(132, 196, 80) 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, rgb(5, 91, 190) 0%, rgb(132, 196, 80) 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, rgb(5, 91, 190) 0%, rgb(132, 196, 80) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#055bbe', endColorstr='#84c450', GradientType=1); /* IE6-9 */
+    background: rgb(49,77,92);
+    background: -moz-linear-gradient(-45deg, rgba(49,77,92,1) 1%, rgba(49,77,92,1) 1%, rgba(49,77,92,1) 34%, rgba(240,202,78,1) 90%, rgba(240,202,78,1) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(49,77,92,1) 1%,rgba(49,77,92,1) 1%,rgba(49,77,92,1) 34%,rgba(240,202,78,1) 90%,rgba(240,202,78,1) 100%);
+    background: linear-gradient(135deg, rgba(49,77,92,1) 1%,rgba(49,77,92,1) 1%,rgba(49,77,92,1) 34%,rgba(240,202,78,1) 90%,rgba(240,202,78,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#314d5c', endColorstr='#f0ca4e',GradientType=1 );
     margin-bottom: 100px;
     padding: 40px;
     color: white;
@@ -22,16 +21,17 @@
 
 .faq-page section.novi-background:after {
     content: "";
-    background-color: #448f87;
-    width: 40px;
-    height: 40px;
-    transform: rotate(45deg);
     position: absolute;
     bottom: -20px;
     left: 0;
     right: 0;
     text-align: center;
     margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #828359;
 }
 
 .faq-page .buttons {
