@@ -61,7 +61,7 @@
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
                                 <div class="col-sm-10">
-                                    {!! Form::select('payment_options',$activePayments,null,['class' => 'form-control']) !!}
+                                    {!! Form::text('payment_options',null,['class' => 'form-control','id'=>'payment_options','data-role'=>'tagsinput','autocomplete' => true]) !!}
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list" style="list-style: none">
@@ -89,7 +89,7 @@
                                         </td>
                                         <td>
                                             <div>
-                                                {!! Form::text('regions',null,['placeholder'=>'Region','id' => 'region','class' => 'form-control','autocomplete' => 'off']) !!}
+                                                {!! Form::text('regions',null,['id' => 'region','class' => 'form-control','autocomplete' => 'off','data-role'=>'tagsinput']) !!}
                                                 <ul class="dropdown-menu"></ul>
                                                 <div id="coupon-category" class="well well-sm view-coupon">
                                                     <ul class="coupon-category-list" style="list-style: none">
@@ -259,10 +259,23 @@
     </div>
 @stop
 @section("css")
+    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
+    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script>
+
+        $('#payment_options').tagsinput({
+            itemValue: 'active_payments_gateways',
+            itemText: 'active_payments_gateways',
+            typeahead: {
+                name: "active_payments_gateways",
+                displayKey: 'active_payments_gateways',
+                valueKey: 'active_payments_gateways',
+                source:{!! json_encode($activePayments,true) !!}
+            }
+        });
         $("body").on("input", "#region", function (e) {
             e.preventDefault()
             let country = $('#country').val();

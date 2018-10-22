@@ -119,7 +119,7 @@ class SettingsController extends Controller
 
     public function geoZoneForm(Countries $countries, Settings $settings, $id = null)
     {
-        $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'key');
+        $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key','section');
         $active_couriers = Settings::LeftJoin('couriers', 'settings.key', '=', 'couriers.id')
             ->where('settings.section', 'active_couriers')
             ->where('settings.val', '1')
