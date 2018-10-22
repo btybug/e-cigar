@@ -41,8 +41,8 @@ class InventoryController extends Controller
     public function getStockEdit ($id)
     {
         $model = Stock::findOrFail($id);
-
-        return $this->view('stock_new',compact(['model']));
+        $attrs = $model->attrs()->where('attributes.parent_id',null)->get();
+        return $this->view('stock_new',compact(['model','attrs']));
     }
 
     public function postStock(Request $request)

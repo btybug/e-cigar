@@ -50,7 +50,7 @@
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
-                    <li ><a data-toggle="tab" href="#media">Media</a></li>
+                    <li><a data-toggle="tab" href="#media">Media</a></li>
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
@@ -74,8 +74,9 @@
                                                 @if(count(get_languages()))
                                                     <ul class="nav nav-tabs">
                                                         @foreach(get_languages() as $language)
-                                                            <li class="@if($loop->first) active @endif"><a data-toggle="tab"
-                                                                                                           href="#{{ strtolower($language->code) }}">
+                                                            <li class="@if($loop->first) active @endif"><a
+                                                                        data-toggle="tab"
+                                                                        href="#{{ strtolower($language->code) }}">
                                                                     <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                                                                 </a></li>
                                                         @endforeach
@@ -87,9 +88,10 @@
                                                             <div id="{{ strtolower($language->code) }}"
                                                                  class="tab-pane fade  @if($loop->first) in active @endif">
                                                                 <div class="form-group">
-                                                                    <label class="col-sm-2 control-label"><span data-toggle="tooltip"
-                                                                                                                title=""
-                                                                                                                data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                    <label class="col-sm-2 control-label"><span
+                                                                                data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="Attribute Name Title">Product Name</span></label>
                                                                     <div class="col-sm-10">
                                                                         {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                     </div>
@@ -98,45 +100,45 @@
                                                         @endforeach
                                                     @endif
                                                 </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="product_id" class="control-label col-sm-4">Product
-                                                                Type</label>
-                                                            <div class="col-sm-8">
-                                                                {!! Form::select('type',['' => 'Select type'] + \App\Models\Stock::TYPES, null,
-                                                                ['class' => 'form-control select-stock-type']) !!}
-                                                            </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="product_id" class="control-label col-sm-4">Product
+                                                            Type</label>
+                                                        <div class="col-sm-8">
+                                                            {!! Form::select('type',['' => 'Select type'] + \App\Models\Stock::TYPES, null,
+                                                            ['class' => 'form-control select-stock-type']) !!}
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="sku" class="control-label col-sm-4">SKU</label>
-                                                            <div class="col-sm-8">
-                                                                <div id="stock-sku">{{ @$model->sku }}</div>
-                                                                {!! Form::hidden('sku',null,['id' => 'sku']) !!}
-                                                            </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="sku" class="control-label col-sm-4">SKU</label>
+                                                        <div class="col-sm-8">
+                                                            <div id="stock-sku">{{ @$model->sku }}</div>
+                                                            {!! Form::hidden('sku',null,['id' => 'sku']) !!}
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="sku"
-                                                                   class="control-label col-sm-4">Barcode</label>
-                                                            <div class="col-sm-8">
-                                                                <div class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="sku"
+                                                               class="control-label col-sm-4">Barcode</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="form-control">
 
-                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="feature_image"
-                                                                   class="control-label col-sm-4">Feature image</label>
-                                                            <div class="col-sm-8">
-                                                                {!! media_button('image',$model) !!}
-                                                            </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="feature_image"
+                                                               class="control-label col-sm-4">Feature image</label>
+                                                        <div class="col-sm-8">
+                                                            {!! media_button('image',$model) !!}
                                                         </div>
                                                     </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
 
@@ -156,7 +158,8 @@
                                         <div class="all-list">
                                             <ul class="nav nav-tabs media-list">
                                                 <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
-                                                <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a></li>
+                                                <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -181,8 +184,8 @@
                                                     </div>
                                                     <div class="media-videos-preview" style="display: flex">
                                                         {{--<div class="video-single-item" style="display: flex"><iframe width="200" height="200"--}}
-                                                                                                                     {{--src="https://www.youtube.com/embed/${videoId}">--}}
-                                                            {{--</iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>--}}
+                                                        {{--src="https://www.youtube.com/embed/${videoId}">--}}
+                                                        {{--</iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>--}}
                                                     </div>
                                                 </div>
 
@@ -208,7 +211,26 @@
                                     <div class="basic-left basic-wall">
                                         <div class="all-list-attributes">
                                             <ul class="get-all-attributes-tab">
-
+                                                @if(isset($attrs) && count($attrs))
+                                                    @foreach($attrs as $attribute)
+                                                        <li style="display: flex"
+                                                            data-option-container="{!! $attribute->id !!}"
+                                                            data-id="{!! $attribute->id !!}"
+                                                            class="option-elm-attributes"><a
+                                                                    href="#">{!! $attribute->name !!}</a>
+                                                            <div class="buttons">
+                                                                <a href="javascript:void(0)"
+                                                                   class="btn btn-sm all-option-add-variations btn-success"><i
+                                                                            class="fa fa-money"></i></a>
+                                                                <a href="javascript:void(0)"
+                                                                   class="remove-all-attributes btn btn-sm btn-danger"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                            </div>
+                                                            <input type="hidden" name="attributes[]"
+                                                                   value="{!! $attribute->id !!}">
+                                                        </li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
@@ -223,6 +245,10 @@
                                     <div class="basic-center basic-wall">
                                         <ul class="choset-attributes">
 
+                                            <div style="height: 50px" class="attributes-container-${id} main-attr-container">
+                                                <input data-id=${id} class="attributes-item-input-${id}"  value="${value}">
+                                                <input type="hidden" name="options[${id}]" value="${optionIds}">
+                                            </div>
 
                                         </ul>
                                     </div>
@@ -236,59 +262,59 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="basic-left basic-wall">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <fieldset>
-                                                            <legend>Packaging Size</legend>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="packaging_length"
-                                                                           class="control-label col-sm-4">Length</label>
-                                                                    <div class="col-sm-8">
-                                                                        <input class="form-control"
-                                                                               name=""
-                                                                               id="packaging_length" type="text">
-                                                                    </div>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <fieldset>
+                                                        <legend>Packaging Size</legend>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_length"
+                                                                       class="control-label col-sm-4">Length</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control"
+                                                                           name=""
+                                                                           id="packaging_length" type="text">
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="packaging_width"
-                                                                           class="control-label col-sm-4">Width</label>
-                                                                    <div class="col-sm-8">
-                                                                        <input class="form-control"
-                                                                               name=""
-                                                                               id="packaging_width" type="text">
-                                                                    </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_width"
+                                                                       class="control-label col-sm-4">Width</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control"
+                                                                           name=""
+                                                                           id="packaging_width" type="text">
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="packaging_height"
-                                                                           class="control-label col-sm-4">Height</label>
-                                                                    <div class="col-sm-8">
-                                                                        <input class="form-control"
-                                                                               name=""
-                                                                               id="packaging_height" type="text">
-                                                                    </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_height"
+                                                                       class="control-label col-sm-4">Height</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control"
+                                                                           name=""
+                                                                           id="packaging_height" type="text">
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="packaging_weight"
-                                                                           class="control-label col-sm-4">Weight</label>
-                                                                    <div class="col-sm-8">
-                                                                        <input class="form-control"
-                                                                               name=""
-                                                                               id="packaging_weight" type="text">
-                                                                    </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="packaging_weight"
+                                                                       class="control-label col-sm-4">Weight</label>
+                                                                <div class="col-sm-8">
+                                                                    <input class="form-control"
+                                                                           name=""
+                                                                           id="packaging_weight" type="text">
                                                                 </div>
                                                             </div>
-                                                        </fieldset>
-                                                    </div>
+                                                        </div>
+                                                    </fieldset>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -306,7 +332,8 @@
                                         </div>
                                         <div class="button-add text-center">
                                             <div class="col-md-6">
-                                                <a href="javascript:void(0)" class="btn btn-info btn-block get-variation"><i
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-info btn-block get-variation"><i
                                                             class="fa fa-plus"></i>More
                                                     option</a>
                                             </div>
@@ -360,11 +387,11 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
-    <script src="/public/js/custom/stock.js?v=".rand(111,999)></script>
+    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             function guid() {
                 return "ss".replace(/s/g, s4);
             }
@@ -375,12 +402,12 @@
                     .substring(1);
             }
 
-           $("body").on('change','.select-stock-type',function () {
-               var type = $(this).val();
-               var generatedString = type + '-' + guid();
-               $('#sku').val(generatedString);
-               $('#stock-sku').html(generatedString);
-           })
+            $("body").on('change', '.select-stock-type', function () {
+                var type = $(this).val();
+                var generatedString = type + '-' + guid();
+                $('#sku').val(generatedString);
+                $('#stock-sku').html(generatedString);
+            })
         });
     </script>
 @stop
