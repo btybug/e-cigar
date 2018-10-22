@@ -152,6 +152,7 @@ class SettingsController extends Controller
             'delivery_cost.*.options.*.cost' => 'required|between:0,99.999999',
             'delivery_cost.*.options.*.time' => 'required',
         ]);
+        if($v->fails())return redirect()->back()->withErrors($v);
         $data = $request->except('_token', 'delivery_cost');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
@@ -163,7 +164,7 @@ class SettingsController extends Controller
             foreach ($options as $key => $value) {
                 $options[$key]['delivery_cost_id'] = $delivery->id;
                 if ($request->id) {
-                    DeliveryCostOptions::updateOrCreate(['id' => $key], $value);
+                    $delivery->options()->updateOrCreate(['id' => $key], $value);
                 }
             }
             if (!$request->id) {
