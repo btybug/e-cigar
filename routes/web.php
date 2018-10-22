@@ -18,7 +18,7 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     $product = \App\Models\Posts::find($request->id);
     return ['error'=>false,'data'=>$product->makeReady()->toArray()];
 });
-Route::get('/faq', 'HomeController@getFaq')->name('faq');
+Route::get('/faq', 'GuestController@getFaq')->name('faq');
 Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
