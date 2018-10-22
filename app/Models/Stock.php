@@ -41,6 +41,6 @@ class Stock extends Translatable
 
     public function attrs()
     {
-        $this->hasManyThrough(Attributes::class, StockAttribute::class, 'stock_id', 'attributes_id');
+        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id');
     }
 }

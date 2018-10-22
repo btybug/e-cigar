@@ -17,7 +17,7 @@ class CreateStockAttributesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('attributes_id');
-            $table->unsignedInteger('parent_id');
+            $table->unsignedInteger('parent_id')->nullable();
             $table->tinyInteger('is_shared')->nullable();
 
             $table->unique(['stock_id','attributes_id']);

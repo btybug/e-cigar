@@ -16,6 +16,8 @@ class StockAttribute extends Model
 
     protected $fillable = ['stock_id','attributes_id','parent_id','is_shared'];
 
+    protected $dates = ['created_at','updated_at'];
+
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id', 'id');

@@ -88,6 +88,10 @@ $("body").on("click", ".get-all-attributes-tab-event", function() {
     });
 });
 
+$(document).on('beforeItemRemove', 'input', function(event) {
+    console.log(event.item);
+});
+
 $("body").on("click", ".add-attribute-event", function() {
     let id = $(this).data("id");
     AjaxCall("/admin/inventory/attributes/get-attribute", { id: id }, function(

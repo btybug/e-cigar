@@ -12,12 +12,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\Stock;
+use App\Services\StockService;
 use Illuminate\Http\Request;
 
 
 class InventoryController extends Controller
 {
     protected $view = 'admin.inventory';
+
+    private $stockService;
+
+    public function __construct(StockService $stockService)
+    {
+        $this->stockService = $stockService;
+    }
 
     public function stock()
     {
@@ -36,7 +44,8 @@ class InventoryController extends Controller
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id,$data);
         $stock->attrs()->sync($request->get('attributes'));
-        dd($request->all());
+        $options = $this->stockService->makeOptions($stock,$request->get('options'));
+        $stock->attrs()->syncWithoutDetaching($options);
 
         return redirect()->route('admin_stock');
     }
