@@ -353,7 +353,8 @@ $("body").on("click", ".get-all-variations", function() {
 });
 
 $("body").on("click", ".variation-select", function() {
-    AjaxCall("/admin/inventory/stock/variation-form", {}, function(res) {
+    var variationId = $(this).attr('variation-id');
+    AjaxCall("/admin/inventory/stock/variation-form", {variationId : variationId}, function(res) {
         if (!res.error) {
             $(".variation-settings")
                 .empty()

@@ -2,7 +2,7 @@
         @foreach($results as $key => $items)
             <div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">
                 <div>
-                    <button class="variation-select"><i class="fa fa-list"></i></button>
+                    <button variation-id="{!! shortUniqueID() !!}" type="button" class="variation-select"><i class="fa fa-list"></i></button>
                 </div>
                 @foreach($data as $generalKey => $options)
                     @php
@@ -18,7 +18,7 @@
                     </div>
                 @endforeach
                 <div>
-                    <button class="remvoe-variations-select"><i class="fa fa-trash"></i></button>
+                    <button type="button" class="remvoe-variations-select"><i class="fa fa-trash"></i></button>
                 </div>
             </div>
         @endforeach

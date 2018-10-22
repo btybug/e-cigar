@@ -82,7 +82,8 @@ class InventoryController extends Controller
 
     public function variationForm(Request $request)
     {
-        $html = \View('admin.inventory._partials.variation_form')->render();
+        $variationID = $request->get('variationId');
+        $html = \View('admin.inventory._partials.variation_form',compact(['variationID']))->render();
         return \Response::json(['error' => false,'html' => $html]);
     }
 }

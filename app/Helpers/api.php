@@ -207,3 +207,7 @@ function receiver_last_name(){
 function receiver_last_phone(){
 
 }
+
+function shortUniqueID(){
+    return base_convert(microtime(false), 10, 36);
+}

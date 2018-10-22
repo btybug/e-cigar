@@ -11,7 +11,7 @@
                                     ID</label>
                                 <div class="col-sm-8">
                                     <input class="form-control" name="variation_id"
-                                           id="variation_id" type="text">
+                                           id="variation_id" readonly value="{{ $variationID }}" type="text">
                                 </div>
                             </div>
                         </div>
