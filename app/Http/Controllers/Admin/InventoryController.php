@@ -40,12 +40,14 @@ class InventoryController extends Controller
 
     public function postStock(Request $request)
     {
-        $data = $request->except('_token','translatable','attributes','options');
+        $data = $request->except('_token','translatable','attributes','options','variations');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id,$data);
         $stock->attrs()->sync($request->get('attributes'));
         $options = $this->stockService->makeOptions($stock,$request->get('options'));
         $stock->attrs()->syncWithoutDetaching($options);
+
+        $this->stockService->saveVariations($stock,$request->get('variations'));
 
         return redirect()->route('admin_stock');
     }
@@ -83,7 +85,8 @@ class InventoryController extends Controller
     public function variationForm(Request $request)
     {
         $variationID = $request->get('variationId');
-        $html = \View('admin.inventory._partials.variation_form',compact(['variationID']))->render();
+        $model = json_decode($request->get('data'),true);
+        $html = \View('admin.inventory._partials.variation_form',compact(['variationID','model']))->render();
         return \Response::json(['error' => false,'html' => $html]);
     }
 }

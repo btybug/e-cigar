@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\Models\StockAttribute;
+use App\Models\StockVariation;
 
 /**
  * Created by PhpStorm.
@@ -31,5 +32,18 @@ class StockService
             }
         }
         return $result;
+    }
+
+    public function saveVariations ($stock,array $data = [])
+    {
+        $stock->variations()->delete();
+        if(count($data)){
+            foreach ($data as $variation_id => $data) {
+                $newData = json_decode($data,true);
+                unset($newData['_token']);
+                $newData['stock_id'] = $stock->id;
+                StockVariation::create($newData);
+            }
+        }
     }
 }

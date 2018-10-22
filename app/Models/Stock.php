@@ -43,4 +43,9 @@ class Stock extends Translatable
     {
         return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id');
     }
+
+    public function variations()
+    {
+        return $this->hasMany(StockVariation::class, 'stock_id');
+    }
 }

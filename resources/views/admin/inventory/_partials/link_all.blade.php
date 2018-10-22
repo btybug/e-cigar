@@ -1,8 +1,12 @@
     @if(count($results))
         @foreach($results as $key => $items)
+            @php
+                $uniqueShortID = shortUniqueID();
+            @endphp
             <div class="list-attrs-single-item" style="display: flex; justify-content: space-between;">
                 <div>
-                    <button variation-id="{!! shortUniqueID() !!}" type="button" class="variation-select"><i class="fa fa-list"></i></button>
+                    <button variation-id="{!! $uniqueShortID !!}" type="button" class="variation-select"><i class="fa fa-list"></i></button>
+                    {!! Form::hidden("variations[".$uniqueShortID."]",json_encode(['variation_id' => $uniqueShortID]),['id' => 'variation_'.$uniqueShortID]) !!}
                 </div>
                 @foreach($data as $generalKey => $options)
                     @php
