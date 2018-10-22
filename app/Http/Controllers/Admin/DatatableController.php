@@ -211,9 +211,10 @@ class DatatableController extends Controller
             ->editColumn('created_at',function ($stock) {
                 return BBgetDateFormat($stock->created_at).' '.BBgetTimeFormat($stock->created_at);
             })
-            ->addColumn('actions', function ($coupons) {
+
+            ->addColumn('actions', function ($stock) {
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+                    <a class='badge btn-warning' href='".route("admin_stock_edit",$stock->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions','name','image'])
             ->make(true);
     }

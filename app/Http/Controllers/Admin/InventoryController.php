@@ -35,7 +35,14 @@ class InventoryController extends Controller
     public function stockNew()
     {
         $model = null;
-        return $this->view('stock_new',compact(['attributes','model']));
+        return $this->view('stock_new',compact(['model']));
+    }
+
+    public function getStockEdit ($id)
+    {
+        $model = Stock::findOrFail($id);
+
+        return $this->view('stock_new',compact(['model']));
     }
 
     public function postStock(Request $request)

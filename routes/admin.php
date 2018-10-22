@@ -140,6 +140,7 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'stock'], function () {
         Route::get('/', 'Admin\InventoryController@stock')->name('admin_stock');
         Route::get('/new', 'Admin\InventoryController@stockNew')->name('admin_stock_new');
+        Route::get('/edit/{id}', 'Admin\InventoryController@getStockEdit')->name('admin_stock_edit');
         Route::post('/save-stock', 'Admin\InventoryController@postStock')->name('admin_stock_save');
         Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');

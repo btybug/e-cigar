@@ -58,7 +58,7 @@
             </div>
 
             <!-- /.col -->
-            {!! Form::model(null,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
+            {!! Form::model($model,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
             <div class="col-md-12">
                 {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
             </div>
@@ -103,7 +103,7 @@
                                                             <label for="product_id" class="control-label col-sm-4">Product
                                                                 Type</label>
                                                             <div class="col-sm-8">
-                                                                {!! Form::select('type',['' => 'Select type'] + \App\Models\Stock::TYPES,null,
+                                                                {!! Form::select('type',['' => 'Select type'] + \App\Models\Stock::TYPES, null,
                                                                 ['class' => 'form-control select-stock-type']) !!}
                                                             </div>
                                                         </div>
@@ -112,7 +112,7 @@
                                                         <div class="row">
                                                             <label for="sku" class="control-label col-sm-4">SKU</label>
                                                             <div class="col-sm-8">
-                                                                <div id="stock-sku"></div>
+                                                                <div id="stock-sku">{{ @$model->sku }}</div>
                                                                 {!! Form::hidden('sku',null,['id' => 'sku']) !!}
                                                             </div>
                                                         </div>
