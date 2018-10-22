@@ -20,7 +20,7 @@ class CreateCourierTranslationsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unique(['couriers_id','locale']);
-            $table->foreign('courier_id')->references('id')->on('couriers')->onDelete('cascade');
+            $table->foreign('couriers_id')->references('id')->on('couriers')->onDelete('cascade');
         });
     }
 

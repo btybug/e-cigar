@@ -180,8 +180,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="media-videos-preview" style="display: flex">
-
-
+                                                        {{--<div class="video-single-item" style="display: flex"><iframe width="200" height="200"--}}
+                                                                                                                     {{--src="https://www.youtube.com/embed/${videoId}">--}}
+                                                            {{--</iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>--}}
                                                     </div>
                                                 </div>
 

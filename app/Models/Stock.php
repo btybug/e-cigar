@@ -38,4 +38,9 @@ class Stock extends Translatable
       'DPT' => 'Devices parts',
       'ACY' => 'Accessory'
     ];
+
+    public function attrs()
+    {
+        $this->hasManyThrough(Attributes::class, StockAttribute::class, 'stock_id', 'attributes_id');
+    }
 }

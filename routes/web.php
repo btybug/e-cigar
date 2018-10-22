@@ -18,10 +18,12 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     $product = \App\Models\Posts::find($request->id);
     return ['error'=>false,'data'=>$product->makeReady()->toArray()];
 });
-
+Route::get('/faq', 'HomeController@getFaq')->name('faq');
 Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 Route::group(['prefix' => 'blog'], function () {
     Route::get('/', 'Frontend\BlogController@index')->name('blog');
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');

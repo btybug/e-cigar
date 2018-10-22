@@ -109,14 +109,17 @@ $("body").on("click", ".add-attribute-event", function() {
                                                 <a href="javascript:void(0)" class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></a>
                                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                 </div>
+                                                <input type="hidden" name="attributes[]" value="${id}">
                                                 </li>`);
                         $(".choset-attributes").append(
                             `<div style="height: 50px" class="attributes-container-${id} main-attr-container"></div>`
                         );
                         console.log(res2.data);
                         let value = "";
+                        let optionIds = "";
                         res2.data.forEach(item => {
                             value += item.name + ",";
+                            optionIds += item.id + ",";
                             let html = `<li class="btn btn-primary attributes-item">
                                           <a href="#" class="title-attr">${
                                               item.name
@@ -125,7 +128,8 @@ $("body").on("click", ".add-attribute-event", function() {
                                         </li>`;
                         });
                         $(`.attributes-container-${id}`).append(
-                            `<input data-id=${id} class="attributes-item-input-${id}"  value="${value}"> `
+                            `<input data-id=${id} class="attributes-item-input-${id}"  value="${value}">
+                             <input type="hidden" name="options[${id}]" value="${optionIds}">`
                         );
                         // Tags
                         makeSearchItem({
@@ -447,7 +451,7 @@ const HTMLyoutubeLinkToIframe = data => {
     if ($(`[value="${videoId}"]`).length !== 0) return false;
     return `<div class="video-single-item" style="display: flex"><iframe width="200" height="200"
     src="https://www.youtube.com/embed/${videoId}">
-    </iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="video-url[]" value="${videoId}"> </div>`;
+    </iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>`;
 };
 
 $("body").on("click", ".add-video-url", function() {

@@ -67,6 +67,7 @@ class Translatable extends Model
                 }
             }
         }
-        return $model->save();
+        $model->save();
+        return $model;
     }
 }
