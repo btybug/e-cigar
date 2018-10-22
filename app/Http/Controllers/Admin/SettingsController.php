@@ -258,7 +258,8 @@ class SettingsController extends Controller
     }
     public function getCreateRate()
     {
-        return $this->view('store.tax_rates.create');
+        $model=null;
+        return $this->view('store.tax_rates.create',compact('model'));
     }
 
 

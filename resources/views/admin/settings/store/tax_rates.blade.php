@@ -41,7 +41,7 @@
             <div class="" aria-labelledby="general-tab">
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
-                        <li class="item  active ">
+                        <li class="item ">
                             <div class="chek-title">
                                 <input id="cash_paymant" name="2" class="gateways_inp" type="checkbox">
                                 <label for="cash_paymant" class="title">Tax 1</label>
@@ -49,7 +49,7 @@
                             <a href="#"
                                class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                         </li>
-                        <li class="item  active ">
+                        <li class="item ">
                             <div class="chek-title">
                                 <input id="cash_paymant"  name="3" class="gateways_inp" type="checkbox">
                                 <label for="cash_paymant" class="title">Tax 2</label>
@@ -57,10 +57,26 @@
                             <a href="#"
                                class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                         </li>
-                        <li class="item  active ">
+                        <li class="item ">
                             <div class="chek-title">
                                 <input id="cash_paymant" checked="" name="4" class="gateways_inp" type="checkbox">
                                 <label for="cash_paymant" class="title">Tax 3</label>
+                            </div>
+                            <a href="#"
+                               class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                        </li>
+                        <li class="item ">
+                            <div class="chek-title">
+                                <input id="cash_paymant" checked="" name="4" class="gateways_inp" type="checkbox">
+                                <label for="cash_paymant" class="title">Tax 4</label>
+                            </div>
+                            <a href="#"
+                               class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                        </li>
+                        <li class="item ">
+                            <div class="chek-title">
+                                <input id="cash_paymant" checked="" name="4" class="gateways_inp" type="checkbox">
+                                <label for="cash_paymant" class="title">Tax 5</label>
                             </div>
                             <a href="#"
                                class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
