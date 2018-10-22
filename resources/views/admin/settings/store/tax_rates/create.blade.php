@@ -84,14 +84,6 @@
                                     <i id="font-show-area"></i>
                                 </div>
                             </div>
-                            <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                              title=""
-                                                                                              data-original-title="Image Title">Image</span></label>
-                                <div class="col-sm-10">
-                                    {!! media_button('image',$model) !!}
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <div class="col-sm-12 text-center">
                                     {!! Form::submit('Save',['class' => 'btn btn-info button_save']) !!}
