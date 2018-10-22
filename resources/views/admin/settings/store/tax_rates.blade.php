@@ -14,7 +14,8 @@
                    aria-controls="shipping" aria-selected="false">Shipping</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}" role="tab"
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}"
+                   role="tab"
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
             </li>
             <li class="nav-item ">
@@ -32,8 +33,41 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
+        <div>
+            <a href="{!! route('admin_settings_tax_create') !!}" class="btn btn-success pull-right">Create new</a>
+        </div>
         <div class="" id="myTabContent">
-            <button class="btn btn-success">Create new</button>
+
+            <div class="" aria-labelledby="general-tab">
+                <div class="payment_gateways_tab">
+                    <ul class="list_paymant">
+                        <li class="item  active ">
+                            <div class="chek-title">
+                                <input id="cash_paymant" name="2" class="gateways_inp" type="checkbox">
+                                <label for="cash_paymant" class="title">Tax 1</label>
+                            </div>
+                            <a href="#"
+                               class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                        </li>
+                        <li class="item  active ">
+                            <div class="chek-title">
+                                <input id="cash_paymant"  name="3" class="gateways_inp" type="checkbox">
+                                <label for="cash_paymant" class="title">Tax 2</label>
+                            </div>
+                            <a href="#"
+                               class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                        </li>
+                        <li class="item  active ">
+                            <div class="chek-title">
+                                <input id="cash_paymant" checked="" name="4" class="gateways_inp" type="checkbox">
+                                <label for="cash_paymant" class="title">Tax 3</label>
+                            </div>
+                            <a href="#"
+                               class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 @stop

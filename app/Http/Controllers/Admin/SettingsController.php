@@ -256,6 +256,10 @@ class SettingsController extends Controller
     {
         return $this->view('store.tax_rates');
     }
+    public function getCreateRate()
+    {
+        return $this->view('store.tax_rates.create');
+    }
 
 
 }

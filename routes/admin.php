@@ -24,6 +24,8 @@ Route::group(['prefix' => 'settings'], function () {
         });
         Route::group(['prefix' => 'tax-rates'], function () {
             Route::get('/', 'Admin\SettingsController@getTaxRates')->name('admin_settings_tax_rates');
+            Route::get('/new', 'Admin\SettingsController@getCreateRate')->name('admin_settings_tax_create');
+
         });
         Route::post('/payment-gateways/enable', 'Admin\SettingsController@postStorePaymentsGatewaysEnable')->name('post_admin_payment_gateways_enable');
         Route::group(['prefix' => 'couriers'], function () {
