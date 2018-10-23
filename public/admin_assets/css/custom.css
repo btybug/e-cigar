@@ -456,4 +456,26 @@ textarea {
     text-transform: capitalize;
 }
 
+.btn-primary-reset-back {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary-reset-back:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
 /*End admin global styles*/
+
+
+.product-introduce h2 {
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 32px;
+    color: #f8b500;
+    text-transform: uppercase;
+}

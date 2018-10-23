@@ -14,7 +14,7 @@
                                 {{--<a href="#" class="file-control">Audio</a>--}}
                                 {{--<a href="#" class="file-control">Images</a>--}}
                                 <div class="hr-line-dashed"></div>
-                                <button class="btn btn-primary btn-block {!! $settings['uploadbutton']??null !!}">
+                                <button class="btn btn-info btn-block {!! $settings['uploadbutton']??null !!}">
                                     Upload Files
                                 </button>
                                 <div class="hr-line-dashed"></div>
@@ -27,7 +27,7 @@
                                         <input type="text" class="form-control" data-mediafield="addfolder"
                                                placeholder="Folder name">
                                         <span class="input-group-btn">
-                                      <button class="btn btn-default" type="button" data-media="addfolder">Add</button>
+                                      <button class="btn btn-primary-reset-back" type="button" data-media="addfolder">Add</button>
                                     </span>
                                     </div><!-- /input-group -->
                                 </div>
@@ -54,7 +54,7 @@
                     <div class="over-auto scrollbar_custom">
                         <div class="row m-0">
                             <div class="col-lg-12 m-b-10 text-right">
-                                <button type="button" class="btn btn-default" data-role="btnUploader">Uploader</button>
+                                <button type="button" class="btn btn-default mb-20" data-role="btnUploader">Uploader</button>
                             </div>
                         </div>
                         <div class="row m-0 collapse show-uploder" data-targetiuploder="folder">
