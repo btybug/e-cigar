@@ -26,11 +26,12 @@ class ProductsController extends Controller
 
     public function getVape()
     {
-        return $this->view('juice');
+        
+        return $this->view('vapes');
     }
 
     public function getJuice()
     {
-        return $this->view('vapes');
+        return $this->view('juice');
     }
 }
