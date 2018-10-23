@@ -16,12 +16,14 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('stock_id')->unsigned();
             $table->string('status')->nullable();
             $table->string('type',20);
             $table->text('image')->nullable();
             $table->text('tags')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
         });
     }
 

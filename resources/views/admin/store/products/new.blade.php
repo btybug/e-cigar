@@ -98,6 +98,15 @@
                     <div class="view-product-wall">
                         <div class="author-wall wall">
                             <div class="row">
+                                {{Form::label('stock', 'Main Stock',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    {!! Form::select('stock_id',['' => 'Select stock'] + $stocks,null,
+                                                ['class' => 'form-control','id'=> 'stock']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="author-wall wall">
+                            <div class="row">
                                 {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
                                     {!! Form::select('user_id',$authors,null,
