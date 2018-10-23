@@ -47,7 +47,7 @@ class InventoryController extends Controller
 
     public function postStock(Request $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations');
+        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations','variation_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
         $stock->attrs()->sync($request->get('attributes'));
