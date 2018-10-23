@@ -29,7 +29,7 @@
                         <div class="tab-content--features_right d-flex flex-column align-items-center justify-content-center h-100">Feature 1</div>
                     </div>
                 </div>
-                <div class="row mb-2">
+                <div class="row">
                     <div class="col-md-8">
                         <div class="tab-content--features_left" style="background-image: url(http://laravelcommerce.com/resources/assets/images/news_images/1531930697.blog-img-3.jpg);"></div>
                     </div>

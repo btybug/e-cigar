@@ -13102,7 +13102,6 @@ a.text-dark:focus, a.text-dark:hover {
     visibility:hidden;
 }
 
-
 .media-slider [data-u="image"],
 .media-slider [data-u="image"] iframe {
     z-index:99 !important;
@@ -13112,8 +13111,8 @@ a.text-dark:focus, a.text-dark:hover {
     z-index: 999 !important;
 }
 
-.tab-content--features .tab-pane{
-    padding: 60px;
+.tab-content--features .tab-pane {
+    padding: 30px 60px;
 }
 
 .tab-content--features_left {
