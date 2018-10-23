@@ -665,5 +665,9 @@ display: flex;
 .payment_gateways_tab .list_paymant .item .chek-title .title{
     margin-left:5px;
 }
-
-
+.mb-10{
+    margin-bottom:10px;
+}
+.m-0{
+    margin: 0;
+}

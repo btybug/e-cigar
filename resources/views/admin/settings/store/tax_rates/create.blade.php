@@ -7,11 +7,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-7 pl-0">
-                                <h2>Attribute</h2>
+                                <h2 class="m-0">Attribute</h2>
                             </div>
                             <div class="col-sm-5 p-0">
-                                <div class="button-save  text-right">
-                                    <a class="btn btn-primary pull-right"
+                                <div class="button-save text-right">
+                                    <a class="btn btn-default pull-right"
                                        href="{!! route('admin_store_attributes') !!}">Back</a>
                                 </div>
                             </div>
@@ -98,3 +98,6 @@
         </div>
     </div>
 @stop()
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop

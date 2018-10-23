@@ -33,8 +33,8 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
-        <div>
-            <a href="{!! route('admin_settings_tax_create') !!}" class="btn btn-success pull-right">Create new</a>
+        <div class="text-right mb-10">
+            <a href="{!! route('admin_settings_tax_create') !!}" class="btn btn-primary">Create new</a>
         </div>
         <div class="" id="myTabContent">
 

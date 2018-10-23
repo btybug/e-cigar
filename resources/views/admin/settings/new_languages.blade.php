@@ -89,7 +89,7 @@
                                             <!-- /.box-body -->
                                             <div class="box-footer text-right">
                                                 <div class="col-sm-offset-2 col-md-offset-3 col-sm-10 col-md-4">
-                                                    {!! Form::submit('Save Language',['class' => 'btn btn-primary']) !!}
+                                                    {!! Form::submit('Save Language',['class' => 'btn btn-info']) !!}
                                                     <a href="#"
                                                        type="button" class="btn btn-default">Back</a>
                                                 </div>

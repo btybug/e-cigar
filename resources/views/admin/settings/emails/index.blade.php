@@ -6,9 +6,9 @@
     <div class="row">
 
         <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Emails</h2></div>
+            <div class=""><h2>Emails</h2></div>
         </div>
-        <div><a class="btn btn-info pull-right" href="{!! route('admin_mail_create_templates') !!}">Create Email</a></div>
+        <div class="col-xs-12 text-right"><a class="btn btn-primary" href="{!! route('admin_mail_create_templates') !!}">Create Email</a></div>
         <div class="col-xs-12">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
