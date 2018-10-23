@@ -27,7 +27,7 @@ class ProductsController extends Controller
 
     public function getVape()
     {
-        $products=Products::where('type','vape')->where('status','published')->orderBy('id','DESC')->paginate(15);
+        $products=Products::where('type','vape')->where('status','published')->orderBy('id','DESC')->paginate(5);
         return $this->view('vapes',compact('products'));
     }
 
