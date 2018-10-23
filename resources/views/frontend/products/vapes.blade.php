@@ -515,6 +515,51 @@
                             </div>
                         </div>
                     </div>
+                    <div class="products products-3x" id="listing-products">
+                        <div class="product">
+                            <article>
+                                <div class="thumb"><img class="img-fluid"
+                                                        src="http://demo.laravelcommerce.com/resources/assets/images/product_images/1502174889.pPOLO2-26314766_standard_v400.jpg"
+                                                        alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
+                                <div class="block-panel mt-4">
+                                                <span class="tag text-center ">
+                                                    Men's Clothing                                                </span>
+                                    <h2 class="title">CLASSIC FIT SOFT-TOUCH POLO</h2>
+                                    <div class="description">
+                                        <p class="read-more"></p>
+                                    </div>
+                                    <div class="block-inner">
+                                        <div class="price">
+                                            $85
+                                        </div>
+
+                                        {{--<div class="buttons">--}}
+                                        {{--<button type="button" class="btn btn-secondary btn-round cart" products_id="1">Add to Cart</button>--}}
+                                        {{--</div>--}}
+                                    </div>
+                                </div>
+
+
+                                <div class="product-hover">
+                                    <div class="icons">
+                                        <div class="icon-liked">
+                                            <span products_id='1' class="fa  fa-heart-o  is_liked"><span
+                                                        class="badge badge-secondary">13</span></span>
+                                        </div>
+                                        <a href="http://demo.laravelcommerce.com/product-detail/classic-fit-soft-touch-polo"
+                                           class="fa fa-eye"></a>
+                                    </div>
+
+                                    <div class="buttons">
+
+                                        <button type="button" class="btn btn-block btn-secondary cart" products_id="1">
+                                            Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
