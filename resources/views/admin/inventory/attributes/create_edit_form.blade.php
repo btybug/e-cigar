@@ -80,6 +80,14 @@
                                 </div>
                             </div>
                             <div class="form-group bord-top">
+                                <label class="col-sm-2 control-label" for="input-total">
+                                    <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
+                                <div class="col-sm-10">
+                                    YES {!! Form::radio('filter',1,null) !!}
+                                    NO {!! Form::radio('filter',0,null) !!}
+                                </div>
+                            </div>
+                            <div class="form-group bord-top">
                                 <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                               title=""
                                                                                               data-original-title="Image Title">Image</span></label>
@@ -92,24 +100,10 @@
                                     {!! Form::submit('Save',['class' => 'btn btn-info button_save']) !!}
                                 </div>
                             </div>
-                            {!! Form::close() !!}
+
                         </div>
                     </div>
                 </div>
-                @if($model)
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h2>Options {{ $model->name }} </h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            @include('admin.inventory.attributes.options')
-                        </div>
-                    </div>
-                @endif
             </div>
             <div class="col-md-3">
                 <div class="right_col">
@@ -120,20 +114,23 @@
                                     Display as
                                 </div>
                                 <div class="col-sm-5 p-0">
-                                    <select name="" id="" class="form-control display_as-select">
-                                        <option value="radio">Radio</option>
-                                        <option value="select_menu">Select menu</option>
-                                        <option value="multi_select">Multi select</option>
-                                        <option value="multi_select_tag">Multi select tag</option>
-                                    </select>
+                                    {!! Form::select('display_as',[
+                                        'radio' => 'radio',
+                                        'select' => 'select',
+                                        'checkbox' => 'checkbox',
+                                        'multy_select' => 'Multi select',
+
+                                    ],null,['class' => 'form-control display_as-select']) !!}
                                 </div>
+                                {{--'multi_select_tag' => 'Multi select tag',--}}
                             </div>
                         </div>
+                        {!! Form::close() !!}
                         <div class="panel-body">
                             <div class="right-main-content">
                                 <div class="display-as-wall " data-displayas="radio">
-                                    <h3>Courier</h3>
                                     @if($model && count($model->children))
+                                        <h3>{{ $model->name }}</h3>
                                         @foreach($model->children as $item)
                                             <div class="form-group row bord-top bg-light attr-option"
                                                  data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
@@ -209,6 +206,22 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12">
+                @if($model)
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <h2>Options {{ $model->name }} </h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            @include('admin.inventory.attributes.options')
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
