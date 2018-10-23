@@ -6,7 +6,9 @@
     <div class="row">
 
         <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Staff</h2></div>
+            <div class="col-md-6 pull-left">
+                <h2 class="m-0">Staff</h2>
+            </div>
         </div>
         <div class="col-xs-12">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">

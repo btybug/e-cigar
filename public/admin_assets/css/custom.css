@@ -394,6 +394,12 @@ table.table--order-dtls.table-bordered tr > th {
     overflow: auto;
 }
 
+.order-notes_message {
+    background: #f1efef;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
 .order-notes_message .underlined {
     text-decoration: underline;
 }
@@ -414,6 +420,40 @@ table.table--order-dtls.table-bordered tr > th {
 /*End admin orders*/
 
 
+
+/*admin global styles*/
 .modal-backdrop {
     background-color: transparent !important;
 }
+
+.form-control:focus {
+    border-color: #d2d6de;
+}
+
+textarea {
+    resize: none;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.bestbetter-modal {
+    padding: 20px 0;
+}
+
+
+.bestbetter-modal-open input {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/*End admin global styles*/

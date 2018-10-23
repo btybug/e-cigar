@@ -8,8 +8,9 @@
             <div id="tree1"></div>
         </div>
         <div class="col-md-8">
-            <div class="button-area">
-                <a class="btn btn-primary pull-right add-category" href="javascript:void(0)">Add new</a></div>
+            <div class="button-area text-right mb-20">
+                <a class="btn btn-primary add-category" href="javascript:void(0)">Add new</a>
+            </div>
 
             <div class="content-area category-form-place">
                 {{--@include('admin.store.categories.create_or_update')--}}

@@ -6,9 +6,13 @@
     <div class="row">
 
         <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Roles</h2></div>
+            <div class="col-md-6">
+                <h2 class="m-0">Roles</h2>
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-warning pull-right" href="{!! route('admin_create_role') !!}">Create Role</a>
+            </div>
         </div>
-        <div><a class="btn btn-info pull-right" href="{!! route('admin_create_role') !!}">Create Role</a></div>
         <div class="col-xs-12">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
