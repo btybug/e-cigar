@@ -40,4 +40,12 @@ class ProductsController extends Controller
 
         return redirect()->route('admin_store');
     }
+
+    public function getEdit($id)
+    {
+        $model = Products::findOrFail($id);
+        $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
+        return $this->view('new',compact('authors','model'));
+    }
 }
