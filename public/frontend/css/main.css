@@ -13037,6 +13037,7 @@ a.text-dark:focus, a.text-dark:hover {
     box-shadow: 0 5px 20px rgba(0,0,0,.2);
     opacity:0;
     visibility: hidden;
+    z-index: 999;
 }
 
 .single-product_btns_share .share-social .jssocials-shares {
@@ -13125,6 +13126,16 @@ a.text-dark:focus, a.text-dark:hover {
 
 .tab-content--features_right {
     border: 2px solid #ddd;
+}
+
+.container--vape .single-product_btns_share .share-social {
+    left: 0;
+    right: auto;
+}
+
+.container--vape .single-product_btns_share .share-social:before {
+    left: 10px;
+    right: auto;
 }
 
 /*End vape pages*/

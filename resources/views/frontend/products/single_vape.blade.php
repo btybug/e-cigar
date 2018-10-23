@@ -1,6 +1,69 @@
 @extends('layouts.frontend')
 @section('content')
     <div class="container container--vape">
+        <div class="row mb-5">
+            <div class="col-md-4">
+                <a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">
+                    <img width="100%" src="http://ukprintplus.co.uk/wp-content/uploads/2015/08/2-side-appointment-400-400x300.jpg" class="attachment-single-product-thumb wp-post-image" alt="">
+                </a>
+                <ul class="single-product_btns pl-0 mb-0 d-md-flex justify-content-md-between">
+                    <li><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
+                    <li class="single-product_btns_share"><a href="#" class="btn btn-outline-dark">share</a>
+                        <div id="share" class="share-social"></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h1 class="product_title entry-title col-md-6 mb-5 p-0">Product Title</h1>
+            </div>
+            <div class="col-md-4">
+                <form>
+                    <h2 class="mb-4">Price Calculator</h2>
+                    <div class="form-group row align-items-center">
+                        <div class="col-md-4">
+                            <label for="quantity" class="mb-0"><span class="text-danger">*</span>Quantity</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control" id="quantity" placeholder="50">
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-md-4">
+                            <label for="sides" class="mb-0"><span class="text-danger">*</span>Sides</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="sides" id="sides">
+                                <option value="1 Side">1 Side</option>
+                                <option value="2 Sides">2 Sides</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center">
+                        <div class="col-md-4">
+                            <label for="orientation" class="mb-0"><span class="text-danger">*</span>Orientation</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="orientation" id="orientation">
+                                <option value="Landscape">Landscape</option>
+                                <option value="Portrait">Portrait</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row align-items-center mb-0">
+                        <div class="col-md-4">
+                            <label for="paperQuantity" class="mb-0"><span class="text-danger">*</span>Paper Quality</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="paperQuantity" id="paperQuantity">
+                                <option value="300gsm Silk">300gsm Silk</option>
+                                <option value="300gsm Silk 2">300gsm Silk 2</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <ul class="nav nav-tabs d-flex" role="tablist">
             <li class="nav-item">
                 <a class="nav-link active" id="feature-tab" data-toggle="tab" href="#feature" role="tab" aria-controls="home" aria-selected="true">Feature</a>
@@ -134,10 +197,22 @@
 
 @stop
 
+@section('css')
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
+    <link rel="stylesheet" href="{{asset('public/frontend/css/jssor-slider.css')}}">
+@stop
+
 @section('js')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script src="{{asset('public/frontend/js/jssor.slider-27.5.0.min.js')}}"></script>
 
     <script>
+        $("#share").jsSocials({
+            shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
+        });
+
+
         jssor_1_slider_init = function() {
 
             var jssor_1_SlideshowTransitions = [
@@ -216,9 +291,6 @@
 @stop
 
 
-@section('css')
-    <link rel="stylesheet" href="{{asset('public/frontend/css/jssor-slider.css')}}">
-@stop
 
 
 

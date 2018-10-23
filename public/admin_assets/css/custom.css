@@ -442,8 +442,16 @@ textarea {
     margin-bottom: 20px;
 }
 
+.mb-0 {
+    margin-bottom: 0;
+}
+
 .m-0 {
     margin: 0;
+}
+
+.d-block {
+    display: block;
 }
 
 .bestbetter-modal {
