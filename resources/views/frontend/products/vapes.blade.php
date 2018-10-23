@@ -455,7 +455,7 @@
                                             <span products_id='1' class="fa  fa-heart-o  is_liked"><span
                                                         class="badge badge-secondary">13</span></span>
                                             </div>
-                                            <a href="http://demo.laravelcommerce.com/product-detail/classic-fit-soft-touch-polo"
+                                            <a href="{!! route('product_single_vape',$product->id) !!}"
                                                class="fa fa-eye"></a>
                                         </div>
 

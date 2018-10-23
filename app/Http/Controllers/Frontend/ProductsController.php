@@ -18,12 +18,7 @@ class ProductsController extends Controller
         return $this->view('index', compact('posts'));
     }
 
-    public function getSingle($post_url)
-    {
-        $post = Posts::where('url', $post_url)->first();
-        if (!$post) abort(404);
-        return $this->view('single', compact('post'));
-    }
+
 
     public function getVape(Request $request)
     {
@@ -42,8 +37,8 @@ class ProductsController extends Controller
 
     public function singleVape($id)
     {
-//        $vape=Products::
-        return $this->view('single_vape');
+        $vape=Products::findOrFail($id);
+        return $this->view('single_vape',compact('vape'));
     }
 
     public function getJuice()
