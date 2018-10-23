@@ -41,7 +41,7 @@ class InventoryController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $attrs = $model->attrs()->where('attributes.parent_id', null)->get();
+        $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         return $this->view('stock_new', compact(['model', 'attrs']));
     }
 
@@ -51,10 +51,10 @@ class InventoryController extends Controller
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
         $stock->attrs()->sync($request->get('attributes'));
-        $options = $this->stockService->makeOptions($stock, $request->get('options'));
+        $options = $this->stockService->makeOptions($stock, $request->get('options',[]));
         $stock->attrs()->syncWithoutDetaching($options);
 
-        $this->stockService->saveVariations($stock, $request->get('variations'));
+        $this->stockService->saveVariations($stock, $request->get('variations',[]));
 
         return redirect()->route('admin_stock');
     }

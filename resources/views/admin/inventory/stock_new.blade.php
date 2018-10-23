@@ -59,6 +59,7 @@
 
             <!-- /.col -->
             {!! Form::model($model,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
+            {!! Form::hidden('id',null) !!}
             <div class="col-md-12">
                 {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
             </div>
@@ -244,14 +245,16 @@
                                 <div class="col-md-9">
                                     <div class="basic-center basic-wall">
                                         <ul class="choset-attributes">
-
-                                            <div style="height: 50px"
-                                                 class="attributes-container-${id} main-attr-container">
-                                                <input data-id=${id} class="attributes-item-input-${id}"
-                                                       value="${value}">
-                                                <input type="hidden" name="options[${id}]" value="${optionIds}">
-                                            </div>
-
+                                            @if(isset($attrs) && count($attrs))
+                                                @foreach($attrs as $attribute)
+                                                    <div style="height: 50px" data-attr-id="{{$attribute->id}}"
+                                                         class="attributes-container-{{$attribute->id}} main-attr-container">
+                                                        <input data-id="{{$attribute->id}}" class="attributes-item-input-{{$attribute->id}}"
+                                                               value="{{ implode(',',$attribute->children->pluck('name')->all()) }}">
+                                                        <input type="hidden" name="options[{{$attribute->id}}]" value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
+                                                    </div>
+                                                @endforeach
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>

@@ -380,6 +380,24 @@ $("body").on("click", ".apply-variation", function() {
     $("#variation_form").remove();
 });
 
+window.onload = function () {
+    var elementList = document.querySelectorAll('.main-attr-container');
+
+    // Iterate through each element in the array
+    for (var i = 0; i < elementList.length; i++) {
+        var ele = elementList[i];
+        makeSearchItem({
+            input: '.attributes-item-input-'+$(ele).data('attr-id'),
+            name: "name",
+            url: '/admin/inventory/attributes/get-options-by-id/'+$(ele).data('attr-id'),
+            title: "Attributes",
+            inputValues: "#tags-names",
+            containerForAppend: ".coupon-tags-list"
+        });
+    }
+}
+
+
 // val.forEach((item, index) => {
 //     // console.log(item)
 //     // console.log(index)
