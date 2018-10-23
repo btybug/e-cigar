@@ -245,8 +245,10 @@
                                     <div class="basic-center basic-wall">
                                         <ul class="choset-attributes">
 
-                                            <div style="height: 50px" class="attributes-container-${id} main-attr-container">
-                                                <input data-id=${id} class="attributes-item-input-${id}"  value="${value}">
+                                            <div style="height: 50px"
+                                                 class="attributes-container-${id} main-attr-container">
+                                                <input data-id=${id} class="attributes-item-input-${id}"
+                                                       value="${value}">
                                                 <input type="hidden" name="options[${id}]" value="${optionIds}">
                                             </div>
 
