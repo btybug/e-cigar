@@ -5,8 +5,10 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Posts</h2></div>
-            <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>
+            <div class="row">
+                <div class="col-md-6 pull-left"><h2 class="m-0">Posts</h2></div>
+                <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>
+            </div>
         </div>
         <div class="col-xs-12">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
@@ -48,4 +50,7 @@
         });
 
     </script>
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop

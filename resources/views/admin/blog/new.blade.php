@@ -16,7 +16,7 @@
         {!! Form::hidden('id',null) !!}
         <div id="home" class="tab-pane tab_info fade in active">
             <div class="text-right btn-save">
-                <button type="button" class="btn btn-danger btn-view">View Product</button>
+                <button type="button" class="btn btn-success btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
             @if ($errors->any())
