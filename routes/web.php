@@ -16,9 +16,20 @@ Route::get('/', function () {
 });
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     $product = \App\Models\Posts::find($request->id);
-    return ['error'=>false,'data'=>$product->makeReady()->toArray()];
+    return ['error' => false, 'data' => $product->makeReady()->toArray()];
 });
-Route::get('/faq', 'GuestController@getFaq')->name('faq');
+
+
+
+//Knowledge base
+//Manuals
+//Ticket
+//Terms & conditions
+//Delivery
+//Whole sellers
+
+
+
 Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
@@ -31,21 +42,31 @@ Route::group(['prefix' => 'news'], function () {
 
 Route::group(['prefix' => 'products'], function () {
     Route::get('/', 'Frontend\ProductsController@index')->name('products');
-  //  Route::get('/{p_id}', 'Frontend\ProductsController@getSingle')->name('product_single');
-    Route::get('/vape','Frontend\ProductsController@getVape')->name('product_vape');
-    Route::get('/juice','Frontend\ProductsController@getJuice')->name('product_juice');
+    //  Route::get('/{p_id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+    Route::get('/vape', 'Frontend\ProductsController@getVape')->name('product_vape');
+    Route::get('/juice', 'Frontend\ProductsController@getJuice')->name('product_juice');
 });
-Route::get('/sales','Frontend\CommonController@getSales')->name('product_sales');
-Route::get('/forum','Frontend\CommonController@getForum')->name('forum');
-Route::get('/support','Frontend\CommonController@getSupport')->name('product_support');
-Route::get('/contact-us','Frontend\CommonController@getContactUs')->name('product_contact_us');
+Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
+Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
+Route::group(['prefix'=>'/support'], function (){
+    Route::get('/', 'Frontend\CommonController@getSupport')->name('product_support');
+
+    Route::get('/faq', 'GuestController@getFaq')->name('faq');
+    Route::get('/knowledge-base', 'GuestController@getKnowledgeBase')->name('knowledge_base');
+    Route::get('/manuals', 'GuestController@getManuals')->name('manuals');
+    Route::get('/ticket', 'GuestController@getTicket')->name('faq');
+    Route::get('/terms-&-conditions', 'GuestController@getTermsConditions')->name('terms_conditions');
+    Route::get('/delivery', 'GuestController@getDelivery')->name('delivery');
+    Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
+});
+Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
 Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
 Route::get('/check-out', 'Frontend\ShopController@getCheckOut')->name('shop_check_out');
 
-Route::group(['prefix' => 'my-account','middleware' => ['auth','verified']], function () {
+Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
     Route::get('/logs', 'Frontend\UserController@getLogs')->name('my_account_logs');
     Route::get('/password', 'Frontend\UserController@getPassword')->name('my_account_password');
