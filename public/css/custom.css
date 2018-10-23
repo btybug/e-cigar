@@ -677,3 +677,29 @@ display: flex;
 .min-300{
     min-height:300px;
 }
+.price_tab_stre_page .media_panel .panel-body{
+
+}
+.price_tab_stre_page .media_panel .panel-body .media-item{
+box-shadow: 0 0 4px #ccc;
+}
+.price_tab_stre_page .media_panel .panel-body .media-item .box{
+position: relative;
+    width: 100%;
+    min-height: 250px;
+    border: 1px solid #eeeeee;
+    margin: 0;
+}
+.price_tab_stre_page .media_panel .panel-body .media-item .box .del-item{
+color: red;
+    position: absolute;
+    top:0;
+    right: 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+.price_tab_stre_page .media_panel .panel-body .media-item .title{
+    padding:20px;
+    color: black;
+    text-align: center;
+}

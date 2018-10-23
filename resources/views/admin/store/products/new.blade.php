@@ -162,158 +162,178 @@
                 </div>
             </div>
         </div>
-        <div id="price" class="tab-pane fade">
+        <div id="price" class="tab-pane price_tab_stre_page fade">
             <div class="text-right btn-save">
                 <button type="submit" class="btn btn-info">Save</button>
             </div>
             <div class="row">
                 {{--<div class="col-md-12">--}}
-                    {{--<div id="tab-discount">--}}
-                        {{--<div class="table-responsive">--}}
-                            {{--<table id="discount" class="table table-striped table-bordered table-hover">--}}
-                                {{--<thead>--}}
-                                {{--<tr>--}}
-                                    {{--<td class="text-left">Customer Group</td>--}}
-                                    {{--<td class="text-right">Quantity</td>--}}
-                                    {{--<td class="text-right">Priority</td>--}}
-                                    {{--<td class="text-left">Date Start</td>--}}
-                                    {{--<td class="text-left">Date End</td>--}}
-                                    {{--<td></td>--}}
-                                {{--</tr>--}}
-                                {{--</thead>--}}
-                                {{--<tbody>--}}
-                                {{--<tr id="discount-row0">--}}
-                                    {{--<td class="text-left"><select name="product_discount[0][customer_group_id]"--}}
-                                                                  {{--class="form-control">--}}
-                                            {{--<option value="1" selected="selected">Default</option>--}}
-                                        {{--</select></td>--}}
-                                    {{--<td class="text-right"><input type="text"--}}
-                                                                  {{--name="product_discount[0][quantity]"--}}
-                                                                  {{--value="10" placeholder="Quantity"--}}
-                                                                  {{--class="form-control"/></td>--}}
-                                    {{--<td class="text-right"><input type="text"--}}
-                                                                  {{--name="product_discount[0][priority]" value="1"--}}
-                                                                  {{--placeholder="Priority" class="form-control"/>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                        {{--<div class="input-group ">--}}
-                                            {{--<input type="text" name="product_discount[0][date_start]" value=""--}}
-                                                   {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-                                                   {{--class="form-control date"/>--}}
-                                            {{--<span class="input-group-btn">--}}
-{{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-{{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                        {{--<div class="input-group ">--}}
-                                            {{--<input type="text" name="product_discount[0][date_end]" value=""--}}
-                                                   {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-                                                   {{--class="form-control date"/>--}}
-                                            {{--<span class="input-group-btn">--}}
-{{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-{{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-center">--}}
-                                        {{--<button type="button" onclick="$('#discount-row0').remove();"--}}
-                                                {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
-                                                    {{--class="fa fa-minus-circle"></i></button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr id="discount-row1">--}}
-                                    {{--<td class="text-left"><select name="product_discount[1][customer_group_id]"--}}
-                                                                  {{--class="form-control">--}}
-                                            {{--<option value="1" selected="selected">Default</option>--}}
-                                        {{--</select></td>--}}
-                                    {{--<td class="text-right"><input type="text"--}}
-                                                                  {{--name="product_discount[1][quantity]"--}}
-                                                                  {{--value="20" placeholder="Quantity"--}}
-                                                                  {{--class="form-control"/></td>--}}
-                                    {{--<td class="text-right"><input type="text"--}}
-                                                                  {{--name="product_discount[1][priority]" value="1"--}}
-                                                                  {{--placeholder="Priority" class="form-control"/>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                        {{--<div class="input-group ">--}}
-                                            {{--<input type="text" name="product_discount[1][date_start]" value=""--}}
-                                                   {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-                                                   {{--class="form-control date"/>--}}
-                                            {{--<span class="input-group-btn">--}}
-{{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-{{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                        {{--<div class="input-group ">--}}
-                                            {{--<input type="text" name="product_discount[1][date_end]" value=""--}}
-                                                   {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-                                                   {{--class="form-control date"/>--}}
-                                            {{--<span class="input-group-btn">--}}
-{{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-{{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-center">--}}
-                                        {{--<button type="button" onclick="$('#discount-row1').remove();"--}}
-                                                {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
-                                                    {{--class="fa fa-minus-circle"></i></button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--<tr id="discount-row2">--}}
-                                    {{--<td class="text-left"><select name="product_discount[2][customer_group_id]"--}}
-                                                                  {{--class="form-control">--}}
-                                            {{--<option value="1" selected="selected">Default</option>--}}
-                                        {{--</select></td>--}}
-                                    {{--<td class="text-right"><input type="text"--}}
-                                                                  {{--name="product_discount[2][quantity]"--}}
-                                                                  {{--value="30" placeholder="Quantity"--}}
-                                                                  {{--class="form-control"/></td>--}}
-                                    {{--<td class="text-right"><input type="text"--}}
-                                                                  {{--name="product_discount[2][priority]" value="1"--}}
-                                                                  {{--placeholder="Priority" class="form-control"/>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                        {{--<div class="input-group ">--}}
-                                            {{--<input type="text" name="product_discount[2][date_start]" value=""--}}
-                                                   {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-                                                   {{--class="form-control date"/>--}}
-                                            {{--<span class="input-group-btn">--}}
-{{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-{{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                        {{--<div class="input-group ">--}}
-                                            {{--<input type="text" name="product_discount[2][date_end]" value=""--}}
-                                                   {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-                                                   {{--class="form-control date"/>--}}
-                                            {{--<span class="input-group-btn">--}}
-{{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-{{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-center">--}}
-                                        {{--<button type="button" onclick="$('#discount-row2').remove();"--}}
-                                                {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
-                                                    {{--class="fa fa-minus-circle"></i></button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--</tbody>--}}
-                                {{--<tfoot>--}}
-                                {{--<tr>--}}
-                                    {{--<td colspan="5"></td>--}}
-                                    {{--<td class="text-center">--}}
-                                        {{--<button type="button" onclick="addDiscount();" data-toggle="tooltip"--}}
-                                                {{--title="Add Discount" class="btn btn-primary"><i--}}
-                                                    {{--class="fa fa-plus-circle"></i></button>--}}
-                                    {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--</tfoot>--}}
-                            {{--</table>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                {{--<div id="tab-discount">--}}
+                {{--<div class="table-responsive">--}}
+                {{--<table id="discount" class="table table-striped table-bordered table-hover">--}}
+                {{--<thead>--}}
+                {{--<tr>--}}
+                {{--<td class="text-left">Customer Group</td>--}}
+                {{--<td class="text-right">Quantity</td>--}}
+                {{--<td class="text-right">Priority</td>--}}
+                {{--<td class="text-left">Date Start</td>--}}
+                {{--<td class="text-left">Date End</td>--}}
+                {{--<td></td>--}}
+                {{--</tr>--}}
+                {{--</thead>--}}
+                {{--<tbody>--}}
+                {{--<tr id="discount-row0">--}}
+                {{--<td class="text-left"><select name="product_discount[0][customer_group_id]"--}}
+                {{--class="form-control">--}}
+                {{--<option value="1" selected="selected">Default</option>--}}
+                {{--</select></td>--}}
+                {{--<td class="text-right"><input type="text"--}}
+                {{--name="product_discount[0][quantity]"--}}
+                {{--value="10" placeholder="Quantity"--}}
+                {{--class="form-control"/></td>--}}
+                {{--<td class="text-right"><input type="text"--}}
+                {{--name="product_discount[0][priority]" value="1"--}}
+                {{--placeholder="Priority" class="form-control"/>--}}
+                {{--</td>--}}
+                {{--<td class="text-left" style="width: 20%;">--}}
+                {{--<div class="input-group ">--}}
+                {{--<input type="text" name="product_discount[0][date_start]" value=""--}}
+                {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
+                {{--class="form-control date"/>--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
+                {{--</span></div>--}}
+                {{--</td>--}}
+                {{--<td class="text-left" style="width: 20%;">--}}
+                {{--<div class="input-group ">--}}
+                {{--<input type="text" name="product_discount[0][date_end]" value=""--}}
+                {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
+                {{--class="form-control date"/>--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
+                {{--</span></div>--}}
+                {{--</td>--}}
+                {{--<td class="text-center">--}}
+                {{--<button type="button" onclick="$('#discount-row0').remove();"--}}
+                {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
+                {{--class="fa fa-minus-circle"></i></button>--}}
+                {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr id="discount-row1">--}}
+                {{--<td class="text-left"><select name="product_discount[1][customer_group_id]"--}}
+                {{--class="form-control">--}}
+                {{--<option value="1" selected="selected">Default</option>--}}
+                {{--</select></td>--}}
+                {{--<td class="text-right"><input type="text"--}}
+                {{--name="product_discount[1][quantity]"--}}
+                {{--value="20" placeholder="Quantity"--}}
+                {{--class="form-control"/></td>--}}
+                {{--<td class="text-right"><input type="text"--}}
+                {{--name="product_discount[1][priority]" value="1"--}}
+                {{--placeholder="Priority" class="form-control"/>--}}
+                {{--</td>--}}
+                {{--<td class="text-left" style="width: 20%;">--}}
+                {{--<div class="input-group ">--}}
+                {{--<input type="text" name="product_discount[1][date_start]" value=""--}}
+                {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
+                {{--class="form-control date"/>--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
+                {{--</span></div>--}}
+                {{--</td>--}}
+                {{--<td class="text-left" style="width: 20%;">--}}
+                {{--<div class="input-group ">--}}
+                {{--<input type="text" name="product_discount[1][date_end]" value=""--}}
+                {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
+                {{--class="form-control date"/>--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
+                {{--</span></div>--}}
+                {{--</td>--}}
+                {{--<td class="text-center">--}}
+                {{--<button type="button" onclick="$('#discount-row1').remove();"--}}
+                {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
+                {{--class="fa fa-minus-circle"></i></button>--}}
+                {{--</td>--}}
+                {{--</tr>--}}
+                {{--<tr id="discount-row2">--}}
+                {{--<td class="text-left"><select name="product_discount[2][customer_group_id]"--}}
+                {{--class="form-control">--}}
+                {{--<option value="1" selected="selected">Default</option>--}}
+                {{--</select></td>--}}
+                {{--<td class="text-right"><input type="text"--}}
+                {{--name="product_discount[2][quantity]"--}}
+                {{--value="30" placeholder="Quantity"--}}
+                {{--class="form-control"/></td>--}}
+                {{--<td class="text-right"><input type="text"--}}
+                {{--name="product_discount[2][priority]" value="1"--}}
+                {{--placeholder="Priority" class="form-control"/>--}}
+                {{--</td>--}}
+                {{--<td class="text-left" style="width: 20%;">--}}
+                {{--<div class="input-group ">--}}
+                {{--<input type="text" name="product_discount[2][date_start]" value=""--}}
+                {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
+                {{--class="form-control date"/>--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
+                {{--</span></div>--}}
+                {{--</td>--}}
+                {{--<td class="text-left" style="width: 20%;">--}}
+                {{--<div class="input-group ">--}}
+                {{--<input type="text" name="product_discount[2][date_end]" value=""--}}
+                {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
+                {{--class="form-control date"/>--}}
+                {{--<span class="input-group-btn">--}}
+                {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
+                {{--</span></div>--}}
+                {{--</td>--}}
+                {{--<td class="text-center">--}}
+                {{--<button type="button" onclick="$('#discount-row2').remove();"--}}
+                {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
+                {{--class="fa fa-minus-circle"></i></button>--}}
+                {{--</td>--}}
+                {{--</tr>--}}
+                {{--</tbody>--}}
+                {{--<tfoot>--}}
+                {{--<tr>--}}
+                {{--<td colspan="5"></td>--}}
+                {{--<td class="text-center">--}}
+                {{--<button type="button" onclick="addDiscount();" data-toggle="tooltip"--}}
+                {{--title="Add Discount" class="btn btn-primary"><i--}}
+                {{--class="fa fa-plus-circle"></i></button>--}}
+                {{--</td>--}}
+                {{--</tr>--}}
+                {{--</tfoot>--}}
+                {{--</table>--}}
+                {{--</div>--}}
+                {{--</div>--}}
                 {{--</div>--}}
                 <div class="col-md-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default media_panel">
                         <div class="panel-heading">
-                            Media Tab
+                            <div class="pull-left">
+                                Media Tab
+                            </div>
+                            <div class="pull-right">
+                                <a href="#modal_add_media" class="btn btn-primary" role="button" data-toggle="modal"><i
+                                            class="fa fa-plus"></i>Add Media</a>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
-                        <div class="panel-body min-300"></div>
+                        <div class="panel-body min-300 ">
+                            <div class="row">
+                                <div class="col-sm-3 col-xs-12">
+                                    <div class="media-item">
+                                        <div class="box">
+                                            <span class="del-item"><i class="fa fa-times"></i></span>
+                                        </div>
+                                        <div class="title">
+                                            Media Name
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -559,6 +579,26 @@
                 </div>
                 <div class="modal-body">
                     motal text
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal HTML -->
+    <div id="modal_add_media" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add Media</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-warning">
+                        <small>Modal body</small>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info">Save</button>
                 </div>
             </div>
         </div>
