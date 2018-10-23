@@ -13,10 +13,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\Translations\CouriersTranslations::class, function (Faker $faker) {
+$factory->define(App\Models\TaxRates::class, function (Faker $faker) {
     return [
-        'name' => $faker->name(),
-        'description' => $faker->text(),
-        'locale' => 'gb',
+        'icon' => '',
+        'amount' => 0,
+        'type' => 'fixed',
     ];
 });

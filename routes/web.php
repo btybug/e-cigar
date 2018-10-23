@@ -24,15 +24,21 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::group(['prefix' => 'blog'], function () {
+Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'Frontend\BlogController@index')->name('blog');
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
 
 Route::group(['prefix' => 'products'], function () {
     Route::get('/', 'Frontend\ProductsController@index')->name('products');
-    Route::get('/{p_id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+  //  Route::get('/{p_id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+    Route::get('/vape','Frontend\ProductsController@getVape')->name('product_vape');
+    Route::get('/juice','Frontend\ProductsController@getJuice')->name('product_juice');
 });
+Route::get('/sales','Frontend\CommonController@getSales')->name('product_sales');
+Route::get('/forum','Frontend\CommonController@getForum')->name('forum');
+Route::get('/support','Frontend\CommonController@getSupport')->name('product_support');
+Route::get('/contact-us','Frontend\CommonController@getContactUs')->name('product_contact_us');
 
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShopController@index')->name('shop');

@@ -158,20 +158,26 @@
                         <div class="collapse navbar-collapse" id="navbar_collapse_1">
 
                             <ul class="navbar-nav">
-                                <li class="nav-item first"><a href="http://laravelcommerce.com" class="nav-link"><i class="fa fa-home"></i></a></li>
-                                <li class="nav-item dropdown open">
-                                    <a class="nav-link dropdown-toggle" href="">Home Pages</a>
-                                    <ul class="dropdown-menu" aria-expanded="false">
-                                        <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=one">Home Page 1</a> </li>
-                                        <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=two">Home Page 2</a> </li>
-                                        <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=three">Home Page 3</a> </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('products') !!}">Products</a> </li>
-                                <li class="nav-item dropdown open">
-                                    <a class="nav-link" href="{!! route('blog') !!}">Blog</a>
-                                </li>
-                                <li class="nav-item last"><a class="nav-link"><span>Hotline</span>(+92 312 1234567)</a></li>
+                                <li class="nav-item first"><a href="{!! url('/') !!}" class="nav-link"><i class="fa fa-home"></i></a></li>
+                                {{--<li class="nav-item dropdown open">--}}
+                                    {{--<a class="nav-link dropdown-toggle" href="">Home Pages</a>--}}
+                                    {{--<ul class="dropdown-menu" aria-expanded="false">--}}
+                                        {{--<li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=one">Home Page 1</a> </li>--}}
+                                        {{--<li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=two">Home Page 2</a> </li>--}}
+                                        {{--<li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=three">Home Page 3</a> </li>--}}
+                                    {{--</ul>--}}
+                                {{--</li>--}}
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_vape') !!}">Vape</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_juice') !!}">Juice</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_sales') !!}">Sales</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('blog') !!}">News</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('forum') !!}">Forums</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_support') !!}">Support</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_contact_us') !!}">Contact Us</a> </li>
+                                {{--<li class="nav-item dropdown open">--}}
+                                    {{--<a class="nav-link" href="{!! route('blog') !!}">Blog</a>--}}
+                                {{--</li>--}}
+                                {{--<li class="nav-item last"><a class="nav-link"><span>Hotline</span>(+92 312 1234567)</a></li>--}}
                             </ul>
                         </div>
                     </nav>

@@ -13,9 +13,9 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\Models\Translations\CouriersTranslations::class, function (Faker $faker) {
+$factory->define(App\Models\Translations\TaxRateTranslation::class, function (Faker $faker) {
     return [
-        'name' => $faker->name(),
+        'name' => $faker->slug(),
         'description' => $faker->text(),
         'locale' => 'gb',
     ];

@@ -23,4 +23,14 @@ class ProductsController extends Controller
         if(! $post) abort(404);
         return $this->view('single',compact('post'));
     }
+
+    public function getVape()
+    {
+        return $this->view('juice');
+    }
+
+    public function getJuice()
+    {
+        return $this->view('vapes');
+    }
 }
