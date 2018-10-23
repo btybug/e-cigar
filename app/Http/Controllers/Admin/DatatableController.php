@@ -122,6 +122,9 @@ class DatatableController extends Controller
             })->editColumn('image',function ($product) {
                 return ($product->image) ? "<img src='$product->image' width='100px'/>" : "No image";
             })
+            ->editColumn('user_id',function ($product) {
+                return $product->author->name;
+            })
             ->addColumn('actions', function ($product) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $product->id . '">Delete</a>
                     <a href="'.route("admin_store_products_edit",$product->id).'" class="btn btn-warning">Edit</a>';
