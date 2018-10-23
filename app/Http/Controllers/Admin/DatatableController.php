@@ -119,11 +119,13 @@ class DatatableController extends Controller
         return Datatables::of(Products::query())
             ->editColumn('created_at',function ($product) {
                 return BBgetDateFormat($product->created_at);
+            })->editColumn('image',function ($product) {
+                return ($product->image) ? "<img src='$product->image' width='100px'/>" : "No image";
             })
             ->addColumn('actions', function ($product) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $product->id . '">Delete</a>
                     <a href="'.route("admin_store_products_edit",$product->id).'" class="btn btn-warning">Edit</a>';
-            })->rawColumns(['actions','image','icon','created_at'])
+            })->rawColumns(['actions','image','created_at'])
             ->make(true);
     }
 

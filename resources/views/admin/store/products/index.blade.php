@@ -20,7 +20,9 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
+                    <th>Image</th>
                     <th>Author</th>
+                    <th>Type</th>
                     <th>Short Description</th>
                     <th>Status</th>
                     <th>Added/Last Modified Date</th>
@@ -42,7 +44,9 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
+                    {data: 'image', name: 'image'},
                     {data: 'user_id', name: 'user_id'},
+                    {data: 'type', name: 'type'},
                     {data: 'short_description', name: 'short_description'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
