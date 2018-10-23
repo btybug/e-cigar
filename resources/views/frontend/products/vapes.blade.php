@@ -1,5 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
+    {!! Form::open(['method'=>'GET']) !!}
+
     <div class="container vapes_page">
         <div class="row">
             <div class="col-md-3">
@@ -15,8 +17,8 @@
                                 Price
                             </div>
                             <div class="card-body">
-                                <div 
-                                     class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                <div
+                                        class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"><span
                                                 class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                     </div>
@@ -399,14 +401,17 @@
                             </div>
                             <div class="form-group col-12 col-md-4 center">
                                 <label class="col-sm-12 col-lg-4 col-form-label">Sort</label>
-                                <select class="col-sm-12 col-lg-6 form-control sortbynews" name="orderBy">
-                                    <option value="" disabled selected>Order by</option>
-                                    <option value="'id', 'asc'">Id (Asc)</option>
-                                    <option value="'id', 'desc'">Id (Desc)</option>
-                                    <option value="'name', 'asc'">Name (A - Z)</option>
-                                    <option value="'name', 'desc'">Name (Z - A)</option>
-                                    <option value="'updated_at', 'asc'">Date (Asc)</option>
-                                    <option value="'updated_at', 'desc'">Date (Desc)</option>
+                                <select class="col-sm-12 col-lg-6 form-control sortbynews" name="orderBy" selected="">
+                                    <option value="" @if($orderBy==null)selected @endif  disabled>Order by</option>
+                                    <option value="id,asc" @if($orderBy=="id,asc")selected @endif>Asc</option>
+                                    <option value="id,desc" @if($orderBy=="id,desc")selected @endif>Desc</option>
+                                    <option value="title,asc" @if($orderBy=="title,asc")selected @endif>A - Z</option>
+                                    <option value="title,desc" @if($orderBy=="title,desc")selected @endif>Z - A</option>
+                                    <option value="updated_at,asc" @if($orderBy=="updated_at,asc")selected @endif>Date
+                                        (Asc)
+                                    </option>
+                                    <option value="updated_at,desc" @if($orderBy=="updated_at,desc")selected @endif>Date
+                                        (Desc)</option>
                                 </select>
                             </div>
                             <div class="form-group col-12 col-md-4">
@@ -422,56 +427,67 @@
                     </div>
                     <div class="products products-3x" id="listing-products">
                         @foreach($products as $product)
-                        <div class="product">
-                            <article>
-                                <div class="thumb"><img class="img-fluid"
-                                                        src="{!! url($product->image) !!}"
-                                                        alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
-                                <div class="block-panel mt-4">
-                                    <h2 class="title">{!! $product->title !!}</h2>
-                                    <div class="description">
-                                        <p class="read-more"></p>
-                                    </div>
-                                    <div class="block-inner">
-                                        <div class="price">
-                                            ${!! rand(10,99) !!}
+                            <div class="product">
+                                <article>
+                                    <div class="thumb"><img class="img-fluid"
+                                                            src="{!! url($product->image) !!}"
+                                                            alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
+                                    <div class="block-panel mt-4">
+                                        <h2 class="title">{!! $product->title !!}</h2>
+                                        <div class="description">
+                                            <p class="read-more"></p>
                                         </div>
+                                        <div class="block-inner">
+                                            <div class="price">
+                                                ${!! rand(10,99) !!}
+                                            </div>
 
-                                        {{--<div class="buttons">--}}
-                                        {{--<button type="button" class="btn btn-secondary btn-round cart" products_id="1">Add to Cart</button>--}}
-                                        {{--</div>--}}
+                                            {{--<div class="buttons">--}}
+                                            {{--<button type="button" class="btn btn-secondary btn-round cart" products_id="1">Add to Cart</button>--}}
+                                            {{--</div>--}}
+                                        </div>
                                     </div>
-                                </div>
 
 
-                                <div class="product-hover">
-                                    <div class="icons">
-                                        <div class="icon-liked">
+                                    <div class="product-hover">
+                                        <div class="icons">
+                                            <div class="icon-liked">
                                             <span products_id='1' class="fa  fa-heart-o  is_liked"><span
                                                         class="badge badge-secondary">13</span></span>
+                                            </div>
+                                            <a href="http://demo.laravelcommerce.com/product-detail/classic-fit-soft-touch-polo"
+                                               class="fa fa-eye"></a>
                                         </div>
-                                        <a href="http://demo.laravelcommerce.com/product-detail/classic-fit-soft-touch-polo"
-                                           class="fa fa-eye"></a>
-                                    </div>
 
-                                    <div class="buttons">
+                                        <div class="buttons">
 
-                                        <button type="button" class="btn btn-block btn-secondary cart" products_id="1">
-                                            Add to Cart
-                                        </button>
+                                            <button type="button" class="btn btn-block btn-secondary cart"
+                                                    products_id="1">
+                                                Add to Cart
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        </div>
-                            @endforeach
+                                </article>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="clearfix"></div>
-        <div class="pagin mt-3">
-            {!! $products->links() !!}
-        </div>
+                <div class="pagin mt-3">
+                    {!! $products->links() !!}
+                </div>
             </div>
         </div>
     </div>
+    {!! Form::close() !!}
 
+@stop
+@section('js')
+    <script>
+        $(function () {
+            $('form select').on('change', function () {
+                $('form').submit();
+            })
+        })
+    </script>
 @stop
