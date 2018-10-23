@@ -15,6 +15,7 @@ use App\Http\Requests\ShippingZonePost;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\Coupons;
+use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
 use Carbon\Carbon;
@@ -34,7 +35,7 @@ class StoreController extends Controller
 
     public function newProduct()
     {
-        $model = new Category();
+        $model = new Products();
         return $this->view('new',compact('model'));
     }
 

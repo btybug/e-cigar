@@ -15,7 +15,7 @@
 @stop
 @section('content')
     <div class="tab-content tabs_content">
-        {!! Form::open(['url' => route('admin_store_new_product'), 'id' => 'post_form','files' => true]) !!}
+        {!! Form::model($model,['url' => route('admin_store_new_product'), 'id' => 'post_form','files' => true]) !!}
         {!! Form::hidden('id',null) !!}
         <div id="home" class="tab-pane tab_info fade in active">
             <div class="text-right btn-save pull-right">
@@ -75,7 +75,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3">Featured image</label>
                                         <div class="col-sm-9">
-                                            {{--{!! media_button('image') !!}--}}
+                                            {!! media_button('image',$model) !!}
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -111,6 +111,15 @@
                                 <div class="col-sm-9">
                                     {!! Form::select('status',['published' => 'Published','draft' => 'Draft','pending' => 'Pending'],null,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-wall wall">
+                            <div class="row">
+                                {{Form::label('type', 'Type',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    {!! Form::select('type',['vape' => 'Vape','juice' => 'Juice'],null,
+                                                ['class' => 'form-control','id'=> 'type']) !!}
                                 </div>
                             </div>
                         </div>
