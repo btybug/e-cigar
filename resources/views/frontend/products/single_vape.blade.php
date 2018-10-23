@@ -4,7 +4,7 @@
         <div class="row mb-5">
             <div class="col-md-4">
                 <a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">
-                    <img width="100%" src="http://ukprintplus.co.uk/wp-content/uploads/2015/08/2-side-appointment-400-400x300.jpg" class="attachment-single-product-thumb wp-post-image" alt="">
+                    <img width="100%" src="{!! url($vape->image) !!}" class="attachment-single-product-thumb wp-post-image" alt="">
                 </a>
                 <ul class="single-product_btns pl-0 mb-0 d-md-flex justify-content-md-between">
                     <li><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
