@@ -13091,6 +13091,18 @@ a.text-dark:focus, a.text-dark:hover {
 /*End Page single product*/
 
 /*vape pages*/
+.media-slider {
+    position:relative;
+    margin:0 auto;
+    top:0;
+    left:0;
+    width:980px;
+    height:600px;
+    overflow:hidden;
+    visibility:hidden;
+}
+
+
 .media-slider [data-u="image"],
 .media-slider [data-u="image"] iframe {
     z-index:99 !important;
@@ -13115,4 +13127,5 @@ a.text-dark:focus, a.text-dark:hover {
 .tab-content--features_right {
     border: 2px solid #ddd;
 }
+
 /*End vape pages*/
