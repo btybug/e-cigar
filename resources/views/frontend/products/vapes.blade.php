@@ -4,16 +4,18 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="filters">
-                    <div class="card">
+                    <div class="">
                         <!--id="headingOne"-->
-                        <div class="card-header">
+                        <div class="bg-secondary p-2 text-white">
                             <h2 class="title">
                                 Filters </h2>
                         </div>
-                        <div class="block">
-                            <div class="card-title">Price</div>
+                        <div class="card mt-2">
+                            <div class="card-header">
+                                Price
+                            </div>
                             <div class="card-body">
-                                <div id="slider-range"
+                                <div 
                                      class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
                                     <div class="ui-slider-range ui-corner-all ui-widget-header"><span
                                                 class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -24,12 +26,15 @@
                                         <div class="slider-value-1">$<input type="text" readonly="" id="max_price_show">
                                         </div>
                                     </div>
+                                    <div class="clearfix"></div>
                                 </div>
                             </div>
                         </div>
-                        <div class="block">
-                            <div class="card-title ">Colors</div>
-                            <div class="card-body">
+                        <div class="card mt-2">
+                            <div class="card-header">
+                                Colors
+                            </div>
+                            <div class="card-body ">
                                 <ul class="list">
                                     <li>
                                         <div class="form-check">
@@ -133,8 +138,10 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="block">
-                            <div class="card-title ">Size</div>
+                        <div class="card mt-2">
+                            <div class="card-header">
+                                Size
+                            </div>
                             <div class="card-body">
                                 <ul class="list">
                                     <li>
@@ -365,111 +372,6 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="block">
-                            <div class="card-title ">Waist</div>
-                            <div class="card-body">
-                                <ul class="list">
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="28W">
-                                                28W
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="30W">
-                                                30W
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="32W">
-                                                32W
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="34W">
-                                                34W
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="36W">
-                                                36W
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="38W">
-                                                38W
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Waist[]"
-                                                       type="checkbox" value="40W">
-                                                40W
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="block">
-                            <div class="card-title  last ">Length</div>
-                            <div class="card-body">
-                                <ul class="list">
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Length[]"
-                                                       type="checkbox" value="30L">
-                                                30L
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Length[]"
-                                                       type="checkbox" value="32L">
-                                                32L
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Length[]"
-                                                       type="checkbox" value="34L">
-                                                34L
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
                         <div class="alret alert-danger" id="filter_required">
                         </div>
 
@@ -497,11 +399,14 @@
                             </div>
                             <div class="form-group col-12 col-md-4 center">
                                 <label class="col-sm-12 col-lg-4 col-form-label">Sort</label>
-                                <select class="col-sm-12 col-lg-6 form-control sortbynews" name="type">
-                                    <option value="desc" selected="">Newest</option>
-                                    <option value="asc">Oldest</option>
-                                    <option value="atoz">A - Z</option>
-                                    <option value="ztoa">Z - A</option>
+                                <select class="col-sm-12 col-lg-6 form-control sortbynews" name="orderBy">
+                                    <option value="" disabled selected>Order by</option>
+                                    <option value="'id', 'asc'">Id (Asc)</option>
+                                    <option value="'id', 'desc'">Id (Desc)</option>
+                                    <option value="'name', 'asc'">Name (A - Z)</option>
+                                    <option value="'name', 'desc'">Name (Z - A)</option>
+                                    <option value="'updated_at', 'asc'">Date (Asc)</option>
+                                    <option value="'updated_at', 'desc'">Date (Desc)</option>
                                 </select>
                             </div>
                             <div class="form-group col-12 col-md-4">
