@@ -523,8 +523,6 @@
                                                         src="{!! url($product->image) !!}"
                                                         alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
                                 <div class="block-panel mt-4">
-                                                <span class="tag text-center ">
-                                                    Men's Clothing                                                </span>
                                     <h2 class="title">{!! $product->title !!}</h2>
                                     <div class="description">
                                         <p class="read-more"></p>
