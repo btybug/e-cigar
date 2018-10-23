@@ -13089,3 +13089,30 @@ a.text-dark:focus, a.text-dark:hover {
     font-size: 29px;
 }
 /*End Page single product*/
+
+/*vape pages*/
+.media-slider [data-u="image"],
+.media-slider [data-u="image"] iframe {
+    z-index:99 !important;
+}
+
+.media-slider_arrow {
+    z-index: 999 !important;
+}
+
+.tab-content--features .tab-pane{
+    padding: 60px;
+}
+
+.tab-content--features_left {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 300px;
+    overflow: hidden;
+}
+
+.tab-content--features_right {
+    border: 2px solid #ddd;
+}
+/*End vape pages*/
