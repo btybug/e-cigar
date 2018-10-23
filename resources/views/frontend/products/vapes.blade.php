@@ -12,370 +12,47 @@
                             <h2 class="title">
                                 Filters </h2>
                         </div>
-                        <div class="card mt-2">
-                            <div class="card-header">
-                                Price
-                            </div>
-                            <div class="card-body">
-                                <div
-                                        class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                                    <div class="ui-slider-range ui-corner-all ui-widget-header"><span
-                                                class="ui-slider-handle ui-corner-all ui-state-default"></span>
-                                    </div>
-                                    <div id="slider-values">
-                                        <div class="slider-value-0">$<input type="text" readonly="" id="min_price_show">
-                                        </div>
-                                        <div class="slider-value-1">$<input type="text" readonly="" id="max_price_show">
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
+                        @foreach($attributes as $attribute)
+                            <div class="card mt-2">
+                                <div class="card-header">
+                                    {!! $attribute->name !!}
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list">
+                                        @if($attribute->display_as=='select')
+                                            <li>
+                                                <div class="form-check">
+                                                    <label class="form-check-label"> </label>
+                                                    {!! Form::select($attribute->name,$attribute->children->pluck('name','id'),null,['class'=>'filters_box form-control']) !!}
+                                                    {{--<input class="form-check-input filters_box" name="Size[]"--}}
+                                                    {{--type="checkbox" value="Small">--}}
+                                                </div>
+                                            </li>
+                                        @elseif ($attribute->display_as=='checkbox')
+                                            <li>
+                                                    @foreach($attribute->children as $option)
+                                                <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            {!! Form::checkbox($attribute->name.'[]',$option->name,null,['class'=>'form-check-input filters_box']) !!}
+                                                            {!! $option->name !!} </label>
+                                                </div>
+                                                        @endforeach
+                                            </li>
+                                            @elseif($attribute->display_as=='radio')
+                                            <li>
+                                                    @foreach($attribute->children as $option)
+                                                <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            {!! Form::radio($attribute->name,$option->name,null,['class'=>'form-check-input filters_box']) !!}
+                                                            {!! $option->name !!} </label>
+                                                </div>
+                                                    @endforeach
+                                            </li>
+                                        @endif
+                                    </ul>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card mt-2">
-                            <div class="card-header">
-                                Colors
-                            </div>
-                            <div class="card-body ">
-                                <ul class="list">
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Brown" checked="">
-                                                Brown
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Cream" checked="">
-                                                Cream
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Blue">
-                                                Blue
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Multi">
-                                                Multi
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Black">
-                                                Black
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Grey">
-                                                Grey
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="White">
-                                                White
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Purple">
-                                                Purple
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Navy">
-                                                Navy
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Hollywood Cream">
-                                                Hollywood Cream
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Colors[]"
-                                                       type="checkbox" value="Vintage Silver">
-                                                Vintage Silver
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card mt-2">
-                            <div class="card-header">
-                                Size
-                            </div>
-                            <div class="card-body">
-                                <ul class="list">
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="Small">
-                                                Small
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="Medium">
-                                                Medium
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="Large">
-                                                Large
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="Extra Large">
-                                                Extra Large
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="7D">
-                                                7D
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="8D">
-                                                8D
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="8.5D">
-                                                8.5D
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="9D">
-                                                9D
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="24">
-                                                24
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="25">
-                                                25
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="26">
-                                                26
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="27">
-                                                27
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="28">
-                                                28
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="29">
-                                                29
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="30">
-                                                30
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="New Born">
-                                                New Born
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="3 Mos">
-                                                3 Mos
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="6 Mos">
-                                                6 Mos
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="9 Mos">
-                                                9 Mos
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="King">
-                                                King
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="Full">
-                                                Full
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="15&quot;x20&quot;">
-                                                15"x20"
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="22&quot;x22&quot;">
-                                                22"x22"
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="3T">
-                                                3T
-                                            </label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="form-check-input filters_box" name="Size[]"
-                                                       type="checkbox" value="4T">
-                                                4T
-                                            </label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="alret alert-danger" id="filter_required">
-                        </div>
+                        @endforeach
 
                         <div class="button">
                             <a href="#" class="btn btn-dark" id="apply_options"> Reset </a>
@@ -411,7 +88,8 @@
                                         (Asc)
                                     </option>
                                     <option value="updated_at,desc" @if($orderBy=="updated_at,desc")selected @endif>Date
-                                        (Desc)</option>
+                                        (Desc)
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group col-12 col-md-4">

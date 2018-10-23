@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attributes;
 use App\Models\Posts;
 use App\Models\Products;
 use View;
@@ -32,7 +33,8 @@ class ProductsController extends Controller
             ->where('status', 'published')
             ->select('products.*', 'products_translations.title', 'products_translations.title')
             ->orderBy($column, $direction)->paginate(5);
-        return $this->view('vapes', compact('products','orderBy'));
+        $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
+        return $this->view('vapes', compact('products','orderBy','attributes'));
     }
 
     public function singleVape($id)
