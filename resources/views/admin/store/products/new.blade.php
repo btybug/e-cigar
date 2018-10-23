@@ -176,7 +176,6 @@
                                     <td class="text-left">Customer Group</td>
                                     <td class="text-right">Quantity</td>
                                     <td class="text-right">Priority</td>
-                                    <td class="text-right">Price</td>
                                     <td class="text-left">Date Start</td>
                                     <td class="text-left">Date End</td>
                                     <td></td>
@@ -196,9 +195,6 @@
                                                                   name="product_discount[0][priority]" value="1"
                                                                   placeholder="Priority" class="form-control"/>
                                     </td>
-                                    <td class="text-right"><input type="text" name="product_discount[0][price]"
-                                                                  value="88.0000" placeholder="Price"
-                                                                  class="form-control"/></td>
                                     <td class="text-left" style="width: 20%;">
                                         <div class="input-group ">
                                             <input type="text" name="product_discount[0][date_start]" value=""
@@ -217,7 +213,7 @@
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
                                     </td>
-                                    <td class="text-left">
+                                    <td class="text-center">
                                         <button type="button" onclick="$('#discount-row0').remove();"
                                                 data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
                                                     class="fa fa-minus-circle"></i></button>
@@ -236,9 +232,6 @@
                                                                   name="product_discount[1][priority]" value="1"
                                                                   placeholder="Priority" class="form-control"/>
                                     </td>
-                                    <td class="text-right"><input type="text" name="product_discount[1][price]"
-                                                                  value="77.0000" placeholder="Price"
-                                                                  class="form-control"/></td>
                                     <td class="text-left" style="width: 20%;">
                                         <div class="input-group ">
                                             <input type="text" name="product_discount[1][date_start]" value=""
@@ -257,7 +250,7 @@
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
                                     </td>
-                                    <td class="text-left">
+                                    <td class="text-center">
                                         <button type="button" onclick="$('#discount-row1').remove();"
                                                 data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
                                                     class="fa fa-minus-circle"></i></button>
@@ -276,9 +269,6 @@
                                                                   name="product_discount[2][priority]" value="1"
                                                                   placeholder="Priority" class="form-control"/>
                                     </td>
-                                    <td class="text-right"><input type="text" name="product_discount[2][price]"
-                                                                  value="66.0000" placeholder="Price"
-                                                                  class="form-control"/></td>
                                     <td class="text-left" style="width: 20%;">
                                         <div class="input-group ">
                                             <input type="text" name="product_discount[2][date_start]" value=""
@@ -297,7 +287,7 @@
 <button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
 </span></div>
                                     </td>
-                                    <td class="text-left">
+                                    <td class="text-center">
                                         <button type="button" onclick="$('#discount-row2').remove();"
                                                 data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
                                                     class="fa fa-minus-circle"></i></button>
@@ -306,8 +296,8 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="6"></td>
-                                    <td class="text-left">
+                                    <td colspan="5"></td>
+                                    <td class="text-center">
                                         <button type="button" onclick="addDiscount();" data-toggle="tooltip"
                                                 title="Add Discount" class="btn btn-primary"><i
                                                     class="fa fa-plus-circle"></i></button>
@@ -318,7 +308,14 @@
                         </div>
                     </div>
                 </div>
-
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+Media Tab
+        </div>
+        <div class="panel-body min-300"></div>
+    </div>
+</div>
             </div>
         </div>
         <div id="menu2" class="tab-pane fade">

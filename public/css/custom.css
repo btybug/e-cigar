@@ -674,3 +674,6 @@ display: flex;
 .tabs_content .tab_info .bestbetter-modal{
     padding:0;
 }
+.min-300{
+    min-height:300px;
+}
