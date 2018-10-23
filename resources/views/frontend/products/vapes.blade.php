@@ -516,21 +516,22 @@
                         </div>
                     </div>
                     <div class="products products-3x" id="listing-products">
+                        @foreach($products as $product)
                         <div class="product">
                             <article>
                                 <div class="thumb"><img class="img-fluid"
-                                                        src="http://demo.laravelcommerce.com/resources/assets/images/product_images/1502174889.pPOLO2-26314766_standard_v400.jpg"
+                                                        src="{!! url($product->image) !!}"
                                                         alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
                                 <div class="block-panel mt-4">
                                                 <span class="tag text-center ">
                                                     Men's Clothing                                                </span>
-                                    <h2 class="title">CLASSIC FIT SOFT-TOUCH POLO</h2>
+                                    <h2 class="title">{!! $product->title !!}</h2>
                                     <div class="description">
                                         <p class="read-more"></p>
                                     </div>
                                     <div class="block-inner">
                                         <div class="price">
-                                            $85
+                                            ${!! rand(10,99) !!}
                                         </div>
 
                                         {{--<div class="buttons">--}}
@@ -559,24 +560,14 @@
                                 </div>
                             </article>
                         </div>
+                            @endforeach
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="clearfix"></div>
         <div class="pagin mt-3">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+            {!! $products->links() !!}
+        </div>
+            </div>
         </div>
     </div>
 
