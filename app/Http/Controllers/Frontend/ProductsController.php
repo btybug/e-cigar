@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
+use App\Models\Products;
 use View;
 use Illuminate\Http\Request;
 
@@ -26,8 +27,15 @@ class ProductsController extends Controller
 
     public function getVape()
     {
-        
-        return $this->view('vapes');
+        $products=Products::where('type','vape')->where('status','published')->orderBy('id','DESC')->get();
+        dd($products);
+        return $this->view('vapes',compact('products'));
+    }
+
+    public function singleVape($id)
+    {
+//        $vape=Products::
+        return $this->view('single_vape');
     }
 
     public function getJuice()
