@@ -150,8 +150,38 @@
                 @endif
 
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">3</div>
-            <div class="tab-pane fade" id="technical" role="tabpanel" aria-labelledby="technical-tab">4</div>
+            <div class="tab-pane fade" id="technical" role="tabpanel" aria-labelledby="technical-tab">
+                <div class="row">
+                    <table class="table-responsive table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Attributes</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if(count($vape->attrs))
+                            @foreach($vape->attrs as $attr)
+                                <tr>
+                                    <td>{!! $attr->name !!}</td>
+                                    <td>
+                                        @if(count($attr->children))
+                                            @foreach($attr->children as $option)
+                                                <span class="badge badge-primary">{!! $option->name !!}</span>
+                                            @endforeach
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr colspan="2">
+                                <td>No Attributes</td>
+                            </tr>
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="tab-pane fade" id="extra" role="tabpanel" aria-labelledby="extra-tab">5</div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">6</div>
         </div>
