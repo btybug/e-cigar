@@ -13000,6 +13000,21 @@ a.text-dark:focus, a.text-dark:hover {
 }
 /*End Vertical tabs my account*/
 
+.view-fav-item {
+    background: #fff;
+}
+
+.view-fav-item_img-outer {
+    width: 146px;
+    max-height: 146px;
+    overflow: hidden;
+}
+
+.view-fav-item_btn-dlt {
+    
+    padding: 0.2rem 0.5rem;
+}
+
 /*page order*/
 .order-table th, .order-table td {
     text-align: center;
@@ -13139,3 +13154,4 @@ a.text-dark:focus, a.text-dark:hover {
 }
 
 /*End vape pages*/
+
