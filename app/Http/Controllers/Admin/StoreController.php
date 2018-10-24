@@ -87,11 +87,7 @@ class StoreController extends Controller
     }
 
 
-    public function getShippingZones()
-    {
-        $zones = ShippingZones::all();
-        return $this->view('shipping_zones',compact('zones'));
-    }
+
 
     public function getTaxRate()
     {
@@ -154,16 +150,6 @@ class StoreController extends Controller
         return $this->view('coupons_new');
     }
 
-
-
-
-
-    public function getregions(Countries $countries)
-    {
-        dd($countries);
-        return $this->view('new_shipping_zone',compact('countries'));
-    }
-
     public function findRegion(Request $request)
     {
         $coontries = new Countries();
@@ -177,11 +163,6 @@ class StoreController extends Controller
             }
         }
        return \Response::json(['error'=>false,'data'=>$posible]);
-    }
-
-    public function getDatatable(Request $request)
-    {
-
     }
 
 
