@@ -57,6 +57,7 @@ class ProductsController extends Controller
         $stock = Stock::with("attrs","variations")->where('id',$request->stock_id)->first();
 
         if($stock){
+            $attrs = $stock->attrs()->with('children')->where('attributes.parent_id', null)->get();
             $translations = $stock->getTranslationsArray();
             $stockArray = $stock->toArray();
             $stockArray['id'] = $request->id;
@@ -65,7 +66,7 @@ class ProductsController extends Controller
             $stocks = Stock::get()->pluck('name','id')->toArray();
             $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
                 ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
-            $html = \View("admin.store.products.form",compact(['model','stocks','authors']))->render();
+            $html = \View("admin.store.products.form",compact(['model','stocks','authors','attrs']))->render();
 
             return \Response::json(['error' => false,'html'=>$html]);
         }
