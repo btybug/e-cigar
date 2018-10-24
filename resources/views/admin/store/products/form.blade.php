@@ -54,6 +54,13 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="sku" class="control-label col-sm-4">SKU</label>
+                            <div class="col-sm-8">
+                                <div id="stock-sku">{{ (is_array($model)) ? @$model['sku'] : @$model->sku }}</div>
+                                {!! Form::hidden('sku',null,['id' => 'sku']) !!}
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="form-group row">
                                 <label class="col-sm-3">Featured image</label>
@@ -163,7 +170,7 @@
         </div>
     </div>
 </div>
-<div id="price" class="tab-pane price_tab_stre_page fade">
+<div id="tabs_data" class="tab-pane price_tab_stre_page fade">
     <div class="text-right btn-save">
         <button type="submit" class="btn btn-info">Save</button>
     </div>
@@ -336,63 +343,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-<div id="menu2" class="tab-pane fade">
-    <div class="text-right btn-save">
-        <button type="submit" class="btn btn-info">Save</button>
-    </div>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <label class="col-sm-3">Tax& shippings</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Tax& shippings">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
-</div>
-<div id="menu3" class="tab-pane fade">
-    <div class="text-right btn-save">
-        <button type="submit" class="btn btn-info">Save</button>
-    </div>
-    <div class="row">
-        <div class="col-md-9">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <label class="col-sm-3">Related & Bundles</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" placeholder="Related & Bundles">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="col-md-3">
-
         </div>
     </div>
 </div>

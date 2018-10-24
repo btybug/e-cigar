@@ -5,9 +5,7 @@
         <div class="head">
             <ul class="nav nav-tabs w-100">
                 <li class="active"><a data-toggle="tab" href="#home">Info</a></li>
-                <li><a data-toggle="tab" href="#price">Price</a></li>
-                <li><a data-toggle="tab" href="#menu2">Tax& shippings</a></li>
-                <li><a data-toggle="tab" href="#menu3">Related & Bundles</a></li>
+                <li><a data-toggle="tab" href="#tabs_data">Tabs Data</a></li>
                 <li><a data-toggle="tab" href="#stocks">Stocks</a></li>
             </ul>
         </div>
