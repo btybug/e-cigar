@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('status')->nullable();
             $table->string('type',20);
             $table->string('image')->nullable();
+            $table->tinyInteger('taxable')->default(0);
 
             $table->string('sku',30)->unique()->nullable();
             $table->text('other_images')->nullable();

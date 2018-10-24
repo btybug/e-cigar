@@ -64,8 +64,8 @@
                         <div class="form-group row">
                             <label for="sku" class="control-label col-sm-4">Taxable</label>
                             <div class="col-sm-8">
-                                Taxable {!! Form::radio('taxable',true,null) !!}
-                                Not taxable {!! Form::radio('taxable',false,true) !!}
+                                Taxable {!! Form::radio('taxable',1,null) !!}
+                                Not taxable {!! Form::radio('taxable',0,true) !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -300,18 +300,6 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div class="row">--}}
-                        {{--<div class="col-sm-3 col-xs-12">--}}
-                            {{--<div class="media-item">--}}
-                                {{--<div class="box">--}}
-                                    {{--<span class="del-item"><i class="fa fa-times"></i></span>--}}
-                                {{--</div>--}}
-                                {{--<div class="title">--}}
-                                    {{--Media Name--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                 </div>
             </div>
         </div>

@@ -40,4 +40,9 @@ class Products extends Translatable
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function attrs()
+    {
+        return $this->belongsToMany(Attributes::class, 'product_attributes', 'product_id', 'attributes_id')->whereNull('attributes.parent_id');
+    }
 }

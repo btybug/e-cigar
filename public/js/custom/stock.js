@@ -64,6 +64,31 @@ function makeSearchItem(basicData) {
     }
 }
 
+$("body").on('change','#stock',function () {
+    var stockId = $(this).val();
+    if(stockId != ''){
+        var form = $(this).closest('form');
+        AjaxCall("/admin/store/apply-stock", form.serialize(), function(res) {
+            if (!res.error) {
+                $(".tabs_content").html(res.html);
+                var elementList = document.querySelectorAll('.main-attr-container');
+                // Iterate through each element in the array
+                for (var i = 0; i < elementList.length; i++) {
+                    var ele = elementList[i];
+                    makeSearchItem({
+                        input: '.attributes-item-input-'+$(ele).data('attr-id'),
+                        name: "name",
+                        url: '/admin/inventory/attributes/get-options-by-id/'+$(ele).data('attr-id'),
+                        title: "Attributes",
+                        inputValues: "#tags-names",
+                        containerForAppend: ".coupon-tags-list"
+                    });
+                }
+            }
+        });
+    }
+});
+
 $("body").on("click", ".get-all-attributes-tab-event", function() {
     let arr = [];
     $(".get-all-attributes-tab")

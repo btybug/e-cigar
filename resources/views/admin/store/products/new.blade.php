@@ -15,45 +15,29 @@
     <div class="tab-content tabs_content">
         @include("admin.store.products.form")
     </div>
-    <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         style="display: none;">
+    <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">×</span></button>
-                    <h4 class="modal-title" id="myModalLabel">modal heading</h4>
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add Options</h4>
                 </div>
                 <div class="modal-body">
-                    motal text
+                    <div class="all-list">
+                        <ul>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal HTML -->
-    <div id="modal_add_media" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Add Media</h4>
-                </div>
-                <div class="modal-body">
-                    <p class="text-warning">
-                        <small>Modal body</small>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @stop
 @section('css')
+    <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
-    {{--<link rel="stylesheet" href="{{asset('public/admin_theme/datetimepicker/bootstrap-datetimepicker.min.css')}}">--}}
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <style>
         .fade.in {
@@ -67,8 +51,10 @@
     </style>
 @stop
 @section('js')
-    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
+    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+
     <script type="text/javascript">
         var discount_row = 3;
 
@@ -94,20 +80,5 @@
             language: 'en-gb',
         });
 
-        $("body").on("click", ".get-all-attributes-tab-event", function () {
-            $("#attributesModal").modal();
-        });
-
-        $("body").on('change','#stock',function () {
-           var stockId = $(this).val();
-            if(stockId != ''){
-                var form = $(this).closest('form');
-                AjaxCall("/admin/store/apply-stock", form.serialize(), function(res) {
-                    if (!res.error) {
-                        $(".tabs_content").html(res.html);
-                    }
-                });
-            }
-        });
     </script>
 @stop
