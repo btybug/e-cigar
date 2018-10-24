@@ -8,5 +8,5 @@ class StockTranslation extends Model
 {
     protected $table = 'stock_translations';
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','short_description','long_description'];
 }

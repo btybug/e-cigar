@@ -21,7 +21,7 @@ class Stock extends Translatable
 
     public $translationModel = StockTranslation::class;
 
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['name','short_description','long_description'];
     /**
      * @var array
      */

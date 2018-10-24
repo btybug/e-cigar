@@ -37,7 +37,7 @@
                                         <div id="{{ strtolower($language->code) }}"
                                              class="tab-pane fade  @if($loop->first) in active @endif">
                                             <div class="form-group">
-                                                <label>Title</label>
+                                                <label>Name</label>
                                                 {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                             </div>
                                             <div class="form-group">

@@ -98,6 +98,24 @@
                                                                         {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                     </div>
                                                                 </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label"><span
+                                                                                data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="Short Description">Short Description</span></label>
+                                                                    <div class="col-sm-10">
+                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label"><span
+                                                                                data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="Short Description">Long Description</span></label>
+                                                                    <div class="col-sm-10">
+                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         @endforeach
                                                     @endif
