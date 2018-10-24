@@ -139,7 +139,7 @@ $("body").on("click", ".open-btn", function(e) {
 
     if (multiple) {
         let realInput = $(`.${id}`);
-        let name = realInput.attr("name");
+        let name = realInput.attr("data-name");
         let parrent = realInput.parent();
         globalArr.forEach(item => {
             parrent.append(

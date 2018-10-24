@@ -30,6 +30,7 @@ class Stock extends Translatable
     protected $casts = [
       'other_images' => 'json',
       'videos' => 'json',
+      'posters' => 'json',
     ];
 
     const TYPES = [

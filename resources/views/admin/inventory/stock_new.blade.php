@@ -51,7 +51,6 @@
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li><a data-toggle="tab" href="#media">Media</a></li>
-                    <li><a data-toggle="tab" href="#posters">Posters</a></li>
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
@@ -204,15 +203,21 @@
                                                         </div>
                                                     </div>
                                                     <div class="media-videos-preview" style="display: flex">
-                                                        {{--<div class="video-single-item" style="display: flex"><iframe width="200" height="200"--}}
-                                                        {{--src="https://www.youtube.com/embed/${videoId}">--}}
-                                                        {{--</iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>--}}
+                                                        @if(isset($model->videos) && $model->videos && count($model->videos))
+                                                            @foreach($model->videos as $video)
+                                                                <div class="video-single-item" style="display: flex">
+                                                                    <iframe width="200" height="200" src="https://www.youtube.com/embed/{{ $video }}">
+                                                                    </iframe><div><button class="btn btn-danger remove-video-single-item">
+                                                                    <i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="{{ $video }}"> </div>
+                                                            @endforeach
+                                                        @endif
+
                                                     </div>
                                                 </div>
 
                                             </div>
                                             <div id="mediaposters" class="tab-pane fade ">
-                                                {!! media_button('other_images',$model,true) !!}
+                                                {!! media_button('posters',$model,true) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -220,38 +225,6 @@
 
                             </div>
 
-                        </div>
-                    </div>
-                    <div id="posters" class="tab-pane basic-details-tab  fade posters_tab">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="basic-left basic-wall">
-                                        <div class="all-list">
-                                            <ul>
-                                                <li><a  href="#">Poster 1</a></li>
-                                                <li class="active"><a href="#">Poster 2</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="button-add text-center">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-info btn-block"><i
-                                                        class="fa fa-plus"></i>Add Poster</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="basic-center basic-wall">
-                                        Poster Preview
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="basic-right basic-wall">
-                                       Extra data
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">

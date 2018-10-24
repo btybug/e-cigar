@@ -22,6 +22,7 @@ class CreateStocksTable extends Migration
             $table->string('image')->nullable();
             $table->text('other_images')->nullable();
             $table->text('videos')->nullable();
+            $table->text('posters')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
