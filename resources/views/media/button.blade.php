@@ -4,15 +4,20 @@
         @if($multiple)
             @if(isset($model->$name) && is_array($model->$name))
                 <input type="text" data-name="{!! $name !!}[]"
+                       data-count="{{ count(array_filter($model->$name)) }}"
                        value="{!! count(array_filter($model->$name)) !!} selected" placeholder="file count"
                        class="modal-input-path {!! $uniqId !!}" readonly>
                 @foreach($model->$name as $image)
                     @if($image)
                         <input type="hidden" name="{!! $name !!}[]"
                                value="{!! $image !!}" placeholder="file name"
-                               class="modal-input-path multipale-hidden-inputs {!! $uniqId !!}" readonly>
+                               class="modal-input-path multipale-hidden-inputs" readonly>
                     @endif
                 @endforeach
+            @else
+                <input type="text" data-name="{!! $name !!}[]"
+                       value="no selected" placeholder="file count"
+                       class="modal-input-path {!! $uniqId !!}" readonly>
             @endif
         @else
             @if($model && is_array($model))
@@ -31,13 +36,13 @@
         </button>
     </div>
     @if($multiple)
-        <div class="multiple-image-placeholder">
+        <div class="multiple-image-placeholder multiple-image-box-{!! $uniqId !!}">
             @if(isset($model->$name) && is_array($model->$name))
                 @foreach($model->$name as $image)
                     @if($image)
                         <div class="img-thumb-container" style="margin: 10px;">
                             <div class="inner"><img src="{{ $image }}" width=200>
-                                    <span data-src="{{ $image }}" class="remove-thumb-img"
+                                    <span data-src="{{ $image }}" data-id="{!! $uniqId !!}" class="remove-thumb-img"
                                                                                    data-is-multiple="true"><i
                                             class="fa fa-trash"></i> </span></div>
                         </div>

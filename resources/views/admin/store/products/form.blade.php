@@ -75,19 +75,11 @@
                                     {!! media_button('image',$model) !!}
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-3">Gallery images</label>
-                                <div class="col-sm-9">
-                                    {{--{!! media_button('gallery',null,true) !!}--}}
-                                </div>
-                            </div>
                         </div>
                         <div class="col-sm-6">
 
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -182,156 +174,11 @@
         <button type="submit" class="btn btn-info">Save</button>
     </div>
     <div class="row">
-        {{--<div class="col-md-12">--}}
-        {{--<div id="tab-discount">--}}
-        {{--<div class="table-responsive">--}}
-        {{--<table id="discount" class="table table-striped table-bordered table-hover">--}}
-        {{--<thead>--}}
-        {{--<tr>--}}
-        {{--<td class="text-left">Customer Group</td>--}}
-        {{--<td class="text-right">Quantity</td>--}}
-        {{--<td class="text-right">Priority</td>--}}
-        {{--<td class="text-left">Date Start</td>--}}
-        {{--<td class="text-left">Date End</td>--}}
-        {{--<td></td>--}}
-        {{--</tr>--}}
-        {{--</thead>--}}
-        {{--<tbody>--}}
-        {{--<tr id="discount-row0">--}}
-        {{--<td class="text-left"><select name="product_discount[0][customer_group_id]"--}}
-        {{--class="form-control">--}}
-        {{--<option value="1" selected="selected">Default</option>--}}
-        {{--</select></td>--}}
-        {{--<td class="text-right"><input type="text"--}}
-        {{--name="product_discount[0][quantity]"--}}
-        {{--value="10" placeholder="Quantity"--}}
-        {{--class="form-control"/></td>--}}
-        {{--<td class="text-right"><input type="text"--}}
-        {{--name="product_discount[0][priority]" value="1"--}}
-        {{--placeholder="Priority" class="form-control"/>--}}
-        {{--</td>--}}
-        {{--<td class="text-left" style="width: 20%;">--}}
-        {{--<div class="input-group ">--}}
-        {{--<input type="text" name="product_discount[0][date_start]" value=""--}}
-        {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-        {{--class="form-control date"/>--}}
-        {{--<span class="input-group-btn">--}}
-        {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-        {{--</span></div>--}}
-        {{--</td>--}}
-        {{--<td class="text-left" style="width: 20%;">--}}
-        {{--<div class="input-group ">--}}
-        {{--<input type="text" name="product_discount[0][date_end]" value=""--}}
-        {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-        {{--class="form-control date"/>--}}
-        {{--<span class="input-group-btn">--}}
-        {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-        {{--</span></div>--}}
-        {{--</td>--}}
-        {{--<td class="text-center">--}}
-        {{--<button type="button" onclick="$('#discount-row0').remove();"--}}
-        {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
-        {{--class="fa fa-minus-circle"></i></button>--}}
-        {{--</td>--}}
-        {{--</tr>--}}
-        {{--<tr id="discount-row1">--}}
-        {{--<td class="text-left"><select name="product_discount[1][customer_group_id]"--}}
-        {{--class="form-control">--}}
-        {{--<option value="1" selected="selected">Default</option>--}}
-        {{--</select></td>--}}
-        {{--<td class="text-right"><input type="text"--}}
-        {{--name="product_discount[1][quantity]"--}}
-        {{--value="20" placeholder="Quantity"--}}
-        {{--class="form-control"/></td>--}}
-        {{--<td class="text-right"><input type="text"--}}
-        {{--name="product_discount[1][priority]" value="1"--}}
-        {{--placeholder="Priority" class="form-control"/>--}}
-        {{--</td>--}}
-        {{--<td class="text-left" style="width: 20%;">--}}
-        {{--<div class="input-group ">--}}
-        {{--<input type="text" name="product_discount[1][date_start]" value=""--}}
-        {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-        {{--class="form-control date"/>--}}
-        {{--<span class="input-group-btn">--}}
-        {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-        {{--</span></div>--}}
-        {{--</td>--}}
-        {{--<td class="text-left" style="width: 20%;">--}}
-        {{--<div class="input-group ">--}}
-        {{--<input type="text" name="product_discount[1][date_end]" value=""--}}
-        {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-        {{--class="form-control date"/>--}}
-        {{--<span class="input-group-btn">--}}
-        {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-        {{--</span></div>--}}
-        {{--</td>--}}
-        {{--<td class="text-center">--}}
-        {{--<button type="button" onclick="$('#discount-row1').remove();"--}}
-        {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
-        {{--class="fa fa-minus-circle"></i></button>--}}
-        {{--</td>--}}
-        {{--</tr>--}}
-        {{--<tr id="discount-row2">--}}
-        {{--<td class="text-left"><select name="product_discount[2][customer_group_id]"--}}
-        {{--class="form-control">--}}
-        {{--<option value="1" selected="selected">Default</option>--}}
-        {{--</select></td>--}}
-        {{--<td class="text-right"><input type="text"--}}
-        {{--name="product_discount[2][quantity]"--}}
-        {{--value="30" placeholder="Quantity"--}}
-        {{--class="form-control"/></td>--}}
-        {{--<td class="text-right"><input type="text"--}}
-        {{--name="product_discount[2][priority]" value="1"--}}
-        {{--placeholder="Priority" class="form-control"/>--}}
-        {{--</td>--}}
-        {{--<td class="text-left" style="width: 20%;">--}}
-        {{--<div class="input-group ">--}}
-        {{--<input type="text" name="product_discount[2][date_start]" value=""--}}
-        {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-        {{--class="form-control date"/>--}}
-        {{--<span class="input-group-btn">--}}
-        {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-        {{--</span></div>--}}
-        {{--</td>--}}
-        {{--<td class="text-left" style="width: 20%;">--}}
-        {{--<div class="input-group ">--}}
-        {{--<input type="text" name="product_discount[2][date_end]" value=""--}}
-        {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-        {{--class="form-control date"/>--}}
-        {{--<span class="input-group-btn">--}}
-        {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-        {{--</span></div>--}}
-        {{--</td>--}}
-        {{--<td class="text-center">--}}
-        {{--<button type="button" onclick="$('#discount-row2').remove();"--}}
-        {{--data-toggle="tooltip" title="Remove" class="btn btn-danger"><i--}}
-        {{--class="fa fa-minus-circle"></i></button>--}}
-        {{--</td>--}}
-        {{--</tr>--}}
-        {{--</tbody>--}}
-        {{--<tfoot>--}}
-        {{--<tr>--}}
-        {{--<td colspan="5"></td>--}}
-        {{--<td class="text-center">--}}
-        {{--<button type="button" onclick="addDiscount();" data-toggle="tooltip"--}}
-        {{--title="Add Discount" class="btn btn-primary"><i--}}
-        {{--class="fa fa-plus-circle"></i></button>--}}
-        {{--</td>--}}
-        {{--</tr>--}}
-        {{--</tfoot>--}}
-        {{--</table>--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
         <div class="col-md-12">
             <div class="panel panel-default media_panel">
                 <div class="panel-heading">
                     <div class="pull-left">
                         Media Tab
-                    </div>
-                    <div class="pull-right">
-                        <a href="#modal_add_media" class="btn btn-primary" role="button" data-toggle="modal"><i
-                                    class="fa fa-plus"></i>Add Media</a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -345,8 +192,7 @@
                                             <ul class="nav nav-tabs media-list">
                                                 <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
                                                 <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
-                                                <li><a data-toggle="tab" href="#mediaposters">Posters</a>
-                                                </li>
+                                                <li><a data-toggle="tab" href="#mediaposters">Posters</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -355,7 +201,7 @@
                                     <div class="basic-center basic-wall">
                                         <div class="tab-content">
                                             <div id="mediaotherimage" class="tab-pane fade ">
-                                                {!! media_button('other_images',$model,true) !!}
+                                                {!! media_button('other_images',(object)$model,true) !!}
                                             </div>
                                             <div id="mediavideos" class="tab-pane fade in active">
                                                 <div class="media-videos">
@@ -370,15 +216,22 @@
                                                         </div>
                                                     </div>
                                                     <div class="media-videos-preview" style="display: flex">
-                                                        {{--<div class="video-single-item" style="display: flex"><iframe width="200" height="200"--}}
-                                                        {{--src="https://www.youtube.com/embed/${videoId}">--}}
-                                                        {{--</iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>--}}
+                                                        @php
+                                                            $videoModel = (is_object($model))? $model :(object)$model;
+                                                        @endphp
+                                                        @if(isset($videoModel->videos) && $videoModel->videos && count($videoModel->videos))
+                                                            @foreach($videoModel->videos as $video)
+                                                                <div class="video-single-item" style="display: flex">
+                                                                    <iframe width="200" height="200" src="https://www.youtube.com/embed/{{ $video }}">
+                                                                    </iframe><div><button class="btn btn-danger remove-video-single-item">
+                                                                            <i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="{{ $video }}"> </div>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                 </div>
-
                                             </div>
                                             <div id="mediaposters" class="tab-pane fade ">
-                                                {!! media_button('other_images',$model,true) !!}
+                                                {!! media_button('posters',(object)$model,true) !!}
                                             </div>
                                         </div>
                                     </div>

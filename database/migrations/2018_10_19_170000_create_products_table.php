@@ -19,7 +19,13 @@ class CreateProductsTable extends Migration
             $table->integer('stock_id')->unsigned();
             $table->string('status')->nullable();
             $table->string('type',20);
-            $table->text('image')->nullable();
+            $table->string('image')->nullable();
+
+            $table->string('sku',30)->unique()->nullable();
+            $table->text('other_images')->nullable();
+            $table->text('videos')->nullable();
+            $table->text('posters')->nullable();
+
             $table->text('tags')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

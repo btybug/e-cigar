@@ -68,9 +68,8 @@
 @stop
 @section('js')
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-    {{--<script src="{{asset('public/admin_theme/datetimepicker/moment.min.js')}}"></script>--}}
-    {{--<script src="{{asset('public/admin_theme/datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>--}}
-    <script type="text/javascript"><!--
+    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script type="text/javascript">
         var discount_row = 3;
 
         function addDiscount() {

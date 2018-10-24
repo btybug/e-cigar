@@ -145,9 +145,12 @@ $("body").on("click", ".open-btn", function(e) {
             parrent.append(
                 `<input type="hidden" class="multipale-hidden-inputs" name="${name}" value="${item}">`
             );
-            $(".multiple-image-placeholder").append(
+            $(".multiple-image-box-"+`${id}`).append(
                 makePreviewImgThumb(item, multiple)
             );
+            var cn = +realInput.attr('data-count') + 1;
+            realInput.val(cn + ' selected');
+            realInput.attr('data-count',cn);
         });
     } else {
         $(`.${id}`).val(globalArr[0]);
@@ -158,12 +161,20 @@ $("body").on("click", ".open-btn", function(e) {
 
 $("body").on("click", ".remove-thumb-img", function(e) {
     e.preventDefault();
+    var id = $(this).data('id')
+    let realInput = $(`.${id}`);
+
     let src = $(this).attr("data-src");
     $(".multipale-hidden-inputs").each(function() {
         if ($(this).val() === src) {
             $(this).remove();
         }
     });
+
+    var cn = realInput.attr('data-count') - 1;
+    realInput.val(cn + ' selected');
+    realInput.attr('data-count',cn);
+
     $(this)
         .closest(".img-thumb-container")
         .remove();

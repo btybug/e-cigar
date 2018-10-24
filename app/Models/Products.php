@@ -30,6 +30,12 @@ class Products extends Translatable
 
     public $translatedAttributes = ['name', 'short_description', 'long_description'];
 
+    protected $casts = [
+        'other_images' => 'json',
+        'videos' => 'json',
+        'posters' => 'json',
+    ];
+
     public function author ()
     {
         return $this->belongsTo(User::class, 'user_id');
