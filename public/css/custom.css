@@ -592,7 +592,7 @@ display: flex;
     border: 1px solid #ddd;
 }
 
-.stock-page .attributes_tab .get-all-attributes-tab li{
+.attributes_tab .get-all-attributes-tab li{
     padding: 10px;
     background-color: #f7f7f7;
     border-bottom: 1px solid #ccc;
@@ -602,12 +602,12 @@ display: flex;
     transition: 0.5s ease;
     justify-content: space-between;
 }
-.stock-page .attributes_tab .basic-center  .choset-attributes .title-attr{
+.attributes_tab .basic-center  .choset-attributes .title-attr{
 color: white;
     text-decoration: none;
 }
 
-.stock-page .attributes_tab .basic-center .attributes-item{
+.attributes_tab .basic-center .attributes-item{
     margin-right: 5px;
 }
 .stock-page .stock-variations-tab .discount-price{
@@ -623,7 +623,7 @@ display: flex;
 .media-new-tab .media-list li a{
     border: none;
 }
-media-list li.active a{
+.media-list li.active a{
     background-color: #000;
     color: white;
 }

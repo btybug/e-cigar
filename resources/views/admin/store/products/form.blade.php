@@ -388,6 +388,65 @@
 
                         </div>
                     </div>
+                    <div class="basic-details-tab attributes_tab">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list-attributes">
+                                            <ul class="get-all-attributes-tab">
+                                                @if(isset($attrs) && count($attrs))
+                                                    @foreach($attrs as $attribute)
+                                                        <li style="display: flex"
+                                                            data-option-container="{!! $attribute->id !!}"
+                                                            data-id="{!! $attribute->id !!}"
+                                                            class="option-elm-attributes"><a
+                                                                    href="#">{!! $attribute->name !!}</a>
+                                                            <div class="buttons">
+                                                                <a href="javascript:void(0)"
+                                                                   class="btn btn-sm all-option-add-variations btn-success"><i
+                                                                            class="fa fa-money"></i></a>
+                                                                <a href="javascript:void(0)"
+                                                                   class="remove-all-attributes btn btn-sm btn-danger"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                            </div>
+                                                            <input type="hidden" name="attributes[]"
+                                                                   value="{!! $attribute->id !!}">
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="button-add text-center">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-info btn-block get-all-attributes-tab-event"><i
+                                                        class="fa fa-plus"></i>Add new
+                                                option</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="basic-center basic-wall">
+                                        <ul class="choset-attributes">
+                                            @if(isset($attrs) && count($attrs))
+                                                @foreach($attrs as $attribute)
+                                                    <div style="height: 50px" data-attr-id="{{$attribute->id}}"
+                                                         class="attributes-container-{{$attribute->id}} main-attr-container">
+                                                        <input data-id="{{$attribute->id}}"
+                                                               class="attributes-item-input-{{$attribute->id}}"
+                                                               value="{{ implode(',',$attribute->children->pluck('name')->all()) }}">
+                                                        <input type="hidden" name="options[{{$attribute->id}}]"
+                                                               value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                     {{--<div class="row">--}}
                         {{--<div class="col-sm-3 col-xs-12">--}}
                             {{--<div class="media-item">--}}
