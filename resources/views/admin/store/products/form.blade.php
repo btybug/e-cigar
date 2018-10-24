@@ -61,6 +61,13 @@
                                 {!! Form::hidden('sku',null,['id' => 'sku']) !!}
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="sku" class="control-label col-sm-4">Taxable</label>
+                            <div class="col-sm-8">
+                                Taxable {!! Form::radio('taxable',true,null) !!}
+                                Not taxable {!! Form::radio('taxable',false,true) !!}
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="form-group row">
                                 <label class="col-sm-3">Featured image</label>
