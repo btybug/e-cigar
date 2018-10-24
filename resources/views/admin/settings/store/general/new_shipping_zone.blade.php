@@ -73,7 +73,7 @@
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-tax-id">Tax Rate</label>
                                 <div class="col-sm-10">
-                                    {!! Form::select('tax_rate_id',$tax_rates,null,['id' => 'input-tax-id','class' => 'form-control']) !!}
+                                    {!! Form::select('tax_rate_id',[null=>'No Tax']+$tax_rates,null,['id' => 'input-tax-id','class' => 'form-control']) !!}
                                 </div>
                             </div>
                             <fieldset>

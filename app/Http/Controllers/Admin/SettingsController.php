@@ -121,7 +121,7 @@ class SettingsController extends Controller
     public function geoZoneForm(Countries $countries, Settings $settings, $id = null)
     {
         $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'section');
-        $tax_rates = TaxRates::where('is_active',1)->get()->pluck('name','id');
+        $tax_rates = TaxRates::where('is_active',1)->get()->pluck('name','id')->toArray();
         $active_couriers = Settings::LeftJoin('couriers', 'settings.key', '=', 'couriers.id')
             ->where('settings.section', 'active_couriers')
             ->where('settings.val', '1')
@@ -145,7 +145,7 @@ class SettingsController extends Controller
     {
         $v = \Validator::make($request->all(), [
             'name' => 'required|max:190',
-            'tax_rate_id' => 'required|integer|exists:tax_rates,id',
+            'tax_rate_id' => 'nullable|exists:tax_rates,id',
             'description' => 'required',
             'payment_options' => 'required',
             'delivery_cost' => 'required|array',
@@ -159,7 +159,7 @@ class SettingsController extends Controller
             'delivery_cost.*.options.*.cost' => 'required|between:0,99.999999',
             'delivery_cost.*.options.*.time' => 'required',
         ]);
-        if ($v->fails()) return redirect()->back()->withErrors($v);
+        if ($v->fails()) return redirect()->back()->withErrors($v)->withInput($request->except('_token'));
         $data = $request->except('_token', 'delivery_cost');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
