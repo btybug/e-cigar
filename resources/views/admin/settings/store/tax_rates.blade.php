@@ -41,16 +41,17 @@
             <div class="" aria-labelledby="general-tab">
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
-                        @foreach($tax_rates as $tax_rate)
-                            <li class="item ">
-                                <div class="chek-title">
-                                    <input id="cash_paymant" name="2" class="gateways_inp" type="checkbox">
-                                    <label for="cash_paymant" class="title">{!! $tax_rate->name !!}</label>
-                                </div>
-                                <a href="{!! route('get_admin_settings_tax_create_or_update',$tax_rate->id) !!}"
-                                   class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                            </li>
-                        @endforeach
+                            @foreach($tax_rates as $tax_rate)
+                                <li class="item @if($model->{$tax_rate->id}) active @endif">
+                                    <div class="chek-title">
+                                        <input id="cash_paymant" @if($model->{$tax_rate->id}) checked
+                                               @endif  name="{!! $tax_rate->id !!}" class="gateways_inp" type="checkbox">
+                                        <label for="cash_paymant" class="title">{!! $tax_rate->name !!}</label>
+                                    </div>
+                                    <a href="{!! route('admin_settings_courier_edit',$tax_rate->id) !!}"
+                                       class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                                </li>
+                            @endforeach
                     </ul>
                 </div>
             </div>
@@ -60,4 +61,29 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+
 @stop
+@section('js')
+    <script>
+        $('body').on('change', '.payment_gateways_tab .list_paymant .item .gateways_inp', function () {
+            if ($(this).is(':checked')) {
+                $(this).closest('.item').addClass('active')
+            } else {
+                $(this).closest('.item').removeClass('active')
+            }
+        });
+        $('.gateways_inp').on('change', function () {
+            var data = {key: $(this).attr('name'), onOff: $(this).prop("checked")}
+            $.ajax({
+                type: "post",
+                url: '{!! route('post_admin_tax_rate_enable') !!}',
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                }
+            });
+        });
+
+    </script>
+    @stop

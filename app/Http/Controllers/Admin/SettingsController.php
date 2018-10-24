@@ -253,10 +253,11 @@ class SettingsController extends Controller
         return $this->view('store.delivery_cost', compact('model'));
     }
 
-    public function getTaxRates()
+    public function getTaxRates(Settings $settings)
     {
+        $model = $settings->getEditableData('active_tax_rates');
         $tax_rates=TaxRates::all();
-        return $this->view('store.tax_rates',compact('tax_rates'));
+        return $this->view('store.tax_rates',compact('tax_rates','model'));
     }
     public function getCreateRate($id=null)
     {
@@ -269,6 +270,13 @@ class SettingsController extends Controller
 //        dd($request->except('_token'),$request->id);
         TaxRates::updateOrCreate($request->id,$request->except('_token','translatable'));
         return redirect()->route('admin_settings_tax_rates');
+    }
+
+    public function postTaxRatesEnable(Request $request, Settings $settings)
+    {
+        $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
+        $settings->updateOrCreateSettings('active_tax_rates', $data);
+        return 1;
     }
 
 
