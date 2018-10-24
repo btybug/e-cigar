@@ -14,9 +14,17 @@
                        class="modal-input-path {!! $uniqId !!}" readonly>
             @endif
         @else
-            <input type="text" name="{!! $name !!}"
-                   value="{!! ($model)?((isset($model->$name))?$model->$name:null):null !!}" placeholder="file name"
-                   class="modal-input-path {!! $uniqId !!}" readonly>
+            @if($model && is_array($model))
+                <input type="text" name="{!! $name !!}"
+                       value="{!! (isset($model[$name]))?$model[$name]:null !!}" placeholder="file name"
+                       class="modal-input-path {!! $uniqId !!}" readonly>
+            @else
+                <input type="text" name="{!! $name !!}"
+                       value="{!! ($model)?((isset($model->$name))?$model->$name:null):null !!}" placeholder="file name"
+                       class="modal-input-path {!! $uniqId !!}" readonly>
+            @endif
+
+
         @endif
         <button type="button" data-multiple="{!! ($multiple)?'true':'false' !!}" id="{!! $uniqId !!}"
                 class="btn btn-lg " data-toggle="modal" data-target="#myModal">Open
