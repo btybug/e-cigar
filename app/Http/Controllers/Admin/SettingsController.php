@@ -120,7 +120,8 @@ class SettingsController extends Controller
 
     public function geoZoneForm(Countries $countries, Settings $settings, $id = null)
     {
-        $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key','section');
+        $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'section');
+        $tax_rates = TaxRates::where('is_active',1)->get()->pluck('name','id');
         $active_couriers = Settings::LeftJoin('couriers', 'settings.key', '=', 'couriers.id')
             ->where('settings.section', 'active_couriers')
             ->where('settings.val', '1')
@@ -132,7 +133,11 @@ class SettingsController extends Controller
         $geo_zone = GeoZones::find($id);
         $delivery_types = DeliveryCostsTypes::all()->pluck('title', 'id');
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        return $this->view('store.general.new_shipping_zone', compact('countries', 'geo_zone', 'activePayments', 'active_couriers', 'delivery_types'));
+        return $this->view('store.general.new_shipping_zone', compact(
+            'countries',
+                'geo_zone',
+                'activePayments',
+                'active_couriers', 'delivery_types','tax_rates'));
     }
 
 
@@ -140,6 +145,7 @@ class SettingsController extends Controller
     {
         $v = \Validator::make($request->all(), [
             'name' => 'required|max:190',
+            'tax_rate_id' => 'required|integer|exists:tax_rates,id',
             'description' => 'required',
             'payment_options' => 'required',
             'delivery_cost' => 'required|array',
@@ -153,15 +159,15 @@ class SettingsController extends Controller
             'delivery_cost.*.options.*.cost' => 'required|between:0,99.999999',
             'delivery_cost.*.options.*.time' => 'required',
         ]);
-        if($v->fails())return redirect()->back()->withErrors($v);
+        if ($v->fails()) return redirect()->back()->withErrors($v);
         $data = $request->except('_token', 'delivery_cost');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
-        foreach ($delivery_costs as $key=>$delivery_cost) {
+        foreach ($delivery_costs as $key => $delivery_cost) {
             $options = $delivery_cost['options'];
             unset($delivery_cost['options']);
-            if (!$request->id) $key=null;
-            $delivery = $geo_zone->deliveries()->updateOrCreate(['id'=>$key],$delivery_cost);
+            if (!$request->id) $key = null;
+            $delivery = $geo_zone->deliveries()->updateOrCreate(['id' => $key], $delivery_cost);
             foreach ($options as $key => $value) {
                 $options[$key]['delivery_cost_id'] = $delivery->id;
                 if ($request->id) {
@@ -255,30 +261,30 @@ class SettingsController extends Controller
 
     public function getTaxRates(Settings $settings)
     {
-        $model = $settings->getEditableData('active_tax_rates');
-        $tax_rates=TaxRates::all();
-        return $this->view('store.tax_rates',compact('tax_rates','model'));
+        $tax_rates = TaxRates::all();
+        return $this->view('store.tax_rates', compact('tax_rates'));
     }
-    public function getCreateRate($id=null)
+
+    public function getCreateRate($id = null)
     {
-        $model=TaxRates::find($id);
-        return $this->view('store.tax_rates.create',compact('model'));
+        $model = TaxRates::find($id);
+        return $this->view('store.tax_rates.create', compact('model'));
     }
 
     public function postCreateOrUpdateTaxRate(Request $request)
     {
-//        dd($request->except('_token'),$request->id);
-        TaxRates::updateOrCreate($request->id,$request->except('_token','translatable'));
+        TaxRates::updateOrCreate($request->id, $request->except('_token', 'translatable'));
         return redirect()->route('admin_settings_tax_rates');
     }
 
-    public function postTaxRatesEnable(Request $request, Settings $settings)
+    public function postTaxRatesEnable(Request $request)
     {
-        $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
-        $settings->updateOrCreateSettings('active_tax_rates', $data);
+
+        $tax = TaxRates::find($request->get('key'));
+        $tax->is_active= ($request->get('onOff') == 'true') ? 1 : 0;
+        $tax->save();
         return 1;
     }
-
 
 
 }

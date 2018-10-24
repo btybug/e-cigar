@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class GeoZones extends Model
 {
     protected $table = 'geo_zones';
-    protected $fillable = ['name', 'description', 'payment_options', 'country', 'regions'];
+    protected $fillable = ['tax_rate_id','name', 'description', 'payment_options', 'country', 'regions'];
 
     public function deliveries()
     {

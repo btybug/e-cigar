@@ -15,12 +15,16 @@ class CreateGeoZonesTable extends Migration
     {
         Schema::create('geo_zones', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('tax_rate_id');
             $table->string('name');
             $table->text('description');
             $table->string('payment_options');
             $table->string('country');
             $table->text('regions');
             $table->timestamps();
+
+            $table->foreign('tax_rate_id')
+                ->references('id')->on('tax_rates');
         });
     }
 

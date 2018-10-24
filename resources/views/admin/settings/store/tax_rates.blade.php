@@ -42,9 +42,9 @@
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
                             @foreach($tax_rates as $tax_rate)
-                                <li class="item @if($model->{$tax_rate->id}) active @endif">
+                                <li class="item @if($tax_rate->is_active) active @endif">
                                     <div class="chek-title">
-                                        <input id="cash_paymant" @if($model->{$tax_rate->id}) checked
+                                        <input id="cash_paymant" @if($tax_rate->is_active) checked
                                                @endif  name="{!! $tax_rate->id !!}" class="gateways_inp" type="checkbox">
                                         <label for="cash_paymant" class="title">{!! $tax_rate->name !!}</label>
                                     </div>

@@ -15,6 +15,7 @@ class CreateTaxRatesTable extends Migration
     {
         Schema::create('tax_rates', function (Blueprint $table) {
             $table->increments('id');
+            $table->tinyInteger('is_active')->default(0);
             $table->text('icon')->nullable();
             $table->decimal('amount',6,2);
             $table->enum('type',['fixed','percentage']);
