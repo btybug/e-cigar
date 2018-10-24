@@ -67,13 +67,13 @@
                                                             <div class="form-group row">
                                                                 {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
                                                                 <div class="col-sm-9">
-                                                                    {{Form::text('translatable['.strtolower($language->code).'][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                                    {{Form::text('translatable['.strtolower($language->code).'][subject]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
                                                                 <div class="col-sm-9">
-                                                                    {{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,'am','content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                                    {{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                                 </div>
                                                             </div>
                                                         </div>

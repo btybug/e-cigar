@@ -72,6 +72,15 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @yield('content-header')
         </section>
 

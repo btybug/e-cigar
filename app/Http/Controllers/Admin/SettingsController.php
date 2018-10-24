@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Couriers;
 use App\Models\DeliveryCostsTypes;
@@ -65,12 +66,12 @@ class SettingsController extends Controller
     {
 
         $model = MailTemplates::find($id);
-        $admin_model=MailTemplates::where('slug','admin_'.$model->slug)->first();
+        $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
         $shortcodes = new ShortCodes();
-        return $this->view('emails.manage', compact('model', 'shortcodes','admin_model'));
+        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model'));
     }
 
-    public function postCreateOrUpdate(Request $request)
+    public function postCreateOrUpdate(MailTemplatesRequest $request)
     {
         $mail = MailTemplates::findOrFail($request->id);
         $data = $request->except('admin', 'translatable', '_token');
@@ -80,9 +81,9 @@ class SettingsController extends Controller
         $translatable = $admin_data['translatable'];
         unset($admin_data['translatable']);
         $admin_data['slug'] = 'admin_' . $mail->slug;
-        $admin_model=MailTemplates::where('slug',$admin_data['slug'])->first();
+        $admin_model = MailTemplates::where('slug', $admin_data['slug'])->first();
         $admin_data['is_for_admin'] = 1;
-        $id=($admin_model)?$admin_model->id:null;
+        $id = ($admin_model) ? $admin_model->id : null;
         MailTemplates::updateOrCreate($id, $admin_data, $translatable);
         return redirect()->route('admin_emails');
     }
