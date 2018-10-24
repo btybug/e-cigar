@@ -65,15 +65,15 @@
                                                         <div id="{{ strtolower($language->code) }}"
                                                              class="tab-pane fade  @if($loop->first) in active @endif">
                                                             <div class="form-group row">
-                                                                {{Form::label('subject_am', 'Subject',['class' => 'col-sm-3'])}}
+                                                                {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
                                                                 <div class="col-sm-9">
-                                                                    {{Form::text('translatable[am][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                                    {{Form::text('translatable['.strtolower($language->code).'][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                {{Form::label('content_am', 'Content',['class' => 'col-sm-3'])}}
+                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
                                                                 <div class="col-sm-9">
-                                                                    {{Form::textarea('translatable[am][content]',get_translated($model,'am','content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                                    {{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,'am','content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -113,13 +113,13 @@
                                                         <div class="form-group row">
                                                             {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
                                                             <div class="col-sm-9">
-                                                                {{Form::text('admin[translatable['.strtolower($language->code).'][subject]]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
+                                                                {{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
                                                             <div class="col-sm-9">
-                                                                {{Form::textarea('admin[translatable['.strtolower($language->code).'][content]]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                                {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                             </div>
                                                         </div>
                                                     </div>

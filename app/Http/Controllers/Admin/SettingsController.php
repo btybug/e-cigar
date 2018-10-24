@@ -77,6 +77,7 @@ class SettingsController extends Controller
     public function postCreateOrUpdate(Request $request)
     {
         $data = $request->all();
+        dd($data);
         MailTemplates::updateOrCreate($request->id, $data);
         return redirect()->route('admin_mail_templates');
     }
