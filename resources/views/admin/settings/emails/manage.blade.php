@@ -86,13 +86,13 @@
                                         <div class="form-group row">
                                             {{Form::label('admin_from', 'From',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::text('admin[from]',null ,['class' =>'form-control','id'=>'admin_from','placeholder' => 'hr@hook.am'])}}
+                                                {{Form::text('admin[from]',($admin_model)?$admin_model->from:null,['class' =>'form-control','id'=>'admin_from','placeholder' => 'hr@hook.am'])}}
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             {{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::text('admin[to]',null ,['class' =>'form-control','id'=>'to_admin'])}}
+                                                {{Form::text('admin[to]',($admin_model)?$admin_model->to:null,['class' =>'form-control','id'=>'to_admin'])}}
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -113,13 +113,13 @@
                                                         <div class="form-group row">
                                                             {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
                                                             <div class="col-sm-9">
-                                                                {{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
+                                                                {{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',get_translated($admin_model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
                                                             <div class="col-sm-9">
-                                                                {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                                {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',get_translated($admin_model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                             </div>
                                                         </div>
                                                     </div>

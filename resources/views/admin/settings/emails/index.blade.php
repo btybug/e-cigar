@@ -14,8 +14,8 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Title</th>
                     <th>Slug</th>
+                    <th>Is Active</th>
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
@@ -34,8 +34,8 @@
                 "bPaginate": true,
                 columns: [
                     {data: 'id',name: 'id'},
-                    {data: 'title', name: 'title'},
                     {data: 'slug',name: 'slug'},
+                    {data: 'is_active', name: 'is_active'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
