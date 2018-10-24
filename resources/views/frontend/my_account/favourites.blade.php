@@ -9,9 +9,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="view-fav-item mb-4">
-                            <div class="text-right">
-                                <button class="btn btn-danger view-fav-item_btn-dlt" href="#"><i class="fa fa-trash"></i></button>
-                            </div>
+                            <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
                             <a href="http://e-cigar.loc/products/vape/10"  class="text-center  px-5 py-3 d-flex flex-column d-block">
                                 <span class="d-inline-block mb-3 view-fav-item_img-outer">
                                     <img class="img-fluid"
@@ -25,9 +23,8 @@
 
                     <div class="col-sm-4">
                         <div class="view-fav-item mb-4">
-                            <div class="text-right">
-                                <button class="btn btn-danger view-fav-item_btn-dlt" href="#"><i class="fa fa-trash"></i></button>
-                            </div>
+                            <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
+
                             <a href="http://e-cigar.loc/products/vape/7"  class="text-center  px-5 py-3 d-flex flex-column d-block">
                                 <span class="d-inline-block mb-3 view-fav-item_img-outer">
                                     <img class="img-fluid"
@@ -41,9 +38,8 @@
 
                     <div class="col-sm-4">
                         <div class="view-fav-item mb-4">
-                            <div class="text-right">
-                                <button class="btn btn-danger view-fav-item_btn-dlt" href="#"><i class="fa fa-trash"></i></button>
-                            </div>
+                            <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
+
                             <a href="http://e-cigar.loc/products/vape/6" class="text-center  px-5 py-3 d-flex flex-column d-block">
                                 <span class="d-inline-block mb-3 view-fav-item_img-outer">
                                     <img class="img-fluid"
@@ -57,9 +53,8 @@
 
                     <div class="col-sm-4">
                         <div class="view-fav-item mb-4">
-                            <div class="text-right">
-                                <button class="btn btn-danger view-fav-item_btn-dlt" href="#"><i class="fa fa-trash"></i></button>
-                            </div>
+                            <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
+
                             <a href="http://e-cigar.loc/products/vape/10"  class="text-center  px-5 py-3 d-flex flex-column d-block">
                                 <span class="d-inline-block mb-3 view-fav-item_img-outer">
                                     <img class="img-fluid"
@@ -73,9 +68,8 @@
 
                     <div class="col-sm-4">
                         <div class="view-fav-item mb-4">
-                            <div class="text-right">
-                                <button class="btn btn-danger view-fav-item_btn-dlt" href="#"><i class="fa fa-trash"></i></button>
-                            </div>
+                            <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
+
                             <a href="http://e-cigar.loc/products/vape/7"  class="text-center  px-5 py-3 d-flex flex-column d-block">
                                 <span class="d-inline-block mb-3 view-fav-item_img-outer">
                                     <img class="img-fluid"
@@ -89,9 +83,8 @@
 
                     <div class="col-sm-4">
                         <div class="view-fav-item mb-4">
-                            <div class="text-right">
-                                <button class="btn btn-danger view-fav-item_btn-dlt" href="#"><i class="fa fa-trash"></i></button>
-                            </div>
+                            <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
+
                             <a href="http://e-cigar.loc/products/vape/6" class="text-center  px-5 py-3 d-flex flex-column d-block">
                                 <span class="d-inline-block mb-3 view-fav-item_img-outer">
                                     <img class="img-fluid"
