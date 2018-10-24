@@ -48,7 +48,7 @@
                                                @endif  name="{!! $tax_rate->id !!}" class="gateways_inp" type="checkbox">
                                         <label for="cash_paymant" class="title">{!! $tax_rate->name !!}</label>
                                     </div>
-                                    <a href="{!! route('admin_settings_courier_edit',$tax_rate->id) !!}"
+                                    <a href="{!! route('get_admin_settings_tax_create_or_update',$tax_rate->id) !!}"
                                        class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                                 </li>
                             @endforeach
