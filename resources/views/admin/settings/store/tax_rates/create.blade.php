@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"><span data-toggle="tooltip"
                                                                             title=""
-                                                                            data-original-title="Couriers Name ">Tax Amount</span></label>
+                                                                            data-original-title="Tax Amount">Tax Amount</span></label>
                                 <div class="col-sm-10">
                                     {!! Form::number('amount',null,['class'=>'form-control']) !!}
                                 </div>
@@ -77,7 +77,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label"><span data-toggle="tooltip"
                                                                             title=""
-                                                                            data-original-title="Couriers Name ">Tax Type</span></label>
+                                                                            data-original-title="Tax Fixed/Percentage">Tax Type</span></label>
                                 <div class="col-sm-10">
                                     {!! Form::select('type',['fixed'=>'Fixed','percentage'=>'Percentage'],null,['class'=>'form-control']) !!}
                                 </div>
