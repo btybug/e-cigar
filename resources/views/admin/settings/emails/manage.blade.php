@@ -14,21 +14,6 @@
         </div>
     </div>
 
-
-    {{--<div class="col-md-12">--}}
-        {{--<div class="text-right btn-save">--}}
-            {{--<button type="submit" class="btn btn-danger btn-view">View Template</button>--}}
-            {{--<button type="submit" class="btn btn-info">Save</button>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="col-md-8">--}}
-        {{--<div class="form-group row">--}}
-            {{--{{Form::label('from', 'From',['class' => 'col-sm-3'])}}--}}
-            {{--<div class="col-sm-9">--}}
-                {{--{{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
     <div class="tab-content tabs_content col-md-8">
 
         <div id="home" class="tab-pane tab_info fade in active">
@@ -54,12 +39,23 @@
                                                 {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
                                             </div>
                                         </div>
+                                        <div class="form-group row">
+                                            {{Form::label('to', 'To',['class' => 'col-sm-3'])}}
+                                            <div class="col-sm-9">
+                                                {{Form::text(null,'{user}' ,['class' =>'form-control','id'=>'from','readonly','disabled'])}}
+                                            </div>
+                                        </div>
                                         <div class="form-group">
-                                            <ul class="nav nav-tabs tab_lang_horizontal">
-                                                <li class="active"><a data-toggle="tab" href="#shortdescAM">AM</a></li>
-                                                <li><a data-toggle="tab" href="#shortdescGB">GB</a></li>
-                                                <li><a data-toggle="tab" href="#shortdescRU">RU</a></li>
-                                            </ul>
+                                            @if(count(get_languages()))
+                                                <ul class="nav nav-tabs">
+                                                    @foreach(get_languages() as $language)
+                                                        <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                                       href="#{{ strtolower($language->code) }}">
+                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                            </a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
                                             <div class="tab-content tab-content-store-settings">
                                                 <div id="shortdescAM" class="tab-pane fade in active">
                                                     <div class="form-group row">
@@ -119,7 +115,86 @@
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                                        ...tab 2..
+                                        <div class="form-group row">
+                                            {{Form::label('admin_from', 'From',['class' => 'col-sm-3'])}}
+                                            <div class="col-sm-9">
+                                                {{Form::text('admin[from]',null ,['class' =>'form-control','id'=>'admin_from','placeholder' => 'hr@hook.am'])}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}
+                                            <div class="col-sm-9">
+                                                {{Form::text('admin[to]',null ,['class' =>'form-control','id'=>'to_admin'])}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @if(count(get_languages()))
+                                                <ul class="nav nav-tabs">
+                                                    @foreach(get_languages() as $language)
+                                                        <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                                       href="#{{ strtolower($language->code) }}">
+                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                            </a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                            <div class="tab-content tab-content-store-settings">
+                                                <div id="shortdescAM" class="tab-pane fade in active">
+                                                    <div class="form-group row">
+                                                        {{Form::label('subject_am', 'Subject',['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::text('translatable[am][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        {{Form::label('content_am', 'Content',['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::textarea('translatable[am][content]',get_translated($model,'am','content') ,['class' =>'form-control','id'=>'content_am','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="shortdescGB" class="tab-pane fade ">
+                                                    <div class="form-group row">
+                                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        {{Form::label('subject_gb', 'Subject',['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::text('admin[translatable[gb][subject]]',get_translated($model,'gb','subject') ,['class' =>'form-control','id'=>'subject_en','placeholder' => __('Subject')])}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        {{Form::label('content_gb', 'Content',['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::textarea('translatable[gb][content]',get_translated($model,'gb','content') ,['class' =>'form-control','id'=>'content_en','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="shortdescRU" class="tab-pane fade ">
+                                                    <div class="form-group row">
+                                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        {{Form::label('subject_ru', __('Subject'),['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::text('translatable[ru][subject]',get_translated($model,'ru','subject') ,['class' =>'form-control','id'=>'subject_ru','placeholder' => __('Subject')])}}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        {{Form::label('content_ru', __('Content'),['class' => 'col-sm-3'])}}
+                                                        <div class="col-sm-9">
+                                                            {{Form::textarea('translatable[ru][content]',get_translated($model,'ru','content') ,['class' =>'form-control','id'=>'content_ru','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -176,7 +251,12 @@
             @endforeach
             </tbody>
         </table>
-
+            <div class="form-group row">
+                {{Form::label('is_active', 'Status',['class' => 'col-sm-3'])}}
+                <div class="col-sm-9">
+                    {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
+                </div>
+            </div>
     </div>
 
     {!! Form::close() !!}

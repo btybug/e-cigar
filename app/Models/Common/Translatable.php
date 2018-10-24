@@ -48,10 +48,10 @@ class Translatable extends Model
 //
 //    }
 //TODO::gordz anel sovory
-    public static function updateOrCreate(int $id = null, array $data)
+    public static function updateOrCreate(int $id = null, array $data,array $translations = [])
     {
         $model = self::find($id)??new static();
-        $translatableData = \Request::get('translatable');
+        $translatableData = (count($translations)) ? $translations :\Request::get('translatable');
         (isset($model->id)) ? $model->update($data) : $model->fill($data) ;
 
         if ($translatableData && count($translatableData)) {
