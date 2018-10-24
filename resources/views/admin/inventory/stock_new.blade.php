@@ -51,6 +51,7 @@
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li><a data-toggle="tab" href="#media">Media</a></li>
+                    <li><a data-toggle="tab" href="#posters">Posters</a></li>
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
@@ -204,6 +205,9 @@
                             </div>
 
                         </div>
+                    </div>
+                    <div id="posters" class="tab-pane basic-details-tab  fade posters_tab">
+                        posters
                     </div>
                     <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">
                         <div class="container-fluid p-25">
