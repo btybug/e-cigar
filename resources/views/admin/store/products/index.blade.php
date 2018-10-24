@@ -19,7 +19,7 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
+                    <th>Name</th>
                     <th>Image</th>
                     <th>Author</th>
                     <th>Type</th>
@@ -43,7 +43,7 @@
                 "bPaginate": true,
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'title', name: 'title'},
+                    {data: 'name', name: 'name'},
                     {data: 'image', name: 'image'},
                     {data: 'user_id', name: 'user_id'},
                     {data: 'type', name: 'type'},
