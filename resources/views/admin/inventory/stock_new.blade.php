@@ -207,7 +207,36 @@
                         </div>
                     </div>
                     <div id="posters" class="tab-pane basic-details-tab  fade posters_tab">
-                        posters
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list">
+                                            <ul>
+                                                <li><a  href="#">Poster 1</a></li>
+                                                <li class="active"><a href="#">Poster 2</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="button-add text-center">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-info btn-block"><i
+                                                        class="fa fa-plus"></i>Add Poster</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="basic-center basic-wall">
+                                        Poster Preview
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="basic-right basic-wall">
+                                       Extra data
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">
                         <div class="container-fluid p-25">
@@ -253,9 +282,11 @@
                                                 @foreach($attrs as $attribute)
                                                     <div style="height: 50px" data-attr-id="{{$attribute->id}}"
                                                          class="attributes-container-{{$attribute->id}} main-attr-container">
-                                                        <input data-id="{{$attribute->id}}" class="attributes-item-input-{{$attribute->id}}"
+                                                        <input data-id="{{$attribute->id}}"
+                                                               class="attributes-item-input-{{$attribute->id}}"
                                                                value="{{ implode(',',$attribute->children->pluck('name')->all()) }}">
-                                                        <input type="hidden" name="options[{{$attribute->id}}]" value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
+                                                        <input type="hidden" name="options[{{$attribute->id}}]"
+                                                               value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
                                                     </div>
                                                 @endforeach
                                             @endif
