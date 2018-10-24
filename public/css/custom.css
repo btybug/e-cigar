@@ -615,26 +615,26 @@ display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.stock-page .media-new-tab .media-list{
+.media-new-tab .media-list{
     display: flex;
     flex-direction: column;
     border: none;
 }
-.stock-page .media-new-tab .media-list li a{
+.media-new-tab .media-list li a{
     border: none;
 }
-.stock-page .media-new-tab .media-list li.active a{
+media-list li.active a{
     background-color: #000;
     color: white;
 }
-.stock-page .media-new-tab .multiple-image-placeholder{
+.media-new-tab .multiple-image-placeholder{
     display: flex;
     flex-wrap: wrap;
     margin-top:15px;
     margin-right: -15px;
     margin-left: -15px;
 }
-.stock-page .media-new-tab .multiple-image-placeholder .img-thumb-container{
+.media-new-tab .multiple-image-placeholder .img-thumb-container{
 position: relative;
     width: 100%;
     min-height: 1px;
@@ -647,13 +647,13 @@ position: relative;
     padding-left: 15px;
 
 }
-.stock-page .media-new-tab .multiple-image-placeholder .img-thumb-container .inner{
+.media-new-tab .multiple-image-placeholder .img-thumb-container .inner{
     position: relative;
     height:240px;
     box-shadow: 0 0 4px #ccc;
     margin-bottom: 15px !important;
 }
-.stock-page .media-new-tab .multiple-image-placeholder .remove-thumb-img{
+.media-new-tab .multiple-image-placeholder .remove-thumb-img{
     position: absolute;
     right: 0;
     top: 0;
@@ -661,7 +661,7 @@ position: relative;
     background-color: red;
     padding: 6px;
 }
-.stock-page .media-new-tab .multiple-image-placeholder .img-thumb-container img{
+.media-new-tab .multiple-image-placeholder .img-thumb-container img{
     height: 100%;
     width: 100%;
     object-fit: cover;

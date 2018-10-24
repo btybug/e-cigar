@@ -329,18 +329,70 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="panel-body min-300 ">
-                    <div class="row">
-                        <div class="col-sm-3 col-xs-12">
-                            <div class="media-item">
-                                <div class="box">
-                                    <span class="del-item"><i class="fa fa-times"></i></span>
+                    <div class="basic-details-tab media-new-tab ">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list">
+                                            <ul class="nav nav-tabs media-list">
+                                                <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
+                                                <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
+                                                <li><a data-toggle="tab" href="#mediaposters">Posters</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="title">
-                                    Media Name
+                                <div class="col-md-9">
+                                    <div class="basic-center basic-wall">
+                                        <div class="tab-content">
+                                            <div id="mediaotherimage" class="tab-pane fade ">
+                                                {!! media_button('other_images',$model,true) !!}
+                                            </div>
+                                            <div id="mediavideos" class="tab-pane fade in active">
+                                                <div class="media-videos">
+                                                    <div class="input-group " style="display: flex">
+                                                        <input type="text" class="form-control video-url-link"
+                                                               placeholder="Video Url" aria-label="Video Url"
+                                                               aria-describedby="basic-addon2">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-info add-video-url"
+                                                                    type="button">Add Link
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-videos-preview" style="display: flex">
+                                                        {{--<div class="video-single-item" style="display: flex"><iframe width="200" height="200"--}}
+                                                        {{--src="https://www.youtube.com/embed/${videoId}">--}}
+                                                        {{--</iframe><div><button class="btn btn-danger remove-video-single-item"><i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="${videoId}"> </div>--}}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div id="mediaposters" class="tab-pane fade ">
+                                                {!! media_button('other_images',$model,true) !!}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
+                    {{--<div class="row">--}}
+                        {{--<div class="col-sm-3 col-xs-12">--}}
+                            {{--<div class="media-item">--}}
+                                {{--<div class="box">--}}
+                                    {{--<span class="del-item"><i class="fa fa-times"></i></span>--}}
+                                {{--</div>--}}
+                                {{--<div class="title">--}}
+                                    {{--Media Name--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
             </div>
         </div>
