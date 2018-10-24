@@ -10,11 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\Couriers;
-use App\Models\DeliveryCostOptions;
 use App\Models\DeliveryCostsTypes;
-use App\Models\Emails;
 use App\Models\GeoZones;
 use App\Models\Languages;
 use App\Models\MailTemplates;
@@ -68,7 +65,7 @@ class SettingsController extends Controller
     {
         $model = null;
         if ($id) {
-            $model = Emails::findOrFail($id);
+            $model = MailTemplates::findOrFail($id);
         }
         $shortcodes = new ShortCodes();
         return $this->view('emails.manage', compact('model', 'shortcodes'));
@@ -76,9 +73,15 @@ class SettingsController extends Controller
 
     public function postCreateOrUpdate(Request $request)
     {
-        $data = $request->all();
-        dd($data);
-        MailTemplates::updateOrCreate($request->id, $data);
+        $mail=MailTemplates::findOrFail($request->id);
+        $data = $request->except('admin','translatable','_token');
+        $translatable=$request->get('translatable');
+        $admin_data=$request->get('admin');
+        MailTemplates::updateOrCreate($request->id, $data,$translatable);
+        $translatable=$admin_data['translatable'];
+        unset($admin_data['translatable']);
+        $admin_data['slug']='admin_'.$mail->slug;
+        MailTemplates::updateOrCreate($request->id, $admin_data,$translatable);
         return redirect()->route('admin_mail_templates');
     }
 

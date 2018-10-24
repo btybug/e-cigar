@@ -13,16 +13,15 @@ class CreateEmailTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('email_translations', function (Blueprint $table) {
+        Schema::create('mail_templates_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('emails_id')->unsigned();
-            $table->string('title')->unique();
+            $table->integer('mail_templates_id')->unsigned();
             $table->string('subject');
             $table->longText('content');
             $table->string('locale')->index();
             $table->timestamps();
-            $table->unique(['emails_id','locale']);
-            $table->foreign('emails_id')->references('id')->on('emails')->onDelete('cascade');
+            $table->unique(['mail_templates_id','locale']);
+            $table->foreign('mail_templates_id')->references('id')->on('mail_templates')->onDelete('cascade');
         });
     }
 

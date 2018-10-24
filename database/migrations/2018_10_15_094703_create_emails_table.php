@@ -13,7 +13,7 @@ class CreateEmailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emails', function (Blueprint $table) {
+        Schema::create('mail_templates', function (Blueprint $table) {
             $table->increments('id');
             $table->string('slug')->unique();
             $table->string('from');
