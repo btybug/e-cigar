@@ -14,7 +14,10 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h1 class="product_title entry-title col-md-6 mb-5 p-0">Product Title</h1>
+                <h1 class="product_title entry-title col-md-6 mb-5 p-0">{!! $vape->name !!}</h1>
+                <div class="row">
+                    {!! $vape->long_description !!}
+                </div>
             </div>
             <div class="col-md-4">
                 <form>
@@ -84,108 +87,68 @@
         </ul>
         <div class="tab-content tab-content--features">
             <div class="tab-pane fade show active" id="feature" role="tabpanel" aria-labelledby="feature-tab">
-                <div class="row mb-2">
-                    <div class="col-md-8">
-                        <div class="tab-content--features_left" style="background-image: url(http://laravelcommerce.com/resources/assets/images/news_images/1531930664.blog-img-2.jpg);"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="tab-content--features_right d-flex flex-column align-items-center justify-content-center h-100">Feature 1</div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="tab-content--features_left" style="background-image: url(http://laravelcommerce.com/resources/assets/images/news_images/1531930697.blog-img-3.jpg);"></div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="tab-content--features_right d-flex flex-column align-items-center justify-content-center h-100">Feature 2</div>
-                    </div>
-                </div>
+                @if($vape->posters && count($vape->posters))
+                    @foreach($vape->posters as $poster)
+                        <div class="row mb-2">
+                            <div class="col-md-12">
+                                <div class="tab-content--features_left" style="background-image: url({{ $poster }});"></div>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    NO Posters
+                @endif
             </div>
 
-
             <div class="tab-pane fade" id="media" role="tabpanel" aria-labelledby="media-tab">
-                <div id="jssorVideos" class="media-slider">
-                    <!-- Loading Screen -->
-                    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:580px;overflow:hidden;">
-                        <div>
-                            <div data-u="image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/j2G1IUpRiPY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                            <div data-u="thumb">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/j2G1IUpRiPY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                @if($vape->videos && count($vape->videos))
+                    <div id="jssorVideos" class="media-slider">
+                        <!-- Loading Screen -->
+                        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:580px;overflow:hidden;">
+                            @foreach($vape->videos as $video)
+                                <div>
+                                    <div data-u="image">
+                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    </div>
+                                    <div data-u="thumb">
+                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- Thumbnail Navigator -->
+                        <div data-u="thumbnavigator" class="jssort101" style="position:absolute;left:0px;bottom:0px;width:980px;height:100px;background-color:#000;" data-autocenter="1" data-scale-bottom="0.75">
+                            <div data-u="slides">
+                                <div data-u="prototype" class="p" style="width:190px;height:90px;">
+                                    <div data-u="thumbnailtemplate" class="t"></div>
+                                    <svg viewbox="0 0 16000 16000" class="cv">
+                                        <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
+                                        <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
+                                        <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div data-u="image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Ujc3yhN9E5Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                <</div>
-                            <div data-u="thumb">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Ujc3yhN9E5Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                <</div>
+                        <!-- Arrow Navigator -->
+                        <div data-u="arrowleft" class="jssora106" style="width:55px;height:55px;top:258px;left:30px;" data-scale="0.75">
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                                <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
+                                <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
+                            </svg>
                         </div>
-                        <div>
-                            <div data-u="image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FE7Ea0ffqOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                            <div data-u="thumb">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FE7Ea0ffqOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
+                        <div data-u="arrowright" class="jssora106" style="width:55px;height:55px;top:258px;right:30px;" data-scale="0.75">
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                                <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
+                                <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
+                            </svg>
                         </div>
-                        <div>
-                            <div data-u="image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/j2G1IUpRiPY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                            <div data-u="thumb">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/j2G1IUpRiPY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                        <div>
-                            <div data-u="image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Ujc3yhN9E5Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            <</div>
-                            <div data-u="thumb">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Ujc3yhN9E5Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                <</div>
-                        </div>
-                        <div>
-                            <div data-u="image">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FE7Ea0ffqOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                            <div data-u="thumb">
-                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/FE7Ea0ffqOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                            </div>
-                        </div>
+                    </div>
+                @else
+                    NO Videos
+                @endif
 
-                    </div>
-                    <!-- Thumbnail Navigator -->
-                    <div data-u="thumbnavigator" class="jssort101" style="position:absolute;left:0px;bottom:0px;width:980px;height:100px;background-color:#000;" data-autocenter="1" data-scale-bottom="0.75">
-                        <div data-u="slides">
-                            <div data-u="prototype" class="p" style="width:190px;height:90px;">
-                                <div data-u="thumbnailtemplate" class="t"></div>
-                                <svg viewbox="0 0 16000 16000" class="cv">
-                                    <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
-                                    <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
-                                    <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Arrow Navigator -->
-                    <div data-u="arrowleft" class="jssora106" style="width:55px;height:55px;top:258px;left:30px;" data-scale="0.75">
-                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                            <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
-                            <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
-                            <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
-                        </svg>
-                    </div>
-                    <div data-u="arrowright" class="jssora106" style="width:55px;height:55px;top:258px;right:30px;" data-scale="0.75">
-                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                            <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
-                            <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
-                            <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
-                        </svg>
-                    </div>
-                </div>
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">3</div>
             <div class="tab-pane fade" id="technical" role="tabpanel" aria-labelledby="technical-tab">4</div>
