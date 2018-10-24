@@ -21,6 +21,7 @@ use App\Models\MailTemplates;
 use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
+use App\Models\TaxRates;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -254,13 +255,22 @@ class SettingsController extends Controller
 
     public function getTaxRates()
     {
-        return $this->view('store.tax_rates');
+        $tax_rates=TaxRates::all();
+        return $this->view('store.tax_rates',compact('tax_rates'));
     }
-    public function getCreateRate()
+    public function getCreateRate($id=null)
     {
-        $model=null;
+        $model=TaxRates::find($id);
         return $this->view('store.tax_rates.create',compact('model'));
     }
+
+    public function postCreateOrUpdateTaxRate(Request $request)
+    {
+//        dd($request->except('_token'),$request->id);
+        TaxRates::updateOrCreate($request->id,$request->except('_token','translatable'));
+        return redirect()->route('admin_settings_tax_rates');
+    }
+
 
 
 }

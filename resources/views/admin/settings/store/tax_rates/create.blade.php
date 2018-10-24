@@ -12,7 +12,7 @@
                             <div class="col-sm-5 p-0">
                                 <div class="button-save text-right">
                                     <a class="btn btn-default pull-right"
-                                       href="{!! route('admin_store_attributes') !!}">Back</a>
+                                       href="{!! route('admin_settings_tax_rates') !!}">Back</a>
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
 
                     <div class="panel-body">
                         <div>
-                            {!! Form::model($model,['class'=>'form-horizontal','url'=>route('admin_settings_courier_save',($model)?$model->id:null)]) !!}
+                            {!! Form::model($model,['class'=>'form-horizontal','url'=>route('post_admin_settings_tax_create_or_update',($model)?$model->id:null)]) !!}
                             @if(count(get_languages()))
                                 <ul class="nav nav-tabs">
                                     @foreach(get_languages() as $language)
@@ -53,14 +53,7 @@
                                                     {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"><span data-toggle="tooltip"
-                                                                                            title=""
-                                                                                            data-original-title="Couriers Name ">Tax Amount</span></label>
-                                                <div class="col-sm-10">
-                                                    {!! Form::number('translatable['.strtolower($language->code).'][amount]',get_translated($model,strtolower($language->code),'amount'),['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
+
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label"><span data-toggle="tooltip"
                                                                                             title=""
@@ -72,6 +65,14 @@
                                         </div>
                                     @endforeach
                                 @endif
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"><span data-toggle="tooltip"
+                                                                            title=""
+                                                                            data-original-title="Couriers Name ">Tax Amount</span></label>
+                                <div class="col-sm-10">
+                                    {!! Form::number('amount',null,['class'=>'form-control']) !!}
+                                </div>
                             </div>
                             <div class="form-group bord-top">
                                 <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
@@ -98,6 +99,20 @@
         </div>
     </div>
 @stop()
-@section('css')
+@section('js')
+    <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
+    <script>
+        $('.icon-picker').iconpicker();
+    </script>
+@stop
+@section("css")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+    <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <style>
+        #font-show-area {
+            font-size: 50px;
+            margin-top: 15px;
+        }
+    </style>
 @stop

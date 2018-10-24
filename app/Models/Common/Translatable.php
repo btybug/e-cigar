@@ -52,7 +52,6 @@ class Translatable extends Model
     {
         $model = self::find($id)??new static();
         $translatableData = \Request::get('translatable');
-
         (isset($model->id)) ? $model->update($data) : $model->fill($data) ;
 
         if ($translatableData && count($translatableData)) {

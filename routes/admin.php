@@ -24,8 +24,8 @@ Route::group(['prefix' => 'settings'], function () {
         });
         Route::group(['prefix' => 'tax-rates'], function () {
             Route::get('/', 'Admin\SettingsController@getTaxRates')->name('admin_settings_tax_rates');
-            Route::get('/new', 'Admin\SettingsController@getCreateRate')->name('admin_settings_tax_create');
-            Route::get('/create-or-update/{id?}', 'Admin\SettingsController@postCreateOrUpdateTaxRate')->name('admin_settings_tax_create_or_update');
+            Route::get('/create-or-update/{id?}', 'Admin\SettingsController@getCreateRate')->name('get_admin_settings_tax_create_or_update');
+            Route::post('/create-or-update/{id?}', 'Admin\SettingsController@postCreateOrUpdateTaxRate')->name('post_admin_settings_tax_create_or_update');
 
         });
         Route::post('/payment-gateways/enable', 'Admin\SettingsController@postStorePaymentsGatewaysEnable')->name('post_admin_payment_gateways_enable');
