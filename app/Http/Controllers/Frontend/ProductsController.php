@@ -31,7 +31,7 @@ class ProductsController extends Controller
             ->where('products_translations.locale', app()->getLocale())
             ->where('type', 'vape')
             ->where('status', 'published')
-            ->select('products.*', 'products_translations.title', 'products_translations.title')
+            ->select('products.*', 'products_translations.name')
             ->orderBy($column, $direction)->paginate(5);
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
         return $this->view('vapes', compact('products','orderBy','attributes'));

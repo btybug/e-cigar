@@ -111,7 +111,7 @@
                                                             src="{!! url($product->image) !!}"
                                                             alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
                                     <div class="block-panel mt-4">
-                                        <h2 class="title">{!! $product->title !!}</h2>
+                                        <h2 class="title">{!! $product->name !!}</h2>
                                         <div class="description">
                                             <p class="read-more"></p>
                                         </div>
