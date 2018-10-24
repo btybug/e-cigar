@@ -132,7 +132,7 @@ $("body").on("click", ".item-for-upload", function(e) {
         .val(tempStr);
 });
 const makePreviewImgThumb = (item, multiple) => {
-    return `<div class="img-thumb-container"  style="margin: 10px;"><img src="${item}" width=200 > <span data-src="${item}" class="remove-thumb-img" data-is-multiple="${multiple}"><i  class="fa fa-trash"></i> </span></div>`;
+    return `<div class="img-thumb-container"  style="margin: 10px;"><div class="inner"><img src="${item}" width=200 > <span data-src="${item}" class="remove-thumb-img" data-is-multiple="${multiple}"><i  class="fa fa-trash"></i> </span></div></div>`;
 };
 $("body").on("click", ".open-btn", function(e) {
     e.preventDefault();

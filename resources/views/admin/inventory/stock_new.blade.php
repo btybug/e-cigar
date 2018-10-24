@@ -161,12 +161,13 @@
                                             <ul class="nav nav-tabs media-list">
                                                 <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
                                                 <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
+                                                <li><a data-toggle="tab" href="#mediaposters">Posters</a>
                                                 </li>
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-9">
                                     <div class="basic-center basic-wall">
                                         <div class="tab-content">
                                             <div id="mediaotherimage" class="tab-pane fade ">
@@ -192,16 +193,13 @@
                                                 </div>
 
                                             </div>
+                                            <div id="mediaposters" class="tab-pane fade ">
+                                                {!! media_button('other_images',$model,true) !!}
+                                            </div>
                                         </div>
-
-
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="basic-right basic-wall">
 
-                                    </div>
-                                </div>
                             </div>
 
                         </div>

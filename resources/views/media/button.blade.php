@@ -33,7 +33,7 @@
     </div>
     @if($multiple)
     <div class="multiple-image-placeholder">
-
+        {{--<div class="img-thumb-container"  style="margin: 10px;"><div class="inner"><img src="${item}" width=200 > <span data-src="${item}" class="remove-thumb-img" data-is-multiple="${multiple}"><i  class="fa fa-trash"></i> </span></div></div>--}}
     </div>
     @endif
 </div>
