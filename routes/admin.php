@@ -76,6 +76,7 @@ Route::group(['prefix' => 'users'], function () {
 Route::group(['prefix' => 'store'], function () {
     Route::get('/', 'Admin\ProductsController@index')->name('admin_store');
     Route::get('/new', 'Admin\ProductsController@newProduct')->name('admin_store_new');
+    Route::post('/apply-stock', 'Admin\ProductsController@applyStock')->name('admin_store_apply_stock');
     Route::get('/edit/{id}', 'Admin\ProductsController@getEdit')->name('admin_store_products_edit');
     Route::post('/new', 'Admin\ProductsController@postNewProduct')->name('admin_store_new_product');
 

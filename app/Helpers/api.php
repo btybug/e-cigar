@@ -166,7 +166,17 @@ function get_pluck($data,$key,$name){
 }
 
 function get_translated($model,$locale,$column){
-    return ($model && $model->getTranslation($locale)) ? $model->getTranslation($locale)->{$column} : null;
+
+    if(is_array($model)){
+        $result = get_translated_by_array($model,$locale,$column);
+    }else{
+        $result = ($model && $model->getTranslation($locale)) ? $model->getTranslation($locale)->{$column} : null;
+    }
+    return $result;
+}
+
+function get_translated_by_array($model,$locale,$column){
+    return ($model && isset($model['translatable'][$locale][$column])) ? $model['translatable'][$locale][$column] : null;
 }
 
 function post_url($post){

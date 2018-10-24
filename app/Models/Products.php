@@ -28,7 +28,7 @@ class Products extends Translatable
 
     protected $guarded = ['id'];
 
-    public $translatedAttributes = ['title', 'short_description', 'long_description'];
+    public $translatedAttributes = ['name', 'short_description', 'long_description'];
 
     public function author ()
     {

@@ -41,7 +41,7 @@ class Stock extends Translatable
 
     public function attrs()
     {
-        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id');
+        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id')->whereNull('attributes.parent_id');
     }
 
     public function variations()

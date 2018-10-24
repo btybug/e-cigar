@@ -51,4 +51,25 @@ class ProductsController extends Controller
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
         return $this->view('new',compact('authors','model','stocks'));
     }
+
+    public function applyStock(Request $request)
+    {
+        $stock = Stock::with("attrs","variations")->where('id',$request->stock_id)->first();
+
+        if($stock){
+            $translations = $stock->getTranslationsArray();
+            $stockArray = $stock->toArray();
+            $stockArray['id'] = $request->id;
+            $stockArray['translatable'] = $translations;
+            $model = array_merge($request->all(),$stockArray);
+            $stocks = Stock::get()->pluck('name','id')->toArray();
+            $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
+                ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
+            $html = \View("admin.store.products.form",compact(['model','stocks','authors']))->render();
+
+            return \Response::json(['error' => false,'html'=>$html]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
 }

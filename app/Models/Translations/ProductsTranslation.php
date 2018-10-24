@@ -10,5 +10,5 @@ class ProductsTranslation extends Model
 
     protected $table = 'products_translations';
 
-    protected $fillable = ['title', 'short_description', 'long_description'];
+    protected $fillable = ['name', 'short_description', 'long_description'];
 }
