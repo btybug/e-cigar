@@ -82,8 +82,8 @@
                                     <option value="" @if($orderBy==null)selected @endif  disabled>Order by</option>
                                     <option value="id,asc" @if($orderBy=="id,asc")selected @endif>Asc</option>
                                     <option value="id,desc" @if($orderBy=="id,desc")selected @endif>Desc</option>
-                                    <option value="title,asc" @if($orderBy=="title,asc")selected @endif>A - Z</option>
-                                    <option value="title,desc" @if($orderBy=="title,desc")selected @endif>Z - A</option>
+                                    <option value="name,asc" @if($orderBy=="name,asc")selected @endif>A - Z</option>
+                                    <option value="name,desc" @if($orderBy=="name,desc")selected @endif>Z - A</option>
                                     <option value="updated_at,asc" @if($orderBy=="updated_at,asc")selected @endif>Date
                                         (Asc)
                                     </option>
