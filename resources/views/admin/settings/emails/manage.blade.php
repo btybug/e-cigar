@@ -25,14 +25,17 @@
                             <div class="col-sm-12">
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item active">
-                                        <a class="nav-link" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true" aria-expanded="true">To User</a>
+                                        <a class="nav-link" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab"
+                                           aria-controls="tab1" aria-selected="true" aria-expanded="true">To User</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="mail" aria-selected="false">To Admin</a>
+                                        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab"
+                                           aria-controls="mail" aria-selected="false">To Admin</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content tab-content-store-settings">
-                                    <div class="tab-pane fade active in" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                                    <div class="tab-pane fade active in" id="tab1" role="tabpanel"
+                                         aria-labelledby="tab1-tab">
                                         <div class="form-group row">
                                             {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
@@ -57,60 +60,25 @@
                                                 </ul>
                                             @endif
                                             <div class="tab-content tab-content-store-settings">
-                                                <div id="shortdescAM" class="tab-pane fade in active">
-                                                    <div class="form-group row">
-                                                        {{Form::label('subject_am', 'Subject',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('translatable[am][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                @if(count(get_languages()))
+                                                    @foreach(get_languages() as $language)
+                                                        <div id="{{ strtolower($language->code) }}"
+                                                             class="tab-pane fade  @if($loop->first) in active @endif">
+                                                            <div class="form-group row">
+                                                                {{Form::label('subject_am', 'Subject',['class' => 'col-sm-3'])}}
+                                                                <div class="col-sm-9">
+                                                                    {{Form::text('translatable[am][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                {{Form::label('content_am', 'Content',['class' => 'col-sm-3'])}}
+                                                                <div class="col-sm-9">
+                                                                    {{Form::textarea('translatable[am][content]',get_translated($model,'am','content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('content_am', 'Content',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::textarea('translatable[am][content]',get_translated($model,'am','content') ,['class' =>'form-control','id'=>'content_am','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="shortdescGB" class="tab-pane fade ">
-                                                    <div class="form-group row">
-                                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('subject_gb', 'Subject',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('translatable[gb][subject]',get_translated($model,'gb','subject') ,['class' =>'form-control','id'=>'subject_en','placeholder' => __('Subject')])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('content_gb', 'Content',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::textarea('translatable[gb][content]',get_translated($model,'gb','content') ,['class' =>'form-control','id'=>'content_en','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="shortdescRU" class="tab-pane fade ">
-                                                    <div class="form-group row">
-                                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('subject_ru', __('Subject'),['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('translatable[ru][subject]',get_translated($model,'ru','subject') ,['class' =>'form-control','id'=>'subject_ru','placeholder' => __('Subject')])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('content_ru', __('Content'),['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::textarea('translatable[ru][content]',get_translated($model,'ru','content') ,['class' =>'form-control','id'=>'content_ru','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -138,66 +106,29 @@
                                                     @endforeach
                                                 </ul>
                                             @endif
-                                            <div class="tab-content tab-content-store-settings">
-                                                <div id="shortdescAM" class="tab-pane fade in active">
-                                                    <div class="form-group row">
-                                                        {{Form::label('subject_am', 'Subject',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('translatable[am][subject]',get_translated($model,'am','subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                            @if(count(get_languages()))
+                                                @foreach(get_languages() as $language)
+                                                    <div id="{{ strtolower($language->code) }}"
+                                                         class="tab-pane fade  @if($loop->first) in active @endif">
+                                                        <div class="form-group row">
+                                                            {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {{Form::text('admin[translatable['.strtolower($language->code).'][subject]]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {{Form::textarea('admin[translatable['.strtolower($language->code).'][content]]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('content_am', 'Content',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::textarea('translatable[am][content]',get_translated($model,'am','content') ,['class' =>'form-control','id'=>'content_am','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="shortdescGB" class="tab-pane fade ">
-                                                    <div class="form-group row">
-                                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('subject_gb', 'Subject',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('admin[translatable[gb][subject]]',get_translated($model,'gb','subject') ,['class' =>'form-control','id'=>'subject_en','placeholder' => __('Subject')])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('content_gb', 'Content',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::textarea('translatable[gb][content]',get_translated($model,'gb','content') ,['class' =>'form-control','id'=>'content_en','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="shortdescRU" class="tab-pane fade ">
-                                                    <div class="form-group row">
-                                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('subject_ru', __('Subject'),['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::text('translatable[ru][subject]',get_translated($model,'ru','subject') ,['class' =>'form-control','id'=>'subject_ru','placeholder' => __('Subject')])}}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        {{Form::label('content_ru', __('Content'),['class' => 'col-sm-3'])}}
-                                                        <div class="col-sm-9">
-                                                            {{Form::textarea('translatable[ru][content]',get_translated($model,'ru','content') ,['class' =>'form-control','id'=>'content_ru','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
-
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -207,28 +138,28 @@
     </div>
     <div class="col-md-4">
         @if($shortcodes->relatedShortcoders[$model->slug])
-        <table class="table table-striped table--email-temp">
-            <thead>
-            <tr class="table--email-temp_top">
-                <th colspan="3">Specific shortcodes for this type</th>
-            </tr>
-            <tr class="table--email-temp_bottom">
-                <th></th>
-                <th>Code</th>
-                <th>Description</th>
-            </tr>
-            </thead>
-            <tbody>
+            <table class="table table-striped table--email-temp">
+                <thead>
+                <tr class="table--email-temp_top">
+                    <th colspan="3">Specific shortcodes for this type</th>
+                </tr>
+                <tr class="table--email-temp_bottom">
+                    <th></th>
+                    <th>Code</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            @foreach($shortcodes->relatedShortcoders[$model->slug] as $shortcode)
-            <tr>
-                <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                <td><b>{!! '['.$shortcode['code'].']' !!}</b></td>
-                <td>{!! $shortcode['description'] !!}</td>
-            </tr>
-            @endforeach
-            </tbody>
-        </table>
+                @foreach($shortcodes->relatedShortcoders[$model->slug] as $shortcode)
+                    <tr>
+                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                        <td><b>{!! '['.$shortcode['code'].']' !!}</b></td>
+                        <td>{!! $shortcode['description'] !!}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
         @endif
         <table class="table table-striped table--email-temp">
             <thead>
@@ -251,12 +182,12 @@
             @endforeach
             </tbody>
         </table>
-            <div class="form-group row">
-                {{Form::label('is_active', 'Status',['class' => 'col-sm-3'])}}
-                <div class="col-sm-9">
-                    {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
-                </div>
+        <div class="form-group row">
+            {{Form::label('is_active', 'Status',['class' => 'col-sm-3'])}}
+            <div class="col-sm-9">
+                {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
             </div>
+        </div>
     </div>
 
     {!! Form::close() !!}
@@ -285,9 +216,7 @@
                 ]
             });
         }
-        initTinyMce("#content_am")
-        initTinyMce("#content_en")
-        initTinyMce("#content_ru")
+        initTinyMce(".content_editor")
         $('#form').submit(function () {
             tinyMCE.triggerSave()
             // DO STUFF...
