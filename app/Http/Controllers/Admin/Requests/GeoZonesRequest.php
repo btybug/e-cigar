@@ -27,7 +27,6 @@ class GeoZonesRequest extends FormRequest
      */
     public function rules()
     {
-
         return ['name' => 'required|max:190',
             'tax_rate_id' => 'nullable|exists:tax_rates,id',
             'description' => 'required',
@@ -35,7 +34,7 @@ class GeoZonesRequest extends FormRequest
             'delivery_cost' => 'required|array',
             'country' => 'required',
             'regions' => 'required',
-            'delivery_cost.*.delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
+            // 'delivery_cost.*.delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
             'delivery_cost.*.min' => 'required|integer|min:0',
             'delivery_cost.*.max' => 'required|integer',
             'delivery_cost.*.options' => 'required|array',

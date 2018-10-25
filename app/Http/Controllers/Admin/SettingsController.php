@@ -151,12 +151,12 @@ class SettingsController extends Controller
 
     public function saveGeoZone(GeoZonesRequest $request)
     {
-        dd($request->all());
-        $data = $request->except('_token', 'delivery_cost');
+        $data = $request->except('_token', 'delivery_cost', 'delivery_cost_types_id');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
         foreach ($delivery_costs as $key => $delivery_cost) {
             $options = $delivery_cost['options'];
+             $delivery_cost['delivery_cost_types_id'] = $request->get('delivery_cost_types_id');
             unset($delivery_cost['options']);
             if (!$request->id) $key = null;
             $delivery = $geo_zone->deliveries()->updateOrCreate(['id' => $key], $delivery_cost);

@@ -113,7 +113,7 @@
                                                 <label class="col-sm-2 control-label" for="input-name"> Delivery
                                                     cost</label>
                                                 <div class="col-sm-10">
-                                                    {!! Form::select('delivery_cost['.$delivery->id.'][delivery_cost_types_id]',$delivery_types,$delivery->delivery_cost_types_id,['id' => 'input-name','class' => 'form-control']) !!}
+                                                    {!! Form::select('delivery_cost_types_id',$delivery_types,$delivery->delivery_cost_types_id,['id' => 'input-name','class' => 'form-control']) !!}
                                                 </div>
                                             </div>
                                         </td>
@@ -269,7 +269,7 @@
     <script src="{{asset('public/js/custom/get_zones.js')}}"></script>
 
     <script>
-    var count = 0;
+    var count = {!! isset($delivery)?($delivery->id + 1) : 1 !!}
     $("body").on("click", ".add-new-order-filed", function(e) {
     // console.log(e)
     let html = `  <tbody>
@@ -282,20 +282,20 @@
 </tr>
 <tr>
 <td class="table--store-settings_vert-top">
-{!! Form::number('delivery_cost_new[${count}][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+{!! Form::number('delivery_cost[${count}][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
       <span>To</span>
-      {!! Form::number('delivery_cost_new[${count}][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+      {!! Form::number('delivery_cost[${count}][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
 
       </td>
        <td>
-                              {!! Form::select('delivery_cost_new[${count}][options][new][0][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
+                              {!! Form::select('delivery_cost[${count}][options][0][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
       </td>
       <td>
-          {!! Form::number('delivery_cost_new[${count}][options][new][0][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
+          {!! Form::number('delivery_cost[${count}][options][0][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
 
       </td>
       <td>
-          {!! Form::text('delivery_cost_new[${count}][options][new][0][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
+          {!! Form::text('delivery_cost[${count}][options][0][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
 
       </td>
 
@@ -418,19 +418,19 @@ $("body").on("click", ".add-new-ship-filed", function() {
     let data_id = $(this).attr("data-id");
     let data_options_count = parseInt($(this).attr("data-options-count")) + 1;
     $(this).attr("data-options-count", data_options_count);
-    let delveriCost = $(this).attr("data-exists") === "true" ? "delivery_cost" : "delivery_cost_new"
+    let delveriCost = "delivery_cost" 
     let html = `<tr>
 <td></td>
 <td>
-{!! Form::select('${delveriCost}[${data_id}][options][new][${data_options_count}][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
+{!! Form::select('${delveriCost}[${data_id}][options][${data_options_count}][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
       </td>
       <td>
-    {!! Form::number('${delveriCost}[${data_id}][options][new][${data_options_count}][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
+    {!! Form::number('${delveriCost}[${data_id}][options][${data_options_count}][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
 
 
       </td>
       <td>
-        {!! Form::text('${delveriCost}[${data_id}][options][new][${data_options_count}][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
+        {!! Form::text('${delveriCost}[${data_id}][options][${data_options_count}][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
 
       </td>
       <td colspan="2" class="text-right">
