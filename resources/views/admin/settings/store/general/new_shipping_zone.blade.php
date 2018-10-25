@@ -87,13 +87,13 @@
                                         </td>
                                         <td>
                                             <div class="wall">
-                                                {!! Form::text('regions',null,['id' => 'region','class' => 'form-control']) !!}
+                                                {!! Form::text('',null,['id' => 'region','class' => 'form-control']) !!}
                                                 <ul class="dropdown-menu"></ul>
                                                 <div id="coupon-category" class="well well-sm view-coupon">
                                                     <ul class="region-category-list" style="list-style: none">
                                                     </ul>
                                                 </div>
-                                                <input type="hidden" class="search-hidden-input" value=""
+                                                <input name="regions" type="hidden" class="search-hidden-input" value=""
                                                        id="region-names">
                                             </div>
                                         </td>
@@ -456,6 +456,7 @@ $(".geo-zones-submit").on("click", function(e){
     }, function (err) {
         
         if (err.responseJSON.message) {
+            $(".error-place").empty()
             $(".error-place").append(`<p> ${err.responseJSON.message}</p>`)
             $(".error-place").show()
         }
