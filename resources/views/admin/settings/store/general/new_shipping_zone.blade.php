@@ -52,8 +52,8 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
-                                <div class="col-sm-10">
-                                    {!! Form::text('payment_options',null,['class' => 'form-control','id'=>'payment_options','data-role'=>'tagsinput','autocomplete' => true]) !!}
+                                <div class="col-sm-10 wall">
+                                    {!! Form::text('payment_options',null,['class' => 'form-control','id'=>'payment_options']) !!}
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list" style="list-style: none">
@@ -85,15 +85,15 @@
                                             {!! Form::select('country',$countries,null,['id' => 'country', 'class'=>'form-control']) !!}
                                         </td>
                                         <td>
-                                            <div>
-                                                {!! Form::text('regions',null,['id' => 'region','class' => 'form-control','autocomplete' => 'off','data-role'=>'tagsinput']) !!}
+                                            <div class="wall">
+                                                {!! Form::text('regions',null,['id' => 'region','class' => 'form-control']) !!}
                                                 <ul class="dropdown-menu"></ul>
                                                 <div id="coupon-category" class="well well-sm view-coupon">
-                                                    <ul class="coupon-category-list" style="list-style: none">
+                                                    <ul class="region-category-list" style="list-style: none">
                                                     </ul>
                                                 </div>
                                                 <input type="hidden" class="search-hidden-input" value=""
-                                                       id="category-names">
+                                                       id="region-names">
                                             </div>
                                         </td>
                                     </tr>
@@ -258,6 +258,8 @@
     </div>
 @stop
 @section("css")
+<link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
+
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop

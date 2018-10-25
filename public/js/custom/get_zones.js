@@ -254,10 +254,39 @@ $("body").on("change", "#ShippingZones", function(e) {
 });
 
 makeSearchItem({
-    input: "#input-category",
+    input: "#payment_options",
     name: "name",
     url: "/admin/settings/store/shipping/search-payment-options",
-    title: "Categoris",
+    title: "Payment Options",
     inputValues: "#category-names",
     containerForAppend: ".coupon-category-list"
+});
+makeSearchItem({
+    input: "#region",
+    name: "name",
+    url: "/admin/settings/store/shipping/search-find-region",
+    title: "Regions Options",
+    inputValues: "#region-names",
+    containerForAppend: ".region-category-list"
+});
+$("body").on("click", ".remove-search-tag", function() {
+    let text = $(this)
+        .closest("li")
+        .text();
+
+    let arr = JSON.parse(
+        $(this)
+            .closest(".wall")
+            .find(".search-hidden-input")
+            .val()
+    );
+    let index = arr.indexOf(text);
+    arr.splice(index, 1);
+    $(this)
+        .closest(".wall")
+        .find(".search-hidden-input")
+        .val(JSON.stringify(arr));
+    $(this)
+        .closest("li")
+        .remove();
 });
