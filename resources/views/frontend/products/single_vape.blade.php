@@ -104,7 +104,7 @@
                 @if($vape->videos && count($vape->videos))
                     <div id="jssorVideos" class="media-slider">
                         <!-- Loading Screen -->
-                        <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:580px;overflow:hidden;">
+                        <div data-u="slides" class="media-slider_slides">
                             @foreach($vape->videos as $video)
                                 <div>
                                     <div data-u="image">
@@ -117,9 +117,9 @@
                             @endforeach
                         </div>
                         <!-- Thumbnail Navigator -->
-                        <div data-u="thumbnavigator" class="jssort101" style="position:absolute;left:0px;bottom:0px;width:980px;height:100px;background-color:#000;" data-autocenter="1" data-scale-bottom="0.75">
+                        <div data-u="thumbnavigator" class="jssort101 media-slider_thumbnavigator" data-autocenter="1" data-scale-bottom="0.75">
                             <div data-u="slides">
-                                <div data-u="prototype" class="p" style="width:190px;height:90px;">
+                                <div data-u="prototype" class="p">
                                     <div data-u="thumbnailtemplate" class="t"></div>
                                     <svg viewbox="0 0 16000 16000" class="cv">
                                         <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
@@ -130,15 +130,15 @@
                             </div>
                         </div>
                         <!-- Arrow Navigator -->
-                        <div data-u="arrowleft" class="jssora106" style="width:55px;height:55px;top:258px;left:30px;" data-scale="0.75">
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                        <div data-u="arrowleft" class="jssora106 media-slider_arrownavigator media-slider_arrownavigator--left" data-scale="0.75">
+                            <svg viewbox="0 0 16000 16000" class="icon">
                                 <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
                                 <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
                                 <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
                             </svg>
                         </div>
-                        <div data-u="arrowright" class="jssora106" style="width:55px;height:55px;top:258px;right:30px;" data-scale="0.75">
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                        <div data-u="arrowright" class="jssora106 media-slider_arrownavigator media-slider_arrownavigator--right" data-scale="0.75">
+                            <svg viewbox="0 0 16000 16000" class="icon">
                                 <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
                                 <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
                                 <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
