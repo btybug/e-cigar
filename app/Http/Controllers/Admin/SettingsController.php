@@ -150,6 +150,7 @@ class SettingsController extends Controller
 
     public function saveGeoZone(Request $request)
     {
+        dd($request->all());
         $v = \Validator::make($request->all(), [
             'name' => 'required|max:190',
             'tax_rate_id' => 'nullable|exists:tax_rates,id',
@@ -186,7 +187,7 @@ class SettingsController extends Controller
             }
         }
 
-        return redirect()->back();
+        return redirect()->route('admin_settings_shipping');
     }
 
     public function findRegion(Request $request)
