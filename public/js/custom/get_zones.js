@@ -274,3 +274,22 @@ $("body").on("click", ".remove-search-tag", function() {
         .closest("li")
         .remove();
 });
+
+$("body").on("change", `[name="delivery_cost_types_id"]`, function(e) {
+    let value = $(this).val();
+    let text = "";
+    if (value === "1") {
+        text = "Order Amount";
+    } else if (value === "2") {
+        text = "Weight Amount";
+    }
+    $("body")
+        .find(".bg-my-light-pink")
+        .each(function() {
+            $(this)
+                .children()
+                .first()
+                .text(text);
+        });
+    console.log(value);
+});
