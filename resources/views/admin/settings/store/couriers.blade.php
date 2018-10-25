@@ -5,34 +5,45 @@
 @section('content')
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
+            @ok('admin_settings_store')
             <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
+            @endok
+            @ok('admin_settings_shipping')
             <li class="nav-item ">
                 <a class="nav-link" id="shipping-tab" href="{!! route('admin_settings_shipping') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Shipping</a>
             </li>
+            @endok
+            @ok('admin_settings_payment_gateways')
             <li class="nav-item">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_payment_gateways') !!}"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Payment gateways</a>
             </li>
+            @endok
+            @ok('admin_settings_couriers')
             <li class="nav-item active">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_couriers') !!}"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Courier </a>
             </li>
+            @endok
+            @ok('admin_settings_delivery')
             <li class="nav-item ">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Delivery Cost</a>
             </li>
-
+            @endok
+            @ok('admin_settings_tax_rates')
             <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tax_rates') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
+            @endok
         </ul>
         <div class="" id="myTabContent">
             <div class="" aria-labelledby="general-tab">
@@ -45,8 +56,10 @@
                                            @endif  name="{!! $courier->id !!}" class="gateways_inp" type="checkbox">
                                     <label for="cash_paymant" class="title">{!! $courier->name !!}</label>
                                 </div>
+                                @ok('admin_settings_courier_edit')
                                 <a href="{!! route('admin_settings_courier_edit',$courier->id) !!}"
                                    class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                                @endok
                             </li>
                         @endforeach
                     </ul>
