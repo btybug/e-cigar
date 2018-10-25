@@ -234,7 +234,9 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($geo_zone) {
                 return "<a class='badge btn-danger' href='".route('admin_settings_geo_zones_new',$geo_zone->id)."'><i class='fa fa-edit'></i></a>
-                    <a class='badge btn-warning' href='#'><i class='fa fa-delete'></i></a>";
+                    <a class='badge btn-warning' href='#'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-info' href='#'><i class='fa fa-copy'></i></a>
+                    ";
             })->rawColumns(['actions'])
             ->make(true);
     }
