@@ -52,10 +52,16 @@ function makeSearchItem(basicData) {
             displayKey: basicData.name,
             valueKey: basicData.name,
             source: function(query, processSync, processAsync) {
+                let data2 = {};
+                if (basicData.country) {
+                    data2 = { q: query, country: $("#country").val() };
+                } else {
+                    data2 = { q: query };
+                }
                 return $.ajax({
                     url: basicData.url,
                     type: "POST",
-                    data: { q: query },
+                    data: data2,
                     dataType: "json",
                     headers: {
                         "X-CSRF-TOKEN": $("input[name='_token']").val()
@@ -267,7 +273,8 @@ makeSearchItem({
     url: "/admin/settings/store/shipping/search-find-region",
     title: "Regions Options",
     inputValues: "#region-names",
-    containerForAppend: ".region-category-list"
+    containerForAppend: ".region-category-list",
+    country: true
 });
 $("body").on("click", ".remove-search-tag", function() {
     let text = $(this)
