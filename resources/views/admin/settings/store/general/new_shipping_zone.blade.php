@@ -4,6 +4,7 @@
 @stop
 @section('content')
     <div id="content" class="geo-zone-page">
+        <div  class="alert alert-danger error-place" style="display: none"></div>
         {!! Form::model($geo_zone,['url'=> route('admin_settings_geo_zone_save',($geo_zone)?$geo_zone->id:null),'class' => 'form-horizontal','files' => true, 'id' => 'geo-zones-form' ]) !!}
         <div class="page-header">
             <div class="container-fluid">
@@ -447,7 +448,17 @@ $(".geo-zones-submit").on("click", function(e){
     e.preventDefault();
     let data = $("#geo-zones-form").serialize()
     postSendAjax($("#geo-zones-form").attr("action"), data, function(res){
-        console.log(res)
+        console.log(1111)
+        
+        if (!res.error) {
+            location.replace(res.url)
+        }
+    }, function (err) {
+        
+        if (err.responseJSON.message) {
+            $(".error-place").append(`<p> ${err.responseJSON.message}</p>`)
+            $(".error-place").show()
+        }
     } )
 })
 
