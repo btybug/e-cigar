@@ -32,6 +32,6 @@ class CreateEmailTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('email_trabslations');
+        Schema::dropIfExists('mail_templates_translations');
     }
 }

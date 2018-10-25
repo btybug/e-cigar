@@ -60,7 +60,7 @@
                                         <ul class="coupon-category-list" style="list-style: none">
                                         </ul>
                                     </div>
-                                    <input type="hidden" name="payment_options" class="search-hidden-input" value="" id="category-names">
+                                    {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!}
                                 </div>
                             </div>
                             <div class="form-group required">
@@ -93,8 +93,7 @@
                                                     <ul class="region-category-list" style="list-style: none">
                                                     </ul>
                                                 </div>
-                                                <input name="regions" type="hidden" class="search-hidden-input" value=""
-                                                       id="region-names">
+                                                {!! Form::hidden('regions',null,['id'=>'region-names','class'=>'search-hidden-input']) !!}
                                             </div>
                                         </td>
                                     </tr>
@@ -105,8 +104,10 @@
                     </div>
                     <div class="tab-pane fade" id="delivery-cost" role="tabpanel" aria-labelledby="delivery-cost">
                         @if($geo_zone)
-                            @foreach($geo_zone->deliveries as $delivery)
+
+                            @foreach($geo_zone->deliveries as $key=>$delivery)
                                 <table class="table table-responsive table--store-settings" data-table-id="20">
+                                   @if(!$key)
                                     <tr class="bg-my-light-blue">
 
                                         <td colspan="6">
@@ -119,10 +120,11 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endif
                                     <tbody>
 
                                     <tr class="bg-my-light-pink">
-                                        <th>Order Amount</th>
+                                        <th>{!! ($delivery->delivery_cost_types_id==1)?'Order Amount':'Weight Amount' !!}</th>
                                         <th>Courier</th>
                                         <th>Cost</th>
                                         <th colspan="3">Time</th>

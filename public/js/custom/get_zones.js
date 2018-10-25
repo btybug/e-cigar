@@ -24,6 +24,12 @@ window.postSendAjax = function(url, data, success, error) {
 };
 
 function makeSearchItem(basicData) {
+    if($(basicData.inputValues).val()){
+        let arr = JSON.parse($(basicData.inputValues).val());
+        arr.forEach(item => {
+            $(basicData.containerForAppend).append(makeSearchHtml(item));
+    })
+    }
     $(basicData.input).tagsinput({
         maxTags: 5,
         confirmKeys: [13, 32, 44],
