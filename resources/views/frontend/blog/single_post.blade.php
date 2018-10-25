@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-        <div id="gp-inner-container" style="transform: none;">
+        <div id="gp-inner-container">
             <div class="container">
                 <div id="gp-left-column">
                     <div id="gp-content">
@@ -19,7 +19,7 @@
                                </div>
                                <div id="gp-share-icons-hide" style="display: none">
                                    <h3>Share This Post</h3>
-                                   <div class="gp-share-icons" style="display: inline-block">
+                                   <div class="gp-share-icons d-inline-block">
                                         <div id="share"></div>
                                        <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
                                        <a href="#" title="Facebook" class="gp-share-facebook"></a>
@@ -28,7 +28,7 @@
                                        <a href="#" class="gp-share-tumblr"></a>
                                        <a href="" title="Email" class="gp-share-email"></a> -->
                                    </div>
-                                   <div class="hide-icons" style="display: inline-block; float: right; margin-top: 10px;">
+                                   <div class="hide-icons d-inline-block float-right mt-2">
                                     <i class="fa fa-times"></i>
                                    </div>
                                </div>

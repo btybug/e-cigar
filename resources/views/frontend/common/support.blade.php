@@ -3,7 +3,7 @@
 <div class="container">
     <section class="qcbox_section">
         <div class="product-introduce">
-            <h1 class="mb-5 text-uppercase" style="color: #F0CA4D">Support</h1>
+            <h1 class="mb-5 text-uppercase text-my-yellow">Support</h1>
             <div class="row">
                 <a href="{!! route('faq') !!}" class="col-sm-3 text-center mb-4 px-5 d-flex flex-column d-block">
                     <span class="d-inline-block mb-3"><i class="fa fa-5x fa-file-text" aria-hidden="true"></i></span>

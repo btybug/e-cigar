@@ -454,6 +454,10 @@ textarea {
     display: block;
 }
 
+.d-inline-block {
+    display: inline-block
+}
+
 .bestbetter-modal {
     padding: 20px 0;
 }

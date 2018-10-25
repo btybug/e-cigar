@@ -16,7 +16,7 @@
                                          src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg"
                                          alt="CLASSIC FIT SOFT-TOUCH POLO">
                                 </span>
-                                <span style="color: #F0CA4D">Product Name</span>
+                                <span class="text-my-yellow">Product Name</span>
                             </a>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                                          src="http://e-cigar.loc/public/media/drive/af1d8604163611f0cf6da924324acc7a.jpg"
                                          alt="CLASSIC FIT SOFT-TOUCH POLO">
                                 </span>
-                                <span style="color: #F0CA4D">Product Name</span>
+                                <span class="text-my-yellow">Product Name</span>
                             </a>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                                          src="http://e-cigar.loc/public/media/drive/4e86f817e1de91452bfaf79824c4205c.jpg"
                                          alt="CLASSIC FIT SOFT-TOUCH POLO">
                                 </span>
-                                <span style="color: #F0CA4D">Product Name</span>
+                                <span class="text-my-yellow">Product Name</span>
                             </a>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                                          src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg"
                                          alt="CLASSIC FIT SOFT-TOUCH POLO">
                                 </span>
-                                <span style="color: #F0CA4D">Product Name</span>
+                                <span class="text-my-yellow">Product Name</span>
                             </a>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                                          src="http://e-cigar.loc/public/media/drive/af1d8604163611f0cf6da924324acc7a.jpg"
                                          alt="CLASSIC FIT SOFT-TOUCH POLO">
                                 </span>
-                                <span style="color: #F0CA4D">Product Name</span>
+                                <span class="text-my-yellow">Product Name</span>
                             </a>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                                          src="http://e-cigar.loc/public/media/drive/4e86f817e1de91452bfaf79824c4205c.jpg"
                                          alt="CLASSIC FIT SOFT-TOUCH POLO">
                                 </span>
-                                <span style="color: #F0CA4D">Product Name</span>
+                                <span class="text-my-yellow">Product Name</span>
                             </a>
                         </div>
                     </div>

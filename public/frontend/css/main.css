@@ -11204,6 +11204,10 @@ a.bg-dark:focus, a.bg-dark:hover {
     margin-left: auto !important;
 }
 
+.text-my-yellow {
+    color: #F0CA4D;
+}
+
 @media (min-width: 576px) {
     .m-sm-0 {
         margin: 0 !important;
