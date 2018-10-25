@@ -1,4 +1,4 @@
-const attributesJson = {};
+var attributesJson = {};
 function makeSearchItem(basicData) {
     var userList = null;
     $.ajax({
@@ -9,7 +9,6 @@ function makeSearchItem(basicData) {
             "X-CSRF-TOKEN": $("input[name='_token']").val()
         },
         success: function(data) {
-            console.log(data)
             userList = data;
         }
     });
@@ -49,7 +48,6 @@ function makeSearchItem(basicData) {
         }
     });
     $(basicData.input).on("beforeItemAdd", function(event) {
-        console.log(userList);
         checkUser = userList.some(item => {
             if (item.name === event.item) {
                 // input-items-value
@@ -61,7 +59,6 @@ function makeSearchItem(basicData) {
                     inputValue = inputValue.split(",");
                     if (!inputValue.includes(item.id)) {
                         inputValue.push(item.id);
-                        console.log(inputValue);
                         input.val(inputValue.join());
                     }
                 } else {
@@ -76,7 +73,6 @@ function makeSearchItem(basicData) {
     $(basicData.input).on("beforeItemRemove", function(event) {
         checkUser = userList.some(item => {
             if (item.name === event.item) {
-                console.log(item)
                 let input = $(event.target)
                     .closest(".main-attr-container")
                     .find(".input-items-value");
@@ -350,7 +346,6 @@ $("body").on("click", ".all-option-add-variations", function() {
 });
 
 function addAttributeToJSON(id, remove = false) {
-    console.log(id);
     let mainContainer = $("body").find(`[data-option-container="${id}"]`);
     let className = mainContainer
         .find(".all-option-add-variations")
@@ -411,6 +406,17 @@ $("body").on("click", ".remvoe-variations-select", function() {
 });
 
 $("body").on("click", ".get-all-variations", function() {
+    attributesJson = {};
+    $(".get-all-attributes-tab")
+        .children()
+        .each(function() {
+            let isShared = $(this)
+                .find(".is-shared-attributes")
+                .val();
+            if (Number(isShared)) {
+                addAttributeToJSON($(this).attr("data-id"));
+            }
+        });
     $(".all-list-attrs").empty();
     AjaxCall(
         "/admin/inventory/stock/link-all",
