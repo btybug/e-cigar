@@ -45,4 +45,9 @@ class Products extends Translatable
     {
         return $this->belongsToMany(Attributes::class, 'product_attributes', 'product_id', 'attributes_id')->whereNull('attributes.parent_id');
     }
+
+    public function variations()
+    {
+        return $this->hasMany(ProductVariation::class, 'product_id');
+    }
 }

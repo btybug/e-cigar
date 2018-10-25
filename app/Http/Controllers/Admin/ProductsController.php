@@ -61,8 +61,9 @@ class ProductsController extends Controller
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
+        $variations = $model->variations;
 
-        return $this->view('new',compact('authors','model','stocks','attrs'));
+        return $this->view('new',compact('authors','model','stocks','attrs','variations'));
     }
 
     public function applyStock(Request $request)
@@ -71,6 +72,7 @@ class ProductsController extends Controller
 
         if($stock){
             $attrs = $stock->attrs()->with('children')->where('attributes.parent_id', null)->get();
+            $variations = $stock->variations;
             $translations = $stock->getTranslationsArray();
             $stockArray = $stock->toArray();
             $stockArray['id'] = $request->id;
@@ -79,7 +81,7 @@ class ProductsController extends Controller
             $stocks = Stock::get()->pluck('name','id')->toArray();
             $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
                 ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
-            $html = \View("admin.store.products.form",compact(['model','stocks','authors','attrs']))->render();
+            $html = \View("admin.store.products.form",compact(['model','stocks','authors','attrs','variations']))->render();
 
             return \Response::json(['error' => false,'html'=>$html]);
         }

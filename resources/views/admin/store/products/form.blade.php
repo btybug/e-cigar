@@ -320,29 +320,17 @@
     color: black;
     min-height: 400px;
     padding: 20px;">
-                    <ul class="get-all-attributes-tab" style="padding-left:0">
-                        <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;"
-                            class="option-elm-attributes"><a href="#">text</a>
-                            <div class="buttons">
-                                <button class="remove-all-attributes btn btn-sm btn-danger"><i
-                                            class="fa fa-trash"></i></button>
-                            </div>
-                        </li>
-                        <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;"
-                            class="option-elm-attributes"><a href="#">text</a>
-                            <div class="buttons">
-                                <button class="remove-all-attributes btn btn-sm btn-danger"><i
-                                            class="fa fa-trash"></i></button>
-                            </div>
-                        </li>
-                        <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;"
-                            class="option-elm-attributes"><a href="#">text</a>
-                            <div class="buttons">
-                                <button class="remove-all-attributes btn btn-sm btn-danger"><i
-                                            class="fa fa-trash"></i></button>
-                            </div>
-                        </li>
-                    </ul>
+                <ul class="get-all-attributes-tab" style="padding-left:0">
+                    @if(isset($variations) && count($variations))
+                            <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;"
+                                class="option-elm-attributes"><a href="#">Main Stock</a>
+                                <div class="buttons">
+                                    <button class="remove-all-attributes btn btn-sm btn-danger"><i
+                                                class="fa fa-trash"></i></button>
+                                </div>
+                            </li>
+                    @endif
+                </ul>
                 </div>
                 <div class="button-add text-center">
                     <a href="javascript:void(0)" class="btn btn-info btn-block get-all-attributes-tab-event"><i
@@ -363,10 +351,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr id="discount-row0">
+                @if(isset($variations) && count($variations))
+                    @foreach($variations as $variation)
+                        <tr id="discount-row0">
                     <td class="text-left"><select name="product_discount[0][customer_group_id]"
                                                   class="form-control">
-                            <option value="1" selected="selected">Default</option>
+                            <option value="1" selected="selected">{{ $variation->variation_id }}</option>
                         </select></td>
                     <td class="text-right"><input type="text" name="product_discount[0][price]"
                                                   value="88.0000" placeholder="Price"
@@ -395,70 +385,8 @@
                                     class="fa fa-minus-circle"></i></button>
                     </td>
                 </tr>
-                <tr id="discount-row1">
-                    <td class="text-left"><select name="product_discount[1][customer_group_id]"
-                                                  class="form-control">
-                            <option value="1" selected="selected">Default</option>
-                        </select></td>
-                    <td class="text-right"><input type="text" name="product_discount[1][price]"
-                                                  value="77.0000" placeholder="Price"
-                                                  class="form-control"/></td>
-                    <td class="text-left" style="width: 20%;">
-                        <div class="input-group ">
-                            <input type="text" name="product_discount[1][date_start]" value=""
-                                   placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                   class="form-control date"/>
-                            <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                    </td>
-                    <td class="text-left" style="width: 20%;">
-                        <div class="input-group ">
-                            <input type="text" name="product_discount[1][date_end]" value=""
-                                   placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                   class="form-control date"/>
-                            <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                    </td>
-                    <td class="text-left">
-                        <button type="button" onclick="$('#discount-row1').remove();"
-                                data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                    class="fa fa-minus-circle"></i></button>
-                    </td>
-                </tr>
-                <tr id="discount-row2">
-                    <td class="text-left"><select name="product_discount[2][customer_group_id]"
-                                                  class="form-control">
-                            <option value="1" selected="selected">Default</option>
-                        </select></td>
-                    <td class="text-right"><input type="text" name="product_discount[2][price]"
-                                                  value="66.0000" placeholder="Price"
-                                                  class="form-control"/></td>
-                    <td class="text-left" style="width: 20%;">
-                        <div class="input-group ">
-                            <input type="text" name="product_discount[2][date_start]" value=""
-                                   placeholder="Date Start" data-date-format="YYYY-MM-DD"
-                                   class="form-control date"/>
-                            <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                    </td>
-                    <td class="text-left" style="width: 20%;">
-                        <div class="input-group ">
-                            <input type="text" name="product_discount[2][date_end]" value=""
-                                   placeholder="Date End" data-date-format="YYYY-MM-DD"
-                                   class="form-control date"/>
-                            <span class="input-group-btn">
-<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>
-</span></div>
-                    </td>
-                    <td class="text-left">
-                        <button type="button" onclick="$('#discount-row2').remove();"
-                                data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
-                                    class="fa fa-minus-circle"></i></button>
-                    </td>
-                </tr>
+                    @endforeach
+                @endif
                 </tbody>
                 <tfoot>
                 <tr>
