@@ -3,6 +3,7 @@
 use App\Models\ProductAttribute;
 use App\Models\StockAttribute;
 use App\Models\StockVariation;
+use App\Models\StockVariationOption;
 
 /**
  * Created by PhpStorm.
@@ -56,15 +57,21 @@ class StockService
         return $result;
     }
 
-    public function saveVariations ($stock,array $data = [])
+    public function saveVariations ($stock,array $data = [], array $options = [])
     {
         $stock->variations()->delete();
         if(count($data)){
+//            dd($data,$options);
             foreach ($data as $variation_id => $data) {
                 $newData = json_decode($data,true);
                 unset($newData['_token']);
                 $newData['stock_id'] = $stock->id;
-                StockVariation::create($newData);
+                $variation = StockVariation::create($newData);
+                if(isset($options[$variation_id]) && count($options[$variation_id])){
+                    foreach ($options[$variation_id] as $option){
+                        $variation->options()->create($option);
+                    }
+                }
             }
         }
     }

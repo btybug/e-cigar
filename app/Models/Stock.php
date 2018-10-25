@@ -42,7 +42,8 @@ class Stock extends Translatable
 
     public function attrs()
     {
-        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id')->whereNull('attributes.parent_id');
+        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id')
+            ->select('attributes.*','stock_attributes.is_shared as is_shared')->whereNull('attributes.parent_id');
     }
 
     public function variations()

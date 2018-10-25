@@ -9,6 +9,7 @@ function makeSearchItem(basicData) {
             "X-CSRF-TOKEN": $("input[name='_token']").val()
         },
         success: function(data) {
+            console.log(data)
             userList = data;
         }
     });
@@ -75,12 +76,14 @@ function makeSearchItem(basicData) {
     $(basicData.input).on("beforeItemRemove", function(event) {
         checkUser = userList.some(item => {
             if (item.name === event.item) {
+                console.log(item)
                 let input = $(event.target)
                     .closest(".main-attr-container")
                     .find(".input-items-value");
                 let inputValue = input.val();
                 let arr = inputValue.split(",");
-                let index = arr.indexOf(item.id);
+                let index = arr.indexOf(item.id + "");
+
                 arr.splice(index, 1);
                 input.val(arr.join());
                 return true;

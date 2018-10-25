@@ -5,6 +5,7 @@ namespace App\Models;
 
 use App\Models\Common\Translatable;
 use App\Models\Translations\AttributeTranslation;
+use phpDocumentor\Reflection\Types\Self_;
 
 class Attributes extends Translatable
 {
@@ -29,6 +30,12 @@ class Attributes extends Translatable
     public function parent()
     {
         return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public static function getById($id,$col = 'name')
+    {
+        $attribute = self::find($id);
+        return ($attribute && isset($attribute->{$col})) ? $attribute->{$col} : null;
     }
 
     public static function recursiveItems($iems, $i = 0, $data = [])

@@ -243,7 +243,7 @@
                                                                     href="#">{!! $attribute->name !!}</a>
                                                             <div class="buttons">
                                                                 <a href="javascript:void(0)"
-                                                                   class="btn btn-sm all-option-add-variations btn-success"><i
+                                                                   class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i
                                                                             class="fa fa-money"></i></a>
                                                                 <a href="javascript:void(0)"
                                                                    class="remove-all-attributes btn btn-sm btn-danger"><i
@@ -357,9 +357,9 @@
                                 <div class="col-md-5">
                                     <div class="basic-left basic-wall">
                                         <div class="all-list-attrs" style="min-height:300px;">
-                                            <!-- <ul class="attribute-list-items">
-
-                                            </ul> -->
+                                            @if($model)
+                                                @include('admin.inventory._partials.link_all_edit')
+                                            @endif
                                         </div>
                                         <div class="button-add text-center">
                                             <div class="col-md-6">

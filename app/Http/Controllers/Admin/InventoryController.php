@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\Stock;
+use App\Models\StockVariationOption;
 use App\Services\StockService;
 use Illuminate\Http\Request;
 
@@ -41,12 +42,14 @@ class InventoryController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
+//        dd($model->variations);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         return $this->view('stock_new', compact(['model', 'attrs']));
     }
 
     public function postStock(Request $request)
     {
+//        dd($request->get('variations'),$request->get('variation_options'));
         $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations','variation_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
@@ -54,7 +57,7 @@ class InventoryController extends Controller
         $options = $this->stockService->makeOptions($stock, $request->get('options',[]));
         $stock->attrs()->syncWithoutDetaching($options);
 
-        $this->stockService->saveVariations($stock, $request->get('variations',[]));
+        $this->stockService->saveVariations($stock, $request->get('variations',[]),$request->get('variation_options',[]));
 
         return redirect()->route('admin_stock');
     }

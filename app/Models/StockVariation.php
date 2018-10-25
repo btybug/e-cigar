@@ -22,4 +22,9 @@ class StockVariation extends Model
     {
         return $this->belongsTo(Stock::class, 'stock_id');
     }
+
+    public function options()
+    {
+        return $this->hasMany(StockVariationOption::class, 'variation_id');
+    }
 }
