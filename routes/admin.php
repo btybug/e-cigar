@@ -21,6 +21,7 @@ Route::group(['prefix' => 'settings'], function () {
             Route::get('/new/{id?}', 'Admin\SettingsController@geoZoneForm')->name('admin_settings_geo_zones_new');
             Route::post('/save-geo-zone/{id?}', 'Admin\SettingsController@saveGeoZone')->name('admin_settings_geo_zone_save');
             Route::post('/search-payment-options', 'Admin\SettingsController@searchPaymentOptions')->name('admin_settings_search-payment-options');
+            Route::post('/search-find-region', 'Admin\SettingsController@searchPaymentOptions')->name('admin_settings_search-find-region');
             Route::post('/find-region', 'Admin\SettingsController@findRegion')->name('admin_store_shipping_zone_region_find');
         });
         Route::group(['prefix' => 'tax-rates'], function () {
