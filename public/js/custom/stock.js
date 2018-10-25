@@ -175,18 +175,23 @@ $("body").on("click", ".add-attribute-event", function() {
                                                 <a href="javascript:void(0)" class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></a>
                                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                 </div>
-                                                <input type="hidden" name="attributes[${id}][value]" value="${id}">
+                                                <input type="hidden" name="attributes[${id}][attributes_id]" value="${id}">
                                                 <input type="hidden" class="is-shared-attributes" name="attributes[${id}][is_shared]"
-                                                value="false">      
+                                                value="0">      
                                                 </li>`);
                         $(".choset-attributes").append(
                             `<div style="height: 50px" class="attributes-container-${id} main-attr-container"></div>`
                         );
                         let value = "";
                         let optionIds = "";
-                        res2.data.forEach(item => {
-                            value += item.name + ",";
-                            optionIds += item.id + ",";
+                        res2.data.forEach((item, index) => {
+                            let comon = ""
+                            if (res2.data.length - 1 !== index) {
+                                comon = ","
+                            }
+                            value += item.name + comon
+
+                            optionIds += item.id + comon
                             let html = `<li class="btn btn-primary attributes-item">
                                           <a href="#" class="title-attr">${
                                               item.name
@@ -330,13 +335,13 @@ $("body").on("click", ".all-option-add-variations", function() {
         $(this)
             .removeClass("btn-success")
             .addClass("btn-primary");
-        parentElm.find(".is-shared-attributes").val("true");
+        parentElm.find(".is-shared-attributes").val(1);
         addAttributeToJSON(id);
     } else {
         $(this)
             .removeClass("btn-primary")
             .addClass("btn-success");
-        parentElm.find(".is-shared-attributes").val("false");
+        parentElm.find(".is-shared-attributes").val(0);
 
         addAttributeToJSON(id, true);
     }

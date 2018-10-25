@@ -249,7 +249,7 @@
                                                                    class="remove-all-attributes btn btn-sm btn-danger"><i
                                                                             class="fa fa-trash"></i></a>
                                                             </div>
-                                                            <input type="hidden" name="attributes[{!! $attribute->id !!}][value]"
+                                                            <input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"
                                                                    value="{!! $attribute->id !!}">
                                                             <input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"
                                                             value="{!! $attribute->is_shared !!}">      
