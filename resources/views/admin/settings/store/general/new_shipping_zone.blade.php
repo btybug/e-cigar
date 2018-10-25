@@ -54,13 +54,13 @@
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
                                 <div class="col-sm-10 wall">
-                                    {!! Form::text('payment_options',null,['class' => 'form-control','id'=>'payment_options']) !!}
+                                    {!! Form::text('',null,['class' => 'form-control','id'=>'payment_options']) !!}
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list" style="list-style: none">
                                         </ul>
                                     </div>
-                                    <input type="hidden" class="search-hidden-input" value="" id="category-names">
+                                    <input type="hidden" name="payment_options" class="search-hidden-input" value="" id="category-names">
                                 </div>
                             </div>
                             <div class="form-group required">
