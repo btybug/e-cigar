@@ -171,7 +171,7 @@ class SettingsController extends Controller
             }
         }
 
-        return redirect()->route('admin_settings_shipping');
+        return ['error'=>false,'url'=>route('admin_settings_shipping')];
     }
 
     public function findRegion(Request $request)

@@ -34,26 +34,13 @@ class GeoZonesRequest extends FormRequest
             'delivery_cost' => 'required|array',
             'country' => 'required',
             'regions' => 'required',
-            // 'delivery_cost.*.delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
+            'delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
             'delivery_cost.*.min' => 'required|integer|min:0',
             'delivery_cost.*.max' => 'required|integer',
             'delivery_cost.*.options' => 'required|array',
             'delivery_cost.*.options.*.courier_id' => 'required|exists:couriers,id',
             'delivery_cost.*.options.*.cost' => 'required|between:0,99.999999',
             'delivery_cost.*.options.*.time' => 'required',
-
-//            'delivery_cost.*.options.new' => 'required|array',
-//            'delivery_cost.*.options.new.*.courier_id' => 'required|exists:couriers,id',
-//            'delivery_cost.*.options.new.*.cost' => 'required|between:0,99.999999',
-//            'delivery_cost.*.options.new.*.time' => 'required',
-//
-//            'delivery_cost_new.*.delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
-//            'delivery_cost_new.*.min' => 'required|integer|min:0',
-//            'delivery_cost_new.*.max' => 'required|integer',
-//            'delivery_cost_new.*.options.new' => 'required|array',
-//            'delivery_cost_new.*.options.new.*.courier_id' => 'required|exists:couriers,id',
-//            'delivery_cost_new.*.options.new.*.cost' => 'required|between:0,99.999999',
-//            'delivery_cost_new.*.options.new.*.time' => 'required',
-            ];
+        ];
     }
 }
