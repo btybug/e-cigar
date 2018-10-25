@@ -24,30 +24,10 @@ window.postSendAjax = function(url, data, success, error) {
 };
 
 function makeSearchItem(basicData) {
-    // basicData = {
-    //     input: "input",
-    //     name: "name",
-    //     url: "url",
-    //     title: "title",
-    //     inputValues: "inputValues",
-    //     containerForAppend: "containerForAppend",
-    //     inputValues: "inputValues"
-    // };
-    var userList = null;
-    $.ajax({
-        url: basicData.url,
-        type: "POST",
-        dataType: "json",
-        headers: {
-            "X-CSRF-TOKEN": $("input[name='_token']").val()
-        },
-        success: function(data) {
-            userList = data.map(item => item.name);
-        }
-    });
     $(basicData.input).tagsinput({
         maxTags: 5,
         confirmKeys: [13, 32, 44],
+        freeInput: false,
         typeaheadjs: {
             displayKey: basicData.name,
             valueKey: basicData.name,
@@ -89,10 +69,7 @@ function makeSearchItem(basicData) {
     $(basicData.input).on("beforeItemAdd", function(event) {
         event.cancel = true;
         let valueCatergorayName = $(basicData.inputValues).val();
-        if (
-            !valueCatergorayName.includes(event.item) &&
-            userList.includes(event.item)
-        ) {
+        if (!valueCatergorayName.includes(event.item)) {
             $(basicData.containerForAppend).append(makeSearchHtml(event.item));
             if (
                 $(basicData.inputValues)
