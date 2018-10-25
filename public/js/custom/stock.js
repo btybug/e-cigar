@@ -80,7 +80,7 @@ function makeSearchItem(basicData) {
                     .find(".input-items-value");
                 let inputValue = input.val();
                 let arr = inputValue.split(",");
-                let index = inputValue.indexOf(item.id);
+                let index = arr.indexOf(item.id);
                 arr.splice(index, 1);
                 input.val(arr.join());
                 return true;
@@ -90,7 +90,6 @@ function makeSearchItem(basicData) {
     });
     $(basicData.input).on("itemAdded", function() {
         let id = $(this).attr("data-id");
-        console.log(id);
         addAttributeToJSON(id);
     });
     function makeSearchHtml(data) {
@@ -185,13 +184,13 @@ $("body").on("click", ".add-attribute-event", function() {
                         let value = "";
                         let optionIds = "";
                         res2.data.forEach((item, index) => {
-                            let comon = ""
+                            let comon = "";
                             if (res2.data.length - 1 !== index) {
-                                comon = ","
+                                comon = ",";
                             }
-                            value += item.name + comon
+                            value += item.name + comon;
 
-                            optionIds += item.id + comon
+                            optionIds += item.id + comon;
                             let html = `<li class="btn btn-primary attributes-item">
                                           <a href="#" class="title-attr">${
                                               item.name
