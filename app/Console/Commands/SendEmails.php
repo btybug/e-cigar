@@ -44,6 +44,7 @@ class SendEmails extends Command
         foreach ($redayEmailsJobs as $job) {
             try {
                 $to=($job->email->to)??$job->to;
+                $job->email->to=$to;
                 Mail::to($to)
                     ->send(new SendEmail($job));
                 $job->status = 4;

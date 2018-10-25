@@ -24,12 +24,31 @@ class ShortCodes
         'receiver_last_name' => ['code' => 'receiver_last_name', 'description' => 'email receiver user last name'],
         'receiver_last_phone' => ['code' => 'receiver_last_phone', 'description' => 'email receiver user last name'],
     ];
-}
 
-function MailShortcoder($content,$user=null,$type=null)
-{
-    foreach ($this->mailShortcodes as $shortcode){
-        $content=str_replace('['.$shortcode['code'].']',call_user_func($shortcode['code'],$user));
+
+    function MailShortcoder($content, $user = null)
+    {
+        foreach ($this->mailShortcodes as $shortcode) {
+            if (function_exists($shortcode['code'])) {
+                $fn = $shortcode['code'];
+                $content = str_replace('[' . $shortcode['code'] . ']', $fn($user),$content);
+            }
+        }
+        return $content;
     }
-//$content=
+
+    function relatedShortcoder($content, $user = null)
+    {
+        foreach ($this->relatedShortcoders as $relatedShortcoders) {
+            foreach ($relatedShortcoders as $shortcode) {
+                if (function_exists($shortcode['code'])) {
+                    $fn = $shortcode['code'];
+                    $content = str_replace('[' . $shortcode['code'] . ']', $fn($user),$content);
+
+                }
+            }
+        }
+        return $content;
+    }
+
 }

@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\MailJob;
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -18,6 +19,7 @@ class SendEmail extends Mailable
      * @return void
      */
     public $job;
+    public $to;
     public function __construct(MailJob $job)
     {
        $this->job=$job;
@@ -34,7 +36,8 @@ class SendEmail extends Mailable
             ->subject($this->job->email->subject)
             ->view('send_email')
             ->with([
-            'email'=>$this->job->email
+            'email'=>$this->job->email,
+            'user'=>User::where('email',$this->job->email->to)->first(),
         ]);
     }
 }

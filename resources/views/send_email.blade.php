@@ -1,1 +1,1 @@
-{!! $email->content !!}
+{!! sc($email->content,$user) !!}

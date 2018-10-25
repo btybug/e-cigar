@@ -30,7 +30,7 @@ function getAlertIconByClass($class = 'success')
 
 function is_enabled_model_boot()
 {
- return Config::get('model_boot',false);
+    return Config::get('model_boot', false);
 
 }
 
@@ -40,15 +40,18 @@ function is_enabled_media_modal()
     return $_MEDIA_BUTTON;
 
 }
-function enableMedia(){
+
+function enableMedia()
+{
     global $_MEDIA_BUTTON;
     $_MEDIA_BUTTON = true;
 }
-function media_button(string $name,$model=null,bool $multiple = false, $slug = 'drive')
+
+function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive')
 {
     enableMedia();
-    $uniqId=uniqid('media_');
-    return view('media.button', compact(['multiple', 'slug','name','model','uniqId']));
+    $uniqId = uniqid('media_');
+    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId']));
 }
 
 
@@ -104,8 +107,8 @@ function getModuleRoutes($method, $sub, $permissions = [])
     ksort($routes[$method]);
     $routes[$method] = (keysort($routes[$method], $sub));
 
-    if(isset($routes[$method][$sub]))
-       return collect($routes[$method][$sub]);
+    if (isset($routes[$method][$sub]))
+        return collect($routes[$method][$sub]);
 
 }
 
@@ -154,10 +157,11 @@ function array_sort_with_count(array $array, $count)
     return false;
 }
 
-function get_pluck($data,$key,$name){
+function get_pluck($data, $key, $name)
+{
     $result = [];
-    if(count($data)){
-        foreach ($data as $datum){
+    if (count($data)) {
+        foreach ($data as $datum) {
             $result[$datum->{$key}] = $datum->{$name};
         }
     }
@@ -165,59 +169,94 @@ function get_pluck($data,$key,$name){
     return $result;
 }
 
-function get_translated($model,$locale,$column){
+function get_translated($model, $locale, $column)
+{
 
-    if(is_array($model)){
-        $result = get_translated_by_array($model,$locale,$column);
-    }else{
+    if (is_array($model)) {
+        $result = get_translated_by_array($model, $locale, $column);
+    } else {
         $result = ($model && $model->getTranslation($locale)) ? $model->getTranslation($locale)->{$column} : null;
     }
     return $result;
 }
 
-function get_translated_by_array($model,$locale,$column){
+function get_translated_by_array($model, $locale, $column)
+{
     return ($model && isset($model['translatable'][$locale][$column])) ? $model['translatable'][$locale][$column] : null;
 }
 
-function post_url($post){
-    return ($post->url) ? "/blog/".$post->url : "#";
+function post_url($post)
+{
+    return ($post->url) ? "/blog/" . $post->url : "#";
 }
 
-function get_languages(){
+function get_languages()
+{
     return \App\Models\SiteLanguages::all();
 }
 
-function get_languages_pluck(){
-    return \App\Models\SiteLanguages::pluck('name','code')->all();
+function get_languages_pluck()
+{
+    return \App\Models\SiteLanguages::pluck('name', 'code')->all();
 }
 
-function get_default_language(){
-    $lang = \App\Models\SiteLanguages::where('default',1)->first();
+function get_default_language()
+{
+    $lang = \App\Models\SiteLanguages::where('default', 1)->first();
     return $lang;
 }
 
-function reset_password_link($token){
-    return url(config('app.url').route('password.reset', $token, false));
-}
-function app_name(){
-
-}
-function app_url(){
-
-}
-function app_blog_url(){
-
-}
-function receiver_name(){
-
-}
-function receiver_last_name(){
-
-}
-function receiver_last_phone(){
-
+function reset_password_link($token)
+{
+    return url(config('app.url') . route('password.reset', $token, false));
 }
 
-function shortUniqueID(){
+function confirmation_link($notifiable)
+{
+    return URL::temporarySignedRoute(
+        'verification.verify', \Carbon\Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
+    );
+}
+
+function app_name()
+{
+    return env('APP_NAME');
+}
+
+function app_url($user)
+{
+    return env('APP_URL');
+}
+
+function app_blog_url($user)
+{
+    return route('blog');
+}
+
+function receiver_name($user)
+{
+    return $user->name;
+}
+
+function receiver_last_name($user)
+{
+    return $user->last_name;
+}
+
+function receiver_last_phone($user)
+{
+    return $user->phone;
+}
+
+function shortUniqueID()
+{
     return base_convert(microtime(false), 10, 36);
+}
+
+function sc($content, $user)
+{
+    $ShortCodes = new \App\Services\ShortCodes();
+    $content = $ShortCodes->MailShortcoder($content, $user);
+    $content = $ShortCodes->relatedShortcoder($content, $user);
+    return $content;
 }
