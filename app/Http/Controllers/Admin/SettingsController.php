@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\GeoZonesRequest;
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Couriers;
@@ -148,7 +149,7 @@ class SettingsController extends Controller
     }
 
 
-    public function saveGeoZone(Request $request)
+    public function saveGeoZone(GeoZonesRequest $request)
     {
         dd($request->all());
         $data = $request->except('_token', 'delivery_cost');

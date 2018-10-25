@@ -446,7 +446,7 @@ $("body").on("click", ".add-new-ship-filed", function() {
 $(".geo-zones-submit").on("click", function(e){
     e.preventDefault();
     let data = $("#geo-zones-form").serialize()
-    postSendAjax($("#geo-zones-form").attr("action"), {data}, function(res){
+    postSendAjax($("#geo-zones-form").attr("action"), data, function(res){
         console.log(res)
     } )
 })
