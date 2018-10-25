@@ -50,13 +50,47 @@ function makeSearchItem(basicData) {
     $(basicData.input).on("beforeItemAdd", function(event) {
         console.log(userList);
         checkUser = userList.some(item => {
-            return item.name === event.item;
+            if (item.name === event.item) {
+                // input-items-value
+                let input = $(event.target)
+                    .closest(".main-attr-container")
+                    .find(".input-items-value");
+                let inputValue = input.val();
+                if (inputValue) {
+                    inputValue = inputValue.split(",");
+                    if (!inputValue.includes(item.id)) {
+                        inputValue.push(item.id);
+                        console.log(inputValue);
+                        input.val(inputValue.join());
+                    }
+                } else {
+                    input.val(item.id);
+                }
+
+                return true;
+            }
         });
         event.cancel = !checkUser;
-        console.log(event.cancel);
+    });
+    $(basicData.input).on("beforeItemRemove", function(event) {
+        checkUser = userList.some(item => {
+            if (item.name === event.item) {
+                let input = $(event.target)
+                    .closest(".main-attr-container")
+                    .find(".input-items-value");
+                let inputValue = input.val();
+                let arr = inputValue.split(",");
+                let index = inputValue.indexOf(item.id);
+                arr.splice(index, 1);
+                input.val(arr.join());
+                return true;
+            }
+        });
+        event.cancel = !checkUser;
     });
     $(basicData.input).on("itemAdded", function() {
         let id = $(this).attr("data-id");
+        console.log(id);
         addAttributeToJSON(id);
     });
     function makeSearchHtml(data) {
@@ -64,21 +98,26 @@ function makeSearchItem(basicData) {
     }
 }
 
-$("body").on('change','#stock',function () {
+$("body").on("change", "#stock", function() {
     var stockId = $(this).val();
-    if(stockId != ''){
-        var form = $(this).closest('form');
+    if (stockId != "") {
+        var form = $(this).closest("form");
         AjaxCall("/admin/store/apply-stock", form.serialize(), function(res) {
             if (!res.error) {
                 $(".tabs_content").html(res.html);
-                var elementList = document.querySelectorAll('.main-attr-container');
+                var elementList = document.querySelectorAll(
+                    ".main-attr-container"
+                );
                 // Iterate through each element in the array
                 for (var i = 0; i < elementList.length; i++) {
                     var ele = elementList[i];
                     makeSearchItem({
-                        input: '.attributes-item-input-'+$(ele).data('attr-id'),
+                        input:
+                            ".attributes-item-input-" + $(ele).data("attr-id"),
                         name: "name",
-                        url: '/admin/inventory/attributes/get-options-by-id/'+$(ele).data('attr-id'),
+                        url:
+                            "/admin/inventory/attributes/get-options-by-id/" +
+                            $(ele).data("attr-id"),
                         title: "Attributes",
                         inputValues: "#tags-names",
                         containerForAppend: ".coupon-tags-list"
@@ -113,9 +152,7 @@ $("body").on("click", ".get-all-attributes-tab-event", function() {
     });
 });
 
-$(document).on('beforeItemRemove', 'input', function(event) {
-    console.log(event.item);
-});
+$(document).on("beforeItemRemove", "input", function(event) {});
 
 $("body").on("click", ".add-attribute-event", function() {
     let id = $(this).data("id");
@@ -138,12 +175,13 @@ $("body").on("click", ".add-attribute-event", function() {
                                                 <a href="javascript:void(0)" class="btn btn-sm all-option-add-variations btn-success"><i class="fa fa-money"></i></a>
                                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                 </div>
-                                                <input type="hidden" name="attributes[]" value="${id}">
+                                                <input type="hidden" name="attributes[${id}][value]" value="${id}">
+                                                <input type="hidden" class="is-shared-attributes" name="attributes[${id}][is_shared]"
+                                                value="false">      
                                                 </li>`);
                         $(".choset-attributes").append(
                             `<div style="height: 50px" class="attributes-container-${id} main-attr-container"></div>`
                         );
-                        console.log(res2.data);
                         let value = "";
                         let optionIds = "";
                         res2.data.forEach(item => {
@@ -158,7 +196,7 @@ $("body").on("click", ".add-attribute-event", function() {
                         });
                         $(`.attributes-container-${id}`).append(
                             `<input data-id=${id} class="attributes-item-input-${id}"  value="${value}">
-                             <input type="hidden" name="options[${id}]" value="${optionIds}">`
+                             <input type="hidden" class="input-items-value" name="options[${id}]" value="${optionIds}">`
                         );
                         // Tags
                         makeSearchItem({
@@ -285,42 +323,44 @@ $("body").on("click", ".restore-item", function() {
 });
 
 $("body").on("click", ".all-option-add-variations", function() {
-    let id = $(this)
-        .closest(".option-elm-attributes")
-        .attr("data-id");
+    let parentElm = $(this).closest(".option-elm-attributes");
+
+    let id = parentElm.attr("data-id");
     if ($(this).hasClass("btn-success")) {
         $(this)
             .removeClass("btn-success")
             .addClass("btn-primary");
+        parentElm.find(".is-shared-attributes").val("true");
         addAttributeToJSON(id);
     } else {
         $(this)
             .removeClass("btn-primary")
             .addClass("btn-success");
+        parentElm.find(".is-shared-attributes").val("false");
+
         addAttributeToJSON(id, true);
     }
 });
 
 function addAttributeToJSON(id, remove = false) {
+    console.log(id);
     let mainContainer = $("body").find(`[data-option-container="${id}"]`);
     let className = mainContainer
         .find(".all-option-add-variations")
         .hasClass("btn-primary");
-    console.log(className);
     let text = mainContainer.find("a").text();
     let classInputContainer = `.attributes-container-${id}`;
-    let inputOptions = $(classInputContainer).find(
-        `.attributes-item-input-${id}`
-    );
+    let inputOptions = $(classInputContainer).find(`.input-items-value`);
+    // let inputOptions = $(classInputContainer).find(
+    //     `.attributes-item-input-${id}`
+    // );
     let inputOptionsValue = inputOptions.val();
 
     if (!remove && className) {
-        attributesJson[text] = inputOptionsValue.split(",");
+        attributesJson[id] = inputOptionsValue.split(",");
     } else {
         delete attributesJson[text];
     }
-
-    console.log(attributesJson);
 }
 
 function HTMLmakeSelectVaritionOptions(name, data, text = "") {
@@ -372,56 +412,62 @@ $("body").on("click", ".get-all-variations", function() {
             if (!res.error) {
                 $(".all-list-attrs").html(res.html);
             }
-            console.log(res);
         }
     );
 });
 
 $("body").on("click", ".variation-select", function() {
-    var variationId = $(this).attr('variation-id');
-    var data = $("body").find("#variation_"+variationId).val();
-    AjaxCall("/admin/inventory/stock/variation-form", {variationId:variationId,data:data}, function(res) {
-        if (!res.error) {
-            $(".variation-settings")
-                .empty()
-                .append(res.html);
+    var variationId = $(this).attr("variation-id");
+    var data = $("body")
+        .find("#variation_" + variationId)
+        .val();
+    AjaxCall(
+        "/admin/inventory/stock/variation-form",
+        { variationId: variationId, data: data },
+        function(res) {
+            if (!res.error) {
+                $(".variation-settings")
+                    .empty()
+                    .append(res.html);
+            }
         }
-    });
+    );
 });
 
 $("body").on("click", ".apply-variation", function() {
     var data = [];
-    var variationId = $(this).attr('variation-id');
+    var variationId = $(this).attr("variation-id");
     var varationForm = $("#variation_form").serializeArray();
     // $.each(varationForm, function(key, val) {
     //     var name = val.name;
     //     data[name] = val.value;
     // });
-    var obj = varationForm.reduce(function ( total, current ) {
-        total[ current.name ] = current.value;
+    var obj = varationForm.reduce(function(total, current) {
+        total[current.name] = current.value;
         return total;
     }, {});
-    $("#variation_"+variationId).val(JSON.stringify(obj));
+    $("#variation_" + variationId).val(JSON.stringify(obj));
     $("#variation_form").remove();
 });
 
-window.onload = function () {
-    var elementList = document.querySelectorAll('.main-attr-container');
+window.onload = function() {
+    var elementList = document.querySelectorAll(".main-attr-container");
 
     // Iterate through each element in the array
     for (var i = 0; i < elementList.length; i++) {
         var ele = elementList[i];
         makeSearchItem({
-            input: '.attributes-item-input-'+$(ele).data('attr-id'),
+            input: ".attributes-item-input-" + $(ele).data("attr-id"),
             name: "name",
-            url: '/admin/inventory/attributes/get-options-by-id/'+$(ele).data('attr-id'),
+            url:
+                "/admin/inventory/attributes/get-options-by-id/" +
+                $(ele).data("attr-id"),
             title: "Attributes",
             inputValues: "#tags-names",
             containerForAppend: ".coupon-tags-list"
         });
     }
-}
-
+};
 
 // val.forEach((item, index) => {
 //     // console.log(item)

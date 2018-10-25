@@ -249,8 +249,10 @@
                                                                    class="remove-all-attributes btn btn-sm btn-danger"><i
                                                                             class="fa fa-trash"></i></a>
                                                             </div>
-                                                            <input type="hidden" name="attributes[]"
+                                                            <input type="hidden" name="attributes[{!! $attribute->id !!}][value]"
                                                                    value="{!! $attribute->id !!}">
+                                                            <input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"
+                                                            value="{!! $attribute->is_shared !!}">      
                                                         </li>
                                                     @endforeach
                                                 @endif
@@ -274,7 +276,7 @@
                                                         <input data-id="{{$attribute->id}}"
                                                                class="attributes-item-input-{{$attribute->id}}"
                                                                value="{{ implode(',',$attribute->children->pluck('name')->all()) }}">
-                                                        <input type="hidden" name="options[{{$attribute->id}}]"
+                                                        <input type="hidden" class="input-items-value" name="options[{{$attribute->id}}]"
                                                                value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
                                                     </div>
                                                 @endforeach
