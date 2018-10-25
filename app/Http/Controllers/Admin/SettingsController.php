@@ -151,23 +151,6 @@ class SettingsController extends Controller
     public function saveGeoZone(Request $request)
     {
         dd($request->all());
-        $v = \Validator::make($request->all(), [
-            'name' => 'required|max:190',
-            'tax_rate_id' => 'nullable|exists:tax_rates,id',
-            'description' => 'required',
-            'payment_options' => 'required',
-            'delivery_cost' => 'required|array',
-            'country' => 'required',
-            'regions' => 'required',
-            'delivery_cost.*.delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
-            'delivery_cost.*.min' => 'required|integer|min:0',
-            'delivery_cost.*.max' => 'required|integer',
-            'delivery_cost.*.options' => 'required|array',
-            'delivery_cost.*.options.*.courier_id' => 'required|exists:couriers,id',
-            'delivery_cost.*.options.*.cost' => 'required|between:0,99.999999',
-            'delivery_cost.*.options.*.time' => 'required',
-        ]);
-        if ($v->fails()) return redirect()->back()->withErrors($v)->withInput($request->except('_token'));
         $data = $request->except('_token', 'delivery_cost');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
@@ -192,15 +175,15 @@ class SettingsController extends Controller
 
     public function findRegion(Request $request)
     {
-        $coontries = new Countries();
-        $posible = array();
-        $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal')->toArray();
-        foreach ($regions as $region) {
-            if (preg_match("/(" . $request->id . ")/i", $region)) {
-                $posible[] = $region;
+        $countries = new Countries();
+        $regions = $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name');
+        $result = array();
+        foreach ($regions as $key => $region) {
+            if (str_contains($key, $request->get('q'), $key)) {
+                $result[] = ['name' => $key];
             }
         }
-        return \Response::json(['error' => false, 'data' => $posible]);
+        return $result;
     }
 
     public function getStore()
@@ -293,13 +276,14 @@ class SettingsController extends Controller
         $tax->save();
         return 1;
     }
+
     public function searchPaymentOptions(Request $request, Settings $settings)
     {
         return $settings->where('section', 'active_payments_gateways')
-            ->where('key','like','%'.$request->q.'%')
+            ->where('key', 'like', '%' . $request->q . '%')
             ->where('val', 1)->select('key as name')->get();
 
-        
+
     }
 
 
