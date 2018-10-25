@@ -293,6 +293,12 @@ class SettingsController extends Controller
         $tax->save();
         return 1;
     }
+    public function searchPaymentOptions(Request $request, Settings $settings)
+    {
+        $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'section');
+
+        
+    }
 
 
 }

@@ -4,11 +4,11 @@
 @stop
 @section('content')
     <div id="content" class="geo-zone-page">
-        {!! Form::model($geo_zone,['url'=> route('admin_settings_geo_zone_save',($geo_zone)?$geo_zone->id:null),'class' => 'form-horizontal','files' => true ]) !!}
+        {!! Form::model($geo_zone,['url'=> route('admin_settings_geo_zone_save',($geo_zone)?$geo_zone->id:null),'class' => 'form-horizontal','files' => true, 'id' => 'geo-zones-form' ]) !!}
         <div class="page-header">
             <div class="container-fluid">
                 <div class="pull-right">
-                    <button type="submit" class="btn btn-primary" data-original-title="Save"><i class="fa fa-save"></i>
+                    <button type="submit" class="btn btn-primary geo-zones-submit"  data-original-title="Save"><i class="fa fa-save"></i>
                     </button>
                     <a href="#" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i
                                 class="fa fa-reply"></i></a></div>
@@ -158,6 +158,7 @@
                                         <td colspan="6" class="text-right">
                                             <button type="button" data-id="{!! $delivery->id !!}"
                                                     data-options-count="{!! $option->id !!}"
+                                                    data-exists="true"
                                                     class="btn btn-primary add-new-ship-filed"><i
                                                         class="fa fa-plus-circle"></i></button>
                                         </td>
@@ -227,6 +228,7 @@
                                 <tr class="add-new-ship-filed-container">
                                     <td colspan="6" class="text-right">
                                         <button type="button" data-id="0" data-options-count="0"
+                                        data-exists="false"
                                                 class="btn btn-primary add-new-ship-filed"><i
                                                     class="fa fa-plus-circle"></i></button>
                                     </td>
@@ -261,208 +263,39 @@
 @stop
 @section('js')
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js')}}"></script>
+    <script src="{{asset('public/js/custom/get_zones.js')}}"></script>
+
     <script>
+    var count = 0;
+    $("body").on("click", ".add-new-order-filed", function(e) {
+    // console.log(e)
+    let html = `  <tbody>
 
-        $('#payment_options').tagsinput({
-            itemValue: 'active_payments_gateways',
-            itemText: 'active_payments_gateways',
-            typeahead: {
-                name: "active_payments_gateways",
-                displayKey: 'active_payments_gateways',
-                valueKey: 'active_payments_gateways',
-                source:{!! json_encode($activePayments,true) !!}
-            }
-        });
-        $("body").on("input", "#region", function (e) {
-            e.preventDefault()
-            let country = $('#country').val();
-            let val = $(this).val();
-            $("#coupon-category").show()
-
-            AjaxCall("/admin/store/shipping-zones/find-region", {id: val, country: country}, function (res) {
-                if (!res.error) {
-                    $('.coupon-category-list').empty()
-                    console.log(res)
-                    Object.values(res.data).forEach(item = > {
-                        if(item !== null
-                )
-                    {
-                        $('.coupon-category-list').append(`<li class="region-item">${item}</li>`);
-
-                    }
-                })
-                }
-            })
-        })
-
-        $("body").on("click", ".region-item", function () {
-            let value = $(this).text()
-            $("#region").val(value)
-            $('.coupon-category-list').empty()
-            $("#coupon-category").hide()
-
-        })
-    </script>
-    <script>
-        let datax = '';
-        $("body").on("click", ".add-new-option", function () {
-            const id = Date.now()
-            let html = `<tr class="container-for-table-remove" data-table-id="${id}">
-   <td>
-      <label for="ShippingZones">Shipping to</label>
-   </td>
-   <td>
-      <select id="ShippingZones" class="form-control">
-         <option selected="">Shipping Zones</option>
-         ${datax}
-      </select>
-   </td>
-   <td class="text-right">
-      <button type="button" data-table-id=${id} class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button>
-   </td>
-</tr>`
-            let html2 = `
-<table class="table table-responsive table--store-settings container-for-table-remove" data-table-id="${id}">
-                <tr class="bg-my-light-blue">
-                <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
-                <td colspan="3">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
-                <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
-                    </tr>
-                    <tbody>
-
-                    <tr class="bg-my-light-pink">
-                        <th>Order Amount</th>
-                        <th>Courier</th>
-                        <th>Cost</th>
-                        <th colspan="3">Time</th>
-                    </tr>
-                    <tr>
-                        <td class="table--store-settings_vert-top">
-                            {!! Form::number('delivery_cost[0][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
-                <span>To</span>
-                {!! Form::number('delivery_cost[0][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
-                </td>
-    <td>
-        <select id="PosType" class="form-control">
-            <option selected>Normal Post</option>
-            <option>...</option>
-        </select>
-    </td>
-    <td>
-        <span class="form-control">
-            5
-        </span>
-    </td>
-    <td>
-        <span class="form-control">
-            3 days
-        </span>
-    </td>
-    <td colspan="2" class="text-right">
-        <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-    </td>
+<tr class="bg-my-light-pink">
+<th>Order Amount</th>
+<th>Courier</th>
+<th>Cost</th>
+<th colspan="3">Time</th>
 </tr>
 <tr>
-    <td></td>
-    <td>
-        <select id="dhl" class="form-control">
-            <option selected>DHL</option>
-            <option>...</option>
-        </select>
-    </td>
-    <td>
-        <span class="form-control">
-            5
-        </span>
-    </td>
-    <td>
-        <span class="form-control">
-            1 day
-        </span>
-    </td>
-    <td colspan="2" class="text-right">
-        <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-    </td>
-</tr>
-<tr class="add-new-ship-filed-container">
-    <td colspan="6" class="text-right">
-        <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
-    </td>
-</tr>
-</tbody>
-<tfoot>
-<tr>
-    <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
-        <span><i class="fa fa-plus"></i></span> Add more option
-    </td>
-</tr>
-</tfoot>
-</table>`
-            $(".all-options").append(html)
-            $("#myTabContent").append(html2)
-        })
+<td class="table--store-settings_vert-top">
+{!! Form::number('delivery_cost_new[${count}][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+      <span>To</span>
+      {!! Form::number('delivery_cost_new[${count}][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
 
-        $("body").on("click", ".remove-ship-filed", function () {
-            $(this).closest("tr").remove()
-        })
-        $("body").on("click", ".add-new-ship-filed", function () {
-            let data_id = $(this).attr("data-id");
-            let data_options_count = parseInt($(this).attr("data-options-count")) + 1;
-            $(this).attr("data-options-count", data_options_count)
-            let html = `<tr>
-   <td></td>
-   <td>
-      {!! Form::select('delivery_cost[${data_id}][options][${data_options_count}][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
-                </td>
-                <td>
-              {!! Form::number('delivery_cost[${data_id}][options][${data_options_count}][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
+      </td>
+       <td>
+                              {!! Form::select('delivery_cost_new[${count}][options][new][0][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
+      </td>
+      <td>
+          {!! Form::number('delivery_cost_new[${count}][options][new][0][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
 
+      </td>
+      <td>
+          {!! Form::text('delivery_cost_new[${count}][options][new][0][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
 
-                </td>
-                <td>
-                  {!! Form::text('delivery_cost[${data_id}][options][${data_options_count}][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
-
-                </td>
-                <td colspan="2" class="text-right">
-                   <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                </td>
-             </tr>`
-            $(this).closest("tbody").find(".add-new-ship-filed-container").before(html)
-        })
-
-        $("body").on("click", ".delete-all-option", function (e) {
-            console.log()
-            let id = $(this).attr("data-table-id")
-            $("body").find(`[data-table-id="${id}"]`).closest(".container-for-table-remove").remove()
-        })
-        $("body").on("click", ".add-new-order-filed", function (e) {
-            // console.log(e)
-            let html = `  <tbody>
-
-   <tr class="bg-my-light-pink">
-      <th>Order Amount</th>
-      <th>Courier</th>
-      <th>Cost</th>
-      <th colspan="3">Time</th>
-   </tr>
-   <tr>
-      <td class="table--store-settings_vert-top">
-        {!! Form::number('delivery_cost[0][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
-                <span>To</span>
-                {!! Form::number('delivery_cost[0][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
-
-                </td>
-                 <td>
-                                        {!! Form::select('delivery_cost[0][options][0][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
-                </td>
-                <td>
-                    {!! Form::number('delivery_cost[0][options][0][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
-
-                </td>
-                <td>
-                    {!! Form::text('delivery_cost[0][options][0][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
-
-                </td>
+      </td>
 
 <td colspan="2" class="text-right">
 <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
@@ -471,105 +304,150 @@
 </tr>
 <tr class="add-new-ship-filed-container">
 <td colspan="6" class="text-right">
-<button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
+<button type="button" data-options-count="1"  data-id="${count}" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
 </td>
 </tr>
-</tbody>`
-            $(this).closest("table").append(html)
-        })
+</tbody>`;
+count++
+    $(this)
+        .closest("table")
+        .append(html);
+});
 
-        $('body').on('change', '#ShippingZones', function (e) {
-            console.log(1111)
-            e.preventDefault();
-            let val = $(this).val();
-            let text = $(this).closest("tr").find("#ShippingZones :selected").text();
-            let id = $(this).closest("tr").attr("data-table-id")
-
-            let html2 = `
+let datax = "";
+$("body").on("click", ".add-new-option", function() {
+    const id = Date.now();
+    let html = `<tr class="container-for-table-remove" data-table-id="${id}">
+<td>
+<label for="ShippingZones">Shipping to</label>
+</td>
+<td>
+<select id="ShippingZones" class="form-control">
+<option selected="">Shipping Zones</option>
+${datax}
+</select>
+</td>
+<td class="text-right">
+<button type="button"  data-table-id=${id} class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button>
+</td>
+</tr>`;
+    let html2 = `
 <table class="table table-responsive table--store-settings container-for-table-remove" data-table-id="${id}">
-                <tr class="bg-my-light-blue">
-                <td>Shipping Zone - <span class="shipzone">${val}</span></td>
-                <td colspan="3">Tax Rate - <span class="taxzone">${text}</span></td>
-                <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
-                    </tr>
-                    <tbody>
+      <tr class="bg-my-light-blue">
+      <td>Shipping Zone - <span class="shipzone">Armenia</span></td>
+      <td colspan="3">Tax Rate - <span class="taxzone">ArmeniaVaT20</span></td>
+      <td colspan="2" class="text-right"><button type="button" data-table-id="${id}" class="btn btn-primary delete-all-option"><i class="fa fa-trash"></i></button></span></td>
+          </tr>
+          <tbody>
 
-                    <tr class="bg-my-light-pink">
-                        <th>Order Amount</th>
-                        <th>Courier</th>
-                        <th>Cost</th>
-                        <th colspan="3">Time</th>
-                    </tr>
-                    <tr>
-                        <td class="table--store-settings_vert-top">
-                            <input type="number" min="1" max="5" class="form-control" style="display: inline-block; width: auto">
-                            <span>To</span>
-                            <input type="number" min="1" max="50" class="form-control" style="display: inline-block; width: auto">
-                        </td>
-                        <td>
-                            <select id="PosType" class="form-control">
-                                <option selected>Normal Post</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                3 days
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <select id="dhl" class="form-control">
-                                <option selected>DHL</option>
-                                <option>...</option>
-                            </select>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                5
-                            </span>
-                        </td>
-                        <td>
-                            <span class="form-control">
-                                1 day
-                            </span>
-                        </td>
-                        <td colspan="2" class="text-right">
-                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
-                        </td>
-                    </tr>
-                    <tr class="add-new-ship-filed-container">
-                        <td colspan="6" class="text-right">
-                            <button type="button" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
-                        </td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
-                            <span><i class="fa fa-plus"></i></span> Add more option
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>`
+          <tr class="bg-my-light-pink">
+              <th>Order Amount</th>
+              <th>Courier</th>
+              <th>Cost</th>
+              <th colspan="3">Time</th>
+          </tr>
+          <tr>
+              <td class="table--store-settings_vert-top">
+                  {!! Form::number('delivery_cost[0][min]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+      <span>To</span>
+      {!! Form::number('delivery_cost[0][max]',null,['class'=>'form-control','min'=>'1', 'style'=>"display: inline-block; width: auto"]) !!}
+      </td>
+<td>
+<select id="PosType" class="form-control">
+  <option selected>Normal Post</option>
+  <option>...</option>
+</select>
+</td>
+<td>
+<span class="form-control">
+  5
+</span>
+</td>
+<td>
+<span class="form-control">
+  3 days
+</span>
+</td>
+<td colspan="2" class="text-right">
+<button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+</td>
+</tr>
+<tr>
+<td></td>
+<td>
+<select id="dhl" class="form-control">
+  <option selected>DHL</option>
+  <option>...</option>
+</select>
+</td>
+<td>
+<span class="form-control">
+  5
+</span>
+</td>
+<td>
+<span class="form-control">
+  1 day
+</span>
+</td>
+<td colspan="2" class="text-right">
+<button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+</td>
+</tr>
+<tr class="add-new-ship-filed-container">
+<td colspan="6" class="text-right">
+<button type="button" data-id="${count}" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
+<span><i class="fa fa-plus"></i></span> Add more option
+</td>
+</tr>
+</tfoot>
+</table>`;
+count++
+    $(".all-options").append(html);
+    $("#myTabContent").append(html2);
+});
+$("body").on("click", ".add-new-ship-filed", function() {
+    let data_id = $(this).attr("data-id");
+    let data_options_count = parseInt($(this).attr("data-options-count")) + 1;
+    $(this).attr("data-options-count", data_options_count);
+    let delveriCost = $(this).attr("data-exists") === "true" ? "delivery_cost" : "delivery_cost_new"
+    let html = `<tr>
+<td></td>
+<td>
+{!! Form::select('${delveriCost}[${data_id}][options][new][${data_options_count}][courier_id]',$active_couriers,null,['class'=>'form-control']) !!}
+      </td>
+      <td>
+    {!! Form::number('${delveriCost}[${data_id}][options][new][${data_options_count}][cost]',null,['class'=>'form-control','min'=>'0', 'max'=>"99999.99",'step'=>'0.01']) !!}
 
 
-            // console.log($(`table[data-table-id="${id}"]`))
-            // $(`table[data-table-id="${id}"]`).find('.shipzone').text(text);
-            // console.log($(`table[data-table-id="${id}"]`).find('.shipzone').text())
-            // $(`table[data-table-id="${id}"]`).find('.taxzone').text(val);
-            $("#myTabContent").append(html2)
+      </td>
+      <td>
+        {!! Form::text('${delveriCost}[${data_id}][options][new][${data_options_count}][time]',null,['class'=>'form-control','placeholder'=>'3 day']) !!}
 
-        });
+      </td>
+      <td colspan="2" class="text-right">
+         <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+      </td>
+   </tr>`;
+    $(this)
+        .closest("tbody")
+        .find(".add-new-ship-filed-container")
+        .before(html);
+});
+
+$(".geo-zones-submit").on("click", function(e){
+    e.preventDefault();
+    let data = $("#geo-zones-form").serialize()
+    postSendAjax($("#geo-zones-form").attr("action"), {data}, function(res){
+        console.log(res)
+    } )
+})
+
     </script>
 @stop
