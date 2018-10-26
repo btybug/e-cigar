@@ -113,6 +113,8 @@
         $("body").find(".media-modal-content-upload").hide()
     }
     $("body").on("click", ".fileinput-remove", function(){
+        retryDrawing()
+
         toggleUploadDivs()
     })
     $("body").on("click", ".file-drop-zone", function() {

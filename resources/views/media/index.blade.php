@@ -432,11 +432,11 @@
         <div data-template="itemthumb">
             <div class="file-box" data-dragitem="{id}" data-id="{id}" data-name="{original_name}" data-mediatype="item">
                 <div class="file {!! $settings['thumbnailclass']??null !!}">
-                    <a href="#">
+                    <a href="{url}" data-lightbox="{real_name}" >
                         <span class="corner"></span>
 
                         <div class="icon">
-                            <img width="180px" src="{url}">
+                            <img width="180px" data-lightbox="{real_name}" src="{url}">
                             <i class="fa fa-file"></i>
                         </div>
                         <div class="file-name">
@@ -550,17 +550,20 @@
     {{--@push("css")--}}
     {{--{!! Html::style("/resources/assets/js/animate/css/animate.css") !!}--}}
     {!! Html::style("public/media_template/css/style.css?v='.rand(111,999))") !!}
+    {!! Html::style("public/admin_theme/media/css/lightbox.css") !!}
     {!! Html::style("public/js/bootstrap-select/css/bootstrap-select.min.css") !!}
     {!! Html::style("public/js/tag-it/css/jquery.tagit.css") !!}
     {{--@endpush--}}
 @stop
 @section("js")
     {!! Html::script("public/js/nestedSortable/jquery.mjs.nestedSortable.js") !!}
+    {!! Html::script("public/admin_theme/media/js/lightbox.js") !!}
     {!! Html::script("public/js/bootstrap-select/js/bootstrap-select.min.js") !!}
     {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
     {!! Html::script("public/js/media_button.js") !!}
     <script>
     $("body").on("click", ".fileinput-remove", function(){
+        retryDrawing()
         $("body").find(".show-uploder").removeClass("in")
     })
     $("body").on("click", ".file-drop-zone", function() {

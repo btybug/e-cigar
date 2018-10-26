@@ -1,8 +1,19 @@
+var _global_folder_id = null;
+
 $(document).ready(function() {
+    window.retryDrawing = function() {
+        var jsondata = {
+            folder_id: _global_folder_id,
+            files: true,
+            access_token: "string"
+        };
+        postSendAjax("/api/api-media/get-folder-childs", jsondata, getfolder);
+    };
     /*$('.file-box').each(function() {
              animationHover(this, 'pulse');
              });*/
     postSendAjax = function(url, data, success, error) {
+        data.folder_id ? (_global_folder_id = data.folder_id) : "drive";
         $.ajax({
             type: "post",
             url: url,
@@ -140,6 +151,9 @@ $(document).ready(function() {
         html = html.replace(/{created_at}/g, datajosn.created_at);
         $.each(datajosn, function(key, val) {});
         return html;
+    };
+    const HTMLmakeBreadCrumbs = data => {
+        `<a href="#" data-id="" data-dropnewitem="" data-media="getitem" class="ui-droppable"><i class="fa fa-folder"></i> Parent Folder</a>`;
     };
     var getfolder = function(data) {
         if (!data.error) {
