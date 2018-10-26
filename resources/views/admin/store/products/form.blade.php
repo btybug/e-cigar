@@ -353,12 +353,17 @@
                 <tbody>
                 @if(isset($variations) && count($variations))
                     @foreach($variations as $variation)
+                        {!! Form::hidden("variations[".$variation->variation_id."]",json_encode($variation->toArray()),['id' => 'variation_'.$variation->variation_id]) !!}
                         <tr id="discount-row0">
-                    <td class="text-left"><select name="product_discount[0][customer_group_id]"
-                                                  class="form-control">
-                            <option value="1" selected="selected">{{ $variation->variation_id }}</option>
-                        </select></td>
-                    <td class="text-right"><input type="text" name="product_discount[0][price]"
+                    <td class="text-left">
+                        @foreach($variation->options as $options)
+                            {!! Form::hidden("variation_options[".$variation->variation_id."][".$options->attributes_id."][attributes_id]",$options->attributes_id) !!}
+                            {!! Form::hidden("variation_options[".$variation->variation_id."][".$options->attributes_id."][options_id]",$options->options_id) !!}
+                            {!! $options->option->name . (($loop->last) ? '' : ' -') !!}
+                        @endforeach
+                    </td>
+                    <td class="text-right">
+                        <input type="text" name="product_discount[0][price]"
                                                   value="88.0000" placeholder="Price"
                                                   class="form-control"/></td>
                     <td class="text-left" style="width: 20%;">

@@ -51,6 +51,8 @@ class ProductsController extends Controller
         $options = $this->stockService->makeProductOptions($product, $request->get('options',[]));
         $product->attrs()->syncWithoutDetaching($options);
 
+        $this->stockService->saveProductVariations($product, $request->get('variations',[]),$request->get('variation_options',[]));
+
         return redirect()->route('admin_store');
     }
 
@@ -61,7 +63,7 @@ class ProductsController extends Controller
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
-        $variations = $model->variations;
+        $variations = $model->variations()->with('options')->get();
 
         return $this->view('new',compact('authors','model','stocks','attrs','variations'));
     }

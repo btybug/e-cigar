@@ -1,6 +1,7 @@
 <?php namespace App\Services;
 
 use App\Models\ProductAttribute;
+use App\Models\ProductVariation;
 use App\Models\StockAttribute;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
@@ -67,6 +68,26 @@ class StockService
                 unset($newData['_token']);
                 $newData['stock_id'] = $stock->id;
                 $variation = StockVariation::create($newData);
+                if(isset($options[$variation_id]) && count($options[$variation_id])){
+                    foreach ($options[$variation_id] as $option){
+                        $variation->options()->create($option);
+                    }
+                }
+            }
+        }
+    }
+
+    public function saveProductVariations ($product,array $data = [], array $options = [])
+    {
+        $product->variations()->delete();
+        if(count($data)){
+            foreach ($data as $variation_id => $data) {
+                $newData = json_decode($data,true);
+                unset($newData['_token']);
+                if(isset($newData['stock_id'])){ unset($newData['stock_id']); }
+
+                $newData['product_id'] = $product->id;
+                $variation = ProductVariation::create($newData);
                 if(isset($options[$variation_id]) && count($options[$variation_id])){
                     foreach ($options[$variation_id] as $option){
                         $variation->options()->create($option);
