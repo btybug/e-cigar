@@ -566,6 +566,14 @@ display: flex;
     padding:25px 0;
 }
 /*end basic details tab*/
+.store_tab-stocks .basic-wall{
+    box-shadow: 0 0 4px #ccc;
+    border: 1px solid #eee;
+    background-color: #fff;
+    color: black;
+    min-height: 400px;
+    padding: 20px;
+}
 .stock-new-tab .logistic-right{
     display: flex;
     flex-direction: column;
