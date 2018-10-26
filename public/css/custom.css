@@ -750,3 +750,20 @@ color: red;
     color: black;
     text-align: center;
 }
+.create-or-update{
+    background-color: #fff;
+    padding: 15px;
+}
+.create-or-update .form-group {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 0;
+}
+.create-or-update .form-group + .form-group {
+    border-top: 1px solid #ededed;
+}
+.create-or-update .wall-select{
+    box-shadow: 0 0 4px #ccc;
+    padding: 20px;
+    background-color: #3c8dbc0d;
+}
