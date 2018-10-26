@@ -22,53 +22,19 @@
                 <div class="">
                     <label class="col-md-3 control-label">Based on</label>
                     <div class="col-md-9">
-                        <select name="" id="" class="form-control">
-                            <option value="">Product</option>
-                            <option value="">Order Amount</option>
-                            <option value="">Promo code</option>
+                        <select name="" id="based-on" class="form-control">
+                            <option value="product">Product</option>
+                            <option value="order_amount">Order Amount</option>
+                            <option value="promo_code">Promo code</option>
                         </select>
                     </div>
                 </div>
 
             </div>
-            <div class="select-product wall-select">
-                <div class="form-group">
-                    <div class="">
-                        <label class="col-md-3 control-label">Select Product</label>
-                        <div class="col-md-9">
-                            <select name="" id="" class="form-control">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="">
-                        <label class="col-md-3 control-label">Count</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" placeholder="1">
-                        </div>
-                    </div>
-                </div>
+            <div class="based-on-container">
+                
             </div>
-            <div class="select-amount wall-select hide">
-                <div class="form-group">
-                    <div class="">
-                        <label class="col-md-3 control-label">Select Amount</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" placeholder="ex.-30$">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="select-promocode wall-select hide">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        Promocode
-                    </div>
-                </div>
-            </div>
+            
             <div class="form-group">
                 <div class="">
                     <label class="col-md-3 control-label">Free Juices count</label>
@@ -117,4 +83,12 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+@stop
+
+@section('js')
+<script src="{{asset('public/js/custom/gifts.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 @stop
