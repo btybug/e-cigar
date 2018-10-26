@@ -297,5 +297,4 @@ $("body").on("change", `[name="delivery_cost_types_id"]`, function(e) {
                 .first()
                 .text(text);
         });
-    console.log(value);
 });
