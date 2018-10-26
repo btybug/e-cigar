@@ -18,7 +18,7 @@
                <div class="col-md-4">
                    <div class="form-group">
                        <label for="city">Select City</label>
-                       <select id="country" class="form-control">
+                       <select id="city" class="form-control">
                            <option selected>Choose...</option>
                            <option>1</option>
                            <option>2</option>
