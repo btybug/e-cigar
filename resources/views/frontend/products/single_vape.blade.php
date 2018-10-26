@@ -14,10 +14,10 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h1 class="product_title entry-title col-md-6 mb-5 p-0">{!! $vape->name !!}</h1>
-                <div class="row">
+                <h1 class="product_title entry-title mb-4 p-0">{!! $vape->name !!}</h1>
+                <p>
                     {!! $vape->long_description !!}
-                </div>
+                </p>
             </div>
             <div class="col-md-4">
                 <form>

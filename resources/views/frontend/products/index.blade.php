@@ -31,12 +31,11 @@
      </div>
     </div>
    </div>
-   <div class="blogs blogs-4x" id="listing-news" style="">
+   <div class="blogs blogs-4x" id="listing-news">
 
     @foreach($posts as $post)
      <div class="blog-post">
-      <article>
-       <a href="{!! post_url($post) !!}" class="d-block blog-post_link">
+       <a href="{!! post_url($post) !!}" class="d-block blog-post_link shadow-sm bg-white py-3 px-4 clearfix">
                             <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
 
                             <span class="blog-date">
@@ -56,7 +55,6 @@
                                 <span class="blog-link">Readmore</span>
                             </span>
        </a>
-      </article>
      </div>
     @endforeach
    </div>
