@@ -15,7 +15,7 @@
                     @endif
                 @endforeach
             @else
-                <input type="text" data-name="{!! $name !!}[]"
+                <input type="hidden" data-name="{!! $name !!}[]"
                        value="no selected" placeholder="file count"
                        class="modal-input-path {!! $uniqId !!}" readonly>
             @endif

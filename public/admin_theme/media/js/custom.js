@@ -49,6 +49,7 @@ $("#jstree_html")
         $(`[name="folder_id"]`).val(r);
         var jsondata = { folder_id: r, files: 1, access_token: "string" };
         _global_folder_id = r;
+        console.log(url.getFolderCildrens);
         postSendAjax(url.getFolderCildrens, jsondata, getfolder);
     })
     .jstree({
@@ -145,12 +146,12 @@ $("body").on("click", ".open-btn", function(e) {
             parrent.append(
                 `<input type="hidden" class="multipale-hidden-inputs" name="${name}" value="${item}">`
             );
-            $(".multiple-image-box-"+`${id}`).append(
+            $(".multiple-image-box-" + `${id}`).append(
                 makePreviewImgThumb(item, multiple)
             );
-            var cn = +realInput.attr('data-count') + 1;
-            realInput.val(cn + ' selected');
-            realInput.attr('data-count',cn);
+            var cn = +realInput.attr("data-count") + 1;
+            realInput.val(cn + " selected");
+            realInput.attr("data-count", cn);
         });
     } else {
         $(`.${id}`).val(globalArr[0]);
@@ -161,7 +162,7 @@ $("body").on("click", ".open-btn", function(e) {
 
 $("body").on("click", ".remove-thumb-img", function(e) {
     e.preventDefault();
-    var id = $(this).data('id')
+    var id = $(this).data("id");
     let realInput = $(`.${id}`);
 
     let src = $(this).attr("data-src");
@@ -171,9 +172,9 @@ $("body").on("click", ".remove-thumb-img", function(e) {
         }
     });
 
-    var cn = realInput.attr('data-count') - 1;
-    realInput.val(cn + ' selected');
-    realInput.attr('data-count',cn);
+    var cn = realInput.attr("data-count") - 1;
+    realInput.val(cn + " selected");
+    realInput.attr("data-count", cn);
 
     $(this)
         .closest(".img-thumb-container")

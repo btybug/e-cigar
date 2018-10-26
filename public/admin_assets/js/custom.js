@@ -1,6 +1,6 @@
 var translation_id = 0;
 var base_url = window.location.origin;
-var url = base_url + "/translations/get-entry";
+var url2 = base_url + "/translations/get-entry";
 
 window.onload = function() {
     var token = $('meta[name="csrf-token"]').attr("content");
@@ -31,7 +31,7 @@ window.onload = function() {
         ]
     });
     var table_entry = $("#translations-table-entry").DataTable({
-        ajax: url,
+        ajax: url2,
         columns: [
             {
                 data: "id",
@@ -67,7 +67,7 @@ window.onload = function() {
             .children()
             .first()
             .text();
-        var full_path = url + "/" + translation_id;
+        var full_path = url2 + "/" + translation_id;
 
         table_entry.ajax.url(full_path);
         table_entry.ajax.reload();
@@ -98,21 +98,17 @@ window.onload = function() {
                     )
             ]);
         result.append([
-            input
-                .clone()
-                .attr({
-                    type: "hidden",
-                    class: "get_td_old_value",
-                    value: text
-                }),
-            input
-                .clone()
-                .attr({
-                    type: "text",
-                    class: "get_input_value",
-                    value: text,
-                    "data-id": id
-                }),
+            input.clone().attr({
+                type: "hidden",
+                class: "get_td_old_value",
+                value: text
+            }),
+            input.clone().attr({
+                type: "text",
+                class: "get_input_value",
+                value: text,
+                "data-id": id
+            }),
             append_to_div
         ]);
 

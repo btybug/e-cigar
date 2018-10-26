@@ -61,7 +61,6 @@ $(document).ready(function() {
 
     var getfolderli = function(datajosn) {
         if (!datajosn) return false;
-        console.log(datajosn);
         var htmlli = $('<li data-treefolder="' + datajosn.id + '"></li>');
         var dragdiv = $("<div></div>");
         var htmla = $(
@@ -150,6 +149,12 @@ $(document).ready(function() {
                 }
                 var appedndata = "";
                 activefolderid = data.data.id;
+                let url = data.data.url;
+                let index = url.indexOf("drive");
+                let arrOfParrentElements = url.substring(index).split("/");
+                console.log(arrOfParrentElements);
+
+                console.log(data.data);
                 $('[data-targetiuploder="folder"]').collapse("hide");
                 //selectedFolder = ' '+ data.data.name;
                 selectedFolder =
@@ -166,6 +171,7 @@ $(document).ready(function() {
                 if (data.data.parent_id == null) {
                     selectedFolder = " " + data.data.name;
                 }
+                console.log(selectedFolder);
                 $('[data-media="selected"]').html(selectedFolder);
                 $('[data-media="folderitem"]').empty();
                 var appendselecter = $(
