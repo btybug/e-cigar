@@ -325,17 +325,10 @@
                             <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;"
                                 class="option-elm-attributes"><a href="#">Main Stock</a>
                                 <div class="buttons">
-                                    <button class="remove-all-attributes btn btn-sm btn-danger"><i
-                                                class="fa fa-trash"></i></button>
                                 </div>
                             </li>
                     @endif
                 </ul>
-                </div>
-                <div class="button-add text-center">
-                    <a href="javascript:void(0)" class="btn btn-info btn-block get-all-attributes-tab-event"><i
-                                class="fa fa-plus"></i>Add new
-                        option</a>
                 </div>
             </div>
         </div>
