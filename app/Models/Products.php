@@ -59,12 +59,16 @@ class Products extends Translatable
 
     public function forRender()
     {
+        if(! $this->id) return [];
+
         return Attributes::leftJoin('product_variation_options', 'attributes.id','=' ,'product_variation_options.attributes_id')
              ->leftJoin('product_variations', 'product_variation_options.variation_id','=' ,'product_variations.id')
             ->leftJoin('products', 'product_variations.product_id','=' ,'products.id')
+//            ->leftJoin('attributes', 'product_variation_options.options_id','=' ,'attributes.id')
             ->where('products.id','=',$this->id)
             ->select('attributes.*','product_variation_options.attributes_id as attr_id')
-            ->groupBy('attr_id','attributes.id','attributes.parent_id','attributes.user_id','attributes.image','attributes.icon','attributes.filter','attributes.display_as','attributes.created_at','attributes.updated_at')
+            ->distinct()
+//            ->groupBy('attr_id','attributes.id','attributes.parent_id','attributes.user_id','attributes.image','attributes.icon','attributes.filter','attributes.display_as','attributes.created_at','attributes.updated_at')
             ->get();
 
     }

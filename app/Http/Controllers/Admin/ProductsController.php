@@ -40,7 +40,9 @@ class ProductsController extends Controller
         $stocks = Stock::get()->pluck('name','id')->toArray();
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
-        return $this->view('new',compact('authors','model','stocks'));
+        $variations = [];
+
+        return $this->view('new',compact('authors','model','stocks','variations'));
     }
 
     public function postNewProduct(Request $request)

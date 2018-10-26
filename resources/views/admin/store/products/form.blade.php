@@ -327,7 +327,7 @@
             <div class="basic-left basic-wall">
                 <div class="all-list-attributes">
                     <ul class="get-all-attributes-tab" style="padding-left:0">
-                        @if(isset($variations) && count($variations))
+                        @if(count($variations))
                             <li style="display: flex; padding: 10px;background-color: #f7f7f7;border-bottom: 1px solid #ccc; box-shadow: 0 0 4px #a5a5a5; margin-bottom: 7px;color: #000;transition: 0.5s ease;justify-content: space-between;"
                                 class="option-elm-attributes"><a href="#">Main Stock</a>
                                 <div class="buttons">
@@ -351,7 +351,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(isset($variations) && count($variations))
+                        @if(count($variations))
                             @foreach($variations as $variation)
                                 <tr id="discount-row0">
                                     {!! Form::hidden("variations[".$variation->variation_id."]",json_encode($variation->toArray()),['id' => 'variation_'.$variation->variation_id]) !!}
