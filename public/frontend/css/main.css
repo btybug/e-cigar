@@ -11208,6 +11208,18 @@ a.bg-dark:focus, a.bg-dark:hover {
     color: #F0CA4D;
 }
 
+.bg-my-yellow {
+    background: #F0CA4D;
+}
+
+.main-transition {
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
 @media (min-width: 576px) {
     .m-sm-0 {
         margin: 0 !important;
@@ -13206,3 +13218,100 @@ a.text-dark:focus, a.text-dark:hover {
 
 /*End vape pages*/
 
+/*page juice*/
+
+.flavor-img-outer {
+    position: relative;
+    overflow: hidden;
+}
+
+.flavor-img-outer:hover img {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+
+.flavor-img-outer img,
+.card-img-outer{
+    position: relative;
+}
+
+.flavor-img-outer:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eee;
+    content: attr(data-title);
+    font-size: 20px;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+
+.flavor-img-outer:after,
+.card-img-outer:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.juice-poster--type-1 .card-title,
+.juice-poster--type-1 .btn {
+    background: #689f38;
+}
+
+.juice-poster--type-1 .btn {
+    border-color: #689f38;
+}
+
+.juice-poster--type-1 .flavor-img-outer:after {
+    background: rgba(104, 159, 56, 0.2);
+
+}
+
+.juice-poster--type-2 .card-title,
+.juice-poster--type-2 .btn {
+    background: #d4e157;
+}
+
+.juice-poster--type-2 .btn {
+    border-color: #d4e157;
+}
+
+.juice-poster--type-2 .flavor-img-outer:after {
+    background: rgba(212, 225, 87, 0.2);
+}
+
+
+.juice-poster--type-3 .card-title,
+.juice-poster--type-3 .btn {
+    background: #81c784;
+}
+
+.juice-poster--type-3 .btn {
+    border-color: #81c784;
+}
+
+
+.juice-poster--type-3 .flavor-img-outer:after {
+    background: rgba(129, 199, 132, 0.2);
+}
+
+
+
+
+/*End page juice*/
