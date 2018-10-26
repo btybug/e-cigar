@@ -432,11 +432,11 @@
         <div data-template="itemthumb">
             <div class="file-box" data-dragitem="{id}" data-id="{id}" data-name="{original_name}" data-mediatype="item">
                 <div class="file {!! $settings['thumbnailclass']??null !!}">
-                    <a href="{url}" data-lightbox="{real_name}" >
+                    <a href="{url}" data-lightbox="image" >
                         <span class="corner"></span>
 
                         <div class="icon">
-                            <img width="180px" data-lightbox="{real_name}" src="{url}">
+                            <img width="180px" data-lightbox="image" src="{url}">
                             <i class="fa fa-file"></i>
                         </div>
                         <div class="file-name">
