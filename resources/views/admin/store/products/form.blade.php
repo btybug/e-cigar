@@ -263,15 +263,17 @@
                                                                     href="#">{!! $attribute->name !!}</a>
                                                             <div class="buttons">
                                                                 <a href="javascript:void(0)"
-                                                                   class="btn btn-sm all-option-add-variations btn-success"><i
+                                                                   class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i
                                                                             class="fa fa-money"></i></a>
                                                                 <a href="javascript:void(0)"
                                                                    class="remove-all-attributes btn btn-sm btn-danger"><i
                                                                             class="fa fa-trash"></i></a>
                                                             </div>
-                                                            <input type="hidden" name="attributes[]"
+                                                            <input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"
                                                                    value="{!! $attribute->id !!}">
                                                         </li>
+                                                        <input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"
+                                                               value="{!! $attribute->is_shared !!}">
                                                     @endforeach
                                                 @endif
                                             </ul>
@@ -290,7 +292,7 @@
                                             @if(isset($attrs) && count($attrs))
                                                 @foreach($attrs as $attribute)
                                                     @php
-                                                        $opptionAttr = $model->stockAttrs()->where('attributes_id',$attribute->id)->first();
+                                                        $opptionAttr = (isset($stockAttrs))? $stockAttrs->where('attributes_id',$attribute->id)->first() : $model->stockAttrs()->where('attributes_id',$attribute->id)->first();
                                                     @endphp
                                                     <div style="height: 50px" data-attr-id="{{$attribute->id}}"
                                                          class="attributes-container-{{$attribute->id}} main-attr-container">
@@ -351,8 +353,8 @@
                         <tbody>
                         @if(isset($variations) && count($variations))
                             @foreach($variations as $variation)
-                                {!! Form::hidden("variations[".$variation->variation_id."]",json_encode($variation->toArray()),['id' => 'variation_'.$variation->variation_id]) !!}
                                 <tr id="discount-row0">
+                                    {!! Form::hidden("variations[".$variation->variation_id."]",json_encode($variation->toArray()),['id' => 'variation_'.$variation->variation_id]) !!}
                                     <td class="text-left">
                                         @foreach($variation->options as $options)
                                             {!! Form::hidden("variation_options[".$variation->variation_id."][".$options->attributes_id."][attributes_id]",$options->attributes_id) !!}
