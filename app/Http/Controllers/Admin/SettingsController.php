@@ -17,6 +17,7 @@ use App\Models\DeliveryCostsTypes;
 use App\Models\GeoZones;
 use App\Models\Languages;
 use App\Models\MailTemplates;
+use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
@@ -156,7 +157,7 @@ class SettingsController extends Controller
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
         foreach ($delivery_costs as $key => $delivery_cost) {
             $options = $delivery_cost['options'];
-             $delivery_cost['delivery_cost_types_id'] = $request->get('delivery_cost_types_id');
+            $delivery_cost['delivery_cost_types_id'] = $request->get('delivery_cost_types_id');
             unset($delivery_cost['options']);
             if (!$request->id) $key = null;
             $delivery = $geo_zone->deliveries()->updateOrCreate(['id' => $key], $delivery_cost);
@@ -171,7 +172,7 @@ class SettingsController extends Controller
             }
         }
 
-        return ['error'=>false,'url'=>route('admin_settings_shipping')];
+        return ['error' => false, 'url' => route('admin_settings_shipping')];
     }
 
     public function findRegion(Request $request)
@@ -290,9 +291,13 @@ class SettingsController extends Controller
     public function getGifts()
     {
         return $this->view('store.gifts');
-    } public function getGiftsManage($id=null)
+    }
+
+    public function getGiftsManage($id = null)
     {
-        return $this->view('store.gifts.manage');
+        $products=Products::where('status','published')->get()->pluck('name','id');
+        $productsTableColumns=collect(\DB::select('show columns from products'))->pluck('Field','Field');
+        return $this->view('store.gifts.manage',compact('products','productsTableColumns'));
     }
 
 
