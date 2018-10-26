@@ -13,7 +13,6 @@ function makeSearchItem(basicData) {
         }
     });
     $(basicData.input).tagsinput({
-        maxTags: 5,
         confirmKeys: [13, 32, 44],
         typeaheadjs: {
             displayKey: basicData.name,
