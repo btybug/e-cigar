@@ -14,7 +14,7 @@
                 <div class="">
                     <label class="col-md-3 control-label">Icon</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="icon">
+                        <input type="text" class="form-control icon-picker"  placeholder="icon">
                     </div>
                 </div>
             </div>
@@ -68,13 +68,23 @@
     </div>
 @stop
 @section('css')
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+
+    <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
 
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
+
     <script>
+
+    $('.icon-picker').iconpicker();
         var HTML ={
             product: `@include('admin.settings.store.gifts.products')`,
             order_amount:  `@include('admin.settings.store.gifts.order_amount')`,
@@ -86,6 +96,6 @@
         }
     </script>
     <script src="{{asset('public/js/custom/gifts.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 
 @stop
