@@ -44,40 +44,92 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-12">
-                    <h4>Can be selected </h4>
-                    <label class="radio-inline">
-                        <input type="radio" name="optradio" checked>All
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="optradio">Choose
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="optradio">Query
-                    </label>
+                <div class="col-md-3">
+
                 </div>
-            </div>
-            <div class="radio-wall-all wall-select">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        1
+                <div class="col-md-9">
+                    <div class="can-selected-radio">
+                        <h4>Can be selected </h4>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio" checked>All
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Choose
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optradio">Query
+                        </label>
+                        <div class="radio-wall-all wall-select mt-15">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    1
+                                </div>
+                            </div>
+                        </div>
+                        <div class="radio-wall-choose wall-select mt-15">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="">
+                                            <label class="col-md-3 control-label">Juices</label>
+                                            <div class="col-md-9">
+                                                <select name="" class="form-control">
+                                                    <option value="">1</option>
+                                                    <option value="">2</option>
+                                                    <option value="">3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="radio-wall-query wall-select mt-15">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Column</th>
+                                                <th>Condition</th>
+                                                <th>Needle</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>Were</td>
+                                                <td>
+                                                    <select name="" class="form-control">
+                                                        <option value="">Colum</option>
+                                                        <option value="">2</option>
+                                                        <option value="">3</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="" class="form-control">
+                                                        <option value="">Condition</option>
+                                                        <option value="">2</option>
+                                                        <option value="">3</option>
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" class="form-control" ></td>
+                                                <td>
+                                                    <button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
-            <div class="radio-wall-choose hide wall-select">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        2
-                    </div>
-                </div>
-            </div>
-            <div class="radio-wall-query hide wall-select">
-                <div class="form-group">
-                    <div class="col-md-12">
-                        3
-                    </div>
-                </div>
-            </div>
+
         </form>
     </div>
 @stop
