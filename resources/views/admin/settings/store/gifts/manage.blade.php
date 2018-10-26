@@ -51,14 +51,15 @@
                     <div class="can-selected-radio">
                         <h4>Can be selected </h4>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio" checked>All
+                            <input type="radio" value="all_juices" name="optradio" checked>All
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio">Choose
+                            <input type="radio" value="choose_juices" name="optradio">Choose
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="optradio">Query
+                            <input type="radio" value="query_juices" name="optradio">Query
                         </label>
+                        <div class="radio-wall-container">
                         <div class="radio-wall-all wall-select mt-15">
                             <div class="form-group">
                                 <div class="col-md-12">
@@ -98,7 +99,7 @@
                                                 <th></th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody class="query-tbody">
                                             <tr>
                                                 <td>Were</td>
                                                 <td>
@@ -117,13 +118,14 @@
                                                 </td>
                                                 <td><input type="text" class="form-control" ></td>
                                                 <td>
-                                                    <button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></td>
+                                                    <button class="btn btn-info btn-sm add-more-query"><i class="fa fa-plus"></i></button></td>
                                             </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -140,6 +142,16 @@
 @stop
 
 @section('js')
+{{--<script>
+    var HTML ={
+        product: {!! !!},
+        order_amount:  {!! !!},
+        promo_code: {!! !!},
+        all_juices: {!! !!},
+        query_juices:  {!! !!},
+        choose_juices: {!! !!},
+    }
+</script> --}}
 <script src="{{asset('public/js/custom/gifts.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
