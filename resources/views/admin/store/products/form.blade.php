@@ -289,13 +289,16 @@
                                         <ul class="choset-attributes">
                                             @if(isset($attrs) && count($attrs))
                                                 @foreach($attrs as $attribute)
+                                                    @php
+                                                        $opptionAttr = $model->stockAttrs()->where('attributes_id',$attribute->id)->first();
+                                                    @endphp
                                                     <div style="height: 50px" data-attr-id="{{$attribute->id}}"
                                                          class="attributes-container-{{$attribute->id}} main-attr-container">
                                                         <input data-id="{{$attribute->id}}"
                                                                class="attributes-item-input-{{$attribute->id}}"
-                                                               value="{{ implode(',',$attribute->children->pluck('name')->all()) }}">
-                                                        <input type="hidden" name="options[{{$attribute->id}}]"
-                                                               value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
+                                                               value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.name')->all()) }}">
+                                                        <input type="hidden" class="input-items-value" name="options[{{$attribute->id}}]"
+                                                               value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.id')->all()) }}">
                                                     </div>
                                                 @endforeach
                                             @endif
@@ -342,8 +345,6 @@
                         <tr>
                             <td class="text-left">Customer Group</td>
                             <td class="text-right">Price</td>
-                            {{--<td class="text-left">Date Start</td>--}}
-                            {{--<td class="text-left">Date End</td>--}}
                             <td></td>
                         </tr>
                         </thead>
@@ -361,26 +362,8 @@
                                     </td>
                                     <td class="text-right">
                                         <input type="text" name="product_discount[0][price]"
-                                               value="88.0000" placeholder="Price"
+                                               value="" placeholder="Price"
                                                class="form-control"/></td>
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                    {{--<div class="input-group ">--}}
-                                    {{--<input type="text" name="product_discount[0][date_start]" value=""--}}
-                                    {{--placeholder="Date Start" data-date-format="YYYY-MM-DD"--}}
-                                    {{--class="form-control date"/>--}}
-                                    {{--<span class="input-group-btn">--}}
-                                    {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-                                    {{--</span></div>--}}
-                                    {{--</td>--}}
-                                    {{--<td class="text-left" style="width: 20%;">--}}
-                                    {{--<div class="input-group ">--}}
-                                    {{--<input type="text" name="product_discount[0][date_end]" value=""--}}
-                                    {{--placeholder="Date End" data-date-format="YYYY-MM-DD"--}}
-                                    {{--class="form-control date"/>--}}
-                                    {{--<span class="input-group-btn">--}}
-                                    {{--<button class="btn btn-default" type="button"><i class="fa fa-calendar"></i></button>--}}
-                                    {{--</span></div>--}}
-                                    {{--</td>--}}
                                     <td class="text-left">
                                         <button type="button" onclick="$('#discount-row0').remove();"
                                                 data-toggle="tooltip" title="Remove" class="btn btn-danger"><i
@@ -405,7 +388,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="basic-right basic-wall">
-
+                        @include("admin.store.products.render_price_form")
                     </div>
                 </div>
             </div>

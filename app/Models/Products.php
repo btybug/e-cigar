@@ -41,6 +41,11 @@ class Products extends Translatable
         return $this->belongsTo(User::class, 'user_id');
     }
 
+    public function stockAttrs()
+    {
+        return $this->hasMany(ProductAttribute::class, 'product_id')->with('children')->whereNull('parent_id');
+    }
+
     public function attrs()
     {
         return $this->belongsToMany(Attributes::class, 'product_attributes', 'product_id', 'attributes_id')->whereNull('attributes.parent_id');
