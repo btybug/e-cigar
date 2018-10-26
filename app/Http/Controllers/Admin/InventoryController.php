@@ -42,7 +42,7 @@ class InventoryController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-//        dd($model->variations);
+//        dd($model->stockAttrs);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         return $this->view('stock_new', compact(['model', 'attrs']));
     }
@@ -65,7 +65,8 @@ class InventoryController extends Controller
     public function linkAll(Request $request)
     {
         $data = $request->get('data');
-        if (count($data)) {
+
+        if ($data && count($data)) {
             $firstKeyArray = array_first($data);
             array_shift($data);
             foreach ($data as $i => $v) {

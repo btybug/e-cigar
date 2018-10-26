@@ -46,6 +46,11 @@ class Stock extends Translatable
             ->select('attributes.*','stock_attributes.is_shared as is_shared')->whereNull('attributes.parent_id');
     }
 
+    public function stockAttrs()
+    {
+        return $this->hasMany(StockAttribute::class, 'stock_id')->with('children')->whereNull('parent_id');
+    }
+
     public function variations()
     {
         return $this->hasMany(StockVariation::class, 'stock_id');

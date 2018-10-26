@@ -9,20 +9,16 @@
                 {!! Form::hidden("variations[".$uniqueShortID."]",json_encode($items->toArray()),['id' => 'variation_'.$uniqueShortID]) !!}
             </div>
             @foreach($items->options as $options)
-                {{--@php--}}
-                {{--$linked = $items[$loop->index];--}}
-                {{--@endphp--}}
                 {!! Form::hidden("variation_options[".$uniqueShortID."][".$options->attributes_id."][attributes_id]",$options->attributes_id) !!}
                 {!! Form::hidden("variation_options[".$uniqueShortID."][".$options->attributes_id."][options_id]",$options->options_id) !!}
                 @php
-                    $opptionAttr = $options->attr;
+                    $opptionAttr = $model->stockAttrs()->where('attributes_id',$options->attributes_id)->first();
                 @endphp
                 <div class="form-group">
-                    <label for="exampleFormControlSelect{{ $options->attributes_id }}">{{ $opptionAttr->name }}</label>
+                    <label for="exampleFormControlSelect{{ $options->attributes_id }}">{{ $opptionAttr->attr->name }}</label>
                     <select class="form-control" id="exampleFormControlSelect{{ $options->attributes_id }}">
-
-                        @foreach($opptionAttr->children as $option)
-                            <option value="{{ $option->id }}" @if($options->options_id == $option->id) selected @endif>{{ $option->name }}</option>
+                        @foreach($opptionAttr->children as $value)
+                            <option value="{{ $value->attr->id }}" @if($options->options_id == $value->attr->id) selected @endif>{{ $value->attr->name }}</option>
                         @endforeach
                     </select>
                 </div>

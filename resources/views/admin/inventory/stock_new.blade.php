@@ -271,13 +271,16 @@
                                         <ul class="choset-attributes">
                                             @if(isset($attrs) && count($attrs))
                                                 @foreach($attrs as $attribute)
+                                                    @php
+                                                        $opptionAttr = $model->stockAttrs()->where('attributes_id',$attribute->id)->first();
+                                                    @endphp
                                                     <div style="height: 50px" data-attr-id="{{$attribute->id}}"
                                                          class="attributes-container-{{$attribute->id}} main-attr-container">
                                                         <input data-id="{{$attribute->id}}"
                                                                class="attributes-item-input-{{$attribute->id}}"
-                                                               value="{{ implode(',',$attribute->children->pluck('name')->all()) }}">
+                                                               value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.name')->all()) }}">
                                                         <input type="hidden" class="input-items-value" name="options[{{$attribute->id}}]"
-                                                               value="{{ implode(',',$attribute->children->pluck('id')->all()) }}">
+                                                               value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.id')->all()) }}">
                                                     </div>
                                                 @endforeach
                                             @endif
