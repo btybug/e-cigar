@@ -287,5 +287,13 @@ class SettingsController extends Controller
 
     }
 
+    public function getGifts()
+    {
+        return $this->view('store.gifts');
+    } public function getGiftsManage($id=null)
+    {
+        return $this->view('store.gifts.manage');
+    }
+
 
 }

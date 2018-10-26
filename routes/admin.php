@@ -44,6 +44,11 @@ Route::group(['prefix' => 'settings'], function () {
             Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_store');
 
         });
+        Route::group(['prefix' => 'gifts'], function () {
+            Route::get('/', 'Admin\SettingsController@getGifts')->name('admin_settings_store_gifts');
+            Route::get('/create-or-update/{id?}', 'Admin\SettingsController@getGiftsManage')->name('admin_settings_store_gifts_manage');
+
+        });
     });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');

@@ -24,6 +24,11 @@
                    aria-controls="shipping" aria-selected="false">Couriers</a>
             </li>
             <li class="nav-item ">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_gifts') !!}"
+                   role="tab"
+                   aria-controls="shipping" aria-selected="false">Gifts</a>
+            </li>
+            <li class="nav-item ">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Delivery Cost</a>

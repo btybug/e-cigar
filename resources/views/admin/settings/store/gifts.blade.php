@@ -23,8 +23,8 @@
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Courier </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_gifts') !!}"
+            <li class="nav-item active ">
+                <a class="nav-link" id="payment_gateways" href="#"
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Gifts</a>
             </li>
@@ -33,30 +33,26 @@
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Delivery Cost</a>
             </li>
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tax_rates') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
-        <div class="text-right mb-10">
-            <a href="{!! route('get_admin_settings_tax_create_or_update') !!}" class="btn btn-primary">Create new</a>
-        </div>
         <div class="" id="myTabContent">
-
+            <div class="text-right mb-10">
+                <a href="{!! route('admin_settings_store_gifts_manage') !!}" class="btn btn-primary">Create new</a>
+            </div>
             <div class="" aria-labelledby="general-tab">
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
-                            @foreach($tax_rates as $tax_rate)
-                                <li class="item @if($tax_rate->is_active) active @endif">
-                                    <div class="chek-title">
-                                        <input id="cash_paymant" @if($tax_rate->is_active) checked
-                                               @endif  name="{!! $tax_rate->id !!}" class="gateways_inp" type="checkbox">
-                                        <label for="cash_paymant" class="title">{!! $tax_rate->name !!}</label>
-                                    </div>
-                                    <a href="{!! route('get_admin_settings_tax_create_or_update',$tax_rate->id) !!}"
-                                       class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                                </li>
-                            @endforeach
+                        <li class="item  active ">
+                            <div class="chek-title">
+                                <input id="cash_paymant" checked="" name="1" class="gateways_inp" type="checkbox">
+                                <label for="cash_paymant" class="title">Gift if amount >= 30 $ </label>
+                            </div>
+                            <a href="{!! route('admin_settings_store_gifts_manage') !!}"
+                               class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -66,29 +62,4 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
-
 @stop
-@section('js')
-    <script>
-        $('body').on('change', '.payment_gateways_tab .list_paymant .item .gateways_inp', function () {
-            if ($(this).is(':checked')) {
-                $(this).closest('.item').addClass('active')
-            } else {
-                $(this).closest('.item').removeClass('active')
-            }
-        });
-        $('.gateways_inp').on('change', function () {
-            var data = {key: $(this).attr('name'), onOff: $(this).prop("checked")}
-            $.ajax({
-                type: "post",
-                url: '{!! route('post_admin_tax_rate_enable') !!}',
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                }
-            });
-        });
-
-    </script>
-    @stop

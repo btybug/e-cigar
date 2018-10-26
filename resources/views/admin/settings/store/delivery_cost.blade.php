@@ -23,6 +23,11 @@
                    role="tab"
                    aria-controls="shipping" aria-selected="false">Courier </a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_gifts') !!}"
+                   role="tab"
+                   aria-controls="shipping" aria-selected="false">Gifts</a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
                    role="tab"

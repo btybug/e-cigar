@@ -31,6 +31,13 @@
                    aria-controls="shipping" aria-selected="false">Courier </a>
             </li>
             @endok
+            @ok('admin_settings_store_gifts')
+            <li class="nav-item ">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_gifts') !!}"
+                   role="tab"
+                   aria-controls="shipping" aria-selected="false">Gifts</a>
+            </li>
+            @endok
             @ok('admin_settings_delivery')
             <li class="nav-item ">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_delivery') !!}"
