@@ -2,19 +2,58 @@
 @section('content')
     <div class="create-or-update">
         <form action="" class="form-horizontal">
-            <div class="form-group">
-                <div class="">
-                    <label class="col-md-3 control-label">Title</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" placeholder="title">
-                    </div>
+            @if(count(get_languages()))
+                <ul class="nav nav-tabs">
+                    @foreach(get_languages() as $language)
+                        <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                       href="#{{ strtolower($language->code) }}">
+                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                            </a></li>
+                    @endforeach
+                </ul>
+            @endif
+                <div class="tab-content">
+                    @if(count(get_languages()))
+                        @foreach(get_languages() as $language)
+                            <div id="{{ strtolower($language->code) }}"
+                                 class="tab-pane fade  @if($loop->first) in active @endif">
+                                <div class="form-group">
+                                    <div class="">
+                                        <label class="col-md-3 control-label">Title</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" placeholder="title">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
-            </div>
+
             <div class="form-group">
                 <div class="">
                     <label class="col-md-3 control-label">Icon</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control icon-picker"  placeholder="icon">
+                    </div>
+                </div>
+            </div>
+                <div class="form-group">
+                <div class="">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-9 row">
+                        <div class="col-md-6">
+                            <label class="col-md-3 control-label">start</label>
+                            <div class="col-md-9">
+                                <input type="date" class="form-control " >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="col-md-3 control-label">end</label>
+                            <div class="col-md-9">
+                                <input type="date" class="form-control " >
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
