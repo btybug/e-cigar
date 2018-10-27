@@ -28,7 +28,6 @@
                     <th>Lon</th>
                     <th>Timezone</th>
                     <th>Continent</th>
-                    <th>Currency</th>
                     <th>Agent</th>
                     <th>Date</th>
                 </tr>
@@ -57,7 +56,6 @@
                     {data: 'lon', name: 'lon'},
                     {data: 'timezone', name: 'timezone'},
                     {data: 'continent', name: 'continent'},
-                    {data: 'currency', name: 'currency'},
                     {data: 'agent', name: 'agent'},
                     {data: 'created_at', name: 'created_at'},
                 ],
