@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-    <div class="row " style="zoom: 65%">
+    <div class="row " style="zoom: 75%">
 
         <div class="col-xs-12">
             <div class="col-md-6 pull-left">
@@ -24,10 +24,7 @@
                     <th>State</th>
                     <th>State Name</th>
                     <th>Postal Code</th>
-                    <th>Lat</th>
-                    <th>Lon</th>
                     <th>Timezone</th>
-                    <th>Continent</th>
                     <th>Agent</th>
                     <th>Date</th>
                 </tr>
@@ -52,10 +49,7 @@
                     {data: 'state', name: 'state'},
                     {data: 'state_name', name: 'state_name'},
                     {data: 'postal_code', name: 'postal_code'},
-                    {data: 'lat', name: 'lat'},
-                    {data: 'lon', name: 'lon'},
                     {data: 'timezone', name: 'timezone'},
-                    {data: 'continent', name: 'continent'},
                     {data: 'agent', name: 'agent'},
                     {data: 'created_at', name: 'created_at'},
                 ],
