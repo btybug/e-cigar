@@ -23,7 +23,6 @@
                     <th>City</th>
                     <th>State</th>
                     <th>State Name</th>
-                    <th>Postal Code</th>
                     <th>Timezone</th>
                     <th>Agent</th>
                     <th>Date</th>
@@ -48,7 +47,6 @@
                     {data: 'city', name: 'city'},
                     {data: 'state', name: 'state'},
                     {data: 'state_name', name: 'state_name'},
-                    {data: 'postal_code', name: 'postal_code'},
                     {data: 'timezone', name: 'timezone'},
                     {data: 'agent', name: 'agent'},
                     {data: 'created_at', name: 'created_at'},
