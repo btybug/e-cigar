@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <div class="create-or-update">
-        <form action="" class="form-horizontal">
+        {!! Form::model(null,['class'=>'form-horizontal']) !!}
+        <div class=" pull-right">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
             @if(count(get_languages()))
                 <ul class="nav nav-tabs">
                     @foreach(get_languages() as $language)
@@ -21,7 +24,7 @@
                                     <div class="">
                                         <label class="col-md-3 control-label">Title</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" placeholder="title">
+                                            {!! Form::text('translatable['.strtolower($language->code).'][title]',null,['class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -34,7 +37,7 @@
                 <div class="">
                     <label class="col-md-3 control-label">Icon</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control icon-picker"  placeholder="icon">
+                        {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
                     </div>
                 </div>
             </div>
@@ -45,13 +48,13 @@
                         <div class="col-md-6">
                             <label class="col-md-3 control-label">start</label>
                             <div class="col-md-9">
-                                <input type="date" class="form-control " >
+                                {!! Form::date('start_date',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="col-md-3 control-label">end</label>
                             <div class="col-md-9">
-                                <input type="date" class="form-control " >
+                                {!! Form::date('end_date',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -61,12 +64,12 @@
                 <div class="">
                     <label class="col-md-3 control-label">Based on</label>
                     <div class="col-md-9">
-                        <select name="" id="based-on" class="form-control">
-                            <option value="create_product">Available for create product</option>
-                            <option value="product">Product</option>
-                            <option value="order_amount">Order Amount</option>
-                            <option value="promo_code">Promo code</option>
-                        </select>
+                        {!! Form::select('based_on',[
+                        'create_product'=>'Available for create product',
+                        'product'=>'Product',
+                        'order_amount'=>'Order Amount',
+                        'promo_code'=>'Promo code',
+                        ],null,['id'=>'based-on', 'class'=>'form-control']) !!}
                     </div>
                 </div>
 
@@ -91,19 +94,19 @@
                     <div class="can-selected-radio">
                         <h4>Can be selected </h4>
                         <label class="radio-inline">
-                            <input type="radio" value="all_juices" name="optradio" checked>All
+                            {!! Form::radio('choice_type','all_juices',true) !!}All
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" value="choose_juices" name="optradio">Choose
+                            {!! Form::radio('choice_type','choose_juices') !!}Choose
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" value="query_juices" name="optradio">Query
+                            {!! Form::radio('choice_type','query_juices') !!}Query
                         </label>
                         <div class="radio-wall-container"></div>
                     </div>
                 </div>
             </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 @stop
 @section('css')

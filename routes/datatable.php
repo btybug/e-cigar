@@ -20,6 +20,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/blog/comments/get-all','Admin\DatatableController@getAllPostComments')->name('datatable_all_post_comments');
     Route::get('/stock/get-all','Admin\DatatableController@getAllStocks')->name('datatable_all_stocks');
     Route::get('/settings/get-all-geo-zones','Admin\DatatableController@getAllGeoZones')->name('datatable_all_geo_zones');
+    Route::get('/settings/get-user-activity/{id}','Admin\DatatableController@getUserActivity')->name('datatable_user_activity');
 });
 
 

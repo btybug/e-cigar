@@ -25,6 +25,7 @@ use App\Models\TaxRates;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
+use Torann\GeoIP\GeoIP;
 
 class SettingsController extends Controller
 {
@@ -298,6 +299,12 @@ class SettingsController extends Controller
         $products=Products::where('status','published')->get()->pluck('name','id');
         $productsTableColumns=collect(\DB::select('show columns from products'))->pluck('Field','Field');
         return $this->view('store.gifts.manage',compact('products','productsTableColumns'));
+    }
+
+    public function postGiftsManage(Request $request)
+    {
+        $gifts=$request->except('_token');
+        dd($request->all());
     }
 
 

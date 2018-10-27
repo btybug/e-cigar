@@ -35,15 +35,15 @@
 @section('js')
     <script>
         $(function () {
-         $('#users-table').DataTable({
-                ajax:  "{!! route('datatable_all_users') !!}",
+            $('#users-table').DataTable({
+                ajax: "{!! route('datatable_all_users') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
                 columns: [
-                    {data: 'id',name: 'id'},
+                    {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
-                    {data: 'last_name',name: 'last_name'},
+                    {data: 'last_name', name: 'last_name'},
                     {data: 'email', name: 'email'},
                     {data: 'membership', name: 'membership'},
                     {data: 'phone', name: 'phone'},
@@ -52,7 +52,7 @@
                     {data: 'status', name: 'status'},
                     {data: 'verification_type', name: 'verification_type'},
                     {data: 'created_at', name: 'created_at'},
-                     {data: 'actions', name: 'actions'}
+                    {data: 'actions', name: 'actions'}
                 ]
             });
         });

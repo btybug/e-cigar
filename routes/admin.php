@@ -47,6 +47,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::group(['prefix' => 'gifts'], function () {
             Route::get('/', 'Admin\SettingsController@getGifts')->name('admin_settings_store_gifts');
             Route::get('/create-or-update/{id?}', 'Admin\SettingsController@getGiftsManage')->name('admin_settings_store_gifts_manage');
+            Route::post('/create-or-update/{id?}', 'Admin\SettingsController@postGiftsManage')->name('post_admin_settings_store_gifts_manage');
 
         });
     });
@@ -73,6 +74,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_customers');
     Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
+    Route::get('/activity/{id}', 'Admin\UserController@getUserActivity')->name('admin_users_activity');
 
     Route::group(['prefix' => 'roles-mebership'], function () {
         Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');

@@ -31,4 +31,10 @@ class UserController extends Controller
         $user=User::find($request->id);
         return $this->view('edit');
     }
+
+    public function getUserActivity($id)
+    {
+        $user=User::findOrFail($id);
+        return $this->view('activity_log',compact('user'));
+    }
 }

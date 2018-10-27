@@ -14,7 +14,7 @@ if ($("#select-product-option").length) {
     $("#select-product-option").select2();
 }
 
-$("body").on("click", `[name="optradio"]`, function() {
+$("body").on("click", `[name="choice_type"]`, function() {
     let value = $(this).val();
     $(".radio-wall-container")
         .empty()
