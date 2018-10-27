@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-    <div class="row">
+    <div class="row " style="zoom: 75%">
 
         <div class="col-xs-12">
             <div class="col-md-6 pull-left">
