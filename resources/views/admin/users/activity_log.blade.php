@@ -7,7 +7,7 @@
 
         <div class="col-xs-12">
             <div class="col-md-6 pull-left">
-                <h2 class="m-0">Users</h2>
+                <h2 class="m-0">User Logs</h2>
             </div>
         </div>
         <div class="col-xs-12">
@@ -15,7 +15,6 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Subject</th>
                     <th>Url</th>
                     <th>Method</th>
                     <th>Ip</th>
@@ -32,7 +31,6 @@
                     <th>Currency</th>
                     <th>Agent</th>
                     <th>Date</th>
-                    <th>Action</th>
                 </tr>
                 </thead>
             </table>
@@ -46,7 +44,6 @@
                 ajax:  "{!! route('datatable_user_activity',$user->id) !!}",
                 columns: [
                     {data: 'id',name: 'id'},
-                    {data: 'subject', name: 'subject'},
                     {data: 'url',name: 'url'},
                     {data: 'method', name: 'method'},
                     {data: 'ip', name: 'ip'},
@@ -63,7 +60,6 @@
                     {data: 'currency', name: 'currency'},
                     {data: 'agent', name: 'agent'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'actions', name: 'actions'},
                 ],
                 order: [ [0, 'desc'] ]
             });
