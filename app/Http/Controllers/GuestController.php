@@ -8,7 +8,7 @@ use PragmaRX\Countries\Package\Countries;
 
 class GuestController extends Controller
 {
-    protected $view='frontend.guest';
+    protected $view = 'frontend.guest';
 
     /**
      * Create a new controller instance.
@@ -52,8 +52,9 @@ class GuestController extends Controller
 
     public function getDelivery(GeoZones $geoZones)
     {
-        $countries = [null=>'Select Country']+$geoZones->groupBy('country')->pluck('country','country')->toArray();
-        return $this->view('delivery',compact('countries'));
+
+        $countries = [null => 'Select Country'] + $geoZones->groupBy('country')->pluck('country', 'country')->toArray();
+        return $this->view('delivery', compact('countries'));
     }
 
     public function getWholeSellers()
@@ -61,10 +62,14 @@ class GuestController extends Controller
         return $this->view('whole_sellers');
     }
 
-    public function getCities(Countries $countries,Request $request)
+    public function getCities(Request $request)
     {
-        $regions = $countries->whereNameCommon($request->get('value'))->first()->hydrateStates()->states->pluck('name', 'name');
-        $html=\Form::select('country',$regions,null,['class'=>'form-control','id'=>'city'])->toHtml();
+        $zones=GeoZones::where('country', 'Armenia')->get();
+        $array=[];
+        foreach ($zones as $zone){
+            $array+= json_decode($zone->regions,true);
+        }
+        $html=\Form::select('city',$array,null,['class'=>'form-control','id'=>'city'])->toHtml();
         return ['error'=>false,'html'=>$html] ;
     }
 }
