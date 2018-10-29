@@ -18,8 +18,8 @@ class CreateGiftsTable extends Migration
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->string('based_on');
-            $table->unsignedInteger('product_id')->nullable();
-            $table->unsignedInteger('product_count')->nullable();
+            $table->unsignedInteger('stock_id')->nullable();
+            $table->unsignedInteger('stock_count')->nullable();
             $table->unsignedInteger('cart_amount')->nullable();
             $table->string('promo_code',50)->nullable();
             $table->unsignedInteger('free_juices_count');
@@ -27,7 +27,7 @@ class CreateGiftsTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
         });
     }
 

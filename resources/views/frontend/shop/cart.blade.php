@@ -16,8 +16,8 @@
 
                     <div class="col-12 col-lg-8 cart-left">
                         <div class="row">
-
-                            <form method='POST' id="update_cart_form" action='http://demo.laravelcommerce.com/updateCart'>
+                            <form method='POST' id="update_cart_form"
+                                  action='http://demo.laravelcommerce.com/updateCart'>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -29,169 +29,79 @@
                                             <th align="right">Subtotal</th>
                                         </tr>
                                         </thead>
-
-
                                         <tbody>
-                                        <tr>
-                                            <td align="left" class="item">
-                                                <input type="hidden" name="cart[]" value="4925">
-                                                <a href="http://demo.laravelcommerce.com/product-detail/custom-slim-fit-weathered-polo"
-                                                   class="cart-thumb">
-                                                    <img class="img-fluid"
-                                                         src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg"
-                                                         alt="CUSTOM SLIM FIT WEATHERED POLO" alt="">
-                                                </a>
-                                            </td>
+                                        @if(count($items))
+                                            @foreach($items as $item)
+                                                @php
+                                                $stock = array_first($item)->attributes->variation->stock
+                                                @endphp
+                                                <tr>
+                                                    <td align="left" class="item">
+                                                        <input type="hidden" name="cart[]" value="4925">
+                                                        <a href="#"
+                                                           class="cart-thumb">
+                                                            <img class="img-fluid"
+                                                                 src="{{ $stock->image }}"
+                                                                 alt="{!! $stock->name !!}">
+                                                        </a>
+                                                        <div>
+                                                           {!! $stock->name !!}
+                                                        </div>
+                                                    </td>
 
-                                            <td align="right" class="options">
-                                                <div class="input-group">
-                                                    <div class="form-group row align-items-center">
-                                                        <label class="mr-2" for="color1">Colors</label>
-                                                        <select class="form-control" name="color1" id="colors">
-                                                            <option value="blue">blue</option>
-                                                            <option value="red">red</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group">
-                                                    <div class="form-group row align-items-center">
-                                                        <label class="mr-2" for="color2">Colors</label>
-                                                        <select class="form-control" name="color2" id="colors">
-                                                            <option value="blue">blue</option>
-                                                            <option value="red">red</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                    <td align="right" class="options">
+                                                        @foreach($item as $option)
+                                                            <div class="input-group">
+                                                                @foreach($option->attributes->variation->options as $voption)
+                                                                    <div class="form-group row">
+                                                                        <label class="mr-2"
+                                                                               for="color1"><strong>{{ $voption->attr->name }}
+                                                                                : </strong> {{ $voption->option->name }}
+                                                                        </label>
 
+                                                                    </div>
+                                                                @endforeach
+                                                            </div>
+                                                        @endforeach
+                                                    </td>
+                                                    <td align="right" class="Qty">
+                                                        @foreach($item as $option)
+                                                            <div class="input-group mb-4">
+                                                                  <span class="input-group-btn qtyminus_4925">
+                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                  </span>
+                                                                <input name="quantity[]" type="text" readonly
+                                                                       value="{{ $option->quantity }}"
+                                                                       class="form-control qty">
+                                                                <span class="input-group-btn qtypluscart_4925">
+                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                  </span>
+                                                            </div>
+                                                        @endforeach
+                                                    </td>
 
-                                            </td>
-                                            <td align="right" class="Qty" rowspan="2">
-                                                <div class="input-group mb-4">
-                                                  <span class="input-group-btn qtyminus_4925">
-                                                    	<i class="fa fa-minus" aria-hidden="true"></i>
-                                                  </span>
-                                                    <input name="quantity[]" type="text" readonly value="1"
-                                                           class="form-control qty">
-                                                    <span class="input-group-btn qtypluscart_4925">
-                                                  		<i class="fa fa-plus" aria-hidden="true"></i>
-                                                  </span>
-                                                </div>
-                                                <div class="input-group">
-                                                  <span class="input-group-btn qtyminus_4925">
-                                                    	<i class="fa fa-minus" aria-hidden="true"></i>
-                                                  </span>
-                                                    <input name="quantity[]" type="text" readonly value="1"
-                                                           class="form-control qty">
-                                                    <span class="input-group-btn qtypluscart_4925">
-                                                  		<i class="fa fa-plus" aria-hidden="true"></i>
-                                                  </span>
-                                                </div>
-                                            </td>
+                                                    <td align="right" class="price">
+                                                        @foreach($item as $option)
+                                                            <div class="d-flex justify-content-end">
+                                                                <span class="d-block cart_price_4925 mb-4">${{ $option->price }}</span>
+                                                                <a href="#"
+                                                                   class="btn btn-danger btn-sm align-self-start ml-1"><i
+                                                                            class="fa fa-times"></i></a>
+                                                            </div>
+                                                        @endforeach
+                                                    </td>
+                                                    <td align="right" class="subtotal">
+                                                        @foreach($item as $option)
+                                                            <div class="d-flex justify-content-end">
+                                                                <span class="d-block cart_price_4925 mb-4">${{ $option->getPriceSum() }}</span>
+                                                            </div>
+                                                        @endforeach
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
 
-                                            <td align="right" class="price">
-                                                <div class="d-flex justify-content-end">
-                                                    <span class="d-block cart_price_4925 mb-4">$89.5</span>
-                                                    <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
-                                                </div>
-                                               <div class="d-flex justify-content-end">
-                                                   <span class="d-block cart_price_4925">$59.5</span>
-                                                   <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
-                                               </div>
-
-                                            </td>
-                                            {{--<td align="right" class="price">--}}
-                                                {{--<a href="#" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>--}}
-                                                {{--<a href="#" class="btn btn-danger btn-sm">fgdfg</a>--}}
-                                            {{--</td>--}}
-                                            <td align="right" class="subtotal" style="vertical-align: middle"><span>$140</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" class="buttons">
-                                                {{--<a href="http://demo.laravelcommerce.com/editcart?id=4925"--}}
-                                                   {{--class="btn btn-sm btn-secondary">Edit</a>--}}
-                                                {{--<a href="http://demo.laravelcommerce.com/deleteCart?id=4925"--}}
-                                                   {{--class="btn btn-sm btn-secondary">Remove Item</a>--}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left" class="item">
-                                                <input type="hidden" name="cart[]" value="4925">
-                                                <a href="http://demo.laravelcommerce.com/product-detail/custom-slim-fit-weathered-polo"
-                                                   class="cart-thumb">
-                                                    <img class="img-fluid"
-                                                         src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg"
-                                                         alt="CUSTOM SLIM FIT WEATHERED POLO" alt="">
-                                                </a>
-                                            </td>
-
-                                            <td align="right" class="options">
-                                                <div class="input-group">
-                                                    <div class="form-group row align-items-center">
-                                                        <label class="mr-2" for="color1">Colors</label>
-                                                        <select class="form-control" name="color1" id="colors">
-                                                            <option value="blue">blue</option>
-                                                            <option value="red">red</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group">
-                                                    <div class="form-group row align-items-center">
-                                                        <label class="mr-2" for="color2">Colors</label>
-                                                        <select class="form-control" name="color2" id="colors">
-                                                            <option value="blue">blue</option>
-                                                            <option value="red">red</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-
-                                            </td>
-                                            <td align="right" class="Qty" rowspan="2">
-                                                <div class="input-group mb-4">
-                                                  <span class="input-group-btn qtyminus_4925">
-                                                    	<i class="fa fa-minus" aria-hidden="true"></i>
-                                                  </span>
-                                                    <input name="quantity[]" type="text" readonly value="1"
-                                                           class="form-control qty">
-                                                    <span class="input-group-btn qtypluscart_4925">
-                                                  		<i class="fa fa-plus" aria-hidden="true"></i>
-                                                  </span>
-                                                </div>
-                                                <div class="input-group">
-                                                  <span class="input-group-btn qtyminus_4925">
-                                                    	<i class="fa fa-minus" aria-hidden="true"></i>
-                                                  </span>
-                                                    <input name="quantity[]" type="text" readonly value="1"
-                                                           class="form-control qty">
-                                                    <span class="input-group-btn qtypluscart_4925">
-                                                  		<i class="fa fa-plus" aria-hidden="true"></i>
-                                                  </span>
-                                                </div>
-                                            </td>
-
-                                            <td align="right" class="price">
-                                                <div class="d-flex justify-content-end">
-                                                    <span class="d-block cart_price_4925 mb-4">$89.5</span>
-                                                    <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
-                                                </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <span class="d-block cart_price_4925">$59.5</span>
-                                                    <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
-                                                </div>
-                                            </td>
-                                            <td align="right" class="subtotal" style="vertical-align: middle"><span>$140</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" class="buttons">
-                                                {{--<a href="http://demo.laravelcommerce.com/editcart?id=4925"--}}
-                                                   {{--class="btn btn-sm btn-secondary">Edit</a>--}}
-                                                {{--<a href="http://demo.laravelcommerce.com/deleteCart?id=4925"--}}
-                                                   {{--class="btn btn-sm btn-secondary">Remove Item</a>--}}
-                                            </td>
-                                        </tr>
                                         </tbody>
-
-
                                     </table>
                                 </div>
                             </form>
@@ -200,7 +110,8 @@
                         <div class="row button back-update-btn">
                             <div class="col-12 col-sm-6">
                                 <div class="row">
-                                    <a href="http://demo.laravelcommerce.com/shop" class="btn btn-dark">Back To Shopping</a>
+                                    <a href="http://demo.laravelcommerce.com/shop" class="btn btn-dark">Back To
+                                        Shopping</a>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6">
@@ -223,15 +134,21 @@
                                         <tbody>
                                         <tr>
                                             <td align="left"><span>Sub Total</span></td>
-                                            <td align="right" id="subtotal">$188</td>
+                                            <td align="right" id="subtotal">
+                                                @if(Auth::check())
+                                                    ${!! \Cart::session(Auth::id())->getSubTotal() !!}
+                                                @else
+                                                    ${!! \Cart::getSubTotal() !!}
+                                                @endif
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td align="left"><span>Tax</span></td>
-                                            <td align="right" id="subtotal">$1</td>
+                                            <td align="right" id="subtotal">$0</td>
                                         </tr>
                                         <tr>
                                             <td align="left"><span>Shipping</span></td>
-                                            <td align="right" id="subtotal">$2</td>
+                                            <td align="right" id="subtotal">$0</td>
                                         </tr>
                                         <tr>
                                             <td align="left"><span>Discount (Coupon)</span></td>
@@ -239,7 +156,13 @@
                                         </tr>
                                         <tr>
                                             <td class="last" align="left"><span>Total</span></td>
-                                            <td class="last" align="right" id="total_price">$188</td>
+                                            <td class="last" align="right" id="total_price">
+                                                @if(Auth::check())
+                                                    ${!! \Cart::session(Auth::id())->getTotal() !!}
+                                                @else
+                                                    ${!! \Cart::getTotal() !!}
+                                                @endif
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -254,7 +177,8 @@
                                         <input type="text" name="coupon_code" class="form-control" id="coupon_code">
 
                                         <div id="coupon_error" class="help-block" style="display: none"></div>
-                                        <div id="coupon_require_error" class="help-block" style="display: none">Please enter
+                                        <div id="coupon_require_error" class="help-block" style="display: none">Please
+                                            enter
                                             a valid coupon code
                                         </div>
                                     </div>
