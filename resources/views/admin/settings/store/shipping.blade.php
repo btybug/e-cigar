@@ -62,8 +62,6 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Country</th>
-                                        <th>Regions</th>
                                         <th>Payment Options</th>
                                         <th>Description</th>
                                         <th>Created at</th>
@@ -91,8 +89,6 @@
                 columns: [
                     {data: 'id',name: 'id'},
                     {data: 'name', name: 'name'},
-                    {data: 'country', name: 'country'},
-                    {data: 'regions', name: 'regions'},
                     {data: 'payment_options', name: 'payment_options'},
                     {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},

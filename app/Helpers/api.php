@@ -260,3 +260,8 @@ function sc($content, $user)
     $content = $ShortCodes->relatedShortcoder($content, $user);
     return $content;
 }
+function getRegions($country){
+    $countries=new \PragmaRX\Countries\Package\Countries();
+   return ['all_selected'=>'All Regions']+$countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
+
+}

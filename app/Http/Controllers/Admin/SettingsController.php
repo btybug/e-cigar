@@ -142,7 +142,7 @@ class SettingsController extends Controller
             ->pluck('name', 'id');
         $geo_zone = GeoZones::find($id);
         $delivery_types = DeliveryCostsTypes::all()->pluck('title', 'id');
-        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
+        $countries = [null=>'Select Country']+$countries->all()->pluck('name.common', 'name.common')->toArray();
         return $this->view('store.general.new_shipping_zone', compact(
             'countries',
             'geo_zone',
@@ -154,21 +154,27 @@ class SettingsController extends Controller
     public function saveGeoZone(GeoZonesRequest $request)
     {
         $data = $request->except('_token', 'delivery_cost', 'delivery_cost_types_id');
-        $countries=$request->get('country');
-        $regions=$request->get('regions');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
-        foreach ($countries as $key=>$country){
-            $country=$geo_zone->countries()->where('name',$country)->first();
-            if($regions[$key]=='all_selected'){
-                $country->all=1;
-                $country->save();
-                $country->regions()->delete();
 
-            }elseif($country){
-                $region= $country->regions()->where('name',$regions[$key])->first();
+        $countries=$request->get('country');
+        $regions=$request->get('region');
+
+        foreach ($countries as $key=>$country){
+            select_country:
+            $zone_country=$geo_zone->countries()->where('name',$country)->first();
+            if($regions[$key]=='all_selected'){
+                $zone_country->all=1;
+                $zone_country->save();
+                $zone_country->regions()->delete();
+
+            }elseif (!$zone_country){
+                $geo_zone->countries()->create(['name'=>$country,'all'=>0]);
+                goto select_country;
+            }elseif($zone_country){
+                $region= $zone_country->regions()->where('name',$regions[$key])->first();
                 if(!$region){
-                    $country->regions()->create(['name'=>$regions[$key]]);
+                    $zone_country->regions()->create(['name'=>$regions[$key]]);
                 }
             }
         }
@@ -196,7 +202,7 @@ class SettingsController extends Controller
     public function findRegion(Request $request)
     {
         $countries = new Countries();
-        $regions = $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name');
+        $regions = ['all_selected'=>'All Regions']+$countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
         $html=\Form::select('region['.$request->get('count').']',$regions,null,['class'=>'form-control region'])->toHtml();
         return ['error'=>false,'html'=>$html];
     }
