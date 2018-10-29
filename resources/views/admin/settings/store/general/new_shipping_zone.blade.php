@@ -56,10 +56,10 @@
                                 <div class="col-sm-10 wall">
                                     {!! Form::text('',null,['class' => 'form-control','id'=>'payment_options']) !!}
                                     <ul class="dropdown-menu"></ul>
-                                    <div id="coupon-category" class="well well-sm view-coupon">
+                                    <!-- <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list" style="list-style: none">
                                         </ul>
-                                    </div>
+                                    </div> -->
                                     {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!}
                                 </div>
                             </div>
@@ -87,13 +87,21 @@
                                         </td>
                                         <td>
                                             <div class="wall">
-                                                {!! Form::text('',null,['id' => 'region','class' => 'form-control']) !!}
-                                                <ul class="dropdown-menu"></ul>
-                                                <div id="coupon-category" class="well well-sm view-coupon">
+                                                <div class="region-container">
+                                                {!! Form::select('region',$countries,null,['class'=>'form-control region']) !!}
+                                                </div>
+                                                <!-- {!! Form::text('',null,['id' => 'region','class' => 'form-control']) !!} -->
+                                                <!-- <ul class="dropdown-menu"></ul> -->
+                                                <!-- <div id="coupon-category" class="well well-sm view-coupon">
                                                     <ul class="region-category-list" style="list-style: none">
                                                     </ul>
-                                                </div>
-                                                {!! Form::hidden('regions',null,['id'=>'region-names','class'=>'search-hidden-input']) !!}
+                                                </div> -->
+                                                {!! Form::hidden('regions',null,['class'=>'search-hidden-input region-names']) !!}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <button type="button" class="add-new-get-zones"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </td>
                                     </tr>
