@@ -54,16 +54,18 @@ class ProductsController extends Controller
 
     public function getPrice(Request $request)
     {
-        $stock = Stock::find(22);
+        $stock = Stock::find($request->uid);
         $attributes = array_keys($request->options);
         $options = array_values($request->options);
+        if($stock){
+            $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)->whereIn('options_id',$options)
+                ->whereIn('variation_id',$stock->variations()->pluck('id')->all())->groupBy('variation_id')->orderBy('total','desc')->first();
 
-        $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)->whereIn('options_id',$options)
-            ->whereIn('variation_id',$stock->variations()->pluck('id')->all())->groupBy('variation_id')->orderBy('total','desc')->first();
-
-        if($option && $option->variation){
-            return \Response::json(['price' =>  $option->variation->price,'error' => false]);
+            if($option && $option->variation){
+                return \Response::json(['price' =>  $option->variation->price,'error' => false]);
+            }
         }
+
 
         return \Response::json(['message' =>  'Currently product unavailable','error' => true]);
     }

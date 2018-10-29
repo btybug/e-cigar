@@ -26,7 +26,7 @@
             @endforeach
         </div>
         <div class="col-md-12 price-place">
-            {{ $variations->first()->price }}
+            {{--{{ $variations->first()->price }}--}}
         </div>
     @endif
 </div>

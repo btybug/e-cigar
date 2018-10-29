@@ -22,6 +22,7 @@
             <div class="col-md-4">
                 <form>
                     <h2 class="mb-4">Price Calculator</h2>
+                    <input type="hidden" value="{{ $vape->id }}" id="vpid">
                     @include("admin.inventory._partials.render_price_form",['model' => $vape])
 
                     <a href="#" class="btn btn-outline-dark btn-success">Add To Cart</a>
@@ -164,34 +165,41 @@
 
     <script>
         $(document).ready(function () {
+            get_price();
             $("body").on('change','.select-variation-option',function () {
-                var items = document.getElementsByClassName('select-variation-option');
-                let options = {};
-                for (var i = 0; i < items.length; i++){
-                    options[$(items[i]).data('name')] = $(items[i]).val();
-                }
-                if (JSON.stringify(options) !== "{}") {
-                    $.ajax({
-                        type: "post",
-                        url: "/products/get-price",
-                        cache: false,
-                        datatype: "json",
-                        data: { options : options, uid : 5 },
-                        headers: {
-                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                        },
-                        success: function(data) {
-                           if(! data.error){
-                                $(".price-place").html(data.price);
-                           }else{
-                               $(".price-place").html(data.message);
-                           }
-                        }
-                    });
-                }
+                get_price();
             })
 
         });
+
+        function get_price(){
+            var items = document.getElementsByClassName('select-variation-option');
+            let options = {};
+            for (var i = 0; i < items.length; i++){
+                options[$(items[i]).data('name')] = $(items[i]).val();
+            }
+            if (JSON.stringify(options) !== "{}") {
+
+                $.ajax({
+                    type: "post",
+                    url: "/products/get-price",
+                    cache: false,
+                    datatype: "json",
+                    data: { options : options, uid : $("#vpid").val() },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $(".price-place").html(data.price);
+                        }else{
+                            $(".price-place").html(data.message);
+                        }
+                    }
+                });
+            }
+        }
+
 
         $("#share").jsSocials({
             shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
