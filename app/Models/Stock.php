@@ -40,6 +40,11 @@ class Stock extends Translatable
       'ACY' => 'Accessory'
     ];
 
+    const STATUS = [
+      '0' => 'Draft',
+      '1' => 'Published'
+    ];
+
     public function attrs()
     {
         return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id')
@@ -62,7 +67,7 @@ class Stock extends Translatable
 
         return Attributes::leftJoin('stock_variation_options', 'attributes.id','=' ,'stock_variation_options.attributes_id')
             ->leftJoin('stock_variations', 'stock_variation_options.variation_id','=' ,'stock_variations.id')
-            ->leftJoin('stocks', 'stock_variations.product_id','=' ,'stocks.id')
+            ->leftJoin('stocks', 'stock_variations.stock_id','=' ,'stocks.id')
 //            ->leftJoin('attributes', 'product_variation_options.options_id','=' ,'attributes.id')
             ->where('stocks.id','=',$this->id)
             ->select('attributes.*','stock_variation_options.attributes_id as attr_id')

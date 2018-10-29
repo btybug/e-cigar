@@ -22,7 +22,7 @@
             <div class="col-md-4">
                 <form>
                     <h2 class="mb-4">Price Calculator</h2>
-                    @include("admin.store.products.render_price_form",['model' => $vape])
+                    @include("admin.inventory._partials.render_price_form",['model' => $vape])
 
                     <a href="#" class="btn btn-outline-dark btn-success">Add To Cart</a>
                 </form>
