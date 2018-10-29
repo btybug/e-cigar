@@ -13269,49 +13269,74 @@ a.text-dark:focus, a.text-dark:hover {
     width: 100%;
 }
 
-.juice-poster--type-1 .card-title,
-.juice-poster--type-1 .btn {
+
+.juice-poster.juice-poster--type-1 .card-title,
+.juice-poster.juice-poster.juice-poster--type-1 .btn,
+.juice-poster.juice-poster--type-1 .btn:focus,
+.juice-poster.juice-poster--type-1 .btn:active {
     background: #689f38;
 }
 
-.juice-poster--type-1 .btn {
+.juice-poster.juice-poster--type-1 .btn,
+.juice-poster.juice-poster--type-1 .btn:focus,
+.juice-poster.juice-poster--type-1 .btn:active {
     border-color: #689f38;
+}
+
+.juice-poster.juice-poster--type-1 .btn:focus,
+.juice-poster.juice-poster--type-1 .btn:active:focus {
+    -webkit-box-shadow: 0 0 0 3px  rgba(104, 159, 56, 0.2);
+    box-shadow: 0 0 0 3px  rgba(104, 159, 56, 0.2);
 }
 
 .juice-poster--type-1 .flavor-img-outer:after {
     background: rgba(104, 159, 56, 0.2);
-
 }
 
 .juice-poster--type-2 .card-title,
-.juice-poster--type-2 .btn {
+.juice-poster.juice-poster--type-2 .btn,
+.juice-poster.juice-poster--type-2 .btn:focus,
+.juice-poster.juice-poster--type-2 .btn:active {
     background: #d4e157;
 }
 
-.juice-poster--type-2 .btn {
+.juice-poster.juice-poster--type-2 .btn,
+.juice-poster.juice-poster--type-2 .btn:focus,
+.juice-poster.juice-poster--type-2 .btn:active {
     border-color: #d4e157;
+}
+
+.juice-poster.juice-poster--type-2 .btn:focus,
+.juice-poster.juice-poster--type-2 .btn:active:focus {
+    -webkit-box-shadow: 0 0 0 3px  rgba(212, 225, 87, 0.2);
+    box-shadow: 0 0 0 3px  rgba(212, 225, 87, 0.2);
 }
 
 .juice-poster--type-2 .flavor-img-outer:after {
     background: rgba(212, 225, 87, 0.2);
 }
 
-
 .juice-poster--type-3 .card-title,
-.juice-poster--type-3 .btn {
+.juice-poster.juice-poster--type-3 .btn,
+.juice-poster.juice-poster--type-3 .btn:focus,
+.juice-poster.juice-poster--type-3 .btn:active {
     background: #81c784;
 }
 
-.juice-poster--type-3 .btn {
+.juice-poster.juice-poster--type-3 .btn,
+.juice-poster.juice-poster--type-3 .btn:focus,
+.juice-poster.juice-poster--type-3 .btn:active {
     border-color: #81c784;
 }
 
+.juice-poster.juice-poster--type-3 .btn:focus,
+.juice-poster.juice-poster--type-3 .btn:active:focus {
+    -webkit-box-shadow: 0 0 0 3px  rgba(129, 199, 132, 0.2);
+    box-shadow: 0 0 0 3px  rgba(129, 199, 132, 0.2);
+}
 
 .juice-poster--type-3 .flavor-img-outer:after {
     background: rgba(129, 199, 132, 0.2);
 }
-
-
-
 
 /*End page juice*/
