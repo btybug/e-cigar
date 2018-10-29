@@ -28,5 +28,6 @@
         <div class="col-md-12 price-place">
             {{--{{ $variations->first()->price }}--}}
         </div>
+        <input type="hidden" value="" id="variation_uid">
     @endif
 </div>

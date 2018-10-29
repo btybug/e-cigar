@@ -25,7 +25,7 @@
                     <input type="hidden" value="{{ $vape->id }}" id="vpid">
                     @include("admin.inventory._partials.render_price_form",['model' => $vape])
 
-                    <a href="#" class="btn btn-outline-dark btn-success">Add To Cart</a>
+                    <a href="javascript:void(0)" class="btn btn-outline-dark btn-success add-to-cart">Add To Cart</a>
                 </form>
             </div>
         </div>
@@ -170,6 +170,33 @@
                 get_price();
             })
 
+
+            $("body").on('click','.add-to-cart',function () {
+                var variationId = $("#variation_uid").val();
+
+                if(variationId && variationId != ''){
+                    $.ajax({
+                        type: "post",
+                        url: "/add-to-cart",
+                        cache: false,
+                        datatype: "json",
+                        data: {  uid : variationId },
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function(data) {
+                            if(! data.error){
+                                alert('added')
+                            }else{
+                                alert('error')
+                            }
+                        }
+                    });
+                }else{
+                    alert('Select available variation');
+                }
+            })
+
         });
 
         function get_price(){
@@ -192,8 +219,10 @@
                     success: function(data) {
                         if(! data.error){
                             $(".price-place").html(data.price);
+                            $("#variation_uid").val(data.variation_id);
                         }else{
                             $(".price-place").html(data.message);
+                            $("#variation_uid").val('');
                         }
                     }
                 });

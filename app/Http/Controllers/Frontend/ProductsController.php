@@ -62,7 +62,7 @@ class ProductsController extends Controller
                 ->whereIn('variation_id',$stock->variations()->pluck('id')->all())->groupBy('variation_id')->orderBy('total','desc')->first();
 
             if($option && $option->variation){
-                return \Response::json(['price' =>  $option->variation->price,'error' => false]);
+                return \Response::json(['price' =>  $option->variation->price,'variation_id' =>$option->variation->variation_id ,'error' => false]);
             }
         }
 
