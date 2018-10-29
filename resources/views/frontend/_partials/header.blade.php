@@ -124,14 +124,14 @@
 
                         <li class="cart-header dropdown head-cart-content">
                             <a href="{!!route('shop_my_cart')  !!}" id="dropdownMenuButton" {{--class="dropdown-toggle"--}}{{-- aria-haspopup="true" aria-expanded="false"--}}>
-                                <span class="badge badge-secondary">0</span>
+                                <span class="badge badge-secondary cart-count">{{ cartCount() }}</span>
                                 <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                                 <!--<img class="img-fluid" src="http://laravelcommerce.com/public/images/shopping_cart.png" alt="icon">-->
 
                                 <span class="block">
                     	<span class="title">My Cart</span>
 
-                            <span class="items">(0)&nbsp;Item</span>
+                            <span class="items">(<span class="cart-count">{{ cartCount() }}</span>)&nbsp;Item(s)</span>
 
                     </span>
                             </a>

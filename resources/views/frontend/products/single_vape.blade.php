@@ -187,6 +187,7 @@
                         success: function(data) {
                             if(! data.error){
                                 alert('added')
+                                $(".cart-count").html(data.count)
                             }else{
                                 alert('error')
                             }

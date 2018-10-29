@@ -8,6 +8,7 @@ use App\Models\Posts;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
+use App\Services\CartService;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use View;
 use Illuminate\Http\Request;
@@ -16,11 +17,11 @@ class ShoppingCartController extends Controller
 {
     protected $view= 'frontend.shop';
 
-    private $cart;
+    private $cartService;
 
-    public function __construct(Cart $cart)
+    public function __construct(CartService $cartService)
     {
-        $this->cart = $cart;
+        $this->cartService = $cartService;
     }
     public function index()
     {
@@ -29,22 +30,7 @@ class ShoppingCartController extends Controller
 
     public function getCart()
     {
-        if(\Auth::check()){
-            $cartCollection = Cart::session(\Auth::id())->getContent();
-            $isEmpty = Cart::session(\Auth::id())->isEmpty();
-        }else{
-            $cartCollection = Cart::getContent();
-            $isEmpty = Cart::isEmpty();
-        }
-
-        $items = [];
-        if(! $isEmpty){
-            foreach($cartCollection as $key => $value){
-                $items[$value->name][$key] = $value;
-            }
-        }
-
-//        dd($items,$cartCollection);
+        $items = $this->cartService->getCartItems();
         return $this->view('cart',compact(['items']));
     }
 
@@ -56,7 +42,6 @@ class ShoppingCartController extends Controller
     public function postAddToCart(Request $request)
     {
         $variation = StockVariation::where('variation_id',$request->uid)->first();
-//        Cart::session(\Auth::id())->clear();
         if($variation){
             if(\Auth::check()){
                 Cart::session(\Auth::id())->add($variation->variation_id,$variation->stock->sku,$variation->price,1,['variation' => $variation]);
@@ -64,9 +49,42 @@ class ShoppingCartController extends Controller
                 Cart::add($variation->variation_id,$variation->stock->sku,$variation->price,1,['variation' => $variation]);
             }
 
-            return \Response::json(['error' => false,'message' => 'added']);
+            return \Response::json(['error' => false,'message' => 'added','count' => $this->cartService->getCount()]);
         }
 
        return \Response::json(['error' => true,'message' => 'try again']);
+    }
+
+    public function postUpdateQty(Request $request)
+    {
+        $qty = ($request->condition) ? 1 : -1;
+        if(\Auth::check()){
+            $i = Cart::session(\Auth::id())->update($request->uid, array(
+                'quantity' => $qty
+            ));
+        }else{
+            Cart::update($request->uid, array(
+                'quantity' => $qty
+            ));
+        }
+
+        $items = $this->cartService->getCartItems();
+        $html = $this->view('_partials.cart_table',compact(['items']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function postRemoveFromCart (Request $request)
+    {
+        if(\Auth::check()){
+            Cart::session(\Auth::id())->remove($request->uid);
+        }else{
+            Cart::remove($request->uid);
+        }
+
+        $items = $this->cartService->getCartItems();
+        $html = $this->view('_partials.cart_table',compact(['items']))->render();
+
+        return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount()]);
     }
 }
