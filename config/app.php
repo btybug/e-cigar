@@ -168,7 +168,7 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Dimsav\Translatable\TranslatableServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
-
+        Darryldecode\Cart\CartServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -231,6 +231,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ],
 
 ];
