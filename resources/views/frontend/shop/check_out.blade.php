@@ -190,7 +190,14 @@
                                         <td align="left"><span>Sub Total</span></td>
                                         <td align="right" id="subtotal">$188</td>
                                     </tr>
-
+                                    <tr>
+                                        <td align="left"><span>Tax</span></td>
+                                        <td align="right" id="subtotal">$1</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><span>Shipping</span></td>
+                                        <td align="right" id="subtotal">$2</td>
+                                    </tr>
 
                                     <tr>
                                         <td align="left"><span>Discount (Coupon)</span></td>

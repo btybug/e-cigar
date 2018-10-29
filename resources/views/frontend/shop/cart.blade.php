@@ -89,17 +89,28 @@
                                             </td>
 
                                             <td align="right" class="price">
-                                                <span class="d-block cart_price_4925 mb-4">$89.5</span>
-                                                <span class="d-block cart_price_4925">$59.5</span>
+                                                <div class="d-flex justify-content-end">
+                                                    <span class="d-block cart_price_4925 mb-4">$89.5</span>
+                                                    <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
+                                                </div>
+                                               <div class="d-flex justify-content-end">
+                                                   <span class="d-block cart_price_4925">$59.5</span>
+                                                   <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
+                                               </div>
+
                                             </td>
+                                            {{--<td align="right" class="price">--}}
+                                                {{--<a href="#" class="btn btn-danger btn-sm"><i class="fa fa-times"></i></a>--}}
+                                                {{--<a href="#" class="btn btn-danger btn-sm">fgdfg</a>--}}
+                                            {{--</td>--}}
                                             <td align="right" class="subtotal" style="vertical-align: middle"><span>$140</span></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="buttons">
-                                                <a href="http://demo.laravelcommerce.com/editcart?id=4925"
-                                                   class="btn btn-sm btn-secondary">Edit</a>
-                                                <a href="http://demo.laravelcommerce.com/deleteCart?id=4925"
-                                                   class="btn btn-sm btn-secondary">Remove Item</a>
+                                                {{--<a href="http://demo.laravelcommerce.com/editcart?id=4925"--}}
+                                                   {{--class="btn btn-sm btn-secondary">Edit</a>--}}
+                                                {{--<a href="http://demo.laravelcommerce.com/deleteCart?id=4925"--}}
+                                                   {{--class="btn btn-sm btn-secondary">Remove Item</a>--}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -159,17 +170,23 @@
                                             </td>
 
                                             <td align="right" class="price">
-                                                <span class="d-block cart_price_4925 mb-4">$89.5</span>
-                                                <span class="d-block cart_price_4925">$59.5</span>
+                                                <div class="d-flex justify-content-end">
+                                                    <span class="d-block cart_price_4925 mb-4">$89.5</span>
+                                                    <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
+                                                </div>
+                                                <div class="d-flex justify-content-end">
+                                                    <span class="d-block cart_price_4925">$59.5</span>
+                                                    <a href="#" class="btn btn-danger btn-sm align-self-start ml-1"><i class="fa fa-times"></i></a>
+                                                </div>
                                             </td>
                                             <td align="right" class="subtotal" style="vertical-align: middle"><span>$140</span></td>
                                         </tr>
                                         <tr>
                                             <td colspan="4" class="buttons">
-                                                <a href="http://demo.laravelcommerce.com/editcart?id=4925"
-                                                   class="btn btn-sm btn-secondary">Edit</a>
-                                                <a href="http://demo.laravelcommerce.com/deleteCart?id=4925"
-                                                   class="btn btn-sm btn-secondary">Remove Item</a>
+                                                {{--<a href="http://demo.laravelcommerce.com/editcart?id=4925"--}}
+                                                   {{--class="btn btn-sm btn-secondary">Edit</a>--}}
+                                                {{--<a href="http://demo.laravelcommerce.com/deleteCart?id=4925"--}}
+                                                   {{--class="btn btn-sm btn-secondary">Remove Item</a>--}}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -208,8 +225,14 @@
                                             <td align="left"><span>Sub Total</span></td>
                                             <td align="right" id="subtotal">$188</td>
                                         </tr>
-
-
+                                        <tr>
+                                            <td align="left"><span>Tax</span></td>
+                                            <td align="right" id="subtotal">$1</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left"><span>Shipping</span></td>
+                                            <td align="right" id="subtotal">$2</td>
+                                        </tr>
                                         <tr>
                                             <td align="left"><span>Discount (Coupon)</span></td>
                                             <td align="right" id="discount">$0</td>
