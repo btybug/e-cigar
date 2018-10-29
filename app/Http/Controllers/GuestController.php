@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use PragmaRX\Countries\Package\Countries;
 
 class GuestController extends Controller
 {
@@ -48,9 +49,10 @@ class GuestController extends Controller
         return $this->view('terms_conditions');
     }
 
-    public function getDelivery()
+    public function getDelivery(Countries $countries)
     {
-        return $this->view('delivery');
+        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
+        return $this->view('delivery',compact('countries'));
     }
 
     public function getWholeSellers()

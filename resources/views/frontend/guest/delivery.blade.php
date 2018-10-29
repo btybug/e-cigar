@@ -6,23 +6,15 @@
                <div class="col-md-4">
                    <div class="form-group">
                        <label for="country">Select Country</label>
-                       <select id="country" class="form-control">
-                           <option selected>Choose...</option>
-                           <option>1</option>
-                           <option>2</option>
-                           <option>2</option>
-                       </select>
+                       {!! Form::select('country',$countries,null,['class'=>'form-control','id'=>'country']) !!}
                    </div>
                </div>
 
                <div class="col-md-4">
                    <div class="form-group">
                        <label for="city">Select City</label>
-                       <select id="city" class="form-control">
+                       <select id="city" disabled readonly="true" class="form-control">
                            <option selected>Choose...</option>
-                           <option>1</option>
-                           <option>2</option>
-                           <option>2</option>
                        </select>
                    </div>
                </div>
