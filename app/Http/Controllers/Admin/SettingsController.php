@@ -180,13 +180,8 @@ class SettingsController extends Controller
     {
         $countries = new Countries();
         $regions = $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name');
-        $result = array();
-        foreach ($regions as $key => $region) {
-            if (str_contains($key, $request->get('q'), $key)) {
-                $result[] = ['name' => $key];
-            }
-        }
-        return $result;
+        $html=\Form::select('region['.$request->get('count').']',$regions,null,['class'=>'form-control region'])->toHtml();
+        return ['error'=>false,'html'=>$html];
     }
 
     public function getStore()

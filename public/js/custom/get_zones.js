@@ -302,9 +302,10 @@ $("body").on("change", `[name="delivery_cost_types_id"]`, function(e) {
 
 $("body").on("change", ".country", function() {
     let value = $(this).val();
+    let count = $(this).attr("data-count")
     AjaxCall(
         "/admin/settings/store/shipping/search-find-region",
-        { country: value },
+        { country: value, count },
         res => {
             console.log(res);
             if (!res.error) {
@@ -313,6 +314,7 @@ $("body").on("change", ".country", function() {
                     .find(".region-container")
                     .empty()
                     .append(res.html);
+
             }
         }
     );
@@ -325,7 +327,7 @@ $("body").on("click", ".add-new-get-zones", function() {
     count++;
     let html = `<tr>
     <td>
-       <select  class="form-control country" name="country[${count}]">
+       <select data-count="${count}" class="form-control country" name="country[${count}]">
           <option value="Aruba" selected="selected">Aruba</option>
           <option value="Afghanistan">Afghanistan</option>
           <option value="Angola">Angola</option>

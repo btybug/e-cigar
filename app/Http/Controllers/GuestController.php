@@ -65,11 +65,19 @@ class GuestController extends Controller
     public function getCities(Request $request)
     {
         $zones=GeoZones::where('country', 'Armenia')->get();
-        $array=[];
+        $array=[null => 'Select Region'];
         foreach ($zones as $zone){
-            $array+= json_decode($zone->regions,true);
+            $regions=json_decode($zone->regions,true);
+            foreach ($regions as $region){
+                $array[$region]=$region;
+            }
         }
         $html=\Form::select('city',$array,null,['class'=>'form-control','id'=>'city'])->toHtml();
         return ['error'=>false,'html'=>$html] ;
+    }
+
+    public function getDeliveryPrices(Request $request)
+    {
+
     }
 }

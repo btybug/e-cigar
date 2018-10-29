@@ -56,10 +56,7 @@
                                 <div class="col-sm-10 wall">
                                     {!! Form::text('',null,['class' => 'form-control','id'=>'payment_options']) !!}
                                     <ul class="dropdown-menu"></ul>
-                                    <!-- <div id="coupon-category" class="well well-sm view-coupon">
-                                        <ul class="coupon-category-list" style="list-style: none">
-                                        </ul>
-                                    </div> -->
+
                                     {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!}
                                 </div>
                             </div>
@@ -83,7 +80,7 @@
                                     <tfoot>
                                     <tr>
                                         <td>
-                                            {!! Form::select('country[0]',$countries,null,[ 'class'=>'country form-control']) !!}
+                                            {!! Form::select('country[0]',$countries,null,[ 'class'=>'country form-control', 'data-count' => "0"]) !!}
                                         </td>
                                         <td>
                                             <div class="wall">

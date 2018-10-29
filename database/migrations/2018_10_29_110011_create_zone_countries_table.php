@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGeoZonesTable extends Migration
+class CreateZoneCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateGeoZonesTable extends Migration
      */
     public function up()
     {
-        Schema::create('geo_zones', function (Blueprint $table) {
+        Schema::create('zone_countries', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('tax_rate_id')->nullable();
-            $table->string('name');
-            $table->text('description');
-            $table->string('payment_options');
+            $table->string('name',100);
+            $table->tinyInteger('all')->default(1);
+            $table->unsignedInteger('geo_zone_id');
             $table->timestamps();
 
-            $table->foreign('tax_rate_id')
-                ->references('id')->on('tax_rates');
+            $table->foreign('geo_zone_id')->references('id')->on('geo_zones')->onDelete('cascade');
         });
     }
 
@@ -33,6 +31,6 @@ class CreateGeoZonesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('geo_zones');
+        Schema::dropIfExists('zone_countries');
     }
 }
