@@ -770,3 +770,15 @@ color: red;
 .create-or-update .mt-15{
     margin-top:15px;
 }
+.stock-variations-tab .list-attrs-single-item{
+    align-items: center;
+    margin-bottom: 10px;
+}
+.stock-variations-tab .list-attrs-single-item .form-group{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.stock-variations-tab .list-attrs-single-item .form-group label {
+    margin-right: 5px;
+}
