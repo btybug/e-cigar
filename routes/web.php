@@ -42,7 +42,7 @@ Route::group(['prefix' => 'news'], function () {
 
 Route::group(['prefix' => 'products'], function () {
     Route::get('/', 'Frontend\ProductsController@index')->name('products');
-    //  Route::get('/{p_id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+    Route::post('/get-price', 'Frontend\ProductsController@getPrice')->name('product_get_price');
     Route::get('/vape', 'Frontend\ProductsController@getVape')->name('product_vape');
     Route::get('/vape/{id}', 'Frontend\ProductsController@singleVape')->name('product_single_vape');
     Route::get('/juice', 'Frontend\ProductsController@getJuice')->name('product_juice');

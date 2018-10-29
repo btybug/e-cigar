@@ -163,6 +163,36 @@
     <script src="{{asset('public/frontend/js/jssor.slider-27.5.0.min.js')}}"></script>
 
     <script>
+        $(document).ready(function () {
+            $("body").on('change','.select-variation-option',function () {
+                var items = document.getElementsByClassName('select-variation-option');
+                let options = {};
+                for (var i = 0; i < items.length; i++){
+                    options[$(items[i]).data('name')] = $(items[i]).val();
+                }
+                if (JSON.stringify(options) !== "{}") {
+                    $.ajax({
+                        type: "post",
+                        url: "/products/get-price",
+                        cache: false,
+                        datatype: "json",
+                        data: { options : options, uid : 5 },
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function(data) {
+                           if(! data.error){
+                                $(".price-place").html(data.price);
+                           }else{
+                               $(".price-place").html(data.message);
+                           }
+                        }
+                    });
+                }
+            })
+
+        });
+
         $("#share").jsSocials({
             shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
         });

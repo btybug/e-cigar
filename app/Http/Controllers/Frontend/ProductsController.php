@@ -7,6 +7,7 @@ use App\Models\Attributes;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Stock;
+use App\Models\StockVariationOption;
 use View;
 use Illuminate\Http\Request;
 
@@ -49,5 +50,21 @@ class ProductsController extends Controller
     public function getJuice()
     {
         return $this->view('juice');
+    }
+
+    public function getPrice(Request $request)
+    {
+        $stock = Stock::find(22);
+        $attributes = array_keys($request->options);
+        $options = array_values($request->options);
+
+        $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)->whereIn('options_id',$options)
+            ->whereIn('variation_id',$stock->variations()->pluck('id')->all())->groupBy('variation_id')->orderBy('total','desc')->first();
+
+        if($option && $option->variation){
+            return \Response::json(['price' =>  $option->variation->price,'error' => false]);
+        }
+
+        return \Response::json(['message' =>  'Currently product unavailable','error' => true]);
     }
 }

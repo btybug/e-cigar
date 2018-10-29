@@ -16,7 +16,7 @@
                         ->groupBy('options_id')->get();
                     @endphp
                     @if(count($options))
-                        <select class="form-control select-attr-option">
+                        <select data-name="{{ $modelattr->id }}" class="form-control select-variation-option">
                             @foreach($options as $item)
                                 <option value="{{ $item->option->id }}">{{ $item->option->name }}</option>
                             @endforeach
@@ -24,6 +24,9 @@
                     @endif
                 </div>
             @endforeach
+        </div>
+        <div class="col-md-12 price-place">
+            {{ $variations->first()->price }}
         </div>
     @endif
 </div>
