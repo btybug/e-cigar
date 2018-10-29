@@ -302,10 +302,19 @@ $("body").on("change", `[name="delivery_cost_types_id"]`, function(e) {
 
 $("body").on("change", ".country", function() {
     let value = $(this).val();
-    let count = $(this).attr("data-count")
+    let count = $(this).attr("data-count");
+    let arr = [];
+    $("body")
+        .find(".country")
+        .each(function(index, item) {
+            let obj = {};
+            obj["country"] = $("body").find(".country")[index].value;
+            obj["region"] = $("body").find(".region")[index].value;
+            arr.push(obj);
+        });
     AjaxCall(
         "/admin/settings/store/shipping/search-find-region",
-        { country: value, count },
+        { country: value, count, data: arr },
         res => {
             console.log(res);
             if (!res.error) {
@@ -314,7 +323,6 @@ $("body").on("change", ".country", function() {
                     .find(".region-container")
                     .empty()
                     .append(res.html);
-
             }
         }
     );
