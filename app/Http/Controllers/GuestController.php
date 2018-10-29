@@ -59,4 +59,11 @@ class GuestController extends Controller
     {
         return $this->view('whole_sellers');
     }
+
+    public function getCities(Countries $countries,Request $request)
+    {
+        $regions = $countries->whereNameCommon($request->get('value'))->first()->hydrateStates()->states->pluck('name', 'name');
+        $html=\Form::select('country',$regions,null,['class'=>'form-control','id'=>'city'])->toHtml();
+        return ['error'=>false,'html'=>$html] ;
+    }
 }

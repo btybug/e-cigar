@@ -97,16 +97,16 @@ postSendAjax = function(url, data, success, error) {
     });
 };
 
-$("body").on("click", "#country", function(){
+$("body").on("change", "#country", function(){
     let value = $(this).val()
-    postSendAjax("/url", {value}, function(res){
+    postSendAjax("{!! route('delivery_get_countries') !!}", {value}, function(res){
         if (!res.error) {
             $(".city-choser").empty().append(res.html)
         }
     })
 })
 
-$("body").on("click", "#city", function(){
+$("body").on("change", "#city", function(){
     let value = $(this).val()
     postSendAjax("/url", {value}, function(res){
         if (!res.error) {

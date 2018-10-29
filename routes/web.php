@@ -58,6 +58,7 @@ Route::group(['prefix'=>'/support'], function (){
     Route::get('/ticket', 'GuestController@getTicket')->name('ticket');
     Route::get('/terms-&-conditions', 'GuestController@getTermsConditions')->name('terms_conditions');
     Route::get('/delivery', 'GuestController@getDelivery')->name('delivery');
+    Route::post('/get-cities', 'GuestController@getCities')->name('delivery_get_countries');
     Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
 });
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
