@@ -40,7 +40,8 @@ class ProductsController extends Controller
     public function singleVape($id)
     {
         $vape=Products::findOrFail($id);
-        return $this->view('single_vape',compact('vape'));
+        $variations = $vape->variations()->with('options')->get();
+        return $this->view('single_vape',compact('vape','variations'));
     }
 
     public function getJuice()

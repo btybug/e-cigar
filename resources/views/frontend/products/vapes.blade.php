@@ -108,7 +108,7 @@
                             <div class="product">
                                 <article>
                                     <div class="thumb"><img class="img-fluid"
-                                                            src="{!! url($product->image) !!}"
+                                                            src="{!! $product->image !!}"
                                                             alt="CLASSIC FIT SOFT-TOUCH POLO"></div>
                                     <div class="block-panel mt-4">
                                         <h2 class="title">{!! $product->name !!}</h2>

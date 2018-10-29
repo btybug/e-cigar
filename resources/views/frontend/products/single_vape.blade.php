@@ -4,7 +4,7 @@
         <div class="row mb-5">
             <div class="col-md-4">
                 <a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">
-                    <img width="100%" src="{!! url($vape->image) !!}" class="attachment-single-product-thumb wp-post-image" alt="">
+                    <img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">
                 </a>
                 <ul class="single-product_btns pl-0 mb-0 d-md-flex justify-content-md-between">
                     <li><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
@@ -22,47 +22,9 @@
             <div class="col-md-4">
                 <form>
                     <h2 class="mb-4">Price Calculator</h2>
-                    <div class="form-group row align-items-center">
-                        <div class="col-md-4">
-                            <label for="quantity" class="mb-0"><span class="text-danger">*</span>Quantity</label>
-                        </div>
-                        <div class="col-md-8">
-                            <input type="number" class="form-control" id="quantity" placeholder="50">
-                        </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-md-4">
-                            <label for="sides" class="mb-0"><span class="text-danger">*</span>Sides</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control" name="sides" id="sides">
-                                <option value="1 Side">1 Side</option>
-                                <option value="2 Sides">2 Sides</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row align-items-center">
-                        <div class="col-md-4">
-                            <label for="orientation" class="mb-0"><span class="text-danger">*</span>Orientation</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control" name="orientation" id="orientation">
-                                <option value="Landscape">Landscape</option>
-                                <option value="Portrait">Portrait</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row align-items-center mb-0">
-                        <div class="col-md-4">
-                            <label for="paperQuantity" class="mb-0"><span class="text-danger">*</span>Paper Quality</label>
-                        </div>
-                        <div class="col-md-8">
-                            <select class="form-control" name="paperQuantity" id="paperQuantity">
-                                <option value="300gsm Silk">300gsm Silk</option>
-                                <option value="300gsm Silk 2">300gsm Silk 2</option>
-                            </select>
-                        </div>
-                    </div>
+                    @include("admin.store.products.render_price_form",['model' => $vape])
+
+                    <a href="#" class="btn btn-outline-dark btn-success">Add To Cart</a>
                 </form>
             </div>
         </div>
