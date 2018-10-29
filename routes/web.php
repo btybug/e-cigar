@@ -64,9 +64,10 @@ Route::group(['prefix'=>'/support'], function (){
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
-Route::get('/shop', 'Frontend\ShopController@index')->name('shop');
-Route::get('/my-cart', 'Frontend\ShopController@getCart')->name('shop_my_cart');
-Route::get('/check-out', 'Frontend\ShopController@getCheckOut')->name('shop_check_out');
+Route::get('/shop', 'Frontend\ShoppingCartController@index')->name('shop');
+Route::get('/my-cart', 'Frontend\ShoppingCartController@getCart')->name('shop_my_cart');
+Route::get('/check-out', 'Frontend\ShoppingCartController@getCheckOut')->name('shop_check_out');
+Route::post('/add-to-cart', 'Frontend\ShoppingCartController@postAddToCart')->name('shop_add_to_cart');
 
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
