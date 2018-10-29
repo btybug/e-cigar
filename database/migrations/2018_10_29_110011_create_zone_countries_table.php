@@ -18,6 +18,7 @@ class CreateZoneCountriesTable extends Migration
             $table->string('name',100);
             $table->tinyInteger('all')->default(1);
             $table->unsignedInteger('geo_zone_id');
+            $table->unique(['geo_zone_id','name']);
             $table->timestamps();
 
             $table->foreign('geo_zone_id')->references('id')->on('geo_zones')->onDelete('cascade');

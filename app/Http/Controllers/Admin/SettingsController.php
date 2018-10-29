@@ -154,8 +154,25 @@ class SettingsController extends Controller
     public function saveGeoZone(GeoZonesRequest $request)
     {
         $data = $request->except('_token', 'delivery_cost', 'delivery_cost_types_id');
+        $countries=$request->get('country');
+        $regions=$request->get('regions');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
+        foreach ($countries as $key=>$country){
+            $country=$geo_zone->countries()->where('name',$country)->first();
+            if($regions[$key]=='all_selected'){
+                $country->all=1;
+                $country->save();
+                $country->regions()->delete();
+
+            }elseif($country){
+                $region= $country->regions()->where('name',$regions[$key])->first();
+                if(!$region){
+                    $country->regions()->create(['name'=>$regions[$key]]);
+                }
+            }
+        }
+
         foreach ($delivery_costs as $key => $delivery_cost) {
             $options = $delivery_cost['options'];
             $delivery_cost['delivery_cost_types_id'] = $request->get('delivery_cost_types_id');

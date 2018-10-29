@@ -55,7 +55,7 @@
                                     Options</label>
                                 <div class="col-sm-10 wall">
                                     {!! Form::text('',null,['class' => 'form-control','id'=>'payment_options']) !!}
-                                    <ul class="dropdown-menu"></ul>
+                                    <ul class="dropdown-menu coupon-category-list"></ul>
 
                                     {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!}
                                 </div>
@@ -93,7 +93,7 @@
                                                     <ul class="region-category-list" style="list-style: none">
                                                     </ul>
                                                 </div> -->
-                                                {!! Form::hidden('regions',null,['class'=>'search-hidden-input region-names']) !!}
+                                                {{--{!! Form::hidden('regions',null,['class'=>'search-hidden-input region-names']) !!}--}}
                                             </div>
                                         </td>
                                         <td>
@@ -458,7 +458,7 @@ $(".geo-zones-submit").on("click", function(e){
         console.log(1111)
         
         if (!res.error) {
-            location.replace(res.url)
+//            location.replace(res.url)
         }
     }, function (err) {
         
