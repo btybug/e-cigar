@@ -168,10 +168,10 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-2 control-label">Status</label>
                                                             <div class="col-sm-10">
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="">1</option>
-                                                                    <option value="">2</option>
-                                                                </select>
+                                                                {!! Form::select('status',[
+                                                                    '0' => 'Draft',
+                                                                    '1' => 'Published',
+                                                                ],null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                     </div>

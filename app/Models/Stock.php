@@ -55,4 +55,20 @@ class Stock extends Translatable
     {
         return $this->hasMany(StockVariation::class, 'stock_id');
     }
+
+    public function forRender()
+    {
+        if(! $this->id) return [];
+
+        return Attributes::leftJoin('stock_variation_options', 'attributes.id','=' ,'stock_variation_options.attributes_id')
+            ->leftJoin('stock_variations', 'stock_variation_options.variation_id','=' ,'stock_variations.id')
+            ->leftJoin('stocks', 'stock_variations.product_id','=' ,'stocks.id')
+//            ->leftJoin('attributes', 'product_variation_options.options_id','=' ,'attributes.id')
+            ->where('stocks.id','=',$this->id)
+            ->select('attributes.*','stock_variation_options.attributes_id as attr_id')
+            ->distinct()
+//            ->groupBy('attr_id','attributes.id','attributes.parent_id','attributes.user_id','attributes.image','attributes.icon','attributes.filter','attributes.display_as','attributes.created_at','attributes.updated_at')
+            ->get();
+
+    }
 }

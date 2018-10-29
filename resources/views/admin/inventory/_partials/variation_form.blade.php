@@ -57,6 +57,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="row">
+                                <label for="variation_quantity"
+                                       class="control-label col-sm-4">Price</label>
+                                <div class="col-sm-8">
+                                    {!! Form::text('price',null,['id' => 'variation_price','class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

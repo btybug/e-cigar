@@ -67,8 +67,6 @@
                     @ok('admin_store')
                     <li><a href="{{route('admin_store_categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     @endok
-                    <li><a href="{{route('admin_store')}}"><i class="fa fa-circle-o"></i> Products</a></li>
-                    {{--<li><a href="{{route('admin_store_shipping_zones')}}"><i class="fa fa-circle-o"></i> Shipping zones</a></li>--}}
                     <li><a href="{{route('admin_store_tax')}}"><i class="fa fa-circle-o"></i> Tax Rate</a></li>
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
                     <li><a href="{{route('admin_store_settings')}}"><i class="fa fa-circle-o"></i> Settings</a></li>
