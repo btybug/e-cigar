@@ -83,12 +83,12 @@
                                     <tfoot>
                                     <tr>
                                         <td>
-                                            {!! Form::select('country',$countries,null,['id' => 'country', 'class'=>'form-control']) !!}
+                                            {!! Form::select('country[0]',$countries,null,[ 'class'=>'country form-control']) !!}
                                         </td>
                                         <td>
                                             <div class="wall">
                                                 <div class="region-container">
-                                                {!! Form::select('region',$countries,null,['class'=>'form-control region']) !!}
+                                                {!! Form::select('region[0]',$countries,null,['class'=>'form-control region']) !!}
                                                 </div>
                                                 <!-- {!! Form::text('',null,['id' => 'region','class' => 'form-control']) !!} -->
                                                 <!-- <ul class="dropdown-menu"></ul> -->
@@ -101,7 +101,7 @@
                                         </td>
                                         <td>
                                             <div>
-                                                <button type="button" class="add-new-get-zones"><i class="fa fa-plus"></i></button>
+                                                <button type="button" data-count="0" class="add-new-get-zones"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </td>
                                     </tr>

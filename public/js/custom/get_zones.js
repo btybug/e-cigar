@@ -302,21 +302,30 @@ $("body").on("change", `[name="delivery_cost_types_id"]`, function(e) {
 
 $("body").on("change", ".country", function() {
     let value = $(this).val();
-    AjaxCall("/url", { value }, function(res) {
-        if (res.error) {
-            $(".region-container")
-                .empty()
-                .append(res.html);
+    AjaxCall(
+        "/admin/settings/store/shipping/search-find-region",
+        { country: value },
+        res => {
+            console.log(res);
+            if (!res.error) {
+                $(this)
+                    .closest("tr")
+                    .find(".region-container")
+                    .empty()
+                    .append(res.html);
+            }
         }
-    });
+    );
 });
 
 $("body").on("click", ".add-new-get-zones", function() {
     $(this).html(`<i class="fa fa-trash"></i>`);
     $(this).attr("class", "remove-new-get-zones");
+    let count = Number($(this).attr("data-count"));
+    count++;
     let html = `<tr>
     <td>
-       <select  class="form-control country" name="country">
+       <select  class="form-control country" name="country[${count}]">
           <option value="Aruba" selected="selected">Aruba</option>
           <option value="Afghanistan">Afghanistan</option>
           <option value="Angola">Angola</option>
@@ -589,22 +598,16 @@ $("body").on("click", ".add-new-get-zones", function() {
     <td>
        <div class="wall">
           <div class="region-container">
-             <select class="form-control region" name="region">
+             <select class="form-control region" name="region[${count}]">
                 <option value="Aruba" selected="selected">All Zones</option>
              </select>
           </div>
-          <!-- <input id="region" class="form-control" name="" type="text"> -->
-          <!-- <ul class="dropdown-menu"></ul> -->
-          <!-- <div id="coupon-category" class="well well-sm view-coupon">
-             <ul class="region-category-list" style="list-style: none">
-             </ul>
-             </div> -->
           <input id="region-names" class="search-hidden-input" name="regions" type="hidden">
        </div>
     </td>
     <td>
        <div>
-          <button type="button" class="add-new-get-zones"><i class="fa fa-plus"></i></button>
+          <button type="button" data-count="${count}" class="add-new-get-zones"><i class="fa fa-plus"></i></button>
        </div>
     </td>
  </tr>`;
