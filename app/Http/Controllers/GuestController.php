@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GeoZones;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -49,9 +50,9 @@ class GuestController extends Controller
         return $this->view('terms_conditions');
     }
 
-    public function getDelivery(Countries $countries)
+    public function getDelivery(GeoZones $geoZones)
     {
-        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
+        $countries = [null=>'Select Country']+$geoZones->groupBy('country')->pluck('country','country')->toArray();
         return $this->view('delivery',compact('countries'));
     }
 
