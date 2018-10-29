@@ -27,13 +27,14 @@ class GeoZonesRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('id');
         return [
             'name' => 'required|max:190',
             'tax_rate_id' => 'nullable|exists:tax_rates,id',
             'description' => 'required',
             'payment_options' => 'required',
             'delivery_cost' => 'required|array',
-            'country.*' => 'required|uniqueWhitColume:zone_countries,name,geo_zone_id',
+//            'country.*' => 'required|uniqueWhitColume:zone_countries,name,geo_zone_id,'.$id,
             'region' => 'required|array',
             'delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
             'delivery_cost.*.min' => 'required|integer|min:0',

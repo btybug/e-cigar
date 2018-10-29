@@ -163,19 +163,17 @@ class SettingsController extends Controller
         foreach ($countries as $key=>$country){
             select_country:
             $zone_country=$geo_zone->countries()->where('name',$country)->first();
+            $zone_country->region()->delete();
             if($regions[$key]=='all_selected'){
                 $zone_country->all=1;
                 $zone_country->save();
-                $zone_country->regions()->delete();
 
             }elseif (!$zone_country){
                 $geo_zone->countries()->create(['name'=>$country,'all'=>0]);
                 goto select_country;
-            }elseif($zone_country){
-                $region= $zone_country->regions()->where('name',$regions[$key])->first();
-                if(!$region){
-                    $zone_country->regions()->create(['name'=>$regions[$key]]);
-                }
+            }
+            if($zone_country){
+              $zone_country->region()->create(['name'=>$regions[$key]])->first();
             }
         }
 
