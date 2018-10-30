@@ -499,7 +499,9 @@ ${datax}
 
                 if (err.responseJSON.message) {
                     $(".error-place").empty()
-                    $(".error-place").append(`<p> ${err.responseJSON.message}</p>`)
+                    Object.entries(err.responseJSON.errors).forEach(([key, val]) => {
+                        $(".error-place").append(`<p> ${val[0]}</p>`)
+                    });
                     $(".error-place").show()
                 }
             })
