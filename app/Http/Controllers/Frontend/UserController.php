@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
+use App\Models\GeoZones;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
 use App\Models\ZoneCountries;
@@ -34,15 +35,19 @@ class UserController extends Controller
         return $this->view('favourites');
     }
 
-    public function getAddress()
+    public function getAddress(GeoZones $geoZones)
     {
         $user=\Auth::user();
         $billing_address=$user->addresses()->where('type','billing_address')->first();
         $default_shipping=$user->addresses()->where('type','default_shipping')->first();
         $address=$user->addresses()->whereNull('type')->get();
         $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
+        $countriesShipping = [null => 'Select Country'] + $geoZones
+                ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
+                ->select('zone_countries.*','zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        return $this->view('address',compact('billing_address','default_shipping','address','countries'));
+        return $this->view('address',compact('billing_address','default_shipping','address','countries','countriesShipping'));
     }
 
     public function postAddress(AddressesRequest $request)

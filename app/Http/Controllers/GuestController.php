@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GeoZones;
+use App\Models\ZoneCountries;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -88,6 +89,16 @@ class GuestController extends Controller
 
         $data = $this->countries->where('name.common', $request->country)->first()->hydrate('cities')
             ->cities->pluck('name', 'name');
+        return ['error'=>false,'data'=> $data] ;
+    }
+
+    public function getRegionsByGeoZone(Request $request)
+    {
+        $country = ZoneCountries::find($request->get('country',0));
+        if(! $request->country) return ['error' => true];
+
+        $data = $country->region;
+
         return ['error'=>false,'data'=> $data] ;
     }
 }

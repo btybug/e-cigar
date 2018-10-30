@@ -276,3 +276,9 @@ function getCities($country){
     $country = $countries->where('name.common', $country)->first();
    return ($country) ? $country->hydrate('cities')->cities->pluck('name', 'name') : [];
 }
+
+function getRegionByZone($country){
+    if(! $country) return [];
+    $country = \App\Models\ZoneCountries::find($country);
+    return ($country) ? [$country->region->id => $country->region->name] : [];
+}
