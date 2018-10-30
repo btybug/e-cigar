@@ -250,7 +250,46 @@
                         <button class="btn btn-block btn-info mt-2">Go to payment</button>
                     </div>
                 </div>
+                <div class="row">
+                    <h3>Delivery cost</h3>
+                    <table class="table table-style table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Order Amount</th>
+                                <th>Courier</th>
+                                <th>Cost</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if($geoZone && count($geoZone->deliveries))
+                                @foreach($geoZone->deliveries as $delivery)
+                                    <tr>
+                                        <td>{!! $delivery->min !!} To {!! $delivery->max !!}</td>
+                                        <td colspan="3"></td>
+                                    </tr>
+                                    @if(count($delivery->options))
+                                        @foreach($delivery->options as $option)
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    {!! $option->courier->name !!}
+                                                </td>
+                                                <td>
+                                                    {!! $option->cost !!}
+                                                </td>
+                                                <td>
+                                                    {!! $option->time !!}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
             <div class="tab-pane fade payment_tab" id="payment" role="tabpanel" aria-labelledby="payment-tab">
                 <div class="row">

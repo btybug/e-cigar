@@ -63,6 +63,8 @@ class ShoppingCartController extends Controller
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
+
+//            dd($geoZone->deliveries,$geoZone->deliveries[0]->options);
         }
 
 
