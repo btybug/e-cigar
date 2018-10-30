@@ -53,7 +53,10 @@ class GuestController extends Controller
     public function getDelivery(GeoZones $geoZones)
     {
 
-        $countries = [null => 'Select Country'] + $geoZones->groupBy('country')->pluck('country', 'country')->toArray();
+        $countries = [null => 'Select Country'] + $geoZones
+                ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
+                ->select('zone_countries.*','zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'country')->toArray();
         return $this->view('delivery', compact('countries'));
     }
 
@@ -64,16 +67,10 @@ class GuestController extends Controller
 
     public function getCities(Request $request)
     {
-        $zones=GeoZones::where('country', 'Armenia')->get();
-        $array=[null => 'Select Region'];
-        foreach ($zones as $zone){
-            $regions=json_decode($zone->regions,true);
-            foreach ($regions as $region){
-                $array[$region]=$region;
-            }
-        }
-        $html=\Form::select('city',$array,null,['class'=>'form-control','id'=>'city'])->toHtml();
-        return ['error'=>false,'html'=>$html] ;
+        $zones=GeoZones::join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
+            ->select('zone_countries.*','zone_countries.name as country')
+        ->orderBy('name');
+        return ['error'=>false,'html'=>\View::make($this->view.'._partials,regions')] ;
     }
 
     public function getDeliveryPrices(Request $request)

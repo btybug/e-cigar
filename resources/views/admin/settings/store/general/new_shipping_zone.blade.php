@@ -81,19 +81,43 @@
                                     <tbody>
                                     </tbody>
                                     <tfoot>
-                                    @foreach($geo_zone->countries as $key=>$country)
+                                    @if(isset($geo_zone) && $geo_zone && isset($geo_zone->countries))
+                                        @foreach($geo_zone->countries as $key=>$country)
+                                            <tr>
+                                                <td>
+                                                    {!! Form::select('country['.$key.']',$countries,$country->name,[ 'class'=>'country form-control', 'data-count' => "0"]) !!}
+                                                </td>
+                                                <td>
+                                                    <div class="wall">
+                                                        <div class="region-container">
+                                                            @if($country->all)
+                                                                {!! Form::select('region['.$key.']',getRegions($country->name),'all_selected',['class'=>'form-control region']) !!}
+                                                            @else
+                                                                {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region']) !!}
+                                                            @endif
+                                                        </div>
+
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <button type="button" data-count="0" class="add-new-get-zones">
+                                                            <i
+                                                                    class="fa fa-plus"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
                                         <tr>
                                             <td>
-                                                {!! Form::select('country['.$key.']',$countries,$country->name,[ 'class'=>'country form-control', 'data-count' => "0"]) !!}
+                                                {!! Form::select('country[0]',$countries,null,[ 'class'=>'country form-control', 'data-count' => "0"]) !!}
                                             </td>
                                             <td>
                                                 <div class="wall">
                                                     <div class="region-container">
-                                                        @if($country->all)
-                                                        {!! Form::select('region['.$key.']',getRegions($country->name),'all_selected',['class'=>'form-control region']) !!}
-                                                        @else
-                                                            {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region']) !!}
-                                                        @endif
+                                                        {!! Form::select('region[0]',[],'all_selected',['class'=>'form-control region']) !!}
+
                                                     </div>
 
                                                 </div>
@@ -105,7 +129,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach
+                                    @endif
                                     </tfoot>
                                 </table>
                             </fieldset>
