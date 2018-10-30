@@ -28,6 +28,7 @@ class AddressesRequest extends FormRequest
             "second_line_address"  => "required",
             "city"  => "required",
             "country"  => "required",
+            "region"  => "required",
             "post_code"  => "required",
         ];
     }
