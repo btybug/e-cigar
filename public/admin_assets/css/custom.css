@@ -482,5 +482,18 @@ textarea {
 
 /*End admin global styles*/
 
+/*admin media page */
+.file .file-name {
+    word-wrap: break-word;
+}
+/*End admin media page */
+
+/*admin roles page*/
+.treeview .list-group {
+    max-height: 600px;
+    overflow-y: auto;
+}
+/*End admin roles page*/
+
 
 
