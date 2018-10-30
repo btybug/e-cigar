@@ -486,7 +486,7 @@ ${datax}
                 console.log(1111)
 
                 if (!res.error) {
-//            location.replace(res.url)
+            location.replace(res.url)
                 }
             }, function (err) {
 
