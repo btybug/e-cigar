@@ -30,6 +30,32 @@
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
 <script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
 <script src="/public/vendor/comments/comments.js"></script>
+<script>
+    window.AjaxCall = function postSendAjax(url, data, success, error) {
+        $.ajax({
+            type: "post",
+            url: url,
+            cache: false,
+            datatype: "json",
+            data: data,
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            },
+            success: function(data) {
+                if (success) {
+                    success(data);
+                }
+                return data;
+            },
+            error: function(errorThrown) {
+                if (error) {
+                    error(errorThrown);
+                }
+                return errorThrown;
+            }
+        });
+    };
+</script>
 @yield('js')
 </body>
 </html>

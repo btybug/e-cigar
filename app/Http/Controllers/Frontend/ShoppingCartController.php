@@ -38,7 +38,7 @@ class ShoppingCartController extends Controller
     {
         $items = $this->cartService->getCartItems();
         if(! count($items)) return redirect('/');
-        
+
         $billing_address = [];
         $default_shipping = [];
         if(\Auth::check()){

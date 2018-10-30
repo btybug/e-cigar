@@ -155,6 +155,7 @@ class StoreController extends Controller
         $coontries = new Countries();
         $posible = array();
         $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal')->toArray();
+
         foreach ($regions as $region)
         {
             if (preg_match("/(" . $request->id . ")/i",$region))

@@ -62,17 +62,17 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="text" class="control-label col-sm-4">City</label>
+                                        <label for="text" class="control-label col-sm-4">Country</label>
                                         <div class="col-sm-8">
-                                            {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                            {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control','id' => 'country']) !!}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group hide">
                                     <div class="row">
-                                        <label for="text" class="control-label col-sm-4">Country</label>
+                                        <label for="text" class="control-label col-sm-4">City</label>
                                         <div class="col-sm-8">
-                                            {!! Form::text('country',null,['class'=>'form-control']) !!}
+                                            {!! Form::select('city',getCities(@$billing_address->country),null,['class'=>'form-control','id' => 'city']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -288,3 +288,33 @@
         }
     </style>
 @stop
+@section('js')
+    <script>
+        $(document).ready(function () {
+            function getCities(){
+                let value = $("#country").val();
+                AjaxCall(
+                    "/get-cities-by-country",
+                    { country: value},
+                    res => {
+                        let select = document.getElementById('city');
+                        select.innerText = null;
+                        if (!res.error) {
+                            $.each(res.data,function (index,value) {
+                                var opt = document.createElement('option');
+                                opt.value = res.data[value];
+                                opt.innerHTML = res.data[value];
+                                select.appendChild(opt);
+                            })
+
+                        }
+                    }
+                );
+            }
+
+            $("body").on("change", "#country", function() {
+                getCities();
+            });
+        })
+    </script>
+@endsection

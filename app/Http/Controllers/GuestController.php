@@ -15,9 +15,13 @@ class GuestController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    private $countries;
+
+    public function __construct(Countries $countries)
     {
+        $this->countries = $countries;
     }
+
 
     /**
      * Show the application dashboard.
@@ -76,5 +80,14 @@ class GuestController extends Controller
     public function getDeliveryPrices(Request $request)
     {
 
+    }
+
+    public function getCitiesByCountry(Request $request)
+    {
+        if(! $request->country) return ['error' => true];
+
+        $data = $this->countries->where('name.common', $request->country)->first()->hydrate('cities')
+            ->cities->pluck('name', 'name');
+        return ['error'=>false,'data'=> $data] ;
     }
 }

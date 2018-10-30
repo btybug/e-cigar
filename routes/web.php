@@ -62,6 +62,7 @@ Route::group(['prefix'=>'/support'], function (){
     Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
 });
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
+Route::post('/get-cities-by-country', 'GuestController@getCitiesByCountry')->name('get_cities_by_country');
 
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShoppingCartController@index')->name('shop');

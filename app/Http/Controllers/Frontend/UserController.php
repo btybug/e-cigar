@@ -8,14 +8,19 @@ use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
+use App\Models\ZoneCountries;
 use Illuminate\Http\Request;
+use PragmaRX\Countries\Package\Countries;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
+    private $countries;
 
+    public function __construct(Countries $countries)
+    {
+        $this->countries = $countries;
     }
+
     protected $view = 'frontend.my_account';
 
     public function index()
@@ -35,7 +40,9 @@ class UserController extends Controller
         $billing_address=$user->addresses()->where('type','billing_address')->first();
         $default_shipping=$user->addresses()->where('type','default_shipping')->first();
         $address=$user->addresses()->whereNull('type')->get();
-        return $this->view('address',compact('billing_address','default_shipping','address'));
+        $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
+
+        return $this->view('address',compact('billing_address','default_shipping','address','countries'));
     }
 
     public function postAddress(AddressesRequest $request)

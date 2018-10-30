@@ -270,3 +270,9 @@ function cartCount(){
    return ['all_selected'=>'All Regions']+$countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
 
 }
+
+function getCities($country){
+    $countries=new \PragmaRX\Countries\Package\Countries();
+    $country = $countries->where('name.common', $country)->first();
+   return ($country) ? $country->hydrate('cities')->cities->pluck('name', 'name') : [];
+}
