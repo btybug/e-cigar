@@ -17,17 +17,20 @@
                                 <button class="btn btn-info btn-block {!! $settings['uploadbutton']??null !!}">
                                     Upload Files
                                 </button>
-                                <div class="hr-line-dashed"></div>
+                                <div class="hr-line-dashed">
+                                
+
+                                </div>
 
                                 <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"
                                        role="button" href="#createFolder"><i class="fa fa-plus" aria-hidden="true"></i></a>Folders
                                     <span data-media="selected"><a href="#">back Foder</a></span></h5>
                                 <div class="collapse" id="createFolder">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" data-mediafield="addfolder"
+                                        <input type="text" class="form-control new-folder-input" data-mediafield="addfolder"
                                                placeholder="Folder name">
                                         <span class="input-group-btn">
-                                      <button class="btn btn-primary-reset-back" type="button" data-media="addfolder">Add</button>
+                                      <button class="btn btn-primary-reset-back" type="button" bb-media-click="add_new_folder" data-media="addfolder">Add</button>
                                     </span>
                                     </div><!-- /input-group -->
                                 </div>
@@ -54,6 +57,7 @@
                     <div class="over-auto scrollbar_custom">
                         <div class="row m-0">
                             <div class="col-lg-12 m-b-10 text-right">
+                            <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
                                 <button type="button" class="btn btn-default mb-20" data-role="btnUploader">Uploader</button>
                             </div>
                         </div>
@@ -61,7 +65,12 @@
                             <div class="col-lg-12 m-b-15"></div>
                         </div>
                         <div class="row m-0 {!! $settings['rightcontainer']??null !!}">
-                            <div class="col-lg-12 " data-media="folderitem">
+                            <div class="bread-crumbs">
+                                <ul class="bread-crumbs-list" style="display: flex; color: white; list-style: none">
+                                   
+                                </ul>
+                            </div>
+                            <div class="col-lg-12 " data-media="folderitem" data-type="main-container">
                             </div>
                             <div class="col-lg-12 hide">
                                 <div class="file-box">
@@ -428,7 +437,7 @@
 
     </div>
 
-    <div class="hide">
+    <!-- <div class="hide">
         <div data-template="itemthumb">
             <div class="file-box" data-dragitem="{id}" data-id="{id}" data-name="{original_name}" data-mediatype="item">
                 <div class="file {!! $settings['thumbnailclass']??null !!}">
@@ -468,7 +477,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Modal -->
     <div id="foldersetting" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -554,13 +563,25 @@
     {!! Html::style("public/js/bootstrap-select/css/bootstrap-select.min.css") !!}
     {!! Html::style("public/js/tag-it/css/jquery.tagit.css") !!}
     {{--@endpush--}}
+    <style>
+        .active {
+            border: 1px solid red;
+        }
+        .show {
+            opacity: 1 !important
+        }
+    </style>
+{!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
+
 @stop
 @section("js")
+{!!  Html::script('public/js/bootstrap-fileinput/js/fileinput.min.js') !!}
     {!! Html::script("public/js/nestedSortable/jquery.mjs.nestedSortable.js") !!}
     {!! Html::script("public/admin_theme/media/js/lightbox.js") !!}
     {!! Html::script("public/js/bootstrap-select/js/bootstrap-select.min.js") !!}
     {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
     {!! Html::script("public/js/media_button.js") !!}
+    {!! Html::script("public/js/media_button_new.js") !!}
     <script>
     $("body").on("click", ".fileinput-remove", function(){
         retryDrawing()

@@ -84,7 +84,7 @@
         </ul>
     </div>
 </script>
-<script type="template" id="media-modal-files">
+<!-- <script type="template" id="media-modal-files">
     <div class="img">
         <a href="#" >
             <img src="{url}" alt="">
@@ -99,7 +99,7 @@
             <li class="text-center"><a href="#" data-item-id={data-item-id} class="remove-item-for-media"><i class="fas fa-exchange-alt"></i></a></li>
         </ul>
     </div>
-</script>
+</script> -->
 
 
 

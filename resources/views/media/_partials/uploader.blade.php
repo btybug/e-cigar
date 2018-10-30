@@ -7,7 +7,10 @@
        $("#uploader").fileinput({
            maxFileCount: 5,
            uploadExtraData:{'_token':$("meta[name='csrf-token']").attr('content')}
-       });
+                }).on("filebatchselected", function(event, files) {
+                    $("#uploader").fileinput("upload");
+
+            });
         $('#uploader').on('filebatchuploadsuccess', function(event, data, previewId, index) {
             var form = data.form, files = data.files, extra = data.extra,
                 response = data.response, reader = data.reader;
