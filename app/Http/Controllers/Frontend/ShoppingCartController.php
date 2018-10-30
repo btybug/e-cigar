@@ -9,6 +9,7 @@ use App\Models\Posts;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
+use App\Models\ZoneCountries;
 use App\Services\CartService;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use PragmaRX\Countries\Package\Countries;
@@ -49,6 +50,7 @@ class ShoppingCartController extends Controller
 
         $billing_address = [];
         $default_shipping = [];
+        $geoZone = null; //need to change
         $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
         $countriesShipping = [null => 'Select Country'] + $geoZones
                 ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
@@ -59,10 +61,12 @@ class ShoppingCartController extends Controller
             $user=\Auth::user();
             $billing_address=$user->addresses()->where('type','billing_address')->first();
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
+            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+            $geoZone = ($zone) ? $zone->geoZone : null;
         }
 
 
-        return $this->view('check_out',compact(['billing_address','default_shipping','countries','countriesShipping']));
+        return $this->view('check_out',compact(['billing_address','default_shipping','countries','countriesShipping','geoZone']));
     }
 
     public function postAddToCart(Request $request)
