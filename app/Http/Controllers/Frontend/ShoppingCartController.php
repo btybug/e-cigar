@@ -36,7 +36,19 @@ class ShoppingCartController extends Controller
 
     public function getCheckOut()
     {
-        return $this->view('check_out');
+        $items = $this->cartService->getCartItems();
+        if(! count($items)) return redirect('/');
+        
+        $billing_address = [];
+        $default_shipping = [];
+        if(\Auth::check()){
+            $user=\Auth::user();
+            $billing_address=$user->addresses()->where('type','billing_address')->first();
+            $default_shipping=$user->addresses()->where('type','default_shipping')->first();
+        }
+
+
+        return $this->view('check_out',compact(['billing_address','default_shipping']));
     }
 
     public function postAddToCart(Request $request)

@@ -25,7 +25,7 @@
                                 <h2>Billing Address</h2>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-                                        {!! Form::open(['class'=>'form-horizontal']) !!}
+                                        {!! Form::model($billing_address,['class'=>'form-horizontal']) !!}
                                         <div class="form-group">
                                             <div class="row">
                                                 <label for="text" class="control-label col-sm-4">Name</label>
@@ -101,7 +101,7 @@
                                 <h2>Default Shipping</h2>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-                                        {!! Form::open(['class'=>'form-horizontal']) !!}
+                                        {!! Form::model($default_shipping,['class'=>'form-horizontal']) !!}
                                         <div class="form-group">
                                             <div class="row">
                                                 <label for="text" class="control-label col-sm-4">Name</label>
@@ -178,38 +178,47 @@
                 <div class="col-md-3">
                     <div class="order-summary-outer">
                         <div class="order-summary">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th align="left" colspan="2">Order Summary</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td align="left"><span>Sub Total</span></td>
-                                        <td align="right" id="subtotal">$188</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><span>Tax</span></td>
-                                        <td align="right" id="subtotal">$1</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><span>Shipping</span></td>
-                                        <td align="right" id="subtotal">$2</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td align="left"><span>Discount (Coupon)</span></td>
-                                        <td align="right" id="discount">$0</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="last" align="left"><span>Total</span></td>
-                                        <td class="last" align="right" id="total_price">$188</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th align="left" colspan="2">Order Summary</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td align="left"><span>Sub Total</span></td>
+                                    <td align="right" id="subtotal">
+                                        @if(Auth::check())
+                                            ${!! \Cart::session(Auth::id())->getSubTotal() !!}
+                                        @else
+                                            ${!! \Cart::getSubTotal() !!}
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span>Tax</span></td>
+                                    <td align="right" id="subtotal">$0</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span>Shipping</span></td>
+                                    <td align="right" id="subtotal">$0</td>
+                                </tr>
+                                <tr>
+                                    <td align="left"><span>Discount (Coupon)</span></td>
+                                    <td align="right" id="discount">$0</td>
+                                </tr>
+                                <tr>
+                                    <td class="last" align="left"><span>Total</span></td>
+                                    <td class="last" align="right" id="total_price">
+                                        @if(Auth::check())
+                                            ${!! \Cart::session(Auth::id())->getTotal() !!}
+                                        @else
+                                            ${!! \Cart::getTotal() !!}
+                                        @endif
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
+use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
@@ -37,7 +38,7 @@ class UserController extends Controller
         return $this->view('address',compact('billing_address','default_shipping','address'));
     }
 
-    public function postAddress(Request $request)
+    public function postAddress(AddressesRequest $request)
     {
         $data=$request->except('_token');
         $data['user_id']=\Auth::id();
