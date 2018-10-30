@@ -105,6 +105,11 @@
                 </div>
             </div>
         </div>
+        <div class="row button back-update-btn">
+            @if($default_shipping)
+                <span>*</span> Your Shipping cost based on &nbsp;<strong> {{ $default_shipping->getCountry->name }} - {{ $default_shipping->getRegion->name }}</strong>
+            @endif
+        </div>
     </div>
     <div class="col-12 col-lg-4 cart-right">
         <div class="order-summary-outer">

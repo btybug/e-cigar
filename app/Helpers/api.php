@@ -265,7 +265,9 @@ function cartCount(){
     $cartService = new \App\Services\CartService();
 
     return $cartService->getCount();
-}function getRegions($country,$all = false){
+}
+
+function getRegions($country,$all = false){
     $countries=new \PragmaRX\Countries\Package\Countries();
    return ($all) ?$countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray() :['all_selected'=>'All Regions']+$countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
 }

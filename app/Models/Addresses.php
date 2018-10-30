@@ -29,4 +29,14 @@ class Addresses extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function getCountry()
+    {
+        return $this->hasOne(ZoneCountries::class, 'id','country');
+    }
+
+    public function getRegion()
+    {
+        return $this->hasOne(ZoneCountryRegions::class, 'id','region');
+    }
 }

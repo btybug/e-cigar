@@ -40,7 +40,14 @@ class ShoppingCartController extends Controller
     public function getCart()
     {
         $items = $this->cartService->getCartItems();
-        return $this->view('cart',compact(['items']));
+        $default_shipping = [];
+        if(\Auth::check()){
+            $user=\Auth::user();
+            $default_shipping=$user->addresses()->where('type','default_shipping')->first();
+        }
+
+//        dd($default_shipping->getCountry);
+        return $this->view('cart',compact(['items','default_shipping']));
     }
 
     public function getCheckOut(GeoZones $geoZones)
