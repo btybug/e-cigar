@@ -85,8 +85,6 @@ class ShoppingCartController extends Controller
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
-
-//            dd($geoZone->deliveries,$geoZone->deliveries[0]->options);
         }
 
 
@@ -116,14 +114,25 @@ class ShoppingCartController extends Controller
             $i = Cart::session(\Auth::id())->update($request->uid, array(
                 'quantity' => $qty
             ));
+
+            $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
+            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+            $geoZone = ($zone) ? $zone->geoZone : null;
+            if($geoZone){
+                $shipping = Cart::getCondition($geoZone->name);
+            }
+
         }else{
+            $default_shipping = null;
+            $shipping = null;
+            $geoZone = null;
             Cart::update($request->uid, array(
                 'quantity' => $qty
             ));
         }
 
         $items = $this->cartService->getCartItems();
-        $html = $this->view('_partials.cart_table',compact(['items']))->render();
+        $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
@@ -132,12 +141,21 @@ class ShoppingCartController extends Controller
     {
         if(\Auth::check()){
             Cart::session(\Auth::id())->remove($request->uid);
+            $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
+            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+            $geoZone = ($zone) ? $zone->geoZone : null;
+            if($geoZone){
+                $shipping = Cart::getCondition($geoZone->name);
+            }
         }else{
+            $default_shipping = null;
+            $shipping = null;
+            $geoZone = null;
             Cart::remove($request->uid);
         }
 
         $items = $this->cartService->getCartItems();
-        $html = $this->view('_partials.cart_table',compact(['items']))->render();
+        $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
 
         return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount()]);
     }
