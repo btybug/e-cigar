@@ -22,6 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('second_line_address');
             $table->string('city',50);
             $table->string('country',50);
+            $table->string('region',100);
             $table->string('post_code',20);
             $table->timestamps();
 

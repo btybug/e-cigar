@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\GeoZones;
 use App\Models\Posts;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
 use App\Services\CartService;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use PragmaRX\Countries\Package\Countries;
 use View;
 use Illuminate\Http\Request;
 
@@ -18,11 +20,17 @@ class ShoppingCartController extends Controller
     protected $view= 'frontend.shop';
 
     private $cartService;
+    private $countries;
 
-    public function __construct(CartService $cartService)
+    public function __construct(
+        CartService $cartService,
+        Countries $countries
+    )
     {
         $this->cartService = $cartService;
+        $this->countries = $countries;
     }
+
     public function index()
     {
         return $this->view('index');
@@ -34,13 +42,19 @@ class ShoppingCartController extends Controller
         return $this->view('cart',compact(['items']));
     }
 
-    public function getCheckOut()
+    public function getCheckOut(GeoZones $geoZones)
     {
         $items = $this->cartService->getCartItems();
         if(! count($items)) return redirect('/');
 
         $billing_address = [];
         $default_shipping = [];
+        $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
+        $countriesShipping = [null => 'Select Country'] + $geoZones
+                ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
+                ->select('zone_countries.*','zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'id')->toArray();
+
         if(\Auth::check()){
             $user=\Auth::user();
             $billing_address=$user->addresses()->where('type','billing_address')->first();
@@ -48,7 +62,7 @@ class ShoppingCartController extends Controller
         }
 
 
-        return $this->view('check_out',compact(['billing_address','default_shipping']));
+        return $this->view('check_out',compact(['billing_address','default_shipping','countries','countriesShipping']));
     }
 
     public function postAddToCart(Request $request)

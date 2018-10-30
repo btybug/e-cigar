@@ -70,9 +70,17 @@
                                 </div>
                                 <div class="form-group hide">
                                     <div class="row">
+                                        <label for="text" class="control-label col-sm-4">Regions</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::select('region',getRegions(@$billing_address->country,true),null,['class'=>'form-control','id' => 'regions']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group hide">
+                                    <div class="row">
                                         <label for="text" class="control-label col-sm-4">City</label>
                                         <div class="col-sm-8">
-                                            {!! Form::select('city',getCities(@$billing_address->country),null,['class'=>'form-control','id' => 'city']) !!}
+                                            {!! Form::text('city',null,['class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -151,13 +159,20 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="text" class="control-label col-sm-4">City</label>
+                                        <label for="text" class="control-label col-sm-4">Regions</label>
                                         <div class="col-sm-8">
-                                            {!! Form::select('city',getRegionByZone(@$default_shipping->country),null,['class'=>'form-control','id' => 'geo_region']) !!}
+                                            {!! Form::select('region',getRegionByZone(@$default_shipping->country),null,['class'=>'form-control','id' => 'geo_region']) !!}
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="form-group hide">
+                                    <div class="row">
+                                        <label for="text" class="control-label col-sm-4">City</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <label for="text" class="control-label col-sm-4">Post Code</label>
@@ -292,13 +307,13 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            function getCities(){
+            function getRegionsPackage(){
                 let value = $("#country").val();
                 AjaxCall(
-                    "/get-cities-by-country",
+                    "/get-regions-by-country",
                     { country: value},
                     res => {
-                        let select = document.getElementById('city');
+                        let select = document.getElementById('regions');
                         select.innerText = null;
                         if (!res.error) {
                             $.each(res.data,function (index,value) {
@@ -332,7 +347,7 @@
             }
 
             $("body").on("change", "#country", function() {
-                getCities();
+                getRegionsPackage();
             });
 
             $("body").on("change", "#geo_country", function() {

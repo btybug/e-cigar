@@ -83,12 +83,11 @@ class GuestController extends Controller
 
     }
 
-    public function getCitiesByCountry(Request $request)
+    public function getRegionsByCountry(Request $request)
     {
         if(! $request->country) return ['error' => true];
 
-        $data = $this->countries->where('name.common', $request->country)->first()->hydrate('cities')
-            ->cities->pluck('name', 'name');
+        $data = $this->countries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
         return ['error'=>false,'data'=> $data] ;
     }
 

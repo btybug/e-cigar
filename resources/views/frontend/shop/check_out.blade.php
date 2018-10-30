@@ -67,17 +67,25 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <label for="text" class="control-label col-sm-4">City</label>
+                                                <label for="text" class="control-label col-sm-4">Country</label>
                                                 <div class="col-sm-8">
-                                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                    {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control','id' => 'country']) !!}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group hide">
                                             <div class="row">
-                                                <label for="text" class="control-label col-sm-4">Country</label>
+                                                <label for="text" class="control-label col-sm-4">Regions</label>
                                                 <div class="col-sm-8">
-                                                    {!! Form::text('country',null,['class'=>'form-control']) !!}
+                                                    {!! Form::select('region',getRegions(@$billing_address->country,true),null,['class'=>'form-control','id' => 'regions']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group hide">
+                                            <div class="row">
+                                                <label for="text" class="control-label col-sm-4">City</label>
+                                                <div class="col-sm-8">
+                                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -143,17 +151,25 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <label for="text" class="control-label col-sm-4">City</label>
+                                                <label for="text" class="control-label col-sm-4">Country</label>
                                                 <div class="col-sm-8">
-                                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                    {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country']) !!}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="row">
-                                                <label for="text" class="control-label col-sm-4">Country</label>
+                                                <label for="text" class="control-label col-sm-4">Regions</label>
                                                 <div class="col-sm-8">
-                                                    {!! Form::text('country',null,['class'=>'form-control']) !!}
+                                                    {!! Form::select('region',getRegionByZone(@$default_shipping->country),null,['class'=>'form-control','id' => 'geo_region']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group hide">
+                                            <div class="row">
+                                                <label for="text" class="control-label col-sm-4">City</label>
+                                                <div class="col-sm-8">
+                                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -287,5 +303,55 @@
             })
         });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            function getRegionsPackage(){
+                let value = $("#country").val();
+                AjaxCall(
+                    "/get-regions-by-country",
+                    { country: value},
+                    res => {
+                        let select = document.getElementById('regions');
+                        select.innerText = null;
+                        if (!res.error) {
+                            $.each(res.data,function (index,value) {
+                                var opt = document.createElement('option');
+                                opt.value = res.data[value];
+                                opt.innerHTML = res.data[value];
+                                select.appendChild(opt);
+                            })
+
+                        }
+                    }
+                );
+            }
+
+            function getRegions(){
+                let value = $("#geo_country").val();
+                AjaxCall(
+                    "/get-regions-by-geozone",
+                    { country: value},
+                    res => {
+                        let select = document.getElementById('geo_region');
+                        select.innerText = null;
+                        if (!res.error) {
+                            var opt = document.createElement('option');
+                            opt.value = res.data.id;
+                            opt.innerHTML = res.data.name;
+                            select.appendChild(opt);
+                        }
+                    }
+                );
+            }
+
+            $("body").on("change", "#country", function() {
+                getRegionsPackage();
+            });
+
+            $("body").on("change", "#geo_country", function() {
+                getRegions();
+            });
+        })
     </script>
 @stop
