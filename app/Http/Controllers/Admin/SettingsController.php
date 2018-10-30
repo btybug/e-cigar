@@ -167,6 +167,7 @@ class SettingsController extends Controller
                 $zone_country->region()->delete();
             }
             if ($regions[$key] == 'all_selected') {
+                dd($zone_country);
                 $zone_country->all = 1;
                 $zone_country->save();
 
