@@ -81,7 +81,7 @@
                                     <tbody>
                                     </tbody>
                                     <tfoot>
-                                    @if(isset($geo_zone) && $geo_zone && isset($geo_zone->countries))
+                                    @if(isset($geo_zone) && $geo_zone && isset($geo_zone->countries) && count($geo_zone->countries))
                                         @foreach($geo_zone->countries as $key=>$country)
                                             <tr>
                                                 <td>
