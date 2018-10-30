@@ -10,7 +10,7 @@
                     <input type="text" id="add-new-tags" class="form-control " placeholder="Add new tags" required>
                 </div>
                 <div class="col-sm-4 text-right">
-                    <button type="submit" class="btn btn-submit btn-info">Add new Tag</button>
+                    <button type="submit" class="btn btn-submit btn-primary">Add new Tag</button>
                 </div>
             </div>
         </form>
