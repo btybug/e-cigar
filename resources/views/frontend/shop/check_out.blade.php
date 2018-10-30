@@ -278,7 +278,7 @@
                                 @if(in_array('stripe',$payment_options))
                                     <li class="payment_method_cheque">
                                         <input id="payment_method_cheque" type="radio" class="input-radio"
-                                               name="payment_method" value="cheque"  data-order_button_text="">
+                                               name="payment_method" value="cheque" data-order_button_text="">
 
                                         <label for="payment_method_cheque">
                                             Stripe </label>
@@ -291,7 +291,7 @@
                                 @if(in_array('paypal',$payment_options))
                                     <li class="payment_method_paypal">
                                         <input id="payment_method_paypal" type="radio" class="input-radio"
-                                               name="payment_method" value="paypal" 
+                                               name="payment_method" value="paypal"
                                                data-order_button_text="Proceed to PayPal">
 
                                         <label for="payment_method_paypal">
