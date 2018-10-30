@@ -106,8 +106,8 @@
             </div>
         </div>
         <div class="row button back-update-btn">
-            @if($default_shipping)
-                <span>*</span> Your Shipping cost based on &nbsp;<strong> {{ $default_shipping->getCountry->name }} - {{ $default_shipping->getRegion->name }}</strong>
+            @if($geoZone)
+                <span>*</span> Your Shipping cost based on &nbsp;<strong> {{ $geoZone->name }} </strong>
             @endif
         </div>
     </div>
@@ -138,7 +138,7 @@
                         </tr>
                         <tr>
                             <td align="left"><span>Shipping</span></td>
-                            <td align="right" id="subtotal">$0</td>
+                            <td align="right" id="subtotal">${!! ($shipping) ? $shipping->getValue():0 !!}</td>
                         </tr>
                         <tr>
                             <td align="left"><span>Discount (Coupon)</span></td>
