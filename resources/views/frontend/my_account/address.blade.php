@@ -292,6 +292,7 @@
 
 @stop
 @section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <style>
         .btn-group-vertical .btn {
             width: 135px;
@@ -305,8 +306,12 @@
     </style>
 @stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <script>
         $(document).ready(function () {
+            $("#country").select2();
+            $("#geo_country").select2();
             function getRegionsPackage(){
                 let value = $("#country").val();
                 AjaxCall(
