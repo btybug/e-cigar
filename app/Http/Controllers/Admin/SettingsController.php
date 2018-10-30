@@ -204,7 +204,7 @@ class SettingsController extends Controller
     {
         $countries = new Countries();
         $regions = ['all_selected' => 'All Regions'] + $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
-        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region'])->toHtml();
+        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region','multiple'=>'multiple'])->toHtml();
         return ['error' => false, 'html' => $html];
     }
 
