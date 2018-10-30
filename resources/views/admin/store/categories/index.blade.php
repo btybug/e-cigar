@@ -4,16 +4,18 @@
 @stop
 @section('content')
     <div class="row">
+        <div class="col-sm-12">
+            <div class="button-area text-right mb-20">
+                <a class="btn btn-primary add-category" href="javascript:void(0)">Add new</a>
+            </div>
+        </div>
         <div class="col-md-4">
             <div id="tree1"></div>
         </div>
         <div class="col-md-8">
-            <div class="button-area text-right mb-20">
-                <a class="btn btn-primary add-category" href="javascript:void(0)">Add new</a>
-            </div>
-
             <div class="content-area category-form-place">
                 {{--@include('admin.store.categories.create_or_update')--}}
+                <h4 class="text-center">New Category</h4>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
