@@ -7,7 +7,7 @@
     <div class="inventory_attributes container-fluid">
         <div class="row dis-flex-wrap">
             <div class="col-md-9">
-                <div class="panel panel-default">
+                <div class="panel panel-default mb-0">
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-sm-7 pl-0">
@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-sm-5 p-0">
                                 <div class="button-save  text-right">
-                                    <a class="btn btn-primary pull-right"
+                                    <a class="btn btn-default pull-right"
                                        href="{!! route('admin_store_attributes') !!}">Back</a>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                               title=""
                                                                                               data-original-title="Icon Title">Icon</span></label>
-                                <div class="col-sm-9">
+                                <div class="col-sm-10">
                                     {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
                                 </div>
                                 <div class="col-sm-1 text-center font-icon-added">

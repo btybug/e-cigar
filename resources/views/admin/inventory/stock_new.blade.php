@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-3">
                 <!-- Profile Image -->
-                <div class="box box-primary mar-0">
+                <div class="box box-primary mb-30">
                     <div class="box-body box-profile">
                         <img class="profile-user-img img-responsive img-circle"
                              src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"
@@ -60,8 +60,8 @@
             <!-- /.col -->
             {!! Form::model($model,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
             {!! Form::hidden('id',null) !!}
-            <div class="col-md-12">
-                {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
+            <div class="col-md-12 pt-25">
+                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
             </div>
             <div class="col-md-12">
                 <div class="tab-content">
@@ -215,7 +215,7 @@
                                                                placeholder="Video Url" aria-label="Video Url"
                                                                aria-describedby="basic-addon2">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-info add-video-url"
+                                                            <button class="btn btn-primary add-video-url"
                                                                     type="button">Add Link
                                                             </button>
                                                         </div>
@@ -278,8 +278,8 @@
                                         </div>
                                         <div class="button-add text-center">
                                             <a href="javascript:void(0)"
-                                               class="btn btn-info btn-block get-all-attributes-tab-event"><i
-                                                        class="fa fa-plus"></i>Add new
+                                               class="btn btn-primary btn-block get-all-attributes-tab-event"><i
+                                                        class="fa fa-plus mr-10"></i>Add new
                                                 option</a>
                                         </div>
                                     </div>
@@ -312,61 +312,51 @@
                     <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-12">
                                     <div class="basic-left basic-wall">
-                                        <div class="container-fluid">
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-5">
                                                     <fieldset>
                                                         <legend>Packaging Size</legend>
                                                         <div class="form-group">
-                                                            <div class="row">
                                                                 <label for="packaging_length"
-                                                                       class="control-label col-sm-4">Length</label>
-                                                                <div class="col-sm-8">
+                                                                       class=" col-sm-2">Length</label>
+                                                                <div class="col-sm-10">
                                                                     <input class="form-control"
                                                                            name=""
                                                                            id="packaging_length" type="text">
                                                                 </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="packaging_width"
+                                                                   class="col-sm-2">Width</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_width" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_width"
-                                                                       class="control-label col-sm-4">Width</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name=""
-                                                                           id="packaging_width" type="text">
-                                                                </div>
+                                                            <label for="packaging_height"
+                                                                   class="col-sm-2">Height</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_height" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_height"
-                                                                       class="control-label col-sm-4">Height</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name=""
-                                                                           id="packaging_height" type="text">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="packaging_weight"
-                                                                       class="control-label col-sm-4">Weight</label>
-                                                                <div class="col-sm-8">
-                                                                    <input class="form-control"
-                                                                           name=""
-                                                                           id="packaging_weight" type="text">
-                                                                </div>
+                                                            <label for="packaging_weight"
+                                                                   class="col-sm-2">Weight</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_weight" type="text">
                                                             </div>
                                                         </div>
                                                     </fieldset>
                                                 </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -375,27 +365,30 @@
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-sm-12">
                                     <div class="basic-left basic-wall">
-                                        <div class="all-list-attrs" style="min-height:300px;">
-                                            @if($model)
-                                                @include('admin.inventory._partials.link_all_edit')
-                                            @endif
-                                        </div>
-                                        <div class="button-add text-center">
-                                            <div class="col-md-6">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-info btn-block get-variation"><i
-                                                            class="fa fa-plus"></i>More
-                                                    option</a>
+                                        <div class="col-md-5">
+                                            <div class="all-list-attrs" style="min-height:300px;">
+                                                @if($model)
+                                                    @include('admin.inventory._partials.link_all_edit')
+                                                @endif
                                             </div>
-                                            <div class="col-md-6">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-warning btn-block get-all-variations"><i
-                                                            class="fa fa-plus"></i>Link all
-                                                    option</a>
+                                            <div class="button-add text-center">
+                                                <div class="col-md-6">
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-primary btn-block get-variation"><i
+                                                                class="fa fa-plus mr-10"></i>More
+                                                        option</a>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-success btn-block get-all-variations"><i
+                                                                class="fa fa-plus mr-10"></i>Link all
+                                                        option</a>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-md-7 variation-settings">

@@ -163,6 +163,7 @@ div.dataTables_wrapper div.dataTables_filter input {
 .table--store-settings_add-options {
     cursor: pointer;
 }
+
 /*End admin store settings*/
 
 /*create Email Templates*/
@@ -450,6 +451,18 @@ textarea {
     margin: 0;
 }
 
+.mr-10 {
+    margin-right: 10px;
+}
+
+.mb-25 {
+    margin-bottom: 25px;
+}
+
+.pt-25 {
+    padding-top: 25px;
+}
+
 .d-block {
     display: block;
 }
@@ -494,6 +507,8 @@ textarea {
     overflow-y: auto;
 }
 /*End admin roles page*/
+
+
 
 
 
