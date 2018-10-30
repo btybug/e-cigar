@@ -323,6 +323,10 @@ $("body").on("change", ".country", function() {
                     .find(".region-container")
                     .empty()
                     .append(res.html);
+                $(this)
+                    .closest("tr")
+                    .find(".region")
+                    .select2();
             }
         }
     );

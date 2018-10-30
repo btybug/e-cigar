@@ -295,6 +295,7 @@
 @stop
 @section("css")
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
@@ -303,8 +304,12 @@
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script src="{{asset('https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js')}}"></script>
     <script src="{{asset('public/js/custom/get_zones.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
+        $("body").on("click", ".remove-deliver-option", function(){
+            $(this).closest("tbody").remove()
+        })
         var count = {!! isset($delivery)?($delivery->id + 1) : 1 !!}
     $("body").on("click", ".add-new-order-filed", function (e) {
             // console.log(e)
@@ -314,7 +319,9 @@
 <th>Order Amount</th>
 <th>Courier</th>
 <th>Cost</th>
-<th colspan="3">Time</th>
+<th colspan="2">Time</th>
+<th><button type="button" class="btn btn-danger remove-deliver-option"><i class="fa fa-trash"></i></button></th>
+
 </tr>
 <tr>
 <td class="table--store-settings_vert-top">
