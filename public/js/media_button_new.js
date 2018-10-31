@@ -43,9 +43,9 @@ function App() {
                     <i class="fa fa-folder"></i>
                 </div>
                 <div class="file-name">
-                    ${data.title}
-                    <br>
-                    <small>Added: ${data.updated_at}</small>
+                <span class="icon-file"><i class="fa fa-file-o" aria-hidden="true"></i></span>
+                <span class="file-title">${data.title}</span>
+                    <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
                 <div class="file-actions">
                   <button bb-media-click="remove_folder" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
@@ -65,11 +65,10 @@ function App() {
                 <i class="fa fa-file"></i>
             </div>
             <div class="file-name">
-                ${data.real_name}
-                <br>
-                
+            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+            <span class="file-title">${data.real_name}</span>
             </div>
-            <small>Added: ${data.updated_at}</small>
+            <!--<small>Added: ${data.updated_at}</small>-->
             <div class="file-actions">
               <button bb-media-click="remove_image" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
               <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>

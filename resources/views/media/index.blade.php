@@ -58,9 +58,9 @@
                         <div class="row m-0">
                             <div class="col-lg-12 m-b-10 text-right d-flex" style="justify-content: space-between;">
                             <ul class="multiple-actions">
-                                <li><button><i class="fa fa-trash"></i></button></li>
-                                <li><button><i class="fa fa-share"></i></button></li>
-                                <li><button><i class="fa fa-clone"></i></button></li>
+                                <li><button class="btn btn-danger"><i class="fa fa-trash"></i></button></li>
+                                <li><button class="btn btn-info"><i class="fa fa-share"></i></button></li>
+                                <li><button class="btn btn-primary"><i class="fa fa-clone"></i></button></li>
                             </ul>
                             <div class="upload-content">
                             <div class="uploader-container d-none">
@@ -605,6 +605,11 @@
         .multiple-actions {
             list-style: none;
             display: flex;
+            padding: 0;
+            margin: 0;
+        }
+        .multiple-actions .btn{
+            margin-left:4px;
         }
     </style>
 {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
