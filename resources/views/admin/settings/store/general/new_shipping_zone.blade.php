@@ -54,13 +54,17 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
-                                <div class="col-sm-10 wall">
-                                    {!! Form::text('',null,['class' => 'form-control','id'=>'payment_options']) !!}
-                                    <ul class="dropdown-menu "></ul>
+                                <div class="col-sm-10 wall payment-container" >
+                                    <div class="payment-option-container" style="display: flex">
+                                        {!! Form::select('',["paypal", "stripe", "cash"],null,['class' => 'form-control','id'=>'payment_options']) !!}
+                                        <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
+
+                                    </div>
+                                    <!-- <ul class="dropdown-menu "></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-category-list" style="list-style: none"></ul>
-                                    </div>
-                                    {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!}
+                                    </div> -->
+                                    <!-- {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!} -->
                                 </div>
                             </div>
                             <div class="form-group required">

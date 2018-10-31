@@ -23,81 +23,81 @@ window.postSendAjax = function(url, data, success, error) {
     });
 };
 
-function makeSearchItem(basicData) {
-    if ($(basicData.inputValues).val()) {
-        console.log($(basicData.inputValues).val());
-        let arr = JSON.parse($(basicData.inputValues).val());
-        arr.forEach(item => {
-            $(basicData.containerForAppend).append(makeSearchHtml(item));
-        });
-    }
-    $(basicData.input).tagsinput({
-        maxTags: 5,
-        confirmKeys: [13, 32, 44],
-        freeInput: false,
-        typeaheadjs: {
-            displayKey: basicData.name,
-            valueKey: basicData.name,
-            source: function(query, processSync, processAsync) {
-                let data2 = {};
-                if (basicData.country) {
-                    data2 = { q: query, country: $("#country").val() };
-                } else {
-                    data2 = { q: query };
-                }
-                return $.ajax({
-                    url: basicData.url,
-                    type: "POST",
-                    data: data2,
-                    dataType: "json",
-                    headers: {
-                        "X-CSRF-TOKEN": $("input[name='_token']").val()
-                    },
-                    success: function(json) {
-                        return processAsync(json);
-                    }
-                });
-            },
-            templates: {
-                empty: [
-                    '<div class="empty-message">',
-                    "No results",
-                    "</div>"
-                ].join("\n"),
-                header: `<h4>${basicData.title}</h4><hr>`,
-                suggestion: function(data) {
-                    return `<div class="user-search-result"><span> ${
-                        data[basicData.name]
-                    } </span></div>`;
-                }
-            }
-        }
-    });
-    $(basicData.input).on("beforeItemAdd", function(event) {
-        event.cancel = true;
-        let valueCatergorayName = $(basicData.inputValues).val();
-        if (!valueCatergorayName.includes(event.item)) {
-            $(basicData.containerForAppend).append(makeSearchHtml(event.item));
-            if (
-                $(basicData.inputValues)
-                    .val()
-                    .trim()
-            ) {
-                let arr = JSON.parse($(basicData.inputValues).val());
-                arr.push(event.item);
-                $(basicData.inputValues).val(JSON.stringify(arr));
-                return;
-            }
-            let elm = [event.item];
-            $(basicData.inputValues).val(JSON.stringify(elm));
-            return;
-        }
-    });
+// function makeSearchItem(basicData) {
+//     if ($(basicData.inputValues).val()) {
+//         console.log($(basicData.inputValues).val());
+//         let arr = JSON.parse($(basicData.inputValues).val());
+//         arr.forEach(item => {
+//             $(basicData.containerForAppend).append(makeSearchHtml(item));
+//         });
+//     }
+//     $(basicData.input).tagsinput({
+//         maxTags: 5,
+//         confirmKeys: [13, 32, 44],
+//         freeInput: false,
+//         typeaheadjs: {
+//             displayKey: basicData.name,
+//             valueKey: basicData.name,
+//             source: function(query, processSync, processAsync) {
+//                 let data2 = {};
+//                 if (basicData.country) {
+//                     data2 = { q: query, country: $("#country").val() };
+//                 } else {
+//                     data2 = { q: query };
+//                 }
+//                 return $.ajax({
+//                     url: basicData.url,
+//                     type: "POST",
+//                     data: data2,
+//                     dataType: "json",
+//                     headers: {
+//                         "X-CSRF-TOKEN": $("input[name='_token']").val()
+//                     },
+//                     success: function(json) {
+//                         return processAsync(json);
+//                     }
+//                 });
+//             },
+//             templates: {
+//                 empty: [
+//                     '<div class="empty-message">',
+//                     "No results",
+//                     "</div>"
+//                 ].join("\n"),
+//                 header: `<h4>${basicData.title}</h4><hr>`,
+//                 suggestion: function(data) {
+//                     return `<div class="user-search-result"><span> ${
+//                         data[basicData.name]
+//                     } </span></div>`;
+//                 }
+//             }
+//         }
+//     });
+//     $(basicData.input).on("beforeItemAdd", function(event) {
+//         event.cancel = true;
+//         let valueCatergorayName = $(basicData.inputValues).val();
+//         if (!valueCatergorayName.includes(event.item)) {
+//             $(basicData.containerForAppend).append(makeSearchHtml(event.item));
+//             if (
+//                 $(basicData.inputValues)
+//                     .val()
+//                     .trim()
+//             ) {
+//                 let arr = JSON.parse($(basicData.inputValues).val());
+//                 arr.push(event.item);
+//                 $(basicData.inputValues).val(JSON.stringify(arr));
+//                 return;
+//             }
+//             let elm = [event.item];
+//             $(basicData.inputValues).val(JSON.stringify(elm));
+//             return;
+//         }
+//     });
 
-    function makeSearchHtml(data) {
-        return `<li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>${data}</li>`;
-    }
-}
+//     function makeSearchHtml(data) {
+//         return `<li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>${data}</li>`;
+//     }
+// }
 
 $("body").on("input", "#region", function(e) {
     e.preventDefault();
@@ -243,14 +243,44 @@ $("body").on("change", "#ShippingZones", function(e) {
     $("#myTabContent").append(html2);
 });
 
-makeSearchItem({
-    input: "#payment_options",
-    name: "name",
-    url: "/admin/settings/store/shipping/search-payment-options",
-    title: "Payment Options",
-    inputValues: "#category-names",
-    containerForAppend: ".coupon-category-list"
+// makeSearchItem({
+//     input: "#payment_options",
+//     name: "name",
+//     url: "/admin/settings/store/shipping/search-payment-options",
+//     title: "Payment Options",
+//     inputValues: "#category-names",
+//     containerForAppend: ".coupon-category-list"
+// });
+
+$("body").on("click", ".add-new-payment-option", function(e) {
+    $(this).html(`<i class="fa fa-trash"></i>`);
+    $(this).attr("class", "remove-new-payment-option");
+    postSendAjax(
+        "/admin/settings/store/shipping/search-payment-options",
+        {},
+        function(res) {
+            let options = "";
+            res.forEach(item => {
+                options += `<option value="${item.id}">${item.key}</option>`;
+            });
+            let html = `<div class="payment-option-container" style="display: flex">
+            <select class="form-control" id="payment_options" name="">
+                ${options}
+            </select>
+            <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
+        
+            </div>`;
+            $(".payment-container").append(html);
+        }
+    );
 });
+
+$("body").on("click", ".remove-new-payment-option", function(e) {
+    $(this)
+        .closest(".payment-option-container")
+        .remove();
+});
+
 // makeSearchItem({
 //     input: "#region",
 //     name: "name",

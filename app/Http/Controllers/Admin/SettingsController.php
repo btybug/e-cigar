@@ -326,9 +326,7 @@ class SettingsController extends Controller
     public
     function searchPaymentOptions(Request $request, Settings $settings)
     {
-        return $settings->where('section', 'active_payments_gateways')
-            ->where('key', 'like', '%' . $request->q . '%')
-            ->where('val', 1)->select('key as name')->get();
+        return $settings->where('section', 'active_payments_gateways')->get();
 
 
     }
