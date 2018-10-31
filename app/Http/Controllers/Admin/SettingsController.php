@@ -237,15 +237,17 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function getStorePaymentsGatewaysCash()
+    public function getStorePaymentsGatewaysCash(Settings $settings)
     {
-        return $this->view('store.payments_gateways.cash');
+        $model = $settings->getEditableData('payments_gateways_cash');
+        return $this->view('store.payments_gateways.cash',compact('model'));
     }
 
-    public function postStorePaymentsGatewaysCash()
+    public function postStorePaymentsGatewaysCash(Request $request, Settings $settings)
     {
-        
-}
+        $settings->updateOrCreateSettings('payments_gateways_cash', $request->except('_token'));
+        return redirect()->back();
+    }
 
     public
     function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
