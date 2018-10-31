@@ -31,11 +31,12 @@ class Settings extends Model
 
     public function getEditableData($section)
     {
+        $_this = new self();
         $result=['attributes'];
-        $settings=$this->where('section',$section)->get();
+        $settings=$_this->where('section',$section)->get();
         foreach ($settings as $setting){
-            $this->setAttribute($setting->key,$setting->val);
+            $_this->setAttribute($setting->key,$setting->val);
         }
-        return $this;
+        return $_this;
     }
 }
