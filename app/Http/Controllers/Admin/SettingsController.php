@@ -204,7 +204,7 @@ class SettingsController extends Controller
     {
         $countries = new Countries();
         $regions = ['all_selected' => 'All Regions'] + $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
-        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region','multiple'=>'multiple'])->toHtml();
+        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region', 'multiple' => 'multiple'])->toHtml();
         return ['error' => false, 'html' => $html];
     }
 
@@ -236,6 +236,16 @@ class SettingsController extends Controller
         $settings->updateOrCreateSettings('payments_gateways', $request->except('_token'));
         return redirect()->back();
     }
+
+    public function getStorePaymentsGatewaysCash()
+    {
+        return $this->view('store.payments_gateways.cash');
+    }
+
+    public function postStorePaymentsGatewaysCash()
+    {
+        
+}
 
     public
     function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
