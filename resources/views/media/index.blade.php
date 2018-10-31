@@ -568,8 +568,9 @@
     {!! Html::style("public/js/tag-it/css/jquery.tagit.css") !!}
     {{--@endpush--}}
     <style>
-        .active {
-            border: 1px solid red;
+        .active >.file {
+            border: 1px solid #000000;
+            box-shadow: 0px 0 4px 3px #f39c12;
         }
         .show {
             opacity: 1 !important
