@@ -15,6 +15,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/stripe', function () {
+// $stripe=new \Stripe();
+// dd($stripe);
+//dd($stripeCharge);
+//// Braintree Accepts Charges In Dollars...
+//    $user->charge(1);
+    return view('stripe');
+});
+Route::any('/charge', function (\Illuminate\Http\Request $request) {
+    putenv('STRIPE_API_KEY=sk_test_5hlaHU2ovKmWpyK33i7sZxxx');
+
+    putenv('STRIPE_API_VERSION=2016-07-06');
+    $stripe=  new Cartalyst\Stripe\Stripe();
+
+// This is a $20.00 charge in US Dollar.
+    $charge = $stripe->charges()->create(
+        array(
+            'amount' => 2000,
+            'currency' => 'usd',
+            'source' => $request->get('stripeToken')
+        )
+    );
+    dd($charge);
     return view('stripe');
 });
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {

@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.7.9 on 2018-10-17 09:04:42.
+ * Generated for Laravel 5.7.12 on 2018-10-31 12:44:04.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2679,6 +2679,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Unset the given driver instances.
+         *
+         * @param array|string|null $name
+         * @return $this 
+         * @static 
+         */ 
+        public static function forgetDriver($name = null)
+        {
+            return \Illuminate\Cache\CacheManager::forgetDriver($name);
+        }
+        
+        /**
          * Register a custom driver creator Closure.
          *
          * @param string $driver
@@ -3135,29 +3147,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function flush()
         {
-            return \Illuminate\Cache\FileStore::flush();
-        }
-        
-        /**
-         * Get the Filesystem instance.
-         *
-         * @return \Illuminate\Filesystem\Filesystem 
-         * @static 
-         */ 
-        public static function getFilesystem()
-        {
-            return \Illuminate\Cache\FileStore::getFilesystem();
-        }
-        
-        /**
-         * Get the working directory of the cache.
-         *
-         * @return string 
-         * @static 
-         */ 
-        public static function getDirectory()
-        {
-            return \Illuminate\Cache\FileStore::getDirectory();
+            return \Illuminate\Cache\ArrayStore::flush();
         }
         
         /**
@@ -3168,7 +3158,7 @@ namespace Illuminate\Support\Facades {
          */ 
         public static function getPrefix()
         {
-            return \Illuminate\Cache\FileStore::getPrefix();
+            return \Illuminate\Cache\ArrayStore::getPrefix();
         }
          
     }
@@ -4894,6 +4884,19 @@ namespace Illuminate\Support\Facades {
         public static function put($path, $contents, $lock = false)
         {
             return \Illuminate\Filesystem\Filesystem::put($path, $contents, $lock);
+        }
+        
+        /**
+         * Write the contents of a file, replacing it atomically if it already exists.
+         *
+         * @param string $path
+         * @param string $content
+         * @return void 
+         * @static 
+         */ 
+        public static function replace($path, $content)
+        {
+            \Illuminate\Filesystem\Filesystem::replace($path, $content);
         }
         
         /**
@@ -7510,6 +7513,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Set the intended url.
+         *
+         * @param string $url
+         * @return void 
+         * @static 
+         */ 
+        public static function setIntendedUrl($url)
+        {
+            \Illuminate\Routing\Redirector::setIntendedUrl($url);
+        }
+        
+        /**
          * Create a new redirect response to the given path.
          *
          * @param string $path
@@ -9936,6 +9951,7 @@ namespace Illuminate\Support\Facades {
      * @method static \Illuminate\Routing\Route permanentRedirect(string $uri, string $destination)
      * @method static \Illuminate\Routing\Route view(string $uri, string $view, array $data = [])
      * @method static void bind(string $key, string|callable $binder)
+     * @method static void model(string $key, string $class, \Closure|null $callback = null)
      * @method static \Illuminate\Routing\Route current()
      * @method static string|null currentRouteName()
      * @method static string|null currentRouteAction()
@@ -12378,12 +12394,13 @@ namespace Illuminate\Support\Facades {
          * Determine if the given request has a valid signature.
          *
          * @param \Illuminate\Http\Request $request
+         * @param bool $absolute
          * @return bool 
          * @static 
          */ 
-        public static function hasValidSignature($request)
+        public static function hasValidSignature($request, $absolute = true)
         {
-            return \Illuminate\Routing\UrlGenerator::hasValidSignature($request);
+            return \Illuminate\Routing\UrlGenerator::hasValidSignature($request, $absolute);
         }
         
         /**
@@ -14871,6 +14888,633 @@ namespace Yajra\DataTables\Facades {
  
 }
 
+namespace Torann\GeoIP\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class GeoIP {
+        
+        /**
+         * Get the location from the provided IP.
+         *
+         * @param string $ip
+         * @return \Torann\GeoIP\Location 
+         * @static 
+         */ 
+        public static function getLocation($ip = null)
+        {
+            return \Torann\GeoIP\GeoIP::getLocation($ip);
+        }
+        
+        /**
+         * Get the currency code from ISO.
+         *
+         * @param string $iso
+         * @return string 
+         * @static 
+         */ 
+        public static function getCurrency($iso)
+        {
+            return \Torann\GeoIP\GeoIP::getCurrency($iso);
+        }
+        
+        /**
+         * Get service instance.
+         *
+         * @return \Torann\GeoIP\Contracts\ServiceInterface 
+         * @throws Exception
+         * @static 
+         */ 
+        public static function getService()
+        {
+            return \Torann\GeoIP\GeoIP::getService();
+        }
+        
+        /**
+         * Get cache instance.
+         *
+         * @return \Torann\GeoIP\Cache 
+         * @static 
+         */ 
+        public static function getCache()
+        {
+            return \Torann\GeoIP\GeoIP::getCache();
+        }
+        
+        /**
+         * Get the client IP address.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getClientIP()
+        {
+            return \Torann\GeoIP\GeoIP::getClientIP();
+        }
+        
+        /**
+         * Get configuration value.
+         *
+         * @param string $key
+         * @param mixed $default
+         * @return mixed 
+         * @static 
+         */ 
+        public static function config($key, $default = null)
+        {
+            return \Torann\GeoIP\GeoIP::config($key, $default);
+        }
+         
+    }
+ 
+}
+
+namespace Darryldecode\Cart\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class CartFacade {
+        
+        /**
+         * sets the session key
+         *
+         * @param string $sessionKey the session key or identifier
+         * @return $this|bool 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function session($sessionKey)
+        {
+            return \Darryldecode\Cart\Cart::session($sessionKey);
+        }
+        
+        /**
+         * get instance name of the cart
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getInstanceName()
+        {
+            return \Darryldecode\Cart\Cart::getInstanceName();
+        }
+        
+        /**
+         * get an item on a cart by item ID
+         *
+         * @param $itemId
+         * @return mixed 
+         * @static 
+         */ 
+        public static function get($itemId)
+        {
+            return \Darryldecode\Cart\Cart::get($itemId);
+        }
+        
+        /**
+         * check if an item exists by item ID
+         *
+         * @param $itemId
+         * @return bool 
+         * @static 
+         */ 
+        public static function has($itemId)
+        {
+            return \Darryldecode\Cart\Cart::has($itemId);
+        }
+        
+        /**
+         * add item to the cart, it can be an array or multi dimensional array
+         *
+         * @param string|array $id
+         * @param string $name
+         * @param float $price
+         * @param int $quantity
+         * @param array $attributes
+         * @param \Darryldecode\Cart\CartCondition|array $conditions
+         * @return $this 
+         * @throws InvalidItemException
+         * @static 
+         */ 
+        public static function add($id, $name = null, $price = null, $quantity = null, $attributes = array(), $conditions = array())
+        {
+            return \Darryldecode\Cart\Cart::add($id, $name, $price, $quantity, $attributes, $conditions);
+        }
+        
+        /**
+         * update a cart
+         *
+         * @param $id
+         * @param $data the $data will be an associative array, you don't need to pass all the data, only the key value
+         * of the item you want to update on it
+         * @return bool 
+         * @static 
+         */ 
+        public static function update($id, $data)
+        {
+            return \Darryldecode\Cart\Cart::update($id, $data);
+        }
+        
+        /**
+         * add condition on an existing item on the cart
+         *
+         * @param int|string $productId
+         * @param \Darryldecode\Cart\CartCondition $itemCondition
+         * @return $this 
+         * @static 
+         */ 
+        public static function addItemCondition($productId, $itemCondition)
+        {
+            return \Darryldecode\Cart\Cart::addItemCondition($productId, $itemCondition);
+        }
+        
+        /**
+         * removes an item on cart by item ID
+         *
+         * @param $id
+         * @return bool 
+         * @static 
+         */ 
+        public static function remove($id)
+        {
+            return \Darryldecode\Cart\Cart::remove($id);
+        }
+        
+        /**
+         * clear cart
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function clear()
+        {
+            return \Darryldecode\Cart\Cart::clear();
+        }
+        
+        /**
+         * add a condition on the cart
+         *
+         * @param \Darryldecode\Cart\CartCondition|array $condition
+         * @return $this 
+         * @throws InvalidConditionException
+         * @static 
+         */ 
+        public static function condition($condition)
+        {
+            return \Darryldecode\Cart\Cart::condition($condition);
+        }
+        
+        /**
+         * get conditions applied on the cart
+         *
+         * @return \Darryldecode\Cart\CartConditionCollection 
+         * @static 
+         */ 
+        public static function getConditions()
+        {
+            return \Darryldecode\Cart\Cart::getConditions();
+        }
+        
+        /**
+         * get condition applied on the cart by its name
+         *
+         * @param $conditionName
+         * @return \Darryldecode\Cart\CartCondition 
+         * @static 
+         */ 
+        public static function getCondition($conditionName)
+        {
+            return \Darryldecode\Cart\Cart::getCondition($conditionName);
+        }
+        
+        /**
+         * Get all the condition filtered by Type
+         * Please Note that this will only return condition added on cart bases, not those conditions added
+         * specifically on an per item bases
+         *
+         * @param $type
+         * @return \Darryldecode\Cart\CartConditionCollection 
+         * @static 
+         */ 
+        public static function getConditionsByType($type)
+        {
+            return \Darryldecode\Cart\Cart::getConditionsByType($type);
+        }
+        
+        /**
+         * Remove all the condition with the $type specified
+         * Please Note that this will only remove condition added on cart bases, not those conditions added
+         * specifically on an per item bases
+         *
+         * @param $type
+         * @return $this 
+         * @static 
+         */ 
+        public static function removeConditionsByType($type)
+        {
+            return \Darryldecode\Cart\Cart::removeConditionsByType($type);
+        }
+        
+        /**
+         * removes a condition on a cart by condition name,
+         * this can only remove conditions that are added on cart bases not conditions that are added on an item/product.
+         * 
+         * If you wish to remove a condition that has been added for a specific item/product, you may
+         * use the removeItemCondition(itemId, conditionName) method instead.
+         *
+         * @param $conditionName
+         * @return void 
+         * @static 
+         */ 
+        public static function removeCartCondition($conditionName)
+        {
+            \Darryldecode\Cart\Cart::removeCartCondition($conditionName);
+        }
+        
+        /**
+         * remove a condition that has been applied on an item that is already on the cart
+         *
+         * @param $itemId
+         * @param $conditionName
+         * @return bool 
+         * @static 
+         */ 
+        public static function removeItemCondition($itemId, $conditionName)
+        {
+            return \Darryldecode\Cart\Cart::removeItemCondition($itemId, $conditionName);
+        }
+        
+        /**
+         * remove all conditions that has been applied on an item that is already on the cart
+         *
+         * @param $itemId
+         * @return bool 
+         * @static 
+         */ 
+        public static function clearItemConditions($itemId)
+        {
+            return \Darryldecode\Cart\Cart::clearItemConditions($itemId);
+        }
+        
+        /**
+         * clears all conditions on a cart,
+         * this does not remove conditions that has been added specifically to an item/product.
+         * 
+         * If you wish to remove a specific condition to a product, you may use the method: removeItemCondition($itemId, $conditionName)
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function clearCartConditions()
+        {
+            \Darryldecode\Cart\Cart::clearCartConditions();
+        }
+        
+        /**
+         * get cart sub total without conditions
+         *
+         * @param bool $formatted
+         * @return float 
+         * @static 
+         */ 
+        public static function getSubTotalWithoutConditions($formatted = true)
+        {
+            return \Darryldecode\Cart\Cart::getSubTotalWithoutConditions($formatted);
+        }
+        
+        /**
+         * get cart sub total
+         *
+         * @param bool $formatted
+         * @return float 
+         * @static 
+         */ 
+        public static function getSubTotal($formatted = true)
+        {
+            return \Darryldecode\Cart\Cart::getSubTotal($formatted);
+        }
+        
+        /**
+         * the new total in which conditions are already applied
+         *
+         * @return float 
+         * @static 
+         */ 
+        public static function getTotal()
+        {
+            return \Darryldecode\Cart\Cart::getTotal();
+        }
+        
+        /**
+         * get total quantity of items in the cart
+         *
+         * @return int 
+         * @static 
+         */ 
+        public static function getTotalQuantity()
+        {
+            return \Darryldecode\Cart\Cart::getTotalQuantity();
+        }
+        
+        /**
+         * get the cart
+         *
+         * @return \Darryldecode\Cart\CartCollection 
+         * @static 
+         */ 
+        public static function getContent()
+        {
+            return \Darryldecode\Cart\Cart::getContent();
+        }
+        
+        /**
+         * check if cart is empty
+         *
+         * @return bool 
+         * @static 
+         */ 
+        public static function isEmpty()
+        {
+            return \Darryldecode\Cart\Cart::isEmpty();
+        }
+        
+        /**
+         * Setter for decimals. Change value on demand.
+         *
+         * @param $decimals
+         * @static 
+         */ 
+        public static function setDecimals($decimals)
+        {
+            return \Darryldecode\Cart\Cart::setDecimals($decimals);
+        }
+        
+        /**
+         * Setter for decimals point. Change value on demand.
+         *
+         * @param $dec_point
+         * @static 
+         */ 
+        public static function setDecPoint($dec_point)
+        {
+            return \Darryldecode\Cart\Cart::setDecPoint($dec_point);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function setThousandsSep($thousands_sep)
+        {
+            return \Darryldecode\Cart\Cart::setThousandsSep($thousands_sep);
+        }
+         
+    }
+ 
+}
+
+namespace Cartalyst\Stripe\Laravel\Facades { 
+
+    /**
+     * 
+     *
+     */ 
+    class Stripe {
+        
+        /**
+         * Create a new Stripe API instance.
+         *
+         * @param string $apiKey
+         * @param string $apiVersion
+         * @return \Cartalyst\Stripe\Stripe 
+         * @static 
+         */ 
+        public static function make($apiKey = null, $apiVersion = null)
+        {
+            return \Cartalyst\Stripe\Stripe::make($apiKey, $apiVersion);
+        }
+        
+        /**
+         * Returns the current package version.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getVersion()
+        {
+            return \Cartalyst\Stripe\Stripe::getVersion();
+        }
+        
+        /**
+         * Returns the Config repository instance.
+         *
+         * @return \Cartalyst\Stripe\ConfigInterface 
+         * @static 
+         */ 
+        public static function getConfig()
+        {
+            return \Cartalyst\Stripe\Stripe::getConfig();
+        }
+        
+        /**
+         * Sets the Config repository instance.
+         *
+         * @param \Cartalyst\Stripe\ConfigInterface $config
+         * @return $this 
+         * @static 
+         */ 
+        public static function setConfig($config)
+        {
+            return \Cartalyst\Stripe\Stripe::setConfig($config);
+        }
+        
+        /**
+         * Returns the Stripe API key.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getApiKey()
+        {
+            return \Cartalyst\Stripe\Stripe::getApiKey();
+        }
+        
+        /**
+         * Sets the Stripe API key.
+         *
+         * @param string $apiKey
+         * @return $this 
+         * @static 
+         */ 
+        public static function setApiKey($apiKey)
+        {
+            return \Cartalyst\Stripe\Stripe::setApiKey($apiKey);
+        }
+        
+        /**
+         * Returns the Stripe API version.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getApiVersion()
+        {
+            return \Cartalyst\Stripe\Stripe::getApiVersion();
+        }
+        
+        /**
+         * Sets the Stripe API version.
+         *
+         * @param string $apiVersion
+         * @return $this 
+         * @static 
+         */ 
+        public static function setApiVersion($apiVersion)
+        {
+            return \Cartalyst\Stripe\Stripe::setApiVersion($apiVersion);
+        }
+        
+        /**
+         * Sets the idempotency key.
+         *
+         * @param string $idempotencyKey
+         * @return $this 
+         * @static 
+         */ 
+        public static function idempotent($idempotencyKey)
+        {
+            return \Cartalyst\Stripe\Stripe::idempotent($idempotencyKey);
+        }
+        
+        /**
+         * Sets the account id.
+         *
+         * @param string $accountId
+         * @return $this 
+         * @static 
+         */ 
+        public static function accountId($accountId)
+        {
+            return \Cartalyst\Stripe\Stripe::accountId($accountId);
+        }
+        
+        /**
+         * Returns the amount converter class and method name.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getAmountConverter()
+        {
+            return \Cartalyst\Stripe\Stripe::getAmountConverter();
+        }
+        
+        /**
+         * Sets the amount converter class and method name.
+         *
+         * @param $amountConverter string
+         * @return void 
+         * @static 
+         */ 
+        public static function setAmountConverter($amountConverter)
+        {
+            \Cartalyst\Stripe\Stripe::setAmountConverter($amountConverter);
+        }
+        
+        /**
+         * Disables the amount converter.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function disableAmountConverter()
+        {
+            \Cartalyst\Stripe\Stripe::disableAmountConverter();
+        }
+        
+        /**
+         * Returns the default amount converter.
+         *
+         * @return string 
+         * @static 
+         */ 
+        public static function getDefaultAmountConverter()
+        {
+            return \Cartalyst\Stripe\Stripe::getDefaultAmountConverter();
+        }
+        
+        /**
+         * Sets the default amount converter;
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function setDefaultAmountConverter()
+        {
+            \Cartalyst\Stripe\Stripe::setDefaultAmountConverter();
+        }
+         
+    }
+ 
+}
+
+namespace PragmaRX\CountriesLaravel\Package { 
+
+    /**
+     * 
+     *
+     */ 
+    class Facade {
+         
+    }
+ 
+}
+
 
 namespace  { 
 
@@ -17249,6 +17893,14 @@ namespace  {
     class Html extends \Collective\Html\HtmlFacade {}
 
     class DataTables extends \Yajra\DataTables\Facades\DataTables {}
+
+    class GeoIP extends \Torann\GeoIP\Facades\GeoIP {}
+
+    class Cart extends \Darryldecode\Cart\Facades\CartFacade {}
+
+    class Stripe extends \Cartalyst\Stripe\Laravel\Facades\Stripe {}
+
+    class Countries extends \PragmaRX\CountriesLaravel\Package\Facade {}
  
 }
 

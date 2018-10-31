@@ -169,6 +169,7 @@ return [
         Dimsav\Translatable\TranslatableServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -232,7 +233,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class
     ],
 
 ];

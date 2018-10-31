@@ -11,13 +11,13 @@
         "darryldecode/cart": "~4.0",
         "dimsav/laravel-translatable": "^9.2",
         "fideloper/proxy": "^4.0",
-        "laravel/cashier": "~7.0",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
         "pragmarx/countries-laravel": "^0.6.2",
         "torann/geoip": "^1.0",
-        "yajra/laravel-datatables-oracle": "~8.0"
+        "yajra/laravel-datatables-oracle": "~8.0",
+        "cartalyst/stripe-laravel": "9.0.*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

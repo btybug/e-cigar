@@ -12,7 +12,7 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,CanComment,Billable;
+    use Notifiable,CanComment;
 
 
     /**
