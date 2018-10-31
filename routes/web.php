@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/stripe', function () {
+    return view('stripe');
+});
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     $product = \App\Models\Posts::find($request->id);
     return ['error' => false, 'data' => $product->makeReady()->toArray()];
