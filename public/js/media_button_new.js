@@ -87,8 +87,8 @@ function App() {
 <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
                   <div style="margin-right: 5px">
                   <span data-id="${
-                data.id
-                }" bb-media-click="get_folder_items" >${data.title}</span>
+                      data.id
+                  }" bb-media-click="get_folder_items" >${data.title}</span>
                   </div></div>
                   <div>
                     <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
@@ -165,7 +165,7 @@ function App() {
                     elm.addEventListener("dragstart", function(e) {
                         let crt = this.cloneNode(true);
                         crt.className += " start";
-                        console.log(crt)
+                        console.log(crt);
                         // 055221110
                         crt.style.position = "absolute";
                         crt.style.top = "-10000px";
@@ -312,10 +312,10 @@ function App() {
                 $("#uploader").fileinput("upload");
             })
             .on("filebatchuploadsuccess", function(event, files) {
-                console.log(11111);
                 console.log("File batch upload success");
 
                 self.requests.drawingItems();
+                self.helpers.showUploaderContainer();
             });
         this.getInitailData();
     };
