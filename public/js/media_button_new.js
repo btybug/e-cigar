@@ -130,7 +130,7 @@ function App() {
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-8 p-0">
                     <div class="modal-header" style="overflow: visible;">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>
+                        <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
                         <div class="btn-group">
@@ -745,6 +745,9 @@ function App() {
         },
         show_uploader(elm, e) {
             self.helpers.showUploaderContainer();
+        },
+        close_full_modal(elm, e) {
+            e.target.closest(".modal").remove();
         }
     };
 }
