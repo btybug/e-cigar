@@ -125,7 +125,7 @@ function App() {
     </div>
   </div>`;
         },
-        fullInfoModal(data) {
+        fullInfoModal(data, countId) {
             return `<div class="adminmodal modal fade in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-8 p-0">
@@ -154,10 +154,19 @@ function App() {
                         data.url
                     }" data-slideshow="typeext" style="width:100%">
                     <div style="display: flex; justify-content: space-between;">
-                    <a href="#imgViewCarousel" role="button" data-slideshow="prev" data-nextid="" class="popuparrow" >
-                    <i class="fa fa-arrow-left"></i></a>
+                    <button href="#" type="button" role="button" ${
+                        countId === 0 ? "disabled" : ""
+                    } data-id="${countId -
+                1}" class="popuparrow" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
+                    
                     <span data-slideshow="title">${data.real_name}</span> 
-                    <a class="popuparrow" href="#imgViewCarousel" role="button" data-slideshow="next" data-nextid=""><i class="fa fa-arrow-right"></i></a> 
+                    <button class="popuparrow" href="#" type="button" role="button" ${
+                        countId ===
+                        document.querySelectorAll(".image-container").length - 1
+                            ? "disabled"
+                            : ""
+                    } data-id="${countId +
+                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button> 
                     </div>
                     </div>
                     <div class="modal-footer col-md-8">
@@ -180,7 +189,21 @@ function App() {
                     </div>
                     <div class="row rowsection collapse in" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
-                            <h4><i class="fa fa-bars text-primary"></i> GENERAL INFO</h4>
+                            <h4><i class="fa fa-bars text-primary"></i> ${
+                                data.real_name
+                            } <div class="btn-group">
+                            <button type="button" style="background-color: black;" class="btn btn-action-popup dropdown-toggle" title="Rename" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="iconaction iconRenameGrey"></i></button>
+                            <div class="dropdown-menu form-inline row width-sm p-l-0 p-r-0" aria-labelledby="dLabel">
+                                <div class="form-group col-sm-7 p-l-5">
+                                    <input name="rename_img" id="rename_img" type="text" class="form-control" placeholder="File name will be come here" value="${
+                                        data.real_name
+                                    }"  data-slideshow="renameval">
+                                </div>
+                                <div class="form-group col-sm-5 p-r-5">
+                                    <button class="btn btn-success btn-block" data-slideshow="save">Save</button>
+                                </div>
+                            </div>
+                        </div> </h4>
                             <div class="table-responsive">
                                 <table class="table tableborder0">
                                     <tr>
@@ -541,7 +564,7 @@ function App() {
                     treeFolderContainer.innerHTML = "";
 
                     res.data.items.forEach((image, index) => {
-                        let html = `<div class="file-box col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
+                        let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
                             image
                         )}</div>`;
                         mainContainer.innerHTML += html;
@@ -665,13 +688,7 @@ function App() {
                     files: true,
                     access_token: "string"
                 },
-                true,
-                res => {
-                    // document
-                    //     .querySelector(`[data-trre-id="${id}"]`)
-                    //     .querySelector("[tree-type]")
-                    //     .setAttribute("class", "fa fa-folder-open");
-                }
+                true
             );
         },
         add_new_folder(elm, e) {
@@ -689,14 +706,35 @@ function App() {
             let id = e.target.closest(".file").getAttribute("data-id");
             if (e.type === "dblclick") {
                 e.target.closest(".file-box").classList.remove("active");
+                let countId = e.target
+                    .closest(".file-box")
+                    .getAttribute("data-image");
                 self.requests.getImageDetails({ item_id: id }, res => {
                     console.log(res);
                     document.body.innerHTML += self.htmlMaker.fullInfoModal(
-                        res
+                        res,
+                        Number(countId)
                     );
                 });
             } else if (e.type === "click") {
                 e.target.closest(".file-box").classList.toggle("active");
+            }
+        },
+        modal_load_image(elm, e) {
+            if (!e.target.closest("button").disabled) {
+                let id = e.target.closest("button").getAttribute("data-id");
+                console.log(id);
+                let imageId = document
+                    .querySelector(`[data-image="${id}"] [data-id]`)
+                    .getAttribute("data-id");
+                self.requests.getImageDetails({ item_id: imageId }, res => {
+                    console.log(res);
+                    e.target.closest(".modal").remove();
+                    document.body.innerHTML += self.htmlMaker.fullInfoModal(
+                        res,
+                        Number(id)
+                    );
+                });
             }
         },
         remove_image(elm, e) {
@@ -713,7 +751,6 @@ function App() {
             );
         },
         edit_image(elm, e) {
-            console.log(111);
             e.preventDefault();
             e.stopPropagation();
             let id = e.target.closest(".file").getAttribute("data-id");
@@ -733,14 +770,7 @@ function App() {
                     item_name: name,
                     access_token: "string"
                 },
-                false,
-                res => {
-                    console.log(res);
-                    // document
-                    //     .querySelector(`[data-trre-id="${id}"]`)
-                    //     .querySelector("[tree-type]")
-                    //     .setAttribute("class", "fa fa-folder-open");
-                }
+                false
             );
         },
         show_uploader(elm, e) {
