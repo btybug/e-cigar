@@ -57,8 +57,10 @@
                     <div class="over-auto scrollbar_custom">
                         <div class="row m-0">
                             <div class="col-lg-12 m-b-10 text-right">
-                            <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
-                                <button type="button" class="btn btn-default mb-20" data-role="btnUploader">Uploader</button>
+                            <div class="uploader-container d-none">
+                                <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
+                            </div>
+                                <button type="button" class="btn btn-default mb-20" data-role="btnUploader" bb-media-click="show_uploader">Uploader</button>
                             </div>
                         </div>
                         <div class="row m-0 collapse show-uploder" data-targetiuploder="folder">
@@ -72,7 +74,7 @@
                             </div>
                             <div class="col-lg-12 " data-media="folderitem" data-type="main-container">
                             </div>
-                            <div class="col-lg-12 hide">
+                            <!-- <div class="col-lg-12 hide">
                                 <div class="file-box">
                                     <div class="file {!! $settings['thumbnailclass']??null !!}">
                                         <a href="#">
@@ -425,7 +427,7 @@
                                     </a>
                                 </div>
 
-                            </div>
+                            </div> -->
 
 
                         </div>
@@ -570,6 +572,15 @@
         .show {
             opacity: 1 !important
         }
+        .d-none {
+            display: none !important; 
+        }
+        .folder-container.over {
+            border: 1px solid yellow;
+        }
+        .file.start {
+            border: 1px dashed red;
+        }
     </style>
 {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
 
@@ -582,6 +593,8 @@
     {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
     {!! Html::script("public/js/media_button.js") !!}
     {!! Html::script("public/js/media_button_new.js") !!}
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
+
     <script>
     $("body").on("click", ".fileinput-remove", function(){
         retryDrawing()
