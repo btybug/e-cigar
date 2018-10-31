@@ -261,25 +261,36 @@ function sc($content, $user)
     return $content;
 }
 
-function cartCount(){
+function cartCount()
+{
     $cartService = new \App\Services\CartService();
 
     return $cartService->getCount();
 }
 
-function getRegions($country,$all = false){
-    $countries=new \PragmaRX\Countries\Package\Countries();
-   return ($all) ?$countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray() :['all_selected'=>'All Regions']+$countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
+function getRegions($country, $all = false)
+{
+    $countries = new \PragmaRX\Countries\Package\Countries();
+    return ($all) ? $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray() : ['all_selected' => 'All Regions'] + $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
 }
 
-function getCities($country){
-    $countries=new \PragmaRX\Countries\Package\Countries();
+function getCities($country)
+{
+    $countries = new \PragmaRX\Countries\Package\Countries();
     $country = $countries->where('name.common', $country)->first();
-   return ($country) ? $country->hydrate('cities')->cities->pluck('name', 'name') : [];
+    return ($country) ? $country->hydrate('cities')->cities->pluck('name', 'name') : [];
 }
 
-function getRegionByZone($country){
-    if(! $country) return [];
+function getRegionByZone($country)
+{
+    if (!$country) return [];
     $country = \App\Models\ZoneCountries::find($country);
     return ($country) ? [$country->region->id => $country->region->name] : [];
+}
+
+function stripe_key()
+{
+    $settings = new \App\Models\Settings();
+    $model = $settings->getEditableData('payments_gateways');
+    return isset($model->stripe_key) ? $model->stripe_key : null;
 }
