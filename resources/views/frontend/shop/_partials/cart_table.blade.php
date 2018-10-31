@@ -137,7 +137,7 @@
                             <td align="right" id="subtotal">$0</td>
                         </tr>
                         <tr>
-                            <td align="left"><span>Shipping {!! ($shippingDefaultOption) ? '('.$shippingDefaultOption->courier->name.')' : '' !!}</span></td>
+                            <td align="left"><span>Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}</span></td>
                             <td align="right" id="subtotal">${!! ($shipping) ? $shipping->getValue():0 !!}</td>
                         </tr>
                         <tr>

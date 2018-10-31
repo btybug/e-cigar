@@ -13,7 +13,6 @@
     <link href={{asset("public/frontend/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
     {{--<link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">--}}
     {{----}}
-    <link href="/public/vendor/comments/comments.css" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
     @yield('css')
@@ -26,10 +25,9 @@
 @include('frontend._partials.header')
 @yield('content')
 @include('frontend._partials.footer')
-
+<img src="/public/images/loader.gif"  class="loader-img" style="width:100px;position: absolute;top:50%;left:50%"/>
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
 <script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
-<script src="/public/vendor/comments/comments.js"></script>
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {
         $.ajax({

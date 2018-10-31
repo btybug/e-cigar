@@ -22,14 +22,17 @@ class ShoppingCartController extends Controller
 
     private $cartService;
     private $countries;
+    private $geoZones;
 
     public function __construct(
         CartService $cartService,
-        Countries $countries
+        Countries $countries,
+        GeoZones $geoZones
     )
     {
         $this->cartService = $cartService;
         $this->countries = $countries;
+        $this->geoZones = $geoZones;
     }
 
     public function index()
@@ -47,25 +50,31 @@ class ShoppingCartController extends Controller
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
-            Cart::removeConditionsByType('shipping');
-            if($geoZone && count($geoZone->deliveries) && $geoZone->deliveries->first() && count($geoZone->deliveries->first()->options)){
-                $shippingDefaultOption =  $geoZone->deliveries->first()->options->first();
-                $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                    'name' => $geoZone->name,
-                    'type' => 'shipping',
-                    'target' => 'total',
-                    'value' => $shippingDefaultOption->cost,
-                    'order' => 1
-                ));
-                Cart::condition($condition2);
+            if($geoZone){
                 $shipping = Cart::getCondition($geoZone->name);
+                if(! $shipping) {
+                    Cart::removeConditionsByType('shipping');
+                    if(count($geoZone->deliveries) && $geoZone->deliveries->first() && count($geoZone->deliveries->first()->options)){
+                        $shippingDefaultOption =  $geoZone->deliveries->first()->options->first();
+                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $geoZone->name,
+                            'type' => 'shipping',
+                            'target' => 'total',
+                            'value' => $shippingDefaultOption->cost,
+                            'order' => 1,
+                            'attributes' => $shippingDefaultOption
+                        ));
+                        Cart::condition($condition2);
+                        $shipping = Cart::getCondition($geoZone->name);
+                    }
+                }
             }
         }
 
-        return $this->view('cart',compact(['items','default_shipping','shippingDefaultOption','shipping','geoZone','shippingDefault']));
+        return $this->view('cart',compact(['items','default_shipping','shipping','geoZone','shippingDefault']));
     }
 
-    public function getCheckOut(GeoZones $geoZones)
+    public function getCheckOut()
     {
         $items = $this->cartService->getCartItems();
         if(! count($items)) return redirect('/');
@@ -73,8 +82,9 @@ class ShoppingCartController extends Controller
         $billing_address = [];
         $default_shipping = [];
         $geoZone = null; //need to change
+        $shipping = null;
         $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
-        $countriesShipping = [null => 'Select Country'] + $geoZones
+        $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
                 ->select('zone_countries.*','zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
@@ -85,10 +95,13 @@ class ShoppingCartController extends Controller
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
+            if($geoZone){
+                $shipping = Cart::getCondition($geoZone->name);
+            }
         }
 
 
-        return $this->view('check_out',compact(['billing_address','default_shipping','countries','countriesShipping','geoZone']));
+        return $this->view('check_out',compact(['billing_address','default_shipping','countries','countriesShipping','geoZone','shipping']));
     }
 
     public function postAddToCart(Request $request)
@@ -118,8 +131,7 @@ class ShoppingCartController extends Controller
             $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
-            if($geoZone && count($geoZone->deliveries) && $geoZone->deliveries->first() && count($geoZone->deliveries->first()->options)){
-                $shippingDefaultOption =  $geoZone->deliveries->first()->options->first();
+            if($geoZone){
                 $shipping = Cart::getCondition($geoZone->name);
             }
 
@@ -127,14 +139,13 @@ class ShoppingCartController extends Controller
             $default_shipping = null;
             $shipping = null;
             $geoZone = null;
-            $shippingDefaultOption = null;
             Cart::update($request->uid, array(
                 'quantity' => $qty
             ));
         }
 
         $items = $this->cartService->getCartItems();
-        $html = $this->view('_partials.cart_table',compact(['items','shippingDefaultOption','default_shipping','shipping','geoZone']))->render();
+        $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
@@ -146,21 +157,65 @@ class ShoppingCartController extends Controller
             $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
-            if($geoZone && count($geoZone->deliveries) && $geoZone->deliveries->first() && count($geoZone->deliveries->first()->options)){
-                $shippingDefaultOption =  $geoZone->deliveries->first()->options->first();
+            if($geoZone){
                 $shipping = Cart::getCondition($geoZone->name);
             }
         }else{
             $default_shipping = null;
             $shipping = null;
             $geoZone = null;
-            $shippingDefaultOption = null;
             Cart::remove($request->uid);
         }
 
         $items = $this->cartService->getCartItems();
-        $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shippingDefaultOption','shipping','geoZone']))->render();
+        $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
 
         return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount()]);
+    }
+
+    public function postChangeShippingMethod(Request $request)
+    {
+        $items = $this->cartService->getCartItems();
+        $billing_address = [];
+        $default_shipping = [];
+        $geoZone = null; //need to change
+        $shipping = null;
+        $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
+        $countriesShipping = [null => 'Select Country'] + $this->geoZones
+                ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
+                ->select('zone_countries.*','zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'id')->toArray();
+
+        if(\Auth::check()){
+            $user=\Auth::user();
+            $billing_address=$user->addresses()->where('type','billing_address')->first();
+            $default_shipping=$user->addresses()->where('type','default_shipping')->first();
+            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+            $geoZone = ($zone) ? $zone->geoZone : null;
+            if($geoZone){
+                $delivery = $geoZone->deliveries()->where('id',$request->deliveryId)->first();
+                if($delivery) {
+                    $shippingDefaultOption = $delivery->options()->where('id',$request->optionId)->first();
+                    if($shippingDefaultOption){
+                        Cart::removeConditionsByType('shipping');
+                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $geoZone->name,
+                            'type' => 'shipping',
+                            'target' => 'total',
+                            'value' => $shippingDefaultOption->cost,
+                            'order' => 1,
+                            'attributes' => $shippingDefaultOption
+                        ));
+                        Cart::condition($condition2);
+                    }
+                }
+
+                $shipping = Cart::getCondition($geoZone->name);
+            }
+        }
+
+        $html = $this->view('_partials.checkout_render',compact(['billing_address','default_shipping','countries','countriesShipping','geoZone','shipping']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
     }
 }
