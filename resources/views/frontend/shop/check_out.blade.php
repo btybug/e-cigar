@@ -55,7 +55,7 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         // Create a Stripe client.
-        var stripe = Stripe('pk_test_zr3Wfst8jb4GrKU8BcLEUkh9');
+        var stripe = Stripe({{ stripe_key() }});
 
         // Create an instance of Elements.
         var elements = stripe.elements();
