@@ -116,7 +116,7 @@
                                             <td>
                                                 <div class="wall">
                                                     <div class="region-container">
-                                                        {!! Form::select('region[0]',[],'all_selected',['class'=>'form-control region']) !!}
+                                                        {!! Form::select('region[0]',[],'all_selected',['class'=>'form-control region','multiple'=>'multiple']) !!}
 
                                                     </div>
 
@@ -485,6 +485,9 @@ ${datax}
                 .find(".add-new-ship-filed-container")
                 .before(html);
         });
+        $(".region").each(function () {
+            $(this).select2()
+        })
 
         $(".geo-zones-submit").on("click", function (e) {
             e.preventDefault();
