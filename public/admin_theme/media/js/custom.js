@@ -83,14 +83,37 @@ function listFolders(data) {
 }
 
 function listFiles(data) {
-    $.each(data, function(k, v) {
-        var folder = $("#media-modal-files").html();
-        folder = folder.replace("{name}", v.real_name);
-        folder = folder.replace(/{data-item-id}/g, v.id);
-        folder = folder.replace("{relative_path}", v.relativeUrl);
-        folder = folder.replace(/{url}/g, v.url);
+    function makeImage(data) {
+        return `<div draggable="true" data-id="${data.id}" class="file">
+    <a  bb-media-click="select_item" >
+        <span class="corner"></span>
 
-        $(".media-modal-main-content").append(folder);
+        <div class="icon">
+            <img width="180px" data-lightbox="image" src="${data.url}">
+            <i class="fa fa-file"></i>
+        </div>
+        <div class="file-name">
+            ${data.real_name}
+            <br>
+            
+        </div>
+        <small>Added: ${data.updated_at}</small>
+        <div class="file-actions">
+          <button bb-media-click="remove_image" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+          <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+          <button bb-media-click="edit_image" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
+      </div>
+    </a>
+</div>`;
+    }
+    $.each(data, function(k, v) {
+        // var folder = $("#media-modal-files").html();
+        // folder = folder.replace("{name}", v.real_name);
+        // folder = folder.replace(/{data-item-id}/g, v.id);
+        // folder = folder.replace("{relative_path}", v.relativeUrl);
+        // folder = folder.replace(/{url}/g, v.url);
+
+        $(".media-modal-main-content").append(makeImage(v));
     });
 }
 

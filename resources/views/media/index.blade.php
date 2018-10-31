@@ -893,6 +893,17 @@
         .multiple-actions .btn{
             margin-left:4px;
         }
+        #imageload .modal-content {
+            height: 100%;
+        }
+        #imageload .modal-body {
+            height: calc(100% - 80px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
     </style>
 {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
 

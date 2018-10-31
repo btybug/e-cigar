@@ -48,4 +48,5 @@ Route::group([
     Route::post('/rename-item', 'Admin\Media\MediaItemsApiController@renameFile');
     Route::post('/copy-item', 'Admin\Media\MediaItemsApiController@getCopyItems');
     Route::post('/transfer-item', 'Admin\Media\MediaItemsApiController@getTransferItems');
+    Route::post('/get-item-details', 'Admin\Media\MediaItemsApiController@getItemDetalis');
 });

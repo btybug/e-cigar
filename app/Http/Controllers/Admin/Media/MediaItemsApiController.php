@@ -141,6 +141,8 @@ class MediaItemsApiController extends Controller
         $oldItem = Items::find($request->item_id);
         if ($oldItem) {
             $filename = (str_contains($request->item_name, '.' . $oldItem->extention)) ? $request->item_name : $request->item_name . '.' . $oldItem->extension;
+            dd($filename);
+
             if (rename($oldItem->folder->path() . '/' . $oldItem->real_name,
                 $oldItem->folder->path() . '/' . $filename)) {
                 $oldItem->real_name = $filename;
@@ -207,5 +209,20 @@ class MediaItemsApiController extends Controller
         }
 
         return \Response::json(['error' => false, "data" => $result]);
+    }
+    public function getItemDetalis(Request $request){
+        $validator = \Validator::make($request->all(), [
+            'item_id' => 'required|exists:drive_items,id'
+        ]);
+        if ($validator->fails()) {
+            return \Response::json(['error' => true, 'message' => $validator->messages()]);
+        }
+        $item = Items::find($request->item_id);
+        if ($item) {
+            return \Response::json(['error' => false, 'data' => $item]);
+        }
+        return \Response::json(['error' => true, 'message' => 'Could not send data.']);
+        
+
     }
 }
