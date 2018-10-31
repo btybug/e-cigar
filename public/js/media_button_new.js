@@ -47,10 +47,10 @@ function App() {
                     <br>
                     <small>Added: ${data.updated_at}</small>
                 </div>
-                <div class"file-actions">
-                  <button bb-media-click="remove_folder"><i class="fa fa-trash"></i></button>
-                  <button><i class="fa fa-cog"></i></button>
-                  <button><i class="fa fa-pencil"></i></button>
+                <div class="file-actions">
+                  <button bb-media-click="remove_folder" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+                  <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
                 </div>
             </a>
         </div>`;
@@ -70,10 +70,10 @@ function App() {
                 
             </div>
             <small>Added: ${data.updated_at}</small>
-            <div class"file-actions">
-              <button bb-media-click="remove_image"><i class="fa fa-trash"></i></button>
-              <button ><i class="fa fa-cog"></i></button>
-              <button bb-media-click="edit_image"><i class="fa fa-pencil"></i></button>
+            <div class="file-actions">
+              <button bb-media-click="remove_image" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+              <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+              <button bb-media-click="edit_image" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
           </div>
         </a>
     </div>`;
@@ -91,9 +91,9 @@ function App() {
                   }" bb-media-click="get_folder_items" >${data.title}</span>
                   </div>
                   <div>
-                    <button bb-media-click="remove_tree_folder"><i class="fa fa-trash"></i></button>
-                    <button><i class="fa fa-cog"></i></button>
-                    <button><i class="fa fa-pencil"></i></button>
+                    <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>
                   </div>
                 </li>`;
         },
@@ -105,25 +105,26 @@ function App() {
             }</li>`;
         },
         editNameModal(id, name) {
-            return `<div class="modal fade show" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Change title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <input class="form-control edit-title-input" value="${name}">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" data-id=${id} class="btn btn-primary" bb-media-click="save_edited_title">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>`;
+            return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Change title</h4>
+        </div>
+        <div class="modal-body">
+              <input class="form-control edit-title-input" value="${name}">
+        </div>
+        <div class="modal-footer">
+         <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>`;
         }
     };
     this.helpers = {
@@ -164,6 +165,8 @@ function App() {
                     elm.addEventListener("dragstart", function(e) {
                         let crt = this.cloneNode(true);
                         crt.className += " start";
+                        console.log(crt)
+                        // 055221110
                         crt.style.position = "absolute";
                         crt.style.top = "-10000px";
                         crt.style.right = "-10000px";
@@ -234,13 +237,13 @@ function App() {
                     treeFolderContainer.innerHTML = "";
 
                     res.data.items.forEach((image, index) => {
-                        let html = `<div class="file-box">${self.htmlMaker.makeImage(
+                        let html = `<div class="file-box col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
                             image
                         )}</div>`;
                         mainContainer.innerHTML += html;
                     });
                     res.data.childs.forEach((folder, index) => {
-                        let html = `<div class="file-box folder-container">${self.htmlMaker.makeFolder(
+                        let html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
                             folder
                         )}</div>`;
                         mainContainer.innerHTML += html;

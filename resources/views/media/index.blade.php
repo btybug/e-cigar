@@ -53,7 +53,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9 animated fadeInRight">
+                <div class="col-lg-9">
                     <div class="over-auto scrollbar_custom">
                         <div class="row m-0">
                             <div class="col-lg-12 m-b-10 text-right">
@@ -66,13 +66,13 @@
                         <div class="row m-0 collapse show-uploder" data-targetiuploder="folder">
                             <div class="col-lg-12 m-b-15"></div>
                         </div>
-                        <div class="row m-0 {!! $settings['rightcontainer']??null !!}">
+                        <div class="row m-0 {!! $settings['rightcontainer']??null !!} media_right_content">
                             <div class="bread-crumbs">
                                 <ul class="bread-crumbs-list" style="display: flex; color: white; list-style: none">
                                    
                                 </ul>
                             </div>
-                            <div class="col-lg-12" style="position: relative;" data-media="folderitem" data-type="main-container">
+                            <div class="row m-0 d-flex flex-wrap" style="position: relative;" data-media="folderitem" data-type="main-container">
                             </div>
                             <!-- <div id="coverup"></div> -->
 
@@ -581,7 +581,9 @@
             border: 1px solid yellow;
         }
         .file.start {
-            border: 1px dashed red;
+            border: 2px dashed #00c0ef;
+            max-height: 200px;
+            max-width: 200px;
         }
         #coverup {
             background: white;
