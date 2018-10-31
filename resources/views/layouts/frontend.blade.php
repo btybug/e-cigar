@@ -25,7 +25,7 @@
 @include('frontend._partials.header')
 @yield('content')
 @include('frontend._partials.footer')
-<img src="/public/images/loader.gif"  class="loader-img" style="width:100px;position: absolute;top:50%;left:50%"/>
+<img src="/public/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
 <script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
 <script>

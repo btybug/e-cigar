@@ -163,19 +163,23 @@
             $("body").on("change", ".select-shipping-method", function () {
                 var optionId = $(this).val();
                 var deliveryId = $(this).data('delivery');
-                $(".container").style('opacity','0.6');
-                $(".loader-img").show();
-                // AjaxCall(
-                //     "/change-shipping-method",
-                //     {deliveryId:deliveryId,optionId: optionId},
-                //     res => {
-                //          $(".container").style('opacity','1');
-                //             $(".loader-img").hide();
-                //         if (!res.error) {
-                //
-                //         }
-                //     }
-                // );
+                $(".container").css('opacity','0.6');
+                $(".loader-img").toggleClass('d-none');
+                AjaxCall(
+                    "/change-shipping-method",
+                    {deliveryId:deliveryId,optionId: optionId},
+                    res => {
+                        if (!res.error) {
+                            $(".container").css('opacity','1');
+                            $(".loader-img").toggleClass('d-none');
+                            $("#address").html(res.html);
+                        }
+                    },
+                    error => {
+                        $(".container").css('opacity','1');
+                        $(".loader-img").toggleClass('d-none');
+                    }
+                );
                console.log($(this).val())
             });
         })
