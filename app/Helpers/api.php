@@ -294,3 +294,9 @@ function stripe_key()
     $model = $settings->getEditableData('payments_gateways');
     return isset($model->stripe_key) ? $model->stripe_key : null;
 }
+function stripe_secret()
+{
+    $settings = new \App\Models\Settings();
+    $model = $settings->getEditableData('payments_gateways');
+    return isset($model->stripe_secret) ? $model->stripe_secret : null;
+}

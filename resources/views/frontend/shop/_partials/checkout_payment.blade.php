@@ -81,7 +81,9 @@
             @endif
             @if(in_array('stripe',$payment_options) && $active_payments_gateways->stripe)
                 <div id="stripe-method" class="d-none payment-method-data">
-                    <form action="/charge" method="post" id="payment-form">
+                    <script src="https://js.stripe.com/v3/"></script>
+                    <form action="/stripe-charge" method="post" id="payment-form">
+                        {!! csrf_field()!!}
                         <div class="form-row">
                             <label for="card-element">
 

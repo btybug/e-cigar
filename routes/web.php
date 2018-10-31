@@ -22,23 +22,7 @@ Route::get('/stripe', function () {
 //    $user->charge(1);
     return view('stripe');
 });
-Route::any('/charge', function (\Illuminate\Http\Request $request) {
-    putenv('STRIPE_API_KEY=sk_test_5hlaHU2ovKmWpyK33i7sZxxx');
-
-    putenv('STRIPE_API_VERSION=2016-07-06');
-    $stripe=  new Cartalyst\Stripe\Stripe();
-
-// This is a $20.00 charge in US Dollar.
-    $charge = $stripe->charges()->create(
-        array(
-            'amount' => 2000,
-            'currency' => 'usd',
-            'source' => $request->get('stripeToken')
-        )
-    );
-    dd($charge);
-    return view('stripe');
-});
+Route::any('/stripe-charge', 'Frontend\StripePaymentController@stripeCharge');
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     $product = \App\Models\Posts::find($request->id);
     return ['error' => false, 'data' => $product->makeReady()->toArray()];
