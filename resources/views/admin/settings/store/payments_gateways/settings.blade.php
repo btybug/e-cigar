@@ -12,11 +12,23 @@
                 </div>
             </div>
         <div class="form-group">
+            <label for="text" class="control-label col-xs-4">Description</label>
+            <div class="col-xs-8">
+                {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+            </div>
+        </div>
+        <div class="form-group">
                 <label for="text" class="control-label col-xs-4">Image</label>
                 <div class="col-xs-8">
                     {!! media_button('stripe_image',$model) !!}
                 </div>
             </div>
+        <div class="form-group">
+            <label for="text1" class="control-label col-xs-4">Icon</label>
+            <div class="col-xs-8">
+                {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
+            </div>
+        </div>
         <div class="form-group">
                 <label for="text" class="control-label col-xs-4">Stripe Key</label>
                 <div class="col-xs-8">
@@ -36,4 +48,16 @@
             </div>
         {!! Form::close() !!}
     </div>
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+    <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop
+@section('js')
+    <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
+    <script>
+        $('.icon-picker').iconpicker();
+    </script>
 @stop
