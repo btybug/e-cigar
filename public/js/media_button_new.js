@@ -71,7 +71,7 @@ function App() {
             <!--<small>Added: ${data.updated_at}</small>-->
             <div class="file-actions">
               <button bb-media-click="remove_image" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-              <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+              <button class="btn btn-sm btn-primary"  bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
               <button bb-media-click="edit_image" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
           </div>
         </a>
@@ -623,6 +623,8 @@ function App() {
             .fileinput({
                 uploadAsync: false,
                 maxFileCount: 5,
+                showUpload: false,
+                showUploadedThumbs: false,
                 uploadExtraData: function() {
                     return {
                         _token: $("meta[name='csrf-token']").attr("content"),
@@ -634,10 +636,9 @@ function App() {
                 $("#uploader").fileinput("upload");
             })
             .on("filebatchuploadsuccess", function(event, files) {
-                console.log("File batch upload success");
-
                 self.requests.drawingItems();
                 self.helpers.showUploaderContainer();
+                $("#uploader").fileinput("clear");
             });
         this.getInitailData();
     };
@@ -689,6 +690,21 @@ function App() {
                 },
                 true
             );
+        },
+        open_full_modal(elm, e) {
+            e.stopPropagation();
+            e.preventDefault();
+            let id = e.target.closest(".file").getAttribute("data-id");
+            let countId = e.target
+                .closest(".file-box")
+                .getAttribute("data-image");
+            self.requests.getImageDetails({ item_id: id }, res => {
+                console.log(res);
+                document.body.innerHTML += self.htmlMaker.fullInfoModal(
+                    res,
+                    Number(countId)
+                );
+            });
         },
         select_item(elm, e) {
             let id = e.target.closest(".file").getAttribute("data-id");
