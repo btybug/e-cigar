@@ -133,19 +133,7 @@ function App() {
                         <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-action-popup dropdown-toggle" title="Rename" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="iconaction iconRenameGrey"></i></button>
-                            <div class="dropdown-menu form-inline row width-sm p-l-0 p-r-0" aria-labelledby="dLabel">
-                                <div class="form-group col-sm-7 p-l-5">
-                                    <input name="rename_img" id="rename_img" type="text" class="form-control" placeholder="File name will be come here" value="${
-                                        data.real_name
-                                    }"  data-slideshow="renameval">
-                                </div>
-                                <div class="form-group col-sm-5 p-r-5">
-                                    <button class="btn btn-success btn-block" data-slideshow="save">Save</button>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div class="modal-body text-center">
                     <div class="modal-title">
