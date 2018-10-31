@@ -224,7 +224,7 @@
                 </table>
             </div>
         </div>
-        <button class="btn btn-block btn-info mt-2">Go to payment</button>
+        <button class="btn btn-block btn-info mt-2 go-to-payment">Go to payment</button>
     </div>
 </div>
 <div class="row">

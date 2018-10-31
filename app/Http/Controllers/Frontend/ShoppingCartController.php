@@ -228,4 +228,10 @@ class ShoppingCartController extends Controller
 
         return \Response::json(['error' => false,'html' => $html]);
     }
+
+    public function postPaymentOptions(Request $request)
+    {
+        //need validate first step
+        return  \Response::json(['error' => false]);
+    }
 }

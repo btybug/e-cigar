@@ -77,6 +77,7 @@ Route::post('/add-to-cart', 'Frontend\ShoppingCartController@postAddToCart')->na
 Route::post('/update-cart', 'Frontend\ShoppingCartController@postUpdateQty')->name('shop_update_cart');
 Route::post('/remove-from-cart', 'Frontend\ShoppingCartController@postRemoveFromCart')->name('shop_remove_from_cart');
 Route::post('/change-shipping-method', 'Frontend\ShoppingCartController@postChangeShippingMethod')->name('change_shipping_method');
+Route::post('/get-payment-options', 'Frontend\ShoppingCartController@postPaymentOptions')->name('get_payment_options');
 
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
