@@ -55,16 +55,24 @@
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
                                 <div class="col-sm-10 wall payment-container" >
-                                    <div class="payment-option-container" style="display: flex">
-                                        {!! Form::select('',["paypal", "stripe", "cash"],null,['class' => 'form-control','id'=>'payment_options']) !!}
-                                        <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
-
-                                    </div>
-                                    <!-- <ul class="dropdown-menu "></ul>
-                                    <div id="coupon-category" class="well well-sm view-coupon">
-                                        <ul class="coupon-category-list" style="list-style: none"></ul>
-                                    </div> -->
-                                    <!-- {!! Form::hidden('payment_options',null,['id'=>'category-names','class'=>'search-hidden-input']) !!} -->
+                                    @if($geo_zone && $geo_zone->payment_options && count($geo_zone->payment_options))
+                                        @foreach($geo_zone->payment_options as $payment_option)
+                                            <div class="payment-option-container" style="display: flex">
+                                                {!! Form::select('payment_options[]',["paypal"=>"paypal", "stripe"=>"stripe", "cash"=>"cash"],
+                                                $payment_option,['class' => 'form-control','id'=>'payment_options']) !!}
+                                                @if($loop->last)
+                                                    <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
+                                                @else
+                                                    <button type="button" class="remove-new-payment-option"><i class="fa fa-trash"></i></button>
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="payment-option-container" style="display: flex">
+                                            {!! Form::select('payment_options[]',["paypal"=>"paypal", "stripe"=>"stripe", "cash"=>"cash"],null,['class' => 'form-control','id'=>'payment_options']) !!}
+                                            <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group required">

@@ -2,7 +2,7 @@
     <div class="col-md-4">
         @inject('settings','\App\Models\Settings')
         @php
-            $payment_options = ($geoZone) ? json_decode($geoZone->payment_options,true) : [];
+            $payment_options = ($geoZone) ? $geoZone->payment_options : [];
             $active_payments_gateways = $settings->getEditableData('active_payments_gateways');
         @endphp
         @if(count($payment_options))

@@ -261,10 +261,10 @@ $("body").on("click", ".add-new-payment-option", function(e) {
         function(res) {
             let options = "";
             res.forEach(item => {
-                options += `<option value="${item.id}">${item.key}</option>`;
+                options += `<option value="${item.key}">${item.key}</option>`;
             });
             let html = `<div class="payment-option-container" style="display: flex">
-            <select class="form-control" id="payment_options" name="">
+            <select class="form-control" id="payment_options" name="payment_options[]">
                 ${options}
             </select>
             <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
