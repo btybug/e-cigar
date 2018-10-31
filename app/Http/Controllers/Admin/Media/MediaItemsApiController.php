@@ -206,6 +206,6 @@ class MediaItemsApiController extends Controller
             $result = Items::transfer($data['item_id'], $data['folder_id']);
         }
 
-        return \Response::json(['error' => $result]);
+        return \Response::json(['error' => false, "data" => $result]);
     }
 }

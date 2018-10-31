@@ -72,8 +72,10 @@
                                    
                                 </ul>
                             </div>
-                            <div class="col-lg-12 " data-media="folderitem" data-type="main-container">
+                            <div class="col-lg-12" style="position: relative;" data-media="folderitem" data-type="main-container">
                             </div>
+                            <!-- <div id="coverup"></div> -->
+
                             <!-- <div class="col-lg-12 hide">
                                 <div class="file-box">
                                     <div class="file {!! $settings['thumbnailclass']??null !!}">
@@ -580,6 +582,15 @@
         }
         .file.start {
             border: 1px dashed red;
+        }
+        #coverup {
+            background: white;
+            width: 170px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 2;
         }
     </style>
 {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}

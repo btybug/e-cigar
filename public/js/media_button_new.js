@@ -48,7 +48,7 @@ function App() {
                     <small>Added: ${data.updated_at}</small>
                 </div>
                 <div class"file-actions">
-                  <button bb-media-click="remove_tree_folder"><i class="fa fa-trash"></i></button>
+                  <button bb-media-click="remove_folder"><i class="fa fa-trash"></i></button>
                   <button><i class="fa fa-cog"></i></button>
                   <button><i class="fa fa-pencil"></i></button>
                 </div>
@@ -162,9 +162,17 @@ function App() {
                 )
                 .forEach(elm => {
                     elm.addEventListener("dragstart", function(e) {
+                        let crt = this.cloneNode(true);
+                        crt.className += " start";
+                        crt.style.position = "absolute";
+                        crt.style.top = "-10000px";
+                        crt.style.right = "-10000px";
+                        document.body.appendChild(crt);
                         let id = this.getAttribute("data-id");
-                        e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
+                        e.dataTransfer.setDragImage(crt, 0, 0);
+                        // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
                         e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+                        // setTimeout(() => (this.className = "invisible"), 0);
                     });
                 });
 
@@ -186,7 +194,14 @@ function App() {
                     let parrentId = e.target
                         .closest(".file")
                         .getAttribute("data-id");
-                    console.log(nodeId, parrentId);
+                    self.requests.transferImage(
+                        {
+                            item_id: Number(nodeId),
+                            folder_id: Number(parrentId),
+                            access_token: "string"
+                        },
+                        false
+                    );
                 });
             });
         }
@@ -243,14 +258,12 @@ function App() {
                     cb ? cb() : null;
                 }
             });
-            shortAjax("/api/api-media/jstree", obj, function(res) {
-                console.log(res);
-            });
         },
         removeTreeFolder(obj = {}, cb) {
             shortAjax("/api/api-media/get-remove-folder", obj, res => {
                 if (!res.error) {
                     cb();
+                    self.requests.drawingItems();
                 }
             });
         },
@@ -261,10 +274,10 @@ function App() {
                 }
             });
         },
-        removeImage(obj = {}, cb) {
+        transferImage(obj = {}, cb) {
             shortAjax("/api/api-media/transfer-item", obj, res => {
                 if (!res.error) {
-                    cb(res);
+                    self.requests.drawingItems();
                 }
             });
         },
@@ -305,7 +318,22 @@ function App() {
     };
     this.events = {
         remove_tree_folder(elm, e) {
+            e.stopPropagation();
+            e.preventDefault();
             let id = elm.closest("li").attr("data-id");
+            self.requests.removeTreeFolder(
+                {
+                    folder_id: Number(id),
+                    trash: 0,
+                    access_token: "string"
+                },
+                () => elm.closest("li").remove()
+            );
+        },
+        remove_folder(elm, e) {
+            e.stopPropagation();
+            e.preventDefault();
+            let id = elm.closest(".file").attr("data-id");
             self.requests.removeTreeFolder(
                 {
                     folder_id: Number(id),
@@ -340,14 +368,7 @@ function App() {
                     folder_name: name,
                     access_token: "string"
                 },
-                true,
-                res => {
-                    console.log(res);
-                    // document
-                    //     .querySelector(`[data-trre-id="${id}"]`)
-                    //     .querySelector("[tree-type]")
-                    //     .setAttribute("class", "fa fa-folder-open");
-                }
+                true
             );
         },
         select_item(elm, e) {
@@ -357,20 +378,13 @@ function App() {
             e.preventDefault();
             e.stopPropagation();
             let id = e.target.closest(".file").getAttribute("data-id");
-            self.requests.removeImage(
+            self.requests.transferImage(
                 {
                     item_id: Number(id),
                     folder_id: 2,
                     access_token: "string"
                 },
-                false,
-                res => {
-                    console.log(res);
-                    // document
-                    //     .querySelector(`[data-trre-id="${id}"]`)
-                    //     .querySelector("[tree-type]")
-                    //     .setAttribute("class", "fa fa-folder-open");
-                }
+                false
             );
         },
         edit_image(elm, e) {
@@ -415,135 +429,3 @@ $("body").on("click", `[bb-media-click]`, function(e) {
     let attr = $(this).attr("bb-media-click");
     app.events[attr]($(this), e);
 });
-
-/*
-* Credits to http://www.htmldrive.net/items/show/13/HTML5-Demo-drag-and-drop
-*
-*/
-
-var addEvent = (function() {
-    if (document.addEventListener) {
-        return function(el, type, fn) {
-            if ((el && el.nodeName) || el === window) {
-                el.addEventListener(type, fn, false);
-            } else if (el && el.length) {
-                for (var i = 0; i < el.length; i++) {
-                    addEvent(el[i], type, fn);
-                }
-            }
-        };
-    } else {
-        return function(el, type, fn) {
-            if ((el && el.nodeName) || el === window) {
-                el.attachEvent("on" + type, function() {
-                    return fn.call(el, window.event);
-                });
-            } else if (el && el.length) {
-                for (var i = 0; i < el.length; i++) {
-                    addEvent(el[i], type, fn);
-                }
-            }
-        };
-    }
-})();
-
-(function() {
-    var pre = document.createElement("pre");
-    pre.id = "view-source";
-
-    // private scope to avoid conflicts with demos
-    addEvent(window, "click", function(event) {
-        if (event.target.hash == "#view-source") {
-            // event.preventDefault();
-            if (!document.getElementById("view-source")) {
-                pre.innerHTML = (
-                    "<!DOCTYPE html>\n<html>\n" +
-                    document.documentElement.innerHTML +
-                    "\n</html>"
-                ).replace(/[<>]/g, function(m) {
-                    return { "<": "&lt;", ">": "&gt;" }[m];
-                });
-                document.body.appendChild(pre);
-            }
-            document.body.className = "view-source";
-
-            var sourceTimer = setInterval(function() {
-                if (window.location.hash != "#view-source") {
-                    clearInterval(sourceTimer);
-                    document.body.className = "";
-                }
-            }, 200);
-        }
-    });
-})();
-
-var eat = ["yum!", "gulp", "burp!", "nom"];
-var yum = document.createElement("p");
-var msie = /*@cc_on!@*/ 0;
-yum.style.opacity = 1;
-
-var links = document.querySelectorAll("li > a"),
-    el = null;
-for (var i = 0; i < links.length; i++) {
-    el = links[i];
-
-    el.setAttribute("draggable", "true");
-
-    addEvent(el, "dragstart", function(e) {
-        e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-        e.dataTransfer.setData("Text", this.id); // required otherwise doesn't work
-    });
-}
-
-var bin = document.querySelector("#bin");
-
-addEvent(bin, "dragover", function(e) {
-    if (e.preventDefault) e.preventDefault(); // allows us to drop
-    this.className = "over";
-    e.dataTransfer.dropEffect = "copy";
-    return false;
-});
-
-// to get IE to work
-addEvent(bin, "dragenter", function(e) {
-    this.className = "over";
-    return false;
-});
-
-addEvent(bin, "dragleave", function() {
-    this.className = "";
-});
-
-addEvent(bin, "drop", function(e) {
-    if (e.stopPropagation) e.stopPropagation(); // stops the browser from redirecting...why???
-
-    var el = document.getElementById(e.dataTransfer.getData("Text"));
-
-    el.parentNode.removeChild(el);
-
-    // stupid nom text + fade effect
-    bin.className = "";
-    yum.innerHTML = eat[parseInt(Math.random() * eat.length)];
-
-    var y = yum.cloneNode(true);
-    bin.appendChild(y);
-
-    setTimeout(function() {
-        var t = setInterval(function() {
-            if (y.style.opacity <= 0) {
-                if (msie) {
-                    // don't bother with the animation
-                    y.style.display = "none";
-                }
-                clearInterval(t);
-            } else {
-                y.style.opacity -= 0.1;
-            }
-        }, 50);
-    }, 250);
-
-    return false;
-});
-
-// For discussion and comments, see: https://remysharp.com/2009/01/07/html5-enabling-script/
-/*@cc_on'abbr article aside audio canvas details figcaption figure footer header hgroup mark menu meter nav output progress section summary time video'.replace(/\w+/g,function(n){document.createElement(n)})@*/
