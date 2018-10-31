@@ -45,6 +45,7 @@ class ShoppingCartController extends Controller
         $items = $this->cartService->getCartItems();
         $default_shipping = null;
         $shipping = null;
+        $geoZone  = null;
         if(\Auth::check()){
             $user=\Auth::user();
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
