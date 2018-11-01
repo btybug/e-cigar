@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderItem extends Model
 {
-    protected $table = 'orders_items';
+    protected $table = 'order_items';
     protected $guarded=['id'];
+
+    protected $casts = [
+        'options' => 'json',
+        'additional_data' => 'json',
+    ];
 
     public function order()
     {

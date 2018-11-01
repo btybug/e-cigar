@@ -19,7 +19,6 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('parent_id')->nullable();
             $table->decimal('amount',6,2);
             $table->unsignedInteger('billing_addresses_id');
-            $table->unsignedInteger('shipping_addresses_id');
             $table->unsignedInteger('transaction_id')->nullable();
             $table->string('status');
             $table->string('shipping_method');
