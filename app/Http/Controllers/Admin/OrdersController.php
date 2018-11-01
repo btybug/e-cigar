@@ -21,7 +21,7 @@ class OrdersController extends Controller
 
         return $this->view('index');
     }
-    public function getManage($id=null)
+    public function getManage($id)
     {
         $order=Orders::where('id',$id)
             ->with('shippingAddress')
@@ -29,6 +29,7 @@ class OrdersController extends Controller
             ->with('history')
             ->with('items')
             ->with('user')->first();
+        if(!$order)abort(404);
         return $this->view('manage',compact('order'));
     }
 
