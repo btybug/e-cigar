@@ -55,6 +55,11 @@ class CashPaymentController extends Controller
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
             foreach ($items as $variation_id => $item){
+                $options = [];
+                foreach ($item->attributes->variation->options as $option){
+                    $options[$option->attr->name] = $option->option->name;
+                }
+
                 OrderItem::create([
                     'order_id' => $order->id,
                     'sku' => $item->name,
@@ -63,7 +68,7 @@ class CashPaymentController extends Controller
                     'qty' => $item->quantity,
                     'amount' => $item->price * $item->quantity,
                     'image' => $item->attributes->variation->stock->image,
-                    'options' => [],//TODO: render names
+                    'options' => $options
                 ]);
             }
         });
