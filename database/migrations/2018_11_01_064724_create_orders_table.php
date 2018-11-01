@@ -20,8 +20,10 @@ class CreateOrdersTable extends Migration
             $table->decimal('amount',6,2);
             $table->unsignedInteger('billing_addresses_id');
             $table->unsignedInteger('shipping_addresses_id');
+            $table->unsignedInteger('transaction_id')->nullable();
             $table->string('status');
             $table->string('shipping_method');
+            $table->string('payment_method');
             $table->decimal('shipping_price',6,2);
             $table->string('currency',3);
             $table->timestamps();
