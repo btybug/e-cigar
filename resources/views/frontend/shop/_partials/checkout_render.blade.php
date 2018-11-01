@@ -13,10 +13,10 @@
                                     <div class="col-sm-8">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                {!! Form::text('first_name',Auth::user()->name,['class'=>'form-control','readonly']) !!}
                                             </div>
                                             <div class="col-sm-6">
-                                                {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                {!! Form::text('last_name',Auth::user()->last_name,['class'=>'form-control','readonly']) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -27,7 +27,7 @@
                                     <label for="text" class="control-label col-sm-4">Company
                                         name</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('company',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('company',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                                     <label for="text" class="control-label col-sm-4">1st Line
                                         address</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('first_line_address',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -45,7 +45,7 @@
                                     <label for="text" class="control-label col-sm-4">2nd line
                                         address</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('second_line_address',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Country</label>
                                     <div class="col-sm-8">
-                                        {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control','id' => 'country']) !!}
+                                        {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control','id' => 'country','disabled']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Regions</label>
                                     <div class="col-sm-8">
-                                        {!! Form::select('region',getRegions(@$billing_address->country,true),null,['class'=>'form-control','id' => 'regions']) !!}
+                                        {!! Form::select('region',getRegions(@$billing_address->country,true),null,['class'=>'form-control','id' => 'regions','disabled']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">City</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('city',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -77,12 +77,12 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Post Code</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('post_code',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
                             {!! Form::hidden('type','billing_address') !!}
-                            {!! Form::hidden('id') !!}
+                            {!! Form::hidden('id',null,['id' => 'billing_address']) !!}
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -100,10 +100,10 @@
                                     <div class="col-sm-8">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                {!! Form::text('first_name',Auth::user()->name,['class'=>'form-control','readonly']) !!}
                                             </div>
                                             <div class="col-sm-6">
-                                                {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                {!! Form::text('last_name',Auth::user()->last_name,['class'=>'form-control','readonly']) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                                     <label for="text" class="control-label col-sm-4">Company
                                         name</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('company',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('company',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                     <label for="text" class="control-label col-sm-4">1st Line
                                         address</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('first_line_address',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@
                                     <label for="text" class="control-label col-sm-4">2nd line
                                         address</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('second_line_address',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Country</label>
                                     <div class="col-sm-8">
-                                        {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country']) !!}
+                                        {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Regions</label>
                                     <div class="col-sm-8">
-                                        {!! Form::select('region',getRegionByZone(@$default_shipping->country),null,['class'=>'form-control','id' => 'geo_region']) !!}
+                                        {!! Form::select('region',getRegionByZone(@$default_shipping->country),null,['class'=>'form-control','id' => 'geo_region','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">City</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('city',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -164,12 +164,12 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Post Code</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                        {!! Form::text('post_code',null,['class'=>'form-control','readonly']) !!}
                                     </div>
                                 </div>
                             </div>
                             {!! Form::hidden('type','default_shipping') !!}
-                            {!! Form::hidden('id') !!}
+                            {!! Form::hidden('id',null,['id' => 'shipping_address']) !!}
 
                             {!! Form::close() !!}
                         </div>
@@ -191,11 +191,7 @@
                     <tr>
                         <td align="left"><span>Sub Total</span></td>
                         <td align="right" id="subtotal">
-                            @if(Auth::check())
-                                ${!! \Cart::session(Auth::id())->getSubTotal() !!}
-                            @else
-                                ${!! \Cart::getSubTotal() !!}
-                            @endif
+                            ${!! \Cart::getSubTotal() !!}
                         </td>
                     </tr>
                     <tr>
@@ -213,11 +209,7 @@
                     <tr>
                         <td class="last" align="left"><span>Total</span></td>
                         <td class="last" align="right" id="total_price">
-                            @if(Auth::check())
-                                ${!! \Cart::session(Auth::id())->getTotal() !!}
-                            @else
-                                ${!! \Cart::getTotal() !!}
-                            @endif
+                            ${!! \Cart::getTotal() !!}
                         </td>
                     </tr>
                     </tbody>

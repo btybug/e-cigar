@@ -120,6 +120,8 @@
                 AjaxCall(
                     "/get-payment-options",
                     {
+                        'shippingId' : $("#shipping_address").val(),
+                        'billingId' : $("#billing_address").val(),
                     },
                     res => {
                         if (!res.error) {
@@ -136,6 +138,19 @@
                         }
                     }
                 );
+            });
+
+            $("body").on("click", ".back-step", function (event) {
+                $(".nav-link").each(function (index,value) {
+                    $(value).removeClass('active').addClass('disabled');
+                });
+
+                $(".tab-pane").each(function (index,value) {
+                    $(value).removeClass('active in show');
+                });
+
+                $("#address").addClass('active in show');
+                $("#address-tab").removeClass('disabled').addClass('active');
             });
 
             $("body").on("click", ".nav-link", function (event) {

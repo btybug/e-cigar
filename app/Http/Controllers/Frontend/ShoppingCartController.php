@@ -87,6 +87,7 @@ class ShoppingCartController extends Controller
         $items = $this->cartService->getCartItems();
         if(! count($items)) return redirect('/');
 
+        session()->forget('shipping_address','billing_address');
         $billing_address = [];
         $default_shipping = [];
         $geoZone = null; //need to change
@@ -251,6 +252,7 @@ class ShoppingCartController extends Controller
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
         if(\Auth::check()){
+            //TODO: fix shipping update
             $user=\Auth::user();
             $billing_address=$user->addresses()->where('type','billing_address')->first();
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
@@ -285,7 +287,9 @@ class ShoppingCartController extends Controller
 
     public function postPaymentOptions(Request $request)
     {
-        //need validate first step
+        session()->put('shipping_address', $request->shippingId);
+        session()->put('billing_address', $request->billingId);
+
         return  \Response::json(['error' => false]);
     }
 }

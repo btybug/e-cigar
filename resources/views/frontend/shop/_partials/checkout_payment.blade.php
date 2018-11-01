@@ -6,7 +6,6 @@
             $active_payments_gateways = $settings->getEditableData('active_payments_gateways');
         @endphp
         @if(count($payment_options))
-
             <ul class="payment_methods methods">
                 @if(in_array('cash',$payment_options) && $active_payments_gateways->cash)
                     @php
@@ -102,9 +101,12 @@
             @endif
             @if(in_array('paypal',$payment_options) && $active_payments_gateways->paypal)
                 <div id="paypal-method" class="d-none payment-method-data">
-paypal
+                    paypal
                 </div>
             @endif
         @endif
+    </div>
+    <div class="col-md-12">
+        <button class="btn btn-light back-step">Back</button>
     </div>
 </div>
