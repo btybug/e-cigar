@@ -85,6 +85,7 @@ Route::post('/remove-from-cart', 'Frontend\ShoppingCartController@postRemoveFrom
 Route::post('/change-shipping-method', 'Frontend\ShoppingCartController@postChangeShippingMethod')->name('change_shipping_method');
 Route::post('/get-payment-options', 'Frontend\ShoppingCartController@postPaymentOptions')->name('get_payment_options');
 Route::post('/cash-order', 'Frontend\CashPaymentController@order')->name('cash_order');
+Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@success')->name('cash_order_success');
 
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');

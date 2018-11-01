@@ -256,7 +256,7 @@
                         if (!res.error) {
                             $(".container").css('opacity','1');
                             $(".loader-img").toggleClass('d-none');
-
+                            window.location = res.url;
                         }
                     },
                     error => {

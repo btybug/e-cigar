@@ -23,6 +23,8 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class CashPaymentController extends Controller
 {
+    protected $view= 'frontend.shop';
+
     public function order(Request $request)
     {
         $shippingId = session()->get('shipping_address');
@@ -34,7 +36,7 @@ class CashPaymentController extends Controller
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-      \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress) {
+        $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order = Orders::create([
@@ -71,7 +73,25 @@ class CashPaymentController extends Controller
                     'options' => $options
                 ]);
             }
+
+            return $order;
         });
-        return \Response::json(['error' => false,'url' => '']);
+
+        return \Response::json(['error' => false,'url' => route('cash_order_success',$order->id)]);
+    }
+
+    public function success (Request $request,$id)
+    {
+        $order = Orders::findOrFail($id);
+        
+        if(! Cart::isEmpty() && session()->has('shipping_address') &&  session()->has('billing_address') && $order){
+            session()->forget('shipping_address','billing_address');
+            Cart::clear();
+            Cart::removeConditionsByType('shipping');
+
+            return $this->view('_partials.cash_success');
+        }
+
+        abort(404);
     }
 }
