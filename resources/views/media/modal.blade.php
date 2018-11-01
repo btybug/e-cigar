@@ -18,15 +18,24 @@
 
                             </div>
                         </div>
-                        <div class="right main-content media-modal-main-content">
-                            <div class="icon">
+                        <div class="media_modal_right_content">
+                        <div class="content-upload media-modal-content-upload">
+                        <div class="upload-content">
+                            <div class="uploader-container">
+                                <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
+                            </div>
+                                <!-- <button type="button" class="btn btn-default mb-20" data-role="btnUploader" bb-media-click="show_uploader">Uploader</button> -->
+                            </div>
+                            </div>
+                            <div class="row main-content media-modal-main-content modal_img_container" data-type="main-container" >
+                            <!-- <div class="icon">
                                 <i class="fa fa-folder" aria-hidden="true"></i>
                                 <ul class="list-unstyled list-inline text-center icons">
                                     <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
                                     <li class="text-center"><a href="#" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="img">
                                 <a href="#" >
                                     <img src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
@@ -42,21 +51,12 @@
                                 </ul>
                             </div>
                         </div>
+                        </div>
+                        
 
 
 
-                        <div class="content-upload media-modal-content-upload">
-                            <div class="upload-space">
-                                    <label class="control-label">Upload Image</label>
-                                    <div class="file-loading">
-                                        <input id="item" name="item[]" type="file" multiple>
-                                    </div>
-                                    <input name="folder_id" data-selectmenu="folder_id" type="hidden" value="1">
-
-
-                                </label>
-                                <div id="errorBlock" class="help-block"></div>
-                            </div>
+                        
                         </div>
 
 
@@ -64,8 +64,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="text" class="pull-left file-realtive-url" placeholder="upload file name">
-                    <button type="button" class="btn btn-success upload-btn">Upload</button>
-                    <button type="button" class="btn btn-info open-btn">Open</button>
+                    <button type="button" class="btn btn-success upload-btn" bb-media-click="open_uploader">Upload</button>
+                    <button type="button" class="btn btn-info open-btn" bb-media-click="open_images" data-dismiss="modal">Open</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -73,6 +73,8 @@
         </div>
     </div>
 </div>
+
+
 <script type="template" id="media-modal-folder">
     <div class="icon">
         <i class="fa fa-folder" aria-hidden="true"></i>
@@ -84,6 +86,7 @@
         </ul>
     </div>
 </script>
+
 <!-- <script type="template" id="media-modal-files">
     <div class="img">
         <a href="#" >
@@ -100,7 +103,6 @@
         </ul>
     </div>
 </script> -->
-
 
 
 

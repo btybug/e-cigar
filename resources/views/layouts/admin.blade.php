@@ -44,6 +44,7 @@
         {!! Html::style('public/admin_theme/media/css/style.css') !!}
         {!! Html::style('public/admin_theme/media/css/lightbox.css') !!}
         {!! Html::style('public/admin_theme/fileinput/css/fileinput.min.css') !!}
+        {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
     @endif
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,7 +59,8 @@
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css')}}">
-    @yield('css')
+    @yield('css') 
+
     @stack('style')
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -183,11 +185,11 @@
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
     <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
     <script src="{!! url('public/admin_theme/media/js/jstree.min.js') !!}"></script>
     <script src="{!! url('public/admin_theme/media/js/custom.js?v='.rand(111,999)) !!}"></script>
-    <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
-    <script>
+    <!-- <script>
         $(function(){
        $("#item").fileinput({
            maxFileCount: 5,
@@ -235,7 +237,7 @@
     $(".btn.btn-file>input[type='file']").click();
 });
 
-    </script>
+    </script> -->
 @endif
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {
@@ -264,9 +266,9 @@
     };
 </script>
 
-<script src="{{asset('public/admin_assets/js/custom.js')}}"></script>
 
 @yield('js')
 @stack('javascript')
+<script src="{{asset('public/admin_assets/js/custom.js')}}"></script>
 </body>
 </html>

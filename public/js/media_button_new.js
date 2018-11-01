@@ -585,7 +585,7 @@ function App() {
                 }
             });
         },
-        editImage(obj = {}, cb) {
+        editImageName(obj = {}, cb) {
             shortAjax("/api/api-media/rename-item", obj, res => {
                 if (!res.error) {
                     cb(res);
@@ -768,7 +768,7 @@ function App() {
         save_edited_title(elm, e) {
             let itemId = e.target.getAttribute("data-id");
             let name = document.querySelector(".edit-title-input").value;
-            self.requests.editImage(
+            self.requests.editImageName(
                 {
                     item_id: Number(itemId),
                     item_name: name,
@@ -787,6 +787,7 @@ function App() {
 }
 const app = new App();
 app.init();
+
 $("body").on("click dblclick", `[bb-media-click]`, function(e) {
     let attr = $(this).attr("bb-media-click");
     app.events[attr]($(this), e);
@@ -801,3 +802,5 @@ $("body").on("click", `[data-tabaction]`, function(e) {
         .find(`[data-tabcontent="${id}"]`)
         .addClass("in");
 });
+
+$("body").on("keydown");
