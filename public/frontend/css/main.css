@@ -13342,8 +13342,11 @@ a.text-dark:focus, a.text-dark:hover {
 /*End page juice*/
 
 /*Address page*/
-.nav-link.nav-link--new-address:not(:disabled):not(.disabled).active {
-    color: #111;
-    background-color: #ae8c1e;
-    /*border-color: #ecbc1e;*/
+/*.nav-link.nav-link--new-address:not(:disabled):not(.disabled) {*/
+    /*color: #111;*/
+    /*background-color: #edbf2a;*/
+/*}*/
+
+.nav-link.nav-link--new-address:focus {
+    box-shadow: none;
 }
