@@ -145,10 +145,10 @@ function App() {
                     <button href="#" type="button" role="button" ${
                         countId === 0 ? "disabled" : ""
                     } data-id="${countId -
-                1}" class="popuparrow" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
+                1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
                     
                     <span data-slideshow="title">${data.real_name}</span> 
-                    <button class="popuparrow" href="#" type="button" role="button" ${
+                    <button class="popuparrow go-next-image" href="#" type="button" role="button" ${
                         countId ===
                         document.querySelectorAll(".image-container").length - 1
                             ? "disabled"
@@ -727,13 +727,13 @@ function App() {
         modal_load_image(elm, e) {
             if (!e.target.closest("button").disabled) {
                 let id = e.target.closest("button").getAttribute("data-id");
-                console.log(id);
                 let imageId = document
                     .querySelector(`[data-image="${id}"] [data-id]`)
                     .getAttribute("data-id");
                 self.requests.getImageDetails({ item_id: imageId }, res => {
-                    console.log(res);
-                    e.target.closest(".modal").remove();
+                    document
+                        .querySelectorAll(".adminmodal ")
+                        .forEach(item => item.remove());
                     document.body.innerHTML += self.htmlMaker.fullInfoModal(
                         res,
                         Number(id)
@@ -803,4 +803,25 @@ $("body").on("click", `[data-tabaction]`, function(e) {
         .addClass("in");
 });
 
-$("body").on("keydown");
+// $("body").on("keydown");
+
+document.addEventListener("keydown", function(e) {
+    e.preventDefault();
+    if (document.querySelector("#imageload")) {
+        if (e.which === 39) {
+            let elm = document.querySelector(".go-next-image");
+            if (!elm.disabled) {
+                elm.click();
+            }
+        } else if (e.which === 37) {
+            let elm = document.querySelector(".go-prev-image");
+            if (!elm.disabled) {
+                elm.click();
+            }
+        } else if (e.which === 27) {
+            document
+                .querySelectorAll(".adminmodal ")
+                .forEach(item => item.remove());
+        }
+    }
+});
