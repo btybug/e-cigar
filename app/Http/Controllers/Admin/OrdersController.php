@@ -23,7 +23,12 @@ class OrdersController extends Controller
     }
     public function getManage($id=null)
     {
-        return $this->view('manage');
+        $order=Orders::where('id',$id)
+            ->with('shippingAddress')
+            ->with('billingAddress')
+            ->with('history')
+            ->with('user')->first();
+        return $this->view('manage',compact('order'));
     }
 
     public function getNew()

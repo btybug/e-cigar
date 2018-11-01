@@ -42,12 +42,12 @@ class CashPaymentController extends Controller
                 'user_id' => \Auth::id(),
                 'amount' => Cart::getTotal(),
                 'billing_addresses_id' => $billingId,
-                'status' => 'ordered',
                 'shipping_method' => $shipping->getAttributes()->courier->name,
                 'payment_method' => 'cash',
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
             ]);
+            $order->history->create();
             $shippingAddress = $shippingAddress->toArray();
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);

@@ -9,47 +9,54 @@
             <div class="col-md-6">
                 <div class="pull-right">
                     <a class="btn btn-info" href="{!! route('admin_orders_new') !!}">Add new</a>
-                    <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
-                    <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="Print Shipping List"><i class="fa fa-truck"></i></a>
-                    <a href="https://demo.opencart.com/admin/index.php?route=sale/order&amp;user_token=qrdym7jfe8IAJBo84RMx4PEZ9O2lQxml" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
+                    <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
+                       data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
+                    <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
+                       data-original-title="Print Shipping List"><i class="fa fa-truck"></i></a>
+                    <a href="https://demo.opencart.com/admin/index.php?route=sale/order&amp;user_token=qrdym7jfe8IAJBo84RMx4PEZ9O2lQxml"
+                       data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i
+                                class="fa fa-reply"></i></a>
                 </div>
             </div>
         </div>
     </div>
 
     {{--<div class="row">--}}
-        {{--<div class="col-xs-12">--}}
-            {{--<div class="col-md-6 pull-left"><h2>Orders</h2></div>--}}
-            {{--<div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>--}}
-        {{--</div>--}}
-        {{--<div class="col-xs-12">--}}
-            {{--<table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">--}}
-                {{--<thead>--}}
-                {{--<tr>--}}
-                    {{--<th>#</th>--}}
-                    {{--<th>Title</th>--}}
-                    {{--<th>Long Description</th>--}}
-                    {{--<th>Short Description</th>--}}
-                    {{--<th>Image</th>--}}
-                    {{--<th>Added/Last Modified Date</th>--}}
-                    {{--<th>Actions</th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
-            {{--</table>--}}
-        {{--</div>--}}
+    {{--<div class="col-xs-12">--}}
+    {{--<div class="col-md-6 pull-left"><h2>Orders</h2></div>--}}
+    {{--<div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>--}}
+    {{--</div>--}}
+    {{--<div class="col-xs-12">--}}
+    {{--<table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">--}}
+    {{--<thead>--}}
+    {{--<tr>--}}
+    {{--<th>#</th>--}}
+    {{--<th>Title</th>--}}
+    {{--<th>Long Description</th>--}}
+    {{--<th>Short Description</th>--}}
+    {{--<th>Image</th>--}}
+    {{--<th>Added/Last Modified Date</th>--}}
+    {{--<th>Actions</th>--}}
+    {{--</tr>--}}
+    {{--</thead>--}}
+    {{--</table>--}}
+    {{--</div>--}}
     {{--</div>--}}
 
     <div class="row order-main-cnt">
         <div class="col-md-8">
             <ul class="nav nav-tabs" role="tablist">
                 <li class="nav-item active">
-                    <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab" aria-controls="general" aria-selected="true" aria-expanded="true">Order Details</a>
+                    <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Order Details</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="seeOrder-tab" data-toggle="tab" href="#seeOrder" role="tab" aria-controls="seeOrder" aria-selected="false">See Order</a>
+                    <a class="nav-link" id="seeOrder-tab" data-toggle="tab" href="#seeOrder" role="tab"
+                       aria-controls="seeOrder" aria-selected="false">See Order</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="editOrder-tab" data-toggle="tab" href="#editOrder" role="tab" aria-controls="editOrder" aria-selected="false">Edit Order</a>
+                    <a class="nav-link" id="editOrder-tab" data-toggle="tab" href="#editOrder" role="tab"
+                       aria-controls="editOrder" aria-selected="false">Edit Order</a>
                 </li>
             </ul>
             <div class="tab-content tab-content-store-settings">
@@ -63,20 +70,36 @@
                                 <table class="table">
                                     <tbody>
                                     <tr>
-                                        <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Store"><i class="fa fa-shopping-cart fa-fw"></i></button></td>
+                                        <td style="width: 1%;">
+                                            <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                    data-original-title="Store"><i
+                                                        class="fa fa-shopping-cart fa-fw"></i></button>
+                                        </td>
                                         <td><a href="https://demo.opencart.com/" target="_blank">Your Store</a></td>
                                     </tr>
                                     <tr>
-                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Date Added"><i class="fa fa-calendar fa-fw"></i></button></td>
-                                        <td>17/10/2018</td>
+                                        <td>
+                                            <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                    data-original-title="Date Added"><i
+                                                        class="fa fa-calendar fa-fw"></i></button>
+                                        </td>
+                                        <td>{!! BBgetDateFormat($order->created_at) !!}</td>
                                     </tr>
                                     <tr>
-                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Payment Method"><i class="fa fa-credit-card fa-fw"></i></button></td>
-                                        <td>Cash On Delivery</td>
+                                        <td>
+                                            <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                    data-original-title="Payment Method"><i
+                                                        class="fa fa-credit-card fa-fw"></i></button>
+                                        </td>
+                                        <td>{!! $order->payment_method !!}</td>
                                     </tr>
                                     <tr>
-                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Shipping Method"><i class="fa fa-truck fa-fw"></i></button></td>
-                                        <td>Flat Shipping Rate</td>
+                                        <td>
+                                            <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                    data-original-title="Shipping Method"><i
+                                                        class="fa fa-truck fa-fw"></i></button>
+                                        </td>
+                                        <td>{!! $order->shipping_method !!}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -87,25 +110,48 @@
                                 <div class="panel-heading">
                                     <h3 class="panel-title"><i class="fa fa-user"></i> Customer Details</h3>
                                 </div>
-                                <table class="table">
-                                    <tbody><tr>
-                                        <td style="width: 1%;"><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer"><i class="fa fa-user fa-fw"></i></button></td>
-                                        <td> sddc sdvdsvc
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Customer Group"><i class="fa fa-group fa-fw"></i></button></td>
-                                        <td>Default</td>
-                                    </tr>
-                                    <tr>
-                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="E-Mail"><i class="fa fa-envelope-o fa-fw"></i></button></td>
-                                        <td><a href="mailto:focusbenj@gmail.com">focusbenj@gmail.com</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><button data-toggle="tooltip" title="" class="btn btn-info btn-xs" data-original-title="Telephone"><i class="fa fa-phone fa-fw"></i></button></td>
-                                        <td>08069386824</td>
-                                    </tr>
-                                    </tbody></table>
+                                @if($order->user)
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td style="width: 1%;">
+                                                <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                        data-original-title="Customer"><i class="fa fa-user fa-fw"></i>
+                                                </button>
+                                            </td>
+                                            <td>{!! $order->user->name.' '.$order->user->last_name !!}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                        data-original-title="Customer Group"><i
+                                                            class="fa fa-group fa-fw"></i></button>
+                                            </td>
+                                            <td>Default</td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                        data-original-title="E-Mail"><i
+                                                            class="fa fa-envelope-o fa-fw"></i>
+                                                </button>
+                                            </td>
+                                            <td><a href="{!! $order->user->email !!}">{!! $order->user->email !!}</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <button data-toggle="tooltip" title="" class="btn btn-info btn-xs"
+                                                        data-original-title="Telephone"><i
+                                                            class="fa fa-phone fa-fw"></i>
+                                                </button>
+                                            </td>
+                                            <td>{!! $order->user->phone !!}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -113,29 +159,43 @@
                                 <ul class="nav nav-tabs nav-addresses" role="tablist">
                                     <li class="nav-item active">
                                         <div class="panel-heading">
-                                            <a class="nav-link" id="shippingAddress-tab" data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress" aria-selected="true" aria-expanded="true">
-                                                <span class="panel-title"><i class="fa fa-user"></i>Shipping address</span>
+                                            <a class="nav-link" id="shippingAddress-tab" data-toggle="tab"
+                                               href="#shippingAddress" role="tab" aria-controls="shippingAddress"
+                                               aria-selected="true" aria-expanded="true">
+                                                <span class="panel-title"><i
+                                                            class="fa fa-user"></i>Shipping address</span>
                                             </a>
                                         </div>
                                     </li>
                                     <li class="nav-item active">
                                         <div class="panel-heading">
-                                            <a class="nav-link" id="billingAddress-tab" data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress" aria-selected="true" aria-expanded="true">
-                                                <span class="panel-title"><i class="fa fa-user"></i>Billing address</span>
+                                            <a class="nav-link" id="billingAddress-tab" data-toggle="tab"
+                                               href="#billingAddress" role="tab" aria-controls="billingAddress"
+                                               aria-selected="true" aria-expanded="true">
+                                                <span class="panel-title"><i
+                                                            class="fa fa-user"></i>Billing address</span>
                                             </a>
                                         </div>
                                     </li>
                                 </ul>
                                 <div class="tab-content tab-content--addresses">
-                                    <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel" aria-labelledby="shippingAddress-tab">
-                                        Shipping address
-                                        ...
-                                        ....
+                                    <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel"
+                                         aria-labelledby="shippingAddress-tab">
+                                        Country:{!! $order->shippingAddress->country !!}<br>
+                                        Region:{!! $order->shippingAddress->region !!}<br>
+                                        City:{!! $order->shippingAddress->city !!}<br>
+                                        First line:{!! $order->shippingAddress->first_line_address !!}<br>
+                                        Second line:{!! $order->shippingAddress->second_line_address !!}
+                                        Post code:{!! $order->shippingAddress->post_code !!}
                                     </div>
-                                    <div class="tab-pane fade" id="billingAddress" role="tabpanel" aria-labelledby="billingAddress-tab">
-                                        Billing address
-                                        ....
-                                        .....
+                                    <div class="tab-pane fade" id="billingAddress" role="tabpanel"
+                                         aria-labelledby="billingAddress-tab">
+                                        Country:{!! $order->billingAddress->country !!}<br>
+                                        Region:{!! $order->billingAddress->region !!}<br>
+                                        City:{!! $order->billingAddress->city !!}<br>
+                                        First line:{!! $order->billingAddress->first_line_address !!}<br>
+                                        Second line:{!! $order->billingAddress->second_line_address !!}
+                                        Post code:{!! $order->billingAddress->post_code !!}
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +215,11 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class="text-left"><a href="https://demo.opencart.com/admin/index.php?route=catalog/product/edit&amp;user_token=JPnmap7USFKyzfmD7yYORAxSA4BCoOZx&amp;product_id=47">HP LP3065</a> <br>
-                                        &nbsp;<small> - Delivery Date: 2011-04-22</small> </td>
+                                    <td class="text-left"><a
+                                                href="https://demo.opencart.com/admin/index.php?route=catalog/product/edit&amp;user_token=JPnmap7USFKyzfmD7yYORAxSA4BCoOZx&amp;product_id=47">HP
+                                            LP3065</a> <br>
+                                        &nbsp;<small> - Delivery Date: 2011-04-22</small>
+                                    </td>
                                     <td class="text-left">Product 21</td>
                                     <td class="text-right">1</td>
                                     <td class="text-right">$100.00</td>
@@ -180,10 +243,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane tabe-pane--see-order fade" id="seeOrder" role="tabpanel" aria-labelledby="seeOrder-tab">
+                <div class="tab-pane tabe-pane--see-order fade" id="seeOrder" role="tabpanel"
+                     aria-labelledby="seeOrder-tab">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-info-circle"></i> Order (#3875)</h3>
+                            <h3 class="panel-title"><i class="fa fa-info-circle"></i> Order (#{!! $order->id !!})</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-bordered table--see-order">
@@ -195,34 +259,56 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class="text-left">sddc sdvdsvc<br>22esdwd<br>dcac 12134<br>Lagos<br>Nigeria</td>
-                                    <td class="text-left">sddc sdvdsvc<br>22esdwd<br>dcac 12134<br>Lagos<br>Nigeria</td>
+                                    <td class="text-left">
+                                        Country:{!! $order->billingAddress->country !!}<br>
+                                        Region:{!! $order->billingAddress->region !!}<br>
+                                        City:{!! $order->billingAddress->city !!}<br>
+                                        First line:{!! $order->billingAddress->first_line_address !!}<br>
+                                        Second line:{!! $order->billingAddress->second_line_address !!}
+                                        Post code:{!! $order->billingAddress->post_code !!}
+                                    </td>
+                                    <td class="text-left">
+                                        Country:{!! $order->shippingAddress->country !!}<br>
+                                        Region:{!! $order->shippingAddress->region !!}<br>
+                                        City:{!! $order->shippingAddress->city !!}<br>
+                                        First line:{!! $order->shippingAddress->first_line_address !!}<br>
+                                        Second line:{!! $order->shippingAddress->second_line_address !!}
+                                        Post code:{!! $order->shippingAddress->post_code !!}
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane tabe-pane--edit-order fade" id="editOrder" role="tabpanel" aria-labelledby="editOrder-tab">
+                <div class="tab-pane tabe-pane--edit-order fade" id="editOrder" role="tabpanel"
+                     aria-labelledby="editOrder-tab">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item active">
-                            <a class="nav-link" id="customerDtls-tab" data-toggle="tab" href="#customerDtls" role="tab" aria-controls="customerDtls" aria-selected="true" aria-expanded="true">1. Customer Details</a>
+                            <a class="nav-link" id="customerDtls-tab" data-toggle="tab" href="#customerDtls" role="tab"
+                               aria-controls="customerDtls" aria-selected="true" aria-expanded="true">1. Customer
+                                Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab" aria-controls="products" aria-selected="false">2. Products</a>
+                            <a class="nav-link" id="products-tab" data-toggle="tab" href="#products" role="tab"
+                               aria-controls="products" aria-selected="false">2. Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="paymentDtls-tab" data-toggle="tab" href="#paymentDtls" role="tab" aria-controls="paymentDtls" aria-selected="false">3. Payment Details</a>
+                            <a class="nav-link" id="paymentDtls-tab" data-toggle="tab" href="#paymentDtls" role="tab"
+                               aria-controls="paymentDtls" aria-selected="false">3. Payment Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="shippingDtls-tab" data-toggle="tab" href="#shippingDtls" role="tab" aria-controls="shippingDtls" aria-selected="false">4. Shipping Details</a>
+                            <a class="nav-link" id="shippingDtls-tab" data-toggle="tab" href="#shippingDtls" role="tab"
+                               aria-controls="shippingDtls" aria-selected="false">4. Shipping Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="totals-tab" data-toggle="tab" href="#totals" role="tab" aria-controls="totals" aria-selected="false">5. Totals</a>
+                            <a class="nav-link" id="totals-tab" data-toggle="tab" href="#totals" role="tab"
+                               aria-controls="totals" aria-selected="false">5. Totals</a>
                         </li>
                     </ul>
                     <div class="tab-content tab-content-store-settings">
-                        <div class="tab-pane fade active in" id="customerDtls" role="tabpanel" aria-labelledby="customerDtls-tab">
+                        <div class="tab-pane fade active in" id="customerDtls" role="tabpanel"
+                             aria-labelledby="customerDtls-tab">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-store">Store</label>
                                 <div class="col-sm-10">
@@ -244,7 +330,9 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-customer">Customer</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="customer" value="" placeholder="Customer" id="input-customer" class="form-control" autocomplete="off"><ul class="dropdown-menu"></ul>
+                                    <input type="text" name="customer" value="" placeholder="Customer"
+                                           id="input-customer" class="form-control" autocomplete="off">
+                                    <ul class="dropdown-menu"></ul>
                                     <input type="hidden" name="customer_id" value="0">
                                 </div>
                             </div>
@@ -259,29 +347,35 @@
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-firstname">First Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="firstname" value="sddc" id="input-firstname" class="form-control">
+                                    <input type="text" name="firstname" value="sddc" id="input-firstname"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-lastname">Last Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="lastname" value="sdvdsvc" id="input-lastname" class="form-control">
+                                    <input type="text" name="lastname" value="sdvdsvc" id="input-lastname"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-email">E-Mail</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="email" value="focusbenj@gmail.com" id="input-email" class="form-control">
+                                    <input type="text" name="email" value="focusbenj@gmail.com" id="input-email"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-telephone">Telephone</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="telephone" value="08069386824" id="input-telephone" class="form-control">
+                                    <input type="text" name="telephone" value="08069386824" id="input-telephone"
+                                           class="form-control">
                                 </div>
                             </div>
                             <div class="text-right">
-                                <button type="button" id="button-customer" data-loading-text="Loading..." class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue</button>
+                                <button type="button" id="button-customer" data-loading-text="Loading..."
+                                        class="btn btn-primary"><i class="fa fa-arrow-right"></i> Continue
+                                </button>
                             </div>
                         </div>
                         <div class="tab-pane fade" id="products" role="tabpanel" aria-labelledby="products-tab">
@@ -367,118 +461,121 @@
                     <h3 class="panel-title text-center">Order History</h3>
                 </div>
                 <div class="order-notes">
-                    <div class="order-notes_message order-notes_message-status-1">
+                    @foreach($order->history as $history)
+                    <div class="order-notes_message {!! $history->color !!}">
                         <p>
                             on <span class="underlined">11/11/2011</span>
                             at <span class="underlined">11:11</span>
                         </p>
+                        <p>
+                            Status <span class="font-bold">{!! $history->status !!}</span>
+                        </p>
+                        @if($history->admin)
+                        <p>
+                            order status changed by <span class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>
+                        </p>
+                            @endif
+                    </div>
+                    @endforeach
+                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                        {{--<div>--}}
+                            {{--<p>--}}
+                                {{--on <span class="underlined">11/11/2011</span>--}}
+                                {{--at <span class="underlined">11:11</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
+                            {{--<p>--}}
+                                {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
+                                {{--admin massage--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                        {{--<div>--}}
+                            {{--<p>--}}
+                                {{--on <span class="underlined">11/11/2011</span>--}}
+                                {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
+                            {{--<p>--}}
+                                {{--#094039404--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="order-notes_message order-notes_message-status-1">--}}
+                        {{--<div>--}}
+                            {{--<p>--}}
+                                {{--on <span class="underlined">11/11/2011</span>--}}
+                                {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                                {{--Order <span class="text-bold">submitted </span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                                {{--Status <span class="text-bold">processing</span>--}}
+                            {{--</p>--}}
 
-                        <p>
-                            Order <span class="text-bold">submitted </span>
-                        </p>
-                        <p>
-                            Status <span class="font-bold">processing</span>
-                        </p>
-                    </div>
-                    <div class="order-notes_message order-notes_message-status-2">
-                        <div>
-                            <p>
-                                on <span class="underlined">11/11/2011</span>
-                                at <span class="underlined">11:11</span>
-                            </p>
-                            <p>order status changed to <span class="font-bold"> processing </span></p>
-                            <p>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                admin massage
-                            </p>
-                        </div>
-                    </div>
-                    <div class="order-notes_message order-notes_message-status-2">
-                            <div>
-                                <p>
-                                    on <span class="underlined">11/11/2011</span>
-                                    at <span class="underlined">11:15</span>
-                                </p>
-                                <p>order status changed to <span class="text-bold">pending </span></p>
-                                <p>
-                                    #094039404
-                                </p>
-                            </div>
-                        </div>
-                    <div class="order-notes_message order-notes_message-status-1">
-                            <div>
-                                <p>
-                                    on <span class="underlined">11/11/2011</span>
-                                    at <span class="underlined">11:15</span>
-                                </p>
-                                <p>
-                                    Order <span class="text-bold">submitted </span>
-                                </p>
-                                <p>
-                                    Status <span class="text-bold">processing</span>
-                                </p>
+                            {{--<p>--}}
+                                {{--added by <span class="text-bold">abokamal </span>--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="order-notes_message order-notes_message-status-1">--}}
+                        {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:11</span>--}}
+                        {{--</p>--}}
 
-                                <p>
-                                    added by <span class="text-bold">abokamal </span>
-                                </p>
-                            </div>
-                        </div>
-                    <div class="order-notes_message order-notes_message-status-1">
-                        <p>
-                            on <span class="underlined">11/11/2011</span>
-                            at <span class="underlined">11:11</span>
-                        </p>
+                        {{--<p>--}}
+                            {{--Order <span class="text-bold">submitted </span>--}}
+                        {{--</p>--}}
+                        {{--<p>--}}
+                            {{--Status <span class="font-bold">processing</span>--}}
+                        {{--</p>--}}
+                    {{--</div>--}}
+                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                        {{--<div>--}}
+                            {{--<p>--}}
+                                {{--on <span class="underlined">11/11/2011</span>--}}
+                                {{--at <span class="underlined">11:11</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
+                            {{--<p>--}}
+                                {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
+                                {{--admin massage--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                        {{--<div>--}}
+                            {{--<p>--}}
+                                {{--on <span class="underlined">11/11/2011</span>--}}
+                                {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
+                            {{--<p>--}}
+                                {{--#094039404--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="order-notes_message order-notes_message-status-1">--}}
+                        {{--<div>--}}
+                            {{--<p>--}}
+                                {{--on <span class="underlined">11/11/2011</span>--}}
+                                {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                                {{--Order <span class="text-bold">submitted </span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                                {{--Status <span class="text-bold">processing</span>--}}
+                            {{--</p>--}}
 
-                        <p>
-                            Order <span class="text-bold">submitted </span>
-                        </p>
-                        <p>
-                            Status <span class="font-bold">processing</span>
-                        </p>
-                    </div>
-                    <div class="order-notes_message order-notes_message-status-2">
-                        <div>
-                            <p>
-                                on <span class="underlined">11/11/2011</span>
-                                at <span class="underlined">11:11</span>
-                            </p>
-                            <p>order status changed to <span class="font-bold"> processing </span></p>
-                            <p>
-                                <i class="fa fa-quote-left" aria-hidden="true"></i>
-                                admin massage
-                            </p>
-                        </div>
-                    </div>
-                    <div class="order-notes_message order-notes_message-status-2">
-                        <div>
-                            <p>
-                                on <span class="underlined">11/11/2011</span>
-                                at <span class="underlined">11:15</span>
-                            </p>
-                            <p>order status changed to <span class="text-bold">pending </span></p>
-                            <p>
-                                #094039404
-                            </p>
-                        </div>
-                    </div>
-                    <div class="order-notes_message order-notes_message-status-1">
-                        <div>
-                            <p>
-                                on <span class="underlined">11/11/2011</span>
-                                at <span class="underlined">11:15</span>
-                            </p>
-                            <p>
-                                Order <span class="text-bold">submitted </span>
-                            </p>
-                            <p>
-                                Status <span class="text-bold">processing</span>
-                            </p>
-
-                            <p>
-                                added by <span class="text-bold">abokamal </span>
-                            </p>
-                        </div>
-                    </div>
+                            {{--<p>--}}
+                                {{--added by <span class="text-bold">abokamal </span>--}}
+                            {{--</p>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
 
             </div>

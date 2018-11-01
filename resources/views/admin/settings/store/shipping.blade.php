@@ -93,7 +93,8 @@
                     {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
-                ]
+                ],
+                order: [ [0, 'desc'] ]
             });
         });
 
