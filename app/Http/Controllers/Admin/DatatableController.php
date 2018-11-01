@@ -13,6 +13,7 @@ use App\Models\LogActivities;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
+use App\Models\Orders;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Regions;
@@ -260,6 +261,19 @@ class DatatableController extends Controller
     public function getUserActivity($id)
     {
         return Datatables::of(LogActivities::where('user_id', $id))
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getAllOrders($id)
+    {
+        return Datatables::of(Orders::leftJoin('orders_addresses','orders.id','=','orders_addresses.order_id')
+        ->select('orders.*','orders_addresses.country','orders_addresses.region','orders_addresses.city'))
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
             })

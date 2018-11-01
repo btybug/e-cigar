@@ -19,6 +19,10 @@ class OrdersController extends Controller
     {
         return $this->view('index');
     }
+    public function getManage($id=null)
+    {
+        return $this->view('manage');
+    }
 
     public function getNew()
     {

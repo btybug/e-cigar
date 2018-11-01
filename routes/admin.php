@@ -134,6 +134,7 @@ Route::group(['prefix' => 'blog'], function () {
 
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/', 'Admin\OrdersController@index')->name('admin_orders');
+    Route::get('/manage/{id?}', 'Admin\OrdersController@getManage')->name('admin_orders_manage');
     Route::get('/new', 'Admin\OrdersController@getNew')->name('admin_orders_new');
 });
 

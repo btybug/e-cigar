@@ -21,6 +21,8 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/stock/get-all','Admin\DatatableController@getAllStocks')->name('datatable_all_stocks');
     Route::get('/settings/get-all-geo-zones','Admin\DatatableController@getAllGeoZones')->name('datatable_all_geo_zones');
     Route::get('/settings/get-user-activity/{id}','Admin\DatatableController@getUserActivity')->name('datatable_user_activity');
+
+    Route::get('/settings/get-all-orders','Admin\DatatableController@getAllOrders')->name('datatable_all_orders');
 });
 
 
