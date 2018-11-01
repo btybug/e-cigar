@@ -9,6 +9,7 @@
 namespace App\Models;
 
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
@@ -19,5 +20,10 @@ class Orders extends Model
     public function shippingAddress()
     {
         return $this->hasOne(OrderAddresses::class,'order_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 }

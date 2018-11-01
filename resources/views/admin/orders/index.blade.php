@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="col-xs-12">
-            <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+            <table id="orders-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -35,21 +35,20 @@
 @section('js')
     <script>
         $(function () {
-            $('#users-table').DataTable({
+            $('#orders-table').DataTable({
                 ajax: "{!! route('datatable_all_orders') !!}",
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'user', name: 'user'},
+                    {data: 'amount', name: 'amount'},
                     {data: 'country', name: 'country'},
                     {data: 'region', name: 'region'},
                     {data: 'city', name: 'city'},
-                    {data: 'amount', name: 'amount'},
                     {data: 'status', name: 'status'},
-                    {data: 'membership', name: 'membership'},
                     {data: 'shipping_method', name: 'shipping_method'},
                     {data: 'currency', name: 'currency'},
-                    {data: 'created_at', name: 'updated_at'},
-                    {data: 'status', name: 'status'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
                 ]
             });

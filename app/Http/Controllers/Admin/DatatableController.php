@@ -270,16 +270,21 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
-    public function getAllOrders($id)
+    public function getAllOrders()
     {
-        return Datatables::of(Orders::leftJoin('orders_addresses','orders.id','=','orders_addresses.order_id')
-        ->select('orders.*','orders_addresses.country','orders_addresses.region','orders_addresses.city'))
+        return Datatables::of(
+            Orders::leftJoin('orders_addresses','orders.id','=','orders_addresses.order_id')
+        ->select('orders.*','orders_addresses.country','orders_addresses.region','orders_addresses.city')
+        )
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
+            })->editColumn('updated_at', function ($attr) {
+                return BBgetDateFormat($attr->updated_at);
+            })->editColumn('user', function ($attr) {
+                return $attr->user->name.' '.$attr->user->last_name;
             })
             ->addColumn('actions', function ($post) {
-                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+                return "<a class='badge btn-warning' href='".route('admin_orders_manage',$post->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }

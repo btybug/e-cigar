@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Orders;
 
 class OrdersController extends Controller
 {
@@ -17,6 +18,7 @@ class OrdersController extends Controller
 
     public function index()
     {
+
         return $this->view('index');
     }
     public function getManage($id=null)
