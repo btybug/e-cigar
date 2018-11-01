@@ -26,7 +26,9 @@ class AppServiceProvider extends ServiceProvider
         \Blade::directive('endok', function ($expression) {
             return '<?php endif; ?>';
         });
-
+        \Blade::directive('convert', function ($money) {
+            return "<?php echo number_format($money, 2); ?>";
+        });
 
     }
 

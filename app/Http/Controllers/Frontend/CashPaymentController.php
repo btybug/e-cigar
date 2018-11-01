@@ -34,8 +34,7 @@ class CashPaymentController extends Controller
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-
-        \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress) {
+      \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order = Orders::create([
@@ -47,7 +46,7 @@ class CashPaymentController extends Controller
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
             ]);
-            $order->history->create();
+            $order->history()->create([]);
             $shippingAddress = $shippingAddress->toArray();
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);
@@ -62,6 +61,7 @@ class CashPaymentController extends Controller
 
                 OrderItem::create([
                     'order_id' => $order->id,
+                    'name' => $item->attributes->variation->stock->name,
                     'sku' => $item->name,
                     'variation_id' => $variation_id,
                     'price' => $item->price,
@@ -72,7 +72,6 @@ class CashPaymentController extends Controller
                 ]);
             }
         });
-
         return \Response::json(['error' => false,'url' => '']);
     }
 }

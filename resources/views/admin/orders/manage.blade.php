@@ -207,35 +207,36 @@
                                 <thead>
                                 <tr>
                                     <td class="text-left">Product</td>
-                                    <td class="text-left">Model</td>
+                                    <td class="text-left">SKU</td>
                                     <td class="text-right">Quantity</td>
                                     <td class="text-right">Unit Price</td>
                                     <td class="text-right">Total</td>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($order->items as $item)
                                 <tr>
                                     <td class="text-left"><a
-                                                href="https://demo.opencart.com/admin/index.php?route=catalog/product/edit&amp;user_token=JPnmap7USFKyzfmD7yYORAxSA4BCoOZx&amp;product_id=47">HP
-                                            LP3065</a> <br>
+                                                href="">{!! $item->name !!}</a> <br>
                                         &nbsp;<small> - Delivery Date: 2011-04-22</small>
                                     </td>
-                                    <td class="text-left">Product 21</td>
-                                    <td class="text-right">1</td>
-                                    <td class="text-right">$100.00</td>
-                                    <td class="text-right">$100.00</td>
+                                    <td class="text-left">{!! $item->sku !!}</td>
+                                    <td class="text-right">{!! $item->qty !!}</td>
+                                    <td class="text-right">$@convert($item->amount)</td>
+                                    <td class="text-right">$@convert($item->amount*$item->qty)</td>
                                 </tr>
+                                @endforeach
                                 <tr>
                                     <td colspan="4" class="text-right">Sub-Total</td>
                                     <td class="text-right">$100.00</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right">Flat Shipping Rate</td>
-                                    <td class="text-right">$5.00</td>
+                                    <td class="text-right">$@convert($item->shipping_price)</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right">Total</td>
-                                    <td class="text-right">$105.00</td>
+                                    <td class="text-right">$@convert($order->amount)</td>
                                 </tr>
                                 </tbody>
                             </table>
