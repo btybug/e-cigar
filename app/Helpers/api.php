@@ -288,6 +288,13 @@ function getRegionByZone($country)
     return ($country) ? [$country->region->id => $country->region->name] : [];
 }
 
+function getCountryByZone($country)
+{
+    if (!$country) return null;
+    $country = \App\Models\ZoneCountries::find($country);
+    return ($country) ? $country : null;
+}
+
 function stripe_key()
 {
     $settings = new \App\Models\Settings();

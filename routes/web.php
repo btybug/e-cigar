@@ -93,6 +93,9 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::get('/favourites', 'Frontend\UserController@getFavourites')->name('my_account_favourites');
     Route::get('/address', 'Frontend\UserController@getAddress')->name('my_account_address');
     Route::post('/address', 'Frontend\UserController@postAddress')->name('post_my_account_address');
+    Route::post('/address-book-form', 'Frontend\UserController@postAddressBookForm')->name('post_my_account_address_book_form');
+    Route::post('/save-address-book', 'Frontend\UserController@postAddressBookSave')->name('post_my_account_address_book_save');
+    Route::post('/select-address-book', 'Frontend\UserController@postAddressBookSelect')->name('post_my_account_address_book_select');
     Route::get('/orders', 'Frontend\UserController@getOrders')->name('my_account_orders');
     Route::get('/tickets', 'Frontend\UserController@getTickets')->name('my_account_tickets');
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
