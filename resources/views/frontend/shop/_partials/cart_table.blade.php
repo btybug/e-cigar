@@ -125,11 +125,7 @@
                         <tr>
                             <td align="left"><span>Sub Total</span></td>
                             <td align="right" id="subtotal">
-                                @if(Auth::check())
-                                    ${!! \Cart::session(Auth::id())->getSubTotal() !!}
-                                @else
-                                    ${!! \Cart::getSubTotal() !!}
-                                @endif
+                                ${!! \Cart::getSubTotal() !!}
                             </td>
                         </tr>
                         <tr>
@@ -147,11 +143,7 @@
                         <tr>
                             <td class="last" align="left"><span>Total</span></td>
                             <td class="last" align="right" id="total_price">
-                                @if(Auth::check())
-                                    ${!! \Cart::session(Auth::id())->getTotal() !!}
-                                @else
-                                    ${!! \Cart::getTotal() !!}
-                                @endif
+                                ${!! \Cart::getTotal() !!}
                             </td>
                         </tr>
                         </tbody>

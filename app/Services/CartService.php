@@ -11,30 +11,21 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 class CartService
 {
     public function getCartItems(){
-        if(\Auth::check()){
-            $cartCollection = Cart::session(\Auth::id())->getContent();
-            $isEmpty = Cart::session(\Auth::id())->isEmpty();
-        }else{
-            $cartCollection = Cart::getContent();
-            $isEmpty = Cart::isEmpty();
-        }
-
+        $cartCollection = Cart::getContent();
         $items = [];
-        if(! $isEmpty){
+        if(! Cart::isEmpty()){
             foreach($cartCollection as $key => $value){
                 $items[$value->name][$key] = $value;
             }
+        }else{
+
         }
 
         return $items;
     }
 
     public function getCount() {
-        if(\Auth::check()){
-            $cartCollection = Cart::session(\Auth::id())->getContent();
-        }else{
-            $cartCollection = Cart::getContent();
-        }
+        $cartCollection = Cart::getContent();
         return $cartCollection->count();
     }
 }

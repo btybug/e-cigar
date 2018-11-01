@@ -239,30 +239,28 @@
         </tr>
         </thead>
         <tbody>
-        @if($geoZone && count($geoZone->deliveries))
-            @foreach($geoZone->deliveries as $delivery)
-                <tr>
-                    <td>{!! $delivery->min !!} To {!! $delivery->max !!}</td>
-                    <td colspan="3"></td>
-                </tr>
-                @if(count($delivery->options))
-                    @foreach($delivery->options as $option)
-                        <tr>
-                            <td></td>
-                            <td>
-                                <input data-delivery="{{ $delivery->id }}" type="radio" {!! ($shipping && $shipping->getAttributes()->id == $option->id) ? 'checked' : "" !!} name="courier_change" value="{!! $option->id !!}" class="select-shipping-method" />
-                                {!! $option->courier->name !!}
-                            </td>
-                            <td>
-                                {!! $option->cost !!}
-                            </td>
-                            <td>
-                                {!! $option->time !!}
-                            </td>
-                        </tr>
-                    @endforeach
-                @endif
-            @endforeach
+        @if($delivery)
+            <tr>
+                <td>{!! $delivery->min !!} To {!! $delivery->max !!}</td>
+                <td colspan="3"></td>
+            </tr>
+            @if(count($delivery->options))
+                @foreach($delivery->options as $option)
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input data-delivery="{{ $delivery->id }}" type="radio" {!! ($shipping && $shipping->getAttributes()->id == $option->id) ? 'checked' : "" !!} name="courier_change" value="{!! $option->id !!}" class="select-shipping-method" />
+                            {!! $option->courier->name !!}
+                        </td>
+                        <td>
+                            {!! $option->cost !!}
+                        </td>
+                        <td>
+                            {!! $option->time !!}
+                        </td>
+                    </tr>
+                @endforeach
+            @endif
         @endif
         </tbody>
     </table>
