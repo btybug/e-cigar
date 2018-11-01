@@ -199,88 +199,261 @@
                         <div class="panel panel-default">
 
                             <div class="panel-body row">
+                                {{--Tab links--}}
                                 <div class="col-md-3">
-                                    <div class="btn-group-vertical">
-                                        <button type="button" class="btn btn-secondary">1</button>
-                                        <button type="button" class="btn btn-secondary">2</button>
-                                        <button type="button" class="btn btn-secondary">2</button>
-                                        <button type="button" class="btn btn-secondary">2</button>
-                                        <button type="button" class="btn btn-secondary">2</button>
+                                    <ul class="nav nav-pills nav-fill btn-group-vertical" role="tablist">
+                                        <li>
+                                            <a class="btn btn-secondary nav-link nav-link--new-address active" id="address1-tab" data-toggle="tab" href="#address-1" role="tab" aria-controls="address-1" aria-selected="true" aria-expanded="true">1</a>
+                                            <a class="btn btn-secondary nav-link nav-link--new-address" id="address2-tab" data-toggle="tab" href="#address-2" role="tab" aria-controls="address-2">2</a>
+
+                                        </li>
+                                    </ul>
+
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-success add-new" data-toggle="modal" data-target="#newAddressModal">+ Add New</button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog" aria-labelledby="newAddressModal" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Add New Address</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form class="form-horizontal">
+
+                                                    <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">Name</label>
+                                                                    <div class="col-sm-8">
+                                                                        <div class="row">
+                                                                            <div class="col-sm-6">
+                                                                                {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                                            </div>
+                                                                            <div class="col-sm-6">
+                                                                                {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">Company name</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input id="text" name="text" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input id="text" name="text" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input id="text" name="text" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">City</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input id="text" name="text" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">Country</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input id="text" name="text" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="text" class="control-label col-sm-4">Post Code</label>
+                                                                    <div class="col-sm-8">
+                                                                        <input id="text" name="text" type="text" class="form-control">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary" data-dismiss="modal">Save Address</button>
+                                                        <button type="button" class="btn btn-secondary">Discard</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <button type="button" class="btn btn-success add-new">+Add New</button>
                                 </div>
+                                {{--End Tab links--}}
+
+                                {{--Tab Content--}}
                                 <div class="col-md-9">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">Name</label>
-                                                <div class="col-sm-8">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active in show" id="address-1" role="tabpanel" aria-labelledby="address1-tab">
+                                            <h5 class="text-center">Address 1</h5>
+
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
                                                     <div class="row">
-                                                        <div class="col-sm-6">
-                                                            {!! Form::text('first_name',null,['class'=>'form-control']) !!}
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">Company name</label>
-                                                <div class="col-sm-8">
-                                                    <input id="text" name="text" type="text" class="form-control">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Company name</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">1st Line address</label>
-                                                <div class="col-sm-8">
-                                                    <input id="text" name="text" type="text" class="form-control">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">2nd line address</label>
-                                                <div class="col-sm-8">
-                                                    <input id="text" name="text" type="text" class="form-control">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">City</label>
-                                                <div class="col-sm-8">
-                                                    <input id="text" name="text" type="text" class="form-control">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">City</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">Country</label>
-                                                <div class="col-sm-8">
-                                                    <input id="text" name="text" type="text" class="form-control">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Country</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <label for="text" class="control-label col-sm-4">Post Code</label>
-                                                <div class="col-sm-8">
-                                                    <input id="text" name="text" type="text" class="form-control">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Post Code</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="col-sm-offset-4 col-sm-8">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                            </div>
+                                        <div class="tab-pane fade" id="address-2" role="tabpanel" aria-labelledby="address2-tab">
+                                            <h5 class="text-center">Address 2</h5>
+
+                                            <form class="form-horizontal">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                                        <div class="col-sm-8">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Company name</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">City</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Country</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="text" class="control-label col-sm-4">Post Code</label>
+                                                        <div class="col-sm-8">
+                                                            <input id="text" name="text" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                    </form>
+                                    </div>
                                 </div>
+                                {{--End Tab Content--}}
                             </div>
                         </div>
                     </div>
