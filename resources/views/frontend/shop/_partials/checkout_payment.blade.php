@@ -75,7 +75,7 @@
         @if(count($payment_options))
             @if(in_array('cash',$payment_options) && $active_payments_gateways->cash)
               <div id="cash-method" class="payment-method-data">
-                    <button class="btn btn-primary">Submit Cash</button>
+                    <button class="btn btn-primary submit-cash">Submit Cash</button>
               </div>
             @endif
             @if(in_array('stripe',$payment_options) && $active_payments_gateways->stripe)

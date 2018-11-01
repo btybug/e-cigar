@@ -244,6 +244,27 @@
                 );
                console.log($(this).val())
             });
+
+
+            $("body").on("click", ".submit-cash", function () {
+                $(".container").css('opacity','0.6');
+                $(".loader-img").toggleClass('d-none');
+                AjaxCall(
+                    "/cash-order",
+                    {},
+                    res => {
+                        if (!res.error) {
+                            $(".container").css('opacity','1');
+                            $(".loader-img").toggleClass('d-none');
+
+                        }
+                    },
+                    error => {
+                        $(".container").css('opacity','1');
+                        $(".loader-img").toggleClass('d-none');
+                    }
+                );
+            });
         })
     </script>
 @stop
