@@ -27,6 +27,7 @@ class OrdersController extends Controller
             ->with('shippingAddress')
             ->with('billingAddress')
             ->with('history')
+            ->with('items')
             ->with('user')->first();
         return $this->view('manage',compact('order'));
     }
