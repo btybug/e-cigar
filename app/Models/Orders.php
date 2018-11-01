@@ -35,7 +35,7 @@ class Orders extends Model
 
     public function history()
     {
-        return $this->hasMany(OrderHistory::class,'order_id')->with('admin');
+        return $this->hasMany(OrderHistory::class,'order_id')->orderBy('id','DESC')->with('admin');
     }
 
 }

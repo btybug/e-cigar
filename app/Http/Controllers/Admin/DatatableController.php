@@ -278,6 +278,8 @@ class DatatableController extends Controller
         )
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
+            })->editColumn('status', function ($attr) {
+                return $attr->history()->first()->status;
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
