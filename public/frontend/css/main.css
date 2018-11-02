@@ -13341,12 +13341,11 @@ a.text-dark:focus, a.text-dark:hover {
 
 /*End page juice*/
 
-/*Address page*/
-/*.nav-link.nav-link--new-address:not(:disabled):not(.disabled) {*/
-    /*color: #111;*/
-    /*background-color: #edbf2a;*/
-/*}*/
-
-.nav-link.nav-link--new-address:focus {
-    box-shadow: none;
+/*page my-account*/
+.my-account .avatar img {
+    width: 135px;
+    height: 135px;
+    object-fit: cover;
+    border-radius: 50%;
 }
+/*End page my-account*/
