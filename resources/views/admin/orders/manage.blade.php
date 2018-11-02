@@ -230,8 +230,8 @@
                                     </td>
                                     <td class="text-left">{!! $item->sku !!}</td>
                                     <td class="text-right">{!! $item->qty !!}</td>
+                                    <td class="text-right">$@convert($item->amount/$item->qty)</td>
                                     <td class="text-right">$@convert($item->amount)</td>
-                                    <td class="text-right">$@convert($item->amount*$item->qty)</td>
                                 </tr>
                                 @endforeach
                                 <tr>
