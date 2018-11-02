@@ -36,7 +36,7 @@
                     {data: 'type', name: 'type'},
                     {data: 'description', name: 'description'},
                     {data: 'icon', name: 'icon'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'color', name: 'color'},
                     {data: 'actions', name: 'actions'}
                 ]
             });
