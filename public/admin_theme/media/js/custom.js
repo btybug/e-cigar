@@ -34,6 +34,7 @@ shortAjax = function(url, data, success, error) {
 
 function App() {
     var self = this;
+    var prevFolder = [];
     var globalFolderId = 1;
     this.multipleImages = [];
     this.htmlMaker = {
@@ -95,9 +96,9 @@ function App() {
         makeBreadCrumbsItem(item) {
             return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
                 item.id
-            }" data-id="${item.id}" bb-media-click="get_folder_items" >/${
-                item.slug
-            }</li>`;
+            }" data-id="${item.id}" bb-media-click="get_folder_items" >
+            <a>${item.slug}</a>
+            </li>`;
         },
         editNameModal(id, name) {
             return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
@@ -456,15 +457,13 @@ function App() {
                     item.remove();
                     return;
                 }
-                if (breadCrumbsListItems.length - 1 !== index) {
-                    item.classList.add("active");
-                    item.classList.remove("disabled");
-                } else {
+                if (item == singleItem) {
                     item.classList.add("disabled");
                     item.classList.remove("active");
-                }
-                if (item == singleItem) {
                     check = true;
+                } else {
+                    item.classList.add("active");
+                    item.classList.remove("disabled");
                 }
             });
         },
@@ -482,8 +481,6 @@ function App() {
                     elm.addEventListener("dragstart", function(e) {
                         let crt = this.cloneNode(true);
                         crt.className += " start";
-                        console.log(crt);
-                        // 055221110
                         crt.style.position = "absolute";
                         crt.style.top = "-10000px";
                         crt.style.right = "-10000px";
@@ -596,7 +593,9 @@ function App() {
                         //     cb(self.htmlMaker.makeTreeFolder(folder));
                         // }
                     });
+
                     globalFolderId = res.settings.id;
+
                     // self.helpers.makeBreadCrumbs(res.settings.id);
                     // self.helpers.makeDnD();
                     cb ? cb() : null;
@@ -698,7 +697,7 @@ function App() {
         },
         get_folder_items(elm, e) {
             let id = elm[0].getAttribute("data-id");
-            console.log(id);
+            prevFolder.push(globalFolderId);
             self.requests.drawingItems(
                 {
                     folder_id: Number(id),
@@ -727,7 +726,6 @@ function App() {
                 .closest(".file-box")
                 .getAttribute("data-image");
             self.requests.getImageDetails({ item_id: id }, res => {
-                console.log(res);
                 document.body.innerHTML += self.htmlMaker.fullInfoModal(
                     res,
                     Number(countId)
@@ -789,12 +787,10 @@ function App() {
         modal_load_image(elm, e) {
             if (!e.target.closest("button").disabled) {
                 let id = e.target.closest("button").getAttribute("data-id");
-                console.log(id);
                 let imageId = document
                     .querySelector(`[data-image="${id}"] [data-id]`)
                     .getAttribute("data-id");
                 self.requests.getImageDetails({ item_id: imageId }, res => {
-                    console.log(res);
                     e.target.closest(".modal").remove();
                     document.body.innerHTML += self.htmlMaker.fullInfoModal(
                         res,
@@ -820,7 +816,6 @@ function App() {
             e.preventDefault();
             e.stopPropagation();
             let id = e.target.closest(".file").getAttribute("data-id");
-            console.log(id);
             let name = e.target
                 .closest(".file")
                 .querySelector(".file-name")
@@ -849,6 +844,25 @@ function App() {
             document
                 .querySelector(".media-modal-content-upload")
                 .classList.add("d-block");
+        },
+        folder_level_up(elm, e) {
+            if (prevFolder.length) {
+                let id =
+                    prevFolder.length === 1
+                        ? 1
+                        : prevFolder[prevFolder.length - 1];
+                self.requests.drawingItems(
+                    {
+                        folder_id: Number(id),
+                        files: true,
+                        access_token: "string"
+                    },
+                    true,
+                    res => {
+                        prevFolder.pop();
+                    }
+                );
+            }
         }
     };
 }

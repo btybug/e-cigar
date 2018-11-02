@@ -1458,3 +1458,7 @@ input[type="checkbox"]:checked + .customcheckbox:before {
 .media_modal_right_content .media-modal-content-upload {
     margin-bottom: 10px;
 }
+
+.modal-loader {
+    background-image: url("https://thumbs.gfycat.com/JointRevolvingAntelopegroundsquirrel-size_restricted.gif");
+}

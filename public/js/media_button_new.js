@@ -99,9 +99,9 @@ function App() {
         makeBreadCrumbsItem(item) {
             return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
                 item.id
-            }" data-id="${item.id}" bb-media-click="get_folder_items" >/${
-                item.slug
-            }</li>`;
+            }" data-id="${item.id}" bb-media-click="get_folder_items" >
+            <a>${item.slug}</a>
+            </li>`;
         },
         editNameModal(id, name) {
             return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
@@ -110,15 +110,15 @@ function App() {
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
           <h4 class="modal-title">Change title</h4>
         </div>
         <div class="modal-body">
               <input class="form-control edit-title-input" value="${name}">
         </div>
         <div class="modal-footer">
-         <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
+         <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                <button type="button" data-id=${id} bb-media-click="close_name_modal" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
         </div>
       </div>
       
@@ -454,15 +454,14 @@ function App() {
                     item.remove();
                     return;
                 }
-                if (breadCrumbsListItems.length - 1 !== index) {
-                    item.classList.add("active");
-                    item.classList.remove("disabled");
-                } else {
+                if (item == singleItem) {
                     item.classList.add("disabled");
                     item.classList.remove("active");
-                }
-                if (item == singleItem) {
+                    // item.removeAttribute("data-id");
                     check = true;
+                } else {
+                    item.classList.add("active");
+                    item.classList.remove("disabled");
                 }
             });
         },
@@ -470,6 +469,7 @@ function App() {
             document
                 .querySelector(".uploader-container")
                 .classList.toggle("d-none");
+            return false;
         },
         makeDnD() {
             document
@@ -480,8 +480,6 @@ function App() {
                     elm.addEventListener("dragstart", function(e) {
                         let crt = this.cloneNode(true);
                         crt.className += " start";
-                        console.log(crt);
-                        // 055221110
                         crt.style.position = "absolute";
                         crt.style.top = "-10000px";
                         crt.style.right = "-10000px";
@@ -646,7 +644,7 @@ function App() {
         remove_tree_folder(elm, e) {
             e.stopPropagation();
             e.preventDefault();
-            let id = elm.closest("li").attr("data-id");
+            let id = elm.closest("li").getAttribute("data-id");
             self.requests.removeTreeFolder(
                 {
                     folder_id: Number(id),
@@ -659,7 +657,7 @@ function App() {
         remove_folder(elm, e) {
             e.stopPropagation();
             e.preventDefault();
-            let id = elm.closest(".file").attr("data-id");
+            let id = elm.closest(".file").getAttribute("data-id");
             self.requests.removeTreeFolder(
                 {
                     folder_id: Number(id),
@@ -670,15 +668,17 @@ function App() {
             );
         },
         get_folder_items(elm, e) {
-            let id = elm[0].getAttribute("data-id");
-            self.requests.drawingItems(
-                {
-                    folder_id: Number(id),
-                    files: true,
-                    access_token: "string"
-                },
-                true
-            );
+            let id = elm.closest("[data-id]").getAttribute("data-id");
+            if (id && !elm.classList.contains("disabled")) {
+                self.requests.drawingItems(
+                    {
+                        folder_id: Number(id),
+                        files: true,
+                        access_token: "string"
+                    },
+                    true
+                );
+            }
         },
         add_new_folder(elm, e) {
             let name = document.querySelector(".new-folder-input").value;
@@ -699,7 +699,6 @@ function App() {
                 .closest(".file-box")
                 .getAttribute("data-image");
             self.requests.getImageDetails({ item_id: id }, res => {
-                console.log(res);
                 document.body.innerHTML += self.htmlMaker.fullInfoModal(
                     res,
                     Number(countId)
@@ -714,7 +713,6 @@ function App() {
                     .closest(".file-box")
                     .getAttribute("data-image");
                 self.requests.getImageDetails({ item_id: id }, res => {
-                    console.log(res);
                     document.body.innerHTML += self.htmlMaker.fullInfoModal(
                         res,
                         Number(countId)
@@ -758,7 +756,6 @@ function App() {
             e.preventDefault();
             e.stopPropagation();
             let id = e.target.closest(".file").getAttribute("data-id");
-            console.log(id);
             let name = e.target
                 .closest(".file")
                 .querySelector(".file-name")
@@ -782,6 +779,27 @@ function App() {
         },
         close_full_modal(elm, e) {
             e.target.closest(".modal").remove();
+        },
+        folder_level_up(elm, e) {
+            let allActiveBreadCrumbs = document.querySelectorAll(
+                ".bread-crumbs-list-item.active"
+            );
+            if (allActiveBreadCrumbs.length) {
+                let oneLevelUpID = allActiveBreadCrumbs[
+                    allActiveBreadCrumbs.length - 1
+                ].getAttribute("data-id");
+                self.requests.drawingItems(
+                    {
+                        folder_id: Number(oneLevelUpID),
+                        files: true,
+                        access_token: "string"
+                    },
+                    true
+                );
+            }
+        },
+        close_name_modal(elm, e) {
+            e.target.closest(".custom_modal_edit").remove();
         }
     };
 }
@@ -790,7 +808,7 @@ app.init();
 
 $("body").on("click dblclick", `[bb-media-click]`, function(e) {
     let attr = $(this).attr("bb-media-click");
-    app.events[attr]($(this), e);
+    app.events[attr](this, e);
 });
 
 $("body").on("click", `[data-tabaction]`, function(e) {

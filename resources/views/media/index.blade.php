@@ -74,11 +74,16 @@
                             <div class="col-lg-12 m-b-15"></div>
                         </div>
                         <div class="row m-0 {!! $settings['rightcontainer']??null !!} media_right_content">
-                            <div class="bread-crumbs">
-                                <ul class="bread-crumbs-list" style="display: flex; color: white; list-style: none">
-                                   
-                                </ul>
+                            <div class="col-xs-12 mb-20">
+                            
+                                <div class="bread-crumbs d-flex" style="justify-content: space-between;">
+                                    <ul class="bread-crumbs-list breadcrumb" style="margin: 0">
+                                    
+                                    </ul>
+                                    <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up" aria-hidden="true"></i></button>
+                                </div>
                             </div>
+                            <div class="clearfix"></div>
                             <div class="row m-0 d-flex flex-wrap" style="position: relative;" data-media="folderitem" data-type="main-container">
                             </div>
                             <!-- <div id="coverup"></div> -->
@@ -622,6 +627,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+        }
+        .bread-crumbs-list .disabled > a {
+            color: gray !important;
         }
 
     </style>

@@ -63,7 +63,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <input type="text" class="pull-left file-realtive-url" placeholder="upload file name">
+                    <input type="text" class="pull-left file-realtive-url" placeholder="upload file name" style="display: none">
+                    <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up" aria-hidden="true"></i></button>
                     <button type="button" class="btn btn-success upload-btn" bb-media-click="open_uploader">Upload</button>
                     <button type="button" class="btn btn-info open-btn" bb-media-click="open_images" data-dismiss="modal">Open</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
