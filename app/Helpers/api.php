@@ -301,9 +301,33 @@ function stripe_key()
     $model = $settings->getEditableData('payments_gateways');
     return isset($model->stripe_key) ? $model->stripe_key : null;
 }
+
 function stripe_secret()
 {
     $settings = new \App\Models\Settings();
     $model = $settings->getEditableData('payments_gateways');
     return isset($model->stripe_secret) ? $model->stripe_secret : null;
+}
+
+function generate_random_letters($length, $prefix = '', $suffix = '')
+{
+    $random = '';
+    for ($i = 0; $i < $length; $i++) {
+        $random .= chr(rand(ord('a'), ord('z')));
+    }
+    return upper($prefix . $random . $suffix);
+}
+
+function BBcodeDate($then)
+{
+    return (date('Y') - $then) . date('md');
+}
+
+function getUniqueCode($table,$column,$prefix='')
+{
+    do{
+        $code = $prefix . BBcodeDate(2000) . generate_random_letters(4);
+    }
+    while (DB::table($table)->where($column, $code)->exists());
+    return $code;
 }

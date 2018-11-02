@@ -19,6 +19,8 @@ use App\Models\ZoneCountries;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use PragmaRX\Countries\Package\Countries;
+
 
 
 class CashPaymentController extends Controller
@@ -41,6 +43,7 @@ class CashPaymentController extends Controller
             $items = Cart::getContent();
             $order = Orders::create([
                 'user_id' => \Auth::id(),
+                'code'=>getUniqueCode('orders','code',Countries::where('name.common', $shippingAddress->country)->first()->cca2),
                 'amount' => Cart::getTotal(),
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
