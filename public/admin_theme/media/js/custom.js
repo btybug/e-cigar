@@ -532,12 +532,12 @@ function App() {
         },
         makeMultiplaImagesAndInputs(arr) {
             let placeholder = document.querySelector(
-                ".multiple-image-placeholder"
+                `.image-box-media_${inputId}`
             );
             let hiddenInput = document.querySelector(`.${inputId}`);
             let hiddenInputName = hiddenInput.getAttribute("data-name");
             let parent = hiddenInput.parentNode;
-            placeholder.innerHTML = "";
+            // placeholder.innerHTML = "";
             arr.forEach(img => {
                 placeholder.innerHTML += self.htmlMaker.makePreviewImgThumb(
                     img,
