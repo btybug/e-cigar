@@ -170,6 +170,8 @@ return [
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+        Milon\Barcode\BarcodeServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -234,7 +236,9 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
-        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+        'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
+        'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
     ],
 
 ];

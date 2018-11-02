@@ -143,9 +143,10 @@
                                                         <label for="sku"
                                                                class="control-label col-sm-4">Barcode</label>
                                                         <div class="col-sm-8">
-                                                            <div class="form-control">
-
-                                                            </div>
+                                                            {!! Form::text('barcode',null,['class' => 'form-control']) !!}
+                                                            @if($model && $model->barcode)
+                                                                <img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
