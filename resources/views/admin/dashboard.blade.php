@@ -8,7 +8,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
     </ol>
-    <button class="btn btn-info">Add new Widget</button>
+    <button class="btn btn-info open_dashboard_widget">Add new Widget</button>
 @stop
 @section('content')
 
@@ -522,15 +522,25 @@
         <!-- right col -->
     </div>
     <!-- /.row (main row) -->
+<div class="dashboard_modal_add_widget">
+    <div class="modal_add_widget">
 
+    </div>
+</div>
 @stop
 @section('css')
     <!-- jvectormap -->
     {!! Html::style("public/admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
+    {!! Html::style("public/admin_assets/css/dashboard.css") !!}
     @stop
 @section('js')
     <!-- jvectormap -->
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
     {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js")!!}
+    <script>
+        $('body').on('click','.open_dashboard_widget',function () {
+            $('.dashboard_modal_add_widget').toggleClass('active')
+        })
+    </script>
     @stop
