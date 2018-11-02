@@ -23,6 +23,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/settings/get-user-activity/{id}','Admin\DatatableController@getUserActivity')->name('datatable_user_activity');
 
     Route::get('/settings/get-all-orders','Admin\DatatableController@getAllOrders')->name('datatable_all_orders');
+    Route::get('/settings/get-all-statuses','Admin\DatatableController@getAllStatuses')->name('datatable_all_statuses');
 });
 
 

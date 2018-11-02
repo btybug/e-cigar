@@ -20,6 +20,7 @@ use App\Models\Regions;
 use App\Models\Roles;
 use App\Models\SelectionType;
 use App\Models\Sports;
+use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\Teams;
 use App\Models\Translations;
@@ -287,6 +288,23 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-warning' href='".route('admin_orders_manage',$post->id)."'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function getAllStatuses()
+    {
+        return Datatables::of(Statuses::query())
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })->editColumn('name', function ($attr) {
+                return $attr->name;
+            })->editColumn('description', function ($attr) {
+                return $attr->description;
+            })
+            ->addColumn('actions', function ($attr) {
+                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='".route('admin_stock_statuses_manage',$attr->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }

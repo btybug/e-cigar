@@ -189,55 +189,7 @@
     <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
     <script src="{!! url('public/admin_theme/media/js/jstree.min.js') !!}"></script>
     <script src="{!! url('public/admin_theme/media/js/custom.js?v='.rand(111,999)) !!}"></script>
-    <!-- <script>
-        $(function(){
-       $("#item").fileinput({
-           maxFileCount: 5,
-           uploadUrl: "/api/api-media/upload",
-            allowedFileExtensions: ["jpg", "png", "gif"],
-            uploadExtraData: function(){
-            return {'_token':$("meta[name='csrf-token']").attr('content'), "folder_id": _global_folder_id }
-           }
-       })
-    }).on('fileuploaded', function(event, data, id, index) {
-        toggleUploadDivs()
-        $(".jstree-clicked").click();
-        $("#jstree_html").jstree('destroy');
-        $("#jstree_html").jstree({
-        core: {
-            data: {
-                type: "POST",
-                url: "/api/api-media/jstree",
-                dataType: "json", // needed only if you do not supply JSON headers
-                data: { folder_id: 1 },
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function(data) {
-                    $(".media-modal-main-content").empty();
-                    listFolders(data.children);
-                    listFiles(data.items);
-                }
-            }
-        }
-    });
 
-        
-    })
-    function toggleUploadDivs(){
-        $("body").find(".media-modal-main-content").show()
-        $("body").find(".media-modal-content-upload").hide()
-    }
-    $("body").on("click", ".fileinput-remove", function(){
-        retryDrawing()
-
-        toggleUploadDivs()
-    })
-    $("body").on("click", ".file-drop-zone", function() {
-    $(".btn.btn-file>input[type='file']").click();
-});
-
-    </script> -->
 @endif
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {

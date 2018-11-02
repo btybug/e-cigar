@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\StockVariationOption;
 use App\Services\StockService;
@@ -104,5 +105,18 @@ class InventoryController extends Controller
     public function getStatuses()
     {
         return $this->view('statuses');
+    }
+
+    public function getStatusesManage($id=null)
+    {
+        $model= $id?Statuses::findOrFail($id):null;
+        return $this->view('statuses.manage',compact('model'));
+    }
+
+    public function postStatusesManage(Request $request)
+    {
+        $data=$request->except(['_token','translatable']);
+        Statuses::updateOrCreate($request->id,$data);
+        return redirect()->route('admin_stock_statuses');
     }
 }
