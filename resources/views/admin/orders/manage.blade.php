@@ -491,7 +491,7 @@
                     <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes</a>
                 </li>
             </ul>
-            <div class="tab-content" style="min-height: 200px; padding-top: 20px">
+            <div class="tab-content" style="min-height: 200px; padding: 20px; background: #fff">
                 <div class="tab-pane fade active in" id="status" role="tabpanel" aria-labelledby="status-tab">
                    Status Content
                 </div>
