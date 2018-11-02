@@ -145,7 +145,8 @@
                                                         <div class="col-sm-8">
                                                             {!! Form::text('barcode',null,['class' => 'form-control']) !!}
                                                             @if($model && $model->barcode)
-                                                                <img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />
+                                                                {!! \DNS1D::getBarcodeSVG($model->barcode, "C39") !!}
+                                                                {{--<img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />--}}
                                                             @endif
                                                         </div>
                                                     </div>
