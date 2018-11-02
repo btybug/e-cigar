@@ -235,7 +235,7 @@
                                 @endforeach
                                 <tr>
                                     <td colspan="4" class="text-right">Sub-Total</td>
-                                    <td class="text-right">$100.00</td>
+                                    <td class="text-right">$@convert($order->amount-$order->shipping_price)</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right">Flat Shipping Rate</td>
