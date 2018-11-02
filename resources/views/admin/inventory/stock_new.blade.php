@@ -190,9 +190,9 @@
                     </div>
                     <div id="media" class="tab-pane basic-details-tab media-new-tab fade ">
                         <div class="container-fluid p-25">
-                            <div class="row">
+                            <div class="row d-flex">
                                 <div class="col-md-3">
-                                    <div class="basic-left basic-wall">
+                                    <div class="basic-left basic-wall h-100">
                                         <div class="all-list">
                                             <ul class="nav nav-tabs media-list">
                                                 <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>

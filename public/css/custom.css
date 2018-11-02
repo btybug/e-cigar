@@ -524,11 +524,12 @@ box-shadow: 0 0 4px #ccc;
     border: 1px solid #eee;
     background-color: #fff;
     color: black;
-    min-height: 400px;
+    /*min-height: 400px;*/
+    height: calc(100vh - 310px);
     padding: 20px;
 }
 .scrollbar_media_tab{
-    height: 600px;
+    /*height: 600px;*/
     overflow: auto;
 }
 .basic-details-tab .basic-left{
@@ -785,4 +786,24 @@ color: red;
 }
 .stock-variations-tab .list-attrs-single-item .form-group label {
     margin-right: 5px;
+}
+.d-flex{
+    display: flex !important;
+}
+.h-100{
+    height: 100%;
+}
+body.sidebar-mini{
+    overflow: hidden;
+}
+body.sidebar-mini .wrapper{
+    height: calc(100vh - 50px) !important;
+    overflow: hidden;
+}
+
+body.sidebar-mini .wrapper .content-wrapper{
+    min-height: 100% !important;
+}
+.bestbetter-modal{
+    padding: 0;
 }
