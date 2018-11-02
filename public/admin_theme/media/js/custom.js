@@ -870,6 +870,38 @@ $("body").on("click", `[data-tabaction]`, function(e) {
         .addClass("in");
 });
 
+$("body").on("click", ".bestbetter-modal-open button", function() {
+    app.requests.drawingItems({
+        folder_id: 1,
+        files: true,
+        access_token: "string"
+    });
+    let value = $(this).attr("data-multiple");
+    inputId = $(this).attr("id");
+    multiple = JSON.parse(value);
+    $(".img").removeClass("active");
+});
+
+$("body").on("click", ".remove-thumb-img", function(e) {
+    e.preventDefault();
+    var id = $(this).data("id");
+    let realInput = $(`.${id}`);
+
+    let src = $(this).attr("data-src");
+    $(".multipale-hidden-inputs").each(function() {
+        if ($(this).val() === src) {
+            $(this).remove();
+        }
+    });
+    let cn = realInput.attr("data-count") - 1;
+    realInput.val(cn + " selected");
+    realInput.attr("data-count", cn);
+
+    $(this)
+        .closest(".img-thumb-container")
+        .remove();
+});
+
 // $("#jstree_html")
 //     .on("changed.jstree", function(e, data) {
 //         console.log(data);
@@ -1016,26 +1048,6 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 //     $("#myModal").modal("hide");
 // });
 
-$("body").on("click", ".remove-thumb-img", function(e) {
-    e.preventDefault();
-    var id = $(this).data("id");
-    let realInput = $(`.${id}`);
-
-    let src = $(this).attr("data-src");
-    $(".multipale-hidden-inputs").each(function() {
-        if ($(this).val() === src) {
-            $(this).remove();
-        }
-    });
-    let cn = realInput.attr("data-count") - 1;
-    realInput.val(cn + " selected");
-    realInput.attr("data-count", cn);
-
-    $(this)
-        .closest(".img-thumb-container")
-        .remove();
-});
-
 // // $("body").on("click", ".remove-item-for-media", function() {
 // //     let id = $(this).attr("data-item-id");
 // //     postSendAjax(
@@ -1044,10 +1056,3 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 // //         function(res) {}
 // //     );
 // // });
-
-$("body").on("click", ".bestbetter-modal-open button", function() {
-    let value = $(this).attr("data-multiple");
-    inputId = $(this).attr("id");
-    multiple = JSON.parse(value);
-    $(".img").removeClass("active");
-});
