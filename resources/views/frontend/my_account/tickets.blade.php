@@ -9,8 +9,8 @@
                 <table class="table table-bordered table-striped table-responsive-lg order-table">
                     <thead>
                     <tr>
-                        <th class="text-capitalize">order number</th>
                         <th class="text-capitalize">ticket ID</th>
+                        <th class="text-capitalize">submited</th>
                         <th class="text-capitalize">updated on</th>
                         <th class="text-capitalize">status</th>
                         <th class="text-capitalize">action</th>
