@@ -73,10 +73,38 @@
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         //addresses js
+        $("body").on('click','.save-address-book',function () {
+            var form = $(".address-book-form").serialize();
+            AjaxCall(
+                "/my-account/save-address-book",
+                form,
+                res => {
+                    if (!res.error) {
+                        let select = $(".select-address")
+                        var opt = document.createElement('option');
+                        opt.value = res.data.id;
+                        opt.innerHTML = res.data.name;
+                        select.append(opt);
+                        $("#newAddressModal").modal('hide');
+
+                        select.val(res.data.id).trigger('change');
+                    }
+                },
+                error => {
+                    if(error.status == 422) {
+                        $('.errors').html('');
+                        for (var err in error.responseJSON.errors) {
+                            $('.errors').append(error.responseJSON.errors[err] + '<br>');
+                        }
+                    }
+                }
+            );
+        })
+
         $("body").on('click','.address-book-new',function () {
             AjaxCall(
                 "/my-account/address-book-form",
-                { },
+                { default:true},
                 res => {
                     if (!res.error) {
                         $(".address-form").html(res.html);
@@ -192,10 +220,7 @@
             $("body").on("click", ".go-to-payment", function (event) {
                 AjaxCall(
                     "/get-payment-options",
-                    {
-                        'shippingId' : $("#shipping_address").val(),
-                        'billingId' : $("#billing_address").val(),
-                    },
+                    {},
                     res => {
                         if (!res.error) {
                             $(".nav-link").each(function (index,value) {

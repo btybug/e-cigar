@@ -66,13 +66,15 @@ class UserController extends Controller
     public function postAddressBookForm (Request $request)
     {
         $id = $request->get('id',0);
+        $default = $request->get('default',false);
+
         $address_book= \Auth::user()->addresses()->find($id);
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
                 ->select('zone_countries.*','zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        $html = $this->view('_partials.new_address',compact(['address_book','countriesShipping']))->render();
+        $html = $this->view('_partials.new_address',compact(['address_book','countriesShipping','default']))->render();
 
         return \Response::json(['error' => false,'html'=>$html]);
     }
@@ -94,9 +96,9 @@ class UserController extends Controller
             $data['type'] = 'default_shipping';
             \Auth::user()->addresses()->where('type','default_shipping')->update(['type' => 'address_book']);
         }
-        Addresses::updateOrCreate(['id'=>$request->get('id',null),'user_id'=>$data['user_id']],$data);
+        $address = Addresses::updateOrCreate(['id'=>$request->get('id',null),'user_id'=>$data['user_id']],$data);
 
-        return \Response::json(['error' => false]);
+        return \Response::json(['error' => false,'data' => $address]);
     }
 
     public function getOrders()

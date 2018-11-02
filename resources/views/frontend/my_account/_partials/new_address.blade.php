@@ -82,6 +82,7 @@
         </div>
     </div>
 </div>
+@if(! $default )
 <div class="form-check">
     <div class="row">
         <div class="col-sm-8 offset-sm-4">
@@ -91,8 +92,8 @@
             </label>
         </div>
     </div>
-
 </div>
+@endif
 {!! Form::hidden('type','address_book') !!}
 {!! Form::hidden('id') !!}
 <div class="form-group row">

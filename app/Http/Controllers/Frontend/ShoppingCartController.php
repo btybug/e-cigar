@@ -110,6 +110,9 @@ class ShoppingCartController extends Controller
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone){
+                session()->put('billing_address_id',$billing_address->id );
+                session()->put('shipping_address_id', $default_shipping->id);
+
                 Cart::removeConditionsByType('shipping');
                 if(count($geoZone->deliveries)){
                     $subtotal = Cart::getSubTotal();
@@ -320,6 +323,8 @@ class ShoppingCartController extends Controller
                    }
                }
 
+                session()->put('billing_address_id',$billing_address->id );
+                session()->put('shipping_address_id', $default_shipping->id);
                 $shipping = Cart::getCondition($geoZone->name);
             }
         }
@@ -332,8 +337,8 @@ class ShoppingCartController extends Controller
 
     public function postPaymentOptions(Request $request)
     {
-        session()->put('shipping_address', $request->shippingId);
-        session()->put('billing_address', $request->billingId);
+        session()->put('shipping_address', session()->get('shipping_address_id'));
+        session()->put('billing_address', session()->get('billing_address_id'));
 
         return  \Response::json(['error' => false]);
     }
