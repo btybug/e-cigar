@@ -238,7 +238,7 @@
                                     <td class="text-right">$@convert($order->amount-$order->shipping_price)</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4" class="text-right">Flat Shipping Rate</td>
+                                    <td colspan="4" class="text-right">Shipping ({!! $order->shipping_method !!})</td>
                                     <td class="text-right">$@convert($order->shipping_price)</td>
                                 </tr>
                                 <tr>
