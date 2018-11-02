@@ -222,16 +222,28 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($order->items as $item)
-                                <tr>
-                                    <td class="text-left"><a
-                                                href="">{!! $item->name !!}</a>
-                                    </td>
-                                    <td class="text-left">{!! $item->sku !!}</td>
-                                    <td class="text-right">{!! $item->qty !!}</td>
-                                    <td class="text-right">$@convert($item->amount/$item->qty)</td>
-                                    <td class="text-right">$@convert($item->amount)</td>
-                                </tr>
+                                @foreach($order->items as $item)
+                                    <tr>
+                                        <td class="text-left"><a
+                                                    href="">{!! $item->name !!}</a>
+                                        </td>
+                                        <td class="text-left">
+                                            {!! $item->sku !!}<br>
+                                            @php
+                                            $options=$item->options;
+                                                $lastElement = end($options);
+                                            @endphp
+                                            <b>
+                                            @foreach($options as $option)
+                                                {!! $option !!} @if($option!=$lastElement) , @endif
+                                            @endforeach
+                                            </b>
+
+                                        </td>
+                                        <td class="text-right">{!! $item->qty !!}</td>
+                                        <td class="text-right">$@convert($item->amount/$item->qty)</td>
+                                        <td class="text-right">$@convert($item->amount)</td>
+                                    </tr>
                                 @endforeach
                                 <tr>
                                     <td colspan="4" class="text-right">Sub-Total</td>
@@ -478,119 +490,120 @@
                 </div>
                 <div class="order-notes">
                     @foreach($order->history as $history)
-                    <div class="order-notes_message {!! $history->color !!}">
-                        <p>
-                            on <span class="underlined">11/11/2011</span>
-                            at <span class="underlined">11:11</span>
-                        </p>
-                        <p>
-                            Status <span class="font-bold">{!! $history->status !!}</span>
-                        </p>
-                        @if($history->admin)
-                        <p>
-                            order status changed by <span class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>
-                        </p>
+                        <div class="order-notes_message {!! $history->color !!}">
+                            <p>
+                                on <span class="underlined">11/11/2011</span>
+                                at <span class="underlined">11:11</span>
+                            </p>
+                            <p>
+                                Status <span class="font-bold">{!! $history->status !!}</span>
+                            </p>
+                            @if($history->admin)
+                                <p>
+                                    order status changed by <span
+                                            class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>
+                                </p>
                             @endif
-                    </div>
+                        </div>
                     @endforeach
                     {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                        {{--<div>--}}
-                            {{--<p>--}}
-                                {{--on <span class="underlined">11/11/2011</span>--}}
-                                {{--at <span class="underlined">11:11</span>--}}
-                            {{--</p>--}}
-                            {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
-                            {{--<p>--}}
-                                {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
-                                {{--admin massage--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
+                    {{--<div>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:11</span>--}}
+                    {{--</p>--}}
+                    {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
+                    {{--<p>--}}
+                    {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
+                    {{--admin massage--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                        {{--<div>--}}
-                            {{--<p>--}}
-                                {{--on <span class="underlined">11/11/2011</span>--}}
-                                {{--at <span class="underlined">11:15</span>--}}
-                            {{--</p>--}}
-                            {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
-                            {{--<p>--}}
-                                {{--#094039404--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
+                    {{--<div>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:15</span>--}}
+                    {{--</p>--}}
+                    {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
+                    {{--<p>--}}
+                    {{--#094039404--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                        {{--<div>--}}
-                            {{--<p>--}}
-                                {{--on <span class="underlined">11/11/2011</span>--}}
-                                {{--at <span class="underlined">11:15</span>--}}
-                            {{--</p>--}}
-                            {{--<p>--}}
-                                {{--Order <span class="text-bold">submitted </span>--}}
-                            {{--</p>--}}
-                            {{--<p>--}}
-                                {{--Status <span class="text-bold">processing</span>--}}
-                            {{--</p>--}}
+                    {{--<div>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:15</span>--}}
+                    {{--</p>--}}
+                    {{--<p>--}}
+                    {{--Order <span class="text-bold">submitted </span>--}}
+                    {{--</p>--}}
+                    {{--<p>--}}
+                    {{--Status <span class="text-bold">processing</span>--}}
+                    {{--</p>--}}
 
-                            {{--<p>--}}
-                                {{--added by <span class="text-bold">abokamal </span>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
+                    {{--<p>--}}
+                    {{--added by <span class="text-bold">abokamal </span>--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                        {{--<p>--}}
-                            {{--on <span class="underlined">11/11/2011</span>--}}
-                            {{--at <span class="underlined">11:11</span>--}}
-                        {{--</p>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:11</span>--}}
+                    {{--</p>--}}
 
-                        {{--<p>--}}
-                            {{--Order <span class="text-bold">submitted </span>--}}
-                        {{--</p>--}}
-                        {{--<p>--}}
-                            {{--Status <span class="font-bold">processing</span>--}}
-                        {{--</p>--}}
+                    {{--<p>--}}
+                    {{--Order <span class="text-bold">submitted </span>--}}
+                    {{--</p>--}}
+                    {{--<p>--}}
+                    {{--Status <span class="font-bold">processing</span>--}}
+                    {{--</p>--}}
                     {{--</div>--}}
                     {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                        {{--<div>--}}
-                            {{--<p>--}}
-                                {{--on <span class="underlined">11/11/2011</span>--}}
-                                {{--at <span class="underlined">11:11</span>--}}
-                            {{--</p>--}}
-                            {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
-                            {{--<p>--}}
-                                {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
-                                {{--admin massage--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
+                    {{--<div>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:11</span>--}}
+                    {{--</p>--}}
+                    {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
+                    {{--<p>--}}
+                    {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
+                    {{--admin massage--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                        {{--<div>--}}
-                            {{--<p>--}}
-                                {{--on <span class="underlined">11/11/2011</span>--}}
-                                {{--at <span class="underlined">11:15</span>--}}
-                            {{--</p>--}}
-                            {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
-                            {{--<p>--}}
-                                {{--#094039404--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
+                    {{--<div>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:15</span>--}}
+                    {{--</p>--}}
+                    {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
+                    {{--<p>--}}
+                    {{--#094039404--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                        {{--<div>--}}
-                            {{--<p>--}}
-                                {{--on <span class="underlined">11/11/2011</span>--}}
-                                {{--at <span class="underlined">11:15</span>--}}
-                            {{--</p>--}}
-                            {{--<p>--}}
-                                {{--Order <span class="text-bold">submitted </span>--}}
-                            {{--</p>--}}
-                            {{--<p>--}}
-                                {{--Status <span class="text-bold">processing</span>--}}
-                            {{--</p>--}}
+                    {{--<div>--}}
+                    {{--<p>--}}
+                    {{--on <span class="underlined">11/11/2011</span>--}}
+                    {{--at <span class="underlined">11:15</span>--}}
+                    {{--</p>--}}
+                    {{--<p>--}}
+                    {{--Order <span class="text-bold">submitted </span>--}}
+                    {{--</p>--}}
+                    {{--<p>--}}
+                    {{--Status <span class="text-bold">processing</span>--}}
+                    {{--</p>--}}
 
-                            {{--<p>--}}
-                                {{--added by <span class="text-bold">abokamal </span>--}}
-                            {{--</p>--}}
-                        {{--</div>--}}
+                    {{--<p>--}}
+                    {{--added by <span class="text-bold">abokamal </span>--}}
+                    {{--</p>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                 </div>
 
