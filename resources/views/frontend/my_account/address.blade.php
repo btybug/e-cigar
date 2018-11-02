@@ -205,19 +205,8 @@
                         <div class="panel panel-default">
 
                             <div class="panel-body">
-                                {{--Inner Tab links --}}
-                                <ul class="nav nav-pills nav-fill" role="tablist">
-                                    <li>
-                                        <!-- Button trigger modal -->
-                                        <button type="button"
-                                            class="nav-link nav-link--new-address btn btn-info address-book-new">+ Add New
-                                        </button>
-                                    </li>
-                                </ul>
-                                {{--Inner Tab Content--}}
-                                <div class="tab-content">
-                                    <div class="p-5 tab-pane fade active in show" id="address-1" role="tabpanel"
-                                         aria-labelledby="address1-tab">
+                                <div>
+                                    <div class="p-5">
 
                                             <div class="form-group row mb-5">
                                                 <div class="col-md-5">
@@ -226,19 +215,24 @@
                                                             your address</label>
                                                     </h5>
                                                 </div>
-                                                <div class="col-md-5">
+                                                <div class="col-md-7 d-flex">
                                                     {!! Form::select('address_book',$address,null,['class' => 'form-control select-address']) !!}
+                                                    <!-- Button trigger modal -->
+                                                        <button type="button"
+                                                                class="nav-link nav-link--new-address btn btn-info address-book-new">+ Add New
+                                                        </button>
                                                 </div>
                                             </div>
-                                            <div class="form-group row render-address">
-
+                                        <div class="border py-3 px-4">
+                                            <div class="render-address">
+                                                <p>lorem</p>
+                                                <p>56</p>
+                                                <p>Lorem ipsum</p>
+                                                <p>lorem</p>
                                             </div>
+                                            <button type="submit" class="btn btn-primary edit-address">Edit</button>
+                                        </div>
 
-                                            <div class="form-group row">
-                                                <div class="col-12">
-                                                    <button type="submit" class="btn btn-primary edit-address">Edit</button>
-                                                </div>
-                                            </div>
 
                                     </div>
                                 </div>
