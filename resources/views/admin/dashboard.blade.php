@@ -8,6 +8,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
     </ol>
+    <button class="btn btn-info">Add new Widget</button>
 @stop
 @section('content')
 
