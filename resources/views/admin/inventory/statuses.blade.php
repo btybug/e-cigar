@@ -14,8 +14,8 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>type</th>
+                    <th>Description</th>
                     <th>icon</th>
                     <th>Color</th>
                     <th>Actions</th>
