@@ -189,9 +189,11 @@
                                 <div class="tab-content tab-content--addresses">
                                     <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel"
                                          aria-labelledby="shippingAddress-tab">
-                                        Country:{!! $order->shippingAddress->country !!}<br>
-                                        Region:{!! $order->shippingAddress->region !!}<br>
-                                        City:{!! $order->shippingAddress->city !!}<br>
+                                        Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
+                                        Region:{!! getCountryByZone($order->shippingAddress->country)->region->name !!}
+                                        <br>
+                                        City:{!! getCountryByZone($order->shippingAddress->country)->region->name !!}
+                                        <br>
                                         First line:{!! $order->shippingAddress->first_line_address !!}<br>
                                         Second line:{!! $order->shippingAddress->second_line_address !!}
                                         Post code:{!! $order->shippingAddress->post_code !!}
@@ -230,13 +232,13 @@
                                         <td class="text-left">
                                             {!! $item->sku !!}<br>
                                             @php
-                                            $options=$item->options;
-                                                $lastElement = end($options);
+                                                $options=$item->options;
+                                                    $lastElement = end($options);
                                             @endphp
                                             <b>
-                                            @foreach($options as $key=>$option)
-                                               {!! $key !!}: {!! $option !!} @if($option!=$lastElement) , @endif
-                                            @endforeach
+                                                @foreach($options as $key=>$option)
+                                                    {!! $key !!}: {!! $option !!} @if($option!=$lastElement) , @endif
+                                                @endforeach
                                             </b>
 
                                         </td>
@@ -288,7 +290,7 @@
                                         Post code:{!! $order->billingAddress->post_code !!}
                                     </td>
                                     <td class="text-left">
-                                        Country:{!! $order->shippingAddress->country !!}<br>
+                                        Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
                                         Region:{!! $order->shippingAddress->region !!}<br>
                                         City:{!! $order->shippingAddress->city !!}<br>
                                         First line:{!! $order->shippingAddress->first_line_address !!}<br>
