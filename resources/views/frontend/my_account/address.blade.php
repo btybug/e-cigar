@@ -118,7 +118,6 @@
                     </div>
                     <div class="tab-pane fade p-4" id="shippingAddress" role="tabpanel"
                          aria-labelledby="shippingAddress-tab">
-                        <h2 class="mb-3">Default Shipping</h2>
                         {!! Form::model($default_shipping,['class'=>'form-horizontal']) !!}
                         <div class="form-group">
                             <div class="row">
@@ -201,7 +200,6 @@
                         {!! Form::close() !!}
                     </div>
                     <div class="tab-pane fade p-4" id="addressBook" role="tabpanel" aria-labelledby="addressBook-tab">
-                        <h2 class="mb-3">Address Book</h2>
                         <div class="panel panel-default">
 
                             <div class="panel-body">
@@ -225,9 +223,10 @@
                                             </div>
                                         <div class="border py-3 px-4">
                                             <div class="render-address">
-                                                
+
                                             </div>
                                             <button type="submit" class="btn btn-primary edit-address">Edit</button>
+                                            <button type="submit" class="btn btn-danger edit-address">Delete</button>
                                         </div>
 
 
