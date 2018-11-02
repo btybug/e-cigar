@@ -58,6 +58,14 @@
                     <a class="nav-link" id="editOrder-tab" data-toggle="tab" href="#editOrder" role="tab"
                        aria-controls="editOrder" aria-selected="false">Edit Order</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="invoiceOrder-tab" data-toggle="tab" href="#invoiceOrder" role="tab"
+                       aria-controls="invoiceOrder" aria-selected="false">Invoice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="managementOrder-tab" data-toggle="tab" href="#managementOrder" role="tab"
+                       aria-controls="managementOrder" aria-selected="false">Management</a>
+                </li>
             </ul>
             <div class="tab-content tab-content-store-settings">
                 <div class="tab-pane fade active in" id="general" role="tabpanel" aria-labelledby="general-tab">
@@ -394,6 +402,14 @@
                     </div>
 
 
+                </div>
+                <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
+                     aria-labelledby="invoiceOrder-tab">
+                    Invoice
+                </div>
+                <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
+                     aria-labelledby="managementOrder-tab">
+                    managementOrder
                 </div>
 
             </div>
