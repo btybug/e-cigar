@@ -391,7 +391,7 @@ table.table--order-dtls.table-bordered tr > th {
 }
 
 .order-notes {
-    height: 800px;
+    height: 320px;
     overflow: auto;
 }
 
