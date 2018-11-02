@@ -426,60 +426,77 @@
             </div>
         </div>
         <div class="col-md-4 order-main-cnt_right-col">
-            <div class="order-main-cnt_control-btns">
-                <div class="my-dropdown">
-                    <button class="btn btn-primary dropdown-btn">Change Status</button>
-                    <div class="dropdown-inner">
-                        <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
-                            <div class="col-sm-8">
-                                <select name="changeStatusSelect" id="input-store" class="form-control">
-                                    <option value="0" selected="selected">Shipping</option>
-                                    <option value="0" selected="selected">...</option>
-                                    <option value="0" selected="selected">...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" type="number">
-                            </div>
-                        </div>
-                        <div class="text-center confirm-btn-outer">
-                            <button type="button" class="btn btn-primary">Change</button>
-                        </div>
-                    </div>
+            {{--<div class="order-main-cnt_control-btns">--}}
+                {{--<div class="my-dropdown">--}}
+                    {{--<button class="btn btn-primary dropdown-btn">Change Status</button>--}}
+                    {{--<div class="dropdown-inner">--}}
+                        {{--<p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>--}}
+                            {{--<div class="col-sm-8">--}}
+                                {{--<select name="changeStatusSelect" id="input-store" class="form-control">--}}
+                                    {{--<option value="0" selected="selected">Shipping</option>--}}
+                                    {{--<option value="0" selected="selected">...</option>--}}
+                                    {{--<option value="0" selected="selected">...</option>--}}
+                                {{--</select>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="form-group">--}}
+                            {{--<label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>--}}
+                            {{--<div class="col-sm-6">--}}
+                                {{--<input class="form-control" type="number">--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="text-center confirm-btn-outer">--}}
+                            {{--<button type="button" class="btn btn-primary">Change</button>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+
+                {{--<div class="my-dropdown">--}}
+                    {{--<button class="btn btn-primary btn dropdown-btn">+ Costumer Note</button>--}}
+                    {{--<div class="dropdown-inner">--}}
+                        {{--<p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>--}}
+                        {{--<div class="text-center">--}}
+                            {{--<h4 class="dropdown-heading">My Note Here</h4>--}}
+                            {{--<textarea name="myNote" rows="5"></textarea>--}}
+                        {{--</div>--}}
+                        {{--<div class="text-center confirm-btn-outer">--}}
+                            {{--<button type="button" class="btn btn-primary">Add Note</button>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+                {{--<div class="my-dropdown">--}}
+                    {{--<button class="btn btn-primary btn dropdown-btn">Internal Note</button>--}}
+                    {{--<div class="dropdown-inner">--}}
+                        {{--<p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>--}}
+                        {{--<div class="text-center">--}}
+                            {{--<h4 class="dropdown-heading">Internal Note</h4>--}}
+                            {{--<textarea name="myNote" rows="5"></textarea>--}}
+                        {{--</div>--}}
+                        {{--<div class="text-center confirm-btn-outer">--}}
+                            {{--<button type="button" class="btn btn-primary">Add Note</button>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            <ul class="nav nav-tabs ml-0" role="tablist">
+                <li class="nav-item active">
+                    <a class="nav-link" id="status-tab" data-toggle="tab" href="#status" role="tab" aria-controls="status" aria-selected="true" aria-expanded="true">Status</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes</a>
+                </li>
+            </ul>
+            <div class="tab-content" style="min-height: 200px; padding-top: 20px">
+                <div class="tab-pane fade active in" id="status" role="tabpanel" aria-labelledby="status-tab">
+                   Status Content
                 </div>
-
-
-                <div class="my-dropdown">
-                    <button class="btn btn-primary btn dropdown-btn">+ Costumer Note</button>
-                    <div class="dropdown-inner">
-                        <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
-                        <div class="text-center">
-                            <h4 class="dropdown-heading">My Note Here</h4>
-                            <textarea name="myNote" rows="5"></textarea>
-                        </div>
-                        <div class="text-center confirm-btn-outer">
-                            <button type="button" class="btn btn-primary">Add Note</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="my-dropdown">
-                    <button class="btn btn-primary btn dropdown-btn">Internal Note</button>
-                    <div class="dropdown-inner">
-                        <p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>
-                        <div class="text-center">
-                            <h4 class="dropdown-heading">Internal Note</h4>
-                            <textarea name="myNote" rows="5"></textarea>
-                        </div>
-                        <div class="text-center confirm-btn-outer">
-                            <button type="button" class="btn btn-primary">Add Note</button>
-                        </div>
-                    </div>
+                <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
+                    Notes Content
                 </div>
             </div>
 
@@ -605,6 +622,31 @@
                     {{--</p>--}}
                     {{--</div>--}}
                     {{--</div>--}}
+                </div>
+                <div style="padding: 0 15px">
+                    <div class="panel panel-default" style="padding: 15px 0">
+                        <div class="form-group mb-20">
+                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
+                            <div class="col-sm-8">
+                                <select name="changeStatusSelect" id="input-store" class="form-control">
+                                    <option value="0" selected="selected">Shipping</option>
+                                    <option value="0" selected="selected">...</option>
+                                    <option value="0" selected="selected">...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" type="number">
+                            </div>
+                        </div>
+                        <div class="confirm-btn-outer" style="padding-left: 15px">
+                            <button type="button" class="btn btn-primary">Change</button>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>

@@ -69,9 +69,9 @@
                         </div>
                         {!! Form::close() !!}
                         <div>
-                            <h3 class="mb-4">Password Change</h3>
+                            <h3 class="mb-4">Change Password</h3>
                             <div class="form-group row username">
-                                <label for="username" class="col-md-4">
+                                <label for="currentPass" class="col-md-4">
                                     Current Password
                                 </label>
                                 <div class="col-md-8">
