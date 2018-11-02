@@ -112,12 +112,21 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    @ok('admin_stock')
                     <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
+                    @endok
                     @ok('admin_store_attributes')
                     <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                     @endok
+                    @ok('admin_stock_options')
                     <li><a href="{{route('admin_stock_options')}}"><i class="fa fa-circle-o"></i> Options</a></li>
+                    @endok
+                    @ok('admin_stock_tags')
                     <li><a href="{{route('admin_stock_tags')}}"><i class="fa fa-circle-o"></i> Tags</a></li>
+                    @endok
+                    @ok('admin_store_attributes')
+                    <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
+                    @endok
                 </ul>
 
             </li>

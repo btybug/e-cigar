@@ -100,4 +100,9 @@ class InventoryController extends Controller
         $html = \View('admin.inventory._partials.variation_form', compact(['variationID', 'model']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function getStatuses()
+    {
+        return $this->view('statuses');
+    }
 }

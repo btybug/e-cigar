@@ -146,6 +146,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/save-stock', 'Admin\InventoryController@postStock')->name('admin_stock_save');
         Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
+        Route::get('/statuses', 'Admin\InventoryController@getStatuses')->name('admin_stock_statuses');
     });
 
     Route::group(['prefix' => 'attributes'], function () {
