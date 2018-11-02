@@ -225,8 +225,7 @@
                                     @foreach($order->items as $item)
                                 <tr>
                                     <td class="text-left"><a
-                                                href="">{!! $item->name !!}</a> <br>
-                                        &nbsp;<small> - Delivery Date: 2011-04-22</small>
+                                                href="">{!! $item->name !!}</a>
                                     </td>
                                     <td class="text-left">{!! $item->sku !!}</td>
                                     <td class="text-right">{!! $item->qty !!}</td>
@@ -240,7 +239,7 @@
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right">Flat Shipping Rate</td>
-                                    <td class="text-right">$@convert($item->shipping_price)</td>
+                                    <td class="text-right">$@convert($order->shipping_price)</td>
                                 </tr>
                                 <tr>
                                     <td colspan="4" class="text-right">Total</td>
