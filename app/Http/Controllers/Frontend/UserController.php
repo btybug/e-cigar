@@ -9,6 +9,7 @@ use App\Models\Addresses;
 use App\Models\GeoZones;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
+use App\Models\Orders;
 use App\Models\ZoneCountries;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -105,6 +106,16 @@ class UserController extends Controller
     {
         $user=\Auth::user()->with('orders')->first();
         return $this->view('orders',compact('user'));
+    }
+
+    public function getOrderInvoice ($id)
+    {
+        $order = Orders::where('id',$id)
+            ->with('items')
+            ->with('user')->first();
+        if(! $order)abort(404);
+
+        return $this->view('order_invoice',compact('order'));
     }
 
     public function getTickets()

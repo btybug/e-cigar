@@ -97,7 +97,10 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::post('/address-book-form', 'Frontend\UserController@postAddressBookForm')->name('post_my_account_address_book_form');
     Route::post('/save-address-book', 'Frontend\UserController@postAddressBookSave')->name('post_my_account_address_book_save');
     Route::post('/select-address-book', 'Frontend\UserController@postAddressBookSelect')->name('post_my_account_address_book_select');
-    Route::get('/orders', 'Frontend\UserController@getOrders')->name('my_account_orders');
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', 'Frontend\UserController@getOrders')->name('my_account_orders');
+        Route::get('/invoice/{id}', 'Frontend\UserController@getOrderInvoice')->name('my_account_order_invoice');
+    });
     Route::get('/tickets', 'Frontend\UserController@getTickets')->name('my_account_tickets');
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
     Route::post('/verification', 'Frontend\UserController@postVerification')->name('post_my_account_verification');

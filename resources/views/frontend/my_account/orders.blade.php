@@ -31,7 +31,7 @@
                             </td>
                             <td>
                                 <div class="mb-2">
-                                    <button type="button" class="btn btn-dark order-table_btn">View</button>
+                                    <a href="{!! route('my_account_order_invoice',$order->id) !!}" class="btn btn-dark order-table_btn">View</a>
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
