@@ -203,7 +203,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <div class="basic-center basic-wall">
+                                    <div class="basic-center basic-wall scrollbar_media_tab">
                                         <div class="tab-content">
                                             <div id="mediaotherimage" class="tab-pane fade ">
                                                 {!! media_button('other_images',$model,true) !!}
