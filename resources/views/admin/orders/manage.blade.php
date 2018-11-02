@@ -491,165 +491,159 @@
                     <a class="nav-link" id="notes-tab" data-toggle="tab" href="#notes" role="tab" aria-controls="notes" aria-selected="false">Notes</a>
                 </li>
             </ul>
-            <div class="tab-content" style="min-height: 200px; padding: 20px; background: #fff">
+            <div class="tab-content">
                 <div class="tab-pane fade active in" id="status" role="tabpanel" aria-labelledby="status-tab">
-                   Status Content
+                    <div class="panel panel-default">
+                        <div class="order-notes">
+                            @foreach($order->history as $history)
+                                <div class="order-notes_message {!! $history->color !!}">
+                                    <p>
+                                        on <span class="underlined">11/11/2011</span>
+                                        at <span class="underlined">11:11</span>
+                                    </p>
+                                    <p>
+                                        Status <span class="font-bold">{!! $history->status !!}</span>
+                                    </p>
+                                    @if($history->admin)
+                                        <p>
+                                            order status changed by <span
+                                                    class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>
+                                        </p>
+                                    @endif
+                                </div>
+                            @endforeach
+                            {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                            {{--<div>--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:11</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
+                            {{--<p>--}}
+                            {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
+                            {{--admin massage--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                            {{--<div>--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
+                            {{--<p>--}}
+                            {{--#094039404--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="order-notes_message order-notes_message-status-1">--}}
+                            {{--<div>--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                            {{--Order <span class="text-bold">submitted </span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                            {{--Status <span class="text-bold">processing</span>--}}
+                            {{--</p>--}}
+
+                            {{--<p>--}}
+                            {{--added by <span class="text-bold">abokamal </span>--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="order-notes_message order-notes_message-status-1">--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:11</span>--}}
+                            {{--</p>--}}
+
+                            {{--<p>--}}
+                            {{--Order <span class="text-bold">submitted </span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                            {{--Status <span class="font-bold">processing</span>--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                            {{--<div>--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:11</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
+                            {{--<p>--}}
+                            {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
+                            {{--admin massage--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="order-notes_message order-notes_message-status-2">--}}
+                            {{--<div>--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
+                            {{--<p>--}}
+                            {{--#094039404--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="order-notes_message order-notes_message-status-1">--}}
+                            {{--<div>--}}
+                            {{--<p>--}}
+                            {{--on <span class="underlined">11/11/2011</span>--}}
+                            {{--at <span class="underlined">11:15</span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                            {{--Order <span class="text-bold">submitted </span>--}}
+                            {{--</p>--}}
+                            {{--<p>--}}
+                            {{--Status <span class="text-bold">processing</span>--}}
+                            {{--</p>--}}
+
+                            {{--<p>--}}
+                            {{--added by <span class="text-bold">abokamal </span>--}}
+                            {{--</p>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                        </div>
+                        <div style="padding: 0 15px">
+                            <div class="panel panel-default" style="padding: 15px 0">
+                                <div class="form-group mb-20">
+                                    <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
+                                    <div class="col-sm-8">
+                                        <select name="changeStatusSelect" id="input-store" class="form-control">
+                                            <option value="0" selected="selected">Shipping</option>
+                                            <option value="0" selected="selected">...</option>
+                                            <option value="0" selected="selected">...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="number">
+                                    </div>
+                                </div>
+                                <div class="confirm-btn-outer" style="padding-left: 15px">
+                                    <button type="button" class="btn btn-primary">Change</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="notes" role="tabpanel" aria-labelledby="notes-tab">
                     Notes Content
                 </div>
             </div>
 
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title text-center">Order History</h3>
-                </div>
-                <div class="order-notes">
-                    @foreach($order->history as $history)
-                        <div class="order-notes_message {!! $history->color !!}">
-                            <p>
-                                on <span class="underlined">11/11/2011</span>
-                                at <span class="underlined">11:11</span>
-                            </p>
-                            <p>
-                                Status <span class="font-bold">{!! $history->status !!}</span>
-                            </p>
-                            @if($history->admin)
-                                <p>
-                                    order status changed by <span
-                                            class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>
-                                </p>
-                            @endif
-                        </div>
-                    @endforeach
-                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                    {{--<div>--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:11</span>--}}
-                    {{--</p>--}}
-                    {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
-                    {{--<p>--}}
-                    {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
-                    {{--admin massage--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                    {{--<div>--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:15</span>--}}
-                    {{--</p>--}}
-                    {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
-                    {{--<p>--}}
-                    {{--#094039404--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                    {{--<div>--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:15</span>--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                    {{--Order <span class="text-bold">submitted </span>--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                    {{--Status <span class="text-bold">processing</span>--}}
-                    {{--</p>--}}
-
-                    {{--<p>--}}
-                    {{--added by <span class="text-bold">abokamal </span>--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:11</span>--}}
-                    {{--</p>--}}
-
-                    {{--<p>--}}
-                    {{--Order <span class="text-bold">submitted </span>--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                    {{--Status <span class="font-bold">processing</span>--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                    {{--<div>--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:11</span>--}}
-                    {{--</p>--}}
-                    {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
-                    {{--<p>--}}
-                    {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
-                    {{--admin massage--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                    {{--<div>--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:15</span>--}}
-                    {{--</p>--}}
-                    {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
-                    {{--<p>--}}
-                    {{--#094039404--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                    {{--<div>--}}
-                    {{--<p>--}}
-                    {{--on <span class="underlined">11/11/2011</span>--}}
-                    {{--at <span class="underlined">11:15</span>--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                    {{--Order <span class="text-bold">submitted </span>--}}
-                    {{--</p>--}}
-                    {{--<p>--}}
-                    {{--Status <span class="text-bold">processing</span>--}}
-                    {{--</p>--}}
-
-                    {{--<p>--}}
-                    {{--added by <span class="text-bold">abokamal </span>--}}
-                    {{--</p>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                </div>
-                <div style="padding: 0 15px">
-                    <div class="panel panel-default" style="padding: 15px 0">
-                        <div class="form-group mb-20">
-                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
-                            <div class="col-sm-8">
-                                <select name="changeStatusSelect" id="input-store" class="form-control">
-                                    <option value="0" selected="selected">Shipping</option>
-                                    <option value="0" selected="selected">...</option>
-                                    <option value="0" selected="selected">...</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" type="number">
-                            </div>
-                        </div>
-                        <div class="confirm-btn-outer" style="padding-left: 15px">
-                            <button type="button" class="btn btn-primary">Change</button>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
         </div>
 
     </div>
