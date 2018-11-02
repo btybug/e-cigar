@@ -226,9 +226,8 @@
 
                                             </div>
                                             <button type="submit" class="btn btn-primary edit-address">Edit</button>
-                                            <button type="submit" class="btn btn-danger edit-address">Delete</button>
+                                            <button type="button" class="btn btn-danger edit-address">Delete</button>
                                         </div>
-
 
                                     </div>
                                 </div>
