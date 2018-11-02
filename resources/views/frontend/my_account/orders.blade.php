@@ -18,71 +18,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>5</td>
-                        <td>36$</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button></div>
-                            <div>
-                                <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>5</td>
-                        <td>36$</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button></div>
-                            <div>
-                                <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>5</td>
-                        <td>36$</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button></div>
-                            <div>
-                                <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>5</td>
-                        <td>36$</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button></div>
-                            <div>
-                                <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
-                            </div>
-                        </td>
-                    </tr>
-
+                    @foreach($user->orders as $order)
+                        <tr>
+                            <td>#4949</td>
+                            <td>{!! BBgetDateFormat($order->created_at).' '.BBgetTimeFormat($order->created_at)  !!}</td>
+                            <td>{!! $order->items->count() !!}</td>
+                            <td>@convert($order->amount)$</td>
+                            <td>
+                                <button type="button" class="btn btn-success {!! $order->history->last()->color !!} order-table_btn order-table_btn--status">
+                                    {!! $order->history->last()->status !!}
+                                </button>
+                            </td>
+                            <td>
+                                <div class="mb-2">
+                                    <button type="button" class="btn btn-dark order-table_btn">View</button>
+                                </div>
+                                <div>
+                                    <button type="button" class="btn btn-warning order-table_btn">Purchase</button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

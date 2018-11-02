@@ -4,6 +4,7 @@ namespace App;
 
 use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
+use App\Models\Orders;
 use App\Models\Roles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -41,6 +42,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function addresses()
     {
         return $this->hasMany(Addresses::class,'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Orders::class,'user_id')->with('items')->with('history');
     }
 
     public function authorAttributes()

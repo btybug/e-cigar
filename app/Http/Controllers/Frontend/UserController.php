@@ -101,7 +101,8 @@ class UserController extends Controller
 
     public function getOrders()
     {
-        return $this->view('orders');
+        $user=\Auth::user()->with('orders')->first();
+        return $this->view('orders',compact('user'));
     }
 
     public function getTickets()
