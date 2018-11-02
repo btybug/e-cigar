@@ -225,10 +225,7 @@
                                             </div>
                                         <div class="border py-3 px-4">
                                             <div class="render-address">
-                                                <p>lorem</p>
-                                                <p>56</p>
-                                                <p>Lorem ipsum</p>
-                                                <p>lorem</p>
+                                                
                                             </div>
                                             <button type="submit" class="btn btn-primary edit-address">Edit</button>
                                         </div>
