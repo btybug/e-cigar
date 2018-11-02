@@ -532,7 +532,7 @@ function App() {
         },
         makeMultiplaImagesAndInputs(arr) {
             let placeholder = document.querySelector(
-                `.image-box-media_${inputId}`
+                `.multiple-image-box-${inputId}`
             );
             let hiddenInput = document.querySelector(`.${inputId}`);
             let hiddenInputName = hiddenInput.getAttribute("data-name");
