@@ -174,6 +174,21 @@
                             {!! Form::close() !!}
                         </div>
                     </div>
+                    <div class="form-group row mb-5">
+                        <div class="col-md-12">
+                            <h5>
+                                <label for="selectAddress" class="control-label text-muted">Select
+                                    your address</label>
+                            </h5>
+                        </div>
+                        <div class="col-md-7 d-flex">
+                        {!! Form::select('address_book',['' => 'Select'] + $address->toArray(),$address_id,['class' => 'form-control select-address']) !!}
+                        <!-- Button trigger modal -->
+                            <button type="button"
+                                    class="nav-link nav-link--new-address btn btn-info address-book-new">+ Add New
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

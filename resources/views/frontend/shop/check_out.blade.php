@@ -21,9 +21,26 @@
         </div>
     </div>
 
+    <div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog"
+         aria-labelledby="newAddressModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Address Book</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body address-form">
 
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <style>
         .StripeElement {
@@ -52,7 +69,63 @@
     </style>
 @stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        //addresses js
+        $("body").on('click','.address-book-new',function () {
+            AjaxCall(
+                "/my-account/address-book-form",
+                { },
+                res => {
+                    if (!res.error) {
+                        $(".address-form").html(res.html);
+                        $("#geo_country_book").select2();
+                        $("#newAddressModal").modal();
+                    }
+                }
+            );
+        });
+
+        $("body").on("change", ".select-address", function() {
+            $(".container").css('opacity','0.6');
+            $(".loader-img").toggleClass('d-none');
+            AjaxCall(
+                "/change-shipping-method",
+                {addressId:$(this).val()},
+                res => {
+                    if (!res.error) {
+                        $(".container").css('opacity','1');
+                        $(".loader-img").toggleClass('d-none');
+                        $("#address").html(res.html);
+                    }
+                },
+                error => {
+                    $(".container").css('opacity','1');
+                    $(".loader-img").toggleClass('d-none');
+                }
+            );
+        });
+
+        $("body").on("change", "#geo_country_book", function() {
+            var value = $(this).val();
+            AjaxCall(
+                "/get-regions-by-geozone",
+                { country: value},
+                res => {
+                    let select = document.getElementById('geo_region_book');
+                    select.innerText = null;
+                    if (!res.error) {
+                        var opt = document.createElement('option');
+                        opt.value = res.data.id;
+                        opt.innerHTML = res.data.name;
+                        select.appendChild(opt);
+                    }
+                }
+            );
+        });
+    </script>
+
     <script>
         var stripe = Stripe("{!! stripe_key() !!}");
         var elements = stripe.elements();
@@ -225,11 +298,12 @@
             $("body").on("change", ".select-shipping-method", function () {
                 var optionId = $(this).val();
                 var deliveryId = $(this).data('delivery');
+                var addressId = $(".select-address").val();
                 $(".container").css('opacity','0.6');
                 $(".loader-img").toggleClass('d-none');
                 AjaxCall(
                     "/change-shipping-method",
-                    {deliveryId:deliveryId,optionId: optionId},
+                    {deliveryId:deliveryId,optionId: optionId,addressId: addressId},
                     res => {
                         if (!res.error) {
                             $(".container").css('opacity','1');
@@ -242,7 +316,6 @@
                         $(".loader-img").toggleClass('d-none');
                     }
                 );
-               console.log($(this).val())
             });
 
 
