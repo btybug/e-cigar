@@ -234,8 +234,8 @@
                                                 $lastElement = end($options);
                                             @endphp
                                             <b>
-                                            @foreach($options as $option)
-                                                {!! $option !!} @if($option!=$lastElement) , @endif
+                                            @foreach($options as $key=>$option)
+                                               {!! $key !!}: {!! $option !!} @if($option!=$lastElement) , @endif
                                             @endforeach
                                             </b>
 
