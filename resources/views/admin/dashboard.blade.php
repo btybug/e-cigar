@@ -524,7 +524,18 @@
     <!-- /.row (main row) -->
 <div class="dashboard_modal_add_widget">
     <div class="modal_add_widget">
-
+        <div class="connectedSortable">
+            <div>
+                <div class="box-header" style="background-color: red;">
+                    <ul>
+                        <li>1</li>
+                        <li>2</li>
+                        <li>4</li>
+                    
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @stop
