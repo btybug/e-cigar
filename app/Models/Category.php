@@ -40,7 +40,7 @@ class Category extends Translatable
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public static function recursiveItems($iems, $i = 0, $data = [])
+    public static function recursiveItems($iems, $i = 0, $data = [], $selected = [])
     {
         if (count($iems)) {
             $item = $iems[$i];
@@ -49,16 +49,21 @@ class Category extends Translatable
                 'name' => $item->name,
                 'text' => $item->name,
                 'parent_id' => $item->parent_id,
+                "state"=> false,
                 'children' => []
             ];
 
+            if(count($selected) && in_array($item->id,$selected)){
+                $data[$i]['state'] = ['selected' => true];
+            }
+
             if (count($item->children)) {
-                $data[$i]['children'] = self::recursiveItems($item->children, 0, $data[$i]['children']);
+                $data[$i]['children'] = self::recursiveItems($item->children, 0, $data[$i]['children'],$selected);
             }
 
             $i = $i + 1;
             if ($i != count($iems)) {
-                $data = self::recursiveItems($iems, $i, $data);
+                $data = self::recursiveItems($iems, $i, $data,$selected);
             }
 
             return $data;

@@ -185,6 +185,7 @@
                                                     <div class="col-md-7">
                                                         <div class="form-group">
                                                             <label class="col-sm-2 control-label">Categories</label>
+                                                            {!! Form::hidden('categories',(isset($checkedCategories)) ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
                                                             <div id="treeview_json"></div>
                                                         </div>
                                                     </div>
@@ -459,7 +460,6 @@
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
-
     function render_categories_tree(){
         $("#treeview_json").jstree({
         plugins: ["wholerow", "checkbox", "types"],
@@ -479,6 +479,13 @@
         }
     })
     }
+
+    $('#treeview_json').on("changed.jstree", function (e, data) {
+        console.log(data.selected);
+        // console.log(data.selected.attr("text"),54545);
+        $("#categories_tree").val(JSON.stringify(data.selected));
+
+    });
 
     render_categories_tree()
 

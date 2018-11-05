@@ -47,14 +47,16 @@ class InventoryController extends Controller
     {
         $model = Stock::findOrFail($id);
         $categories =  Category::with('children')->whereNull('parent_id')->get();
-        $data = Category::recursiveItems($categories);
+        $checkedCategories = $model->categories()->pluck('id')->all();
+        $data = Category::recursiveItems($categories,0,[],$checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
-        return $this->view('stock_new', compact(['model', 'attrs','data']));
+        
+        return $this->view('stock_new', compact(['model', 'attrs','data','checkedCategories']));
     }
 
     public function postStock(Request $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations','variation_options');
+        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations','variation_options','categories');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
         $stock->attrs()->sync($request->get('attributes'));
@@ -62,7 +64,7 @@ class InventoryController extends Controller
         $stock->attrs()->syncWithoutDetaching($options);
 
         $this->stockService->saveVariations($stock, $request->get('variations',[]),$request->get('variation_options',[]));
-
+        $stock->categories()->sync(json_decode($request->get('categories',[])));
         return redirect()->route('admin_stock');
     }
 
