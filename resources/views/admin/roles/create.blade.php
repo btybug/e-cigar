@@ -68,29 +68,32 @@
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
         var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
-        let html = (data) =>   `<div class="checkbox checkbox-success checkbox-compact">
-                        <div class="icheckbox_flat-green checked" aria-checked="true" aria-disabled="false" style="position: relative;"><input class="sub-module flat-red task module_action_application_managements module_action_application_managements_admin_settings" id="${data.url}" data-id="admin_settings" name="task" type="checkbox" value="1" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                        <label class="disable-text-select" for="${data.url}">${data.text}</label>
+        let html = (data) =>   `<div class="checkbox checkbox-success checkbox-compact row">
+                        <div class="col-lg-3 col-md-12" style="margin-bottom: 20px;"><div class="icheckbox_flat-green checked" aria-checked="true" aria-disabled="false" style="position: relative;"><input class="sub-module flat-red task module_action_application_managements module_action_application_managements_admin_settings" id="${data.url}" data-id="admin_settings" name="task" type="checkbox" value="1" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                        <label class="disable-text-select" for="${data.url}">${data.text}</label></div>
                     </div>` 
-        let html2 = (data) => `<div class="col-lg-9 col-md-12" style="margin-bottom:20px; border-bottom:1px solid #efefef; padding-bottom: 10px">
+        let html2 = (data2) => `<div class="col-lg-9 col-md-12" style="margin-bottom:20px; border-bottom:1px solid #3c8dbc; padding-bottom: 10px">
                     <div class="row dc-clear">
-                        <div class="col-lg-3 col-md-3 col-sm-6">
+                        ${data2}
+                        
+                    </div>
+                    </div>`
+        let html3 = (data) => `<div class="col-lg-3 col-md-3 col-sm-6" style="margin-bottom: 20px;">
                             <div class="checkbox checkbox-success checkbox-inline checkbox-compact">
                                 <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input class="route-item flat-red module_action_user_managements task_action_users" id="${data.text}" name="roles[user_managements][users][]" type="checkbox" value="${data.text}" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
                                 <label class="disable-text-select" for="${data.text}">${data.text}</label>
                             </div>
-                        </div>
-                        
-                    </div>
-                    </div>`            
+                        </div>`
         function MakeChekbox(aaa) {
             let treeNodes = Object.values(tree[0].nodes)
             treeNodes.forEach(item => {
                 let item2 = $(html(item))
                 if (item.nodes) {
+                    let temp =  ""
                     Object.values(item.nodes).forEach(elm => {
-                        item2.append(html2(elm))
+                        temp += html3(elm)
                     })
+                    item2.append(html2(temp))
                 }
                 $("#treeview_json").append(item2)
             })
