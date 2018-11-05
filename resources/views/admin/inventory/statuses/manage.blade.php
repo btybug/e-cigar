@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    @include('')
+                    @include('admin.inventory.statuses._patrials.status_form')
                 </div>
             </div>
         </div>
