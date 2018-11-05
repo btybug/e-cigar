@@ -431,63 +431,6 @@
 
         </div>
         <div class="col-md-4 order-main-cnt_right-col">
-            {{--<div class="order-main-cnt_control-btns">--}}
-            {{--<div class="my-dropdown">--}}
-            {{--<button class="btn btn-primary dropdown-btn">Change Status</button>--}}
-            {{--<div class="dropdown-inner">--}}
-            {{--<p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>--}}
-            {{--<div class="form-group">--}}
-            {{--<label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>--}}
-            {{--<div class="col-sm-8">--}}
-            {{--<select name="changeStatusSelect"  class="form-control">--}}
-            {{--<option value="0" selected="selected">Shipping</option>--}}
-            {{--<option value="0" selected="selected">...</option>--}}
-            {{--<option value="0" selected="selected">...</option>--}}
-            {{--</select>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="form-group">--}}
-            {{--<label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>--}}
-            {{--<div class="col-sm-6">--}}
-            {{--<input class="form-control" type="number">--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="text-center confirm-btn-outer">--}}
-            {{--<button type="button" class="btn btn-primary">Change</button>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-
-
-            {{--<div class="my-dropdown">--}}
-            {{--<button class="btn btn-primary btn dropdown-btn">+ Costumer Note</button>--}}
-            {{--<div class="dropdown-inner">--}}
-            {{--<p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>--}}
-            {{--<div class="text-center">--}}
-            {{--<h4 class="dropdown-heading">My Note Here</h4>--}}
-            {{--<textarea name="myNote" rows="5"></textarea>--}}
-            {{--</div>--}}
-            {{--<div class="text-center confirm-btn-outer">--}}
-            {{--<button type="button" class="btn btn-primary">Add Note</button>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-
-            {{--<div class="my-dropdown">--}}
-            {{--<button class="btn btn-primary btn dropdown-btn">Internal Note</button>--}}
-            {{--<div class="dropdown-inner">--}}
-            {{--<p class="dropdown-close text-right"><i class="fa fa-times" aria-hidden="true"></i></p>--}}
-            {{--<div class="text-center">--}}
-            {{--<h4 class="dropdown-heading">Internal Note</h4>--}}
-            {{--<textarea name="myNote" rows="5"></textarea>--}}
-            {{--</div>--}}
-            {{--<div class="text-center confirm-btn-outer">--}}
-            {{--<button type="button" class="btn btn-primary">Add Note</button>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-            {{--</div>--}}
-
             <div class="order-notes panel panel-default mb-0">
                 {{--@foreach($order->history as $history)--}}
                 {{--<div class="order-notes_message {!! $history->color !!}">--}}
@@ -561,136 +504,36 @@
                     </ul>
                 </div>
 
-
-                {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                {{--<div>--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:11</span>--}}
-                {{--</p>--}}
-                {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
-                {{--<p>--}}
-                {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
-                {{--admin massage--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                {{--<div>--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:15</span>--}}
-                {{--</p>--}}
-                {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
-                {{--<p>--}}
-                {{--#094039404--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                {{--<div>--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:15</span>--}}
-                {{--</p>--}}
-                {{--<p>--}}
-                {{--Order <span class="text-bold">submitted </span>--}}
-                {{--</p>--}}
-                {{--<p>--}}
-                {{--Status <span class="text-bold">processing</span>--}}
-                {{--</p>--}}
-
-                {{--<p>--}}
-                {{--added by <span class="text-bold">abokamal </span>--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:11</span>--}}
-                {{--</p>--}}
-
-                {{--<p>--}}
-                {{--Order <span class="text-bold">submitted </span>--}}
-                {{--</p>--}}
-                {{--<p>--}}
-                {{--Status <span class="font-bold">processing</span>--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                {{--<div>--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:11</span>--}}
-                {{--</p>--}}
-                {{--<p>order status changed to <span class="font-bold"> processing </span></p>--}}
-                {{--<p>--}}
-                {{--<i class="fa fa-quote-left" aria-hidden="true"></i>--}}
-                {{--admin massage--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="order-notes_message order-notes_message-status-2">--}}
-                {{--<div>--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:15</span>--}}
-                {{--</p>--}}
-                {{--<p>order status changed to <span class="text-bold">pending </span></p>--}}
-                {{--<p>--}}
-                {{--#094039404--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="order-notes_message order-notes_message-status-1">--}}
-                {{--<div>--}}
-                {{--<p>--}}
-                {{--on <span class="underlined">11/11/2011</span>--}}
-                {{--at <span class="underlined">11:15</span>--}}
-                {{--</p>--}}
-                {{--<p>--}}
-                {{--Order <span class="text-bold">submitted </span>--}}
-                {{--</p>--}}
-                {{--<p>--}}
-                {{--Status <span class="text-bold">processing</span>--}}
-                {{--</p>--}}
-
-                {{--<p>--}}
-                {{--added by <span class="text-bold">abokamal </span>--}}
-                {{--</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
             </div>
 
-            <div class="clearfix">
+            <div class="row order-main-cnt_control-btns">
                 <button class="btn btn-default col-sm-6"><i class="fa fa-plus" aria-hidden="true"></i> Add Status</button>
                 <button class="btn btn-default col-sm-6"><i class="fa fa-plus" aria-hidden="true"></i> Add Note</button>
             </div>
 
 
-            <div class="panel panel-default" style="padding: 15px">
-                <div class="form-group mb-20 w-100">
-                    <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
-                    <div class="col-sm-8">
-                        <select name="changeStatusSelect" id="input-store" class="form-control">
-                            <option value="0" selected="selected">Shipping</option>
-                            <option value="0" selected="selected">...</option>
-                            <option value="0" selected="selected">...</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" type="number">
-                    </div>
-                </div>
-                <div class="confirm-btn-outer" style="padding-left: 15px">
-                    <button type="button" class="btn btn-primary">Change</button>
-                </div>
+            {{--<div class="panel panel-default" style="padding: 15px">--}}
+                {{--<div class="form-group mb-20 w-100">--}}
+                    {{--<label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>--}}
+                    {{--<div class="col-sm-8">--}}
+                        {{--<select name="changeStatusSelect" id="input-store" class="form-control">--}}
+                            {{--<option value="0" selected="selected">Shipping</option>--}}
+                            {{--<option value="0" selected="selected">...</option>--}}
+                            {{--<option value="0" selected="selected">...</option>--}}
+                        {{--</select>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="form-group">--}}
+                    {{--<label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>--}}
+                    {{--<div class="col-sm-6">--}}
+                        {{--<input class="form-control" type="number">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="confirm-btn-outer" style="padding-left: 15px">--}}
+                    {{--<button type="button" class="btn btn-primary">Change</button>--}}
+                {{--</div>--}}
 
-            </div>
+            {{--</div>--}}
 
 
         </div>

@@ -287,15 +287,15 @@ table.table--order-dtls.table-bordered tr > th {
 
 .order-main-cnt_right-col {
     border-left: 2px solid #ddd;
-    min-height: 868px;
-    overflow: auto
+    height: calc(100vh - 194px);
+    display: flex;
+    flex-direction: column;
+    /*min-height: 868px;*/
+    /*overflow: auto*/
 }
 
 .order-main-cnt_control-btns {
-    width: 100%;
-    display: flex;
-    position: relative;
-    margin-bottom: 30px;
+    margin-top: auto;
 }
 
 .order-main-cnt_control-btns .dropdown-inner {
@@ -327,7 +327,7 @@ table.table--order-dtls.table-bordered tr > th {
 }
 
 .order-notes {
-    height: 409px;
+    height: 466px;
     overflow: auto;
 }
 
