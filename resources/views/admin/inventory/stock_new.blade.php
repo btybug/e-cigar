@@ -431,6 +431,7 @@
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>

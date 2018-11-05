@@ -793,17 +793,3 @@ color: red;
 .h-100{
     height: 100%;
 }
-body.sidebar-mini{
-    overflow: hidden;
-}
-body.sidebar-mini .wrapper{
-    height: calc(100vh - 50px) !important;
-    overflow: hidden;
-}
-
-body.sidebar-mini .wrapper .content-wrapper{
-    min-height: 100% !important;
-}
-.bestbetter-modal{
-    padding: 0;
-}
