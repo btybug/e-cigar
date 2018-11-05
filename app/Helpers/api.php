@@ -187,7 +187,7 @@ function get_translated_by_array($model, $locale, $column)
 
 function post_url($post)
 {
-    return ($post->url) ? "/blog/" . $post->url : "#";
+    return ($post->url) ? "/news/" . $post->url : "#";
 }
 
 function get_languages()

@@ -176,10 +176,10 @@
 
 
 const  comment = {
-     init: function(data}){
+     init: function(data){
          $('#comments-container').comments({
              getComments: function(success, error) {
-                 AjaxC0all(`/get-comments`, data, function(res){
+                 AjaxCall(`/get-comments`, data, function(res){
                      if (!res.error) {
                          success(res.data);
                      }
@@ -189,10 +189,10 @@ const  comment = {
          });
      }
 }
- comment.innit({
-     'comentable':'Posts',
-     'id':'1'
- })
+// comment.init({
+//     'comentable':'Posts',
+//     'id':'1'
+// })
 
 
 document.querySelector(".jquery-comments .save").addEventListener("click", function(e){
