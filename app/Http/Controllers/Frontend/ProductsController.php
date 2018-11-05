@@ -51,18 +51,23 @@ class ProductsController extends Controller
     public function getJuice(Request $request,$category_id = null)
     {
         $orderBy=$request->get('orderBy');
+        $products = [];
         $orderByArray = explode(',', $request->get('orderBy', 'id,DESC'));
         $column = $orderByArray[0];
         $direction = $orderByArray[1];
         $categories = Category::find(Category::JUICE_ID);
         $category = ($category_id) ? Category::find($category_id) : ((count($categories->children)) ? $categories->children->first() : null);
 
-        $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
-            ->where('stock_translations.locale', app()->getLocale())
-            ->where('type', 'JUE')
-            ->where('status', true)
-            ->select('stocks.*', 'stock_translations.name')
-            ->orderBy($column, $direction)->paginate(5);
+        if($category){
+            $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+                ->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
+                ->select('stocks.*', 'stock_translations.name')
+                ->where('stock_translations.locale', app()->getLocale())
+                ->where('type', 'JUE')
+                ->where('status', true)
+                ->where('stock_categories.categories_id', $category->id)
+                ->orderBy($column, $direction)->get();
+        }
 
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 

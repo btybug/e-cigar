@@ -68,62 +68,26 @@
                     <div class="tab-content">
                         @foreach($category->children as $item)
                             <div class="tab-pane fade p-4 {{ $loop->first ? ' show active' : '' }}" id="subTab{{ $item->id }}" role="tabpanel" aria-labelledby="tab-{{ $item->id }}">
-                                {{ $item->name }}
                                 <ul class="list-unstyled row juice-tabs-items">
-                                    <li class="col-md-3 mb-3">
-                                        <div class="shadow p-3 bg-light">
-                                            <div class="mb-3 img-outer">
-                                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
-                                            </div>
-                                            <h4 class="text-center">Product Title</h4>
-                                        </div>
+                                    @if(count($products))
+                                        @foreach($products as $product)
+                                            <li class="col-md-3 mb-3">
+                                                <div class="shadow p-3 bg-light">
+                                                    <div class="mb-3 img-outer">
+                                                        @if($product->image)
+                                                            <img class="card-img-top" src="{{ $product->image }}" alt="">
+                                                        @else
+                                                            <img class="card-img-top" src="/public/images/no_image.jpg" alt="">
+                                                        @endif
 
-                                    </li>
-                                    <li class="col-md-3 mb-3">
-                                        <div class="shadow p-3 bg-light">
-                                            <div class="mb-3 img-outer">
-                                                <img class="card-img-top" src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg" alt="">
-                                            </div>
-                                            <h4 class="text-center">Product Title</h4>
-                                        </div>
-
-                                    </li>
-                                    <li class="col-md-3 mb-3">
-                                        <div class="shadow p-3 bg-light">
-                                            <div class="mb-3 img-outer">
-                                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
-                                            </div>
-                                            <h4 class="text-center">Product Title</h4>
-                                        </div>
-
-                                    </li>
-                                    <li class="col-md-3 mb-3">
-                                        <div class="shadow p-3 bg-light">
-                                            <div class="mb-3 img-outer">
-                                                <img class="card-img-top" src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg" alt="">
-                                            </div>
-                                            <h4 class="text-center">Product Title</h4>
-                                        </div>
-
-                                    </li>
-                                    <li class="col-md-3 mb-3">
-                                        <div class="shadow p-3 bg-light">
-                                            <div class="mb-3 img-outer">
-                                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
-                                            </div>
-                                            <h4 class="text-center">Product Title</h4>
-                                        </div>
-
-                                    </li>
-                                    <li class="col-md-3 mb-3">
-                                        <div class="shadow p-3 bg-light">
-                                            <div class="mb-3 img-outer">
-                                                <img class="card-img-top" src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg" alt="">
-                                            </div>
-                                            <h4 class="text-center">Product Title</h4>
-                                        </div>
-
-                                    </li>
+                                                    </div>
+                                                    <h4 class="text-center">{{ $product->name }}</h4>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    @else
+                                        NO products
+                                    @endif
                                 </ul>
                             </div>
                         @endforeach
