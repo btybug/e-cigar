@@ -4,22 +4,28 @@
     <div class="row">
         <div class="col-md-3">
             <ul class="list-unstyled list-group">
-                @if(count($categories))
-                    @foreach($categories as $category)
-                        <li class="list-group-item">
-                            <a href="{!! url('products/juice',$category->id) !!}" class="d-inline-block w-100 text-center">{{ $category->name }}</a>
+                @if(count($categories->children))
+                    @foreach($categories->children as $child)
+                        <li class="list-group-item {{ ($category && $category->id == $child->id) ? 'active' : '' }}">
+                            <a href="{!! url('products/juice',$child->id) !!}" class="d-inline-block w-100 text-center">{{ $child->name }}</a>
                         </li>
                     @endforeach
                 @endif
             </ul>
         </div>
         <div class="col-md-9">
+            @if($category)
             <div class="card juice-poster juice-poster--type-1 mb-5 bg-light">
                 <div class="row no-gutters">
                     <div class="col-md-5">
-                        <h3 class="card-title text-center mb-0 p-2 text-white">Kaliony Hit</h3>
+                        <h3 class="card-title text-center mb-0 p-2 text-white">{{ $category->name }}</h3>
                         <div class="img-outer card-img-outer p-4">
-                            <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
+                            @if($category->image)
+                                <img class="card-img-top" src="{{ $category->image }}" alt="">
+                            @else
+                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
+                            @endif
+
                         </div>
                     </div>
 
@@ -29,9 +35,8 @@
                                 <a href="#" class="btn btn-primary">View more</a>
                             </div>
                             <div class="pt-4 px-3 text-justify">
-                                <p class="card-text mb-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aut dignissimos earum eum eveniet ex laudantium nobis. Atque dignissimos explicabo impedit ipsum laborum modi necessitatibus obcaecati optio quia quos. Quo!</p>
+                                <p class="card-text mb-3">{{ $category->description }}</p>
                             </div>
-
 
                             <div class="row no-gutters mt-auto">
                                 <div class="col-md-3 flavor-img-outer p-3" data-title="Flavor 1">
@@ -52,28 +57,25 @@
                     </div>
                 </div>
             </div>
-            <ul class="nav nav-tabs d-flex" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="firstTab-tab" data-toggle="tab" href="#firstTab" role="tab" aria-controls="firstTab" aria-selected="true">First Tab</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="secondTab-tab" data-toggle="tab" href="#secondTab" role="tab" aria-controls="secondTab" aria-selected="false">Second Tab</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="thirdTab-tab" data-toggle="tab" href="#thirdTab" role="tab" aria-controls="thirdTab" aria-selected="false">Third Tab</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="firstTab" role="tabpanel" aria-labelledby="firstTab-tab">
-                    first Tab
-                </div>
-                <div class="tab-pane fade" id="secondTab" role="tabpanel" aria-labelledby="secondTab-tab">
-                    second Tab
-                </div>
-                <div class="tab-pane fade" id="thirdTab" role="tabpanel" aria-labelledby="thirdTab-tab">
-                    third Tab
-                </div>
-            </div>
+            @if(count($category->children))
+                    <ul class="nav nav-tabs d-flex" role="tablist">
+                        @foreach($category->children as $item)
+                            <li class="nav-item">
+                                <a class="nav-link {{ $loop->first ? 'active' : '' }}" id="tab-{{ $item->id }}" data-toggle="tab" href="#subTab{{ $item->id }}" role="tab" aria-controls="subTab{{ $item->id }}" aria-selected="true">{{ $item->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="tab-content">
+                        @foreach($category->children as $item)
+                            <div class="tab-pane fade {{ $loop->first ? ' show active' : '' }}" id="subTab{{ $item->id }}" role="tabpanel" aria-labelledby="tab-{{ $item->id }}">
+                                {{ $item->name }} Tab
+                            </div>
+                        @endforeach
+                    </div>
+
+            @endif
+
+            @endif
         </div>
     </div>
 

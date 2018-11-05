@@ -11,6 +11,8 @@ class Category extends Translatable
     /**
      * @var string
      */
+    const JUICE_ID = 3;
+
     protected $table = 'categories';
 
     public $translationModel = CategoryTranslation::class;

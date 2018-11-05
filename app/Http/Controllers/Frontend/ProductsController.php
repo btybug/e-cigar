@@ -54,9 +54,8 @@ class ProductsController extends Controller
         $orderByArray = explode(',', $request->get('orderBy', 'id,DESC'));
         $column = $orderByArray[0];
         $direction = $orderByArray[1];
-
-        //TODO: make dynamic or CONST
-        $categories = Category::find(3)->children;
+        $categories = Category::find(Category::JUICE_ID);
+        $category = ($category_id) ? Category::find($category_id) : ((count($categories->children)) ? $categories->children->first() : null);
 
         $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
             ->where('stock_translations.locale', app()->getLocale())
@@ -67,7 +66,7 @@ class ProductsController extends Controller
 
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 
-        return $this->view('juice',compact('products','orderBy','attributes','categories'));
+        return $this->view('juice',compact('products','orderBy','attributes','categories','category'));
     }
 
     public function categoryJuice($id)
