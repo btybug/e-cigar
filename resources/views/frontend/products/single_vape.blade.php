@@ -1,11 +1,29 @@
 @extends('layouts.frontend')
 @section('content')
     <div class="container container--vape">
+
         <div class="row mb-5">
             <div class="col-md-4">
-                <a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">
-                    <img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">
-                </a>
+                <div class="product-single-slider owl-carousel owl-theme">
+                    <div class="item">
+                        <img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">
+                    </div>
+                    <div class="item">
+                        <img src="https://www.elementvape.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/m/smok_vape_pen_22_light_edition_kit_5_colors.jpg" alt="img">
+                    </div>
+                    <div class="item">
+                        <img src="https://www.lepetitvapoteur.com/16417-large_default/peach-lemon-aj-vape.jpg" alt="img">
+                    </div>
+                    <div class="item">
+                        <img src="https://www.electrictobacconist.com/images/bo-vape-starter-kit-p4245-6046_image.jpg" alt="img">
+                    </div>
+                    <div class="item">
+                        <img src="https://www.vapeyaya.com/image/cache/catalog/Product%20Pic/e-pipe/e-pipe-618/e-pipe-618-kit-automatic-e-cigarette-smoking-vape-pipe-10-800x800.jpg" alt="img">
+                    </div>
+                </div>
+                {{--<a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">--}}
+                    {{--<img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">--}}
+                {{--</a>--}}
                 <ul class="single-product_btns pl-0 mb-0 d-md-flex justify-content-md-between">
                     <li><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
                     <li class="single-product_btns_share"><a href="#" class="btn btn-outline-dark">share</a>
@@ -157,14 +175,25 @@
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
     <link rel="stylesheet" href="{{asset('public/frontend/css/jssor-slider.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
 @stop
 
 @section('js')
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script src="{{asset('public/frontend/js/jssor.slider-27.5.0.min.js')}}"></script>
+    <script src="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>
 
     <script>
         $(document).ready(function () {
+            $('.product-single-slider').owlCarousel({
+//                margin:10,
+                nav:false,
+                items:1,
+                dots:false,
+                autoplay:true,
+                autoplayTimeout:3000
+            })
             get_price();
             $("body").on('change','.select-variation-option',function () {
                 get_price();
