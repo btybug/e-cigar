@@ -335,7 +335,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label" for="input-store">Store</label>
                                     <div class="col-sm-10">
-                                        <select name="store_id" id="input-store" class="form-control">
+                                        <select name="store_id"  class="form-control">
                                             <option value="0" selected="selected">Default</option>
                                         </select>
                                     </div>
@@ -439,7 +439,7 @@
                         {{--<div class="form-group">--}}
                             {{--<label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>--}}
                             {{--<div class="col-sm-8">--}}
-                                {{--<select name="changeStatusSelect" id="input-store" class="form-control">--}}
+                                {{--<select name="changeStatusSelect"  class="form-control">--}}
                                     {{--<option value="0" selected="selected">Shipping</option>--}}
                                     {{--<option value="0" selected="selected">...</option>--}}
                                     {{--<option value="0" selected="selected">...</option>--}}
@@ -622,11 +622,8 @@
                                 <div class="form-group mb-20">
                                     <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
                                     <div class="col-sm-8">
-                                        <select name="changeStatusSelect" id="input-store" class="form-control">
-                                            <option value="0" selected="selected">Shipping</option>
-                                            <option value="0" selected="selected">...</option>
-                                            <option value="0" selected="selected">...</option>
-                                        </select>
+                                        {!! Form::select('changeStatusSelect',$statuses,null,['class'=>'form-control']) !!}
+                                      
                                     </div>
                                 </div>
                                 <div class="form-group">

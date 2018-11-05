@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Orders;
+use App\Models\Statuses;
 
 class OrdersController extends Controller
 {
@@ -30,7 +31,8 @@ class OrdersController extends Controller
             ->with('items')
             ->with('user')->first();
         if(!$order)abort(404);
-        return $this->view('manage',compact('order'));
+        $statuses=Statuses::where('type','order')->get()->pluck('name','id');
+        return $this->view('manage',compact('order','statuses'));
     }
 
     public function getNew()
