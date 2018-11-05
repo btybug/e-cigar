@@ -444,6 +444,7 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
 @stop
 @section('js')
@@ -451,42 +452,102 @@
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
-    var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
-    var tree =[{!! json_encode(['nodes' => $categories]) !!}]
-    $('#treeview_json').treeview({
-        data: tree,
-        showCheckbox: true,
-        onNodeChecked: function(event, node) {
-            if(typeof node.parentId !== "undefined") {
-                checkParent(node.parentId, "#treeview_json")
-            }
+    
+    function xxx(){
+        $("#treeview_json").jstree({
+        plugins: ["wholerow", "checkbox", "types"],
+        core: {
+            themes: {
+                responsive: !1
+            },
+            data: [{
+                text: "Same but with checkboxes",
+                children: [{
+                    text: "initially selected",
+                    state: {
+                        selected: !0
+                    }
+                }, {
+                    text: "Folder 1"
+                }, {
+                    text: "Folder 2"
+                }, {
+                    text: "Folder 3"
+                }, {
+                    text: "initially open",
+                    icon: "fa fa-folder fa-lg",
+                    state: {
+                        opened: !0
+                    },
+                    children: [{
+                        text: "Another node"
+                    }, {
+                        text: "disabled node",
+                        state: {
+                            disabled: !0
+                        }
+                    }]
+                }, {
+                    text: "custom icon",
+                    icon: "fa fa-cloud-download fa-lg text-inverse"
+                }, {
+                    text: "disabled node",
+                    state: {
+                        disabled: !0
+                    }
+                }]
+            }, "Root node 2"]
         },
-        onNodeUnchecked: function (event, node) {
-            unCheckChildren(node.nodeId, "#treeview_json")
-        }
-    });
-    function checkParent(id, selecetor) {
-            let parrentId = id;
-            $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
-            if(parrentId){
-                let parent = $('#treeview_json').treeview('getNode', parrentId);
-                let pId = parent.parentId
-                checkParent(pId, selecetor)
+        types: {
+            "default": {
+                icon: "fa fa-folder text-primary fa-lg"
+            },
+            file: {
+                icon: "fa fa-file text-success fa-lg"
             }
-
         }
-        function unCheckChildren(id, selecetor){
-            let currentNode = $('#treeview_json').treeview('getNode', id);
-            $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
-            if (currentNode.nodes){
-                Object.values(currentNode.nodes).forEach(item => {
-                    unCheckChildren(item.nodeId, selecetor )
-                })
-            }
+    })
+    }
+
+    xxx()
+
+    // var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
+    // var tree =[{!! json_encode(['nodes' => $categories]) !!}]
+    // $('#treeview_json').treeview({
+    //     data: tree,
+    //     showCheckbox: true,
+    //     onNodeChecked: function(event, node) {
+    //         if(typeof node.parentId !== "undefined") {
+    //             checkParent(node.parentId, "#treeview_json")
+    //         }
+    //     },
+    //     onNodeUnchecked: function (event, node) {
+    //         unCheckChildren(node.nodeId, "#treeview_json")
+    //     }
+    // });
+    // function checkParent(id, selecetor) {
+    //         let parrentId = id;
+    //         $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
+    //         if(parrentId){
+    //             let parent = $('#treeview_json').treeview('getNode', parrentId);
+    //             let pId = parent.parentId
+    //             checkParent(pId, selecetor)
+    //         }
+
+    //     }
+    // function unCheckChildren(id, selecetor){
+    //     let currentNode = $('#treeview_json').treeview('getNode', id);
+    //     $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
+    //     if (currentNode.nodes){
+    //         Object.values(currentNode.nodes).forEach(item => {
+    //             unCheckChildren(item.nodeId, selecetor )
+    //         })
+    //     }
 
 
-        }
+    // }
     </script>
     <script>
         $(document).ready(function () {
