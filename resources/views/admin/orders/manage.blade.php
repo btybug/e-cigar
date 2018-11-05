@@ -531,45 +531,12 @@
                                 <div>
                                     <img src="http://e-cigar.loc/public/admin_theme/dist/img/user2-160x160.jpg">
                                     <span>11/5/2018</span>
-                                    <span>18:25</span>
-
-                                    <<<<<<< Updated upstream
-                                    {{--<p>--}}
-                                    {{--added by <span class="text-bold">abokamal </span>--}}
-                                    {{--</p>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                </div>
-                                <div style="padding: 0 15px">
-                                    <div class="panel panel-default" style="padding: 15px 0">
-                                        <div class="form-group mb-20">
-                                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
-                                            <div class="col-sm-8">
-                                                {!! Form::select('changeStatusSelect',$statuses,null,['class'=>'form-control']) !!}
-
-                                                =======
-                                                >>>>>>> Stashed changes
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div>
-                                                <h6>Lorem ipsum</h6>
-                                                <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                                    Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                            </div>
-                                        </div>
-                        </li>
-                        <li>
-                            <div>
-                                <div>
-                                    <img src="http://e-cigar.loc/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>20:00</span>
+                                    <span>15:25</span>
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <h6>Lorem ipsum</h6>
+                                    <div class="status-holder">Submited</div>
                                     <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
