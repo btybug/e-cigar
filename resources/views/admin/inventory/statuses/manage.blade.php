@@ -15,7 +15,7 @@
             </div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 attributes-container">
                         @foreach($statuses as $key=>$status)
                             <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $key !!}"
                                  data-parent-id="1">
@@ -33,10 +33,10 @@
                                 <input name="id" type="hidden">
                                 <input name="parent_id" type="hidden" value="1">
                                 <div class="col-md-8">
-                                    <input class="form-control" name="translatable[gb][name]" type="text">
+                                    <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
                                 </div>
                                 <div class="col-md-4 text-right">
-                                    <input class="btn btn-primary" type="submit" value="Add">
+                                    <button class="btn btn-primary add-new-order"  type="button">Add </button>
                                 </div>
                             </form>
                         </div>
@@ -50,4 +50,37 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop
+
+@section("js")
+<script>
+$("body").on("click", ".attr-option", function(e) {
+    e.preventDefault()
+    let id = $(this).attr("data-item-id")
+    AjaxCall("/url", {id}, function (res) {
+        if (!res.error) {
+            $("body").find(".options-form").html(res.html)
+        }
+    })
+})
+
+$("body").on("click", ".add-new-order", function (e) {
+    e.preventDefault()
+    let name =     $(".new-oreder-input").val()
+    AjaxCall("/url", {name}, function (res) {
+        if (!res.error) {
+            let html = `<div class="form-group row bord-top bg-light attr-option" data-item-id="${res.id}" data-parent-id="${res.id}">
+                    <div class="col-md-8">
+                        ${name}
+                    </div>
+                    <div class="col-md-4 text-right">
+
+                    </div>
+                </div>`
+            $("body").find(".attributes-container").append(html)
+            $(".new-oreder-input").val("")
+        }
+    })
+})
+</script>
 @stop
