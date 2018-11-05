@@ -475,6 +475,7 @@
         $("#treeview_json").jstree({
         "checkbox" : {
             "three_state": false,
+            "cascade": 'undetermined',
             "keep_selected_style" : false
         },
         plugins: ["wholerow", "checkbox", "types"],
@@ -499,17 +500,20 @@
         if(data.node) {
             var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
             var ids = [];
+            var parents = [];
             for (var i = 0, j = selectedNode.length; i < j; i++) {
                 ids.push(selectedNode[i].id);
+                parents.push(selectedNode[i].parent);
             }
-//            var uniqueNames = [];
-//            if(parent.length > 0){
-//                $.each(parent, function(i, el){
-//                    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-//                });
-//            }
-//            var all = id.concat(uniqueNames);
-            $("#categories_tree").val(JSON.stringify(ids));
+            var uniqueNames = [];
+            if(parents.length > 0){
+                $.each(parents, function(i, el){
+                    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                });
+            }
+            console.log(uniqueNames)
+            var all = ids.concat(uniqueNames);
+            $("#categories_tree").val(JSON.stringify(all));
         }
     });
 
