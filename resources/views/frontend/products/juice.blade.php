@@ -7,7 +7,7 @@
                 @if(count($categories->children))
                     @foreach($categories->children as $child)
                         <li class="list-group-item {{ ($category && $category->id == $child->id) ? 'active' : '' }}">
-                            <a href="{!! url('products/juice',$child->id) !!}" class="d-inline-block w-100 text-center">{{ $child->name }}</a>
+                            <a href="{!! url('products/juice',$child->slug) !!}" class="d-inline-block w-100 text-center">{{ $child->name }}</a>
                         </li>
                     @endforeach
                 @endif
@@ -82,7 +82,7 @@
                                                         @endif
 
                                                     </div>
-                                                    <h4 class="text-center"><a href="{{ route('product_single_juice',[$category->id,$product->id]) }}">{{ $product->name }}</a></h4>
+                                                    <h4 class="text-center"><a href="{{ route('product_single_juice',[$category->slug,$product->id]) }}">{{ $product->name }}</a></h4>
                                                 </div>
                                             </li>
                                             @endif

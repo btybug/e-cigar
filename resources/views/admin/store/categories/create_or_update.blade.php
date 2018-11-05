@@ -36,7 +36,10 @@
         @endforeach
     @endif
 </div>
-
+<div class="form-group">
+    <label>Slug</label>
+    {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
+</div>
 <div class="form-group">
     <label>Parent</label>
     {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
@@ -52,6 +55,7 @@
         </div>
     </div>
 </div>
+
 <div class="form-group">
     <label>Image</label>
     {!! media_button('image',$model) !!}

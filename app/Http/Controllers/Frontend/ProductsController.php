@@ -48,7 +48,7 @@ class ProductsController extends Controller
         return $this->view('single_vape',compact('vape','variations'));
     }
 
-    public function getJuice(Request $request,$category_id = null)
+    public function getJuice(Request $request,$slug = null)
     {
         $orderBy=$request->get('orderBy');
         $products = [];
@@ -56,7 +56,7 @@ class ProductsController extends Controller
         $column = $orderByArray[0];
         $direction = $orderByArray[1];
         $categories = Category::find(Category::JUICE_ID);
-        $category = ($category_id) ? Category::find($category_id) : ((count($categories->children)) ? $categories->children->first() : null);
+        $category = ($slug) ? Category::where('slug',$slug)->first() : ((count($categories->children)) ? $categories->children->first() : null);
 
         if($category){
             $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
@@ -81,7 +81,7 @@ class ProductsController extends Controller
         return $this->view('category_juice');
     }
 
-    public function singleJuice($category_id,$id)
+    public function singleJuice($slug,$id)
     {
         $vape=Stock::findOrFail($id);
         $variations = $vape->variations()->with('options')->get();

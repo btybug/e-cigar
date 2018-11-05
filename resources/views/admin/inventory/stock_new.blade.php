@@ -6,10 +6,10 @@
     <section class="content-top">
         <div class="row m-0">
             <div class="col-md-4">
-                <input type="text" placeholder="Product Name" class="form-control" readonly>
+                <input type="text" placeholder="Product Name" class="form-control" value="{{ @$model->name }}" readonly>
             </div>
             <div class="col-md-4">
-                <input type="text" placeholder="SKU" class="form-control" readonly>
+                <input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>
             </div>
         </div>
     </section>
