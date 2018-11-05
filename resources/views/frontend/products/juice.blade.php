@@ -7,7 +7,7 @@
                 @if(count($categories))
                     @foreach($categories as $category)
                         <li class="list-group-item">
-                            <a href="#" class="d-inline-block w-100 text-center">{{ $category->name }}</a>
+                            <a href="{!! url('products/juice',$category->id) !!}" class="d-inline-block w-100 text-center">{{ $category->name }}</a>
                         </li>
                     @endforeach
                 @endif

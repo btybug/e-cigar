@@ -48,7 +48,7 @@ class ProductsController extends Controller
         return $this->view('single_vape',compact('vape','variations'));
     }
 
-    public function getJuice(Request $request)
+    public function getJuice(Request $request,$category_id = null)
     {
         $orderBy=$request->get('orderBy');
         $orderByArray = explode(',', $request->get('orderBy', 'id,DESC'));
