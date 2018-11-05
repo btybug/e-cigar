@@ -7,6 +7,9 @@
  */
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+Route::get('/menu-manager', function (){
+    return view('admin.menu_manager');
+});
 
 Route::group(['prefix' => 'settings'], function () {
     Route::group(['prefix' => 'general'], function () {
