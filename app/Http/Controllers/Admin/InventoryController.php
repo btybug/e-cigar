@@ -127,4 +127,12 @@ class InventoryController extends Controller
     {
         return $this->view('statuses.types');
     }
+
+    public function postGetManageStatusForm(Request $request)
+    {
+        $model=Statuses::findOrFail($request->get('id'));
+        $path=$this->view.'.statuses._patrials.status_form';
+        $html=\View::make($path)->with(['model'=>$model])->render();
+        return \Response::json(['error'=>false,'html'=>$html]);
+    }
 }

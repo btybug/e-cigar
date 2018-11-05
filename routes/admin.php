@@ -7,7 +7,7 @@
  */
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
-Route::get('/menu-manager', function (){
+Route::get('/menu-manager', function () {
     return view('admin.menu_manager');
 });
 
@@ -152,6 +152,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/statuses/', 'Admin\InventoryController@getStatuses')->name('admin_stock_statuses');
         Route::get('/statuses/manage/{type}', 'Admin\InventoryController@getStatusesManage')->name('admin_stock_statuses_manage');
         Route::post('/statuses/manage/{type}', 'Admin\InventoryController@postStatusesManage')->name('post_admin_stock_statuses_manage');
+        Route::post('get-manage-form','Admin\InventoryController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
     });
 
     Route::group(['prefix' => 'attributes'], function () {

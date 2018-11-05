@@ -57,7 +57,7 @@
 $("body").on("click", ".attr-option", function(e) {
     e.preventDefault()
     let id = $(this).attr("data-item-id")
-    AjaxCall("/url", {id}, function (res) {
+    AjaxCall("{!! route('post_admin_stock_statuses_manage_form') !!}", {id}, function (res) {
         if (!res.error) {
             $("body").find(".options-form").html(res.html)
         }
