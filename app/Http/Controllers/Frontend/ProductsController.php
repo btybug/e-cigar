@@ -67,6 +67,13 @@ class ProductsController extends Controller
         return $this->view('juice',compact('products','orderBy','attributes'));
     }
 
+    public function categoryJuice($id)
+    {
+//        $vape=Stock::findOrFail($id);
+//        $variations = $vape->variations()->with('options')->get();
+        return $this->view('category_juice');
+    }
+
     public function singleJuice($id)
     {
         $vape=Stock::findOrFail($id);
