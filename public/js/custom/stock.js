@@ -462,7 +462,7 @@ $("body").on("click", ".apply-variation", function() {
     $("#variation_form").remove();
 });
 
-window.onload = function() {
+// window.onload = function() {
     var elementList = document.querySelectorAll(".main-attr-container");
 
     // Iterate through each element in the array
@@ -479,7 +479,7 @@ window.onload = function() {
             containerForAppend: ".coupon-tags-list"
         });
     }
-};
+// };
 
 // val.forEach((item, index) => {
 //     // console.log(item)

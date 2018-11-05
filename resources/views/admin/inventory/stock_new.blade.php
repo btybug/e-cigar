@@ -454,11 +454,11 @@
 
 @stop
 @section('js')
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
     function render_categories_tree(){
         $("#treeview_json").jstree({
