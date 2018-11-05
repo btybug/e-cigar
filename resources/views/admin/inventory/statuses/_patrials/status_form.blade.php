@@ -1,6 +1,6 @@
 <div class="col-md-9 options-form">
     <div class="col-md-9 options-form">
-        {!! Form::model($model) !!}
+        {!! Form::model($model,['url'=>route('post_admin_stock_statuses_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
         @if(count(get_languages()))
             <ul class="nav nav-tabs">

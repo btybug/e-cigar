@@ -151,7 +151,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
         Route::get('/statuses/', 'Admin\InventoryController@getStatuses')->name('admin_stock_statuses');
         Route::get('/statuses/manage/{type}', 'Admin\InventoryController@getStatusesManage')->name('admin_stock_statuses_manage');
-        Route::post('/statuses/manage/{type}', 'Admin\InventoryController@postStatusesManage')->name('post_admin_stock_statuses_manage');
+        Route::post('/statuses/manage/{id?}', 'Admin\InventoryController@postStatusesManage')->name('post_admin_stock_statuses_manage');
         Route::post('get-manage-form','Admin\InventoryController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
     });
 

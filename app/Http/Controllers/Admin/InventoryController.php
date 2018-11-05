@@ -120,7 +120,7 @@ class InventoryController extends Controller
     {
         $data=$request->except(['_token','translatable']);
         Statuses::updateOrCreate($request->id,$data);
-        return redirect()->route('admin_stock_statuses');
+        return redirect()->back();
     }
 
     public function getStatusesTypes()
