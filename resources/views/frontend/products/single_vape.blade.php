@@ -141,14 +141,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($vape->attrs))
-                            @foreach($vape->attrs as $attr)
+                        @if(count($vape->stockAttrs))
+                            @foreach($vape->stockAttrs as $attr)
                                 <tr>
-                                    <td>{!! $attr->name !!}</td>
+                                    <td>{!! $attr->attr->name !!}</td>
                                     <td>
                                         @if(count($attr->children))
                                             @foreach($attr->children as $option)
-                                                <span class="badge badge-primary">{!! $option->name !!}</span>
+                                                <span class="badge badge-primary">{!! $option->attr->name !!}</span>
                                             @endforeach
                                         @endif
                                     </td>
