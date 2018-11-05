@@ -459,7 +459,7 @@
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
-    
+
     function render_categories_tree(){
         $("#treeview_json").jstree({
         plugins: ["wholerow", "checkbox", "types"],
