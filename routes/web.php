@@ -55,6 +55,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/vape', 'Frontend\ProductsController@getVape')->name('product_vape');
     Route::get('/vape/{id}', 'Frontend\ProductsController@singleVape')->name('product_single_vape');
     Route::get('/juice', 'Frontend\ProductsController@getJuice')->name('product_juice');
+    Route::get('/juice/{id}', 'Frontend\ProductsController@singleJuice')->name('product_single_juice');
 });
 Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');

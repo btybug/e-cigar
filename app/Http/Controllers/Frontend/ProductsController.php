@@ -47,9 +47,31 @@ class ProductsController extends Controller
         return $this->view('single_vape',compact('vape','variations'));
     }
 
-    public function getJuice()
+    public function getJuice(Request $request)
     {
-        return $this->view('juice');
+        $orderBy=$request->get('orderBy');
+        $orderByArray = explode(',', $request->get('orderBy', 'id,DESC'));
+        $column = $orderByArray[0];
+        $direction = $orderByArray[1];
+
+
+        $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->where('stock_translations.locale', app()->getLocale())
+            ->where('type', 'JUE')
+            ->where('status', true)
+            ->select('stocks.*', 'stock_translations.name')
+            ->orderBy($column, $direction)->paginate(5);
+
+        $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
+
+        return $this->view('juice',compact('products','orderBy','attributes'));
+    }
+
+    public function singleJuice($id)
+    {
+        $vape=Stock::findOrFail($id);
+        $variations = $vape->variations()->with('options')->get();
+        return $this->view('single_juice',compact('vape','variations'));
     }
 
     public function getPrice(Request $request)
