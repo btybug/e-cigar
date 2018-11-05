@@ -119,4 +119,9 @@ class InventoryController extends Controller
         Statuses::updateOrCreate($request->id,$data);
         return redirect()->route('admin_stock_statuses');
     }
+
+    public function getStatusesTypes()
+    {
+        return $this->view('statuses.types');
+    }
 }

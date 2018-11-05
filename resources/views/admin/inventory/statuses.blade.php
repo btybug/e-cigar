@@ -16,7 +16,7 @@
 
                         <label for="cash_paymant" class="title">Order</label>
                     </div>
-                    <a href="{!! '#' !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                    <a href="{!! route('admin_stock_statuses_type') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                 </li>
                 <li class="item">
                     <div class="chek-title">
