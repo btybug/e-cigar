@@ -47,10 +47,24 @@
     </div>
 @stop
 @section('css')
+    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 
 @section("js")
+    <script src="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.js')}}"></script>
+    <script>
+        $(function() {
+            $('#colorselector_2').colorselector({
+                callback : function(value, color, title) {
+                    $("#colorValue").val(value);
+                    $("#colorColor").val(color);
+                    $("#colorTitle").val(title);
+                }
+            });
+
+        });
+    </script>
 <script>
 $("body").on("click", ".attr-option", function(e) {
     e.preventDefault()
