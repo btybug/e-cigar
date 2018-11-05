@@ -126,6 +126,9 @@ div.dataTables_wrapper div.dataTables_filter input {
 /*admin store settings*/
 .tab-content-store-settings {
     padding-top: 30px;
+    height: calc(100vh - 236px);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .bg-my-light-blue {
@@ -325,8 +328,9 @@ table.table--order-dtls.table-bordered tr > th {
 }
 
 .order-notes {
-    height: 466px;
     overflow: auto;
+    flex: auto;
+    padding: 0 10px;
 }
 
 .order-notes_message {

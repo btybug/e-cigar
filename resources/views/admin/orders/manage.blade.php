@@ -501,6 +501,54 @@
                                 </div>
                             </div>
                         </li>
+                        <li>
+                            <div>
+                                <div>
+                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
+                                    <span>11/5/2018</span>
+                                    <span>15:25</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="status-holder">Submited</div>
+                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <div>
+                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
+                                    <span>11/5/2018</span>
+                                    <span>15:25</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="status-holder">Submited</div>
+                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <div>
+                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
+                                    <span>11/5/2018</span>
+                                    <span>15:25</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="status-holder">Submited</div>
+                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
@@ -545,7 +593,6 @@
 
 @section('css')
     <style>
-        @media (min-width: 1201px) {
             .content-wrapper {
                 min-height: 100%!important;
                 height: calc(100vh - 101px);
@@ -557,8 +604,7 @@
             }
 
 
-            body .main-sidebar,
-            .order-main-cnt_left-col {
+            body .main-sidebar {
                 overflow-y: auto !important;
                 overflow-x: hidden !important;
                 height: 640px;
@@ -585,7 +631,6 @@
             .order-main-cnt_left-col::-webkit-scrollbar-thumb:hover {
                 background: #555;
             }
-        }
 
     </style>
 @stop
