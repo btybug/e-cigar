@@ -290,8 +290,6 @@ table.table--order-dtls.table-bordered tr > th {
     height: calc(100vh - 194px);
     display: flex;
     flex-direction: column;
-    /*min-height: 868px;*/
-    /*overflow: auto*/
 }
 
 .order-main-cnt_control-btns {
