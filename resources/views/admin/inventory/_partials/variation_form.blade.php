@@ -1,5 +1,5 @@
 {!! Form::model($model,['id' => 'variation_form']) !!}
-<div class="basic-center basic-wall">
+<div class="">
     <div class="container-fluid">
         <div class="row">
             <button variation-id="{{ $variationID }}" type="button" class="btn btn-warning apply-variation">Apply</button>

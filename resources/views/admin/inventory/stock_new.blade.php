@@ -379,33 +379,38 @@
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="basic-left basic-wall">
-                                        <div class="col-md-5">
-                                            <div class="all-list-attrs" style="min-height:300px;">
-                                                @if($model)
-                                                    @include('admin.inventory._partials.link_all_edit')
-                                                @endif
-                                            </div>
-                                            <div class="button-add text-center">
-                                                <div class="col-md-6">
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-primary btn-block get-variation"><i
-                                                                class="fa fa-plus mr-10"></i>More
-                                                        option</a>
+                                    <div class="basic-center basic-wall">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="all-list-attrs" style="min-height:300px;">
+                                                    @if($model)
+                                                        @include('admin.inventory._partials.link_all_edit')
+                                                    @endif
                                                 </div>
-                                                <div class="col-md-6">
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-success btn-block get-all-variations"><i
-                                                                class="fa fa-plus mr-10"></i>Link all
-                                                        option</a>
+                                                <div class="button-add text-center">
+                                                    <div class="col-md-6">
+                                                        <a href="javascript:void(0)"
+                                                           class="btn btn-primary btn-block get-variation"><i
+                                                                    class="fa fa-plus mr-10"></i>More
+                                                            option</a>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="javascript:void(0)"
+                                                           class="btn btn-success btn-block get-all-variations"><i
+                                                                    class="fa fa-plus mr-10"></i>Link all
+                                                            option</a>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-7 variation-settings">
+                                            </div>
+
                                         </div>
+
 
                                     </div>
                                 </div>
-                                <div class="col-md-7 variation-settings">
-                                </div>
+
                             </div>
                         </div>
                     </div>
