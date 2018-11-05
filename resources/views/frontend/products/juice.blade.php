@@ -71,6 +71,7 @@
                                 <ul class="list-unstyled row juice-tabs-items">
                                     @if(count($products))
                                         @foreach($products as $product)
+                                            @if($product->categories()->where('categories.id',$item->id)->first())
                                             <li class="col-md-3 mb-3">
                                                 <div class="shadow p-3 bg-light">
                                                     <div class="mb-3 img-outer">
@@ -84,6 +85,7 @@
                                                     <h4 class="text-center"><a href="{{ route('product_single_juice',[$category->id,$product->id]) }}">{{ $product->name }}</a></h4>
                                                 </div>
                                             </li>
+                                            @endif
                                         @endforeach
                                     @else
                                         NO products

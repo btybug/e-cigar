@@ -195,7 +195,8 @@
                                                     <div class="col-md-7">
                                                         <div class="form-group">
                                                             <label class="col-sm-2 control-label">Categories</label>
-                                                            {!! Form::hidden('categories',(isset($checkedCategories)) ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                            {!! Form::hidden('categories',(isset($checkedCategories))
+                                                            ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
                                                             <div id="treeview_json"></div>
                                                         </div>
                                                     </div>
@@ -472,6 +473,10 @@
     <script>
     function render_categories_tree(){
         $("#treeview_json").jstree({
+        "checkbox" : {
+            "three_state": false,
+            "keep_selected_style" : false
+        },
         plugins: ["wholerow", "checkbox", "types"],
         core: {
             themes: {
@@ -491,13 +496,35 @@
     }
 
     $('#treeview_json').on("changed.jstree", function (e, data) {
-        console.log(data.selected);
-        // console.log(data.selected.attr("text"),54545);
-        $("#categories_tree").val(JSON.stringify(data.selected));
-
+        if(data.node) {
+            var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
+            var ids = [];
+            for (var i = 0, j = selectedNode.length; i < j; i++) {
+                ids.push(selectedNode[i].id);
+            }
+//            var uniqueNames = [];
+//            if(parent.length > 0){
+//                $.each(parent, function(i, el){
+//                    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+//                });
+//            }
+//            var all = id.concat(uniqueNames);
+            $("#categories_tree").val(JSON.stringify(ids));
+        }
     });
 
     render_categories_tree()
+
+    function removeA(arr) {
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+            }
+        }
+        return arr;
+    }
 
     {{--// var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
     {{--// var tree =[{!! //json_encode(['nodes' => $categories]) !!}]--}}
