@@ -3,6 +3,16 @@
 
 @stop
 @section('content')
+    <section class="content-top">
+        <div class="row m-0">
+            <div class="col-md-4">
+                <input type="text" placeholder="Product Name" class="form-control" readonly>
+            </div>
+            <div class="col-md-4">
+                <input type="text" placeholder="SKU" class="form-control" readonly>
+            </div>
+        </div>
+    </section>
     <section class="content-header">
         {{--<h1> Admin Profile </h1>--}}
         <ol class="breadcrumb">
