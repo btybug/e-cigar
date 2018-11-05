@@ -444,6 +444,7 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
+
 @stop
 @section('js')
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
@@ -451,10 +452,8 @@
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
-    {{--var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
+    var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
     var tree =[{!! json_encode(['nodes' => $categories]) !!}]
-
-    console.log(tree)
     $('#treeview_json').treeview({
         data: tree,
         showCheckbox: true,

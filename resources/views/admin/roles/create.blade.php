@@ -55,6 +55,7 @@
         <div id="treeview_json2"></div>
     </div>
 @stop
+
 @section('js')
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
@@ -65,11 +66,11 @@
             showCheckbox: true,
             onNodeChecked: function(event, node) {
                 if(typeof node.parentId !== "undefined") {
-                    checkParent(node.parentId, "#treeview_json2")
+                    checkParent(node.parentId, "#treeview_json")
                 }
             },
             onNodeUnchecked: function (event, node) {
-                unCheckChildren(node.nodeId, "#treeview_json2")
+                unCheckChildren(node.nodeId, "#treeview_json")
             }
         });
         $('#treeview_json2').treeview({
