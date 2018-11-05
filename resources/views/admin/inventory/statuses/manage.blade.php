@@ -55,13 +55,14 @@
     <script src="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.js')}}"></script>
     <script>
         $(function() {
-            $('#colorselector_2').colorselector({
-                callback : function(value, color, title) {
-                    $("#colorValue").val(value);
-                    $("#colorColor").val(color);
-                    $("#colorTitle").val(title);
-                }
-            });
+//            $('#colorselector_2').colorselector({
+//                callback : function(value, color, title) {
+//                    $("#colorValue").val(value);
+//                    $("#colorColor").val(color);
+//                    $("#colorTitle").val(title);
+//                }
+//            });
+            $('#colorselector_2').colorselector();
 
         });
     </script>

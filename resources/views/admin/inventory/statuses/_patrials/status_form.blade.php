@@ -75,9 +75,9 @@
                         </select> <br />
                         {{--<button class="btn" type="button" id="setColor">set by color (#008B8B)</button>--}}
                         {{--<button class="btn" type="button" id="setValue">set by value (18)</button>--}}
-                        <input type="text" id="colorValue" />
-                        <input type="text" id="colorColor" />
-                        <input type="text" id="colorTitle" />
+                        {{--<input type="text" id="colorValue" />--}}
+                        {{--<input type="text" id="colorColor" />--}}
+                        {{--<input type="text" id="colorTitle" />--}}
                     </div>
                 </div>
                 <div class="col-md-2">
