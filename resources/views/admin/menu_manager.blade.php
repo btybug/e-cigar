@@ -2,22 +2,7 @@
 @section('content')
 <div class="row">
   <div class="col-md-4">
-  <div class="box box-primary">
-   <div class="box-header with-border">
-      <h3 class="box-title">Select Nav</h3>
-   </div>
-   <!-- /.box-header -->
-   <!-- form start -->
-   <div class="box-body">
-      <div class="form-group">
-         <ul class="list-unstyled" style="overflow-y: scroll; max-height: 150px;">
-            <li><a href="#">Back end</a></li>
-            <li><a href="#">Front end</a></li>
-            <li><a href="#">Optional</a></li>
-         </ul> 
-      </div>
-   </div>
-</div>
+  
 <div class="box box-primary">
    <div class="box-header with-border">
       <h3 class="box-title">Add Routes</h3>
