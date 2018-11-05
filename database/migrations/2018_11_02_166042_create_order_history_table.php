@@ -17,11 +17,13 @@ class CreateOrderHistoryTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->string('status',20);
+            $table->unsignedInteger('status_id');
+            $table->text('note')->nullable();
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('status_id')->references('id')->on('statuses');
 
 
         });
