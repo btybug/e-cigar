@@ -55,55 +55,86 @@
         <div id="treeview_json2"></div>
     </div>
 @stop
+@section("css")
+<link rel="stylesheet" href="http://laraframe.codemen.org/backend/assets/css/admin_lte.css">
+@stop
 
 @section('js')
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
         var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
-        var tree2 =[{!! getModuleRoutes('POST','admin',[])->toJson(1) !!}]
-        $('#treeview_json').treeview({
-            data: tree,
-            showCheckbox: true,
-            onNodeChecked: function(event, node) {
-                if(typeof node.parentId !== "undefined") {
-                    checkParent(node.parentId, "#treeview_json")
+        let html = (data) =>   `<div class="checkbox checkbox-success checkbox-compact">
+                        <div class="icheckbox_flat-green checked" aria-checked="true" aria-disabled="false" style="position: relative;"><input class="sub-module flat-red task module_action_application_managements module_action_application_managements_admin_settings" id="${data.url}" data-id="admin_settings" name="task" type="checkbox" value="1" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                        <label class="disable-text-select" for="${data.url}">${data.text}</label>
+                    </div>` 
+        let html2 = (data) => `<div class="col-lg-9 col-md-12" style="margin-bottom:20px; border-bottom:1px solid #efefef; padding-bottom: 10px">
+                    <div class="row dc-clear">
+                        <div class="col-lg-3 col-md-3 col-sm-6">
+                            <div class="checkbox checkbox-success checkbox-inline checkbox-compact">
+                                <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input class="route-item flat-red module_action_user_managements task_action_users" id="${data.text}" name="roles[user_managements][users][]" type="checkbox" value="${data.text}" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
+                                <label class="disable-text-select" for="${data.text}">${data.text}</label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    </div>`            
+        function MakeChekbox(aaa) {
+            let treeNodes = Object.values(tree[0].nodes)
+            treeNodes.forEach(item => {
+                let item2 = $(html(item))
+                if (item.nodes) {
+                    Object.values(item.nodes).forEach(elm => {
+                        item2.append(html2(elm))
+                    })
                 }
-            },
-            onNodeUnchecked: function (event, node) {
-                unCheckChildren(node.nodeId, "#treeview_json")
-            }
-        });
-        $('#treeview_json2').treeview({
-            data: tree2,
-            showCheckbox: true,
-            onNodeChecked: function(event, node) {
-                if(typeof node.parentId !== "undefined") {
-                    checkParent(node.parentId, "#treeview_json2")
-                }
-            },
-            onNodeUnchecked: function (event, node) {
-                unCheckChildren(node.nodeId, "#treeview_json2")
-            }
-        });
-        function checkParent(id, selecetor) {
-            let parrentId = id;
-            $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
-            if(parrentId){
-                let parent = $('#treeview_json').treeview('getNode', parrentId);
-                let pId = parent.parentId
-                checkParent(pId)
-            }
-
+                $("#treeview_json").append(item2)
+            })
         }
-        function unCheckChildren(id, selecetor){
-            let currentNode = $('#treeview_json').treeview('getNode', id);
-            $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
-            if (currentNode.nodes){
-                Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId))
-            }
+        MakeChekbox()
+        // var tree2 =[{!! getModuleRoutes('POST','admin',[])->toJson(1) !!}]
+        // $('#treeview_json').treeview({
+        //     data: tree,
+        //     showCheckbox: true,
+        //     onNodeChecked: function(event, node) {
+        //         if(typeof node.parentId !== "undefined") {
+        //             checkParent(node.parentId, "#treeview_json")
+        //         }
+        //     },
+        //     onNodeUnchecked: function (event, node) {
+        //         unCheckChildren(node.nodeId, "#treeview_json")
+        //     }
+        // });
+        // $('#treeview_json2').treeview({
+        //     data: tree2,
+        //     showCheckbox: true,
+        //     onNodeChecked: function(event, node) {
+        //         if(typeof node.parentId !== "undefined") {
+        //             checkParent(node.parentId, "#treeview_json2")
+        //         }
+        //     },
+        //     onNodeUnchecked: function (event, node) {
+        //         unCheckChildren(node.nodeId, "#treeview_json2")
+        //     }
+        // });
+        // function checkParent(id, selecetor) {
+        //     let parrentId = id;
+        //     $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
+        //     if(parrentId){
+        //         let parent = $('#treeview_json').treeview('getNode', parrentId);
+        //         let pId = parent.parentId
+        //         checkParent(pId)
+        //     }
+
+        // }
+        // function unCheckChildren(id, selecetor){
+        //     let currentNode = $('#treeview_json').treeview('getNode', id);
+        //     $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
+        //     if (currentNode.nodes){
+        //         Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId))
+        //     }
 
 
-        }
+        // }
         $("form").on("submit", function (e) {
             e.preventDefault()
             let formData = $("form").serializeArray();
