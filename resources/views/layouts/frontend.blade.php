@@ -27,6 +27,7 @@
 @include('frontend._partials.footer')
 <img src="/public/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
+<script src={{asset("public/frontend/js/popper.js")}}></script>
 <script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {
