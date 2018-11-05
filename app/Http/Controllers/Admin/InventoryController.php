@@ -46,12 +46,10 @@ class InventoryController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $categories =  Category::leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->where('categories_translations.locale', app()->getLocale())
-            ->select('categories.*', 'categories_translations.name as text')
-            ->get();
+        $categories =  Category::with('children')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
-        return $this->view('stock_new', compact(['model', 'attrs','categories']));
+        return $this->view('stock_new', compact(['model', 'attrs','data']));
     }
 
     public function postStock(Request $request)
