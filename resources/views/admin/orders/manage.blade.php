@@ -45,7 +45,7 @@
 
     <div class="row order-main-cnt">
         <div class="col-md-8">
-            <div class="order-main-cnt_left-wrapp">
+            <div class="order-main-cnt_left-col">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item active">
                         <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab"
@@ -71,7 +71,7 @@
                 <div class="tab-content tab-content-store-settings">
                     <div class="tab-pane fade active in" id="general" role="tabpanel" aria-labelledby="general-tab">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-lg-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order Details</h3>
@@ -114,7 +114,7 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-lg-4">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h3 class="panel-title"><i class="fa fa-user"></i> Customer Details</h3>
@@ -163,7 +163,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-lg-4">
                                 <div class="panel panel-default panel--orders-addresses">
                                     <ul class="nav nav-tabs nav-addresses" role="tablist">
                                         <li class="nav-item active">
@@ -171,8 +171,9 @@
                                                 <a class="nav-link" id="shippingAddress-tab" data-toggle="tab"
                                                    href="#shippingAddress" role="tab" aria-controls="shippingAddress"
                                                    aria-selected="true" aria-expanded="true">
-                                                <span class="panel-title"><i
-                                                            class="fa fa-user"></i>Shipping address</span>
+                                                <span class="panel-title"><i class="fa fa-user"></i>
+                                                    Shipping address
+                                                </span>
                                                 </a>
                                             </div>
                                         </li>
@@ -181,8 +182,9 @@
                                                 <a class="nav-link" id="billingAddress-tab" data-toggle="tab"
                                                    href="#billingAddress" role="tab" aria-controls="billingAddress"
                                                    aria-selected="true" aria-expanded="true">
-                                                <span class="panel-title"><i
-                                                            class="fa fa-user"></i>Billing address</span>
+                                                <span class="panel-title"><i class="fa fa-user"></i>
+                                                    Billing address
+                                                </span>
                                                 </a>
                                             </div>
                                         </li>
@@ -655,49 +657,48 @@
 
 @section('css')
     <style>
-        .content-wrapper {
-            min-height: 100%!important;
-            height: calc(100vh - 101px);
-            overflow: hidden;
+        @media (min-width: 1201px) {
+            .content-wrapper {
+                min-height: 100%!important;
+                height: calc(100vh - 101px);
+                overflow: hidden;
+            }
+
+            body > .wrapper {
+                overflow: hidden;
+            }
+
+
+            body .main-sidebar,
+            .order-main-cnt_left-col {
+                overflow-y: auto !important;
+                overflow-x: hidden !important;
+                height: 640px;
+
+            }
+
+            body .main-sidebar::-webkit-scrollbar,
+            .order-main-cnt_left-col::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            body .main-sidebar::-webkit-scrollbar-track,
+            .order-main-cnt_left-col::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+
+            body .main-sidebar::-webkit-scrollbar-thumb,
+            .order-main-cnt_left-col::-webkit-scrollbar-thumb {
+                background: #888;
+            }
+
+            body .main-sidebar::-webkit-scrollbar-thumb:hover,
+            .order-main-cnt_left-col::-webkit-scrollbar-thumb:hover {
+                background: #555;
+            }
         }
 
-        body > .wrapper {
-            overflow: hidden;
-        }
-
-        .order-main-cnt_left-wrapp {
-            width: 100%;
-        }
-
-
-        body .main-sidebar,
-        .order-main-cnt_left-wrapp {
-            overflow-y: auto !important;
-            overflow-x: visible !important;
-            height: 100%;
-
-        }
-
-        body .main-sidebar::-webkit-scrollbar,
-        .order-main-cnt_left-wrapp::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        body .main-sidebar::-webkit-scrollbar-track,
-        .order-main-cnt_left-wrapp::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-
-        body .main-sidebar::-webkit-scrollbar-thumb,
-        .order-main-cnt_left-wrapp::-webkit-scrollbar-thumb {
-            background: #888;
-        }
-
-        body .main-sidebar::-webkit-scrollbar-thumb:hover,
-        .order-main-cnt_left-wrapp::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
     </style>
 @stop
 
@@ -719,19 +720,19 @@
             {{--]--}}
             {{--});--}}
 
-            $('.dropdown-btn').on('click', function () {
-                $('.dropdown-btn').each(function () {
-                    if ($('.dropdown-btn').next('.dropdown-inner').hasClass('show')) {
-                        $('.dropdown-inner').removeClass('show');
-                    }
-                });
-
-                $(this).next('.dropdown-inner').addClass('show');
-            });
-
-            $('.dropdown-close').on('click', function () {
-                $(this).closest('.dropdown-inner').removeClass('show');
-            });
+//            $('.dropdown-btn').on('click', function () {
+//                $('.dropdown-btn').each(function () {
+//                    if ($('.dropdown-btn').next('.dropdown-inner').hasClass('show')) {
+//                        $('.dropdown-inner').removeClass('show');
+//                    }
+//                });
+//
+//                $(this).next('.dropdown-inner').addClass('show');
+//            });
+//
+//            $('.dropdown-close').on('click', function () {
+//                $(this).closest('.dropdown-inner').removeClass('show');
+//            });
 
         });
 

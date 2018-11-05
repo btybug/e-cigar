@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <ul class="list-unstyled list-group">
+            <ul class="list-unstyled list-group list-group--juice">
                 @if(count($categories->children))
                     @foreach($categories->children as $child)
                         <li class="list-group-item {{ ($category && $category->id == $child->id) ? 'active' : '' }}">

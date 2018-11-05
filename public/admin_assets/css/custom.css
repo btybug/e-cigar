@@ -229,19 +229,6 @@ table.table--order-dtls.table-bordered tr > th {
 .order-notes1 .status {
     position: relative;
 }
-/*.order-notes .status:before,*/
-/*.order-notes .status1:before {*/
-/*content: "";*/
-/*position: absolute;*/
-/*top: 100%;*/
-/*left: 24px;*/
-/*width: 0;*/
-/*height: 0;*/
-/*border-style: solid;*/
-/*border-width: 18px 9px 0 9px;*/
-/*border-color: #f1efef transparent transparent transparent;*/
-/*}*/
-
 
 .order-notes {
     padding: 10px;
@@ -391,7 +378,7 @@ table.table--order-dtls.table-bordered tr > th {
 }
 
 .order-notes {
-    height: 320px;
+    height: 380px;
     overflow: auto;
 }
 
@@ -470,11 +457,6 @@ textarea {
 .d-inline-block {
     display: inline-block
 }
-
-/*.bestbetter-modal {*/
-    /*padding: 20px 0;*/
-/*}*/
-
 
 .bestbetter-modal-open input {
     text-align: center;
