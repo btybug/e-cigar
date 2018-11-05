@@ -157,7 +157,7 @@
 
                         <div class="collapse navbar-collapse" id="navbar_collapse_1">
 
-                            <ul class="navbar-nav">
+                            <ul class="navbar-nav position-relative">
                                 <li class="nav-item first"><a href="{!! url('/') !!}" class="nav-link"><i class="fa fa-home"></i></a></li>
                                 {{--<li class="nav-item dropdown open">--}}
                                     {{--<a class="nav-link dropdown-toggle" href="">Home Pages</a>--}}
@@ -168,8 +168,40 @@
                                     {{--</ul>--}}
                                 {{--</li>--}}
                                 <li class="nav-item"> <a class="nav-link" href="{!! route('product_vape') !!}">Vape</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_juice') !!}">Juice</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_sales') !!}">Sales</a> </li>
+                                {{--! HAS SUBMENU MUST HAVE CLASS (has-subnav)--}}
+                                <li class="nav-item has-subnav"> <a class="nav-link" href="{!! route('product_juice') !!}">Juice</a>
+                                    <ul class="subnav list-unstyled position-absolute d-flex">
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">subnav item 1</a>
+                                        </li>
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">subnav item 2</a>
+                                        </li>
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">subnav item 3</a>
+                                        </li>
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">subnav item 4</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {{--! HAS SUBMENU--}}
+                                <li class="nav-item has-subnav"> <a class="nav-link" href="{!! route('product_sales') !!}">Sales</a>
+                                    <ul class="subnav list-unstyled position-absolute d-flex">
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 1</a>
+                                        </li>
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 2</a>
+                                        </li>
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 3</a>
+                                        </li>
+                                        <li class="subnav-item">
+                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 4</a>
+                                        </li>
+                                    </ul>
+                                </li>
                                 <li class="nav-item"> <a class="nav-link" href="{!! route('blog') !!}">News</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="{!! route('forum') !!}">Forums</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="{!! route('product_support') !!}">Support</a> </li>
