@@ -13339,6 +13339,15 @@ a.text-dark:focus, a.text-dark:hover {
     background: rgba(129, 199, 132, 0.2);
 }
 
+.list-group-item.active a {
+    color: #fff;
+}
+
+.juice-tabs-items .img-outer {
+    max-height: 154px;
+    overflow: hidden;
+}
+
 /*End page juice*/
 
 /*page my-account*/

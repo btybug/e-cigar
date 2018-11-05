@@ -67,8 +67,64 @@
                     </ul>
                     <div class="tab-content">
                         @foreach($category->children as $item)
-                            <div class="tab-pane fade {{ $loop->first ? ' show active' : '' }}" id="subTab{{ $item->id }}" role="tabpanel" aria-labelledby="tab-{{ $item->id }}">
-                                {{ $item->name }} Tab
+                            <div class="tab-pane fade p-4 {{ $loop->first ? ' show active' : '' }}" id="subTab{{ $item->id }}" role="tabpanel" aria-labelledby="tab-{{ $item->id }}">
+                                {{ $item->name }}
+                                <ul class="list-unstyled row juice-tabs-items">
+                                    <li class="col-md-3 mb-3">
+                                        <div class="shadow p-3 bg-light">
+                                            <div class="mb-3 img-outer">
+                                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
+                                            </div>
+                                            <h4 class="text-center">Product Title</h4>
+                                        </div>
+
+                                    </li>
+                                    <li class="col-md-3 mb-3">
+                                        <div class="shadow p-3 bg-light">
+                                            <div class="mb-3 img-outer">
+                                                <img class="card-img-top" src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg" alt="">
+                                            </div>
+                                            <h4 class="text-center">Product Title</h4>
+                                        </div>
+
+                                    </li>
+                                    <li class="col-md-3 mb-3">
+                                        <div class="shadow p-3 bg-light">
+                                            <div class="mb-3 img-outer">
+                                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
+                                            </div>
+                                            <h4 class="text-center">Product Title</h4>
+                                        </div>
+
+                                    </li>
+                                    <li class="col-md-3 mb-3">
+                                        <div class="shadow p-3 bg-light">
+                                            <div class="mb-3 img-outer">
+                                                <img class="card-img-top" src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg" alt="">
+                                            </div>
+                                            <h4 class="text-center">Product Title</h4>
+                                        </div>
+
+                                    </li>
+                                    <li class="col-md-3 mb-3">
+                                        <div class="shadow p-3 bg-light">
+                                            <div class="mb-3 img-outer">
+                                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
+                                            </div>
+                                            <h4 class="text-center">Product Title</h4>
+                                        </div>
+
+                                    </li>
+                                    <li class="col-md-3 mb-3">
+                                        <div class="shadow p-3 bg-light">
+                                            <div class="mb-3 img-outer">
+                                                <img class="card-img-top" src="http://e-cigar.loc/public/media/drive/53b44d8993ca974c87170c051232bada.jpg" alt="">
+                                            </div>
+                                            <h4 class="text-center">Product Title</h4>
+                                        </div>
+
+                                    </li>
+                                </ul>
                             </div>
                         @endforeach
                     </div>
