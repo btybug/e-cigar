@@ -39,12 +39,11 @@ class CashPaymentController extends Controller
             $shipping = Cart::getCondition($geoZone->name);
         }
         $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone) {
-           dd(Countries::where('name.common', $shippingAddress->country)->first(),$shippingAddress,$zone);
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order = Orders::create([
                 'user_id' => \Auth::id(),
-                'code'=>getUniqueCode('orders','code',Countries::where('name.common', $shippingAddress->country)->first()->cca2),
+                'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => Cart::getTotal(),
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
