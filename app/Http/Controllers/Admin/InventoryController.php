@@ -113,12 +113,12 @@ class InventoryController extends Controller
     public function getStatusesManage($type)
     {
         $statuses=Statuses::where('type',$type)->get()->pluck('name','id');
-        return $this->view('statuses.manage',compact('statuses'));
+        return $this->view('statuses.manage',compact('statuses','type'));
     }
 
     public function postStatusesManage(Request $request)
     {
-        $data=$request->except(['_token','translatable']);
+        $data=$request->except(['_token','translatable'],[]);
         Statuses::updateOrCreate($request->id,$data);
         return redirect()->back();
     }

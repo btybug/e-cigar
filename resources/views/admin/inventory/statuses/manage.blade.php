@@ -28,15 +28,13 @@
                             </div>
                         @endforeach
                         <div class="form-group row bord-top">
-                            <form method="POST" action="#" accept-charset="UTF-8"><input name="_token" type="hidden"
-                                                                                         value="UKBHve7gjHFA4dy2Q9XlXbVRF6dkzcRhlOzt49ej">
-                                <input name="id" type="hidden">
-                                <input name="parent_id" type="hidden" value="1">
+                            {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
+                                  <input name="type" type="hidden" value="{!! $type !!}">
                                 <div class="col-md-8">
                                     <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
                                 </div>
                                 <div class="col-md-4 text-right">
-                                    <button class="btn btn-primary add-new-order"  type="button">Add </button>
+                                    <button class="btn btn-primary add-new-order"  type="submit">Add </button>
                                 </div>
                             </form>
                         </div>
@@ -62,25 +60,7 @@ $("body").on("click", ".attr-option", function(e) {
             $("body").find(".options-form").html(res.html)
         }
     })
-})
+});
 
-$("body").on("click", ".add-new-order", function (e) {
-    e.preventDefault()
-    let name =     $(".new-oreder-input").val()
-    AjaxCall("/url", {name}, function (res) {
-        if (!res.error) {
-            let html = `<div class="form-group row bord-top bg-light attr-option" data-item-id="${res.id}" data-parent-id="${res.id}">
-                    <div class="col-md-8">
-                        ${name}
-                    </div>
-                    <div class="col-md-4 text-right">
-
-                    </div>
-                </div>`
-            $("body").find(".attributes-container").append(html)
-            $(".new-oreder-input").val("")
-        }
-    })
-})
 </script>
 @stop
