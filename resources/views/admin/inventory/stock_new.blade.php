@@ -467,12 +467,11 @@
     });
     function checkParent(id, selecetor) {
             let parrentId = id;
-            console.log(111)
             $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
             if(parrentId){
                 let parent = $('#treeview_json').treeview('getNode', parrentId);
                 let pId = parent.parentId
-                checkParent(pId)
+                checkParent(pId, selecetor)
             }
 
         }
@@ -480,7 +479,9 @@
             let currentNode = $('#treeview_json').treeview('getNode', id);
             $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
             if (currentNode.nodes){
-                Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId))
+                Object.values(currentNode.nodes).forEach(item => {
+                    unCheckChildren(item.nodeId, selecetor )
+                })
             }
 
 
