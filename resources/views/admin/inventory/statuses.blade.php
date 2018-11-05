@@ -6,7 +6,6 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="col-md-6 pull-left"><h2>Statuses</h2></div>
-            <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_statuses_manage') !!}">Add new</a></div>
         </div>
 
         <div class="payment_gateways_tab">
