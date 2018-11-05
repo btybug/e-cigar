@@ -116,10 +116,10 @@ class InventoryController extends Controller
         return $this->view('statuses');
     }
 
-    public function getStatusesManage($id=null)
+    public function getStatusesManage($type)
     {
-        $model= $id?Statuses::findOrFail($id):null;
-        return $this->view('statuses.manage',compact('model'));
+        $statuses=Statuses::where('type',$type)->get()->pluck('name','id');
+        return $this->view('statuses.manage',compact('statuses'));
     }
 
     public function postStatusesManage(Request $request)
