@@ -83,9 +83,9 @@ class ProductsController extends Controller
 
     public function singleJuice($slug,$id)
     {
-        $vape=Stock::findOrFail($id);
+        $vape=Stock::with(['variations','stockAttrs'])->findOrFail($id);
         $variations = $vape->variations()->with('options')->get();
-//        dd($vape->attrs,$vape->stockAttrs->);
+
         return $this->view('single_vape',compact('vape','variations'));
     }
 

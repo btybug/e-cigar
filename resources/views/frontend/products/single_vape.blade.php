@@ -8,18 +8,23 @@
                     <div class="item">
                         <img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">
                     </div>
-                    <div class="item">
-                        <img src="https://www.elementvape.com/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/s/m/smok_vape_pen_22_light_edition_kit_5_colors.jpg" alt="img">
-                    </div>
-                    <div class="item">
-                        <img src="https://www.lepetitvapoteur.com/16417-large_default/peach-lemon-aj-vape.jpg" alt="img">
-                    </div>
-                    <div class="item">
-                        <img src="https://www.electrictobacconist.com/images/bo-vape-starter-kit-p4245-6046_image.jpg" alt="img">
-                    </div>
-                    <div class="item">
-                        <img src="https://www.vapeyaya.com/image/cache/catalog/Product%20Pic/e-pipe/e-pipe-618/e-pipe-618-kit-automatic-e-cigarette-smoking-vape-pipe-10-800x800.jpg" alt="img">
-                    </div>
+                    @if(count($variations))
+                        @foreach($variations as $v)
+                            @if($v->image)
+                            <div class="item item-{{ $v->variation_id }}">
+                                <img src="{{ $v->image }}" alt="img">
+                            </div>
+                            @endif
+                        @endforeach
+                    @endif
+
+                    @if(count($vape->other_images))
+                        @foreach($vape->other_images as $other_image)
+                            <div class="item ">
+                                <img src="{{ $other_image }}" alt="img">
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
                 {{--<a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">--}}
                     {{--<img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">--}}
@@ -191,7 +196,7 @@
                 nav:false,
                 items:1,
                 dots:false,
-                autoplay:true,
+                autoplay:false,
                 autoplayTimeout:3000
             })
             get_price();
