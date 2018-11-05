@@ -38,50 +38,9 @@ class InventoryController extends Controller
     public function stockNew()
     {
         $model = null;
-        $categories =  Category::with('children')->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->where('categories_translations.locale', app()->getLocale())
-            ->select('categories.*', 'categories_translations.name as text')
-            ->get();
-
-//        [{
-//        text: "Same but with checkboxes",
-//                children: [{
-//            text: "initially selected",
-//                    state: {
-//                selected: !0
-//                    }
-//                }, {
-//            text: "Folder 1"
-//                }, {
-//            text: "Folder 2"
-//                }, {
-//            text: "Folder 3"
-//                }, {
-//            text: "initially open",
-//                    icon: "fa fa-folder fa-lg",
-//                    state: {
-//                opened: !0
-//                    },
-//                    children: [{
-//                text: "Another node"
-//                    }, {
-//                text: "disabled node",
-//                        state: {
-//                    disabled: !0
-//                        }
-//                    }]
-//                }, {
-//            text: "custom icon",
-//                    icon: "fa fa-cloud-download fa-lg text-inverse"
-//                }, {
-//            text: "disabled node",
-//                    state: {
-//                disabled: !0
-//                    }
-//                }]
-//            }, "Root node 2"]
-
-        return $this->view('stock_new', compact(['model','categories']));
+        $categories =  Category::with('children')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories);
+        return $this->view('stock_new', compact(['model','data']));
     }
 
     public function getStockEdit($id)

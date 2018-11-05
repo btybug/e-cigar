@@ -467,7 +467,7 @@
             themes: {
                 responsive: !1
             },
-            data: {!! $categories->toJson() !!}
+            data: {!! json_encode($data) !!}
         },
         types: {
             "default": {
@@ -482,8 +482,8 @@
 
     render_categories_tree()
 
-    // var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
-    // var tree =[{!! json_encode(['nodes' => $categories]) !!}]
+    {{--// var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
+    {{--// var tree =[{!! //json_encode(['nodes' => $categories]) !!}]--}}
     // $('#treeview_json').treeview({
     //     data: tree,
     //     showCheckbox: true,

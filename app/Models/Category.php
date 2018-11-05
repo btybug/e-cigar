@@ -47,6 +47,7 @@ class Category extends Translatable
             $data[$i] = [
                 'id' => $item->id,
                 'name' => $item->name,
+                'text' => $item->name,
                 'parent_id' => $item->parent_id,
                 'children' => []
             ];
