@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\Category;
 use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\StockVariationOption;
@@ -37,7 +38,12 @@ class InventoryController extends Controller
     public function stockNew()
     {
         $model = null;
-        return $this->view('stock_new', compact(['model']));
+        $categories =  Category::leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->where('categories_translations.locale', app()->getLocale())
+            ->select('categories.*', 'categories_translations.name as text')
+            ->get();
+
+        return $this->view('stock_new', compact(['model','categories']));
     }
 
     public function getStockEdit($id)

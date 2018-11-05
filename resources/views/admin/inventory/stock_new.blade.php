@@ -451,7 +451,9 @@
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
-    var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
+    {{--var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
+    var tree =[{!! json_encode(['nodes' => $categories]) !!}]
+
     console.log(tree)
     $('#treeview_json').treeview({
         data: tree,
