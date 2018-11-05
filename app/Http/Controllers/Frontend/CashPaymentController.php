@@ -51,7 +51,7 @@ class CashPaymentController extends Controller
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
             ]);
-            $order->history()->create([]);
+            $order->history()->create(['status_id'=>1]);
             $shippingAddress = $shippingAddress->toArray();
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);
