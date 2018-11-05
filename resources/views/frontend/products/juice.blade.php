@@ -81,7 +81,7 @@
                                                         @endif
 
                                                     </div>
-                                                    <h4 class="text-center">{{ $product->name }}</h4>
+                                                    <h4 class="text-center"><a href="{{ route('product_single_juice',[$category->id,$product->id]) }}">{{ $product->name }}</a></h4>
                                                 </div>
                                             </li>
                                         @endforeach

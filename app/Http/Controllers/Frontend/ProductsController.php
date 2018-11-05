@@ -81,11 +81,11 @@ class ProductsController extends Controller
         return $this->view('category_juice');
     }
 
-    public function singleJuice($id)
+    public function singleJuice($category_id,$id)
     {
         $vape=Stock::findOrFail($id);
         $variations = $vape->variations()->with('options')->get();
-        return $this->view('single_juice',compact('vape','variations'));
+        return $this->view('single_vape',compact('vape','variations'));
     }
 
     public function getPrice(Request $request)
