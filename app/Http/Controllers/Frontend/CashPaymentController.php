@@ -39,6 +39,7 @@ class CashPaymentController extends Controller
             $shipping = Cart::getCondition($geoZone->name);
         }
         $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress) {
+           dd(Countries::where('name.common', $shippingAddress->country)->first(),$shippingAddress);
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order = Orders::create([
