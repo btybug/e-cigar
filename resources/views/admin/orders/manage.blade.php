@@ -529,7 +529,7 @@
                         <li>
                             <div>
                                 <div>
-                                    <img src="public/admin_theme/dist/img/user2-160x160.jpg">
+                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
                                     <span>11/5/2018</span>
                                     <span>15:25</span>
                                 </div>
@@ -545,7 +545,7 @@
                         <li>
                             <div>
                                 <div>
-                                    <img src="public/admin_theme/dist/img/user2-160x160.jpg">
+                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
                                     <span>11/5/2018</span>
                                     <span>15:25</span>
                                 </div>
