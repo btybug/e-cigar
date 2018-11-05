@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\Category;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Stock;
@@ -54,6 +55,8 @@ class ProductsController extends Controller
         $column = $orderByArray[0];
         $direction = $orderByArray[1];
 
+        //TODO: make dynamic or CONST
+        $categories = Category::find(3)->children;
 
         $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
             ->where('stock_translations.locale', app()->getLocale())
@@ -64,7 +67,7 @@ class ProductsController extends Controller
 
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 
-        return $this->view('juice',compact('products','orderBy','attributes'));
+        return $this->view('juice',compact('products','orderBy','attributes','categories'));
     }
 
     public function categoryJuice($id)

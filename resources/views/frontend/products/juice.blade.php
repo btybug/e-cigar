@@ -4,15 +4,13 @@
     <div class="row">
         <div class="col-md-3">
             <ul class="list-unstyled list-group">
-                <li class="list-group-item">
-                    <a href="#" class="d-inline-block w-100 text-center">item 1</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#" class="d-inline-block w-100 text-center">item 2</a>
-                </li>
-                <li class="list-group-item">
-                    <a href="#" class="d-inline-block w-100 text-center">item 3</a>
-                </li>
+                @if(count($categories))
+                    @foreach($categories as $category)
+                        <li class="list-group-item">
+                            <a href="#" class="d-inline-block w-100 text-center">{{ $category->name }}</a>
+                        </li>
+                    @endforeach
+                @endif
             </ul>
         </div>
         <div class="col-md-9">
