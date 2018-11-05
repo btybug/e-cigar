@@ -527,6 +527,7 @@ box-shadow: 0 0 4px #ccc;
     /*min-height: 400px;*/
     height: calc(100vh - 310px);
     padding: 20px;
+    overflow: auto;
 }
 .scrollbar_media_tab{
     /*height: 600px;*/
