@@ -650,6 +650,20 @@
 
 @stop
 
+@section('css')
+    <style>
+        .content-wrapper {
+            min-height: 100%!important;
+            height: calc(100vh - 101px);
+            overflow: hidden;
+        }
+
+        body > .wrapper {
+            overflow: hidden;
+        }
+    </style>
+@stop
+
 @section('js')
     <script>
         $(function () {
