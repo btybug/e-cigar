@@ -455,50 +455,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
     
-    function xxx(){
+    function render_categories_tree(){
         $("#treeview_json").jstree({
         plugins: ["wholerow", "checkbox", "types"],
         core: {
             themes: {
                 responsive: !1
             },
-            data: [{
-                text: "Same but with checkboxes",
-                children: [{
-                    text: "initially selected",
-                    state: {
-                        selected: !0
-                    }
-                }, {
-                    text: "Folder 1"
-                }, {
-                    text: "Folder 2"
-                }, {
-                    text: "Folder 3"
-                }, {
-                    text: "initially open",
-                    icon: "fa fa-folder fa-lg",
-                    state: {
-                        opened: !0
-                    },
-                    children: [{
-                        text: "Another node"
-                    }, {
-                        text: "disabled node",
-                        state: {
-                            disabled: !0
-                        }
-                    }]
-                }, {
-                    text: "custom icon",
-                    icon: "fa fa-cloud-download fa-lg text-inverse"
-                }, {
-                    text: "disabled node",
-                    state: {
-                        disabled: !0
-                    }
-                }]
-            }, "Root node 2"]
+            data: {!! $categories->toJson() !!}
         },
         types: {
             "default": {
@@ -511,7 +475,7 @@
     })
     }
 
-    xxx()
+    render_categories_tree()
 
     // var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
     // var tree =[{!! json_encode(['nodes' => $categories]) !!}]
