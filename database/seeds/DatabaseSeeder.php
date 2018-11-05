@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
              SiteLanguagesTableSeeder::class,
              EmailsTableSeeder::class,
              CouriersTableSeeder::class,
-             DeliveryCostsTypesTableSeeder::class
+             DeliveryCostsTypesTableSeeder::class,
+             CategoryTableSeeder::class
          ]);
     }
 }
