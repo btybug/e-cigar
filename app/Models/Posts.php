@@ -34,7 +34,7 @@ class Posts extends Translatable
         $tags=@json_decode($this->tags,true);
         if($tags){
             foreach ($tags as $key=>$value){
-            $keywords.=((count($tags)==($key+1))?'':',').$value;
+            $keywords.=((count($tags)==($key))?'':',').$value;
             }
         }
         return $keywords;
