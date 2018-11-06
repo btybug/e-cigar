@@ -86,7 +86,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3">Gallery images</label>
                                         <div class="col-sm-9">
-                                          {!! media_button('gallery',null,true) !!}
+                                            {!! media_button('gallery',null,true) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -141,14 +141,14 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="tag-wall wall">
+                    <!-- <div class="tag-wall wall">
                             <div class="row">
                                 {{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}
-                                <div class="col-sm-9">
-                                    {{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
-                                </div>
+                            <div class="col-sm-9">
+                                {{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
                             </div>
-                        </div> -->
+                        </div>
+                    </div> -->
                         <div class="tag-wall wall">
                             <div class="row">
                                 <label class="col-sm-3 control-label" for="input-category"><span
@@ -200,7 +200,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-title" type="text" class="form-control">
+                                <input id="seo-facebook-title" value="{!! getSeo($fbSeo,'go:title',$post) !!}" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-desc" type="text" class="form-control">
+                                <input id="seo-facebook-desc" type="text" value="{!! getSeo($fbSeo,'go:description',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -230,7 +230,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-title" type="text" class="form-control">
+                                <input id="seo-twitter-title" type="text" value="{!! getSeo($twitterSeo,'go:title',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-desc" type="text" class="form-control">
+                                <input id="seo-twitter-desc" type="text" value="{!! getSeo($twitterSeo,'go:description',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -263,7 +263,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" id="seo_focuskw">
+                                    <input type="text" value="{!! getSeo($general,'go:keywords',$post) !!}" class="form-control" id="seo_focuskw">
                                 </td>
                             </tr>
                             <tr>
@@ -272,7 +272,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <input type="text" id="seo_title" class="form-control"
+                                    <input type="text" id="seo_title" class="form-control" value="{!! getSeo($general,'go:title',$post) !!}"
                                            placeholder="Surprisingly think it, you can find several fundamental hints out there which will assist produce your article writing abilities instantly. It really is satisfying to develop your own skills. There are a lot of easy ways to foster your skills, but you simply should know what things to do and the fashion to take action. A very simple method to improve writing abilities is constantly to study unique kinds of article content.  -"><br>
                                     <div>
                                         <p><span class="wrong">Warning:</span>
@@ -287,7 +287,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <textarea class="form-control metadesc" rows="2" id="seo_metadesc"></textarea>
+                                    <textarea class="form-control metadesc" rows="2" id="seo_metadesc">{!! getSeo($general,'go:description',$post) !!}</textarea>
                                     <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
                                     </div>
                                 </td>
@@ -303,13 +303,8 @@
                                     <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                 </th>
                                 <td>
-                                    <select name="" id="seo_meta-robots-noindex"
-                                            class="">
-                                        <option selected="selected" value="0">Default for post type, currently: index
-                                        </option>
-                                        <option value="2">index</option>
-                                        <option value="1">noindex</option>
-                                    </select>
+                                    {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'']) !!}
+
                                 </td>
                             </tr>
                             <tr>
@@ -403,16 +398,16 @@
 
         initTinyMce(".tinyMcArea")
         /*$('form').submit(function(e) {
-            tinymce.get().forEach(item => {
-                console.log(item.id)
-                let html = item.getBody().innerHTML
-                $(`#${item.id}`).val(html)
-                console.log($(`#${item.id}`).val())
-            })
-        // DO STUFF...
-            e.preventDefault()
-        return false; // return false to cancel form action
-        });*/
+         tinymce.get().forEach(item => {
+         console.log(item.id)
+         let html = item.getBody().innerHTML
+         $(`#${item.id}`).val(html)
+         console.log($(`#${item.id}`).val())
+         })
+         // DO STUFF...
+         e.preventDefault()
+         return false; // return false to cancel form action
+         });*/
     </script>
     <script>
 
@@ -425,5 +420,5 @@
         });
     </script>
     <script src="/public/admin_theme/blog_new.js"></script>
-  
+
 @stop

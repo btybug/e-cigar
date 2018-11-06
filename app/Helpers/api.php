@@ -323,14 +323,14 @@ function BBcodeDate($then)
     return (date('Y') - $then) . date('md');
 }
 
-function getUniqueCode($table,$column,$prefix='')
+function getUniqueCode($table, $column, $prefix = '')
 {
-    do{
+    do {
         $code = $prefix . BBcodeDate(2000) . generate_random_letters(4);
-    }
-    while (DB::table($table)->where($column, $code)->exists());
+    } while (DB::table($table)->where($column, $code)->exists());
     return $code;
 }
+
 
 function commentRender($comments, $i = 0,$parent = false)
 {
@@ -410,3 +410,37 @@ function time_ago($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
+function meta($object, $type = 'seo_posts')
+{
+    $settings = new \App\Models\Settings();
+    $metaTags = $settings->getEditableData($type);
+    if (!$metaTags) return null;
+    $metaTags = $metaTags->toArray();
+    $columns = $object->toArray();
+    $HTML = '';
+    foreach ($metaTags as $name => $metaTag) {
+        if (!is_null($metaTag)) {
+            $value = parametazor($metaTag,$object);
+
+            $HTML.= Html::meta($name, $value)->toHtml().'\r\n';
+        }
+    }
+    return $HTML;
+}
+
+function parametazor($string,$object)
+{
+    preg_match('/{(.*?)}/', $string, $matches);
+    if (count($matches)) {
+        $string = str_replace($matches[0], $object->{$matches[1]}, $string);
+        $string = parametazor($string,$object);
+    }
+    return $string;
+}
+function getSeo(array $seo,$index,$object)
+{
+ if($seo && is_object($object) && isset($seo[$index])) return parametazor($seo[$index],$object);
+ return null;
+}
+

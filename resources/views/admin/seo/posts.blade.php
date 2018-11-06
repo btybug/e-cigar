@@ -52,7 +52,7 @@
                         <div class="row">
                             <label for="seo-meta-robots" class="col-md-2 col-xs-12">Meta Robots</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],null,['class'=>'form-control']) !!}
+                                {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'form-control']) !!}
 
                             </div>
                         </div>
@@ -89,7 +89,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="panel panel-default mt-20">
                 <div class="panel-heading">Twitter</div>
                 <div class="panel-body">
