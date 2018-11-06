@@ -40,24 +40,19 @@
                                        <div class="gp-clear"></div>
                                    </div>
                                    <div class="blog-products-slider owl-carousel owl-theme">
+                                       @if($post->image)
                                        <div class="item">
-                                           <img  src="https://images.pexels.com/photos/1391465/pexels-photo-1391465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                           <img  src="{{ $post->image }}" class="attachment-single-product-thumb wp-post-image" alt="">
                                        </div>
-                                       <div class="item">
-                                           <img src="https://images.pexels.com/photos/338710/pexels-photo-338710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
-                                       </div>
-                                       <div class="item">
-                                           <img src="https://images.pexels.com/photos/1391465/pexels-photo-1391465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
-                                       </div>
-                                       <div class="item">
-                                           <img src="https://images.pexels.com/photos/986729/pexels-photo-986729.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
-                                       </div>
-                                       <div class="item">
-                                           <img src="https://images.pexels.com/photos/1423864/pexels-photo-1423864.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
-                                       </div>
-                                       <div class="item">
-                                           <img  src="https://images.pexels.com/photos/338710/pexels-photo-338710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
-                                       </div>
+                                       @endif
+
+                                       @if(count($post->gallery))
+                                           @foreach($post->gallery as $gal)
+                                                   <div class="item">
+                                                       <img  src="{{ $gal }}" class="attachment-single-product-thumb wp-post-image" alt="">
+                                                   </div>
+                                           @endforeach
+                                       @endif
                                    </div>
                                    <header class="gp-entry-header">
                                        <div class="gp-entry-cats">
@@ -115,167 +110,138 @@
                                            </div>
                                        </div>
                                    </div>
-                                   <div class="comments">
-                                       <h2>Comments</h2>
-                                       <div class="divider"></div>
 
-                                       {!! commentRender($post->comments) !!}
-
-                                       <div class="user-add-comment mt-md-5 mt-4">
-                                           <div class="row">
-                                               <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
-                                                   <div class="user-img">
-                                                       <img src="/public/images/male.png" alt="">
-                                                   </div>
-                                               </div>
-                                               <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">
-                                                   <div class="add-comment">
-                                                       {!! Form::open(['route' => 'comment_create_post']) !!}
-                                                       {!! Form::hidden('post_id',$post->id) !!}
-                                                       @if(! Auth::check())
-                                                           <div class="row">
-                                                               <div class="col-sm-6">
-                                                                   <input name="guest_name" type="text" placeholder="Username">
-                                                                   <span class="error-box invalid-feedback guest_name"></span>
-                                                               </div>
-                                                               <div class="col-sm-6">
-                                                                   <input name="guest_email" type="email" placeholder="Email">
-                                                                   <span class="error-box invalid-feedback guest_email"></span>
-                                                               </div>
-                                                           </div>
-                                                       @endif
-
-                                                       <textarea name="comment" id="" rows="0"
-                                                                 placeholder="Your comments"></textarea>
-                                                       <span class="error-box invalid-feedback comment"></span>
-                                                       <div class="row mt-1">
-                                                           <div class="col-sm-6">
-                                                               <button type="button"
-                                                                       class="btn btn-outline-success btn-block cancel-comment">
-                                                                   Cancel
-                                                               </button>
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                               <button type="button"
-                                                                       class="btn btn-outline-success btn-block add-comment-btn">
-                                                                   Add
-                                                               </button>
-                                                           </div>
-                                                       </div>
-                                                       {!! Form::close() !!}
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
                                </article>
 
+                               @if(count($post->stocks))
                                <div class="blog-posts-slider owl-carousel owl-theme mb-5">
+                                   @foreach($post->stocks as $stock)
                                    <div class="item">
                                        <div class="card text-center">
                                            <div class="img-outer">
-                                               <img class="card-img-top" src="https://images.pexels.com/photos/1005486/pexels-photo-1005486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                               @if($stock->image)
+                                                   <img class="card-img-top" src="{{ $stock->image }}" alt="">
+                                               @else
+                                                    <img class="card-img-top" src="https://images.pexels.com/photos/1005486/pexels-photo-1005486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                               @endif
                                            </div>
                                            <div class="card-body">
-                                               <h5 class="card-title">Product 1</h5>
-                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                               <a href="#" class="btn btn-primary">Go somewhere</a>
+                                               <h5 class="card-title">{!! $stock->name !!}</h5>
+                                               <p class="card-text">{!! $stock->description !!}</p>
+                                               <a href="{!! url('products/vape/'.$stock->id) !!}" class="btn btn-primary">View</a>
                                            </div>
                                        </div>
                                    </div>
-                                   <div class="item">
-                                       <div class="card text-center">
-                                           <div class="img-outer">
-                                               <img class="card-img-top" src="https://images.pexels.com/photos/849203/pexels-photo-849203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
-                                           </div>
-                                           <div class="card-body">
-                                               <h5 class="card-title">Product 1</h5>
-                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                               <a href="#" class="btn btn-primary">Go somewhere</a>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="item">
-                                       <div class="card text-center">
-                                           <div class="img-outer">
-                                               <img class="card-img-top" src="https://images.pexels.com/photos/338710/pexels-photo-338710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
-                                           </div>
-                                           <div class="card-body">
-                                               <h5 class="card-title">Product 1</h5>
-                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                               <a href="#" class="btn btn-primary">Go somewhere</a>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="item">
-                                       <div class="card text-center">
-                                           <div class="img-outer">
-                                               <img class="card-img-top" src="https://images.pexels.com/photos/849203/pexels-photo-849203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
-                                           </div>
-                                           <div class="card-body">
-                                               <h5 class="card-title">Product 1</h5>
-                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                               <a href="#" class="btn btn-primary">Go somewhere</a>
-                                           </div>
-                                       </div>
-                                   </div>
+                                   @endforeach
                                </div>
+                               @endif
                                <div class="comment-list">
+                                   <h2>Comments</h2>
+                                   <div class="divider"></div>
+
+                                   {!! commentRender($post->comments) !!}
+
+                                   <div class="user-add-comment mt-md-5 mt-4">
+                                       <div class="row">
+                                           <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                               <div class="user-img">
+                                                   <img src="/public/images/male.png" alt="">
+                                               </div>
+                                           </div>
+                                           <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">
+                                               <div class="add-comment">
+                                                   {!! Form::open(['route' => 'comment_create_post']) !!}
+                                                   {!! Form::hidden('post_id',$post->id) !!}
+                                                   @if(! Auth::check())
+                                                       <div class="row">
+                                                           <div class="col-sm-6">
+                                                               <input name="guest_name" type="text" placeholder="Username">
+                                                               <span class="error-box invalid-feedback guest_name"></span>
+                                                           </div>
+                                                           <div class="col-sm-6">
+                                                               <input name="guest_email" type="email" placeholder="Email">
+                                                               <span class="error-box invalid-feedback guest_email"></span>
+                                                           </div>
+                                                       </div>
+                                                   @endif
+
+                                                   <textarea name="comment" id="" rows="0"
+                                                             placeholder="Your comments"></textarea>
+                                                   <span class="error-box invalid-feedback comment"></span>
+                                                   <div class="row mt-1">
+                                                       <div class="col-sm-6">
+                                                           <button type="button"
+                                                                   class="btn btn-outline-success btn-block cancel-comment">
+                                                               Cancel
+                                                           </button>
+                                                       </div>
+                                                       <div class="col-sm-6">
+                                                           <button type="button"
+                                                                   class="btn btn-outline-success btn-block add-comment-btn">
+                                                               Add
+                                                           </button>
+                                                       </div>
+                                                   </div>
+                                                   {!! Form::close() !!}
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
                                    <!-- First Comment -->
-                                   <div class="row">
-                                       <div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">
-                                           <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
-                                               <figcaption class="text-center">username</figcaption>
-                                           </figure>
-                                       </div>
-                                       <div class="col-lg-10 col-md-10">
-                                           <div class="card arrow left mb-4">
-                                               <div class="card-body">
-                                                   <header class="text-left">
-                                                       <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                       <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                                   </header>
-                                                   <div class="comment-post">
-                                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                           consequat.</p>
-                                                   </div>
-                                                   <p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>
-                                                   </p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <!-- Comment Reply -->
-                                   <div class="row">
-                                       <div class="col-lg-2 col-md-2 offset-md-1 offset-sm-0 hidden-xsd-none d-sm-block">
-                                           <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
-                                               <figcaption class="text-center">username</figcaption>
-                                           </figure>
-                                       </div>
-                                       <div class="col-lg-9 col-md-9">
-                                           <div class="card arrow left mb-4">
-                                               <div class="card-header right">Reply</div>
-                                               <div class="card-body">
-                                                   <header class="text-left">
-                                                       <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                       <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                                   </header>
-                                                   <div class="comment-post">
-                                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                           consequat.</p>
-                                                   </div>
-                                                   <p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>
-                                                   </p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
+                                   {{--<div class="row">--}}
+                                       {{--<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">--}}
+                                           {{--<figure class="thumbnail">--}}
+                                               {{--<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">--}}
+                                               {{--<figcaption class="text-center">username</figcaption>--}}
+                                           {{--</figure>--}}
+                                       {{--</div>--}}
+                                       {{--<div class="col-lg-10 col-md-10">--}}
+                                           {{--<div class="card arrow left mb-4">--}}
+                                               {{--<div class="card-body">--}}
+                                                   {{--<header class="text-left">--}}
+                                                       {{--<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>--}}
+                                                       {{--<time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>--}}
+                                                   {{--</header>--}}
+                                                   {{--<div class="comment-post">--}}
+                                                       {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod--}}
+                                                           {{--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,--}}
+                                                           {{--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo--}}
+                                                           {{--consequat.</p>--}}
+                                                   {{--</div>--}}
+                                                   {{--<p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>--}}
+                                                   {{--</p>--}}
+                                               {{--</div>--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<!-- Comment Reply -->--}}
+                                   {{--<div class="row">--}}
+                                       {{--<div class="col-lg-2 col-md-2 offset-md-1 offset-sm-0 hidden-xsd-none d-sm-block">--}}
+                                           {{--<figure class="thumbnail">--}}
+                                               {{--<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">--}}
+                                               {{--<figcaption class="text-center">username</figcaption>--}}
+                                           {{--</figure>--}}
+                                       {{--</div>--}}
+                                       {{--<div class="col-lg-9 col-md-9">--}}
+                                           {{--<div class="card arrow left mb-4">--}}
+                                               {{--<div class="card-header right">Reply</div>--}}
+                                               {{--<div class="card-body">--}}
+                                                   {{--<header class="text-left">--}}
+                                                       {{--<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>--}}
+                                                       {{--<time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>--}}
+                                                   {{--</header>--}}
+                                                   {{--<div class="comment-post">--}}
+                                                       {{--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod--}}
+                                                           {{--tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,--}}
+                                                           {{--quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo--}}
+                                                           {{--consequat.</p>--}}
+                                                   {{--</div>--}}
+                                                   {{--<p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>--}}
+                                                   {{--</p>--}}
+                                               {{--</div>--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
 
                                </div>
                            </div>

@@ -337,35 +337,39 @@ function commentRender($comments, $i = 0,$parent = false)
     if (count($comments)) {
         $comment = $comments[$i];
         //render main content
+        echo '<div class="row user-comment-img">';
         if($parent){
-            echo '<div class="reply-comment user-comment-img mt-md-5 mt-4 ml-5">';
+            echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
         }else{
-            echo '<div class="user-comment-img mt-md-5 mt-4">';
+            echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
         }
-        echo '<div class="row">';
-        echo '<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">';
-        echo '<div class="user-img">';
-        echo '<img src="/public/images/male.png" alt="">';
-        echo '</div>';
-        echo '</div>';
-        echo '<div class="col-sm-11 col-md-8 col-lg-6 col-xl-3">';
-        echo '<div class="user-comment d-flex flex-column">';
-        echo '<div class="user-title d-flex justify-content-between flex-wrap mb-1">';
-        if($comment->author){
-            if($comment->author->isAdmin()){
-                echo '<h6>Admin</h6>';
+        echo '<figure class="thumbnail">';
+            echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
+            if($comment->author){
+                if($comment->author->isAdmin()){
+                    echo '<figcaption class="text-center">Admin</figcaption>';
+                }else{
+                    echo '<figcaption class="text-center">' .$comment->author->username.'</figcaption>';
+                }
             }else{
-                echo '<h6>' .$comment->author->username.'</h6>';
+                echo '<figcaption class="text-center">' .$comment->guest_name.'</figcaption>';
             }
-        }else{
-            echo '<h6>'. $comment->guest_name .'</h6>';
-        }
-        echo '<span>'. time_ago($comment->created_at) .'</span>';
+
+        echo '</figure>';
         echo '</div>';
-        echo '<div class="content-reply d-flex justify-content-between">';
+
+
+        echo '<div class="col-lg-10 col-md-10">';
+        echo '<div class="card arrow left mb-4">';
+        echo '<div class="card-body">';
+        echo '<header class="text-left">';
+        echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
+        echo '<time class="comment-date" datetime="'. $comment->created_at .'"><i class="fa fa-clock-o"></i> '. time_ago($comment->created_at) .'</time>';
+        echo '</header>';
+        echo '<div class="comment-post">';
         echo '<p>'.$comment->comment.'</p>';
-        echo '<a href="javascript:void(0)" data-id="'.$comment->id.'" class="reply"><i class="fas fa-reply"></i> reply</a>';
         echo '</div>';
+        echo '<p class="text-right"><a href="#" data-id="'.$comment->id.'" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
