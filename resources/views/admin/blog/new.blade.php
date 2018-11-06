@@ -13,8 +13,8 @@
 @section('content')
     <div class="tab-content tabs_content">
         {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
-        {!! Form::hidden('id',null) !!}
         <div id="home" class="tab-pane tab_info fade in active">
+        {!! Form::hidden('id',null) !!}
             <div class="text-right btn-save">
                 <button type="button" class="btn btn-success btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
@@ -188,8 +188,8 @@
                     </div>
                 </div>
             </div>
-        </div>
         {!! Form::close() !!}
+        </div>
 
         <div id="seo" class="tab-pane  tab_seo fade">
             <div class="text-right btn-save">
