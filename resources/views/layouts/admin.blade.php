@@ -58,7 +58,7 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
     @yield('css') 
 
     @stack('style')
