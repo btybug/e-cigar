@@ -453,98 +453,98 @@
 
                 <div class="order-notes_timeline">
                     <ul class="list-unstyled">
-                        <li>
-                            <div>
+                        <li class="timeline_item">
+                            <div class="timeline-item-left-col">
                                 <div>
                                     <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>15:25</span>
+                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
+                                    <span class="timeline-item-left-col_dtls">15:25</span>
                                 </div>
                             </div>
-                            <div>
+                            <div class="timeline-item-right-col">
                                 <div>
                                     <div class="status-holder">Submited</div>
-                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div>
+                        <li class="timeline_item">
+                            <div class="timeline-item-left-col">
                                 <div>
                                     <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>15:25</span>
+                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
+                                    <span class="timeline-item-left-col_dtls">15:25</span>
                                 </div>
                             </div>
-                            <div>
+                            <div class="timeline-item-right-col">
                                 <div>
                                     <div class="status-holder">Submited</div>
-                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div>
+                        <li class="timeline_item">
+                            <div class="timeline-item-left-col">
                                 <div>
                                     <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>15:25</span>
+                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
+                                    <span class="timeline-item-left-col_dtls">15:25</span>
                                 </div>
                             </div>
-                            <div>
+                            <div class="timeline-item-right-col">
                                 <div>
                                     <div class="status-holder">Submited</div>
-                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div>
+                        <li class="timeline_item">
+                            <div class="timeline-item-left-col">
                                 <div>
                                     <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>15:25</span>
+                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
+                                    <span class="timeline-item-left-col_dtls">15:25</span>
                                 </div>
                             </div>
-                            <div>
+                            <div class="timeline-item-right-col">
                                 <div>
                                     <div class="status-holder">Submited</div>
-                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div>
+                        <li class="timeline_item">
+                            <div class="timeline-item-left-col">
                                 <div>
                                     <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>15:25</span>
+                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
+                                    <span class="timeline-item-left-col_dtls">15:25</span>
                                 </div>
                             </div>
-                            <div>
+                            <div class="timeline-item-right-col">
                                 <div>
                                     <div class="status-holder">Submited</div>
-                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div>
+                        <li class="timeline_item">
+                            <div class="timeline-item-left-col">
                                 <div>
                                     <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span>11/5/2018</span>
-                                    <span>15:25</span>
+                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
+                                    <span class="timeline-item-left-col_dtls">15:25</span>
                                 </div>
                             </div>
-                            <div>
+                            <div class="timeline-item-right-col">
                                 <div>
                                     <div class="status-holder">Submited</div>
-                                    <p>Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
+                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
                                         Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
                                 </div>
                             </div>
@@ -612,23 +612,27 @@
             }
 
             body .main-sidebar::-webkit-scrollbar,
-            .order-main-cnt_left-col::-webkit-scrollbar {
+            .order-main-cnt_left-col::-webkit-scrollbar,
+            .order-notes::-webkit-scrollbar {
                 width: 10px;
             }
 
             body .main-sidebar::-webkit-scrollbar-track,
-            .order-main-cnt_left-col::-webkit-scrollbar-track {
+            .order-main-cnt_left-col::-webkit-scrollbar-track,
+            .order-notes::-webkit-scrollbar-track {
                 background: #f1f1f1;
             }
 
 
             body .main-sidebar::-webkit-scrollbar-thumb,
-            .order-main-cnt_left-col::-webkit-scrollbar-thumb {
+            .order-main-cnt_left-col::-webkit-scrollbar-thumb,
+            .order-notes::-webkit-scrollbar-thumb {
                 background: #888;
             }
 
             body .main-sidebar::-webkit-scrollbar-thumb:hover,
-            .order-main-cnt_left-col::-webkit-scrollbar-thumb:hover {
+            .order-main-cnt_left-col::-webkit-scrollbar-thumb:hover,
+            .order-notes::-webkit-scrollbar-thumb:hover {
                 background: #555;
             }
 

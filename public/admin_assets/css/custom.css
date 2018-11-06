@@ -353,28 +353,28 @@ table.table--order-dtls.table-bordered tr > th {
 .order-notes_message .text-bold {
     font-weight: bold;
 }
-/******/
 
 .order-notes_timeline {
     background: #fff;
 }
-.order-notes_timeline > ul > li {
+
+.timeline_item {
     display: flex;
     max-width: 500px;
     margin: 0 auto;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(1) {
+.order-notes_timeline .timeline-item-left-col {
     padding: 15px 27px 15px 15px;
     z-index: 1;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(1) > div {
+.order-notes_timeline .timeline-item-left-col > div {
     position: relative;
     text-align: center;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(1) > div::after {
+.order-notes_timeline .timeline-item-left-col > div::after {
     content: '';
     width: 100%;
     height: 0;
@@ -385,7 +385,7 @@ table.table--order-dtls.table-bordered tr > th {
     z-index: -1;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(1) img {
+.order-notes_timeline .timeline-item-left-col img {
     border-radius: 50%;
     border: 3px solid #222d32;
     width: 50px;
@@ -393,7 +393,7 @@ table.table--order-dtls.table-bordered tr > th {
     object-fit: cover;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(1) span {
+.order-notes_timeline .timeline-item-left-col_dtls {
     background: #fff;
     display: block;
     clear: both;
@@ -401,32 +401,25 @@ table.table--order-dtls.table-bordered tr > th {
     margin: 0.5em 0;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(2) {
+.order-notes_timeline .timeline-item-right-col {
     position: relative;
     flex-grow: 1;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(2) > div {
+.order-notes_timeline .timeline-item-right-col > div {
     border: 1px solid #222d32;
     border-radius: 0.5em;
     padding: 15px;
     margin: 1em 0;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(2) > div h6 {
-    font-size: 1.4em;
-    margin: 0;
-    padding: 0 0 0.5em 0;
-    letter-spacing: 0.1em;
-}
-
-.order-notes_timeline > ul > li > div:nth-of-type(2) > div p {
+.order-notes_timeline .status-massage {
     margin: 0;
     padding: 0;
     line-height: 150%;
 }
 
-.order-notes_timeline > ul > li > div:nth-of-type(2)::before {
+.order-notes_timeline .timeline-item-right-col::before {
     content: '';
     width: 0;
     height: 100%;
@@ -445,7 +438,7 @@ table.table--order-dtls.table-bordered tr > th {
     display: inline-block;
     margin-bottom: 5px;
 }
-/******/
+
 
 /*End admin orders*/
 
