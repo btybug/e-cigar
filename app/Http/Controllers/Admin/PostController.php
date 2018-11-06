@@ -53,9 +53,10 @@ class PostController extends Controller
 
     public function newPost(StoreBlogPost $request,$locale = null)
     {
-        $data = $request->except('_token','translatable','categories');
+        $data = $request->except('_token','translatable','categories','stocks');
         $post = Posts::updateOrCreate($request->id, $data);
         $post->categories()->sync(json_decode($request->get('categories',[])));
+        $post->stocks()->sync($request->get('stocks',[]));
 
         return redirect()->route('admin_blog');
     }

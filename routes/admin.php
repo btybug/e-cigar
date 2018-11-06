@@ -242,6 +242,7 @@ Route::group(['prefix' => 'seo'], function () {
 
 Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');
 Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');
+Route::post('/get-stocks', 'Admin\InventoryController@getStocks')->name('admin_inventary_get_stocks');
 Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 
 

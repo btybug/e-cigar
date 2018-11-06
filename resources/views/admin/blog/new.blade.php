@@ -88,10 +88,23 @@
                                         <span>
                                             Related Products
                                         </span>
-                                        <button class="btn btn-info">Select</button>
+                                        <button type="button" class="btn btn-info select-products">Select</button>
                                     </div>
-                                    <div class="panel-body">
-                                        Content
+                                    <div class="panel-body product-body">
+                                        <ul class="get-all-attributes-tab">
+                                            @if(isset($post) && count($post->stocks))
+                                                @foreach($post->stocks as $stock)
+                                                    <li style="display: flex" data-id="{{ $stock->id }}" class="option-elm-attributes">
+                                                        <a href="#">{!! $stock->name !!}</a>
+                                                        <div class="buttons">
+                                                            <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger">
+                                                                <i class="fa fa-trash"></i></a>
+                                                        </div>
+                                                        <input type="hidden" name="stocks[]" value="{{ $stock->id }}">
+                                                    </li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -356,6 +369,27 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select products</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all-list">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
@@ -374,6 +408,49 @@
 
     <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
+        $(function () {
+            $("body").on('click','.select-products',function () {
+                let arr = [];
+                $(".get-all-attributes-tab")
+                    .children()
+                    .each(function() {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/get-stocks", { arr }, function(res) {
+                    if (!res.error) {
+                        $("#productsModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${
+                                item.name
+                                }</a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}" data-id="${
+                                item.id
+                                }">ADD</a></li>`;
+                        $("#productsModal .modal-body .all-list").append(html);
+                    });
+                        $("#productsModal").modal();
+                    }
+                });
+            });
+
+
+            $("body").on("click", ".add-attribute-event", function() {
+                let id = $(this).data("id");
+                let name = $(this).data("name");
+                $(".get-all-attributes-tab")
+                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                                href="#">${name}</a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="stocks[]" value="${id}">
+                                </li>`);
+                $(this)
+                    .parent()
+                    .remove();
+            });
+        });
+        
         function render_categories_tree(){
             $("#treeview_json").jstree({
                 "checkbox" : {

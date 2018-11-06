@@ -48,4 +48,9 @@ class Posts extends Translatable
     {
         return $this->belongsToMany(CategoryPost::class, 'post_categories', 'post_id', 'categories_post_id');
     }
+
+    public function stocks()
+    {
+        return $this->belongsToMany(Stock::class, 'post_stocks', 'post_id', 'stock_id');
+    }
 }

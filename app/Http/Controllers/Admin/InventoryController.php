@@ -137,4 +137,10 @@ class InventoryController extends Controller
         $html=\View::make($path)->with(['model'=>$model])->render();
         return \Response::json(['error'=>false,'html'=>$html]);
     }
+
+    public function getStocks (Request $request)
+    {
+        $attr = Stock::whereNotIn('id', $request->get('arr',[]))->get();
+        return \Response::json(['error' => false,'data' => $attr]);
+    }
 }
