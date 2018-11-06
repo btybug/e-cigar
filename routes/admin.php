@@ -211,6 +211,9 @@ Route::group(['prefix' => 'media'], function () {
     Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
     Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
 });
+Route::group(['prefix' => 'seo'], function () {
+    Route::get('/', 'Admin\SeoController@general')->name('admin_seo');
+});
 
 Route::post('/get-categories', 'Admin\StoreController@getCategory')->name('admin_get_categories');
 Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');

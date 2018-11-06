@@ -88,6 +88,20 @@
                 </ul>
             </li>
             @endok
+            @ok('admin_seo')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-list-alt"></i>
+                    <span>SEO</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin_seo')}}"><i class="fa fa-circle-o"></i> General</a></li>
+                </ul>
+            </li>
+            @endok
             @ok('admin_orders')
             <li class="treeview">
                 <a href="#">
