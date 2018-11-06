@@ -68,7 +68,6 @@
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
                                 {!! Form::text('fb[go:title]',null,['class'=>'form-control']) !!}
-                                <input id="seo-facebook-title" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
