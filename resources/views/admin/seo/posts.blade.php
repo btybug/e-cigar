@@ -18,6 +18,8 @@
         </div>
     </div>
     <div class="container-fluid">
+        {!! Form::model($general) !!}
+        <div class="pull-right"><button type="submit" class="btn btn-success">Save</button></div>
         <div class="seo-page-general">
             <div class="panel panel-default mt-20">
                 <div class="panel-heading">General</div>
@@ -26,7 +28,7 @@
                         <div class="row">
                             <label for="seo-title" class="col-md-2 col-xs-12">Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-title" type="text" class="form-control">
+                                {!! Form::text('go:title',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -34,7 +36,7 @@
                         <div class="row">
                             <label for="seo-desc" class="col-md-2 col-xs-12">Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-desc" type="text" class="form-control">
+                                {!! Form::text('go:description',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -42,7 +44,7 @@
                         <div class="row">
                             <label for="seo-keywords" class="col-md-2 col-xs-12">Focus keywords</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-keywords" type="text" class="form-control">
+                                {!! Form::text('go:keywords',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -50,10 +52,8 @@
                         <div class="row">
                             <label for="seo-meta-robots" class="col-md-2 col-xs-12">Meta Robots</label>
                             <div class="col-md-5 col-xs-12">
-                                <select name="" id="seo-meta-robots" class="form-control">
-                                    <option value="">Index</option>
-                                    <option value="">Noindex</option>
-                                </select>
+                                {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],null,['class'=>'form-control']) !!}
+
                             </div>
                         </div>
                     </div>
@@ -67,6 +67,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
+                                {!! Form::text('fb[go:title]',null,['class'=>'form-control']) !!}
                                 <input id="seo-facebook-title" type="text" class="form-control">
                             </div>
                         </div>
@@ -75,7 +76,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-desc" type="text" class="form-control">
+                                {!! Form::text('fb[go:description]',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
                         <div class="row">
                             <label for="seo-facebook-image" class="col-md-2 col-xs-12">Facebook Image</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-image" type="text" class="form-control">
+                                {!! Form::text('fb[go:image]',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -97,7 +98,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-title" type="text" class="form-control">
+                                {!! Form::text('twitter[go:title]',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -105,7 +106,7 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-desc" type="text" class="form-control">
+                                {!! Form::text('twitter[go:description]',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -113,13 +114,14 @@
                         <div class="row">
                             <label for="seo-twitter-image" class="col-md-2 col-xs-12">Twitter Image</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-image" type="text" class="form-control">
+                                {!! Form::text('twitter[go:image]',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
 
 
