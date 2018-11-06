@@ -151,6 +151,14 @@
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-tags-list">
+                                            @if($post && $post->tags)
+                                                <?php
+                                                    $tags = json_decode($post->tags,true);
+                                                ?>
+                                                @foreach($tags as $tag)
+                                                        <li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>{{ $tag }}</li>
+                                                    @endforeach
+                                            @endif
                                         </ul>
                                     </div>
                                     {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
