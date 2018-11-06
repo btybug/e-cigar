@@ -5,16 +5,12 @@
 
             <li class="nav-item active">
                 <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo') !!}" role="tab"
-                   aria-controls="shipping" aria-selected="false">General</a>
+                   aria-controls="shipping" aria-selected="false">Posts</a>
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_social') !!}" role="tab"
-                   aria-controls="shipping" aria-selected="false">Social</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link " id="general-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
-                   aria-controls="general" aria-selected="true" aria-expanded="true">Bulk</a>
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_stocks') !!}" role="tab"
+                   aria-controls="shipping" aria-selected="false">Stocks</a>
             </li>
         </ul>
         <div class="" id="myTabContent">

@@ -212,8 +212,8 @@ Route::group(['prefix' => 'media'], function () {
     Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
 });
 Route::group(['prefix' => 'seo'], function () {
-    Route::get('/', 'Admin\SeoController@general')->name('admin_seo');
-    Route::get('/social-media', 'Admin\SeoController@getSocial')->name('admin_seo_social');
+    Route::get('/', 'Admin\SeoController@getPosts')->name('admin_seo');
+    Route::get('/stocks', 'Admin\SeoController@getStocks')->name('admin_seo_stocks');
     Route::get('/bulk', 'Admin\SeoController@getBulk')->name('admin_seo_bulk');
 });
 

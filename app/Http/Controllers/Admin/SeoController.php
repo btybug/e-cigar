@@ -15,14 +15,14 @@ class SeoController extends Controller
 {
     protected $view = 'admin.seo';
 
-    public function general()
+    public function getPosts()
     {
-        return $this->view('general');
+        return $this->view('posts');
     }
 
-    public function getSocial()
+    public function getStocks()
     {
-        return $this->view('social');
+        return $this->view('stocks');
     }
 
     public function getBulk()
