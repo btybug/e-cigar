@@ -91,38 +91,76 @@
                                 </div>
                             </div>
                             <div id="comments">
-                                <div id="respond" class="comment-respond">
-                                    <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small>
-                                            <a rel="nofollow" id="cancel-comment-reply-link" href="/featured-news/dale-webster-takes-a-break-after-14642-consecutive-days/#respond" style="display:none;">Cancel Reply</a></small>
-                                    </h3>
-                                    <form method="post" id="commentform" class="comment-form">
-                                        <p class="comment-notes">
-                                            Your email address will not be published. Required fields are marked <span class="required">*</span></p>
-                                        <p class="comment-form-comment">
-                                            <label for="comment">Comment</label>
-                                            <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea>
-                                        </p>
-                                        <p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:
-                                            <code>&lt;a href="" title=""&gt; &lt;abbr title=""&gt; &lt;acronym title=""&gt; &lt;b&gt; &lt;blockquote cite=""&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=""&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=""&gt; &lt;s&gt; &lt;strike&gt; &lt;strong&gt;
-                                            </code>
-                                        </p>
-                                        <p class="comment-form-author">
-                                            <input id="author" name="author" type="text" value="" size="30" placeholder="Name *" aria-required="true"></p>
-                                        <p class="comment-form-email"><input id="email" name="email" type="text" value="" size="30" placeholder="Email *" aria-required="true"></p>
-                                        <p class="comment-form-url">
-                                            <input id="url" name="url" type="text" value="" size="30" placeholder="Website"></p>
-                                        <p class="form-submit">
-                                            <input name="submit" type="submit" id="submit" class="submit" value="Post Comment">
-                                            <input type="hidden" name="comment_post_ID" value="3513" id="comment_post_ID">
-                                            <input type="hidden" name="comment_parent" id="comment_parent" value="0"></p>
-                                        <p style="display: none;">
-                                            <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="c69e824df6">
-                                        </p>
-                                        <input type="hidden" id="ak_js" name="ak_js" value="1539328157045">
-                                    </form>
+                                <div class="comment-area container">
+                                    <div class="comment-heading">
+                                        <h3>{{ $post->totalCommentCount() }} Thoughts</h3>
+                                    </div>
+                                    @if(count($post->comments))
+                                        @foreach($post->comments  as $comment)
+                                            <div class="single-comment">
+                                                <div class="media">
+                                                    <div class="media-left text-center">
+                                                        <a href="#">
+                                                            <img class="media-object img" src="{!! url('public/images/other.png') !!}" alt="">
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="media-heading">
+                                                            <h3 class="text-uppercase">
+                                                                <span>{{ $comment->user->name }}</span>
+                                                                <a href="#" class="pull-right reply-btn">reply</a>
+                                                            </h3>
+                                                        </div>
+                                                        <p class="comment-date">
+                                                            {{ BBgetDateFormat($comment->created_at) }}
+                                                        </p>
+                                                        <p class="comment-p">
+                                                            {{ $comment->comment }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            @if(count($comment->childrens))
+                                                @foreach($comment->childrens as $child)
+                                                    <div class="single-comment single-comment-reply">
+                                                        <div class="media">
+                                                            <div class="media-left text-center">
+                                                                <a href="#"> <img class="media-object" src="http://www.sheebamagazine.com/wp-content/uploads/2016/03/2016-15-VOL-I-A-Bieber-WEB-620x805.jpg" alt=""></a>
+                                                            </div>
+                                                            <div class="media-body">
+                                                                <div class="media-heading">
+                                                                    <h3 class="text-uppercase"><a href="#">{{ $child->user->name }}</a></h3>
+                                                                </div>
+                                                                <p class="comment-date">
+                                                                    {{ BBgetDateFormat($child->created_at) }}
+                                                                </p>
+                                                                <p class="comment-p">
+                                                                    {{ $child->comment }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+                                </div>
+                                <div class="leave-comment">
+                                    <h4>Leave a reply</h4>
+                                    {!! Form::open(['class' => 'form-horizontal contact-form','route' => 'comment_create_post']) !!}
+                                        {!! Form::hidden('post_id',$post->id) !!}
+                                        {!! Form::hidden('author_id',Auth::id()) !!}
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <textarea class="form-control" rows="6" name="comment" placeholder="Write Massage" required=""></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn send-btn">Post Comment</button>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
-                            <div id="comments-container"></div>
                         </article>
                     </div>
                 </div>
@@ -140,6 +178,163 @@
    <style>
    .hide-icons {
        cursor: pointer;
+   }
+
+
+
+   .top-comment {
+       padding: 30px;
+       background-color: #fff;
+       color: #444;
+       margin-bottom: 20px;
+       border: 1px solid #eee;
+       overflow: hidden;
+   }
+
+   .top-comment img {
+       margin-right: 15px;
+       width: 109px;
+       height: 109px;
+       object-fit: cover;
+   }
+
+   .top-comment p {
+       line-height: 24px;
+   }
+
+   .top-comment h4 a:hover {
+       color: #da521e;
+   }
+
+   .top-comment .social-share {
+       margin-bottom: 0;
+       margin-top: -5px;
+   }
+
+   .top-comment .social-share li {
+       margin-bottom: 0;
+   }
+
+   .top-comment .social-share li a {
+       color: #c2c2c2;
+   }
+
+   .top-comment .social-share li a:hover {
+       color: #da521e;
+   }
+
+   .comment-area {
+       background: #fff;
+       border-radius: 4px;
+       border: 1px solid #e2e2e2;
+       margin-bottom: 60px;
+       padding: 50px;
+   }
+
+   .comment-area .comment-heading h3 {
+       font-size: 18px;
+       padding-bottom: 14px;
+   }
+
+   .comment-area .single-comment {
+       padding-bottom: 25px;
+   }
+
+   .comment-area .single-comment .media {
+       margin-top: 0;
+   }
+
+   .comment-area .single-comment .media-left {
+       padding-right: 15px;
+       float: left;
+   }
+
+   .comment-area .single-comment .media-left img {
+       width: 60px;
+       height: 60px;
+       object-fit: cover;
+   }
+
+   .comment-area .single-comment .media-body h3 {
+       font-size: 14px;
+       margin: 0;
+       padding-bottom: 5px;
+   }
+
+   .comment-area .single-comment .media-body h3 .reply-btn {
+       background: #eee;
+       color: #777;
+       display: inline-block;
+       font-size: 12px;
+       height: 30px;
+       line-height: 30px;
+       text-align: center;
+       width: 60px;
+   }
+
+   .comment-area .single-comment .media-body h3 .reply-btn:hover {
+       background: #da521e;
+       color: #fff;
+   }
+
+   .comment-area .single-comment .media-body .comment-date {
+       color: #888888;
+   }
+
+   .comment-area .single-comment .media-body .comment-p {
+       font-size: 14px;
+       line-height: 24px;
+   }
+
+   .comment-area .single-comment-reply {
+       margin-left: 30px;
+   }
+
+   .leave-comment {
+       background-color: #fff;
+       border: 1px solid #e2e2e2;
+       margin-bottom: 60px;
+       padding: 20px;
+       color: #212121;
+   }
+
+   .leave-comment h4 {
+       color: #444;
+       font-size: 14px;
+       text-transform: uppercase;
+       font-weight: 700;
+   }
+
+   .leave-comment .contact-form .form-control {
+       background-color: #FAFAFA;
+       color: #999999;
+       border-radius: 0;
+       font-size: 14px;
+       line-height: 28px;
+       padding: 20px;
+       border-color: #eee;
+       -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.075);
+       box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.075);
+   }
+
+   .leave-comment .contact-form .form-control:focus {
+       box-shadow: none;
+       border-color: #da521e;
+   }
+
+   .leave-comment .send-btn {
+       background: #333;
+       color: #fff;
+       font-family: "Oswald", sans-serif;
+       letter-spacing: 1px;
+       text-transform: uppercase;
+       -webkit-transition: all .33s;
+       transition: all .33s;
+       border-radius: 0;
+   }
+
+   .leave-comment .send-btn:hover {
+       background: #da521e;
    }
    </style>
 @stop

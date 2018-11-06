@@ -49,6 +49,10 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
 
+Route::group(['prefix'=>'comments'],function (){
+    Route::post('/create', 'Frontend\CommentsConroller@postCreate')->name('comment_create_post');
+});
+
 Route::group(['prefix' => 'products'], function () {
     Route::get('/', 'Frontend\ProductsController@index')->name('products');
     Route::post('/get-price', 'Frontend\ProductsController@getPrice')->name('product_get_price');
