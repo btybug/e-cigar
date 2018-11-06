@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogPost;
+use App\Models\CategoryPost;
 use App\Models\Comment;
 use App\Models\Posts;
 use App\Models\Settings;
@@ -22,6 +23,13 @@ class PostController extends Controller
 {
     protected $view = 'admin.blog';
 
+    private $settings;
+
+    public function __construct (Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
     public function index()
     {
         return $this->view('index');
@@ -30,9 +38,17 @@ class PostController extends Controller
     public function create()
     {
         $post = null;
+        $categories =  CategoryPost::with('children')->whereNull('parent_id')->get();
+        $data = CategoryPost::recursiveItems($categories);
+
+        $general= $this->settings->getEditableData('seo_posts')->toArray();
+        $twitterSeo= $this->settings->getEditableData('seo_twitter_posts')->toArray();
+        $fbSeo= $this->settings->getEditableData('seo_fb_posts')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_posts');
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
-        return $this->view('new',compact('authors','post'));
+
+        return $this->view('new',compact('post','authors','general','twitterSeo','fbSeo','robot','data'));
     }
 
     public function newPost(StoreBlogPost $request,$locale = null)
@@ -50,12 +66,12 @@ class PostController extends Controller
         return redirect()->route('admin_blog');
     }
 
-    public function edit($id,Settings $settings)
+    public function edit($id)
     {
-        $general=$settings->getEditableData('seo_posts')->toArray();
-        $twitterSeo=$settings->getEditableData('seo_twitter_posts')->toArray();
-        $fbSeo=$settings->getEditableData('seo_fb_posts')->toArray();
-        $robot=$settings->getEditableData('seo_robot_posts');
+        $general= $this->settings->getEditableData('seo_posts')->toArray();
+        $twitterSeo= $this->settings->getEditableData('seo_twitter_posts')->toArray();
+        $fbSeo= $this->settings->getEditableData('seo_fb_posts')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_posts');
 
         $post = Posts::findOrFail($id);
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')

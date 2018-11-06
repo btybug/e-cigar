@@ -19,15 +19,6 @@
                 <button type="button" class="btn btn-success btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
             <div class="row sortable-panels">
                 <div class="col-md-9 ">
                     <div class="form-group">
@@ -141,11 +132,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="comment-wall wall">
+                            <div class="row">
+                                {{Form::label('comment', 'Enable comment',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    YES {!! Form::radio('comment_enabled',true,true,['class' => '']) !!}
+                                    NO {!! Form::radio('comment_enabled',false,null,['class' => '']) !!}
+                                </div>
+                            </div>
+                        </div>
                     <!-- <div class="tag-wall wall">
                             <div class="row">
-                                {{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}
+                                {{--{{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}--}}
                             <div class="col-sm-9">
-                                {{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}
+                                {{--{{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}--}}
                             </div>
                         </div>
                     </div> -->
@@ -173,25 +173,19 @@
                                             data-toggle="tooltip" title=""
                                             data-original-title="Choose all products under selected category.">Category</span></label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="" value="" placeholder="Category"
-                                           id="input-category" class="form-control" autocomplete="off">
-                                    <ul class="dropdown-menu"></ul>
-                                    <div id="coupon-category" class="well well-sm view-coupon">
-                                        <ul class="coupon-category-list">
-                                        </ul>
+                                    <div class="form-group">
+                                        {!! Form::hidden('categories',(isset($checkedCategories))
+                                        ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                        <div id="treeview_json"></div>
                                     </div>
-                                    <input type="hidden" class="search-hidden-input" value="" id="category-names">
-
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        {!! Form::close() !!}
         </div>
-
-        <div id="seo" class="tab-pane  tab_seo fade">
+        <div id="seo" class="tab-pane tab_seo fade">
             <div class="text-right btn-save">
                 <button type="submit" class="btn btn-info">Save</button>
             </div>
@@ -362,12 +356,15 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
@@ -375,9 +372,57 @@
     <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
     <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
+        function render_categories_tree(){
+            $("#treeview_json").jstree({
+                "checkbox" : {
+                    "three_state": false,
+                    "cascade": 'undetermined',
+                    "keep_selected_style" : false
+                },
+                plugins: ["wholerow", "checkbox", "types"],
+                core: {
+                    themes: {
+                        responsive: !1
+                    },
+                    data: {!! json_encode($data) !!}
+                },
+                types: {
+                    "default": {
+                        icon: "fa fa-folder text-primary fa-lg"
+                    },
+                    file: {
+                        icon: "fa fa-file text-success fa-lg"
+                    }
+                }
+            })
+        }
+
+        $('#treeview_json').on("changed.jstree", function (e, data) {
+            if(data.node) {
+                var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
+                var ids = [];
+                var parents = [];
+                for (var i = 0, j = selectedNode.length; i < j; i++) {
+                    ids.push(selectedNode[i].id);
+                    parents.push(selectedNode[i].parent);
+                }
+                var uniqueNames = [];
+                if(parents.length > 0){
+                    $.each(parents, function(i, el){
+                        if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                    });
+                }
+                var all = ids.concat(uniqueNames);
+                $("#categories_tree").val(JSON.stringify(all));
+            }
+        });
+
+        render_categories_tree()
+
         function initTinyMce(e) {
             tinymce.init({
                 selector: e,
