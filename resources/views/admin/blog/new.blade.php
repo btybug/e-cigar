@@ -208,7 +208,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-title" value="{!! getSeo($fbSeo,'go:title',$post) !!}" type="text" class="form-control">
+                                <input id="seo-facebook-title" placeholder="{!! getSeo($fbSeo,'go:title',$post) !!}" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-desc" type="text" value="{!! getSeo($fbSeo,'go:description',$post) !!}" class="form-control">
+                                <input id="seo-facebook-desc" type="text" placeholder="{!! getSeo($fbSeo,'go:description',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-title" type="text" value="{!! getSeo($twitterSeo,'go:title',$post) !!}" class="form-control">
+                                <input id="seo-twitter-title" type="text" placeholder="{!! getSeo($twitterSeo,'go:title',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-desc" type="text" value="{!! getSeo($twitterSeo,'go:description',$post) !!}" class="form-control">
+                                <input id="seo-twitter-desc" type="text" placeholder="{!! getSeo($twitterSeo,'go:description',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -271,7 +271,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <input type="text" value="{!! getSeo($general,'go:keywords',$post) !!}" class="form-control" id="seo_focuskw">
+                                    <input type="text" placeholder="{!! getSeo($general,'go:keywords',$post) !!}" class="form-control" id="seo_focuskw">
                                 </td>
                             </tr>
                             <tr>
@@ -280,7 +280,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <input type="text" id="seo_title" class="form-control" value="{!! getSeo($general,'go:title',$post) !!}"
+                                    <input type="text" id="seo_title" class="form-control" placeholder="{!! getSeo($general,'go:title',$post) !!}"
                                            placeholder="Surprisingly think it, you can find several fundamental hints out there which will assist produce your article writing abilities instantly. It really is satisfying to develop your own skills. There are a lot of easy ways to foster your skills, but you simply should know what things to do and the fashion to take action. A very simple method to improve writing abilities is constantly to study unique kinds of article content.  -"><br>
                                     <div>
                                         <p><span class="wrong">Warning:</span>
