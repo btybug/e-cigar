@@ -82,7 +82,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="panel panel-default mt-20">
                                     <div class="panel-heading d-flex justify-content-between align-items-center">
                                         <span>
@@ -153,8 +153,7 @@
                                         <ul class="coupon-tags-list">
                                         </ul>
                                     </div>
-                                    <input type="hidden" name="tags" class="search-hidden-input" value="" id="tags-names">
-
+                                    {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
                                 </div>
                             </div>
                         </div>

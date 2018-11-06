@@ -24,8 +24,7 @@ class Posts extends Translatable
     protected $guarded = ['id'];
 
     protected $casts = [
-      'gallery' => 'json',
-      'tags' => 'json'
+      'gallery' => 'json'
     ];
 
     public $translatedAttributes = ['title', 'short_description', 'long_description'];

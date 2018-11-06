@@ -24,7 +24,7 @@ class StoreBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'url' => 'required|unique:posts',
+            'url' => 'required|unique:posts,id,'.$this->id,
             "translatable"    => "required|array|min:1",
             "translatable.*.title"  => "required|string|min:3",
             "translatable.*.short_description"  => "required|string|min:3",
