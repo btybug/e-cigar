@@ -99,6 +99,9 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_seo')}}"><i class="fa fa-circle-o"></i> General</a></li>
+                    @ok('admin_seo_bulk')
+                    <li><a href="{{route('admin_seo_bulk')}}"><i class="fa fa-circle-o"></i> Bulk</a></li>
+                    @endok
                 </ul>
             </li>
             @endok
