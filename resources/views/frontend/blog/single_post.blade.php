@@ -2,19 +2,21 @@
 @section('content')
     <div id="gp-inner-container">
         <div class="container">
-            <div id="gp-left-column">
+            {{--<div id="gp-left-column">--}}
                    <div class="row">
                        <div class="col-md-3"></div>
                        <div class="col-md-9">
                            <div id="gp-content">
+
                                <article class="mb-5">
                                    <div id="gp-post-navigation">
                                        <div id="gp-breadcrumbs">
-                                <span>
-                                    <span><a href="http://socialize.ghostpool.com/">Home</a> / <span>
-                                <a href="#">Featured News</a> / <span class="breadcrumb_last">Dale Webster takes a break after 14642 consecutive days</span></span></span>
-                                </span>
+                                        <span>
+                                            <span><a href="http://socialize.ghostpool.com/">Home</a> / <span>
+                                        <a href="#">Featured News</a> / <span class="breadcrumb_last">Dale Webster takes a break after 14642 consecutive days</span></span></span>
+                                        </span>
                                        </div>
+
                                        <div id="gp-post-links">
                                            <a href="#" rel="prev"></a>
                                            <a href="#" rel="next"></a>
@@ -36,6 +38,26 @@
                                            </div>
                                        </div>
                                        <div class="gp-clear"></div>
+                                   </div>
+                                   <div class="blog-products-slider owl-carousel owl-theme">
+                                       <div class="item">
+                                           <img  src="https://images.pexels.com/photos/1391465/pexels-photo-1391465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                       </div>
+                                       <div class="item">
+                                           <img src="https://images.pexels.com/photos/338710/pexels-photo-338710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                       </div>
+                                       <div class="item">
+                                           <img src="https://images.pexels.com/photos/1391465/pexels-photo-1391465.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                       </div>
+                                       <div class="item">
+                                           <img src="https://images.pexels.com/photos/986729/pexels-photo-986729.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                       </div>
+                                       <div class="item">
+                                           <img src="https://images.pexels.com/photos/1423864/pexels-photo-1423864.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                       </div>
+                                       <div class="item">
+                                           <img  src="https://images.pexels.com/photos/338710/pexels-photo-338710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" class="attachment-single-product-thumb wp-post-image" alt="">
+                                       </div>
                                    </div>
                                    <header class="gp-entry-header">
                                        <div class="gp-entry-cats">
@@ -147,12 +169,63 @@
                                        </div>
                                    </div>
                                </article>
+
+                               <div class="blog-posts-slider owl-carousel owl-theme mb-5">
+                                   <div class="item">
+                                       <div class="card text-center">
+                                           <div class="img-outer">
+                                               <img class="card-img-top" src="https://images.pexels.com/photos/1005486/pexels-photo-1005486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                           </div>
+                                           <div class="card-body">
+                                               <h5 class="card-title">Product 1</h5>
+                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                               <a href="#" class="btn btn-primary">Go somewhere</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="item">
+                                       <div class="card text-center">
+                                           <div class="img-outer">
+                                               <img class="card-img-top" src="https://images.pexels.com/photos/849203/pexels-photo-849203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                           </div>
+                                           <div class="card-body">
+                                               <h5 class="card-title">Product 1</h5>
+                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                               <a href="#" class="btn btn-primary">Go somewhere</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="item">
+                                       <div class="card text-center">
+                                           <div class="img-outer">
+                                               <img class="card-img-top" src="https://images.pexels.com/photos/338710/pexels-photo-338710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                           </div>
+                                           <div class="card-body">
+                                               <h5 class="card-title">Product 1</h5>
+                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                               <a href="#" class="btn btn-primary">Go somewhere</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="item">
+                                       <div class="card text-center">
+                                           <div class="img-outer">
+                                               <img class="card-img-top" src="https://images.pexels.com/photos/849203/pexels-photo-849203.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="">
+                                           </div>
+                                           <div class="card-body">
+                                               <h5 class="card-title">Product 1</h5>
+                                               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                               <a href="#" class="btn btn-primary">Go somewhere</a>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
                                <div class="comment-list">
                                    <!-- First Comment -->
                                    <div class="row">
                                        <div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">
                                            <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
+                                               <img class="img-fluid" src="https://images.pexels.com/photos/1005486/pexels-photo-1005486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
                                                <figcaption class="text-center">username</figcaption>
                                            </figure>
                                        </div>
@@ -175,8 +248,8 @@
                                            </div>
                                        </div>
                                    </div>
-                                   <!-- Second Comment Reply -->
-                                   <article class="row">
+                                   <!-- Comment Reply -->
+                                   <div class="row">
                                        <div class="col-lg-2 col-md-2 offset-md-1 offset-sm-0 hidden-xsd-none d-sm-block">
                                            <figure class="thumbnail">
                                                <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
@@ -202,132 +275,26 @@
                                                </div>
                                            </div>
                                        </div>
-                                   </article>
-                                   <!-- Third Comment -->
-                                   <article class="row">
-                                       <div class="col-lg-10 col-md-10">
-                                           <div class="card arrow right mb-4">
-                                               <div class="card-body">
-                                                   <header class="text-right">
-                                                       <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                       <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                                   </header>
-                                                   <div class="comment-post">
-                                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                           consequat.</p>
-                                                   </div>
-                                                   <p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>
-                                                   </p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                       <div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">
-                                           <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
-                                               <figcaption class="text-center">username</figcaption>
-                                           </figure>
-                                       </div>
-                                   </article>
-                                   <!-- Fourth Comment -->
-                                   <article class="row">
-                                       <div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">
-                                           <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
-                                               <figcaption class="text-center">username</figcaption>
-                                           </figure>
-                                       </div>
-                                       <div class="col-lg-10 col-md-10 col-12">
-                                           <div class="card arrow left mb-4">
-                                               <div class="card-body">
-                                                   <header class="text-left">
-                                                       <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                       <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                                   </header>
-                                                   <div class="comment-post">
-                                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                           consequat.</p>
-                                                   </div>
-                                                   <p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>
-                                                   </p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </article>
-                                   <!-- Fifth Comment -->
-                                   <article class="row">
-                                       <div class="col-lg-10 col-md-10">
-                                           <div class="card arrow right mb-4">
-                                               <div class="card-body">
-                                                   <header class="text-right">
-                                                       <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                       <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                                   </header>
-                                                   <div class="comment-post">
-                                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                           consequat.</p>
-                                                   </div>
-                                                   <p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>
-                                                   </p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                       <div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">
-                                           <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
-                                               <figcaption class="text-center">username</figcaption>
-                                           </figure>
-                                       </div>
-                                   </article>
-                                   <!-- Sixth Comment Reply -->
-                                   <article class="row">
-                                       <div class="col-lg-9 col-md-9 offset-md-1 order-md-1 offset-sm-0">
-                                           <div class="card arrow right mb-4">
-                                               <div class="card-header">Reply</div>
-                                               <div class="card-body">
-                                                   <header class="text-right">
-                                                       <div class="comment-user"><i class="fa fa-user"></i> That Guy</div>
-                                                       <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Dec 16, 2014</time>
-                                                   </header>
-                                                   <div class="comment-post">
-                                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                           tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                                           quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                                           consequat.</p>
-                                                   </div>
-                                                   <p class="text-right"><a href="#" class="btn btn-secondary btn-sm"><i class="fa fa-reply"></i> reply</a>
-                                                   </p>
-                                               </div>
-                                           </div>
-                                       </div>
-                                       <div class="col-lg-2 col-md-2 order-md-1 hidden-xsd-none d-sm-block">
-                                           <figure class="thumbnail">
-                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
-                                               <figcaption class="text-center">username</figcaption>
-                                           </figure>
-                                       </div>
-                                   </article>
+                                   </div>
+
                                </div>
                            </div>
                        </div>
                    </div>
-            </div>
+            {{--</div>--}}
 
         </div>
     </div>
 
 @stop
 @section('css')
-    {!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}
+    {{--{!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
     <link href={{asset("public/frontend/css/blog-single.css?v=".rand(111,999))}} rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
+    <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
     <style>
         .hide-icons {
             cursor: pointer;
@@ -410,10 +377,29 @@
     <!-- jQuery UI 1.11.4 -->
     {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
     {!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
+    <script src="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>
 
     {!! Html::script('public/js/custom/comments.js') !!}
     <script>
         $(document).ready(function () {
+
+            $('.blog-products-slider').owlCarousel({
+                nav:true,
+                items:1,
+                dots:false,
+                autoplay:true,
+                autoplayTimeout:3000
+            })
+
+            $('.blog-posts-slider').owlCarousel({
+                nav:false,
+                items:3,
+                dots:true,
+                autoplay:true,
+                autoplayTimeout:5000,
+                loop: true,
+                margin: 10
+            })
 
             $('body').on('click', '.cancel-comment', function (event) {
                 $(this).parents('form:first')[0].reset();

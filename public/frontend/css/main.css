@@ -13500,3 +13500,47 @@ a.text-dark:focus, a.text-dark:hover {
     margin-top: 6px;
 }
 /*End Comments*/
+
+/*blog slider*/
+.blog-products-slider img{
+    height: 350px;
+    object-fit: cover;
+}
+.blog-posts-slider img {
+    height: 150px;
+    object-fit: cover;
+}
+
+.blog-products-slider {
+    position: relative;
+}
+
+.blog-products-slider.owl-carousel .owl-nav button.owl-prev,
+.blog-products-slider.owl-carousel .owl-nav button.owl-next {
+    position: absolute;
+    top:50%;
+    font-size: 78px;
+    color: #f1f1f1;
+    opacity: .6;
+    transform: translateY(-50%);
+}
+
+.blog-products-slider .owl-nav button.owl-prev {
+    left: 5px;
+}
+
+.blog-products-slider .owl-nav button.owl-next {
+    right: 5px;
+}
+
+.blog-products-slider.owl-carousel .owl-nav button.owl-prev:focus,
+.blog-products-slider.owl-carousel .owl-nav button.owl-next:focus {
+    outline: none;
+}
+
+.blog-products-slider.owl-carousel .owl-nav button.owl-prev:hover,
+.blog-products-slider.owl-carousel .owl-nav button.owl-next:hover {
+    background: rgba(0,0,0,.6);
+}
+
+/*End blog slider*/
