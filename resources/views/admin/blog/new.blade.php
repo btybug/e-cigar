@@ -12,8 +12,8 @@
 
 @section('content')
     <div class="tab-content tabs_content">
-        <div id="home" class="tab-pane tab_info fade in active">
             {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+        <div id="home" class="tab-pane tab_info fade in active">
 
             {!! Form::hidden('id',null) !!}
             <div class="text-right btn-save">
@@ -195,7 +195,7 @@
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
+
         </div>
         <div id="seo" class="tab-pane tab_seo fade">
             <div class="text-right btn-save">
@@ -208,7 +208,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-title" placeholder="{!! getSeo($fbSeo,'go:title',$post) !!}" type="text" class="form-control">
+                                {!! Form::text('fb[go:title]',null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:title',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-facebook-desc" type="text" placeholder="{!! getSeo($fbSeo,'go:description',$post) !!}" class="form-control">
+                                {!! Form::text('fb[go:description]',null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:description',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -238,7 +238,8 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                <input id="seo-twitter-title" type="text" placeholder="{!! getSeo($twitterSeo,'go:title',$post) !!}" class="form-control">
+                                {!! Form::text('twitter[go:description]',null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
+
                             </div>
                         </div>
                     </div>
@@ -246,6 +247,8 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
+                                {!! Form::text('twitter[go:description]',null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
+
                                 <input id="seo-twitter-desc" type="text" placeholder="{!! getSeo($twitterSeo,'go:description',$post) !!}" class="form-control">
                             </div>
                         </div>
@@ -271,7 +274,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <input type="text" placeholder="{!! getSeo($general,'go:keywords',$post) !!}" class="form-control" id="seo_focuskw">
+                                    {!! Form::text('general[go:keywords]',null,['class'=>'form-control','placeholder'=>getSeo($general,'go:keywords',$post)]) !!}
                                 </td>
                             </tr>
                             <tr>
@@ -280,6 +283,8 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
+                                    {!! Form::text('general[go:title]',null,['class'=>'form-control','placeholder'=>getSeo($general,'go:title',$post)]) !!}
+
                                     <input type="text" id="seo_title" class="form-control" placeholder="{!! getSeo($general,'go:title',$post) !!}"
                                            placeholder="Surprisingly think it, you can find several fundamental hints out there which will assist produce your article writing abilities instantly. It really is satisfying to develop your own skills. There are a lot of easy ways to foster your skills, but you simply should know what things to do and the fashion to take action. A very simple method to improve writing abilities is constantly to study unique kinds of article content.  -"><br>
                                     <div>
@@ -295,7 +300,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    <textarea class="form-control metadesc" rows="2" id="seo_metadesc">{!! getSeo($general,'go:description',$post) !!}</textarea>
+                                    {!! Form::textarea('general[go:description]',null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'go:description',$post)]) !!}
                                     <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
                                     </div>
                                 </td>
@@ -311,7 +316,7 @@
                                     <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                 </th>
                                 <td>
-                                    {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'']) !!}
+                                    {!! Form::select('robot[robots]',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'']) !!}
 
                                 </td>
                             </tr>
@@ -319,10 +324,10 @@
                                 <th scope="row">Meta Robots Follow</th>
                                 <td>
                                     <input type="radio" checked="checked" id="seo_meta-robots-nofollow_0"
-                                           name="" value="0">
+                                          value="0">
                                     <label for="seo_meta-robots-nofollow_0">Follow</label>
                                     <input type="radio" id="seo_meta-robots-nofollow_1"
-                                           name="" value="1">
+                                            value="1">
                                     <label for="seo_meta-robots-nofollow_1">Nofollow</label>
                                 </td>
                             </tr>
@@ -332,7 +337,7 @@
                                 </th>
                                 <td>
                                     <select multiple="multiple" size="7" style="height: 144px;"
-                                            name="" id="seo_meta-robots-adv"
+                                             id="seo_meta-robots-adv"
                                             class="">
                                         <option selected="selected" value="-">Site-wide default: None</option>
                                         <option value="none">None</option>
@@ -350,7 +355,7 @@
                                     <label for="seo_canonical">Canonical URL:</label>
                                 </th>
                                 <td>
-                                    <input type="text" id="seo_canonical" name="" value=""
+                                    <input type="text" id="seo_canonical"  value=""
                                            class="form-control"><br>
                                     <div>The canonical URL that this page should point to, leave empty to default to
                                         permalink. <a target="_blank"
@@ -368,6 +373,7 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
 
     <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">

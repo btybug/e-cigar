@@ -17,6 +17,7 @@ class CreatePostSeoTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('post_id');
             $table->string('name');
+            $table->string('type');
             $table->text('content');
             $table->timestamps();
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
