@@ -176,12 +176,9 @@ class DatatableController extends Controller
 
     public function getAllPostComments()
     {
-        $comments = Comment::with('commentTree')->where('commentable_type', Posts::class)->get();
-        $data = Comment::recursiveItemsToOneArray($comments);
-
-        return Datatables::of($data)
+        return Datatables::of(Comment::query())
             ->editColumn('author', function ($comment) {
-                $user = $comment->user;
+                $user = $comment->author;
                 return '<strong>
                             <img alt="" src="/public/admin_theme/dist/img/user2-160x160.jpg" class="img" height="32" width="32"> ' . $user->name . '</strong>
                             <br>
@@ -190,18 +187,21 @@ class DatatableController extends Controller
             ->editColumn('comment', function ($comment) {
                 $str = 'Submitted on ' . BBgetDateFormat($comment->created_at) . ' at ' . BBgetTimeFormat($comment->created_at);
                 if ($comment->parent) {
-                    $str .= ' | In reply to ' . $comment->parent->user->name;
+                    $str .= ' | In reply to ' . $comment->parent->author->name;
                 }
                 $str .= '<br>';
                 $str .= '<div>' . $comment->comment . '</div>';
                 return $str;
             })
             ->editColumn('replies', function ($comment) {
-                return '<span class="comment-count">' . count($comment->childrens) . '</span>';
+                return '<span class="comment-count">' . count($comment->childrenAll) . '</span>';
             })
             ->addColumn('actions', function ($comment) {
-                return "<a class='badge btn-danger' href='" . route("admin_post_comment_delete", $comment['id']) . "'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='" . route("admin_post_comment_edit", $comment['id']) . "'><i class='fa fa-edit'></i></a>";
+                $actions = ($comment->status) ? '<a href="'.route('unapprove_comments',$comment->id).'" class="btn btn-info"> Block</a>' : '<a href="'.route('approve_comments',$comment->id).'" class="btn btn-success">Approve</a>';
+                $actions .= '<a class="btn btn-primary" href="'.route('reply_comment',$comment->id).'">Reply</a>';
+                $actions .= '<a class="btn btn-warning" href="'.route('edit_comment',$comment->id).'"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger delete-button" data-text="<p>Do you really want to delete comment, it will delete all children as well?</p>" data-table="comments" data-id="' . $comment->id . '" href="#"><i class="fa fa-trash"></i></a>';
+                return $actions;
             })->rawColumns(['actions', 'author', 'comment', 'replies'])
             ->make(true);
     }
