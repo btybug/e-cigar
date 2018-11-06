@@ -53,8 +53,9 @@ class PostController extends Controller
 
     public function newPost(StoreBlogPost $request,$locale = null)
     {
-        $data = $request->except('_token','translatable');
-        Posts::updateOrCreate($request->id, $data);
+        $data = $request->except('_token','translatable','categories');
+        $post = Posts::updateOrCreate($request->id, $data);
+        $post->categories()->sync(json_decode($request->get('categories',[])));
 
         return redirect()->route('admin_blog');
     }
@@ -68,15 +69,21 @@ class PostController extends Controller
 
     public function edit($id)
     {
+        $post = Posts::findOrFail($id);
+
+        $categories =  CategoryPost::with('children')->whereNull('parent_id')->get();
+        $checkedCategories = $post->categories()->pluck('id')->all();
+        $data = CategoryPost::recursiveItems($categories,0,[],$checkedCategories);
+
         $general= $this->settings->getEditableData('seo_posts')->toArray();
         $twitterSeo= $this->settings->getEditableData('seo_twitter_posts')->toArray();
         $fbSeo= $this->settings->getEditableData('seo_fb_posts')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_posts');
 
-        $post = Posts::findOrFail($id);
+
         $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type','backend')->select('users.*','roles.title')->pluck('users.name','users.id')->toArray();
-        return $this->view('new',compact('post','authors','general','twitterSeo','fbSeo','robot'));
+        return $this->view('new',compact('post','authors','general','twitterSeo','fbSeo','robot','data','checkedCategories'));
     }
 
     public function getComments()

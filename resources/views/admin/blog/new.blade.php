@@ -12,9 +12,10 @@
 
 @section('content')
     <div class="tab-content tabs_content">
-        {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
         <div id="home" class="tab-pane tab_info fade in active">
-        {!! Form::hidden('id',null) !!}
+            {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+
+            {!! Form::hidden('id',null) !!}
             <div class="text-right btn-save">
                 <button type="button" class="btn btn-success btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
@@ -27,7 +28,7 @@
                                 <div class="form-group row">
                                     {{Form::label('purl', 'Post Url',['class' => 'col-sm-3'])}}
                                     <div class="col-sm-9">
-                                        <label>blog/</label>
+                                        <label>news/</label>
                                         {{Form::text('url', null,['class' =>'form-control','id'=>'purl','placeholder' => 'Enter URL ...'])}}
                                     </div>
                                 </div>
@@ -77,7 +78,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3">Gallery images</label>
                                         <div class="col-sm-9">
-                                            {!! media_button('gallery',null,true) !!}
+                                            {!! media_button('gallery',$post,true) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +128,7 @@
                             <div class="row">
                                 {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('status',['published' => 'Published','draft' => 'Draft','pending' => 'Pending'],null,
+                                    {!! Form::select('status',[0 => 'Draft',1 => 'Published'],null,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
@@ -136,8 +137,8 @@
                             <div class="row">
                                 {{Form::label('comment', 'Enable comment',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    YES {!! Form::radio('comment_enabled',true,true,['class' => '']) !!}
-                                    NO {!! Form::radio('comment_enabled',false,null,['class' => '']) !!}
+                                    YES {!! Form::radio('comment_enabled',1,true,['class' => '']) !!}
+                                    NO {!! Form::radio('comment_enabled',0,null,['class' => '']) !!}
                                 </div>
                             </div>
                         </div>
@@ -162,7 +163,7 @@
                                         <ul class="coupon-tags-list">
                                         </ul>
                                     </div>
-                                    <input type="hidden" class="search-hidden-input" value="" id="tags-names">
+                                    <input type="hidden" name="tags" class="search-hidden-input" value="" id="tags-names">
 
                                 </div>
                             </div>
@@ -184,6 +185,7 @@
                     </div>
                 </div>
             </div>
+            {!! Form::close() !!}
         </div>
         <div id="seo" class="tab-pane tab_seo fade">
             <div class="text-right btn-save">
@@ -356,7 +358,6 @@
                 </div>
             </div>
         </div>
-        {!! Form::close() !!}
     </div>
 @stop
 @section('css')
@@ -404,24 +405,41 @@
         $('#treeview_json').on("changed.jstree", function (e, data) {
             if(data.node) {
                 var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
-                var ids = [];
-                var parents = [];
+                var dataArr = [];
                 for (var i = 0, j = selectedNode.length; i < j; i++) {
-                    ids.push(selectedNode[i].id);
-                    parents.push(selectedNode[i].parent);
+                    dataArr.push(selectedNode[i].id);
+                    dataArr.push(selectedNode[i].parent);
                 }
+
                 var uniqueNames = [];
-                if(parents.length > 0){
-                    $.each(parents, function(i, el){
+
+                if(dataArr.length > 0){
+                    $.each(dataArr, function(i, el){
                         if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
                     });
                 }
-                var all = ids.concat(uniqueNames);
-                $("#categories_tree").val(JSON.stringify(all));
+
+                var index = uniqueNames.indexOf("#");
+                if (index > -1) {
+                    uniqueNames.splice(index, 1);
+                }
+
+                $("#categories_tree").val(JSON.stringify(uniqueNames));
             }
         });
 
         render_categories_tree()
+
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax= arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
 
         function initTinyMce(e) {
             tinymce.init({

@@ -23,6 +23,11 @@ class Posts extends Translatable
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+      'gallery' => 'json',
+      'tags' => 'json'
+    ];
+
     public $translatedAttributes = ['title', 'short_description', 'long_description'];
 
     public function author ()
@@ -38,5 +43,10 @@ class Posts extends Translatable
     public function approvedComments()
     {
         return $this->comments()->whereNull('parent_id')->where('status',self::APPROVED)->orderBy('created_at','desc')->get();
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(CategoryPost::class, 'post_categories', 'post_id', 'categories_post_id');
     }
 }

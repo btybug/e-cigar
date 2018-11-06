@@ -159,10 +159,12 @@ class DatatableController extends Controller
                 return $post->short_description;
             })
             ->editColumn('url', function ($post) {
-                return "<a href='/blog/" . $post->url . "' target='_blank'>blog/" . $post->url . "</a>";
+                return "<a href='/news/" . $post->url . "' target='_blank'>news/" . $post->url . "</a>";
             })
             ->editColumn('user_id', function ($post) {
                 return $post->author->name;
+            })->editColumn('status', function ($post) {
+                return ($post->status) ? '<span class="badge btn-success">published</span>' : '<span class="badge btn-danger">draft</span>';
             })
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
@@ -170,7 +172,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger' href='" . route("admin_post_delete", $post->id) . "'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions', 'url', 'short_description', 'created_at'])
+            })->rawColumns(['actions', 'url', 'short_description', 'created_at','status'])
             ->make(true);
     }
 

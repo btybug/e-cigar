@@ -295,7 +295,7 @@
                                                             <input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"
                                                                    value="{!! $attribute->id !!}">
                                                             <input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"
-                                                            value="{!! $attribute->is_shared !!}">      
+                                                            value="{!! $attribute->is_shared !!}">
                                                         </li>
                                                     @endforeach
                                                 @endif
@@ -499,21 +499,26 @@
     $('#treeview_json').on("changed.jstree", function (e, data) {
         if(data.node) {
             var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
-            var ids = [];
-            var parents = [];
+            var dataArr = [];
             for (var i = 0, j = selectedNode.length; i < j; i++) {
-                ids.push(selectedNode[i].id);
-                parents.push(selectedNode[i].parent);
+                dataArr.push(selectedNode[i].id);
+                dataArr.push(selectedNode[i].parent);
             }
+
             var uniqueNames = [];
-            if(parents.length > 0){
-                $.each(parents, function(i, el){
+
+            if(dataArr.length > 0){
+                $.each(dataArr, function(i, el){
                     if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
                 });
             }
-            console.log(uniqueNames)
-            var all = ids.concat(uniqueNames);
-            $("#categories_tree").val(JSON.stringify(all));
+
+            var index = uniqueNames.indexOf("#");
+            if (index > -1) {
+                uniqueNames.splice(index, 1);
+            }
+
+            $("#categories_tree").val(JSON.stringify(uniqueNames));
         }
     });
 

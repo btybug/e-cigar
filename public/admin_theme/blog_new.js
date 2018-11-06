@@ -114,14 +114,14 @@ $("body").on("click", ".remove-search-tag", function() {
 //     containerForAppend: "containerForAppend",
 //     inputValues: "inputValues"
 // };
-makeSearchItem({
-    input: "#input-category",
-    name: "name",
-    url: "/admin/get-categories",
-    title: "Categoris",
-    inputValues: "#category-names",
-    containerForAppend: ".coupon-category-list"
-});
+// makeSearchItem({
+//     input: "#input-category",
+//     name: "name",
+//     url: "/admin/get-categories",
+//     title: "Categoris",
+//     inputValues: "#category-names",
+//     containerForAppend: ".coupon-category-list"
+// });
 makeSearchItem({
     input: "#input-tags",
     name: "name",
