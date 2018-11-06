@@ -91,13 +91,6 @@ Route::group(['prefix' => 'users'], function () {
     });
 });
 Route::group(['prefix' => 'store'], function () {
-    Route::group(['prefix' => 'categories'], function () {
-        Route::get('/', 'Admin\StoreController@getCategories')->name('admin_store_categories');
-        Route::post('/get-form', 'Admin\StoreController@postCategoryForm')->name('admin_store_categories_form');
-        Route::post('/update-parent', 'Admin\StoreController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
-        Route::post('/create-or-update', 'Admin\StoreController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
-        Route::post('/delete', 'Admin\StoreController@postDeleteCategory')->name('admin_store_categories_delete');
-    });
 
     Route::group(['prefix' => 'tax-rate'], function () {
         Route::get('/', 'Admin\StoreController@getTaxRate')->name('admin_store_tax');
@@ -190,6 +183,26 @@ Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
 Route::group(['prefix' => '/tools'], function () {
     Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
     Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', 'Admin\CategoriesController@list')->name('admin_categories_list');
+
+        Route::group(['prefix' => 'stock'], function () {
+            Route::get('/', 'Admin\CategoriesController@getCategories')->name('admin_store_categories');
+            Route::post('/get-form', 'Admin\CategoriesController@postCategoryForm')->name('admin_store_categories_form');
+            Route::post('/update-parent', 'Admin\CategoriesController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
+            Route::post('/create-or-update', 'Admin\CategoriesController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
+            Route::post('/delete', 'Admin\CategoriesController@postDeleteCategory')->name('admin_store_categories_delete');
+        });
+
+        Route::group(['prefix' => 'post'], function () {
+            Route::get('/', 'Admin\CategoriesController@getPostCategories')->name('admin_categories_post');
+            Route::post('/get-form', 'Admin\CategoriesController@postCategoryPostForm')->name('admin_categories_post_form');
+            Route::post('/update-parent', 'Admin\CategoriesController@postCategoryPostUpdateParent')->name('admin_categories_post_update_parent');
+            Route::post('/create-or-update', 'Admin\CategoriesController@postCreateOrUpdateCategoryPost')->name('admin_categories_post_new_or_update');
+            Route::post('/delete', 'Admin\CategoriesController@postDeleteCategoryPost')->name('admin_categories_post_delete');
+        });
+    });
 });
 
 Route::group(['prefix'=>'comments'], function () {
@@ -227,7 +240,7 @@ Route::group(['prefix' => 'seo'], function () {
     Route::get('/bulk', 'Admin\SeoController@getBulk')->name('admin_seo_bulk');
 });
 
-Route::post('/get-categories', 'Admin\StoreController@getCategory')->name('admin_get_categories');
+Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');
 Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');
 Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 

@@ -64,9 +64,6 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    @ok('admin_store')
-                    <li><a href="{{route('admin_store_categories')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
-                    @endok
                     <li><a href="{{route('admin_store_tax')}}"><i class="fa fa-circle-o"></i> Tax Rate</a></li>
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
                     <li><a href="{{route('admin_store_settings')}}"><i class="fa fa-circle-o"></i> Settings</a></li>
@@ -188,7 +185,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_tools')}}"><i class="fa fa-circle-o"></i> Show</a></li>
+                    <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+                    <li><a href="{{route('admin_tools')}}"><i class="fa fa-circle-o"></i> Tools</a></li>
                     <li><a href="{{ route('admin_tools_tags') }}"><i class="fa fa-circle-o"></i> Tags</a></li>
                 </ul>
             </li>
