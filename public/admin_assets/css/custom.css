@@ -299,27 +299,22 @@ table.table--order-dtls.table-bordered tr > th {
     margin-top: auto;
 }
 
-.order-main-cnt_control-btns.status-btn-clicked .btn--add-note {
+.order-main-cnt_control-btns.btn-clicked {
     display: none;
-}
-
-.order-main-cnt_control-btns.status-btn-clicked .btn--add-status {
-    width: 100% !important;
-}
-
-
-.order-main-cnt_control-btns.note-btn-clicked .btn--add-status {
-    display: none;
-}
-
-.order-main-cnt_control-btns.note-btn-clicked .btn--add-note {
-    width: 100% !important;
 }
 
 .hidden-add-field {
-    padding: 15px;
     background: #fff;
     display: none;
+    box-shadow: 0 -5px 5px -5px #333;
+}
+
+.hidden-add-field_body {
+    padding: 15px;
+}
+
+.hidden-add-field .fa-close {
+    cursor: pointer;
 }
 
 .order-main-cnt .form-group {

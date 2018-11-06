@@ -559,33 +559,46 @@
                 <button id="btnAddNote" class="btn btn-default col-sm-6 btn--add-note"><i class="fa fa-plus" aria-hidden="true"></i> Add Note</button>
             </div>
             <div class="hidden-add-field" id="addStatusField">
-                <div class="form-group mb-20 w-100">
-                    <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
-                    <div class="col-sm-8">
-                        <select name="changeStatusSelect" id="input-store" class="form-control">
-                            <option value="0" selected="selected">Shipping</option>
-                            <option value="0" selected="selected">...</option>
-                            <option value="0" selected="selected">...</option>
-                        </select>
+                <div class="panel-default hidden-add-field_heading">
+                    <p class="panel-heading text-center">Add Status <span class="pull-right"><i class="fa fa-close"></i></span></p>
+                </div>
+                <div class="hidden-add-field_body">
+                    <div class="form-group mb-20 w-100">
+                        <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
+                        <div class="col-sm-8">
+                            <select name="changeStatusSelect" id="input-store" class="form-control">
+                                <option value="0" selected>Shipping</option>
+                                <option value="0">...</option>
+                                <option value="0">...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ChangeMessage" class="control-label col-sm-4">Message</label>
+                        <div class="col-sm-8">
+                            <textarea id="ChangeMessage" class="d-block w-100" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <div class="confirm-btn-outer" style="padding-left: 15px">
+                        <button type="button" class="btn btn-primary">Change</button>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" type="number">
-                    </div>
-                </div>
-                <div class="confirm-btn-outer" style="padding-left: 15px">
-                    <button type="button" class="btn btn-primary">Change</button>
-                </div>
-
             </div>
 
             <div class="hidden-add-field" id="addNoteField">
-                <div class="form-group w-100">
-                    <label class="control-label" for="addNoteArea">Add your Note</label>
-                    <textarea id="addNoteArea" class="d-block w-100" rows="6"></textarea>
+                <div class="panel-default hidden-add-field_heading">
+                    <p class="panel-heading text-center">Add Note <span class="pull-right"><i class="fa fa-close"></i></span></p>
                 </div>
+                <div class="hidden-add-field_body">
+                    <div class="form-group w-100">
+                        <label class="control-label" for="addNoteArea">Add your note</label>
+                        <textarea id="addNoteArea" class="d-block w-100" rows="6"></textarea>
+                    </div>
+                    <div class="confirm-btn-outer">
+                        <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
 
             </div>
 
@@ -649,18 +662,26 @@
         $(function () {
 
             $('#btnAddStatus').on('click',function(){
-                $('#addStatusField').slideToggle();
-                $('.order-main-cnt_control-btns').toggleClass('status-btn-clicked')
+                console.log(1111);
+                $('#addStatusField').slideDown();
+                $('.order-main-cnt_control-btns').addClass('btn-clicked')
             });
 
             $('#btnAddNote').on('click',function(){
-                $('#addNoteField').slideToggle();
-                $('.order-main-cnt_control-btns').toggleClass('note-btn-clicked')
+                $('#addNoteField').slideDown();
+                $('.order-main-cnt_control-btns').addClass('btn-clicked');
+            });
+
+            $('.hidden-add-field_heading .fa-close').on('click',function(){
+                $(this).closest('.hidden-add-field').slideUp();
+                $('.order-main-cnt_control-btns').removeClass('btn-clicked');
+
             });
 
 
 
-            {{--$('#categories-table').DataTable({--}}
+
+        {{--$('#categories-table').DataTable({--}}
             {{--ajax:  "{!! route('datatable_all_categories') !!}",--}}
             {{--"processing": true,--}}
             {{--"serverSide": true,--}}
