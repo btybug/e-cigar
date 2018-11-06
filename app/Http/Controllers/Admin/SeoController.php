@@ -19,4 +19,15 @@ class SeoController extends Controller
     {
         return $this->view('general');
     }
+
+    public function getSocial()
+    {
+        return $this->view('social');
+    }
+
+    public function getBulk()
+    {
+        return $this->view('bulk');
+    }
+
 }

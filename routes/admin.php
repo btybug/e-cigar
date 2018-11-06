@@ -213,6 +213,8 @@ Route::group(['prefix' => 'media'], function () {
 });
 Route::group(['prefix' => 'seo'], function () {
     Route::get('/', 'Admin\SeoController@general')->name('admin_seo');
+    Route::get('/social-media', 'Admin\SeoController@getSocial')->name('admin_seo_social');
+    Route::get('/bulk', 'Admin\SeoController@getBulk')->name('admin_seo_bulk');
 });
 
 Route::post('/get-categories', 'Admin\StoreController@getCategory')->name('admin_get_categories');
