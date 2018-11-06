@@ -189,6 +189,8 @@
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
+
         <div id="seo" class="tab-pane  tab_seo fade">
             <div class="text-right btn-save">
                 <button type="submit" class="btn btn-info">Save</button>
@@ -360,7 +362,6 @@
                 </div>
             </div>
         </div>
-        {!! Form::close() !!}
     </div>
 @stop
 @section('css')
