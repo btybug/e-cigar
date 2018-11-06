@@ -26,6 +26,19 @@ class Posts extends Translatable
     protected $casts = [
       'gallery' => 'json'
     ];
+    protected $appends = array('keywords');
+
+    public function getKeywordsAttribute()
+    {
+        $keywords='';
+        $tags=@json_decode($this->tags,true);
+        if($tags){
+            foreach ($tags as $key=>$value){
+            $keywords.=((count($tags)==($key+1))?'':',').$value;
+            }
+        }
+        return $keywords;
+    }
 
     public $translatedAttributes = ['title', 'short_description', 'long_description'];
 
