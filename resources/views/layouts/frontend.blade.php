@@ -24,6 +24,22 @@
 <body>
 @include('frontend._partials.header')
 @yield('content')
+
+<div class="modal fade modal-request" id="msgModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <button type="button" class="close d-flex justify-content-center align-items-center" data-dismiss="modal">&times;</button>
+                <span class="message-place">Do you want request ?</span>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="close btn btn-success btn-block" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @include('frontend._partials.footer')
 <img src="/public/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 <script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>

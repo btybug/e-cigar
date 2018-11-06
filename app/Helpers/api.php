@@ -331,3 +331,82 @@ function getUniqueCode($table,$column,$prefix='')
     while (DB::table($table)->where($column, $code)->exists());
     return $code;
 }
+
+function commentRender($comments, $i = 0,$parent = false)
+{
+    if (count($comments)) {
+        $comment = $comments[$i];
+        //render main content
+        if($parent){
+            echo '<div class="reply-comment user-comment-img mt-md-5 mt-4 ml-5">';
+        }else{
+            echo '<div class="user-comment-img mt-md-5 mt-4">';
+        }
+        echo '<div class="row">';
+        echo '<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">';
+        echo '<div class="user-img">';
+        echo '<img src="/public/images/male.png" alt="">';
+        echo '</div>';
+        echo '</div>';
+        echo '<div class="col-sm-11 col-md-8 col-lg-6 col-xl-3">';
+        echo '<div class="user-comment d-flex flex-column">';
+        echo '<div class="user-title d-flex justify-content-between flex-wrap mb-1">';
+        if($comment->author){
+            if($comment->author->isAdmin()){
+                echo '<h6>Admin</h6>';
+            }else{
+                echo '<h6>' .$comment->author->username.'</h6>';
+            }
+        }else{
+            echo '<h6>'. $comment->guest_name .'</h6>';
+        }
+        echo '<span>'. time_ago($comment->created_at) .'</span>';
+        echo '</div>';
+        echo '<div class="content-reply d-flex justify-content-between">';
+        echo '<p>'.$comment->comment.'</p>';
+        echo '<a href="javascript:void(0)" data-id="'.$comment->id.'" class="reply"><i class="fas fa-reply"></i> reply</a>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        if (count($comment->children)) {
+            commentRender($comment->children, 0,true);
+        }
+
+        echo '</div>';
+        $i = $i + 1;
+        if ($i != count($comments)) {
+            commentRender($comments, $i);
+        }
+    }
+}
+
+
+function time_ago($datetime, $full = false) {
+    $now = new DateTime;
+    $ago = new DateTime($datetime);
+    $diff = $now->diff($ago);
+
+    $diff->w = floor($diff->d / 7);
+    $diff->d -= $diff->w * 7;
+
+    $string = array(
+        'y' => 'year',
+        'm' => 'month',
+        'w' => 'week',
+        'd' => 'day',
+        'h' => 'hour',
+        'i' => 'minute',
+        's' => 'second',
+    );
+    foreach ($string as $k => &$v) {
+        if ($diff->$k) {
+            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+        } else {
+            unset($string[$k]);
+        }
+    }
+
+    if (!$full) $string = array_slice($string, 0, 1);
+    return $string ? implode(', ', $string) . ' ago' : 'just now';
+}

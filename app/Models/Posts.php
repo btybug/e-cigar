@@ -15,11 +15,7 @@ use App\User;
 
 class Posts extends Translatable
 {
-    use Commentable;
-
-    protected $canBeRated = true;
-
-    protected $mustBeApproved = true;
+    const APPROVED = 1;
 
     protected $table = 'posts';
 
@@ -32,5 +28,15 @@ class Posts extends Translatable
     public function author ()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'post_id', 'id');
+    }
+
+    public function approvedComments()
+    {
+        return $this->comments()->whereNull('parent_id')->where('status',self::APPROVED)->orderBy('created_at','desc')->get();
     }
 }

@@ -13,9 +13,7 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,CanComment;
-
-
+    use Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -69,4 +67,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     }
 
+    public function isAdmin()
+    {
+        return (bool)$this->role_id;
+    }
 }

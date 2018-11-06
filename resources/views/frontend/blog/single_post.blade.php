@@ -1,50 +1,50 @@
 @extends('layouts.frontend')
 @section('content')
-        <div id="gp-inner-container">
-            <div class="container">
-                <div id="gp-left-column">
-                    <div id="gp-content">
-                        <article>
-                           <div id="gp-post-navigation">
-                        <div id="gp-breadcrumbs">
+    <div id="gp-inner-container">
+        <div class="container">
+            <div id="gp-left-column">
+                <div id="gp-content">
+                    <article>
+                        <div id="gp-post-navigation">
+                            <div id="gp-breadcrumbs">
                             <span>
                                 <span><a href="http://socialize.ghostpool.com/">Home</a> / <span>
                             <a href="#">Featured News</a> / <span class="breadcrumb_last">Dale Webster takes a break after 14642 consecutive days</span></span></span>
                             </span>
-                        </div>
-                               <div id="gp-post-links">
-                                   <a href="#" rel="prev"></a>
-                                   <a href="#" rel="next"></a>
-                                   <a href="#" class="gp-share-button"></a>
-                               </div>
-                               <div id="gp-share-icons-hide" style="display: none">
-                                   <h3>Share This Post</h3>
-                                   <div class="gp-share-icons d-inline-block">
-                                        <div id="share"></div>
-                                       <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
-                                       <a href="#" title="Facebook" class="gp-share-facebook"></a>
-                                       <a href="#" title="Google+" class="gp-share-google-plus"></a>
-                                       <a href="#" title="LinkedIn" class="gp-share-linkedin"></a>
-                                       <a href="#" class="gp-share-tumblr"></a>
-                                       <a href="" title="Email" class="gp-share-email"></a> -->
-                                   </div>
-                                   <div class="hide-icons d-inline-block float-right mt-2">
-                                    <i class="fa fa-times"></i>
-                                   </div>
-                               </div>
-                               <div class="gp-clear"></div>
-                           </div>
-                            <header class="gp-entry-header">
-                                <div class="gp-entry-cats">
-                                    <a href="#">Sport</a>
+                            </div>
+                            <div id="gp-post-links">
+                                <a href="#" rel="prev"></a>
+                                <a href="#" rel="next"></a>
+                                <a href="#" class="gp-share-button"></a>
+                            </div>
+                            <div id="gp-share-icons-hide" style="display: none">
+                                <h3>Share This Post</h3>
+                                <div class="gp-share-icons d-inline-block">
+                                    <div id="share"></div>
+                                    <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
+                                    <a href="#" title="Facebook" class="gp-share-facebook"></a>
+                                    <a href="#" title="Google+" class="gp-share-google-plus"></a>
+                                    <a href="#" title="LinkedIn" class="gp-share-linkedin"></a>
+                                    <a href="#" class="gp-share-tumblr"></a>
+                                    <a href="" title="Email" class="gp-share-email"></a> -->
                                 </div>
-                                <h1 class="gp-entry-title">{!! $post->title !!}</h1>
-                                <div class="gp-entry-meta"> <span class="gp-post-meta gp-meta-avatar">
+                                <div class="hide-icons d-inline-block float-right mt-2">
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="gp-clear"></div>
+                        </div>
+                        <header class="gp-entry-header">
+                            <div class="gp-entry-cats">
+                                <a href="#">Sport</a>
+                            </div>
+                            <h1 class="gp-entry-title">{!! $post->title !!}</h1>
+                            <div class="gp-entry-meta"> <span class="gp-post-meta gp-meta-avatar">
                                     <a href="http://socialize.ghostpool.com/author/socialize/">
                                         <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpthumb.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-50 photo" height="50" width="50">
                                     </a>
                                     </span>
-                                    <span class="gp-post-meta-rows">
+                                <span class="gp-post-meta-rows">
                                         <span class="gp-post-meta-row-1">
                                             <span class="gp-post-meta gp-meta-author">
                                                 By
@@ -55,369 +55,301 @@
                                         </span>
                                         <span class="gp-post-meta-row-2">
                                             <span class="gp-post-meta gp-meta-views">4282 views</span> </span> </span>
-                                </div>
-                            </header>
-                            <div class="gp-entry-content gp-image-above">
-                                <div class="gp-entry-text" itemprop="text">
-                                    {!! $post->long_description !!}
-                                </div>
                             </div>
-                            <div class="gp-entry-tags">
-                                <a href="http://socialize.ghostpool.com/tag/sport/" rel="tag">sport</a>
-                                <a href="http://socialize.ghostpool.com/tag/surf/" rel="tag">surf</a>
+                        </header>
+                        <div class="gp-entry-content gp-image-above">
+                            <div class="gp-entry-text" itemprop="text">
+                                {!! $post->long_description !!}
                             </div>
-                            <div id="gp-share-icons">
-                                <h3>Share This Post</h3>
-                                <div class="gp-share-icons-on-footer">
-                                    <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
-                                    <a href="#" title="Facebook" class="gp-share-facebook"></a>
-                                    <a href="#" title="Google+" class="gp-share-google-plus"></a>
-                                    <a href="#" title="Pinterest" class="gp-share-pinterest" target="_blank"></a>
-                                    <a href="#" title="Tumblr" class="gp-share-tumblr"></a>
-                                    <a href="" title="Email" class="gp-share-email"></a> -->
+                        </div>
+                        <div class="gp-entry-tags">
+                            <a href="http://socialize.ghostpool.com/tag/sport/" rel="tag">sport</a>
+                            <a href="http://socialize.ghostpool.com/tag/surf/" rel="tag">surf</a>
+                        </div>
+                        <div id="gp-share-icons">
+                            <h3>Share This Post</h3>
+                            <div class="gp-share-icons-on-footer">
+                                <!-- <a href="#" title="Twitter" class="gp-share-twitter"></a>
+                                <a href="#" title="Facebook" class="gp-share-facebook"></a>
+                                <a href="#" title="Google+" class="gp-share-google-plus"></a>
+                                <a href="#" title="Pinterest" class="gp-share-pinterest" target="_blank"></a>
+                                <a href="#" title="Tumblr" class="gp-share-tumblr"></a>
+                                <a href="" title="Email" class="gp-share-email"></a> -->
+                            </div>
+                        </div>
+                        <div class="gp-author-info">
+                            <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-110 photo" height="110" width="110">
+                            <div class="gp-author-meta"><div class="gp-author-name">
+                                    <a href="#">GhostPool</a>
                                 </div>
-                            </div>
-                            <div class="gp-author-info">
-                                <img alt="" src="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg" srcset="http://socialize.ghostpool.com/wp-content/uploads/avatars/2/31d53749448a096b43df20db6fdb94a8-bpfull.jpg 2x" class="avatar avatar-110 photo" height="110" width="110">
-                                <div class="gp-author-meta"><div class="gp-author-name">
-                                        <a href="#">GhostPool</a>
-                                    </div>
-                                    <div class="gp-author-desc">
-                                        Credibly embrace multidisciplinary paradigms and synergistic services. Phosfluorescently fabricate customer directed technologies after value-added infrastructures.
-                                    </div>
-                                    <div class="gp-author-social-icons">
-
-                                    </div>
+                                <div class="gp-author-desc">
+                                    Credibly embrace multidisciplinary paradigms and synergistic services. Phosfluorescently fabricate customer directed technologies after value-added infrastructures.
                                 </div>
-                            </div>
-                            <div id="comments">
-                                <div class="comment-area container">
-                                    <div class="comment-heading">
-                                        <h3>{{ $post->totalCommentCount() }} Thoughts</h3>
-                                    </div>
-                                    @if(count($post->comments))
-                                        @foreach($post->comments  as $comment)
-                                            <div class="single-comment">
-                                                <div class="media">
-                                                    <div class="media-left text-center">
-                                                        <a href="#">
-                                                            <img class="media-object img" src="{!! url('public/images/other.png') !!}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="media-body">
-                                                        <div class="media-heading">
-                                                            <h3 class="text-uppercase">
-                                                                <span>{{ $comment->user->name }}</span>
-                                                                <a href="#" class="pull-right reply-btn">reply</a>
-                                                            </h3>
-                                                        </div>
-                                                        <p class="comment-date">
-                                                            {{ BBgetDateFormat($comment->created_at) }}
-                                                        </p>
-                                                        <p class="comment-p">
-                                                            {{ $comment->comment }}
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            @if(count($comment->childrens))
-                                                @foreach($comment->childrens as $child)
-                                                    <div class="single-comment single-comment-reply">
-                                                        <div class="media">
-                                                            <div class="media-left text-center">
-                                                                <a href="#"> <img class="media-object" src="http://www.sheebamagazine.com/wp-content/uploads/2016/03/2016-15-VOL-I-A-Bieber-WEB-620x805.jpg" alt=""></a>
-                                                            </div>
-                                                            <div class="media-body">
-                                                                <div class="media-heading">
-                                                                    <h3 class="text-uppercase"><a href="#">{{ $child->user->name }}</a></h3>
-                                                                </div>
-                                                                <p class="comment-date">
-                                                                    {{ BBgetDateFormat($child->created_at) }}
-                                                                </p>
-                                                                <p class="comment-p">
-                                                                    {{ $child->comment }}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif
+                                <div class="gp-author-social-icons">
 
                                 </div>
-                                <div class="leave-comment">
-                                    <h4>Leave a reply</h4>
-                                    {!! Form::open(['class' => 'form-horizontal contact-form','route' => 'comment_create_post']) !!}
-                                        {!! Form::hidden('post_id',$post->id) !!}
-                                        {!! Form::hidden('author_id',Auth::id()) !!}
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <textarea class="form-control" rows="6" name="comment" placeholder="Write Massage" required=""></textarea>
+                            </div>
+                        </div>
+                        <div class="comments">
+                            <h2>Comments</h2>
+                            <div class="divider"></div>
+
+                            {!! commentRender($post->comments) !!}
+
+                            <div class="user-add-comment mt-md-5 mt-4">
+                                <div class="row">
+                                    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                        <div class="user-img">
+                                            <img src="/public/images/male.png" alt="">
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn send-btn">Post Comment</button>
-                                    {!! Form::close() !!}
+                                    <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">
+                                        <div class="add-comment">
+                                            {!! Form::open(['route' => 'comment_create_post']) !!}
+                                            {!! Form::hidden('post_id',$post->id) !!}
+                                            @if(! Auth::check())
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <input name="guest_name" type="text" placeholder="Username">
+                                                        <span class="error-box invalid-feedback guest_name"></span>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input name="guest_email" type="email" placeholder="Email">
+                                                        <span class="error-box invalid-feedback guest_email"></span>
+                                                    </div>
+                                                </div>
+                                            @endif
+
+                                            <textarea name="comment" id="" rows="0"
+                                                      placeholder="Your comments"></textarea>
+                                            <span class="error-box invalid-feedback comment"></span>
+                                            <div class="row mt-1">
+                                                <div class="col-sm-6">
+                                                    <button type="button"
+                                                            class="btn btn-outline-success btn-block cancel-comment">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="button"
+                                                            class="btn btn-outline-success btn-block add-comment-btn">
+                                                        Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </article>
-                    </div>
+                        </div>
+                    </article>
                 </div>
+            </div>
 
-                </div>
         </div>
+    </div>
 
 @stop
 @section('css')
+    {!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}
     <link href={{asset("public/frontend/css/blog-single.css?v=".rand(111,999))}} rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="http://viima.github.io/jquery-comments/demo/css/jquery-comments.css">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
-   <style>
-   .hide-icons {
-       cursor: pointer;
-   }
+    <style>
+        .hide-icons {
+            cursor: pointer;
+        }
 
+        .comments {
+            font-family: 'SF-UI-Text-Medium_1';
+            font-size: 16px;
+        }
 
+        .comments .user-comment-img .user-img img{
+            width: 100%;
+            max-height: 65px;
+            object-fit: cover;
+        }
+        .comments .user-comment-img .user-comment{
+            flex: 1;
+            height:100%;
+        }
+        .comments .user-comment-img .user-comment .content-reply{
+            font-family: 'SF-UI-Text-Light_1';
+            margin-top: auto;
+            padding-bottom: 10px;
+        }
+        .comments .user-comment-img .user-comment .content-reply .reply{
+            color: #1c8379;
+            text-decoration: none;
+        }
+        .comments .user-comment-img .user-title h6{
+            color:#3a3b3b ;
 
-   .top-comment {
-       padding: 30px;
-       background-color: #fff;
-       color: #444;
-       margin-bottom: 20px;
-       border: 1px solid #eee;
-       overflow: hidden;
-   }
-
-   .top-comment img {
-       margin-right: 15px;
-       width: 109px;
-       height: 109px;
-       object-fit: cover;
-   }
-
-   .top-comment p {
-       line-height: 24px;
-   }
-
-   .top-comment h4 a:hover {
-       color: #da521e;
-   }
-
-   .top-comment .social-share {
-       margin-bottom: 0;
-       margin-top: -5px;
-   }
-
-   .top-comment .social-share li {
-       margin-bottom: 0;
-   }
-
-   .top-comment .social-share li a {
-       color: #c2c2c2;
-   }
-
-   .top-comment .social-share li a:hover {
-       color: #da521e;
-   }
-
-   .comment-area {
-       background: #fff;
-       border-radius: 4px;
-       border: 1px solid #e2e2e2;
-       margin-bottom: 60px;
-       padding: 50px;
-   }
-
-   .comment-area .comment-heading h3 {
-       font-size: 18px;
-       padding-bottom: 14px;
-   }
-
-   .comment-area .single-comment {
-       padding-bottom: 25px;
-   }
-
-   .comment-area .single-comment .media {
-       margin-top: 0;
-   }
-
-   .comment-area .single-comment .media-left {
-       padding-right: 15px;
-       float: left;
-   }
-
-   .comment-area .single-comment .media-left img {
-       width: 60px;
-       height: 60px;
-       object-fit: cover;
-   }
-
-   .comment-area .single-comment .media-body h3 {
-       font-size: 14px;
-       margin: 0;
-       padding-bottom: 5px;
-   }
-
-   .comment-area .single-comment .media-body h3 .reply-btn {
-       background: #eee;
-       color: #777;
-       display: inline-block;
-       font-size: 12px;
-       height: 30px;
-       line-height: 30px;
-       text-align: center;
-       width: 60px;
-   }
-
-   .comment-area .single-comment .media-body h3 .reply-btn:hover {
-       background: #da521e;
-       color: #fff;
-   }
-
-   .comment-area .single-comment .media-body .comment-date {
-       color: #888888;
-   }
-
-   .comment-area .single-comment .media-body .comment-p {
-       font-size: 14px;
-       line-height: 24px;
-   }
-
-   .comment-area .single-comment-reply {
-       margin-left: 30px;
-   }
-
-   .leave-comment {
-       background-color: #fff;
-       border: 1px solid #e2e2e2;
-       margin-bottom: 60px;
-       padding: 20px;
-       color: #212121;
-   }
-
-   .leave-comment h4 {
-       color: #444;
-       font-size: 14px;
-       text-transform: uppercase;
-       font-weight: 700;
-   }
-
-   .leave-comment .contact-form .form-control {
-       background-color: #FAFAFA;
-       color: #999999;
-       border-radius: 0;
-       font-size: 14px;
-       line-height: 28px;
-       padding: 20px;
-       border-color: #eee;
-       -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.075);
-       box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.075);
-   }
-
-   .leave-comment .contact-form .form-control:focus {
-       box-shadow: none;
-       border-color: #da521e;
-   }
-
-   .leave-comment .send-btn {
-       background: #333;
-       color: #fff;
-       font-family: "Oswald", sans-serif;
-       letter-spacing: 1px;
-       text-transform: uppercase;
-       -webkit-transition: all .33s;
-       transition: all .33s;
-       border-radius: 0;
-   }
-
-   .leave-comment .send-btn:hover {
-       background: #da521e;
-   }
-   </style>
+        }
+        .comments .user-comment-img .user-title span{
+            color:#cbcbcb ;
+        }
+        .comments .user-add-comment{
+            font-family: 'SF-UI-Text-Light_1';
+        }
+        .comments .user-add-comment img{
+            width: 100%;
+            max-height: 65px;
+            object-fit: cover;
+        }
+        .comments .user-add-comment textarea{
+            border: none;
+            border-bottom: 1px solid #26a69a;
+            resize: none;
+            outline: none;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            margin-top:10px;
+        }
+        .comments .user-add-comment input{
+            display: block;
+            width: 100%;
+            padding: .375rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            border: none;
+            background-clip: padding-box;
+            border-bottom: 1px solid #27a59a;
+            outline: none;
+        }
+        .comments .user-add-comment button {
+            color: #27a59a;
+            border-color: #27a59a;
+        }
+        .comments .user-add-comment button:hover{
+            background-color: #27a59a;
+            border-color: #27a59a;
+            color: #ffffff;
+        }
+    </style>
 @stop
 
 @section("js")
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script type="text/javascript" src="http://viima.github.io/jquery-comments/demo/js/jquery-comments.js"></script>
+    {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
+    <!-- jQuery UI 1.11.4 -->
+    {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
+    {!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
+
+    {!! Html::script('public/js/custom/comments.js') !!}
     <script>
+        $(document).ready(function () {
 
-         window.AjaxCall = function postSendAjax(url, data, success, error) {
-            $.ajax({
-                type: "post",
-                url: url,
-                cache: false,
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function(data) {
-                    if (success) {
-                        success(data);
-                    }
-                    return data;
-                },
-                error: function(errorThrown) {
-                    if (error) {
-                        error(errorThrown);
-                    }
-                    return errorThrown;
-                }
+            $('body').on('click', '.cancel-comment', function (event) {
+                $(this).parents('form:first')[0].reset();
             });
-        };
+
+            $('body').on('click', '.cancel-reply', function (event) {
+                $(this).parents('.user-add-comment').remove();
+            });
+
+            $('body').on('click', '.add-comment-btn', function (event) {
+                event.preventDefault();
+                var form = $(this).parents('form:first');
+                var data = form.serialize();
+                $.ajax({
+                    url: "{!! route('comment_create_post') !!}",
+                    type: 'POST',
+                    data: data,
+                    success: function (data) {
+                        $('.error-box').html('');
+                        if (data.success == false) {
+                            $.map(data.errors, function (k, v) {
+                                form.find('.' + v).text(k[0]);
+                            });
+                        } else {
+                            form[0].reset();
+                            $(".user-add-comment-secondry").remove();
+
+                            $("#msgModal .message-place").text(data.message);
+                            $("#msgModal").modal();
+                        }
+                    },
+                    error: function (data) {
+                        // alert(data.err);
+                    }
+                });
+            });
 
 
-const  comment = {
-     init: function(data){
-         $('#comments-container').comments({
-             getComments: function(success, error) {
-                 AjaxCall(`/get-comments`, data, function(res){
-                     if (!res.error) {
-                         success(res.data);
-                     }
+            $('body').on('click', '.reply', function (e) {
+                e.preventDefault();
+                $(".user-add-comment-secondry").remove();
+                var parentID = $(this).data('id');
+                var data = '<div class="user-add-comment user-add-comment-secondry mt-md-5 mt-4">\n' +
+                    '                                    <div class="row">\n' +
+                    '                                        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">\n' +
+                    '                                        </div>\n' +
+                    '                                        <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">\n' +
+                    '                                            <div class="add-comment">\n' +
+                    '                                            {!! Form::open(["route" => "comment_create_post"]) !!}\n' +
+                    '                            {!! Form::hidden("post_id",$post->id) !!}\n' +
+                    '                        <input type="hidden" name="parent_id" value="' + parentID + '" />\n' +
+                    '                            @if(! Auth::check())\n' +
+                    '                        <div class="row">\n' +
+                    '                            <div class="col-sm-6">\n' +
+                    '                                <input name="guest_name" type="text" placeholder="Username">\n' +
+                    '                                <span class="error-box invalid-feedback guest_name"></span>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="col-sm-6">\n' +
+                    '                                <input name="guest_email" type="email" placeholder="Email">\n' +
+                    '                                <span class="error-box invalid-feedback guest_email"></span>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '@endif\n' +
+                    '\n' +
+                    '                        <textarea name="comment" id="" rows="0"\n' +
+                    '                                  placeholder="Your comments"></textarea>\n' +
+                    '                        <span class="error-box invalid-feedback comment"></span>\n' +
+                    '                        <div class="row mt-1">\n' +
+                    '                            <div class="col-sm-6">\n' +
+                    '                                <button type="button"\n' +
+                    '                                        class="btn btn-outline-success btn-block cancel-reply">\n' +
+                    '                                    Cancel\n' +
+                    '                                </button>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="col-sm-6">\n' +
+                    '                                <button type="button"\n' +
+                    '                                        class="btn btn-outline-success btn-block add-comment-btn">\n' +
+                    '                                    Add\n' +
+                    '                                </button>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '{!! Form::close() !!}\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>';
+                $(this).closest(".user-comment-img").append(data);
+                $(this).closest(".user-comment-img").addClass("user-commmet-add")
 
-                 })
-             }
-         });
-     }
-}
-// comment.init({
-//     'comentable':'Posts',
-//     'id':'1'
-// })
-
-
-document.querySelector(".jquery-comments .save").addEventListener("click", function(e){
-    e.stopPropagation();
-    const user = {auth: false}
-    if (user.auth) {
-        let container = document.querySelector(".jquery-comments .textarea");
-        let text = container.textContent;
-        container.innerHTML = "";    
-    }else {
-        alert("you need register")
-    }
-    
-
-})
+            })
+        });
     </script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
-<script>
-$("#share").jsSocials({
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
+    <script>
+        $("#share").jsSocials({
             shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-});
-$(".gp-author-social-icons").jsSocials({
+        });
+        $(".gp-author-social-icons").jsSocials({
             shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-});
-$(".gp-share-icons-on-footer").jsSocials({
+        });
+        $(".gp-share-icons-on-footer").jsSocials({
             shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
-});
-$("body").on("click", ".gp-share-button, .hide-icons", function(){
-    $("#gp-share-icons-hide").toggle()
-})
-</script>
+        });
+        $("body").on("click", ".gp-share-button, .hide-icons", function(){
+            $("#gp-share-icons-hide").toggle()
+        })
+    </script>
 
 @stop

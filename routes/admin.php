@@ -125,13 +125,13 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('delete/{id}', 'Admin\PostController@getDelete')->name('admin_post_delete');
     Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
     Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
-    Route::group(['prefix' => 'comments'], function () {
-        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
-        Route::get('/settings', 'Admin\PostController@getCommentSettings')->name('admin_blog_comments_settings');
-        Route::get('/delete/{id}', 'Admin\PostController@getCommentsDelete')->name('admin_post_comment_delete');
-        Route::get('edit/{id}', 'Admin\PostController@getCommentsEdit')->name('admin_post_comment_edit');
-
-    });
+//    Route::group(['prefix' => 'comments'], function () {
+//        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
+//        Route::get('/settings', 'Admin\PostController@getCommentSettings')->name('admin_blog_comments_settings');
+//        Route::get('/delete/{id}', 'Admin\PostController@getCommentsDelete')->name('admin_post_comment_delete');
+//        Route::get('edit/{id}', 'Admin\PostController@getCommentsEdit')->name('admin_post_comment_edit');
+//
+//    });
 
 });
 
@@ -192,6 +192,15 @@ Route::group(['prefix' => '/tools'], function () {
     Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
 });
 
+Route::group(['prefix'=>'comments'], function () {
+    Route::get('/','Admin\CommentsController@index')->name('show_comments');
+    Route::get('/approve/{id}','Admin\CommentsController@approve')->name('approve_comments');
+    Route::get('/unapprove/{id}','Admin\CommentsController@unapprove')->name('unapprove_comments');
+    Route::get('/edit/{id}','Admin\CommentsController@edit')->name('edit_comment');
+    Route::post('/edit/{id}','Admin\CommentsController@postEdit')->name('edit_comment_post');
+    Route::get('/reply/{id}','Admin\CommentsController@reply')->name('reply_comment');
+    Route::post('/reply/{id}','Admin\CommentsController@postReply')->name('reply_comment_post');
+});
 
 //Route::get('{locale}', function($locale) {
 //    app()->setLocale($locale);

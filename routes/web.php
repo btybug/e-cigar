@@ -43,15 +43,12 @@ Auth::routes();
 Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'Frontend\BlogController@index')->name('blog');
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
+Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
 
-Route::group(['prefix'=>'comments'],function (){
-    Route::post('/create', 'Frontend\CommentsConroller@postCreate')->name('comment_create_post');
-});
 
 Route::group(['prefix' => 'products'], function () {
     Route::get('/', 'Frontend\ProductsController@index')->name('products');
