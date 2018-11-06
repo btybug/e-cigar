@@ -101,6 +101,17 @@
                                         Content
                                     </div>
                                 </div>
+                                <div class="panel panel-default mt-20">
+                                    <div class="panel-heading d-flex justify-content-between align-items-center">
+                                        <span>
+                                            Related Products
+                                        </span>
+                                        <button class="btn btn-info">Select</button>
+                                    </div>
+                                    <div class="panel-body">
+                                        Content
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
 
                                 </div>
