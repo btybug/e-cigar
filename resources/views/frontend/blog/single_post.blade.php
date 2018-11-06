@@ -225,7 +225,7 @@
                                    <div class="row">
                                        <div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">
                                            <figure class="thumbnail">
-                                               <img class="img-fluid" src="https://images.pexels.com/photos/1005486/pexels-photo-1005486.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260">
+                                               <img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">
                                                <figcaption class="text-center">username</figcaption>
                                            </figure>
                                        </div>

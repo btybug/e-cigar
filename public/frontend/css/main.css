@@ -13543,4 +13543,21 @@ a.text-dark:focus, a.text-dark:hover {
     background: rgba(0,0,0,.6);
 }
 
+.blog-posts-slider.owl-carousel .owl-dots .owl-dot span {
+    border: 2px solid #ddd;
+    content: '';
+    opacity: 1;
+    background: transparent;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    width: 15px;
+    height: 15px;
+}
+
+.blog-posts-slider.owl-carousel .owl-dots .owl-dot.active span {
+    background: transparent;
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
 /*End blog slider*/
