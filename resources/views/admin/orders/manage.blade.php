@@ -555,34 +555,39 @@
             </div>
 
             <div class="row order-main-cnt_control-btns">
-                <button class="btn btn-default col-sm-6"><i class="fa fa-plus" aria-hidden="true"></i> Add Status</button>
-                <button class="btn btn-default col-sm-6"><i class="fa fa-plus" aria-hidden="true"></i> Add Note</button>
+                <button id="btnAddStatus" class="btn btn-default col-sm-6 btn--add-status"><i class="fa fa-plus" aria-hidden="true"></i> Add Status</button>
+                <button id="btnAddNote" class="btn btn-default col-sm-6 btn--add-note"><i class="fa fa-plus" aria-hidden="true"></i> Add Note</button>
+            </div>
+            <div class="hidden-add-field" id="addStatusField">
+                <div class="form-group mb-20 w-100">
+                    <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
+                    <div class="col-sm-8">
+                        <select name="changeStatusSelect" id="input-store" class="form-control">
+                            <option value="0" selected="selected">Shipping</option>
+                            <option value="0" selected="selected">...</option>
+                            <option value="0" selected="selected">...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>
+                    <div class="col-sm-6">
+                        <input class="form-control" type="number">
+                    </div>
+                </div>
+                <div class="confirm-btn-outer" style="padding-left: 15px">
+                    <button type="button" class="btn btn-primary">Change</button>
+                </div>
+
             </div>
 
+            <div class="hidden-add-field" id="addNoteField">
+                <div class="form-group w-100">
+                    <label class="control-label" for="addNoteArea">Add your Note</label>
+                    <textarea id="addNoteArea" class="d-block w-100" rows="6"></textarea>
+                </div>
 
-            {{--<div class="panel panel-default" style="padding: 15px">--}}
-                {{--<div class="form-group mb-20 w-100">--}}
-                    {{--<label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>--}}
-                    {{--<div class="col-sm-8">--}}
-                        {{--<select name="changeStatusSelect" id="input-store" class="form-control">--}}
-                            {{--<option value="0" selected="selected">Shipping</option>--}}
-                            {{--<option value="0" selected="selected">...</option>--}}
-                            {{--<option value="0" selected="selected">...</option>--}}
-                        {{--</select>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="form-group">--}}
-                    {{--<label for="ChangeTrackingNMB" class="control-label col-sm-4">Tracking number</label>--}}
-                    {{--<div class="col-sm-6">--}}
-                        {{--<input class="form-control" type="number">--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="confirm-btn-outer" style="padding-left: 15px">--}}
-                    {{--<button type="button" class="btn btn-primary">Change</button>--}}
-                {{--</div>--}}
-
-            {{--</div>--}}
-
+            </div>
 
         </div>
 
@@ -642,6 +647,19 @@
 @section('js')
     <script>
         $(function () {
+
+            $('#btnAddStatus').on('click',function(){
+                $('#addStatusField').slideToggle();
+                $('.order-main-cnt_control-btns').toggleClass('status-btn-clicked')
+            });
+
+            $('#btnAddNote').on('click',function(){
+                $('#addNoteField').slideToggle();
+                $('.order-main-cnt_control-btns').toggleClass('note-btn-clicked')
+            });
+
+
+
             {{--$('#categories-table').DataTable({--}}
             {{--ajax:  "{!! route('datatable_all_categories') !!}",--}}
             {{--"processing": true,--}}
