@@ -388,6 +388,7 @@
                 items:1,
                 dots:false,
                 autoplay:true,
+                loop: true,
                 autoplayTimeout:3000
             })
 
