@@ -81,9 +81,9 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-2 col-xs-12">Facebook Image</label>
+                            <label for="seo-facebook-image" class="col-md-2 col-xs-12">Facebook Image</label>
                             <div class="col-md-5 col-xs-12">
-                                <button class="btn btn-info">Image</button>
+                                <input id="seo-facebook-image" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -111,9 +111,9 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-2 col-xs-12">Twitter Image</label>
+                            <label for="seo-twitter-image" class="col-md-2 col-xs-12">Twitter Image</label>
                             <div class="col-md-5 col-xs-12">
-                                <button class="btn btn-info">Image</button>
+                                <input id="seo-twitter-image" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
