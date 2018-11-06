@@ -305,8 +305,21 @@ table.table--order-dtls.table-bordered tr > th {
 
 .hidden-add-field {
     background: #fff;
-    display: none;
-    box-shadow: 0 -5px 5px -5px #333;
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
+}
+
+.hidden-add-field.show {
+    visibility: visible;
+    opacity: 1;
+    max-height: 500px;
+
 }
 
 .hidden-add-field_body {
@@ -319,20 +332,6 @@ table.table--order-dtls.table-bordered tr > th {
 
 .order-main-cnt .form-group {
     overflow: hidden;
-}
-
-.order-main-cnt_control-btns .dropdown-inner .confirm-btn-outer {
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-}
-
-.order-main-cnt_control-btns .dropdown-inner .dropdown-heading {
-    margin:0 0 10px;
-}
-
-.order-main-cnt_control-btns .dropdown-inner textarea {
-    width: 100%;
-    resize: none;
 }
 
 .order-notes {

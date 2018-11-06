@@ -662,19 +662,18 @@
         $(function () {
 
             $('#btnAddStatus').on('click',function(){
-                console.log(1111);
-                $('#addStatusField').slideDown();
-                $('.order-main-cnt_control-btns').addClass('btn-clicked')
+                $('#addStatusField').addClass('show');
+                $('.order-main-cnt_control-btns').hide();
             });
 
             $('#btnAddNote').on('click',function(){
-                $('#addNoteField').slideDown();
-                $('.order-main-cnt_control-btns').addClass('btn-clicked');
+                $('#addNoteField').addClass('show');
+                $('.order-main-cnt_control-btns').hide();
             });
 
             $('.hidden-add-field_heading .fa-close').on('click',function(){
-                $(this).closest('.hidden-add-field').slideUp();
-                $('.order-main-cnt_control-btns').removeClass('btn-clicked');
+                $(this).closest('.hidden-add-field').removeClass('show');
+                $('.order-main-cnt_control-btns').show("1000");
 
             });
 
