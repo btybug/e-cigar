@@ -320,6 +320,8 @@ class DatatableController extends Controller
         return Datatables::of(Posts::query())
             ->editColumn('title', function ($attr) {
                 return $attr->title;
+            })->editColumn('status', function ($attr) {
+                return ($attr->status)?'Published':'Draft';
             })->editColumn('seo_title', function ($attr) use ($settings) {
                 $general = $settings->getEditableData('seo_posts')->toArray();
                 return ($attr->getSeoField('og:title'))??getSeo($general, 'og:title', $attr);
