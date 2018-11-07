@@ -19,6 +19,7 @@ use App\Models\Products;
 use App\Models\Regions;
 use App\Models\Roles;
 use App\Models\SelectionType;
+use App\Models\Settings;
 use App\Models\Sports;
 use App\Models\Statuses;
 use App\Models\Stock;
@@ -307,6 +308,20 @@ class DatatableController extends Controller
                 return $attr->description;
             })
             ->addColumn('actions', function ($attr) {
+                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='".route('admin_stock_statuses_manage',$attr->id)."'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getBulkPosts(Settings $settings)
+    {
+        return Datatables::of(Posts::query())
+            ->editColumn('title', function ($attr) {
+                return $attr->title;
+            })->editColumn('seo_title', function ($attr)use($settings) {
+                $general=$settings->getEditableData('seo_posts');
+                return ($attr->getSeoField('og:title'))??getSeo($general,'og:title',$attr);
+            })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='".route('admin_stock_statuses_manage',$attr->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])

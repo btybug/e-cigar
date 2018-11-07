@@ -24,6 +24,7 @@ Route::group(['prefix'=>'datatables'],function(){
 
     Route::get('/settings/get-all-orders','Admin\DatatableController@getAllOrders')->name('datatable_all_orders');
     Route::get('/settings/get-all-statuses','Admin\DatatableController@getAllStatuses')->name('datatable_all_statuses');
+    Route::get('/settings/get-bulk-posts','Admin\DatatableController@getBulkPosts')->name('datatable_bulk_posts');
 });
 
 
