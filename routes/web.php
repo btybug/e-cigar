@@ -103,7 +103,10 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
         Route::get('/', 'Frontend\UserController@getOrders')->name('my_account_orders');
         Route::get('/invoice/{id}', 'Frontend\UserController@getOrderInvoice')->name('my_account_order_invoice');
     });
-    Route::get('/tickets', 'Frontend\UserController@getTickets')->name('my_account_tickets');
+    Route::group(['prefix' => 'tickets'], function () {
+        Route::get('/', 'Frontend\UserController@getTickets')->name('my_account_tickets');
+        Route::get('/new', 'Frontend\UserController@getTicketsNew')->name('my_account_tickets_new');
+    });
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
     Route::post('/verification', 'Frontend\UserController@postVerification')->name('post_my_account_verification');
     Route::get('/payments', 'Frontend\UserController@getPayments')->name('my_account_payment');

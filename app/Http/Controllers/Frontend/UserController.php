@@ -123,6 +123,11 @@ class UserController extends Controller
         return $this->view('tickets');
     }
 
+    public function getTicketsNew ()
+    {
+        return $this->view('tickets_open');
+    }
+
     public function getLogs()
     {
         return $this->view('logs');
