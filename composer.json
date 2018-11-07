@@ -12,7 +12,6 @@
         "darryldecode/cart": "~4.0",
         "dimsav/laravel-translatable": "^9.2",
         "fideloper/proxy": "^4.0",
-        "kordy/ticketit": "^0.4.5",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
