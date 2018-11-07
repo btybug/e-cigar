@@ -42,7 +42,7 @@
                             <strong>{!! BBgetDateFormat($post->created_at,'d') !!}</strong>{!! BBgetDateFormat($post->created_at,'M') !!}
                         </span>
 
-                            <img class="img-fluid" src="http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg" alt="About &amp; Contact Pages">
+                            <img class="img-fluid" src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="About &amp; Contact Pages">
                         </span>
 
                         <span class="d-block blog-block">
