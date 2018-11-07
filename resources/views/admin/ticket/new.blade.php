@@ -22,16 +22,12 @@
 
                                 <div class="form-group">
                                     <div class="form-group">
-                                        <label>Title</label>
+                                        <label>Subject</label>
                                         {!! Form::text('subject',null,['class'=>'form-control']) !!}
                                     </div>
                                     <div class="form-group">
-                                        <label>Short Description</label>
-                                        {!! Form::textarea('short_description',null,['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Long Description</label>
-                                        {!! Form::textarea('long_description',null,['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                        <label>Summary</label>
+                                        {!! Form::textarea('summary',null,['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                     </div>
                                 </div>
 
@@ -134,7 +130,7 @@
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-tags-list">
                                             {{--@if($post && $post->tags)--}}
-                                            
+
                                                 {{--$tags = json_decode($post->tags, true);--}}
 
                                                 {{--@foreach($tags as $tag)--}}
