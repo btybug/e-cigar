@@ -55,4 +55,9 @@ class SeoController extends Controller
         return $this->view('pages');
     }
 
+    public function getBulkProducts()
+    {
+        return $this->view('products');
+    }
+
 }

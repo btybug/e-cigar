@@ -330,4 +330,19 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
+
+    public function getBulkStock()
+    {
+        return Datatables::of(Stock::query())
+            ->editColumn('image', function ($stock) {
+                return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
+            })
+            ->editColumn('created_at', function ($stock) {
+                return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
+            })
+            ->addColumn('actions', function ($stock) {
+                return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
+            })->rawColumns(['actions', 'name', 'image'])
+            ->make(true);
+    }
 }

@@ -244,6 +244,7 @@ Route::group(['prefix' => 'seo'], function () {
     Route::get('/stocks', 'Admin\SeoController@getStocks')->name('admin_seo_stocks');
     Route::get('/pages', 'Admin\SeoController@getPages')->name('admin_seo_pages');
     Route::get('/bulk', 'Admin\SeoController@getBulk')->name('admin_seo_bulk');
+    Route::get('/bulk/products', 'Admin\SeoController@getBulkProducts')->name('admin_seo_bulk_products');
 });
 
 Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');
