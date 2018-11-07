@@ -22,4 +22,112 @@
 
         </div>
     </div>
+    <div class="container-fluid">
+        {{--{!! Form::model($general) !!}--}}
+        <div class="pull-right"><button type="submit" class="btn btn-success">Save</button></div>
+        <div class="clearfix"></div>
+        <div class="seo-page-general">
+            <div class="panel panel-default mt-20">
+                <div class="panel-heading">General</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-title" class="col-md-2 col-xs-12">Title</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('og:title',null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-desc" class="col-md-2 col-xs-12">Description</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('og:description',null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-keywords" class="col-md-2 col-xs-12">Focus keywords</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('og:keywords',null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-meta-robots" class="col-md-2 col-xs-12">Meta Robots</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'form-control']) !!}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default mt-20">
+                <div class="panel-heading">FB</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('fb[og:title]',isset($fb['og:title'])?$fb['og:title']:null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('fb[og:description]',isset($fb['og:description'])?$fb['og:description']:null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-facebook-image" class="col-md-2 col-xs-12">Facebook Image</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('fb[og:image]',isset($fb['og:image'])?$fb['og:image']:null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default mt-20">
+                <div class="panel-heading">Twitter</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('twitter[og:title]',isset($twitter['og:title'])?$twitter['og:title']:null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('twitter[og:description]',isset($twitter['og:description'])?$twitter['og:description']:null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="seo-twitter-image" class="col-md-2 col-xs-12">Twitter Image</label>
+                            <div class="col-md-5 col-xs-12">
+                                {!! Form::text('twitter[og:image]',isset($twitter['og:image'])?$twitter['og:image']:null,['class'=>'form-control']) !!}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{--{!! Form::close() !!}--}}
+    </div>
     @stop
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop
