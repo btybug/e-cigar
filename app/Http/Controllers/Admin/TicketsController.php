@@ -19,4 +19,9 @@ class TicketsController extends Controller
     {
         return $this->view('index');
     }
+
+    public function getNew ()
+    {
+        return $this->view('new');
+    }
 }

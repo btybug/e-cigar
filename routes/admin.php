@@ -178,7 +178,11 @@ Route::group(['prefix' => 'inventory'], function () {
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
-Route::get('/tickets', 'Admin\TicketsController@index')->name('admin_tickets');
+
+Route::group(['prefix' => '/tickets'], function () {
+    Route::get('/', 'Admin\TicketsController@index')->name('admin_tickets');
+    Route::get('/new', 'Admin\TicketsController@getNew')->name('admin_tickets_new');
+});
 
 Route::group(['prefix' => '/tools'], function () {
     Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
