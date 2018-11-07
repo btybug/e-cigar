@@ -9,6 +9,8 @@ use Yajra\DataTables\DataTables;
 
 class CommentsController extends Controller
 {
+    protected $view = 'admin.comments';
+
     public $comment;
 
     public function __construct(
@@ -20,21 +22,21 @@ class CommentsController extends Controller
 
     public function index()
     {
-        return view('admin.comments.show');
+        return $this->view('show');
     }
 
     public function unapprove($id)
     {
-        $this->comment->findOrFail($id);
-        $this->comment->update($id,['status'=>0]);
+        $comment = $this->comment->findOrFail($id);
+        $comment->update(['status'=>0]);
 
         return redirect()->back()->with("message", "Comment Successfully unapproved");
     }
 
     public function approve($id)
     {
-        $this->comment->findOrFail($id);
-        $this->comment->update($id,['status'=>1]);
+        $comment = $this->comment->findOrFail($id);
+        $comment->update(['status'=>1]);
 
         return redirect()->back()->with("message", "Comment Successfully approved");
     }
@@ -43,13 +45,14 @@ class CommentsController extends Controller
     {
         $comment = $this->comment->findOrFail($id);
 
-        return view('admin.comments.edit',compact(['comment']));
+        return $this->view('edit',compact(['comment']));
     }
 
     public function postEdit(Request $request,$id)
     {
         $comment = $this->comment->findOrFail($id);
-        $this->comment->update($id,$request->except('_token'));
+        $comment->update($request->except('_token'));
+
         return redirect()->route('show_comments')->with("message", "Comment Successfully edited");
     }
 
@@ -57,7 +60,7 @@ class CommentsController extends Controller
     {
         $comment = $this->comment->findOrFail($id);
 
-        return view('admin.comments.reply',compact(['comment']));
+        return $this->view('reply',compact(['comment']));
     }
 
     public function postReply(Request $request,$id)
@@ -66,5 +69,14 @@ class CommentsController extends Controller
         $this->comment->create(['author_id' => \Auth::id(),'comment' => $request->comment,'parent_id' => $id,'post_id' => $comment->post_id,'status' => 1]);
 
         return redirect()->route('show_comments')->with("message", "Comment Successfully replied");
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $comment = $this->comment->find($id);
+
+        if($comment) $comment->delete();
+
+        return redirect()->back();
     }
 }

@@ -179,7 +179,9 @@ class DatatableController extends Controller
     public function getAllPostComments()
     {
         return Datatables::of(Comment::query())
-            ->editColumn('author', function ($comment) {
+            ->editColumn('status', function ($comment) {
+                return ($comment->status) ? '<span class="badge btn-success">Approved</span>' : '<span class="badge btn-danger">Unapproved</span>';
+            })->editColumn('author', function ($comment) {
                 $user = $comment->author;
                 return '<strong>
                             <img alt="" src="/public/admin_theme/dist/img/user2-160x160.jpg" class="img" height="32" width="32"> ' . $user->name . '</strong>
@@ -192,19 +194,19 @@ class DatatableController extends Controller
                     $str .= ' | In reply to ' . $comment->parent->author->name;
                 }
                 $str .= '<br>';
-                $str .= '<div>' . $comment->comment . '</div>';
+                $str .= '<div><strong>' . $comment->comment . '</strong></div>';
                 return $str;
             })
             ->editColumn('replies', function ($comment) {
-                return '<span class="comment-count">' . count($comment->childrenAll) . '</span>';
+                return '<span class="badge comment-count">' . count($comment->childrenAll) . '</span>';
             })
             ->addColumn('actions', function ($comment) {
                 $actions = ($comment->status) ? '<a href="'.route('unapprove_comments',$comment->id).'" class="btn btn-info"> Block</a>' : '<a href="'.route('approve_comments',$comment->id).'" class="btn btn-success">Approve</a>';
                 $actions .= '<a class="btn btn-primary" href="'.route('reply_comment',$comment->id).'">Reply</a>';
                 $actions .= '<a class="btn btn-warning" href="'.route('edit_comment',$comment->id).'"><i class="fa fa-edit"></i></a>
-                        <a class="btn btn-danger delete-button" data-text="<p>Do you really want to delete comment, it will delete all children as well?</p>" data-table="comments" data-id="' . $comment->id . '" href="#"><i class="fa fa-trash"></i></a>';
+                        <a class="btn btn-danger delete-button" href="'.route('delete_comments',$comment->id).'"><i class="fa fa-trash"></i></a>';
                 return $actions;
-            })->rawColumns(['actions', 'author', 'comment', 'replies'])
+            })->rawColumns(['actions', 'author', 'comment', 'replies', 'status'])
             ->make(true);
     }
 

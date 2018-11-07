@@ -138,10 +138,8 @@
                                <div class="comment-list">
                                    <h2>Comments</h2>
                                    <div class="divider"></div>
-                                   <div class="comments-refresh">
-                                     @include('frontend.blog.single_post_comments')
-                                   </div>
-                                   <div class="user-add-comment mt-md-5 mt-4">
+
+                                   <div class="user-add-comment mt-md-5 my-4">
                                        <div class="row">
                                            <div class="col-sm-1">
                                                <div class="user-img">
@@ -152,18 +150,18 @@
                                                <div class="add-comment">
                                                    {!! Form::open(['route' => 'comment_create_post']) !!}
                                                    {!! Form::hidden('post_id',$post->id) !!}
-                                                   @if(! Auth::check())
-                                                       <div class="row">
-                                                           <div class="col-sm-6">
-                                                               <input name="guest_name" type="text" placeholder="Username">
-                                                               <span class="error-box invalid-feedback guest_name"></span>
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                               <input name="guest_email" type="email" placeholder="Email">
-                                                               <span class="error-box invalid-feedback guest_email"></span>
-                                                           </div>
-                                                       </div>
-                                                   @endif
+                                                   {{--@if(! Auth::check())--}}
+                                                       {{--<div class="row">--}}
+                                                           {{--<div class="col-sm-6">--}}
+                                                               {{--<input name="guest_name" type="text" placeholder="Username">--}}
+                                                               {{--<span class="error-box invalid-feedback guest_name"></span>--}}
+                                                           {{--</div>--}}
+                                                           {{--<div class="col-sm-6">--}}
+                                                               {{--<input name="guest_email" type="email" placeholder="Email">--}}
+                                                               {{--<span class="error-box invalid-feedback guest_email"></span>--}}
+                                                           {{--</div>--}}
+                                                       {{--</div>--}}
+                                                   {{--@endif--}}
 
                                                    <textarea name="comment" id="" rows="0"
                                                              placeholder="Your comments"></textarea>
@@ -186,6 +184,9 @@
                                                </div>
                                            </div>
                                        </div>
+                                   </div>
+                                   <div class="comments-refresh">
+                                       @include('frontend.blog.single_post_comments')
                                    </div>
                                    <!-- First Comment -->
                                    {{--<div class="row">--}}
@@ -418,18 +419,6 @@
                     '                                            {!! Form::open(["route" => "comment_create_post"]) !!}\n' +
                     '                            {!! Form::hidden("post_id",$post->id) !!}\n' +
                     '                        <input type="hidden" name="parent_id" value="' + parentID + '" />\n' +
-                    '                            @if(! Auth::check())\n' +
-                    '                        <div class="row">\n' +
-                    '                            <div class="col-sm-6">\n' +
-                    '                                <input name="guest_name" type="text" placeholder="Username">\n' +
-                    '                                <span class="error-box invalid-feedback guest_name"></span>\n' +
-                    '                            </div>\n' +
-                    '                            <div class="col-sm-6">\n' +
-                    '                                <input name="guest_email" type="email" placeholder="Email">\n' +
-                    '                                <span class="error-box invalid-feedback guest_email"></span>\n' +
-                    '                            </div>\n' +
-                    '                        </div>\n' +
-                    '@endif\n' +
                     '\n' +
                     '                        <textarea name="comment" id="" rows="0"\n' +
                     '                                  placeholder="Your comments"></textarea>\n' +

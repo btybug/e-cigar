@@ -11,7 +11,7 @@
                     <h3>Replying to</h3>
                     <span>
                         @if($comment->author)
-                            Author : {{ user_name($comment->author_id) }}
+                            Author : {{ $comment->author->name }}
                         @else
                             Author : {{ $comment->guest_name . ' ('.$comment->guest_email.')' }}
                         @endif

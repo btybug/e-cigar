@@ -13,11 +13,11 @@ class Comment extends Model
     protected $guarded = ['id'];
 
     public function scopeMain($query){
-        return $query->whereNull('parent_id')->where('status', true);
+        return $query->whereNull('parent_id')->where('status', true)->orderBy('created_at','desc');
     }
 
     public function scopeMainAll($query){
-        return $query->whereNull('parent_id');
+        return $query->whereNull('parent_id')->orderBy('created_at','desc');
     }
 
     public function post()
@@ -27,7 +27,7 @@ class Comment extends Model
 
     public function children()
     {
-        return $this->hasMany(self::class, 'parent_id', 'id')->where('status', true);
+        return $this->hasMany(self::class, 'parent_id', 'id')->where('status', true)->orderBy('created_at','desc');
     }
 
     public function parent()
@@ -37,7 +37,7 @@ class Comment extends Model
 
     public function childrenAll()
     {
-        return $this->hasMany(self::class, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id')->orderBy('created_at','desc');
     }
 
     public function author()
