@@ -319,7 +319,7 @@ class DatatableController extends Controller
             ->editColumn('title', function ($attr) {
                 return $attr->title;
             })->editColumn('seo_title', function ($attr)use($settings) {
-                $general=$settings->getEditableData('seo_posts');
+                $general=$settings->getEditableData('seo_posts')->toArray();
                 return ($attr->getSeoField('og:title'))??getSeo($general,'og:title',$attr);
             })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
