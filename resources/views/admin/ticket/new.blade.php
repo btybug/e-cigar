@@ -4,7 +4,7 @@
 @stop
 
 @section('content')
-    <div class="col-md-12">
+    <section class="content stock-page">
         <div class="col-xs-12">
             <div class="col-md-6 pull-left"><h2>New ticket</h2></div>
         </div>
@@ -167,7 +167,7 @@
                 </div>
             </div>
         {!! Form::close() !!}
-    </div>
+    </section>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
