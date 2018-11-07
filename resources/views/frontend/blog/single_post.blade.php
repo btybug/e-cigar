@@ -2,6 +2,7 @@
 
 @section('meta')
     {!! meta($post) !!}
+    <meta property="url" content="{!! route('blog_post',$post->url) !!}">
 @stop
 @section('content')
     <div id="gp-inner-container">
