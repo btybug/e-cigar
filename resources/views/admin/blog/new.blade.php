@@ -72,7 +72,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3">Featured image</label>
                                         <div class="col-sm-9">
-                                            {!! media_button('image') !!}
+                                            {!! media_button('image',$post) !!}
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -228,7 +228,8 @@
                         <div class="row">
                             <label class="col-md-2 col-xs-12">Facebook Image</label>
                             <div class="col-md-5 col-xs-12">
-                                <button class="btn btn-info">Image</button>
+                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'go:image',$post)]) !!}
+
                             </div>
                         </div>
                     </div>
@@ -260,7 +261,7 @@
                         <div class="row">
                             <label class="col-md-2 col-xs-12">Twitter Image</label>
                             <div class="col-md-5 col-xs-12">
-                                <button class="btn btn-info">Image</button>
+                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'go:image',$post)]) !!}
                             </div>
                         </div>
                     </div>
