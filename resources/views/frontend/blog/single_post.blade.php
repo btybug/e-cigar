@@ -138,17 +138,17 @@
                                <div class="comment-list">
                                    <h2>Comments</h2>
                                    <div class="divider"></div>
-
-                                   {!! commentRender($post->comments) !!}
-
+                                   <div class="comments-refresh">
+                                     @include('frontend.blog.single_post_comments')
+                                   </div>
                                    <div class="user-add-comment mt-md-5 mt-4">
                                        <div class="row">
-                                           <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+                                           <div class="col-sm-1">
                                                <div class="user-img">
                                                    <img src="/public/images/male.png" alt="">
                                                </div>
                                            </div>
-                                           <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">
+                                           <div class="col-sm-11">
                                                <div class="add-comment">
                                                    {!! Form::open(['route' => 'comment_create_post']) !!}
                                                    {!! Form::hidden('post_id',$post->id) !!}
@@ -171,13 +171,13 @@
                                                    <div class="row mt-1">
                                                        <div class="col-sm-6">
                                                            <button type="button"
-                                                                   class="btn btn-outline-success btn-block cancel-comment">
+                                                                   class="btn btn-outline-warning btn-block cancel-comment">
                                                                Cancel
                                                            </button>
                                                        </div>
                                                        <div class="col-sm-6">
                                                            <button type="button"
-                                                                   class="btn btn-outline-success btn-block add-comment-btn">
+                                                                   class="btn btn-outline-warning btn-block add-comment-btn">
                                                                Add
                                                            </button>
                                                        </div>
@@ -396,6 +396,8 @@
 
                             $("#msgModal .message-place").text(data.message);
                             $("#msgModal").modal();
+
+                            $(".comments-refresh").html(data.html);
                         }
                     },
                     error: function (data) {
@@ -409,11 +411,9 @@
                 e.preventDefault();
                 $(".user-add-comment-secondry").remove();
                 var parentID = $(this).data('id');
-                var data = '<div class="user-add-comment user-add-comment-secondry mt-md-5 mt-4">\n' +
-                    '                                    <div class="row">\n' +
-                    '                                        <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">\n' +
-                    '                                        </div>\n' +
-                    '                                        <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">\n' +
+                var data = '<div class="user-add-comment user-add-comment-secondry w-100 mt-md-5 my-4">\n' +
+                    '                                    <div class="row m-0">\n' +
+                    '                                        <div class="col-sm-12">\n' +
                     '                                            <div class="add-comment">\n' +
                     '                                            {!! Form::open(["route" => "comment_create_post"]) !!}\n' +
                     '                            {!! Form::hidden("post_id",$post->id) !!}\n' +
@@ -437,13 +437,13 @@
                     '                        <div class="row mt-1">\n' +
                     '                            <div class="col-sm-6">\n' +
                     '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-success btn-block cancel-reply">\n' +
+                    '                                        class="btn btn-outline-warning btn-block cancel-reply">\n' +
                     '                                    Cancel\n' +
                     '                                </button>\n' +
                     '                            </div>\n' +
                     '                            <div class="col-sm-6">\n' +
                     '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-success btn-block add-comment-btn">\n' +
+                    '                                        class="btn btn-outline-warning btn-block add-comment-btn">\n' +
                     '                                    Add\n' +
                     '                                </button>\n' +
                     '                            </div>\n' +

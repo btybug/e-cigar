@@ -12,6 +12,14 @@ class Comment extends Model
 
     protected $guarded = ['id'];
 
+    public function scopeMain($query){
+        return $query->whereNull('parent_id')->where('status', true);
+    }
+
+    public function scopeMainAll($query){
+        return $query->whereNull('parent_id');
+    }
+
     public function post()
     {
         return $this->belongsTo(Posts::class, 'post_id', 'id');

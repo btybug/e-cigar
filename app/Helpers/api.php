@@ -337,12 +337,13 @@ function commentRender($comments, $i = 0,$parent = false)
     if (count($comments)) {
         $comment = $comments[$i];
         //render main content
-        echo '<div class="row user-comment-img">';
         if($parent){
-            echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
+            echo '<div class="row user-comment-img sub pl-4 w-100 m-0">';
         }else{
-            echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
+            echo '<div class="row user-comment-img">';
         }
+
+        echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
         echo '<figure class="thumbnail">';
             echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
             if($comment->author){
@@ -373,14 +374,15 @@ function commentRender($comments, $i = 0,$parent = false)
         echo '</div>';
         echo '</div>';
         echo '</div>';
-        if (count($comment->children)) {
-            commentRender($comment->children, 0,true);
+
+        if (count($comment->childrenAll)) {
+            commentRender($comment->childrenAll, 0,true);
         }
 
         echo '</div>';
         $i = $i + 1;
         if ($i != count($comments)) {
-            commentRender($comments, $i);
+            commentRender($comments, $i,$parent);
         }
     }
 }

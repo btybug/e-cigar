@@ -23,7 +23,8 @@ class BlogController extends Controller
         $post = Posts::where('url',$post_url)->first();
         if(! $post) abort(404);
 
-        return $this->view('single_post',compact('post'));
+        $comments = $post->comments()->mainAll()->get();
+        return $this->view('single_post',compact('post','comments'));
     }
 
     public function addComment(Request $request)
@@ -68,7 +69,10 @@ class BlogController extends Controller
 
         $comment = new Comment();
         $comment->create($result);
+        $post = Posts::find($data['post_id']);
+        $comments = $post->comments()->mainAll()->get();
+        $html = \View::make('frontend.blog.single_post_comments',compact('comments'))->render();
 
-        return \Response::json(['success' => true,'message' => 'Success']);
+        return \Response::json(['success' => true,'message' => 'Success','html' => $html]);
     }
 }
