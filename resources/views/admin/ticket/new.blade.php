@@ -11,7 +11,6 @@
         {!! Form::model(null,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
             {!! Form::hidden('id',null) !!}
             <div class="text-right btn-save">
-                <button type="button" class="btn btn-success btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
             <div class="row sortable-panels">
@@ -81,8 +80,7 @@
                             <div class="row">
                                 {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('user_id',[],null,
-                                                ['class' => 'form-control','id'=> 'status']) !!}
+                                    Username
                                 </div>
                             </div>
                         </div>
@@ -90,17 +88,8 @@
                             <div class="row">
                                 {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('status',[0 => 'Draft',1 => 'Published'],null,
+                                    {!! Form::select('status',[0 => 'open',1 => 'close'],null,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-wall wall">
-                            <div class="row">
-                                {{Form::label('comment', 'Enable comment',['class' => 'col-sm-3'])}}
-                                <div class="col-sm-9">
-                                    YES {!! Form::radio('comment_enabled',1,true,['class' => '']) !!}
-                                    NO {!! Form::radio('comment_enabled',0,null,['class' => '']) !!}
                                 </div>
                             </div>
                         </div>
@@ -139,17 +128,30 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="category-wall wall">
+                        <div class="status-wall wall">
                             <div class="row">
-                                <label class="col-sm-3 control-label" for="input-category"><span
-                                            data-toggle="tooltip" title=""
-                                            data-original-title="Choose all products under selected category.">Category</span></label>
+                                {{Form::label('category', 'Category',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    <div class="form-group">
-                                        {!! Form::hidden('categories',(isset($checkedCategories))
-                                        ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                        <div id="treeview_json"></div>
-                                    </div>
+                                    {!! Form::select('category',[0 => 'category1',1 => 'category2'],null,
+                                                ['class' => 'form-control','id'=> 'category']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-wall wall">
+                            <div class="row">
+                                {{Form::label('priority', 'Priority',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    {!! Form::select('priority',[0 => 'urgent',1 => 'urgent2'],null,
+                                                ['class' => 'form-control','id'=> 'priority']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status-wall wall">
+                            <div class="row">
+                                {{Form::label('staff', 'Responsible staff',['class' => 'col-sm-3'])}}
+                                <div class="col-sm-9">
+                                    {!! Form::select('staff',[0 => 'staff1',1 => 'staff2'],null,
+                                                ['class' => 'form-control','id'=> 'staff']) !!}
                                 </div>
                             </div>
                         </div>
