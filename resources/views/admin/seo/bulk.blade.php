@@ -44,6 +44,9 @@
         $(function () {
             $('#posts-table').DataTable({
                 ajax: "{!! route('datatable_bulk_posts') !!}",
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
@@ -52,11 +55,9 @@
                     {data: 'seo_title', name: 'seo_title'},
                     {data: 'actions', name: 'actions'}
                 ],
-                order: [[0, 'desc']],
-                
-                buttons: [
-                    'csv', 'excel', 'pdf', 'print'
-                ]
+                order: [[0, 'desc']]
+
+
             });
         });
 
