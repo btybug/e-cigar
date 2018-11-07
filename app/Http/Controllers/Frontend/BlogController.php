@@ -14,16 +14,16 @@ class BlogController extends Controller
 
     public function index()
     {
-        $posts = Posts::all();
+        $posts = Posts::active()->orderby('created_at','desc')->get();
         return $this->view('index',compact('posts'));
     }
 
     public function getSingle($post_url)
     {
-        $post = Posts::where('url',$post_url)->first();
+        $post = Posts::active()->where('url',$post_url)->first();
         if(! $post) abort(404);
 
-        $comments = $post->comments()->mainAll()->get();
+        $comments = $post->comments()->main()->get();
         return $this->view('single_post',compact('post','comments'));
     }
 
@@ -39,6 +39,7 @@ class BlogController extends Controller
 
             $result = [
                 'post_id' => $data['post_id'],
+                'status' => 1,
                 'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
                 'author_id' => \Auth::id(),
                 'comment' => trim(htmlspecialchars($data['comment']))
@@ -54,6 +55,7 @@ class BlogController extends Controller
 
             $result = [
                 'post_id' => $data['post_id'],
+                'status' => 1,
                 'comment' => trim(htmlspecialchars($data['comment'])),
                 'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
                 'guest_name' => trim(htmlspecialchars($data['guest_name'])),
@@ -70,7 +72,7 @@ class BlogController extends Controller
         $comment = new Comment();
         $comment->create($result);
         $post = Posts::find($data['post_id']);
-        $comments = $post->comments()->mainAll()->get();
+        $comments = $post->comments()->main()->get();
         $html = \View::make('frontend.blog.single_post_comments',compact('comments'))->render();
 
         return \Response::json(['success' => true,'message' => 'Success','html' => $html]);

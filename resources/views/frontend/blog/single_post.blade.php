@@ -46,7 +46,7 @@
                                        </div>
                                        @endif
 
-                                       @if(count($post->gallery))
+                                       @if($post->gallery && count($post->gallery))
                                            @foreach($post->gallery as $gal)
                                                    <div class="item">
                                                        <img  src="{{ $gal }}" class="attachment-single-product-thumb wp-post-image" alt="">
@@ -135,7 +135,9 @@
                                    @endforeach
                                </div>
                                @endif
-                               <div class="comment-list">
+
+                               @if($post->comment_enabled)
+                                <div class="comment-list">
                                    <h2>Comments</h2>
                                    <div class="divider"></div>
 
@@ -245,6 +247,7 @@
                                    {{--</div>--}}
 
                                </div>
+                               @endif
                            </div>
                        </div>
                    </div>

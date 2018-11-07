@@ -375,8 +375,8 @@ function commentRender($comments, $i = 0,$parent = false)
         echo '</div>';
         echo '</div>';
 
-        if (count($comment->childrenAll)) {
-            commentRender($comment->childrenAll, 0,true);
+        if (count($comment->children)) {
+            commentRender($comment->children, 0,true);
         }
 
         echo '</div>';

@@ -28,6 +28,10 @@ class Posts extends Translatable
     ];
     protected $appends = array('keywords');
 
+    public function scopeActive($query){
+        return $query->where('status',self::APPROVED);
+    }
+
     public function getKeywordsAttribute()
     {
         $keywords='';
