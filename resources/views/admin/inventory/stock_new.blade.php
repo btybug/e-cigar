@@ -64,6 +64,7 @@
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
+                    <li><a data-toggle="tab" href="#seo">Seo</a></li>
                 </ul>
             </div>
 
@@ -74,7 +75,7 @@
                 {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
             </div>
             <div class="col-md-12">
-                <div class="tab-content">
+                <div class="tab-content tabs_content">
                     <div id="basic" class="tab-pane fade in active basic-details-tab ">
                         <div class="container-fluid p-25">
                             <div class="row">
@@ -423,6 +424,183 @@
                                     </div>
                                 </div>
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="basic-center basic-wall">
+                                            <div class="text-right btn-save">
+                                                <button type="submit" class="btn btn-info">Save</button>
+                                            </div>
+                                            <div class="panel panel-default mt-20">
+                                                <div class="panel-heading">FB</div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="row m-0">
+                                                            <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
+                                                            <div class="col-md-5 col-xs-12">
+                                                                <input class="form-control" placeholder="Lorem Ipsum" name="" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row m-0">
+                                                            <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
+                                                            <div class="col-md-5 col-xs-12">
+                                                                <input class="form-control" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," name="" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row m-0">
+                                                            <label class="col-md-2 col-xs-12">Facebook Image</label>
+                                                            <div class="col-md-5 col-xs-12">
+                                                                <input class="form-control" readonly="" disabled="" placeholder="" type="text">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="panel panel-default mt-20">
+                                                <div class="panel-heading">Twitter</div>
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <div class="row m-0">
+                                                            <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
+                                                            <div class="col-md-5 col-xs-12">
+                                                                <input class="form-control" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ice the 1500s," name="" type="text">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row m-0">
+                                                            <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
+                                                            <div class="col-md-5 col-xs-12">
+                                                                <input class="form-control" placeholder="Lorem Ipsum is simply dummy text of txt ever since the 1500s," name="" type="text">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row m-0">
+                                                            <label class="col-md-2 col-xs-12">Twitter Image</label>
+                                                            <div class="col-md-5 col-xs-12">
+                                                                <input class="form-control" readonly="" disabled="" placeholder="" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="seo-general-content">
+                                                        <table class="form-table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <label for="seo_focuskw">Focus Keyword:</label>
+                                                                    <img src="/public/images/question-mark.png" alt="question">
+                                                                </th>
+                                                                <td>
+                                                                    <input class="form-control" placeholder="" name="general[og:keywords]" type="text">
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <label for="seo_title">SEO Title:</label>
+                                                                    <img src="/public/images/question-mark.png" alt="question">
+                                                                </th>
+                                                                <td>
+                                                                    <input class="form-control" placeholder="Lorem Ipsum" name="general[og:title]" type="text">
+                                                                    <br>
+                                                                    <div>
+                                                                        <p><span class="wrong">Warning:</span>
+                                                                            Title display in Google is limited to a fixed width, yours is too long.
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <label for="seo_metadesc">Meta description:</label>
+                                                                    <img src="/public/images/question-mark.png" alt="question">
+                                                                </th>
+                                                                <td>
+                                                                    <textarea class="form-control" rows="2" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," name="" cols="50"></textarea>
+                                                                    <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="seo-advanced">
+                                                        <table class="form-table">
+                                                            <tbody>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
+                                                                </th>
+                                                                <td>
+                                                                    <select class="" name=""><option value="" selected="selected">As default Index</option><option value="1">Index</option><option value="0">No Index</option></select>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">Meta Robots Follow</th>
+                                                                <td>
+                                                                    <input type="radio" checked="checked" id="seo_meta-robots-nofollow_0" value="0">
+                                                                    <label for="seo_meta-robots-nofollow_0">Follow</label>
+                                                                    <input type="radio" id="seo_meta-robots-nofollow_1" value="1">
+                                                                    <label for="seo_meta-robots-nofollow_1">Nofollow</label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <label for="seo_meta-robots-adv">Meta Robots Advanced:</label>
+                                                                </th>
+                                                                <td>
+                                                                    <select multiple="multiple" size="7" style="height: 144px;" id="seo_meta-robots-adv" class="">
+                                                                        <option selected="selected" value="-">Site-wide default: None</option>
+                                                                        <option value="none">None</option>
+                                                                        <option value="noodp">NO ODP</option>
+                                                                        <option value="noydir">NO YDIR</option>
+                                                                        <option value="noimageindex">No Image Index</option>
+                                                                        <option value="noarchive">No Archive</option>
+                                                                        <option value="nosnippet">No Snippet</option>
+                                                                    </select>
+                                                                    <div>Advanced <code>meta</code> robots settings for this page.</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <label for="seo_canonical">Canonical URL:</label>
+                                                                </th>
+                                                                <td>
+                                                                    <input type="text" id="seo_canonical" value="" class="form-control"><br>
+                                                                    <div>The canonical URL that this page should point to, leave empty to default to
+                                                                        permalink. <a target="_blank" href="#">Cross
+                                                                            domain canonical</a> supported too.
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -555,7 +555,7 @@
     background-color: #fff;
     color: black;
     /*min-height: 400px;*/
-    height: calc(100vh - 310px);
+    height: calc(100vh - 340px);
     padding: 20px;
     overflow: auto;
 }
