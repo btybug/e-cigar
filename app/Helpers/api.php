@@ -427,9 +427,13 @@ function meta($object, $type = 'seo_posts')
     $HTML = '';
     foreach ($metaTags as $name => $metaTag) {
         if (!is_null($metaTag)) {
+            $objSeo=$object->seo()->where('name',$name)->where('type','general')->first();
+            if(!$objSeo){
             $value = parametazor($metaTag,$object);
-
-            $HTML.= Html::meta($name, $value)->toHtml().'\r\n';
+            }else{
+                $value=$objSeo->content;
+            }
+            $HTML.= Html::meta($name, $value)->toHtml()."\n\r";
         }
     }
     return $HTML;

@@ -24,21 +24,22 @@ class Posts extends Translatable
     protected $guarded = ['id'];
 
     protected $casts = [
-      'gallery' => 'json'
+        'gallery' => 'json'
     ];
     protected $appends = array('keywords');
 
-    public function scopeActive($query){
-        return $query->where('status',self::APPROVED);
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::APPROVED);
     }
 
     public function getKeywordsAttribute()
     {
-        $keywords='';
-        $tags=@json_decode($this->tags,true);
-        if($tags){
-            foreach ($tags as $key=>$value){
-            $keywords.=((count($tags)==($key))?'':',').$value;
+        $keywords = '';
+        $tags = @json_decode($this->tags, true);
+        if ($tags) {
+            foreach ($tags as $key => $value) {
+                $keywords .= ((count($tags) == ($key)) ? '' : ',') . $value;
             }
         }
         return $keywords;
@@ -46,7 +47,7 @@ class Posts extends Translatable
 
     public $translatedAttributes = ['title', 'short_description', 'long_description'];
 
-    public function author ()
+    public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -58,7 +59,7 @@ class Posts extends Translatable
 
     public function approvedComments()
     {
-        return $this->comments()->whereNull('parent_id')->where('status',self::APPROVED)->orderBy('created_at','desc')->get();
+        return $this->comments()->whereNull('parent_id')->where('status', self::APPROVED)->orderBy('created_at', 'desc')->get();
     }
 
     public function categories()
@@ -73,12 +74,12 @@ class Posts extends Translatable
 
     public function seo()
     {
-     return $this->hasMany(SeoPosts::class,'post_id');
+        return $this->hasMany(SeoPosts::class, 'post_id');
     }
 
-    public function getSeoField($name,$type='general')
+    public function getSeoField($name, $type = 'general')
     {
-       $seo=$this->seo()->where('name',$name)->where('type',$type)->first();
-       return ($seo)?$seo->content:null;
+        $seo = $this->seo()->where('name', $name)->where('type', $type)->first();
+        return ($seo) ? $seo->content : null;
     }
 }
