@@ -13,19 +13,19 @@ class CategoryTableSeeder extends Seeder
     {
         $locale='gb';
 
-        $category = new \App\Models\Category(['slug' => 'vape']);
+        $category = new \App\Models\Category(['slug' => 'vape','user_id' => 1]);
         $category->save();
         $category->translateOrNew($locale)->name = 'Vape';
         $category->translateOrNew($locale)->description = '';
         $category->save();
 
-        $category = new \App\Models\Category(['slug' => 'parts']);
+        $category = new \App\Models\Category(['slug' => 'parts','user_id' => 1]);
         $category->save();
         $category->translateOrNew($locale)->name = 'Parts';
         $category->translateOrNew($locale)->description = '';
         $category->save();
 
-        $category = new \App\Models\Category(['slug' => 'juice']);
+        $category = new \App\Models\Category(['slug' => 'juice','user_id' => 1]);
         $category->save();
         $category->translateOrNew($locale)->name = 'Juice';
         $category->translateOrNew($locale)->description = '';

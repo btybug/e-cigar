@@ -347,7 +347,7 @@ function commentRender($comments, $i = 0,$parent = false)
         echo '<figure class="thumbnail">';
             echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
             if($comment->author){
-                if($comment->author->isAdmin()){
+                if($comment->author->isAdministrator()){
                     echo '<figcaption class="text-center">Admin</figcaption>';
                 }else{
                     echo '<figcaption class="text-center">' .$comment->author->username.'</figcaption>';

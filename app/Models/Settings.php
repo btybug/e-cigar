@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
 {
-    protected $table = 'settings';
+    protected $table = 'bty_settings';
     protected $fillable = ['section', 'key', 'val'];
 
     public function updateOrCreateSettings($section, array $data)
