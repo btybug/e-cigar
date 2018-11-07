@@ -23,7 +23,7 @@ class CreatePostCategoriesTable extends Migration
             $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
-            $table->foreign('categories_post_id')->references('id')->on('categories_post')->onDelete('cascade');
+            $table->foreign('categories_post_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

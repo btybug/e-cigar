@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogPost;
+use App\Models\Category;
 use App\Models\CategoryPost;
 use App\Models\Comment;
 use App\Models\Posts;
@@ -39,8 +40,8 @@ class PostController extends Controller
     public function create()
     {
         $post = null;
-        $categories = CategoryPost::with('children')->whereNull('parent_id')->get();
-        $data = CategoryPost::recursiveItems($categories);
+        $categories = Category::with('children')->where('type','posts')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories);
 
         $general = $this->settings->getEditableData('seo_posts')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_posts')->toArray();
@@ -74,9 +75,9 @@ class PostController extends Controller
     {
         $post = Posts::findOrFail($id);
 
-        $categories = CategoryPost::with('children')->whereNull('parent_id')->get();
+        $categories = Category::with('children')->where('type','posts')->whereNull('parent_id')->get();
         $checkedCategories = $post->categories()->pluck('id')->all();
-        $data = CategoryPost::recursiveItems($categories, 0, [], $checkedCategories);
+        $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 
         $general = $this->settings->getEditableData('seo_posts')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_posts')->toArray();

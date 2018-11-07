@@ -64,7 +64,8 @@ class Posts extends Translatable
 
     public function categories()
     {
-        return $this->belongsToMany(CategoryPost::class, 'post_categories', 'post_id', 'categories_post_id');
+        return $this->belongsToMany(Category::class, 'post_categories', 'post_id', 'categories_post_id')
+            ->where('categories.type','posts');
     }
 
     public function stocks()

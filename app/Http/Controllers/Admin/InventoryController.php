@@ -38,7 +38,7 @@ class InventoryController extends Controller
     public function stockNew()
     {
         $model = null;
-        $categories =  Category::with('children')->whereNull('parent_id')->get();
+        $categories =  Category::with('children')->where('type','stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
         return $this->view('stock_new', compact(['model','data']));
     }
@@ -46,7 +46,7 @@ class InventoryController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $categories =  Category::with('children')->whereNull('parent_id')->get();
+        $categories =  Category::with('children')->where('type','stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories,0,[],$checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();

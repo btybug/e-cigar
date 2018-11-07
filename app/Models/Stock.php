@@ -53,7 +53,8 @@ class Stock extends Translatable
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'stock_categories', 'stock_id', 'categories_id');
+        return $this->belongsToMany(Category::class, 'stock_categories', 'stock_id', 'categories_id')
+            ->where('categories.type','stocks');
     }
 
     public function stockAttrs()
