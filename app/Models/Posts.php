@@ -66,4 +66,15 @@ class Posts extends Translatable
     {
         return $this->belongsToMany(Stock::class, 'post_stocks', 'post_id', 'stock_id');
     }
+
+    public function seo()
+    {
+     return $this->hasMany(SeoPosts::class,'post_id');
+    }
+
+    public function getSeoField($name,$type='general')
+    {
+       $seo=$this->seo()->where('name',$name)->where('type',$type)->first();
+       return ($seo)?$seo->content:null;
+    }
 }

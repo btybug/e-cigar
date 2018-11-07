@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="tab-content tabs_content">
-            {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+        {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
         <div id="home" class="tab-pane tab_info fade in active">
 
             {!! Form::hidden('id',null) !!}
@@ -94,10 +94,12 @@
                                         <ul class="get-all-attributes-tab">
                                             @if(isset($post) && count($post->stocks))
                                                 @foreach($post->stocks as $stock)
-                                                    <li style="display: flex" data-id="{{ $stock->id }}" class="option-elm-attributes">
+                                                    <li style="display: flex" data-id="{{ $stock->id }}"
+                                                        class="option-elm-attributes">
                                                         <a href="#">{!! $stock->name !!}</a>
                                                         <div class="buttons">
-                                                            <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger">
+                                                            <a href="javascript:void(0)"
+                                                               class="remove-all-attributes btn btn-sm btn-danger">
                                                                 <i class="fa fa-trash"></i></a>
                                                         </div>
                                                         <input type="hidden" name="stocks[]" value="{{ $stock->id }}">
@@ -166,11 +168,13 @@
                                         <ul class="coupon-tags-list">
                                             @if($post && $post->tags)
                                                 <?php
-                                                    $tags = json_decode($post->tags,true);
+                                                $tags = json_decode($post->tags, true);
                                                 ?>
                                                 @foreach($tags as $tag)
-                                                        <li><span class="remove-search-tag"><i class="fa fa-minus-circle"></i></span>{{ $tag }}</li>
-                                                    @endforeach
+                                                    <li><span class="remove-search-tag"><i
+                                                                    class="fa fa-minus-circle"></i></span>{{ $tag }}
+                                                    </li>
+                                                @endforeach
                                             @endif
                                         </ul>
                                     </div>
@@ -208,7 +212,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:title]',null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:title',$post)]) !!}
+                                {!! Form::text('fb[go:title]',($post)?$post->getSeoField('go:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:title',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -216,7 +220,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:description]',null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:description',$post)]) !!}
+                                {!! Form::text('fb[go:description]',($post)?$post->getSeoField('go:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:description',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -238,7 +242,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:description]',null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
+                                {!! Form::text('twitter[go:title]',($post)?$post->getSeoField('go:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
 
                             </div>
                         </div>
@@ -247,9 +251,8 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:description]',null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
+                                {!! Form::text('twitter[go:description]',($post)?$post->getSeoField('go:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
 
-                                <input id="seo-twitter-desc" type="text" placeholder="{!! getSeo($twitterSeo,'go:description',$post) !!}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -274,7 +277,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::text('general[go:keywords]',null,['class'=>'form-control','placeholder'=>getSeo($general,'go:keywords',$post)]) !!}
+                                    {!! Form::text('general[go:keywords]',($post)?$post->getSeoField('go:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'go:keywords',$post)]) !!}
                                 </td>
                             </tr>
                             <tr>
@@ -283,8 +286,8 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::text('general[go:title]',null,['class'=>'form-control','placeholder'=>getSeo($general,'go:title',$post)]) !!}
-<br>
+                                    {!! Form::text('general[go:title]',($post)?$post->getSeoField('go:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'go:title',$post)]) !!}
+                                    <br>
                                     <div>
                                         <p><span class="wrong">Warning:</span>
                                             Title display in Google is limited to a fixed width, yours is too long.
@@ -298,7 +301,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::textarea('general[go:description]',null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'go:description',$post)]) !!}
+                                    {!! Form::textarea('general[go:description]',($post)?$post->getSeoField('go:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'go:description',$post)]) !!}
                                     <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
                                     </div>
                                 </td>
@@ -314,7 +317,7 @@
                                     <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                 </th>
                                 <td>
-                                    {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],null,['class'=>'']) !!}
+                                    {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($post)?$post->getSeoField('robots','robot'):null,['class'=>'']) !!}
 
                                 </td>
                             </tr>
@@ -322,10 +325,10 @@
                                 <th scope="row">Meta Robots Follow</th>
                                 <td>
                                     <input type="radio" checked="checked" id="seo_meta-robots-nofollow_0"
-                                          value="0">
+                                           value="0">
                                     <label for="seo_meta-robots-nofollow_0">Follow</label>
                                     <input type="radio" id="seo_meta-robots-nofollow_1"
-                                            value="1">
+                                           value="1">
                                     <label for="seo_meta-robots-nofollow_1">Nofollow</label>
                                 </td>
                             </tr>
@@ -335,7 +338,7 @@
                                 </th>
                                 <td>
                                     <select multiple="multiple" size="7" style="height: 144px;"
-                                             id="seo_meta-robots-adv"
+                                            id="seo_meta-robots-adv"
                                             class="">
                                         <option selected="selected" value="-">Site-wide default: None</option>
                                         <option value="none">None</option>
@@ -353,7 +356,7 @@
                                     <label for="seo_canonical">Canonical URL:</label>
                                 </th>
                                 <td>
-                                    <input type="text" id="seo_canonical"  value=""
+                                    <input type="text" id="seo_canonical" value=""
                                            class="form-control"><br>
                                     <div>The canonical URL that this page should point to, leave empty to default to
                                         permalink. <a target="_blank"
@@ -378,7 +381,8 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Select products</h4>
                 </div>
                 <div class="modal-body">
@@ -399,7 +403,7 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
 
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
@@ -413,17 +417,17 @@
     <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
         $(function () {
-            $("body").on('click','.select-products',function () {
+            $("body").on('click', '.select-products', function () {
                 let arr = [];
                 $(".get-all-attributes-tab")
                     .children()
-                    .each(function() {
+                    .each(function () {
                         arr.push($(this).attr("data-id"));
                     });
-                AjaxCall("/admin/get-stocks", { arr }, function(res) {
+                AjaxCall("/admin/get-stocks", {arr}, function (res) {
                     if (!res.error) {
                         $("#productsModal .modal-body .all-list").empty();
-                        res.data.forEach(item => {
+                        res.data.forEach(item = > {
                             let html = `<li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${
                                 item.name
@@ -431,14 +435,15 @@
                                 item.id
                                 }">ADD</a></li>`;
                         $("#productsModal .modal-body .all-list").append(html);
-                    });
+                    })
+                        ;
                         $("#productsModal").modal();
                     }
                 });
             });
 
 
-            $("body").on("click", ".add-attribute-event", function() {
+            $("body").on("click", ".add-attribute-event", function () {
                 let id = $(this).data("id");
                 let name = $(this).data("name");
                 $(".get-all-attributes-tab")
@@ -454,13 +459,13 @@
                     .remove();
             });
         });
-        
-        function render_categories_tree(){
+
+        function render_categories_tree() {
             $("#treeview_json").jstree({
-                "checkbox" : {
+                "checkbox": {
                     "three_state": false,
                     "cascade": 'undetermined',
-                    "keep_selected_style" : false
+                    "keep_selected_style": false
                 },
                 plugins: ["wholerow", "checkbox", "types"],
                 core: {
@@ -481,7 +486,7 @@
         }
 
         $('#treeview_json').on("changed.jstree", function (e, data) {
-            if(data.node) {
+            if (data.node) {
                 var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
                 var dataArr = [];
                 for (var i = 0, j = selectedNode.length; i < j; i++) {
@@ -491,9 +496,9 @@
 
                 var uniqueNames = [];
 
-                if(dataArr.length > 0){
-                    $.each(dataArr, function(i, el){
-                        if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                if (dataArr.length > 0) {
+                    $.each(dataArr, function (i, el) {
+                        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
                     });
                 }
 
@@ -512,7 +517,7 @@
             var what, a = arguments, L = a.length, ax;
             while (L > 1 && arr.length) {
                 what = a[--L];
-                while ((ax= arr.indexOf(what)) !== -1) {
+                while ((ax = arr.indexOf(what)) !== -1) {
                     arr.splice(ax, 1);
                 }
             }

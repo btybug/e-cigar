@@ -14,6 +14,7 @@ use App\Http\Requests\StoreBlogPost;
 use App\Models\CategoryPost;
 use App\Models\Comment;
 use App\Models\Posts;
+use App\Models\SeoPosts;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use App\User;
@@ -51,7 +52,7 @@ class PostController extends Controller
         return $this->view('new', compact('post', 'authors', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data'));
     }
 
-    public function newPost(StoreBlogPost $request,$locale = null)
+    public function newPost(StoreBlogPost $request, $locale = null)
     {
 
         $data = $request->except('_token', 'translatable', 'categories', 'stocks', 'fb', 'twitter', 'general', 'robot');
@@ -113,16 +114,17 @@ class PostController extends Controller
     private function createOrUpdateSeo($request, $post_id)
     {
         $types = $request->only(['fb', 'general', 'twitter', 'robot']);
-        $result = [];
         foreach ($types as $type => $data) {
             foreach ($data as $name => $value) {
+                   $seo= SeoPosts::firstOrNew(['post_id' => $post_id, 'name' => $name,'type' => $type]);
                 if ($value) {
-                    $result[] = ['post_id' => $post_id, 'name' => $name, 'content' => $value, 'type' => $type];
+                   $seo->content=$value;
+                    $seo->save();
+                }else{
+                    $seo->delete();
                 }
             }
         }
-        \DB::table('post_seo')->insert($result);
-
     }
 
 }
