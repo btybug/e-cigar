@@ -50,4 +50,9 @@ class SeoController extends Controller
         return redirect()->back();
     }
 
+    public function getPages()
+    {
+        return $this->view('pages');
+    }
+
 }

@@ -8,12 +8,11 @@
                    aria-controls="shipping" aria-selected="false">Posts</a>
             </li>
 
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_stocks') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Stocks</a>
             </li>
-
-            <li class="nav-item ">
+            <li class="nav-item active">
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_pages') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Pages</a>
             </li>
@@ -22,4 +21,12 @@
 
         </div>
     </div>
-    @stop
+    <div class="container-fluid">
+
+    </div>
+
+
+@stop
+@section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop

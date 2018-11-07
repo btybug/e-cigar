@@ -12,6 +12,10 @@
                 <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_stocks') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Stocks</a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_pages') !!}" role="tab"
+                   aria-controls="shipping" aria-selected="false">Pages</a>
+            </li>
         </ul>
         <div class="" id="myTabContent">
 
