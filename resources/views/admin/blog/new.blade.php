@@ -284,9 +284,7 @@
                                 </th>
                                 <td>
                                     {!! Form::text('general[go:title]',null,['class'=>'form-control','placeholder'=>getSeo($general,'go:title',$post)]) !!}
-
-                                    <input type="text" id="seo_title" class="form-control" placeholder="{!! getSeo($general,'go:title',$post) !!}"
-                                           placeholder="Surprisingly think it, you can find several fundamental hints out there which will assist produce your article writing abilities instantly. It really is satisfying to develop your own skills. There are a lot of easy ways to foster your skills, but you simply should know what things to do and the fashion to take action. A very simple method to improve writing abilities is constantly to study unique kinds of article content.  -"><br>
+<br>
                                     <div>
                                         <p><span class="wrong">Warning:</span>
                                             Title display in Google is limited to a fixed width, yours is too long.
@@ -316,7 +314,7 @@
                                     <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                 </th>
                                 <td>
-                                    {!! Form::select('robot[robots]',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'']) !!}
+                                    {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],null,['class'=>'']) !!}
 
                                 </td>
                             </tr>
