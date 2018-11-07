@@ -52,6 +52,8 @@
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
+                ], buttons: [
+                    'csv', 'excel', 'pdf', 'print'
                 ]
             });
         });

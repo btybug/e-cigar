@@ -52,7 +52,10 @@
                     {data: 'seo_title', name: 'seo_title'},
                     {data: 'actions', name: 'actions'}
                 ],
-                order: [ [0, 'desc'] ]
+                order: [ [0, 'desc'] ],
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ]
             });
         });
 
