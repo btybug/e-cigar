@@ -36,6 +36,19 @@
                     <a href="{!! route('admin_stock_statuses_manage','stock') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                 </li>
 
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="paypal" class="title">Tickets</label>
+                    </div>
+                    <a href="{!! route('admin_stock_statuses_manage','tickets') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="paypal" class="title">Ticket Priority</label>
+                    </div>
+                    <a href="{!! route('admin_stock_statuses_manage','ticket_priority') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                </li>
+
             </ul>
         </div>
 
