@@ -33,15 +33,9 @@
 
                                 <div class="form-group">
                                     <div class="form-group row">
-                                        <label class="col-sm-3">Featured image</label>
+                                        <label class="col-sm-3">Attachments</label>
                                         <div class="col-sm-9">
-                                            {!! media_button('image',null) !!}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-3">Gallery images</label>
-                                        <div class="col-sm-9">
-                                            {!! media_button('gallery',null,true) !!}
+                                            {!! Form::file('image',['multyple' => true]) !!}
                                         </div>
                                     </div>
                                 </div>
