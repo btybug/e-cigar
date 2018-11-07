@@ -324,8 +324,7 @@ class DatatableController extends Controller
                 $general = $settings->getEditableData('seo_posts')->toArray();
                 return ($attr->getSeoField('og:title'))??getSeo($general, 'og:title', $attr);
             })->addColumn('actions', function ($attr) {
-                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='" . route('admin_stock_statuses_manage', $attr->id) . "'><i class='fa fa-edit'></i></a>";
+                return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
             })->rawColumns(['actions'])
             ->make(true);
     }
