@@ -32,7 +32,7 @@
                         <div class="row">
                             <label for="seo-title" class="col-md-2 col-xs-12">Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('go:title',null,['class'=>'form-control']) !!}
+                                {!! Form::text('og:title',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         <div class="row">
                             <label for="seo-desc" class="col-md-2 col-xs-12">Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('go:description',null,['class'=>'form-control']) !!}
+                                {!! Form::text('og:description',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="row">
                             <label for="seo-keywords" class="col-md-2 col-xs-12">Focus keywords</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('go:keywords',null,['class'=>'form-control']) !!}
+                                {!! Form::text('og:keywords',null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:title]',isset($fb['go:title'])?$fb['go:title']:null,['class'=>'form-control']) !!}
+                                {!! Form::text('fb[og:title]',isset($fb['og:title'])?$fb['og:title']:null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:description]',isset($fb['go:description'])?$fb['go:description']:null,['class'=>'form-control']) !!}
+                                {!! Form::text('fb[og:description]',isset($fb['og:description'])?$fb['og:description']:null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <div class="row">
                             <label for="seo-facebook-image" class="col-md-2 col-xs-12">Facebook Image</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:image]',isset($fb['go:image'])?$fb['go:image']:null,['class'=>'form-control']) !!}
+                                {!! Form::text('fb[og:image]',isset($fb['og:image'])?$fb['og:image']:null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:title]',isset($twitter['go:title'])?$twitter['go:title']:null,['class'=>'form-control']) !!}
+                                {!! Form::text('twitter[og:title]',isset($twitter['og:title'])?$twitter['og:title']:null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:description]',isset($twitter['go:description'])?$twitter['go:description']:null,['class'=>'form-control']) !!}
+                                {!! Form::text('twitter[og:description]',isset($twitter['og:description'])?$twitter['og:description']:null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                         <div class="row">
                             <label for="seo-twitter-image" class="col-md-2 col-xs-12">Twitter Image</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:image]',isset($twitter['go:image'])?$twitter['go:image']:null,['class'=>'form-control']) !!}
+                                {!! Form::text('twitter[og:image]',isset($twitter['og:image'])?$twitter['og:image']:null,['class'=>'form-control']) !!}
                             </div>
                         </div>
                     </div>

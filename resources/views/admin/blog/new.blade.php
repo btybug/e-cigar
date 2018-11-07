@@ -212,7 +212,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:title]',($post)?$post->getSeoField('go:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:title',$post)]) !!}
+                                {!! Form::text('fb[og:title]',($post)?$post->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[go:description]',($post)?$post->getSeoField('go:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'go:description',$post)]) !!}
+                                {!! Form::text('fb[og:description]',($post)?$post->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                         <div class="row">
                             <label class="col-md-2 col-xs-12">Facebook Image</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'go:image',$post)]) !!}
+                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$post)]) !!}
 
                             </div>
                         </div>
@@ -243,7 +243,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:title]',($post)?$post->getSeoField('go:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
+                                {!! Form::text('twitter[og:title]',($post)?$post->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
 
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[go:description]',($post)?$post->getSeoField('go:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'go:description',$post)]) !!}
+                                {!! Form::text('twitter[og:description]',($post)?$post->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
 
                             </div>
                         </div>
@@ -261,7 +261,7 @@
                         <div class="row">
                             <label class="col-md-2 col-xs-12">Twitter Image</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'go:image',$post)]) !!}
+                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$post)]) !!}
                             </div>
                         </div>
                     </div>
@@ -278,7 +278,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::text('general[go:keywords]',($post)?$post->getSeoField('go:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'go:keywords',$post)]) !!}
+                                    {!! Form::text('general[og:keywords]',($post)?$post->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$post)]) !!}
                                 </td>
                             </tr>
                             <tr>
@@ -287,7 +287,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::text('general[go:title]',($post)?$post->getSeoField('go:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'go:title',$post)]) !!}
+                                    {!! Form::text('general[og:title]',($post)?$post->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$post)]) !!}
                                     <br>
                                     <div>
                                         <p><span class="wrong">Warning:</span>
@@ -302,7 +302,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::textarea('general[go:description]',($post)?$post->getSeoField('go:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'go:description',$post)]) !!}
+                                    {!! Form::textarea('general[og:description]',($post)?$post->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$post)]) !!}
                                     <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
                                     </div>
                                 </td>
