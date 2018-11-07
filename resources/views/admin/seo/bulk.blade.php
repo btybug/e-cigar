@@ -45,7 +45,7 @@
             $('#posts-table').DataTable({
                 ajax: "{!! route('datatable_bulk_posts') !!}",
                 buttons: [
-                    'csv', 'excel', 'pdf', 'print'
+                    'copy', 'excel', 'pdf'
                 ],
                 columns: [
                     {data: 'id', name: 'id'},
