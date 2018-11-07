@@ -13444,6 +13444,19 @@ a.text-dark:focus, a.text-dark:hover {
 .comment-list .card .card-header .panel-body {
     padding-top: 6px;
 }
+
+.comment-list .thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
 .comment-list figcaption {
     /*For wrapping text in thumbnail*/
     word-wrap: break-word;
