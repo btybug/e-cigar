@@ -424,7 +424,7 @@ function meta($object, $type = 'seo_posts')
     if (!$metaTags) return null;
     $metaTags = $metaTags->toArray();
     $columns = $object->toArray();
-    $HTML = '';
+    $HTML = Html::meta('go:image', url($object->image))->toHtml()."\n\r";
     foreach ($metaTags as $name => $metaTag) {
         if (!is_null($metaTag)) {
             $objSeo=$object->seo()->where('name',$name)->where('type','general')->first();
