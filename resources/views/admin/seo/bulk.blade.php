@@ -44,10 +44,10 @@
         $(function () {
             $('#posts-table').DataTable({
                 ajax: "{!! route('datatable_bulk_posts') !!}",
-                
+
                 dom: 'Bfrtip',
                 buttons: [
-                    'copy', 'excel', 'pdf'
+                    'csv', 'excel', 'pdf', 'print'
                 ],
                 columns: [
                     {data: 'id', name: 'id'},

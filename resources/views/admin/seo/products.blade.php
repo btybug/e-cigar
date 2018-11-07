@@ -45,6 +45,10 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
@@ -52,8 +56,6 @@
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
-                ], buttons: [
-                    'csv', 'excel', 'pdf', 'print'
                 ]
             });
         });
