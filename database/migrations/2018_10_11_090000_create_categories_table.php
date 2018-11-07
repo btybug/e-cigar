@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->string('slug',100)->unique()->nullable();
             $table->string('image',255)->nullable();
             $table->string('icon',255)->nullable();
+            $table->string('type',100)->default('stocks');
             $table->timestamps();
 
             $table->index('parent_id');

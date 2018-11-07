@@ -34,45 +34,28 @@ class CategoriesController extends Controller
         return $this->view('list');
     }
 
-    public function getCategories()
+    public function getCategories($type)
     {
-        $categories = Category::whereNull('parent_id')->get();
-        $allCategories = Category::all();
+        $categories = Category::whereNull('parent_id')->where('type',$type)->get();
+        $allCategories = Category::where('type',$type)->get();
         enableMedia();
-        return $this->view('index',compact('categories','model','allCategories'));
+        return $this->view('index',compact('categories','model','allCategories','type'));
     }
 
-    public function getPostCategories()
-    {
-        $categories = CategoryPost::whereNull('parent_id')->get();
-        $allCategories = CategoryPost::all();
-        enableMedia();
-        return $this->view('post.index',compact('categories','model','allCategories'));
-    }
-
-    public function postCategoryForm (Request $request)
+    public function postCategoryForm (Request $request,$type)
     {
         $id = $request->get('id',0);
-        $model = Category::find($id);
-        $allCategories = Category::where('id','!=',$id)->get();
-        $html = $this->view("create_or_update",compact(['allCategories','model']))->render();
+        $model = Category::where('id',$id)->where('type',$type)->first();
+
+        $allCategories = Category::where('id','!=',$id)->where('type',$type)->get();
+        $html = $this->view("create_or_update",compact(['allCategories','model','type']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
 
-    public function postCategoryPostForm (Request $request)
+    public function postCategoryUpdateParent (Request $request,$type)
     {
-        $id = $request->get('id',0);
-        $model = CategoryPost::find($id);
-        $allCategories = CategoryPost::where('id','!=',$id)->get();
-        $html = $this->view("post.create_or_update",compact(['allCategories','model']))->render();
-
-        return \Response::json(['error' => false,'html' => $html]);
-    }
-
-    public function postCategoryUpdateParent (Request $request)
-    {
-        $model = Category::find($request->get('id'));
+        $model = Category::where('id',$request->get('id'))->where('type',$type)->first();
         if($model){
             $model->parent_id = $request->get('parentId');
             $model->save();
@@ -81,18 +64,7 @@ class CategoriesController extends Controller
         return \Response::json(['error' => false]);
     }
 
-    public function postCategoryPostUpdateParent (Request $request)
-    {
-        $model = CategoryPost::find($request->get('id'));
-        if($model){
-            $model->parent_id = $request->get('parentId');
-            $model->save();
-        }
-
-        return \Response::json(['error' => false]);
-    }
-
-    public function postCreateOrUpdateCategory(StoreCategoryPost $request)
+    public function postCreateOrUpdateCategory(StoreCategoryPost $request,$type)
     {
         $data = $request->except('_token','translatable');
         $data['user_id'] = \Auth::id();
@@ -100,27 +72,9 @@ class CategoriesController extends Controller
         return redirect()->back();
     }
 
-    public function postCreateOrUpdateCategoryPost(StoreCategoryPost $request)
-    {
-        $data = $request->except('_token','translatable');
-        $data['user_id'] = \Auth::id();
-        CategoryPost::updateOrCreate($request->id, $data);
-        return redirect()->back();
-    }
-
-    public function postDeleteCategory (Request $request)
+    public function postDeleteCategory (Request $request,$type)
     {
         $model = Category::find($request->get('id'));
-        if($model){
-            $model->delete();
-        }
-
-        return redirect()->back();
-    }
-
-    public function postDeleteCategoryPost (Request $request)
-    {
-        $model = CategoryPost::find($request->get('id'));
         if($model){
             $model->delete();
         }

@@ -191,21 +191,11 @@ Route::group(['prefix' => '/tools'], function () {
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'Admin\CategoriesController@list')->name('admin_categories_list');
 
-        Route::group(['prefix' => 'stock'], function () {
-            Route::get('/', 'Admin\CategoriesController@getCategories')->name('admin_store_categories');
-            Route::post('/get-form', 'Admin\CategoriesController@postCategoryForm')->name('admin_store_categories_form');
-            Route::post('/update-parent', 'Admin\CategoriesController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
-            Route::post('/create-or-update', 'Admin\CategoriesController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
-            Route::post('/delete', 'Admin\CategoriesController@postDeleteCategory')->name('admin_store_categories_delete');
-        });
-
-        Route::group(['prefix' => 'post'], function () {
-            Route::get('/', 'Admin\CategoriesController@getPostCategories')->name('admin_categories_post');
-            Route::post('/get-form', 'Admin\CategoriesController@postCategoryPostForm')->name('admin_categories_post_form');
-            Route::post('/update-parent', 'Admin\CategoriesController@postCategoryPostUpdateParent')->name('admin_categories_post_update_parent');
-            Route::post('/create-or-update', 'Admin\CategoriesController@postCreateOrUpdateCategoryPost')->name('admin_categories_post_new_or_update');
-            Route::post('/delete', 'Admin\CategoriesController@postDeleteCategoryPost')->name('admin_categories_post_delete');
-        });
+        Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_store_categories');
+        Route::post('/get-form/{type}', 'Admin\CategoriesController@postCategoryForm')->name('admin_store_categories_form');
+        Route::post('/update-parent/{type}', 'Admin\CategoriesController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
+        Route::post('/create-or-update/{type}', 'Admin\CategoriesController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
+        Route::post('/delete/{type}', 'Admin\CategoriesController@postDeleteCategory')->name('admin_store_categories_delete');
     });
 });
 

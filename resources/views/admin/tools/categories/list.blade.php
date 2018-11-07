@@ -15,13 +15,19 @@
 
                         <label for="cash_paymant" class="title">Stocks</label>
                     </div>
-                    <a href="{!! route('admin_store_categories') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                    <a href="{!! route('admin_store_categories','stocks') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                 </li>
                 <li class="item">
                     <div class="chek-title">
                         <label for="stripe_paymant"  class="title">Posts</label>
                     </div>
-                    <a href="{!! route('admin_categories_post') !!} " class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                    <a href="{!! route('admin_store_categories','posts') !!} " class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="stripe_paymant"  class="title">Tickets</label>
+                    </div>
+                    <a href="{!! route('admin_store_categories','tickets') !!} " class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                 </li>
             </ul>
         </div>

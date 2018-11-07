@@ -1,5 +1,5 @@
 @if($model)
-    {!! Form::model($model,['url' => route('admin_store_categories_delete')]) !!}
+    {!! Form::model($model,['url' => route('admin_store_categories_delete',$type)]) !!}
     {!! Form::hidden('id',null) !!}
     <div class="form-group">
         {!! Form::submit('delete',['class' => 'btn btn-danger']) !!}
@@ -7,8 +7,9 @@
 @endif
 {!! Form::close() !!}
 
-{!! Form::model($model,['url' => route('admin_store_categories_new_or_update')]) !!}
+{!! Form::model($model,['url' => route('admin_store_categories_new_or_update',$type)]) !!}
 {!! Form::hidden('id',null) !!}
+{!! Form::hidden('type',$type) !!}
 
 @if(count(get_languages()))
     <ul class="nav nav-tabs">

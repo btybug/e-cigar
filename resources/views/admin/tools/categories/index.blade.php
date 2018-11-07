@@ -34,7 +34,7 @@
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
         $("body").on('click','.add-category',function () {
-            AjaxCall("/admin/tools/categories/stock/get-form", {id: null}, function (res) {
+            AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: null}, function (res) {
                 if(! res.error){
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
@@ -87,14 +87,14 @@
                 let id = e.id
                 let parentId = e.parent.id
                 // var tree_json = $("#tree1").tree("toJson");
-                AjaxCall("/admin/tools/categories/stock/update-parent", {id, parentId}, function (res) {
+                AjaxCall("/admin/tools/categories/update-parent/{{ $type }}", {id, parentId}, function (res) {
                     $(".category-form-place").html('');
                 });
             }
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            AjaxCall("/admin/tools/categories/stock/get-form", {id: e.node.id}, function (res) {
+            AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: e.node.id}, function (res) {
                 if(! res.error){
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
