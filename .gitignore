@@ -1,5 +1,6 @@
 /node_modules
 /public/hot
+/public/js/DataTables-old
 /public/storage
 /storage/*.key
 /vendor
