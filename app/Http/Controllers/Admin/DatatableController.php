@@ -173,7 +173,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger' href='" . route("admin_post_delete", $post->id) . "'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions', 'url', 'short_description', 'created_at','status'])
+            })->rawColumns(['actions', 'url', 'short_description', 'created_at', 'status'])
             ->make(true);
     }
 
@@ -202,10 +202,10 @@ class DatatableController extends Controller
                 return '<span class="badge comment-count">' . count($comment->childrenAll) . '</span>';
             })
             ->addColumn('actions', function ($comment) {
-                $actions = ($comment->status) ? '<a href="'.route('unapprove_comments',$comment->id).'" class="btn btn-info"> Block</a>' : '<a href="'.route('approve_comments',$comment->id).'" class="btn btn-success">Approve</a>';
-                $actions .= '<a class="btn btn-primary" href="'.route('reply_comment',$comment->id).'">Reply</a>';
-                $actions .= '<a class="btn btn-warning" href="'.route('edit_comment',$comment->id).'"><i class="fa fa-edit"></i></a>
-                        <a class="btn btn-danger delete-button" href="'.route('delete_comments',$comment->id).'"><i class="fa fa-trash"></i></a>';
+                $actions = ($comment->status) ? '<a href="' . route('unapprove_comments', $comment->id) . '" class="btn btn-info"> Block</a>' : '<a href="' . route('approve_comments', $comment->id) . '" class="btn btn-success">Approve</a>';
+                $actions .= '<a class="btn btn-primary" href="' . route('reply_comment', $comment->id) . '">Reply</a>';
+                $actions .= '<a class="btn btn-warning" href="' . route('edit_comment', $comment->id) . '"><i class="fa fa-edit"></i></a>
+                        <a class="btn btn-danger delete-button" href="' . route('delete_comments', $comment->id) . '"><i class="fa fa-trash"></i></a>';
                 return $actions;
             })->rawColumns(['actions', 'author', 'comment', 'replies', 'status'])
             ->make(true);
@@ -276,11 +276,12 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
+
     public function getAllOrders()
     {
         return Datatables::of(
-            Orders::leftJoin('orders_addresses','orders.id','=','orders_addresses.order_id')
-        ->select('orders.*','orders_addresses.country','orders_addresses.region','orders_addresses.city')
+            Orders::leftJoin('orders_addresses', 'orders.id', '=', 'orders_addresses.order_id')
+                ->select('orders.*', 'orders_addresses.country', 'orders_addresses.region', 'orders_addresses.city')
         )
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
@@ -289,10 +290,10 @@ class DatatableController extends Controller
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
-                return $attr->user->name.' '.$attr->user->last_name;
+                return $attr->user->name . ' ' . $attr->user->last_name;
             })
             ->addColumn('actions', function ($post) {
-                return "<a class='badge btn-warning' href='".route('admin_orders_manage',$post->id)."'><i class='fa fa-edit'></i></a>";
+                return "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }
@@ -309,21 +310,22 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='".route('admin_stock_statuses_manage',$attr->id)."'><i class='fa fa-edit'></i></a>";
+                    <a class='badge btn-warning' href='" . route('admin_stock_statuses_manage', $attr->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }
+
     public function getBulkPosts(Settings $settings)
     {
         return Datatables::of(Posts::query())
             ->editColumn('title', function ($attr) {
                 return $attr->title;
-            })->editColumn('seo_title', function ($attr)use($settings) {
-                $general=$settings->getEditableData('seo_posts')->toArray();
-                return ($attr->getSeoField('og:title'))??getSeo($general,'og:title',$attr);
+            })->editColumn('seo_title', function ($attr) use ($settings) {
+                $general = $settings->getEditableData('seo_posts')->toArray();
+                return ($attr->getSeoField('og:title'))??getSeo($general, 'og:title', $attr);
             })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='".route('admin_stock_statuses_manage',$attr->id)."'><i class='fa fa-edit'></i></a>";
+                    <a class='badge btn-warning' href='" . route('admin_stock_statuses_manage', $attr->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }
