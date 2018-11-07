@@ -44,7 +44,6 @@
         $(function () {
             $('#posts-table').DataTable({
                 ajax: "{!! route('datatable_bulk_posts') !!}",
-
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
