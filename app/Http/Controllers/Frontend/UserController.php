@@ -6,11 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
+use App\Models\Category;
 use App\Models\GeoZones;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
 use App\Models\Orders;
+use App\Models\Statuses;
+use App\Models\Ticket;
 use App\Models\ZoneCountries;
+use App\Services\FileService;
+use App\User;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -18,17 +23,29 @@ class UserController extends Controller
 {
     private $countries;
     private $geoZones;
+    private $statuses;
+    private $category;
+    private $user;
+    private $fileService;
+
+    protected $view = 'frontend.my_account';
 
     public function __construct(
         Countries $countries,
-        GeoZones $geoZones
+        GeoZones $geoZones,
+        Statuses $statuses,
+        Category $category,
+        User $user,
+        FileService $fileService
     )
     {
         $this->countries = $countries;
         $this->geoZones = $geoZones;
+        $this->statuses = $statuses;
+        $this->category = $category;
+        $this->user = $user;
+        $this->fileService = $fileService;
     }
-
-    protected $view = 'frontend.my_account';
 
     public function index()
     {
@@ -120,12 +137,50 @@ class UserController extends Controller
 
     public function getTickets()
     {
-        return $this->view('tickets');
+        $tickets = \Auth::user()->tickets;
+
+        return $this->view('tickets',compact(['tickets']));
     }
 
     public function getTicketsNew ()
     {
-        return $this->view('tickets_open');
+        $priorities = $this->statuses->where('type','ticket_priority')->get()->pluck('name','id')->all();
+        $categories = $this->category->where('type','tickets')->get()->pluck('name','id')->all();
+
+        return $this->view('tickets_open',compact(['priorities','categories']));
+    }
+
+    public function postTicketsNew(Request $request)
+    {
+        $data = $request->except('_token','attachments');
+
+        $max_size = (int)ini_get('upload_max_filesize') * 1000;
+        $all_ext = implode(',',  $this->fileService->allExtensions());
+
+        $validate = $this->fileService->validate($request->all(), [
+            'subject' => 'required',
+            'summary' => 'required',
+            'attachments.*' => 'sometimes|file|mimes:' . $all_ext . '|max:' . $max_size
+        ]);
+
+        if($validate) return redirect()->back()->withErrors($validate);
+
+        $status = $this->statuses->where('type','tickets')->where('is_default',true)->first();
+        $data['user_id'] = \Auth::id();
+        //TODO : need to delete conditon
+        $data['status_id'] = ($status)?$status->id : $this->statuses->first()->id;
+
+        $ticket = Ticket::create($data);
+
+        if($ticket){
+            if($request->hasfile('attachments')){
+                foreach($request->file('attachments') as $file){
+                    $this->fileService->saveFiles($ticket->attachments(),$file);
+                }
+            }
+        }
+
+        return redirect()->route('my_account_tickets');
     }
 
     public function getLogs()

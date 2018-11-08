@@ -6,6 +6,7 @@ use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
 use App\Models\Orders;
 use App\Models\Roles;
+use App\Models\Ticket;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -40,6 +41,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function addresses()
     {
         return $this->hasMany(Addresses::class,'user_id');
+    }
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class,'user_id');
     }
 
     public function orders()

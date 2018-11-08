@@ -19,7 +19,7 @@ class CreateTicketsTable extends Migration
             $table->unsignedInteger('status_id');
             $table->unsignedInteger('category_id');
             $table->unsignedInteger('priority_id');
-            $table->unsignedInteger('staff_id');
+            $table->unsignedInteger('staff_id')->nullable();
             $table->string('subject');
             $table->text('summary');
             $table->text('tags')->nullable();

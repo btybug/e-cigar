@@ -20,19 +20,27 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>13/10/09</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button>
-                            </div>
-                        </td>
-                    </tr>
+                    @if(count($tickets))
+                        @foreach($tickets as $ticket)
+                            <tr>
+                                <td>#{{ $ticket->id }}</td>
+                                <td>{!! BBgetDateFormat($ticket->created_at) . ' ' . BBgetTimeFormat($ticket->created_at); !!}</td>
+                                <td>{!! BBgetDateFormat($ticket->updated_at) . ' ' . BBgetTimeFormat($ticket->updated_at); !!}</td>
+                                <td>
+                                    <span style="background: {{ ($ticket->status->color)??'cornflowerblue' }}" class="btn order-table_btn order-table_btn--status">{!! $ticket->status->name !!} </span>
+                                </td>
+                                <td>
+                                    <div class="mb-2">
+                                        <button type="button" class="btn btn-dark order-table_btn">View</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="5">No Tickets</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td>#4949</td>
                         <td>12/10/09</td>
