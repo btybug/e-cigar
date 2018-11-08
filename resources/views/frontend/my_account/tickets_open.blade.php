@@ -50,34 +50,6 @@
                     </div>
                     <div class="col-md-3 ">
                         <div class="view-product-wall">
-                            <div class="tag-wall wall">
-                                <div class="row">
-                                    <label class="col-sm-3 control-label" for="input-category"><span
-                                                data-toggle="tooltip" title=""
-                                                data-original-title="Choose all products under selected category.">Tags</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="" value="" placeholder="Tags"
-                                               id="input-tags" class="form-control" autocomplete="off">
-                                        <ul class="dropdown-menu"></ul>
-                                        <div id="coupon-category" class="well well-sm view-coupon">
-                                            <ul class="coupon-tags-list">
-                                                @if(isset($model) && $model->tags)
-                                                    @php
-                                                        $tags = json_decode($model->tags, true);
-                                                    @endphp
-
-                                                    @foreach($tags as $tag)
-                                                        <li><span class="remove-search-tag"><i
-                                                                        class="fa fa-minus-circle"></i></span>{{ $tag }}
-                                                        </li>
-                                                    @endforeach
-                                                @endif
-                                            </ul>
-                                        </div>
-                                        {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
-                                    </div>
-                                </div>
-                            </div>
                             <div class="status-wall wall">
                                 <div class="row">
                                     {{Form::label('category_id', 'Category',['class' => 'col-sm-3'])}}
