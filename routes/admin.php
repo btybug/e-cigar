@@ -182,6 +182,7 @@ Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 Route::group(['prefix' => '/tickets'], function () {
     Route::get('/', 'Admin\TicketsController@index')->name('admin_tickets');
     Route::get('/new', 'Admin\TicketsController@getNew')->name('admin_tickets_new');
+    Route::get('/edit/{id}', 'Admin\TicketsController@getEdit')->name('admin_tickets_edit');
     Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
 });
 

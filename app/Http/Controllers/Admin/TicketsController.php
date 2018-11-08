@@ -87,4 +87,17 @@ class TicketsController extends Controller
         return redirect()->route('admin_tickets');
     }
 
+    public function getEdit ($id)
+    {
+        $model = Ticket::findOrFail($id);
+
+        $statuses = $this->statuses->where('type','tickets')->get()->pluck('name','id')->all();
+        $priorities = $this->statuses->where('type','ticket_priority')->get()->pluck('name','id')->all();
+        $categories = $this->category->where('type','tickets')->get()->pluck('name','id')->all();
+        $staff = $this->user->pluck('name','id')->all();
+
+        return $this->view('edit',compact(['model','statuses','priorities','categories','staff']));
+
+    }
+
 }
