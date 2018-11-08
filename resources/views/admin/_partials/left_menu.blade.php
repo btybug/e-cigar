@@ -138,9 +138,6 @@
                     @ok('admin_stock_tags')
                     <li><a href="{{route('admin_stock_tags')}}"><i class="fa fa-circle-o"></i> Tags</a></li>
                     @endok
-                    @ok('admin_store_attributes')
-                    <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
-                    @endok
                 </ul>
 
             </li>
@@ -195,6 +192,9 @@
                     @endok
                     @ok('admin_tools_logs')
                     <li><a href="{{ route('admin_tools_logs') }}"><i class="fa fa-circle-o"></i> Logs</a></li>
+                    @endok
+                    @ok('admin_stock_statuses')
+                    <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
                     @endok
                 </ul>
             </li>

@@ -107,37 +107,6 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getStatuses()
-    {
-        return $this->view('statuses');
-    }
-
-    public function getStatusesManage($type)
-    {
-        $statuses=Statuses::where('type',$type)->get()->pluck('name','id');
-        return $this->view('statuses.manage',compact('statuses','type'));
-    }
-
-    public function postStatusesManage(Request $request)
-    {
-        $data=$request->except(['_token','translatable'],[]);
-        Statuses::updateOrCreate($request->id,$data);
-        return redirect()->back();
-    }
-
-    public function getStatusesTypes()
-    {
-        return $this->view('statuses.types');
-    }
-
-    public function postGetManageStatusForm(Request $request)
-    {
-        $model=Statuses::findOrFail($request->get('id'));
-        $path=$this->view.'.statuses._patrials.status_form';
-        $html=\View::make($path)->with(['model'=>$model])->render();
-        return \Response::json(['error'=>false,'html'=>$html]);
-    }
-
     public function getStocks (Request $request)
     {
         $attr = Stock::whereNotIn('id', $request->get('arr',[]))->get();

@@ -145,10 +145,6 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/save-stock', 'Admin\InventoryController@postStock')->name('admin_stock_save');
         Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
-        Route::get('/statuses/', 'Admin\InventoryController@getStatuses')->name('admin_stock_statuses');
-        Route::get('/statuses/manage/{type}', 'Admin\InventoryController@getStatusesManage')->name('admin_stock_statuses_manage');
-        Route::post('/statuses/manage/{id?}', 'Admin\InventoryController@postStatusesManage')->name('post_admin_stock_statuses_manage');
-        Route::post('get-manage-form', 'Admin\InventoryController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
     });
 
     Route::group(['prefix' => 'attributes'], function () {
@@ -205,6 +201,13 @@ Route::group(['prefix' => '/tools'], function () {
     Route::group(['prefix' => 'logs'], function () {
         Route::get('/', 'Admin\LogsController@getFrontend')->name('admin_tools_logs');
         Route::get('/backend', 'Admin\LogsController@getBackend')->name('admin_tools_logs_backend');
+    });
+
+    Route::group(['prefix' => 'statuses'], function () {
+        Route::get('/', 'Admin\StatusController@getStatuses')->name('admin_stock_statuses');
+        Route::get('/manage/{type}', 'Admin\StatusController@getStatusesManage')->name('admin_stock_statuses_manage');
+        Route::post('/manage/{id?}', 'Admin\StatusController@postStatusesManage')->name('post_admin_stock_statuses_manage');
+        Route::post('get-manage-form', 'Admin\StatusController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
     });
 });
 

@@ -16,14 +16,14 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-3 attributes-container">
-                        @foreach($statuses as $key=>$status)
-                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $key !!}"
+                        @foreach($statuses as $status)
+                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $status->id !!}"
                                  data-parent-id="1">
                                 <div class="col-md-8">
-                                    {!! $status !!}
+                                    {!! $status->name !!}
                                 </div>
                                 <div class="col-md-4 text-right">
-
+                                    <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
                                 </div>
                             </div>
                         @endforeach
@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    @include('admin.inventory.statuses._patrials.status_form')
+                    @include('admin.tools.statuses._patrials.status_form')
                 </div>
             </div>
         </div>
@@ -72,8 +72,8 @@ $("body").on("click", ".attr-option", function(e) {
     let id = $(this).attr("data-item-id")
     AjaxCall("{!! route('post_admin_stock_statuses_manage_form') !!}", {id}, function (res) {
         if (!res.error) {
-            $('#colorselector_2').colorselector();
             $("body").find(".options-form").html(res.html)
+            $('#colorselector_2').colorselector();
         }
     })
 });
