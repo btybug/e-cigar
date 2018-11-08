@@ -23,5 +23,11 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->subject = 'please reset';
         $email->translateOrNew($locale)->content = '';
         $email->save();
+
+        $email = new \App\Models\MailTemplates(['slug' => 'ticket','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'New Ticket';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
     }
 }

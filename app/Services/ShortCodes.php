@@ -15,6 +15,9 @@ class ShortCodes
         'reset_password' => [
             'reset_password_link' => ['code' => 'reset_password_link', 'description' => 'url witch will take user to change password page']
         ],
+        'ticket' => [
+
+        ],
     ];
     public $mailShortcodes = [
         'app_name' => ['code' => 'app_name', 'description' => 'your site name '],
