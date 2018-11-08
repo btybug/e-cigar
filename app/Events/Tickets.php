@@ -11,7 +11,7 @@ namespace App\Events;
 
 use Illuminate\Queue\SerializesModels;
 
-class Registered
+class Tickets
 {
     use SerializesModels;
 
@@ -21,6 +21,7 @@ class Registered
      * @var \Illuminate\Contracts\Auth\Authenticatable
      */
     public $user;
+    public $ticket;
 
     /**
      * Create a new event instance.
@@ -28,8 +29,9 @@ class Registered
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @return void
      */
-    public function __construct($user)
+    public function __construct($user,$ticket)
     {
         $this->user = $user;
+        $this->ticket = $ticket;
     }
 }
