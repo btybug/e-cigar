@@ -278,6 +278,18 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
+    public function getUserPostActivity($id)
+    {
+        return Datatables::of(LogActivities::where('user_id', $id)->where('method','post'))
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
 
     public function getAllOrders()
     {
