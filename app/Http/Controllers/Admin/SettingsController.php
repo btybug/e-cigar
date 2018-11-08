@@ -122,6 +122,10 @@ class SettingsController extends Controller
         return $this->view('general');
     }
 
+    public function getAccount()
+    {
+        return $this->view('account');
+    }
 
 
     public function getGeoZones()
@@ -241,7 +245,7 @@ class SettingsController extends Controller
     public function getStorePaymentsGatewaysCash(Settings $settings)
     {
         $model = $settings->getEditableData('payments_gateways_cash');
-        return $this->view('store.payments_gateways.cash',compact('model'));
+        return $this->view('store.payments_gateways.cash', compact('model'));
     }
 
     public function postStorePaymentsGatewaysCash(Request $request, Settings $settings)

@@ -14,6 +14,7 @@ Route::get('/menu-manager', function () {
 Route::group(['prefix' => 'settings'], function () {
     Route::group(['prefix' => 'general'], function () {
         Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
+        Route::get('/account', 'Admin\SettingsController@getAccount')->name('admin_settings_account');
     });
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', 'Admin\EventsController@getIndex')->name('admin_settings_events');
