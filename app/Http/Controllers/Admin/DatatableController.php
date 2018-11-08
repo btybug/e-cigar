@@ -60,7 +60,9 @@ class DatatableController extends Controller
             ->where('roles.type', 'backend')->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
                 return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
-                    <a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+                    <a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
+                    <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info"><i class="fa fa-eye"></i>Activity</a>
+                    ';
             })->addColumn('role', function ($user) {
                 return $user->role->title;
             })->rawColumns(['actions'])
