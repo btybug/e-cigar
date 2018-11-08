@@ -53,7 +53,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Country</label>
                                     <div class="col-sm-8">
-                                        {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control','id' => 'country','disabled']) !!}
+                                        {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control','disabled']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <label for="text" class="control-label col-sm-4">Regions</label>
                                     <div class="col-sm-8">
-                                        {!! Form::select('region',getRegions(@$billing_address->country,true),null,['class'=>'form-control','id' => 'regions','disabled']) !!}
+                                        {!! Form::text('region',null,['class'=>'form-control','id' => 'regions','disabled']) !!}
                                     </div>
                                 </div>
                             </div>
