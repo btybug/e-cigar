@@ -70,11 +70,11 @@ class SettingsController extends Controller
     {
 
         $model = MailTemplates::find($id);
-        $froms=Emails::where('type','from')->pluck('email','email');
-        $tos=Emails::where('type','to')->pluck('email','email');
+        $froms = Emails::where('type', 'from')->pluck('email', 'email');
+        $tos = Emails::where('type', 'to')->pluck('email', 'email');
         $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
         $shortcodes = new ShortCodes();
-        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model','froms','tos'));
+        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model', 'froms', 'tos'));
     }
 
     public function postCreateOrUpdate(MailTemplatesRequest $request)
@@ -127,7 +127,27 @@ class SettingsController extends Controller
 
     public function getAccounts()
     {
-        return $this->view('accounts');
+        $froms = Emails::where('type', 'from')->get();
+        $tos = Emails::where('type', 'to')->get();
+        return $this->view('accounts', compact('froms', 'tos'));
+    }
+
+    public function postAccounts(Request $request)
+    {
+        $new = $request->get('new', []);
+        $new_to = $request->get('new_to', []);
+        $olds = $request->get('old');
+        if (count($olds)) {
+            Emails::whereNotIn('id', array_keys($olds))->delete();
+            foreach ($olds as $id => $old) {
+                \DB::table('emails')->where('id', $id)->update($old);
+            }
+        }
+        $data = array_merge($new, $new_to);
+        if (count($data)) {
+            \DB::table('emails')->insert($data);
+        }
+        return redirect()->back();
     }
 
 

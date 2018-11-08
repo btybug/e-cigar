@@ -19,30 +19,69 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Sending Email
                     <button type="submit" class="
-btn btn-success pull-right">Save</button></div>
+btn btn-success pull-right">Save
+                    </button>
+                </div>
                 <div class="panel-body">
                     <div class="col-md-9">
                         <table class="table froms-table">
+                            @if($froms->count())
+                                @foreach($froms as $key=>$from)
+                                <tr>
+                                    <td>
+                                        <label for="sendingEmail">E-Mail Address</label>
+
+                                    </td>
+                                    <td>
+                                        {!! Form::hidden('old['.$from->id.'][type]','from') !!}
+                                        <input  type="text" name="old[{!!$from->id!!}][email]" class="form-control" value="{!! $from->email !!}"
+                                               aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                    </td>
+                                    <td>
+                                        <label for="sendingEmailDesc">Description</label>
+
+                                    </td>
+                                    <td>
+                                    <textarea rows="5" class="form-control" name="old[{!!$from->id!!}][description]"
+                                              aria-describedby="sendingEmailDesc"
+                                              placeholder="Enter Description">{!!$from->description!!}</textarea>
+                                    </td>
+                                    <td>
+                                        @if(count($froms)!=$key+1)
+                                            <button type="button" class="btn pull-right remove-line btn-warning delete"><i class="fa fa-minus"></i></button>
+                                        @else
+                                            <button type="button" class="btn btn-primary pull-right add-more-from"><i
+                                                        class="fa fa-plus"></i></button>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
                             <tr>
                                 <td>
                                     <label for="sendingEmail">E-Mail Address</label>
 
                                 </td>
                                 <td>
-                                    {!! Form::hidden('new[type][]') !!}
-                                    <input type="new[email][]" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                    {!! Form::hidden('new[0][type]','from') !!}
+                                    <input name="new[0][email]" type="text" class="form-control" id="sendingEmail"
+                                           aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
                                 </td>
                                 <td>
                                     <label for="sendingEmailDesc">Description</label>
 
                                 </td>
                                 <td>
-                                    <textarea rows="5" class="form-control" name="new[description][]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
+                                    <textarea rows="5" class="form-control" name="new[0][description]"
+                                              aria-describedby="sendingEmailDesc"
+                                              placeholder="Enter Description"></textarea>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-primary pull-right add-more-from"><i
+                                                class="fa fa-plus"></i></button>
                                 </td>
                             </tr>
+                                @endif
                         </table>
                     </div>
                 </div>
@@ -52,25 +91,63 @@ btn btn-success pull-right">Save</button></div>
                 <div class="panel-body">
                     <div class="col-md-9">
                         <table class="table table-to">
-                            <tr>
-                                <td>
-                                    <label for="sendingEmail">E-Mail Address</label>
+                            @if($tos->count())
+                                @foreach($tos as $k=>$to)
+                                <tr>
+                                    <td>
+                                        <label for="sendingEmail">E-Mail Address</label>
 
-                                </td>
-                                <td>
-                                    <input type="email" class="form-control" id="reseivingEmail" aria-describedby="reseivingEmail" placeholder="Enter E-Mail Address">
-                                </td>
-                                <td>
-                                    <label for="sendingEmailDesc">Description</label>
+                                    </td>
+                                    <td>
+                                        {!! Form::hidden('old['.$to->id.'][type]','to') !!}
+                                        <input type="text" name="old[{!!$to->id!!}][email]" class="form-control" value="{!! $to->email !!}"
+                                               aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                    </td>
+                                    <td>
+                                        <label for="sendingEmailDesc">Description</label>
 
-                                </td>
-                                <td>
-                                    <textarea rows="5" class="form-control" id="reseivingEmailDesc" aria-describedby="reseivingEmailDesc" placeholder="Enter Description"></textarea>
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-primary pull-right add-more-too"><i class="fa fa-plus"></i></button>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td>
+                                    <textarea rows="5" class="form-control" name="old[{!!$to->id!!}][description]"
+                                              aria-describedby="sendingEmailDesc"
+                                              placeholder="Enter Description">{!!$to->description!!}</textarea>
+                                    </td>
+                                    <td>
+                                        @if(count($tos)!=$k+1)
+                                            <button type="button" class="btn pull-right remove-line btn-warning delete"><i class="fa fa-minus"></i></button>
+                                        @else
+                                            <button type="button" class="btn btn-primary pull-right add-more-too"><i
+                                                        class="fa fa-plus"></i></button>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td>
+                                        <label for="sendingEmail">E-Mail Address</label>
+
+                                    </td>
+                                    <td>
+                                        {!! Form::hidden('new_to[0][type]','to') !!}
+                                        <input name="new_to[0][email]" type="text" class="form-control" id="sendingEmail"
+                                               aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                    </td>
+                                    <td>
+                                        <label for="sendingEmailDesc">Description</label>
+
+                                    </td>
+                                    <td>
+                                    <textarea rows="5" class="form-control" name="new_to[0][description]"
+                                              aria-describedby="sendingEmailDesc"
+                                              placeholder="Enter Description"></textarea>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary pull-right add-more-too"><i
+                                                    class="fa fa-plus"></i></button>
+                                    </td>
+                                </tr>
+                                @endif
                         </table>
                     </div>
                 </div>
@@ -82,31 +159,38 @@ btn btn-success pull-right">Save</button></div>
 @stop
 @section('js')
     <script>
+        var fcount=1;
+        var tcount=1;
         $(function () {
-$('body').on('click','.add-more-from',function () {
-    $(this).removeClass('add-more-from').addClass('remove-line');
-    $(this).removeClass('btn-primary').addClass('btn-warning');
-    $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
-  let html='<tr><td><label for="sendingEmail">E-Mail Address</label>' +
-      '</td><td><input type="hidden" name="new[type][]">' +
-      '<input type="new[email][]" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address"> ' +
-      '</td><td><label for="sendingEmailDesc">Description</label></td> <td> ' +
-      '<textarea rows="5" class="form-control" name="new[description][]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea> ' +
-      '</td><td><button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button> </td></tr>';
-  $('.froms-table').append(html)
-})
-            $('body').on('click','.add-more-too',function () {
-    $(this).removeClass('add-more-from').addClass('remove-line');
-    $(this).removeClass('btn-primary').addClass('btn-warning');
-    $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
-  let html='<tr><td><label for="sendingEmail">E-Mail Address</label>' +
-      '</td><td><input type="hidden" name="new[type][]">' +
-      '<input type="new[email][]" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address"> ' +
-      '</td><td><label for="sendingEmailDesc">Description</label></td> <td> ' +
-      '<textarea rows="5" class="form-control" name="new[description][]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea> ' +
-      '</td><td><button type="button" class="btn btn-primary pull-right add-more-too"><i class="fa fa-plus"></i></button> </td></tr>';
-  $('.table-to').append(html)
-})
+            $('body').on('click', '.add-more-from', function () {
+                $(this).removeClass('add-more-from').addClass('remove-line');
+                $(this).removeClass('btn-primary').addClass('btn-warning delete');
+                $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
+                let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
+                    </td><td><input type="hidden" name="new[${fcount}][type]" value="from">
+                    <input name="new[${fcount}][email]" type="text" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                    </td><td><label for="sendingEmailDesc">Description</label></td> <td>
+                    <textarea rows="5" class="form-control" name="new[${fcount}][description]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
+                    </td><td><button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button> </td></tr>`;
+                $('.froms-table').append(html);
+                fcount++;
+            })
+            $('body').on('click', '.add-more-too', function () {
+                $(this).removeClass('add-more-from').addClass('remove-line');
+                $(this).removeClass('btn-primary').addClass('btn-warning delete');
+                $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
+                let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
+                    </td><td><input type="hidden" name="new_to[${tcount}][type]" value="to">
+                    <input name="new_to[${tcount}][email]" type="text" class="form-control"  aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                    </td><td><label for="sendingEmailDesc">Description</label></td> <td>
+                    <textarea rows="5" class="form-control" name="new_to[${tcount}][description]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
+                    </td><td><button type="button" class="btn btn-primary pull-right  add-more-too"><i class="fa fa-plus"></i></button> </td></tr>`;
+                $('.table-to').append(html)
+                tcount++;
+            })
+            $('body').on('click','.delete',function () {
+                $(this).closest('tr').remove();
+            })
         })
     </script>
-    @stop
+@stop
