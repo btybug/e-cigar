@@ -122,9 +122,9 @@ class SettingsController extends Controller
         return $this->view('general');
     }
 
-    public function getAccount()
+    public function getAccounts()
     {
-        return $this->view('account');
+        return $this->view('accounts');
     }
 
 
