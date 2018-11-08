@@ -2,10 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\Registered;
+use App\Events\Tickets;
 use App\Models\MailJob;
 use App\Models\MailTemplates;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 /**
  * Created by PhpStorm.
@@ -22,7 +21,7 @@ class SendEmailTickets
      * @param  \Illuminate\Auth\Events\Registered $event
      * @return void
      */
-    public function handle(Registered $event)
+    public function handle(Tickets $event)
     {
             $mailTemplate = MailTemplates::where('slug', 'ticket')
                 ->where('is_active', '1')
