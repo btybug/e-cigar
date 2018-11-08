@@ -293,8 +293,7 @@ class DatatableController extends Controller
 
     public function getFrontendActivity()
     {
-        dd(LogActivities::leftJoin('users','users.id','=','log_activities.user_id')->whereNull('users.role_id')
-            ->select('log_activities.*','users.name','users.last_name')->get());
+   
         return Datatables::of(LogActivities::leftJoin('users','users.id','=','log_activities.user_id')->whereNull('users.role_id')
             ->select('log_activities.*','users.name','users.last_name'))
             ->editColumn('created_at', function ($attr) {
