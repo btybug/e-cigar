@@ -40,6 +40,7 @@ class SendEmails extends Command
      */
     public function handle()
     {
+        \File::put(public_path('test.txt'),now());
         $redayEmailsJobs = MailJob::where('status', '<', 3)->where('must_be_done', '<', now())->with('email')->get();
         foreach ($redayEmailsJobs as $job) {
             try {
