@@ -184,9 +184,18 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+                    @ok('admin_tools')
                     <li><a href="{{route('admin_tools')}}"><i class="fa fa-circle-o"></i> Tools</a></li>
+                    @endok
+                    @ok('admin_categories_list')
+                    <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
+                    @endok
+                    @ok('admin_tools_tags')
                     <li><a href="{{ route('admin_tools_tags') }}"><i class="fa fa-circle-o"></i> Tags</a></li>
+                    @endok
+                    @ok('admin_tools_logs')
+                    <li><a href="{{ route('admin_tools_logs') }}"><i class="fa fa-circle-o"></i> Logs</a></li>
+                    @endok
                 </ul>
             </li>
             @endok

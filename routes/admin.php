@@ -145,7 +145,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/statuses/', 'Admin\InventoryController@getStatuses')->name('admin_stock_statuses');
         Route::get('/statuses/manage/{type}', 'Admin\InventoryController@getStatusesManage')->name('admin_stock_statuses_manage');
         Route::post('/statuses/manage/{id?}', 'Admin\InventoryController@postStatusesManage')->name('post_admin_stock_statuses_manage');
-        Route::post('get-manage-form','Admin\InventoryController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
+        Route::post('get-manage-form', 'Admin\InventoryController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
     });
 
     Route::group(['prefix' => 'attributes'], function () {
@@ -198,17 +198,21 @@ Route::group(['prefix' => '/tools'], function () {
         Route::post('/create-or-update/{type}', 'Admin\CategoriesController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
         Route::post('/delete/{type}', 'Admin\CategoriesController@postDeleteCategory')->name('admin_store_categories_delete');
     });
+    Route::group(['prefix' => 'logs'], function () {
+        Route::get('/', 'Admin\LogsController@getFrontend')->name('admin_tools_logs');
+        Route::get('/backend', 'Admin\LogsController@getBackend')->name('admin_tools_logs_backend');
+    });
 });
 
-Route::group(['prefix'=>'comments'], function () {
-    Route::get('/','Admin\CommentsController@index')->name('show_comments');
-    Route::get('/approve/{id}','Admin\CommentsController@approve')->name('approve_comments');
-    Route::get('/unapprove/{id}','Admin\CommentsController@unapprove')->name('unapprove_comments');
-    Route::get('/delete/{id}','Admin\CommentsController@delete')->name('delete_comments');
-    Route::get('/edit/{id}','Admin\CommentsController@edit')->name('edit_comment');
-    Route::post('/edit/{id}','Admin\CommentsController@postEdit')->name('edit_comment_post');
-    Route::get('/reply/{id}','Admin\CommentsController@reply')->name('reply_comment');
-    Route::post('/reply/{id}','Admin\CommentsController@postReply')->name('reply_comment_post');
+Route::group(['prefix' => 'comments'], function () {
+    Route::get('/', 'Admin\CommentsController@index')->name('show_comments');
+    Route::get('/approve/{id}', 'Admin\CommentsController@approve')->name('approve_comments');
+    Route::get('/unapprove/{id}', 'Admin\CommentsController@unapprove')->name('unapprove_comments');
+    Route::get('/delete/{id}', 'Admin\CommentsController@delete')->name('delete_comments');
+    Route::get('/edit/{id}', 'Admin\CommentsController@edit')->name('edit_comment');
+    Route::post('/edit/{id}', 'Admin\CommentsController@postEdit')->name('edit_comment_post');
+    Route::get('/reply/{id}', 'Admin\CommentsController@reply')->name('reply_comment');
+    Route::post('/reply/{id}', 'Admin\CommentsController@postReply')->name('reply_comment_post');
 });
 
 //Route::get('{locale}', function($locale) {
