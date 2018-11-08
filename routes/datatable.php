@@ -22,6 +22,8 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/settings/get-all-geo-zones','Admin\DatatableController@getAllGeoZones')->name('datatable_all_geo_zones');
     Route::get('/settings/get-user-activity/{id}','Admin\DatatableController@getUserActivity')->name('datatable_user_activity');
     Route::get('/settings/get-post-user-activity/{id}','Admin\DatatableController@getUserPostActivity')->name('datatable_user_post_activity');
+    Route::get('/settings/get-frontend-activity','Admin\DatatableController@getFrontendActivity')->name('datatable_frontend_activity');
+    Route::get('/settings/get-backend-activity','Admin\DatatableController@getBackendActivity')->name('datatable_backend_activity');
 
     Route::get('/settings/get-all-orders','Admin\DatatableController@getAllOrders')->name('datatable_all_orders');
     Route::get('/settings/get-all-statuses','Admin\DatatableController@getAllStatuses')->name('datatable_all_statuses');

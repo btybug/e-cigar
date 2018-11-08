@@ -291,6 +291,26 @@ class DatatableController extends Controller
             ->make(true);
     }
 
+    public function getFrontendActivity()
+    {
+        return Datatables::of(LogActivities::leftJoin('users','users.id','=','log_activities.user_id')->whereNull('users.role_id')
+            ->select('log_activities.*','users.name','users.last_name'))
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            }) ->editColumn('user', function ($attr) {
+                return $attr->name.' '.$attr->last_name;
+            })
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+    public function getBackendActivity()
+    {
+
+    }
+
     public function getAllOrders()
     {
         return Datatables::of(
