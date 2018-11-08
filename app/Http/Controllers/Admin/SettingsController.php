@@ -136,7 +136,7 @@ class SettingsController extends Controller
     {
         $new = $request->get('new', []);
         $new_to = $request->get('new_to', []);
-        $olds = $request->get('old');
+        $olds = $request->get('old',[]);
         if (count($olds)) {
             Emails::whereNotIn('id', array_keys($olds))->delete();
             foreach ($olds as $id => $old) {
