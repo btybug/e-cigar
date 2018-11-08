@@ -41,45 +41,6 @@
                             <td colspan="5">No Tickets</td>
                         </tr>
                     @endif
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>13/10/09</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>13/10/09</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>#4949</td>
-                        <td>12/10/09</td>
-                        <td>13/10/09</td>
-                        <td>
-                            <button type="button" class="btn btn-success order-table_btn order-table_btn--status">Completed</button>
-                        </td>
-                        <td>
-                            <div class="mb-2">
-                                <button type="button" class="btn btn-dark order-table_btn">View</button>
-                            </div>
-                        </td>
-                    </tr>
 
                     </tbody>
                 </table>
