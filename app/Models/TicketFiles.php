@@ -12,6 +12,13 @@ class TicketFiles extends Model
         'name', 'original_name','path','type', 'extension', 'ticket_id'
     ];
 
+    protected $appends = array('file_path');
+
+
+    public function getFilePathAttribute()
+    {
+        return asset("storage/app/{$this->path}/{$this->name}.{$this->extension}");
+    }
 
     public function ticket()
     {

@@ -102,6 +102,15 @@ class TicketsController extends Controller
 
     }
 
+    public function postEdit (Request $request,$id)
+    {
+        $model = Ticket::findOrFail($id);
+
+        $model->update($request->except('_token'));
+
+        return redirect()->route('admin_tickets');
+    }
+
     public function reply(Request $request)
     {
         $data = $request->all();

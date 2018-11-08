@@ -402,9 +402,9 @@ class DatatableController extends Controller
             ->editColumn('user_id', function ($ticket) {
                 return $ticket->author->name;
             })->editColumn('status_id', function ($ticket) {
-                return $ticket->status->name;
+                return "<span style='background: ".$ticket->status->color."' class='badge'>".$ticket->status->name."</span>";
             })->editColumn('priority_id', function ($ticket) {
-                return $ticket->priority->name;
+                return "<span style='background: ".$ticket->priority->color."' class='badge'>".$ticket->priority->name."</span>";
             })->editColumn('category_id', function ($ticket) {
                 return $ticket->category->name;
             })->editColumn('tags', function ($ticket) {
@@ -413,12 +413,12 @@ class DatatableController extends Controller
             ->editColumn('created_at', function ($ticket) {
                 return BBgetDateFormat($ticket->created_at) . ' ' . BBgetTimeFormat($ticket->created_at);
             })->editColumn('attachments', function ($ticket) {
-                return count($ticket->attachments);
+                return "<span class='badge'>".count($ticket->attachments)."</span>";
             })
             ->addColumn('actions', function ($ticket) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions'])
+            })->rawColumns(['actions','priority_id','status_id','attachments'])
             ->make(true);
     }
 }

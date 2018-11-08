@@ -28,17 +28,27 @@
                                 <div class="attachments">
                                     <span class="title">Attachments</span>
                                     <ul>
-                                        <li class="item-attach">
-                                            <img src="http://dqudrat.com/wp-content/uploads/2018/08/25-1-10.jpg" alt="">
-                                        </li>
-                                        <li class="item-attach">
-                                            <iframe src="https://eloquentjavascript.net/Eloquent_JavaScript.pdf" style="width: 100%;height: 100%;border: none;"></iframe>
-                                        </li>
-                                        <li class="item-attach">
-                                            <audio controls>
-                                                <source src="https://www.computerhope.com/jargon/m/example.mp3" />
-                                            </audio>
-                                        </li>
+                                        @if(count($model->attachments))
+                                            @foreach($model->attachments as $attachment)
+                                                @if($attachment->type == 'image')
+                                                    <li class="item-attach">
+                                                        <img src="{{ $attachment->file_path }}" alt="">
+                                                    </li>
+                                                @elseif($attachment->type == 'document')
+                                                    <li class="item-attach">
+                                                        <iframe src="{{ $attachment->file_path }}" style="width: 100%;height: 100%;border: none;"></iframe>
+                                                    </li>
+                                                @endif
+                                            @endforeach
+
+                                        {{--<li class="item-attach">--}}
+                                            {{--<audio controls>--}}
+                                                {{--<source src="https://www.computerhope.com/jargon/m/example.mp3" />--}}
+                                            {{--</audio>--}}
+                                        {{--</li>--}}
+                                        @else
+                                            <li>No Attachments</li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -90,7 +100,7 @@
                 </div>
             </div>
             <div class="col-md-3 ">
-                {!! Form::model($model,['url' => '#', 'id' => 'ticket_form','files' => true]) !!}
+                {!! Form::model($model,['url' => route('admin_tickets_edit_post',$model->id), 'id' => 'ticket_form','files' => true]) !!}
                 {!! Form::hidden('id',null) !!}
                 <div class="view-product-wall">
                     <div class="form-group text-right">

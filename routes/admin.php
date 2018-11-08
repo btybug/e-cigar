@@ -183,6 +183,7 @@ Route::group(['prefix' => '/tickets'], function () {
     Route::get('/', 'Admin\TicketsController@index')->name('admin_tickets');
     Route::get('/new', 'Admin\TicketsController@getNew')->name('admin_tickets_new');
     Route::get('/edit/{id}', 'Admin\TicketsController@getEdit')->name('admin_tickets_edit');
+    Route::post('/edit/{id}', 'Admin\TicketsController@postEdit')->name('admin_tickets_edit_post');
     Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
     Route::post('/reply', 'Admin\TicketsController@reply')->name('admin_tickets_reply');
 });
