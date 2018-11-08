@@ -18,20 +18,23 @@
             <div class="tab-pane fade active in" id="admin_settings_general">
                 <div class="panel panel-default">
                     <div class="panel-heading">Basics</div>
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <label for="SiteName">Site Name</label>
-                            <input type="text" class="form-control" id="SiteName" aria-describedby="name" placeholder="Enter name">
+                        <div class="panel-body">
+                            <div class="col-md-7">
+                                <div class="form-group">
+                                    <label for="SiteName">Site Name</label>
+                                    <input type="text" class="form-control" id="SiteName" aria-describedby="name" placeholder="Enter name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="siteLogo">Site Logo</label>
+                                    <input type="file" class="form-control" id="siteLogo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea  class="form-control" id="description"  rows="5" aria-describedby="description" placeholder="Enter description"></textarea>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="form-group">
-                            <label for="siteLogo">Site Logo</label>
-                            <input type="file" class="form-control" id="siteLogo">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea  class="form-control" id="description"  rows="5" aria-describedby="description" placeholder="Enter description"></textarea>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="panel panel-default">
