@@ -534,3 +534,10 @@ textarea {
 
 
 
+/*admin settings*/
+.settings-map-outer {
+    border-radius: 4px;
+    border: 1px solid #d2d6de;
+    height: 300px;
+}
+/*End admin settings*/

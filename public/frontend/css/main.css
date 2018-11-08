@@ -13849,9 +13849,50 @@ a.text-dark:focus, a.text-dark:hover {
 
 /*ticket page*/
 
-.ticket-file-holder {
-    height: 150px;
+
+.ticket-attachments {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ticket-attachments span.title {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.ticket-attachments ul .item-attach img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ticket-attachments ul .item-attach > * {
+    width: 100%;
+}
+
+
+.ticket-attachments ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ticket-attachments ul .item-attach {
+    width: 90px;
+    height: 70px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 2px #b3b1b1;
     overflow: hidden;
+    margin-right: 5px;
+    margin-bottom: 3px;
+}
+
+.ticket-file-holder {
+    height: 100px;
+    overflow: auto;
 }
 
 .ticket-file-holder--img img {
