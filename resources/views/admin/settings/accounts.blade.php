@@ -19,24 +19,25 @@
                 <div class="panel-heading">Sending Email</div>
                 <div class="panel-body">
                     <div class="col-md-9">
-                        <table class="table">
+                        <table class="table froms-table">
                             <tr>
                                 <td>
                                     <label for="sendingEmail">E-Mail Address</label>
 
                                 </td>
                                 <td>
-                                    <input type="email" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                    {!! Form::hidden('new[type][]') !!}
+                                    <input type="new[email][]" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
                                 </td>
                                 <td>
                                     <label for="sendingEmailDesc">Description</label>
 
                                 </td>
                                 <td>
-                                    <textarea rows="5" class="form-control" id="sendingEmailDesc" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
+                                    <textarea rows="5" class="form-control" name="new[description][]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button>
                                 </td>
                             </tr>
                         </table>
@@ -47,7 +48,7 @@
                 <div class="panel-heading">Reseiving Emails</div>
                 <div class="panel-body">
                     <div class="col-md-9">
-                        <table class="table">
+                        <table class="table table-to">
                             <tr>
                                 <td>
                                     <label for="sendingEmail">E-Mail Address</label>
@@ -64,7 +65,7 @@
                                     <textarea rows="5" class="form-control" id="reseivingEmailDesc" aria-describedby="reseivingEmailDesc" placeholder="Enter Description"></textarea>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></button>
+                                    <button type="button" class="btn btn-primary pull-right add-more-too"><i class="fa fa-plus"></i></button>
                                 </td>
                             </tr>
                         </table>
@@ -75,3 +76,33 @@
 
     </div>
 @stop
+@section('js')
+    <script>
+        $(function () {
+$('body').on('click','.add-more-from',function () {
+    $(this).removeClass('add-more-from').addClass('remove-line');
+    $(this).removeClass('btn-primary').addClass('btn-warning');
+    $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
+  let html='<tr><td><label for="sendingEmail">E-Mail Address</label>' +
+      '</td><td><input type="hidden" name="new[type][]">' +
+      '<input type="new[email][]" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address"> ' +
+      '</td><td><label for="sendingEmailDesc">Description</label></td> <td> ' +
+      '<textarea rows="5" class="form-control" name="new[description][]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea> ' +
+      '</td><td><button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button> </td></tr>';
+  $('.froms-table').append(html)
+})
+            $('body').on('click','.add-more-too',function () {
+    $(this).removeClass('add-more-from').addClass('remove-line');
+    $(this).removeClass('btn-primary').addClass('btn-warning');
+    $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
+  let html='<tr><td><label for="sendingEmail">E-Mail Address</label>' +
+      '</td><td><input type="hidden" name="new[type][]">' +
+      '<input type="new[email][]" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address"> ' +
+      '</td><td><label for="sendingEmailDesc">Description</label></td> <td> ' +
+      '<textarea rows="5" class="form-control" name="new[description][]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea> ' +
+      '</td><td><button type="button" class="btn btn-primary pull-right add-more-too"><i class="fa fa-plus"></i></button> </td></tr>';
+  $('.table-to').append(html)
+})
+        })
+    </script>
+    @stop
