@@ -11,7 +11,7 @@
             </li>
             <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_account') !!}" role="tab"
-                   aria-controls="general" aria-selected="true" aria-expanded="true">Account</a>
+                   aria-controls="general" aria-selected="true" aria-expanded="true">Accounts</a>
             </li>
         </ul>
         <div class="" id="myTabContent">
