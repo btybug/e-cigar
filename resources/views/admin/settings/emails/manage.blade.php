@@ -39,7 +39,7 @@
                                         <div class="form-group row">
                                             {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::text('from',null ,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
+                                                {{Form::select('from',$froms,null,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -86,13 +86,13 @@
                                         <div class="form-group row">
                                             {{Form::label('admin_from', 'From',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::text('admin[from]',($admin_model)?$admin_model->from:null,['class' =>'form-control','id'=>'admin_from','placeholder' => 'hr@hook.am'])}}
+                                                {{Form::select('admin[from]',$froms,($admin_model)?$admin_model->from:null,['class' =>'form-control','id'=>'admin_from','placeholder' => 'hr@hook.am'])}}
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             {{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::text('admin[to]',($admin_model)?$admin_model->to:null,['class' =>'form-control','id'=>'to_admin'])}}
+                                                {{Form::select('admin[to]',$tos,($admin_model)?$admin_model->to:null,['class' =>'form-control','id'=>'to_admin'])}}
                                             </div>
                                         </div>
                                         <div class="form-group">

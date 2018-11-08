@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Couriers;
 use App\Models\DeliveryCostsTypes;
+use App\Models\Emails;
 use App\Models\GeoZones;
 use App\Models\Languages;
 use App\Models\MailTemplates;
@@ -69,9 +70,11 @@ class SettingsController extends Controller
     {
 
         $model = MailTemplates::find($id);
+        $froms=Emails::where('type','from')->pluck('email','email');
+        $tos=Emails::where('type','to')->pluck('email','email');
         $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
         $shortcodes = new ShortCodes();
-        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model'));
+        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model','froms','tos'));
     }
 
     public function postCreateOrUpdate(MailTemplatesRequest $request)
