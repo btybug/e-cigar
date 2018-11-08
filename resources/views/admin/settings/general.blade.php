@@ -6,16 +6,16 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item active">
-                <a class="nav-link " id="general-tab" href="{!! route('admin_settings_general') !!}" role="tab"
+                <a class="nav-link " id="info-tab" href="{!! route('admin_settings_general') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Info</a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_accounts') !!}" role="tab"
-                   aria-controls="general" aria-selected="true" aria-expanded="true">Accounts</a>
+                   aria-controls="accounts" aria-selected="true" aria-expanded="true">Accounts</a>
             </li>
         </ul>
-        <div class="nav-content">
-            <div class="tab-pane fade active in">
+        <div class="tab-content">
+            <div class="tab-pane fade active in" id="admin_settings_general">
                 <div class="panel panel-default">
                     <div class="panel-heading">Basics</div>
                     <div class="panel-body">
@@ -39,6 +39,14 @@
                     <div class="panel-body">
                         <div class="col-md-4">
                             <div class="form-group">
+                                <label for="firstAddress">1st line address</label>
+                                <input type="text" class="form-control" id="firstAddress" aria-describedby="firstAddress" placeholder="Enter Address">
+                            </div>
+                            <div class="form-group">
+                                <label for="secondAddress">2nd line address</label>
+                                <input type="text" class="form-control" id="secondAddress" aria-describedby="secondAddress" placeholder="Enter Address">
+                            </div>
+                            <div class="form-group">
                                 <label for="city">City</label>
                                 <select id="city" class="form-control">
                                     <option selected>Choose...</option>
@@ -52,6 +60,11 @@
                                     <option>...</option>
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="postCode">Post Code</label>
+                                <input type="text" class="form-control" id="postCode" aria-describedby="postCode" placeholder="Enter Post Code">
+                            </div>
+
                         </div>
                         <div class="col-md-offset-1 col-md-6">
                             <div class="settings-map-outer"></div>
@@ -112,11 +125,10 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <select id="calendar" class="form-control">
-                                            <option selected>Calendar</option>
-                                            <option>.....</option>
-                                            <option>....</option>
-                                        </select>
+                                        <label for="calendar">Calendar</label>
+                                    </td>
+                                    <td>
+                                        <input class=form-control type="text" id="calendar">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" placeholder="Christmas">
@@ -137,4 +149,13 @@
         </div>
 
     </div>
+@stop
+
+
+@section('js')
+    <script>
+        $( function() {
+            $( "#calendar" ).datepicker();
+        } );
+    </script>
 @stop
