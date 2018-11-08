@@ -3,6 +3,7 @@
 
 @stop
 @section('content')
+    {!! Form::open() !!}
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
@@ -16,7 +17,9 @@
         </ul>
         <div class="tab-pane fade in" id="admin_settings_accounts">
             <div class="panel panel-default">
-                <div class="panel-heading">Sending Email</div>
+                <div class="panel-heading">Sending Email
+                    <button type="submit" class="
+btn btn-success pull-right">Save</button></div>
                 <div class="panel-body">
                     <div class="col-md-9">
                         <table class="table froms-table">
@@ -75,6 +78,7 @@
         </div>
 
     </div>
+    {!! Form::close() !!}
 @stop
 @section('js')
     <script>
