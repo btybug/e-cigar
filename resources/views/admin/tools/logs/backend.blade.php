@@ -42,7 +42,7 @@
     <script>
         $(function () {
             $('#users-table').DataTable({
-                ajax:  "{!! route('admin_tools_logs') !!}",
+                ajax:  "{!! route('datatable_backend_activity') !!}",
                 columns: [
                     {data: 'user',name: 'user'},
                     {data: 'url',name: 'url'},
