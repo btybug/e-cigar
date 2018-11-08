@@ -7,7 +7,7 @@
             </div>
             <div class="col-md-8">
                 <div class="col-md-12">
-                    <a class="btn btn-primary" href="{!! route('my_account_tickets_new') !!}">Back</a>
+                    <a class="btn btn-primary" href="{!! route('my_account_tickets') !!}">Back</a>
                 </div>
                 <div class="col-md-12">
                     <div class="panel panel-default">
