@@ -40,7 +40,6 @@ class SendEmails extends Command
      */
     public function handle()
     {
-        echo 1;die;
         $redayEmailsJobs = MailJob::where('status', '<', 3)->where('must_be_done', '<', now())->with('email')->get();
         foreach ($redayEmailsJobs as $job) {
             try {
