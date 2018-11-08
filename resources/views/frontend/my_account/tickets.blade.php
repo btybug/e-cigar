@@ -31,7 +31,7 @@
                                 </td>
                                 <td>
                                     <div class="mb-2">
-                                        <button type="button" class="btn btn-dark order-table_btn">View</button>
+                                        <a href="{!! route('my_account_tickets_view',$ticket->id) !!}" class="btn btn-dark order-table_btn">View</a>
                                     </div>
                                 </td>
                             </tr>

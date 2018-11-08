@@ -150,6 +150,15 @@ class UserController extends Controller
         return $this->view('tickets_open',compact(['priorities','categories']));
     }
 
+    public function getTicketsView($id)
+    {
+        $ticket = Ticket::where('id',$id)->where('user_id',\Auth::id())->first();
+
+        if(! $ticket) abort(404);
+
+        return $this->view('ticket_view',compact(['ticket']));
+    }
+
     public function postTicketsNew(Request $request)
     {
         $data = $request->except('_token','attachments');
