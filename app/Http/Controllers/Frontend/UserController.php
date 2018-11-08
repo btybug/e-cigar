@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Events\Tickets;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
 use App\Http\Requests\AddressesRequest;
@@ -188,7 +189,7 @@ class UserController extends Controller
                 }
             }
         }
-
+        event(new Tickets(\Auth::user(),$ticket));
         return redirect()->route('my_account_tickets');
     }
 
