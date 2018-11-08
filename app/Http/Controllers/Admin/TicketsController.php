@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Reply;
 use App\Models\Statuses;
 use App\Models\Ticket;
 use App\Models\TicketFiles;
@@ -95,9 +96,40 @@ class TicketsController extends Controller
         $priorities = $this->statuses->where('type','ticket_priority')->get()->pluck('name','id')->all();
         $categories = $this->category->where('type','tickets')->get()->pluck('name','id')->all();
         $staff = $this->user->pluck('name','id')->all();
+        $replies = $model->replies()->main()->get();
 
-        return $this->view('edit',compact(['model','statuses','priorities','categories','staff']));
+        return $this->view('edit',compact(['model','statuses','priorities','categories','staff','replies']));
 
+    }
+
+    public function reply(Request $request)
+    {
+        $data = $request->all();
+        $rules = [
+            'ticket_id' => 'required|exists:tickets,id',
+            'reply' => 'required|min:2|max:1000'
+        ];
+
+        $result = [
+            'ticket_id' => $data['ticket_id'],
+            'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
+            'author_id' => \Auth::id(),
+            'reply' => trim(htmlspecialchars($data['reply']))
+        ];
+
+        $validator = \Validator::make($data, $rules);
+
+        if ($validator->fails()) {
+            return \Response::json(['errors' => $validator->messages(),'success' => false]);
+        }
+
+        $reply = new Reply();
+        $reply->create($result);
+        $ticket = Ticket::find($data['ticket_id']);
+        $replies = $ticket->replies()->main()->get();
+        $html = \View::make('admin.ticket._partials.comments',compact('replies'))->render();
+
+        return \Response::json(['success' => true,'message' => 'Success','html' => $html]);
     }
 
 }

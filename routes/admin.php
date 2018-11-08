@@ -184,6 +184,7 @@ Route::group(['prefix' => '/tickets'], function () {
     Route::get('/new', 'Admin\TicketsController@getNew')->name('admin_tickets_new');
     Route::get('/edit/{id}', 'Admin\TicketsController@getEdit')->name('admin_tickets_edit');
     Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
+    Route::post('/reply', 'Admin\TicketsController@reply')->name('admin_tickets_reply');
 });
 
 Route::group(['prefix' => '/tools'], function () {

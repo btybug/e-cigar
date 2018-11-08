@@ -17,6 +17,11 @@ class Ticket extends Model
       'tags' => 'json'
     ];
 
+    public function replies()
+    {
+        return $this->hasMany(Reply::class, 'ticket_id', 'id');
+    }
+
     public function attachments()
     {
         return $this->hasMany(TicketFiles::class,  'ticket_id');

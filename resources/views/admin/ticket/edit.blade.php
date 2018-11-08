@@ -15,24 +15,16 @@
                                          alt="user">
                                 </div>
                                 <div class="user-name">
-                                    User Name
+                                    {!! $model->author->name !!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-9 col-xs-12">
                             <div class="user-content">
-                                <h3>Subject here</h3>
-                                <p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A consequuntur
-                                    dignissimos
-                                    fuga incidunt nam quas sit voluptatibus, voluptatum. Amet, animi consequuntur dicta
-                                    fugit illum incidunt itaque labore maxime molestias nesciunt nobis placeat possimus
-                                    quam saepe sint sit voluptatem? Autem consequatur cum esse facilis perferendis
-                                    possimus saepe tempore? Asperiores blanditiis commodi consectetur cumque cupiditate
-                                    doloremque dolorum earum error excepturi fuga incidunt ipsa natus nihil nostrum
-                                    numquam optio placeat praesentium quasi quidem quo quod reiciendis rem repellendus
-                                    sed similique, sit soluta tenetur, totam ut vel. Incidunt maxime odit veniam!
-                                    Adipisci aperiam dignissimos eos iusto magnam officiis quasi quibusdam veritatis!
-                                    Adipisci, nemo sunt?</p>
+                                <h3>{!! $model->subject !!}</h3>
+                                <p class="info min-300">
+                                    {!! $model->summary !!}
+                                </p>
                                 <div class="attachments">
                                     <span class="title">Attachments</span>
                                     <ul>
@@ -66,10 +58,10 @@
                                     </div>
                                     <div class="col-sm-11">
                                         <div class="add-comment">
-                                            {!! Form::open(['url' => 'comment_create_ticket']) !!}
+                                            {!! Form::open(['url' => 'admin_tickets_reply']) !!}
                                             {!! Form::hidden('ticket_id',$model->id) !!}
-                                            <textarea name="comment" id="" rows="0"
-                                                      placeholder="Your comments"></textarea>
+                                            <textarea name="reply" id="" rows="0"
+                                                      placeholder="Your reply"></textarea>
                                             <span class="error-box invalid-feedback comment"></span>
                                             <div class="row mt-1">
                                                 <div class="col-sm-6">
@@ -98,19 +90,11 @@
                 </div>
             </div>
             <div class="col-md-3 ">
-                {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
+                {!! Form::model($model,['url' => '#', 'id' => 'ticket_form','files' => true]) !!}
                 {!! Form::hidden('id',null) !!}
                 <div class="view-product-wall">
                     <div class="form-group text-right">
                         {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-                    </div>
-                    <div class="author-wall wall">
-                        <div class="row form-group">
-                            {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
-                            <div class="col-sm-9">
-                                Username
-                            </div>
-                        </div>
                     </div>
                     <div class="status-wall wall">
                         <div class="row form-group">
@@ -188,4 +172,85 @@
 
 @stop
 @section('js')
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.cancel-comment', function (event) {
+                $(this).parents('form:first')[0].reset();
+            });
+
+            $('body').on('click', '.cancel-reply', function (event) {
+                $(this).parents('.user-add-comment').remove();
+            });
+
+            $('body').on('click', '.add-comment-btn', function (event) {
+                event.preventDefault();
+                var form = $(this).parents('form:first');
+                var data = form.serialize();
+                $.ajax({
+                    url: "{!! route('admin_tickets_reply') !!}",
+                    type: 'POST',
+                    data: data,
+                    success: function (data) {
+                        $('.error-box').html('');
+                        if (data.success == false) {
+                            $.map(data.errors, function (k, v) {
+                                form.find('.' + v).text(k[0]);
+                            });
+                        } else {
+                            form[0].reset();
+                            $(".user-add-comment-secondry").remove();
+
+                            $("#msgModal .message-place").text(data.message);
+                            $("#msgModal").modal();
+
+                            $(".comments-refresh").html(data.html);
+                        }
+                    },
+                    error: function (data) {
+                        // alert(data.err);
+                    }
+                });
+            });
+
+
+            $('body').on('click', '.reply', function (e) {
+                e.preventDefault();
+                $(".user-add-comment-secondry").remove();
+                var parentID = $(this).data('id');
+                var data = '<div class="user-add-comment user-add-comment-secondry w-100 mt-md-5 my-4">\n' +
+                    '                                    <div class="row m-0">\n' +
+                    '                                        <div class="col-sm-12">\n' +
+                    '                                            <div class="add-comment">\n' +
+                    '                                            {!! Form::open(["route" => "admin_tickets_reply"]) !!}\n' +
+                    '                            {!! Form::hidden("ticket_id",$model->id) !!}\n' +
+                    '                        <input type="hidden" name="parent_id" value="' + parentID + '" />\n' +
+                    '\n' +
+                    '                        <textarea name="reply" id="" rows="0"\n' +
+                    '                                  placeholder="Your reply"></textarea>\n' +
+                    '                        <span class="error-box invalid-feedback comment"></span>\n' +
+                    '                        <div class="row mt-1">\n' +
+                    '                            <div class="col-sm-6">\n' +
+                    '                                <button type="button"\n' +
+                    '                                        class="btn btn-outline-warning btn-block cancel-reply">\n' +
+                    '                                    Cancel\n' +
+                    '                                </button>\n' +
+                    '                            </div>\n' +
+                    '                            <div class="col-sm-6">\n' +
+                    '                                <button type="button"\n' +
+                    '                                        class="btn btn-outline-warning btn-block add-comment-btn">\n' +
+                    '                                    Add\n' +
+                    '                                </button>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '{!! Form::close() !!}\n' +
+                    '                        </div>\n' +
+                    '                    </div>\n' +
+                    '                </div>\n' +
+                    '            </div>';
+                $(this).closest(".user-comment-img").append(data);
+                $(this).closest(".user-comment-img").addClass("user-commmet-add")
+
+            })
+        });
+    </script>
 @stop
