@@ -54,7 +54,7 @@
                     <label>Color</label>
                     {{--{!! Form::text('color',null,['class'=>'form-control','required'=>true]) !!}--}}
                     <div class="color_select_wall">
-                        <select id="colorselector_2">
+                        <select name="color" id="colorselector_2">
                             <option value="106" data-color="#A0522D">sienna</option>
                             <option value="47" data-color="#CD5C5C" selected="selected">indianred</option>
                             <option value="87" data-color="#FF4500">orangered</option>
