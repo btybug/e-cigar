@@ -119,8 +119,9 @@ class SettingsController extends Controller
 
     public function getGeneral()
     {
-        return $this->view('store.general');
+        return $this->view('general');
     }
+
 
 
     public function getGeoZones()
@@ -211,7 +212,7 @@ class SettingsController extends Controller
     public
     function getStore()
     {
-        return $this->view('store.index');
+        return $this->view('store.general');
     }
 
 

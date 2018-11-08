@@ -50,7 +50,7 @@ Route::group(['prefix' => 'settings'], function () {
         });
         Route::get('/delivery-cost', 'Admin\SettingsController@getDeliveryCost')->name('admin_settings_delivery');
         Route::group(['prefix' => 'general'], function () {
-            Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_store');
+            Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
 
         });
         Route::group(['prefix' => 'gifts'], function () {
