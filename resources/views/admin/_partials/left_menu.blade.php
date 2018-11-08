@@ -219,6 +219,9 @@
                     @ok('admin_settings_store')
                     <li><a href="{{route('admin_settings_store')}}"><i class="fa fa-circle-o"></i>Store</a></li>
                     @endok
+                    @ok('admin_settings_events')
+                    <li><a href="{{route('admin_settings_events')}}"><i class="fa fa-circle-o"></i>Events</a></li>
+                    @endok
 
                 </ul>
             </li>

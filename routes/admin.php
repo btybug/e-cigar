@@ -15,6 +15,9 @@ Route::group(['prefix' => 'settings'], function () {
     Route::group(['prefix' => 'general'], function () {
         Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
     });
+    Route::group(['prefix' => 'events'], function () {
+        Route::get('/', 'Admin\EventsController@getIndex')->name('admin_settings_events');
+    });
     Route::group(['prefix' => 'store'], function () {
         Route::get('/payment-gateways', 'Admin\SettingsController@getStorePaymentsGateways')->name('admin_settings_payment_gateways');
         Route::get('/payment-gateways/stripe', 'Admin\SettingsController@getStorePaymentsGatewaysSettings')->name('admin_payment_gateways_stripe');
