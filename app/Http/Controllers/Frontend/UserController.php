@@ -14,6 +14,7 @@ use App\Models\Media\Items;
 use App\Models\Orders;
 use App\Models\Statuses;
 use App\Models\Ticket;
+use App\Models\Settings;
 use App\Models\ZoneCountries;
 use App\Services\FileService;
 use App\User;
@@ -28,6 +29,7 @@ class UserController extends Controller
     private $category;
     private $user;
     private $fileService;
+    private $settings;
 
     protected $view = 'frontend.my_account';
 
@@ -37,7 +39,8 @@ class UserController extends Controller
         Statuses $statuses,
         Category $category,
         User $user,
-        FileService $fileService
+        FileService $fileService,
+        Settings $settings
     )
     {
         $this->countries = $countries;
@@ -46,6 +49,7 @@ class UserController extends Controller
         $this->category = $category;
         $this->user = $user;
         $this->fileService = $fileService;
+        $this->settings = $settings;
     }
 
     public function index()
@@ -175,10 +179,9 @@ class UserController extends Controller
 
         if($validate) return redirect()->back()->withErrors($validate);
 
-        $status = $this->statuses->where('type','tickets')->where('is_default',true)->first();
+        $status = $setting = $this->settings->getData('tickets', 'open');
         $data['user_id'] = \Auth::id();
-        //TODO : need to delete conditon
-        $data['status_id'] = ($status)?$status->id : $this->statuses->first()->id;
+        $data['status_id'] = ($status)?$status->val : $this->statuses->where('type','tickets')->first()->id;
 
         $ticket = Ticket::create($data);
 
@@ -190,6 +193,17 @@ class UserController extends Controller
             }
         }
         event(new Tickets(\Auth::user(),$ticket));
+        return redirect()->route('my_account_tickets');
+    }
+
+    public function ticketMarkCompleted (Request $request,$id)
+    {
+        $ticket = Ticket::where('id',$id)->where('user_id',\Auth::id())->first();
+        $status = $this->settings->getData('tickets', 'completed');
+
+        if(! $ticket or ! $status) abort(404);
+        $ticket->update(['status_id'=>$status->val]);
+
         return redirect()->route('my_account_tickets');
     }
 

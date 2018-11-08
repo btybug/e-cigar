@@ -416,7 +416,7 @@ class DatatableController extends Controller
                 return "<span class='badge'>".count($ticket->attachments)."</span>";
             })
             ->addColumn('actions', function ($ticket) {
-                return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
+                return "<a class='badge btn-danger' href='" . route('admin_tickets_close', $ticket->id) . "'>Close</a>
                     <a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions','priority_id','status_id','attachments'])
             ->make(true);

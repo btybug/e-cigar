@@ -93,7 +93,9 @@
                 <div class="card well well-sm mb-5">
                     <h2 class="header card-header">
                         {{ $ticket->subject }}
-                        <a href="#" class="btn btn-success">Mark Complete</a>
+                        {!! Form::open(['url' => route('my_account_tickets_mark_completed',$ticket->id)]) !!}
+                            {!! Form::submit('Mark Complete',['class' => 'btn btn-success']) !!}
+                        {!! Form::close() !!}
                     </h2>
                     <div class="panel-body card-body">
                         <p>

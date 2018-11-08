@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Reply;
+use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\Ticket;
 use App\Models\TicketFiles;
@@ -29,18 +30,21 @@ class TicketsController extends Controller
     private $category;
     private $user;
     private $fileService;
+    private $settings;
 
     public function __construct(
         Statuses $statuses,
         Category $category,
         User $user,
-        FileService $fileService
+        FileService $fileService,
+        Settings $settings
     )
     {
         $this->statuses = $statuses;
         $this->category = $category;
         $this->user = $user;
         $this->fileService = $fileService;
+        $this->settings = $settings;
     }
 
     public function index()
@@ -139,6 +143,34 @@ class TicketsController extends Controller
         $html = \View::make('admin.ticket._partials.comments',compact('replies'))->render();
 
         return \Response::json(['success' => true,'message' => 'Success','html' => $html]);
+    }
+
+    public function getSettings ()
+    {
+        $statuses = $this->statuses->where('type','tickets')->get()->pluck('name','id')->all();
+        $settings = $this->settings->getEditableData('tickets');
+
+        return $this->view('settings',compact(['settings','statuses']));
+    }
+
+    public function postSettings (Request $request)
+    {
+        $data = $request->except('_token');
+
+        $this->settings->updateOrCreateSettings('tickets', $data);
+
+        return redirect()->back();
+    }
+
+    public function getClose (Request $request,$id)
+    {
+        $ticket = Ticket::findOrFail($id);
+        $status = $this->settings->getData('tickets', 'completed');
+
+        if(! $status) abort(404);
+        $ticket->update(['status_id'=>$status->val]);
+
+        return redirect()->route('admin_tickets');
     }
 
 }

@@ -39,4 +39,9 @@ class Settings extends Model
         }
         return $_this;
     }
+
+    public function getData ($section,$key)
+    {
+        return $this->where('section',$section)->where('key',$key)->first();
+    }
 }

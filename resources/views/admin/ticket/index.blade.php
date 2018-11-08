@@ -7,7 +7,10 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-md-6 pull-left"><h2 class="m-0">Tickets</h2></div>
-                <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_tickets_new') !!}">Add new</a></div>
+                <div class="col-md-6 ">
+                    <a class="btn btn-warning pull-right" href="{!! route('admin_tickets_settings') !!}">Settings</a>
+                    <a class="btn btn-primary pull-right" href="{!! route('admin_tickets_new') !!}">Add new</a>
+                </div>
             </div>
         </div>
         <div class="col-xs-12">

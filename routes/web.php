@@ -108,6 +108,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
         Route::get('/new', 'Frontend\UserController@getTicketsNew')->name('my_account_tickets_new');
         Route::post('/new', 'Frontend\UserController@postTicketsNew')->name('my_account_tickets_new_post');
         Route::get('/view/{id}', 'Frontend\UserController@getTicketsView')->name('my_account_tickets_view');
+        Route::post('/mark-complete/{id}', 'Frontend\UserController@ticketMarkCompleted')->name('my_account_tickets_mark_completed');
     });
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
     Route::post('/verification', 'Frontend\UserController@postVerification')->name('post_my_account_verification');

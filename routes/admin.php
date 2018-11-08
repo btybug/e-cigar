@@ -186,6 +186,10 @@ Route::group(['prefix' => '/tickets'], function () {
     Route::post('/edit/{id}', 'Admin\TicketsController@postEdit')->name('admin_tickets_edit_post');
     Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
     Route::post('/reply', 'Admin\TicketsController@reply')->name('admin_tickets_reply');
+    Route::get('/settings', 'Admin\TicketsController@getSettings')->name('admin_tickets_settings');
+    Route::post('/settings', 'Admin\TicketsController@postSettings')->name('admin_tickets_settings_save');
+    Route::get('/close/{id}', 'Admin\TicketsController@getClose')->name('admin_tickets_close');
+
 });
 
 Route::group(['prefix' => '/tools'], function () {
