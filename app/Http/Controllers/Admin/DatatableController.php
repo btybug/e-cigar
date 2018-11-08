@@ -24,6 +24,7 @@ use App\Models\Sports;
 use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\Teams;
+use App\Models\Ticket;
 use App\Models\Translations;
 use App\Models\TranslationsEntry;
 use App\User;
@@ -392,6 +393,31 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
             })->rawColumns(['actions', 'name', 'image'])
+            ->make(true);
+    }
+
+    public function getTickets()
+    {
+        return Datatables::of(Ticket::query())
+            ->editColumn('user_id', function ($ticket) {
+                return $ticket->author->name;
+            })->editColumn('status_id', function ($ticket) {
+                return $ticket->status->name;
+            })->editColumn('priority_id', function ($ticket) {
+                return $ticket->priority->name;
+            })->editColumn('category_id', function ($ticket) {
+                return $ticket->category->name;
+            })->editColumn('tags', function ($ticket) {
+                return '';
+            })
+            ->editColumn('created_at', function ($ticket) {
+                return BBgetDateFormat($ticket->created_at) . ' ' . BBgetTimeFormat($ticket->created_at);
+            })->editColumn('attachments', function ($ticket) {
+                return count($ticket->attachments);
+            })
+            ->addColumn('actions', function ($ticket) {
+
+            })->rawColumns(['actions'])
             ->make(true);
     }
 }

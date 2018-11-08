@@ -8,7 +8,7 @@
         <div class="col-xs-12">
             <div class="col-md-6 pull-left"><h2>New ticket</h2></div>
         </div>
-        {!! Form::model(null,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+        {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
             {!! Form::hidden('id',null) !!}
             <div class="text-right btn-save">
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
@@ -18,7 +18,6 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12">
-
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label>Subject</label>
@@ -29,48 +28,15 @@
                                         {!! Form::textarea('summary',null,['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <div class="form-group row">
                                         <label class="col-sm-3">Attachments</label>
                                         <div class="col-sm-9">
-                                            {!! Form::file('image',['multyple' => true]) !!}
+                                            {!! Form::file('attachments[]',['multiple' => true]) !!}
                                         </div>
                                     </div>
                                 </div>
-
-                                {{--<div class="panel panel-default mt-20">--}}
-                                    {{--<div class="panel-heading d-flex justify-content-between align-items-center">--}}
-                                        {{--<span>--}}
-                                            {{--Related Products--}}
-                                        {{--</span>--}}
-                                        {{--<button type="button" class="btn btn-info select-products">Select</button>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="panel-body product-body">--}}
-                                        {{--<ul class="get-all-attributes-tab">--}}
-                                            {{--@if(isset($post) && count($post->stocks))--}}
-                                                {{--@foreach($post->stocks as $stock)--}}
-                                                    {{--<li style="display: flex" data-id="{{ $stock->id }}"--}}
-                                                        {{--class="option-elm-attributes">--}}
-                                                        {{--<a href="#">{!! $stock->name !!}</a>--}}
-                                                        {{--<div class="buttons">--}}
-                                                            {{--<a href="javascript:void(0)"--}}
-                                                               {{--class="remove-all-attributes btn btn-sm btn-danger">--}}
-                                                                {{--<i class="fa fa-trash"></i></a>--}}
-                                                        {{--</div>--}}
-                                                        {{--<input type="hidden" name="stocks[]" value="{{ $stock->id }}">--}}
-                                                    {{--</li>--}}
-                                                {{--@endforeach--}}
-                                            {{--@endif--}}
-                                        {{--</ul>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                <div class="col-sm-6">
-
-                                </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -88,19 +54,11 @@
                             <div class="row">
                                 {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('status',[0 => 'open',1 => 'close'],null,
+                                    {!! Form::select('status_id',$statuses,null,
                                                 ['class' => 'form-control','id'=> 'status']) !!}
                                 </div>
                             </div>
                         </div>
-                    <!-- <div class="tag-wall wall">
-                            <div class="row">
-                                {{--{{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}--}}
-                            <div class="col-sm-9">
-                                {{--{{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}--}}
-                            </div>
-                        </div>
-                    </div> -->
                         <div class="tag-wall wall">
                             <div class="row">
                                 <label class="col-sm-3 control-label" for="input-category"><span
@@ -112,16 +70,17 @@
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-tags-list">
-                                            {{--@if($post && $post->tags)--}}
+                                            @if($model && $model->tags)
+                                                @php
+                                                $tags = json_decode($model->tags, true);
+                                                @endphp
 
-                                                {{--$tags = json_decode($post->tags, true);--}}
-
-                                                {{--@foreach($tags as $tag)--}}
-                                                    {{--<li><span class="remove-search-tag"><i--}}
-                                                                    {{--class="fa fa-minus-circle"></i></span>{{ $tag }}--}}
-                                                    {{--</li>--}}
-                                                {{--@endforeach--}}
-                                            {{--@endif--}}
+                                                @foreach($tags as $tag)
+                                                    <li><span class="remove-search-tag"><i
+                                                                    class="fa fa-minus-circle"></i></span>{{ $tag }}
+                                                    </li>
+                                                @endforeach
+                                            @endif
                                         </ul>
                                     </div>
                                     {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
@@ -130,18 +89,18 @@
                         </div>
                         <div class="status-wall wall">
                             <div class="row">
-                                {{Form::label('category', 'Category',['class' => 'col-sm-3'])}}
+                                {{Form::label('category_id', 'Category',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('category',[0 => 'category1',1 => 'category2'],null,
+                                    {!! Form::select('category_id',$categories,null,
                                                 ['class' => 'form-control','id'=> 'category']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="status-wall wall">
                             <div class="row">
-                                {{Form::label('priority', 'Priority',['class' => 'col-sm-3'])}}
+                                {{Form::label('priority_id', 'Priority',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('priority',[0 => 'urgent',1 => 'urgent2'],null,
+                                    {!! Form::select('priority_id',$priorities,null,
                                                 ['class' => 'form-control','id'=> 'priority']) !!}
                                 </div>
                             </div>
@@ -150,7 +109,7 @@
                             <div class="row">
                                 {{Form::label('staff', 'Responsible staff',['class' => 'col-sm-3'])}}
                                 <div class="col-sm-9">
-                                    {!! Form::select('staff',[0 => 'staff1',1 => 'staff2'],null,
+                                    {!! Form::select('staff_id',$staff,null,
                                                 ['class' => 'form-control','id'=> 'staff']) !!}
                                 </div>
                             </div>

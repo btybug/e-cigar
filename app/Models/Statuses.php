@@ -23,6 +23,6 @@ class Statuses extends Translatable
      */
     public $translationModel = StatusesTranslations::class;
     protected $fillable = ['icon', 'color', 'type'];
-    public $translatedAttributes = ['name','description'];
+    public $translatedAttributes = ['name', 'description'];
 
 }

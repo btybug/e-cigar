@@ -15,11 +15,14 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
                     <th>Author</th>
-                    <th>URL</th>
-                    <th>Short Description</th>
+                    <th>Subject</th>
+                    <th>Summary</th>
                     <th>Status</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Tags</th>
+                    <th>Attachments</th>
                     <th>Added/Last Modified Date</th>
                     <th>Action</th>
                 </tr>
@@ -31,22 +34,25 @@
 @section('js')
     <script>
         $(function () {
-            {{--$('#posts-table').DataTable({--}}
-                {{--ajax: "{!! route('datatable_all_posts') !!}",--}}
-                {{--"processing": true,--}}
-                {{--"serverSide": true,--}}
-                {{--"bPaginate": true,--}}
-                {{--columns: [--}}
-                    {{--{data: 'id', name: 'id'},--}}
-                    {{--{data: 'title', name: 'title'},--}}
-                    {{--{data: 'user_id', name: 'user_id'},--}}
-                    {{--{data: 'url', name: 'url'},--}}
-                    {{--{data: 'short_description', name: 'short_description'},--}}
-                    {{--{data: 'status', name: 'status'},--}}
-                    {{--{data: 'created_at', name: 'created_at'},--}}
-                    {{--{data: 'actions', name: 'actions'}--}}
-                {{--]--}}
-            {{--});--}}
+            $('#posts-table').DataTable({
+                ajax: "{!! route('datatable_tickets') !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'subject', name: 'subject'},
+                    {data: 'summary', name: 'summary'},
+                    {data: 'status_id', name: 'status_id'},
+                    {data: 'category_id', name: 'category_id'},
+                    {data: 'priority_id', name: 'priority_id'},
+                    {data: 'tags', name: 'tags'},
+                    {data: 'attachments', name: 'attachments'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'actions', name: 'actions'}
+                ]
+            });
         });
 
     </script>
