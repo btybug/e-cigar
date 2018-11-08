@@ -19,7 +19,7 @@ class Ticket extends Model
 
     public function attachments()
     {
-        return $this->hasMany(self::class,  'id','ticket_id');
+        return $this->hasMany(TicketFiles::class,  'ticket_id');
     }
 
     public function author()
