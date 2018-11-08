@@ -32,6 +32,11 @@ class Ticket extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
+    public function staff()
+    {
+        return $this->belongsTo(User::class,'staff_id','id');
+    }
+
     public function status()
     {
         return $this->hasOne(Statuses::class,'id','status_id');

@@ -6,7 +6,7 @@
                 @include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account_tickets'])
             </div>
             <div class="col-md-8">
-                <div class="col-md-12">
+                <div class="col-md-12 my-4">
                     <a class="btn btn-primary" href="{!! route('my_account_tickets_new') !!}">Open ticket</a>
                 </div>
                 <table class="table table-bordered table-striped table-responsive-lg order-table">
@@ -41,9 +41,11 @@
                             <td colspan="5">No Tickets</td>
                         </tr>
                     @endif
-
                     </tbody>
                 </table>
+                <div class="col-md-12 my-4">
+                    {!! $tickets->links() !!}
+                </div>
             </div>
         </div>
 

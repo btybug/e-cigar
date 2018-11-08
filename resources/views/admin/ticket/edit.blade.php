@@ -240,6 +240,7 @@
                     '                        <span class="error-box invalid-feedback comment"></span>\n' +
                     '                        <div class="row mt-1">\n' +
                     '                            <div class="col-sm-6">\n' +
+                    '<button type="button" class="btn btn-outline-warning btn-block cancel-reply">Cancel </button>\n' +
                     '                            </div>\n' +
                     '                            <div class="col-sm-6 text-right">\n' +
                     '                                <button type="button"\n' +

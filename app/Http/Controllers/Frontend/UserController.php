@@ -138,7 +138,7 @@ class UserController extends Controller
 
     public function getTickets()
     {
-        $tickets = \Auth::user()->tickets;
+        $tickets = \Auth::user()->tickets()->paginate(10);
 
         return $this->view('tickets',compact(['tickets']));
     }
@@ -156,8 +156,8 @@ class UserController extends Controller
         $ticket = Ticket::where('id',$id)->where('user_id',\Auth::id())->first();
 
         if(! $ticket) abort(404);
-
-        return $this->view('ticket_view',compact(['ticket']));
+        $replies = $ticket->replies()->main()->get();
+        return $this->view('ticket_view',compact(['ticket','replies']));
     }
 
     public function postTicketsNew(Request $request)
