@@ -4,11 +4,6 @@
 @section('content')
     <section class="content tickets-edit-page">
         <h2>Edit ticket</h2>
-        {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
-        {!! Form::hidden('id',null) !!}
-        <div class="text-right btn-save">
-            {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-        </div>
         <div class="row">
             <div class="col-md-9 ">
                 <div class="subject-wall">
@@ -58,23 +53,59 @@
                         </div>
                     </div>
                     <div class="line"></div>
-                    <div class="subject-reply">
-                        <div class="row">
-                            <div class="col-md-3 col-xs-12">
-                                <div class="title">
-                                    Reply
+                    <div class="subject-reply comment">
+                        <div class="comment-list">
+                            <h2>Reply</h2>
+                            <div class="divider"></div>
+                            <div class="user-add-comment mt-md-5 my-4">
+                                <div class="row">
+                                    <div class="col-sm-1">
+                                        <div class="user-img">
+                                            <img src="/public/images/male.png" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <div class="add-comment">
+                                            {!! Form::open(['url' => 'comment_create_ticket']) !!}
+                                            {!! Form::hidden('ticket_id',$model->id) !!}
+                                            <textarea name="comment" id="" rows="0"
+                                                      placeholder="Your comments"></textarea>
+                                            <span class="error-box invalid-feedback comment"></span>
+                                            <div class="row mt-1">
+                                                <div class="col-sm-6">
+                                                    <button type="button"
+                                                            class="btn btn-outline-warning btn-block cancel-comment">
+                                                        Cancel
+                                                    </button>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <button type="button"
+                                                            class="btn btn-outline-warning btn-block add-comment-btn">
+                                                        Add
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </div>
                                 </div>
-
                             </div>
-                            <div class="col-md-9 col-xs-12">
-                                <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+                            <div class="comments-refresh">
+                                @include('admin.ticket._partials.comments')
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 ">
+                {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
+                {!! Form::hidden('id',null) !!}
                 <div class="view-product-wall">
+                    <div class="author-wall wall">
+                        <div class="row form-group">
+                            {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                        </div>
+                    </div>
                     <div class="author-wall wall">
                         <div class="row form-group">
                             {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
@@ -148,13 +179,96 @@
                         </div>
                     </div>
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
-        {!! Form::close() !!}
+
     </section>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <style>
+        .comments {
+            font-family: 'SF-UI-Text-Medium_1';
+            font-size: 16px;
+        }
+
+        .comments .user-comment-img .user-img img {
+            width: 100%;
+            max-height: 65px;
+            object-fit: cover;
+        }
+
+        .comments .user-comment-img .user-comment {
+            flex: 1;
+            height: 100%;
+        }
+
+        .comments .user-comment-img .user-comment .content-reply {
+            font-family: 'SF-UI-Text-Light_1';
+            margin-top: auto;
+            padding-bottom: 10px;
+        }
+
+        .comments .user-comment-img .user-comment .content-reply .reply {
+            color: #1c8379;
+            text-decoration: none;
+        }
+
+        .comments .user-comment-img .user-title h6 {
+            color: #3a3b3b;
+
+        }
+
+        .comments .user-comment-img .user-title span {
+            color: #cbcbcb;
+        }
+
+        .comments .user-add-comment {
+            font-family: 'SF-UI-Text-Light_1';
+        }
+
+        .comments .user-add-comment img {
+            width: 100%;
+            max-height: 65px;
+            object-fit: cover;
+        }
+
+        .comments .user-add-comment textarea {
+            border: none;
+            border-bottom: 1px solid #26a69a;
+            resize: none;
+            outline: none;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .comments .user-add-comment input {
+            display: block;
+            width: 100%;
+            padding: .375rem 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            border: none;
+            background-clip: padding-box;
+            border-bottom: 1px solid #27a59a;
+            outline: none;
+        }
+
+        .comments .user-add-comment button {
+            color: #27a59a;
+            border-color: #27a59a;
+        }
+
+        .comments .user-add-comment button:hover {
+            background-color: #27a59a;
+            border-color: #27a59a;
+            color: #ffffff;
+        }
+    </style>
 @stop
 @section('js')
 @stop
