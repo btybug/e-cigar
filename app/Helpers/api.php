@@ -396,7 +396,7 @@ function replyRender($replies, $i = 0,$parent = false)
         $reply = $replies[$i];
         //render main content
         if($parent){
-            echo '<div class="row user-comment-img sub pl-4 w-100 m-0">';
+            echo '<div class="clearfix"></div><div class="row user-comment-img sub pl-4 w-100 m-0">';
         }else{
             echo '<div class="row user-comment-img">';
         }

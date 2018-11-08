@@ -946,7 +946,10 @@
     text-align: center;
     margin-top: 2px;
 }
-
+.tickets-edit-page .subject-wall .user-content{
+    display: flex;
+    flex-direction: column;
+}
 .tickets-edit-page .subject-wall .user-content h3 {
     font-size: 34px;
     margin-top: 0;
@@ -955,6 +958,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin-top:auto;
 }
 
 .tickets-edit-page .subject-wall .user-content .attachments span.title {
@@ -1019,6 +1023,9 @@ resize: none;
 .mt-1 {
     margin-top: 0.25rem;
 }
+.pl-4 {
+    padding-left: 1.5rem !important;
+}
 /*Comments start*/
 .comments_wall{
 
@@ -1066,5 +1073,67 @@ resize: none;
     color: #fff;
     background-color: #ffc107;
     border-color: #ffc107;
+}
+.comments_wall .thumbnail {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.comments_wall figure {
+    margin: 0 0 1rem;
+}
+.comments_wall figcaption {
+    word-wrap: break-word;
+}
+.comments_wall .arrow.left:before {
+    right: 100%;
+    top: 30px;
+    border-right-color: inherit;
+    border-width: 16px;
+}
+.comments_wall .arrow.left:after, .comments_wall .arrow.left:before {
+    border-left: 0;
+}
+.comments_wall .arrow:after, .comments_wall .arrow:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+}
+.comments_wall .card {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0;
+}
+.comments_wall .comment-post {
+    margin-top: 6px;
+}
+.comments_wall .card-body {
+    padding: 1.25rem;
+}
+.comments_wall .btn.reply{
+    color: #111;
+    background-color: #F0CA4D;
+    border-color: #F0CA4D;
 }
 /*Comments end*/

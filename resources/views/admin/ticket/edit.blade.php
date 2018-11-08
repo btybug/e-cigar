@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-9 ">
                 <div class="subject-wall">
-                    <div class="row">
+                    <div class="row d-flex">
                         <div class="col-md-3 col-xs-12">
                             <div class="user-image-name">
                                 <div class="user-image">
@@ -20,9 +20,9 @@
                             </div>
                         </div>
                         <div class="col-md-9 col-xs-12">
-                            <div class="user-content">
+                            <div class="user-content h-100">
                                 <h3>{!! $model->subject !!}</h3>
-                                <p class="info min-300">
+                                <p class="info">
                                     {!! $model->summary !!}
                                 </p>
                                 <div class="attachments">
@@ -65,15 +65,15 @@
                                             <span class="error-box invalid-feedback comment"></span>
                                             <div class="row mt-1">
                                                 <div class="col-sm-6">
-                                                    <button type="button"
-                                                            class="btn btn-outline-warning btn-block cancel-comment">
-                                                        Cancel
-                                                    </button>
+                                                    {{--<button type="button"--}}
+                                                            {{--class="btn btn-outline-warning btn-block cancel-comment">--}}
+                                                        {{--Cancel--}}
+                                                    {{--</button>--}}
                                                 </div>
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-6 text-right">
                                                     <button type="button"
-                                                            class="btn btn-outline-warning btn-block add-comment-btn">
-                                                        Add
+                                                            class="btn btn-outline-warning add-comment-btn">
+                                                        Submit
                                                     </button>
                                                 </div>
                                             </div>
@@ -230,15 +230,11 @@
                     '                        <span class="error-box invalid-feedback comment"></span>\n' +
                     '                        <div class="row mt-1">\n' +
                     '                            <div class="col-sm-6">\n' +
-                    '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-warning btn-block cancel-reply">\n' +
-                    '                                    Cancel\n' +
-                    '                                </button>\n' +
                     '                            </div>\n' +
-                    '                            <div class="col-sm-6">\n' +
+                    '                            <div class="col-sm-6 text-right">\n' +
                     '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-warning btn-block add-comment-btn">\n' +
-                    '                                    Add\n' +
+                    '                                        class="btn btn-outline-warning add-comment-btn">\n' +
+                    '                                    Submit\n' +
                     '                                </button>\n' +
                     '                            </div>\n' +
                     '                        </div>\n' +
