@@ -189,7 +189,7 @@ class SettingsController extends Controller
 
         $countries = $request->get('country');
         $regions = $request->get('regions');
-        $geo_zone->countries()->whereNotIn('name', $regions);
+        $geo_zone->countries()->whereNotIn('name', $countries);
         foreach ($countries as $key => $country) {
             select_country:
             $zone_country = $geo_zone->countries()->where('name', $country)->first();
