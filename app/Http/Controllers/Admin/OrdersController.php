@@ -46,20 +46,11 @@ class OrdersController extends Controller
     public function addNote(OrderHistoryRequest $request)
     {
         $order = Orders::findOrFail($request->id);
-        $last = $order->history()->latest()->first();
-        if($last){
-            $new = $last->replicate();
-            if($request->status_id){
-                $new->status_id =  $request->status_id;
-            }
-            $new->note = $request->note;
-            $new->save();
-        }else{
-            $order->history()->create([
-                'status_id' => $request->status_id,
-                'note' => $request->note,
-            ]);
-        }
+
+        $order->history()->create([
+            'status_id' => $request->get('status_id',null),
+            'note' => $request->note,
+        ]);
 
         $histories = $order->history()->orderBy('created_at','desc')->get();
         $html = \View('admin.orders._partials.timeline_item',compact(['histories']))->render();

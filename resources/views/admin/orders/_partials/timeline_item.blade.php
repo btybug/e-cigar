@@ -9,7 +9,9 @@
         </div>
         <div class="timeline-item-right-col">
             <div>
-                <div class="status-holder" style="background: {{ $history->status->color }}">{!! $history->status->name !!}</div>
+                @if($history->status_id)
+                    <div class="status-holder" style="background: {{ $history->status->color }}">{!! $history->status->name !!}</div>
+                @endif
                 <p class="status-massage">
                     {!! $history->note !!}
                 </p>

@@ -17,7 +17,7 @@ class CreateOrderHistoryTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('status_id');
+            $table->unsignedInteger('status_id')->nullable();
             $table->text('note')->nullable();
             $table->timestamps();
 
