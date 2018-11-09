@@ -39,6 +39,16 @@
         </ul>
         <div class="" id="myTabContent">
 
+            <div class="form-group">
+                <div class="row">
+                    <label for="text" class="control-label col-sm-4">we ship to</label>
+                    <div class="col-sm-8">
+                        {!! Form::open(['class'=>'form-horizontal']) !!}
+                        {!! Form::text('we_ship_to',null,['class'=>'form-control']) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @stop

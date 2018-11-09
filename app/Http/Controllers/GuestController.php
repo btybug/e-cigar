@@ -97,7 +97,7 @@ class GuestController extends Controller
         if(! $request->country) return ['error' => true];
 
         $data = $country->region;
-
+        if($country->region)
         return ['error'=>false,'data'=> $data] ;
     }
 }

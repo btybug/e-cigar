@@ -28,7 +28,7 @@ class GeoZones extends Model
 
     public function countries()
     {
-        return $this->hasMany(ZoneCountries::class,'geo_zone_id');
+        return $this->hasMany(ZoneCountries::class,'geo_zone_id')->with('region');
     }
 
 }

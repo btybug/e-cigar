@@ -23,8 +23,7 @@
                     </li>
                     <li>
                         <a class="btn btn-info nav-link nav-link--new-address" id="shippingAddress-tab"
-                           data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress">Shipping
-                            Address</a>
+                           data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress">Shipping Address</a>
                     </li>
                     <li>
                         <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab" data-toggle="tab"
@@ -162,7 +161,7 @@
                             <div class="row">
                                 <label for="text" class="control-label col-sm-4">Country</label>
                                 <div class="col-sm-8">
-                                    {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country']) !!}
+                                    {!! Form::select('country',$countriesShipping,null,['class'=>'form-control']) !!}
                                 </div>
                             </div>
                         </div>
