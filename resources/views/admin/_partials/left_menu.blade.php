@@ -63,6 +63,9 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    @ok('admin_orders')
+                        <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
+                    @endok
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
                 </ul>
             </li>
@@ -96,20 +99,6 @@
                     @ok('admin_seo_bulk')
                     <li><a href="{{route('admin_seo_bulk')}}"><i class="fa fa-circle-o"></i> Bulk</a></li>
                     @endok
-                </ul>
-            </li>
-            @endok
-            @ok('admin_orders')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-bath"></i>
-                    <span>Orders</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                 </ul>
             </li>
             @endok
