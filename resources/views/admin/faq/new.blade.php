@@ -60,12 +60,6 @@
 
                                 <div class="form-group">
                                     <div class="form-group row">
-                                        <label class="col-sm-3">Featured image</label>
-                                        <div class="col-sm-9">
-                                            {!! media_button('image',$post) !!}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
                                         <label class="col-sm-3">Gallery images</label>
                                         <div class="col-sm-9">
                                             {!! media_button('gallery',$post,true) !!}
@@ -110,15 +104,7 @@
                 </div>
                 <div class="col-md-3 ">
                     <div class="view-product-wall">
-                        <div class="author-wall wall">
-                            <div class="row">
-                                {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
-                                <div class="col-sm-9">
-                                    {!! Form::select('user_id',$authors,null,
-                                                ['class' => 'form-control','id'=> 'status']) !!}
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="status-wall wall">
                             <div class="row">
                                 {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
@@ -128,23 +114,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="comment-wall wall">
-                            <div class="row">
-                                {{Form::label('comment', 'Enable comment',['class' => 'col-sm-3'])}}
-                                <div class="col-sm-9">
-                                    YES {!! Form::radio('comment_enabled',1,true,['class' => '']) !!}
-                                    NO {!! Form::radio('comment_enabled',0,null,['class' => '']) !!}
-                                </div>
-                            </div>
-                        </div>
-                    <!-- <div class="tag-wall wall">
-                            <div class="row">
-                                {{--{{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}--}}
-                            <div class="col-sm-9">
-                                {{--{{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}--}}
-                            </div>
-                        </div>
-                    </div> -->
                         <div class="tag-wall wall">
                             <div class="row">
                                 <label class="col-sm-3 control-label" for="input-category"><span
