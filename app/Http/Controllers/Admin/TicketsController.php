@@ -139,7 +139,8 @@ class TicketsController extends Controller
         $reply->create($result);
         $ticket = Ticket::find($data['ticket_id']);
         $replies = $ticket->replies()->main()->get();
-        $html = \View::make('admin.ticket._partials.comments',compact('replies'))->render();
+        $data = mergeCollections($replies,$ticket->history);
+        $html = \View::make('admin.ticket._partials.comments',compact('data'))->render();
 
         return \Response::json(['success' => true,'message' => 'Success','html' => $html]);
     }
