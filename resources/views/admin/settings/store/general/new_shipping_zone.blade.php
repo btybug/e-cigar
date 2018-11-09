@@ -103,9 +103,9 @@
                                                     <div class="wall">
                                                         <div class="region-container">
                                                             @if($country->all)
-                                                                {!! Form::select('region['.$key.']',getRegions($country->name),'all_selected',['class'=>'form-control region']) !!}
+                                                                {!! Form::select('region['.$key.']',getRegions($country->name),'all_selected',['class'=>'form-control region','multiple']) !!}
                                                             @else
-                                                                {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region']) !!}
+                                                                {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region','multiple']) !!}
                                                             @endif
                                                         </div>
 
@@ -128,7 +128,7 @@
                                             <td>
                                                 <div class="wall">
                                                     <div class="region-container">
-                                                        {!! Form::select('region[0]',[],'all_selected',['class'=>'form-control region','multiple'=>'multiple']) !!}
+                                                        {!! Form::select('region[0]',[],'all_selected',['class'=>'form-control region','multiple']) !!}
 
                                                     </div>
 
