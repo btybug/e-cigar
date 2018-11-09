@@ -577,11 +577,7 @@ textarea {
 .social-media-group .dropdown-menu .dropdown-item.active {
     background-color: #ededed;
 }
-.social-media-group .plus-icon {
-    color: #d2583a;
-    font-size: 22px;
-    cursor: pointer;
-}
+
 .col-form-label {
     padding-top: calc(.375rem + 1px);
     padding-bottom: calc(.375rem + 1px);
@@ -649,5 +645,9 @@ textarea {
     bottom: 4px;
     right: 2px;
     transform: rotate(-45deg);
+}
+
+.table.table--opening-hours > tbody > tr > td {
+    vertical-align: bottom;
 }
 /*End admin settings*/
