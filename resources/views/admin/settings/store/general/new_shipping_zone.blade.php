@@ -104,7 +104,7 @@
                                                 <td>
                                                     <div class="wall">
                                                         <div class="region-container">
-                                                            <select multiple name='regions[{!! $key !!}][]' class="form-control region select-{!! $key !!}">
+                                                            <select multiple name='region[{!! $key !!}][]' class="form-control region select-{!! $key !!}">
                                                                 @php
                                                                     $old=$country->regions->pluck('name','name')->toArray();
                                                                 $getRegions=getRegions($country->name);
@@ -523,7 +523,7 @@ ${datax}
             postSendAjax($("#geo-zones-form").attr("action"), data, function (res) {
 
                 if (!res.error) {
-            location.replace(res.url)
+//            location.replace(res.url)
                 }
             }, function (err) {
 
