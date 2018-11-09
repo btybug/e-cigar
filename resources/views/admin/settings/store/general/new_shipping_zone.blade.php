@@ -525,7 +525,8 @@ ${datax}
                 $("."+$(this).attr("data-select")+" > option").prop("selected","selected");
                 $("." + $(this).attr("data-select")).trigger("change");
             }else{
-                $("."+$(this).attr("data-select")+" > option").removeAttr("selected");
+                console.log(1);
+                $("."+$(this).attr("data-select")+" > option").prop("selected",false);
                 $("." + $(this).attr("data-select")).trigger("change");
             }
         });
