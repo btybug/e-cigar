@@ -39,6 +39,26 @@
 
                                     </div>
                                 </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Social Profile</div>
+                                    <div class="panel-body">
+                                        <div class="col-md-7">
+                                            <div class="form-group">
+                                                <label for="SiteName">Site Name</label>
+                                                <input type="text" class="form-control" id="SiteName" aria-describedby="name" placeholder="Enter name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="siteLogo">Site Logo</label>
+                                                <input type="file" class="form-control" id="siteLogo">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="description">Description</label>
+                                                <textarea  class="form-control" id="description"  rows="5" aria-describedby="description" placeholder="Enter description"></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
 
                                 <div class="panel panel-default">
                                     <div class="panel-heading">Address</div>
@@ -157,14 +177,17 @@
                                             <label for="dateFormat">Date Format</label>
                                             <select id="dateFormat" class="form-control">
                                                 <option selected>Choose...</option>
-                                                <option>...</option>
+                                                <option>MM/DD/YY</option>
+                                                <option>DD/MM/YY</option>
+                                                <option>YY/MM/DD</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="timeFormat">Time Format</label>
                                             <select id="timeFormat" class="form-control">
                                                 <option selected>Choose...</option>
-                                                <option>...</option>
+                                                <option>dd hh:mm</option>
+                                                <option>dd hh:mm:ss.s</option>
                                             </select>
                                         </div>
 
