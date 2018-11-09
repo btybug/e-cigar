@@ -43,7 +43,6 @@
                                     <div class="panel-heading">Social Profile</div>
                                     <div class="panel-body">
                                         <div class="form-group d-flex flex-wrap align-items-center social-media-group">
-                                            {{Form::label('social_media', 'Social Media', array('class' => 'col-sm-3 pl-0 col-form-label'))}}
                                             <div class="col-sm-6 p-0">
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
