@@ -39,22 +39,47 @@
 
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
+                                <div class="panel panel-default social-profile-page">
                                     <div class="panel-heading">Social Profile</div>
                                     <div class="panel-body">
-                                        <div class="col-md-7">
-                                            <div class="form-group">
-                                                <label for="SiteName">Site Name</label>
-                                                <input type="text" class="form-control" id="SiteName" aria-describedby="name" placeholder="Enter name">
+                                        <div class="form-group d-flex flex-wrap align-items-center social-media-group">
+                                            {{Form::label('social_media', 'Social Media', array('class' => 'col-sm-3 pl-0 col-form-label'))}}
+                                            <div class="col-sm-6 p-0">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle"
+                                                                type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                            <i class="fa fa-facebook-f icon-blue"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item active" href="javascript:void(0);">
+                                                                <i class="fa fa-facebook icon-green"></i>
+                                                                <span class="name">Facebook</span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">
+                                                                <i class="fa fa-twitter icon-green"></i>
+                                                                <span class="name">Twitter</span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">
+                                                                <i class="fa fa-yahoo icon-purple"></i>
+                                                                <span class="name">Yahoo</span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">
+                                                                <i class="fa fa-google icon-red"></i>
+                                                                <span class="name">Google</span>
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+                                                    {!! Form::text('social_media[0][url]', null, ['class' => 'form-control','id' => 'socialMedia','placeholder' => 'Profile URL','aria-label' => 'Text input with dropdown button']) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="siteLogo">Site Logo</label>
-                                                <input type="file" class="form-control" id="siteLogo">
+                                            <div class="col-sm-3">
+                                                <span class="plus-icon add-new-social-input"><i class="fa fa-plus"></i></span>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="description">Description</label>
-                                                <textarea  class="form-control" id="description"  rows="5" aria-describedby="description" placeholder="Enter description"></textarea>
-                                            </div>
+
+
                                         </div>
 
                                     </div>
@@ -218,6 +243,28 @@
             $( "#calendar" ).datepicker();
             $('#timepicker1').timepicker();
             $('#timepicker2').timepicker();
+
+
+            $("body").on("click", ".add-new-social-input", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = "\n  <div class=\"clearfix\"></div><div class=\"d-flex align-items-center w-100 social-container mt-3\">\n  <div class=\"col-sm-3 pl-0 col-form-label\"></div>\n\n  <div class=\"col-sm-6 p-0\">\n                                  <div class=\"input-group\">\n                                      <div class=\"input-group-prepend\">\n                                          <button class=\"btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle\"\n                                                  type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n                                                  aria-expanded=\"false\"><i class=\"fa fa-facebook-f icon-blue\"></i>\n                                          </button>\n                                          <div class=\"dropdown-menu\">\n                                              <a class=\"dropdown-item active\"  href=\"#\">\n                                                  <i class=\"fa fa-facebook icon-green\"></i>\n                                                  <span class=\"name\">Facebook</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"#\">\n                                                  <i class=\"fa fa-twitter icon-green\"></i>\n                                                  <span class=\"name\">Twitter</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"#\">\n                                                  <i class=\"fa fa-yahoo icon-purple\"></i>\n                                                  <span class=\"name\">Yahoo</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"#\">\n                                                  <i class=\"fa fa-google icon-red\"></i>\n                                                  <span class=\"name\">Google</span>\n                                              </a>\n                                          </div>\n                                             <input name=\"social_media[" + uid + "][social]\" value=\"fab fa-facebook icon-green\" type=\"hidden\" class=\"social_type\">\n                                      </div>\n                                      <input name=\"social_media[" + uid + "][url]\" type=\"text\" class=\"form-control\"\n                                             aria-label=\"Text input with dropdown button\" placeholder=\"Profile URL\"> \n                                  </div>\n                                </div>\n                                <div class=\"col-sm-3\">\n                                    <span class=\"plus-icon remove-new-social-input\"><i class=\"fa fa-minus\"></i></span>\n                                </div>\n                                </div>\n  ";
+                $(".social-media-group").append(html);
+            });
+
+            $("body").on("click", ".remove-new-social-input", function () {
+                $(this).closest(".social-container").remove();
+            });
+
+            $("body").on("click", ".social-profile-page .dropdown-item", function () {
+                var parent = $(this).closest(".input-group-prepend").find(".dropdown-toggle").find("i");
+
+                var classList = $(this).find("i").attr("class");
+
+                parent.attr("class", "").addClass(classList);
+                $(this).closest(".input-group-prepend").find('.social_type').val(classList);
+                $('.social-profile-page .dropdown-item').removeClass('active');
+                $(this).addClass('active')
+            });
         } );
     </script>
 @stop
