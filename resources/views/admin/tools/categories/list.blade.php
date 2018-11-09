@@ -29,6 +29,12 @@
                     </div>
                     <a href="{!! route('admin_store_categories','tickets') !!} " class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
                 </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="stripe_paymant"  class="title">FAQ</label>
+                    </div>
+                    <a href="{!! route('admin_store_categories','faq') !!} " class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                </li>
             </ul>
         </div>
     </div>

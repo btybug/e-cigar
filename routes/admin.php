@@ -126,6 +126,14 @@ Route::group(['prefix' => 'blog'], function () {
 
 });
 
+Route::group(['prefix' => 'faq'], function () {
+    Route::get('/', 'Admin\FaqController@index')->name('admin_faq');
+    Route::get('create', 'Admin\FaqController@create')->name('admin_faq_create');
+    Route::get('delete/{id}', 'Admin\FaqController@getDelete')->name('admin_faq_delete');
+    Route::get('edit/{id}', 'Admin\FaqController@edit')->name('admin_faq_edit');
+    Route::post('create-new', 'Admin\FaqController@newPost')->name('admin_faq_new');
+});
+
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/', 'Admin\OrdersController@index')->name('admin_orders');
     Route::get('/manage/{id}', 'Admin\OrdersController@getManage')->name('admin_orders_manage');

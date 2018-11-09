@@ -428,4 +428,9 @@ class DatatableController extends Controller
             })->rawColumns(['actions','priority_id','status_id','attachments'])
             ->make(true);
     }
+
+    public function getFaq ()
+    {
+        
+    }
 }
