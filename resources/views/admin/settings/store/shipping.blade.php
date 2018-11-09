@@ -46,7 +46,6 @@
                                 <a href="{!! route('admin_settings_geo_zones_new') !!}" class="btn btn-primary">
                                     <i class="fa fa-plus"></i>
                                 </a>
-                                <button type="button" data-toggle="tooltip" title="" class="btn btn-danger" onclick="confirm('Are you sure?') ? $('#form-geo-zone').submit() : false;" data-original-title="Delete"><i class="fa fa-trash-o"></i></button>
                             </div>
                             <h1>Geo Zones</h1>
                         </div>

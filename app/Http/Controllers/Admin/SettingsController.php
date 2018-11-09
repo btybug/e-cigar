@@ -161,9 +161,9 @@ class SettingsController extends Controller
     {
         $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'section');
         $tax_rates = TaxRates::where('is_active', 1)->get()->pluck('name', 'id')->toArray();
-        $active_couriers = Settings::LeftJoin('couriers', 'settings.key', '=', 'couriers.id')
-            ->where('settings.section', 'active_couriers')
-            ->where('settings.val', '1')
+        $active_couriers = Settings::LeftJoin('couriers', 'bty_settings.key', '=', 'couriers.id')
+            ->where('bty_settings.section', 'active_couriers')
+            ->where('bty_settings.val', '1')
             ->select('couriers.*')
             ->LeftJoin('courier_translations', 'couriers.id', '=', 'courier_translations.couriers_id')
             ->where('courier_translations.locale', app()->getLocale())
