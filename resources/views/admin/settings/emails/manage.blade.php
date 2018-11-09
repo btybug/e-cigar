@@ -39,7 +39,7 @@
                                         <div class="form-group row">
                                             {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::select('from',$froms,null,['class' =>'form-control','id'=>'from','placeholder' => 'hr@hook.am'])}}
+                                                {{Form::select('from',$froms,null,['class' =>'form-control','id'=>'from'])}}
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -86,7 +86,7 @@
                                         <div class="form-group row">
                                             {{Form::label('admin_from', 'From',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::select('admin[from]',$froms,($admin_model)?$admin_model->from:null,['class' =>'form-control','id'=>'admin_from','placeholder' => 'hr@hook.am'])}}
+                                                {{Form::select('admin[from]',$froms,($admin_model)?$admin_model->from:null,['class' =>'form-control','id'=>'admin_from'])}}
                                             </div>
                                         </div>
                                         <div class="form-group row">

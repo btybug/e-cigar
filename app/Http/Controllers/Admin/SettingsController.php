@@ -71,7 +71,7 @@ class SettingsController extends Controller
     {
 
         $model = MailTemplates::find($id);
-        $froms = Emails::where('type', 'from')->pluck('email', 'email');
+        $froms = Emails::where('type', 'from')->pluck('email','email');
         $tos = Emails::where('type', 'to')->pluck('email', 'email');
         $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
         $shortcodes = new ShortCodes();
