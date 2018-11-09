@@ -75,6 +75,7 @@
                                     @endif
                                 </div>
                             </div>
+
                             <div class="form-group required">
                                 <label class="col-sm-2 control-label" for="input-tax-id">Tax Rate</label>
                                 <div class="col-sm-10">
@@ -93,6 +94,7 @@
                                     <tbody>
                                     </tbody>
                                     <tfoot>
+
                                     @if(isset($geo_zone) && $geo_zone && isset($geo_zone->countries) && count($geo_zone->countries))
                                         @foreach($geo_zone->countries as $key=>$country)
                                             <tr>
@@ -102,8 +104,18 @@
                                                 <td>
                                                     <div class="wall">
                                                         <div class="region-container">
-                                                                {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region select-'.$key.'','multiple']) !!}
-                                                            <input type="checkbox" class="select-all" data-select="select-{!! $key !!}">Select All
+                                                            <select multiple name='regions[{!! $key !!}][]' class="form-control region select-{!! $key !!}">
+                                                                @php
+                                                                    $old=$country->regions->pluck('name','name')->toArray();
+                                                                $getRegions=getRegions($country->name);
+                                                                @endphp
+                                                                @foreach($getRegions as $region)
+
+                                                                    <option value="{!! $region !!}"
+                                                                            @if(isset($old[$region])) selected @endif>{!! $region !!}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            <input type="checkbox" @if(count($getRegions)==$country->regions->count()) checked @endif class="select-all" data-select="select-{!! $key !!}">Select All
                                                         </div>
 
                                                     </div>
@@ -130,7 +142,7 @@
                                             <td>
                                                 <div class="wall">
                                                     <div class="region-container">
-                                                        {!! Form::select('region[0]',[],'all_selected',['class'=>'form-control region','multiple']) !!}
+                                                        {!! Form::select('regions[0][]',[],'all_selected',['class'=>'form-control region','multiple']) !!}
 
                                                     </div>
 
@@ -509,10 +521,9 @@ ${datax}
             e.preventDefault();
             let data = $("#geo-zones-form").serialize()
             postSendAjax($("#geo-zones-form").attr("action"), data, function (res) {
-                console.log(1111)
 
                 if (!res.error) {
-            location.replace(res.url)
+//            location.replace(res.url)
                 }
             }, function (err) {
 
@@ -526,13 +537,14 @@ ${datax}
             })
         })
         $("body").on('click','.select-all',function(){
+                var selector='.'+$(this).attr("data-select");
             if($(this).is(':checked') ){
-                $("."+$(this).attr("data-select")+" > option").prop("selected","selected");
-                $("." + $(this).attr("data-select")).trigger("change");
+                $(selector+" > option").prop("selected","selected");
+                console.log($(selector).trigger("change"));
             }else{
                 console.log(1);
-                $("."+$(this).attr("data-select")+" > option").prop("selected",false);
-                $("." + $(this).attr("data-select")).trigger("change");
+                $(selector+" > option").prop("selected",false);
+                console.log($(selector).trigger("change"));
             }
         });
     </script>

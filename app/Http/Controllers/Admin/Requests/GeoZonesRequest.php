@@ -35,7 +35,7 @@ class GeoZonesRequest extends FormRequest
             'payment_options' => 'required',
             'delivery_cost' => 'required|array',
 //            'country.*' => 'required|uniqueWhitColume:zone_countries,name,geo_zone_id,'.$id,
-            'region' => 'required|array',
+            'regions.*' => 'required|array',
             'delivery_cost_types_id' => 'required|exists:delivery_cost_types,id',
             'delivery_cost.*.min' => 'required|integer|min:0',
             'delivery_cost.*.max' => 'required|integer',

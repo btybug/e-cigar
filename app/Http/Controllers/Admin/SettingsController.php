@@ -71,7 +71,7 @@ class SettingsController extends Controller
     {
 
         $model = MailTemplates::find($id);
-        $froms = Emails::where('type', 'from')->pluck('email','email');
+        $froms = Emails::where('type', 'from')->pluck('email', 'email');
         $tos = Emails::where('type', 'to')->pluck('email', 'email');
         $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
         $shortcodes = new ShortCodes();
@@ -137,7 +137,7 @@ class SettingsController extends Controller
     {
         $new = $request->get('new', []);
         $new_to = $request->get('new_to', []);
-        $olds = $request->get('old',[]);
+        $olds = $request->get('old', []);
         if (count($olds)) {
             Emails::whereNotIn('id', array_keys($olds))->delete();
             foreach ($olds as $id => $old) {
@@ -182,29 +182,27 @@ class SettingsController extends Controller
 
     public function saveGeoZone(GeoZonesRequest $request)
     {
+
         $data = $request->except('_token', 'delivery_cost', 'delivery_cost_types_id');
         $delivery_costs = $request->get('delivery_cost');
         $geo_zone = GeoZones::updateOrCreate(['id' => $request->id], $data);
 
         $countries = $request->get('country');
-        $regions = $request->get('region');
-
+        $regions = $request->get('regions');
+        $geo_zone->countries()->whereNotIn('name', $regions);
         foreach ($countries as $key => $country) {
             select_country:
             $zone_country = $geo_zone->countries()->where('name', $country)->first();
             if ($zone_country) {
-                $zone_country->region()->delete();
-            }
-            if ($regions[$key] == 'all_selected' && $zone_country) {
-                $zone_country->all = 1;
-                $zone_country->save();
-
+                $zone_country->regions()->whereNotIn('name', $regions[$key])->delete();
             } elseif (!$zone_country) {
                 $geo_zone->countries()->create(['name' => $country, 'all' => 0]);
                 goto select_country;
             }
             if ($zone_country) {
-                $zone_country->region()->create(['name' => $regions[$key]])->first();
+                foreach ($regions[$key] as $region) {
+                    $zone_country->regions()->create(['name' => $region]);
+                }
             }
         }
 
@@ -219,171 +217,173 @@ class SettingsController extends Controller
                 if ($request->id) {
                     $delivery->options()->updateOrCreate(['id' => $key], $value);
                 }
-            }
-            if (!$request->id) {
-                \DB::table('delivery_cost_options')->insert($options);
-            }
-        }
+}
+if (!$request->id) {
+    \DB::table('delivery_cost_options')->insert($options);
+}
+}
 
-        return ['error' => false, 'url' => route('admin_settings_shipping')];
-    }
+return ['error' => false, 'url' => route('admin_settings_shipping')];
+}
 
-    public
-    function findRegion(Request $request)
-    {
-        $countries = new Countries();
-        $regions =$countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
-        $id=uniqid();
-        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region select-'.$id.'', 'multiple' => 'multiple'])->toHtml();
-        $html.=' <input type="checkbox" class="select-all" data-select="select-'.$id.'">Select All';
-        return ['error' => false, 'html' => $html];
-    }
+public
+function findRegion(Request $request)
+{
+    $countries = new Countries();
+    $regions = $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
+    $id = uniqid();
+    $html = \Form::select('regions[' . $request->get('count') . '][]', $regions, null, ['class' => 'form-control region select-' . $id . '', 'multiple' => 'multiple'])->toHtml();
+    $html .= ' <input type="checkbox" class="select-all" data-select="select-' . $id . '">Select All';
+    return ['error' => false, 'html' => $html];
+}
 
-    public
-    function getStore()
-    {
-        return $this->view('store.general');
-    }
-
-
-    public
-    function getStorePaymentsGateways(Settings $settings)
-    {
-        $model = $settings->getEditableData('active_payments_gateways');
-        return $this->view('store.payments_gateways', compact('model'));
-    }
+public
+function getStore()
+{
+    return $this->view('store.general');
+}
 
 
-    public
-    function getStorePaymentsGatewaysSettings(Settings $settings)
-    {
-        $model = $settings->getEditableData('payments_gateways');
-        return $this->view('store.payments_gateways.settings', compact('model'));
-    }
-
-    public
-    function postStorePaymentsGatewaysSettings(Request $request, Settings $settings)
-    {
-        $settings->updateOrCreateSettings('payments_gateways', $request->except('_token'));
-        return redirect()->back();
-    }
-
-    public function getStorePaymentsGatewaysCash(Settings $settings)
-    {
-        $model = $settings->getEditableData('payments_gateways_cash');
-        return $this->view('store.payments_gateways.cash', compact('model'));
-    }
-
-    public function postStorePaymentsGatewaysCash(Request $request, Settings $settings)
-    {
-        $settings->updateOrCreateSettings('payments_gateways_cash', $request->except('_token'));
-        return redirect()->back();
-    }
-
-    public
-    function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
-    {
-        $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
-        $settings->updateOrCreateSettings('active_payments_gateways', $data);
-        return 1;
-    }
-
-    public
-    function postCouriersEnable(Request $request, Settings $settings)
-    {
-        $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
-        $settings->updateOrCreateSettings('active_couriers', $data);
-        return 1;
-    }
-
-    public
-    function getCouriers(Settings $settings)
-    {
-        $model = $settings->getEditableData('active_couriers');
-        $couriers = Couriers::all();
-        return $this->view('store.couriers', compact('model', 'couriers'));
-    }
-
-    public
-    function getCouriersEdit($id)
-    {
-        $model = Couriers::find($id);
-        return $this->view('store.couriers.edit', compact('model'));
-    }
-
-    public
-    function getCouriersSave(Request $request)
-    {
-        Couriers::updateOrCreate($request->id, $request->except('_token'));
-        return redirect()->route('admin_settings_couriers');
-    }
-
-    public
-    function getDeliveryCost(Settings $settings)
-    {
-        $model = $settings->getEditableData('deliverycost');
-        return $this->view('store.delivery_cost', compact('model'));
-    }
-
-    public
-    function getTaxRates(Settings $settings)
-    {
-        $tax_rates = TaxRates::all();
-        return $this->view('store.tax_rates', compact('tax_rates'));
-    }
-
-    public
-    function getCreateRate($id = null)
-    {
-        $model = TaxRates::find($id);
-        return $this->view('store.tax_rates.create', compact('model'));
-    }
-
-    public
-    function postCreateOrUpdateTaxRate(Request $request)
-    {
-        TaxRates::updateOrCreate($request->id, $request->except('_token', 'translatable'));
-        return redirect()->route('admin_settings_tax_rates');
-    }
-
-    public
-    function postTaxRatesEnable(Request $request)
-    {
-
-        $tax = TaxRates::find($request->get('key'));
-        $tax->is_active = ($request->get('onOff') == 'true') ? 1 : 0;
-        $tax->save();
-        return 1;
-    }
-
-    public
-    function searchPaymentOptions(Request $request, Settings $settings)
-    {
-        return $settings->where('section', 'active_payments_gateways')->get();
+public
+function getStorePaymentsGateways(Settings $settings)
+{
+    $model = $settings->getEditableData('active_payments_gateways');
+    return $this->view('store.payments_gateways', compact('model'));
+}
 
 
-    }
+public
+function getStorePaymentsGatewaysSettings(Settings $settings)
+{
+    $model = $settings->getEditableData('payments_gateways');
+    return $this->view('store.payments_gateways.settings', compact('model'));
+}
 
-    public
-    function getGifts()
-    {
-        return $this->view('store.gifts');
-    }
+public
+function postStorePaymentsGatewaysSettings(Request $request, Settings $settings)
+{
+    $settings->updateOrCreateSettings('payments_gateways', $request->except('_token'));
+    return redirect()->back();
+}
 
-    public
-    function getGiftsManage($id = null)
-    {
-        $products = Products::where('status', 'published')->get()->pluck('name', 'id');
-        $productsTableColumns = collect(\DB::select('show columns from products'))->pluck('Field', 'Field');
-        return $this->view('store.gifts.manage', compact('products', 'productsTableColumns'));
-    }
+public
+function getStorePaymentsGatewaysCash(Settings $settings)
+{
+    $model = $settings->getEditableData('payments_gateways_cash');
+    return $this->view('store.payments_gateways.cash', compact('model'));
+}
 
-    public
-    function postGiftsManage(Request $request)
-    {
-        $gifts = $request->except('_token');
-        dd($request->all());
-    }
+public
+function postStorePaymentsGatewaysCash(Request $request, Settings $settings)
+{
+    $settings->updateOrCreateSettings('payments_gateways_cash', $request->except('_token'));
+    return redirect()->back();
+}
+
+public
+function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
+{
+    $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
+    $settings->updateOrCreateSettings('active_payments_gateways', $data);
+    return 1;
+}
+
+public
+function postCouriersEnable(Request $request, Settings $settings)
+{
+    $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
+    $settings->updateOrCreateSettings('active_couriers', $data);
+    return 1;
+}
+
+public
+function getCouriers(Settings $settings)
+{
+    $model = $settings->getEditableData('active_couriers');
+    $couriers = Couriers::all();
+    return $this->view('store.couriers', compact('model', 'couriers'));
+}
+
+public
+function getCouriersEdit($id)
+{
+    $model = Couriers::find($id);
+    return $this->view('store.couriers.edit', compact('model'));
+}
+
+public
+function getCouriersSave(Request $request)
+{
+    Couriers::updateOrCreate($request->id, $request->except('_token'));
+    return redirect()->route('admin_settings_couriers');
+}
+
+public
+function getDeliveryCost(Settings $settings)
+{
+    $model = $settings->getEditableData('deliverycost');
+    return $this->view('store.delivery_cost', compact('model'));
+}
+
+public
+function getTaxRates(Settings $settings)
+{
+    $tax_rates = TaxRates::all();
+    return $this->view('store.tax_rates', compact('tax_rates'));
+}
+
+public
+function getCreateRate($id = null)
+{
+    $model = TaxRates::find($id);
+    return $this->view('store.tax_rates.create', compact('model'));
+}
+
+public
+function postCreateOrUpdateTaxRate(Request $request)
+{
+    TaxRates::updateOrCreate($request->id, $request->except('_token', 'translatable'));
+    return redirect()->route('admin_settings_tax_rates');
+}
+
+public
+function postTaxRatesEnable(Request $request)
+{
+
+    $tax = TaxRates::find($request->get('key'));
+    $tax->is_active = ($request->get('onOff') == 'true') ? 1 : 0;
+    $tax->save();
+    return 1;
+}
+
+public
+function searchPaymentOptions(Request $request, Settings $settings)
+{
+    return $settings->where('section', 'active_payments_gateways')->get();
+
+
+}
+
+public
+function getGifts()
+{
+    return $this->view('store.gifts');
+}
+
+public
+function getGiftsManage($id = null)
+{
+    $products = Products::where('status', 'published')->get()->pluck('name', 'id');
+    $productsTableColumns = collect(\DB::select('show columns from products'))->pluck('Field', 'Field');
+    return $this->view('store.gifts.manage', compact('products', 'productsTableColumns'));
+}
+
+public
+function postGiftsManage(Request $request)
+{
+    $gifts = $request->except('_token');
+    dd($request->all());
+}
 
 
 }
