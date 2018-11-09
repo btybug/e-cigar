@@ -452,106 +452,10 @@
 
 
                 <div class="order-notes_timeline">
-                    <ul class="list-unstyled">
-                        <li class="timeline_item">
-                            <div class="timeline-item-left-col">
-                                <div>
-                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
-                                    <span class="timeline-item-left-col_dtls">15:25</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item-right-col">
-                                <div>
-                                    <div class="status-holder">Submited</div>
-                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline_item">
-                            <div class="timeline-item-left-col">
-                                <div>
-                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
-                                    <span class="timeline-item-left-col_dtls">15:25</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item-right-col">
-                                <div>
-                                    <div class="status-holder">Submited</div>
-                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline_item">
-                            <div class="timeline-item-left-col">
-                                <div>
-                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
-                                    <span class="timeline-item-left-col_dtls">15:25</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item-right-col">
-                                <div>
-                                    <div class="status-holder">Submited</div>
-                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline_item">
-                            <div class="timeline-item-left-col">
-                                <div>
-                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
-                                    <span class="timeline-item-left-col_dtls">15:25</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item-right-col">
-                                <div>
-                                    <div class="status-holder">Submited</div>
-                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline_item">
-                            <div class="timeline-item-left-col">
-                                <div>
-                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
-                                    <span class="timeline-item-left-col_dtls">15:25</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item-right-col">
-                                <div>
-                                    <div class="status-holder">Submited</div>
-                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="timeline_item">
-                            <div class="timeline-item-left-col">
-                                <div>
-                                    <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
-                                    <span class="timeline-item-left-col_dtls">11/5/2018</span>
-                                    <span class="timeline-item-left-col_dtls">15:25</span>
-                                </div>
-                            </div>
-                            <div class="timeline-item-right-col">
-                                <div>
-                                    <div class="status-holder">Submited</div>
-                                    <p class="status-massage">Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio.
-                                        Lorem ipsum dolor sit amet consiquest dio, Lorem ipsum dolor sit amet consiquest dio</p>
-                                </div>
-                            </div>
-                        </li>
+                    <ul class="list-unstyled order-timeline">
+                        @include('admin.orders._partials.timeline_item',['histories' => $order->history()->orderBy('created_at','desc')->get()])
                     </ul>
                 </div>
-
             </div>
 
             <div class="row order-main-cnt_control-btns">
@@ -563,25 +467,25 @@
                     <p class="panel-heading text-center">Add Status <span class="pull-right"><i class="fa fa-close"></i></span></p>
                 </div>
                 <div class="hidden-add-field_body">
-                    <div class="form-group mb-20 w-100">
-                        <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
-                        <div class="col-sm-8">
-                            <select name="changeStatusSelect" id="input-store" class="form-control">
-                                <option value="0" selected>Shipping</option>
-                                <option value="0">...</option>
-                                <option value="0">...</option>
-                            </select>
+                    {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                        {!! Form::hidden('id',$order->id) !!}
+                        <div class="errors"></div>
+                        <div class="form-group mb-20 w-100">
+                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change status to</label>
+                            <div class="col-sm-8">
+                                {!! Form::select('status_id',$statuses,null,['class' => 'form-control']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="ChangeMessage" class="control-label col-sm-4">Message</label>
-                        <div class="col-sm-8">
-                            <textarea id="ChangeMessage" class="d-block w-100" rows="6"></textarea>
+                        <div class="form-group">
+                            <label for="ChangeMessage" class="control-label col-sm-4">Message</label>
+                            <div class="col-sm-8">
+                                {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="confirm-btn-outer" style="padding-left: 15px">
-                        <button type="button" class="btn btn-primary">Change</button>
-                    </div>
+                        <div class="confirm-btn-outer" style="padding-left: 15px">
+                            {!! Form::submit('Change',['class' => 'btn btn-primary change-status-btn']) !!}
+                        </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
 
@@ -590,13 +494,17 @@
                     <p class="panel-heading text-center">Add Note <span class="pull-right"><i class="fa fa-close"></i></span></p>
                 </div>
                 <div class="hidden-add-field_body">
-                    <div class="form-group w-100">
-                        <label class="control-label" for="addNoteArea">Add your note</label>
-                        <textarea id="addNoteArea" class="d-block w-100" rows="6"></textarea>
-                    </div>
-                    <div class="confirm-btn-outer">
-                        <button type="button" class="btn btn-primary">Submit</button>
-                    </div>
+                    {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                        <div class="errors"></div>
+                        {!! Form::hidden('id',$order->id) !!}
+                        <div class="form-group w-100">
+                            <label class="control-label" for="addNoteArea">Add your note</label>
+                            {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
+                        </div>
+                        <div class="confirm-btn-outer">
+                            {!! Form::submit('Submit',['class' => 'btn btn-primary change-status-btn']) !!}
+                        </div>
+                    {!! Form::close() !!}
                 </div>
 
 
@@ -661,6 +569,31 @@
     <script>
         $(function () {
 
+            $('body').on('click', '.change-status-btn', function (event) {
+                event.preventDefault();
+                var form = $(this).parents('form:first');
+                var data = form.serialize();
+                form.find('.errors').html('');
+                $.ajax({
+                    url: "{!! route('orders_add_note') !!}",
+                    type: 'POST',
+                    data: data,
+                    success: function (data) {
+                        if(! data.error) {
+                            form[0].reset();
+                            $('.hidden-add-field_heading .fa-close').trigger('click');
+                            $(".order-timeline").html(data.html);
+                        }
+                    },
+                    error: function (data) {
+                        let errors = data.responseJSON.errors;
+                        $.map(errors, function (k, v) {
+                            form.find('.errors').append(`<p>${k[0]}</p>`);
+                        });
+                    }
+                });
+            });
+
             $('#btnAddStatus').on('click',function(){
                 $('#addStatusField').addClass('show');
                 $('.order-main-cnt_control-btns').hide();
@@ -674,41 +607,7 @@
             $('.hidden-add-field_heading .fa-close').on('click',function(){
                 $(this).closest('.hidden-add-field').removeClass('show');
                 $('.order-main-cnt_control-btns').show("1000");
-
             });
-
-
-
-
-        {{--$('#categories-table').DataTable({--}}
-            {{--ajax:  "{!! route('datatable_all_categories') !!}",--}}
-            {{--"processing": true,--}}
-            {{--"serverSide": true,--}}
-            {{--"bPaginate": true,--}}
-            {{--columns: [--}}
-            {{--{data: 'id',name: 'id'},--}}
-            {{--{data: 'name', name: 'name'},--}}
-            {{--{data: 'description',name: 'description'},--}}
-            {{--{data: 'image', name: 'image'},--}}
-            {{--{data: 'icon', name: 'icon'},--}}
-            {{--{data: 'created_at', name: 'created_at'}--}}
-            {{--]--}}
-            {{--});--}}
-
-            //            $('.dropdown-btn').on('click', function () {
-            //                $('.dropdown-btn').each(function () {
-            //                    if ($('.dropdown-btn').next('.dropdown-inner').hasClass('show')) {
-            //                        $('.dropdown-inner').removeClass('show');
-            //                    }
-            //                });
-            //
-            //                $(this).next('.dropdown-inner').addClass('show');
-            //            });
-            //
-            //            $('.dropdown-close').on('click', function () {
-            //                $(this).closest('.dropdown-inner').removeClass('show');
-            //            });
-
         });
 
     </script>

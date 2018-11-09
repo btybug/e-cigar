@@ -41,6 +41,11 @@ class OrderHistory extends Model
         return $this->belongsTo(Orders::class, 'order_id');
     }
 
+    public function status()
+    {
+        return $this->hasOne(Statuses::class, 'id','status_id');
+    }
+
     public function admin()
     {
         return $this->belongsTo(User::class, 'user_id');

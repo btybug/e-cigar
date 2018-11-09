@@ -9,9 +9,12 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\OrderHistoryRequest;
 use App\Http\Controllers\Controller;
+use App\Models\OrderHistory;
 use App\Models\Orders;
 use App\Models\Statuses;
+use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
@@ -38,5 +41,29 @@ class OrdersController extends Controller
     public function getNew()
     {
         return $this->view('new');
+    }
+
+    public function addNote(OrderHistoryRequest $request)
+    {
+        $order = Orders::findOrFail($request->id);
+        $last = $order->history()->latest()->first();
+        if($last){
+            $new = $last->replicate();
+            if($request->status_id){
+                $new->status_id =  $request->status_id;
+            }
+            $new->note = $request->note;
+            $new->save();
+        }else{
+            $order->history()->create([
+                'status_id' => $request->status_id,
+                'note' => $request->note,
+            ]);
+        }
+
+        $histories = $order->history()->orderBy('created_at','desc')->get();
+        $html = \View('admin.orders._partials.timeline_item',compact(['histories']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
     }
 }
