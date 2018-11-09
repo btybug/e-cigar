@@ -39,17 +39,6 @@ class StoreController extends Controller
         return $this->view('new',compact('model'));
     }
 
-    public function getTaxRate()
-    {
-        return $this->view('tax_rate');
-    }
-
-    public function getSettings()
-    {
-        $shipping_zones = ShippingZones::all();
-        return $this->view('settings',compact('shipping_zones'));
-    }
-
     public function getCoupons()
     {
         return $this->view('coupons');

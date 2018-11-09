@@ -19,9 +19,4 @@ class ToolsController extends Controller
     {
         return $this->view('index');
     }
-
-    public function getTags()
-    {
-        return $this->view('tags');
-    }
 }

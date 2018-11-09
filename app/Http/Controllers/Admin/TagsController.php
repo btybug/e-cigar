@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
-    protected $view = 'admin.inventory.tags';
+    protected $view = 'admin.tools.tags';
 
     public function getIndex()
     {

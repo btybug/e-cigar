@@ -96,19 +96,12 @@ Route::group(['prefix' => 'users'], function () {
     });
 });
 Route::group(['prefix' => 'store'], function () {
-
-    Route::group(['prefix' => 'tax-rate'], function () {
-        Route::get('/', 'Admin\StoreController@getTaxRate')->name('admin_store_tax');
-        Route::post('/', 'Admin\StoreController@postTaxRate')->name('post_admin_store_tax');
-    });
-
     Route::group(['prefix' => 'coupons'], function () {
         Route::get('/', 'Admin\StoreController@getCoupons')->name('admin_store_coupons');
         Route::get('/new', 'Admin\StoreController@getCouponsNew')->name('admin_store_coupons_new');
         Route::get('/delete/{id}', 'Admin\StoreController@Delete')->name('admin_store_coupons_delete');
         Route::get('/edit/{id}', 'Admin\StoreController@Edit')->name('admin_store_coupons_edit');
         Route::post('/coupons-save', 'Admin\StoreController@CouponsSave')->name('admin_store_coupons_save');
-
     });
 
     Route::group(['prefix' => 'settings'], function () {
@@ -168,17 +161,6 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/delete', 'Admin\AttributesController@postAttributesDelete')->name('admin_store_attributes_delete');
         Route::post('/get-variations-table', 'Admin\AttributesController@getVariationsTable')->name('admin_store_attributes_variations_table');
     });
-
-    Route::group(['prefix' => 'options'], function () {
-        Route::get('/', 'Admin\OptionsController@getIndex')->name('admin_stock_options');
-    });
-
-    Route::group(['prefix' => 'tags'], function () {
-        Route::get('/', 'Admin\TagsController@getIndex')->name('admin_stock_tags');
-        Route::post('/save', 'Admin\TagsController@tagsSave')->name('admin_stock_tags_save');
-        Route::post('/search', 'Admin\TagsController@postSearch')->name('admin_stock_tags_save');
-        Route::post('/delete', 'Admin\TagsController@postDelete')->name('admin_stock_tags_delete');
-    });
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
@@ -198,8 +180,6 @@ Route::group(['prefix' => '/tickets'], function () {
 
 Route::group(['prefix' => '/tools'], function () {
     Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
-    Route::get('/tags', 'Admin\ToolsController@getTags')->name('admin_tools_tags');
-
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'Admin\CategoriesController@list')->name('admin_categories_list');
 
@@ -219,6 +199,13 @@ Route::group(['prefix' => '/tools'], function () {
         Route::get('/manage/{type}', 'Admin\StatusController@getStatusesManage')->name('admin_stock_statuses_manage');
         Route::post('/manage/{id?}', 'Admin\StatusController@postStatusesManage')->name('post_admin_stock_statuses_manage');
         Route::post('get-manage-form', 'Admin\StatusController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
+    });
+
+    Route::group(['prefix' => 'tags'], function () {
+        Route::get('/', 'Admin\TagsController@getIndex')->name('admin_stock_tags');
+        Route::post('/save', 'Admin\TagsController@tagsSave')->name('admin_stock_tags_save');
+        Route::post('/search', 'Admin\TagsController@postSearch')->name('admin_stock_tags_save');
+        Route::post('/delete', 'Admin\TagsController@postDelete')->name('admin_stock_tags_delete');
     });
 });
 

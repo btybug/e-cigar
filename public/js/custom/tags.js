@@ -41,7 +41,7 @@ const makeAllHtml = data => {
         $(".tags").append(makeHtml(item));
     });
 };
-AjaxCall("/admin/inventory/tags/save", {}, function(res) {
+AjaxCall("/admin/tools/tags/save", {}, function(res) {
     if (!res.error && res.data) {
         makeAllHtml(res.data);
     }
@@ -68,7 +68,7 @@ $("form").submit(function(e) {
         alert("Please fill the form");
         return;
     }
-    AjaxCall("/admin/inventory/tags/save", { tags: value }, function(res) {
+    AjaxCall("/admin/tools/tags/save", { tags: value }, function(res) {
         if (!res.error && res.data) {
             makeAllHtml(res.data);
         }
@@ -90,7 +90,7 @@ $("form").submit(function(e) {
 
 $("body").on("click", ".remove-tag", function() {
     let value = $(this).attr("data-id");
-    AjaxCall("/admin/inventory/tags/delete", { id: value }, function(res) {
+    AjaxCall("/admin/tools/tags/delete", { id: value }, function(res) {
         if (!res.error && res.data) {
             makeAllHtml(res.data);
         }
