@@ -102,11 +102,8 @@
                                                 <td>
                                                     <div class="wall">
                                                         <div class="region-container">
-                                                            @if($country->all)
-                                                                {!! Form::select('region['.$key.']',getRegions($country->name),'all_selected',['class'=>'form-control region','multiple']) !!}
-                                                            @else
-                                                                {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region','multiple']) !!}
-                                                            @endif
+                                                                {!! Form::select('region['.$key.']',getRegions($country->name),$country->region->name,['class'=>'form-control region select-'.$key.'','multiple']) !!}
+                                                            <input type="checkbox" class="select-all" data-select="select-{!! $key !!}">Select All
                                                         </div>
 
                                                     </div>
@@ -319,6 +316,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
+
+
         $("body").on("click", ".remove-deliver-option", function(){
             $(this).closest("tbody").remove()
         })
@@ -521,6 +520,14 @@ ${datax}
                 }
             })
         })
-
+        $("body").on('click','.select-all',function(){
+            if($(this).is(':checked') ){
+                $("."+$(this).attr("data-select")+" > option").prop("selected","selected");
+                $("." + $(this).attr("data-select")).trigger("change");
+            }else{
+                $("."+$(this).attr("data-select")+" > option").removeAttr("selected");
+                $("." + $(this).attr("data-select")).trigger("change");
+            }
+        });
     </script>
 @stop

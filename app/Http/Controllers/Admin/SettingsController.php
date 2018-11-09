@@ -233,7 +233,9 @@ class SettingsController extends Controller
     {
         $countries = new Countries();
         $regions = ['all_selected' => 'All Regions'] + $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
-        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region', 'multiple' => 'multiple'])->toHtml();
+        $id=uniqid();
+        $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region select-'.$id.'', 'multiple' => 'multiple'])->toHtml();
+        $html.=' <input type="checkbox" class="select-all" data-select="select-'.$id.'">Select All';
         return ['error' => false, 'html' => $html];
     }
 
