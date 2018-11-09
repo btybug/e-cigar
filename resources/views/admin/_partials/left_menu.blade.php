@@ -50,7 +50,6 @@
                     <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
                     </li>
                     @endok
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
             @endok
@@ -145,7 +144,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_forum')}}"><i class="fa fa-circle-o"></i> Show</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Inline charts</a></li>
                 </ul>
             </li>
             @endok
