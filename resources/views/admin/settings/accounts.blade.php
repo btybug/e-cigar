@@ -19,7 +19,7 @@
                 </ul>
                 <div class="tab-pane fade in" id="admin_settings_accounts">
                     <div class="text-right">
-                        <button type="submit" class="btn btn-success pull-right">Save</button>
+                        <button type="submit" class="btn btn-success">Save</button>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
