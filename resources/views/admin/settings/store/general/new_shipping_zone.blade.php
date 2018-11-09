@@ -523,7 +523,7 @@ ${datax}
             postSendAjax($("#geo-zones-form").attr("action"), data, function (res) {
 
                 if (!res.error) {
-//            location.replace(res.url)
+            location.replace(res.url)
                 }
             }, function (err) {
 
