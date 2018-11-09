@@ -336,7 +336,9 @@ class DatatableController extends Controller
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
             })->editColumn('status', function ($attr) {
-                return $attr->history()->first()->status;
+                $status = $attr->history()->whereNotNull('status_id')->latest()->first();
+                return ($status) ?
+                    '<span class="badge" style="background-color: '.$status->status->color.'">'.$status->status->name.'</span>' : null;
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
@@ -344,7 +346,7 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions'])
+            })->rawColumns(['actions','status'])
             ->make(true);
     }
 

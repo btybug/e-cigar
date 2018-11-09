@@ -138,6 +138,8 @@ Route::group(['prefix' => 'orders'], function () {
     Route::get('/manage/{id}', 'Admin\OrdersController@getManage')->name('admin_orders_manage');
     Route::get('/new', 'Admin\OrdersController@getNew')->name('admin_orders_new');
     Route::post('/add-note', 'Admin\OrdersController@addNote')->name('orders_add_note');
+    Route::get('/settings', 'Admin\OrdersController@getSettings')->name('admin_orders_settings');
+    Route::post('/settings', 'Admin\OrdersController@postSettings')->name('admin_orders_settings_save');
 });
 
 Route::group(['prefix' => 'inventory'], function () {

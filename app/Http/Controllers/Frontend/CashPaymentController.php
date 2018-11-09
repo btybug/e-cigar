@@ -15,6 +15,8 @@ use App\Models\OrderAddresses;
 use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\StripePayments;
+use App\Models\Statuses;
+use App\Models\Settings;
 use App\Models\ZoneCountries;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
@@ -26,6 +28,18 @@ use PragmaRX\Countries\Package\Countries;
 class CashPaymentController extends Controller
 {
     protected $view= 'frontend.shop';
+
+    private $statuses;
+    private $settings;
+
+    public function __construct(
+        Statuses $statuses,
+        Settings $settings
+    )
+    {
+        $this->statuses = $statuses;
+        $this->settings = $settings;
+    }
 
     public function order(Request $request)
     {
@@ -51,7 +65,14 @@ class CashPaymentController extends Controller
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
             ]);
-            $order->history()->create(['status_id'=>1]);
+
+            $status = $setting = $this->settings->getData('order', 'open');
+            $historyData['user_id'] = \Auth::id();
+            $historyData['status_id'] = ($status)?$status->val : $this->statuses->where('type','order')->first()->id;
+            $historyData['note'] = 'Order made';
+
+            $order->history()->create($historyData);
+
             $shippingAddress = $shippingAddress->toArray();
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);

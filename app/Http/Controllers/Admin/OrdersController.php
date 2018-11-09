@@ -14,11 +14,24 @@ use App\Http\Controllers\Controller;
 use App\Models\OrderHistory;
 use App\Models\Orders;
 use App\Models\Statuses;
+use App\Models\Settings;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
     protected $view = 'admin.orders';
+
+    private $statuses;
+    private $settings;
+
+    public function __construct(
+        Statuses $statuses,
+        Settings $settings
+    )
+    {
+        $this->statuses = $statuses;
+        $this->settings = $settings;
+    }
 
     public function index()
     {
@@ -34,7 +47,7 @@ class OrdersController extends Controller
             ->with('items')
             ->with('user')->first();
         if(!$order)abort(404);
-        $statuses=Statuses::where('type','order')->get()->pluck('name','id');
+        $statuses= $this->statuses->where('type','order')->get()->pluck('name','id');
         return $this->view('manage',compact('order','statuses'));
     }
 
@@ -56,5 +69,22 @@ class OrdersController extends Controller
         $html = \View('admin.orders._partials.timeline_item',compact(['histories']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function getSettings ()
+    {
+        $statuses = $this->statuses->where('type','order')->get()->pluck('name','id')->all();
+        $settings = $this->settings->getEditableData('order');
+
+        return $this->view('settings',compact(['settings','statuses']));
+    }
+
+    public function postSettings (Request $request)
+    {
+        $data = $request->except('_token');
+
+        $this->settings->updateOrCreateSettings('order', $data);
+
+        return redirect()->back();
     }
 }
