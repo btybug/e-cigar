@@ -110,12 +110,14 @@
                                                 </td>
                                                 <td>
                                                     <div>
-                                                        @if(count($geo_zone->countries)==$key-1)
-                                                            <button type="button" data-count="0" class="add-new-get-zones"><i
-                                                                        class="fa fa-plus"></i></button>
+                                                        @if(count($geo_zone->countries)!=$key+1)
+                                                            <button type="button" data-count="{!! $key !!}" class="remove-new-get-zones"><i class="fa fa-trash"></i></button>
+
+
                                                             @else
-                                                        <button type="button" data-count="{!! $key !!}" class="remove-new-get-zones"><i class="fa fa-trash"></i></button>
-                                                            @endif
+                                                            <button type="button" data-count="{!! $key !!}" class="add-new-get-zones"><i
+                                                                    class="fa fa-plus"></i></button>
+                                                        @endif
                                                     </div>
                                                 </td>
                                             </tr>
