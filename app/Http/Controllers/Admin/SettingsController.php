@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\AccountsRequest;
 use App\Http\Controllers\Admin\Requests\GeoZonesRequest;
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
@@ -132,7 +133,7 @@ class SettingsController extends Controller
         return $this->view('accounts', compact('froms', 'tos'));
     }
 
-    public function postAccounts(Request $request)
+    public function postAccounts(AccountsRequest $request)
     {
         $new = $request->get('new', []);
         $new_to = $request->get('new_to', []);
