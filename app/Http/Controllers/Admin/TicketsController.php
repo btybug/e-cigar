@@ -111,7 +111,7 @@ class TicketsController extends Controller
 
         $model->update($request->except('_token'));
 
-        return redirect()->route('admin_tickets');
+        return redirect()->back();
     }
 
     public function reply(Request $request)
