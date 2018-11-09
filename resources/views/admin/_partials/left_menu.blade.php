@@ -63,6 +63,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    @ok('admin_stock')
+                    <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
+                    @endok
+                    @ok('admin_store_attributes')
+                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
+                    @endok
                     @ok('admin_orders')
                         <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
@@ -100,26 +106,6 @@
                     <li><a href="{{route('admin_seo_bulk')}}"><i class="fa fa-circle-o"></i> Bulk</a></li>
                     @endok
                 </ul>
-            </li>
-            @endok
-            @ok('admin_stock')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-bath"></i>
-                    <span>Inventory </span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    @ok('admin_stock')
-                    <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
-                    @endok
-                    @ok('admin_store_attributes')
-                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
-                    @endok
-                </ul>
-
             </li>
             @endok
             @ok('admin_forum')
