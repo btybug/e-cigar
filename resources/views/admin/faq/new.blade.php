@@ -44,15 +44,12 @@
                                                 <div id="{{ strtolower($language->code) }}"
                                                      class="tab-pane fade  @if($loop->first) in active @endif">
                                                     <div class="form-group">
-                                                        <label>Title</label>
+                                                        <label>To Question</label>
                                                         {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($post,strtolower($language->code),'title'),['class'=>'form-control']) !!}
                                                     </div>
+
                                                     <div class="form-group">
-                                                        <label>Short Description</label>
-                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($post,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Long Description</label>
+                                                        <label>To Answer</label>
                                                         {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($post,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                     </div>
                                                 </div>
