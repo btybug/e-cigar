@@ -51,7 +51,7 @@
                                                 </td>
                                                 <td>
                                                     @if(count($froms)!=$key+1)
-                                                        <button type="button" class="btn pull-right remove-line btn-danger delete"><i class="fa fa-danger"></i></button>
+                                                        <button type="button" class="btn pull-right remove-line btn-danger delete"><i class="fa fa-minus"></i></button>
                                                     @else
                                                         <button type="button" class="btn btn-primary pull-right add-more-from"><i
                                                                     class="fa fa-plus"></i></button>
@@ -170,7 +170,7 @@
         $(function () {
             $('body').on('click', '.add-more-from', function () {
                 $(this).removeClass('add-more-from').addClass('remove-line');
-                $(this).removeClass('btn-primary').addClass('btn-warning delete');
+                $(this).removeClass('btn-primary').addClass('btn-danger delete');
                 $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
                 let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
                     </td><td><input type="hidden" name="new[${fcount}][type]" value="from">
@@ -183,7 +183,7 @@
             })
             $('body').on('click', '.add-more-too', function () {
                 $(this).removeClass('add-more-from').addClass('remove-line');
-                $(this).removeClass('btn-primary').addClass('btn-warning delete');
+                $(this).removeClass('btn-primary').addClass('btn-danger delete');
                 $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
                 let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
                     </td><td><input type="hidden" name="new_to[${tcount}][type]" value="to">
