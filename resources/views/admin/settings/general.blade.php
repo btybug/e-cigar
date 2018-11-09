@@ -179,13 +179,14 @@
                                     <div class="panel-heading">Holidays</div>
                                     <div class="row">
                                         <div class="col-md-7">
-                                            <table class="table">
+                                            <table class="table table--holidays">
                                                 <tr>
                                                     <td>
                                                         <label for="calendar">Calendar</label>
-                                                    </td>
-                                                    <td>
-                                                        <input class=form-control type="text" id="calendar">
+                                                        <div class="input-group">
+                                                            <input id="calendar" type="text" class="form-control" placeholder="Choose date">
+                                                            <label class="input-group-addon" for="calendar"><i class="glyphicon glyphicon-calendar"></i></label>
+                                                        </div>
                                                     </td>
                                                     <td>
                                                         <input type="text" class="form-control" placeholder="Christmas">

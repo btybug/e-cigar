@@ -647,7 +647,8 @@ textarea {
     transform: rotate(-45deg);
 }
 
-.table.table--opening-hours > tbody > tr > td {
+.table.table--opening-hours > tbody > tr > td,
+.table.table--holidays > tbody > tr > td {
     vertical-align: bottom;
 }
 /*End admin settings*/
