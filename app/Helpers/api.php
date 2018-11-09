@@ -396,7 +396,10 @@ function replyRender($replies, $i = 0,$parent = false)
         $reply = $replies[$i];
 
         if($reply->getTable() == 'history'){
-            echo '<div class="row">'.$reply->user->name .' has '.$reply->body.'</div>';
+            echo '<div class="admin_updated">
+<div class="image label label-default"><img src="/public/images/male.png" alt="img"></div>
+<h4><span class="label label-default">'.$reply->user->name .' has '.$reply->body.'</span></h4>
+</div>';
         }else{
             //render main content
             if($parent){
