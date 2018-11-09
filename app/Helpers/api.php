@@ -394,15 +394,19 @@ function replyRender($replies, $i = 0,$parent = false)
 {
     if (count($replies)) {
         $reply = $replies[$i];
-        //render main content
-        if($parent){
-            echo '<div class="clearfix"></div><div class="row user-comment-img sub pl-4 w-100 m-0">';
-        }else{
-            echo '<div class="row user-comment-img">';
-        }
 
-        echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
-        echo '<figure class="thumbnail">';
+        if($reply->getTable() == 'history'){
+            echo '<div class="row">'.$reply->user->name .' has '.$reply->body.'</div>';
+        }else{
+            //render main content
+            if($parent){
+                echo '<div class="clearfix"></div><div class="row user-comment-img sub pl-4 w-100 m-0">';
+            }else{
+                echo '<div class="row user-comment-img">';
+            }
+
+            echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
+            echo '<figure class="thumbnail">';
             echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
             if($reply->author){
                 if($reply->author->isAdministrator()){
@@ -414,30 +418,32 @@ function replyRender($replies, $i = 0,$parent = false)
                 echo '<figcaption class="text-center">' .$reply->guest_name.'</figcaption>';
             }
 
-        echo '</figure>';
-        echo '</div>';
+            echo '</figure>';
+            echo '</div>';
 
 
-        echo '<div class="col-lg-10 col-md-10">';
-        echo '<div class="card arrow left mb-4">';
-        echo '<div class="card-body">';
-        echo '<header class="text-left">';
-        echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
-        echo '<time class="comment-date" datetime="'. $reply->created_at .'"><i class="fa fa-clock-o"></i> '. time_ago($reply->created_at) .'</time>';
-        echo '</header>';
-        echo '<div class="comment-post">';
-        echo '<p>'.$reply->reply.'</p>';
-        echo '</div>';
-        echo '<p class="text-right"><a href="#" data-id="'.$reply->id.'" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
+            echo '<div class="col-lg-10 col-md-10">';
+            echo '<div class="card arrow left mb-4">';
+            echo '<div class="card-body">';
+            echo '<header class="text-left">';
+            echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
+            echo '<time class="comment-date" datetime="'. $reply->created_at .'"><i class="fa fa-clock-o"></i> '. time_ago($reply->created_at) .'</time>';
+            echo '</header>';
+            echo '<div class="comment-post">';
+            echo '<p>'.$reply->reply.'</p>';
+            echo '</div>';
+            echo '<p class="text-right"><a href="#" data-id="'.$reply->id.'" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
 
-        if (count($reply->children)) {
-            replyRender($reply->children, 0,true);
+            if (count($reply->children)) {
+                replyRender($reply->children, 0,true);
+            }
+            echo '</div>';
         }
 
-        echo '</div>';
+
         $i = $i + 1;
         if ($i != count($replies)) {
             replyRender($replies, $i,$parent);
@@ -510,5 +516,16 @@ function getSeo(array $seo,$index,$object)
 {
  if($seo && is_object($object) && isset($seo[$index])) return parametazor($seo[$index],$object);
  return null;
+}
+
+function mergeCollections($collection1,$collection2){
+    $collection = collect();
+
+    foreach ($collection1 as $col1)
+        $collection->push($col1);
+    foreach ($collection2 as $col2)
+        $collection->push($col2);
+    $data = $collection->sortByDesc('created_at');
+    return $data->merge([]);
 }
 

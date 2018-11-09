@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\LogActivities;
+use App\Models\Ticket;
+use App\Observers\TicketObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             return "<?php echo number_format($money, 2); ?>";
         });
 
+        Ticket::observe(TicketObserver::class);
     }
 
     /**

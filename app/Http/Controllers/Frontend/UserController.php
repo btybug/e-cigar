@@ -161,7 +161,9 @@ class UserController extends Controller
 
         if(! $ticket) abort(404);
         $replies = $ticket->replies()->main()->get();
-        return $this->view('ticket_view',compact(['ticket','replies']));
+        $data = mergeCollections($replies,$ticket->history);
+
+        return $this->view('ticket_view',compact(['ticket','data']));
     }
 
     public function postTicketsNew(Request $request)

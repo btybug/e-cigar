@@ -51,4 +51,9 @@ class Ticket extends Model
     {
         return $this->belongsTo(Category::class,'category_id','id');
     }
+
+    public function history()
+    {
+        return $this->morphMany(History::class, 'tickets', 'reference_table', 'reference_id');
+    }
 }

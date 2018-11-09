@@ -1,1 +1,1 @@
-{!! replyRender($replies) !!}
+{!! replyRender($data) !!}
