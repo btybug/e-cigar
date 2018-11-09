@@ -232,7 +232,7 @@ class SettingsController extends Controller
     function findRegion(Request $request)
     {
         $countries = new Countries();
-        $regions = ['all_selected' => 'All Regions'] + $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
+        $regions =$countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
         $id=uniqid();
         $html = \Form::select('region[' . $request->get('count') . ']', $regions, null, ['class' => 'form-control region select-'.$id.'', 'multiple' => 'multiple'])->toHtml();
         $html.=' <input type="checkbox" class="select-all" data-select="select-'.$id.'">Select All';

@@ -273,7 +273,7 @@ function getRegions($country, $all = false)
     $countries = new \PragmaRX\Countries\Package\Countries();
     if(! $country) return [];
     return ($all) ? $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray() :
-        ['all_selected' => 'All Regions'] + $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
+       $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
 }
 
 function getCities($country)
