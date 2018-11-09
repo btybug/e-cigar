@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="content">
-                        <div class="attachments">
+                        <div class="attachments mb-2">
                             <span class="title">Attachments</span>
                             <ul>
                                 @if(count($ticket->attachments))
@@ -43,12 +43,12 @@
                                 <div class="divider"></div>
                                 <div class="user-add-comment mt-md-5 my-4">
                                     <div class="row">
-                                        <div class="col-sm-1">
+                                        <div class="col-sm-2">
                                             <div class="user-img">
                                                 <img src="/public/images/male.png" alt="">
                                             </div>
                                         </div>
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-10">
                                             <div class="add-comment">
                                                 {!! Form::open(['url' => 'admin_tickets_reply']) !!}
                                                 {!! Form::hidden('ticket_id',$ticket->id) !!}

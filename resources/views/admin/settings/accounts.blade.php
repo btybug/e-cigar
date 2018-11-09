@@ -16,11 +16,12 @@
             </li>
         </ul>
         <div class="tab-pane fade in" id="admin_settings_accounts">
+            <div class="text-right">
+                <button type="submit" class="btn btn-success pull-right">Save</button>
+            </div>
             <div class="panel panel-default">
-                <div class="panel-heading">Sending Email
-                    <button type="submit" class="
-btn btn-success pull-right">Save
-                    </button>
+                <div class="panel-heading">
+                    Sending Email
                 </div>
                 <div class="panel-body">
                     <div class="col-md-9">
@@ -48,7 +49,7 @@ btn btn-success pull-right">Save
                                     </td>
                                     <td>
                                         @if(count($froms)!=$key+1)
-                                            <button type="button" class="btn pull-right remove-line btn-warning delete"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn pull-right remove-line btn-danger delete"><i class="fa fa-danger"></i></button>
                                         @else
                                             <button type="button" class="btn btn-primary pull-right add-more-from"><i
                                                         class="fa fa-plus"></i></button>
@@ -114,7 +115,7 @@ btn btn-success pull-right">Save
                                     </td>
                                     <td>
                                         @if(count($tos)!=$k+1)
-                                            <button type="button" class="btn pull-right remove-line btn-warning delete"><i class="fa fa-minus"></i></button>
+                                            <button type="button" class="btn pull-right remove-line btn-danger delete"><i class="fa fa-minus"></i></button>
                                         @else
                                             <button type="button" class="btn btn-primary pull-right add-more-too"><i
                                                         class="fa fa-plus"></i></button>
