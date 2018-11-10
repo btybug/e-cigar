@@ -26,6 +26,8 @@ class AddressesRequest extends FormRequest
         return [
             "first_line_address"  => "required",
             "second_line_address"  => "required",
+            "first_name"  => "required",
+            "last_name"  => "required",
             "city"  => "required",
             "country"  => "required",
             "region"  => "required",
