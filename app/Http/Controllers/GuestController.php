@@ -96,8 +96,8 @@ class GuestController extends Controller
         $country = ZoneCountries::find($request->get('country',0));
         if(! $request->country) return ['error' => true];
 
-        $data = $country->region;
-        if($country->region)
+        $data = $country->regions->pluck('name','id');
+        if($data)
         return ['error'=>false,'data'=> $data] ;
     }
 }

@@ -287,7 +287,7 @@ function getRegionByZone($country)
 {
     if (!$country) return [];
     $country = \App\Models\ZoneCountries::find($country);
-    return ($country) ? [$country->region->id => $country->region->name] : [];
+    return ($country) ? $country->regions->pluck('name','id'): [];
 }
 
 function getCountryByZone($country)

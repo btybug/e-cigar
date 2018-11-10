@@ -161,7 +161,7 @@
                             <div class="row">
                                 <label for="text" class="control-label col-sm-4">Country</label>
                                 <div class="col-sm-8">
-                                    {!! Form::select('country',$countriesShipping,null,['class'=>'form-control']) !!}
+                                    {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country']) !!}
                                 </div>
                             </div>
                         </div>
@@ -169,7 +169,7 @@
                             <div class="row">
                                 <label for="text" class="control-label col-sm-4">Regions</label>
                                 <div class="col-sm-8">
-                                    {!! Form::select('region',getRegionByZone(@$default_shipping->country),null,['class'=>'form-control','id' => 'geo_region']) !!}
+                                    {!! Form::select('region',getRegionByZone(@$default_shipping->country),$default_shipping->region?$default_shipping->region:null,['class'=>'form-control','id' => 'geo_region']) !!}
                                 </div>
                             </div>
                         </div>
@@ -363,9 +363,13 @@
                         select.innerText = null;
                         if (!res.error) {
                             var opt = document.createElement('option');
-                            opt.value = res.data.id;
-                            opt.innerHTML = res.data.name;
-                            select.appendChild(opt);
+                            $.each(res.data,function (k,v) {
+                                var option=$(opt).clone();
+                                option.val(k) ;
+                                option.text(v);
+                                $(select).append(option);
+                            });
+
                         }
                     }
                 );
@@ -406,9 +410,12 @@
                         select.innerText = null;
                         if (!res.error) {
                             var opt = document.createElement('option');
-                            opt.value = res.data.id;
-                            opt.innerHTML = res.data.name;
-                            select.appendChild(opt);
+                            $.each(res.data,function (k,v) {
+                                var option=$(opt).clone();
+                                option.val(k) ;
+                                option.text(v);
+                                $(select).append(option);
+                            });
                         }
                     }
                 );
