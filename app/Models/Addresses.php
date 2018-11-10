@@ -22,7 +22,7 @@ class Addresses extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'company','type', 'first_line_address', 'second_line_address', 'city', 'country','region', 'post_code'
+        'user_id','first_name','last_name','company','type', 'first_line_address', 'second_line_address', 'city', 'country','region', 'post_code'
     ];
 
     public function user()
