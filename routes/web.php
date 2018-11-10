@@ -113,4 +113,4 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
     Route::post('/verification', 'Frontend\UserController@postVerification')->name('post_my_account_verification');
     Route::get('/payments', 'Frontend\UserController@getPayments')->name('my_account_payment');
-});
+   });

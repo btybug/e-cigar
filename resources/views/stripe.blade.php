@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     <script src="https://js.stripe.com/v3/"></script>
-    <form action="/charge" method="post" id="payment-form">
+    <form action="/stripe-charge" method="post" id="payment-form">
         {!! csrf_field()!!}
         <div class="form-row">
             <label for="card-element">
