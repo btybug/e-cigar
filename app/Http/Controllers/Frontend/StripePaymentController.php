@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\StripePayments;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class StripePaymentController extends Controller
 {
@@ -25,7 +26,7 @@ class StripePaymentController extends Controller
 // This is a $20.00 charge in US Dollar.
         $charge = $stripe->charges()->create(
             array(
-                'amount' => 2000,
+                'amount' => Cart::total(),
                 'currency' => 'usd',
                 'source' => $request->get('stripeToken')
             )
