@@ -17,7 +17,7 @@ class CreateBtySettingsTable extends Migration
             $table->increments('id');
             $table->string('section');
             $table->string('key');
-            $table->text('val');
+            $table->text('val')->nullable();
             $table->timestamps();
         });
     }
