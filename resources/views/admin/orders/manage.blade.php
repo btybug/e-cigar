@@ -193,7 +193,7 @@
                                         <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel"
                                              aria-labelledby="shippingAddress-tab">
                                             Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
-                                            Region:{!! getCountryByZone($order->shippingAddress->country)->region->name !!}
+                                            Region:{!! getRegion($order->shippingAddress->region)->name !!}
                                             <br>
                                             First line:{!! $order->shippingAddress->first_line_address !!}<br>
                                             Second line:{!! $order->shippingAddress->second_line_address !!}

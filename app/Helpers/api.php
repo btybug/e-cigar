@@ -271,9 +271,9 @@ function cartCount()
 function getRegions($country, $all = false)
 {
     $countries = new \PragmaRX\Countries\Package\Countries();
-    if(! $country) return [];
+    if (!$country) return [];
     return ($all) ? $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray() :
-       $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
+        $countries->whereNameCommon($country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
 }
 
 function getCities($country)
@@ -287,7 +287,7 @@ function getRegionByZone($country)
 {
     if (!$country) return [];
     $country = \App\Models\ZoneCountries::find($country);
-    return ($country) ? $country->regions->pluck('name','id'): [];
+    return ($country) ? $country->regions->pluck('name', 'id') : [];
 }
 
 function getCountryByZone($country)
@@ -295,6 +295,13 @@ function getCountryByZone($country)
     if (!$country) return null;
     $country = \App\Models\ZoneCountries::find($country);
     return ($country) ? $country : null;
+}
+
+function getRegion($region)
+{
+    if (!$region) return null;
+    $region = \App\Models\ZoneCountryRegions::find($region);
+    return ($region) ? $region : null;
 }
 
 function stripe_key()
@@ -334,29 +341,29 @@ function getUniqueCode($table, $column, $prefix = '')
 }
 
 
-function commentRender($comments, $i = 0,$parent = false)
+function commentRender($comments, $i = 0, $parent = false)
 {
     if (count($comments)) {
         $comment = $comments[$i];
         //render main content
-        if($parent){
+        if ($parent) {
             echo '<div class="row user-comment-img sub pl-4 w-100 m-0">';
-        }else{
+        } else {
             echo '<div class="row user-comment-img">';
         }
 
         echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
         echo '<figure class="thumbnail">';
-            echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
-            if($comment->author){
-                if($comment->author->isAdministrator()){
-                    echo '<figcaption class="text-center">Admin</figcaption>';
-                }else{
-                    echo '<figcaption class="text-center">' .$comment->author->username.'</figcaption>';
-                }
-            }else{
-                echo '<figcaption class="text-center">' .$comment->guest_name.'</figcaption>';
+        echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
+        if ($comment->author) {
+            if ($comment->author->isAdministrator()) {
+                echo '<figcaption class="text-center">Admin</figcaption>';
+            } else {
+                echo '<figcaption class="text-center">' . $comment->author->username . '</figcaption>';
             }
+        } else {
+            echo '<figcaption class="text-center">' . $comment->guest_name . '</figcaption>';
+        }
 
         echo '</figure>';
         echo '</div>';
@@ -367,58 +374,58 @@ function commentRender($comments, $i = 0,$parent = false)
         echo '<div class="card-body">';
         echo '<header class="text-left">';
         echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
-        echo '<time class="comment-date" datetime="'. $comment->created_at .'"><i class="fa fa-clock-o"></i> '. time_ago($comment->created_at) .'</time>';
+        echo '<time class="comment-date" datetime="' . $comment->created_at . '"><i class="fa fa-clock-o"></i> ' . time_ago($comment->created_at) . '</time>';
         echo '</header>';
         echo '<div class="comment-post">';
-        echo '<p>'.$comment->comment.'</p>';
+        echo '<p>' . $comment->comment . '</p>';
         echo '</div>';
-        echo '<p class="text-right"><a href="#" data-id="'.$comment->id.'" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
+        echo '<p class="text-right"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
 
         if (count($comment->children)) {
-            commentRender($comment->children, 0,true);
+            commentRender($comment->children, 0, true);
         }
 
         echo '</div>';
         $i = $i + 1;
         if ($i != count($comments)) {
-            commentRender($comments, $i,$parent);
+            commentRender($comments, $i, $parent);
         }
     }
 }
 
 
-function replyRender($replies, $i = 0,$parent = false)
+function replyRender($replies, $i = 0, $parent = false)
 {
     if (count($replies)) {
         $reply = $replies[$i];
 
-        if($reply->getTable() == 'history'){
+        if ($reply->getTable() == 'history') {
             echo '<div class="admin_updated">
 <div class="image label label-default"><img src="/public/images/male.png" alt="img"></div>
-<h4><span class="label label-default">'.$reply->user->name .' has '.$reply->body.'</span></h4>
+<h4><span class="label label-default">' . $reply->user->name . ' has ' . $reply->body . '</span></h4>
 </div>';
-        }else{
+        } else {
             //render main content
-            if($parent){
+            if ($parent) {
                 echo '<div class="clearfix"></div><div class="row user-comment-img sub pl-4 w-100 m-0">';
-            }else{
+            } else {
                 echo '<div class="row user-comment-img">';
             }
 
             echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
             echo '<figure class="thumbnail">';
             echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
-            if($reply->author){
-                if($reply->author->isAdministrator()){
+            if ($reply->author) {
+                if ($reply->author->isAdministrator()) {
                     echo '<figcaption class="text-center">Admin</figcaption>';
-                }else{
-                    echo '<figcaption class="text-center">' .$reply->author->username.'</figcaption>';
+                } else {
+                    echo '<figcaption class="text-center">' . $reply->author->username . '</figcaption>';
                 }
-            }else{
-                echo '<figcaption class="text-center">' .$reply->guest_name.'</figcaption>';
+            } else {
+                echo '<figcaption class="text-center">' . $reply->guest_name . '</figcaption>';
             }
 
             echo '</figure>';
@@ -430,18 +437,18 @@ function replyRender($replies, $i = 0,$parent = false)
             echo '<div class="card-body">';
             echo '<header class="text-left">';
             echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
-            echo '<time class="comment-date" datetime="'. $reply->created_at .'"><i class="fa fa-clock-o"></i> '. time_ago($reply->created_at) .'</time>';
+            echo '<time class="comment-date" datetime="' . $reply->created_at . '"><i class="fa fa-clock-o"></i> ' . time_ago($reply->created_at) . '</time>';
             echo '</header>';
             echo '<div class="comment-post">';
-            echo '<p>'.$reply->reply.'</p>';
+            echo '<p>' . $reply->reply . '</p>';
             echo '</div>';
-            echo '<p class="text-right"><a href="#" data-id="'.$reply->id.'" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
+            echo '<p class="text-right"><a href="#" data-id="' . $reply->id . '" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
 
             if (count($reply->children)) {
-                replyRender($reply->children, 0,true);
+                replyRender($reply->children, 0, true);
             }
             echo '</div>';
         }
@@ -449,13 +456,14 @@ function replyRender($replies, $i = 0,$parent = false)
 
         $i = $i + 1;
         if ($i != count($replies)) {
-            replyRender($replies, $i,$parent);
+            replyRender($replies, $i, $parent);
         }
     }
 }
 
 
-function time_ago($datetime, $full = false) {
+function time_ago($datetime, $full = false)
+{
     $now = new DateTime;
     $ago = new DateTime($datetime);
     $diff = $now->diff($ago);
@@ -491,37 +499,39 @@ function meta($object, $type = 'seo_posts')
     if (!$metaTags) return null;
     $metaTags = $metaTags->toArray();
     $columns = $object->toArray();
-    $HTML = Html::meta('og:image', url($object->image))->toHtml()."\n\r";
+    $HTML = Html::meta('og:image', url($object->image))->toHtml() . "\n\r";
     foreach ($metaTags as $name => $metaTag) {
         if (!is_null($metaTag)) {
-            $objSeo=$object->seo()->where('name',$name)->where('type','general')->first();
-            if(!$objSeo){
-            $value = parametazor($metaTag,$object);
-            }else{
-                $value=$objSeo->content;
+            $objSeo = $object->seo()->where('name', $name)->where('type', 'general')->first();
+            if (!$objSeo) {
+                $value = parametazor($metaTag, $object);
+            } else {
+                $value = $objSeo->content;
             }
-            $HTML.= Html::meta($name, $value)->toHtml()."\n\r";
+            $HTML .= Html::meta($name, $value)->toHtml() . "\n\r";
         }
     }
     return $HTML;
 }
 
-function parametazor($string,$object)
+function parametazor($string, $object)
 {
     preg_match('/{(.*?)}/', $string, $matches);
     if (count($matches)) {
         $string = str_replace($matches[0], $object->{$matches[1]}, $string);
-        $string = parametazor($string,$object);
+        $string = parametazor($string, $object);
     }
     return $string;
 }
-function getSeo(array $seo,$index,$object)
+
+function getSeo(array $seo, $index, $object)
 {
- if($seo && is_object($object) && isset($seo[$index])) return parametazor($seo[$index],$object);
- return null;
+    if ($seo && is_object($object) && isset($seo[$index])) return parametazor($seo[$index], $object);
+    return null;
 }
 
-function mergeCollections($collection1,$collection2){
+function mergeCollections($collection1, $collection2)
+{
     $collection = collect();
 
     foreach ($collection1 as $col1)

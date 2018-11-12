@@ -24,6 +24,7 @@
                     <th>City</th>
                     <th>Status</th>
                     <th>Shipping method</th>
+                    <th>Payment Method</th>
                     <th>Currency</th>
                     <th>Created At</th>
                     <th>Updated At</th>
@@ -48,6 +49,7 @@
                     {data: 'city', name: 'city'},
                     {data: 'status', name: 'status'},
                     {data: 'shipping_method', name: 'shipping_method'},
+                    {data: 'payment_method', name: 'payment_method'},
                     {data: 'currency', name: 'currency'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
