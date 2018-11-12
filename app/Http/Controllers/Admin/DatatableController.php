@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Competitions;
 use App\Models\Coupons;
 use App\Models\Emails;
+use App\Models\Faq;
 use App\Models\GeoZones;
 use App\Models\LogActivities;
 use App\Models\MailTemplates;
@@ -431,6 +432,24 @@ class DatatableController extends Controller
 
     public function getFaq ()
     {
-        
+        return Datatables::of(Faq::query())
+            ->editColumn('question', function ($faq) {
+                return $faq->question;
+            })->editColumn('answer', function ($faq) {
+                return $faq->answer;
+            })
+            ->editColumn('user_id', function ($faq) {
+                return $faq->author->name;
+            })->editColumn('status', function ($faq) {
+                return ($faq->status) ? '<span class="badge btn-success">published</span>' : '<span class="badge btn-danger">draft</span>';
+            })
+            ->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            })
+            ->addColumn('actions', function ($faq) {
+                return "<a class='badge btn-danger' href='" . route("admin_faq_delete", $faq->id) . "'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
+            ->make(true);
     }
 }

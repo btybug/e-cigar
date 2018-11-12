@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMailTemplatesTable extends Migration
+class CreateFaqTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateMailTemplatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('mail_templates', function (Blueprint $table) {
+        Schema::create('faq', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('slug')->unique();
-            $table->string('from');
-            $table->string('to')->nullable();
-            $table->tinyInteger('is_active')->default(0);
-            $table->tinyInteger('is_for_admin')->default(0);
+            $table->integer('user_id')->unsigned();
+            $table->tinyInteger('status')->default(0);
+            $table->text('tags')->nullable();
+            $table->text('gallery')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -31,6 +32,6 @@ class CreateMailTemplatesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mail_templates');
+        Schema::dropIfExists('faq');
     }
 }

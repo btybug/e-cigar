@@ -12,12 +12,11 @@
 
 @section('content')
     <div class="tab-content tabs_content">
-        {!! Form::model($post,['url' => route('admin_faq_new'), 'id' => 'post_form','files' => true]) !!}
+        {!! Form::model($model,['url' => route('admin_faq_new'), 'id' => 'post_form','files' => true]) !!}
         <div id="home" class="tab-pane tab_info fade in active">
 
             {!! Form::hidden('id',null) !!}
             <div class="text-right btn-save">
-                <button type="button" class="btn btn-success btn-view">View Product</button>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
             <div class="row sortable-panels">
@@ -25,7 +24,6 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-12">
-
                                 <div class="form-group">
                                     @if(count(get_languages()))
                                         <ul class="nav nav-tabs tab_lang_horizontal">
@@ -45,12 +43,12 @@
                                                      class="tab-pane fade  @if($loop->first) in active @endif">
                                                     <div class="form-group">
                                                         <label>To Question</label>
-                                                        {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($post,strtolower($language->code),'title'),['class'=>'form-control']) !!}
+                                                        {!! Form::text('translatable['.strtolower($language->code).'][question]',get_translated($model,strtolower($language->code),'question'),['class'=>'form-control']) !!}
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label>To Answer</label>
-                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($post,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][answer]',get_translated($model,strtolower($language->code),'answer'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -62,7 +60,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3">Gallery images</label>
                                         <div class="col-sm-9">
-                                            {!! media_button('gallery',$post,true) !!}
+                                            {!! media_button('gallery',$model,true) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -76,8 +74,9 @@
                                     </div>
                                     <div class="panel-body product-body">
                                         <ul class="get-all-attributes-tab">
-                                            @if(isset($post) && count($post->stocks))
-                                                @foreach($post->stocks as $stock)
+                                            {{--TODO: make stocks--}}
+                                            @if($model && count($model->stocks))
+                                                @foreach($model->stocks as $stock)
                                                     <li style="display: flex" data-id="{{ $stock->id }}"
                                                         class="option-elm-attributes">
                                                         <a href="#">{!! $stock->name !!}</a>
@@ -125,9 +124,9 @@
                                     <ul class="dropdown-menu"></ul>
                                     <div id="coupon-category" class="well well-sm view-coupon">
                                         <ul class="coupon-tags-list">
-                                            @if($post && $post->tags)
+                                            @if($model && $model->tags)
                                                 <?php
-                                                $tags = json_decode($post->tags, true);
+                                                $tags = json_decode($model->tags, true);
                                                 ?>
                                                 @foreach($tags as $tag)
                                                     <li><span class="remove-search-tag"><i
@@ -171,7 +170,7 @@
                         <div class="row">
                             <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[og:title]',($post)?$post->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$post)]) !!}
+                                {!! Form::text('fb[og:title]',($model)?$model->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$model)]) !!}
                             </div>
                         </div>
                     </div>
@@ -179,7 +178,7 @@
                         <div class="row">
                             <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('fb[og:description]',($post)?$post->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$post)]) !!}
+                                {!! Form::text('fb[og:description]',($model)?$model->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$model)]) !!}
                             </div>
                         </div>
                     </div>
@@ -187,7 +186,7 @@
                         <div class="row">
                             <label class="col-md-2 col-xs-12">Facebook Image</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$post)]) !!}
+                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$model)]) !!}
 
                             </div>
                         </div>
@@ -202,7 +201,7 @@
                         <div class="row">
                             <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[og:title]',($post)?$post->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
+                                {!! Form::text('twitter[og:title]',($model)?$model->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
 
                             </div>
                         </div>
@@ -211,7 +210,7 @@
                         <div class="row">
                             <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text('twitter[og:description]',($post)?$post->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
+                                {!! Form::text('twitter[og:description]',($model)?$model->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
 
                             </div>
                         </div>
@@ -220,7 +219,7 @@
                         <div class="row">
                             <label class="col-md-2 col-xs-12">Twitter Image</label>
                             <div class="col-md-5 col-xs-12">
-                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$post)]) !!}
+                                {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$model)]) !!}
                             </div>
                         </div>
                     </div>
@@ -237,7 +236,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::text('general[og:keywords]',($post)?$post->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$post)]) !!}
+                                    {!! Form::text('general[og:keywords]',($model)?$model->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$model)]) !!}
                                 </td>
                             </tr>
                             <tr>
@@ -246,7 +245,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::text('general[og:title]',($post)?$post->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$post)]) !!}
+                                    {!! Form::text('general[og:title]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$model)]) !!}
                                     <br>
                                     <div>
                                         <p><span class="wrong">Warning:</span>
@@ -261,7 +260,7 @@
                                     <img src="/public/images/question-mark.png" alt="question">
                                 </th>
                                 <td>
-                                    {!! Form::textarea('general[og:description]',($post)?$post->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$post)]) !!}
+                                    {!! Form::textarea('general[og:description]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$model)]) !!}
                                     <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
                                     </div>
                                 </td>
@@ -277,7 +276,7 @@
                                     <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                 </th>
                                 <td>
-                                    {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($post)?$post->getSeoField('robots','robot'):null,['class'=>'']) !!}
+                                    {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($model)?$model->getSeoField('robots','robot'):null,['class'=>'']) !!}
 
                                 </td>
                             </tr>

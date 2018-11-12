@@ -125,7 +125,7 @@ $("body").on("click", ".remove-search-tag", function() {
 makeSearchItem({
     input: "#input-tags",
     name: "name",
-    url: "/admin/inventory/tags/search",
+    url: "/admin/tools/tags/search",
     title: "Tags",
     inputValues: "#tags-names",
     containerForAppend: ".coupon-tags-list"

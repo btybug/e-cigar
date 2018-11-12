@@ -10,10 +10,12 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FaqRequest;
 use App\Http\Requests\StoreBlogPost;
 use App\Models\Category;
 use App\Models\CategoryPost;
 use App\Models\Comment;
+use App\Models\Faq;
 use App\Models\Posts;
 use App\Models\SeoPosts;
 use App\Models\Settings;
@@ -39,54 +41,48 @@ class FaqController extends Controller
 
     public function create()
     {
-        $post = null;
-        $categories = Category::with('children')->where('type','posts')->whereNull('parent_id')->get();
+        $model = null;
+        $categories = Category::with('children')->where('type','faq')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
 
-        $general = $this->settings->getEditableData('seo_posts')->toArray();
-        $twitterSeo = $this->settings->getEditableData('seo_twitter_posts')->toArray();
-        $fbSeo = $this->settings->getEditableData('seo_fb_posts')->toArray();
-        $robot = $this->settings->getEditableData('seo_robot_posts');
-        $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('roles.type', 'backend')->select('users.*', 'roles.title')->pluck('users.name', 'users.id')->toArray();
+        $general = $this->settings->getEditableData('seo_faq')->toArray();
+        $twitterSeo = $this->settings->getEditableData('seo_twitter_faq')->toArray();
+        $fbSeo = $this->settings->getEditableData('seo_fb_faq')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_faq');
 
-        return $this->view('new', compact('post', 'authors', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data'));
+        return $this->view('new', compact('model', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data'));
     }
 
-    public function newPost(StoreBlogPost $request, $locale = null)
+    public function newPost(FaqRequest $request, $locale = null)
     {
-        dd('OK');
         $data = $request->except('_token', 'translatable', 'categories', 'stocks', 'fb', 'twitter', 'general', 'robot');
-        $post = Posts::updateOrCreate($request->id, $data);
-        $post->categories()->sync(json_decode($request->get('categories', [])));
-        $post->stocks()->sync($request->get('stocks', []));
-        $this->createOrUpdateSeo($request, $post->id);
+        $data['user_id'] = \Auth::id();
+        $faq = Faq::updateOrCreate($request->id, $data);
+        $faq->categories()->sync(json_decode($request->get('categories', [])));
+        $faq->stocks()->sync($request->get('stocks', []));
+//        $this->createOrUpdateSeo($request, $faq->id);
         return redirect()->route('admin_faq');
     }
 
     public function getDelete($id)
     {
-        $post = Posts::findOrFail($id);
-        $post->delete();
+        $faq = Faq::findOrFail($id);
+        $faq->delete();
         return redirect()->route('admin_faq');
     }
 
     public function edit($id)
     {
-        $post = Posts::findOrFail($id);
-
-        $categories = Category::with('children')->where('type','posts')->whereNull('parent_id')->get();
-        $checkedCategories = $post->categories()->pluck('id')->all();
+        $model = Faq::findOrFail($id);
+        $categories = Category::with('children')->where('type','faq')->whereNull('parent_id')->get();
+        $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 
-        $general = $this->settings->getEditableData('seo_posts')->toArray();
-        $twitterSeo = $this->settings->getEditableData('seo_twitter_posts')->toArray();
-        $fbSeo = $this->settings->getEditableData('seo_fb_posts')->toArray();
-        $robot = $this->settings->getEditableData('seo_robot_posts');
+        $general = $this->settings->getEditableData('seo_faq')->toArray();
+        $twitterSeo = $this->settings->getEditableData('seo_twitter_faq')->toArray();
+        $fbSeo = $this->settings->getEditableData('seo_fb_faq')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_faq');
 
-
-        $authors = User::join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('roles.type', 'backend')->select('users.*', 'roles.title')->pluck('users.name', 'users.id')->toArray();
-        return $this->view('new', compact('post', 'authors', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data', 'checkedCategories'));
+        return $this->view('new', compact('model', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data', 'checkedCategories'));
     }
 }
