@@ -16,6 +16,7 @@
                     </li>
                 </ul>
                 <div class="tab-content">
+                    {!! Form::open() !!}
                     <div class="tab-pane fade active in" id="admin_settings_general">
                         <div class="row">
                             <div class="col-md-9">
@@ -25,15 +26,15 @@
                                         <div class="col-md-7">
                                             <div class="form-group">
                                                 <label for="SiteName">Site Name</label>
-                                                <input type="text" class="form-control" id="SiteName" aria-describedby="name" placeholder="Enter name">
+                                                {!! Form::text('site_name',env('SITE_NAME'),['class'=>'form-control']) !!}
                                             </div>
                                             <div class="form-group">
                                                 <label for="siteLogo">Site Logo</label>
-                                                <input type="file" class="form-control" id="siteLogo">
+                                                {!! media_button('siteLogo') !!}
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Description</label>
-                                                <textarea  class="form-control" id="description"  rows="5" aria-describedby="description" placeholder="Enter description"></textarea>
+                                                {!! Form::textarea('site_description',null,['class'=>'form-control','rows'=>5]) !!}
                                             </div>
                                         </div>
 
@@ -91,29 +92,25 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="firstAddress">1st line address</label>
-                                                <input type="text" class="form-control" id="firstAddress" aria-describedby="firstAddress" placeholder="Enter Address">
+                                                {!! Form::text('first_address',null,['class'=>'form-control']) !!}
                                             </div>
                                             <div class="form-group">
                                                 <label for="secondAddress">2nd line address</label>
-                                                <input type="text" class="form-control" id="secondAddress" aria-describedby="secondAddress" placeholder="Enter Address">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="city">City</label>
-                                                <select id="city" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
-                                                </select>
+                                                {!! Form::text('second_address',null,['class'=>'form-control']) !!}
                                             </div>
                                             <div class="form-group">
                                                 <label for="country">Country</label>
-                                                <select id="country" class="form-control">
-                                                    <option selected>Choose...</option>
-                                                    <option>...</option>
-                                                </select>
+                                                {!! Form::select('country',[],null,['class'=>'form-control','id' => 'geo_country']) !!}
+
                                             </div>
                                             <div class="form-group">
+                                                <label for="city">City</label>
+                                                {!! Form::select('city',[],null,['class'=>'form-control']) !!}
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="postCode">Post Code</label>
-                                                <input type="text" class="form-control" id="postCode" aria-describedby="postCode" placeholder="Enter Post Code">
+                                                {!! Form::text('post_code',null,['class'=>'form-control']) !!}
                                             </div>
 
                                         </div>
@@ -134,23 +131,22 @@
                                                         <td>
                                                             <div class="form-group">
                                                                 <label for="weekday" class="mb-0">Weekday</label>
-                                                                <select id="weekday" class="form-control">
-                                                                    <option selected>Choose</option>
-                                                                    <option>Sunday</option>
-                                                                    <option>Monday</option>
-                                                                    <option>Tuesday</option>
-                                                                    <option>Wednesday</option>
-                                                                    <option>Thursday</option>
-                                                                    <option>Friday</option>
-                                                                    <option>Saturday</option>
-                                                                </select>
+                                                                {!! Form::select('weekday',[
+                                                                'Sunday'=>'Sunday',
+                                                                'Monday'=>'Monday',
+                                                                'Tuesday'=>'Tuesday',
+                                                                'Wednesday'=>'Wednesday',
+                                                                'Thursday'=>'Thursday',
+                                                                'Friday'=>'Friday',
+                                                                'Saturday'=>'Saturday',
+                                                                ],null,['class'=>'form-control','id' => 'geo_country']) !!}
                                                             </div>
                                                         </td>
                                                         <td>
                                                             <div class="form-group">
                                                                 <strong>From</strong>
                                                                 <div class="input-group bootstrap-timepicker timepicker">
-                                                                    <input id="timepicker1" type="text" class="form-control input-small">
+                                                                    {!! Form::time('time_from',null,['class'=>'form-control']) !!}
                                                                     <label class="input-group-addon" for="timepicker1"><i class="glyphicon glyphicon-time"></i></label>
                                                                 </div>
 
@@ -160,7 +156,7 @@
                                                             <div class="form-group">
                                                                 <strong>To</strong>
                                                                 <div class="input-group bootstrap-timepicker timepicker">
-                                                                    <input id="timepicker2" type="text" class="form-control input-small">
+                                                                    {!! Form::time('time_to',null,['class'=>'form-control']) !!}
                                                                     <label class="input-group-addon" for="timepicker2"><i class="glyphicon glyphicon-time"></i></label>
                                                                 </div>
                                                             </div>
@@ -184,12 +180,12 @@
                                                     <td>
                                                         <label for="calendar">Calendar</label>
                                                         <div class="input-group">
-                                                            <input id="calendar" type="text" class="form-control" placeholder="Choose date">
+                                                            {!! Form::date('holidays',null,['class'=>'form-control']) !!}
                                                             <label class="input-group-addon" for="calendar"><i class="glyphicon glyphicon-calendar"></i></label>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control" placeholder="Christmas">
+                                                        {!! Form::text('reason',null,['class'=>'form-control']) !!}
                                                     </td>
                                                     <td>
                                                         <button type="button" class="btn btn-primary pull-right"><i class="fa fa-plus"></i></button>
@@ -226,6 +222,7 @@
                             </div>
                         </div>
                     </div>
+                    {!! Form::close() !!}
                 </div>
         </div>
 
