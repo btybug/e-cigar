@@ -22,7 +22,7 @@
                     <a class="nav-link text-uppercase" href="{!! route('product_sales') !!}">Sales</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="#">Community</a>
+                    <a class="nav-link text-uppercase" href="{!! route('blog') !!}">Community</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" href="{!! route('product_support') !!}">Support</a>
