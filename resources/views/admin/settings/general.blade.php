@@ -16,7 +16,8 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    {!! Form::open() !!}
+                    {!! Form::model($model) !!}
+                    <button class="btn btn-success pull-right" type="submit">Save</button>
                     <div class="tab-pane fade active in" id="admin_settings_general">
                         <div class="row">
                             <div class="col-md-9">
@@ -100,12 +101,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="country">Country</label>
-                                                {!! Form::select('country',[],null,['class'=>'form-control','id' => 'geo_country']) !!}
+                                                {!! Form::select('country',$countries,null,['class'=>'form-control','id' => 'first_line_country']) !!}
 
                                             </div>
                                             <div class="form-group">
                                                 <label for="city">City</label>
-                                                {!! Form::select('city',[],null,['class'=>'form-control']) !!}
+                                                <div id="regions">
+                                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -232,18 +235,21 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/plugins/timepicker/bootstrap-timepicker.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+
 @stop
 
 
 @section('js')
     {!! Html::script("public/admin_theme/plugins/timepicker/bootstrap-timepicker.js")!!}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <script>
         $( function() {
             $( "#calendar" ).datepicker();
             $('#timepicker1').timepicker();
             $('#timepicker2').timepicker();
-
-
+            $('#first_line_country').select2();
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = "\n  <div class=\"clearfix\"></div><div class=\"d-flex align-items-center w-100 social-container mt-3\">\n  <div class=\"col-sm-6 p-0\">\n                                  <div class=\"input-group\">\n                                      <div class=\"input-group-prepend\">\n                                          <button class=\"btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle\"\n                                                  type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n                                                  aria-expanded=\"false\"><i class=\"fa fa-facebook-f icon-blue\"></i>\n                                          </button>\n                                          <div class=\"dropdown-menu\">\n                                              <a class=\"dropdown-item active\"  href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-facebook icon-green\"></i>\n                                                  <span class=\"name\">Facebook</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-twitter icon-green\"></i>\n                                                  <span class=\"name\">Twitter</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-yahoo icon-purple\"></i>\n                                                  <span class=\"name\">Yahoo</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-google icon-red\"></i>\n                                                  <span class=\"name\">Google</span>\n                                              </a>\n                                          </div>\n                                             <input name=\"social_media[" + uid + "][social]\" value=\"fab fa-facebook icon-green\" type=\"hidden\" class=\"social_type\">\n                                      </div>\n                                      <input name=\"social_media[" + uid + "][url]\" type=\"text\" class=\"form-control\"\n                                             aria-label=\"Text input with dropdown button\" placeholder=\"Profile URL\"> \n                                  </div>\n                                </div>\n                                <div class=\"col-sm-3\">\n                                    <button class=\"plus-icon remove-new-social-input btn btn-danger\"><i class=\"fa fa-minus\"></i></button>\n                                </div>\n                                </div>\n  ";

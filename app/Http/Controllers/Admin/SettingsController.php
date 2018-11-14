@@ -121,9 +121,17 @@ class SettingsController extends Controller
     }
 
 
-    public function getGeneral()
+    public function getGeneral(Settings $settings,Countries $countries)
     {
-        return $this->view('general');
+        $model = $settings->getEditableData('admin_general_settings');
+        $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
+        return $this->view('general', compact('model','countries'));
+    }
+
+    public function saveGeneral(Request $request, Settings $settings)
+    {
+        $settings->updateOrCreateSettings('admin_general_settings', $request->except('_token'));
+        return redirect()->back();
     }
 
     public function getAccounts()
@@ -192,7 +200,7 @@ class SettingsController extends Controller
         foreach ($countries as $key => $country) {
             $zone_country = $geo_zone->countries()->where('name', $country)->first();
             if (!$zone_country) {
-                $zone_country= $geo_zone->countries()->create(['name' => $country, 'all' => 0]);
+                $zone_country = $geo_zone->countries()->create(['name' => $country, 'all' => 0]);
             }
             $zone_country->regions()->whereNotIn('name', $regions[$key])->delete();
             if ($zone_country) {

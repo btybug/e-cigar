@@ -20,6 +20,7 @@ class Settings extends Model
     {
         $result=[];
         foreach ($data as $key=>$val){
+            $val=(is_array($val))?json_encode($val,true):$val;
            if($this->where('section',$section)->where('key',$key)->exists()){
                $result[]=  $this->where('section',$section)->where('key',$key)->update(['val'=>$val]);
            }else{
