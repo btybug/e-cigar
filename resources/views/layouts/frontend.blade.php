@@ -11,11 +11,21 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/frontend/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
+    <link href={{asset("public/css/fonts.css?v=".rand(111,999))}} rel="stylesheet" />
+    <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
     {{--<link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">--}}
     {{----}}
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
+    <script src={{asset("public/js/jQuery3.3.1.js")}}></script>
+    <!--[if lt IE 9]>
+    <script src={{asset("public/plugins/crossbrowserjs/html5shiv.js")}}></script>
+    <script src={{asset("public/plugins/crossbrowserjs/respond.min.js")}}></script>
+    <![endif]-->
+    <!--[if !IE]><!-->
+    <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
+    <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
+    <!--<![endif]-->
     @yield('css')
 
 
@@ -25,7 +35,6 @@
 <body>
 @include('frontend._partials.header')
 @yield('content')
-
 <div class="modal fade modal-request" id="msgModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -41,11 +50,9 @@
         </div>
     </div>
 </div>
-@include('frontend._partials.footer')
 <img src="/public/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
-<script src={{asset("public/frontend/js/jquery-3.2.1.min.js")}}></script>
-<script src={{asset("public/frontend/js/popper.js")}}></script>
-<script src={{asset("public/frontend/js/bootstrap.min.js")}}></script>
+<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
+<script src={{asset("public/js/main.js")}}></script>
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {
         $.ajax({

@@ -1,487 +1,236 @@
-<header id="header-area" class="header-area bg-primary">
-    <div class="header-mini">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12">
-
-                    <nav id="navbar_0" class="navbar navbar-expand-md navbar-dark navbar-0 p-0">
-                        <div class="navbar-brand">
-                            <select name="change_language" id="change_language" class="change-language" style="display: none;">
-
-                                <option value="en" data-class="en" data-style="background-image: url(http://laravelcommerce.com/resources/assets/images/language_flags/1486556365.503984030_english.jpg);">English</option>
-
-                                <option value="ar" data-class="ar" data-style="background-image: url(http://laravelcommerce.com/resources/assets/images/language_flags/1502799254.1501241757.uae.jpg);">عربى</option>
-
-                            </select><span tabindex="0" id="change_language-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="change_language-menu" aria-haspopup="true" class="ui-selectmenu-button ui-selectmenu-button-closed ui-corner-all ui-button ui-widget"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">English</span><span id="change_language_image" class="ui-selectmenu-image" style="background-image: url(http://laravelcommerce.com/resources/assets/images/language_flags/1486556365.503984030_english.jpg);">&nbsp;</span></span>
-                        </div>
-
-
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_collapse_0" aria-controls="navbar_collapse_0" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbar_collapse_0">
-                            @if(Auth::check())
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="{!! url('public/images/other.png') !!}" width="20px" alt=""/>
-                                    <span class="d-none d-md-inline">{!! Auth::user()->name !!}</span> <b class="caret"></b>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="{!! url('my-account') !!}" class="dropdown-item">Edit Profile</a>
-                                    <div class="dropdown-divider"></div>
-                                    {!! Form::open(['url'=>route('logout')]) !!}
-                                    <button type="submit" class="btn btn-default btn-flat">Sign out</button>
-                                    {!! Form::close() !!}
-                                </div>
-                            @else
-                                <ul class="navbar-nav">
-                                    <li class="nav-item"><div class="nav-link">Welcome Guest!</div></li>
-                                    <li class="nav-item"> <a href="{!! route('login') !!}" class="nav-link -before"><i class="fa fa-lock" aria-hidden="true"></i>&nbsp;Login/Register</a> </li>
-                                </ul>
-                            @endif
-                        </div>
-                    </nav></div>
-
-            </div>
+<header class="page-header bg-main-clr">
+    <nav class="navbar navbar-expand-xl navbar-dark align-items-stretch justify-content-between">
+        <div class="header-navbar-brand-holder">
+            <a class="navbar-brand header-navbar-brand p-0 m-0" href="{!! url('/') !!}">
+                <img src="/public/img/header-logo.png" class="header-logo-img" alt="">
+                <img src="/public/img/header-logo-text.png" class="header-logo-text-img" alt="">
+            </a>
         </div>
-    </div>
-    <div class="header-maxi">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-12 col-sm-12 col-lg-3 spaceright-0">
-                    <a href="{!! url('/') !!}" class="logo">
-                        <strong>E</strong>COMMERCE
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+                aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav ml-xl-auto header-navbar-nav h-100">
+                <li class="nav-item active">
+                    <a class="nav-link text-uppercase" href="{!! url('/') !!}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="{!! route('products') !!}">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="{!! route('product_sales') !!}">Sales</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="#">Community</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-uppercase" href="{!! route('product_support') !!}">Support</a>
+                </li>
+            </ul>
+        </div>
+        <div class="header-right-wrapp d-flex align-items-center ml-auto">
+                <span class="header-search-icon pointer">
+                    <svg width="26px" height="28px" viewBox="0 0 26 28">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M25.805,27.105 L18.246,18.936 C20.174,16.927 21.368,14.156 21.368,11.101 C21.368,4.980 16.576,-0.000 10.684,-0.000 C4.793,-0.000 -0.000,4.980 -0.000,11.101 C-0.000,17.223 4.793,22.203 10.684,22.203 C13.270,22.203 15.644,21.242 17.494,19.648 L25.072,27.838 C25.172,27.946 25.305,28.000 25.439,28.000 C25.566,28.000 25.693,27.951 25.791,27.852 C25.994,27.650 26.000,27.315 25.805,27.105 ZM10.684,21.146 C5.354,21.146 1.017,16.640 1.017,11.101 C1.017,5.563 5.354,1.057 10.684,1.057 C16.015,1.057 20.351,5.563 20.351,11.101 C20.351,16.640 16.014,21.146 10.684,21.146 Z"/>
+</svg>
+                </span>
+            <div class="header-shop-icons-outer d-flex align-items-center">
+                <span class="header-like-icon position-relative active">
+                    <a href="{!! route('my_account_favourites') !!}">
+                    <span class="qty position-absolute absolute-center">3</span>
+                        <svg width="30px" height="28px" viewBox="0 0 30 28">
+                            <path fill-rule="evenodd"
+                                  d="M29.355,11.060 C28.755,13.649 27.363,16.008 25.333,17.877 L14.912,27.331 L4.670,17.879 C2.637,16.007 1.246,13.648 0.645,11.060 C0.213,9.200 0.390,8.149 0.391,8.142 L0.400,8.080 C0.796,3.538 3.897,0.241 7.774,0.241 C10.634,0.241 13.152,2.028 14.347,4.904 L14.909,6.259 L15.471,4.904 C16.647,2.072 19.298,0.242 22.227,0.242 C26.102,0.242 29.204,3.539 29.609,8.139 C29.610,8.149 29.787,9.200 29.355,11.060 Z"/>
+                        </svg>
                     </a>
+                </span>
+                <span id="headerShopCartBtn" class="header-cart-bag-icon pointer position-relative active">
+                    <a href="{!!route('shop_my_cart')  !!}"/>
+                     <span class="qty position-absolute absolute-center cart-count">{{ cartCount() }}</span>
+                    <svg width="27px" height="35px" viewBox="0 0 27 35">
+                        <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                              d="M26.842,34.836 C26.738,34.941 26.594,35.000 26.445,35.000 L0.555,35.000 C0.404,35.000 0.261,34.941 0.158,34.836 C0.055,34.731 -0.000,34.590 0.007,34.444 L1.239,9.387 C1.254,9.104 1.494,8.883 1.787,8.883 L7.028,8.883 L7.028,6.263 C7.028,2.810 9.931,-0.000 13.499,-0.000 C17.068,-0.000 19.971,2.810 19.971,6.263 L19.971,8.883 L25.213,8.883 C25.505,8.883 25.746,9.104 25.760,9.387 L26.993,34.444 C27.000,34.590 26.946,34.731 26.842,34.836 ZM18.875,6.263 C18.875,3.395 16.464,1.061 13.499,1.061 C10.535,1.061 8.124,3.395 8.124,6.263 L8.124,8.883 L18.875,8.883 L18.875,6.263 ZM24.690,9.943 L19.971,9.943 L19.971,11.534 C19.971,11.827 19.726,12.064 19.423,12.064 C19.120,12.064 18.875,11.827 18.875,11.534 L18.875,9.943 L8.124,9.943 L8.124,11.534 C8.124,11.827 7.878,12.064 7.576,12.064 C7.273,12.064 7.028,11.827 7.028,11.534 L7.028,9.943 L2.309,9.943 L1.129,33.939 L25.870,33.939 L24.690,9.943 Z"/>
+                    </svg>
+                    </a>
+                </span>
+            </div>
+            <div class="ml-auto d-flex align-items-center">
+                <div class="header-lang-bar">
+                    <img src="/public/img/uk.png" alt="">
+                    <span class="icon d-inline-block">
+                            <svg width="18px" height="9px" viewBox="0 0 18 9">
+                            <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                                  d="M9.024,7.799 L0.918,0.187 C0.718,-0.000 0.399,-0.000 0.199,0.187 C-0.000,0.374 -0.000,0.675 0.199,0.862 L8.667,8.813 C8.866,9.000 9.186,9.000 9.385,8.813 L17.849,0.862 C17.947,0.770 18.000,0.646 18.000,0.526 C18.000,0.406 17.951,0.283 17.849,0.191 C17.650,0.003 17.330,0.003 17.131,0.191 L9.024,7.799 Z"/>
+                        </svg>
+                        </span>
+
                 </div>
-
-                <div class="col-12 col-sm-7 col-md-8 col-lg-6 px-0">
-                    <form class="form-inline" action="http://laravelcommerce.com/shop" method="get">
-                        <div class="search-categories">
-                            <select id="category_id" name="category" style="display: none;">
-                                <option value="all">All Categories</option>
-                                <option value="men-s-clothing">Men's Clothing</option>
-                                <option value="men-polo-shirts">--Men Polo shirts</option>
-                                <option value="men-polo-shirts-1">--Men Polo shirts</option>
-                                <option value="men-jeans">--Men Jeans</option>
-                                <option value="men-shoes">--Men Shoes</option>
-                                <option value="sunglasses-glasses">--Sunglasses &amp; Glasses</option>
-
-                                <option value="women-s-clothing">Women's Clothing</option>
-                                <option value="women-dresses">--Women Dresses</option>
-                                <option value="women-shirts-tops">--Women Shirts &amp; Tops</option>
-                                <option value="women-jeans">--Women Jeans</option>
-                                <option value="women-hand-bags">--Women Hand Bags</option>
-
-                                <option value="boy-s-clothing">Boy's Clothing</option>
-                                <option value="boy-polo-shirts">--Boy Polo shirts</option>
-                                <option value="boy-casual-shirts">--Boy Casual Shirts</option>
-                                <option value="boy-pants-jeans">--Boy Pants &amp; Jeans</option>
-                                <option value="boy-shoes">--Boy Shoes</option>
-
-                                <option value="girl-s-clothing">Girl's Clothing</option>
-                                <option value="dresses-rompers">--Dresses &amp; Rompers</option>
-                                <option value="shorts-skirts">--Shorts &amp; Skirts</option>
-                                <option value="sweaters">--Sweaters</option>
-
-                                <option value="baby-mother">Baby &amp; Mother</option>
-                                <option value="new-born">--New Born</option>
-                                <option value="baby-dresses">--Baby Dresses</option>
-                                <option value="baby-blankets-swaddles">--Baby Blankets &amp; Swaddles</option>
-
-                                <option value="household-merchandises">Household Merchandises</option>
-                                <option value="bedding-collections">--Bedding Collections</option>
-                                <option value="throws-pillows">--Throws &amp; Pillows</option>
-                                <option value="bath-robes">--Bath Robes</option>
-
-                                <option value="health-beauty-hair">Health &amp; Beauty, Hair</option>
-
-                                <option value="automobiles-motorcycles">Automobiles &amp; Motorcycles</option>
-
-                                <option value="jewelry-watches">Jewelry &amp; Watches</option>
-
-                                <option value="cellphones-accessories">Cellphones &amp; Accessories</option>
-
-                                <option value="computer-office-security">Computer, Office, Security</option>
-
-
-                            </select><span tabindex="0" id="category_id-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="category_id-menu" aria-haspopup="true" class="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-closed ui-corner-all" aria-activedescendant="ui-id-1" aria-labelledby="ui-id-1" aria-disabled="false"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text">All Categories</span></span>
-                            <input type="search" name="search" placeholder="Search entire store here..." value="" aria-label="Search">
-                            <button type="submit" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-12 col-sm-5 col-md-4 col-lg-3 spaceleft-0">
-                    <ul class="top-right-list">
-
-
-                        <li class="wishlist-header">
-                            <a href="{!! route('my_account_favourites') !!}">
-                                <span class="badge badge-secondary" id="wishlist-count">0</span>                            <span class="fa-stack fa-lg">
-                              <i class="fa fa-shopping-bag fa-stack-2x"></i>
-                              <i class="fa fa-heart fa-stack-2x"></i>
-                            </span>
-                            </a>
-                        </li>
-
-                        <li class="cart-header dropdown head-cart-content">
-                            <a href="{!!route('shop_my_cart')  !!}" id="dropdownMenuButton" {{--class="dropdown-toggle"--}}{{-- aria-haspopup="true" aria-expanded="false"--}}>
-                                <span class="badge badge-secondary cart-count">{{ cartCount() }}</span>
-                                <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                <!--<img class="img-fluid" src="http://laravelcommerce.com/public/images/shopping_cart.png" alt="icon">-->
-
-                                <span class="block">
-                    	<span class="title">My Cart</span>
-
-                            <span class="items">(<span class="cart-count">{{ cartCount() }}</span>)&nbsp;Item(s)</span>
-
+                @if(Auth::check())
+                    <span id="ptofileBtn" class="pointer header-profile-icon">
+                        <svg width="34px" height="34px" viewBox="0 0 34 34">
+                        <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                              d="M34.000,17.000 C34.000,7.626 26.373,-0.000 17.000,-0.000 C7.627,-0.000 -0.000,7.626 -0.000,17.000 C-0.000,21.951 2.129,26.414 5.518,29.523 L5.502,29.537 L6.053,30.002 C6.089,30.032 6.128,30.057 6.164,30.087 C6.457,30.330 6.760,30.560 7.069,30.784 C7.170,30.856 7.270,30.928 7.372,30.999 C7.702,31.226 8.041,31.442 8.387,31.647 C8.462,31.691 8.538,31.734 8.614,31.778 C8.993,31.993 9.380,32.197 9.776,32.383 C9.806,32.397 9.835,32.409 9.864,32.423 C11.156,33.023 12.534,33.464 13.976,33.724 C14.013,33.731 14.051,33.738 14.090,33.745 C14.537,33.822 14.990,33.884 15.448,33.925 C15.503,33.930 15.559,33.933 15.615,33.938 C16.071,33.976 16.533,34.000 17.000,34.000 C17.463,34.000 17.920,33.976 18.374,33.939 C18.431,33.934 18.488,33.931 18.546,33.926 C19.000,33.885 19.449,33.825 19.892,33.749 C19.931,33.742 19.970,33.735 20.008,33.728 C21.428,33.473 22.787,33.042 24.061,32.458 C24.108,32.436 24.156,32.416 24.203,32.393 C24.584,32.214 24.957,32.021 25.322,31.815 C25.413,31.763 25.504,31.711 25.594,31.658 C25.926,31.462 26.254,31.258 26.571,31.040 C26.686,30.962 26.797,30.880 26.911,30.798 C27.182,30.603 27.448,30.402 27.707,30.191 C27.765,30.144 27.827,30.104 27.883,30.057 L28.449,29.584 L28.432,29.570 C31.851,26.459 34.000,21.976 34.000,17.000 ZM1.236,17.000 C1.236,8.308 8.308,1.236 17.000,1.236 C25.692,1.236 32.764,8.308 32.764,17.000 C32.764,21.684 30.708,25.895 27.454,28.784 C27.272,28.659 27.089,28.546 26.902,28.452 L21.668,25.836 C21.198,25.601 20.906,25.128 20.906,24.604 L20.906,22.776 C21.027,22.626 21.155,22.457 21.288,22.271 C21.965,21.314 22.509,20.249 22.905,19.104 C23.688,18.731 24.194,17.951 24.194,17.070 L24.194,14.879 C24.194,14.343 23.997,13.823 23.645,13.414 L23.645,10.529 C23.678,10.209 23.791,8.398 22.481,6.904 C21.342,5.604 19.498,4.945 17.000,4.945 C14.502,4.945 12.658,5.604 11.519,6.904 C10.209,8.397 10.322,10.208 10.354,10.529 L10.354,13.414 C10.003,13.823 9.806,14.342 9.806,14.878 L9.806,17.070 C9.806,17.750 10.112,18.385 10.635,18.814 C11.135,20.775 12.166,22.260 12.547,22.763 L12.547,24.552 C12.547,25.057 12.271,25.520 11.828,25.763 L6.940,28.429 C6.785,28.514 6.630,28.612 6.475,28.723 C3.261,25.835 1.236,21.650 1.236,17.000 ZM26.247,29.754 C26.031,29.911 25.811,30.063 25.588,30.209 C25.485,30.275 25.383,30.342 25.279,30.407 C24.987,30.588 24.690,30.759 24.387,30.920 C24.320,30.955 24.253,30.989 24.186,31.023 C23.490,31.380 22.769,31.687 22.030,31.936 C22.004,31.945 21.978,31.954 21.951,31.962 C21.563,32.091 21.171,32.205 20.774,32.304 C20.773,32.304 20.772,32.304 20.770,32.304 C20.370,32.403 19.964,32.485 19.556,32.553 C19.545,32.555 19.534,32.557 19.523,32.559 C19.139,32.621 18.752,32.667 18.364,32.701 C18.295,32.707 18.226,32.711 18.157,32.716 C17.773,32.745 17.388,32.764 17.000,32.764 C16.608,32.764 16.217,32.744 15.829,32.715 C15.761,32.710 15.694,32.706 15.627,32.700 C15.235,32.665 14.845,32.619 14.459,32.556 C14.441,32.553 14.424,32.550 14.407,32.547 C13.589,32.410 12.785,32.209 12.002,31.946 C11.978,31.938 11.953,31.930 11.929,31.922 C11.540,31.789 11.156,31.643 10.778,31.481 C10.776,31.480 10.772,31.478 10.770,31.477 C10.413,31.323 10.062,31.153 9.716,30.973 C9.671,30.949 9.625,30.927 9.580,30.903 C9.265,30.734 8.956,30.552 8.651,30.361 C8.560,30.304 8.471,30.247 8.382,30.189 C8.101,30.005 7.824,29.814 7.555,29.612 C7.527,29.591 7.500,29.569 7.473,29.548 C7.492,29.537 7.512,29.526 7.532,29.514 L12.420,26.848 C13.261,26.390 13.783,25.510 13.783,24.552 L13.782,22.326 L13.640,22.154 C13.626,22.138 12.290,20.512 11.785,18.311 L11.729,18.066 L11.518,17.930 C11.221,17.737 11.043,17.416 11.043,17.069 L11.043,14.878 C11.043,14.590 11.164,14.323 11.387,14.122 L11.591,13.937 L11.591,10.494 L11.585,10.413 C11.583,10.398 11.401,8.912 12.448,7.718 C13.342,6.699 14.874,6.182 17.000,6.182 C19.118,6.182 20.645,6.695 21.541,7.706 C22.587,8.888 22.416,10.402 22.415,10.414 L22.409,13.939 L22.613,14.123 C22.835,14.323 22.957,14.592 22.957,14.879 L22.957,17.070 C22.957,17.511 22.657,17.911 22.227,18.044 L21.920,18.139 L21.821,18.445 C21.456,19.578 20.937,20.624 20.278,21.555 C20.116,21.784 19.959,21.987 19.823,22.142 L19.670,22.317 L19.670,24.604 C19.670,25.600 20.224,26.496 21.115,26.942 L26.349,29.558 C26.383,29.575 26.415,29.592 26.448,29.610 C26.382,29.660 26.314,29.706 26.247,29.754 Z"/>
+                </svg>
                     </span>
-                            </a>
-
-
-                            <div class="shopping-cart shopping-cart-empty dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                <ul class="shopping-cart-items">
-                                    <li>You have no items in your shopping cart.</li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                @endif
             </div>
+
         </div>
-    </div>
-    <div class="header-navi">
-        <div class="container">
-            <div class="row align-items-center">
 
-                <div class="col-12">
-                    <nav id="navbar_1" class="navbar navbar-expand-lg navbar-dark navbar-1 p-0 d-none d-lg-block">
-
-                        <div class="collapse navbar-collapse" id="navbar_collapse_1">
-
-                            <ul class="navbar-nav position-relative">
-                                <li class="nav-item first"><a href="{!! url('/') !!}" class="nav-link"><i class="fa fa-home"></i></a></li>
-                                {{--<li class="nav-item dropdown open">--}}
-                                    {{--<a class="nav-link dropdown-toggle" href="">Home Pages</a>--}}
-                                    {{--<ul class="dropdown-menu" aria-expanded="false">--}}
-                                        {{--<li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=one">Home Page 1</a> </li>--}}
-                                        {{--<li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=two">Home Page 2</a> </li>--}}
-                                        {{--<li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=three">Home Page 3</a> </li>--}}
-                                    {{--</ul>--}}
-                                {{--</li>--}}
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_vape') !!}">Vape</a> </li>
-                                {{--! HAS SUBMENU MUST HAVE CLASS (has-subnav)--}}
-                                <li class="nav-item has-subnav"> <a class="nav-link" href="{!! route('product_juice') !!}">Juice</a>
-                                    <ul class="subnav list-unstyled position-absolute d-flex">
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">subnav item 1</a>
-                                        </li>
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">subnav item 2</a>
-                                        </li>
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">subnav item 3</a>
-                                        </li>
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">subnav item 4</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                {{--! HAS SUBMENU--}}
-                                <li class="nav-item has-subnav"> <a class="nav-link" href="{!! route('product_sales') !!}">Sales</a>
-                                    <ul class="subnav list-unstyled position-absolute d-flex">
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 1</a>
-                                        </li>
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 2</a>
-                                        </li>
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 3</a>
-                                        </li>
-                                        <li class="subnav-item">
-                                            <a href="#" class="subnav-link d-inline-block">sales subnav item 4</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('blog') !!}">News</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('forum') !!}">Forums</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_support') !!}">Support</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="{!! route('product_contact_us') !!}">Contact Us</a> </li>
-                                {{--<li class="nav-item dropdown open">--}}
-                                    {{--<a class="nav-link" href="{!! route('blog') !!}">Blog</a>--}}
-                                {{--</li>--}}
-                                {{--<li class="nav-item last"><a class="nav-link"><span>Hotline</span>(+92 312 1234567)</a></li>--}}
-                            </ul>
-                        </div>
-                    </nav>
-
-
-                    <nav id="navbar_2" class="navbar navbar-expand-lg navbar-dark navbar-2 p-0 d-block d-lg-none">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_collapse_2" aria-controls="navbar_collapse_2" aria-expanded="false" aria-label="Toggle navigation"> Menu </button>
-
-                        <div class="collapse navbar-collapse" id="navbar_collapse_2">
-
-                            <ul class="navbar-nav">
-                                <li class="nav-item first"><a href="http://laravelcommerce.com" class="nav-link"><i class="fa fa-home"></i></a></li>
-                                <li class="nav-item dropdown open">
-                                    <div class="nav-link dropdown-toggle">Home Pages</div>
-                                    <ul class="dropdown-menu">
-                                        <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=one">Home Page 1</a> </li>
-                                        <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=two">Home Page 2</a> </li>
-                                        <li> <a class="dropdown-item" href="http://laravelcommerce.com/setStyle?style=three">Home Page 3</a> </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="http://laravelcommerce.com/shop">Shop</a> </li>
-
-                                <li class="nav-item dropdown mega-dropdown open">
-                                    <div class="nav-link dropdown-toggle">
-                                        Collection                                <span class="badge badge-secondary">Hot</span>
-                                    </div>
-
-                                    <ul class="dropdown-menu mega-dropdown-menu row">
-                                        <li class="col-sm-3">
-                                            <ul>
-                                                <li class="dropdown-header underline">New in Stores</li>
-
-                                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                                    <div class="carousel-inner">
-
-                                                        <div class="carousel-item  active ">
-                                                            <span products_id="81" class="fa  fa-heart-o  is_liked"><span class="badge badge-secondary">2</span></span>
-                                                            <a href="http://laravelcommerce.com/product-detail/ruffled-cotton-cardigan"><img src="http://laravelcommerce.com/resources/assets/images/product_images/1502366686.pPOLO2-25207761_standard_v400.jpg" alt="RUFFLED COTTON CARDIGAN"></a>
-                                                            <small>Girl's Clothing</small>
-                                                            <h5>RUFFLED COTTON CARDIGAN</h5>
-
-                                                            <div class="block">
-                                                    <span class="price">
-                                                                                                                    $49.5
-                                                                                                            </span>
-
-                                                                <div class="buttons">
-                                                                    <a href="http://laravelcommerce.com/product-detail/ruffled-cotton-cardigan" class="btn btn-dark">View Detail</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Item -->
-                                                        <div class="carousel-item ">
-                                                            <span products_id="80" class="fa  fa-heart-o  is_liked"><span class="badge badge-secondary">2</span></span>
-                                                            <a href="http://laravelcommerce.com/product-detail/flag-combed-cotton-sweater"><img src="http://laravelcommerce.com/resources/assets/images/product_images/1502366586.pPOLO2-25834797_standard_v400.jpg" alt="FLAG COMBED COTTON SWEATER"></a>
-                                                            <small>Girl's Clothing</small>
-                                                            <h5>FLAG COMBED COTTON SWEATER</h5>
-
-                                                            <div class="block">
-                                                    <span class="price">
-                                                                                                                    <span class="line-through">$99.99</span>
-                                                            $125
-                                                                                                            </span>
-
-                                                                <div class="buttons">
-                                                                    <a href="http://laravelcommerce.com/product-detail/flag-combed-cotton-sweater" class="btn btn-dark">View Detail</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Item -->
-                                                        <div class="carousel-item ">
-                                                            <span products_id="79" class="fa  fa-heart-o  is_liked"><span class="badge badge-secondary">2</span></span>
-                                                            <a href="http://laravelcommerce.com/product-detail/fair-isle-hooded-sweater"><img src="http://laravelcommerce.com/resources/assets/images/product_images/1502366462.pPOLO2-26090829_standard_v400.jpg" alt="FAIR ISLE HOODED SWEATER"></a>
-                                                            <small>Girl's Clothing</small>
-                                                            <h5>FAIR ISLE HOODED SWEATER</h5>
-
-                                                            <div class="block">
-                                                    <span class="price">
-                                                                                                                    $45
-                                                                                                            </span>
-
-                                                                <div class="buttons">
-                                                                    <a href="http://laravelcommerce.com/product-detail/fair-isle-hooded-sweater" class="btn btn-dark">View Detail</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Item -->
-                                                        <div class="carousel-item ">
-                                                            <span products_id="78" class="fa  fa-heart-o  is_liked"><span class="badge badge-secondary">2</span></span>
-                                                            <a href="http://laravelcommerce.com/product-detail/cable-knit-cashmere-sweater"><img src="http://laravelcommerce.com/resources/assets/images/product_images/1502366342.pPOLO2-26090785_standard_v400.jpg" alt="CABLE-KNIT CASHMERE SWEATER"></a>
-                                                            <small>Girl's Clothing</small>
-                                                            <h5>CABLE-KNIT CASHMERE SWEATER</h5>
-
-                                                            <div class="block">
-                                                    <span class="price">
-                                                                                                                    $195
-                                                                                                            </span>
-
-                                                                <div class="buttons">
-                                                                    <a href="http://laravelcommerce.com/product-detail/cable-knit-cashmere-sweater" class="btn btn-dark">View Detail</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Item -->
-                                                        <div class="carousel-item ">
-                                                            <span products_id="77" class="fa  fa-heart-o  is_liked"><span class="badge badge-secondary">2</span></span>
-                                                            <a href="http://laravelcommerce.com/product-detail/pleated-madras-skirt"><img src="http://laravelcommerce.com/resources/assets/images/product_images/1502366105.pPOLO2-26091049_alternate1_v400.jpg" alt="PLEATED MADRAS SKIRT"></a>
-                                                            <small>Girl's Clothing</small>
-                                                            <h5>PLEATED MADRAS SKIRT</h5>
-
-                                                            <div class="block">
-                                                    <span class="price">
-                                                                                                                    $56.5
-                                                                                                            </span>
-
-                                                                <div class="buttons">
-                                                                    <a href="http://laravelcommerce.com/product-detail/pleated-madras-skirt" class="btn btn-dark">View Detail</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Item -->
-
-                                                    </div>
-                                                    <!-- End Carousel Inner -->
-                                                </div>
-
-                                            </ul>
-                                        </li>
-                                        <li class="col-sm-9 pl-4 row">
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=men-s-clothing">Men's Clothing</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=men-polo-shirts">Men Polo shirts</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=men-polo-shirts-1">Men Polo shirts</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=men-jeans">Men Jeans</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=men-shoes">Men Shoes</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=sunglasses-glasses">Sunglasses &amp; Glasses</a></li>
-
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=women-s-clothing">Women's Clothing</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=women-dresses">Women Dresses</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=women-shirts-tops">Women Shirts &amp; Tops</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=women-jeans">Women Jeans</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=women-hand-bags">Women Hand Bags</a></li>
-
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=boy-s-clothing">Boy's Clothing</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=boy-polo-shirts">Boy Polo shirts</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=boy-casual-shirts">Boy Casual Shirts</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=boy-pants-jeans">Boy Pants &amp; Jeans</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=boy-shoes">Boy Shoes</a></li>
-
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=girl-s-clothing">Girl's Clothing</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=dresses-rompers">Dresses &amp; Rompers</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=shorts-skirts">Shorts &amp; Skirts</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=sweaters">Sweaters</a></li>
-
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=baby-mother">Baby &amp; Mother</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=new-born">New Born</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=baby-dresses">Baby Dresses</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=baby-blankets-swaddles">Baby Blankets &amp; Swaddles</a></li>
-
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=household-merchandises">Household Merchandises</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=bedding-collections">Bedding Collections</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=throws-pillows">Throws &amp; Pillows</a></li>
-                                                <li><a href="http://laravelcommerce.com/shop?category=bath-robes">Bath Robes</a></li>
-
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=health-beauty-hair">Health &amp; Beauty, Hair</a></li>
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=automobiles-motorcycles">Automobiles &amp; Motorcycles</a></li>
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=jewelry-watches">Jewelry &amp; Watches</a></li>
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=cellphones-accessories">Cellphones &amp; Accessories</a></li>
-
-
-                                            </ul>
-
-                                            <ul class="col-sm-4">
-                                                <li class="dropdown-header"><a href="http://laravelcommerce.com/shop?category=computer-office-security">Computer, Office, Security</a></li>
-
-
-                                            </ul>
-
-                                        </li>
-
-
-                                    </ul>
-
-                                </li>
-                                <li class="nav-item dropdown open">
-                                    <div class="nav-link dropdown-toggle">News</div>
-
-                                    <ul class="dropdown-menu">
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=app-features">App Features</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=introduction">Introduction</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=platforms">Platforms</a>
-                                        </li>
-
-                                        <li>
-                                            <a class="dropdown-item" href="http://laravelcommerce.com/news?category=screen-shots">Screen Shots</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="nav-item dropdown open">
-                                    <div class="nav-link dropdown-toggle">Info Pages</div>
-
-                                    <ul class="dropdown-menu">
-                                        <li> <a href="http://laravelcommerce.com/page?name=about-us" class="dropdown-item">About Us</a> </li>
-                                        <li> <a href="http://laravelcommerce.com/page?name=privacy-policy" class="dropdown-item">Privacy Policy</a> </li>
-                                        <li> <a href="http://laravelcommerce.com/page?name=refund-policy" class="dropdown-item">Refund Policy</a> </li>
-                                        <li> <a href="http://laravelcommerce.com/page?name=term-services" class="dropdown-item">Term &amp; Services</a> </li>
-
-                                    </ul>
-                                </li>
-
-                                <li class="nav-item"> <a class="nav-link" href="http://laravelcommerce.com/contact-us">Contact Us</a> </li>
-                                <li class="nav-item last"><a class="nav-link"><span>Hotline</span>(+92 312 1234567)</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    </nav>
 </header>
+
+@if(Auth::check())
+<!--Hidden Sidebars-->
+<div id="profileSidebar" class="hidden-sidebar profile-aside d-flex flex-column">
+    <div class="profile-aside-dtls">
+        <div class="profile-aside-img-holder">
+            <img src="/public/img/profile.png" alt="">
+        </div>
+        <h2 class="profile-aside-username text-white text-center">{!! Auth::user()->name !!}</h2>
+    </div>
+    <ul class="user-aside-menu list-unstyled">
+        <li class="user-aside-menu-item">
+            <a href="{!! url('my-account') !!}" class="user-aside-menu-link text-white d-inline-flex align-items-center">
+                <span class="user-aside-menu-icon-holder">
+                    <svg width="37px" height="34px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M34.000,17.000 C34.000,7.626 26.373,-0.000 17.000,-0.000 C7.626,-0.000 -0.000,7.626 -0.000,17.000 C-0.000,21.951 2.129,26.414 5.518,29.523 L5.502,29.537 L6.053,30.002 C6.089,30.032 6.128,30.057 6.164,30.087 C6.457,30.330 6.760,30.560 7.069,30.784 C7.170,30.856 7.270,30.928 7.372,30.999 C7.702,31.226 8.041,31.442 8.387,31.647 C8.462,31.691 8.538,31.734 8.614,31.778 C8.993,31.993 9.380,32.197 9.776,32.383 C9.805,32.397 9.835,32.409 9.864,32.423 C11.156,33.023 12.534,33.464 13.976,33.724 C14.013,33.731 14.051,33.738 14.089,33.745 C14.537,33.822 14.990,33.884 15.448,33.925 C15.503,33.930 15.559,33.933 15.615,33.938 C16.071,33.976 16.532,34.000 17.000,34.000 C17.463,34.000 17.920,33.976 18.373,33.939 C18.431,33.934 18.488,33.931 18.546,33.926 C19.000,33.885 19.449,33.825 19.892,33.749 C19.931,33.742 19.970,33.735 20.008,33.728 C21.428,33.473 22.787,33.042 24.061,32.458 C24.108,32.436 24.156,32.416 24.203,32.393 C24.584,32.214 24.957,32.021 25.322,31.815 C25.413,31.763 25.504,31.711 25.594,31.658 C25.926,31.462 26.253,31.258 26.571,31.040 C26.686,30.962 26.797,30.880 26.911,30.798 C27.182,30.603 27.448,30.402 27.707,30.191 C27.765,30.144 27.827,30.104 27.883,30.057 L28.449,29.584 L28.432,29.570 C31.850,26.459 34.000,21.976 34.000,17.000 ZM1.236,17.000 C1.236,8.308 8.308,1.236 17.000,1.236 C25.692,1.236 32.764,8.308 32.764,17.000 C32.764,21.684 30.708,25.895 27.454,28.784 C27.272,28.659 27.089,28.546 26.902,28.452 L21.668,25.836 C21.198,25.601 20.906,25.128 20.906,24.604 L20.906,22.776 C21.027,22.626 21.155,22.457 21.288,22.271 C21.965,21.314 22.508,20.249 22.905,19.104 C23.688,18.731 24.194,17.951 24.194,17.070 L24.194,14.879 C24.194,14.343 23.997,13.823 23.645,13.414 L23.645,10.529 C23.678,10.209 23.791,8.398 22.481,6.904 C21.342,5.604 19.498,4.945 17.000,4.945 C14.502,4.945 12.658,5.604 11.518,6.904 C10.208,8.397 10.322,10.208 10.354,10.529 L10.354,13.414 C10.003,13.823 9.806,14.342 9.806,14.878 L9.806,17.070 C9.806,17.750 10.111,18.385 10.634,18.814 C11.135,20.775 12.166,22.260 12.546,22.763 L12.546,24.552 C12.546,25.057 12.271,25.520 11.828,25.763 L6.940,28.429 C6.784,28.514 6.630,28.612 6.475,28.723 C3.261,25.835 1.236,21.650 1.236,17.000 ZM26.247,29.754 C26.031,29.911 25.811,30.063 25.588,30.209 C25.485,30.275 25.383,30.342 25.279,30.407 C24.987,30.588 24.690,30.759 24.387,30.920 C24.320,30.955 24.253,30.989 24.186,31.023 C23.490,31.380 22.769,31.687 22.029,31.936 C22.003,31.945 21.977,31.954 21.951,31.962 C21.563,32.091 21.171,32.205 20.774,32.304 C20.773,32.304 20.771,32.304 20.770,32.304 C20.370,32.403 19.964,32.485 19.556,32.553 C19.545,32.555 19.534,32.557 19.523,32.559 C19.139,32.621 18.752,32.667 18.364,32.701 C18.295,32.707 18.226,32.711 18.157,32.716 C17.773,32.745 17.387,32.764 17.000,32.764 C16.608,32.764 16.217,32.744 15.828,32.715 C15.761,32.710 15.694,32.706 15.627,32.700 C15.235,32.665 14.845,32.619 14.459,32.556 C14.441,32.553 14.424,32.550 14.407,32.547 C13.589,32.410 12.785,32.209 12.002,31.946 C11.978,31.938 11.953,31.930 11.929,31.922 C11.540,31.789 11.156,31.643 10.778,31.481 C10.775,31.480 10.772,31.478 10.770,31.477 C10.413,31.323 10.062,31.153 9.716,30.973 C9.671,30.949 9.625,30.927 9.580,30.903 C9.265,30.734 8.955,30.552 8.651,30.361 C8.560,30.304 8.471,30.247 8.382,30.189 C8.101,30.005 7.824,29.814 7.555,29.612 C7.527,29.591 7.500,29.569 7.472,29.548 C7.492,29.537 7.512,29.526 7.532,29.514 L12.420,26.848 C13.260,26.390 13.783,25.510 13.783,24.552 L13.782,22.326 L13.640,22.154 C13.626,22.138 12.290,20.512 11.785,18.311 L11.729,18.066 L11.518,17.930 C11.220,17.737 11.042,17.416 11.042,17.069 L11.042,14.878 C11.042,14.590 11.164,14.323 11.387,14.122 L11.591,13.937 L11.591,10.494 L11.585,10.413 C11.583,10.398 11.401,8.912 12.448,7.718 C13.342,6.699 14.874,6.182 17.000,6.182 C19.118,6.182 20.645,6.695 21.541,7.706 C22.587,8.888 22.416,10.402 22.414,10.414 L22.409,13.939 L22.613,14.123 C22.835,14.323 22.957,14.592 22.957,14.879 L22.957,17.070 C22.957,17.511 22.657,17.911 22.227,18.044 L21.920,18.139 L21.821,18.445 C21.456,19.578 20.937,20.624 20.278,21.555 C20.116,21.784 19.958,21.987 19.823,22.142 L19.670,22.317 L19.670,24.604 C19.670,25.600 20.224,26.496 21.115,26.942 L26.349,29.558 C26.383,29.575 26.415,29.592 26.448,29.610 C26.382,29.660 26.314,29.706 26.247,29.754 Z"/>
+</svg></span>Account</a>
+        </li>
+        <li class="user-aside-menu-item">
+            <a href="{!! route('my_account_favourites') !!}" class="user-aside-menu-link text-white d-inline-flex align-items-center">
+                <span class="user-aside-menu-icon-holder">
+                    <svg width="37px" height="30px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M31.814,8.946 C31.351,3.762 27.742,0.000 23.226,0.000 C20.217,0.000 17.462,1.647 15.912,4.285 C14.376,1.613 11.734,-0.000 8.774,-0.000 C4.259,-0.000 0.649,3.761 0.187,8.945 C0.150,9.174 -0.000,10.379 0.456,12.344 C1.114,15.179 2.634,17.757 4.850,19.799 L15.905,30.000 L27.150,19.800 C29.366,17.757 30.886,15.180 31.543,12.344 C32.000,10.380 31.850,9.175 31.814,8.946 ZM30.355,12.060 C29.755,14.649 28.363,17.008 26.333,18.877 L15.912,28.331 L5.670,18.879 C3.637,17.006 2.246,14.648 1.645,12.059 C1.213,10.200 1.390,9.149 1.391,9.142 L1.400,9.080 C1.797,4.538 4.897,1.241 8.774,1.241 C11.634,1.241 14.152,3.028 15.347,5.904 L15.909,7.259 L16.471,5.904 C17.647,3.072 20.298,1.242 23.227,1.242 C27.102,1.242 30.204,4.539 30.609,9.139 C30.610,9.149 30.787,10.200 30.355,12.060 Z"/>
+</svg></span>Favorites</a>
+        </li>
+        <li class="user-aside-menu-item">
+            <a href="{!! route('my_account_orders') !!}" class="user-aside-menu-link text-white d-inline-flex align-items-center">
+                <span class="user-aside-menu-icon-holder">
+                   <svg width="37px" height="36px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M29.828,35.810 C29.714,35.931 29.557,36.000 29.392,36.000 L0.607,36.000 C0.443,36.000 0.286,35.931 0.172,35.810 C0.059,35.689 -0.000,35.526 0.008,35.359 L1.208,11.562 C1.213,11.467 1.243,11.382 1.285,11.304 C1.290,11.296 1.288,11.287 1.292,11.279 L3.091,8.228 C3.200,8.044 3.395,7.932 3.606,7.932 L4.036,7.932 L3.549,3.742 C3.511,3.408 3.746,3.105 4.074,3.065 L10.826,2.253 C10.843,2.211 10.854,2.168 10.881,2.130 C11.839,0.796 13.378,-0.000 15.000,-0.000 C17.401,-0.000 19.465,1.743 19.964,4.100 L25.345,5.381 C25.500,5.417 25.634,5.515 25.718,5.653 C25.802,5.790 25.829,5.956 25.792,6.114 L25.374,7.932 L26.394,7.932 C26.605,7.932 26.800,8.044 26.908,8.228 L28.707,11.279 C28.711,11.286 28.710,11.295 28.713,11.302 C28.756,11.381 28.787,11.467 28.792,11.562 L29.992,35.359 C30.000,35.526 29.941,35.689 29.828,35.810 ZM4.178,9.152 L3.945,9.152 L2.866,10.983 L4.390,10.983 L4.178,9.152 ZM4.811,4.205 L5.598,10.983 L8.517,10.983 L8.043,8.974 C7.965,8.647 8.163,8.317 8.485,8.238 L14.083,6.869 L13.650,3.142 L4.811,4.205 ZM9.349,9.282 L9.751,10.983 L18.736,10.983 L17.843,7.204 L9.349,9.282 ZM15.000,1.220 C14.151,1.220 13.343,1.523 12.675,2.030 L14.104,1.859 C14.263,1.840 14.421,1.885 14.546,1.985 C14.671,2.086 14.752,2.232 14.770,2.393 L15.257,6.581 L15.865,6.433 L16.449,3.890 C16.485,3.733 16.582,3.596 16.717,3.511 C16.852,3.426 17.015,3.398 17.170,3.435 L18.635,3.784 C18.070,2.279 16.637,1.220 15.000,1.220 ZM17.481,4.762 L17.170,6.113 L18.146,5.875 C18.302,5.837 18.464,5.863 18.599,5.947 C18.735,6.032 18.832,6.168 18.869,6.325 L19.970,10.983 L23.441,10.983 L24.488,6.430 L17.481,4.762 ZM26.054,9.152 L25.093,9.152 L24.673,10.983 L27.134,10.983 L26.054,9.152 ZM27.623,12.203 L2.376,12.203 L1.238,34.780 L28.761,34.780 L27.623,12.203 ZM10.502,13.424 C11.494,13.424 12.301,14.245 12.301,15.254 C12.301,16.049 11.798,16.720 11.102,16.972 L11.102,19.220 C11.102,21.407 12.850,23.186 15.000,23.186 C17.149,23.186 18.898,21.407 18.898,19.220 L18.898,16.972 C18.201,16.720 17.698,16.049 17.698,15.254 C17.698,14.245 18.505,13.424 19.497,13.424 C20.489,13.424 21.296,14.245 21.296,15.254 C21.296,16.049 20.794,16.720 20.097,16.972 L20.097,19.220 C20.097,22.080 17.810,24.407 15.000,24.407 C12.189,24.407 9.903,22.080 9.903,19.220 L9.903,16.972 C9.206,16.720 8.703,16.049 8.703,15.254 C8.703,14.245 9.510,13.424 10.502,13.424 ZM19.497,14.644 C19.167,14.644 18.898,14.918 18.898,15.254 C18.898,15.353 18.926,15.442 18.967,15.524 C19.075,15.365 19.247,15.254 19.451,15.254 L19.497,15.254 C19.717,15.254 19.900,15.380 20.005,15.559 C20.058,15.468 20.097,15.368 20.097,15.254 C20.097,14.918 19.828,14.644 19.497,14.644 ZM9.995,15.559 C10.099,15.380 10.283,15.254 10.502,15.254 C10.721,15.254 10.905,15.380 11.010,15.559 C11.063,15.468 11.102,15.368 11.102,15.254 C11.102,14.918 10.833,14.644 10.502,14.644 C10.171,14.644 9.903,14.918 9.903,15.254 C9.903,15.368 9.941,15.468 9.995,15.559 Z"/>
+</svg></span>Orders</a>
+        </li>
+        <li class="user-aside-menu-item">
+            <a href="{!! route('my_account_address') !!}" class="user-aside-menu-link text-white d-inline-flex align-items-center">
+                <span class="user-aside-menu-icon-holder">
+                   <svg width="37px" height="33px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M27.921,33.000 L5.807,33.000 C4.127,33.000 2.796,31.664 2.796,29.978 L2.796,23.799 L-0.000,23.799 L-0.000,22.396 L2.796,22.396 L2.796,17.201 L-0.000,17.201 L-0.000,15.798 L2.796,15.798 L2.796,10.604 L-0.000,10.604 L-0.000,9.201 L2.796,9.201 L2.796,3.022 C2.796,1.336 4.127,-0.000 5.807,-0.000 L27.989,-0.000 C29.669,-0.000 31.000,1.336 31.000,3.022 L31.000,29.978 C30.933,31.664 29.602,33.000 27.921,33.000 ZM29.595,29.991 L29.595,3.022 C29.595,2.111 28.829,1.410 27.989,1.410 L5.807,1.410 C4.900,1.410 4.201,2.179 4.201,3.022 L4.201,9.215 L6.863,9.215 L6.863,10.618 L4.201,10.618 L4.201,15.812 L6.863,15.812 L6.863,17.215 L4.201,17.215 L4.201,22.409 L6.869,22.409 L6.869,23.812 L4.208,23.812 L4.208,29.991 C4.208,30.902 4.974,31.604 5.814,31.604 L27.995,31.604 C28.903,31.604 29.602,30.835 29.602,29.991 L29.595,29.991 ZM17.214,24.939 C14.411,24.939 11.971,24.204 10.849,23.151 C10.432,22.726 10.896,16.088 15.392,16.088 L18.962,16.088 C23.452,16.088 23.794,22.895 23.371,23.252 C22.322,24.237 20.017,24.939 17.214,24.939 ZM19.036,17.424 L15.466,17.424 C12.361,17.424 11.971,22.058 12.038,22.268 C12.879,23.037 14.908,23.529 17.214,23.529 C19.519,23.529 21.549,23.043 22.390,22.268 C22.464,22.052 22.107,17.417 19.036,17.424 ZM17.147,15.664 C15.043,15.664 13.369,13.977 13.369,11.872 C13.369,9.768 15.050,8.081 17.147,8.081 C19.244,8.081 20.924,9.768 20.924,11.872 C20.998,13.977 19.244,15.664 17.147,15.664 ZM17.147,9.484 C15.816,9.484 14.693,10.537 14.693,11.872 C14.693,13.208 15.823,14.260 17.147,14.260 C18.471,14.260 19.593,13.208 19.593,11.872 C19.593,10.537 18.545,9.484 17.147,9.484 Z"/>
+</svg></span>Address</a>
+        </li>
+        <li class="user-aside-menu-item">
+            <a href="{!! route('my_account_tickets') !!}" class="user-aside-menu-link text-white d-inline-flex align-items-center">
+                <span class="user-aside-menu-icon-holder">
+                   <svg width="37px" height="37px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M13.934,37.000 L9.703,32.768 L10.106,32.365 C10.862,31.609 11.080,31.060 11.080,29.915 C11.080,27.600 9.400,25.920 7.085,25.920 C5.940,25.920 5.391,26.138 4.635,26.894 L4.231,27.297 L-0.000,23.066 L23.066,-0.000 L27.297,4.231 L26.894,4.635 C26.138,5.391 25.920,5.940 25.920,7.085 C25.920,9.400 27.600,11.080 29.915,11.080 C31.060,11.080 31.609,10.862 32.365,10.106 L32.768,9.703 L37.000,13.934 L13.934,37.000 ZM32.753,11.301 C31.941,11.981 31.160,12.222 29.915,12.222 C26.986,12.222 24.778,10.014 24.778,7.085 C24.778,5.840 25.019,5.059 25.699,4.248 L23.066,1.614 L15.883,8.797 L17.762,10.677 L16.955,11.484 L15.076,9.604 L1.614,23.066 L4.247,25.699 C5.059,25.019 5.840,24.778 7.085,24.778 C10.014,24.778 12.222,26.986 12.222,29.915 C12.222,31.160 11.981,31.941 11.301,32.752 L13.934,35.386 L27.396,21.924 L25.516,20.045 L26.323,19.238 L28.203,21.117 L35.386,13.934 L32.753,11.301 ZM22.092,16.621 L22.899,15.814 L25.182,18.097 L24.375,18.904 L22.092,16.621 ZM18.096,12.626 L18.903,11.819 L21.186,14.102 L20.379,14.909 L18.096,12.626 Z"/>
+</svg></span>Tickets</a>
+        </li>
+    </ul>
+    {!! Form::open(['url'=>route('logout')]) !!}
+        <button type="submit" class="profile-aside-btn-logout btn mt-auto align-self-center rounded-0">Logout</button>
+    {!! Form::close() !!}
+</div>
+@endif
+<div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column">
+    <!--Empty Card Message-->
+    <p id="cartSidebarEmptyMsg" class="text-white text-center cart-aside-empty-msg">Cart is Empty</p>
+    <!--Repeating cart item-->
+    <div class="cart-aside-item position-relative">
+        <div class="row">
+            <div class="col-5">
+                <div class="cart-aside-img-holder position-relative">
+                    <img class="img-fluid" src="/public/img/temp/product-1.jpg" alt="">
+                    <span class="cart-aside-img-badge position-absolute rounded-circle d-flex align-items-center justify-content-center">
+                             <svg width="15px" height="23px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M13.932,8.633 L2.068,22.474 C1.940,22.625 1.755,22.704 1.567,22.704 C1.450,22.704 1.330,22.673 1.223,22.607 C0.947,22.437 0.835,22.092 0.959,21.793 L4.952,12.159 L1.568,12.159 C1.334,12.159 1.118,12.034 0.999,11.832 C0.881,11.630 0.879,11.381 0.994,11.176 L6.926,0.631 C7.042,0.424 7.262,0.295 7.500,0.295 L12.773,0.295 C13.013,0.295 13.235,0.427 13.351,0.637 C13.466,0.848 13.458,1.105 13.329,1.309 L9.360,7.545 L13.432,7.545 C13.689,7.545 13.923,7.695 14.030,7.929 C14.137,8.162 14.100,8.438 13.932,8.633 ZM8.159,8.864 C7.919,8.864 7.697,8.732 7.581,8.521 C7.466,8.311 7.474,8.054 7.603,7.850 L11.573,1.614 L7.886,1.614 L2.695,10.841 L5.939,10.841 C6.159,10.841 6.364,10.951 6.487,11.133 C6.609,11.317 6.633,11.549 6.548,11.752 L3.762,18.472 L11.999,8.864 L8.159,8.864 Z"/>
+                            </svg>
+                        </span>
+                </div>
+            </div>
+            <div class="col-7">
+                <h3 class="cart-product-qty-title text-white">Apple Hit</h3>
+                <div class="cart-product-dtls font-main-light">
+                    <span class="d-block">Kaliony Juice</span>
+                    <span class="d-block">Nicotin 12mg</span>
+                    <span class="d-block">Single Pack</span>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-5">
+                <div class="form-group mb-0">
+                    <label class="cart-product-qty-label text-white font-main-light" for="cartProductqQty">QTY&nbsp;:&nbsp;</label>
+                    <select class="cart-product-qty-select select-default" name="cartProductqQty" id="cartProductqQty">
+                        <option selected>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-7">
+                <span class="d-block cart-product-price">€6,02</span>
+            </div>
+        </div>
+        <span class="cart-item-close d-inline-block position-absolute pointer d-flex align-items-center justify-content-center">
+                <svg width="16px" height="16px">
+                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                          d="M15.120,-0.000 L7.996,7.177 L0.818,0.053 L-0.000,0.879 L7.177,8.003 L0.053,15.180 L0.879,16.000 L8.003,8.823 L15.180,15.946 L16.000,15.121 L8.822,7.997 L15.946,0.820 L15.120,-0.000 Z"/>
+                </svg>
+            </span>
+    </div>
+    <!--Repeating cart item-->
+    <div class="cart-aside-item position-relative">
+        <div class="row">
+            <div class="col-5">
+                <div class="cart-aside-img-holder position-relative">
+                    <img class="img-fluid" src="/public/img/temp/product-1.jpg" alt="">
+                    <span class="cart-aside-img-badge position-absolute rounded-circle d-flex align-items-center justify-content-center">
+                            <svg width="15px" height="23px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M13.932,8.633 L2.068,22.474 C1.940,22.625 1.755,22.704 1.567,22.704 C1.450,22.704 1.330,22.673 1.223,22.607 C0.947,22.437 0.835,22.092 0.959,21.793 L4.952,12.159 L1.568,12.159 C1.334,12.159 1.118,12.034 0.999,11.832 C0.881,11.630 0.879,11.381 0.994,11.176 L6.926,0.631 C7.042,0.424 7.262,0.295 7.500,0.295 L12.773,0.295 C13.013,0.295 13.235,0.427 13.351,0.637 C13.466,0.848 13.458,1.105 13.329,1.309 L9.360,7.545 L13.432,7.545 C13.689,7.545 13.923,7.695 14.030,7.929 C14.137,8.162 14.100,8.438 13.932,8.633 ZM8.159,8.864 C7.919,8.864 7.697,8.732 7.581,8.521 C7.466,8.311 7.474,8.054 7.603,7.850 L11.573,1.614 L7.886,1.614 L2.695,10.841 L5.939,10.841 C6.159,10.841 6.364,10.951 6.487,11.133 C6.609,11.317 6.633,11.549 6.548,11.752 L3.762,18.472 L11.999,8.864 L8.159,8.864 Z"/>
+                            </svg>
+                        </span>
+                </div>
+            </div>
+            <div class="col-7">
+                <h3 class="cart-product-qty-title text-white">Orange Hit</h3>
+                <div class="cart-product-dtls font-main-light">
+                    <span class="d-block">Kaliony Juice</span>
+                    <span class="d-block">Nicotin 12mg</span>
+                    <span class="d-block">Single Pack</span>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-5">
+                <div class="form-group mb-0">
+                    <label class="cart-product-qty-label text-white font-main-light" for="cartProductqQty-2">QTY&nbsp;:&nbsp;</label>
+                    <select class="cart-product-qty-select select-default" name="cartProductqQty-2"
+                            id="cartProductqQty-2">
+                        <option>1</option>
+                        <option selected>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-7">
+                <span class="d-block cart-product-price">€12,42</span>
+            </div>
+        </div>
+        <span class="cart-item-close d-inline-block position-absolute pointer d-flex align-items-center justify-content-center">
+               <svg width="16px" height="16px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M15.120,-0.000 L7.996,7.177 L0.818,0.053 L-0.000,0.879 L7.177,8.003 L0.053,15.180 L0.879,16.000 L8.003,8.823 L15.180,15.946 L16.000,15.121 L8.822,7.997 L15.946,0.820 L15.120,-0.000 Z"/>
+</svg>
+            </span>
+    </div>
+
+</div>
