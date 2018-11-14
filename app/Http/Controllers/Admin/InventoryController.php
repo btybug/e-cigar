@@ -40,7 +40,7 @@ class InventoryController extends Controller
         $model = null;
         $categories =  Category::with('children')->where('type','stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
-        return $this->view('stock_new', compact(['model','data']));
+        return $this->view('stock_new', compact(['model','data','categories']));
     }
 
     public function getStockEdit($id)
@@ -51,7 +51,7 @@ class InventoryController extends Controller
         $data = Category::recursiveItems($categories,0,[],$checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         
-        return $this->view('stock_new', compact(['model', 'attrs','data','checkedCategories']));
+        return $this->view('stock_new', compact(['model', 'attrs','data','checkedCategories','categories']));
     }
 
     public function postStock(Request $request)

@@ -135,7 +135,7 @@
                                                         <label for="product_id" class="control-label col-sm-4">Product
                                                             Type</label>
                                                         <div class="col-sm-8">
-                                                            {!! Form::select('type',['' => 'Select type'] + \App\Models\Stock::TYPES, null,
+                                                            {!! Form::select('type',['' => 'Select type'] + $categories->pluck('name','slug')->all(), null,
                                                             ['class' => 'form-control select-stock-type']) !!}
                                                         </div>
                                                     </div>
