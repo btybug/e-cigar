@@ -34,10 +34,9 @@ class Stock extends Translatable
     ];
 
     const TYPES = [
-      'DEV' => 'Devices',
-      'JUE' => 'Juice',
-      'DPT' => 'Devices parts',
-      'ACY' => 'Accessory'
+      'vape' => 'Devices',
+      'juice' => 'Juice',
+      'parts' => 'Devices parts'
     ];
 
     const STATUS = [
