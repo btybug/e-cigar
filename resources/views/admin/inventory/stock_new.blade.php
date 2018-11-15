@@ -25,38 +25,6 @@
     <section class="content stock-page">
 
         <div class="row">
-            {{--<div class="col-md-3">--}}
-                {{--<!-- Profile Image -->--}}
-                {{--<div class="box box-primary mb-30">--}}
-                    {{--<div class="box-body box-profile">--}}
-                        {{--<img class="profile-user-img img-responsive img-circle"--}}
-                             {{--src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"--}}
-                             {{--alt="Václav profile picture">--}}
-
-                        {{--<h3 class="profile-username text-center">Václav Kutiš</h3>--}}
-
-                        {{--<p class="text-muted text-center">Administrator</p>--}}
-
-                        {{--<!-- <ul class="list-group list-group-unbordered">--}}
-                           {{--<li class="list-group-item">--}}
-                             {{--<b>Followers</b> <a class="pull-right">1,322</a>--}}
-                           {{--</li>--}}
-                           {{--<li class="list-group-item">--}}
-                             {{--<b>Following</b> <a class="pull-right">543</a>--}}
-                           {{--</li>--}}
-                           {{--<li class="list-group-item">--}}
-                             {{--<b>Friends</b> <a class="pull-right">13,287</a>--}}
-                           {{--</li>--}}
-                         {{--</ul>--}}
-
-                         {{--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->--}}
-                    {{--</div>--}}
-                    {{--<!-- /.box-body -->--}}
-                {{--</div>--}}
-                {{--<!-- /.box -->--}}
-
-                {{--<!-- /.box -->--}}
-            {{--</div>--}}
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
@@ -222,8 +190,8 @@
                                             <ul class="nav nav-tabs media-list">
                                                 <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
                                                 <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
-                                                <li><a data-toggle="tab" href="#mediaposters">Posters</a>
-                                                </li>
+                                                <li><a data-toggle="tab" href="#mediastickers">Stickers</a></li>
+                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related Products</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -260,8 +228,57 @@
                                                 </div>
 
                                             </div>
-                                            <div id="mediaposters" class="tab-pane fade ">
-                                                {!! media_button('posters',$model,true) !!}
+                                            <div id="mediastickers" class="tab-pane fade ">
+                                                <div class="panel-heading d-flex justify-content-between align-items-center">
+                                                    <span>
+                                                       Stickers
+                                                    </span>
+                                                    <button type="button" class="btn btn-info select-stickers">Select</button>
+                                                </div>
+                                                <div class="panel-body product-body">
+                                                    <ul class="get-all-stickers-tab">
+                                                        @if(isset($model) && count($model->stickers))
+                                                            @foreach($model->stickers as $sticker)
+                                                                <li style="display: flex" data-id="{{ $sticker->id }}"
+                                                                    class="option-elm-attributes">
+                                                                    <a href="#">{!! $sticker->name !!}</a>
+                                                                    <div class="buttons">
+                                                                        <a href="javascript:void(0)"
+                                                                           class="remove-all-attributes btn btn-sm btn-danger">
+                                                                            <i class="fa fa-trash"></i></a>
+                                                                    </div>
+                                                                    <input type="hidden" name="stickers[]" value="{{ $sticker->id }}">
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div id="mediarelatedproducts" class="tab-pane fade ">
+                                                <div class="panel-heading d-flex justify-content-between align-items-center">
+                                                    <span>
+                                                        Related Products
+                                                    </span>
+                                                    <button type="button" class="btn btn-info select-products">Select</button>
+                                                </div>
+                                                <div class="panel-body product-body">
+                                                    <ul class="get-all-products-tab">
+                                                        @if(isset($model) && count($model->related_products))
+                                                            @foreach($model->related_products as $related_product)
+                                                                <li style="display: flex" data-id="{{ $related_product->id }}"
+                                                                    class="option-elm-attributes">
+                                                                    <a href="#">{!! $related_product->name !!}</a>
+                                                                    <div class="buttons">
+                                                                        <a href="javascript:void(0)"
+                                                                           class="remove-all-attributes btn btn-sm btn-danger">
+                                                                            <i class="fa fa-trash"></i></a>
+                                                                    </div>
+                                                                    <input type="hidden" name="related_products[]" value="{{ $related_product->id }}">
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -633,6 +650,51 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select Products</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all-list">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select Stickers</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all-list">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @section('css')
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
@@ -649,6 +711,83 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
+        $(document).ready(function () {
+            $("body").on('click', '.select-products', function () {
+                let arr = [];
+                $(".get-all-products-tab")
+                    .children()
+                    .each(function () {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/get-stocks", {arr}, function (res) {
+                    if (!res.error) {
+                        $("#productsModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-related-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                            $("#productsModal .modal-body .all-list").append(html);
+                        });
+                        $("#productsModal").modal();
+                    }
+                });
+            });
+
+            $("body").on("click", ".add-related-event", function () {
+                let id = $(this).data("id");
+                let name = $(this).data("name");
+                $(".get-all-products-tab")
+                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                                href="#">${name}</a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="related_products[]" value="${id}">
+                                </li>`);
+                $(this)
+                    .parent()
+                    .remove();
+            });
+
+            $("body").on('click', '.select-stickers', function () {
+                let arr = [];
+                $(".get-all-stickers-tab")
+                    .children()
+                    .each(function () {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/tools/stickers/get-all", {arr}, function (res) {
+                    if (!res.error) {
+                        $("#stickerModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-sticker-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                            $("#stickerModal .modal-body .all-list").append(html);
+                        });
+                        $("#stickerModal").modal();
+                    }
+                });
+            });
+
+            $("body").on("click", ".add-sticker-event", function () {
+                let id = $(this).data("id");
+                let name = $(this).data("name");
+                $(".get-all-stickers-tab")
+                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                                href="#">${name}</a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="stickers[]" value="${id}">
+                                </li>`);
+                $(this)
+                    .parent()
+                    .remove();
+            });
+        });
     function render_categories_tree(){
         $("#treeview_json").jstree({
         "checkbox" : {

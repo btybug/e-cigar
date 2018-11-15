@@ -42,4 +42,10 @@ class ToolsController extends Controller
         $html=\View::make($path)->with(['model'=>$model])->render();
         return \Response::json(['error'=>false,'html'=>$html]);
     }
+
+    public function postAll (Request $request)
+    {
+        $attr = Stickers::whereNotIn('id', $request->get('arr',[]))->get();
+        return \Response::json(['error' => false,'data' => $attr]);
+    }
 }

@@ -66,6 +66,16 @@ class Stock extends Translatable
         return $this->hasMany(StockVariation::class, 'stock_id');
     }
 
+    public function related_products()
+    {
+        return $this->belongsToMany(Stock::class, 'stock_related', 'stock_id', 'related_id');
+    }
+
+    public function stickers()
+    {
+        return $this->belongsToMany(Stickers::class, 'stock_stickers', 'stock_id','sticker_id');
+    }
+
     public function forRender()
     {
         if(! $this->id) return [];
