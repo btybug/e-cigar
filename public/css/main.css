@@ -36,6 +36,7 @@ html {
 body {
     color: #222423;
     font-family: "Montserrat", sans-serif;
+    font-weight: 400;
     height: 100%;
     overflow: hidden;
 }
@@ -56,6 +57,10 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
+}
+
+a:hover {
+    text-decoration: none;
 }
 
 /*End Globals*/
@@ -220,11 +225,26 @@ body {
 }
 
 .navbar-toggler {
+    border: none;
     padding: .25rem .3rem;
 }
 
 .navbar-toggler:focus {
     outline-color: #973e4f;
+}
+
+.header-login-link {
+    color: #fff;
+    font-size: 15px;
+}
+
+.header-login-link:hover,
+.header-shop-icons-outer a:hover {
+    color: #fff;
+}
+
+.header-login-icon {
+    color: #fff;
 }
 /*End header*/
 
@@ -296,7 +316,6 @@ body {
     padding: 10px 18px;
     font-size: 18px;
 }
-
 
 /*Cart aside*/
 .cart-aside {
@@ -422,14 +441,24 @@ select-default::-ms-expand {
     flex: auto;
     overflow: auto;
     flex-wrap: nowrap; }
-.main-left-tabs .nav::-webkit-scrollbar {
-    width: 10px; }
-.main-left-tabs .nav::-webkit-scrollbar-track {
-    background: #f1f1f1; }
-.main-left-tabs .nav::-webkit-scrollbar-thumb {
-    background: #888; }
-.main-left-tabs .nav::-webkit-scrollbar-thumb:hover {
-    background: #555; }
+
+.main-left-tabs .nav::-webkit-scrollbar,
+.user-aside-menu::-webkit-scrollbar {
+    width: 10px;
+}
+.main-left-tabs .nav::-webkit-scrollbar-track,
+.user-aside-menu::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.main-left-tabs .nav::-webkit-scrollbar-thumb,
+.user-aside-menu::-webkit-scrollbar-thumb {
+    background: #888;
+}
+.main-left-tabs .nav::-webkit-scrollbar-thumb:hover,
+.user-aside-menu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 .main-left-tabs .nav a {
     -webkit-border-radius: 0;
     -moz-border-radius: 0;

@@ -37,24 +37,20 @@
 </svg>
                 </span>
             <div class="header-shop-icons-outer d-flex align-items-center">
-                <span class="header-like-icon position-relative active">
-                    <a href="{!! route('my_account_favourites') !!}">
-                    <span class="qty position-absolute absolute-center">3</span>
-                        <svg width="30px" height="28px" viewBox="0 0 30 28">
-                            <path fill-rule="evenodd"
-                                  d="M29.355,11.060 C28.755,13.649 27.363,16.008 25.333,17.877 L14.912,27.331 L4.670,17.879 C2.637,16.007 1.246,13.648 0.645,11.060 C0.213,9.200 0.390,8.149 0.391,8.142 L0.400,8.080 C0.796,3.538 3.897,0.241 7.774,0.241 C10.634,0.241 13.152,2.028 14.347,4.904 L14.909,6.259 L15.471,4.904 C16.647,2.072 19.298,0.242 22.227,0.242 C26.102,0.242 29.204,3.539 29.609,8.139 C29.610,8.149 29.787,9.200 29.355,11.060 Z"/>
-                        </svg>
-                    </a>
-                </span>
-                <span id="headerShopCartBtn" class="header-cart-bag-icon pointer position-relative active">
-                    <a href="{!!route('shop_my_cart')  !!}"/>
-                     <span class="qty position-absolute absolute-center cart-count">{{ cartCount() }}</span>
-                    <svg width="27px" height="35px" viewBox="0 0 27 35">
-                        <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-                              d="M26.842,34.836 C26.738,34.941 26.594,35.000 26.445,35.000 L0.555,35.000 C0.404,35.000 0.261,34.941 0.158,34.836 C0.055,34.731 -0.000,34.590 0.007,34.444 L1.239,9.387 C1.254,9.104 1.494,8.883 1.787,8.883 L7.028,8.883 L7.028,6.263 C7.028,2.810 9.931,-0.000 13.499,-0.000 C17.068,-0.000 19.971,2.810 19.971,6.263 L19.971,8.883 L25.213,8.883 C25.505,8.883 25.746,9.104 25.760,9.387 L26.993,34.444 C27.000,34.590 26.946,34.731 26.842,34.836 ZM18.875,6.263 C18.875,3.395 16.464,1.061 13.499,1.061 C10.535,1.061 8.124,3.395 8.124,6.263 L8.124,8.883 L18.875,8.883 L18.875,6.263 ZM24.690,9.943 L19.971,9.943 L19.971,11.534 C19.971,11.827 19.726,12.064 19.423,12.064 C19.120,12.064 18.875,11.827 18.875,11.534 L18.875,9.943 L8.124,9.943 L8.124,11.534 C8.124,11.827 7.878,12.064 7.576,12.064 C7.273,12.064 7.028,11.827 7.028,11.534 L7.028,9.943 L2.309,9.943 L1.129,33.939 L25.870,33.939 L24.690,9.943 Z"/>
+                <a href="{!! route('my_account_favourites') !!}" class="header-like-icon position-relative active">
+                <span class="qty position-absolute absolute-center">3</span>
+                    <svg width="30px" height="28px" viewBox="0 0 30 28">
+                        <path fill-rule="evenodd"
+                              d="M29.355,11.060 C28.755,13.649 27.363,16.008 25.333,17.877 L14.912,27.331 L4.670,17.879 C2.637,16.007 1.246,13.648 0.645,11.060 C0.213,9.200 0.390,8.149 0.391,8.142 L0.400,8.080 C0.796,3.538 3.897,0.241 7.774,0.241 C10.634,0.241 13.152,2.028 14.347,4.904 L14.909,6.259 L15.471,4.904 C16.647,2.072 19.298,0.242 22.227,0.242 C26.102,0.242 29.204,3.539 29.609,8.139 C29.610,8.149 29.787,9.200 29.355,11.060 Z"/>
                     </svg>
-                    </a>
-                </span>
+                </a>
+                <a id="headerShopCartBtn" class="header-cart-bag-icon pointer position-relative active" href="{!!route('shop_my_cart')  !!}">
+                 <span class="qty position-absolute absolute-center cart-count">{{ cartCount() }}</span>
+                <svg width="27px" height="35px" viewBox="0 0 27 35">
+                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                          d="M26.842,34.836 C26.738,34.941 26.594,35.000 26.445,35.000 L0.555,35.000 C0.404,35.000 0.261,34.941 0.158,34.836 C0.055,34.731 -0.000,34.590 0.007,34.444 L1.239,9.387 C1.254,9.104 1.494,8.883 1.787,8.883 L7.028,8.883 L7.028,6.263 C7.028,2.810 9.931,-0.000 13.499,-0.000 C17.068,-0.000 19.971,2.810 19.971,6.263 L19.971,8.883 L25.213,8.883 C25.505,8.883 25.746,9.104 25.760,9.387 L26.993,34.444 C27.000,34.590 26.946,34.731 26.842,34.836 ZM18.875,6.263 C18.875,3.395 16.464,1.061 13.499,1.061 C10.535,1.061 8.124,3.395 8.124,6.263 L8.124,8.883 L18.875,8.883 L18.875,6.263 ZM24.690,9.943 L19.971,9.943 L19.971,11.534 C19.971,11.827 19.726,12.064 19.423,12.064 C19.120,12.064 18.875,11.827 18.875,11.534 L18.875,9.943 L8.124,9.943 L8.124,11.534 C8.124,11.827 7.878,12.064 7.576,12.064 C7.273,12.064 7.028,11.827 7.028,11.534 L7.028,9.943 L2.309,9.943 L1.129,33.939 L25.870,33.939 L24.690,9.943 Z"/>
+                </svg>
+                </a>
             </div>
             <div class="ml-auto d-flex align-items-center">
                 <div class="header-lang-bar">
@@ -67,6 +63,11 @@
                         </span>
 
                 </div>
+                <span class="d-inline-block">
+                    <a href="#" class="header-login-link">Login</a>
+                    <span class="header-login-icon">&nbsp;&#47;&nbsp;</span>
+                    <a href="#" class="header-login-link">Register</a>
+                </span>
                 @if(Auth::check())
                     <span id="ptofileBtn" class="pointer header-profile-icon">
                         <svg width="34px" height="34px" viewBox="0 0 34 34">
@@ -78,7 +79,6 @@
             </div>
 
         </div>
-
     </nav>
 </header>
 
@@ -134,7 +134,9 @@
         </li>
     </ul>
     {!! Form::open(['url'=>route('logout')]) !!}
+    <div class="text-center">
         <button type="submit" class="profile-aside-btn-logout btn mt-auto align-self-center rounded-0">Logout</button>
+    </div>
     {!! Form::close() !!}
 </div>
 @endif
