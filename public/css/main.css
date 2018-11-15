@@ -1207,7 +1207,21 @@ a:hover {
 .product-range-top-label {
     opacity: .7;
 }
-
+/*technical tabs product*/
+.technical_tabs_product .wall .image{
+    border: 2px solid #222322;
+}
+.technical_tabs_product .wall .info{
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 2px #ccc;
+    padding: 15px;
+}
+.technical_tabs_product .wall .image img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
 /*responsive*/
 @media (max-width: 1680px) {
     .header-navbar-nav .nav-item {

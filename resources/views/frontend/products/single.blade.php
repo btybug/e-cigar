@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane h-100 fade" id="v-pills-technical" role="tabpanel"
+                        <div class="tab-pane h-100 fade technical_tabs_product" id="v-pills-technical" role="tabpanel"
                              aria-labelledby="v-pills-technical-tab">
                             <div class="row">
                                 <table class="table-responsive table-bordered">
@@ -146,6 +146,34 @@
                                     @endif
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="d-flex flex-wrap my-2 wall">
+                                <div class="col-sm-5">
+                                    <div class="image">
+                                        <img src="https://stmed.net/sites/default/files/3d-wallpapers-25161-7914548.jpg"
+                                             alt="nice">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="info">
+                                        <h4 class="h1 text-center">Big Title</h4>
+                                        <p class="desc mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur beatae eum iure laborum laudantium minus quibusdam quos recusandae, suscipit voluptatem. Ab dolores esse eum exercitationem ipsam nemo obcaecati, quam sequi.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap my-2 wall">
+                                <div class="col-sm-5">
+                                    <div class="image">
+                                        <img src="https://stmed.net/sites/default/files/3d-wallpapers-25161-7914548.jpg"
+                                             alt="nice">
+                                    </div>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="info">
+                                        <h4 class="h1 text-center">Big Title</h4>
+                                        <p class="desc mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur beatae eum iure laborum laudantium minus quibusdam quos recusandae, suscipit voluptatem. Ab dolores esse eum exercitationem ipsam nemo obcaecati, quam sequi.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane h-100 fade" id="v-pills-related" role="tabpanel"
