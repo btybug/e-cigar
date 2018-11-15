@@ -93,9 +93,8 @@
                                             <div class="tab-pane fade show {{ $loop->first ? 'active' : '' }}" id="subTab{{ $item->id }}" role="tabpanel"
                                                  aria-labelledby="pills-fruit-{{ $item->id }}">
                                                 <div class="d-flex flex-wrap listing">
-                                                    @if(count($products))
-                                                        @foreach($products as $product)
-                                                            @if($product->categories()->where('categories.id',$item->id)->first())
+                                                    @if(count($item->products))
+                                                        @foreach($item->products as $product)
                                                                 <div class="col-lg-2 col-md-4 col-sm-6">
                                                                     <a href="javascript:void(0);" class="item">
                                                                         <div class="image">
@@ -110,7 +109,6 @@
                                                                         </div>
                                                                     </a>
                                                                 </div>
-                                                            @endif
                                                         @endforeach
                                                     @else
                                                         NO products

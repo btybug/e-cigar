@@ -74,4 +74,9 @@ class Category extends Translatable
     {
         return $this->belongsToMany(Stickers::class, 'category_stickers', 'categories_id','sticker_id');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Stock::class, 'stock_categories',  'categories_id','stock_id');
+    }
 }

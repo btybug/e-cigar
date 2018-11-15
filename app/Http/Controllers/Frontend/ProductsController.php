@@ -28,25 +28,15 @@ class ProductsController extends Controller
         $topCategory = Category::with('children')->where('slug',$type)->whereNull('parent_id')->first();
 
         if(! $topCategory) abort(404);
-        $products = [];
+
         $categories = $topCategory->children;
         $category = ((count($categories)) ? $categories->where('slug',$category_slug)->first() : null);
 
         if(! $category && $category_slug != null) abort(404);
 
-        if($category){
-            $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
-                ->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
-                ->select('stocks.*', 'stock_translations.name')
-                ->where('stock_translations.locale', app()->getLocale())
-                ->where('type', $type)
-                ->where('status', true)
-                ->where('stock_categories.categories_id', $category->id)->get();
-        }
-
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 
-        return $this->view('product_types',compact('products','orderBy','attributes','categories','category','type'));
+        return $this->view('product_types',compact('attributes','categories','category','type'));
     }
 
     public function getSingle($type,$category_slug,$id)
