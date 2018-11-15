@@ -82,7 +82,7 @@
                                             @if($value->image)
                                                 <img src="{{ $value->image }}" alt="">
                                             @else
-                                                <img src="/public/images/no_image.jpg" height="450" alt="">
+                                                <img src="/public/images/no_image.jpg" style="max-height:450px !important;" alt="">
                                             @endif
                                         </div>
                                     </div>
