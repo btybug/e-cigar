@@ -31,7 +31,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="siteLogo">Site Logo</label>
-                                            {!! media_button('siteLogo') !!}
+                                            {!! media_button('siteLogo',$model) !!}
                                         </div>
                                         <div class="form-group">
                                             <label for="description">Description</label>
@@ -45,44 +45,98 @@
                                 <div class="panel-heading">Social Profile</div>
                                 <div class="panel-body">
                                     <div class="form-group d-flex flex-wrap align-items-center social-media-group">
-                                        <div class="col-sm-6 p-0">
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <button class="btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle"
-                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        <i class="fa fa-facebook-f icon-blue"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item active" href="javascript:void(0);">
-                                                            <i class="fa fa-facebook icon-green"></i>
-                                                            <span class="name">Facebook</span>
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="fa fa-twitter icon-green"></i>
-                                                            <span class="name">Twitter</span>
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="fa fa-yahoo icon-purple"></i>
-                                                            <span class="name">Yahoo</span>
-                                                        </a>
-                                                        <a class="dropdown-item" href="javascript:void(0);">
-                                                            <i class="fa fa-google icon-red"></i>
-                                                            <span class="name">Google</span>
-                                                        </a>
+                                        @if($model && isset($model->social_media) && @json_decode($model->social_media,true))
+
+                                            @php
+                                                $social_medias=json_decode($model->social_media,true);
+                                            @endphp
+                                            @foreach($social_medias as $key=>$social_media)
+                                                <div class="clearfix"></div>
+                                                <div class="col-sm-6 p-0">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <button class="btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle"
+                                                                    type="button" data-toggle="dropdown"
+                                                                    aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                <i class="{!! $social_media['social'] !!}"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-facebook icon-green') active @endif"
+                                                                   href="javascript:void(0);">
+                                                                    <i class="fa fa-facebook icon-green"></i>
+                                                                    <span class="name">Facebook</span>
+                                                                </a>
+                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-twitter icon-green') active @endif" href="javascript:void(0);">
+                                                                    <i class="fa fa-twitter icon-green"></i>
+                                                                    <span class="name">Twitter</span>
+                                                                </a>
+                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-yahoo icon-purple') active @endif" href="javascript:void(0);">
+                                                                    <i class="fa fa-yahoo icon-purple"></i>
+                                                                    <span class="name">Yahoo</span>
+                                                                </a>
+                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-google icon-red') active @endif" href="javascript:void(0);">
+                                                                    <i class="fa fa-google icon-red"></i>
+                                                                    <span class="name">Google</span>
+                                                                </a>
+                                                            </div>
+
+                                                            {!! Form::hidden('social_media['.$key.'][social]',$social_media['social'],['class'=>'social_type']) !!}
+                                                        </div>
+                                                        {!! Form::text('social_media['.$key.'][url]', $social_media['url'], ['class' => 'form-control','id' => 'socialMedia','placeholder' => 'Profile URL','aria-label' => 'Text input with dropdown button']) !!}
                                                     </div>
-
                                                 </div>
-                                                {!! Form::text('social_media[0][url]', null, ['class' => 'form-control','id' => 'socialMedia','placeholder' => 'Profile URL','aria-label' => 'Text input with dropdown button']) !!}
+                                                <div class="col-sm-3">
+                                                    @if(!$key)
+                                                    <button type="button" class="btn btn-primary add-new-social-input">
+                                                        <i
+                                                                class="fa fa-plus"></i></button>
+                                                        @else
+                                                        <button class="plus-icon remove-new-social-input btn btn-danger">
+                                                            <i class="fa fa-minus"></i></button>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="col-sm-6 p-0">
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <button class="btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle"
+                                                                type="button" data-toggle="dropdown"
+                                                                aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                            <i class="fa fa-facebook-f icon-blue"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item active" href="javascript:void(0);">
+                                                                <i class="fa fa-facebook icon-green"></i>
+                                                                <span class="name">Facebook</span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">
+                                                                <i class="fa fa-twitter icon-green"></i>
+                                                                <span class="name">Twitter</span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">
+                                                                <i class="fa fa-yahoo icon-purple"></i>
+                                                                <span class="name">Yahoo</span>
+                                                            </a>
+                                                            <a class="dropdown-item" href="javascript:void(0);">
+                                                                <i class="fa fa-google icon-red"></i>
+                                                                <span class="name">Google</span>
+                                                            </a>
+                                                        </div>
+
+                                                        {!! Form::hidden('social_media[0][social]',null,['class'=>'social_type']) !!}
+                                                    </div>
+                                                    {!! Form::text('social_media[0][url]', null, ['class' => 'form-control','id' => 'socialMedia','placeholder' => 'Profile URL','aria-label' => 'Text input with dropdown button']) !!}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <button type="button" class="btn btn-primary add-new-social-input"><i
-                                                        class="fa fa-plus"></i></button>
-                                            {{--<span class="plus-icon add-new-social-input"><i class="fa fa-plus"></i></span>--}}
-                                        </div>
-
-
+                                            <div class="col-sm-3">
+                                                <button type="button" class="btn btn-primary add-new-social-input"><i
+                                                            class="fa fa-plus"></i></button>
+                                                {{--<span class="plus-icon add-new-social-input"><i class="fa fa-plus"></i></span>--}}
+                                            </div>
+                                        @endif
                                     </div>
 
                                 </div>
@@ -311,20 +365,18 @@
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <label for="dateFormat">Date Format</label>
-                                        <select id="dateFormat" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>MM/DD/YY</option>
-                                            <option>DD/MM/YY</option>
-                                            <option>YY/MM/DD</option>
-                                        </select>
+                                        {!! Form::select('date_format',[
+                                        'MM/DD/YY'=>'MM/DD/YY',
+                                        'DD/MM/YY'=>'DD/MM/YY',
+                                        'YY/MM/DD'=>'YY/MM/DD',
+                                        ],null,['class'=>'form-control']) !!}
                                     </div>
                                     <div class="form-group">
                                         <label for="timeFormat">Time Format</label>
-                                        <select id="timeFormat" class="form-control">
-                                            <option selected>Choose...</option>
-                                            <option>dd hh:mm</option>
-                                            <option>dd hh:mm:ss.s</option>
-                                        </select>
+                                        {!! Form::select('time_format',[
+                                      'dd hh:mm'=>'dd hh:mm',
+                                      'dd hh:mm:ss.s'=>'dd hh:mm:ss.s',
+                                      ],null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -359,7 +411,22 @@
             $('#first_line_country').select2();
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
-                var html = "\n  <div class=\"clearfix\"></div><div class=\"d-flex align-items-center w-100 social-container mt-3\">\n  <div class=\"col-sm-6 p-0\">\n                                  <div class=\"input-group\">\n                                      <div class=\"input-group-prepend\">\n                                          <button class=\"btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle\"\n                                                  type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n                                                  aria-expanded=\"false\"><i class=\"fa fa-facebook-f icon-blue\"></i>\n                                          </button>\n                                          <div class=\"dropdown-menu\">\n                                              <a class=\"dropdown-item active\"  href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-facebook icon-green\"></i>\n                                                  <span class=\"name\">Facebook</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-twitter icon-green\"></i>\n                                                  <span class=\"name\">Twitter</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-yahoo icon-purple\"></i>\n                                                  <span class=\"name\">Yahoo</span>\n                                              </a>\n                                              <a class=\"dropdown-item\" href=\"javascript:void(0);\">\n                                                  <i class=\"fa fa-google icon-red\"></i>\n                                                  <span class=\"name\">Google</span>\n                                              </a>\n                                          </div>\n                                             <input name=\"social_media[" + uid + "][social]\" value=\"fab fa-facebook icon-green\" type=\"hidden\" class=\"social_type\">\n                                      </div>\n                                      <input name=\"social_media[" + uid + "][url]\" type=\"text\" class=\"form-control\"\n                                             aria-label=\"Text input with dropdown button\" placeholder=\"Profile URL\"> \n                                  </div>\n                                </div>\n                                <div class=\"col-sm-3\">\n                                    <button class=\"plus-icon remove-new-social-input btn btn-danger\"><i class=\"fa fa-minus\"></i></button>\n                                </div>\n                                </div>\n  ";
+                var html = `<div class="clearfix">
+                    </div><div class="d-flex align-items-center w-100 social-container mt-3">
+                    <div class="col-sm-6 p-0">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-facebook-f icon-blue"></i>
+                    </button><div class="dropdown-menu">
+                    <a class="dropdown-item active"  href="javascript:void(0);"> <i class="fa fa-facebook icon-green"></i>  <span class="name">Facebook</span> </a> <a class="dropdown-item" href="javascript:void(0);"> <i class="fa fa-twitter icon-green"></i> <span class="name">Twitter</span></a>
+                    <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-yahoo icon-purple"></i>
+                    <span class="name">Yahoo</span></a><a class="dropdown-item" href="javascript:void(0);">
+                    <i class="fa fa-google icon-red"></i><span class="name">Google</span> </a> </div>
+                    <input name="social_media[${uid}][social]" value="fab fa-facebook icon-green" type="hidden" class="social_type">
+                    </div>
+                    <input name="social_media[${uid}][url]" type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Profile URL">
+                    </div></div><div class="col-sm-3"><button class="plus-icon remove-new-social-input btn btn-danger">
+                    <i class="fa fa-minus"></i></button></div></div>`;
                 $(".social-media-group").append(html);
             });
 
