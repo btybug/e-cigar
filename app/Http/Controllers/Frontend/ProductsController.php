@@ -28,7 +28,8 @@ class ProductsController extends Controller
 
         if(! $topCategory) abort(404);
         $products = [];
-        $category = ($slug) ? Category::where('slug',$slug)->first() : ((count($topCategory->children)) ? $topCategory->children->first() : null);
+        $categories = $topCategory->children;
+        $category = ($slug) ? Category::where('slug',$slug)->first() : ((count($categories)) ? $categories->first() : null);
 
         if($category){
             $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
@@ -39,6 +40,7 @@ class ProductsController extends Controller
                 ->where('status', true)
                 ->where('stock_categories.categories_id', $category->id)->get();
         }
+
 
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 
