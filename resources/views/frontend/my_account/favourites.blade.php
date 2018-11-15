@@ -65,10 +65,9 @@
                 <div class="container mt-5">
                     <div class="row">
                         @foreach(Auth::user()->favorites as $favorite)
-                            {!! dd($favorite->category) !!}
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 items">
                             <div class="view-fav-item mb-4">
-                                <button class="btn btn-danger view-fav-item_btn-dlt pull-right" href="#"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-danger view-fav-item_btn-dlt pull-right remove-from-favorite" data-id="{!! $favorite->id !!}" href="#"><i class="fa fa-trash"></i></button>
                                 <a href="http://e-cigar.loc/products/vape/10"  class="text-center  px-5 py-3 d-flex flex-column d-block">
                         <span class="d-inline-block mb-3 view-fav-item_img-outer">
                             <img class="img-fluid"
@@ -86,3 +85,29 @@
         </div>
     </main>
 @stop
+@section()
+    <script>
+        $(function () {
+            $('.remove-from-favorite').on('click', function () {
+
+                let data = {'id': $(this).attr('data-id')}
+                $(this).closest(".items").remove();
+                $.ajax({
+                    type: "POST",
+                    url: "{!! route('product_remove_from_favorites') !!}",
+                    datatype: "json",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+
+
+                        }
+                    }
+                });
+            })
+        })
+    </script>
+    @stop
