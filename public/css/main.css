@@ -155,13 +155,36 @@ a:hover {
 .header-lang-bar {
     margin-right: 25px;
 }
+.header-lang-bar .flag-icon{
+    font-size: 24px;
+}
+.header-lang-bar .dropdown-toggle:after{
+    border: none;
+}
+.header-lang-bar .dropdown-menu{
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    background-color: #353636;
+}
+.header-lang-bar .dropdown-menu .dropdown-item{
+    border-top: 1px solid rgba(123, 123, 123, 0.74);
+    background-color: rgb(53, 54, 54);
+    padding: .45rem 1rem;
+}
+.header-lang-bar .dropdown .dropdown-toggle >div{
+    padding: .45rem 1rem;
+}
+.header-lang-bar .dropdown.show .dropdown-toggle>div{
+    background-color: #353636;
+}
 
 .header-lang-bar img {
     width: 30px;
 }
 
 .header-lang-bar .icon {
-    margin-left: 12px;
+    margin-left: 2px;
 }
 
 

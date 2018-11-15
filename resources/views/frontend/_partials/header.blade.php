@@ -54,14 +54,21 @@
             </div>
             <div class="ml-auto d-flex align-items-center">
                 <div class="header-lang-bar">
-                    <img src="/public/img/uk.png" alt="">
-                    <span class="icon d-inline-block">
-                            <svg width="18px" height="9px" viewBox="0 0 18 9">
+                    <div class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center" id="dropdownLang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div><span class="flag-icon flag-icon-gb"></span></div>
+
+                            <span class="icon"><svg width="18px" height="9px" viewBox="0 0 18 9">
                             <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                                   d="M9.024,7.799 L0.918,0.187 C0.718,-0.000 0.399,-0.000 0.199,0.187 C-0.000,0.374 -0.000,0.675 0.199,0.862 L8.667,8.813 C8.866,9.000 9.186,9.000 9.385,8.813 L17.849,0.862 C17.947,0.770 18.000,0.646 18.000,0.526 C18.000,0.406 17.951,0.283 17.849,0.191 C17.650,0.003 17.330,0.003 17.131,0.191 L9.024,7.799 Z"/>
-                        </svg>
-                        </span>
-
+                        </svg></span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownLang">
+                            <a href="javascript:void(0);" class="dropdown-item"><span class="flag-icon flag-icon-gr"></span></a>
+                            <a href="javascript:void(0);" class="dropdown-item"><span class="flag-icon flag-icon-am"></span></a>
+                            <a href="javascript:void(0);" class="dropdown-item"><span class="flag-icon flag-icon-ru"></span></a>
+                        </div>
+                    </div>
                 </div>
                 <span class="d-inline-block">
                     <a href="#" class="header-login-link">Login</a>
