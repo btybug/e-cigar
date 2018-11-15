@@ -1,4 +1,4 @@
-const shortAjax = function(URL, obj = {}, cb) {
+const shortAjax = function (URL, obj = {}, cb) {
     fetch(URL, {
         method: "post",
         headers: {
@@ -11,32 +11,32 @@ const shortAjax = function(URL, obj = {}, cb) {
         credentials: "same-origin",
         body: JSON.stringify(obj)
     })
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
         })
-        .then(function(json) {
+        .then(function (json) {
             return cb(json);
         })
-        .catch(function(error) {
+        .catch(function (error) {
             console.log(error);
         });
 };
 /*
-Helpers 
-  **TYPES**
-  data-type="main-container" || Main container,  for applying all content
-  **EVNTS**
-  bb-media-click="fodler" || Get current folder item if bb-media-type="folder"
-*/
+ Helpers
+ **TYPES**
+ data-type="main-container" || Main container,  for applying all content
+ **EVNTS**
+ bb-media-click="fodler" || Get current folder item if bb-media-type="folder"
+ */
 function App() {
     var self = this;
     var globalFolderId = 1;
     this.htmlMaker = {
-        makeFolder: function(data) {
+        makeFolder: function (data) {
             return `<div draggable="true"  data-id="${data.id}"  class="file ">
             <a href="#"  data-id="${
                 data.id
-            }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
+                }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
                 <span class="corner"></span>
         
                 <div class="icon">
@@ -55,7 +55,7 @@ function App() {
             </a>
         </div>`;
         },
-        makeImage: function(data) {
+        makeImage: function (data) {
             return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
@@ -77,17 +77,17 @@ function App() {
         </a>
     </div>`;
         },
-        makeTreeFolder: function(data) {
+        makeTreeFolder: function (data) {
             return `<li  bb-media-type="tree-folder" data-trre-id="${
                 data.id
-            }" data-id="${
+                }" data-id="${
                 data.id
-            }" style="display: flex; justify-content: space-between;"> 
+                }" style="display: flex; justify-content: space-between;"> 
 <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
                   <div style="margin-right: 5px">
                   <span data-id="${
-                      data.id
-                  }" bb-media-click="get_folder_items" >${data.title}</span>
+                data.id
+                }" bb-media-click="get_folder_items" >${data.title}</span>
                   </div></div>
                   <div>
                     <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
@@ -99,7 +99,7 @@ function App() {
         makeBreadCrumbsItem(item) {
             return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
                 item.id
-            }" data-id="${item.id}" bb-media-click="get_folder_items" >
+                }" data-id="${item.id}" bb-media-click="get_folder_items" >
             <a>${item.slug}</a>
             </li>`;
         },
@@ -139,22 +139,22 @@ function App() {
                     <div class="modal-title">
                         
                     <img src="${
-                        data.url
-                    }" data-slideshow="typeext" style="width:100%">
+                data.url
+                }" data-slideshow="typeext" style="width:100%">
                     <div style="display: flex; justify-content: space-between;">
                     <button href="#" type="button" role="button" ${
-                        countId === 0 ? "disabled" : ""
-                    } data-id="${countId -
-                1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
+                countId === 0 ? "disabled" : ""
+                } data-id="${countId -
+            1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
                     
                     <span data-slideshow="title">${data.real_name}</span> 
                     <button class="popuparrow go-next-image" href="#" type="button" role="button" ${
-                        countId ===
-                        document.querySelectorAll(".image-container").length - 1
-                            ? "disabled"
-                            : ""
-                    } data-id="${countId +
-                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button> 
+                countId ===
+                document.querySelectorAll(".image-container").length - 1
+                    ? "disabled"
+                    : ""
+                } data-id="${countId +
+            1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button> 
                     </div>
                     </div>
                     <div class="modal-footer col-md-8">
@@ -178,14 +178,14 @@ function App() {
                     <div class="row rowsection collapse in" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="fa fa-bars text-primary"></i> ${
-                                data.real_name
-                            } <div class="btn-group">
+                data.real_name
+                } <div class="btn-group">
                             <button type="button" style="background-color: black;" class="btn btn-action-popup dropdown-toggle" title="Rename" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="iconaction iconRenameGrey"></i></button>
                             <div class="dropdown-menu form-inline row width-sm p-l-0 p-r-0" aria-labelledby="dLabel">
                                 <div class="form-group col-sm-7 p-l-5">
                                     <input name="rename_img" id="rename_img" type="text" class="form-control" placeholder="File name will be come here" value="${
-                                        data.real_name
-                                    }"  data-slideshow="renameval">
+                data.real_name
+                }"  data-slideshow="renameval">
                                 </div>
                                 <div class="form-group col-sm-5 p-r-5">
                                     <button class="btn btn-success btn-block" data-slideshow="save">Save</button>
@@ -197,20 +197,20 @@ function App() {
                                     <tr>
                                         <th width="30%">Type</th>
                                         <td><img src="" data-slideshow="typeext"> <span data-slideshow="ext">${
-                                            data.extension
-                                        }</span></td>
+                data.extension
+                }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Size</th>
                                         <td><span data-slideshow="size">${
-                                            data.size
-                                        } </span></td>
+                data.size
+                } </span></td>
                                     </tr>
                                     <tr>
                                         <th>Location</th>
                                         <td><i class="fa fa-folder"></i> <span data-slideshow="location">${
-                                            data.folder.title
-                                        }</span></td>
+                data.folder.title
+                }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Uploaded By</th>
@@ -219,14 +219,14 @@ function App() {
                                     <tr>
                                         <th>Created</th>
                                         <td><span data-slideshow="created_at">${
-                                            data.created_at
-                                        }</span></td>
+                data.created_at
+                }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Opened</th>
                                         <td><span data-slideshow="updated_at">${
-                                            data.updated_at
-                                        }</span></td>
+                data.updated_at
+                }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Version</th>
@@ -449,21 +449,26 @@ function App() {
                 ".bread-crumbs-list-item"
             );
             let singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
-            breadCrumbsListItems.forEach((item, index) => {
+            breadCrumbsListItems.forEach((item, index) = > {
                 if (check) {
                     item.remove();
                     return;
                 }
-                if (item == singleItem) {
-                    item.classList.add("disabled");
-                    item.classList.remove("active");
-                    // item.removeAttribute("data-id");
-                    check = true;
-                } else {
-                    item.classList.add("active");
-                    item.classList.remove("disabled");
-                }
-            });
+                if (item == singleItem
+        )
+            {
+                item.classList.add("disabled");
+                item.classList.remove("active");
+                // item.removeAttribute("data-id");
+                check = true;
+            }
+        else
+            {
+                item.classList.add("active");
+                item.classList.remove("disabled");
+            }
+        })
+            ;
         },
         showUploaderContainer() {
             document
@@ -476,136 +481,158 @@ function App() {
                 .querySelectorAll(
                     `[data-type="main-container"] [draggable="true"]`
                 )
-                .forEach(elm => {
-                    elm.addEventListener("dragstart", function(e) {
-                        let crt = this.cloneNode(true);
-                        crt.className += " start";
-                        crt.style.position = "absolute";
-                        crt.style.top = "-10000px";
-                        crt.style.right = "-10000px";
-                        document.body.appendChild(crt);
-                        let id = this.getAttribute("data-id");
-                        e.dataTransfer.setDragImage(crt, 0, 0);
-                        // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-                        e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
-                        // setTimeout(() => (this.className = "invisible"), 0);
-                    });
-                });
-
-            document.querySelectorAll(".folder-container").forEach(folder => {
-                folder.addEventListener("dragover", function(e) {
-                    if (e.preventDefault) e.preventDefault(); // allows us to drop
-                    e.dataTransfer.dropEffect = "copy";
-                    this.classList.add("over");
-                    return false;
-                });
-                folder.addEventListener("dragleave", function(e) {
-                    if (e.preventDefault) e.preventDefault(); // allows us to drop
-                    this.classList.remove("over");
-                    return false;
-                });
-                folder.addEventListener("drop", function(e) {
-                    this.classList.remove("over");
-                    let nodeId = e.dataTransfer.getData("node_id");
-                    let parrentId = e.target
-                        .closest(".file")
-                        .getAttribute("data-id");
-                    self.requests.transferImage(
-                        {
-                            item_id: Number(nodeId),
-                            folder_id: Number(parrentId),
-                            access_token: "string"
-                        },
-                        false
-                    );
-                });
+                .forEach(elm = > {
+                elm.addEventListener("dragstart", function (e) {
+                let crt = this.cloneNode(true);
+                crt.className += " start";
+                crt.style.position = "absolute";
+                crt.style.top = "-10000px";
+                crt.style.right = "-10000px";
+                document.body.appendChild(crt);
+                let id = this.getAttribute("data-id");
+                e.dataTransfer.setDragImage(crt, 0, 0);
+                // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
+                e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+                // setTimeout(() => (this.className = "invisible"), 0);
             });
+        })
+            ;
+
+            document.querySelectorAll(".folder-container").forEach(folder = > {
+                folder.addEventListener("dragover", function (e) {
+                if (e.preventDefault) e.preventDefault(); // allows us to drop
+                e.dataTransfer.dropEffect = "copy";
+                this.classList.add("over");
+                return false;
+            });
+            folder.addEventListener("dragleave", function (e) {
+                if (e.preventDefault) e.preventDefault(); // allows us to drop
+                this.classList.remove("over");
+                return false;
+            });
+            folder.addEventListener("drop", function (e) {
+                this.classList.remove("over");
+                let nodeId = e.dataTransfer.getData("node_id");
+                let parrentId = e.target
+                    .closest(".file")
+                    .getAttribute("data-id");
+                self.requests.transferImage(
+                    {
+                        item_id: Number(nodeId),
+                        folder_id: Number(parrentId),
+                        access_token: "string"
+                    },
+                    false
+                );
+            });
+        })
+            ;
         }
     };
     this.requests = {
-        drawingItems(
-            obj = {
-                folder_id: globalFolderId,
-                files: true,
-                access_token: "string"
-            },
-            tree = true,
-            cb
-        ) {
-            shortAjax("/api/api-media/get-folder-childs", obj, res => {
-                if (!res.error) {
-                    let mainContainer = document.querySelector(
-                        `[data-type="main-container"]`
-                    );
-                    let breadCrumbsList = document.querySelector(
-                        ".bread-crumbs-list"
-                    );
-                    breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(
-                        res.settings
-                    );
-                    mainContainer.innerHTML = "";
-                    let treeFolderContainer = document.querySelector(
-                        ".folder-list"
-                    );
-                    treeFolderContainer.innerHTML = "";
+        drawingItems(obj = {
+                         folder_id: globalFolderId,
+                         files: true,
+                         access_token: "string"
+                     },
+                     tree = true,
+                     cb) {
+            shortAjax("/api/api-media/get-folder-childs", obj, res = > {
+                if (
+            !res.error
+        )
+            {
+                let mainContainer = document.querySelector(
+                    `[data-type="main-container"]`
+                );
+                let breadCrumbsList = document.querySelector(
+                    ".bread-crumbs-list"
+                );
+                breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(
+                    res.settings
+                );
+                mainContainer.innerHTML = "";
+                let treeFolderContainer = document.querySelector(
+                    ".folder-list"
+                );
+                treeFolderContainer.innerHTML = "";
 
-                    res.data.items.forEach((image, index) => {
-                        let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
-                            image
-                        )}</div>`;
-                        mainContainer.innerHTML += html;
-                    });
-                    res.data.childs.forEach((folder, index) => {
-                        let html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
-                            folder
-                        )}</div>`;
-                        mainContainer.innerHTML += html;
-                        if (tree) {
-                            treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
-                                folder
-                            );
-                        } else {
-                            cb(self.htmlMaker.makeTreeFolder(folder));
-                        }
-                    });
-                    globalFolderId = res.settings.id;
-                    self.helpers.makeBreadCrumbs(res.settings.id);
-                    self.helpers.makeDnD();
-                    cb ? cb() : null;
+                res.data.items.forEach((image, index) = > {
+                    let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
+                        image
+                    )}</div>`;
+                mainContainer.innerHTML += html;
+            })
+                ;
+                res.data.childs.forEach((folder, index) = > {
+                    let html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
+                        folder
+                    )}</div>`;
+                mainContainer.innerHTML += html;
+                if (tree) {
+                    treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
+                        folder
+                    );
+                } else {
+                    cb(self.htmlMaker.makeTreeFolder(folder));
                 }
-            });
+            })
+                ;
+                globalFolderId = res.settings.id;
+                self.helpers.makeBreadCrumbs(res.settings.id);
+                self.helpers.makeDnD();
+                cb ? cb() : null;
+            }
+        })
+            ;
         },
         removeTreeFolder(obj = {}, cb) {
-            shortAjax("/api/api-media/get-remove-folder", obj, res => {
-                if (!res.error) {
-                    cb();
-                    self.requests.drawingItems();
-                }
-            });
+            shortAjax("/api/api-media/get-remove-folder", obj, res = > {
+                if (
+            !res.error
+        )
+            {
+                cb();
+                self.requests.drawingItems();
+            }
+        })
+            ;
         },
         editImageName(obj = {}, cb) {
-            shortAjax("/api/api-media/rename-item", obj, res => {
-                if (!res.error) {
-                    cb(res);
-                }
-            });
+            shortAjax("/api/api-media/rename-item", obj, res = > {
+                if (
+            !res.error
+        )
+            {
+                cb(res);
+            }
+        })
+            ;
         },
         transferImage(obj = {}, cb) {
-            shortAjax("/api/api-media/transfer-item", obj, res => {
-                if (!res.error) {
-                    self.requests.drawingItems();
-                }
-            });
+            shortAjax("/api/api-media/transfer-item", obj, res = > {
+                if (
+            !res.error
+        )
+            {
+                self.requests.drawingItems();
+            }
+        })
+            ;
         },
         addNewFolder(obj = {}, cb) {
-            shortAjax("/api/api-media/get-create-folder-child", obj, res => {
-                if (!res.error) {
-                    self.requests.drawingItems();
-                }
-            });
+            shortAjax("/api/api-media/get-create-folder-child", obj, res = > {
+                if (
+            !res.error
+        )
+            {
+                self.requests.drawingItems();
+            }
+        })
+            ;
         },
         getImageDetails(obj = {}, cb) {
-            shortAjax("/api/api-media/get-item-details", obj, function(res) {
+            shortAjax("/api/api-media/get-item-details", obj, function (res) {
                 if (!res.error) {
                     cb(res.data);
                 }
@@ -613,27 +640,27 @@ function App() {
         }
     };
 
-    this.getInitailData = function() {
+    this.getInitailData = function () {
         this.requests.drawingItems();
     };
-    this.init = function() {
+    this.init = function () {
         $("#uploader")
             .fileinput({
                 uploadAsync: false,
                 maxFileCount: 5,
                 showUpload: false,
                 showUploadedThumbs: false,
-                uploadExtraData: function() {
+                uploadExtraData: function () {
                     return {
                         _token: $("meta[name='csrf-token']").attr("content"),
                         folder_id: globalFolderId
                     };
                 }
             })
-            .on("filebatchselected", function(event, files) {
+            .on("filebatchselected", function (event, files) {
                 $("#uploader").fileinput("upload");
             })
-            .on("filebatchuploadsuccess", function(event, files) {
+            .on("filebatchuploadsuccess", function (event, files) {
                 self.requests.drawingItems();
                 self.helpers.showUploaderContainer();
                 $("#uploader").fileinput("clear");
@@ -651,8 +678,9 @@ function App() {
                     trash: 0,
                     access_token: "string"
                 },
-                () => elm.closest("li").remove()
-            );
+                () = > elm.closest("li").remove()
+        )
+            ;
         },
         remove_folder(elm, e) {
             e.stopPropagation();
@@ -664,8 +692,9 @@ function App() {
                     trash: 0,
                     access_token: "string"
                 },
-                () => elm.closest("li").remove()
-            );
+                () = > elm.closest("li").remove()
+        )
+            ;
         },
         get_folder_items(elm, e) {
             let id = elm.closest("[data-id]").getAttribute("data-id");
@@ -698,12 +727,13 @@ function App() {
             let countId = e.target
                 .closest(".file-box")
                 .getAttribute("data-image");
-            self.requests.getImageDetails({ item_id: id }, res => {
+            self.requests.getImageDetails({item_id: id}, res = > {
                 document.body.innerHTML += self.htmlMaker.fullInfoModal(
-                    res,
-                    Number(countId)
-                );
-            });
+                res,
+                Number(countId)
+            );
+        })
+            ;
         },
         select_item(elm, e) {
             let id = e.target.closest(".file").getAttribute("data-id");
@@ -712,12 +742,13 @@ function App() {
                 let countId = e.target
                     .closest(".file-box")
                     .getAttribute("data-image");
-                self.requests.getImageDetails({ item_id: id }, res => {
+                self.requests.getImageDetails({item_id: id}, res = > {
                     document.body.innerHTML += self.htmlMaker.fullInfoModal(
-                        res,
-                        Number(countId)
-                    );
-                });
+                    res,
+                    Number(countId)
+                );
+            })
+                ;
             } else if (e.type === "click") {
                 e.target.closest(".file-box").classList.toggle("active");
             }
@@ -728,15 +759,18 @@ function App() {
                 let imageId = document
                     .querySelector(`[data-image="${id}"] [data-id]`)
                     .getAttribute("data-id");
-                self.requests.getImageDetails({ item_id: imageId }, res => {
+                self.requests.getImageDetails({item_id: imageId}, res = > {
                     document
-                        .querySelectorAll(".adminmodal ")
-                        .forEach(item => item.remove());
-                    document.body.innerHTML += self.htmlMaker.fullInfoModal(
-                        res,
-                        Number(id)
-                    );
-                });
+                    .querySelectorAll(".adminmodal ")
+                    .forEach(item = > item.remove()
+            )
+                ;
+                document.body.innerHTML += self.htmlMaker.fullInfoModal(
+                    res,
+                    Number(id)
+                );
+            })
+                ;
             }
         },
         remove_image(elm, e) {
@@ -786,8 +820,8 @@ function App() {
             );
             if (allActiveBreadCrumbs.length) {
                 let oneLevelUpID = allActiveBreadCrumbs[
-                    allActiveBreadCrumbs.length - 1
-                ].getAttribute("data-id");
+                allActiveBreadCrumbs.length - 1
+                    ].getAttribute("data-id");
                 self.requests.drawingItems(
                     {
                         folder_id: Number(oneLevelUpID),
@@ -806,12 +840,12 @@ function App() {
 const app = new App();
 app.init();
 
-$("body").on("click dblclick", `[bb-media-click]`, function(e) {
+$("body").on("click dblclick", `[bb-media-click]`, function (e) {
     let attr = $(this).attr("bb-media-click");
     app.events[attr](this, e);
 });
 
-$("body").on("click", `[data-tabaction]`, function(e) {
+$("body").on("click", `[data-tabaction]`, function (e) {
     let id = $(this).attr("data-tabaction");
     $("body")
         .find(`[data-tabcontent]`)
@@ -823,7 +857,7 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 
 // $("body").on("keydown");
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", function (e) {
     e.preventDefault();
     if (document.querySelector("#imageload")) {
         if (e.which === 39) {
@@ -839,7 +873,9 @@ document.addEventListener("keydown", function(e) {
         } else if (e.which === 27) {
             document
                 .querySelectorAll(".adminmodal ")
-                .forEach(item => item.remove());
+                .forEach(item = > item.remove()
+        )
+            ;
         }
     }
 });
