@@ -34,7 +34,7 @@ $(function() {
 
     // product range
     $('body').on('change','.product-range input',function () {
-        $('.product-range .item').removeClass('active line-none');
+        $(this).closest('.product-range').children().removeClass('active line-none');
         if($(this).is(":checked")){
             $(this).parent().addClass('active');
             $(this).parent().prevAll( ).addClass('active');
