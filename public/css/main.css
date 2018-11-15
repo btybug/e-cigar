@@ -137,6 +137,10 @@ a:hover {
     fill: #973e4f;
 }
 
+.add-to-favorite svg {
+    fill: transparent;
+}
+
 .add-to-favorite.active svg path {
     stroke: #fff;
 }

@@ -264,20 +264,24 @@
             transition: all.5s;
             position: absolute;
             right: 0;
-            top: 160%;
+            top: 150%;
+        }
+
+        .product-share-social .jssocials-share {
+            margin-right: 0;
         }
 
 
         .product-share-social:before {
             position: absolute;
             bottom: 100%;
-            right: 10px;
+            right: 5px;
             content: '';
             display: inline-block;
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 0 12px 20px 12px;
+            border-width: 0 10px 16px 10px;
             border-color: transparent transparent #353636 transparent;
         }
 
