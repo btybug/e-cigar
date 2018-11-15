@@ -17,13 +17,13 @@ class CreateMailJobTable extends Migration
             $table->increments('id');
             $table->tinyInteger('status')->default(0);
             $table->string('to')->nullable();
-            $table->unsignedInteger('mail_template_id');
+            $table->unsignedInteger('template_id');
             $table->timestamp('sent_at')->nullable();
             $table->timestamp('must_be_done')->nullable();
             $table->text('log')->nullable();
             $table->timestamps();
 
-            $table->foreign('mail_template_id')
+            $table->foreign('template_id')
                 ->references('id')
                 ->on('mail_templates')
                 ->onDelete('cascade');
