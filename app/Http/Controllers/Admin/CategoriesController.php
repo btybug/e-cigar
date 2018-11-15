@@ -19,6 +19,7 @@ use App\Models\Coupons;
 use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
+use App\Models\Stickers;
 use Carbon\Carbon;
 use DB;
 use PragmaRX\Countries\Package\Countries;
@@ -48,7 +49,8 @@ class CategoriesController extends Controller
         $model = Category::where('id',$id)->where('type',$type)->first();
 
         $allCategories = Category::where('id','!=',$id)->where('type',$type)->get();
-        $html = $this->view("create_or_update",compact(['allCategories','model','type']))->render();
+        $stickers = Stickers::all()->pluck('name','id');
+        $html = $this->view("create_or_update",compact(['allCategories','model','type','stickers']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
@@ -66,9 +68,10 @@ class CategoriesController extends Controller
 
     public function postCreateOrUpdateCategory(StoreCategoryPost $request,$type)
     {
-        $data = $request->except('_token','translatable');
+        $data = $request->except('_token','translatable','stickers');
         $data['user_id'] = \Auth::id();
-        Category::updateOrCreate($request->id, $data);
+        $category = Category::updateOrCreate($request->id, $data);
+        $category->stickers()->sync($request->get('stickers'));
         return redirect()->back();
     }
 

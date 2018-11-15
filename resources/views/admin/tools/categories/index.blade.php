@@ -31,8 +31,10 @@
 @stop
 @section('js')
     <script src="https://mbraak.github.io/jqTree/tree.jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
+        $("#select-stickers").select2();
         $("body").on('click','.add-category',function () {
             AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: null}, function (res) {
                 if(! res.error){
@@ -98,6 +100,7 @@
                 if(! res.error){
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
+                    $("#select-stickers").select2();
                 }
             });
         });
@@ -107,6 +110,7 @@
     <link rel="stylesheet" href="https://mbraak.github.io/jqTree/jqtree.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <style>
         #font-show-area {
             font-size: 50px;

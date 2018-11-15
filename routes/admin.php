@@ -217,6 +217,12 @@ Route::group(['prefix' => '/tools'], function () {
         Route::post('/search', 'Admin\TagsController@postSearch')->name('admin_stock_tags_save');
         Route::post('/delete', 'Admin\TagsController@postDelete')->name('admin_stock_tags_delete');
     });
+
+    Route::group(['prefix' => 'stickers'], function () {
+        Route::get('/', 'Admin\ToolsController@stickers')->name('admin_tools_stickers');
+        Route::post('/manage/{id?}', 'Admin\ToolsController@postStickersManage')->name('admin_tools_stickers_manage');
+        Route::post('get-manage-form', 'Admin\ToolsController@postStickersManageForm')->name('admin_tools_stickers_manage_form');
+    });
 });
 
 Route::group(['prefix' => 'comments'], function () {

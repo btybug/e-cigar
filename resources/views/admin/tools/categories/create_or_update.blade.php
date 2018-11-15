@@ -42,8 +42,16 @@
     {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
 </div>
 <div class="form-group">
+    <label>Custom classes</label>
+    {!! Form::text('classes',null,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
     <label>Parent</label>
     {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
+    <label>Select stickers</label>
+    {!! Form::select('stickers[]',$stickers,null,['class'=>'form-control','id' => 'select-stickers','multiple' => true]) !!}
 </div>
 <div class="form-group">
     <div class="row">

@@ -69,4 +69,9 @@ class Category extends Translatable
             return $data;
         }
     }
+
+    public function stickers()
+    {
+        return $this->belongsToMany(Stickers::class, 'category_stickers', 'categories_id','sticker_id');
+    }
 }

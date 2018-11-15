@@ -162,6 +162,9 @@
                     @ok('admin_stock_statuses')
                     <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
                     @endok
+                    @ok('admin_tools_stickers')
+                    <li><a href="{{route('admin_tools_stickers')}}"><i class="fa fa-circle-o"></i> Stickers</a></li>
+                    @endok
                 </ul>
             </li>
             @endok
