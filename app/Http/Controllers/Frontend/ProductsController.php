@@ -51,7 +51,6 @@ class ProductsController extends Controller
     {
         $vape=Stock::with(['variations','stockAttrs'])->findOrFail($id);
         $variations = $vape->variations()->with('options')->get();
-
         return $this->view('single',compact('vape','variations'));
     }
 
