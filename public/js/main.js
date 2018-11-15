@@ -47,7 +47,15 @@ $(function() {
 function openSidbar(btn, sidebar) {
     btn.on('click', function (e) {
         e.stopPropagation();
-        sidebar.toggleClass('show');
+        if(!sidebar.hasClass('show')){
+            $('.hidden-sidebar').removeClass('show')
+        }
+        if(sidebar.hasClass('show')){
+            sidebar.removeClass('show');
+        }else{
+            sidebar.addClass('show');
+        }
+
     });
 
     $('body').on('click', function (e) {
