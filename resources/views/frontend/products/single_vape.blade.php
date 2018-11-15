@@ -200,6 +200,7 @@
                 autoplayTimeout:3000
             })
             get_price();
+
             $("body").on('change','.select-variation-option',function () {
                 get_price();
             })

@@ -56,10 +56,15 @@ Route::group(['prefix' => 'products'], function () {
 //    Route::get('/vape', 'Frontend\ProductsController@getVape')->name('product_vape');
 //    Route::get('/vape/{id}', 'Frontend\ProductsController@singleVape')->name('product_single_vape');
     Route::group(['prefix' => '{type}'], function () {
-        Route::get('{category?}', 'Frontend\ProductsController@getType')->name('product_type');
+        Route::group(['prefix' => '{category?}'], function () {
+            Route::get('/', 'Frontend\ProductsController@getType')->name('product_type');
+            Route::get('/{id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+        });
+
+
     });
 
-    Route::get('/juice/{category}/{id}', 'Frontend\ProductsController@singleJuice')->name('product_single_juice');
+//    Route::get('/juice/{category}/{id}', 'Frontend\ProductsController@singleJuice')->name('product_single_juice');
 });
 Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');

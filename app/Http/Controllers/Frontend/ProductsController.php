@@ -44,7 +44,15 @@ class ProductsController extends Controller
 
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 
-        return $this->view('product_types',compact('products','orderBy','attributes','categories','category'));
+        return $this->view('product_types',compact('products','orderBy','attributes','categories','category','type'));
+    }
+
+    public function getSingle($type,$category_slug,$id)
+    {
+        $vape=Stock::with(['variations','stockAttrs'])->findOrFail($id);
+        $variations = $vape->variations()->with('options')->get();
+
+        return $this->view('single',compact('vape','variations'));
     }
 
 
