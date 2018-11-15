@@ -55,7 +55,7 @@
                 </ul>
                 <form method="POST" action="http://e-cigar.loc/logout" accept-charset="UTF-8"><input name="_token" type="hidden" value="teujYutXdjnkk0xIfCeJO62V30CdYAHbHsElmVE1">
                     <div class="text-center">
-                        <button type="submit" class="profile-aside-btn-logout btn mt-auto align-self-center rounded-0">Logout</button>
+                        <button type="submit" class="profile-aside-btn btn mt-auto align-self-center rounded-0 bg-cl-red">Logout</button>
                     </div>
                 </form>
             </div>

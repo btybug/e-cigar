@@ -29,6 +29,30 @@
     background: #353736;
 }
 
+.bg-cl-red {
+    background-color: #ac4357;
+}
+
+.bg-cl-blue {
+    background-color: #386aa1;
+}
+
+.txt-cl-red {
+    color: #ac4357 !important;
+}
+
+.txt-cl-blue {
+    color: #386aa1 !important;
+}
+
+.txt-cl-green {
+    color: #367251 !important;
+}
+
+.txt-cl-brown {
+    color: #a68c4d !important;
+}
+
 html {
     height: 100%;
 }
@@ -343,8 +367,7 @@ a:hover {
     margin-right: 30px;
 }
 
-.profile-aside-btn-logout {
-    background: #973e4f;
+.profile-aside-btn {
     color: #fff;
     padding: 10px 18px;
     font-size: 18px;
@@ -438,21 +461,6 @@ a:hover {
 }
 
 /*page Kaliony Hit*/
-.txt-cl-red {
-    color: #ac4357 !important;
-}
-
-.txt-cl-blue {
-    color: #386aa1 !important;
-}
-
-.txt-cl-green {
-    color: #367251 !important;
-}
-
-.txt-cl-brown {
-    color: #a68c4d !important;
-}
 
 .page-main-content {
     width: 100%;

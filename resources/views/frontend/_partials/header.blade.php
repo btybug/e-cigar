@@ -153,7 +153,7 @@
     </ul>
     {!! Form::open(['url'=>route('logout')]) !!}
     <div class="text-center">
-        <button type="submit" class="profile-aside-btn-logout btn mt-auto align-self-center rounded-0">Logout</button>
+        <button type="submit" class="profile-aside-btn btn mt-auto align-self-center rounded-0 bg-cl-red">Logout</button>
     </div>
     {!! Form::close() !!}
 </div>
@@ -251,6 +251,10 @@
       d="M15.120,-0.000 L7.996,7.177 L0.818,0.053 L-0.000,0.879 L7.177,8.003 L0.053,15.180 L0.879,16.000 L8.003,8.823 L15.180,15.946 L16.000,15.121 L8.822,7.997 L15.946,0.820 L15.120,-0.000 Z"/>
 </svg>
             </span>
+    </div>
+    <div class="mt-auto">
+        <button type="submit" class="profile-aside-btn btn mt-auto align-self-center rounded-0 bg-cl-red mr-3">View Cart</button>
+        <button type="submit" class="profile-aside-btn btn mt-auto align-self-center rounded-0 bg-cl-blue">Checkout</button>
     </div>
 
 </div>
