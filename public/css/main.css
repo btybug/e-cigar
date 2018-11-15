@@ -132,8 +132,13 @@ a:hover {
     font-size: 14px;
 }
 
-.header-like-icon.active {
+.header-like-icon.active,
+.add-to-favorite.active svg {
     fill: #973e4f;
+}
+
+.add-to-favorite.active svg path {
+    stroke: #fff;
 }
 
 .header-cart-bag-icon.active .qty {
