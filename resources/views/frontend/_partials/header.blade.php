@@ -89,9 +89,9 @@
                     </span>
                 @else
                     <span class="d-inline-block">
-                        <a href="#" class="header-login-link">Login</a>
+                        <a href="{!! route('login') !!}" class="header-login-link">Login</a>
                         <span class="header-login-icon">&nbsp;&#47;&nbsp;</span>
-                        <a href="#" class="header-login-link">Register</a>
+                        <a href="{!! route('register') !!}" class="header-login-link">Register</a>
                     </span>
                 @endif
             </div>
