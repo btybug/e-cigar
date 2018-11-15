@@ -10,233 +10,224 @@
         </div>
     @endif
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-3">
-                @include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account_address'])
-            </div>
-            <div class="col-md-9">
-                <ul class="nav nav-pills nav-fill" role="tablist">
-                    <li>
-                        <a class="btn btn-info nav-link nav-link--new-address active" id="billingAddress-tab"
-                           data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress"
-                           aria-selected="true" aria-expanded="true">Billing Address</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-info nav-link nav-link--new-address" id="shippingAddress-tab"
-                           data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress">Shipping Address</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab" data-toggle="tab"
-                           href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>
-                    </li>
-                </ul>
+        <ul class="nav nav-pills nav-fill" role="tablist">
+            <li>
+                <a class="btn btn-info nav-link nav-link--new-address active" id="billingAddress-tab"
+                   data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress"
+                   aria-selected="true" aria-expanded="true">Billing Address</a>
+            </li>
+            <li>
+                <a class="btn btn-info nav-link nav-link--new-address" id="shippingAddress-tab"
+                   data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress">Shipping Address</a>
+            </li>
+            <li>
+                <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab" data-toggle="tab"
+                   href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>
+            </li>
+        </ul>
 
-                <div class="tab-content">
-                    <div class="tab-pane fade active in show p-4" id="billingAddress" role="tabpanel"
-                         aria-labelledby="billingAddress-tab">
-                        {!! Form::model($billing_address,['class'=>'form-horizontal']) !!}
-                        <div class="form-group">
+        <div class="tab-content">
+            <div class="tab-pane fade active in show p-4" id="billingAddress" role="tabpanel"
+                 aria-labelledby="billingAddress-tab">
+                {!! Form::model($billing_address,['class'=>'form-horizontal']) !!}
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Name</label>
+                        <div class="col-sm-8">
                             <div class="row">
-                                <label for="text" class="control-label col-sm-4">Name</label>
-                                <div class="col-sm-8">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            {!! Form::text('first_name',null,['class'=>'form-control']) !!}
-                                        </div>
-                                        <div class="col-sm-6">
-                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                                        </div>
-                                    </div>
+                                <div class="col-sm-6">
+                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                </div>
+                                <div class="col-sm-6">
+                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Company name</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('company',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">1st Line address</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">2nd line address</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Country</label>
-                                <div class="col-sm-8">
-                                    {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group hide">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Regions</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group hide">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">City</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Post Code</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('post_code',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        {!! Form::hidden('type','billing_address') !!}
-                        {!! Form::hidden('id') !!}
-                        <div class="form-group row">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
-                    <div class="tab-pane fade p-4" id="shippingAddress" role="tabpanel"
-                         aria-labelledby="shippingAddress-tab">
-                        {!! Form::model($default_shipping,['class'=>'form-horizontal']) !!}
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Name</label>
-                                <div class="col-sm-8">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            {!! Form::text('first_name',null,['class'=>'form-control']) !!}
-                                        </div>
-                                        <div class="col-sm-6">
-                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Company name</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('company',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">1st Line address</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">2nd line address</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Country</label>
-                                <div class="col-sm-8">
-                                    {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Regions</label>
-                                <div class="col-sm-8">
-                                    {!! Form::select('region',getRegionByZone(@$default_shipping->country),$default_shipping->region?$default_shipping->region:null,['class'=>'form-control','id' => 'geo_region']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group hide">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">City</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="text" class="control-label col-sm-4">Post Code</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('post_code',null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        {!! Form::hidden('type','default_shipping') !!}
-                        {!! Form::hidden('id') !!}
-                        <div class="form-group row">
-                            <div class="col-sm-offset-4 col-sm-8">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
-                    <div class="tab-pane fade p-4" id="addressBook" role="tabpanel" aria-labelledby="addressBook-tab">
-                        <div class="panel panel-default">
-
-                            <div class="panel-body">
-                                <div>
-                                    <div class="p-5">
-
-                                            <div class="form-group row mb-5">
-                                                <div class="col-md-5">
-                                                    <h5>
-                                                        <label for="selectAddress" class="control-label text-muted">Select
-                                                            your address</label>
-                                                    </h5>
-                                                </div>
-                                                <div class="col-md-7 d-flex">
-                                                    {!! Form::select('address_book',$address,null,['class' => 'form-control select-address']) !!}
-                                                    <!-- Button trigger modal -->
-                                                        <button type="button"
-                                                                class="nav-link nav-link--new-address btn btn-info address-book-new">+ Add New
-                                                        </button>
-                                                </div>
-                                            </div>
-                                        <div class="border py-3 px-4">
-                                            <div class="render-address">
-
-                                            </div>
-                                            <button type="submit" class="btn btn-primary edit-address">Edit</button>
-                                            <button type="button" class="btn btn-danger edit-address">Delete</button>
-                                        </div>
-
-                                    </div>
-                                </div>
-                                {{--Inner Tab Content--}}
-                            </div>
-                        </div>
-
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Company name</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('company',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">1st Line address</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">2nd line address</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Country</label>
+                        <div class="col-sm-8">
+                            {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group hide">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Regions</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group hide">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">City</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('city',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Post Code</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                {!! Form::hidden('type','billing_address') !!}
+                {!! Form::hidden('id') !!}
+                <div class="form-group row">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+            <div class="tab-pane fade p-4" id="shippingAddress" role="tabpanel"
+                 aria-labelledby="shippingAddress-tab">
+                {!! Form::model($default_shipping,['class'=>'form-horizontal']) !!}
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Name</label>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                </div>
+                                <div class="col-sm-6">
+                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Company name</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('company',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">1st Line address</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">2nd line address</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Country</label>
+                        <div class="col-sm-8">
+                            {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Regions</label>
+                        <div class="col-sm-8">
+                            {!! Form::select('region',getRegionByZone(@$default_shipping->country),$default_shipping->region?$default_shipping->region:null,['class'=>'form-control','id' => 'geo_region']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group hide">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">City</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('city',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label for="text" class="control-label col-sm-4">Post Code</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                </div>
+                {!! Form::hidden('type','default_shipping') !!}
+                {!! Form::hidden('id') !!}
+                <div class="form-group row">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+                {!! Form::close() !!}
+            </div>
+            <div class="tab-pane fade p-4" id="addressBook" role="tabpanel" aria-labelledby="addressBook-tab">
+                <div class="panel panel-default">
 
+                    <div class="panel-body">
+                        <div>
+                            <div class="p-5">
+
+                                    <div class="form-group row mb-5">
+                                        <div class="col-md-5">
+                                            <h5>
+                                                <label for="selectAddress" class="control-label text-muted">Select
+                                                    your address</label>
+                                            </h5>
+                                        </div>
+                                        <div class="col-md-7 d-flex">
+                                            {!! Form::select('address_book',$address,null,['class' => 'form-control select-address']) !!}
+                                            <!-- Button trigger modal -->
+                                                <button type="button"
+                                                        class="nav-link nav-link--new-address btn btn-info address-book-new">+ Add New
+                                                </button>
+                                        </div>
+                                    </div>
+                                <div class="border py-3 px-4">
+                                    <div class="render-address">
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary edit-address">Edit</button>
+                                    <button type="button" class="btn btn-danger edit-address">Delete</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        {{--Inner Tab Content--}}
+                    </div>
+                </div>
 
             </div>
         </div>

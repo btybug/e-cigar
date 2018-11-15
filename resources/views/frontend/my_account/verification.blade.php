@@ -1,11 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4">
-                @include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account_verification'])
-            </div>
-            <div class="col-md-8 registration-area">
+            <div class="registration-area">
                 {!! Form::open(['files'=>true]) !!}
                 <div class="form-group row">
                     <label class="col-2 col-form-label" for="select">Document Type</label>
@@ -45,7 +41,6 @@
                 </div>
                 {!! Form::close() !!}
             </div>
-        </div>
 
     </div>
 
