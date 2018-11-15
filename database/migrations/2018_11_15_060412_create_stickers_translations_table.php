@@ -18,6 +18,7 @@ class CreateStickersTranslationsTable extends Migration
             $table->integer('stickers_id')->unsigned();
             $table->string('locale')->index();
             $table->string('name');
+            $table->text('description')->nullable();
             $table->unique(['stickers_id','locale']);
             $table->foreign('stickers_id')->references('id')->on('stickers')->onDelete('cascade');
         });

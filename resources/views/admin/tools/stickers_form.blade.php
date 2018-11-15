@@ -25,6 +25,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label>Sticker Description</label>
+                                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             @endif
