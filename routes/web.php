@@ -53,6 +53,8 @@ Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment
 Route::group(['prefix' => 'products'], function () {
     Route::get('/', 'Frontend\ProductsController@index')->name('products');
     Route::post('/get-price', 'Frontend\ProductsController@getPrice')->name('product_get_price');
+    Route::post('/add-to-favorites', 'Frontend\ProductsController@attachFavorite')->name('product_add_to_favorites');
+    Route::post('/remove-from-favorites', 'Frontend\ProductsController@detachFavorite')->name('product_remove_from_favorites');
 //    Route::get('/vape', 'Frontend\ProductsController@getVape')->name('product_vape');
 //    Route::get('/vape/{id}', 'Frontend\ProductsController@singleVape')->name('product_single_vape');
     Route::group(['prefix' => '{type}'], function () {

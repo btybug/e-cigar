@@ -138,4 +138,19 @@ class ProductsController extends Controller
 
         return \Response::json(['message' =>  'Currently product unavailable','error' => true]);
     }
+
+    public function attachFavorite(Request $request)
+    {
+        $id=$request->get('id');
+        $user=\Auth::user();
+        $user->favorites()->attach($id);
+        return ['error'=>false];
+    }
+    public function detachFavorite(Request $request)
+    {
+        $id=$request->get('id');
+        $user=\Auth::user();
+        $user->favorites()->detach($id);
+        return ['error'=>false];
+    }
 }

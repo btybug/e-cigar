@@ -195,7 +195,7 @@
                                 </div>
                             </div>
                             <div class="share-btns d-inline-block ml-auto">
-                                <a href="javascript:void(0)" class="d-block share-btns-item add-to-favorite active"
+                                <a href="javascript:void(0)" class="d-block share-btns-item add-to-favorite add-to-favorite @if(Auth::user()->favorites()->exists($vape->id)) active @endif"
                                    data-id="{!! $vape->id !!}">
                                     <svg width="30px" height="28px" viewBox="0 0 30 28">
                                         <path fill-rule="evenodd" stroke="rgb(34, 36, 35)"
@@ -385,7 +385,33 @@
                 });
             }
         }
+        $('.add-to-favorite').on('click', function () {
+            let data = {'id': $(this).attr('data-id')}
+            if ($(this).hasClass('active')) {
+                var url = "{!! route('product_remove_from_favorites') !!}";
+            } else {
+                var url = "{!! route('product_add_to_favorites') !!}";
+            }
+            $.ajax({
+                type: "POST",
+                url: url,
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
 
+                        if ($('.add-to-favorite').hasClass('active')) {
+                            $('.add-to-favorite').removeClass('active')
+                        } else {
+                            $('.add-to-favorite').addClass('active')
+                        }
+                    }
+                }
+            });
+        })
         $("#share").jsSocials({
             shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
         });
