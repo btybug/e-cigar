@@ -13,7 +13,7 @@
                                 class="name">Kaliony</span><span class="sub cloud txt-cl-blue">Cloud</span></a>
                     <a class="nav-link d-flex flex-column align-items-center" id="v-pills-50-50-tab" data-toggle="pill"
                        href="#v-pills-50-50" role="tab" aria-controls="v-pills-50-50" aria-selected="false"><span
-                                class="name">Kaliony</span><span class="sub percent txt-cl-green">50/50</span></a>
+                                class="name">Kaliony</span><span class="sub percent txt-cl-green">50<span class="dash">&#47;</span>50</span></a>
                     <a class="nav-link d-flex flex-column align-items-center" id="v-pills-short-fill-tab" data-toggle="pill"
                        href="#v-pills-short-fill" role="tab" aria-controls="v-pills-short-fill" aria-selected="false"><span
                                 class="name">Kaliony</span><span class="sub short-fill txt-cl-brown">Short Fill</span></a>
