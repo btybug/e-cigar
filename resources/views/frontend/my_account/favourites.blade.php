@@ -68,7 +68,7 @@
                         <div class="col-sm-4 items">
                             <div class="view-fav-item mb-4">
                                 <button class="btn btn-danger view-fav-item_btn-dlt pull-right remove-from-favorite" data-id="{!! $favorite->id !!}" href="#"><i class="fa fa-trash"></i></button>
-                                <a href="http://e-cigar.loc/products/vape/10"  class="text-center  px-5 py-3 d-flex flex-column d-block">
+                                <a href="#"  class="text-center  px-5 py-3 d-flex flex-column d-block">
                         <span class="d-inline-block mb-3 view-fav-item_img-outer">
                             <img class="img-fluid"
                                  src="{!! url($favorite->image) !!}"
