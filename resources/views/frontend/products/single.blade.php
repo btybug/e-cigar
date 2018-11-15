@@ -61,13 +61,14 @@
                 </div>
 
             </div>
-            <div class="main-right-wrapp kaliony-page">
-                <div class="tab-content h-100" id="v-pills-tabContent">
-                    <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
-                         aria-labelledby="v-pills-product-tab">
-                        <div class="main-content product-tab-main-content h-100">
-                            <div class="row no-gutters h-100">
-                                <div class="col-xl-7 col-lg-6">
+            <div class="main-right-wrapp kaliony-page d-flex flex-wrap">
+                <div class="col-xl-7 col-lg-6 p-0">
+                    <div class="tab-content h-100" id="v-pills-tabContent">
+                        <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
+                             aria-labelledby="v-pills-product-tab">
+                            <div class="main-content product-tab-main-content h-100">
+                                <div class="row no-gutters h-100">
+
                                     <div class="sliders">
                                         <div class="carousel_1">
                                             @if($vape->image)
@@ -112,18 +113,61 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-5 col-lg-6">
-                                    <div class="product-content-left-col-inner">
-                                        <div class="d-flex w-100 product-tab-main-content-desc">
-                                            <div class="product-tab-main-content-title">
-                                                <img class="img-fluid logo" src="/public/img/kaliony-logo.svg"
-                                                     alt="kaliony">
+                            </div>
+                        </div>
+                        <div class="tab-pane h-100 fade" id="v-pills-technical" role="tabpanel"
+                             aria-labelledby="v-pills-technical-tab">
+                            <div class="row">
+                                <table class="table-responsive table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>Attributes</th>
+                                        <th>Options</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @if(count($vape->stockAttrs))
+                                        @foreach($vape->stockAttrs as $attr)
+                                            <tr>
+                                                <td>{!! $attr->attr->name !!}</td>
+                                                <td>
+                                                    @if(count($attr->children))
+                                                        @foreach($attr->children as $option)
+                                                            <span class="badge badge-primary">{!! $option->attr->name !!}</span>
+                                                        @endforeach
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr colspan="2">
+                                            <td>No Attributes</td>
+                                        </tr>
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane h-100 fade" id="v-pills-related" role="tabpanel"
+                             aria-labelledby="v-pills-related-tab">3
+                        </div>
+                        <div class="tab-pane h-100 fade" id="v-pills-reviews" role="tabpanel"
+                             aria-labelledby="v-pills-reviews-tab">4
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5 col-lg-6 p-0">
+                    <div class="product-content-left-col-inner">
+                        <div class="d-flex w-100 product-tab-main-content-desc">
+                            <div class="product-tab-main-content-title">
+                                <img class="img-fluid logo" src="/public/img/kaliony-logo.svg"
+                                     alt="kaliony">
 
-                                                <div class="product-tab-main-content-sub text-uppercase">
-                                                    <em class="txt-cl-red emph">{!! $vape->name !!}</em>
-                                                </div>
-                                            </div>
-                                            <span class="share-btns d-inline-block ml-auto">
+                                <div class="product-tab-main-content-sub text-uppercase">
+                                    <em class="txt-cl-red emph">{!! $vape->name !!}</em>
+                                </div>
+                            </div>
+                            <span class="share-btns d-inline-block ml-auto">
                                            <a href="#" class="d-block share-btns-item">
                                                <svg width="32px" height="30px">
                                                    <path fill-rule="evenodd" fill="rgb(34, 36, 35)"
@@ -137,49 +181,36 @@
                                                    </svg>
                                            </a>
                                        </span>
-                                        </div>
-                                        <p class="product-tab-main-content-info">
-                                            <strong class="font-main-med fnz-18">
-                                                {!! $vape->long_description !!}
-                                            </strong>
-                                        </p>
-                                        <div>
-                                            <input type="hidden" value="{{ $vape->id }}" id="vpid">
-                                            @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                                            <div>
-                                                <div class="form-group d-md-flex align-items-center">
-                                                    <label for="productQty"
-                                                           class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
-                                                    <select class="product-qty-select mr-3" id="productQty">
-                                                        <option>1</option>
-                                                        <option selected>2</option>
-                                                        <option>3</option>
-                                                    </select>
-                                                    <button class="btn btn-add-to-cart rounded-0 fnz-20 add-to-cart">
+                        </div>
+                        <p class="product-tab-main-content-info">
+                            <strong class="font-main-med fnz-18">
+                                {!! $vape->long_description !!}
+                            </strong>
+                        </p>
+                        <div>
+                            <input type="hidden" value="{{ $vape->id }}" id="vpid">
+                            @include("admin.inventory._partials.render_price_form",['model' => $vape])
+                            <div>
+                                <div class="form-group d-md-flex align-items-center">
+                                    <label for="productQty"
+                                           class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
+                                    <select class="product-qty-select mr-3" id="productQty">
+                                        <option>1</option>
+                                        <option selected>2</option>
+                                        <option>3</option>
+                                    </select>
+                                    <button class="btn btn-add-to-cart rounded-0 fnz-20 add-to-cart">
                                                     <span class="icon">
                                                         <svg width="24px" height="31px">
                                                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                                                           d="M23.860,30.854 C23.767,30.947 23.640,31.000 23.507,31.000 L0.493,31.000 C0.359,31.000 0.232,30.947 0.140,30.854 C0.049,30.761 -0.000,30.636 0.006,30.508 L1.102,8.314 C1.114,8.064 1.328,7.867 1.589,7.867 L6.247,7.867 L6.247,5.547 C6.247,2.488 8.828,-0.000 12.000,-0.000 C15.171,-0.000 17.752,2.488 17.752,5.547 L17.752,7.867 L22.411,7.867 C22.671,7.867 22.886,8.064 22.898,8.314 L23.994,30.508 C24.000,30.636 23.952,30.761 23.860,30.854 ZM16.778,5.547 C16.778,3.007 14.635,0.939 12.000,0.939 C9.364,0.939 7.221,3.007 7.221,5.547 L7.221,7.867 L16.778,7.867 L16.778,5.547 ZM21.947,8.807 L17.752,8.807 L17.752,10.216 C17.752,10.475 17.535,10.685 17.265,10.685 C16.996,10.685 16.778,10.475 16.778,10.216 L16.778,8.807 L7.221,8.807 L7.221,10.216 C7.221,10.475 7.003,10.685 6.734,10.685 C6.465,10.685 6.247,10.475 6.247,10.216 L6.247,8.807 L2.052,8.807 L1.003,30.061 L22.996,30.061 L21.947,8.807 Z"/>
                                                 </svg>
                                                     </span>
-                                                        Add to Cart
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        Add to Cart
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane h-100 fade" id="v-pills-technical" role="tabpanel"
-                         aria-labelledby="v-pills-technical-tab">2
-                    </div>
-                    <div class="tab-pane h-100 fade" id="v-pills-related" role="tabpanel"
-                         aria-labelledby="v-pills-related-tab">3
-                    </div>
-                    <div class="tab-pane h-100 fade" id="v-pills-reviews" role="tabpanel"
-                         aria-labelledby="v-pills-reviews-tab">4
                     </div>
                 </div>
             </div>
@@ -199,56 +230,56 @@
     <script src="/public/plugins/formstone/carousel/carousel.js"></script>
     <script>
         $(document).ready(function () {
-        get_price();
-
-        $("body").on('change','.select-variation-option',function () {
             get_price();
-        });
 
-        $("body").on('change','.select-variation-radio-option',function () {
-            get_price();
-        });
+            $("body").on('change', '.select-variation-option', function () {
+                get_price();
+            });
+
+            $("body").on('change', '.select-variation-radio-option', function () {
+                get_price();
+            });
 
 
-        $("body").on('click','.add-to-cart',function () {
-            var variationId = $("#variation_uid").val();
+            $("body").on('click', '.add-to-cart', function () {
+                var variationId = $("#variation_uid").val();
 
-            if(variationId && variationId != ''){
-                $.ajax({
-                    type: "post",
-                    url: "/add-to-cart",
-                    cache: false,
-                    datatype: "json",
-                    data: {  uid : variationId },
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function(data) {
-                        if(! data.error){
-                            alert('added')
-                            $(".cart-count").html(data.count)
-                        }else{
-                            alert('error')
+                if (variationId && variationId != '') {
+                    $.ajax({
+                        type: "post",
+                        url: "/add-to-cart",
+                        cache: false,
+                        datatype: "json",
+                        data: {uid: variationId},
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                alert('added')
+                                $(".cart-count").html(data.count)
+                            } else {
+                                alert('error')
+                            }
                         }
-                    }
-                });
-            }else{
-                alert('Select available variation');
-            }
-        })
+                    });
+                } else {
+                    alert('Select available variation');
+                }
+            })
 
         });
 
-        function get_price(){
+        function get_price() {
             var items = document.getElementsByClassName('select-variation-option');
 
             let options = {};
-            for (var i = 0; i < items.length; i++){
+            for (var i = 0; i < items.length; i++) {
                 options[$(items[i]).data('name')] = $(items[i]).val();
             }
 
-           $.map($(".options-group input:radio:checked"), function(elem, idx) {
-               options[$(elem).data('name')] = $(elem).val();
+            $.map($(".options-group input:radio:checked"), function (elem, idx) {
+                options[$(elem).data('name')] = $(elem).val();
             });
 
             console.log(options);
@@ -260,15 +291,15 @@
                     url: "/products/get-price",
                     cache: false,
                     datatype: "json",
-                    data: { options : options, uid : $("#vpid").val() },
+                    data: {options: options, uid: $("#vpid").val()},
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
-                    success: function(data) {
-                        if(! data.error){
+                    success: function (data) {
+                        if (!data.error) {
                             $(".price-place").html("€" + data.price);
                             $("#variation_uid").val(data.variation_id);
-                        }else{
+                        } else {
                             $(".price-place").html(data.message);
                             $("#variation_uid").val('');
                         }
