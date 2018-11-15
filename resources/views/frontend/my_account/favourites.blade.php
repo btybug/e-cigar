@@ -85,7 +85,7 @@
         </div>
     </main>
 @stop
-@section()
+@section('js')
     <script>
         $(function () {
             $('.remove-from-favorite').on('click', function () {
