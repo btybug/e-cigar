@@ -287,6 +287,12 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
     <style>
+
+        #gp-inner-container {
+            height: calc(100% - 100px);
+            overflow: auto;
+        }
+
         .hide-icons {
             cursor: pointer;
         }
