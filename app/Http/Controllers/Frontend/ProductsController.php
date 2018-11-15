@@ -22,14 +22,17 @@ class ProductsController extends Controller
         return $this->view('index', compact('categories'));
     }
 
-    public function getType ($type,$category = null,$slug = null)
+    public function getType ($type,$category_slug = null)
     {
+//        dd($category,$slug);
         $topCategory = Category::with('children')->where('slug',$type)->whereNull('parent_id')->first();
 
         if(! $topCategory) abort(404);
         $products = [];
         $categories = $topCategory->children;
-        $category = ($slug) ? Category::where('slug',$slug)->first() : ((count($categories)) ? $categories->first() : null);
+        $category = ((count($categories)) ? $categories->where('slug',$category_slug)->first() : null);
+
+        if(! $category && $category_slug != null) abort(404);
 
         if($category){
             $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
@@ -40,7 +43,6 @@ class ProductsController extends Controller
                 ->where('status', true)
                 ->where('stock_categories.categories_id', $category->id)->get();
         }
-
 
         $attributes=Attributes::where('filter',1)->whereNull('parent_id')->with('children')->get();
 
