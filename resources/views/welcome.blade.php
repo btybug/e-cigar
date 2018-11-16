@@ -4,6 +4,14 @@
     <main class="page-main-content">
         <div class="d-flex h-100">
             <div class="main-left-tabs d-flex flex-column kaliony-menu">
+                <div class="nav flex-column justify-content-center nav-pills" id="v-pills-tab" role="tablist"
+                     aria-orientation="vertical">
+                    <a class="nav-link active d-flex flex-column align-items-center" id="v-pills-product-tab"
+                       data-toggle="pill"
+                       href="#v-pills-product" role="tab" aria-controls="v-pills-hit" aria-selected="true">
+                        <span class="name">Kaliony</span></a>
+                </div>
+
                 <div class="user-status mt-auto">
                     <span class="status-color"></span>
                     <div class="user d-flex flex-column align-items-center">
@@ -16,8 +24,71 @@
                 </div>
 
             </div>
-            <div class="main-right-wrapp home-page"></div>
+
+            <div class="main-right-wrapp d-flex flex-wrap">
+                <div class="tab-content h-100 single-product-main-cnt-left has-srollbar-customized" id="v-pills-tabContent">
+                        <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
+                             aria-labelledby="v-pills-product-tab">
+                            <div class="sliders">
+                                <div class="carousel_1">
+                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+
+
+
+                                </div>
+
+                                <div class="carousel_2" data-carousel-controller-for=".carousel_1">
+                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+            </div>
+
         </div>
 
     </main>
+@stop
+
+@section('css')
+    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <style>
+        .carousel_2 {
+            position: absolute !important;
+            bottom: 22px;
+        }
+    </style>
+@stop
+
+@section('js')
+
+    <script src="/public/js/bootstrap.bundle.min.js"></script>
+    <script src="/public/plugins/formstone/core.js"></script>
+    <script src="/public/plugins/formstone/mediaquery.js"></script>
+    <script src="/public/plugins/formstone/touch.js"></script>
+    <script src="/public/plugins/formstone/carousel/carousel.js"></script>
+    <script>
+        $(".carousel_1").carousel({
+            pagination: false,
+            controls: false
+        });
+        $(".carousel_2").carousel({
+            controls: false,
+            pagination: false,
+            autoAdvance:true,
+            show: {
+                "0px": 1,
+                "500px": 2,
+                "980px": 3
+            }
+        });
+
+    </script>
+
 @stop
