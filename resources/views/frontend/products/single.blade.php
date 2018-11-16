@@ -91,7 +91,13 @@
                                             @endif
                                             @if(count($vape->videos))
                                                 @foreach($vape->videos as $video)
-                                                        <div> <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                                    <div>
+                                                        <iframe width="100%" height="100%"
+                                                                src="https://www.youtube.com/embed/{{$video}}"
+                                                                frameborder="0"
+                                                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                allowfullscreen></iframe>
+                                                    </div>
                                                 @endforeach
                                             @endif
                                         </div>
@@ -117,7 +123,8 @@
                                             @endif
                                             @if(count($vape->videos))
                                                 @foreach($vape->videos as $video)
-                                                        <div> <img src="http://img.youtube.com/vi/{{ $video }}/sddefault.jpg" width="100%" height="100%" alt=""></div>
+                                                    <div><img src="http://img.youtube.com/vi/{{ $video }}/sddefault.jpg"
+                                                              width="100%" height="100%" alt=""></div>
                                                 @endforeach
                                             @endif
                                         </div>
@@ -159,20 +166,20 @@
                             </div>
 
                             @foreach($vape->stickers as $sticker)
-                            <div class="d-flex flex-wrap my-2 wall">
-                                <div class="col-sm-5">
-                                    <div class="image">
-                                        <img src="{!! $sticker->image !!}"
-                                             alt="{!! $sticker->name !!}">
+                                <div class="d-flex flex-wrap my-2 wall">
+                                    <div class="col-sm-5">
+                                        <div class="image">
+                                            <img src="{!! $sticker->image !!}"
+                                                 alt="{!! $sticker->name !!}">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="info">
+                                            <h4 class="h1 text-center">{!! $sticker->name !!}</h4>
+                                            <p class="desc mt-3">{!! $sticker->description !!}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-7">
-                                    <div class="info">
-                                        <h4 class="h1 text-center">{!! $sticker->name !!}</h4>
-                                        <p class="desc mt-3">{!! $sticker->description !!}</p>
-                                    </div>
-                                </div>
-                            </div>
                             @endforeach
                         </div>
                         <div class="tab-pane h-100 fade" id="v-pills-related" role="tabpanel"
@@ -195,13 +202,16 @@
                                 </div>
                             </div>
                             <div class="share-btns d-inline-block ml-auto">
-                                <a href="javascript:void(0)" class="d-block share-btns-item add-to-favorite add-to-favorite @if(Auth::user()->favorites()->exists($vape->id)) active @endif"
-                                   data-id="{!! $vape->id !!}">
-                                    <svg width="30px" height="28px" viewBox="0 0 30 28">
-                                        <path fill-rule="evenodd" stroke="rgb(34, 36, 35)"
-                                              d="M29.355,11.060 C28.755,13.649 27.363,16.008 25.333,17.877 L14.912,27.331 L4.670,17.879 C2.637,16.007 1.246,13.648 0.645,11.060 C0.213,9.200 0.390,8.149 0.391,8.142 L0.400,8.080 C0.796,3.538 3.897,0.241 7.774,0.241 C10.634,0.241 13.152,2.028 14.347,4.904 L14.909,6.259 L15.471,4.904 C16.647,2.072 19.298,0.242 22.227,0.242 C26.102,0.242 29.204,3.539 29.609,8.139 C29.610,8.149 29.787,9.200 29.355,11.060 Z"></path>
-                                    </svg>
-                                </a>
+                                @if(Auth::check())
+                                    <a href="javascript:void(0)"
+                                       class="d-block share-btns-item add-to-favorite add-to-favorite @if(Auth::user()->favorites()->exists($vape->id)) active @endif"
+                                       data-id="{!! $vape->id !!}">
+                                        <svg width="30px" height="28px" viewBox="0 0 30 28">
+                                            <path fill-rule="evenodd" stroke="rgb(34, 36, 35)"
+                                                  d="M29.355,11.060 C28.755,13.649 27.363,16.008 25.333,17.877 L14.912,27.331 L4.670,17.879 C2.637,16.007 1.246,13.648 0.645,11.060 C0.213,9.200 0.390,8.149 0.391,8.142 L0.400,8.080 C0.796,3.538 3.897,0.241 7.774,0.241 C10.634,0.241 13.152,2.028 14.347,4.904 L14.909,6.259 L15.471,4.904 C16.647,2.072 19.298,0.242 22.227,0.242 C26.102,0.242 29.204,3.539 29.609,8.139 C29.610,8.149 29.787,9.200 29.355,11.060 Z"></path>
+                                        </svg>
+                                    </a>
+                                @endif
                                 <div class="d-block share-btns-item share-social-btn pointer">
                                     <svg width="32px" height="35px">
                                         <path fill-rule="evenodd" fill="rgb(34, 36, 35)"
