@@ -191,7 +191,7 @@
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-6 p-0">
-                    <div class="product-content-left-col-inner d-flex flex-column">
+                    <div class="product-content-left-col-inner">
                         <div class="d-flex w-100 product-tab-main-content-desc">
                             <div class="product-tab-main-content-title">
                                 <img class="img-fluid logo" src="/public/img/kaliony-logo.svg"
@@ -226,7 +226,7 @@
                                 {!! $vape->long_description !!}
                             </strong>
                         </p>
-                        <div class="mt-auto">
+                        <div>
                             <input type="hidden" value="{{ $vape->id }}" id="vpid">
                             @include("admin.inventory._partials.render_price_form",['model' => $vape])
                             <div>
