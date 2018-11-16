@@ -8,17 +8,17 @@ $(function() {
     openSidbar($('#ptofileBtn'), $('#profileSidebar'));
     openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));
 
-    // remove cart-info from cart sidbar
-    $('.cart-item-close').on('click', function (e) {
-        e.stopPropagation();
-        $(this).parent($('.cart-aside-item')).remove();
-        if(!$('.cart-aside-item').length) {
-        $('#cartSidebarEmptyMsg').show();
-            $('#headerShopCartBtn').removeClass('active')
-    } else {
-            $('#cartSidebarEmptyMsg').hide();
-        }
-    });
+    // // remove cart-info from cart sidbar
+    // $('.cart-item-close').on('click', function (e) {
+    //     e.stopPropagation();
+    //     $(this).parent($('.cart-aside-item')).remove();
+    //     if(!$('.cart-aside-item').length) {
+    //     $('#cartSidebarEmptyMsg').show();
+    //         $('#headerShopCartBtn').removeClass('active')
+    // } else {
+    //         $('#cartSidebarEmptyMsg').hide();
+    //     }
+    // });
 
     // product-slider
     $(".carousel_1").carousel({

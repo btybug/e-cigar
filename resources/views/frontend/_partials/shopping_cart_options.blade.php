@@ -35,7 +35,7 @@
             <div class="col-5">
                 <div class="form-group mb-0">
                     <label class="cart-product-qty-label text-white font-main-light" for="cartProductqQty">QTY&nbsp;:&nbsp;</label>
-                    {!! ForM::number('',$item->quantity,['class' => 'cart-product-qty-select select-default','min' => '1']) !!}
+                    {!! Form::number('',$item->quantity,['class' => 'cart-product-qty-select select-default qty-input','min' => '1','data-uid' => $item->id]) !!}
 
                 </div>
             </div>
@@ -43,12 +43,12 @@
                 <span class="d-block cart-product-price">€ {{ $item->price }}</span>
             </div>
         </div>
-        <span class="cart-item-close d-inline-block position-absolute pointer d-flex align-items-center justify-content-center">
+        <a data-uid="{{ $item->id }}" class="remove-from-cart cart-item-close d-inline-block position-absolute pointer d-flex align-items-center justify-content-center">
                 <svg width="16px" height="16px">
                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                           d="M15.120,-0.000 L7.996,7.177 L0.818,0.053 L-0.000,0.879 L7.177,8.003 L0.053,15.180 L0.879,16.000 L8.003,8.823 L15.180,15.946 L16.000,15.121 L8.822,7.997 L15.946,0.820 L15.120,-0.000 Z"/>
                 </svg>
-            </span>
+            </a>
     </div>
     @endforeach
 @endif

@@ -82,6 +82,92 @@
             }
         });
     };
+
+    $(document).ready(function () {
+        $("body").on('click','.qtycount',function () {
+            var uid = $(this).data('uid');
+            var condition = $(this).data('condition');
+            if(uid && uid != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/update-cart",
+                    cache: false,
+                    datatype: "json",
+                    data: {  uid : uid, condition: condition },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $('.cart-area').html(data.html)
+                            $('#cartSidebar').html(data.headerHtml)
+                        }else{
+                            alert('error')
+                        }
+                    }
+                });
+            }else{
+                alert('Select available variation');
+            }
+        });
+
+        $("body").on('change', '.qty-input' ,function () {
+            var uid = $(this).data('uid');
+            var condition = 'inner';
+            var value = $(this).val();
+            if(uid && uid != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/update-cart",
+                    cache: false,
+                    datatype: "json",
+                    data: {  uid : uid, condition: condition,value :value },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $('.cart-area').html(data.html)
+                            $('#cartSidebar').html(data.headerHtml)
+                        }else{
+                            alert('error')
+                        }
+                    }
+                });
+            }else{
+                alert('Select available variation');
+            }
+        });
+
+
+        $("body").on('click','.remove-from-cart',function () {
+            var uid = $(this).data('uid');
+            console.log(uid,454545);
+            if(uid && uid != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/remove-from-cart",
+                    cache: false,
+                    datatype: "json",
+                    data: {  uid : uid },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $('.cart-area').html(data.html)
+                            $('#cartSidebar').html(data.headerHtml)
+                            $(".cart-count").html(data.count)
+                        }else{
+                            alert('error')
+                        }
+                    }
+                });
+            }else{
+                alert('Select available variation');
+            }
+        })
+    });
 </script>
 @yield('js')
 </body>

@@ -170,7 +170,9 @@ class ShoppingCartController extends Controller
                 Cart::add($variation->variation_id,$variation->stock->sku,$variation->price,1,['variation' => $variation]);
             }
 
-            return \Response::json(['error' => false,'message' => 'added','count' => $this->cartService->getCount()]);
+            $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
+
+            return \Response::json(['error' => false,'message' => 'added','count' => $this->cartService->getCount(),'headerHtml' => $headerhtml]);
         }
 
        return \Response::json(['error' => true,'message' => 'try again']);
@@ -179,13 +181,24 @@ class ShoppingCartController extends Controller
     public function postUpdateQty(Request $request)
     {
         $qty = ($request->condition) ? 1 : -1;
+
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
         if(\Auth::check()){
-            $i = Cart::update($request->uid, array(
-                'quantity' => $qty
-            ));
+            if($request->condition == 'inner'){
+                Cart::update($request->uid, array(
+                    'quantity' => array(
+                        'relative' => false,
+                        'value' => $request->value
+                    )));
+            }else{
+                $i = Cart::update($request->uid, array(
+                    'quantity' => $qty
+                ));
+            }
+
+
 
             $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
@@ -210,15 +223,24 @@ class ShoppingCartController extends Controller
             }
 
         }else{
-            Cart::update($request->uid, array(
-                'quantity' => $qty
-            ));
+            if($request->condition == 'inner'){
+                Cart::update($request->uid, array(
+                    'quantity' => array(
+                        'relative' => false,
+                        'value' => $request->value
+                    )));
+            }else{
+                $i = Cart::update($request->uid, array(
+                    'quantity' => $qty
+                ));
+            }
         }
 
         $items = $this->cartService->getCartItems();
         $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
+        $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false,'html' => $html,'headerHtml' => $headerhtml]);
     }
 
     public function postRemoveFromCart (Request $request)
@@ -255,8 +277,9 @@ class ShoppingCartController extends Controller
 
         $items = $this->cartService->getCartItems();
         $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
+        $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 
-        return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount()]);
+        return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount(),'headerHtml' => $headerhtml]);
     }
 
     public function postChangeShippingMethod(Request $request)

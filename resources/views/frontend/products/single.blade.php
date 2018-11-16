@@ -346,6 +346,7 @@
                             if (!data.error) {
                                 alert('added')
                                 $(".cart-count").html(data.count)
+                                $('#cartSidebar').html(data.headerHtml)
                             } else {
                                 alert('error')
                             }
