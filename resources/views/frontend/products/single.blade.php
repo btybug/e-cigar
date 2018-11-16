@@ -341,11 +341,11 @@
                         },
                         success: function (data) {
                             if (!data.error) {
-                                alert('added')
                                 $(".cart-count").html(data.count)
                                 $('#cartSidebar').html(data.headerHtml)
+                                $("#headerShopCartBtn").trigger('click');
                             } else {
-                                alert('error')
+
                             }
                         }
                     });
