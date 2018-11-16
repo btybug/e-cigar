@@ -1,5 +1,8 @@
 @extends('layouts.frontend')
 @section('content')
+    <main class="page-main-content">
+        <div class="d-flex h-100">
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -239,7 +242,8 @@
             </div>
 
 
-
+        </div>
+    </main>
 
 
     <div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog"
@@ -259,6 +263,7 @@
             </div>
         </div>
     </div>
+
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>

@@ -34,11 +34,7 @@
 </head>
 <body>
 @include('frontend._partials.header')
-<main class="page-main-content">
-    <div class="d-flex h-100">
 @yield('content')
-    </div>
-</main>
 <div class="modal fade modal-request" id="msgModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
