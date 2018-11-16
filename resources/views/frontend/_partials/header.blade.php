@@ -16,7 +16,7 @@
                     <a class="nav-link text-uppercase" href="{!! url('/') !!}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase" href="{!! route('products') !!}">Product</a>
+                    <a class="nav-link text-uppercase" href="{!! route('categories_front') !!}">Product</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-uppercase" href="{!! route('product_sales') !!}">Sales</a>

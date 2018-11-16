@@ -6,7 +6,7 @@
                 @foreach($categories as $category)
                 <div class="col-sm-4">
                     <div class="product-single vape-product d-flex flex-column text-center">
-                        <h2 class="title"><a style="text-decoration: none;color: black;" href="{!! route('product_type',$category->slug) !!}" class="item-link">{{ $category->name }}</a></h2>
+                        <h2 class="title"><a style="text-decoration: none;color: black;" href="{!! route('categories_types',$category->slug) !!}" class="item-link">{{ $category->name }}</a></h2>
                         <div class="images">
                             @if($category->image)
                                 <img src="{!! $category->image !!}" alt="{{ $category->name }}">
@@ -18,7 +18,7 @@
                         <ul class="info list-unstyled">
                             @foreach($category->children as $child)
                             <li>
-                                <a href="{!! route('product_type',[$category->slug,$child->slug]) !!}" class="item-link">
+                                <a href="{!! route('categories_types',[$category->slug,$child->slug]) !!}" class="item-link">
                                     {{ $child->name }}
                                 </a>
                             </li>

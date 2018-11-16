@@ -39,7 +39,7 @@ class ProductsController extends Controller
         return $this->view('product_types',compact('attributes','categories','category','type'));
     }
 
-    public function getSingle($type,$category_slug,$id)
+    public function getSingle($type,$id)
     {
         $vape=Stock::with(['variations','stockAttrs'])->findOrFail($id);
         $variations = $vape->variations()->with('options')->get();

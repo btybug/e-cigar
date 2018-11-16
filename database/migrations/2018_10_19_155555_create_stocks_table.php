@@ -19,6 +19,7 @@ class CreateStocksTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->string('type')->nullable();
             $table->string('sku',30)->unique();
+            $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->text('other_images')->nullable();
             $table->text('videos')->nullable();
