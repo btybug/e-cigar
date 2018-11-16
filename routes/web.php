@@ -103,6 +103,7 @@ Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@success')
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
     Route::post('/', 'Frontend\UserController@saveMyAccount')->name('my_account_save_data');
+    Route::post('/changePassword', 'Frontend\UserController@changePassword')->name('my_account_change_password');
     Route::get('/logs', 'Frontend\UserController@getLogs')->name('my_account_logs');
     Route::get('/password', 'Frontend\UserController@getPassword')->name('my_account_password');
     Route::get('/favourites', 'Frontend\UserController@getFavourites')->name('my_account_favourites');

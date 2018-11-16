@@ -3,15 +3,15 @@
     <main class="page-main-content">
         <div class="d-flex h-100">
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @include('frontend._partials.left_bar')
 
             <div class="main-right-wrapp">
@@ -24,10 +24,12 @@
                         </li>
                         <li>
                             <a class="btn btn-info nav-link nav-link--new-address" id="shippingAddress-tab"
-                               data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress">Shipping Address</a>
+                               data-toggle="tab" href="#shippingAddress" role="tab" aria-controls="shippingAddress">Shipping
+                                Address</a>
                         </li>
                         <li>
-                            <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab" data-toggle="tab"
+                            <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab"
+                               data-toggle="tab"
                                href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>
                         </li>
                     </ul>
@@ -199,7 +201,8 @@
                             </div>
                             {!! Form::close() !!}
                         </div>
-                        <div class="tab-pane fade p-4" id="addressBook" role="tabpanel" aria-labelledby="addressBook-tab">
+                        <div class="tab-pane fade p-4" id="addressBook" role="tabpanel"
+                             aria-labelledby="addressBook-tab">
                             <div class="panel panel-default">
 
                                 <div class="panel-body">
@@ -217,7 +220,8 @@
                                                 {!! Form::select('address_book',$address,null,['class' => 'form-control select-address']) !!}
                                                 <!-- Button trigger modal -->
                                                     <button type="button"
-                                                            class="nav-link nav-link--new-address btn btn-info address-book-new">+ Add New
+                                                            class="nav-link nav-link--new-address btn btn-info address-book-new">
+                                                        + Add New
                                                     </button>
                                                 </div>
                                             </div>
@@ -226,7 +230,8 @@
 
                                                 </div>
                                                 <button type="submit" class="btn btn-primary edit-address">Edit</button>
-                                                <button type="button" class="btn btn-danger edit-address">Delete</button>
+                                                <button type="button" class="btn btn-danger edit-address">Delete
+                                                </button>
                                             </div>
 
                                         </div>
@@ -274,39 +279,45 @@
 
     <script>
         $(document).ready(function () {
-            $("body").on('click','.save-address-book',function () {
+            $("body").on('click', '.save-address-book', function () {
                 var form = $(".address-book-form").serialize();
                 AjaxCall(
                     "/my-account/save-address-book",
                     form,
-                    res => {
-                        if (!res.error) {
-                            window.location.reload();
-                        }
-                    },
-                    error => {
-                        if(error.status == 422) {
-                            $('.errors').html('');
-                            for (var err in error.responseJSON.errors) {
-                                $('.errors').append(error.responseJSON.errors[err] + '<br>');
-                            }
+                    res = > {
+                    if (
+                !res.error
+                )
+                {
+                    window.location.reload();
+                }
+            },
+                error =
+                >
+                {
+                    if (error.status == 422) {
+                        $('.errors').html('');
+                        for (var err in error.responseJSON.errors) {
+                            $('.errors').append(error.responseJSON.errors[err] + '<br>');
                         }
                     }
-                );
+                }
+                )
+                ;
             })
 
             $("#country").select2();
             $("#geo_country").select2();
-            function getRegionsPackage(){
+            function getRegionsPackage() {
                 let value = $("#country").val();
                 AjaxCall(
                     "/get-regions-by-country",
-                    { country: value},
-                    res => {
+                    {country: value},
+                    res = > {
                     let select = document.getElementById('regions');
                 select.innerText = null;
                 if (!res.error) {
-                    $.each(res.data,function (index,value) {
+                    $.each(res.data, function (index, value) {
                         var opt = document.createElement('option');
                         opt.value = res.data[value];
                         opt.innerHTML = res.data[value];
@@ -315,104 +326,120 @@
 
                 }
             }
-            );
+            )
+                ;
             }
 
-            $("body").on('click','.address-book-new',function () {
+            $("body").on('click', '.address-book-new', function () {
                 AjaxCall(
                     "/my-account/address-book-form",
-                    { },
-                    res => {
-                        if (!res.error) {
-                            $(".address-form").html(res.html);
-                            $("#geo_country_book").select2();
-                            $("#newAddressModal").modal();
-                        }
-                    }
-                );
+                    {},
+                    res = > {
+                    if (
+                !res.error
+                )
+                {
+                    $(".address-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    $("#newAddressModal").modal();
+                }
+            }
+                )
+                ;
             });
 
-            $("body").on('click','.edit-address',function () {
+            $("body").on('click', '.edit-address', function () {
                 var id = $(".select-address").val();
                 AjaxCall(
                     "/my-account/address-book-form",
-                    { id: id},
-                    res => {
-                        if (!res.error) {
-                            $(".address-form").html(res.html);
-                            $("#geo_country_book").select2();
-                            $("#newAddressModal").modal();
-                        }
-                    }
-                );
+                    {id: id},
+                    res = > {
+                    if (
+                !res.error
+                )
+                {
+                    $(".address-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    $("#newAddressModal").modal();
+                }
+            }
+                )
+                ;
             });
 
-            function getRegions(){
+            function getRegions() {
                 let value = $("#geo_country").val();
                 AjaxCall(
-                        "/get-regions-by-geozone",
-                        { country: value},
-                        res => {
-                            let select = document.getElementById('geo_region');
-                        select.innerText = null;
-                        if (!res.error) {
-                            var opt = document.createElement('option');
-                            $.each(res.data,function (k,v) {
-                                var option=$(opt).clone();
-                                option.val(k) ;
-                                option.text(v);
-                                $(select).append(option);
-                            });
+                    "/get-regions-by-geozone",
+                    {country: value},
+                    res = > {
+                    let select = document.getElementById('geo_region');
+                select.innerText = null;
+                if (!res.error) {
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
 
-                        }
-                    }
-                );
+                }
+            }
+            )
+                ;
             }
 
-            function renderAddressBook(){
+            function renderAddressBook() {
                 let value = $(".select-address").val();
                 AjaxCall(
-                        "/my-account/select-address-book",
-                        { id: value},
-                        res => {
-                        if (!res.error) {
-                            $(".render-address").html(res.html);
-                        }
-                    }
-                );
+                    "/my-account/select-address-book",
+                    {id: value},
+                    res = > {
+                    if (
+                !res.error
+            )
+                {
+                    $(".render-address").html(res.html);
+                }
             }
+            )
+                ;
+            }
+
             renderAddressBook();
-            $("body").on("change", ".select-address", function() {
+            $("body").on("change", ".select-address", function () {
                 renderAddressBook();
             });
 
-            $("body").on("change", "#country", function() {
+            $("body").on("change", "#country", function () {
                 getRegionsPackage();
             });
 
-            $("body").on("change", "#geo_country", function() {
+            $("body").on("change", "#geo_country", function () {
                 getRegions();
             });
 
-            $("body").on("change", "#geo_country_book", function() {
+            $("body").on("change", "#geo_country_book", function () {
                 var value = $(this).val();
                 AjaxCall(
                     "/get-regions-by-geozone",
-                    { country: value},
-                    res => {
-                        let select = document.getElementById('geo_region_book');
-                        select.innerText = null;
-                        if (!res.error) {
-                            var opt = document.createElement('option');
-                            $.each(res.data,function (k,v) {
-                                var option=$(opt).clone();
-                                option.val(k) ;
-                                option.text(v);
-                                $(select).append(option);
-                            });
-                        }
-                    }
-                );
+                    {country: value},
+                    res = > {
+                    let select = document.getElementById('geo_region_book');
+                select.innerText = null;
+                if (!res.error) {
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
+                }
+            }
+                )
+                ;
             });
         })
     </script>
