@@ -60,7 +60,8 @@ class UserController extends Controller
 
     public function getFavourites()
     {
-        return $this->view('favourites');
+        $user=\Auth::user();
+        return $this->view('favourites',compact('user'));
     }
 
     public function getAddress()
@@ -75,7 +76,7 @@ class UserController extends Controller
                 ->select('zone_countries.*','zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        return $this->view('address',compact('billing_address','default_shipping','address','countries','countriesShipping'));
+        return $this->view('address',compact('billing_address','default_shipping','address','user','countries','countriesShipping'));
     }
 
     public function postAddress(AddressesRequest $request)

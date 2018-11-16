@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <main class="page-main-content">
-        <div class="d-flex h-100">
+    @include('frontend._partials.left_bar')
             <div id="profileSidebar" class="profile-aside profile-page-profile-aside d-flex flex-column">
                 <div class="profile-aside-dtls">
                     <div class="profile-aside-img-holder">
@@ -182,8 +181,6 @@
 
                 </div>
             </div>
-        </div>
-    </main>
 
 
 @stop
