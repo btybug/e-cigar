@@ -134,7 +134,7 @@
                         </div>
                         <div class="tab-pane h-100 fade technical_tabs_product " id="v-pills-technical" role="tabpanel"
                              aria-labelledby="v-pills-technical-tab">
-                            <div class="row">
+                            <div>
                                 <table class="table-responsive table-bordered">
                                     <thead>
                                     <tr>
