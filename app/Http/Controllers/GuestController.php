@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Faq;
 use App\Models\GeoZones;
 use App\Models\ZoneCountries;
 use Illuminate\Http\Request;
@@ -32,7 +34,22 @@ class GuestController extends Controller
 
     public function getFaq()
     {
-        return $this->view('faq');
+        $categories = Category::where('type','faq')->whereNull('parent_id')->get();
+        $category = $categories->first();
+
+        return $this->view('faq',compact(['categories','category']));
+    }
+
+    public function getFaqByCategory(Request $request)
+    {
+        $category = Category::where('type','faq')->where('id',$request->uid)->first();
+        if($category){
+            $html = $this->view('_partials.faq_questions',compact(['category']))->render();
+
+            return \Response::json(['error' => false,'html' => $html]);
+        }
+
+        return \Response::json(['error' => true]);
     }
 
     public function getKnowledgeBase()

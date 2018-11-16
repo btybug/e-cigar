@@ -462,6 +462,35 @@ function replyRender($replies, $i = 0, $parent = false)
 }
 
 
+function renderCategory($replies, $i = 0, $parent = false)
+{
+    if (count($replies)) {
+        $reply = $replies[$i];
+        //render main content
+        if ($parent) {
+            echo '<ul class="sub-list">';
+        } else {
+            echo '<ul class="list-unstyled list-category">';
+        }
+        $active = ($i == 0 && $parent == false) ? "active" : "";
+        echo '<li><a href="javasript:void(0);" data-uid="'.$reply->id.'" class="btn btn-primary cat-link select-faq-category '.$active.'">'.$reply->name.'</a>';
+
+        if (count($reply->children)) {
+            renderCategory($reply->children, 0, true);
+        }
+        echo '</li>';
+
+
+
+        $i = $i + 1;
+        if ($i != count($replies)) {
+            renderCategory($replies, $i, $parent);
+        }
+        echo '</ul>';
+    }
+}
+
+
 function time_ago($datetime, $full = false)
 {
     $now = new DateTime;
