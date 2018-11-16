@@ -34,7 +34,7 @@ class GuestController extends Controller
 
     public function getFaq()
     {
-        $categories = Category::where('type','faq')->whereNull('parent_id')->get();
+        $categories = Category::with('faqs')->where('type','faq')->whereNull('parent_id')->get();
         $category = $categories->first();
 
         return $this->view('faq',compact(['categories','category']));
@@ -42,11 +42,11 @@ class GuestController extends Controller
 
     public function getFaqByCategory(Request $request)
     {
-        $category = Category::where('type','faq')->where('id',$request->uid)->first();
+        $category = Category::with('faqs')->where('type','faq')->where('id',$request->uid)->first();
         if($category){
             $html = $this->view('_partials.faq_questions',compact(['category']))->render();
 
-            return \Response::json(['error' => false,'html' => $html]);
+            return \Response::json(['error' => false,'html' => $html,'count' => $category->faqs->count()]);
         }
 
         return \Response::json(['error' => true]);

@@ -33,7 +33,7 @@
                 <div class="col-md-3">
                     <div class="buttons">
                         <h4>General Questions
-                            <small class="text-muted">(4)</small>
+                            <small class="text-muted">({{$categories->count()}})</small>
                         </h4>
                         <p>All you need to know about Intense design studio and how to get Support.</p>
                         {!! renderCategory($categories) !!}
@@ -43,7 +43,7 @@
                     <div class="accord">
                         <div class="offset-top-66 offset-lg-top-0">
                             <h3>Other Questions
-                                <small class="text-muted">(7)</small>
+                                <small class="text-muted question-count">({{ $category->faqs->count() }})</small>
                             </h3>
                             <p>The answers on most common questions are described bellow.</p>
                             <div class="mt-5">
@@ -82,6 +82,7 @@
                     success: function (data) {
                         if (!data.error) {
                             $("#accordion-2").html(data.html);
+                            $(".question-count").html("("+data.count+")");
                         }
                     }
                 });
