@@ -23,6 +23,12 @@ class CreateDriveItemsTable extends Migration
                 ->index('drive_items_extension');
             $table->string('size');
             $table->integer('folder_id')->unsigned();
+
+            $table->string('seo_keywords')->nullable();
+            $table->string('seo_caption')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->string('seo_alt')->nullable();
+
             $table->timestamps();
             $table->foreign('folder_id')
                 ->references('id')

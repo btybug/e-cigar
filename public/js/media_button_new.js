@@ -21,6 +21,30 @@ const shortAjax = function(URL, obj = {}, cb) {
             console.log(error);
         });
 };
+const normAjax = function(URL, obj = {}, cb) {
+    $.ajax({
+            type: "post",
+            url: URL,
+            cache: false,
+            datatype: "json",
+            data: obj,
+            headers: {
+                "X-CSRF-TOKEN": $('input[name="_token"]').val()
+            },
+            success: function(data) {
+                if (success) {
+                    cb(data);
+                }
+                return data;
+            },
+            error: function(errorThrown) {
+                if (error) {
+                    error(errorThrown);
+                }
+                return errorThrown;
+            }
+        });
+};
 /*
 Helpers 
   **TYPES**
@@ -133,20 +157,15 @@ function App() {
                         <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
-                        
                     </div>
                     <div class="modal-body text-center">
                     <div class="modal-title">
-                        
-                    <img src="${
-                        data.url
-                    }" data-slideshow="typeext" style="width:100%">
+                    <img src="${data.url}" data-slideshow="typeext" style="width:100%">
                     <div style="display: flex; justify-content: space-between;">
                     <button href="#" type="button" role="button" ${
                         countId === 0 ? "disabled" : ""
-                    } data-id="${countId -
-                1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
-                    
+                    } data-id="${countId - 1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
+                   
                     <span data-slideshow="title">${data.real_name}</span> 
                     <button class="popuparrow go-next-image" href="#" type="button" role="button" ${
                         countId ===
@@ -247,6 +266,7 @@ function App() {
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="fa fa-bars text-primary"></i> Seo Detail</h4>
                             <div class="table-responsive">
+                            <form>
                                 <table class="table tableborder0">
     
                                     <tr>
@@ -260,26 +280,26 @@ function App() {
                                     <tr>
                                         <th width="23%">Keywords</th>
                                         <td>
-                                            <input type="text" data-slideshow="keywords" class="form-control" >
+                                            <input type="text" data-slideshow="keywords" name="seo_keywords" class="form-control" value="${data.seo_keywords}">
                                         </td>
                                     </tr>
     
                                     <tr>
                                         <th width="23%">Caption</th>
                                         <td>
-                                            <input type="text" data-slideshow="caption" class="form-control" >
+                                            <input type="text" data-slideshow="caption" name="seo_caption" class="form-control" value="${data.seo_caption}" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th width="23%">Description</th>
-                                        <td><textarea name="description" data-slideshow="description" class="form-control"></textarea>
+                                        <td><textarea name="seo_description" data-slideshow="description" class="form-control">${data.seo_description}</textarea>
     
                                         </td>
                                     </tr>
                                     <tr>
                                         <th width="23%">Alt Text</th>
                                         <td>
-                                            <input type="text" data-slideshow="alt_text" class="form-control" >
+                                            <input type="text" data-slideshow="alt_text" class="form-control" name="seo_alt" value="${data.seo_alt}">
                                         </td>
                                     </tr>
     
@@ -288,10 +308,12 @@ function App() {
                                         <th></th>
                                         <td>
     
-                                            <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="saveSeo">Save Detail</button>
+                                            <button type="button" class="btn btn-default p-l-5 p-r-5" bb-media-click="save_seo" data-action="saveSeo">Save Detail</button>
                                         </td>
                                     </tr>
                                 </table>
+                                <input type="hidden" name='item_id'  value="${data.id}">
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -582,6 +604,12 @@ function App() {
                     self.requests.drawingItems();
                 }
             });
+        }, saveSeo(obj = {}, cb) {
+            normAjax("/api/api-media/save-seo", obj, res => {
+                if (!res.error) {
+                    cb();
+                }
+            });
         },
         editImageName(obj = {}, cb) {
             shortAjax("/api/api-media/rename-item", obj, res => {
@@ -641,6 +669,12 @@ function App() {
         this.getInitailData();
     };
     this.events = {
+
+        save_seo(elm, e) {
+            e.stopPropagation();
+            e.preventDefault();
+            self.requests.saveSeo($(elm).closest('form').serializeArray());
+        },
         remove_tree_folder(elm, e) {
             e.stopPropagation();
             e.preventDefault();
@@ -724,14 +758,13 @@ function App() {
         },
         modal_load_image(elm, e) {
             if (!e.target.closest("button").disabled) {
+                console.log(123)
                 let id = e.target.closest("button").getAttribute("data-id");
                 let imageId = document
                     .querySelector(`[data-image="${id}"] [data-id]`)
                     .getAttribute("data-id");
                 self.requests.getImageDetails({ item_id: imageId }, res => {
-                    document
-                        .querySelectorAll(".adminmodal ")
-                        .forEach(item => item.remove());
+                    document.querySelectorAll(".adminmodal ").forEach(item => item.remove());
                     document.body.innerHTML += self.htmlMaker.fullInfoModal(
                         res,
                         Number(id)

@@ -225,4 +225,20 @@ class MediaItemsApiController extends Controller
         
 
     }
+
+    public function getSaveSeo(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'item_id' => 'required|exists:drive_items,id'
+        ]);
+        if ($validator->fails()) {
+            return \Response::json(['error' => true, 'message' => $validator->messages()]);
+        }
+        $item = Items::find($request->item_id);
+        if ($item) {
+            $item->update($request->except('item_id'));
+            return \Response::json(['error' => false, 'data' => $item]);
+        }
+        return \Response::json(['error' => true, 'message' => 'Could not send data.']);
+    }
 }
