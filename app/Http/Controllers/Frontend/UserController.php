@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Events\Tickets;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Frontend\Requests\MyAccountRequest;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
@@ -64,6 +65,13 @@ class UserController extends Controller
         return $this->view('favourites',compact('user'));
     }
 
+    public function saveMyAccount(MyAccountRequest $request)
+    {
+        $data=$request->except('_token');
+        $user=\Auth::user();
+        $user->update($data);
+        return redirect()->back();
+}
     public function getAddress()
     {
         $user=\Auth::user();
