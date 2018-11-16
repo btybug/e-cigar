@@ -63,7 +63,7 @@
             </div>
             <div class="main-right-wrapp kaliony-page d-flex flex-wrap">
                 <div class="col-xl-7 col-lg-6 p-0">
-                    <div class="tab-content h-100" id="v-pills-tabContent">
+                    <div class="tab-content h-100 single-product-main-cnt-left has-srollbar-customized" id="v-pills-tabContent">
                         <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
                              aria-labelledby="v-pills-product-tab">
                             <div class="main-content product-tab-main-content h-100">
@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane h-100 fade technical_tabs_product" id="v-pills-technical" role="tabpanel"
+                        <div class="tab-pane h-100 fade technical_tabs_product " id="v-pills-technical" role="tabpanel"
                              aria-labelledby="v-pills-technical-tab">
                             <div class="row">
                                 <table class="table-responsive table-bordered">

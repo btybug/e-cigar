@@ -435,7 +435,13 @@ a:hover {
     width: 55px;
 }
 
-.select-no-arrows {
+.number-input-no-arrows::-webkit-inner-spin-button,
+.number-input-no-arrows::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.number-input-no-arrows {
     -webkit-appearance: none;
     margin: 0;
 }
@@ -500,22 +506,27 @@ a:hover {
 }
 
 .main-left-tabs .nav::-webkit-scrollbar,
-.user-aside-menu::-webkit-scrollbar {
+.user-aside-menu::-webkit-scrollbar,
+.has-srollbar-customized::-webkit-scrollbar {
     width: 10px;
 }
 
 .main-left-tabs .nav::-webkit-scrollbar-track,
-.user-aside-menu::-webkit-scrollbar-track {
+.user-aside-menu::-webkit-scrollbar-track,
+.has-srollbar-customized::-webkit-scrollbar {
+
     background: #f1f1f1;
 }
 
 .main-left-tabs .nav::-webkit-scrollbar-thumb,
-.user-aside-menu::-webkit-scrollbar-thumb {
+.user-aside-menu::-webkit-scrollbar-thumb,
+.has-srollbar-customized::-webkit-scrollbar-thumb {
     background: #888;
 }
 
 .main-left-tabs .nav::-webkit-scrollbar-thumb:hover,
-.user-aside-menu::-webkit-scrollbar-thumb:hover {
+.user-aside-menu::-webkit-scrollbar-thumb:hover,
+.has-srollbar-customized::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
@@ -889,6 +900,11 @@ a:hover {
     height: 100%;
 }
 
+.single-product-main-cnt-left {
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 @media screen and (max-width: 768px) {
     .product-page .product-single {
         max-width: 80%;
@@ -1023,7 +1039,6 @@ a:hover {
 .product-content-left-col-inner {
     padding: 30px 42px 0 36px;
     height: 100%;
-    overflow: auto;
 }
 
 .product-tab-main-content-desc {
@@ -1077,7 +1092,7 @@ a:hover {
 }
 
 .product-form-groups {
-    margin-bottom: 140px;
+    margin-bottom: 72px;
 }
 
 .product-tab-main-content-info {
