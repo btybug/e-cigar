@@ -36,10 +36,29 @@
                             <small class="text-muted">(4)</small>
                         </h4>
                         <p>All you need to know about Intense design studio and how to get Support.</p>
-                        <button type="button" class="btn btn-primary"> WHAT DOES ...</button>
-                        <button type="button" class="btn btn-primary"> WHAT DOES ...</button>
-                        <button type="button" class="btn btn-primary"> WHAT DOES ...</button>
-                        <button type="button" class="btn btn-primary"> WHAT DOES ...</button>
+                        <ul class="list-unstyled list-category">
+                            <li>
+                                <a href="javasript:void(0);" class="btn btn-primary cat-link">WHAT DOES ...</a>
+                            </li>
+                            <li>
+                                <ul class="sub-list">
+                                    <li>
+                                        <a href="javasript:void(0);" class="btn btn-primary cat-link">Sub ...</a>
+                                        <ul class="sub-list">
+                                            <li>
+                                                <a href="javasript:void(0);" class="btn btn-primary cat-link">Sub ...</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="javasript:void(0);" class="btn btn-primary cat-link">WHAT DOES ...</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javasript:void(0);" class="btn btn-primary cat-link">WHAT DOES ...</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-md-9">
