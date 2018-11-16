@@ -233,11 +233,8 @@
                                 <div class="form-group d-md-flex align-items-center">
                                     <label for="productQty"
                                            class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
-                                    <select class="product-qty-select mr-3" id="productQty">
-                                        <option>1</option>
-                                        <option selected>2</option>
-                                        <option>3</option>
-                                    </select>
+                                    {!! Form::number('',1,['class' => 'product-qty-select mr-3','min' => '1','style'=> 'width: 85px;']) !!}
+
                                     <button class="btn btn-add-to-cart rounded-0 fnz-20 add-to-cart">
                                                     <span class="icon">
                                                         <svg width="24px" height="31px">
