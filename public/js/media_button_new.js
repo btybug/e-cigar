@@ -46,7 +46,7 @@ const normAjax = function(URL, obj = {}, cb) {
         });
 };
 /*
-Helpers 
+Helpers
   **TYPES**
   data-type="main-container" || Main container,  for applying all content
   **EVNTS**
