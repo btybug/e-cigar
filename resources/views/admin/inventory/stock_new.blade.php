@@ -101,6 +101,16 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="product_id" class="control-label col-sm-4">Product
+                                                            Slug (for url)</label>
+                                                        <div class="col-sm-8">
+                                                            {!! Form::text('slug', null,
+                                                            ['class' => 'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="product_id" class="control-label col-sm-4">Product
                                                             Type</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::select('type',['' => 'Select type'] + $categories->pluck('name','slug')->all(), null,

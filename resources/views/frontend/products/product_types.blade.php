@@ -105,7 +105,7 @@
                                                                             @endif
                                                                         </div>
                                                                         <div class="name text-center">
-                                                                            <a href="{{ route('product_single',[$type,$product->id]) }}">{{ $product->name }}</a>
+                                                                            <a href="{{ route('product_single',[$type,$product->slug]) }}">{{ $product->name }}</a>
                                                                         </div>
                                                                     </a>
                                                                 </div>

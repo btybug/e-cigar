@@ -55,7 +55,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/add-to-favorites', 'Frontend\ProductsController@attachFavorite')->name('product_add_to_favorites');
     Route::post('/remove-from-favorites', 'Frontend\ProductsController@detachFavorite')->name('product_remove_from_favorites');
     Route::group(['prefix' => '{type}'], function () {
-            Route::get('/{id}', 'Frontend\ProductsController@getSingle')->name('product_single');
+            Route::get('/{slug}', 'Frontend\ProductsController@getSingle')->name('product_single');
     });
 });
 

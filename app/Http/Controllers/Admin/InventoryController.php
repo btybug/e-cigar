@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductsRequest;
 use App\Models\Attributes;
 use App\Models\Category;
 use App\Models\Statuses;
@@ -54,7 +55,7 @@ class InventoryController extends Controller
         return $this->view('stock_new', compact(['model', 'attrs','data','checkedCategories','categories']));
     }
 
-    public function postStock(Request $request)
+    public function postStock(ProductsRequest $request)
     {
         $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations','variation_options','categories','general','related_products','stickers');
         $data['user_id'] = \Auth::id();
