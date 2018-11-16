@@ -6,10 +6,14 @@
             <div class="main-left-tabs d-flex flex-column kaliony-menu">
                 <div class="nav flex-column justify-content-center nav-pills" id="v-pills-tab" role="tablist"
                      aria-orientation="vertical">
-                    <a class="nav-link active d-flex flex-column align-items-center" id="v-pills-product-tab"
+                    <a class="nav-link active d-flex flex-column align-items-center text-center" id="v-pills-product-tab"
                        data-toggle="pill"
                        href="#v-pills-product" role="tab" aria-controls="v-pills-hit" aria-selected="true">
                         <span class="name">Kaliony</span></a>
+                    <a class="nav-link d-flex flex-column align-items-center text-center" id="v-pills-product-tab"
+                       data-toggle="pill"
+                       href="#v-pills-sales" role="tab" aria-controls="v-pills-sales" aria-selected="true">
+                        <span class="name">Hot Sales</span></a>
                 </div>
 
                 <div class="user-status mt-auto">
@@ -47,8 +51,15 @@
                             </div>
 
                         </div>
+                    <div class="tab-pane h-100 fade" id="v-pills-sales" role="tabpanel"
+                         aria-labelledby="v-pills-product-tab">
+                        Here Come Our Hot Sales
 
                     </div>
+
+
+
+                </div>
             </div>
 
         </div>
