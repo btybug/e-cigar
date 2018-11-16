@@ -30,7 +30,7 @@
             </div>
 
             <div class="main-right-wrapp d-flex flex-wrap">
-                <div class="tab-content h-100 single-product-main-cnt-left has-srollbar-customized" id="v-pills-tabContent">
+                <div class="tab-content h-100 w-100" id="v-pills-tabContent">
                         <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
                              aria-labelledby="v-pills-product-tab">
                             <div class="sliders">
@@ -53,7 +53,42 @@
                         </div>
                     <div class="tab-pane h-100 fade" id="v-pills-sales" role="tabpanel"
                          aria-labelledby="v-pills-product-tab">
-                        Here Come Our Hot Sales
+                        <div class="container p-4">
+                            <h2 class="mb-5 text-center">Here are our Hot Sales Products</h2>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card text-center">
+                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <a href="#" class="btn bg-cl-red text-white">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card text-center">
+                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <a href="#" class="btn bg-cl-red text-white">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card text-center">
+                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Product title</h5>
+                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <a href="#" class="btn bg-cl-red text-white">Checkout</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                     </div>
 
