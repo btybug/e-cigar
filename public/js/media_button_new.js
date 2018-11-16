@@ -726,7 +726,7 @@ function App() {
                 true
             );
         },
-        open_full_modal(elm, e) {
+        open_full_modal(elm, e) {5
             e.stopPropagation();
             e.preventDefault();
             let id = e.target.closest(".file").getAttribute("data-id");
@@ -741,6 +741,7 @@ function App() {
             });
         },
         select_item(elm, e) {
+
             let id = e.target.closest(".file").getAttribute("data-id");
             if (e.type === "dblclick") {
                 e.target.closest(".file-box").classList.remove("active");
@@ -748,10 +749,12 @@ function App() {
                     .closest(".file-box")
                     .getAttribute("data-image");
                 self.requests.getImageDetails({ item_id: id }, res => {
-                    document.body.innerHTML += self.htmlMaker.fullInfoModal(
+                    var html=self.htmlMaker.fullInfoModal(
                         res,
                         Number(countId)
                     );
+
+                  return $('body').append(html);
                 });
             } else if (e.type === "click") {
                 e.target.closest(".file-box").classList.toggle("active");
@@ -857,23 +860,23 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 
 // $("body").on("keydown");
 
-document.addEventListener("keydown", function(e) {
-    e.preventDefault();
-    if (document.querySelector("#imageload")) {
-        if (e.which === 39) {
-            let elm = document.querySelector(".go-next-image");
-            if (!elm.disabled) {
-                elm.click();
-            }
-        } else if (e.which === 37) {
-            let elm = document.querySelector(".go-prev-image");
-            if (!elm.disabled) {
-                elm.click();
-            }
-        } else if (e.which === 27) {
-            document
-                .querySelectorAll(".adminmodal ")
-                .forEach(item => item.remove());
-        }
-    }
-});
+// document.addEventListener("keydown", function(e) {
+//     e.preventDefault();
+//     if (document.querySelector("#imageload")) {
+//         if (e.which === 39) {
+//             let elm = document.querySelector(".go-next-image");
+//             if (!elm.disabled) {
+//                 elm.click();
+//             }
+//         } else if (e.which === 37) {
+//             let elm = document.querySelector(".go-prev-image");
+//             if (!elm.disabled) {
+//                 elm.click();
+//             }
+//         } else if (e.which === 27) {
+//             document
+//                 .querySelectorAll(".adminmodal ")
+//                 .forEach(item => item.remove());
+//         }
+//     }
+// });

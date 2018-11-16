@@ -18,7 +18,7 @@
                                     Upload Files
                                 </button>
                                 <div class="hr-line-dashed">
-                                
+
 
                                 </div>
 
@@ -75,10 +75,10 @@
                         </div>
                         <div class="row m-0 {!! $settings['rightcontainer']??null !!} media_right_content">
                             <div class="col-xs-12 mb-20">
-                            
+
                                 <div class="bread-crumbs d-flex" style="justify-content: space-between;">
                                     <ul class="bread-crumbs-list breadcrumb" style="margin: 0">
-                                    
+
                                     </ul>
                                     <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up" aria-hidden="true"></i></button>
                                 </div>
@@ -171,7 +171,7 @@
 
         </div>
     </div>
-   
+
 
     {!! Form::hidden(null,'drive',['data-type'=>'folder']) !!}
 @stop
