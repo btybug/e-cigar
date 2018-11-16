@@ -570,4 +570,8 @@ function mergeCollections($collection1, $collection2)
     $data = $collection->sortByDesc('created_at');
     return $data->merge([]);
 }
-
+function getImage($url){
+    $url=explode('/',$url);
+    $name=end($url);
+    return \App\Models\Media\Items::where('original_name',$name)->first();
+}

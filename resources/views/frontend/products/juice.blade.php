@@ -21,9 +21,9 @@
                         <h3 class="card-title text-center mb-0 p-2 text-white">{{ $category->name }}</h3>
                         <div class="img-outer card-img-outer p-4">
                             @if($category->image)
-                                <img class="card-img-top" src="{{ $category->image }}" alt="">
+                                <img class="card-img-top" src="{{ $category->image }}" alt="{!! getImage($category->image)->seo_alt !!}">
                             @else
-                                <img class="card-img-top" src="http://core.bootydev.co.uk/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
+                                <img class="card-img-top" src="/public/media/drive/3f44266c7fa59df324ec315e97e8579c.jpg" alt="">
                             @endif
 
                         </div>
@@ -76,7 +76,7 @@
                                                 <div class="shadow p-3 bg-light">
                                                     <div class="mb-3 img-outer">
                                                         @if($product->image)
-                                                            <img class="card-img-top" src="{{ $product->image }}" alt="">
+                                                            <img class="card-img-top" src="{{ $product->image }}" alt="{!! getImage($product->image)->seo_alt !!}">
                                                         @else
                                                             <img class="card-img-top" src="/public/images/no_image.jpg" alt="">
                                                         @endif

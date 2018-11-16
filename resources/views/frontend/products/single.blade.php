@@ -73,20 +73,20 @@
                                         <div class="carousel_1">
                                             @if($vape->image)
                                                 <div>
-                                                    <img src="{!! $vape->image !!}" alt="">
+                                                    <img src="{!! $vape->image !!}" alt="{!! getImage( $vape->image)->seo_alt !!}">
                                                 </div>
                                             @endif
                                             @if(count($variations))
                                                 @foreach($variations as $v)
                                                     @if($v->image)
-                                                        <div><img src="{{ $v->image }}" alt=""></div>
+                                                        <div><img src="{{ $v->image }}" alt="{!! getImage( $v->image)->seo_alt !!}"></div>
                                                     @endif
                                                 @endforeach
                                             @endif
 
                                             @if(count($vape->other_images))
                                                 @foreach($vape->other_images as $other_image)
-                                                    <div><img src="{{ $other_image }}" alt=""></div>
+                                                    <div><img src="{{ $other_image }}" alt="{!! getImage($other_image)->seo_alt !!}"></div>
                                                 @endforeach
                                             @endif
                                             @if(count($vape->videos))
@@ -105,20 +105,20 @@
                                         <div class="carousel_2" data-carousel-controller-for=".carousel_1">
                                             @if($vape->image)
                                                 <div>
-                                                    <img src="{!! $vape->image !!}" alt="">
+                                                    <img src="{!! $vape->image !!}" alt="{!! getImage($vape->image)->seo_alt !!}">
                                                 </div>
                                             @endif
                                             @if(count($variations))
                                                 @foreach($variations as $v)
                                                     @if($v->image)
-                                                        <div><img src="{{ $v->image }}" alt=""></div>
+                                                        <div><img src="{{ $v->image }}" alt="{!! getImage($v->image)->seo_alt !!}"></div>
                                                     @endif
                                                 @endforeach
                                             @endif
 
                                             @if(count($vape->other_images))
                                                 @foreach($vape->other_images as $other_image)
-                                                    <div><img src="{{ $other_image }}" alt=""></div>
+                                                    <div><img src="{{ $other_image }}" alt="{!! getImage($other_image)->seo_alt !!}"></div>
                                                 @endforeach
                                             @endif
                                             @if(count($vape->videos))
@@ -170,7 +170,7 @@
                                     <div class="col-sm-5">
                                         <div class="image">
                                             <img src="{!! $sticker->image !!}"
-                                                 alt="{!! $sticker->name !!}">
+                                                 alt="{!! getImage($sticker->image)->seo_alt !!}">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
