@@ -6,7 +6,8 @@
             <div class="main-left-tabs d-flex flex-column kaliony-menu">
                 <div class="nav flex-column justify-content-center nav-pills" id="v-pills-tab" role="tablist"
                      aria-orientation="vertical">
-                    <a class="nav-link active d-flex flex-column align-items-center text-center" id="v-pills-product-tab"
+                    <a class="nav-link active d-flex flex-column align-items-center text-center"
+                       id="v-pills-product-tab"
                        data-toggle="pill"
                        href="#v-pills-product" role="tab" aria-controls="v-pills-hit" aria-selected="true">
                         <span class="name">Kaliony</span></a>
@@ -31,26 +32,38 @@
 
             <div class="main-right-wrapp d-flex flex-wrap">
                 <div class="tab-content h-100 w-100" id="v-pills-tabContent">
-                        <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
-                             aria-labelledby="v-pills-product-tab">
-                            <div class="sliders">
-                                <div class="carousel_1">
-                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
-                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
-                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
-
-
-
+                    <div class="tab-pane h-100 fade show active" id="v-pills-product" role="tabpanel"
+                         aria-labelledby="v-pills-product-tab">
+                        <div class="sliders home-sliders">
+                            <div class="carousel_1">
+                                <div>
+                                    <div class="info p-0 m-0 slider-logo w-100">
+                                        <img src="/public/img/header-logo.png" class="header-logo-img" alt="">
+                                        <img src="/public/img/header-logo-text.png" class="header-logo-text-img" alt="">
+                                    </div>
+                                    <img src="/public/img/temp/homepage-bg.jpg" alt="">
                                 </div>
-
-                                <div class="carousel_2" data-carousel-controller-for=".carousel_1">
-                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
-                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
-                                    <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                <div>
+                                    <div class="info">
+                                        <span class="title">
+                                        THE BEST VAPE
+                                    </span>
+                                    </div>
+                                    <img src="http://resourcemagonline.com/wp-content/uploads/2015/01/smoke-photo.jpg"
+                                         alt="">
                                 </div>
+                                <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
                             </div>
 
+                            <div class="carousel_2" data-carousel-controller-for=".carousel_1">
+                                <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                                <div><img src="http://resourcemagonline.com/wp-content/uploads/2015/01/smoke-photo.jpg"
+                                          alt=""></div>
+                                <div><img src="/public/img/temp/homepage-bg.jpg" alt=""></div>
+                            </div>
                         </div>
+
+                    </div>
                     <div class="tab-pane h-100 fade" id="v-pills-sales" role="tabpanel"
                          aria-labelledby="v-pills-product-tab">
                         <div class="container p-4">
@@ -58,30 +71,36 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="card text-center">
-                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg"
+                                             alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Product title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
                                             <a href="#" class="btn bg-cl-red text-white">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card text-center">
-                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg"
+                                             alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Product title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
                                             <a href="#" class="btn bg-cl-red text-white">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card text-center">
-                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg" alt="Card image cap">
+                                        <img class="card-img-top" src="/public/img/temp/product-1.jpg"
+                                             alt="Card image cap">
                                         <div class="card-body">
                                             <h5 class="card-title">Product title</h5>
-                                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                            <p class="card-text">Some quick example text to build on the card title and
+                                                make up the bulk of the card's content.</p>
                                             <a href="#" class="btn bg-cl-red text-white">Checkout</a>
                                         </div>
                                     </div>
@@ -91,7 +110,6 @@
                         </div>
 
                     </div>
-
 
 
                 </div>
@@ -108,6 +126,44 @@
         .carousel_2 {
             position: absolute !important;
             bottom: 22px;
+        }
+        .home-sliders .fs-carousel-item{
+position: relative;
+        }
+        .home-sliders .fs-carousel-item .info{
+            position: absolute;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #0000007a;
+        }
+        .home-sliders .fs-carousel-item .info .title{
+            font-size: 70px;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: -3px 5px black;
+
+        }
+        .slider-logo .header-logo-img{
+            width: 210px;
+            margin-right: 15px;
+            transform-style: preserve-3d;
+            animation: mymove 5s infinite;
+        }
+        .slider-logo >img{
+            width: auto;
+            height: auto;
+        }
+        @keyframes mymove {
+            0%{
+                transform: rotate3d(0,180, 0,0deg);
+            }
+            100%{
+                transform: rotate3d(0,180, 0,360deg);
+            }
         }
     </style>
 @stop
@@ -127,7 +183,7 @@
         $(".carousel_2").carousel({
             controls: false,
             pagination: false,
-            autoAdvance:true,
+            autoAdvance: true,
             show: {
                 "0px": 1,
                 "500px": 2,
