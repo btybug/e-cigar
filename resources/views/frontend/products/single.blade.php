@@ -191,7 +191,7 @@
                     </div>
                 </div>
                 <div class="col-xl-5 col-lg-6 p-0">
-                    <div class="product-content-left-col-inner">
+                    <div class="product-content-left-col-inner d-flex flex-column">
                         <div class="d-flex w-100 product-tab-main-content-desc">
                             <div class="product-tab-main-content-title">
                                 <img class="img-fluid logo" src="/public/img/kaliony-logo.svg"
@@ -226,11 +226,11 @@
                                 {!! $vape->long_description !!}
                             </strong>
                         </p>
-                        <div class="d-flex flex-column">
+                        <div class="mt-auto">
                             <input type="hidden" value="{{ $vape->id }}" id="vpid">
                             @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                            <div class="mt-auto">
-                                <div class="form-group d-md-flex align-items-center mb-0">
+                            <div>
+                                <div class="form-group d-md-flex align-items-center">
                                     <label for="productQty"
                                            class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
                                     {!! Form::number('',1,['class' => 'product-qty-select mr-3','min' => '1','style'=> 'width: 85px;']) !!}
