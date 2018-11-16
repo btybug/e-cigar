@@ -226,11 +226,11 @@
                                 {!! $vape->long_description !!}
                             </strong>
                         </p>
-                        <div>
+                        <div class="d-flex flex-column">
                             <input type="hidden" value="{{ $vape->id }}" id="vpid">
                             @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                            <div>
-                                <div class="form-group d-md-flex align-items-center">
+                            <div class="mt-auto">
+                                <div class="form-group d-md-flex align-items-center mb-0">
                                     <label for="productQty"
                                            class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
                                     {!! Form::number('',1,['class' => 'product-qty-select mr-3','min' => '1','style'=> 'width: 85px;']) !!}

@@ -435,6 +435,11 @@ a:hover {
     width: 55px;
 }
 
+.select-no-arrows {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .cart-product-qty-title {
     font-size: 20px;
 }
