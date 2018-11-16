@@ -52,6 +52,7 @@ Helpers
   **EVNTS**
   bb-media-click="fodler" || Get current folder item if bb-media-type="folder"
 */
+
 function App() {
     var self = this;
     var globalFolderId = 1;
