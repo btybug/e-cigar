@@ -358,6 +358,7 @@ a:hover {
     padding: 0 18px;
     overflow: auto;
     flex: 1;
+    min-height: 100px;
 }
 
 .user-aside-menu-link:hover {
@@ -1084,6 +1085,8 @@ a:hover {
     height: 100%;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .carousel_1 {
@@ -1100,11 +1103,6 @@ a:hover {
     object-fit: cover;
 }
 
-.carousel_2 {
-    position: absolute !important;
-    bottom: 22px;
-}
-
 .carousel_2 img {
     width: 108px;
     height: 108px;
@@ -1113,13 +1111,8 @@ a:hover {
     cursor: pointer;
 }
 
-.carousel_2 .fs-carousel-container {
-
-}
-
 .carousel_2 .fs-carousel-item {
     text-align: center;
-    opacity: .3;
 }
 
 .carousel_2 .fs-carousel-item.fs-carousel-active {

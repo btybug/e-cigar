@@ -1,15 +1,4 @@
 $(function() {
-    function heightBlock(mainDiv,element) {
-        let countElement = 0;
-        $(element).each(function(){
-            countElement += $(this).outerHeight();
-        });
-        if($(mainDiv).outerHeight()<countElement){
-            $(mainDiv).css('display','block')
-        }else{
-            $(mainDiv).css('display','flex')
-        }
-    }
     heightBlock('.main-left-tabs .nav','.main-left-tabs .nav a');
     $( window ).resize(function() {
         heightBlock('.main-left-tabs .nav','.main-left-tabs .nav a');
@@ -58,6 +47,18 @@ $(function() {
     });
 
 });
+
+function heightBlock(mainDiv,element) {
+    let countElement = 0;
+    $(element).each(function(){
+        countElement += $(this).outerHeight();
+    });
+    if($(mainDiv).outerHeight()<countElement){
+        $(mainDiv).css('display','block')
+    }else{
+        $(mainDiv).css('display','flex')
+    }
+}
 
 function openSidbar(btn, sidebar) {
     btn.on('click', function (e) {
