@@ -5,19 +5,24 @@
 
         <section class="section novi-background breadcrumb-classic">
             <div class="container section-34 section-sm-50">
-                <div class="row align-items-xl-center">
-                    <div class="col-xl-5 d-none d-xl-block text-xl-left">
-                        <h2><span class="big">Faq</span></h2>
-                    </div>
-                    <div class="col-xl-2 d-none d-md-block text-center"><span><i class="fa fa-question-circle"></i></span></div>
-                    <div class="offset-top-0 offset-md-top-10 col-xl-5 offset-xl-top-0 small text-xl-right">
-                        <ul class="list-inline list-inline-dashed p">
-                            <li class="list-inline-item"><a href="#">Home /</a></li>
-                            <li class="list-inline-item"><a href="#">Pages /</a></li>
-                            <li class="list-inline-item">Faq
-                            </li>
-                        </ul>
-                    </div>
+                <div class="d-flex flex-wrap align-items-xl-center">
+                    {{--<div class="col-xl-5 d-none d-xl-block text-xl-left">--}}
+                        {{--<h2><span class="big">Faq</span></h2>--}}
+                    {{--</div>--}}
+                    <ul class="list-inline list-inline-dashed p">
+                        <li class="list-inline-item"><a href="#">FAQ </a></li>
+                        <li class="list-inline-item"><a href="#">Contact us </a></li>
+                        </li>
+                    </ul>
+                    {{--<div class="col-xl-2 d-none d-md-block text-center"><span><i class="fa fa-question-circle"></i></span></div>--}}
+                    {{--<div class="offset-top-0 offset-md-top-10 col-xl-5 offset-xl-top-0 small text-xl-right">--}}
+                        {{--<ul class="list-inline list-inline-dashed p">--}}
+                            {{--<li class="list-inline-item"><a href="#">Home /</a></li>--}}
+                            {{--<li class="list-inline-item"><a href="#">Pages /</a></li>--}}
+                            {{--<li class="list-inline-item">Faq--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</div>--}}
                 </div>
             </div>
 
