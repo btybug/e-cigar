@@ -24,7 +24,7 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            "sku"    => 'required|exists:stock_variations,variation_id|unique:purchases,id,'.$this->id,
+            "sku"    => 'required|unique:purchases,id,'.$this->id,
             "qty"  => "required|numeric",
             "price"  => "required|numeric",
         ];

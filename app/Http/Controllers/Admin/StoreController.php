@@ -107,7 +107,6 @@ class StoreController extends Controller
     public function getPurchaseNew ()
     {
         $model = null;
-        $variations = StockVariation::pluck('variation_id','variation_id')->all();
         return $this->view('purchase.new',compact('model','variations'));
     }
 
@@ -125,7 +124,6 @@ class StoreController extends Controller
     public function EditPurchase ($id)
     {
         $model = Purchase::findOrFail($id);
-        $variations = StockVariation::pluck('variation_id','variation_id')->all();
         return $this->view('purchase.new',compact('model','variations'));
     }
 

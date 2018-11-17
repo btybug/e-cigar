@@ -12,7 +12,7 @@
                 <label class="col-sm-2 control-label" for="input-code">
                     <span data-toggle="tooltip" title="" data-original-title="">SKU</span></label>
                 <div class="col-sm-10">
-                    {!! Form::select('sku',['' => 'Select'] + $variations,null,[ 'class'=> 'form-control select-sku']) !!}
+                    {!! Form::text('sku',null,[ 'class'=> 'form-control select-sku']) !!}
                 </div>
             </div>
             <div class="form-group">
@@ -72,9 +72,6 @@
             // maxYear: parseInt(moment().format('YYYY'),10)
         });
 
-        $("body").on('change','.select-sku',function () {
-            get_product();
-        });
         get_product();
         function get_product() {
             var sku = $(".select-sku").val();
