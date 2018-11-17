@@ -96,4 +96,13 @@ class StoreController extends Controller
     }
 
 
+    public function getPurchase ()
+    {
+        return $this->view('purchase.index',compact(''));
+    }
+
+    public function getPurchaseNew ()
+    {
+        return $this->view('purchase.new',compact(''));
+    }
 }

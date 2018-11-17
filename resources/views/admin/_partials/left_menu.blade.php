@@ -73,6 +73,7 @@
                         <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
+                    <li><a href="{{route('admin_store_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>
                 </ul>
             </li>
             @endok

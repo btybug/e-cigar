@@ -109,6 +109,11 @@ Route::group(['prefix' => 'store'], function () {
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'Admin\StoreController@getSettings')->name('admin_store_settings');
     });
+
+    Route::group(['prefix' => 'purchase'], function () {
+        Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_store_purchase');
+        Route::get('/new', 'Admin\StoreController@getPurchaseNew')->name('admin_store_purchase_new');
+    });
 });
 
 
