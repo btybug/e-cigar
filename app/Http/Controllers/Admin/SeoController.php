@@ -20,6 +20,7 @@ class SeoController extends Controller
 
     public function getPosts(Settings $settings)
     {
+
         $general=$settings->getEditableData('seo_posts');
         $fb=$settings->getEditableData('seo_fb_posts');
         $twitter=$settings->getEditableData('seo_twitter_posts');
