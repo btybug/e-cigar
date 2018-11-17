@@ -17,6 +17,7 @@ use App\Models\Matches;
 use App\Models\Orders;
 use App\Models\Posts;
 use App\Models\Products;
+use App\Models\Purchase;
 use App\Models\Regions;
 use App\Models\Roles;
 use App\Models\SelectionType;
@@ -449,6 +450,23 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($faq) {
                 return "<a class='badge btn-danger' href='" . route("admin_faq_delete", $faq->id) . "'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
+            ->make(true);
+    }
+
+    public function getPurchases ()
+    {
+        return Datatables::of(Purchase::query())
+            ->editColumn('user_id', function ($faq) {
+                return $faq->user->name;
+            })->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            })->editColumn('purchase_date', function ($faq) {
+                return BBgetDateFormat($faq->purchase_date);
+            })
+            ->addColumn('actions', function ($faq) {
+                return "<a class='badge btn-danger' href='" . route("admin_store_purchase_delete", $faq->id) . "'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='" . route("admin_store_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }

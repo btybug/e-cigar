@@ -31,6 +31,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/settings/get-bulk-stock','Admin\DatatableController@getBulkStock')->name('datatable_bulk_stocks');
     Route::get('/tickets/get-all','Admin\DatatableController@getTickets')->name('datatable_tickets');
     Route::get('/faq/get-all','Admin\DatatableController@getFaq')->name('datatable_all_faq');
+    Route::get('/store/get-purchases','Admin\DatatableController@getPurchases')->name('datatable_all_purchases');
 });
 
 
