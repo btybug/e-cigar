@@ -7,7 +7,6 @@
         <h3>Purchase Form</h3>
         <div class="col-md-8">
             {!! Form::model($model,['url' => route('admin_store_purchase_save'),'id' => 'form-coupon','class' => 'form-horizontal']) !!}
-            {!! Form::hidden('id',null) !!}
             <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-code">
                     <span data-toggle="tooltip" title="" data-original-title="">SKU</span></label>

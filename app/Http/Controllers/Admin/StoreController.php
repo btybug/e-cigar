@@ -107,7 +107,7 @@ class StoreController extends Controller
     public function getPurchaseNew ()
     {
         $model = null;
-        return $this->view('purchase.new',compact('model','variations'));
+        return $this->view('purchase.new',compact('model'));
     }
 
     public function postSaveOrUpdate (PurchaseRequest $request)
@@ -116,25 +116,19 @@ class StoreController extends Controller
 
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
-        Purchase::updateOrCreate(['id'=>$request->id],$data);
+        Purchase::create($data);
 
         return redirect()->route('admin_store_purchase');
     }
 
-    public function EditPurchase ($id)
+    public function EditPurchase ($sku)
     {
-        $model = Purchase::findOrFail($id);
-        return $this->view('purchase.new',compact('model','variations'));
+        $data = Purchase::where('sku',$sku)->get();
+        if(! count($data)) abort(404);
+
+        return $this->view('purchase.edit',compact('data','sku'));
     }
 
-    public function DeletePurchase($id)
-    {
-        $model = Purchase::findOrFail($id);
-
-        $model->delete();
-
-        return redirect(route('admin_store_purchase'));
-    }
 
     public function getStockBySku (Request $request)
     {
