@@ -118,27 +118,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="sku" class="control-label col-sm-4">SKU</label>
-                                                        <div class="col-sm-8">
-                                                            <div id="stock-sku">{{ @$model->sku }}</div>
-                                                            {!! Form::hidden('sku',null,['id' => 'sku']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="sku"
-                                                               class="control-label col-sm-4">Barcode</label>
-                                                        <div class="col-sm-8">
-                                                            @if($model && $model->sku)
-                                                                {!! \DNS1D::getBarcodeSVG($model->sku, "C39") !!}
+                                                {{--<div class="form-group">--}}
+                                                    {{--<div class="row">--}}
+                                                        {{--<label for="sku"--}}
+                                                               {{--class="control-label col-sm-4">Barcode</label>--}}
+                                                        {{--<div class="col-sm-8">--}}
+                                                            {{--@if($model && $model->sku)--}}
+                                                                {{--{!! \DNS1D::getBarcodeSVG($model->sku, "C39") !!}--}}
                                                                 {{--<img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />--}}
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                            {{--@endif--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="feature_image"

@@ -14,7 +14,6 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>SKU</th>
                     <th>Image</th>
                     <th>Added/Last Modified Date</th>
                     <th>Actions</th>
@@ -35,7 +34,6 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
-                    {data: 'sku', name: 'sku'},
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}

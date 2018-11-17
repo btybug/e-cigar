@@ -14,7 +14,7 @@
                                        class="control-label col-sm-4">Variation
                                     ID</label>
                                 <div class="col-sm-8">
-                                    {!! Form::text('variation_id',null,['id' => 'variation_id','class' => 'form-control','readonly' => true]) !!}
+                                    {!! Form::text('variation_id',null,['id' => 'variation_id','class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>
