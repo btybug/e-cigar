@@ -116,6 +116,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::post('/new-or-update', 'Admin\StoreController@postSaveOrUpdate')->name('admin_store_purchase_save');
         Route::get('/delete/{id}', 'Admin\StoreController@DeletePurchase')->name('admin_store_purchase_delete');
         Route::get('/edit/{id}', 'Admin\StoreController@EditPurchase')->name('admin_store_purchase_edit');
+        Route::post('/get-stock-by-sku', 'Admin\StoreController@getStockBySku')->name('admin_store_purchase_get_stock_by_sku');
     });
 });
 

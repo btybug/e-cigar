@@ -138,4 +138,18 @@ class StoreController extends Controller
         return redirect(route('admin_store_purchase'));
     }
 
+    public function getStockBySku (Request $request)
+    {
+        $sku = $request->get('sku');
+        $variation = StockVariation::where('variation_id',$sku)->first();
+        if($variation){
+            $vape = $variation->stock;
+            $html = $this->view('purchase.product',compact('vape','variation'))->render();
+
+            return \Response::json(['error' => false,'html' => $html]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
+
 }

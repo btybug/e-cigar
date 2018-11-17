@@ -48,7 +48,7 @@
             </div>
             {!! Form::close() !!}
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 product-box">
 
         </div>
     </div>
@@ -72,6 +72,27 @@
             // maxYear: parseInt(moment().format('YYYY'),10)
         });
 
-
+        $("body").on('change','.select-sku',function () {
+            get_product();
+        });
+        get_product();
+        function get_product() {
+            var sku = $(".select-sku").val();
+            $.ajax({
+                type: "post",
+                url: "{!! route('admin_store_purchase_get_stock_by_sku') !!}",
+                cache: false,
+                datatype: "json",
+                data: {sku: sku},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $(".product-box").html(data.html);
+                    }
+                }
+            });
+        }
     </script>
 @stop

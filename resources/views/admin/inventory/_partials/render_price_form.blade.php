@@ -16,7 +16,6 @@
                                 <div class="col-md-5">
 
                                         @if(count($options))
-                                                <p class="fnz-20 mb-2 product-range-top-label">Mild Nicotin</p>
                                                 <div class="product-range d-flex">
                                                         @foreach($options as $item)
                                                                 <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
