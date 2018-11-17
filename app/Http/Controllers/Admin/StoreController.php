@@ -128,4 +128,14 @@ class StoreController extends Controller
         $variations = StockVariation::pluck('variation_id','variation_id')->all();
         return $this->view('purchase.new',compact('model','variations'));
     }
+
+    public function DeletePurchase($id)
+    {
+        $model = Purchase::findOrFail($id);
+
+        $model->delete();
+
+        return redirect(route('admin_store_purchase'));
+    }
+
 }
