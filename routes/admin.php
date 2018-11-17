@@ -113,6 +113,9 @@ Route::group(['prefix' => 'store'], function () {
     Route::group(['prefix' => 'purchase'], function () {
         Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_store_purchase');
         Route::get('/new', 'Admin\StoreController@getPurchaseNew')->name('admin_store_purchase_new');
+        Route::post('/new-or-update', 'Admin\StoreController@postSaveOrUpdate')->name('admin_store_purchase_save');
+        Route::get('/delete/{id}', 'Admin\StoreController@DeletePurchase')->name('admin_store_purchase_delete');
+        Route::get('/edit/{id}', 'Admin\StoreController@EditPurchase')->name('admin_store_purchase_edit');
     });
 });
 

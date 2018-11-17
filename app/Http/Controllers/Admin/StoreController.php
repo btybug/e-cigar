@@ -11,13 +11,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponsRequest;
+use App\Http\Requests\PurchaseRequest;
 use App\Http\Requests\ShippingZonePost;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\Products;
+use App\Models\Purchase;
 use App\Models\Settings;
 use App\Models\ShippingZones;
+use App\Models\StockVariation;
 use Carbon\Carbon;
 use DB;
 use PragmaRX\Countries\Package\Countries;
@@ -103,6 +106,26 @@ class StoreController extends Controller
 
     public function getPurchaseNew ()
     {
-        return $this->view('purchase.new',compact(''));
+        $model = null;
+        $variations = StockVariation::pluck('variation_id','variation_id')->all();
+        return $this->view('purchase.new',compact('model','variations'));
+    }
+
+    public function postSaveOrUpdate (PurchaseRequest $request)
+    {
+        $data = $request->except('_token');
+
+        $data['purchase_date'] = Carbon::parse($data['purchase_date']);
+        $data['user_id'] = \Auth::id();
+        Purchase::updateOrCreate(['id'=>$request->id],$data);
+
+        return redirect()->route('admin_store_purchase');
+    }
+
+    public function EditPurchase ($id)
+    {
+        $model = Purchase::findOrFail($id);
+        $variations = StockVariation::pluck('variation_id','variation_id')->all();
+        return $this->view('purchase.new',compact('model','variations'));
     }
 }
