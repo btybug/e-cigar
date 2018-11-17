@@ -13,16 +13,9 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::get('/stripe', function () {
-// $stripe=new \Stripe();
-// dd($stripe);
-//dd($stripeCharge);
-//// Braintree Accepts Charges In Dollars...
-//    $user->charge(1);
-    return view('stripe');
-});
-Route::any('/stripe-charge', 'Frontend\StripePaymentController@stripeCharge');
+})->name('home');
+
+Route::post('/stripe-charge', 'Frontend\StripePaymentController@stripeCharge');
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     $product = \App\Models\Posts::find($request->id);
     return ['error' => false, 'data' => $product->makeReady()->toArray()];
@@ -41,8 +34,7 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
 
 Auth::routes();
 Auth::routes(['verify' => true]);
-Route::get('/home', 'HomeController@index')->name('home');
-
+//Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'Frontend\BlogController@index')->name('blog');
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');

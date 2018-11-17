@@ -87,6 +87,25 @@ function userCan($permission)
     if ($role->slug == 'superadmin') return true;
     return $role->hasAccess($permission);
 }
+function getFrontendPages($permissions = [])
+{
+    $routes = array();
+    $routeCollection = \Route::getRoutes();
+    foreach ($routeCollection as $value) {
+        if(!starts_with($value->uri(),'admin')){
+            if (isset($permissions[$value->getName()])) {
+
+                $routes[$value->methods()[0]][$value->uri()] = ['url' => $value->uri(), 'text' => $value->getName(), 'state' => ['checked' => true]];
+            } else {
+                $routes[$value->methods()[0]][$value->uri()] = ['url' => $value->uri(), 'text' => $value->getName()];
+            }
+        }
+
+    }
+    if (isset($routes['GET']))
+        return collect($routes['GET']);
+
+}
 
 function getModuleRoutes($method, $sub, $permissions = [])
 {
@@ -105,8 +124,6 @@ function getModuleRoutes($method, $sub, $permissions = [])
         $routes[$method]['admin'] = [];
     }
     ksort($routes[$method]);
-    $routes[$method] = (keysort($routes[$method], $sub));
-
     if (isset($routes[$method][$sub]))
         return collect($routes[$method][$sub]);
 

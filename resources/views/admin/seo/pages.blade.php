@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
 
@@ -24,49 +25,57 @@
     <div class="seo-pages mt-20">
         <div class="container-fluid">
             <div class="row m-0">
-                <button class="btn btn-info pull-right">Save</button>
+                <button class="btn btn-info pull-right" id="form-submit">Save</button>
             </div>
             <div class="row mt-20">
                 <div class="col-md-3">
                     <div class="seo-pages-left-list">
                         <ul>
-                            <li>
-                                <a href="#" class="link">Item 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="link">Item 2</a>
-                                <ul>
-                                    <li>
-                                        <a href="#" class="sub-link">Sub Item 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sub-link">Sub Item 1</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="#" class="link">Item 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="link">Item 3</a>
-                                <ul>
-                                    <li>
-                                        <a href="#" class="sub-link">Sub Item 1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sub-link">Sub Item 2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="sub-link">Sub Item 3</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @foreach($pages as $key=>$page)
+                                <li>
+                                    <a href="?p={!! $page['text'] !!}" class="link">{!! $page['url'] !!}</a>
+                                </li>
+                            @endforeach
+                            {{--<li>--}}
+                            {{--<a href="#" class="link">Categories</a>--}}
+                            {{--<ul>--}}
+                            {{--<li>--}}
+                            {{--<a href="#vape" class="sub-link">Vape</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                            {{--<a href="#parts" class="sub-link">Parts</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                            {{--<a href="#juice" class="sub-link">Juice</a>--}}
+                            {{--<ul>--}}
+                            {{--<li>--}}
+                            {{--<a href="#vape" class="sub-link">Vape</a>--}}
+                            {{--</li>--}}
+                            {{--</ul>--}}
+                            {{--</li>--}}
+                            {{--</ul>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                            {{--<a href="#" class="link">Item 2</a>--}}
+                            {{--<ul>--}}
+                            {{--<li>--}}
+                            {{--<a href="#" class="sub-link">Sub Item 1</a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                            {{--<a href="#" class="sub-link">Sub Item 1</a>--}}
+                            {{--</li>--}}
+                            {{--</ul>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                            {{--<a href="#categories" class="link"></a>--}}
+                            {{--</li>--}}
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-9">
                     <div class="panel panel-default">
                         <div class="panel-heading">General</div>
+                        {!! Form::model($model) !!}
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="row">
@@ -102,6 +111,9 @@
                                 </div>
                             </div>
                         </div>
+                        {!! Form::hidden('p',$p) !!}
+                        <button type="submit" id="submit" class="hidden"></button>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
@@ -112,3 +124,10 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
+@section('js')
+    <script>
+        $('#form-submit').on('click',function () {
+            $('#submit').click();
+        })
+    </script>
+    @stop

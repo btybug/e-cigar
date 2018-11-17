@@ -2,8 +2,8 @@
     <nav class="navbar navbar-expand-xl navbar-dark align-items-stretch justify-content-between">
         <div class="header-navbar-brand-holder">
             <a class="navbar-brand header-navbar-brand p-0 m-0" href="{!! url('/') !!}">
-                <img src="/public/img/header-logo.png" class="header-logo-img" alt="">
-                <img src="/public/img/header-logo-text.png" class="header-logo-text-img" alt="">
+                <img src="/public/img/header-logo.png" class="header-logo-img" alt="kaliony">
+                <img src="/public/img/header-logo-text.png" class="header-logo-text-img" alt="kaliony">
             </a>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
