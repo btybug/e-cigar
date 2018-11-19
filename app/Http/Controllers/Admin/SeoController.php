@@ -28,9 +28,25 @@ class SeoController extends Controller
         return $this->view('posts',compact('general','fb','twitter','robot'));
     }
 
-    public function getStocks()
+    public function getStocks(Settings $settings)
     {
-        return $this->view('stocks');
+        $general=$settings->getEditableData('seo_stocks');
+        $fb=$settings->getEditableData('seo_fb_stocks');
+        $twitter=$settings->getEditableData('seo_twitter_stocks');
+        $robot=$settings->getEditableData('seo_robot_stocks');
+        return $this->view('stocks',compact('general','fb','twitter','robot'));
+    }
+    public function postStocks(Request $request,Settings $settings)
+    {
+        $general=$request->except(['_token','fb','twitter','robots']);
+        $fb=$request->only('fb');
+        $twitter=$request->only('twitter');
+        $robot=$request->only('robots');
+        $settings->updateOrCreateSettings('seo_stocks',$general);
+        $settings->updateOrCreateSettings('seo_fb_stocks',$fb['fb']);
+        $settings->updateOrCreateSettings('seo_twitter_stocks',$twitter['twitter']);
+        $settings->updateOrCreateSettings('seo_robot_stocks',$robot);
+        return redirect()->back();
     }
 
     public function getBulk()
@@ -50,6 +66,7 @@ class SeoController extends Controller
         $settings->updateOrCreateSettings('seo_robot_posts',$robot);
         return redirect()->back();
     }
+
 
     public function getPages(Request $request,Settings $settings)
     {

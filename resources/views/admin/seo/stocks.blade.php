@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        {{--{!! Form::model($general) !!}--}}
+        {!! Form::model($general) !!}
         <div class="pull-right"><button type="submit" class="btn btn-success">Save</button></div>
         <div class="clearfix"></div>
         <div class="seo-page-general">
@@ -125,7 +125,7 @@
                 </div>
             </div>
         </div>
-        {{--{!! Form::close() !!}--}}
+        {!! Form::close() !!}
     </div>
     @stop
 @section('css')
