@@ -402,51 +402,36 @@
                                 <div class="col-sm-12">
                                     <div class="basic-center basic-wall">
                                         <div class="row">
-                                            <div class="col-md-12">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-sm btn-primary get-variation pull-right"><i
-                                                            class="fa fa-plus mr-10"></i>New Variation</a>
+                                            <div class="col-md-5">
+                                                <div class="all-list-attrs" style="min-height:300px;">
+                                                    @if($model)
+                                                        @include('admin.inventory._partials.link_all_edit')
+                                                    @endif
+                                                </div>
+                                                <div class="button-add text-center">
+                                                    <div class="col-md-6">
+                                                        <a href="javascript:void(0)"
+                                                           class="btn btn-primary btn-block get-variation"><i
+                                                                    class="fa fa-plus mr-10"></i>More
+                                                            option</a>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <a href="javascript:void(0)"
+                                                           class="btn btn-success btn-block get-all-variations"><i
+                                                                    class="fa fa-plus mr-10"></i>Link all
+                                                            option</a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-12">
-                                                {{--<div class="all-list-attrs" style="min-height:300px;">--}}
-                                                    {{--@if($model)--}}
-                                                        {{--@include('admin.inventory._partials.link_all_edit')--}}
-                                                    {{--@endif--}}
-                                                {{--</div>--}}
-                                                <table id="variations-table" class="table table-style table-bordered" cellspacing="0" width="100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Attributes</th>
-                                                        <th>SKU</th>
-                                                        <th>Price</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="all-list-attrs">
-                                                        <tr>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                            <div class="col-md-7 variation-settings">
                                             </div>
+
                                         </div>
+
+
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -678,7 +663,8 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    
+
+
     <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">

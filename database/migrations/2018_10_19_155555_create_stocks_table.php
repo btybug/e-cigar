@@ -17,12 +17,10 @@ class CreateStocksTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('status')->default(0);
-            $table->string('type')->nullable();
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->text('other_images')->nullable();
             $table->text('videos')->nullable();
-            $table->text('posters')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
