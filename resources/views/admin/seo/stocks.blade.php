@@ -22,7 +22,7 @@
 
         </div>
     </div>
-    <div>
+    <div class="d-flex">
     <div class="container">
         {!! Form::model($general) !!}
         <div class="pull-right"><button type="submit" class="btn btn-success">Save</button></div>
