@@ -25,18 +25,25 @@
                         <div class="col-md-6 col-xs-12">
                             <div class="row">
                                 <label for="variation_id"
-                                       class="control-label col-sm-4">Variation
-                                    ID</label>
+                                       class="control-label col-sm-4">Name</label>
+                                <div class="col-sm-8">
+                                    {!! Form::text('name',null,['id' => 'variation_name','class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="row">
+                                <label for="variation_id"
+                                       class="control-label col-sm-4">SKU number</label>
                                 <div class="col-sm-8">
                                     {!! Form::text('variation_id',null,['id' => 'variation_id','class' => 'form-control']) !!}
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                </div>
-                <div class="form-group">
-                    <div class="row">
                         <div class="col-md-6 col-xs-12">
                             <div class="row">
                                 <label for="variation_image"
@@ -59,20 +66,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-xs-12">
-                            <div class="row">
-                                <label for="variation_quantity_alert"
-                                       class="control-label col-sm-4">Quantity
-                                    Alert</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('qty_alert',null,['id' => 'variation_qty_alert','class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
                         <div class="col-md-6 col-xs-12">
                             <div class="row">
                                 <label for="variation_quantity"
