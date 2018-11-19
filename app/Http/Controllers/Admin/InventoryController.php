@@ -71,10 +71,9 @@ class InventoryController extends Controller
         return redirect()->route('admin_stock');
     }
 
-    public function linkAll(Request $request)
+    public function linkAll($data)
     {
-        $data = $request->get('data');
-
+        $results = [];
         if ($data && count($data)) {
             $firstKeyArray = array_first($data);
             array_shift($data);
@@ -88,25 +87,22 @@ class InventoryController extends Controller
                 $firstKeyArray = array_slice($firstKeyArray, $notFullCount);
             }
 
-            $results = [];
+
             if (count($firstKeyArray)) {
                 foreach ($firstKeyArray as $string) {
                     $results[] = explode('-', $string);
                 }
             }
-
-            $html = \View('admin.inventory._partials.link_all', compact(['results']))->with('data', $request->get('data'))->render();
-            return \Response::json(['error' => false, 'html' => $html]);
         }
 
-        return \Response::json(['error' => true]);
+        return $results;
     }
 
     public function variationForm(Request $request)
     {
-        $variationID = $request->get('variationId');
-        $model = json_decode($request->get('data'), true);
-        $html = \View('admin.inventory._partials.variation_form', compact(['variationID', 'model']))->render();
+        $data = $request->get('data');
+        $model = null;
+        $html = \View('admin.inventory._partials.variation_form', compact(['model','data']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

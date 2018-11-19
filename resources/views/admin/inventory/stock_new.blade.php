@@ -404,7 +404,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <a href="javascript:void(0)"
-                                                   class="btn btn-sm btn-primary get-variation pull-right"><i
+                                                   class="btn btn-sm btn-primary add-variation pull-right"><i
                                                             class="fa fa-plus mr-10"></i>New Variation</a>
                                             </div>
                                             <div class="col-md-12">
@@ -696,6 +696,25 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="modal fade" id="variationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Variation form</h4>
+                </div>
+                <div class="modal-body variation-box">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning apply-variation">Apply</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

@@ -2,10 +2,24 @@
 <div class="">
     <div class="container-fluid">
         <div class="row">
-            <button variation-id="{{ $variationID }}" type="button" class="btn btn-warning apply-variation">Apply</button>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
+                @if(count($data))
+                    @foreach($data as $key => $items)
+                        <div class="col-md-4">
+                            {!! Form::hidden("attributes[$key][attributes_id]",$key) !!}
+                            <div class="form-group">
+                                <label>{{ \App\Models\Attributes::getById($key) }}</label>
+                                <select name="attributes[{{ $key }}][option_id]" class="form-control">
+                                    @foreach($items as $option)
+                                        <option value="{{ $option }}">{{ \App\Models\Attributes::getById($option) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+            <div class="col-md-12">
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
