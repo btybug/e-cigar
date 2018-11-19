@@ -13,8 +13,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Attributes;
 use App\Models\Category;
+use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\Stock;
+use App\Models\StockSeo;
 use App\Models\StockVariationOption;
 use App\Services\StockService;
 use Illuminate\Http\Request;
@@ -25,10 +27,12 @@ class InventoryController extends Controller
     protected $view = 'admin.inventory';
 
     private $stockService;
+    private $settings;
 
-    public function __construct(StockService $stockService)
+    public function __construct(StockService $stockService, Settings $settings)
     {
         $this->stockService = $stockService;
+        $this->settings = $settings;
     }
 
     public function stock()
@@ -39,36 +43,62 @@ class InventoryController extends Controller
     public function stockNew()
     {
         $model = null;
-        $categories =  Category::with('children')->where('type','stocks')->whereNull('parent_id')->get();
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
-        return $this->view('stock_new', compact(['model','data','categories']));
+
+        $general = $this->settings->getEditableData('seo_stocks')->toArray();
+        $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
+        $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_stocks');
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $categories =  Category::with('children')->where('type','stocks')->whereNull('parent_id')->get();
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
-        $data = Category::recursiveItems($categories,0,[],$checkedCategories);
+        $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
-        
-        return $this->view('stock_new', compact(['model', 'attrs','data','checkedCategories','categories']));
+
+        $general = $this->settings->getEditableData('seo_stocks')->toArray();
+        $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
+        $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_stocks');
+        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations','variation_options','categories','general','related_products','stickers');
+        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations', 'variation_options', 'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
         $stock->attrs()->sync($request->get('attributes'));
-        $options = $this->stockService->makeOptions($stock, $request->get('options',[]));
+        $options = $this->stockService->makeOptions($stock, $request->get('options', []));
         $stock->attrs()->syncWithoutDetaching($options);
 
-        $this->stockService->saveVariations($stock, $request->get('variations',[]),$request->get('variation_options',[]));
-        $stock->categories()->sync(json_decode($request->get('categories',[])));
+        $this->stockService->saveVariations($stock, $request->get('variations', []), $request->get('variation_options', []));
+        $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
         $stock->stickers()->sync($request->get('stickers'));
+        $this->createOrUpdateSeo($request, $stock->id);
         return redirect()->route('admin_stock');
+    }
+
+    private function createOrUpdateSeo($request, $stock_id)
+    {
+        $types = $request->only(['fb', 'general', 'twitter', 'robot']);
+        foreach ($types as $type => $data) {
+            foreach ($data as $name => $value) {
+                $seo= StockSeo::firstOrNew(['stock_id' => $stock_id, 'name' => $name,'type' => $type]);
+                if ($value) {
+                    $seo->content=$value;
+                    $seo->save();
+                }else{
+                    $seo->delete();
+                }
+            }
+        }
     }
 
     public function linkAll($data)
@@ -102,13 +132,13 @@ class InventoryController extends Controller
     {
         $data = $request->get('data');
         $model = null;
-        $html = \View('admin.inventory._partials.variation_form', compact(['model','data']))->render();
+        $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getStocks (Request $request)
+    public function getStocks(Request $request)
     {
-        $attr = Stock::whereNotIn('id', $request->get('arr',[]))->get();
-        return \Response::json(['error' => false,'data' => $attr]);
+        $attr = Stock::whereNotIn('id', $request->get('arr', []))->get();
+        return \Response::json(['error' => false, 'data' => $attr]);
     }
 }
