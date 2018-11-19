@@ -22,7 +22,8 @@
 
         </div>
     </div>
-    <div class="container-fluid">
+    <div>
+    <div class="container">
         {!! Form::model($general) !!}
         <div class="pull-right"><button type="submit" class="btn btn-success">Save</button></div>
         <div class="clearfix"></div>
@@ -126,6 +127,47 @@
             </div>
         </div>
         {!! Form::close() !!}
+    </div>
+    <div class="container">
+        <div class="seo-page-general">
+            <div class="panel panel-default mt-20">
+                <div class="panel-heading">Shortcodes</div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Code </th>
+                            <th>Description</th>
+                            <th>is translatable  </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{name}</td>
+                            <td>Stock name</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>{short_description}</td>
+                            <td>Stock short description</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>{long_description}</td>
+                            <td>Stock long description</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>{image}</td>
+                            <td>Stock Image</td>
+                            <td>No</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     @stop
 @section('css')
