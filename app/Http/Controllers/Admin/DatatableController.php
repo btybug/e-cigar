@@ -281,9 +281,10 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
+
     public function getUserPostActivity($id)
     {
-        return Datatables::of(LogActivities::where('user_id', $id)->where('method','post'))
+        return Datatables::of(LogActivities::where('user_id', $id)->where('method', 'post'))
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
             })
@@ -297,13 +298,13 @@ class DatatableController extends Controller
     public function getFrontendActivity()
     {
 
-        return Datatables::of(LogActivities::leftJoin('users','users.id','=','log_activities.user_id')->whereNull('users.role_id')
-            ->select('log_activities.*','users.name','users.last_name'))
+        return Datatables::of(LogActivities::leftJoin('users', 'users.id', '=', 'log_activities.user_id')->whereNull('users.role_id')
+            ->select('log_activities.*', 'users.name', 'users.last_name'))
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
-            }) ->editColumn('user', function ($attr) {
-                if(!$attr->name) return 'GUEST';
-                return $attr->name.' '.$attr->last_name;
+            })->editColumn('user', function ($attr) {
+                if (!$attr->name) return 'GUEST';
+                return $attr->name . ' ' . $attr->last_name;
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
@@ -311,16 +312,17 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
+
     public function getBackendActivity()
     {
-        return Datatables::of(LogActivities::leftJoin('users','users.id','=','log_activities.user_id')
+        return Datatables::of(LogActivities::leftJoin('users', 'users.id', '=', 'log_activities.user_id')
             ->whereNotNull('users.role_id')->whereNotNull('user_id')
-            ->select('log_activities.*','users.name','users.last_name'))
+            ->select('log_activities.*', 'users.name', 'users.last_name'))
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
-            }) ->editColumn('user', function ($attr) {
-                if(!$attr->name) return 'GUEST';
-                return $attr->name.' '.$attr->last_name;
+            })->editColumn('user', function ($attr) {
+                if (!$attr->name) return 'GUEST';
+                return $attr->name . ' ' . $attr->last_name;
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger' href=''><i class='fa fa-trash'></i></a>
@@ -340,7 +342,7 @@ class DatatableController extends Controller
             })->editColumn('status', function ($attr) {
                 $status = $attr->history()->whereNotNull('status_id')->latest()->first();
                 return ($status) ?
-                    '<span class="badge" style="background-color: '.$status->status->color.'">'.$status->status->name.'</span>' : null;
+                    '<span class="badge" style="background-color: ' . $status->status->color . '">' . $status->status->name . '</span>' : null;
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
@@ -348,7 +350,7 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions','status'])
+            })->rawColumns(['actions', 'status'])
             ->make(true);
     }
 
@@ -375,7 +377,7 @@ class DatatableController extends Controller
             ->editColumn('title', function ($attr) {
                 return $attr->title;
             })->editColumn('status', function ($attr) {
-                return ($attr->status)?'Published':'Draft';
+                return ($attr->status) ? 'Published' : 'Draft';
             })->editColumn('seo_title', function ($attr) use ($settings) {
                 $general = $settings->getEditableData('seo_posts')->toArray();
                 return ($attr->getSeoField('og:title'))??getSeo($general, 'og:title', $attr);
@@ -385,19 +387,52 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-    public function getBulkStock()
+    public function getBulkStock(Settings $settings)
     {
+        $general = $settings->getEditableData('seo_stocks')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_stocks')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_stocks')->toArray();
+        $robot = $settings->getEditableData('seo_robot_stocks');
+        $robot = $settings->getEditableData('seo_robot_stocks');
+
         return Datatables::of(Stock::query())
-            ->editColumn('image', function ($stock) {
-                return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
-            })
-            ->editColumn('created_at', function ($stock) {
-                return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
-            })
-            ->addColumn('actions', function ($stock) {
+
+            ->editColumn('og:title', function ($stock)use($general) {
+        return ($stock) ? $stock->getSeoField('og:title') : getSeo($general,'og:title',$stock);
+    })
+        ->editColumn('og:image', function ($stock)use($general) {
+            return ($stock) ? "<img src='" . $stock->getSeoField('og:image') . "' width='50px'/>" : "<img src='".getSeo($general,'og:keywords',$stock) . "' width='50px'/>";
+        })
+        ->editColumn('og:description', function ($stock)use($general) {
+            return ($stock) ? $stock->getSeoField('og:description') : getSeo($general,'og:description',$stock);
+        })
+        ->editColumn('og:keywords', function ($stock)use($general) {
+            return ($stock) ? $stock->getSeoField('og:keywords') : getSeo($general,'og:keywords',$stock);
+        })
+        ->editColumn('fb:title', function ($stock) use($fbSeo){
+            return ($stock) ? $stock->getSeoField('og:title', 'fb') : getSeo($fbSeo,'og:title',$stock);
+        })
+        ->editColumn('fb:description', function ($stock) use($fbSeo) {
+            return ($stock) ? $stock->getSeoField('og:description', 'fb') : getSeo($fbSeo,'og:description',$stock);
+        })
+        ->editColumn('fb:image', function ($stock) use($fbSeo) {
+            return ($stock) ? $stock->getSeoField('og:image', 'fb') : "<img src='".getSeo($fbSeo,'og:keywords',$stock) . "' width='50px'/>";
+        })
+        ->editColumn('tw:title', function ($stock)use ($twitterSeo) {
+            return ($stock) ? $stock->getSeoField('og:title', 'twitter') :  getSeo($twitterSeo,'og:title',$stock);
+        })
+        ->editColumn('tw:description', function ($stock)use ($twitterSeo) {
+            return ($stock) ? $stock->getSeoField('og:description', 'twitter') : getSeo($twitterSeo,'og:description',$stock);
+        })
+        ->editColumn('tw:image', function ($stock)use ($twitterSeo) {
+            return ($stock) ? $stock->getSeoField('og:image', 'twitter') :  "<img src='".getSeo($twitterSeo,'og:keywords',$stock) . "' width='50px'/>";;
+        })->addColumn('robots', function ($stock) {
                 return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
-            })->rawColumns(['actions', 'name', 'image'])
-            ->make(true);
+            })->addColumn('actions', function ($stock) {
+            return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
+        })
+        ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
+        ->make(true);
     }
 
     public function getTickets()
@@ -406,9 +441,9 @@ class DatatableController extends Controller
             ->editColumn('user_id', function ($ticket) {
                 return $ticket->author->name;
             })->editColumn('status_id', function ($ticket) {
-                return "<span style='background: ".$ticket->status->color."' class='badge'>".$ticket->status->name."</span>";
+                return "<span style='background: " . $ticket->status->color . "' class='badge'>" . $ticket->status->name . "</span>";
             })->editColumn('priority_id', function ($ticket) {
-                return "<span style='background: ".$ticket->priority->color."' class='badge'>".$ticket->priority->name."</span>";
+                return "<span style='background: " . $ticket->priority->color . "' class='badge'>" . $ticket->priority->name . "</span>";
             })->editColumn('category_id', function ($ticket) {
                 return $ticket->category->name;
             })->editColumn('tags', function ($ticket) {
@@ -417,21 +452,21 @@ class DatatableController extends Controller
             ->editColumn('created_at', function ($ticket) {
                 return BBgetDateFormat($ticket->created_at) . ' ' . BBgetTimeFormat($ticket->created_at);
             })->editColumn('attachments', function ($ticket) {
-                return "<span class='badge'>".count($ticket->attachments)."</span>";
+                return "<span class='badge'>" . count($ticket->attachments) . "</span>";
             })
             ->addColumn('actions', function ($ticket) {
                 $settings = new Settings();
                 $status = $settings->getData('tickets', 'completed');
                 $actions = "<a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>";
-                if($status && $status->val != $ticket->status_id){
+                if ($status && $status->val != $ticket->status_id) {
                     $actions .= "<a class='badge btn-danger' href='" . route('admin_tickets_close', $ticket->id) . "'>Close</a>";
                 }
                 return $actions;
-            })->rawColumns(['actions','priority_id','status_id','attachments'])
+            })->rawColumns(['actions', 'priority_id', 'status_id', 'attachments'])
             ->make(true);
     }
 
-    public function getFaq ()
+    public function getFaq()
     {
         return Datatables::of(Faq::query())
             ->editColumn('question', function ($faq) {
@@ -454,7 +489,7 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-    public function getPurchases ()
+    public function getPurchases()
     {
         return Datatables::of(Purchase::groupBy('sku'))
             ->editColumn('user_id', function ($faq) {

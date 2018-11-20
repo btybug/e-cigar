@@ -43,6 +43,14 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
+                                <label for="seo-title" class="col-md-2 col-xs-12">Image</label>
+                                <div class="col-md-5 col-xs-12">
+                                    {!! Form::text('og:image',null,['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
                                 <label for="seo-desc" class="col-md-2 col-xs-12">Description</label>
                                 <div class="col-md-5 col-xs-12">
                                     {!! Form::text('og:description',null,['class'=>'form-control']) !!}

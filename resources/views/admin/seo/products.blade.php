@@ -22,10 +22,19 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Name</th>
-                            <th>SKU</th>
-                            <th>Image</th>
-                            <th>Added/Last Modified Date</th>
+                            <th>OG title</th>
+                            <th>OG image</th>
+                            <th>OG description</th>
+                            <th>OG Keywords</th>
+
+                            <th>FB title</th>
+                            <th>FB image</th>
+                            <th>FB description</th>
+
+                            <th>TW title</th>
+                            <th>TW image</th>
+                            <th>TW description</th>
+
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -51,11 +60,23 @@
                 ],
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'sku', name: 'sku'},
-                    {data: 'image', name: 'image'},
-                    {data: 'created_at', name: 'created_at'},
+
+                    {data: 'og:title', name: 'og:title'},
+                    {data: 'og:image', name: 'og:image'},
+                    {data: 'og:description', name: 'og:description'},
+                    {data: 'og:keywords', name: 'og:keywords'},
+                    {data: 'robots', name: 'robots'},
+
+                    {data: 'fb:title', name: 'og:title'},
+                    {data: 'fb:image', name: 'og:image'},
+                    {data: 'fb:description', name: 'og:description'},
+
+                    {data: 'tw:title', name: 'og:title'},
+                    {data: 'tw:image', name: 'og:image'},
+                    {data: 'tw:description', name: 'og:description'},
+
                     {data: 'actions', name: 'actions'}
+
                 ]
             });
         });

@@ -106,31 +106,32 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="row">
-                                    <label class="col-md-4">Allow these Currency</label>
+                                    <label class="col-md-4">Default product price in </label>
                                     <div class="col-md-8">
-                                        <input type="text" class="form-control">
+                                        <input type="text" readonly value="GBP" class="form-control">
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-5" style="border: 1px solid #b1b1b1">
+                                <p>Current rate</p>
                                 <div class="row">
-                                    <label class="col-md-4">Out of stock status</label>
-                                    <div class="col-md-6">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
+                                    <label class="col-md-2">1 GBP</label>
+                                    <div class="col-md-8">
+                                        <input type="text" readonly value="1.281296" class="form-control">
                                     </div>
+                                    <label class="col-md-2">USD</label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-md-2">1 GBP</label>
+                                    <div class="col-md-8">
+                                        <input type="text" readonly value="621.85" class="form-control">
+                                    </div>
+                                    <label class="col-md-2">AMD</label>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                    <div class="form-group">
+
                         <div class="row">
 
                         </div>
