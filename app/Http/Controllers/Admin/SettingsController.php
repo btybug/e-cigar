@@ -17,6 +17,7 @@ use App\Models\Couriers;
 use App\Models\DeliveryCostsTypes;
 use App\Models\Emails;
 use App\Models\GeoZones;
+use App\Models\GetForexData;
 use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\Products;
@@ -242,7 +243,7 @@ class SettingsController extends Controller
     }
 
     public
-    function getStore()
+    function getStore(GetForexData $forexData)
     {
         return $this->view('store.general');
     }
