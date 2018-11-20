@@ -132,9 +132,40 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
                         <div class="row">
-
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <label class="col-md-4">GBP </label>
+                                    <div class="col-md-8">
+                                        <input type="text" readonly value="UK" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <label class="col-md-4">EURO </label>
+                                    <div class="col-md-8">
+                                        <input type="text" readonly value="France,Germany" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <label class="col-md-4">USD</label>
+                                    <div class="col-md-8">
+                                        <input type="text" readonly value="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
