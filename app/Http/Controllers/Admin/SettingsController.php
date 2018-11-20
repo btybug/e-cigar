@@ -50,8 +50,8 @@ class SettingsController extends Controller
     public function getLanguagesEdit($id)
     {
         $model = SiteLanguages::findOrFail($id);
-        $countries = Countries::pluck('name', 'code')->all();
-
+        $countries = Languages::pluck('name', 'code')->all();
+        
         return $this->view('new_languages', compact(['model', 'countries']));
     }
 
