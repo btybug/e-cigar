@@ -58,18 +58,17 @@ class StockService
         return $result;
     }
 
-    public function saveVariations ($stock,array $data = [], array $options = [])
+    public function saveVariations ($stock,array $data = [])
     {
         $stock->variations()->delete();
         if(count($data)){
-//            dd($data,$options);
             foreach ($data as $variation_id => $data) {
                 $newData = json_decode($data,true);
-                unset($newData['_token']);
                 $newData['stock_id'] = $stock->id;
+                $attributes = $newData['attributes'];
                 $variation = StockVariation::create($newData);
-                if(isset($options[$variation_id]) && count($options[$variation_id])){
-                    foreach ($options[$variation_id] as $option){
+                if(isset($attributes) && count($attributes)){
+                    foreach ($attributes as $option){
                         $variation->options()->create($option);
                     }
                 }

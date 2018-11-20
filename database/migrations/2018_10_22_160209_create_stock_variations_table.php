@@ -17,9 +17,9 @@ class CreateStockVariationsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('stock_id');
             $table->string('variation_id');
+            $table->string('name');
             $table->text('image')->nullable();
             $table->unsignedInteger('qty')->default(0);
-            $table->string('qty_alert')->nullable();
             $table->float('price')->default(0);
             $table->unique(['stock_id','variation_id']);
             $table->timestamps();

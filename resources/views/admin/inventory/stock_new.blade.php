@@ -424,23 +424,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="all-list-attrs">
-                                                        <tr>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                            <td>
-
-                                                            </td>
-                                                        </tr>
+                                                        @if($model)
+                                                            @foreach($model->variations as $variation)
+                                                                @include('admin.inventory._partials.variation_item',['item' => $variation])
+                                                            @endforeach
+                                                        @endif
                                                     </tbody>
                                                 </table>
                                             </div>

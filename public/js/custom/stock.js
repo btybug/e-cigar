@@ -398,7 +398,7 @@ $("body").on("click", ".get-variation", function() {
     );
 });
 
-$("body").on("click", ".remvoe-variations-select", function() {
+$("body").on("click", ".remove-variation", function() {
     $(this)
         .closest(".list-attrs-single-item")
         .remove();
@@ -454,18 +454,29 @@ $("body").on("click", ".add-variation", function() {
 
 $("body").on("click", ".apply-variation", function() {
     var data = [];
-    var variationId = $(this).attr("variation-id");
-    var varationForm = $("#variation_form").serializeArray();
+    // var variationId = $(this).attr("variation-id");
+    var varationForm = $("#variation_form").serialize();
+    AjaxCall(
+        "/admin/inventory/stock/add-variation",
+        varationForm,
+        function(res) {
+            if (!res.error) {
+                $(".all-list-attrs").append(res.html);
+                $("#variation_form")[0].reset();
+                $("#variationModal").modal('hide');
+            }
+        }
+    );
     // $.each(varationForm, function(key, val) {
     //     var name = val.name;
     //     data[name] = val.value;
     // });
-    var obj = varationForm.reduce(function(total, current) {
-        total[current.name] = current.value;
-        return total;
-    }, {});
-    $("#variation_" + variationId).val(JSON.stringify(obj));
-    $("#variation_form").remove();
+    // var obj = varationForm.reduce(function(total, current) {
+    //     total[current.name] = current.value;
+    //     return total;
+    // }, {});
+    // $("#variation_" + variationId).val(JSON.stringify(obj));
+
 });
 
 // window.onload = function() {

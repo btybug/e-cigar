@@ -70,14 +70,14 @@ class InventoryController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations', 'variation_options', 'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot');
+        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations', 'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
         $stock->attrs()->sync($request->get('attributes'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
         $stock->attrs()->syncWithoutDetaching($options);
 
-        $this->stockService->saveVariations($stock, $request->get('variations', []), $request->get('variation_options', []));
+        $this->stockService->saveVariations($stock, $request->get('variations', []));
         $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
         $stock->stickers()->sync($request->get('stickers'));
@@ -140,5 +140,12 @@ class InventoryController extends Controller
     {
         $attr = Stock::whereNotIn('id', $request->get('arr', []))->get();
         return \Response::json(['error' => false, 'data' => $attr]);
+    }
+
+    public function addVariation(Request $request)
+    {
+        $item = $request->except('_token');
+        $html = \View('admin.inventory._partials.variation_item', compact(['item']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 }
