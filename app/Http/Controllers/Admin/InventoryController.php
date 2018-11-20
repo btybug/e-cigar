@@ -148,4 +148,12 @@ class InventoryController extends Controller
         $html = \View('admin.inventory._partials.variation_item', compact(['item']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function editVariation (Request $request)
+    {
+        $data = $request->get('attributesJson');
+        $model = $request->get('data');
+        $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }

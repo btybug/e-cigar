@@ -479,6 +479,44 @@ $("body").on("click", ".apply-variation", function() {
 
 });
 
+$("body").on("click", ".edit-variation", function() {
+    var variationId = $(this).data("id");
+    var data = $(this).closest(".list-attrs-single-item").find('.variation-json').val();
+    data = JSON.parse(data);
+
+    attributesJson = {};
+    $(".get-all-attributes-tab")
+        .children()
+        .each(function() {
+            let isShared = $(this)
+                .find(".is-shared-attributes")
+                .val();
+            if (Number(isShared)) {
+                addAttributeToJSON($(this).attr("data-id"));
+            }
+        });
+    AjaxCall(
+        "/admin/inventory/stock/edit-variation",
+        {data : data,attributesJson : attributesJson },
+        function(res) {
+            if (!res.error) {
+                $(".variation-box").html(res.html);
+                $("#variationModal").modal();
+            }
+        }
+    );
+    // $.each(varationForm, function(key, val) {
+    //     var name = val.name;
+    //     data[name] = val.value;
+    // });
+    // var obj = varationForm.reduce(function(total, current) {
+    //     total[current.name] = current.value;
+    //     return total;
+    // }, {});
+    // $("#variation_" + variationId).val(JSON.stringify(obj));
+
+});
+
 // window.onload = function() {
     var elementList = document.querySelectorAll(".main-attr-container");
 

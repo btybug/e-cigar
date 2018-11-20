@@ -3,11 +3,12 @@
         $variationOptions = $item->options;
         $item = $item->toArray();
     }
+    $uniqueID = uniqid();
 @endphp
-<tr class="list-attrs-single-item">
+<tr class="list-attrs-single-item" data-variation="{{ $uniqueID }}">
     <td>
         {!! $item['name'] !!}
-        {!! Form::hidden('variations[]',json_encode($item,true)) !!}
+        {!! Form::hidden('variations[]',json_encode($item,true),['class' => 'variation-json']) !!}
     </td>
     <td>
         @if(count($item['options']))
@@ -24,8 +25,6 @@
     </td>
     <td>
         <a class="remove-variation btn btn-danger"><i class="fa fa-trash-o"></i></a>
-        @if(isset($item['id']))
-            <a data-id="{{ $item['id'] }}" class="edit-variation btn btn-warning"><i class="fa fa-pencil"></i></a>
-        @endif
+        <a data-id="{{ $uniqueID }}" class="edit-variation btn btn-warning"><i class="fa fa-pencil"></i></a>
     </td>
 </tr>

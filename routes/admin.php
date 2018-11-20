@@ -163,6 +163,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
         Route::post('/add-variation', 'Admin\InventoryController@addVariation')->name('admin_stock_variation_add');
+        Route::post('/edit-variation', 'Admin\InventoryController@editVariation')->name('admin_stock_variation_add');
     });
 
     Route::group(['prefix' => 'attributes'], function () {
