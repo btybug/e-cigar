@@ -151,9 +151,10 @@ class InventoryController extends Controller
 
     public function editVariation (Request $request)
     {
-        $data = $request->get('attributesJson');
-        $model = $request->get('data');
-        $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data']))->render();
+        $data = $request->get('data');
+        $model = $request->get('model');
+        $variationId = $request->get('variationId');
+        $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data','variationId']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 }

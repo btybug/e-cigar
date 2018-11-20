@@ -461,7 +461,13 @@ $("body").on("click", ".apply-variation", function() {
         varationForm,
         function(res) {
             if (!res.error) {
-                $(".all-list-attrs").append(res.html);
+                var vID = $("#vId").val();
+                if(vID){
+                    $(".list-attrs-single-item[data-variation="+vID+"]").replaceWith(res.html);
+                }else{
+                    $(".all-list-attrs").append(res.html);
+                }
+
                 $("#variation_form")[0].reset();
                 $("#variationModal").modal('hide');
             }
@@ -497,7 +503,7 @@ $("body").on("click", ".edit-variation", function() {
         });
     AjaxCall(
         "/admin/inventory/stock/edit-variation",
-        {data : data,attributesJson : attributesJson },
+        {model : data, data : attributesJson,variationId : variationId },
         function(res) {
             if (!res.error) {
                 $(".variation-box").html(res.html);
