@@ -6,10 +6,10 @@
                 @if(count($data))
                     @foreach($data as $key => $items)
                         <div class="col-md-4">
-                            {!! Form::hidden("attributes[$key][attributes_id]",$key) !!}
+                            {!! Form::hidden("options[$key][attributes_id]",$key) !!}
                             <div class="form-group">
                                 <label>{{ \App\Models\Attributes::getById($key) }}</label>
-                                <select name="attributes[{{ $key }}][options_id]" class="form-control">
+                                <select name="options[{{ $key }}][options_id]" class="form-control">
                                     @foreach($items as $option)
                                         <option value="{{ $option }}">{{ \App\Models\Attributes::getById($option) }}</option>
                                     @endforeach

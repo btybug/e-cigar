@@ -65,7 +65,7 @@ class StockService
             foreach ($data as $variation_id => $data) {
                 $newData = json_decode($data,true);
                 $newData['stock_id'] = $stock->id;
-                $attributes = $newData['attributes'];
+                $attributes = $newData['options'];
                 $variation = StockVariation::create($newData);
                 if(isset($attributes) && count($attributes)){
                     foreach ($attributes as $option){

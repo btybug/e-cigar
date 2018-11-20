@@ -2,7 +2,6 @@
     if(is_object($item)){
         $variationOptions = $item->options;
         $item = $item->toArray();
-        $item['attributes'] = $item['options'];
     }
 @endphp
 <tr class="list-attrs-single-item">
@@ -11,8 +10,8 @@
         {!! Form::hidden('variations[]',json_encode($item,true)) !!}
     </td>
     <td>
-        @if(count($item['attributes']))
-            @foreach($item['attributes'] as $attribute)
+        @if(count($item['options']))
+            @foreach($item['options'] as $attribute)
                 <p>{{ \App\Models\Attributes::getById($attribute['attributes_id']) }} : {{ \App\Models\Attributes::getById($attribute['options_id']) }}</p>
             @endforeach
         @endif
