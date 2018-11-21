@@ -83,6 +83,9 @@ div.dataTables_wrapper div.dataTables_filter input {
 .mt15 {
     margin-top: 15px;
 }
+.mt20 {
+    margin-top: 15px;
+}
 .tr-style {
     background-color: #3c8dbc;
     color: #ffffff;
@@ -568,7 +571,6 @@ textarea {
 .social-media-group .dropdown-menu .dropdown-item i {
     font-size: 22px;
     margin-right: 15px;
-    color: #3296b5;
 }
 .social-media-group .dropdown-menu .dropdown-item .name {
     color: #4f4f4f;

@@ -20,7 +20,7 @@
             </li>
         </ul>
         <div class="tab-pane fade in" id="admin_settings_accounts">
-            <div class="text-right">
+            <div class="text-right mb-20 mt20">
                 <button type="submit" class="btn btn-success">Save</button>
             </div>
             <div class="panel panel-default">

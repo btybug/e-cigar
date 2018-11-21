@@ -243,7 +243,7 @@
                                                                     </button>
                                                                 @else
                                                                     <button type="button"
-                                                                            class="btn btn-warning pull-right remove-hour">
+                                                                            class="btn btn-danger pull-right remove-hour">
                                                                         <i class="fa fa-minus"></i></button>
                                                                 @endif
                                                             </td>
@@ -332,7 +332,7 @@
                                                                             class="fa fa-plus"></i></button>
                                                             @else
                                                                 <button type="button"
-                                                                        class="btn btn-warning pull-right remove-calendar">
+                                                                        class="btn btn-danger pull-right remove-calendar">
                                                                     <i class="fa fa-minus"></i></button>
                                                             @endif
                                                         </td>
@@ -453,7 +453,7 @@
                     '<input class="form-control timepicker1" name="opening_hours[time_to][]" type="text"> ' +
                     '<label class="input-group-addon" for="timepicker2">' +
                     '<i class="glyphicon glyphicon-time"></i>' +
-                    '</label> </div> </div> </td> <td><button type="button" class="btn btn-warning pull-right remove-hour"><i class="fa fa-minus"></i></button>' +
+                    '</label> </div> </div> </td> <td><button type="button" class="btn btn-danger pull-right remove-hour"><i class="fa fa-minus"></i></button>' +
                     '</td></tr>';
                 $("#working-hours").append(html);
                 $('.timepicker1').timepicker();
@@ -476,7 +476,7 @@
                     '<input class="form-control" name="calendar[reason][]" type="text"> ' +
                     '</td> ' +
                     '<td> ' +
-                    '<button type="button" class="btn btn-warning pull-right remove-calendar"><i class="fa fa-minus"></i></button> ' +
+                    '<button type="button" class="btn btn-danger pull-right remove-calendar"><i class="fa fa-minus"></i></button> ' +
                     '</td> ' +
                     '</tr>';
                 $("#calendar").append(html);
