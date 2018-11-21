@@ -718,7 +718,12 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-
+    <style>
+        .errors {
+            color:red;
+            font-style: italic;
+        }
+    </style>
 @stop
 @section('js')
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>

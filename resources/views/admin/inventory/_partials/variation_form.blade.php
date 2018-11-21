@@ -23,11 +23,14 @@
                                        <option {{ ($selectedValue == $option) ? 'selected' : '' }} value="{{ $option }}">{{ \App\Models\Attributes::getById($option) }}</option>
                                    @endforeach
                                </select>
+
                            </div>
                        </div>
                    @endforeach
+
                @endif
            </div>
+            <div class="col-md-12 errors option-error"></div>
            <div class="col-md-12">
                <div class="form-group">
                    <div class="row">
@@ -37,6 +40,7 @@
                                       class="control-label col-sm-4">Name</label>
                                <div class="col-sm-8">
                                    {!! Form::text('name',null,['id' => 'variation_name','class' => 'form-control']) !!}
+                                   <div class="errors name-error"></div>
                                </div>
                            </div>
                        </div>
@@ -50,6 +54,7 @@
                                       class="control-label col-sm-4">SKU number</label>
                                <div class="col-sm-8">
                                    {!! Form::text('variation_id',null,['id' => 'variation_id','class' => 'form-control']) !!}
+                                   <div class="errors sku-error"></div>
                                </div>
                            </div>
                        </div>
@@ -71,7 +76,7 @@
                                <label for="variation_quantity"
                                       class="control-label col-sm-4">Quantity</label>
                                <div class="col-sm-8">
-                                   {!! Form::number('qty',null,['id' => 'variation_qty','class' => 'form-control']) !!}
+                                   {!! Form::number('qty',null,['id' => 'variation_qty','class' => 'form-control','min' => '0']) !!}
                                </div>
                            </div>
                        </div>
@@ -81,6 +86,7 @@
                                       class="control-label col-sm-4">Price</label>
                                <div class="col-sm-8">
                                    {!! Form::text('price',null,['id' => 'variation_price','class' => 'form-control']) !!}
+                                   <div class="errors price-error"></div>
                                </div>
                            </div>
                        </div>

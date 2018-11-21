@@ -478,81 +478,82 @@ $("body").on("click", ".apply-variation", function() {
     console.log(variationForm)
     var error = false;
     var optionsArr = [];
-
+    $(".errors").html('');
     $("body .option-class")
         .each(function() {
             let val = $(this).val();
             optionsArr.push(parseInt(val));
         });
 
-    $('.list-attrs-single-item').map(function (e,item) {
-        if($("#vId").val() != $(item).data('variation')){
+    var isRequred = false;
 
-            var jsonData = JSON.parse($(item).find('.variation-json').val());
-            console.log(jsonData.options)
-            var compareOptions = [];
+    if($("#variation_name").val() == ''){
+        $(".name-error").text("Name field required");
+        isRequred = true;
+    }
+    if($("#variation_id").val() == ''){
+        $(".sku-error").text("Sku field required");
+        isRequred = true;
+    }
+    if($("#variation_price").val() == ''){
+        $(".price-error").text("Price field required");
+        isRequred = true;
+    }
 
-            var massiveOptions = Object.values(jsonData.options)
-
-            console.log(massiveOptions)
+    if(! isRequred){
+        $('.list-attrs-single-item').map(function (e,item) {
+            if($("#vId").val() != $(item).data('variation')){
+                var jsonData = JSON.parse($(item).find('.variation-json').val());
+                console.log(jsonData.options)
+                var compareOptions = [];
+                var massiveOptions = Object.values(jsonData.options)
 
                 massiveOptions.map(function (e,i) {
                     compareOptions.push(parseInt(e.attributes_id))
                     compareOptions.push(parseInt(e.options_id))
                 });
 
+                console.log(optionsArr,compareOptions)
+                var at = jQuery.compare(optionsArr, compareOptions);
+                console.log(at)
+                if(at == true){
+                    $(".option-error").text("You already have variation with that options");
+                    error = true;
+                }
 
-            console.log(optionsArr,compareOptions)
-           var at = jQuery.compare(optionsArr, compareOptions);
-            console.log(at)
-            if(at == true){
-                alert('You already have variation with that options');
-                error = true;
-            }
+                if($("#variation_name").val() == $(item).attr('validate-name')){
+                    $(".name-error").text("Name field is unqiue, please enter another name");
+                    error = true;
+                }
 
-            if($("#variation_name").val() == $(item).attr('validate-name')){
-                alert('name can\'t be same');
-                error = true;
-            }
-
-            if($("#variation_id").val() == $(item).attr('validate-sku')){
-                alert('Sku can\'t be same');
-                error = true;
-            }
-        }
-
-    });
-
-    if(error === false){
-        AjaxCall(
-            "/admin/inventory/stock/add-variation",
-            variationForm,
-            function(res) {
-                if (!res.error) {
-                    var vID = $("#vId").val();
-                    if(vID){
-                        $(".list-attrs-single-item[data-variation="+vID+"]").replaceWith(res.html);
-                    }else{
-                        $(".all-list-attrs").append(res.html);
-                    }
-
-                    $("#variation_form")[0].reset();
-                    $("#variationModal").modal('hide');
+                if($("#variation_id").val() == $(item).attr('validate-sku')){
+                    $(".sku-error").text("Sku field is unqiue, please enter another sku number");
+                    error = true;
                 }
             }
-        );
+
+        });
+
+        if(error === false){
+            AjaxCall(
+                "/admin/inventory/stock/add-variation",
+                variationForm,
+                function(res) {
+                    if (!res.error) {
+                        var vID = $("#vId").val();
+                        if(vID){
+                            $(".list-attrs-single-item[data-variation="+vID+"]").replaceWith(res.html);
+                        }else{
+                            $(".all-list-attrs").append(res.html);
+                        }
+
+                        $("#variation_form")[0].reset();
+                        $("#variationModal").modal('hide');
+                    }
+                }
+            );
+        }
     }
-
-    // $.each(varationForm, function(key, val) {
-    //     var name = val.name;
-    //     data[name] = val.value;
-    // });
-    // var obj = varationForm.reduce(function(total, current) {
-    //     total[current.name] = current.value;
-    //     return total;
-    // }, {});
-    // $("#variation_" + variationId).val(JSON.stringify(obj));
-
 });
 
 $("body").on("click", ".edit-variation", function() {
