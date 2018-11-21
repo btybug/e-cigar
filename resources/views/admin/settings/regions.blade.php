@@ -55,39 +55,75 @@
                    </div>
 
                    {{--languages--}}
-                   <div class="row mb-20">
-                       <div class="col-md-3">
-                           <div class="form-group">
-                               <label for="languages" class="col-sm-3 text-right">Languages</label>
-                               <div class="col-sm-7">
-                                   <input type="text" id="languages" class="form-control">
-                               </div>
-                               <div class="col-sm-2">
-                                   <button class="btn btn-danger">
-                                       <i class="fa fa-plus"></i>
-                                   </button>
+                   <div class="mb-20">
+                       <div class="row">
+                           <div class="col-md-3">
+                               <div class="form-group">
+                                   <label for="languages" class="col-sm-3 text-right">Languages</label>
+                                   <div class="col-sm-7">
+                                       <input type="text" id="languages" class="form-control">
+                                   </div>
+                                   <div class="col-sm-2">
+                                       <button class="btn btn-primary">
+                                           <i class="fa fa-plus"></i>
+                                       </button>
+                                   </div>
                                </div>
                            </div>
                        </div>
+
+                       <div class="row">
+                           <div class="col-md-3">
+                               <div class="form-group">
+                                   <div class="col-sm-7 col-sm-offset-3">
+                                       <input type="text" id="languages" class="form-control">
+                                   </div>
+                                   <div class="col-sm-2">
+                                       <button class="btn btn-danger">
+                                           <i class="fa fa-minus"></i>
+                                       </button>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+
                    </div>
 
                    {{--currency--}}
-                   <div class="row">
-                       <div class="col-md-3">
-                           <div class="form-group">
-                               <label for="currency" class="col-sm-3 text-right">Currency</label>
-                               <div class="col-sm-7">
-                                   <input type="text" id="currency" class="form-control">
-                               </div>
-                               <div class="col-sm-2">
-                                   <button class="btn btn-danger">
-                                       <i class="fa fa-plus"></i>
-                                   </button>
-                               </div>
-                           </div>
-                       </div>
-                   </div>
+                    <div class="mb-20">
 
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="currency" class="col-sm-3 text-right">Currency</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" id="currency" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-primary">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="col-sm-7 col-sm-offset-3">
+                                        <input type="text" id="currency" class="form-control">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button class="btn btn-danger">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                </div>
 
            </div>
