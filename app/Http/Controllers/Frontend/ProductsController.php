@@ -122,16 +122,24 @@ class ProductsController extends Controller
         $attributes = array_keys($request->options);
         $options = array_values($request->options);
         if($stock){
-            $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)->whereIn('options_id',$options)
-                ->whereIn('variation_id',$stock->variations()->pluck('id')->all())->groupBy('variation_id')->orderBy('total','desc')->first();
+            $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)
+                ->whereIn('options_id',$options)
+                ->whereIn('variation_id',$stock->variations()->pluck('id')->all())
+                ->groupBy('variation_id')
+                ->having('total',count($request->options))
+                ->orderBy('total','desc')->first();
 
             if($option && $option->variation){
-                return \Response::json(['price' =>  $option->variation->price,'variation_id' =>$option->variation->variation_id ,'error' => false]);
+                if($option->variation->qty > 0){
+                    return \Response::json(['price' =>  $option->variation->price,'variation_id' =>$option->variation->variation_id ,'error' => false]);
+                }else{
+                    return \Response::json(['message' =>  'Out of stock','variation_id' =>$option->variation->variation_id ,'error' => true]);
+                }
             }
         }
 
 
-        return \Response::json(['message' =>  'Currently product unavailable','error' => true]);
+        return \Response::json(['message' =>  'See available options','error' => true]);
     }
 
     public function attachFavorite(Request $request)

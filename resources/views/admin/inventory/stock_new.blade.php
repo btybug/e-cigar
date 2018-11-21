@@ -419,6 +419,7 @@
                                                         <th>Name</th>
                                                         <th>Attributes</th>
                                                         <th>SKU</th>
+                                                        <th>Qty</th>
                                                         <th>Price</th>
                                                         <th>Actions</th>
                                                     </tr>

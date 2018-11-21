@@ -21,6 +21,9 @@
         {!! $item['variation_id'] !!}
     </td>
     <td>
+        {!! $item['qty'] !!}
+    </td>
+    <td>
         {!! $item['price'] !!}
     </td>
     <td>

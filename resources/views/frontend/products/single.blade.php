@@ -235,7 +235,7 @@
                                            class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
                                     {!! Form::number('',1,['class' => 'product-qty-select mr-3','min' => '1','style'=> 'width: 85px;']) !!}
 
-                                    <button class="btn btn-add-to-cart rounded-0 fnz-20 add-to-cart">
+                                    <button class="btn btn-add-to-cart rounded-0 fnz-20">
                                                     <span class="icon">
                                                         <svg width="24px" height="31px">
                                                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
@@ -358,7 +358,7 @@
 
         function get_price() {
             var items = document.getElementsByClassName('select-variation-option');
-
+            $(".btn-add-to-cart").removeClass('add-to-cart');
             let options = {};
             for (var i = 0; i < items.length; i++) {
                 options[$(items[i]).data('name')] = $(items[i]).val();
@@ -385,6 +385,7 @@
                         if (!data.error) {
                             $(".price-place").html("€" + data.price);
                             $("#variation_uid").val(data.variation_id);
+                            $(".btn-add-to-cart").addClass('add-to-cart');
                         } else {
                             $(".price-place").html(data.message);
                             $("#variation_uid").val('');
