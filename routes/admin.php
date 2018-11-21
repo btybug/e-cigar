@@ -18,6 +18,9 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::get('/accounts', 'Admin\SettingsController@getAccounts')->name('admin_settings_accounts');
         Route::post('/accounts', 'Admin\SettingsController@postAccounts')->name('post_admin_settings_accounts');
+
+        Route::get('/regions', 'Admin\SettingsController@getRegions')->name('admin_settings_regions');
+        Route::post('/regions', 'Admin\SettingsController@postRegions')->name('post_admin_settings_regions');
     });
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', 'Admin\EventsController@getIndex')->name('admin_settings_events');

@@ -52,7 +52,7 @@ class SettingsController extends Controller
     {
         $model = SiteLanguages::findOrFail($id);
         $countries = Languages::pluck('name', 'code')->all();
-        
+
         return $this->view('new_languages', compact(['model', 'countries']));
     }
 
@@ -122,11 +122,11 @@ class SettingsController extends Controller
     }
 
 
-    public function getGeneral(Settings $settings,Countries $countries)
+    public function getGeneral(Settings $settings, Countries $countries)
     {
         $model = $settings->getEditableData('admin_general_settings');
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
-        return $this->view('general', compact('model','countries'));
+        return $this->view('general', compact('model', 'countries'));
     }
 
     public function saveGeneral(Request $request, Settings $settings)
@@ -160,6 +160,15 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    public function getRegions()
+    {
+        return $this->view('regions');
+    }
+
+    public function postRegions()
+    {
+
+    }
 
     public function getGeoZones()
     {
