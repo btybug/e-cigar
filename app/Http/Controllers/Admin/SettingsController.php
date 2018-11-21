@@ -254,7 +254,8 @@ class SettingsController extends Controller
     public
     function getStore(GetForexData $forexData)
     {
-        return $this->view('store.general');
+        $rates=$forexData->latest();
+        return $this->view('store.general',compact('rates'));
     }
 
 

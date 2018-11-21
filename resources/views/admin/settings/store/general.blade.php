@@ -108,25 +108,82 @@
                                 <div class="row">
                                     <label class="col-md-4">Default product price in </label>
                                     <div class="col-md-8">
-                                        <select class="form-control" name="">
-                                            <option value="1" selected="selected">USD</option>
-                                            <option value="2">GBP</option>
-                                            <option value="3">AMD</option>
+                                        <select class="form-control default-currency" name="">
+                                            <option value="USD" >USD</option>
+                                            <option value="GBP" selected="selected">GBP</option>
+                                            <option value="AMD">AMD</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-5">
+                                <table class="table table-responsive table--store-settings" data-table-id="20">
+
+                                    <tbody>
+
+                                    <tr class="bg-my-light-pink">
+                                        <th>Currency</th>
+                                        <th>Countries</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+
+
+
+                                        <td>
+                                            <select class="form-control" name="">
+                                                <option value="1" selected="selected">USD</option>
+                                                <option value="2">GBP</option>
+                                                <option value="3">AMD</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="form-control"  name="" type="text" >
+
+                                        </td>
+                                        <td colspan="2" class="text-right">
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+
+
+
+                                        <td>
+                                            <select class="form-control" name="">
+                                                <option value="1" selected="selected">USD</option>
+                                                <option value="2">GBP</option>
+                                                <option value="3">AMD</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="form-control"  name="" type="text" >
+                                        </td>
+                                        <td colspan="2" class="text-right">
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="add-new-ship-filed-container">
+                                        <td colspan="6" class="text-right">
+                                            <button type="button" data-id="2" data-options-count="6" data-exists="true" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
                             <div class="col-md-5" style="border: 1px solid #b1b1b1">
                                 <p>Current rate</p>
                                 <div class="row">
-                                    <label class="col-md-2">1 GBP</label>
+                                    <label class="col-md-2">1 <span class="currency">GBP</span></label>
                                     <div class="col-md-8">
                                         <input type="text" readonly value="1.281296" class="form-control">
                                     </div>
                                     <label class="col-md-2">USD</label>
                                 </div>
                                 <div class="row">
-                                    <label class="col-md-2">1 GBP</label>
+                                    <label class="col-md-2">1 <span class="currency">GBP<span></label>
                                     <div class="col-md-8">
                                         <input type="text" readonly value="621.85" class="form-control">
                                     </div>
@@ -142,64 +199,24 @@
                                     <thead>
                                     <tr class="info">
                                         <th>Currency Code</th>
-                                        <th>Currency Symbole</th>
-                                        <th>Currency Exchange Rate Api</th>
                                         <th>Currency Exchange Rate</th>
                                         <th>Update using Api</th>
-                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($rates['rates'] as $key=>$value)
                                     <tr>
-                                        <td>USD</td>
-                                        <td>&#x24;</td>
+                                        <td>{!! $key !!}</td>
+
                                         <td>
-                                            <select class="form-control" name="">
-                                                <option value="1" selected="selected">Yahoo Finance</option>
-                                                <option value="2">European central bank</option>
-                                                <option value="3">Fixer.io</option>
-                                                <option value="4">Free Curency covertor Api</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input class="form-control" name="" type="text">
+                                            <input class="form-control" readonly value="{!! $value !!}" name="" type="text">
                                         </td>
                                         <td>
                                             <button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>
                                         </td>
-                                        <td colspan="2" class="text-right">
-                                            <button type="button" class="btn btn-danger"><i
-                                                        class="fa fa-minus-circle"></i></button>
-                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td>EUR</td>
-                                        <td>&#8364;	</td>
-                                        <td>
-                                            <select class="form-control" name="">
-                                                <option value="1" selected="selected">Yahoo Finance</option>
-                                                <option value="2">European central bank</option>
-                                                <option value="3">Fixer.io</option>
-                                                <option value="4">Free Curency covertor Api</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input class="form-control" name="" type="text">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>
-                                        </td>
-                                        <td colspan="2" class="text-right">
-                                            <button type="button" class="btn btn-danger"><i
-                                                        class="fa fa-minus-circle"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr class="add-new">
-                                        <td colspan="6" class="text-right">
-                                            <button type="button" class="btn btn-primary"><i
-                                                        class="fa fa-plus-circle"></i></button>
-                                        </td>
-                                    </tr>
+                                        @endforeach
+
                                     </tbody>
 
                                 </table>
@@ -216,4 +233,17 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+
+@stop
+@section('js')
+   <script>
+       $(function(){
+           $('.default-currency').on('change',function () {
+               let value=$(this).val();
+               $('.currency').val(value)
+               $('.currency').text(value)
+           })
+       })
+   </script>
+
 @stop

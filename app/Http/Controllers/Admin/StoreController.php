@@ -12,19 +12,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponsRequest;
 use App\Http\Requests\PurchaseRequest;
-use App\Http\Requests\ShippingZonePost;
-use App\Http\Requests\StoreCategoryPost;
-use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\Products;
 use App\Models\Purchase;
-use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\StockVariation;
 use Carbon\Carbon;
-use DB;
 use PragmaRX\Countries\Package\Countries;
-use Lang;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
