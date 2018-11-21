@@ -21,6 +21,80 @@
         </ul>
         <div class="tab-pane fade in" id="admin_settings_regions">
 
+           <div class="panel panel-default">
+               <div class="panel-heading">Regions</div>
+
+               <div class="panel-body form-horizontal">
+                   {{--top 3 inputs--}}
+                   <div class="row mb-20">
+                       <div class="col-md-3">
+                           <div class="form-group">
+                               <label for="siteName" class="col-sm-3 text-right">Site Name</label>
+                               <div class="col-sm-9">
+                                   <input type="text" id="siteName" class="form-control">
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-4">
+                           <div class="form-group">
+                               <label for="siteLink" class="col-sm-3 text-right">Site Link</label>
+                               <div class="col-sm-9">
+                                   <input type="text" id="siteLink" class="form-control">
+                               </div>
+                           </div>
+                       </div>
+                       <div class="col-md-3">
+                           <div class="form-group">
+                               <label for="icon" class="col-sm-3 text-right">Icon</label>
+                               <div class="col-sm-9">
+                                   <input type="text" id="icon" class="form-control">
+                               </div>
+                           </div>
+                       </div>
+
+                   </div>
+
+                   {{--languages--}}
+                   <div class="row mb-20">
+                       <div class="col-md-3">
+                           <div class="form-group">
+                               <label for="languages" class="col-sm-3 text-right">Languages</label>
+                               <div class="col-sm-7">
+                                   <input type="text" id="languages" class="form-control">
+                               </div>
+                               <div class="col-sm-2">
+                                   <button class="btn btn-danger">
+                                       <i class="fa fa-plus"></i>
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+                   {{--currency--}}
+                   <div class="row">
+                       <div class="col-md-3">
+                           <div class="form-group">
+                               <label for="currency" class="col-sm-3 text-right">Currency</label>
+                               <div class="col-sm-7">
+                                   <input type="text" id="currency" class="form-control">
+                               </div>
+                               <div class="col-sm-2">
+                                   <button class="btn btn-danger">
+                                       <i class="fa fa-plus"></i>
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+
+               </div>
+
+           </div>
+            {{--add new item btn--}}
+            <div class="text-right">
+                <button class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;Add new item</button>
+            </div>
         </div>
 
     </div>
