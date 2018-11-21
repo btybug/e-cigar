@@ -5,7 +5,7 @@
     }
     $uniqueID = uniqid();
 @endphp
-<tr class="list-attrs-single-item" data-variation="{{ $uniqueID }}">
+<tr class="list-attrs-single-item" validate-name="{{ $item['name'] }}" validate-sku="{{ $item['variation_id'] }}" data-variation="{{ $uniqueID }}">
     <td>
         {!! $item['name'] !!}
         {!! Form::hidden('variations[]',json_encode($item,true),['class' => 'variation-json']) !!}

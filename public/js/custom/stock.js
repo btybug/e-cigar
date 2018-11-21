@@ -451,28 +451,98 @@ $("body").on("click", ".add-variation", function() {
         }
     );
 });
+jQuery.extend({
+    compare: function (arrayA, arrayB) {
+        if (arrayA.length != arrayB.length) { return false; }
+        // sort modifies original array
+        // (which are passed by reference to our method!)
+        // so clone the arrays before sorting
+        var a = jQuery.extend(true, [], arrayA);
+        var b = jQuery.extend(true, [], arrayB);
+        a.sort();
+        b.sort();
+        for (var i = 0, l = a.length; i < l; i++) {
+            if (a[i] !== b[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+});
+
 
 $("body").on("click", ".apply-variation", function() {
     var data = [];
     // var variationId = $(this).attr("variation-id");
-    var varationForm = $("#variation_form").serialize();
-    AjaxCall(
-        "/admin/inventory/stock/add-variation",
-        varationForm,
-        function(res) {
-            if (!res.error) {
-                var vID = $("#vId").val();
-                if(vID){
-                    $(".list-attrs-single-item[data-variation="+vID+"]").replaceWith(res.html);
-                }else{
-                    $(".all-list-attrs").append(res.html);
-                }
+    var variationForm = $("#variation_form").serialize();
+    console.log(variationForm)
+    var error = false;
+    var optionsArr = [];
 
-                $("#variation_form")[0].reset();
-                $("#variationModal").modal('hide');
+    $("body .option-class")
+        .each(function() {
+            let val = $(this).val();
+            optionsArr.push(parseInt(val));
+        });
+
+    $('.list-attrs-single-item').map(function (e,item) {
+        if($("#vId").val() != $(item).data('variation')){
+
+            var jsonData = JSON.parse($(item).find('.variation-json').val());
+            console.log(jsonData.options)
+            var compareOptions = [];
+
+            var massiveOptions = Object.values(jsonData.options)
+
+            console.log(massiveOptions)
+
+                massiveOptions.map(function (e,i) {
+                    compareOptions.push(parseInt(e.attributes_id))
+                    compareOptions.push(parseInt(e.options_id))
+                });
+
+
+            console.log(optionsArr,compareOptions)
+           var at = jQuery.compare(optionsArr, compareOptions);
+            console.log(at)
+            if(at == true){
+                alert('You already have variation with that options');
+                error = true;
+            }
+
+            if($("#variation_name").val() == $(item).attr('validate-name')){
+                alert('name can\'t be same');
+                error = true;
+            }
+
+            if($("#variation_id").val() == $(item).attr('validate-sku')){
+                alert('Sku can\'t be same');
+                error = true;
             }
         }
-    );
+
+    });
+
+    if(error === false){
+        AjaxCall(
+            "/admin/inventory/stock/add-variation",
+            variationForm,
+            function(res) {
+                if (!res.error) {
+                    var vID = $("#vId").val();
+                    if(vID){
+                        $(".list-attrs-single-item[data-variation="+vID+"]").replaceWith(res.html);
+                    }else{
+                        $(".all-list-attrs").append(res.html);
+                    }
+
+                    $("#variation_form")[0].reset();
+                    $("#variationModal").modal('hide');
+                }
+            }
+        );
+    }
+
     // $.each(varationForm, function(key, val) {
     //     var name = val.name;
     //     data[name] = val.value;
