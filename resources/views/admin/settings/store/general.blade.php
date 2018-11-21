@@ -151,7 +151,6 @@
                                     <tr>
 
 
-
                                         <td>
                                             <select class="form-control" name="">
                                                 <option value="1" selected="selected">USD</option>
@@ -160,17 +159,17 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input class="form-control"  name="" type="text" >
+                                            <input class="form-control" name="" type="text">
 
                                         </td>
                                         <td colspan="2" class="text-right">
-                                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                                        class="fa fa-minus-circle"></i></button>
                                         </td>
                                     </tr>
                                     <tr>
 
 
-
                                         <td>
                                             <select class="form-control" name="">
                                                 <option value="1" selected="selected">USD</option>
@@ -179,15 +178,18 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <input class="form-control"  name="" type="text" >
+                                            <input class="form-control" name="" type="text">
                                         </td>
                                         <td colspan="2" class="text-right">
-                                            <button type="button" class="btn btn-danger remove-ship-filed"><i class="fa fa-minus-circle"></i></button>
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                                        class="fa fa-minus-circle"></i></button>
                                         </td>
                                     </tr>
                                     <tr class="add-new-ship-filed-container">
                                         <td colspan="6" class="text-right">
-                                            <button type="button" data-id="2" data-options-count="6" data-exists="true" class="btn btn-primary add-new-ship-filed"><i class="fa fa-plus-circle"></i></button>
+                                            <button type="button" data-id="2" data-options-count="6" data-exists="true"
+                                                    class="btn btn-primary add-new-ship-filed"><i
+                                                        class="fa fa-plus-circle"></i></button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -197,10 +199,81 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                          <table class="table table-responsive table-striped table-bordered">
+                                    <thead>
+                                    <tr class="info">
+                                        <th>Currency Code</th>
+                                        <th>Currency Symbole</th>
+                                        <th>Currency Exchange Rate Api</th>
+                                        <th>Currency Exchange Rate</th>
+                                        <th>Update using Api</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>USD</td>
+                                        <td>&#x24;</td>
+                                        <td>
+                                            <select class="form-control" name="">
+                                                <option value="1" selected="selected">Yahoo Finance</option>
+                                                <option value="2">European central bank</option>
+                                                <option value="3">Fixer.io</option>
+                                                <option value="4">Free Curency covertor Api</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" name="" type="text">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary">Update now</button>
+                                        </td>
+                                        <td colspan="2" class="text-right">
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                                        class="fa fa-minus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>EUR</td>
+                                        <td>&#8364;	</td>
+                                        <td>
+                                            <select class="form-control" name="">
+                                                <option value="1" selected="selected">Yahoo Finance</option>
+                                                <option value="2">European central bank</option>
+                                                <option value="3">Fixer.io</option>
+                                                <option value="4">Free Curency covertor Api</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input class="form-control" name="" type="text">
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-secondary">Update now</button>
+                                        </td>
+                                        <td colspan="2" class="text-right">
+                                            <button type="button" class="btn btn-danger remove-ship-filed"><i
+                                                        class="fa fa-minus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="add-new">
+                                        <td colspan="6" class="text-right">
+                                            <button type="button" class="btn btn-primary"><i
+                                                        class="fa fa-plus-circle"></i></button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                        <div>
+                            <button class="btn btn-info">Update All exchange rates</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @stop
 
