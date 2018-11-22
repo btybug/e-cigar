@@ -173,25 +173,29 @@ div.dataTables_wrapper div.dataTables_filter input {
 /*End admin store settings*/
 
 /*create Email Templates*/
+/*.table--email-temp {*/
+    /*border: 1px solid #367fa9;*/
+    /*border-collapse: unset;*/
+    /*border-radius: 10px 10px 0 0;*/
+    /*overflow: hidden;*/
+/*}*/
+/*.table.table--email-temp th,*/
+/*.table.table--email-temp td {*/
+    /*border: 0;*/
+/*}*/
+
+/*.table--email-temp_bottom {*/
+    /*background: #d9edf7;*/
+/*}*/
+
 .table--email-temp {
-    border: 1px solid #367fa9;
-    border-collapse: unset;
-    border-radius: 10px 10px 0 0;
-    overflow: hidden;
-}
-.table.table--email-temp th,
-.table.table--email-temp td {
-    border: 0;
+border: 1px solid #eee;
 }
 
 .table--email-temp_top {
-    background: #367fa9;
-    color: #fff;
+    background: #eee;
 }
 
-.table--email-temp_bottom {
-    background: #d9edf7;
-}
 
 .table--email-temp_icon {
     color: #38b69a;
@@ -475,8 +479,16 @@ textarea {
     margin-bottom: 20px;
 }
 
+.mb-50 {
+    margin-bottom: 50px;
+}
+
 .mb-0 {
     margin-bottom: 0;
+}
+
+.mt-0 {
+    margin-top: 0;
 }
 
 .m-0 {
@@ -501,6 +513,10 @@ textarea {
 
 .d-inline-block {
     display: inline-block
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .bestbetter-modal-open input {
@@ -654,3 +670,10 @@ textarea {
     vertical-align: bottom;
 }
 /*End admin settings*/
+
+/*admin faq*/
+.faq-select-modal .option-elm-modal {
+    justify-content: space-between;
+    align-items: center;
+}
+/*End admin faq*/

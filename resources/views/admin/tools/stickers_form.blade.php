@@ -1,5 +1,5 @@
-<div class="col-md-9 options-form">
-    <div class="col-md-9 options-form">
+<div class="options-form">
+    <div class="col-md-8 col-md-offset-1">
         {!! Form::model($model,['url'=>route('admin_tools_stickers_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
         @if(count(get_languages()))

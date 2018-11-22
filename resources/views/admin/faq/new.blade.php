@@ -2,7 +2,7 @@
 @section('content-header')
     <div class="list-tabs-head">
         <div class="head">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs w-100">
                 <li class="active"><a data-toggle="tab" href="#home">Info</a></li>
                 <li><a data-toggle="tab" href="#seo">SEO</a></li>
             </ul>
@@ -345,7 +345,7 @@
                     <h4 class="modal-title">Select products</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="all-list">
+                    <div class="all-list list-group faq-select-modal">
                         <ul>
 
                         </ul>
@@ -387,7 +387,7 @@
                     if (!res.error) {
                         $("#productsModal .modal-body .all-list").empty();
                         res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                            let html = `<li data-id="${item.id}" class="option-elm-modal list-group-item d-flex"><a
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;

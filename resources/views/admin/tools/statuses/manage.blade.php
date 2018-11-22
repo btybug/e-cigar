@@ -14,34 +14,34 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-3 attributes-container">
-                        @foreach($statuses as $status)
-                            <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $status->id !!}"
-                                 data-parent-id="1">
-                                <div class="col-md-8">
-                                    {!! $status->name !!}
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
-                                </div>
+                <div class="col-md-3 attributes-container">
+                   <div class="mb-20 list-group">
+                       @foreach($statuses as $status)
+                           <div class="form-group row list-group-item bg-light attr-option pointer" data-item-id="{!! $status->id !!}"
+                                data-parent-id="1">
+                               <div class="col-md-8">
+                                   {!! $status->name !!}
+                               </div>
+                               <div class="col-md-4 text-right">
+                                   <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
+                               </div>
+                           </div>
+                       @endforeach
+                   </div>
+                    <div class="form-group row bord-top">
+                        {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
+                              <input name="type" type="hidden" value="{!! $type !!}">
+                            <div class="col-md-8">
+                                <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
                             </div>
-                        @endforeach
-                        <div class="form-group row bord-top">
-                            {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
-                                  <input name="type" type="hidden" value="{!! $type !!}">
-                                <div class="col-md-8">
-                                    <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <button class="btn btn-primary add-new-order"  type="submit">Add </button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="col-md-4 text-right">
+                                <button class="btn btn-primary add-new-order"  type="submit">Add </button>
+                            </div>
+                        </form>
                     </div>
-
-                    @include('admin.tools.statuses._patrials.status_form')
                 </div>
+
+                @include('admin.tools.statuses._patrials.status_form')
             </div>
         </div>
     </div>

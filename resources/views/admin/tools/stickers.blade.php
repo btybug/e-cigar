@@ -14,7 +14,6 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="row">
                     <div class="col-md-3 attributes-container">
                         @foreach($stickers as $sticker)
                             <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $sticker->id !!}"
@@ -49,7 +48,6 @@
                     </div>
 
                     @include('admin.tools.stickers_form')
-                </div>
             </div>
         </div>
     </div>

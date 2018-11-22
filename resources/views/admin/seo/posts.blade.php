@@ -24,7 +24,7 @@
     <div class="d-flex">
         <div class="container">
             {!! Form::model($general) !!}
-            <div class="pull-right"><button type="submit" class="btn btn-success">Save</button></div>
+            <div class="text-right mt-20"><button type="submit" class="btn btn-info">Save</button></div>
             <div class="seo-page-general">
                 <div class="panel panel-default mt-20">
                     <div class="panel-heading">General</div>

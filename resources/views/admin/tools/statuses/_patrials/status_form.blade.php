@@ -1,5 +1,5 @@
-<div class="col-md-9 options-form">
-    <div class="col-md-9 options-form">
+<div class="options-form">
+    <div class="col-md-8 col-md-offset-1">
         {!! Form::model($model,['url'=>route('post_admin_stock_statuses_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
         @if(count(get_languages()))
@@ -86,7 +86,7 @@
         </div>
         <div class="form-group">
             {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-            <a href="#" class="btn btn-success pull-right">Create Email</a>
+            <a href="#" class="btn btn-warning pull-right">Create Email</a>
         </div>
 
         {!! Form::close() !!}
