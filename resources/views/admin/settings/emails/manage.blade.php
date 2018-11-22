@@ -9,7 +9,7 @@
             </div>
             <div class="pull-right">
                 <div class="text-right btn-save">
-                    <button type="submit" class="btn btn-success btn-view">View Template</button>
+                    <button type="submit" class="btn btn-danger btn-view">View Template</button>
                     <button type="submit" class="btn btn-info">Save</button>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                                                            @endforeach
                                                        </ul>
                                                    @endif
-                                                   <div class="tab-content pt-30">
+                                                   <div class="tab-content tab-content-store-settings">
                                                        @if(count(get_languages()))
                                                            @foreach(get_languages() as $language)
                                                                <div id="{{ strtolower($language->code) }}"
@@ -112,7 +112,7 @@
                                                    @if(count(get_languages()))
                                                        @foreach(get_languages() as $language)
                                                            <div id="{{ strtolower($language->code) }}"
-                                                                class="tab-pane pt-30 fade  @if($loop->first) in active @endif">
+                                                                class="tab-pane fade  @if($loop->first) in active @endif">
                                                                <div class="form-group row">
                                                                    {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
                                                                    <div class="col-sm-9">
@@ -141,7 +141,7 @@
            </div>
            <div class="col-md-4 col-md-offset-1">
                @if($shortcodes->relatedShortcoders[$model->slug])
-                   <table class="table table-striped table--email-temp">
+                   <table class="table table-striped table--email-temp mb-50">
                        <thead>
                        <tr class="table--email-temp_top">
                            <th colspan="3">Specific shortcodes for this type</th>
@@ -163,7 +163,6 @@
                        @endforeach
                        </tbody>
                    </table>
-                   <hr>
                @endif
                <table class="table table-striped table--email-temp">
                    <thead>
@@ -186,7 +185,6 @@
                    @endforeach
                    </tbody>
                </table>
-                   <hr>
                <div class="form-group row border-top">
                    {{Form::label('is_active', 'Status',['class' => 'col-sm-3'])}}
                    <div class="col-sm-9">
