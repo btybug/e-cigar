@@ -168,7 +168,7 @@ class SettingsController extends Controller
 
     public function postRegions(Request $request)
     {
-dd($request->all());
+        dd($request->all());
     }
 
     public function getGeoZones()
@@ -253,11 +253,30 @@ dd($request->all());
     }
 
     public
-    function getStore(Currencies $currencies)
+    function getStore(Currencies $currencies,Settings $settings,Request $request)
     {
+        $default=$settings->where('section','currencies')->where('key','default_currency_code')->first();
+        $p=$request->get('p',($default)?$default->val:null);
+        $siteCurrencies=($p)?$settings->getEditableData('currencies',$p)->toArray():[];
+        $currencies = $currencies->all()->pluck('currency', 'currency');
+        return $this->view('store.general', compact('currencies','p','siteCurrencies'));
+    }
 
-        $currencies=$currencies->all()->pluck('currency','currency');
-        return $this->view('store.general',compact('currencies'));
+    public function postStore(Request $request,Settings $settings)
+    {
+        $data=[];
+        $settings->updateOrCreateSettings('currencies',['default_currency_code'=>$request->get('default_currency_code')]);
+        $currencies=$request->get('currency_code',[]);
+        $rates=$request->get('rate',[]);
+        foreach ($currencies as $key=>$currency){
+           $data[$currency] =$rates[$key];
+        }
+        $settings
+            ->where('section','currencies')
+            ->where('sub_id',$request->get('default_currency_code'))
+            ->whereNotIn('key',$currencies)->delete();
+        $settings->updateOrCreateSettings('currencies',$data,$request->get('default_currency_code'));
+        return redirect()->back();
     }
 
 

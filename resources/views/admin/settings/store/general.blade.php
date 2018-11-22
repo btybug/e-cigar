@@ -38,9 +38,8 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
+        {!! Form::open(['class'=>'form-horizontal']) !!}
         <div class="" id="myTabContent">
-            {!! Form::open(['class'=>'form-horizontal']) !!}
-
             <div class="form-group">
                 <div class="row">
                     <label for="text" class="control-label col-md-4">we ship to</label>
@@ -49,7 +48,6 @@
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
         </div>
         <div>
             <div class="panel panel-default">
@@ -108,11 +106,7 @@
                                 <div class="row">
                                     <label class="col-md-4">Default product price in </label>
                                     <div class="col-md-8">
-                                        <select class="form-control default-currency" name="">
-                                            <option value="USD">USD</option>
-                                            <option value="GBP" selected="selected">GBP</option>
-                                            <option value="AMD">AMD</option>
-                                        </select>
+                                        {!! Form::select('default_currency_code',$currencies,$p,['class'=>'form-control default-currency']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -120,11 +114,7 @@
                                 <div class="row">
                                     <label class="col-md-4">Other currencies </label>
                                     <div class="col-md-8">
-                                        {{--<select class="form-control default-currency" name="">--}}
-                                        {{--<option value="USD" >USD</option>--}}
-                                        {{--<option value="GBP" selected="selected">GBP</option>--}}
-                                        {{--<option value="AMD">AMD</option>--}}
-                                        {{--</select>--}}
+
                                     </div>
                                 </div>
                             </div>
@@ -143,52 +133,63 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    {!! Form::select('currency_code',$currencies,null,['class'=>'form-control']) !!}
+                            <tbody id="currency-list">
+                            @foreach($siteCurrencies as $currency=>$rate)
+                                <tr>
+                                    <td>
+                                        {!! Form::select('currency_code[]',$currencies,$currency,['class'=>'form-control']) !!}
 
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control">
-                                </td>
-                                <td class="w-10">
-                                    <button class="btn btn-primary">Get live rate</button>
-                                </td>
-                                <td class="text-right w-5">
-                                    <button class="btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
-                                </td>
-                            </tr>
-                            {{--@foreach($rates['rates'] as $key=>$value)--}}
-                            {{--<tr>--}}
-                            {{--<td>{!! $key !!}</td>--}}
-
-                            {{--<td>--}}
-                            {{--<input class="form-control" readonly value="{!! $value !!}" name="" type="text">--}}
-                            {{--</td>--}}
-                            {{--<td>--}}
-                            {{--<button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>--}}
-                            {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--@endforeach--}}
+                                    </td>
+                                    <td>
+                                        <input type="text" name="rate[]"  value="{!! $rate !!}" class="form-control">
+                                    </td>
+                                    <td class="w-10">
+                                        <button type="button" class="btn btn-primary">Get live rate</button>
+                                    </td>
+                                    <td class="text-right w-5">
+                                        <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
+                                    </td>
+                                </tr>
+                            @endforeach
 
                             </tbody>
                             <tfoot>
-                              <tr>
-                                  <td colspan="4" class="text-right"><button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></td>
-                              </tr>
+                            <tr>
+                                <td colspan="4" class="text-right">
+                                    <button type="button" class="btn btn-info btn-sm " id="add-more-currency"><i
+                                                class="fa fa-plus"></i></button>
+                                </td>
+                            </tr>
                             </tfoot>
 
                         </table>
                         <div>
-                            <button class="btn btn-info">Update All exchange rates</button>
+                            <button type="submit" class="btn btn-info">Update All exchange rates</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
     </div>
+    <script type="template" id="currency_row">
+        <tr>
+            <td>
+                {!! Form::select('currency_code[]',$currencies,null,['class'=>'form-control']) !!}
+
+            </td>
+            <td>
+                <input type="text" name="rate[]" class="form-control">
+            </td>
+            <td class="w-10">
+                <button type="button" class="btn btn-primary">Get live rate</button>
+            </td>
+            <td class="text-right w-5">
+                <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
+            </td>
+        </tr>
+    </script>
 @stop
 
 @section('css')
@@ -200,9 +201,16 @@
         $(function () {
             $('.default-currency').on('change', function () {
                 let value = $(this).val();
-                $('.currency').val(value)
-                $('.currency').text(value)
+                window.location.href='?p='+value;
             })
+            $('#add-more-currency').on('click', function () {
+                let html = $('#currency_row').html();
+                $('#currency-list').append(html);
+            });
+            $('body').on('click', '.remove-row', function () {
+                $(this).closest('tr').remove();
+            });
+            $()
         })
     </script>
 
