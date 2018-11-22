@@ -216,18 +216,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($rates['rates'] as $key=>$value)
-                                    <tr>
-                                        <td>{!! $key !!}</td>
+                                    {{--@foreach($rates['rates'] as $key=>$value)--}}
+                                    {{--<tr>--}}
+                                        {{--<td>{!! $key !!}</td>--}}
 
-                                        <td>
-                                            <input class="form-control" readonly value="{!! $value !!}" name="" type="text">
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>
-                                        </td>
-                                    </tr>
-                                        @endforeach
+                                        {{--<td>--}}
+                                            {{--<input class="form-control" readonly value="{!! $value !!}" name="" type="text">--}}
+                                        {{--</td>--}}
+                                        {{--<td>--}}
+                                            {{--<button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>--}}
+                                        {{--</td>--}}
+                                    {{--</tr>--}}
+                                        {{--@endforeach--}}
 
                                     </tbody>
 

@@ -254,7 +254,7 @@ dd($request->all());
     public
     function getStore(GetForexData $forexData)
     {
-        $rates=$forexData->latest();
+        //$rates=$forexData->latest();
         return $this->view('store.general',compact('rates'));
     }
 
