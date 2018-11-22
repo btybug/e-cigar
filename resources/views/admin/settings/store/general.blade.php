@@ -109,7 +109,7 @@
                                     <label class="col-md-4">Default product price in </label>
                                     <div class="col-md-8">
                                         <select class="form-control default-currency" name="">
-                                            <option value="USD" >USD</option>
+                                            <option value="USD">USD</option>
                                             <option value="GBP" selected="selected">GBP</option>
                                             <option value="AMD">AMD</option>
                                         </select>
@@ -120,11 +120,11 @@
                                 <div class="row">
                                     <label class="col-md-4">Other currencies </label>
                                     <div class="col-md-8">
-                                        <select class="form-control default-currency" name="">
-                                            <option value="USD" >USD</option>
-                                            <option value="GBP" selected="selected">GBP</option>
-                                            <option value="AMD">AMD</option>
-                                        </select>
+                                        {{--<select class="form-control default-currency" name="">--}}
+                                        {{--<option value="USD" >USD</option>--}}
+                                        {{--<option value="GBP" selected="selected">GBP</option>--}}
+                                        {{--<option value="AMD">AMD</option>--}}
+                                        {{--</select>--}}
                                     </div>
                                 </div>
                             </div>
@@ -134,31 +134,37 @@
 
 
                     <div class="form-group">
-                          <table class="table table-responsive table-striped table-bordered">
-                                    <thead>
-                                    <tr class="info">
-                                        <th>Currency Code</th>
-                                        <th>Currency Exchange Rate</th>
-                                        <th>Update using Api</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {{--@foreach($rates['rates'] as $key=>$value)--}}
-                                    {{--<tr>--}}
-                                        {{--<td>{!! $key !!}</td>--}}
+                        <table class="table table-responsive table-striped table-bordered">
+                            <thead>
+                            <tr class="info">
+                                <th>Currency Code</th>
+                                <th>Currency Exchange Rate</th>
+                                <th>Other currencies</th>
+                                <th>Update using Api</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{--@foreach($rates['rates'] as $key=>$value)--}}
+                            {{--<tr>--}}
+                            {{--<td>{!! $key !!}</td>--}}
 
-                                        {{--<td>--}}
-                                            {{--<input class="form-control" readonly value="{!! $value !!}" name="" type="text">--}}
-                                        {{--</td>--}}
-                                        {{--<td>--}}
-                                            {{--<button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>--}}
-                                        {{--</td>--}}
-                                    {{--</tr>--}}
-                                        {{--@endforeach--}}
+                            {{--<td>--}}
+                            {{--<input class="form-control" readonly value="{!! $value !!}" name="" type="text">--}}
+                            {{--</td>--}}
+                            {{--<td>--}}
+                            {{--<button type="button" class="btn btn-secondary">Update now <i class="fa fa-repeat"></i></button>--}}
+                            {{--</td>--}}
+                            {{--</tr>--}}
+                            {{--@endforeach--}}
 
-                                    </tbody>
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                  <td colspan="4" class="text-right"><button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></td>
+                              </tr>
+                            </tfoot>
 
-                                </table>
+                        </table>
                         <div>
                             <button class="btn btn-info">Update All exchange rates</button>
                         </div>
@@ -175,14 +181,14 @@
 
 @stop
 @section('js')
-   <script>
-       $(function(){
-           $('.default-currency').on('change',function () {
-               let value=$(this).val();
-               $('.currency').val(value)
-               $('.currency').text(value)
-           })
-       })
-   </script>
+    <script>
+        $(function () {
+            $('.default-currency').on('change', function () {
+                let value = $(this).val();
+                $('.currency').val(value)
+                $('.currency').text(value)
+            })
+        })
+    </script>
 
 @stop
