@@ -106,7 +106,13 @@
                                     <th></th>
                                 </tr>
                                 <tr>
-                                    <td>RUS</td>
+                                    <td>
+                                        <select class="form-control" name="">
+                                            <option value="1" selected="selected">RUS</option>
+                                            <option value="2">AM</option>
+                                            <option value="3">FR</option>
+                                        </select>
+                                    </td>
                                     <td>
                                         <select class="form-control" name="">
                                             <option value="1" selected="selected">USD</option>
@@ -123,7 +129,13 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>AM</td>
+                                    <td>
+                                        <select class="form-control" name="">
+                                            <option value="1">RUS</option>
+                                            <option value="2" selected="selected">AM</option>
+                                            <option value="3">FR</option>
+                                        </select>
+                                    </td>
                                     <td>
                                         <select class="form-control" name="">
                                             <option value="1" selected="selected">USD</option>
