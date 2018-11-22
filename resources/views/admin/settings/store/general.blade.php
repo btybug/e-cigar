@@ -104,9 +104,21 @@
                 <div class="panel-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-8">
                                 <div class="row">
                                     <label class="col-md-4">Default product price in </label>
+                                    <div class="col-md-8">
+                                        <select class="form-control default-currency" name="">
+                                            <option value="USD" >USD</option>
+                                            <option value="GBP" selected="selected">GBP</option>
+                                            <option value="AMD">AMD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="row">
+                                    <label class="col-md-4">Other currencies </label>
                                     <div class="col-md-8">
                                         <select class="form-control default-currency" name="">
                                             <option value="USD" >USD</option>
