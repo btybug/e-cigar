@@ -196,19 +196,12 @@ border: 1px solid #eee;
     background: #eee;
 }
 
-
 .table--email-temp_icon {
     color: #38b69a;
     font-size: 18px;
-    font-weight: bold;
 }
 /*End create Email Templates*/
 
-/*new shipping zone*/
-.panel-body--new-shipping-zone .form-control:focus {
-    border-color: #3c8dbc;
-}
-/*End new shipping zone*/
 
 /*admin orders*/
 .table--order-dtls {
@@ -505,6 +498,10 @@ textarea {
 
 .pt-25 {
     padding-top: 25px;
+}
+
+.pt-30 {
+    padding-top: 30px;
 }
 
 .d-block {
