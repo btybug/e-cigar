@@ -210,7 +210,6 @@
             $('body').on('click', '.remove-row', function () {
                 $(this).closest('tr').remove();
             });
-            $()
         })
     </script>
 

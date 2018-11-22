@@ -161,14 +161,25 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function getRegions()
+    public function getRegions(SiteLanguages $languages, Settings $settings)
     {
-        return $this->view('regions');
+        $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
+        $siteCurrencies = array_keys(($default) ? [$default->val => 1] + $settings->getEditableData('currencies', $default->val)->toArray() : []);
+        $currencies = [];
+        foreach ($siteCurrencies as $siteCurrency) {
+            $currencies[$siteCurrency] = $siteCurrency;
+        };
+        $regions = $settings->where('section','site_regions')->where('key','regions')->first();
+        $regions=($regions)?json_decode($regions->val,true):[];
+        $languages = $languages->all()->pluck('name', 'name');
+        return $this->view('regions', compact('languages', 'currencies','regions'));
     }
 
     public function postRegions(Request $request)
     {
-        dd($request->all());
+        $data = $request->except('_token');
+        Settings::updateOrCreate(['section'=>'site_regions', 'key' => 'regions'], ['val' => json_encode($data, true)]);
+        return redirect()->back();
     }
 
     public function getGeoZones()
@@ -241,8 +252,7 @@ class SettingsController extends Controller
         return ['error' => false, 'url' => route('admin_settings_shipping')];
     }
 
-    public
-    function findRegion(Request $request)
+    public function findRegion(Request $request)
     {
         $countries = new Countries();
         $regions = $countries->whereNameCommon($request->get('country'))->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
@@ -252,138 +262,122 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public
-    function getStore(Currencies $currencies,Settings $settings,Request $request)
+    public function getStore(Currencies $currencies, Settings $settings, Request $request)
     {
-        $default=$settings->where('section','currencies')->where('key','default_currency_code')->first();
-        $p=$request->get('p',($default)?$default->val:null);
-        $siteCurrencies=($p)?$settings->getEditableData('currencies',$p)->toArray():[];
+        $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
+        $p = $request->get('p', ($default) ? $default->val : null);
+        $siteCurrencies = ($p) ? $settings->getEditableData('currencies', $p)->toArray() : [];
         $currencies = $currencies->all()->pluck('currency', 'currency');
-        return $this->view('store.general', compact('currencies','p','siteCurrencies'));
+        return $this->view('store.general', compact('currencies', 'p', 'siteCurrencies'));
     }
 
-    public function postStore(Request $request,Settings $settings)
+    public function postStore(Request $request, Settings $settings)
     {
-        $data=[];
-        $settings->updateOrCreateSettings('currencies',['default_currency_code'=>$request->get('default_currency_code')]);
-        $currencies=$request->get('currency_code',[]);
-        $rates=$request->get('rate',[]);
-        foreach ($currencies as $key=>$currency){
-           $data[$currency] =$rates[$key];
+        $data = [];
+        $settings->updateOrCreateSettings('currencies', ['default_currency_code' => $request->get('default_currency_code')]);
+        $currencies = $request->get('currency_code', []);
+        $rates = $request->get('rate', []);
+        foreach ($currencies as $key => $currency) {
+            $data[$currency] = $rates[$key];
         }
         $settings
-            ->where('section','currencies')
-            ->where('sub_id',$request->get('default_currency_code'))
-            ->whereNotIn('key',$currencies)->delete();
-        $settings->updateOrCreateSettings('currencies',$data,$request->get('default_currency_code'));
+            ->where('section', 'currencies')
+            ->where('sub_id', $request->get('default_currency_code'))
+            ->whereNotIn('key', $currencies)->delete();
+        $settings->updateOrCreateSettings('currencies', $data, $request->get('default_currency_code'));
         return redirect()->back();
     }
 
 
-    public
-    function getStorePaymentsGateways(Settings $settings)
+    public function getStorePaymentsGateways(Settings $settings)
     {
         $model = $settings->getEditableData('active_payments_gateways');
         return $this->view('store.payments_gateways', compact('model'));
     }
 
 
-    public
-    function getStorePaymentsGatewaysSettings(Settings $settings)
+    public function getStorePaymentsGatewaysSettings(Settings $settings)
     {
         $model = $settings->getEditableData('payments_gateways');
         return $this->view('store.payments_gateways.settings', compact('model'));
     }
 
-    public
-    function postStorePaymentsGatewaysSettings(Request $request, Settings $settings)
+    public function postStorePaymentsGatewaysSettings(Request $request, Settings $settings)
     {
         $settings->updateOrCreateSettings('payments_gateways', $request->except('_token'));
         return redirect()->back();
     }
 
-    public
-    function getStorePaymentsGatewaysCash(Settings $settings)
+    public function getStorePaymentsGatewaysCash(Settings $settings)
     {
         $model = $settings->getEditableData('payments_gateways_cash');
         return $this->view('store.payments_gateways.cash', compact('model'));
     }
 
-    public
-    function postStorePaymentsGatewaysCash(Request $request, Settings $settings)
+    public function postStorePaymentsGatewaysCash(Request $request, Settings $settings)
     {
         $settings->updateOrCreateSettings('payments_gateways_cash', $request->except('_token'));
         return redirect()->back();
     }
 
-    public
-    function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
+    public function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
     {
         $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
         $settings->updateOrCreateSettings('active_payments_gateways', $data);
         return 1;
     }
 
-    public
-    function postCouriersEnable(Request $request, Settings $settings)
+    public function postCouriersEnable(Request $request, Settings $settings)
     {
         $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
         $settings->updateOrCreateSettings('active_couriers', $data);
         return 1;
     }
 
-    public
-    function getCouriers(Settings $settings)
+    public function getCouriers(Settings $settings)
     {
         $model = $settings->getEditableData('active_couriers');
         $couriers = Couriers::all();
         return $this->view('store.couriers', compact('model', 'couriers'));
     }
 
-    public
-    function getCouriersEdit($id)
+    public function getCouriersEdit($id)
     {
         $model = Couriers::find($id);
         return $this->view('store.couriers.edit', compact('model'));
     }
 
-    public
-    function getCouriersSave(Request $request)
+    public function getCouriersSave(Request $request)
     {
         Couriers::updateOrCreate($request->id, $request->except('_token'));
         return redirect()->route('admin_settings_couriers');
     }
 
-    public
-    function getDeliveryCost(Settings $settings)
+    public function getDeliveryCost(Settings $settings)
     {
         $model = $settings->getEditableData('deliverycost');
         return $this->view('store.delivery_cost', compact('model'));
     }
 
-    public
-    function getTaxRates(Settings $settings)
+    public function getTaxRates(Settings $settings)
     {
         $tax_rates = TaxRates::all();
         return $this->view('store.tax_rates', compact('tax_rates'));
     }
 
-    public
-    function getCreateRate($id = null)
+    public function getCreateRate($id = null)
     {
         $model = TaxRates::find($id);
         return $this->view('store.tax_rates.create', compact('model'));
     }
 
-    public
-    function postCreateOrUpdateTaxRate(Request $request)
+    public function postCreateOrUpdateTaxRate(Request $request)
     {
         TaxRates::updateOrCreate($request->id, $request->except('_token', 'translatable'));
         return redirect()->route('admin_settings_tax_rates');
     }
 
-    public
-    function postTaxRatesEnable(Request $request)
+    public function postTaxRatesEnable(Request $request)
     {
 
         $tax = TaxRates::find($request->get('key'));
@@ -392,30 +386,26 @@ class SettingsController extends Controller
         return 1;
     }
 
-    public
-    function searchPaymentOptions(Request $request, Settings $settings)
+    public function searchPaymentOptions(Request $request, Settings $settings)
     {
         return $settings->where('section', 'active_payments_gateways')->get();
 
 
     }
 
-    public
-    function getGifts()
+    public function getGifts()
     {
         return $this->view('store.gifts');
     }
 
-    public
-    function getGiftsManage($id = null)
+    public function getGiftsManage($id = null)
     {
         $products = Products::where('status', 'published')->get()->pluck('name', 'id');
         $productsTableColumns = collect(\DB::select('show columns from products'))->pluck('Field', 'Field');
         return $this->view('store.gifts.manage', compact('products', 'productsTableColumns'));
     }
 
-    public
-    function postGiftsManage(Request $request)
+    public function postGiftsManage(Request $request)
     {
         $gifts = $request->except('_token');
         dd($request->all());
