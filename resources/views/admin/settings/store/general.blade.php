@@ -140,6 +140,7 @@
                                 <th>Currency Code</th>
                                 <th>Currency Exchange Rate</th>
                                 <th>Update using Api</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -154,8 +155,11 @@
                                 <td>
                                     <input type="text" class="form-control">
                                 </td>
-                                <td>
+                                <td class="w-10">
                                     <button class="btn btn-primary">Get live rate</button>
+                                </td>
+                                <td class="text-right w-5">
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-minus"></i></button>
                                 </td>
                             </tr>
                             {{--@foreach($rates['rates'] as $key=>$value)--}}
@@ -174,7 +178,7 @@
                             </tbody>
                             <tfoot>
                               <tr>
-                                  <td colspan="3" class="text-right"><button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></td>
+                                  <td colspan="4" class="text-right"><button class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button></td>
                               </tr>
                             </tfoot>
 

@@ -1162,3 +1162,9 @@ resize: none;
     object-fit: cover;
 }
 /*Comments end*/
+.w-10{
+    width: 10%;
+}
+.w-5{
+    width: 5%;
+}
