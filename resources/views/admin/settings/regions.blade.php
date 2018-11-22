@@ -100,14 +100,13 @@
                                 <tbody>
 
                                 <tr class="bg-my-light-pink">
+                                    <th>Language</th>
                                     <th>Currency</th>
                                     <th>Countries</th>
                                     <th></th>
                                 </tr>
                                 <tr>
-
-
-
+                                    <td>RUS</td>
                                     <td>
                                         <select class="form-control" name="">
                                             <option value="1" selected="selected">USD</option>
@@ -124,9 +123,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-
-
-
+                                    <td>AM</td>
                                     <td>
                                         <select class="form-control" name="">
                                             <option value="1" selected="selected">USD</option>
