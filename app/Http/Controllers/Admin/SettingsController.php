@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Requests\GeoZonesRequest;
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Couriers;
+use App\Models\Currencies;
 use App\Models\DeliveryCostsTypes;
 use App\Models\Emails;
 use App\Models\GeoZones;
@@ -252,10 +253,11 @@ dd($request->all());
     }
 
     public
-    function getStore(GetForexData $forexData)
+    function getStore(Currencies $currencies)
     {
-        //$rates=$forexData->latest();
-        return $this->view('store.general',compact('rates'));
+
+        $currencies=$currencies->all()->pluck('currency','currency');
+        return $this->view('store.general',compact('currencies'));
     }
 
 

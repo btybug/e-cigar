@@ -146,11 +146,8 @@
                             <tbody>
                             <tr>
                                 <td>
-                                    <select class="form-control" name="">
-                                        <option value="1" selected="selected">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
+                                    {!! Form::select('currency_code',$currencies,null,['class'=>'form-control']) !!}
+
                                 </td>
                                 <td>
                                     <input type="text" class="form-control">

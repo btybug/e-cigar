@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
              EmailsTableSeeder::class,
              CouriersTableSeeder::class,
              DeliveryCostsTypesTableSeeder::class,
-             CategoryTableSeeder::class
+             CategoryTableSeeder::class,
+             CurrenciesTableSeeder::class,
          ]);
     }
 }
