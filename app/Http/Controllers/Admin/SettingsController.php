@@ -165,9 +165,9 @@ class SettingsController extends Controller
         return $this->view('regions');
     }
 
-    public function postRegions()
+    public function postRegions(Request $request)
     {
-
+dd($request->all());
     }
 
     public function getGeoZones()
