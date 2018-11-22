@@ -129,23 +129,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5" style="border: 1px solid #b1b1b1">
-                                <p>Current rate</p>
-                                <div class="row">
-                                    <label class="col-md-2">1 <span class="currency">GBP</span></label>
-                                    <div class="col-md-8">
-                                        <input type="text" readonly value="1.281296" class="form-control">
-                                    </div>
-                                    <label class="col-md-2">USD</label>
-                                </div>
-                                <div class="row">
-                                    <label class="col-md-2">1 <span class="currency">GBP<span></label>
-                                    <div class="col-md-8">
-                                        <input type="text" readonly value="621.85" class="form-control">
-                                    </div>
-                                    <label class="col-md-2">AMD</label>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
