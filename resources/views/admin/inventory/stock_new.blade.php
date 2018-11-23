@@ -473,7 +473,7 @@
                                         </div>
                                         <div class="button-add text-center">
                                             <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-block get-all-extra-tab-event"><i
+                                               class="btn btn-primary btn-block get-all-extra-tab-event" data-toggle="modal" data-target="#myExtraTabModal"><i
                                                         class="fa fa-plus mr-10"></i>Add new
                                                 option</a>
                                         </div>
@@ -710,7 +710,69 @@
         <!-- /.row -->
 
     </section>
+    <!-- Modal -->
+    <div id="myExtraTabModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">New Option</h4>
+                </div>
+                <form action="">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <label for="" class="col-md-3">Option Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-responsive table--store-settings">
+                        <thead>
+                        <tr class="bg-my-light-pink">
+                            <th>Attributes</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td class="w-20">
+                                        <input type="text" class="form-control">
+                                    </td>
+                                    <td class="w-70">
+                                        <input type="text" value="Option1,Option2" data-role="tagsinput"/>
+                                    </td>
+                                    <td colspan="2" class="text-right">
+                                        <button type="button" class="btn btn-danger"><i
+                                                    class="fa fa-minus-circle"></i></button>
+                                    </td>
+                                </tr>
+
+                        </tbody>
+                        <tfoot>
+                        <tr class="add-new-ship-filed-container">
+                            <td colspan="4" class="text-right">
+                                <button type="button" class="btn btn-primary"><i
+                                            class="fa fa-plus-circle"></i></button>
+                            </td>
+                        </tr>
+                        </tfoot>
+
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info">Save</button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
     <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
