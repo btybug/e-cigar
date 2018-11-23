@@ -63,7 +63,6 @@
 <link rel="stylesheet" href="http://laraframe.codemen.org/backend/assets/css/admin_lte.css">
 <link rel="stylesheet" href="http://laraframe.codemen.org/common/vendors/iCheck/flat/_all.css">
 @stop
-
 @section('js')
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
