@@ -400,6 +400,9 @@
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
+                                <div class="col-sm-12 text-center mb-20">
+                                    <a href="javascript:void(0);" class="btn btn-warning" data-toggle="modal" data-target="#myExtraTabModal">Select Atributes <span class="ml-50">Edit</span></a>
+                                </div>
                                 <div class="col-sm-12">
                                     <div class="basic-center basic-wall">
                                         <div class="row">
@@ -741,7 +744,10 @@
                         <tbody>
                                 <tr>
                                     <td class="w-20">
-                                        <input type="text" class="form-control">
+                                        <select name="" class="form-control">
+                                            <option value="">Select</option>
+                                            <option value="">2</option>
+                                        </select>
                                     </td>
                                     <td class="w-70">
                                         <input type="text" value="Option1,Option2" data-role="tagsinput"/>
