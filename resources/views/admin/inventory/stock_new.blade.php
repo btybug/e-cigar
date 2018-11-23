@@ -715,7 +715,7 @@
     </section>
     <!-- Modal -->
     <div id="myExtraTabModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
@@ -741,14 +741,14 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="v-options-list">
                             @include("admin.inventory._partials.variation_option_item")
                         </tbody>
                         <tfoot>
                         <tr class="add-new-ship-filed-container">
                             <td colspan="4" class="text-right">
                                 <button type="button" class="btn btn-primary"><i
-                                            class="fa fa-plus-circle"></i></button>
+                                            class="fa fa-plus-circle add-new-v-option"></i></button>
                             </td>
                         </tr>
                         </tfoot>
@@ -867,6 +867,78 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
+            var elementList = $(".select-attribute");
+
+            console.log(elementList);
+
+            for (var i = 0; i < elementList.length; i++) {
+                var ele = elementList[i];
+                if($(ele).val() != ''){
+                    makeSearchItem({
+                        input:
+                        ".v-input-" + $(ele).data("uid"),
+                        name: "name",
+                        url:
+                        "/admin/inventory/attributes/get-options-by-id/" +
+                        $(ele).val(),
+                        title: "Attributes",
+                        inputValues: "#tags-names",
+                        containerForAppend: null
+                    });
+                }
+            }
+
+
+
+            $("body").on('click', '.delete-v-option', function () {
+                $(this).closest('tr').remove();
+            });
+
+            $("body").on('click', '.add-new-v-option', function () {
+                AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
+                    if (!res.error) {
+                        $(".v-options-list").append(res.html);
+                        $(".tag-input-v").tagsinput();
+                        makeSearchItem({
+                            input:
+                            ".v-input-" + vID,
+                            name: "name",
+                            url:
+                            "/admin/inventory/attributes/get-options-by-id/" +
+                            value,
+                            title: "Attributes",
+                            inputValues: "#tags-names",
+                            containerForAppend: null
+                        });
+                    }
+                });
+            });
+
+            $("body").on('change', '.select-attribute', function () {
+                var value = $(this).val();
+                var vID = $(this).data('uid');
+                if(value != ''){
+                    AjaxCall("/admin/inventory/stock/get-option-by-id", {id: value}, function (res) {
+                        if (!res.error) {
+                            $(".select-attribute[data-uid="+vID+"]").closest('.v-options-list-item').replaceWith(res.html);
+                            $(".tag-input-v").tagsinput();
+                            makeSearchItem({
+                                input:
+                                ".v-input-" + vID,
+                                name: "name",
+                                url:
+                                "/admin/inventory/attributes/get-options-by-id/" +
+                                value,
+                                title: "Attributes",
+                                inputValues: "#tags-names",
+                                containerForAppend: null
+                            });
+                        }
+                    });
+                }
+            });
+
+
             $("body").on('click', '.select-products', function () {
                 let arr = [];
                 $(".get-all-products-tab")

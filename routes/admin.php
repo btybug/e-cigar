@@ -168,6 +168,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
         Route::post('/add-variation', 'Admin\InventoryController@addVariation')->name('admin_stock_variation_add');
         Route::post('/edit-variation', 'Admin\InventoryController@editVariation')->name('admin_stock_variation_add');
+        Route::post('/get-option-by-id', 'Admin\InventoryController@getOptionById')->name('admin_stock_variation_get_option');
     });
 
     Route::group(['prefix' => 'attributes'], function () {

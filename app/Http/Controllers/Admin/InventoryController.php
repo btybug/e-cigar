@@ -159,4 +159,14 @@ class InventoryController extends Controller
         $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data','variationId']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function getOptionById(Request $request)
+    {
+        $selected = Attributes::find($request->id);
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+
+        $html = \View("admin.inventory._partials.variation_option_item",compact(['selected','allAttrs']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }

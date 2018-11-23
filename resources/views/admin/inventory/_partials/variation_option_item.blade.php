@@ -1,21 +1,22 @@
 @php
     $uniqueID = uniqid();
 @endphp
-<tr>
+<tr class="v-options-list-item">
     <td class="w-20">
-        <select name="test_options[{{ $uniqueID }}][attr_id]" class="form-control">
+        <select data-uid="{{ $uniqueID }}" name="test_options[{{ $uniqueID }}][attr_id]" class="form-control select-attribute" placeholder="Select">
+               <option>Select</option>
            @foreach($allAttrs as $allAttr)
-               <option value="{{ $allAttr->id }}">{{ $allAttr->name }}</option>
+               <option {{ (isset($selected) && $selected->id == $allAttr->id) ? 'selected' : '' }} value="{{ $allAttr->id }}">{{ $allAttr->name }}</option>
             @endforeach
         </select>
     </td>
     <td class="w-70">
-        <input data-role="tagsinput" value="{{ implode(',',$allAttr->children->pluck('name')->all()) }}">
+        <input data-role="tagsinput" class="tag-input-v v-input-{{ $uniqueID }}" value="{{ (isset($selected) && $selected) ? implode(',',$selected->children->pluck('name')->all()) : '' }}">
         <input type="hidden" name="test_options[{{ $uniqueID }}][options]"
-               value="{{ implode(',',$allAttr->children->pluck('id')->all()) }}">
+               value="{{ (isset($selected) && $selected) ? implode(',',$allAttr->children->pluck('id')->all()) : '' }}">
     </td>
     <td colspan="2" class="text-right">
         <button type="button" class="btn btn-danger"><i
-                    class="fa fa-minus-circle"></i></button>
+                    class="fa fa-minus-circle delete-v-option"></i></button>
     </td>
 </tr>
