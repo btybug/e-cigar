@@ -45,12 +45,13 @@ class InventoryController extends Controller
         $model = null;
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general','allAttrs','twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function getStockEdit($id)
@@ -60,12 +61,13 @@ class InventoryController extends Controller
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories','allAttrs', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock(ProductsRequest $request)

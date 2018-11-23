@@ -742,22 +742,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                                <tr>
-                                    <td class="w-20">
-                                        <select name="" class="form-control">
-                                            <option value="">Select</option>
-                                            <option value="">2</option>
-                                        </select>
-                                    </td>
-                                    <td class="w-70">
-                                        <input type="text" value="Option1,Option2" data-role="tagsinput"/>
-                                    </td>
-                                    <td colspan="2" class="text-right">
-                                        <button type="button" class="btn btn-danger"><i
-                                                    class="fa fa-minus-circle"></i></button>
-                                    </td>
-                                </tr>
-
+                            @include("admin.inventory._partials.variation_option_item")
                         </tbody>
                         <tfoot>
                         <tr class="add-new-ship-filed-container">
