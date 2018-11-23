@@ -443,7 +443,43 @@
                     <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list-extra">
+                                            <ul class="get-all-extra-tab">
+                                                {{--@if(isset($attrs) && count($attrs))--}}
+                                                    {{--@foreach($attrs as $attribute)--}}
+                                                        {{--<li style="display: flex"--}}
+                                                            {{--data-option-container="{!! $attribute->id !!}"--}}
+                                                            {{--data-id="{!! $attribute->id !!}"--}}
+                                                            {{--class="option-elm-attributes"><a--}}
+                                                                    {{--href="#">{!! $attribute->name !!}</a>--}}
+                                                            {{--<div class="buttons">--}}
+                                                                {{--<a href="javascript:void(0)"--}}
+                                                                   {{--class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i--}}
+                                                                            {{--class="fa fa-money"></i></a>--}}
+                                                                {{--<a href="javascript:void(0)"--}}
+                                                                   {{--class="remove-all-attributes btn btn-sm btn-danger"><i--}}
+                                                                            {{--class="fa fa-trash"></i></a>--}}
+                                                            {{--</div>--}}
+                                                            {{--<input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"--}}
+                                                                   {{--value="{!! $attribute->id !!}">--}}
+                                                            {{--<input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"--}}
+                                                                   {{--value="{!! $attribute->is_shared !!}">--}}
+                                                        {{--</li>--}}
+                                                    {{--@endforeach--}}
+                                                {{--@endif--}}
+                                            </ul>
+                                        </div>
+                                        <div class="button-add text-center">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-primary btn-block get-all-extra-tab-event"><i
+                                                        class="fa fa-plus mr-10"></i>Add new
+                                                option</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
                                     <div class="basic-center basic-wall">
                                         <div class="row">
                                             <div class="col-md-12">
@@ -480,6 +516,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
