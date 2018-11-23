@@ -161,7 +161,7 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function getRegions(SiteLanguages $languages, Settings $settings)
+    public function getRegions(SiteLanguages $languages, Settings $settings,Countries $countries)
     {
         $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
         $siteCurrencies = array_keys(($default) ? [$default->val => 1] + $settings->getEditableData('currencies', $default->val)->toArray() : []);
@@ -172,7 +172,8 @@ class SettingsController extends Controller
         $regions = $settings->where('section','site_regions')->where('key','regions')->first();
         $regions=($regions)?json_decode($regions->val,true):[];
         $languages = $languages->all()->pluck('name', 'name');
-        return $this->view('regions', compact('languages', 'currencies','regions'));
+        $countries= $countries->all()->pluck('name.common', 'name.common')->toArray();
+        return $this->view('regions', compact('languages', 'currencies','regions','countries'));
     }
 
     public function postRegions(Request $request)
@@ -262,7 +263,7 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public function getStore(Currencies $currencies, Settings $settings, Request $request)
+    public function getStore(Currencies $currencies, Settings $settings,Request $request)
     {
         $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
         $p = $request->get('p', ($default) ? $default->val : null);

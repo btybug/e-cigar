@@ -28,18 +28,18 @@
                 <div class="panel-heading">Site 1</div>
                 <div class="panel-body form-horizontal">
                     <div class="mb-20">
-                            <table class="table table-responsive table--store-settings" data-table-id="20">
-                                <thead>
-                                <tr class="bg-my-light-pink">
-                                    <th>Language</th>
-                                    <th>Currency</th>
-                                    <th>Countries</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
+                        <table class="table table-responsive table--store-settings" data-table-id="20">
+                            <thead>
+                            <tr class="bg-my-light-pink">
+                                <th>Language</th>
+                                <th>Currency</th>
+                                <th>Countries</th>
+                                <th></th>
+                            </tr>
+                            </thead>
 
-                                <tbody id="regions-list">
-                                @if(isset($regions['languages']))
+                            <tbody id="regions-list">
+                            @if(isset($regions['languages']))
                                 @foreach($regions['languages'] as $key=>$language)
                                     <tr>
                                         <td>
@@ -49,26 +49,27 @@
                                             {!! Form::select('currencies[]',$currencies,$regions['currencies'][$key],['class'=>'form-control']) !!}
                                         </td>
                                         <td>
-                                            <input class="form-control"  name="countries[]" value="{!! $regions['countries'][$key] !!}" type="text" >
+                                            {!! Form::select('countries['.$key.'][]',$countries,$regions['countries'][$key],['class'=>'form-control region','multiple']) !!}
                                         </td>
                                         <td colspan="2" class="text-right">
-                                            <button type="button" class="btn btn-danger remove-row"><i class="fa fa-minus-circle"></i></button>
+                                            <button type="button" class="btn btn-danger remove-row"><i
+                                                        class="fa fa-minus-circle"></i></button>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                                <tfoot>
-                                <tr class="add-new-ship-filed-container">
-                                    <td colspan="6" class="text-right">
-                                        <button type="button"  class="btn btn-primary add-new-region"><i class="fa fa-plus-circle"></i></button>
-                                    </td>
-                                </tr>
-                                </tfoot>
+                                @endforeach
+                            @endif
+                            </tbody>
+                            <tfoot>
+                            <tr class="add-new-ship-filed-container">
+                                <td colspan="6" class="text-right">
+                                    <button type="button" class="btn btn-primary add-new-region"><i
+                                                class="fa fa-plus-circle"></i></button>
+                                </td>
+                            </tr>
+                            </tfoot>
 
 
-
-                            </table>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -79,31 +80,41 @@
     </div>
     <script type="template" id="new-region">
         <tr>
-        <td>
-            {!! Form::select('languages[]',$languages,null,['class'=>'form-control']) !!}
+            <td>
+                {!! Form::select('languages[]',$languages,null,['class'=>'form-control']) !!}
             </td>
             <td>
                 {!! Form::select('currencies[]',$currencies,null,['class'=>'form-control']) !!}
             </td>
             <td>
-            <input class="form-control"  name="countries[]" type="text" >
+                {!! Form::select('countries[{count}][]',$countries,'all_selected',['class'=>'form-control region','multiple']) !!}
+
             </td>
             <td colspan="2" class="text-right">
-            <button type="button" class="btn btn-danger remove-row"><i class="fa fa-minus-circle"></i></button>
+                <button type="button" class="btn btn-danger remove-row"><i class="fa fa-minus-circle"></i></button>
             </td>
-            </tr>
+        </tr>
     </script>
 @stop
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+@stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <script>
         $(function () {
-            $('.add-new-region').on('click',function () {
-                let html=$('#new-region').html();
+            $('.add-new-region').on('click', function () {
+                let html = $('#new-region').html();
+                let count=$('body').find('.region').length;
+                html=html.replace(/{count}/g,count);
                 $('#regions-list').append(html);
+                $(".region").select2();
             });
             $('body').on('click', '.remove-row', function () {
                 $(this).closest('tr').remove();
             });
+            $(".region").select2();
         })
     </script>
 @stop

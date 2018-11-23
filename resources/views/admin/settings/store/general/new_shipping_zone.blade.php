@@ -54,23 +54,26 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 control-label" for="input-description">Payment
                                     Options</label>
-                                <div class="col-sm-10 wall payment-container" >
+                                <div class="col-sm-10 wall payment-container">
                                     @if($geo_zone && $geo_zone->payment_options && count($geo_zone->payment_options))
                                         @foreach($geo_zone->payment_options as $payment_option)
                                             <div class="payment-option-container" style="display: flex">
                                                 {!! Form::select('payment_options[]',["paypal"=>"paypal", "stripe"=>"stripe", "cash"=>"cash"],
                                                 $payment_option,['class' => 'form-control','id'=>'payment_options']) !!}
                                                 @if($loop->last)
-                                                    <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
+                                                    <button type="button" class="add-new-payment-option"><i
+                                                                class="fa fa-plus"></i></button>
                                                 @else
-                                                    <button type="button" class="remove-new-payment-option"><i class="fa fa-trash"></i></button>
+                                                    <button type="button" class="remove-new-payment-option"><i
+                                                                class="fa fa-trash"></i></button>
                                                 @endif
                                             </div>
                                         @endforeach
                                     @else
                                         <div class="payment-option-container" style="display: flex">
                                             {!! Form::select('payment_options[]',["paypal"=>"paypal", "stripe"=>"stripe", "cash"=>"cash"],null,['class' => 'form-control','id'=>'payment_options']) !!}
-                                            <button type="button" class="add-new-payment-option"><i class="fa fa-plus"></i></button>
+                                            <button type="button" class="add-new-payment-option"><i
+                                                        class="fa fa-plus"></i></button>
                                         </div>
                                     @endif
                                 </div>
@@ -104,7 +107,8 @@
                                                 <td>
                                                     <div class="wall">
                                                         <div class="region-container">
-                                                            <select multiple name='region[{!! $key !!}][]' class="form-control region select-{!! $key !!}">
+                                                            <select multiple name='region[{!! $key !!}][]'
+                                                                    class="form-control region select-{!! $key !!}">
                                                                 @php
                                                                     $old=$country->regions->pluck('name','name')->toArray();
                                                                 $getRegions=getRegions($country->name);
@@ -115,7 +119,10 @@
                                                                             @if(isset($old[$region])) selected @endif>{!! $region !!}</option>
                                                                 @endforeach
                                                             </select>
-                                                            <input type="checkbox" @if(count($getRegions)==$country->regions->count()) checked @endif class="select-all" data-select="select-{!! $key !!}">Select All
+                                                            <input type="checkbox"
+                                                                   @if(count($getRegions)==$country->regions->count()) checked
+                                                                   @endif class="select-all"
+                                                                   data-select="select-{!! $key !!}">Select All
                                                         </div>
 
                                                     </div>
@@ -123,12 +130,15 @@
                                                 <td>
                                                     <div>
                                                         @if(count($geo_zone->countries)!=$key+1)
-                                                            <button type="button" data-count="{!! $key !!}" class="remove-new-get-zones"><i class="fa fa-trash"></i></button>
+                                                            <button type="button" data-count="{!! $key !!}"
+                                                                    class="remove-new-get-zones"><i
+                                                                        class="fa fa-trash"></i></button>
 
 
-                                                            @else
-                                                            <button type="button" data-count="{!! $key !!}" class="add-new-get-zones"><i
-                                                                    class="fa fa-plus"></i></button>
+                                                        @else
+                                                            <button type="button" data-count="{!! $key !!}"
+                                                                    class="add-new-get-zones"><i
+                                                                        class="fa fa-plus"></i></button>
                                                         @endif
                                                     </div>
                                                 </td>
@@ -321,7 +331,7 @@
 @stop
 @section("css")
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
 
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
@@ -335,7 +345,7 @@
     <script>
 
 
-        $("body").on("click", ".remove-deliver-option", function(){
+        $("body").on("click", ".remove-deliver-option", function () {
             $(this).closest("tbody").remove()
         })
         var count = {!! isset($delivery)?($delivery->id + 1) : 1 !!}
@@ -523,27 +533,30 @@ ${datax}
             postSendAjax($("#geo-zones-form").attr("action"), data, function (res) {
 
                 if (!res.error) {
-            location.replace(res.url)
+                    location.replace(res.url)
                 }
             }, function (err) {
 
                 if (err.responseJSON.message) {
                     $(".error-place").empty()
-                    Object.entries(err.responseJSON.errors).forEach(([key, val]) => {
-                        $(".error-place").append(`<p> ${val[0]}</p>`)
-                    });
+                    Object.entries(err.responseJSON.errors).forEach(([key, val]) = > {
+                        $(".error-place"
+                ).
+                    append(`<p> ${val[0]}</p>`)
+                })
+                    ;
                     $(".error-place").show()
                 }
             })
         })
-        $("body").on('click','.select-all',function(){
-                var selector='.'+$(this).attr("data-select");
-            if($(this).is(':checked') ){
-                $(selector+" > option").prop("selected","selected");
+        $("body").on('click', '.select-all', function () {
+            var selector = '.' + $(this).attr("data-select");
+            if ($(this).is(':checked')) {
+                $(selector + " > option").prop("selected", "selected");
                 console.log($(selector).trigger("change"));
-            }else{
+            } else {
                 console.log(1);
-                $(selector+" > option").prop("selected",false);
+                $(selector + " > option").prop("selected", false);
                 console.log($(selector).trigger("change"));
             }
         });
