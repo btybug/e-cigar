@@ -26,6 +26,7 @@
                             <th>OG image</th>
                             <th>OG description</th>
                             <th>OG Keywords</th>
+                            <th>Robots</th>
 
                             <th>FB title</th>
                             <th>FB image</th>
@@ -51,35 +52,23 @@
         $(function () {
             $('#stocks-table').DataTable({
                 ajax: "{!! route('datatable_bulk_stocks') !!}",
-                "processing": true,
-                "serverSide": true,
-                "bPaginate": true,
-                dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'pdf', 'print'
-                ],
                 columns: [
                     {data: 'id', name: 'id'},
-
                     {data: 'og:title', name: 'og:title'},
                     {data: 'og:image', name: 'og:image'},
                     {data: 'og:description', name: 'og:description'},
                     {data: 'og:keywords', name: 'og:keywords'},
                     {data: 'robots', name: 'robots'},
-
                     {data: 'fb:title', name: 'og:title'},
                     {data: 'fb:image', name: 'og:image'},
                     {data: 'fb:description', name: 'og:description'},
-
                     {data: 'tw:title', name: 'og:title'},
                     {data: 'tw:image', name: 'og:image'},
                     {data: 'tw:description', name: 'og:description'},
-
                     {data: 'actions', name: 'actions'}
 
                 ]
             });
         });
-
     </script>
 @stop

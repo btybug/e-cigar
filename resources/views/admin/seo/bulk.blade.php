@@ -51,24 +51,24 @@
 @section('js')
     <script>
         $(function () {
-            {{--$('#posts-table').DataTable({--}}
-                {{--ajax: "{!! route('datatable_bulk_posts') !!}",--}}
-                {{--dom: 'Bfrtip',--}}
-                {{--buttons: [--}}
-                    {{--'csv', 'excel', 'pdf', 'print'--}}
-                {{--],--}}
-                {{--columns: [--}}
-                    {{--{data: 'id', name: 'id'},--}}
-                    {{--{data: 'title', name: 'title'},--}}
-                    {{--{data: 'status', name: 'status'},--}}
-                    {{--{data: 'url', name: 'url'},--}}
-                    {{--{data: 'seo_title', name: 'seo_title'},--}}
-                    {{--{data: 'actions', name: 'actions'}--}}
-                {{--],--}}
-                {{--order: [[0, 'desc']]--}}
+            $('#posts-table').DataTable({
+                ajax: "{!! route('datatable_bulk_posts') !!}",
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'title', name: 'title'},
+                    {data: 'status', name: 'status'},
+                    {data: 'url', name: 'url'},
+                    {data: 'seo_title', name: 'seo_title'},
+                    {data: 'actions', name: 'actions'}
+                ],
+                order: [[0, 'desc']]
 
 
-            {{--});--}}
+            });
         });
 
     </script>
