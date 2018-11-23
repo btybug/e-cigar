@@ -49,9 +49,6 @@
                         <a href="#users_profile" data-toggle="tab">Profile</a>
                     </li>
                     <li>
-                        <a href="#users_password" data-toggle="tab">Password</a>
-                    </li>
-                    <li>
                         <a href="#users_logs" data-toggle="tab">Logs</a>
                     </li>
                     <li>
@@ -419,41 +416,6 @@
                                     </div>
                                 </form>
 
-                        </div>
-                        <div id="users_password" class="tab-pane fade">
-                            <form method="POST" action="http://demo0.laravelcommerce.com/admin/updateAdminPassword"
-                                  accept-charset="UTF-8" onsubmit="return validatePasswordForm()"
-                                  id="updateAdminPassword" name="updateAdminPassword" class="form-horizontal"
-                                  enctype="multipart/form-data"><input name="_token" type="hidden"
-                                                                       value="EPR3S7xjpRJpLaBWjrK2inveDp79PyO1CZih33bg">
-                                <div class="form-group">
-                                    <label for="password" class="col-sm-2 control-label">New Password</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="password" name="password"
-                                               placeholder="New Password">
-                                        <span class="help-block"
-                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter minimum 6 characters.</span>
-                                        <span style="display: none" class="help-block"></span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="re-password" class="col-sm-2 control-label">Re-Enter Password</label>
-                                    <div class="col-sm-10">
-                                        <input type="password" class="form-control" id="re_password" name="re_password"
-                                               placeholder="Re-Enter Password">
-                                        <span class="help-block"
-                                              style="font-weight: normal;font-size: 11px;margin-bottom: 0;">Please enter minimum 6 characters.</span>
-                                        <span style="display: none" class="help-block"></span>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-danger">Update</button>
-                                    </div>
-                                </div>
-                            </form>
                         </div>
                         <div id="users_logs" class="tab-pane fade">
                             <h3>Logs</h3>
