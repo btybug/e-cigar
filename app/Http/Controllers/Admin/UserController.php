@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use PragmaRX\Countries\Package\Countries;
 
 class UserController extends Controller
 {
@@ -26,10 +27,18 @@ class UserController extends Controller
         return $this->view('staff');
     }
 
-    public function edit(Request $request)
+    public function edit(Request $request,Countries $countries)
     {
         $user=User::find($request->id);
-        return $this->view('edit');
+        $countries= $countries->all()->pluck('name.common', 'name.common')->toArray();
+        return $this->view('edit',compact('user','countries'));
+    }
+
+    public function postEdit(Request $request)
+    {
+        $data=$request->except('_token');
+        User::find($request->id)->update($data);
+        return redirect()->back();
     }
 
     public function getUserActivity($id)
