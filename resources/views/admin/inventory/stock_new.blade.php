@@ -400,9 +400,6 @@
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
-                                <div class="col-sm-12 text-center mb-20">
-                                    <a href="javascript:void(0);" class="btn btn-warning" data-toggle="modal" data-target="#myExtraTabModal">Select Atributes <span class="ml-50">Edit</span></a>
-                                </div>
                                 <div class="col-sm-12">
                                     <div class="basic-center basic-wall">
                                         <div class="row">
@@ -467,8 +464,7 @@
                                                             {{--</div>--}}
                                                             {{--<input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"--}}
                                                                    {{--value="{!! $attribute->id !!}">--}}
-                                                            {{--<input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"--}}
-                                                                   {{--value="{!! $attribute->is_shared !!}">--}}
+                                                            {{----}}
                                                         {{--</li>--}}
                                                     {{--@endforeach--}}
                                                 {{--@endif--}}
@@ -723,13 +719,13 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">New Option</h4>
                 </div>
-                <form action="">
                 <div class="modal-body">
+                    {!! Form::open(['id' => 'v-option-form']) !!}
                     <div class="form-group">
                         <div class="row">
                             <label for="" class="col-md-3">Option Name</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control">
+                                {!! Form::text('option_name',null,['class' => 'form-control option-name']) !!}
                             </div>
                         </div>
                     </div>
@@ -741,9 +737,11 @@
                             <th></th>
                         </tr>
                         </thead>
+
                         <tbody class="v-options-list">
                             @include("admin.inventory._partials.variation_option_item")
                         </tbody>
+
                         <tfoot>
                         <tr class="add-new-ship-filed-container">
                             <td colspan="4" class="text-right">
@@ -753,13 +751,12 @@
                         </tr>
                         </tfoot>
 
-
+                        {!! Form::close() !!}
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info">Save</button>
+                    <button type="button" class="btn btn-info save-v-option">Save</button>
                 </div>
-                </form>
             </div>
 
         </div>
@@ -867,6 +864,16 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
+            function guid() {
+                return "ss".replace(/s/g, s4);
+            }
+
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                    .toString(7)
+                    .substring(1);
+            }
+
             var elementList = $(".select-attribute");
 
             console.log(elementList);
@@ -890,8 +897,44 @@
 
 
 
+            $("body").on('click', '.save-v-option', function () {
+                var data = $("#v-option-form").serialize();
+                var name = $(".option-name").val();
+
+                if(name != ''){
+                    let html = `<li style="display: flex"
+                                        class="option-elm-attributes"><a
+                                                href="#">${name}</a>
+                                        <div class="buttons">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-sm edit-extra-option btn-warning"><i
+                                                        class="fa fa-pencil"></i></a>
+                                            <a href="javascript:void(0)"
+                                               class="remove-extra-option btn btn-sm btn-danger"><i
+                                                        class="fa fa-trash"></i></a>
+                                        </div>
+                                        <input type="hidden" name="extra_options[${guid()}][options]"
+                                               value="${data}">
+                                        <input type="hidden" name="extra_options[${guid()}][name]"
+                                               value="${name}">
+                                                        </li>`;
+                    $(".get-all-extra-tab").append(html);
+
+                    $("#myExtraTabModal").modal('hide');
+                    $("#v-option-form")[0].reset();
+
+
+                }else{
+                    alert('name is required')
+                }
+            });
+
             $("body").on('click', '.delete-v-option', function () {
                 $(this).closest('tr').remove();
+            });
+
+            $("body").on('click', '.remove-extra-option', function () {
+                $(this).closest('li').remove();
             });
 
             $("body").on('click', '.add-new-v-option', function () {
@@ -1117,15 +1160,6 @@
     </script>
     <script>
         $(document).ready(function () {
-            function guid() {
-                return "ss".replace(/s/g, s4);
-            }
-
-            function s4() {
-                return Math.floor((1 + Math.random()) * 0x10000)
-                    .toString(7)
-                    .substring(1);
-            }
 
             $("body").on('change', '.select-stock-type', function () {
                 var type = $(this).val();
