@@ -49,7 +49,7 @@
                                             {!! Form::select('currencies[]',$currencies,$regions['currencies'][$key],['class'=>'form-control']) !!}
                                         </td>
                                         <td>
-                                            {!! Form::select('countries['.$key.'][]',$countries,$regions['countries'][$key],['class'=>'form-control region','multiple']) !!}
+                                            {!! Form::select('countries['.$key.'][]',$countries,isset($regions['countries'][$key])?$regions['countries'][$key]:null,['class'=>'form-control region','multiple']) !!}
                                         </td>
                                         <td colspan="2" class="text-right">
                                             <button type="button" class="btn btn-danger remove-row"><i
@@ -87,7 +87,7 @@
                 {!! Form::select('currencies[]',$currencies,null,['class'=>'form-control']) !!}
             </td>
             <td>
-                {!! Form::select('countries[{count}][]',$countries,'all_selected',['class'=>'form-control region','multiple']) !!}
+                {!! Form::select('countries[{count}][]',$countries,null,['class'=>'form-control region','multiple']) !!}
 
             </td>
             <td colspan="2" class="text-right">
