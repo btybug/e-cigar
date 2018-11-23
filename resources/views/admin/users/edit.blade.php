@@ -23,9 +23,9 @@
                              src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"
                              alt="Václav profile picture">
 
-                        <h3 class="profile-username text-center">Václav Kutiš</h3>
+                        <h3 class="profile-username text-center">{!! $user->name.' '.$user->last_name !!}</h3>
 
-                        <p class="text-muted text-center">Administrator</p>
+                        <p class="text-muted text-center">{!! ($user->role)?$user->role->title:'User' !!}</p>
 
                         <!-- <ul class="list-group list-group-unbordered">
                            <li class="list-group-item">
@@ -113,6 +113,13 @@
                                 <label for="inputExperience" class="col-sm-2 control-label">Status</label>
                                 <div class="col-sm-10">
                                     {!! Form::select('status',[0=>'In Active',1=>'Active'],null,['class'=>'form-control']) !!}
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputExperience" class="col-sm-2 control-label">Membership</label>
+                                <div class="col-sm-10">
+                                    {!! Form::select('role_id',[null=>'No Membership']+$roles,null,['class'=>'form-control']) !!}
 
                                 </div>
                             </div>
