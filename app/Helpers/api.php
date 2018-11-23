@@ -124,6 +124,8 @@ function getModuleRoutes($method, $sub, $permissions = [])
         $routes[$method]['admin'] = [];
     }
     ksort($routes[$method]);
+    $routes[$method] = (keysort($routes[$method], $sub));
+
     if (isset($routes[$method][$sub]))
         return collect($routes[$method][$sub]);
 
