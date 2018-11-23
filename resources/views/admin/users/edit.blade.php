@@ -131,7 +131,12 @@
                                 </div>
                             </div>
                             {!! Form::close() !!}
-
+                            <div>
+                                {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
+                                {!! Form::hidden('email',$user->email) !!}
+                                <button type="submit" class="btn btn-warning">Send reset password email</button>
+                                {!! Form::close() !!}
+                            </div>
                         </div>
                         <div id="users_logs" class="tab-pane fade">
                             <h3>Logs</h3>

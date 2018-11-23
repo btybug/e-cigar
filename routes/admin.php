@@ -92,6 +92,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
     Route::post('/edit/{id}', 'Admin\UserController@postEdit')->name('post_admin_users_edit');
+    Route::post('/send-reset-password-email', 'Admin\UserController@sendResetLinkEmail')->name('post_admin_users_reset_pass');
     Route::get('/activity/{id}', 'Admin\UserController@getUserActivity')->name('admin_users_activity');
 
     Route::group(['prefix' => 'roles-mebership'], function () {
