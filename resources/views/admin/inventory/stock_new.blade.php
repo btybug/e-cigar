@@ -32,6 +32,7 @@
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
                     <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
+                    <li><a data-toggle="tab" href="#extra">Extra</a></li>
                     <li><a data-toggle="tab" href="#seo">Seo</a></li>
                 </ul>
             </div>
@@ -439,7 +440,49 @@
                             </div>
                         </div>
                     </div>
-
+                    <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="basic-center basic-wall">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-sm btn-primary add-variation pull-right"><i
+                                                            class="fa fa-plus mr-10"></i>New Variation</a>
+                                            </div>
+                                            <div class="col-md-12">
+                                                {{--<div class="all-list-attrs" style="min-height:300px;">--}}
+                                                {{--@if($model)--}}
+                                                {{--@include('admin.inventory._partials.link_all_edit')--}}
+                                                {{--@endif--}}
+                                                {{--</div>--}}
+                                                <table id="variations-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Name</th>
+                                                        <th>Attributes</th>
+                                                        <th>SKU</th>
+                                                        <th>Qty</th>
+                                                        <th>Price</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody class="all-list-attrs">
+                                                    @if($model)
+                                                        @foreach($model->variations as $variation)
+                                                            @include('admin.inventory._partials.variation_item',['item' => $variation])
+                                                        @endforeach
+                                                    @endif
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
                         <div class="container-fluid p-25">
                             <div class="row">
