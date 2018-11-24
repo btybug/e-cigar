@@ -21,28 +21,6 @@
         </div>
     </div>
 
-    {{--<div class="row">--}}
-    {{--<div class="col-xs-12">--}}
-    {{--<div class="col-md-6 pull-left"><h2>Orders</h2></div>--}}
-    {{--<div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>--}}
-    {{--</div>--}}
-    {{--<div class="col-xs-12">--}}
-    {{--<table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">--}}
-    {{--<thead>--}}
-    {{--<tr>--}}
-    {{--<th>#</th>--}}
-    {{--<th>Title</th>--}}
-    {{--<th>Long Description</th>--}}
-    {{--<th>Short Description</th>--}}
-    {{--<th>Image</th>--}}
-    {{--<th>Added/Last Modified Date</th>--}}
-    {{--<th>Actions</th>--}}
-    {{--</tr>--}}
-    {{--</thead>--}}
-    {{--</table>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-
     <div class="row order-main-cnt">
         <div class="col-md-8">
             <div class="order-main-cnt_left-col">
@@ -193,7 +171,7 @@
                                         <div class="tab-pane fade active in" id="shippingAddress" role="tabpanel"
                                              aria-labelledby="shippingAddress-tab">
                                             Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
-                                            Region:{!! getRegion($order->shippingAddress->region)->name !!}
+                                            Region:{!! getRegion($order->shippingAddress->region,'name')  !!}
                                             <br>
                                             First line:{!! $order->shippingAddress->first_line_address !!}<br>
                                             Second line:{!! $order->shippingAddress->second_line_address !!}

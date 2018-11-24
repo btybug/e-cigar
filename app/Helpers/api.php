@@ -316,11 +316,11 @@ function getCountryByZone($country)
     return ($country) ? $country : null;
 }
 
-function getRegion($region)
+function getRegion($region ,$attr=null)
 {
     if (!$region) return null;
     $region = \App\Models\ZoneCountryRegions::find($region);
-    return ($region) ? $region : null;
+    return ($attr && $region)?$region->$attr:null;
 }
 
 function stripe_key()

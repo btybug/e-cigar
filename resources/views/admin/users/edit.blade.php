@@ -169,7 +169,7 @@
                                 <div class="col-xs-12">
                                     <div class="row">
                                         <div class="col-md-6 pull-left"><h2 class="m-0">{!! __('orders') !!}</h2></div>
-                                       
+
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
