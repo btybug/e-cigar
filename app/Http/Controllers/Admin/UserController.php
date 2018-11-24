@@ -33,6 +33,20 @@ class UserController extends Controller
         return $this->view('staff');
     }
 
+    public function newStaff(Countries $countries)
+    {
+        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
+        $roles = Roles::where('type', 'backend')->pluck('title', 'id')->toArray();
+        return $this->view('staff.new', compact('countries', 'roles'));
+    }
+    //TODO create validation
+    public function postStaff(Request $request)
+    {
+        $data = $request->except('_token');
+        User::create($data);
+        return redirect()->route('admin_staff');
+    }
+
     public function edit(Request $request, Countries $countries)
     {
         $user = User::find($request->id);
@@ -48,6 +62,7 @@ class UserController extends Controller
 
         return redirect()->back();
     }
+
 
     public function getUserActivity($id)
     {

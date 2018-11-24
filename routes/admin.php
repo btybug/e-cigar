@@ -90,6 +90,8 @@ Route::group(['prefix' => 'settings'], function () {
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_customers');
     Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
+    Route::get('/staff/new', 'Admin\UserController@newStaff')->name('admin_staff_new');
+    Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
     Route::post('/edit/{id}', 'Admin\UserController@postEdit')->name('post_admin_users_edit');
     Route::post('/send-reset-password-email', 'Admin\UserController@sendResetLinkEmail')->name('post_admin_users_reset_pass');
