@@ -373,17 +373,47 @@ class DatatableController extends Controller
 
     public function getBulkPosts(Settings $settings)
     {
+        $general = $settings->getEditableData('seo_posts')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_posts')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_posts')->toArray();
+        $robot = $settings->getEditableData('seo_robot_posts');
         return Datatables::of(Posts::query())
-            ->editColumn('title', function ($attr) {
-                return $attr->title;
-            })->editColumn('status', function ($attr) {
-                return ($attr->status) ? 'Published' : 'Draft';
-            })->editColumn('seo_title', function ($attr) use ($settings) {
-                $general = $settings->getEditableData('seo_posts')->toArray();
-                return ($attr->getSeoField('og:title'))??getSeo($general, 'og:title', $attr);
-            })->addColumn('actions', function ($attr) {
+            ->editColumn('og:title', function ($stock)use($general) {
+
+                return ($stock->getSeoField('og:title'))? $stock->getSeoField('og:title'): getSeo($general,'og:title',$stock);
+            })
+            ->addColumn('og:image', function ($stock)use($general) {
+                return ($stock) ? "<img src='" . $stock->getSeoField('og:image') . "' width='50px'/>" : "<img src='".getSeo($general,'og:keywords',$stock) . "' width='50px'/>";
+            })
+            ->addColumn('og:description', function ($stock)use($general) {
+                return ($stock->getSeoField('og:description'))?$stock->getSeoField('og:description') : getSeo($general,'og:description',$stock);
+            })
+            ->addColumn('og:keywords', function ($stock)use($general) {
+                return ($stock->getSeoField('og:keywords'))?$stock->getSeoField('og:keywords'): getSeo($general,'og:keywords',$stock);
+            })
+            ->addColumn('fb:title', function ($stock) use($fbSeo){
+                return ($stock->getSeoField('og:title', 'fb'))?$stock->getSeoField('og:title', 'fb'): getSeo($fbSeo,'og:title',$stock);
+            })
+            ->addColumn('fb:description', function ($stock) use($fbSeo) {
+                return ($stock->getSeoField('og:description', 'fb'))? $stock->getSeoField('og:description', 'fb'): getSeo($fbSeo,'og:description',$stock);
+            })
+            ->addColumn('fb:image', function ($stock) use($fbSeo) {
+                return ($stock->getSeoField('og:image', 'fb'))?$stock->getSeoField('og:image', 'fb') : "<img src='".getSeo($fbSeo,'og:keywords',$stock) . "' width='50px'/>";
+            })
+            ->addColumn('tw:title', function ($stock)use ($twitterSeo) {
+                return ($stock->getSeoField('og:title', 'twitter'))?$stock->getSeoField('og:title', 'twitter') :  getSeo($twitterSeo,'og:title',$stock);
+            })
+            ->addColumn('tw:description', function ($stock)use ($twitterSeo) {
+                return ($stock->getSeoField('og:description', 'twitter'))?$stock->getSeoField('og:description', 'twitter') : getSeo($twitterSeo,'og:description',$stock);
+            })
+            ->addColumn('tw:image', function ($stock)use ($twitterSeo) {
+                return ($stock->getSeoField('og:image', 'twitter'))?$stock->getSeoField('og:image', 'twitter') :  "<img src='".getSeo($twitterSeo,'og:keywords',$stock) . "' width='50px'/>";;
+            })->addColumn('robots', function ($stock) {
+                return "";
+            })->addColumn('actions', function ($stock) {
                 return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
-            })->rawColumns(['actions'])
+            })
+            ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
             ->make(true);
     }
 

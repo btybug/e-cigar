@@ -52,6 +52,10 @@
         $(function () {
             $('#stocks-table').DataTable({
                 ajax: "{!! route('datatable_bulk_stocks') !!}",
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'og:title', name: 'og:title'},

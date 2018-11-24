@@ -59,10 +59,17 @@
                 ],
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'title', name: 'title'},
-                    {data: 'status', name: 'status'},
-                    {data: 'url', name: 'url'},
-                    {data: 'seo_title', name: 'seo_title'},
+                    {data: 'og:title', name: 'og:title'},
+                    {data: 'og:image', name: 'og:image'},
+                    {data: 'og:description', name: 'og:description'},
+                    {data: 'og:keywords', name: 'og:keywords'},
+                    {data: 'robots', name: 'robots'},
+                    {data: 'fb:title', name: 'og:title'},
+                    {data: 'fb:image', name: 'og:image'},
+                    {data: 'fb:description', name: 'og:description'},
+                    {data: 'tw:title', name: 'og:title'},
+                    {data: 'tw:image', name: 'og:image'},
+                    {data: 'tw:description', name: 'og:description'},
                     {data: 'actions', name: 'actions'}
                 ],
                 order: [[0, 'desc']]
