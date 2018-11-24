@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\Models\Settings;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class SeoController extends Controller
@@ -99,5 +100,16 @@ class SeoController extends Controller
         $robot = $settings->getEditableData('seo_robot_posts');
 
         return $this->view('edit_post',compact('post','general', 'fbSeo', 'twitterSeo', 'robot'));
+    }
+    public function getBulkEditProduct($id,Settings $settings)
+    {
+        $stock = Stock::findOrFail($id);
+
+        $general = $settings->getEditableData('seo_stocks')->toArray();
+        $fbSeo= $settings->getEditableData('seo_fb_stocks')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_stocks')->toArray();
+        $robot = $settings->getEditableData('seo_robot_stocks');
+
+        return $this->view('edit_stock',compact('stock','general', 'fbSeo', 'twitterSeo', 'robot'));
     }
 }

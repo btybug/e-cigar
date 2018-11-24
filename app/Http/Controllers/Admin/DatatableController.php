@@ -411,7 +411,7 @@ class DatatableController extends Controller
             })->addColumn('robots', function ($post) {
                 return "";
             })->addColumn('actions', function ($post) {
-                return "<a href='".route('admin_seo_bulk_edit_post',$post->id)."'>edit</a>";
+                return "<a href='".route('admin_seo_bulk_edit_post',$post->id)."'>Edit</a>";
             })
             ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
             ->make(true);
@@ -459,7 +459,7 @@ class DatatableController extends Controller
         })->addColumn('robots', function ($stock) {
                 return "";
             })->addColumn('actions', function ($stock) {
-            return "<a href='#'>Save</a>|<a href='#'>Save All</a>";
+            return "<a href='".route('admin_seo_bulk_edit_stock',$stock->id)."'>Edit</a>";
         })
         ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
         ->make(true);
