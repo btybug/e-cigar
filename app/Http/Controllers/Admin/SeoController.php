@@ -11,8 +11,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
+use App\Models\SeoPosts;
 use App\Models\Settings;
 use App\Models\Stock;
+use App\Models\StockSeo;
 use Illuminate\Http\Request;
 
 class SeoController extends Controller
@@ -90,26 +92,61 @@ class SeoController extends Controller
         return $this->view('products');
     }
 
-    public function getBulkEditPost($id,Settings $settings)
+    public function getBulkEditPost($id, Settings $settings)
     {
         $post = Posts::findOrFail($id);
 
         $general = $settings->getEditableData('seo_posts')->toArray();
-        $fbSeo= $settings->getEditableData('seo_fb_posts')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_posts')->toArray();
         $twitterSeo = $settings->getEditableData('seo_twitter_posts')->toArray();
         $robot = $settings->getEditableData('seo_robot_posts');
 
-        return $this->view('edit_post',compact('post','general', 'fbSeo', 'twitterSeo', 'robot'));
+        return $this->view('edit_post', compact('post', 'general', 'fbSeo', 'twitterSeo', 'robot'));
     }
-    public function getBulkEditProduct($id,Settings $settings)
+
+    public function getBulkEditProduct($id, Settings $settings)
     {
         $stock = Stock::findOrFail($id);
 
         $general = $settings->getEditableData('seo_stocks')->toArray();
-        $fbSeo= $settings->getEditableData('seo_fb_stocks')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_stocks')->toArray();
         $twitterSeo = $settings->getEditableData('seo_twitter_stocks')->toArray();
         $robot = $settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('edit_stock',compact('stock','general', 'fbSeo', 'twitterSeo', 'robot'));
+        return $this->view('edit_stock', compact('stock', 'general', 'fbSeo', 'twitterSeo', 'robot'));
+    }
+
+    public function createOrUpdatePostSeo(Request $request, $id)
+    {
+        $types = $request->only(['fb', 'general', 'twitter', 'robot']);
+        foreach ($types as $type => $data) {
+            foreach ($data as $name => $value) {
+                $seo = SeoPosts::firstOrNew(['post_id' => $id, 'name' => $name, 'type' => $type]);
+                if ($value) {
+                    $seo->content = $value;
+                    $seo->save();
+                } else {
+                    $seo->delete();
+                }
+            }
+        }
+        return redirect()->back();
+    }
+
+    public function createOrUpdateStockSeo(Request $request, $id)
+    {
+        $types = $request->only(['fb', 'general', 'twitter', 'robot']);
+        foreach ($types as $type => $data) {
+            foreach ($data as $name => $value) {
+                $seo = StockSeo::firstOrNew(['stock_id' => $id, 'name' => $name, 'type' => $type]);
+                if ($value) {
+                    $seo->content = $value;
+                    $seo->save();
+                } else {
+                    $seo->delete();
+                }
+            }
+        }
+        return redirect()->back();
     }
 }
