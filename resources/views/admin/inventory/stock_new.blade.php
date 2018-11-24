@@ -409,6 +409,12 @@
                                                             class="fa fa-plus mr-10"></i>New Variation</a>
                                             </div>
                                             <div class="col-md-12">
+                                                <a href="javascript:void(0)"
+                                                   class="btn btn-primary btn-block get-all-extra-tab-event"><i
+                                                            class="fa fa-plus mr-10"></i>Add new
+                                                    option</a>
+                                            </div>
+                                            <div class="col-md-12">
                                                 {{--<div class="all-list-attrs" style="min-height:300px;">--}}
                                                     {{--@if($model)--}}
                                                         {{--@include('admin.inventory._partials.link_all_edit')--}}
@@ -472,7 +478,7 @@
                                         </div>
                                         <div class="button-add text-center">
                                             <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-block get-all-extra-tab-event" data-toggle="modal" data-target="#myExtraTabModal"><i
+                                               class="btn btn-primary btn-block get-all-extra-tab-event"><i
                                                         class="fa fa-plus mr-10"></i>Add new
                                                 option</a>
                                         </div>
@@ -721,38 +727,8 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(['id' => 'v-option-form']) !!}
-                    <div class="form-group">
-                        <div class="row">
-                            <label for="" class="col-md-3">Option Name</label>
-                            <div class="col-md-9">
-                                {!! Form::text('option_name',null,['class' => 'form-control option-name']) !!}
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-responsive table--store-settings">
-                        <thead>
-                        <tr class="bg-my-light-pink">
-                            <th>Attributes</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-
-                        <tbody class="v-options-list">
-                            @include("admin.inventory._partials.variation_option_item")
-                        </tbody>
-
-                        <tfoot>
-                        <tr class="add-new-ship-filed-container">
-                            <td colspan="4" class="text-right">
-                                <button type="button" class="btn btn-primary"><i
-                                            class="fa fa-plus-circle add-new-v-option"></i></button>
-                            </td>
-                        </tr>
-                        </tfoot>
-
-                        {!! Form::close() !!}
-                    </table>
+                            @include("admin.inventory._partials.variation_option_form")
+                    {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info save-v-option">Save</button>
@@ -874,6 +850,17 @@
                     .substring(1);
             }
 
+            function getFormData($form){
+                var unindexed_array = $form.serializeArray();
+                var indexed_array = {};
+
+                $.map(unindexed_array, function(n, i){
+                    indexed_array[n['name']] = n['value'];
+                });
+
+                return indexed_array;
+            }
+
             var elementList = $(".select-attribute");
 
             console.log(elementList);
@@ -895,38 +882,38 @@
                 }
             }
 
+            $("body").on('click','.option-elm-attributes',function () {
+                var data = $(this).find('.extra-item-data').val();
+                var options = JSON.parse(data)
+                console.log(data,options);
+                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {options : options.test_options }, function (res) {
+                    if (!res.error) {
 
+                    }
+                });
+            })
+
+
+            $("body").on('click','.get-all-extra-tab-event',function () {
+                AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
+                    if (!res.error) {
+                        $("#v-option-form")[0].reset();
+                        $("#v-option-form .v-options-list").html(res.html);
+                        $(".tag-input-v").tagsinput();
+                        $("#myExtraTabModal").modal();
+                    }
+                });
+            })
 
             $("body").on('click', '.save-v-option', function () {
                 var data = $("#v-option-form").serialize();
-                var name = $(".option-name").val();
-
-                if(name != ''){
-                    let html = `<li style="display: flex"
-                                        class="option-elm-attributes"><a
-                                                href="#">${name}</a>
-                                        <div class="buttons">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-sm edit-extra-option btn-warning"><i
-                                                        class="fa fa-pencil"></i></a>
-                                            <a href="javascript:void(0)"
-                                               class="remove-extra-option btn btn-sm btn-danger"><i
-                                                        class="fa fa-trash"></i></a>
-                                        </div>
-                                        <input type="hidden" name="extra_options[${guid()}][options]"
-                                               value="${data}">
-                                        <input type="hidden" name="extra_options[${guid()}][name]"
-                                               value="${name}">
-                                                        </li>`;
-                    $(".get-all-extra-tab").append(html);
-
-                    $("#myExtraTabModal").modal('hide');
-                    $("#v-option-form")[0].reset();
-
-
-                }else{
-                    alert('name is required')
-                }
+                AjaxCall("/admin/inventory/stock/add-extra-option", data, function (res) {
+                    if (!res.error) {
+                        $(".get-all-extra-tab").append(res.html);
+                        $("#myExtraTabModal").modal('hide');
+                        $("#v-option-form")[0].reset();
+                    }
+                });
             });
 
             $("body").on('click', '.delete-v-option', function () {
@@ -942,24 +929,13 @@
                     if (!res.error) {
                         $(".v-options-list").append(res.html);
                         $(".tag-input-v").tagsinput();
-                        makeSearchItem({
-                            input:
-                            ".v-input-" + vID,
-                            name: "name",
-                            url:
-                            "/admin/inventory/attributes/get-options-by-id/" +
-                            value,
-                            title: "Attributes",
-                            inputValues: "#tags-names",
-                            containerForAppend: null
-                        });
                     }
                 });
             });
 
             $("body").on('change', '.select-attribute', function () {
                 var value = $(this).val();
-                var vID = $(this).data('uid');
+                let vID = $(this).data('uid');
                 if(value != ''){
                     AjaxCall("/admin/inventory/stock/get-option-by-id", {id: value}, function (res) {
                         if (!res.error) {

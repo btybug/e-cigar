@@ -72,6 +72,8 @@ class InventoryController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
+        $extraOptions = $request->get('extra_options');
+        dd($extraOptions);
         $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations', 'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
@@ -168,5 +170,17 @@ class InventoryController extends Controller
         $html = \View("admin.inventory._partials.variation_option_item",compact(['selected','allAttrs']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function addExtraOption(Request $request)
+    {
+        $option = $request->except('_token');
+        $html = \View("admin.inventory._partials.extra_item",compact(['option']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function addExtraOptionVariations (Request $request)
+    {
+        dd($request->all());
     }
 }

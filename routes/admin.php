@@ -173,6 +173,10 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/add-variation', 'Admin\InventoryController@addVariation')->name('admin_stock_variation_add');
         Route::post('/edit-variation', 'Admin\InventoryController@editVariation')->name('admin_stock_variation_add');
         Route::post('/get-option-by-id', 'Admin\InventoryController@getOptionById')->name('admin_stock_variation_get_option');
+
+        //extra
+        Route::post('/add-extra-option', 'Admin\InventoryController@addExtraOption')->name('admin_stock_extra_option');
+        Route::post('/get-extra-option-variations', 'Admin\InventoryController@addExtraOptionVariations')->name('admin_stock_extra_option_variations');
     });
 
     Route::group(['prefix' => 'attributes'], function () {
