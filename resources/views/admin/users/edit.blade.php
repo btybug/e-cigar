@@ -139,7 +139,24 @@
                             </div>
                         </div>
                         <div id="users_logs" class="tab-pane fade">
-                            <h3>Logs</h3>
+                                <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Url</th>
+                                        <th>Method</th>
+                                        <th>Ip</th>
+                                        <th>Iso Code</th>
+                                        <th>Country</th>
+                                        <th>City</th>
+                                        <th>State</th>
+                                        <th>State Name</th>
+                                        <th>Timezone</th>
+                                        <th>Agent</th>
+                                        <th>Date</th>
+                                    </tr>
+                                    </thead>
+                                </table>
                         </div>
                         <div id="users_favourites" class="tab-pane fade">
                             <h3>Favourites</h3>
@@ -160,4 +177,27 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
+    <script>
+        $(function () {
+            $('#users-table').DataTable({
+                ajax:  "{!! route('datatable_user_activity',$user->id) !!}",
+                columns: [
+                    {data: 'id',name: 'id'},
+                    {data: 'url',name: 'url'},
+                    {data: 'method', name: 'method'},
+                    {data: 'ip', name: 'ip'},
+                    {data: 'iso_code', name: 'iso_code'},
+                    {data: 'country', name: 'country'},
+                    {data: 'city', name: 'city'},
+                    {data: 'state', name: 'state'},
+                    {data: 'state_name', name: 'state_name'},
+                    {data: 'timezone', name: 'timezone'},
+                    {data: 'agent', name: 'agent'},
+                    {data: 'created_at', name: 'created_at'},
+                ],
+                order: [ [0, 'desc'] ]
+            });
+        });
+
+    </script>
 @stop
