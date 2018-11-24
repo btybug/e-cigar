@@ -534,4 +534,27 @@ class DatatableController extends Controller
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
+
+    public function getUserOrders($user_id)
+    {
+        return Datatables::of(
+            Orders::leftJoin('orders_addresses', 'orders.id', '=', 'orders_addresses.order_id')
+                ->select('orders.*', 'orders_addresses.country', 'orders_addresses.region', 'orders_addresses.city')->where('user_id',$user_id)
+        )
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })->editColumn('status', function ($attr) {
+                $status = $attr->history()->whereNotNull('status_id')->latest()->first();
+                return ($status) ?
+                    '<span class="badge" style="background-color: ' . $status->status->color . '">' . $status->status->name . '</span>' : null;
+            })->editColumn('updated_at', function ($attr) {
+                return BBgetDateFormat($attr->updated_at);
+            })->editColumn('user', function ($attr) {
+                return $attr->user->name . ' ' . $attr->user->last_name;
+            })
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions', 'status'])
+            ->make(true);
+    }
 }

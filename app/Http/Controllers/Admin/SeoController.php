@@ -14,7 +14,6 @@ use App\Models\Posts;
 use App\Models\SeoPosts;
 use App\Models\Settings;
 use App\Models\Stock;
-use App\Models\StockSeo;
 use Illuminate\Http\Request;
 
 class SeoController extends Controller
