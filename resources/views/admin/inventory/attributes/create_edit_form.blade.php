@@ -215,7 +215,7 @@
                                 <div class="col-sm-12 clearfix">
                                     {{--<h2>Options {{ $model->name }} </h2>--}}
                                     <h2 class="pull-left">Attributes</h2>
-                                    <button class="btn btn-primary pull-right"><i class="fa fa-plus"></i><span>&nbsp;Add attribute</span></button>
+                                    <button class="btn btn-primary pull-right"><i class="fa fa-plus fa-sm mr-10"></i>Add attribute</button>
                                 </div>
                             </div>
                         </div>
