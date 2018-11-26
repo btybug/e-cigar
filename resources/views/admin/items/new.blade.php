@@ -246,6 +246,44 @@
                                                 </div>
                                             </div>
                                             <div class="panel-body">
+                                                <table class="table table-responsive table--store-settings">
+                                                    <thead>
+                                                    <tr class="bg-my-light-pink">
+                                                        <th>Attributes</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    <tbody class="v-options-list">
+                                                    <tr class="v-options-list-item">
+                                                        <td class="w-20">
+                                                            <select data-uid="5bfc2451ba67e" name="test_options[5bfc2451ba67e][attr_id]" class="form-control select-attribute" placeholder="Select">
+                                                                <option>Select</option>
+                                                                <option value="1">Flavor Type</option>
+                                                                <option value="6">Nicotine Strength</option>
+                                                                <option value="12">Packs</option>
+                                                                <option value="15">VG/PG</option>
+                                                            </select>
+                                                        </td>
+                                                        <td class="w-70">
+                                                            <div class="bootstrap-tagsinput"><input type="text" placeholder=""></div><input data-role="tagsinput" class="tag-input-v v-input-5bfc2451ba67e" value="" style="display: none;">
+                                                            <input type="hidden" class="input-items-value" name="test_options[5bfc2451ba67e][options]" value="">
+                                                        </td>
+                                                        <td colspan="2" class="text-right">
+                                                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle delete-v-option"></i></button>
+                                                        </td>
+                                                    </tr>                                                    </tbody>
+
+                                                    <tfoot>
+                                                    <tr class="add-new-ship-filed-container">
+                                                        <td colspan="4" class="text-right">
+                                                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle add-new-v-option"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
                                             </div>
                                         </div>
 
@@ -261,8 +299,6 @@
             </div>
         </div>
     </div>
-
-
 @stop
 @section('css')
 
