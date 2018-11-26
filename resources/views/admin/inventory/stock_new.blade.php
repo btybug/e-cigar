@@ -493,12 +493,12 @@
                                                    class="btn btn-sm btn-primary add-variation pull-right"><i
                                                             class="fa fa-plus mr-10"></i>New Variation</a>
                                             </div>
-                                            <div class="col-md-12">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-primary btn-block get-all-extra-tab-event"><i
-                                                            class="fa fa-plus mr-10"></i>Add new
-                                                    option</a>
-                                            </div>
+                                            {{--<div class="col-md-12">--}}
+                                                {{--<a href="javascript:void(0)"--}}
+                                                   {{--class="btn btn-primary btn-block get-all-extra-tab-event"><i--}}
+                                                            {{--class="fa fa-plus mr-10"></i>Add new--}}
+                                                    {{--option</a>--}}
+                                            {{--</div>--}}
                                             <div class="col-md-12">
                                                 {{--<div class="all-list-attrs" style="min-height:300px;">--}}
                                                 {{--@if($model)--}}
