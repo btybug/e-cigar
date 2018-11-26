@@ -85,6 +85,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                            <div class="form-group">
+                                            <div class="row">
+                                                <label for="product_id" class="control-label col-sm-4">Quantity
+                                                    SKU</label>
+                                                <div class="col-sm-8">
+                                                    {!! Form::number('quantity', null,
+                                                    ['class' => 'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="row">
                                                 <label for="feature_image"
