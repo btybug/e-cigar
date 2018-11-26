@@ -521,7 +521,7 @@ class DatatableController extends Controller
 
     public function getPurchases()
     {
-        return Datatables::of(Purchase::groupBy('item_id'))
+        return Datatables::of(Purchase::query())
             ->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
             })->editColumn('sku', function ($attr) {
