@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponsRequest;
 use App\Http\Requests\PurchaseRequest;
 use App\Models\Coupons;
+use App\Models\Items;
 use App\Models\Products;
 use App\Models\Purchase;
 use App\Models\ShippingZones;
@@ -101,7 +102,8 @@ class StoreController extends Controller
     public function getPurchaseNew ()
     {
         $model = null;
-        return $this->view('purchase.new',compact('model'));
+        $items=Items::all()->pluck('name','id');
+        return $this->view('purchase.new',compact('model','items'));
     }
 
     public function postSaveOrUpdate (PurchaseRequest $request)
@@ -111,7 +113,6 @@ class StoreController extends Controller
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
         Purchase::create($data);
-
         return redirect()->route('admin_store_purchase');
     }
 

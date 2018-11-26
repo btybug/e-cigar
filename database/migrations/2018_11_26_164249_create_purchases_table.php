@@ -16,7 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->string('sku');
+            $table->unsignedInteger('item_id');
             $table->unsignedInteger('qty')->default(0);
             $table->timestamp('purchase_date');
             $table->integer('price');

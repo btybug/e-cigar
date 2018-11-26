@@ -9,9 +9,9 @@
             {!! Form::model($model,['url' => route('admin_store_purchase_save'),'id' => 'form-coupon','class' => 'form-horizontal']) !!}
             <div class="form-group required">
                 <label class="col-sm-2 control-label" for="input-code">
-                    <span data-toggle="tooltip" title="" data-original-title="">SKU</span></label>
+                    <span data-toggle="tooltip" title="" data-original-title="">Item</span></label>
                 <div class="col-sm-10">
-                    {!! Form::text('sku',null,[ 'class'=> 'form-control select-sku']) !!}
+                    {!! Form::select('item_id',$items,null,[ 'class'=> 'form-control select-sku']) !!}
                 </div>
             </div>
             <div class="form-group">
