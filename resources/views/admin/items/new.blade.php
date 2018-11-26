@@ -91,43 +91,43 @@
                                                     @endforeach
                                                 @endif
                                             </div>
-                                            {{--<div class="form-group">--}}
-                                                {{--<div class="row">--}}
-                                                    {{--<label for="product_id" class="control-label col-sm-4">Product--}}
-                                                        {{--SKU</label>--}}
-                                                    {{--<div class="col-sm-8">--}}
-                                                        {{--{!! Form::text('sku', null,--}}
-                                                        {{--['class' => 'form-control']) !!}--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group">--}}
-                                                {{--<div class="row">--}}
-                                                    {{--<label for="product_id" class="control-label col-sm-4">Quantity</label>--}}
-                                                    {{--<div class="col-sm-8">--}}
-                                                        {{--{!! Form::number('quantity', null,--}}
-                                                        {{--['class' => 'form-control']) !!}--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group">--}}
-                                                {{--<div class="row">--}}
-                                                    {{--<label for="feature_image"--}}
-                                                           {{--class="control-label col-sm-4">Feature image</label>--}}
-                                                    {{--<div class="col-sm-8">--}}
-                                                        {{--{!! media_button('image',$model) !!}--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="form-group">--}}
-                                                {{--<div class="row">--}}
-                                                    {{--<label for="feature_image"--}}
-                                                           {{--class="control-label col-sm-4"></label>--}}
-                                                    {{--<div class="col-sm-8">--}}
-                                                        {{--<button type="submit">Save</button>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="product_id" class="control-label col-sm-4">Product
+                                                        SKU</label>
+                                                    <div class="col-sm-8">
+                                                        {!! Form::text('sku', null,
+                                                        ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="product_id" class="control-label col-sm-4">Quantity</label>
+                                                    <div class="col-sm-8">
+                                                        {!! Form::number('quantity', null,
+                                                        ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="feature_image"
+                                                           class="control-label col-sm-4">Feature image</label>
+                                                    <div class="col-sm-8">
+                                                        {!! media_button('image',$model) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="feature_image"
+                                                           class="control-label col-sm-4"></label>
+                                                    <div class="col-sm-8">
+                                                        <button type="submit">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                     </div>
                                     <div id="videos" class="tab-pane">
@@ -160,32 +160,6 @@
 
                                             </div>
                                         </div>
-                                        {{--<div class="media-videos">--}}
-                                            {{--<div class="input-group d-flex">--}}
-                                                {{--<input type="text" class="form-control video-url-link"--}}
-                                                       {{--placeholder="Video Url" aria-label="Video Url"--}}
-                                                       {{--aria-describedby="basic-addon2">--}}
-                                                {{--<div class="input-group-append">--}}
-                                                    {{--<button class="btn btn-primary add-video-url"--}}
-                                                            {{--type="button">Add Link--}}
-                                                    {{--</button>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="media-videos-preview d-flex">--}}
-                                                {{--<div class="video-single-item d-flex">--}}
-                                                    {{--<iframe width="200" height="200"--}}
-                                                            {{--src="https://www.youtube.com/embed/XkqyrDZUxVc">--}}
-                                                    {{--</iframe>--}}
-                                                    {{--<div>--}}
-                                                        {{--<button class="btn btn-danger remove-video-single-item">--}}
-                                                            {{--<i class="fa fa-trash"></i></button>--}}
-                                                    {{--</div>--}}
-                                                    {{--<input type="hidden" name="videos[]"--}}
-                                                           {{--value="">--}}
-                                                {{--</div>--}}
-
-                                            {{--</div>--}}
-                                        {{--</div>--}}
                                     </div>
                                     <div id="images" class="tab-pane">
                                         {!! media_button('other_images',$model,true) !!}
