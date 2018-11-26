@@ -1,21 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <section class="content-top">
-        <div class="row m-0">
-            <div class="col-md-3">
-                <input type="text" placeholder="Product Name" class="form-control" value="{{ @$model->name }}" readonly>
-            </div>
-            <div class="col-md-3">
-                <input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>
-            </div>
-            <div class="col-md-3">
-                <input type="text" placeholder="Quantity" class="form-control" value="{{ @$model->quantity }}" readonly>
-            </div>
-            <div class="col-md-3">
-                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
-            </div>
-        </div>
-    </section>
+
     <div class="content main-content">
         <ul class="nav nav-tabs admin-profile-left">
             <li class="active"><a data-toggle="tab" href="#info">Info</a></li>

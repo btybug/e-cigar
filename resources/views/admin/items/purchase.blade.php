@@ -23,6 +23,10 @@
         </ul>
         <div class="tab-content">
             <div id="purchases" class="tabe-pane fade in active media-new-tab basic-details-tab">
+                <div class="col-md-3 pull-right">
+                    <div class="col-md-6">Total Quantity:</div>
+                    <div class="col-md-6">{!! $item->purchase->sum('qty') !!}</div>
+                </div>
                 <div class="col-xs-12">
                     <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                         <thead>
