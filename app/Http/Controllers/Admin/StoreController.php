@@ -116,9 +116,9 @@ class StoreController extends Controller
         return redirect()->route('admin_store_purchase');
     }
 
-    public function EditPurchase ($sku)
+    public function EditPurchase ($id)
     {
-        $data = Purchase::where('sku',$sku)->get();
+        $data = Purchase::find($id);
         if(! count($data)) abort(404);
 
         return $this->view('purchase.edit',compact('data','sku'));
