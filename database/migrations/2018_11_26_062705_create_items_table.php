@@ -19,6 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('sku');
             $table->text('description');
             $table->text('image');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

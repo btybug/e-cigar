@@ -12,6 +12,8 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>SKU</th>
+                    <th>Quantity</th>
+                    <th>Image</th>
                     <th>Description</th>
                     <th>Created At</th>
                     <th>Actions</th>
@@ -32,6 +34,8 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'quantity', name: 'quantity'},
                     {data: 'image', name: 'image'},
                     {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},
