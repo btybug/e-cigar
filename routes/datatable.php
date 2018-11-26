@@ -33,6 +33,8 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/tickets/get-all','Admin\DatatableController@getTickets')->name('datatable_tickets');
     Route::get('/faq/get-all','Admin\DatatableController@getFaq')->name('datatable_all_faq');
     Route::get('/store/get-purchases','Admin\DatatableController@getPurchases')->name('datatable_all_purchases');
+
+    Route::get('/store/get-items','Admin\DatatableController@getAllItems')->name('datatable_all_items');
 });
 
 
