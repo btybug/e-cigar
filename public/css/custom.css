@@ -1177,6 +1177,9 @@ resize: none;
 .ml-50{
     margin-left: 50px;
 }
+.ml-5{
+    margin-left: 5px;
+}
 #myExtraTabModal .bootstrap-tagsinput{
     display: flex;
     align-items: center;

@@ -388,59 +388,6 @@
                             </div>
                         </div>
                     </div>
-                    {{--<div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">--}}
-                    {{--<div class="container-fluid p-25">--}}
-                    {{--<div class="row">--}}
-                    {{--<div class="col-md-12">--}}
-                    {{--<div class="basic-left basic-wall">--}}
-                    {{--<div class="row">--}}
-                    {{--<div class="col-md-5">--}}
-                    {{--<fieldset>--}}
-                    {{--<legend>Packaging Size</legend>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="packaging_length"--}}
-                    {{--class=" col-sm-2">Length</label>--}}
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input class="form-control"--}}
-                    {{--name=""--}}
-                    {{--id="packaging_length" type="text">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="packaging_width"--}}
-                    {{--class="col-sm-2">Width</label>--}}
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input class="form-control"--}}
-                    {{--name=""--}}
-                    {{--id="packaging_width" type="text">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="packaging_height"--}}
-                    {{--class="col-sm-2">Height</label>--}}
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input class="form-control"--}}
-                    {{--name=""--}}
-                    {{--id="packaging_height" type="text">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="packaging_weight"--}}
-                    {{--class="col-sm-2">Weight</label>--}}
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input class="form-control"--}}
-                    {{--name=""--}}
-                    {{--id="packaging_weight" type="text">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</fieldset>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="col-sm-12">
@@ -489,9 +436,11 @@
                                     <div class="basic-center basic-wall">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-sm btn-primary add-variation pull-right"><i
-                                                            class="fa fa-plus mr-10"></i>New Variation</a>
+                                                {{--<a href="javascript:void(0)"--}}
+                                                   {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
+                                                            {{--class="fa fa-plus mr-10"></i>New Variation</a>--}}
+                                                <button type="button" class="btn btn-primary pull-right add-variation-row"><i class="fa fa-plus-circle add-new-v-option"></i>
+                                                </button>
                                             </div>
                                             {{--<div class="col-md-12">--}}
                                                 {{--<a href="javascript:void(0)"--}}
@@ -518,11 +467,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="all-list-attrs">
-                                                    @if($model)
-                                                        @foreach($model->variations as $variation)
-                                                            @include('admin.inventory._partials.variation_item',['item' => $variation])
-                                                        @endforeach
-                                                    @endif
+                                                    {{--@if($model)--}}
+                                                        {{--@foreach($model->variations as $variation)--}}
+                                                            @include('admin.inventory._partials.variation_item')
+                                                        {{--@endforeach--}}
+                                                    {{--@endif--}}
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -954,7 +903,43 @@
                     $('.table-product-variotion').addClass('hide')
                 }
 
-            })
+            });
+            $('body').on('click','.add-variation-row',function () {
+                let htmlRow=`<tr class="list-table-single-item">
+    <td>
+        <input type="text" class="form-control">
+    </td>
+    <td>
+        <div class="d-flex">
+            <select name="" id="" class="form-control">
+                <option value="">1</option>
+                <option value="">2</option>
+            </select>
+            <select name="" id="" class="form-control ml-5">
+                <option value="">1</option>
+                <option value="">2</option>
+            </select>
+        </div>
+    </td>
+    <td>
+        <select name="" id="" class="form-control">
+            <option value="">1</option>
+            <option value="">2</option>
+        </select>
+    </td>
+    <td>
+        99
+    </td>
+    <td class="w-5">
+        <input type="text" class="form-control">
+    </td>
+    <td class="w-10">
+        <a class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+        <a class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+    </td>
+</tr>`;
+                $('#variations-table .all-list-attrs').append(htmlRow)
+            });
 
             function guid() {
                 return "ss".replace(/s/g, s4);
