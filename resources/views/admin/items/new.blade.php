@@ -19,8 +19,6 @@
     <div class="content main-content">
         <ul class="nav nav-tabs admin-profile-left">
             <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
-            <li><a data-toggle="tab" href="#purchases">Purchases</a></li>
-            <li><a data-toggle="tab" href="#sales">Sales</a></li>
         </ul>
         <div class="tab-content">
             <div id="info" class="tab-pane fade in active media-new-tab basic-details-tab">
@@ -92,15 +90,6 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="product_id" class="control-label col-sm-4">Qty</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::number('quantity', null,
-                                                        ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
                                             </div>
                                                 <div class="form-group">
                                                 <div class="row">
@@ -223,8 +212,6 @@
                 </div>
                 {!! Form::close() !!}
             </div>
-            <div id="purchases" class="tabe-pane fade"></div>
-            <div id="sales" class="tabe-pane fade"></div>
         </div>
     </div>
 
