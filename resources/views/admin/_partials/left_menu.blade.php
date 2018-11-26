@@ -57,7 +57,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dropbox"></i>
-                    <span>Store</span>
+                    <span>Inventory</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -66,6 +66,19 @@
                     @ok('admin_items')
                     <li><a href="{{route('admin_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
                     @endok
+                </ul>
+            </li>
+            @endok
+            @ok('admin_store')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dropbox"></i>
+                    <span>Store</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
                     @ok('admin_stock')
                     <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
                     @endok
