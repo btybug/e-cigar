@@ -344,7 +344,7 @@
                                         </tr>
                                         </thead>
 
-                                        <tbody class="v-options-list">
+                                        <tbody class="v-options-list get-all-attributes-tab">
                                         @include("admin.inventory._partials.variation_option_item")
                                         </tbody>
 
@@ -445,7 +445,7 @@
                                                     <tbody class="all-list-attrs">
                                                     {{--@if($model)--}}
                                                     {{--@foreach($model->variations as $variation)--}}
-                                                    @include('admin.inventory._partials.variation_item')
+                                                    {{--@include('admin.inventory._partials.variation_item')--}}
                                                     {{--@endforeach--}}
                                                     {{--@endif--}}
                                                     </tbody>
@@ -524,7 +524,7 @@
                                                     <tbody class="all-list-attrs">
                                                     @if($model)
                                                         @foreach($model->variations as $variation)
-                                                            @include('admin.inventory._partials.variation_item',['item' => $variation])
+                                                            {{--@include('admin.inventory._partials.variation_item',['item' => $variation])--}}
                                                         @endforeach
                                                     @endif
                                                     </tbody>
@@ -886,40 +886,23 @@
 
             });
             $('body').on('click', '.add-variation-row', function () {
-                let htmlRow = `<tr class="list-table-single-item">
-    <td>
-        <input type="text" class="form-control">
-    </td>
-    <td>
-        <div class="d-flex">
-            <select name="" id="" class="form-control">
-                <option value="">1</option>
-                <option value="">2</option>
-            </select>
-            <select name="" id="" class="form-control ml-5">
-                <option value="">1</option>
-                <option value="">2</option>
-            </select>
-        </div>
-    </td>
-    <td>
-        <select name="" id="" class="form-control">
-            <option value="">1</option>
-            <option value="">2</option>
-        </select>
-    </td>
-    <td>
-        99
-    </td>
-    <td class="w-5">
-        <input type="text" class="form-control">
-    </td>
-    <td class="w-10">
-        <a class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-        <a class="btn btn-warning"><i class="fa fa-pencil"></i></a>
-    </td>
-</tr>`;
-                $('#variations-table .all-list-attrs').append(htmlRow)
+                attributesJson = {};
+
+                $(".get-all-attributes-tab")
+                    .children()
+                    .each(function() {
+                        console.log($(this))
+                        addAttributeToJSONNew($(this))
+                    });
+                AjaxCall(
+                    "/admin/inventory/stock/add-variation",
+                    {options : attributesJson},
+                    function(res) {
+                        if (!res.error) {
+                            $('#variations-table .all-list-attrs').append(res.html)
+                        }
+                    }
+                );
             });
 
             function guid() {

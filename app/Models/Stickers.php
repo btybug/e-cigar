@@ -28,4 +28,10 @@ class Stickers extends Translatable
     {
         return $this->belongsToMany(Category::class, 'category_stickers', 'sticker_id', 'categories_id');
     }
+
+    public static function getById($id,$col = 'name')
+    {
+        $attribute = self::find($id);
+        return ($attribute && isset($attribute->{$col})) ? $attribute->{$col} : null;
+    }
 }

@@ -364,6 +364,15 @@ function addAttributeToJSON(id, remove = false) {
     }
 }
 
+function addAttributeToJSONNew($_this, remove = false) {
+    let id = $_this.find('.select-attribute').val();
+
+    let inputOptions = $_this.find(`.input-items-value`);
+
+    let inputOptionsValue = inputOptions.val();
+    attributesJson[id] = inputOptionsValue.split(",");
+}
+
 function HTMLmakeSelectVaritionOptions(name, data, text = "") {
     let value = "";
     data.forEach(

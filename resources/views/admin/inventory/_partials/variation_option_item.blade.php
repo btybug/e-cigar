@@ -12,7 +12,7 @@
     </td>
     <td class="w-70">
         <input data-role="tagsinput" class="tag-input-v v-input-{{ $uniqueID }}" value="{{ (isset($selected) && $selected) ? implode(',',$selected->stickers->pluck('name')->all()) : '' }}">
-        <input type="hidden" name="test_options[{{ $uniqueID }}][options]"
+        <input type="hidden" class="input-items-value" name="test_options[{{ $uniqueID }}][options]"
                value="{{ (isset($selected) && $selected) ? implode(',',$allAttr->stickers->pluck('id')->all()) : '' }}">
     </td>
     <td colspan="2" class="text-right">
