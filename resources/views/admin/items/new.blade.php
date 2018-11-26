@@ -237,14 +237,7 @@
                                     </div>
                                     <div id="specifications" class="tabe-pan fade">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <div class="row">
-                                                    <div class="col-sm-12 clearfix">
-                                                        <h3 class="pull-left m-0">Specifications</h3>
-                                                        <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                       
                                             <div class="panel-body">
                                                 <table class="table table-responsive table--store-settings">
                                                     <thead>
