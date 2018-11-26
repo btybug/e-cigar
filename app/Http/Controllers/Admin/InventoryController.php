@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Attributes;
 use App\Models\Category;
+use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\Stock;
@@ -147,7 +148,8 @@ class InventoryController extends Controller
     public function addVariation(Request $request)
     {
         $item = $request->except('_token');
-        $html = \View('admin.inventory._partials.variation_item', compact(['item']))->render();
+        $stockItems = Items::all()->pluck('sku','sku')->all();
+        $html = \View('admin.inventory._partials.variation_item', compact(['item','stockItems']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

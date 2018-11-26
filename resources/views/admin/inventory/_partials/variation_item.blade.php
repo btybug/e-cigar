@@ -29,7 +29,7 @@
         @endif
     </td>
     <td>
-        {!! Form::select("variations[$uniqueID][variation_id]",[],(isset($item['variation_id'])) ? $item['variation_id'] : null,['class' => 'form-control']) !!}
+        {!! Form::select("variations[$uniqueID][variation_id]",$stockItems,(isset($item['variation_id'])) ? $item['variation_id'] : null,['class' => 'form-control']) !!}
     </td>
     <td>
         {!! (isset($item['qty'])) ? $item['qty'] : null !!}
