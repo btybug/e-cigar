@@ -40,4 +40,13 @@ class ItemsController extends Controller
         $item=Items::FindOrFail($id);
         return $this->view('purchase',compact('item'));
     }
+
+    public function getSuppliers()
+    {
+        return $this->view('suppliers.index');
+    }
+    public function getSaleChannels()
+    {
+        return $this->view('sale_channels.index');
+    }
 }

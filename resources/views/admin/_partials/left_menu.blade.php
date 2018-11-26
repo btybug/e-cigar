@@ -69,6 +69,12 @@
                     @ok('admin_store_purchase')
                     <li><a href="{{route('admin_store_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>
                     @endok
+                    @ok('admin_suppliers')
+                    <li><a href="{{route('admin_suppliers')}}"><i class="fa fa-circle-o"></i>Suppliers</a></li>
+                    @endok
+                    @ok('admin_sale_channels')
+                    <li><a href="{{route('admin_sale_channels')}}"><i class="fa fa-circle-o"></i>Sale Channels</a></li>
+                    @endok
                 </ul>
             </li>
             @endok
