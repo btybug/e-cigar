@@ -184,6 +184,7 @@
                                                 <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
                                                 <li><a data-toggle="tab" href="#mediastickers">Stickers</a></li>
                                                 <li><a data-toggle="tab" href="#mediarelatedproducts">Related Products</a></li>
+                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -271,6 +272,9 @@
                                                         @endif
                                                     </ul>
                                                 </div>
+                                            </div>
+                                            <div id="mediaspecifications" class="tab-pane fade ">
+                                                Specifications
                                             </div>
                                         </div>
                                     </div>
