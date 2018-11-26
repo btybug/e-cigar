@@ -871,6 +871,17 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
+            function addAttributeToJSONNew($_this, remove = false) {
+                let id = $_this.find('.select-attribute').val();
+
+                let inputOptions = $_this.find(`.input-items-value`);
+
+
+                let inputOptionsValue = inputOptions.val();
+                console.log(id,inputOptionsValue);
+                attributesJson[id] = inputOptionsValue.split(",");
+            }
+
             $('body').on('change', '#variation-product-select', function () {
                 $('.product-wall').addClass('hide')
                 $('#variations-table').closest('.row').removeClass('hide')
