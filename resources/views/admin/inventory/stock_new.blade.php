@@ -396,7 +396,6 @@
                                         <label class="col-md-1">Product Type</label>
                                         <div class="col-md-3">
                                             <select name="" id="variation-product-select" class="form-control">
-                                                <option value="">Select Product</option>
                                                 <option value="simple_product">Simple Product</option>
                                                 <option value="variation_product">Variation Product</option>
                                             </select>
@@ -438,7 +437,7 @@
                                     <div class="basic-center basic-wall">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="sipmle-product-wall product-wall hide">
+                                                <div class="sipmle-product-wall product-wall">
                                                     <table class="table table-style table-bordered" cellspacing="0" width="100%">
                                                         <thead>
                                                         <tr>
@@ -477,7 +476,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row hide">
                                             <div class="col-md-12">
                                                 {{--<a href="javascript:void(0)"--}}
                                                 {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
