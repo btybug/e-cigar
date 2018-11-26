@@ -26,7 +26,7 @@ class ItemsRequest extends FormRequest
         return [
             "translatable"    => "required|array|min:1",
             "translatable.*.name"  => "required|string|min:3",
-            "sku"  => "required|numeric|digits:13",
+            "sku"  => "required|numeric|digits:13|unique:items.sku",
             "image"  => "required",
         ];
     }
