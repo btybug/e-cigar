@@ -9,11 +9,12 @@
 namespace App\Models;
 
 
-use App\User;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Common\Translatable;
+use App\Models\Translations\ItemsTranslation;
 
-class Items extends Model
+class Items extends Translatable
 {
     protected $table = 'items';
     protected $guarded = ['id'];
+    public $translationModel = ItemsTranslation::class;
 }
