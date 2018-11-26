@@ -170,6 +170,7 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'sale-channels'], function () {
         Route::get('/','Admin\ItemsController@getSaleChannels')->name('admin_sale_channels');
     });
+
     Route::group(['prefix' => 'items'], function () {
         Route::get('/','Admin\ItemsController@index')->name('admin_items');
         Route::get('/new','Admin\ItemsController@getNew')->name('admin_items_new');

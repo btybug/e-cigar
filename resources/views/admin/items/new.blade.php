@@ -21,6 +21,7 @@
                                         <li><a data-toggle="tab" href="#downloads">Downloads</a></li>
                                         <li><a data-toggle="tab" href="#settings">Settings</a></li>
                                         <li><a data-toggle="tab" href="#management">Management</a></li>
+                                        <li><a data-toggle="tab" href="#specifications">Specifications</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -233,6 +234,21 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id="specifications" class="tabe-pan fade">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-sm-12 clearfix">
+                                                        <h3 class="pull-left m-0">Specifications</h3>
+                                                        <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
