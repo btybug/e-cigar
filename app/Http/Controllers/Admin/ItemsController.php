@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemsRequest;
-use App\Models\Media\Items;
+use App\Models\Items;
 
 class ItemsController extends Controller
 {
@@ -31,7 +31,13 @@ class ItemsController extends Controller
     public function postNew(ItemsRequest $request)
     {
         $data = $request->except('_token', 'translatable');
-        \App\Models\Items::updateOrCreate($request->id, $data);
+        Items::updateOrCreate($request->id, $data);
         return redirect()->route('admin_items');
+    }
+
+    public function getPurchase($id)
+    {
+        $item=Items::FindOrFail($id);
+        return $this->view('purchase',compact('item'));
     }
 }

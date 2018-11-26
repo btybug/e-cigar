@@ -536,6 +536,23 @@ class DatatableController extends Controller
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
+    public function getItemPurchases($item_id)
+    {
+        return Datatables::of(Purchase::where('item_id',$item_id))
+            ->editColumn('user_id', function ($faq) {
+                return $faq->user->name;
+            })->editColumn('sku', function ($attr) {
+                return $attr->item->sku;
+            })->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            })->editColumn('purchase_date', function ($faq) {
+                return BBgetDateFormat($faq->purchase_date);
+            })
+            ->addColumn('actions', function ($faq) {
+                return "<a class='badge btn-warning' href='" . route("admin_store_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
+            ->make(true);
+    }
 
     public function getUserOrders($user_id)
     {
@@ -569,8 +586,9 @@ class DatatableController extends Controller
                 return $attr->short_description;
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
-            })->addColumn('actions', function ($faq) {
-                return "<a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+            })->addColumn('actions', function ($attr) {
+                return "<a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>
+            <a class='badge btn-warning' href='".route('admin_items_purchase',$attr->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])->make(true);
     }
 }
