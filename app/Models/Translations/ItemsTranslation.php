@@ -8,7 +8,7 @@ class ItemsTranslation extends Model
 {
     public $timestamps = false;
 
-    protected $table = 'items_translations';
+    protected $table = 'item_translations';
 
     protected $fillable = ['name', 'short_description', 'long_description'];
 }

@@ -561,8 +561,12 @@ class DatatableController extends Controller
     public function getAllItems()
     {
         return Datatables::of(Items::query())
-            ->editColumn('created_at', function ($attr) {
-                return BBgetDateFormat($attr->created_at);
+            ->editColumn('name', function ($attr) {
+                return $attr->name;
+            })->editColumn('short_description', function ($attr) {
+                return $attr->short_description;
+            })->editColumn('long_description', function ($attr) {
+                return $attr->long_description;
             })->addColumn('actions', function ($faq) {
                 return "<a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])->make(true);

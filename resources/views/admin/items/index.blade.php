@@ -37,7 +37,7 @@
                     {data: 'sku', name: 'sku'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'image', name: 'image'},
-                    {data: 'description', name: 'description'},
+                    {data: 'short_description', name: 'short_description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

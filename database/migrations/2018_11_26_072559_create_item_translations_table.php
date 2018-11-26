@@ -16,7 +16,7 @@ class CreateItemTranslationsTable extends Migration
         Schema::create('item_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('sort_description')->nullable();
+            $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
             $table->integer('items_id')->unsigned();
             $table->string('locale')->index();

@@ -167,6 +167,7 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'items'], function () {
         Route::get('/','Admin\ItemsController@index')->name('admin_items');
         Route::get('/new','Admin\ItemsController@getNew')->name('admin_items_new');
+        Route::post('/new','Admin\ItemsController@postNew')->name('admin_items_new');
     });
     Route::group(['prefix' => 'stock'], function () {
         Route::get('/', 'Admin\InventoryController@stock')->name('admin_stock');

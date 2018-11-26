@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ItemsRequest;
+use App\Models\Media\Items;
 
 class ItemsController extends Controller
 {
@@ -22,6 +24,14 @@ class ItemsController extends Controller
 
     public function getNew()
     {
-        return $this->view('new');
+        $model=null;
+        return $this->view('new',compact('model'));
+    }
+
+    public function postNew(ItemsRequest $request)
+    {
+        $data = $request->except('_token', 'translatable');
+        \App\Models\Items::updateOrCreate($request->id, $data);
+        return redirect()->route('admin_items');
     }
 }

@@ -20,56 +20,97 @@
             <li><a data-toggle="tab" href="#sales">Sales</a></li>
         </ul>
         <div class="tab-content">
-            <div id="info" class="tab-pane basic-details-tab info-new-tab fade active in">
-                            <div class="row d-flex">
-                                <div class="col-md-3">
-                                    <div class="basic-left basic-wall h-100">
-                                        <div class="all-list">
-                                            <ul class="nav nav-tabs info-list">
-                                                <li class="active"><a data-toggle="tab" href="#innerBasics">Basics</a></li>
-                                                <li><a data-toggle="tab" href="#mediavideos">Videos</a>
-                                                <li><a data-toggle="tab" href="#mediastickers">Stickers</a></li>
-                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related
-                                                        Products</a></li>
-                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a>
-                                                </li>
+            <div id="info" class="tab-pane fade in active ">
+                {!! Form::model($model,['class'=>'form-horizontal']) !!}
+                <div class="container-fluid p-25">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="basic-center basic-wall">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @if(count(get_languages()))
+                                            <ul class="nav nav-tabs">
+                                                @foreach(get_languages() as $language)
+                                                    <li class="@if($loop->first) active @endif"><a
+                                                                data-toggle="tab"
+                                                                href="#{{ strtolower($language->code) }}">
+                                                            <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                        </a></li>
+                                                @endforeach
                                             </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="basic-center basic-wall scrollbar_media_tab">
+                                        @endif
                                         <div class="tab-content">
-                                            <div id="innerBasics" class="tab-pane fade in active">
-                                                    <form class="form-horizontal">
+                                            @if(count(get_languages()))
+                                                @foreach(get_languages() as $language)
+                                                    <div id="{{ strtolower($language->code) }}"
+                                                         class="tab-pane fade  @if($loop->first) in active @endif">
                                                         <div class="form-group">
-                                                            <label for="name" class="col-sm-2 control-label"><span data-toggle="tooltip" title="" data-original-title="Attribute Name Title">Product Name</span></label>
+                                                            <label class="col-sm-2 control-label"><span
+                                                                        data-toggle="tooltip"
+                                                                        title=""
+                                                                        data-original-title="Attribute Name Title">Product Name</span></label>
                                                             <div class="col-sm-10">
-                                                                <input id="name" class="form-control" type="text" value="Apple Hit">
+                                                                {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="shortDescr" class="col-sm-2 control-label"><span data-toggle="tooltip" title="" data-original-title="Short Description">Short Description</span></label>
+                                                            <label class="col-sm-2 control-label"><span
+                                                                        data-toggle="tooltip"
+                                                                        title=""
+                                                                        data-original-title="Short Description">Short Description</span></label>
                                                             <div class="col-sm-10">
-                                                                <textarea id="shortDescr" class="form-control" cols="30" rows="2">Short description for apple hits</textarea>
+                                                                {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="longDescr" class="col-sm-2 control-label"><span data-toggle="tooltip" title="" data-original-title="Long Description">Long Description</span></label>
-                                                            <div id="longDescr" class="col-sm-10">
-                                                                <textarea id="longDescr" class="form-control tinyMcArea" cols="30" rows="10">long description for apple hits</textarea>
+                                                            <label class="col-sm-2 control-label"><span
+                                                                        data-toggle="tooltip"
+                                                                        title=""
+                                                                        data-original-title="Short Description">Long Description</span></label>
+                                                            <div class="col-sm-10">
+                                                                {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                             </div>
                                                         </div>
-                                                    </form>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label for="product_id" class="control-label col-sm-4">Product
+                                                    SKU</label>
+                                                <div class="col-sm-8">
+                                                    {!! Form::text('sku', null,
+                                                    ['class' => 'form-control']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label for="feature_image"
+                                                       class="control-label col-sm-4">Feature image</label>
+                                                <div class="col-sm-8">
+                                                    {!! media_button('image',$model) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <label for="feature_image"
+                                                       class="control-label col-sm-4"></label>
+                                                <div class="col-sm-8">
+                                                    <button type="submit">Save</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
-
-
-
+                        </div>
+                    </div>
+                </div>
+                {!! Form::close() !!}
             </div>
             <div id="purchases" class="tabe-pane fade"></div>
             <div id="sales" class="tabe-pane fade"></div>
@@ -77,7 +118,4 @@
     </div>
 
 
-@stop
-@section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
