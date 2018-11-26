@@ -32,8 +32,6 @@
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li><a data-toggle="tab" href="#media">Media</a></li>
-                    <li><a data-toggle="tab" href="#attributes">Technical</a></li>
-                    {{--<li><a data-toggle="tab" href="#logistic">Logistic</a></li>--}}
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
                     <li><a data-toggle="tab" href="#extra">Extra</a></li>
                     <li><a data-toggle="tab" href="#seo">Seo</a></li>
@@ -319,73 +317,6 @@
 
                             </div>
 
-                        </div>
-                    </div>
-                    <div id="attributes" class="tab-pane basic-details-tab  fade attributes_tab">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="basic-left basic-wall">
-                                        <div class="all-list-attributes">
-                                            <ul class="get-all-attributes-tab">
-                                                @if(isset($attrs) && count($attrs))
-                                                    @foreach($attrs as $attribute)
-                                                        <li style="display: flex"
-                                                            data-option-container="{!! $attribute->id !!}"
-                                                            data-id="{!! $attribute->id !!}"
-                                                            class="option-elm-attributes"><a
-                                                                    href="#">{!! $attribute->name !!}</a>
-                                                            <div class="buttons">
-                                                                <a href="javascript:void(0)"
-                                                                   class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i
-                                                                            class="fa fa-money"></i></a>
-                                                                <a href="javascript:void(0)"
-                                                                   class="remove-all-attributes btn btn-sm btn-danger"><i
-                                                                            class="fa fa-trash"></i></a>
-                                                            </div>
-                                                            <input type="hidden"
-                                                                   name="attributes[{!! $attribute->id !!}][attributes_id]"
-                                                                   value="{!! $attribute->id !!}">
-                                                            <input type="hidden" class="is-shared-attributes"
-                                                                   name="attributes[{!! $attribute->id !!}][is_shared]"
-                                                                   value="{!! $attribute->is_shared !!}">
-                                                        </li>
-                                                    @endforeach
-                                                @endif
-                                            </ul>
-                                        </div>
-                                        <div class="button-add text-center">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-block get-all-attributes-tab-event"><i
-                                                        class="fa fa-plus mr-10"></i>Add new
-                                                option</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="basic-center basic-wall">
-                                        <ul class="choset-attributes">
-                                            @if(isset($attrs) && count($attrs))
-                                                @foreach($attrs as $attribute)
-                                                    @php
-                                                        $opptionAttr = $model->stockAttrs()->where('attributes_id',$attribute->id)->first();
-                                                    @endphp
-                                                    <div style="height: 50px" data-attr-id="{{$attribute->id}}"
-                                                         class="attributes-container-{{$attribute->id}} main-attr-container">
-                                                        <input data-id="{{$attribute->id}}"
-                                                               class="attributes-item-input-{{$attribute->id}}"
-                                                               value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.name')->all()) }}">
-                                                        <input type="hidden" class="input-items-value"
-                                                               name="options[{{$attribute->id}}]"
-                                                               value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.id')->all()) }}">
-                                                    </div>
-                                                @endforeach
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
