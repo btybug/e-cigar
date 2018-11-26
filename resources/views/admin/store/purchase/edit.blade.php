@@ -4,11 +4,16 @@
 @stop
 @section('content')
     <div class="coupons_new_page">
-        <h3>SKU : {{ $sku }}</h3>
-        {!! Form::hidden('sku',$sku,['class' => 'select-sku']) !!}
         <div>
             <a href="{!! route('admin_store_purchase') !!}" class="btn btn-warning pull-right">Back</a>
         </div>
+        <h3>SKU : {{ $sku }}</h3>
+        <div class="pull-right">
+            <div class="col-md-6 "><b>Quantity:</b></div>
+            <div class="col-md-6"> <span>255</span></div>
+        </div>
+        {!! Form::hidden('sku',$sku,['class' => 'select-sku']) !!}
+
         <div class="col-md-8">
             <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
