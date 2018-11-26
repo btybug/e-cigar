@@ -11,6 +11,9 @@
             <div class="col-md-4">
                 <input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>
             </div>
+            <div class="col-md-4">
+                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
+            </div>
         </div>
     </section>
     <section class="content-header">
@@ -30,7 +33,7 @@
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
                     <li><a data-toggle="tab" href="#media">Media</a></li>
                     <li><a data-toggle="tab" href="#attributes">Technical</a></li>
-                    <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
+                    {{--<li><a data-toggle="tab" href="#logistic">Logistic</a></li>--}}
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
                     <li><a data-toggle="tab" href="#extra">Extra</a></li>
                     <li><a data-toggle="tab" href="#seo">Seo</a></li>
@@ -40,9 +43,6 @@
             <!-- /.col -->
             {!! Form::model($model,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
             {!! Form::hidden('id',null) !!}
-            <div class="col-md-12 pt-25">
-                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
-            </div>
             <div class="col-md-12">
                 <div class="tab-content tabs_content">
                     <div id="basic" class="tab-pane fade in active basic-details-tab ">
@@ -371,59 +371,59 @@
                             </div>
                         </div>
                     </div>
-                    <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="basic-left basic-wall">
-                                            <div class="row">
-                                                <div class="col-md-5">
-                                                    <fieldset>
-                                                        <legend>Packaging Size</legend>
-                                                        <div class="form-group">
-                                                                <label for="packaging_length"
-                                                                       class=" col-sm-2">Length</label>
-                                                                <div class="col-sm-10">
-                                                                    <input class="form-control"
-                                                                           name=""
-                                                                           id="packaging_length" type="text">
-                                                                </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="packaging_width"
-                                                                   class="col-sm-2">Width</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_width" type="text">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="packaging_height"
-                                                                   class="col-sm-2">Height</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_height" type="text">
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="packaging_weight"
-                                                                   class="col-sm-2">Weight</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_weight" type="text">
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--<div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">--}}
+                        {{--<div class="container-fluid p-25">--}}
+                            {{--<div class="row">--}}
+                                {{--<div class="col-md-12">--}}
+                                    {{--<div class="basic-left basic-wall">--}}
+                                            {{--<div class="row">--}}
+                                                {{--<div class="col-md-5">--}}
+                                                    {{--<fieldset>--}}
+                                                        {{--<legend>Packaging Size</legend>--}}
+                                                        {{--<div class="form-group">--}}
+                                                                {{--<label for="packaging_length"--}}
+                                                                       {{--class=" col-sm-2">Length</label>--}}
+                                                                {{--<div class="col-sm-10">--}}
+                                                                    {{--<input class="form-control"--}}
+                                                                           {{--name=""--}}
+                                                                           {{--id="packaging_length" type="text">--}}
+                                                                {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="form-group">--}}
+                                                            {{--<label for="packaging_width"--}}
+                                                                   {{--class="col-sm-2">Width</label>--}}
+                                                            {{--<div class="col-sm-10">--}}
+                                                                {{--<input class="form-control"--}}
+                                                                       {{--name=""--}}
+                                                                       {{--id="packaging_width" type="text">--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="form-group">--}}
+                                                            {{--<label for="packaging_height"--}}
+                                                                   {{--class="col-sm-2">Height</label>--}}
+                                                            {{--<div class="col-sm-10">--}}
+                                                                {{--<input class="form-control"--}}
+                                                                       {{--name=""--}}
+                                                                       {{--id="packaging_height" type="text">--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="form-group">--}}
+                                                            {{--<label for="packaging_weight"--}}
+                                                                   {{--class="col-sm-2">Weight</label>--}}
+                                                            {{--<div class="col-sm-10">--}}
+                                                                {{--<input class="form-control"--}}
+                                                                       {{--name=""--}}
+                                                                       {{--id="packaging_weight" type="text">--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                    {{--</fieldset>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="row">
