@@ -1007,9 +1007,10 @@
             });
 
             $("body").on('click', '.add-new-v-option', function () {
+                let $this = $(this);
                 AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
-                        $(".v-options-list").append(res.html);
+                        $this.closest("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").tagsinput();
                     }
                 });
