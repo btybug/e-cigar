@@ -40,6 +40,21 @@
             </div>
 
             <div class="form-group">
+                <label class="col-sm-2 control-label" for="supplier">
+                    Supplier</label>
+                <div class="col-sm-10">
+                    {!! Form::select('supplier',$items,null,[ 'class'=> 'form-control']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label" for="invoiceNumber">Invoice number</label>
+                <div class="col-sm-10">
+                    {!! Form::number('invoiceNumber',null,['placeholder' => 'Purchase invoice number','class'=> 'form-control']) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-sm-2 control-label" for="input-status"></label>
                 <div class="col-sm-10">
                     {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
