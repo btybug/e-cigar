@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemsRequest;
+use App\Models\Attributes;
 use App\Models\Items;
 
 class ItemsController extends Controller
@@ -25,7 +26,8 @@ class ItemsController extends Controller
     public function getNew()
     {
         $model=null;
-        return $this->view('new',compact('model'));
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        return $this->view('new',compact('model','allAttrs'));
     }
 
     public function postNew(ItemsRequest $request)

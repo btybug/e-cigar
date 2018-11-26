@@ -237,46 +237,32 @@
                                     </div>
                                     <div id="specifications" class="tabe-pan fade">
                                         <div class="panel panel-default">
-                                       
                                             <div class="panel-body">
-                                                <table class="table table-responsive table--store-settings">
-                                                    <thead>
-                                                    <tr class="bg-my-light-pink">
-                                                        <th>Attributes</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
+                                                    {!! Form::open(['id' => 'v-option-form']) !!}
+                                                    <table class="table table-responsive table--store-settings">
+                                                        <thead>
+                                                        <tr class="bg-my-light-pink">
+                                                            <th>Attributes</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                        </thead>
 
-                                                    <tbody class="v-options-list">
-                                                    <tr class="v-options-list-item">
-                                                        <td class="w-20">
-                                                            <select data-uid="5bfc2451ba67e" name="test_options[5bfc2451ba67e][attr_id]" class="form-control select-attribute" placeholder="Select">
-                                                                <option>Select</option>
-                                                                <option value="1">Flavor Type</option>
-                                                                <option value="6">Nicotine Strength</option>
-                                                                <option value="12">Packs</option>
-                                                                <option value="15">VG/PG</option>
-                                                            </select>
-                                                        </td>
-                                                        <td class="w-70">
-                                                            <div class="bootstrap-tagsinput"><input type="text" placeholder=""></div><input data-role="tagsinput" class="tag-input-v v-input-5bfc2451ba67e" value="" style="display: none;">
-                                                            <input type="hidden" class="input-items-value" name="test_options[5bfc2451ba67e][options]" value="">
-                                                        </td>
-                                                        <td colspan="2" class="text-right">
-                                                            <button type="button" class="btn btn-danger"><i class="fa fa-minus-circle delete-v-option"></i></button>
-                                                        </td>
-                                                    </tr>                                                    </tbody>
+                                                        <tbody class="v-options-list">
+                                                        @include("admin.inventory._partials.variation_option_item")
+                                                        </tbody>
 
-                                                    <tfoot>
-                                                    <tr class="add-new-ship-filed-container">
-                                                        <td colspan="4" class="text-right">
-                                                            <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle add-new-v-option"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    </tfoot>
-                                                </table>
+                                                        <tfoot>
+                                                        <tr class="add-new-ship-filed-container">
+                                                            <td colspan="4" class="text-right">
+                                                                <button type="button" class="btn btn-primary"><i
+                                                                            class="fa fa-plus-circle add-new-v-option"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                    {!! Form::close() !!}
                                             </div>
                                         </div>
 
@@ -301,5 +287,39 @@
 @section('js')
 
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script>
+        $(function () {
+            $("body").on('click', '.add-new-v-option', function () {
+                let $this = $(this);
+                AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
+                    if (!res.error) {
+                        $this.closest("table").find(".v-options-list").append(res.html);
+                        $(".tag-input-v").tagsinput();
+                    }
+                });
+            });
+            $("body").on('click', '.get-all-extra-tab-event', function () {
+                AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
+                    if (!res.error) {
+                        $("#v-option-form")[0].reset();
+                        $("#v-option-form .v-options-list").html(res.html);
+                        $(".tag-input-v").tagsinput();
+                        $("#myExtraTabModal").modal();
+                    }
+                });
+            })
 
+            $("body").on('click', '.save-v-option', function () {
+                var data = $("#v-option-form").serialize();
+                AjaxCall("/admin/inventory/stock/add-extra-option", data, function (res) {
+                    if (!res.error) {
+                        $(".get-all-extra-tab").append(res.html);
+                        $("#myExtraTabModal").modal('hide');
+                        $("#v-option-form")[0].reset();
+                    }
+                });
+            });
+        })
+
+    </script>
 @stop
