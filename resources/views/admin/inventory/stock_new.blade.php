@@ -110,16 +110,16 @@
                                                     </div>
                                                 </div>
                                                 {{--<div class="form-group">--}}
-                                                    {{--<div class="row">--}}
-                                                        {{--<label for="sku"--}}
-                                                               {{--class="control-label col-sm-4">Barcode</label>--}}
-                                                        {{--<div class="col-sm-8">--}}
-                                                            {{--@if($model && $model->sku)--}}
-                                                                {{--{!! \DNS1D::getBarcodeSVG($model->sku, "C39") !!}--}}
-                                                                {{--<img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />--}}
-                                                            {{--@endif--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
+                                                {{--<div class="row">--}}
+                                                {{--<label for="sku"--}}
+                                                {{--class="control-label col-sm-4">Barcode</label>--}}
+                                                {{--<div class="col-sm-8">--}}
+                                                {{--@if($model && $model->sku)--}}
+                                                {{--{!! \DNS1D::getBarcodeSVG($model->sku, "C39") !!}--}}
+                                                {{--<img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />--}}
+                                                {{--@endif--}}
+                                                {{--</div>--}}
+                                                {{--</div>--}}
                                                 {{--</div>--}}
                                                 <div class="form-group">
                                                     <div class="row">
@@ -183,8 +183,10 @@
                                                 <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
                                                 <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
                                                 <li><a data-toggle="tab" href="#mediastickers">Stickers</a></li>
-                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related Products</a></li>
-                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a></li>
+                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related
+                                                        Products</a></li>
+                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -211,9 +213,15 @@
                                                         @if(isset($model->videos) && $model->videos && count($model->videos))
                                                             @foreach($model->videos as $video)
                                                                 <div class="video-single-item" style="display: flex">
-                                                                    <iframe width="200" height="200" src="https://www.youtube.com/embed/{{ $video }}">
-                                                                    </iframe><div><button class="btn btn-danger remove-video-single-item">
-                                                                    <i class="fa fa-trash"></i></button></div><input type="hidden" name="videos[]" value="{{ $video }}"> </div>
+                                                                    <iframe width="200" height="200"
+                                                                            src="https://www.youtube.com/embed/{{ $video }}">
+                                                                    </iframe>
+                                                                    <div>
+                                                                        <button class="btn btn-danger remove-video-single-item">
+                                                                            <i class="fa fa-trash"></i></button>
+                                                                    </div>
+                                                                    <input type="hidden" name="videos[]"
+                                                                           value="{{ $video }}"></div>
                                                             @endforeach
                                                         @endif
 
@@ -226,7 +234,8 @@
                                                     <span>
                                                        Stickers
                                                     </span>
-                                                    <button type="button" class="btn btn-info select-stickers">Select</button>
+                                                    <button type="button" class="btn btn-info select-stickers">Select
+                                                    </button>
                                                 </div>
                                                 <div class="panel-body product-body">
                                                     <ul class="get-all-stickers-tab">
@@ -240,7 +249,8 @@
                                                                            class="remove-all-attributes btn btn-sm btn-danger">
                                                                             <i class="fa fa-trash"></i></a>
                                                                     </div>
-                                                                    <input type="hidden" name="stickers[]" value="{{ $sticker->id }}">
+                                                                    <input type="hidden" name="stickers[]"
+                                                                           value="{{ $sticker->id }}">
                                                                 </li>
                                                             @endforeach
                                                         @endif
@@ -252,13 +262,15 @@
                                                     <span>
                                                         Related Products
                                                     </span>
-                                                    <button type="button" class="btn btn-info select-products">Select</button>
+                                                    <button type="button" class="btn btn-info select-products">Select
+                                                    </button>
                                                 </div>
                                                 <div class="panel-body product-body">
                                                     <ul class="get-all-products-tab">
                                                         @if(isset($model) && count($model->related_products))
                                                             @foreach($model->related_products as $related_product)
-                                                                <li style="display: flex" data-id="{{ $related_product->id }}"
+                                                                <li style="display: flex"
+                                                                    data-id="{{ $related_product->id }}"
                                                                     class="option-elm-attributes">
                                                                     <a href="#">{!! $related_product->name !!}</a>
                                                                     <div class="buttons">
@@ -266,7 +278,8 @@
                                                                            class="remove-all-attributes btn btn-sm btn-danger">
                                                                             <i class="fa fa-trash"></i></a>
                                                                     </div>
-                                                                    <input type="hidden" name="related_products[]" value="{{ $related_product->id }}">
+                                                                    <input type="hidden" name="related_products[]"
+                                                                           value="{{ $related_product->id }}">
                                                                 </li>
                                                             @endforeach
                                                         @endif
@@ -292,7 +305,8 @@
                                                     <tr class="add-new-ship-filed-container">
                                                         <td colspan="4" class="text-right">
                                                             <button type="button" class="btn btn-primary"><i
-                                                                        class="fa fa-plus-circle add-new-v-option"></i></button>
+                                                                        class="fa fa-plus-circle add-new-v-option"></i>
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                     </tfoot>
@@ -329,10 +343,12 @@
                                                                    class="remove-all-attributes btn btn-sm btn-danger"><i
                                                                             class="fa fa-trash"></i></a>
                                                             </div>
-                                                            <input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"
+                                                            <input type="hidden"
+                                                                   name="attributes[{!! $attribute->id !!}][attributes_id]"
                                                                    value="{!! $attribute->id !!}">
-                                                            <input type="hidden" class="is-shared-attributes" name="attributes[{!! $attribute->id !!}][is_shared]"
-                                                            value="{!! $attribute->is_shared !!}">
+                                                            <input type="hidden" class="is-shared-attributes"
+                                                                   name="attributes[{!! $attribute->id !!}][is_shared]"
+                                                                   value="{!! $attribute->is_shared !!}">
                                                         </li>
                                                     @endforeach
                                                 @endif
@@ -359,7 +375,8 @@
                                                         <input data-id="{{$attribute->id}}"
                                                                class="attributes-item-input-{{$attribute->id}}"
                                                                value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.name')->all()) }}">
-                                                        <input type="hidden" class="input-items-value" name="options[{{$attribute->id}}]"
+                                                        <input type="hidden" class="input-items-value"
+                                                               name="options[{{$attribute->id}}]"
                                                                value="{{ implode(',',$opptionAttr->children()->with('attr')->get()->pluck('attr.id')->all()) }}">
                                                     </div>
                                                 @endforeach
@@ -372,60 +389,101 @@
                         </div>
                     </div>
                     {{--<div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">--}}
-                        {{--<div class="container-fluid p-25">--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-md-12">--}}
-                                    {{--<div class="basic-left basic-wall">--}}
-                                            {{--<div class="row">--}}
-                                                {{--<div class="col-md-5">--}}
-                                                    {{--<fieldset>--}}
-                                                        {{--<legend>Packaging Size</legend>--}}
-                                                        {{--<div class="form-group">--}}
-                                                                {{--<label for="packaging_length"--}}
-                                                                       {{--class=" col-sm-2">Length</label>--}}
-                                                                {{--<div class="col-sm-10">--}}
-                                                                    {{--<input class="form-control"--}}
-                                                                           {{--name=""--}}
-                                                                           {{--id="packaging_length" type="text">--}}
-                                                                {{--</div>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="form-group">--}}
-                                                            {{--<label for="packaging_width"--}}
-                                                                   {{--class="col-sm-2">Width</label>--}}
-                                                            {{--<div class="col-sm-10">--}}
-                                                                {{--<input class="form-control"--}}
-                                                                       {{--name=""--}}
-                                                                       {{--id="packaging_width" type="text">--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="form-group">--}}
-                                                            {{--<label for="packaging_height"--}}
-                                                                   {{--class="col-sm-2">Height</label>--}}
-                                                            {{--<div class="col-sm-10">--}}
-                                                                {{--<input class="form-control"--}}
-                                                                       {{--name=""--}}
-                                                                       {{--id="packaging_height" type="text">--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                        {{--<div class="form-group">--}}
-                                                            {{--<label for="packaging_weight"--}}
-                                                                   {{--class="col-sm-2">Weight</label>--}}
-                                                            {{--<div class="col-sm-10">--}}
-                                                                {{--<input class="form-control"--}}
-                                                                       {{--name=""--}}
-                                                                       {{--id="packaging_weight" type="text">--}}
-                                                            {{--</div>--}}
-                                                        {{--</div>--}}
-                                                    {{--</fieldset>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                    {{--<div class="container-fluid p-25">--}}
+                    {{--<div class="row">--}}
+                    {{--<div class="col-md-12">--}}
+                    {{--<div class="basic-left basic-wall">--}}
+                    {{--<div class="row">--}}
+                    {{--<div class="col-md-5">--}}
+                    {{--<fieldset>--}}
+                    {{--<legend>Packaging Size</legend>--}}
+                    {{--<div class="form-group">--}}
+                    {{--<label for="packaging_length"--}}
+                    {{--class=" col-sm-2">Length</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                    {{--<input class="form-control"--}}
+                    {{--name=""--}}
+                    {{--id="packaging_length" type="text">--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                    {{--<label for="packaging_width"--}}
+                    {{--class="col-sm-2">Width</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                    {{--<input class="form-control"--}}
+                    {{--name=""--}}
+                    {{--id="packaging_width" type="text">--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                    {{--<label for="packaging_height"--}}
+                    {{--class="col-sm-2">Height</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                    {{--<input class="form-control"--}}
+                    {{--name=""--}}
+                    {{--id="packaging_height" type="text">--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="form-group">--}}
+                    {{--<label for="packaging_weight"--}}
+                    {{--class="col-sm-2">Weight</label>--}}
+                    {{--<div class="col-sm-10">--}}
+                    {{--<input class="form-control"--}}
+                    {{--name=""--}}
+                    {{--id="packaging_weight" type="text">--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</fieldset>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
                     {{--</div>--}}
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label class="col-md-1">Product Type</label>
+                                        <div class="col-md-3">
+                                            <select name="" id="variation-product-select" class="form-control">
+                                                <option value="simple_product">Simple Product</option>
+                                                <option value="variation_product">Variation Product</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-product-variotion row hide">
+                                    {!! Form::open(['id' => 'v-option-form']) !!}
+                                    <table class="table table-responsive table--store-settings">
+                                        <thead>
+                                        <tr class="bg-my-light-pink">
+                                            <th>Attributes</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="v-options-list">
+                                        @include("admin.inventory._partials.variation_option_item")
+                                        </tbody>
+
+                                        <tfoot>
+                                        <tr class="add-new-ship-filed-container">
+                                            <td colspan="4" class="text-right">
+                                                <button type="button" class="btn btn-primary"><i
+                                                            class="fa fa-plus-circle add-new-v-option"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                    {!! Form::close() !!}
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="basic-center basic-wall">
@@ -443,11 +501,12 @@
                                             </div>
                                             <div class="col-md-12">
                                                 {{--<div class="all-list-attrs" style="min-height:300px;">--}}
-                                                    {{--@if($model)--}}
-                                                        {{--@include('admin.inventory._partials.link_all_edit')--}}
-                                                    {{--@endif--}}
+                                                {{--@if($model)--}}
+                                                {{--@include('admin.inventory._partials.link_all_edit')--}}
+                                                {{--@endif--}}
                                                 {{--</div>--}}
-                                                <table id="variations-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                                                <table id="variations-table" class="table table-style table-bordered"
+                                                       cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
                                                         <th>Name</th>
@@ -459,11 +518,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="all-list-attrs">
-                                                        @if($model)
-                                                            @foreach($model->variations as $variation)
-                                                                @include('admin.inventory._partials.variation_item',['item' => $variation])
-                                                            @endforeach
-                                                        @endif
+                                                    @if($model)
+                                                        @foreach($model->variations as $variation)
+                                                            @include('admin.inventory._partials.variation_item',['item' => $variation])
+                                                        @endforeach
+                                                    @endif
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -481,25 +540,25 @@
                                         <div class="all-list-extra">
                                             <ul class="get-all-extra-tab">
                                                 {{--@if(isset($attrs) && count($attrs))--}}
-                                                    {{--@foreach($attrs as $attribute)--}}
-                                                        {{--<li style="display: flex"--}}
-                                                            {{--data-option-container="{!! $attribute->id !!}"--}}
-                                                            {{--data-id="{!! $attribute->id !!}"--}}
-                                                            {{--class="option-elm-attributes"><a--}}
-                                                                    {{--href="#">{!! $attribute->name !!}</a>--}}
-                                                            {{--<div class="buttons">--}}
-                                                                {{--<a href="javascript:void(0)"--}}
-                                                                   {{--class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i--}}
-                                                                            {{--class="fa fa-money"></i></a>--}}
-                                                                {{--<a href="javascript:void(0)"--}}
-                                                                   {{--class="remove-all-attributes btn btn-sm btn-danger"><i--}}
-                                                                            {{--class="fa fa-trash"></i></a>--}}
-                                                            {{--</div>--}}
-                                                            {{--<input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"--}}
-                                                                   {{--value="{!! $attribute->id !!}">--}}
-                                                            {{----}}
-                                                        {{--</li>--}}
-                                                    {{--@endforeach--}}
+                                                {{--@foreach($attrs as $attribute)--}}
+                                                {{--<li style="display: flex"--}}
+                                                {{--data-option-container="{!! $attribute->id !!}"--}}
+                                                {{--data-id="{!! $attribute->id !!}"--}}
+                                                {{--class="option-elm-attributes"><a--}}
+                                                {{--href="#">{!! $attribute->name !!}</a>--}}
+                                                {{--<div class="buttons">--}}
+                                                {{--<a href="javascript:void(0)"--}}
+                                                {{--class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i--}}
+                                                {{--class="fa fa-money"></i></a>--}}
+                                                {{--<a href="javascript:void(0)"--}}
+                                                {{--class="remove-all-attributes btn btn-sm btn-danger"><i--}}
+                                                {{--class="fa fa-trash"></i></a>--}}
+                                                {{--</div>--}}
+                                                {{--<input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"--}}
+                                                {{--value="{!! $attribute->id !!}">--}}
+                                                {{----}}
+                                                {{--</li>--}}
+                                                {{--@endforeach--}}
                                                 {{--@endif--}}
                                             </ul>
                                         </div>
@@ -525,7 +584,8 @@
                                                 {{--@include('admin.inventory._partials.link_all_edit')--}}
                                                 {{--@endif--}}
                                                 {{--</div>--}}
-                                                <table id="variations-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                                                <table id="variations-table" class="table table-style table-bordered"
+                                                       cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>
                                                         <th>Name</th>
@@ -563,7 +623,8 @@
                                             <div class="panel-body">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
+                                                        <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook
+                                                            Title</label>
                                                         <div class="col-md-5 col-xs-12">
                                                             {!! Form::text('fb[og:title]',($model)?$model->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$model)]) !!}
                                                         </div>
@@ -571,7 +632,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
+                                                        <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook
+                                                            Description</label>
                                                         <div class="col-md-5 col-xs-12">
                                                             {!! Form::text('fb[og:description]',($model)?$model->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$model)]) !!}
                                                         </div>
@@ -594,7 +656,8 @@
                                             <div class="panel-body">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
+                                                        <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter
+                                                            Title</label>
                                                         <div class="col-md-5 col-xs-12">
                                                             {!! Form::text('twitter[og:title]',($model)?$model->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
 
@@ -603,7 +666,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
+                                                        <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter
+                                                            Description</label>
                                                         <div class="col-md-5 col-xs-12">
                                                             {!! Form::text('twitter[og:description]',($model)?$model->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
 
@@ -628,7 +692,8 @@
                                                         <tr>
                                                             <th scope="row">
                                                                 <label for="seo_focuskw">Focus Keyword:</label>
-                                                                <img src="/public/images/question-mark.png" alt="question">
+                                                                <img src="/public/images/question-mark.png"
+                                                                     alt="question">
                                                             </th>
                                                             <td>
                                                                 {!! Form::text('general[og:keywords]',($model)?$model->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$model)]) !!}
@@ -637,14 +702,16 @@
                                                         <tr>
                                                             <th scope="row">
                                                                 <label for="seo_title">SEO Title:</label>
-                                                                <img src="/public/images/question-mark.png" alt="question">
+                                                                <img src="/public/images/question-mark.png"
+                                                                     alt="question">
                                                             </th>
                                                             <td>
                                                                 {!! Form::text('general[og:title]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$model)]) !!}
                                                                 <br>
                                                                 <div>
                                                                     <p><span class="wrong">Warning:</span>
-                                                                        Title display in Google is limited to a fixed width, yours is too long.
+                                                                        Title display in Google is limited to a fixed
+                                                                        width, yours is too long.
                                                                     </p>
                                                                 </div>
                                                             </td>
@@ -652,11 +719,13 @@
                                                         <tr>
                                                             <th scope="row">
                                                                 <label for="seo_metadesc">Meta description:</label>
-                                                                <img src="/public/images/question-mark.png" alt="question">
+                                                                <img src="/public/images/question-mark.png"
+                                                                     alt="question">
                                                             </th>
                                                             <td>
                                                                 {!! Form::textarea('general[og:description]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$model)]) !!}
-                                                                <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
+                                                                <div>The <code>meta</code> description will be limited
+                                                                    to 156 chars, 156 chars left.
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -668,7 +737,8 @@
                                                         <tbody>
                                                         <tr>
                                                             <th scope="row">
-                                                                <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
+                                                                <label for="seo_meta-robots-noindex">Meta Robots
+                                                                    Index:</label>
                                                             </th>
                                                             <td>
                                                                 {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($model)?$model->getSeoField('robots','robot'):null,['class'=>'']) !!}
@@ -678,7 +748,8 @@
                                                         <tr>
                                                             <th scope="row">Meta Robots Follow</th>
                                                             <td>
-                                                                <input type="radio" checked="checked" id="seo_meta-robots-nofollow_0"
+                                                                <input type="radio" checked="checked"
+                                                                       id="seo_meta-robots-nofollow_0"
                                                                        value="0">
                                                                 <label for="seo_meta-robots-nofollow_0">Follow</label>
                                                                 <input type="radio" id="seo_meta-robots-nofollow_1"
@@ -688,13 +759,17 @@
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">
-                                                                <label for="seo_meta-robots-adv">Meta Robots Advanced:</label>
+                                                                <label for="seo_meta-robots-adv">Meta Robots
+                                                                    Advanced:</label>
                                                             </th>
                                                             <td>
-                                                                <select multiple="multiple" size="7" style="height: 144px;"
+                                                                <select multiple="multiple" size="7"
+                                                                        style="height: 144px;"
                                                                         id="seo_meta-robots-adv"
                                                                         class="">
-                                                                    <option selected="selected" value="-">Site-wide default: None</option>
+                                                                    <option selected="selected" value="-">Site-wide
+                                                                        default: None
+                                                                    </option>
                                                                     <option value="none">None</option>
                                                                     <option value="noodp">NO ODP</option>
                                                                     <option value="noydir">NO YDIR</option>
@@ -702,7 +777,9 @@
                                                                     <option value="noarchive">No Archive</option>
                                                                     <option value="nosnippet">No Snippet</option>
                                                                 </select>
-                                                                <div>Advanced <code>meta</code> robots settings for this page.</div>
+                                                                <div>Advanced <code>meta</code> robots settings for this
+                                                                    page.
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -712,7 +789,8 @@
                                                             <td>
                                                                 <input type="text" id="seo_canonical" value=""
                                                                        class="form-control"><br>
-                                                                <div>The canonical URL that this page should point to, leave empty to default to
+                                                                <div>The canonical URL that this page should point to,
+                                                                    leave empty to default to
                                                                     permalink. <a target="_blank"
                                                                                   href="#">Cross
                                                                         domain canonical</a> supported too.
@@ -754,7 +832,7 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(['id' => 'v-option-form']) !!}
-                            @include("admin.inventory._partials.variation_option_form")
+                    @include("admin.inventory._partials.variation_option_form")
                     {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
@@ -804,7 +882,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    
+
     <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
@@ -851,10 +929,10 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
         .errors {
-            color:red;
+            color: red;
             font-style: italic;
         }
     </style>
@@ -862,11 +940,22 @@
 @section('js')
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
+            $('body').on('change', '#variation-product-select', function () {
+
+                if ($(this).val()=='variation_product') {
+                    $('.table-product-variotion').removeClass('hide')
+             }else{
+                    $('.table-product-variotion').addClass('hide')
+                }
+
+            })
+
             function guid() {
                 return "ss".replace(/s/g, s4);
             }
@@ -877,11 +966,11 @@
                     .substring(1);
             }
 
-            function getFormData($form){
+            function getFormData($form) {
                 var unindexed_array = $form.serializeArray();
                 var indexed_array = {};
 
-                $.map(unindexed_array, function(n, i){
+                $.map(unindexed_array, function (n, i) {
                     indexed_array[n['name']] = n['value'];
                 });
 
@@ -894,7 +983,7 @@
 
             for (var i = 0; i < elementList.length; i++) {
                 var ele = elementList[i];
-                if($(ele).val() != ''){
+                if ($(ele).val() != '') {
                     makeSearchItem({
                         input:
                         ".v-input-" + $(ele).data("uid"),
@@ -909,11 +998,11 @@
                 }
             }
 
-            $("body").on('click','.option-elm-attributes',function () {
+            $("body").on('click', '.option-elm-attributes', function () {
                 var data = $(this).find('.extra-item-data').val();
                 var options = JSON.parse(data)
-                console.log(data,options);
-                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {options : options.test_options }, function (res) {
+                console.log(data, options);
+                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {options: options.test_options}, function (res) {
                     if (!res.error) {
 
                     }
@@ -921,7 +1010,7 @@
             })
 
 
-            $("body").on('click','.get-all-extra-tab-event',function () {
+            $("body").on('click', '.get-all-extra-tab-event', function () {
                 AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
                         $("#v-option-form")[0].reset();
@@ -963,10 +1052,10 @@
             $("body").on('change', '.select-attribute', function () {
                 var value = $(this).val();
                 let vID = $(this).data('uid');
-                if(value != ''){
+                if (value != '') {
                     AjaxCall("/admin/inventory/stock/get-option-by-id", {id: value}, function (res) {
                         if (!res.error) {
-                            $(".select-attribute[data-uid="+vID+"]").closest('.v-options-list-item').replaceWith(res.html);
+                            $(".select-attribute[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
                             $(".tag-input-v").tagsinput();
                             makeSearchItem({
                                 input:
@@ -1061,105 +1150,106 @@
                     .remove();
             });
         });
-    function render_categories_tree(){
-        $("#treeview_json").jstree({
-        "checkbox" : {
-            "three_state": false,
-            "cascade": 'undetermined',
-            "keep_selected_style" : false
-        },
-        plugins: ["wholerow", "checkbox", "types"],
-        core: {
-            themes: {
-                responsive: !1
-            },
-            data: {!! json_encode($data) !!}
-        },
-        types: {
-            "default": {
-                icon: "fa fa-folder text-primary fa-lg"
-            },
-            file: {
-                icon: "fa fa-file text-success fa-lg"
-            }
+
+        function render_categories_tree() {
+            $("#treeview_json").jstree({
+                "checkbox": {
+                    "three_state": false,
+                    "cascade": 'undetermined',
+                    "keep_selected_style": false
+                },
+                plugins: ["wholerow", "checkbox", "types"],
+                core: {
+                    themes: {
+                        responsive: !1
+                    },
+                    data: {!! json_encode($data) !!}
+                },
+                types: {
+                    "default": {
+                        icon: "fa fa-folder text-primary fa-lg"
+                    },
+                    file: {
+                        icon: "fa fa-file text-success fa-lg"
+                    }
+                }
+            })
         }
-    })
-    }
 
-    $('#treeview_json').on("changed.jstree", function (e, data) {
-        if(data.node) {
-            var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
-            var dataArr = [];
-            for (var i = 0, j = selectedNode.length; i < j; i++) {
-                dataArr.push(selectedNode[i].id);
-                dataArr.push(selectedNode[i].parent);
+        $('#treeview_json').on("changed.jstree", function (e, data) {
+            if (data.node) {
+                var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
+                var dataArr = [];
+                for (var i = 0, j = selectedNode.length; i < j; i++) {
+                    dataArr.push(selectedNode[i].id);
+                    dataArr.push(selectedNode[i].parent);
+                }
+
+                var uniqueNames = [];
+
+                if (dataArr.length > 0) {
+                    $.each(dataArr, function (i, el) {
+                        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                    });
+                }
+
+                var index = uniqueNames.indexOf("#");
+                if (index > -1) {
+                    uniqueNames.splice(index, 1);
+                }
+
+                $("#categories_tree").val(JSON.stringify(uniqueNames));
             }
+        });
 
-            var uniqueNames = [];
+        render_categories_tree()
 
-            if(dataArr.length > 0){
-                $.each(dataArr, function(i, el){
-                    if($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-                });
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
             }
-
-            var index = uniqueNames.indexOf("#");
-            if (index > -1) {
-                uniqueNames.splice(index, 1);
-            }
-
-            $("#categories_tree").val(JSON.stringify(uniqueNames));
+            return arr;
         }
-    });
 
-    render_categories_tree()
+        {{--// var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
+        {{--// var tree =[{!! //json_encode(['nodes' => $categories]) !!}]--}}
+        // $('#treeview_json').treeview({
+        //     data: tree,
+        //     showCheckbox: true,
+        //     onNodeChecked: function(event, node) {
+        //         if(typeof node.parentId !== "undefined") {
+        //             checkParent(node.parentId, "#treeview_json")
+        //         }
+        //     },
+        //     onNodeUnchecked: function (event, node) {
+        //         unCheckChildren(node.nodeId, "#treeview_json")
+        //     }
+        // });
+        // function checkParent(id, selecetor) {
+        //         let parrentId = id;
+        //         $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
+        //         if(parrentId){
+        //             let parent = $('#treeview_json').treeview('getNode', parrentId);
+        //             let pId = parent.parentId
+        //             checkParent(pId, selecetor)
+        //         }
 
-    function removeA(arr) {
-        var what, a = arguments, L = a.length, ax;
-        while (L > 1 && arr.length) {
-            what = a[--L];
-            while ((ax= arr.indexOf(what)) !== -1) {
-                arr.splice(ax, 1);
-            }
-        }
-        return arr;
-    }
-
-    {{--// var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
-    {{--// var tree =[{!! //json_encode(['nodes' => $categories]) !!}]--}}
-    // $('#treeview_json').treeview({
-    //     data: tree,
-    //     showCheckbox: true,
-    //     onNodeChecked: function(event, node) {
-    //         if(typeof node.parentId !== "undefined") {
-    //             checkParent(node.parentId, "#treeview_json")
-    //         }
-    //     },
-    //     onNodeUnchecked: function (event, node) {
-    //         unCheckChildren(node.nodeId, "#treeview_json")
-    //     }
-    // });
-    // function checkParent(id, selecetor) {
-    //         let parrentId = id;
-    //         $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
-    //         if(parrentId){
-    //             let parent = $('#treeview_json').treeview('getNode', parrentId);
-    //             let pId = parent.parentId
-    //             checkParent(pId, selecetor)
-    //         }
-
-    //     }
-    // function unCheckChildren(id, selecetor){
-    //     let currentNode = $('#treeview_json').treeview('getNode', id);
-    //     $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
-    //     if (currentNode.nodes){
-    //         Object.values(currentNode.nodes).forEach(item => {
-    //             unCheckChildren(item.nodeId, selecetor )
-    //         })
-    //     }
+        //     }
+        // function unCheckChildren(id, selecetor){
+        //     let currentNode = $('#treeview_json').treeview('getNode', id);
+        //     $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
+        //     if (currentNode.nodes){
+        //         Object.values(currentNode.nodes).forEach(item => {
+        //             unCheckChildren(item.nodeId, selecetor )
+        //         })
+        //     }
 
 
-    // }
+        // }
     </script>
     <script>
         $(document).ready(function () {
