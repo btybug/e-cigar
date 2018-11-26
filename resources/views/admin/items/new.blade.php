@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="col-md-9">
+                        <div class="col-md-7">
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="" data-original-title="Attribute Name Title">Product Name</span></label>
