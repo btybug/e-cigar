@@ -41,6 +41,5 @@
     </td>
     <td>
         <a class="remove-variation btn btn-danger"><i class="fa fa-trash-o"></i></a>
-        <a data-id="{{ $uniqueID }}" class="edit-variation btn btn-warning"><i class="fa fa-pencil"></i></a>
     </td>
 </tr>
