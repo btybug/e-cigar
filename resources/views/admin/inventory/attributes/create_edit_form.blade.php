@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-
+    {!! Form::model($model,['class'=>'form-horizontal']) !!}
     <div class="inventory_attributes container-fluid">
         <div class="row dis-flex-wrap">
             <div class="col-md-9">
@@ -30,9 +30,9 @@
                             </ul>
                         </div>
                     @endif
+
                     <div class="panel-body">
                         <div>
-                            {!! Form::model($model,['class'=>'form-horizontal']) !!}
                             @if(count(get_languages()))
                                 <ul class="nav nav-tabs">
                                     @foreach(get_languages() as $language)
@@ -125,7 +125,7 @@
                                 {{--'multi_select_tag' => 'Multi select tag',--}}
                             </div>
                         </div>
-                        {!! Form::close() !!}
+
                         <div class="panel-body">
                             <div class="right-main-content">
                                 <div class="display-as-wall " data-displayas="radio">
@@ -208,39 +208,101 @@
                 </div>
             </div>
             <div class="col-md-12">
-                @if($model)
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-sm-12 clearfix">
                                     {{--<h2>Options {{ $model->name }} </h2>--}}
                                     <h2 class="pull-left">Attributes</h2>
-                                    <button class="btn btn-primary pull-right"><i class="fa fa-plus fa-sm mr-10"></i>Add attribute</button>
+                                    <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add attribute</button>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
-                            {{--@include('admin.inventory.attributes.options')--}}
-                            <div class="d-flex">
-                                <div class="inventory-attr-item">
-                                    <h3 class="text">Desserts</h3>
-                                    <button class="btn btn-danger"><i class="fa fa-close"></i></button>
-                                </div>
-                                <div class="inventory-attr-item">
-                                    <h3 class="text">Tobacco</h3>
-                                    <button class="btn btn-danger"><i class="fa fa-close"></i></button>
-                                </div>
+                            <div class="d-flex get-all-stickers-tab">
+                                @if(isset($model) && count($model->stickers))
+                                    @foreach($model->stickers as $sticker)
+                                        <div class="inventory-attr-item" data-id="{{ $sticker->id }}">
+                                            <h3 class="text">{!! $sticker->name !!}</h3>
+                                            <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
+                                            <input type="hidden" name="stickers[]" value="{{ $sticker->id }}">
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
-                @endif
             </div>
         </div>
     </div>
+    {!! Form::close() !!}
+
+
+    <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select Stickers</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="all-list">
+                        <ul>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @section('js')
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
+
+        $("body").on('click', '.remove-all-attributes', function () {
+            $(this).closest('.inventory-attr-item').remove();
+        });
+
+        $("body").on('click', '.select-stickers', function () {
+            let arr = [];
+            $(".get-all-stickers-tab")
+                .children()
+                .each(function () {
+                    arr.push($(this).attr("data-id"));
+                });
+            AjaxCall("/admin/tools/stickers/get-all", {arr}, function (res) {
+                if (!res.error) {
+                    $("#stickerModal .modal-body .all-list").empty();
+                    res.data.forEach(item => {
+                        let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-sticker-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                        $("#stickerModal .modal-body .all-list").append(html);
+                    });
+                    $("#stickerModal").modal();
+                }
+            });
+        });
+
+        $("body").on("click", ".add-sticker-event", function () {
+            let id = $(this).data("id");
+            let name = $(this).data("name");
+            $(".get-all-stickers-tab")
+                .append(`<div class="inventory-attr-item" data-id="${id}">
+                                            <h3 class="text">${name}</h3>
+                                            <button  type="button" class="btn btn-danger remove-all-attributes "><i class="fa fa-close"></i></button>
+                                            <input type="hidden" name="stickers[]" value="${id}">
+                                        </div>`);
+            $(this)
+                .parent()
+                .remove();
+        });
 
         $('body').on('change', '.inventory_attributes .display_as-select', function () {
             $(".display-as-wall").addClass("d-none")

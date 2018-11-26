@@ -38,6 +38,11 @@ class Attributes extends Translatable
         return ($attribute && isset($attribute->{$col})) ? $attribute->{$col} : null;
     }
 
+    public function stickers()
+    {
+        return $this->belongsToMany(Stickers::class, 'attributes_stickers', 'attributes_id','sticker_id');
+    }
+
     public static function recursiveItems($iems, $i = 0, $data = [])
     {
         if (count($iems)) {

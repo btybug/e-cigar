@@ -34,9 +34,10 @@ class AttributesController extends Controller
 
     public function postAttributesCreate(Request $request)
     {
-        $data = $request->except('_token','translatable');
+        $data = $request->except('_token','translatable','stickers');
         $data['user_id'] = \Auth::id();
-        Attributes::updateOrCreate($request->id,$data);
+        $attr = Attributes::updateOrCreate($request->id,$data);
+        $attr->stickers()->sync($request->get('stickers'));
         return redirect()->route('admin_store_attributes');
     }
 
@@ -49,9 +50,10 @@ class AttributesController extends Controller
 
     public function postAttributesEdit(Request $request,$id)
     {
-        $data = $request->except('_token','translatable');
+        $data = $request->except('_token','translatable','stickers');
         $data['user_id'] = \Auth::id();
-        Attributes::updateOrCreate($id, $data);
+        $attr = Attributes::updateOrCreate($request->id,$data);
+        $attr->stickers()->sync($request->get('stickers'));
         return redirect()->route('admin_store_attributes');
     }
 
