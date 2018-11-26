@@ -17,5 +17,5 @@ class Items extends Translatable
     protected $table = 'items';
     protected $guarded = ['id'];
     public $translationModel = ItemsTranslation::class;
-    public $translatedAttributes = ['name', 'short_description','long_description'];
+    public $translatedAttributes = ['name', 'short_description', 'long_description'];
 }
