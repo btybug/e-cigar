@@ -24,7 +24,7 @@ class PurchaseRequest extends FormRequest
     public function rules()
     {
         return [
-            "sku"    => 'required',
+            "item_id"    => 'required',
             "qty"  => "required|numeric",
             "price"  => "required|numeric",
         ];
