@@ -165,7 +165,7 @@ class InventoryController extends Controller
     public function getOptionById(Request $request)
     {
         $selected = Attributes::find($request->id);
-        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
 
         $html = \View("admin.inventory._partials.variation_option_item",compact(['selected','allAttrs']))->render();
 
