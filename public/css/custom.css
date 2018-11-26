@@ -594,6 +594,11 @@
     color: white;
 }
 
+.basic-details-tab .basic-left .all-list ul li.active a:hover {
+    border-left: 0;
+    border-right: 0;
+}
+
 .basic-details-tab .basic-right .list a {
     display: block;
     padding: 5px 10px;

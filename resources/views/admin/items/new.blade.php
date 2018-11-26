@@ -35,7 +35,9 @@
                                         <li><a data-toggle="tab" href="#videos">Videos</a>
                                         <li><a data-toggle="tab" href="#images">Images</a>
                                         <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
-                                        <li><a data-toggle="tab" href="#downloads">downloads</a></li>
+                                        <li><a data-toggle="tab" href="#downloads">Downloads</a></li>
+                                        <li><a data-toggle="tab" href="#settings">Settings</a></li>
+                                        <li><a data-toggle="tab" href="#management">Management</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -209,6 +211,9 @@
                                                             </div>
                                                         </div>
                                     </div>
+                                    <div id="downloads" class="tabe-pan fade"></div>
+                                    <div id="settings" class="tabe-pan fade"></div>
+                                    <div id="management" class="tabe-pan fade"></div>
                                 </div>
                             </div>
                         </div>
