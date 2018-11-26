@@ -396,13 +396,14 @@
                                         <label class="col-md-1">Product Type</label>
                                         <div class="col-md-3">
                                             <select name="" id="variation-product-select" class="form-control">
+                                                <option value="">Select Product</option>
                                                 <option value="simple_product">Simple Product</option>
                                                 <option value="variation_product">Variation Product</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-product-variotion row hide">
+                                <div class="table-product-variotion product-wall row hide">
                                     {!! Form::open(['id' => 'v-option-form']) !!}
                                     <table class="table table-responsive table--store-settings">
                                         <thead>
@@ -429,6 +430,7 @@
                                     </table>
                                     {!! Form::close() !!}
                                 </div>
+
                             </div>
 
                             <div class="row">
@@ -436,17 +438,60 @@
                                     <div class="basic-center basic-wall">
                                         <div class="row">
                                             <div class="col-md-12">
+                                                <div class="sipmle-product-wall product-wall hide">
+                                                    <table class="table table-style table-bordered" cellspacing="0" width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>SKU</th>
+                                                            <th>Qty</th>
+                                                            <th>Price</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <input type="text" class="form-control">
+                                                            </td>
+                                                            <td>
+                                                                <select name="" id="" class="form-control">
+                                                                    <option value="">1</option>
+                                                                    <option value="">2</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                99
+                                                            </td>
+                                                            <td class="w-5">
+                                                                <input type="text" class="form-control">
+                                                            </td>
+                                                            <td class="w-10">
+                                                                <a class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                                                                <a class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                            </td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
                                                 {{--<a href="javascript:void(0)"--}}
-                                                   {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
-                                                            {{--class="fa fa-plus mr-10"></i>New Variation</a>--}}
-                                                <button type="button" class="btn btn-primary pull-right add-variation-row"><i class="fa fa-plus-circle add-new-v-option"></i>
+                                                {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
+                                                {{--class="fa fa-plus mr-10"></i>New Variation</a>--}}
+                                                <button type="button"
+                                                        class="btn btn-primary pull-right add-variation-row"><i
+                                                            class="fa fa-plus-circle add-new-v-option"></i>
                                                 </button>
                                             </div>
                                             {{--<div class="col-md-12">--}}
-                                                {{--<a href="javascript:void(0)"--}}
-                                                   {{--class="btn btn-primary btn-block get-all-extra-tab-event"><i--}}
-                                                            {{--class="fa fa-plus mr-10"></i>Add new--}}
-                                                    {{--option</a>--}}
+                                            {{--<a href="javascript:void(0)"--}}
+                                            {{--class="btn btn-primary btn-block get-all-extra-tab-event"><i--}}
+                                            {{--class="fa fa-plus mr-10"></i>Add new--}}
+                                            {{--option</a>--}}
                                             {{--</div>--}}
                                             <div class="col-md-12">
                                                 {{--<div class="all-list-attrs" style="min-height:300px;">--}}
@@ -454,6 +499,7 @@
                                                 {{--@include('admin.inventory._partials.link_all_edit')--}}
                                                 {{--@endif--}}
                                                 {{--</div>--}}
+
                                                 <table id="variations-table" class="table table-style table-bordered"
                                                        cellspacing="0" width="100%">
                                                     <thead>
@@ -468,9 +514,9 @@
                                                     </thead>
                                                     <tbody class="all-list-attrs">
                                                     {{--@if($model)--}}
-                                                        {{--@foreach($model->variations as $variation)--}}
-                                                            @include('admin.inventory._partials.variation_item')
-                                                        {{--@endforeach--}}
+                                                    {{--@foreach($model->variations as $variation)--}}
+                                                    @include('admin.inventory._partials.variation_item')
+                                                    {{--@endforeach--}}
                                                     {{--@endif--}}
                                                     </tbody>
                                                 </table>
@@ -896,16 +942,21 @@
     <script>
         $(document).ready(function () {
             $('body').on('change', '#variation-product-select', function () {
-
-                if ($(this).val()=='variation_product') {
+                $('.product-wall').addClass('hide')
+                $('#variations-table').closest('.row').removeClass('hide')
+                if ($(this).val() == 'variation_product') {
                     $('.table-product-variotion').removeClass('hide')
-             }else{
-                    $('.table-product-variotion').addClass('hide')
+                } else if ($(this).val() == 'simple_product') {
+                    $('.sipmle-product-wall').removeClass('hide');
+                    $('#variations-table').closest('.row').addClass('hide');
+
+                } else {
+
                 }
 
             });
-            $('body').on('click','.add-variation-row',function () {
-                let htmlRow=`<tr class="list-table-single-item">
+            $('body').on('click', '.add-variation-row', function () {
+                let htmlRow = `<tr class="list-table-single-item">
     <td>
         <input type="text" class="form-control">
     </td>
