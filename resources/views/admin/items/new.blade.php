@@ -103,15 +103,6 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <label for="product_id" class="control-label col-sm-4">Quantity</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::number('quantity', null,
-                                                        ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
                                                     <label for="feature_image"
                                                            class="control-label col-sm-4">Feature image</label>
                                                     <div class="col-sm-8">
@@ -163,6 +154,51 @@
                                     </div>
                                     <div id="images" class="tab-pane">
                                         {!! media_button('other_images',$model,true) !!}
+                                    </div>
+                                    <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
+                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <fieldset>
+                                                                    <legend>Packaging Size</legend>
+                                                                    <div class="form-group">
+                                                                        <label for="packaging_length"
+                                                                               class=" col-sm-2">Length</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="form-control"
+                                                                                   name=""
+                                                                                   id="packaging_length" type="text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="packaging_width"
+                                                                               class="col-sm-2">Width</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="form-control"
+                                                                                   name=""
+                                                                                   id="packaging_width" type="text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="packaging_height"
+                                                                               class="col-sm-2">Height</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="form-control"
+                                                                                   name=""
+                                                                                   id="packaging_height" type="text">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="packaging_weight"
+                                                                               class="col-sm-2">Weight</label>
+                                                                        <div class="col-sm-10">
+                                                                            <input class="form-control"
+                                                                                   name=""
+                                                                                   id="packaging_weight" type="text">
+                                                                        </div>
+                                                                    </div>
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
                                     </div>
                                 </div>
                             </div>
