@@ -66,6 +66,9 @@
                     @ok('admin_items')
                     <li><a href="{{route('admin_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
                     @endok
+                    @ok('admin_store_purchase')
+                    <li><a href="{{route('admin_store_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>
+                    @endok
                 </ul>
             </li>
             @endok
@@ -89,7 +92,7 @@
                         <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
-                    <li><a href="{{route('admin_store_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>
+
                 </ul>
             </li>
             @endok
