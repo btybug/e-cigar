@@ -677,3 +677,21 @@ textarea {
     align-items: center;
 }
 /*End admin faq*/
+.inventory-attr-item {
+    text-align: center;
+    margin-right: 30px;
+}
+
+.inventory-attr-item:last-of-type {
+    margin-right: 0;
+}
+.inventory-attr-item .text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F2F2F2;
+    width: 150px;
+    height: 150px;
+}
+
+

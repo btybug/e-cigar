@@ -212,13 +212,25 @@
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <h2>Options {{ $model->name }} </h2>
+                                <div class="col-sm-12 clearfix">
+                                    {{--<h2>Options {{ $model->name }} </h2>--}}
+                                    <h2 class="pull-left">Attributes</h2>
+                                    <button class="btn btn-primary pull-right"><i class="fa fa-plus"></i><span>&nbsp;Add attribute</span></button>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
-                            @include('admin.inventory.attributes.options')
+                            {{--@include('admin.inventory.attributes.options')--}}
+                            <div class="d-flex">
+                                <div class="inventory-attr-item">
+                                    <h3 class="text">Desserts</h3>
+                                    <button class="btn btn-danger"><i class="fa fa-close"></i></button>
+                                </div>
+                                <div class="inventory-attr-item">
+                                    <h3 class="text">Tobacco</h3>
+                                    <button class="btn btn-danger"><i class="fa fa-close"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 @endif
