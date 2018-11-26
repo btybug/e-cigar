@@ -369,7 +369,9 @@ function addAttributeToJSONNew($_this, remove = false) {
 
     let inputOptions = $_this.find(`.input-items-value`);
 
+
     let inputOptionsValue = inputOptions.val();
+    console.log(id,inputOptionsValue);
     attributesJson[id] = inputOptionsValue.split(",");
 }
 

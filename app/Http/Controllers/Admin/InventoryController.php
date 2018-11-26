@@ -166,7 +166,6 @@ class InventoryController extends Controller
     {
         $selected = Attributes::find($request->id);
         $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
-
         $html = \View("admin.inventory._partials.variation_option_item",compact(['selected','allAttrs']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);

@@ -891,7 +891,6 @@
                 $(".get-all-attributes-tab")
                     .children()
                     .each(function() {
-                        console.log($(this))
                         addAttributeToJSONNew($(this))
                     });
                 AjaxCall(
