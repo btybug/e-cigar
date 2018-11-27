@@ -682,20 +682,25 @@
     align-items: center;
 }
 
-.media-new-tab .media-list,
-.info-new-tab .info-list {
+.media-new-tab .media-list {
     display: flex;
     flex-direction: column;
     border: none;
 }
 
-.media-new-tab .media-list li a,
-.info-new-tab .info-list li a {
+.media-new-tab .media-list li a {
     border: none;
 }
 
-.media-list li.active a,
-.info-list li.active a {
+.media-list-tab-content .fade {
+    display: none;
+}
+
+.media-list-tab-content .fade.in {
+    display: block;
+}
+
+.media-list li.active a {
     background-color: #000 !important;
     color: white !important;
 }

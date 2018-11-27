@@ -28,7 +28,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="basic-center basic-wall">
-                                <div class="tab-content">
+                                <div class="tab-content media-list-tab-content">
                                     <div id="basics" class="tab-pane fade in active">
                                             @if(count(get_languages()))
                                                 <ul class="nav nav-tabs">
@@ -107,7 +107,7 @@
                                             </div>
 
                                     </div>
-                                    <div id="videos" class="tab-pane">
+                                    <div id="videos" class="tab-pane fade">
                                         <div class="media-videos">
                                             <div class="input-group " style="display: flex">
                                                 <input type="text" class="form-control video-url-link"
@@ -138,7 +138,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="images" class="tab-pane">
+                                    <div id="images" class="tab-pane fade">
                                         {!! media_button('other_images',$model,true) !!}
                                     </div>
                                     <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
@@ -186,9 +186,9 @@
                                                             </div>
                                                         </div>
                                     </div>
-                                    <div id="downloads" class="tabe-pan fade"></div>
-                                    <div id="settings" class="tabe-pan fade"></div>
-                                    <div id="management" class="tabe-pan fade">
+                                    <div id="downloads" class="tabe-pane fade"></div>
+                                    <div id="settings" class="tabe-pane fade"></div>
+                                    <div id="management" class="tabe-pane fade">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <div class="row">
@@ -235,7 +235,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="specifications" class="tabe-pan fade">
+                                    <div id="specifications" class="tabe-pane fade">
                                         <div class="panel panel-default">
                                             <div class="panel-body" id="v-option-form">
                                                     <table class="table table-responsive table--store-settings">
