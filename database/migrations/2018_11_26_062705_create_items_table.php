@@ -18,6 +18,11 @@ class CreateItemsTable extends Migration
             $table->string('sku');
             $table->integer('quantity')->default(0);
             $table->text('image');
+
+            $table->decimal('length')->nullable();
+            $table->decimal('width')->nullable();
+            $table->decimal('height')->nullable();
+            $table->decimal('weight')->nullable();
             $table->timestamps();
         });
     }

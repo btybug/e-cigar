@@ -32,6 +32,7 @@ class ItemsController extends Controller
 
     public function postNew(ItemsRequest $request)
     {
+        dd($request->all());
         $data = $request->except('_token', 'translatable');
         Items::updateOrCreate($request->id, $data);
         return redirect()->route('admin_items');

@@ -237,8 +237,7 @@
                                     </div>
                                     <div id="specifications" class="tabe-pan fade">
                                         <div class="panel panel-default">
-                                            <div class="panel-body">
-                                                    {!! Form::open(['id' => 'v-option-form']) !!}
+                                            <div class="panel-body" id="v-option-form">
                                                     <table class="table table-responsive table--store-settings">
                                                         <thead>
                                                         <tr class="bg-my-light-pink">
@@ -262,7 +261,6 @@
                                                         </tr>
                                                         </tfoot>
                                                     </table>
-                                                    {!! Form::close() !!}
                                             </div>
                                         </div>
 
