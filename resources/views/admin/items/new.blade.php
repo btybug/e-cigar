@@ -291,12 +291,13 @@
 </script>
 @stop
 @section('css')
+    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')
-
+    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
