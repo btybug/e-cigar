@@ -12,7 +12,7 @@
     </td>
     <td>
         @if(count($item['options']))
-            @if($model)
+            @if(isset($model) && $model)
                 @foreach($item['options'] as $items)
                     {{--$model->type_attrs_pivot--}}
                     {!! Form::hidden("variations[$uniqueID][options][".$items['attributes_id']."][attributes_id]",$items['attributes_id'],['class' => 'option-class']) !!}

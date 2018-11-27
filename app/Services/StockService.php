@@ -106,6 +106,7 @@ class StockService
                     $variation = StockVariation::create($newData);
                 }
                 $deletableArray[] = $variation->id;
+                $variation->options()->delete();
                 if(isset($attributes) && count($attributes)){
                     foreach ($attributes as $option){
                         $variation->options()->create($option);
