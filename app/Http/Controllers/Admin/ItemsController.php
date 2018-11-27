@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemsRequest;
 use App\Models\Attributes;
 use App\Models\Items;
+use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
@@ -25,12 +26,12 @@ class ItemsController extends Controller
 
     public function getNew()
     {
-        $model=null;
+        $model = null;
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new',compact('model','allAttrs'));
+        return $this->view('new', compact('model', 'allAttrs'));
     }
 
-    public function postNew(ItemsRequest $request)
+    public function postNew(Request $request)
     {
         dd($request->all());
         $data = $request->except('_token', 'translatable');
@@ -38,16 +39,27 @@ class ItemsController extends Controller
         return redirect()->route('admin_items');
     }
 
+    private function saveImages(Request $request, $item)
+    {
+        $images = $request->get('other_images');
+    }
+
+    private function saveVideos(Request $request, $item)
+    {
+
+    }
+
     public function getPurchase($id)
     {
-        $item=Items::FindOrFail($id);
-        return $this->view('purchase',compact('item'));
+        $item = Items::FindOrFail($id);
+        return $this->view('purchase', compact('item'));
     }
 
     public function getSuppliers()
     {
         return $this->view('suppliers.index');
     }
+
     public function getSaleChannels()
     {
         return $this->view('sale_channels.index');
