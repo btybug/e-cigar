@@ -187,7 +187,9 @@
                                                             </div>
                                                         </div>
                                     </div>
-                                    <div id="downloads" class="tabe-pane fade"></div>
+                                    <div id="downloads" class="tabe-pane fade">
+                                        {!! media_button('downloads',$model,true) !!}
+                                    </div>
                                     <div id="settings" class="tabe-pane fade"></div>
                                     <div id="management" class="tabe-pane fade">
                                         <div class="panel panel-default">
