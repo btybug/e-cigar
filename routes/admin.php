@@ -166,6 +166,9 @@ Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'suppliers'], function () {
         Route::get('/','Admin\ItemsController@getSuppliers')->name('admin_suppliers');
+        Route::get('/new','Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
+        Route::get('/edit/{id}','Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
+        Route::post('/new','Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
     });
     Route::group(['prefix' => 'sale-channels'], function () {
         Route::get('/','Admin\ItemsController@getSaleChannels')->name('admin_sale_channels');
@@ -174,8 +177,8 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'items'], function () {
         Route::get('/','Admin\ItemsController@index')->name('admin_items');
         Route::get('/new','Admin\ItemsController@getNew')->name('admin_items_new');
+        Route::post('/new','Admin\ItemsController@postNew')->name('post_admin_items_new');
         Route::get('/purchase/{item_id}','Admin\ItemsController@getPurchase')->name('admin_items_purchase');
-        Route::post('/new','Admin\ItemsController@postNew')->name('admin_items_new');
     });
     Route::group(['prefix' => 'stock'], function () {
         Route::get('/', 'Admin\InventoryController@stock')->name('admin_stock');

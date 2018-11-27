@@ -17,12 +17,15 @@ class CreatePurchasesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('item_id');
+            $table->unsignedInteger('supplier_id');
+            $table->string('invoice_number')->nullable();
             $table->unsignedInteger('qty')->default(0);
             $table->timestamp('purchase_date');
             $table->integer('price');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict');
         });
     }
 

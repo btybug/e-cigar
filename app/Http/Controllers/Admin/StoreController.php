@@ -18,6 +18,7 @@ use App\Models\Products;
 use App\Models\Purchase;
 use App\Models\ShippingZones;
 use App\Models\StockVariation;
+use App\Models\Suppliers;
 use Carbon\Carbon;
 use PragmaRX\Countries\Package\Countries;
 use Illuminate\Http\Request;
@@ -103,7 +104,9 @@ class StoreController extends Controller
     {
         $model = null;
         $items=Items::all()->pluck('name','id');
-        return $this->view('purchase.new',compact('model','items'));
+        $suppliers=Suppliers::all()->pluck('name','id');
+
+        return $this->view('purchase.new',compact('model','items','suppliers'));
     }
 
     public function postSaveOrUpdate (PurchaseRequest $request)

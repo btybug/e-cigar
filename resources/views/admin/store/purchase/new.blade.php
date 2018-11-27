@@ -43,14 +43,14 @@
                 <label class="col-sm-2 control-label" for="supplier">
                     Supplier</label>
                 <div class="col-sm-10">
-                    {!! Form::select('supplier',$items,null,[ 'class'=> 'form-control']) !!}
+                    {!! Form::select('supplier_id',$suppliers,null,[ 'class'=> 'form-control']) !!}
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="invoiceNumber">Invoice number</label>
                 <div class="col-sm-10">
-                    {!! Form::number('invoiceNumber',null,['placeholder' => 'Purchase invoice number','class'=> 'form-control']) !!}
+                    {!! Form::number('invoice_number',null,['placeholder' => 'Purchase invoice number','class'=> 'form-control']) !!}
                 </div>
             </div>
 

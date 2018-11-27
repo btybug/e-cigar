@@ -9,10 +9,12 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\SupplierRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ItemsRequest;
+use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Models\Attributes;
 use App\Models\Items;
+use App\Models\Suppliers;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -94,5 +96,23 @@ class ItemsController extends Controller
     public function getSaleChannels()
     {
         return $this->view('sale_channels.index');
+    }
+
+    public function getSuppliersNew()
+    {
+        $model = null;
+        return $this->view('suppliers.new',compact('model'));
+    }
+    public function getSuppliersEdit($id)
+    {
+        $model=Suppliers::findOrFail($id);
+        return $this->view('suppliers.new',compact('model'));
+    }
+
+    public function postSuppliers(SupplierRequest $request)
+    {
+        $data=$request->except('_token');
+        Suppliers::updateOrCreate(['id'=>$request->get('id')],$data);
+        return redirect()->route('admin_suppliers');
     }
 }

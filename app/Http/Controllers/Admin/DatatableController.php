@@ -26,6 +26,7 @@ use App\Models\Settings;
 use App\Models\Sports;
 use App\Models\Statuses;
 use App\Models\Stock;
+use App\Models\Suppliers;
 use App\Models\Teams;
 use App\Models\Ticket;
 use App\Models\Translations;
@@ -589,6 +590,16 @@ class DatatableController extends Controller
             })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>
             <a class='badge btn-info' href='".route('admin_items_purchase',$attr->id)."'><i class='fa fa-eye'></i></a>";
+            })->rawColumns(['actions'])->make(true);
+    }
+    public function getAllSuppliers()
+    {
+        return Datatables::of(Suppliers::query())
+            ->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            })
+            ->addColumn('actions', function ($attr) {
+                return "<a class='badge btn-warning' href='".route('admin_suppliers_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])->make(true);
     }
 }
