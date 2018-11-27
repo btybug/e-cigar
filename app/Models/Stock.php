@@ -102,4 +102,16 @@ class Stock extends Translatable
         $seo = $this->seo()->where('name', $name)->where('type', $type)->first();
         return ($seo) ? $seo->content : null;
     }
+
+    public function type_attrs()
+    {
+        return $this->belongsToMany(Attributes::class, 'stock_type_attributes', 'stock_id', 'attributes_id')
+            ->whereNull('stock_type_attributes.sticker_id');
+    }
+
+    public function type_attrs_pivot()
+    {
+        return $this->hasMany(StockTypeAttribute::class, 'stock_id', 'id')
+            ->whereNotNull('stock_type_attributes.sticker_id');
+    }
 }

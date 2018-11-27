@@ -12,7 +12,7 @@
                 <input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>
             </div>
             <div class="col-md-4">
-                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
+                {!! Form::submit('Save',['class' => 'btn btn-info pull-right submit-form']) !!}
             </div>
         </div>
     </section>
@@ -39,7 +39,7 @@
             </div>
 
             <!-- /.col -->
-            {!! Form::model($model,['class'=>'form-horizontal','url' => route('admin_stock_save')]) !!}
+            {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
             {!! Form::hidden('id',null) !!}
             <div class="col-md-12">
                 <div class="tab-content tabs_content">
@@ -285,7 +285,6 @@
                                                 </div>
                                             </div>
                                             <div id="mediaspecifications" class="tab-pane fade ">
-                                                {!! Form::open(['id' => 'v-option-form']) !!}
                                                 <table class="table table-responsive table--store-settings">
                                                     <thead>
                                                     <tr class="bg-my-light-pink">
@@ -296,7 +295,7 @@
                                                     </thead>
 
                                                     <tbody class="v-options-list">
-                                                    @include("admin.inventory._partials.variation_option_item")
+
                                                     </tbody>
 
                                                     <tfoot>
@@ -309,7 +308,6 @@
                                                     </tr>
                                                     </tfoot>
                                                 </table>
-                                                {!! Form::close() !!}
                                             </div>
                                         </div>
                                     </div>
@@ -326,15 +324,13 @@
                                     <div class="row">
                                         <label class="col-md-1">Product Type</label>
                                         <div class="col-md-3">
-                                            <select name="" id="variation-product-select" class="form-control">
-                                                <option value="simple_product">Simple Product</option>
-                                                <option value="variation_product">Variation Product</option>
-                                            </select>
+                                            {!! Form::select('type',['' => 'Select','simple_product'=>'Simple Product','variation_product' => 'Variation Product'],null,
+                                            ['id'=>'variation-product-select','class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-product-variotion product-wall row hide">
-                                    {!! Form::open(['id' => 'v-option-form']) !!}
+                                <div class="table-product-variotion product-wall row {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
+
                                     <table class="table table-responsive table--store-settings">
                                         <thead>
                                         <tr class="bg-my-light-pink">
@@ -345,7 +341,11 @@
                                         </thead>
 
                                         <tbody class="v-options-list get-all-attributes-tab">
-                                        @include("admin.inventory._partials.variation_option_item")
+                                            @if($model)
+                                                @foreach($model->type_attrs as $typeAttr)
+                                                    @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
+                                                @endforeach
+                                            @endif
                                         </tbody>
 
                                         <tfoot>
@@ -358,7 +358,7 @@
                                         </tr>
                                         </tfoot>
                                     </table>
-                                    {!! Form::close() !!}
+
                                 </div>
 
                             </div>
@@ -368,7 +368,7 @@
                                     <div class="basic-center basic-wall">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="sipmle-product-wall product-wall">
+                                                <div class="sipmle-product-wall product-wall {{ ($model && $model->type =='simple_product') ? '' : 'hide' }}">
                                                     <table class="table table-style table-bordered" cellspacing="0" width="100%">
                                                         <thead>
                                                         <tr>
@@ -407,7 +407,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row hide">
+                                        <div class="row variation-product-wall {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
                                             <div class="col-md-12">
                                                 {{--<a href="javascript:void(0)"--}}
                                                 {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
@@ -741,9 +741,6 @@
             {!! Form::close() !!}
         </div>
         <!-- /.col -->
-        </div>
-        <!-- /.row -->
-
     </section>
     <!-- Modal -->
     <div id="myExtraTabModal" class="modal fade" role="dialog">
@@ -871,28 +868,36 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
-            function addAttributeToJSONNew($_this, remove = false) {
+            $("body").on('click','.submit-form',function () {
+                $(".stock-form").submit();
+            })
+
+            function addAttributeToJSONNew($_this) {
                 let id = $_this.find('.select-attribute').val();
 
                 let inputOptions = $_this.find(`.input-items-value`);
 
 
                 let inputOptionsValue = inputOptions.val();
-                console.log(id,inputOptionsValue);
                 attributesJson[id] = inputOptionsValue.split(",");
+
+                console.log(attributesJson);
             }
 
             $('body').on('change', '#variation-product-select', function () {
-                $('.product-wall').addClass('hide')
-                $('#variations-table').closest('.row').removeClass('hide')
-                if ($(this).val() == 'variation_product') {
-                    $('.table-product-variotion').removeClass('hide')
-                } else if ($(this).val() == 'simple_product') {
+                var value = $(this).val();
+                if (value == 'variation_product') {
+                    $('.sipmle-product-wall').addClass('hide');
+                    $('.variation-product-wall').removeClass('hide');
+                    $('.table-product-variotion').removeClass('hide');
+                } else if (value == 'simple_product') {
                     $('.sipmle-product-wall').removeClass('hide');
-                    $('#variations-table').closest('.row').addClass('hide');
-
-                } else {
-
+                    $('.variation-product-wall').addClass('hide');
+                    $('.table-product-variotion').addClass('hide');
+                }else{
+                    $('.sipmle-product-wall').addClass('hide');
+                    $('.variation-product-wall').addClass('hide');
+                    $('.table-product-variotion').addClass('hide');
                 }
 
             });
@@ -936,26 +941,26 @@
                 return indexed_array;
             }
 
-            var elementList = $(".select-attribute");
-
-            console.log(elementList);
-
-            for (var i = 0; i < elementList.length; i++) {
-                var ele = elementList[i];
-                if ($(ele).val() != '') {
-                    makeSearchItem({
-                        input:
-                        ".v-input-" + $(ele).data("uid"),
-                        name: "name",
-                        url:
-                        "/admin/inventory/attributes/get-options-by-id/" +
-                        $(ele).val(),
-                        title: "Attributes",
-                        inputValues: "#tags-names",
-                        containerForAppend: null
-                    });
-                }
-            }
+//            var elementList = $('.select-attribute');
+//
+//            console.log(elementList);
+//
+//            for (var i = 0; i < elementList.length; i++) {
+//                var ele = elementList[i];
+//                if ($(ele).val() != '') {
+//                    makeSearchItem({
+//                        input:
+//                        ".v-input-" + $(ele).data("uid"),
+//                        name: "name",
+//                        url:
+//                        "/admin/inventory/attributes/get-options-by-id/" +
+//                        $(ele).val(),
+//                        title: "Attributes",
+//                        inputValues: "#tags-names",
+//                        containerForAppend: null
+//                    });
+//                }
+//            }
 
             $("body").on('click', '.option-elm-attributes', function () {
                 var data = $(this).find('.extra-item-data').val();
@@ -1210,16 +1215,5 @@
 
 
         // }
-    </script>
-    <script>
-        $(document).ready(function () {
-
-            $("body").on('change', '.select-stock-type', function () {
-                var type = $(this).val();
-                var generatedString = type + '-' + guid();
-                $('#sku').val(generatedString);
-                $('#stock-sku').html(generatedString);
-            })
-        });
     </script>
 @stop

@@ -63,7 +63,7 @@
 
     @stack('style')
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue">
 <div class="wrapper">
 
 @include('admin._partials.header')

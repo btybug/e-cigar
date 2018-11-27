@@ -3,6 +3,7 @@
 use App\Models\ProductAttribute;
 use App\Models\ProductVariation;
 use App\Models\StockAttribute;
+use App\Models\StockTypeAttribute;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
 
@@ -34,6 +35,34 @@ class StockService
 
             }
         }
+        return $result;
+    }
+
+    public function makeTypeOptions($stock,array $data = [])
+    {
+        $result = [];
+
+        if(count($data)){
+            foreach ($data as $datum) {
+                $attr_id = $datum['attributes_id'];
+                $ids = $datum['options'];
+
+                $ids = explode(',',$ids);
+                $result[] = ['attributes_id' => $attr_id];
+                if(count($ids)){
+                    foreach ($ids as $id){
+                        if($id){
+                            $result[] = ['attributes_id' => $attr_id,'sticker_id' => $id];
+                        }
+                    }
+                }
+
+            }
+        }
+
+        $stock->type_attrs()->sync($result);
+//        $stock->type_attrs()->syncWithoutDetaching($type_options);
+
         return $result;
     }
 

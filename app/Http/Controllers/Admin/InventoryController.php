@@ -73,18 +73,27 @@ class InventoryController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations', 'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot');
+//        dd($request->all());
+        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations',
+            'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
+
+
+        $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
+
+
         $stock->attrs()->sync($request->get('attributes'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
         $stock->attrs()->syncWithoutDetaching($options);
 
         $this->stockService->saveVariations($stock, $request->get('variations', []));
+        //-------------------//
         $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
         $stock->stickers()->sync($request->get('stickers'));
         $this->createOrUpdateSeo($request, $stock->id);
+        //-------------------//
         return redirect()->route('admin_stock');
     }
 
