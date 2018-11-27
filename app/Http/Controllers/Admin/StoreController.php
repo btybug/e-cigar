@@ -121,10 +121,10 @@ class StoreController extends Controller
 
     public function EditPurchase ($id)
     {
-        $data = Purchase::find($id);
-        if(! count($data)) abort(404);
-
-        return $this->view('purchase.edit',compact('data','sku'));
+        $model = Purchase::findOrFail($id);
+        $items=Items::all()->pluck('name','id');
+        $suppliers=Suppliers::all()->pluck('name','id');
+        return $this->view('purchase.new',compact('model','items','suppliers'));
     }
 
 
