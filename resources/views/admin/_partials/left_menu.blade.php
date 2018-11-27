@@ -89,7 +89,7 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_stock')
-                    <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i> Stock</a></li>
+                    <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok
                     @ok('admin_store_attributes')
                     <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
