@@ -8,6 +8,15 @@
         <div class="tab-content">
             <div id="info" class="tab-pane fade in active media-new-tab basic-details-tab">
                 {!! Form::model($model,['class'=>'form-horizontal']) !!}
+                <div class="form-group pull-right">
+                    <div class="row">
+                        <label for="feature_image"
+                               class="control-label col-sm-4"></label>
+                        <div class="col-sm-8">
+                            <button class="btn btn-success" type="submit">Save</button>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid p-25">
                     <div class="row">
                         <div class="col-md-3">
@@ -96,22 +105,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="feature_image"
-                                                           class="control-label col-sm-4"></label>
-                                                    <div class="col-sm-8">
-                                                        <button type="submit">Save</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+
 
                                     </div>
                                     <div id="videos" class="tab-pane fade">
                                         <div class="media-videos">
                                             <div class="input-group " style="display: flex">
                                                 <input type="text" class="form-control video-url-link"
-                                                       placeholder="Video Url" aria-label="Video Url"
+                                                       placeholder="Video Url" name="video" aria-label="Video Url"
                                                        aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-primary add-video-url"
