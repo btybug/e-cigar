@@ -380,7 +380,7 @@ function HTMLmakeSelectVaritionOptions(name, data, text = "") {
       </div>`;
 }
 
-$("body").on("click", ".get-variation", function() {
+$("body").on("click", ".get-variationssssss", function() {
     let html = "";
     if (
         Object.keys(attributesJson).length === 0 ||
@@ -404,7 +404,7 @@ $("body").on("click", ".remove-variation", function() {
         .remove();
 });
 
-$("body").on("click", ".get-all-variations", function() {
+$("body").on("click", ".get-all-variationssssss", function() {
     attributesJson = {};
     $(".get-all-attributes-tab")
         .children()
@@ -428,7 +428,7 @@ $("body").on("click", ".get-all-variations", function() {
     );
 });
 
-$("body").on("click", ".add-variation", function() {
+$("body").on("click", ".add-variationssssss", function() {
     attributesJson = {};
     $(".get-all-attributes-tab")
         .children()
@@ -471,7 +471,7 @@ jQuery.extend({
 });
 
 
-$("body").on("click", ".apply-variation", function() {
+$("body").on("click", ".apply-variationssssss", function() {
     var data = [];
     // var variationId = $(this).attr("variation-id");
     var variationForm = $("#variation_form").serialize();
@@ -556,7 +556,7 @@ $("body").on("click", ".apply-variation", function() {
     }
 });
 
-$("body").on("click", ".edit-variation", function() {
+$("body").on("click", ".edit-variationssssss", function() {
     var variationId = $(this).data("id");
     var data = $(this).closest(".list-attrs-single-item").find('.variation-json').val();
     data = JSON.parse(data);
@@ -595,22 +595,22 @@ $("body").on("click", ".edit-variation", function() {
 });
 
 // window.onload = function() {
-    var elementList = document.querySelectorAll(".main-attr-container");
-
-    // Iterate through each element in the array
-    for (var i = 0; i < elementList.length; i++) {
-        var ele = elementList[i];
-        makeSearchItem({
-            input: ".attributes-item-input-" + $(ele).data("attr-id"),
-            name: "name",
-            url:
-                "/admin/inventory/attributes/get-options-by-id/" +
-                $(ele).data("attr-id"),
-            title: "Attributes",
-            inputValues: "#tags-names",
-            containerForAppend: ".coupon-tags-list"
-        });
-    }
+//     var elementList = document.querySelectorAll(".main-attr-container");
+//
+//     // Iterate through each element in the array
+//     for (var i = 0; i < elementList.length; i++) {
+//         var ele = elementList[i];
+//         makeSearchItem({
+//             input: ".attributes-item-input-" + $(ele).data("attr-id"),
+//             name: "name",
+//             url:
+//                 "/admin/inventory/attributes/get-options-by-id/" +
+//                 $(ele).data("attr-id"),
+//             title: "Attributes",
+//             inputValues: "#tags-names",
+//             containerForAppend: ".coupon-tags-list"
+//         });
+//     }
 // };
 
 // val.forEach((item, index) => {

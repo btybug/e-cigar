@@ -3,6 +3,8 @@
 
 @stop
 @section('content')
+    {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
+
     <section class="content-top">
         <div class="row m-0">
             <div class="col-md-4">
@@ -12,7 +14,7 @@
                 <input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>
             </div>
             <div class="col-md-4">
-                {!! Form::submit('Save',['class' => 'btn btn-info pull-right submit-form']) !!}
+                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
             </div>
         </div>
     </section>
@@ -39,7 +41,6 @@
             </div>
 
             <!-- /.col -->
-            {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
             {!! Form::hidden('id',null) !!}
             <div class="col-md-12">
                 <div class="tab-content tabs_content">
@@ -409,26 +410,13 @@
                                         </div>
                                         <div class="row variation-product-wall {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
                                             <div class="col-md-12">
-                                                {{--<a href="javascript:void(0)"--}}
-                                                {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
-                                                {{--class="fa fa-plus mr-10"></i>New Variation</a>--}}
                                                 <button type="button"
                                                         class="btn btn-primary pull-right add-variation-row"><i
                                                             class="fa fa-plus-circle add-new-v-option"></i>
                                                 </button>
                                             </div>
-                                            {{--<div class="col-md-12">--}}
-                                            {{--<a href="javascript:void(0)"--}}
-                                            {{--class="btn btn-primary btn-block get-all-extra-tab-event"><i--}}
-                                            {{--class="fa fa-plus mr-10"></i>Add new--}}
-                                            {{--option</a>--}}
-                                            {{--</div>--}}
+
                                             <div class="col-md-12">
-                                                {{--<div class="all-list-attrs" style="min-height:300px;">--}}
-                                                {{--@if($model)--}}
-                                                {{--@include('admin.inventory._partials.link_all_edit')--}}
-                                                {{--@endif--}}
-                                                {{--</div>--}}
 
                                                 <table id="variations-table" class="table table-style table-bordered"
                                                        cellspacing="0" width="100%">
@@ -443,11 +431,11 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody class="all-list-attrs">
-                                                    {{--@if($model)--}}
-                                                    {{--@foreach($model->variations as $variation)--}}
-                                                    {{--@include('admin.inventory._partials.variation_item')--}}
-                                                    {{--@endforeach--}}
-                                                    {{--@endif--}}
+                                                    @if($model && count($model->variations))
+                                                        @foreach($model->variations()->with('options')->get() as $variation)
+                                                            @include('admin.inventory._partials.variation_item',['item' => $variation])
+                                                        @endforeach
+                                                    @endif
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -504,11 +492,7 @@
                                                             class="fa fa-plus mr-10"></i>New Variation</a>
                                             </div>
                                             <div class="col-md-12">
-                                                {{--<div class="all-list-attrs" style="min-height:300px;">--}}
-                                                {{--@if($model)--}}
-                                                {{--@include('admin.inventory._partials.link_all_edit')--}}
-                                                {{--@endif--}}
-                                                {{--</div>--}}
+
                                                 <table id="variations-table" class="table table-style table-bordered"
                                                        cellspacing="0" width="100%">
                                                     <thead>
@@ -521,12 +505,12 @@
                                                         <th>Actions</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody class="all-list-attrs">
-                                                    @if($model)
-                                                        @foreach($model->variations as $variation)
+                                                    <tbody class="all-list-attrs-extra">
+                                                    {{--@if($model)--}}
+                                                        {{--@foreach($model->variations as $variation)--}}
                                                             {{--@include('admin.inventory._partials.variation_item',['item' => $variation])--}}
-                                                        @endforeach
-                                                    @endif
+                                                        {{--@endforeach--}}
+                                                    {{--@endif--}}
                                                     </tbody>
                                                 </table>
                                             </div>

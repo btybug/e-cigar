@@ -89,19 +89,31 @@ class StockService
 
     public function saveVariations ($stock,array $data = [])
     {
-        $stock->variations()->delete();
+//        $stock->variations()->delete();
+
         if(count($data)){
+            $deletableArray = [];
             foreach ($data as $variation_id => $data) {
-                $newData = json_decode($data,true);
+                $newData = $data;
                 $newData['stock_id'] = $stock->id;
                 $attributes = $newData['options'];
-                $variation = StockVariation::create($newData);
+                unset($newData['options']);
+//                dd($newData,$attributes);
+                if(isset($newData['id'])){
+                    $variation = StockVariation::find($newData['id']);
+                    $variation->update($newData);
+                }else{
+                    $variation = StockVariation::create($newData);
+                }
+                $deletableArray[] = $variation->id;
                 if(isset($attributes) && count($attributes)){
                     foreach ($attributes as $option){
                         $variation->options()->create($option);
                     }
                 }
             }
+
+            $stock->variations()->whereNotIn('id',$deletableArray)->delete();
         }
     }
 

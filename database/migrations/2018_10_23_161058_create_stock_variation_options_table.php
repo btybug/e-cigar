@@ -22,7 +22,7 @@ class CreateStockVariationOptionsTable extends Migration
 
             $table->foreign('variation_id')->references('id')->on('stock_variations')->onDelete('cascade');
             $table->foreign('attributes_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('options_id')->references('id')->on('attributes')->onDelete('cascade');
+            $table->foreign('options_id')->references('id')->on('stickers')->onDelete('cascade');
         });
     }
 

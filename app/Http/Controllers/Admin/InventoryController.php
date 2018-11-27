@@ -47,12 +47,13 @@ class InventoryController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        $stockItems = Items::all()->pluck('sku','sku')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general','allAttrs','twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general','allAttrs','twitterSeo', 'fbSeo', 'robot', 'data','stockItems']));
     }
 
     public function getStockEdit($id)
@@ -63,31 +64,30 @@ class InventoryController extends Controller
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        $stockItems = Items::all()->pluck('sku','sku')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories','allAttrs', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories','allAttrs', 'general','stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock(ProductsRequest $request)
     {
-//        dd($request->all());
         $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations',
             'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
 
+        $this->stockService->saveVariations($stock, $request->get('variations', []));
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
-
-
         $stock->attrs()->sync($request->get('attributes'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
         $stock->attrs()->syncWithoutDetaching($options);
 
-        $this->stockService->saveVariations($stock, $request->get('variations', []));
+
         //-------------------//
         $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
