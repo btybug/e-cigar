@@ -31,22 +31,53 @@ class ItemsController extends Controller
         return $this->view('new', compact('model', 'allAttrs'));
     }
 
-    public function postNew(Request $request)
+    public function postNew(ItemsRequest $request)
     {
-        dd($request->all());
-        $data = $request->except('_token', 'translatable');
-        Items::updateOrCreate($request->id, $data);
+        $data = $request->only('sku', 'image');
+        $item = Items::updateOrCreate($request->id, $data);
+        $this->saveImages($request, $item);
+        $this->saveVideos($request, $item);
+        $this->saveDownloads($request, $item);
         return redirect()->route('admin_items');
     }
 
     private function saveImages(Request $request, $item)
     {
         $images = $request->get('other_images');
+        if ($images) {
+            $data = [];
+            foreach ($images as $image) {
+                $data[] = ['url' => $image, 'type' => 'image', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
+            }
+            return \DB::table('items_media')->insert($data);
+        }
+        return null;
     }
 
     private function saveVideos(Request $request, $item)
     {
+        $videos = $request->get('videos');
+        if ($videos) {
+            $data = [];
+            foreach ($videos as $video) {
+                $data[] = ['url' => $video, 'type' => 'video', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
+            }
+            return \DB::table('items_media')->insert($data);
+        }
+        return null;
+    }
 
+    private function saveDownloads(Request $request, $item)
+    {
+        $downloads = $request->get('downloads');
+        if ($downloads) {
+            $data = [];
+            foreach ($downloads as $download) {
+                $data[] = ['url' => $download, 'type' => 'download', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
+            }
+            return \DB::table('items_media')->insert($data);
+        }
+        return null;
     }
 
     public function getPurchase($id)

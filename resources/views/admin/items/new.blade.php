@@ -112,7 +112,7 @@
                                         <div class="media-videos">
                                             <div class="input-group " style="display: flex">
                                                 <input type="text" class="form-control video-url-link"
-                                                       placeholder="Video Url" name="video" aria-label="Video Url"
+                                                       placeholder="Video Url" aria-label="Video Url"
                                                        aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <button class="btn btn-primary add-video-url"
@@ -279,6 +279,16 @@
             </div>
         </div>
     </div>
+    <script type="template" id="add-more-video">
+        <div class="input-group " style="display: flex">
+            <input type="text" class="form-control video-url-link"
+                   placeholder="Video Url" name="video" aria-label="Video Url"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-danger remove-vido" type="button"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+</script>
 @stop
 @section('css')
 
