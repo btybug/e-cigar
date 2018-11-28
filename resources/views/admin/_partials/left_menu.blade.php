@@ -75,6 +75,9 @@
                     @ok('admin_sale_channels')
                     <li><a href="{{route('admin_sale_channels')}}"><i class="fa fa-circle-o"></i>Sale Channels</a></li>
                     @endok
+                    @ok('admin_other')
+                    <li><a href="{{route('admin_sale_channels')}}"><i class="fa fa-circle-o"></i>Other</a></li>
+                    @endok
                 </ul>
             </li>
             @endok

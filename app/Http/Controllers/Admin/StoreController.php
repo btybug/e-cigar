@@ -35,7 +35,7 @@ class StoreController extends Controller
     public function newProduct()
     {
         $model = new Products();
-        return $this->view('new',compact('model'));
+        return $this->view('new', compact('model'));
     }
 
     public function getCoupons()
@@ -46,8 +46,9 @@ class StoreController extends Controller
     public function getCouponsNew()
     {
         $coupons = null;
-        return $this->view('coupons_new',compact('coupons'));
+        return $this->view('coupons_new', compact('coupons'));
     }
+
     public function CouponsSave(CouponsRequest $request)
     {
         $data = $request->except('_token');
@@ -64,12 +65,12 @@ class StoreController extends Controller
     public function Edit($id)
     {
         $coupons = Coupons::find($id);
-        return $this->view('coupons_new',compact('coupons'));
+        return $this->view('coupons_new', compact('coupons'));
     }
 
     public function saveTags(Request $request)
     {
-       dd($request->all());
+        dd($request->all());
     }
 
     public function getProducts(Request $request)
@@ -84,59 +85,65 @@ class StoreController extends Controller
         $posible = array();
         $regions = $coontries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'postal')->toArray();
 
-        foreach ($regions as $region)
-        {
-            if (preg_match("/(" . $request->id . ")/i",$region))
-            {
+        foreach ($regions as $region) {
+            if (preg_match("/(" . $request->id . ")/i", $region)) {
                 $posible[] = $region;
             }
         }
-       return \Response::json(['error'=>false,'data'=>$posible]);
+        return \Response::json(['error' => false, 'data' => $posible]);
     }
 
 
-    public function getPurchase ()
+    public function getPurchase()
     {
-        return $this->view('purchase.index',compact(''));
+        return $this->view('purchase.index', compact(''));
     }
 
-    public function getPurchaseNew ()
+    public function getPurchaseNew()
     {
         $model = null;
-        $items=Items::all()->pluck('name','id');
-        $suppliers=Suppliers::all()->pluck('name','id');
+        $items = Items::all()->pluck('name', 'id');
+        $suppliers = Suppliers::all()->pluck('name', 'id');
 
-        return $this->view('purchase.new',compact('model','items','suppliers'));
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
     }
 
-    public function postSaveOrUpdate (PurchaseRequest $request)
+    public function postSaveOrUpdate(PurchaseRequest $request)
     {
         $data = $request->except('_token');
-
+        $id=$request->get('id');
+        $qty=$data['qty'];
+        if($id){
+           $purchase =Purchase::findOrFail($id);
+           $qty=$data['qty']-$purchase->qty;
+        }
+        $item=Items::findOrFail($data['item_id']);
+        $item->quantity=$item->quantity+$qty;
+        $item->save();
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
-        Purchase::updateOrCreate($request->only('id'),$data);
+        Purchase::updateOrCreate($request->only('id'), $data);
         return redirect()->route('admin_store_purchase');
     }
 
-    public function EditPurchase ($id)
+    public function EditPurchase($id)
     {
         $model = Purchase::findOrFail($id);
-        $items=Items::all()->pluck('name','id');
-        $suppliers=Suppliers::all()->pluck('name','id');
-        return $this->view('purchase.new',compact('model','items','suppliers'));
+        $items = Items::all()->pluck('name', 'id');
+        $suppliers = Suppliers::all()->pluck('name', 'id');
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
     }
 
 
-    public function getStockBySku (Request $request)
+    public function getStockBySku(Request $request)
     {
         $sku = $request->get('sku');
-        $variation = StockVariation::where('variation_id',$sku)->first();
-        if($variation){
+        $variation = StockVariation::where('variation_id', $sku)->first();
+        if ($variation) {
             $vape = $variation->stock;
-            $html = $this->view('purchase.product',compact('vape','variation'))->render();
+            $html = $this->view('purchase.product', compact('vape', 'variation'))->render();
 
-            return \Response::json(['error' => false,'html' => $html]);
+            return \Response::json(['error' => false, 'html' => $html]);
         }
 
         return \Response::json(['error' => true]);

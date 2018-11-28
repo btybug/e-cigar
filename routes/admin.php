@@ -173,6 +173,9 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'sale-channels'], function () {
         Route::get('/','Admin\ItemsController@getSaleChannels')->name('admin_sale_channels');
     });
+    Route::group(['prefix' => 'other'], function () {
+        Route::get('/','Admin\OtherController@getIndex')->name('admin_inventory_other');
+    });
 
     Route::group(['prefix' => 'items'], function () {
         Route::get('/','Admin\ItemsController@index')->name('admin_items');
