@@ -868,6 +868,24 @@
                 console.log(attributesJson);
             }
 
+            $('.tag-input-v').on("beforeItemRemove", function(event) {
+                let value = $(this).val();
+                let arrValue = value.split(",");
+                let index = arrValue.indexOf(event.item + "");
+
+                console.log(5465465465465, value, event.item)
+                console.info(arrValue, index,999898)
+                let input = $(event.target)
+                    .closest(".v-options-list-item")
+                    .find(".input-items-value");
+                let inputValue = input.val();
+                let arr = inputValue.split(",");
+//
+                arr.splice(index, 1);
+                input.val(arr.join());
+                return true;
+            });
+
             $('body').on('change', '#variation-product-select', function () {
                 var value = $(this).val();
                 if (value == 'variation_product') {
