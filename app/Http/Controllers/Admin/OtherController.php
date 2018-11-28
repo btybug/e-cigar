@@ -9,10 +9,10 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\OtherRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Items;
 use App\Models\Others;
-use Illuminate\Http\Request;
 
 class OtherController extends Controller
 {
@@ -30,7 +30,7 @@ class OtherController extends Controller
         return $this->view('new', compact('model', 'items'));
     }
 
-    public function postOthers(Request $request)
+    public function postOthers(OtherRequest $request)
     {
         $data = $request->only(['item_id', 'qty', 'reason', 'notes']);
         $id = $request->get('id');
