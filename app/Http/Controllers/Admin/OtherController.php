@@ -23,10 +23,10 @@ class OtherController extends Controller
         return $this->view('index');
     }
 
-    public function getNew()
+    public function getNew($id=null)
     {
         $items = Items::all()->pluck('name', 'id');
-        $model = null;
+        $model = Items::find($id);
         return $this->view('new', compact('model', 'items'));
     }
 

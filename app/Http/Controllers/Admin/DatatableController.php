@@ -616,7 +616,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->created_at);
             })
             ->addColumn('actions', function ($attr) {
-                return "<a class='badge btn-warning' href='".route('admin_suppliers_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
+                return "<a class='badge btn-warning' href='".route('admin_inventory_others_new',$attr->id)."'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions'])->make(true);
     }
 }

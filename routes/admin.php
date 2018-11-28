@@ -175,7 +175,7 @@ Route::group(['prefix' => 'inventory'], function () {
     });
     Route::group(['prefix' => 'other'], function () {
         Route::get('/','Admin\OtherController@getIndex')->name('admin_inventory_other');
-        Route::get('/new','Admin\OtherController@getNew')->name('admin_inventory_others_new');
+        Route::get('/manage/{id?}','Admin\OtherController@getNew')->name('admin_inventory_others_new');
         Route::post('/new','Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
     });
 
