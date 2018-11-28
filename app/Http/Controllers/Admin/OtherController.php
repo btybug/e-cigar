@@ -26,7 +26,7 @@ class OtherController extends Controller
     public function getNew($id=null)
     {
         $items = Items::all()->pluck('name', 'id');
-        $model = Items::find($id);
+        $model = Others::find($id);
         return $this->view('new', compact('model', 'items'));
     }
 
