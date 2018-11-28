@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Items;
+use App\Models\Others;
 use Illuminate\Http\Request;
 
 class OtherController extends Controller
@@ -24,14 +25,27 @@ class OtherController extends Controller
 
     public function getNew()
     {
-        $items=Items::all()->pluck('name','id');
-        $model=null;
-        return $this->view('new',compact('model','items'));
+        $items = Items::all()->pluck('name', 'id');
+        $model = null;
+        return $this->view('new', compact('model', 'items'));
     }
 
     public function postOthers(Request $request)
     {
-        dd($request->all());
+        $data = $request->only(['item_id', 'qty', 'reason', 'notes']);
+        $id = $request->get('id');
+        $qty = $data['qty'];
+        if ($id) {
+            $other = Others::findOrFail($id);
+            $qty = $data['qty'] - $other->qty;
+        }
+        $item = Items::findOrFail($data['item_id']);
+        $item->quantity = $item->quantity - $qty;
+
+        $data['user_id']=\Auth::id();
+        Others::updateOrCreate($request->only('id'),$data);
+        $item->save();
+        return redirect()->route('admin_inventory_other');
     }
 
 }
