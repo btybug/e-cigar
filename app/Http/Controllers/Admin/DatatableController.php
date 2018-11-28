@@ -16,6 +16,7 @@ use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
 use App\Models\Orders;
+use App\Models\Others;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Purchase;
@@ -596,6 +597,22 @@ class DatatableController extends Controller
     {
         return Datatables::of(Suppliers::query())
             ->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            })
+            ->addColumn('actions', function ($attr) {
+                return "<a class='badge btn-warning' href='".route('admin_suppliers_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])->make(true);
+    }
+    public function getAllOthers()
+    {
+        return Datatables::of(Others::query())
+            ->editColumn('item', function ($other) {
+                return $other->item->name;
+            }) ->editColumn('user', function ($other) {
+                return $other->user->name.' '.$other->user->last_name;
+            })->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            }) ->editColumn('updated_at', function ($faq) {
                 return BBgetDateFormat($faq->created_at);
             })
             ->addColumn('actions', function ($attr) {

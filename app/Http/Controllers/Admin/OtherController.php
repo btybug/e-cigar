@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Items;
+use Illuminate\Http\Request;
 
 class OtherController extends Controller
 {
@@ -19,4 +21,17 @@ class OtherController extends Controller
     {
         return $this->view('index');
     }
+
+    public function getNew()
+    {
+        $items=Items::all()->pluck('name','id');
+        $model=null;
+        return $this->view('new',compact('model','items'));
+    }
+
+    public function postOthers(Request $request)
+    {
+        dd($request->all());
+    }
+
 }
