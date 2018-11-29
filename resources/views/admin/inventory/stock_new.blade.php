@@ -487,69 +487,58 @@
                                     <div class="basic-left basic-wall">
                                         <div class="all-list-extra">
                                             <ul class="get-all-extra-tab">
-                                                {{--@if(isset($attrs) && count($attrs))--}}
-                                                {{--@foreach($attrs as $attribute)--}}
-                                                {{--<li style="display: flex"--}}
-                                                {{--data-option-container="{!! $attribute->id !!}"--}}
-                                                {{--data-id="{!! $attribute->id !!}"--}}
-                                                {{--class="option-elm-attributes"><a--}}
-                                                {{--href="#">{!! $attribute->name !!}</a>--}}
-                                                {{--<div class="buttons">--}}
-                                                {{--<a href="javascript:void(0)"--}}
-                                                {{--class="btn btn-sm all-option-add-variations {{ ($attribute->is_shared) ? 'btn-primary' : 'btn-success' }}"><i--}}
-                                                {{--class="fa fa-money"></i></a>--}}
-                                                {{--<a href="javascript:void(0)"--}}
-                                                {{--class="remove-all-attributes btn btn-sm btn-danger"><i--}}
-                                                {{--class="fa fa-trash"></i></a>--}}
-                                                {{--</div>--}}
-                                                {{--<input type="hidden" name="attributes[{!! $attribute->id !!}][attributes_id]"--}}
-                                                {{--value="{!! $attribute->id !!}">--}}
-                                                {{----}}
-                                                {{--</li>--}}
-                                                {{--@endforeach--}}
-                                                {{--@endif--}}
+                                                @if($model)
+                                                    @foreach($model->promotions as $promotion)
+                                                        <li style="display: flex" data-id="{{ $promotion->id }}" class="promotion-elm"><a
+                                                                    href="#">{{ $promotion->name }}</a>
+                                                            <div class="buttons">
+                                                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                            </div>
+                                                            <input type="hidden" name="promotions[]" value="{{ $promotion->id }}">
+                                                        </li>
+                                                    @endforeach
+                                                @endif
                                             </ul>
                                         </div>
                                         <div class="button-add text-center">
                                             <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-block get-all-extra-tab-event"><i
-                                                        class="fa fa-plus mr-10"></i>Add new
-                                                option</a>
+                                               class="btn btn-primary btn-block select-promotions"><i
+                                                        class="fa fa-plus mr-10"></i>Add promotion</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="basic-center basic-wall">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <a href="javascript:void(0)"
-                                                   class="btn btn-sm btn-primary add-variation pull-right"><i
-                                                            class="fa fa-plus mr-10"></i>New Variation</a>
-                                            </div>
-                                            <div class="col-md-12">
+                                        {{--<div class="row">--}}
+                                            {{--<div class="col-md-12">--}}
+                                                {{--<a href="javascript:void(0)"--}}
+                                                   {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
+                                                            {{--class="fa fa-plus mr-10"></i>New Variation</a>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-md-12">--}}
 
-                                                <table id="variations-table" class="table table-style table-bordered"
-                                                       cellspacing="0" width="100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Attributes</th>
-                                                        <th>SKU</th>
-                                                        <th>Qty</th>
-                                                        <th>Price</th>
-                                                        <th>Actions</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="all-list-attrs-extra">
+                                                {{--<table id="variations-table" class="table table-style table-bordered"--}}
+                                                       {{--cellspacing="0" width="100%">--}}
+                                                    {{--<thead>--}}
+                                                    {{--<tr>--}}
+                                                        {{--<th>Name</th>--}}
+                                                        {{--<th>Attributes</th>--}}
+                                                        {{--<th>SKU</th>--}}
+                                                        {{--<th>Qty</th>--}}
+                                                        {{--<th>Price</th>--}}
+                                                        {{--<th>Actions</th>--}}
+                                                    {{--</tr>--}}
+                                                    {{--</thead>--}}
+                                                    {{--<tbody class="all-list-attrs-extra">--}}
                                                     {{--@if($model)--}}
                                                     {{--@foreach($model->variations as $variation)--}}
                                                     {{--@include('admin.inventory._partials.variation_item',['item' => $variation])--}}
                                                     {{--@endforeach--}}
                                                     {{--@endif--}}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
+                                                    {{--</tbody>--}}
+                                                {{--</table>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
                                     </div>
                                 </div>
 
@@ -1087,7 +1076,7 @@
                     .each(function () {
                         arr.push($(this).attr("data-id"));
                     });
-                AjaxCall("/admin/get-stocks", {arr}, function (res) {
+                AjaxCall("/admin/get-stocks", {arr:arr, promotion: 0}, function (res) {
                     if (!res.error) {
                         $("#productsModal .modal-body .all-list").empty();
                         res.data.forEach(item => {
@@ -1100,6 +1089,51 @@
                         $("#productsModal").modal();
                     }
                 });
+            });
+
+            $("body").on('click', '.select-promotions', function () {
+                let arr = [];
+                $(".get-all-extra-tab")
+                    .children()
+                    .each(function () {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/get-stocks", {arr:arr, promotion: 1}, function (res) {
+                    if (!res.error) {
+                        $("#productsModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-promotion" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                        $("#productsModal .modal-body .all-list").append(html);
+                    });
+                        $("#productsModal").modal();
+                    }
+                });
+            });
+
+
+
+            $("body").on("click", ".select-promotion", function () {
+                var id = $(this).data('id');
+
+            });
+
+            $("body").on("click", ".add-promotion", function () {
+                let id = $(this).data("id");
+                let name = $(this).data("name");
+                $(".get-all-extra-tab")
+                    .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
+                                href="#">${name}</a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="promotions[]" value="${id}">
+                                </li>`);
+                $(this)
+                    .parent()
+                    .remove();
             });
 
             $("body").on("click", ".add-related-event", function () {

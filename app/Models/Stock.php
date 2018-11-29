@@ -71,6 +71,11 @@ class Stock extends Translatable
         return $this->belongsToMany(Stock::class, 'stock_related', 'stock_id', 'related_id');
     }
 
+    public function promotions()
+    {
+        return $this->belongsToMany(Stock::class, 'product_promotions', 'stock_id', 'promotion_id');
+    }
+
     public function stickers()
     {
         return $this->belongsToMany(Stickers::class, 'stock_stickers', 'stock_id', 'sticker_id');

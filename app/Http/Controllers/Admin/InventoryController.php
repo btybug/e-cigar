@@ -77,7 +77,7 @@ class InventoryController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options',
+        $data = $request->except('_token', 'translatable', 'attributes', 'options','promotions',
             'variations','variation_single','package_variation_price','package_variation',
             'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
         $data['user_id'] = \Auth::id();
@@ -102,6 +102,7 @@ class InventoryController extends Controller
         //-------------------//
         $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
+        $stock->promotions()->sync($request->get('promotions'));
         $stock->stickers()->sync($request->get('stickers'));
         $this->createOrUpdateSeo($request, $stock->id);
         //-------------------//
@@ -161,7 +162,8 @@ class InventoryController extends Controller
 
     public function getStocks(Request $request)
     {
-        $attr = Stock::whereNotIn('id', $request->get('arr', []))->get();
+        $promotion = ($request->get("promotion")) ? true : false;
+        $attr = Stock::where('is_promotion',$promotion)->whereNotIn('id', $request->get('arr', []))->get();
         return \Response::json(['error' => false, 'data' => $attr]);
     }
 
