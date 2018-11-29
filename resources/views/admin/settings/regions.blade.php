@@ -4,7 +4,6 @@
 @stop
 @section('content')
 
-    <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_general') !!}" role="tab"
@@ -23,14 +22,16 @@
 
 
             {!! Form::open(['id'=>'sites']) !!}
-            <button type="submit" class="btn btn-success">Save</button>
+            <div class="text-right mb-20 mt20">
+                <button type="submit" class="btn btn-info">Save</button>
+            </div>
             <div class="panel panel-default site-panel">
                 <div class="panel-heading">Site 1</div>
                 <div class="panel-body form-horizontal">
                     <div class="mb-20">
                         <table class="table table-responsive table--store-settings" data-table-id="20">
                             <thead>
-                            <tr class="bg-my-light-pink">
+                            <tr class="bg-info">
                                 <th>Language</th>
                                 <th>Currency</th>
                                 <th>Countries</th>
@@ -76,8 +77,6 @@
             {!! Form::close() !!}
 
         </div>
-
-    </div>
     <script type="template" id="new-region">
         <tr>
             <td>

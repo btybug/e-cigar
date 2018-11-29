@@ -21,7 +21,7 @@
             </ul>
             <div class="tab-content">
                 {!! Form::model($model) !!}
-                <button class="btn btn-success pull-right mb-20 mt20" type="submit">Save</button>
+                <button class="btn btn-info pull-right mb-20 mt20" type="submit">Save</button>
                 <div class="tab-pane fade active in" id="admin_settings_general">
                     <div class="row">
                         <div class="col-md-9">
