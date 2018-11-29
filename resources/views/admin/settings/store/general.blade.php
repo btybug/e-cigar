@@ -38,140 +38,139 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
-        {!! Form::open(['class'=>'form-horizontal']) !!}
-        <div class="" id="myTabContent">
-            <div class="form-group">
-                <div class="row">
-                    <label for="text" class="control-label col-md-4">we ship to</label>
-                    <div class="col-md-8">
-                        {!! Form::text('we_ship_to',null,['class'=>'form-control']) !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
+        <div class="tab-content">
+            {!! Form::open(['class'=>'form-horizontal']) !!}
             <div class="panel panel-default">
-                <div class="panel-heading">Stock availability</div>
                 <div class="panel-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-5">
-                                <div class="row">
+                                <label for="text" class="col-md-4">we ship to</label>
+                                <div class="col-md-8">
+                                    {!! Form::text('we_ship_to',null,['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Stock availability</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <label class="col-md-4">Availabile stock status</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7">
+                                <div class="col-md-7">
 
+                                </div>
                             </div>
+
                         </div>
-
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-5">
-                                <div class="row">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <label class="col-md-4">Out of stock status</label>
                                     <div class="col-md-8">
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
+                                <div class="col-md-7">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio" checked>Enable Back order
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="optradio">Disable order
+                                    </label>
+                                </div>
                             </div>
-                            <div class="col-md-7">
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio" checked>Enable Back order
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optradio">Disable order
-                                </label>
-                            </div>
+
                         </div>
+                        <div class="form-group">
+                            <div class="row">
 
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">Currency</div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Currency</div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <label class="col-md-4">Default product price in </label>
                                     <div class="col-md-8">
                                         {!! Form::select('default_currency_code',$currencies,$p,['class'=>'form-control default-currency']) !!}
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
-                                <div class="row">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <label class="col-md-4">Other currencies </label>
                                     <div class="col-md-8">
 
                                     </div>
                                 </div>
+
                             </div>
-
                         </div>
-                    </div>
 
 
-                    <div class="form-group">
-                        <table class="table table-responsive table-striped table-bordered">
-                            <thead>
-                            <tr class="info">
-                                <th>Currency Code</th>
-                                <th>Currency Exchange Rate</th>
-                                <th>Update using Api</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-                            <tbody id="currency-list">
-                            @foreach($siteCurrencies as $currency=>$rate)
+                        <div class="form-group">
+                            <table class="table table-responsive table-striped table-bordered">
+                                <thead>
+                                <tr class="info">
+                                    <th>Currency Code</th>
+                                    <th>Currency Exchange Rate</th>
+                                    <th>Update using Api</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody id="currency-list">
+                                @foreach($siteCurrencies as $currency=>$rate)
+                                    <tr>
+                                        <td>
+                                            {!! Form::select('currency_code[]',$currencies,$currency,['class'=>'form-control']) !!}
+
+                                        </td>
+                                        <td>
+                                            <input type="text" name="rate[]"  value="{!! $rate !!}" class="form-control">
+                                        </td>
+                                        <td class="w-10">
+                                            <button type="button" class="btn btn-primary">Get live rate</button>
+                                        </td>
+                                        <td class="text-right w-5">
+                                            <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
+                                </tbody>
+                                <tfoot>
                                 <tr>
-                                    <td>
-                                        {!! Form::select('currency_code[]',$currencies,$currency,['class'=>'form-control']) !!}
-
-                                    </td>
-                                    <td>
-                                        <input type="text" name="rate[]"  value="{!! $rate !!}" class="form-control">
-                                    </td>
-                                    <td class="w-10">
-                                        <button type="button" class="btn btn-primary">Get live rate</button>
-                                    </td>
-                                    <td class="text-right w-5">
-                                        <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
+                                    <td colspan="4" class="text-right">
+                                        <button type="button" class="btn btn-info btn-sm " id="add-more-currency"><i
+                                                    class="fa fa-plus"></i></button>
                                     </td>
                                 </tr>
-                            @endforeach
+                                </tfoot>
 
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colspan="4" class="text-right">
-                                    <button type="button" class="btn btn-info btn-sm " id="add-more-currency"><i
-                                                class="fa fa-plus"></i></button>
-                                </td>
-                            </tr>
-                            </tfoot>
-
-                        </table>
-                        <div>
-                            <button type="submit" class="btn btn-info">Update All exchange rates</button>
+                            </table>
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-info">Update All exchange rates</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {!! Form::close() !!}
         </div>
-        {!! Form::close() !!}
-    </div>
     </div>
     <script type="template" id="currency_row">
         <tr>
