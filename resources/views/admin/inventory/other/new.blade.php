@@ -53,5 +53,53 @@
             </div>
             {!! Form::close() !!}
         </div>
+        @if($model)
+            <div class="col-md-12">
+            <h3>Order History</h3>
+                <div class="col-xs-12">
+                    <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Qty</th>
+                            <th>Reason</th>
+                            <th>Moderator</th>
+                            <th>Created At</th>
+                            <th>Updated At</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            @endif
     </div>
 @stop
+
+@section('js')
+
+@if($model)
+    <script>
+        $(function () {
+            $('#stocks-table').DataTable({
+                ajax: "{!! route('datatable_all_others',$model->item_id) !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'item_id', name: 'item_id'},
+                    {data: 'qty', name: 'qty'},
+                    {data: 'reason', name: 'reason'},
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'updated_at', name: 'updated_at'},
+                ],
+                order: [ [0, 'desc'] ]
+            });
+        });
+
+    </script>
+@endif
+
+    @stop

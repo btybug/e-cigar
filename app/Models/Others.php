@@ -26,4 +26,14 @@ class Others extends Model
     {
        return $this->belongsTo(Items::class,'item_id');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Others::class,'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Others::class,'parent_id');
+    }
 }

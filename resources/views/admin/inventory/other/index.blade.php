@@ -33,14 +33,15 @@
                 "bPaginate": true,
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'item', name: 'item'},
+                    {data: 'item_id', name: 'item_id'},
                     {data: 'qty', name: 'qty'},
                     {data: 'reason', name: 'reason'},
-                    {data: 'user', name: 'user'},
+                    {data: 'user_id', name: 'user_id'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
-                ]
+                ],
+                order: [ [0, 'desc'] ]
             });
         });
 
