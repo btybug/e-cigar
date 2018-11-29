@@ -606,7 +606,7 @@ class DatatableController extends Controller
     public function getAllOthers($id=null)
     {
         if(!$id){
-            $array=collect(json_decode(json_encode(\DB::select('SELECT MAX(id) as id FROM others GROUP BY `item_id`'),true),true))->pluck('id');
+            $array=collect(json_decode(json_encode(\DB::select('SELECT MAX(id) as id FROM others GROUP BY `group`'),true),true))->pluck('id');
             return Datatables::of(
                 Others::whereIn('id',$array)
             )
