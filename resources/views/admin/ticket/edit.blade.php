@@ -2,7 +2,7 @@
 @section('content-header')
 @stop
 @section('content')
-    <section class="content tickets-edit-page">
+    <section class="tickets-edit-page">
        <div class="panel panel-default">
            <h2 class="panel-heading mt-0">Edit ticket</h2>
           <div class="panel-body">
@@ -104,74 +104,79 @@
                   <div class="col-md-5 ">
                       {!! Form::model($model,['url' => route('admin_tickets_edit_post',$model->id), 'id' => 'ticket_form','files' => true]) !!}
                       {!! Form::hidden('id',null) !!}
-                      <div class="view-product-wall">
-                          <div class="form-group text-right">
-                              {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-                          </div>
-                          <div class="status-wall wall">
-                              <div class="row form-group">
-                                  {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
-                                  <div class="col-sm-9">
-                                      {!! Form::select('status_id',$statuses,null,
-                                                  ['class' => 'form-control','id'=> 'status']) !!}
-                                  </div>
+                      <div class="panel panel-default">
+                          <div class="panel-heading">
+                              <div class="text-right">
+                                  {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                               </div>
                           </div>
-                          <div class="tag-wall wall">
-                              <div class="row form-group">
-                                  <label class="col-sm-3 control-label" for="input-category"><span
-                                              data-toggle="tooltip" title=""
-                                              data-original-title="Choose all products under selected category.">Tags</span></label>
-                                  <div class="col-sm-9">
-                                      <input type="text" name="" value="" placeholder="Tags"
-                                             id="input-tags" class="form-control" autocomplete="off">
-                                      <ul class="dropdown-menu"></ul>
-                                      <div id="coupon-category" class="well well-sm view-coupon">
-                                          <ul class="coupon-tags-list">
-                                              @if($model && $model->tags)
-                                                  @php
-                                                      $tags = json_decode($model->tags, true);
-                                                  @endphp
 
-                                                  @foreach($tags as $tag)
-                                                      <li><span class="remove-search-tag"><i
-                                                                      class="fa fa-minus-circle"></i></span>{{ $tag }}
-                                                      </li>
-                                                  @endforeach
-                                              @endif
-                                          </ul>
-                                      </div>
-                                      {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="status-wall wall">
-                              <div class="row form-group">
-                                  {{Form::label('category_id', 'Category',['class' => 'col-sm-3'])}}
-                                  <div class="col-sm-9">
-                                      {!! Form::select('category_id',$categories,null,
-                                                  ['class' => 'form-control','id'=> 'category']) !!}
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="status-wall wall">
-                              <div class="row form-group">
-                                  {{Form::label('priority_id', 'Priority',['class' => 'col-sm-3'])}}
-                                  <div class="col-sm-9">
-                                      {!! Form::select('priority_id',$priorities,null,
-                                                  ['class' => 'form-control','id'=> 'priority']) !!}
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="status-wall wall">
-                              <div class="row form-group">
-                                  {{Form::label('staff', 'Responsible staff',['class' => 'col-sm-3'])}}
-                                  <div class="col-sm-9">
-                                      {!! Form::select('staff_id',$staff,null,
-                                                  ['class' => 'form-control','id'=> 'staff']) !!}
-                                  </div>
-                              </div>
-                          </div>
+                         <div class="panel-body">
+                             <div class="status-wall wall">
+                                 <div class="row form-group">
+                                     {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
+                                     <div class="col-sm-9">
+                                         {!! Form::select('status_id',$statuses,null,
+                                                     ['class' => 'form-control','id'=> 'status']) !!}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="tag-wall wall">
+                                 <div class="row form-group">
+                                     <label class="col-sm-3 control-label" for="input-category"><span
+                                                 data-toggle="tooltip" title=""
+                                                 data-original-title="Choose all products under selected category.">Tags</span></label>
+                                     <div class="col-sm-9">
+                                         <input type="text" name="" value="" placeholder="Tags"
+                                                id="input-tags" class="form-control" autocomplete="off">
+                                         <ul class="dropdown-menu"></ul>
+                                         <div id="coupon-category" class="well well-sm view-coupon">
+                                             <ul class="coupon-tags-list">
+                                                 @if($model && $model->tags)
+                                                     @php
+                                                         $tags = json_decode($model->tags, true);
+                                                     @endphp
+
+                                                     @foreach($tags as $tag)
+                                                         <li><span class="remove-search-tag"><i
+                                                                         class="fa fa-minus-circle"></i></span>{{ $tag }}
+                                                         </li>
+                                                     @endforeach
+                                                 @endif
+                                             </ul>
+                                         </div>
+                                         {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="status-wall wall">
+                                 <div class="row form-group">
+                                     {{Form::label('category_id', 'Category',['class' => 'col-sm-3'])}}
+                                     <div class="col-sm-9">
+                                         {!! Form::select('category_id',$categories,null,
+                                                     ['class' => 'form-control','id'=> 'category']) !!}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="status-wall wall">
+                                 <div class="row form-group">
+                                     {{Form::label('priority_id', 'Priority',['class' => 'col-sm-3'])}}
+                                     <div class="col-sm-9">
+                                         {!! Form::select('priority_id',$priorities,null,
+                                                     ['class' => 'form-control','id'=> 'priority']) !!}
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="status-wall wall">
+                                 <div class="row form-group">
+                                     {{Form::label('staff', 'Responsible staff',['class' => 'col-sm-3'])}}
+                                     <div class="col-sm-9">
+                                         {!! Form::select('staff_id',$staff,null,
+                                                     ['class' => 'form-control','id'=> 'staff']) !!}
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
                       </div>
                       {!! Form::close() !!}
                   </div>

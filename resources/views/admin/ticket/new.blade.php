@@ -4,15 +4,21 @@
 @stop
 
 @section('content')
-    <section class="content stock-page">
+    <div class="stock-page">
+        {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
+        {!! Form::hidden('id',null) !!}
        <div class="panel panel-default">
-           <h2 class="panel-heading mt-0">New ticket</h2>
-           <div class="panel-body">
-               {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
-               {!! Form::hidden('id',null) !!}
-               <div class="text-right btn-save mb-20">
+
+           <div class="panel-heading clearfix">
+               <h2 class="mt-0 pull-left">New ticket</h2>
+
+               <div class="pull-right btn-save">
                    {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                </div>
+           </div>
+
+           <div class="panel-body">
+
                <div class="row sortable-panels">
                    <div class="col-md-7 ">
                        <div class="form-group">
@@ -117,11 +123,11 @@
                        </div>
                    </div>
                </div>
-               {!! Form::close() !!}
            </div>
-
        </div>
-    </section>
+        {!! Form::close() !!}
+
+    </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">

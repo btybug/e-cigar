@@ -4,17 +4,18 @@
 @stop
 
 @section('content')
-    <section class="content stock-page">
-
-       <div class="panel panel-default">
-           <h2 class="panel-heading mt-0">Settings</h2>
+    <div class="stock-page">
+        {!! Form::model($settings,[]) !!}
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h2 class="m-0 pull-left">Settings</h2>
+                <div class="text-right btn-save pull-right">
+                    <a href="{!! route('admin_tickets') !!}" class="btn btn-action btn-default">Back</a>
+                    {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                </div>
+            </div>
 
            <div class="panel-body">
-               {!! Form::model($settings,[]) !!}
-               <div class="text-right btn-save">
-                   <a href="{!! route('admin_tickets') !!}" class="btn btn-action btn-default">Back</a>
-                   {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-               </div>
                <div class="row sortable-panels">
                    <div class="col-md-7 ">
                        <div class="form-group">
@@ -35,10 +36,11 @@
                        </div>
                    </div>
                </div>
-               {!! Form::close() !!}
            </div>
        </div>
-    </section>
+        {!! Form::close() !!}
+
+    </div>
 @stop
 @section('css')
 
