@@ -37,21 +37,19 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
-        <div class="" id="myTabContent">
-            <div class="" aria-labelledby="general-tab">
-                <div id="content">
-                    <div class="page-header">
-                        <div class="container-fluid">
-                            <div class="pull-right">
-                                <a href="{!! route('admin_settings_geo_zones_new') !!}" class="btn btn-primary">
-                                    <i class="fa fa-plus"></i>
-                                </a>
-                            </div>
-                            <h1>Geo Zones</h1>
-                        </div>
+        <div id="content">
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    <h2 class="pull-left m-0">Geo Zones</h2>
+                    <div class="pull-right">
+                        <a href="{!! route('admin_settings_geo_zones_new') !!}" class="btn btn-primary">
+                            <i class="fa fa-plus"></i>
+                        </a>
                     </div>
-                    <div class="container-fluid">
-                        <div class="panel panel-default">
+                </div>
+            </div>
+
+            <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title"><i class="fa fa-list"></i> Geo Zone List</h3>
                             </div>
@@ -70,9 +68,6 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @stop
