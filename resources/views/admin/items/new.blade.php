@@ -187,11 +187,11 @@
                                                             </div>
                                                         </div>
                                     </div>
-                                    <div id="downloads" class="tabe-pane fade">
+                                    <div id="downloads" class="tab-pane fade">
                                         {!! media_button('downloads',$model,true) !!}
                                     </div>
-                                    <div id="settings" class="tabe-pane fade"></div>
-                                    <div id="management" class="tabe-pane fade">
+                                    <div id="settings" class="tab-pane fade"></div>
+                                    <div id="management" class="tab-pane fade">
                                         <div class="panel panel-default">
                                             <div class="panel-heading">
                                                 <div class="row">
@@ -238,7 +238,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="specifications" class="tabe-pane fade">
+                                    <div id="specifications" class="tab-pane fade">
                                         <div class="panel panel-default">
                                             <div class="panel-body" id="v-option-form">
                                                     <table class="table table-responsive table--store-settings">

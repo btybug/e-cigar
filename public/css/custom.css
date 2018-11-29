@@ -692,14 +692,6 @@
     border: none;
 }
 
-.media-list-tab-content .fade {
-    display: none;
-}
-
-.media-list-tab-content .fade.in {
-    display: block;
-}
-
 .media-list li.active a {
     background-color: #000 !important;
     color: white !important;
