@@ -46,8 +46,6 @@ class StockService
             foreach ($data as $datum) {
                 $attr_id = $datum['attributes_id'];
                 $ids = $datum['options'];
-
-                $ids = explode(',',$ids);
                 $result[] = ['attributes_id' => $attr_id];
                 if(count($ids)){
                     foreach ($ids as $id){

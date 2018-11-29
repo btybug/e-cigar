@@ -10,7 +10,7 @@
         {!! Form::text("variations[$uniqueID][name]",(isset($item['name'])) ? $item['name'] : null,['class' => 'form-control']) !!}
         {!! Form::hidden("variations[$uniqueID][id]",(isset($item['id'])) ? $item['id'] : null) !!}
     </td>
-    <td>
+    <td class="variation-options-place">
         @if(count($item['options']))
             @if(isset($model) && $model)
                 @foreach($item['options'] as $items)
@@ -20,7 +20,7 @@
                         $selectedValue = $items['options_id'];
                         $optionData = $model->type_attrs_pivot()->where('attributes_id',$items['attributes_id'])->get();
                     @endphp
-                    <select name="variations[{{ $uniqueID }}][options][{{ $items['attributes_id'] }}][options_id]" class="form-control">
+                    <select data-attribute_id="{{ $items['attributes_id'] }}" name="variations[{{ $uniqueID }}][options][{{ $items['attributes_id'] }}][options_id]" class="form-control">
                         @foreach($optionData as $option)
                                 <option {{ ($selectedValue == $option->sticker_id) ? 'selected' : '' }} value="{{ $option->sticker_id }}">{{ \App\Models\Stickers::getById($option->sticker_id) }}</option>
                         @endforeach
@@ -37,7 +37,7 @@
                         @php $selectedValue = $model['options'][$loop->index ]['options_id']; @endphp
                     @endif
                     {{--<label>{{ \App\Models\Attributes::getById($key) }}</label>--}}
-                    <select name="variations[{{ $uniqueID }}][options][{{ $key }}][options_id]" class="form-control">
+                    <select data-attribute_id="{{ $key }}" name="variations[{{ $uniqueID }}][options][{{ $key }}][options_id]" class="form-control">
                         @foreach($items as $option)
                             <option {{ ($selectedValue == $option) ? 'selected' : '' }} value="{{ $option }}">{{ \App\Models\Stickers::getById($option) }}</option>
                         @endforeach

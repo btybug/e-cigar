@@ -344,11 +344,11 @@
                                         </thead>
 
                                         <tbody class="v-options-list get-all-attributes-tab">
-                                            @if($model)
-                                                @foreach($model->type_attrs as $typeAttr)
-                                                    @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
-                                                @endforeach
-                                            @endif
+                                        @if($model)
+                                            @foreach($model->type_attrs as $typeAttr)
+                                                @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
+                                            @endforeach
+                                        @endif
                                         </tbody>
 
                                         <tfoot>
@@ -373,9 +373,10 @@
                                             <div class="col-md-12">
                                                 <div class="sipmle-product-wall product-wall {{ ($model && $model->type =='simple_product') ? '' : 'hide' }}">
                                                     @php
-                                                    $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
+                                                        $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
                                                     @endphp
-                                                    <table class="table table-style table-bordered" cellspacing="0" width="100%">
+                                                    <table class="table table-style table-bordered" cellspacing="0"
+                                                           width="100%">
                                                         <thead>
                                                         <tr>
                                                             <th>Name</th>
@@ -406,38 +407,39 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="basic-center basic-wall">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
-                                                        <div class="col-md-12">
-                                                            <div class="col-md-6">
-                                                                Price : {!! Form::text("package_variation_price",
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-6">
+                                                            Price : {!! Form::text("package_variation_price",
                                                                 ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <button class="btn btn-primary pull-right add-package-item" type="button">
-                                                                    <i class="fa fa-plus"></i> Add new</button>
-                                                            </div>
                                                         </div>
-                                                        <table class="table table-style table-bordered" cellspacing="0" width="100%">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>SKU</th>
-                                                                <th>Qty</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody class="package-variation-box">
-                                                                @if($model && count($model->variations))
-                                                                    @foreach($model->variations as $package_variation)
-                                                                        @include('admin.inventory._partials.variation_package_item')
-                                                                    @endforeach
-                                                                @endif
-                                                            </tbody>
-                                                        </table>
+                                                        <div class="col-md-6">
+                                                            <button class="btn btn-primary pull-right add-package-item"
+                                                                    type="button">
+                                                                <i class="fa fa-plus"></i> Add new
+                                                            </button>
+                                                        </div>
                                                     </div>
+                                                    <table class="table table-style table-bordered" cellspacing="0"
+                                                           width="100%">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>SKU</th>
+                                                            <th>Qty</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody class="package-variation-box">
+                                                        @if($model && count($model->variations))
+                                                            @foreach($model->variations as $package_variation)
+                                                                @include('admin.inventory._partials.variation_package_item')
+                                                            @endforeach
+                                                        @endif
+                                                        </tbody>
+                                                    </table>
                                                 </div>
                                             </div>
                                         </div>
@@ -540,9 +542,9 @@
                                                     </thead>
                                                     <tbody class="all-list-attrs-extra">
                                                     {{--@if($model)--}}
-                                                        {{--@foreach($model->variations as $variation)--}}
-                                                            {{--@include('admin.inventory._partials.variation_item',['item' => $variation])--}}
-                                                        {{--@endforeach--}}
+                                                    {{--@foreach($model->variations as $variation)--}}
+                                                    {{--@include('admin.inventory._partials.variation_item',['item' => $variation])--}}
+                                                    {{--@endforeach--}}
                                                     {{--@endif--}}
                                                     </tbody>
                                                 </table>
@@ -864,8 +866,7 @@
     </div><!-- /.modal -->
 @stop
 @section('css')
-    <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
-    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
@@ -877,19 +878,20 @@
     </style>
 @stop
 @section('js')
-    <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
-    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
-            $("body").on('click','.add-package-item',function () {
+            $(".tag-input-v").select2({ width: '100%' });
+
+            $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
                     "/admin/inventory/stock/add-package-variation",
                     {},
-                    function(res) {
+                    function (res) {
                         if (!res.error) {
                             $('.package-variation-box').append(res.html)
                         }
@@ -897,39 +899,53 @@
                 );
             })
 
-            $("body").on('click','.submit-form',function () {
+            $("body").on('click', '.submit-form', function () {
                 $(".stock-form").submit();
             })
 
             function addAttributeToJSONNew($_this) {
                 let id = $_this.find('.select-attribute').val();
-
                 let inputOptions = $_this.find(`.input-items-value`);
-
-
                 let inputOptionsValue = inputOptions.val();
-                attributesJson[id] = inputOptionsValue.split(",");
-
-                console.log(attributesJson);
+                if(inputOptionsValue.length){
+                    attributesJson[id] = inputOptionsValue;
+                }
             }
 
-            $('.tag-input-v').on("beforeItemRemove", function(event) {
-                let value = $(this).val();
-                let arrValue = value.split(",");
-                let index = arrValue.indexOf(event.item + "");
+            function changeVariationOptions() {
+                var list = $(".list-attrs-single-item");
+                attributesJson = {};
+                $(".get-all-attributes-tab")
+                    .children()
+                    .each(function () {
+                        addAttributeToJSONNew($(this))
+                    });
 
-                console.log(5465465465465, value, event.item)
-                console.info(arrValue, index,999898)
-                let input = $(event.target)
-                    .closest(".v-options-list-item")
-                    .find(".input-items-value");
-                let inputValue = input.val();
-                let arr = inputValue.split(",");
-//
-                arr.splice(index, 1);
-                input.val(arr.join());
-                return true;
-            });
+                list.each(function (i,e) {
+                    var box = $(e).find('.variation-options-place');
+                    var options = box.find('select');
+                    box.empty();
+                    var objData = {};
+                    options.each(function (i,e) {
+                        var attrId = $(e).data("attribute_id");
+                        objData[attrId] = $(e).val();
+                    });
+                    var variation = $(e).data('variation');
+                    AjaxCall(
+                        "/admin/inventory/stock/render-variation-new-options",
+                        {variation : variation, objData : objData, attributesJson: attributesJson},
+                        function (res) {
+                            if (!res.error) {
+                                box.append(res.html)
+                            }
+                        }
+                    );
+
+                })
+            }
+
+
+            $("body").on("change",".tag-input-v", function (e) { changeVariationOptions() });
 
             $('body').on('change', '#variation-product-select', function () {
                 var value = $(this).val();
@@ -944,12 +960,12 @@
                     $('.table-product-variotion').addClass('hide');
                     $('.packge-product-wall').addClass('hide');
 
-                }else if(value == 'package_product'){
+                } else if (value == 'package_product') {
                     $('.packge-product-wall').removeClass('hide');
                     $('.sipmle-product-wall').addClass('hide');
                     $('.variation-product-wall').addClass('hide');
                     $('.table-product-variotion').addClass('hide');
-                }else{
+                } else {
                     $('.packge-product-wall').addClass('hide');
                     $('.sipmle-product-wall').addClass('hide');
                     $('.variation-product-wall').addClass('hide');
@@ -959,16 +975,15 @@
 
             $('body').on('click', '.add-variation-row', function () {
                 attributesJson = {};
-
                 $(".get-all-attributes-tab")
                     .children()
-                    .each(function() {
+                    .each(function () {
                         addAttributeToJSONNew($(this))
                     });
                 AjaxCall(
                     "/admin/inventory/stock/add-variation",
-                    {options : attributesJson},
-                    function(res) {
+                    {options: attributesJson},
+                    function (res) {
                         if (!res.error) {
                             $('#variations-table .all-list-attrs').append(res.html)
                         }
@@ -995,39 +1010,6 @@
                 });
 
                 return indexed_array;
-            }
-
-            var elementList = $('.select-attribute');
-//
-            console.log(elementList);
-//
-            for (var i = 0; i < elementList.length; i++) {
-                var ele = elementList[i];
-                console.log($(ele),78545511);
-                if ($(ele).val() != '') {
-                    $('.tag-input-v').tagsinput({
-                        typeaheadjs: {
-                            name: 'countries',
-                            displayKey: 'name',
-                            valueKey: 'name',
-                            source: $.post('/admin/inventory/attributes/get-options-by-id/'+$(ele).val())
-                        },
-
-                        freeInput: false
-                    });
-
-//                    makeSearchItem({
-//                        input:
-//                        ".v-input-" + $(ele).data("uid"),
-//                        name: "name",
-//                        url:
-//                        "/admin/inventory/attributes/get-options-by-id/" +
-//                        $(ele).val(),
-//                        title: "Attributes",
-//                        inputValues: "#tags-names",
-//                        containerForAppend: null
-//                    });
-                }
             }
 
             $("body").on('click', '.option-elm-attributes', function () {
@@ -1066,6 +1048,7 @@
 
             $("body").on('click', '.delete-v-option', function () {
                 $(this).closest('tr').remove();
+                changeVariationOptions();
             });
 
             $("body").on('click', '.remove-extra-option', function () {
@@ -1077,7 +1060,7 @@
                 AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
-                        $(".tag-input-v").tagsinput();
+                        $(".tag-input-v").select2({ width: '100%' });
                     }
                 });
             });
@@ -1089,18 +1072,8 @@
                     AjaxCall("/admin/inventory/stock/get-option-by-id", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-attribute[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
-                            $(".tag-input-v").tagsinput();
-                            makeSearchItem({
-                                input:
-                                ".v-input-" + vID,
-                                name: "name",
-                                url:
-                                "/admin/inventory/attributes/get-options-by-id/" +
-                                value,
-                                title: "Attributes",
-                                inputValues: "#tags-names",
-                                containerForAppend: null
-                            });
+                            $(".tag-input-v").select2({ width: '100%' });
+                            changeVariationOptions();
                         }
                     });
                 }

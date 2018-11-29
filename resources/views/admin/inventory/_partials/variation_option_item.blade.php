@@ -12,22 +12,21 @@
     </td>
     <td class="w-70">
         @php
+            $type_options = [];
+            $type_optionArray = [];
             if(isset($noAjax)){
                 if(isset($selected) && $selected && $model){
-                    $type_options = implode(',',$model->type_attrs_pivot()->where('attributes_id',$selected->id)->pluck('sticker_id','sticker_id')->all());
-                    $type_options_name = implode(',',$model->type_attrs_pivot()->with('sticker')->where('attributes_id',$selected->id)->get()->pluck('sticker.name')->all());
-                }else{
-                    $type_options = '';
-                    $type_options_name = '';
+                    $type_options = $model->type_attrs_pivot()->with('sticker')->where('attributes_id',$selected->id)->get()->pluck('sticker.id')->all();
+                    $type_optionArray = $selected->stickers()->get()->pluck('name','id')->all();
                 }
             }else{
-                $type_options = (isset($selected) && $selected) ? implode(',',$selected->stickers->pluck('id')->all()) : '';
-                $type_options_name = (isset($selected) && $selected) ? implode(',',$selected->stickers->pluck('name')->all()) : '';
+                $type_options = (isset($selected) && $selected) ? $selected->stickers->pluck('id')->all() : [];
+                $type_optionArray = (isset($selected) && $selected) ? $selected->stickers->pluck('name','id')->all() : [];;
             }
+
         @endphp
-        <input data-role="tagsinput" class="tag-input-v v-input-{{ $uniqueID }}" value="{{ $type_options_name }}">
-        <input type="hidden" class="input-items-value" name="type_attributes[{{ $uniqueID }}][options]"
-               value="{{ $type_options }}">
+        {{--<input  class="tag-input-v v-input-{{ $uniqueID }}" value="{{ $type_options_name }}">--}}
+        {!! Form::select("type_attributes[$uniqueID][options][]",$type_optionArray,$type_options,['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
     </td>
     <td colspan="2" class="text-right">
         <button type="button" class="btn btn-danger"><i

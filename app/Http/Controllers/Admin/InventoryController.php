@@ -81,6 +81,7 @@ class InventoryController extends Controller
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
 
+
         if($data['type'] == 'variation_product'){
             $this->stockService->saveVariations($stock, $request->get('variations', []));
         }elseif ($data['type'] == 'simple_product'){
@@ -88,6 +89,7 @@ class InventoryController extends Controller
         }elseif ($data['type'] == 'package_product'){
             $this->stockService->savePackageVariation($stock, $request->get('package_variation', []),$request->get('package_variation_price'));
         }
+
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->attrs()->sync($request->get('attributes'));
@@ -205,5 +207,15 @@ class InventoryController extends Controller
     public function addExtraOptionVariations (Request $request)
     {
         dd($request->all());
+    }
+
+    public function postRenderVariationNewOptions(Request $request)
+    {
+        $attributesJson = $request->get('attributesJson');
+        $objData = $request->get('objData');
+        $variation = $request->get('variation');
+        $html = \View("admin.inventory._partials.variation_item_render_new_options",compact(['attributesJson','objData','variation']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 }
