@@ -3,50 +3,57 @@
 
 @stop
 @section('content')
-    <div class="container">
-        {!! Form::model($model,['class'=>'form-horizontal'])!!}
-            <div class="form-group">
-                <label for="text" class="control-label col-xs-4">Payment Name</label>
-                <div class="col-xs-8">
-                    {!! Form::text('stripe_payment_name',null,['class'=>'form-control']) !!}
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2 class="m-0">Stripe</h2></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    {!! Form::model($model,['class'=>''])!!}
+                    <div class="form-group row">
+                        <label for="text" class="control-label col-sm-3">Payment Name</label>
+                        <div class="col-sm-9">
+                            {!! Form::text('stripe_payment_name',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text" class="control-label col-sm-3">Description</label>
+                        <div class="col-sm-9">
+                            {!! Form::textarea('description',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text" class="control-label col-sm-3">Image</label>
+                        <div class="col-sm-9">
+                            {!! media_button('stripe_image',$model) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text1" class="control-label col-sm-3">Icon</label>
+                        <div class="col-sm-9">
+                            {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text" class="control-label col-sm-3">Stripe Key</label>
+                        <div class="col-sm-9">
+                            {!! Form::text('stripe_key',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="text1" class="control-label col-sm-3">Stripe Secret</label>
+                        <div class="col-sm-9">
+                            {!! Form::text('stripe_secret',null,['class'=>'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
+                            <button  type="submit" class="btn btn-info">Save</button>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
                 </div>
-            </div>
-        <div class="form-group">
-            <label for="text" class="control-label col-xs-4">Description</label>
-            <div class="col-xs-8">
-                {!! Form::textarea('description',null,['class'=>'form-control']) !!}
             </div>
         </div>
-        <div class="form-group">
-                <label for="text" class="control-label col-xs-4">Image</label>
-                <div class="col-xs-8">
-                    {!! media_button('stripe_image',$model) !!}
-                </div>
-            </div>
-        <div class="form-group">
-            <label for="text1" class="control-label col-xs-4">Icon</label>
-            <div class="col-xs-8">
-                {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
-            </div>
-        </div>
-        <div class="form-group">
-                <label for="text" class="control-label col-xs-4">Stripe Key</label>
-                <div class="col-xs-8">
-                    {!! Form::text('stripe_key',null,['class'=>'form-control']) !!}
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="text1" class="control-label col-xs-4">Stripe Secret</label>
-                <div class="col-xs-8">
-                    {!! Form::text('stripe_secret',null,['class'=>'form-control']) !!}
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-xs-offset-4 col-xs-8">
-                    <button  type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
-        {!! Form::close() !!}
     </div>
 @stop
 
