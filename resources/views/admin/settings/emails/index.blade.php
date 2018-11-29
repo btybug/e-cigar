@@ -3,26 +3,30 @@
 
 @stop
 @section('content')
-    <div class="row">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="m-0 pull-left">Emails</h2>
+        <div class="text-right">
+            <a class="btn btn-primary" href="{!! route('admin_mail_create_templates') !!}">Create Email</a>
+        </div>
 
-        <div class="col-xs-12">
-            <div class=""><h2>Emails</h2></div>
-        </div>
-        <div class="col-xs-12 text-right"><a class="btn btn-primary" href="{!! route('admin_mail_create_templates') !!}">Create Email</a></div>
-        <div class="col-xs-12">
-            <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Slug</th>
-                    <th>Is Active</th>
-                    <th>Created At</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
     </div>
+    <div class="panel-body">
+        <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Slug</th>
+                <th>Is Active</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+
 @stop
 @section('js')
     <script>
