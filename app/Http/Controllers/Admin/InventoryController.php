@@ -58,7 +58,9 @@ class InventoryController extends Controller
 
     public function getStockEdit($id)
     {
-        $model = Stock::findOrFail($id);
+        $model = Stock::where('is_promotion',false)->where('id',$id)->first();
+        if(! $model) abort(404);
+
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);

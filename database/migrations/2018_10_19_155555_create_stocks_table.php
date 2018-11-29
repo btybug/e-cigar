@@ -17,6 +17,7 @@ class CreateStocksTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('is_promotion')->default(0);
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->text('other_images')->nullable();
