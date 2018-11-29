@@ -38,10 +38,7 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
-        <div class="" id="myTabContent">
-            <div class="text-right mb-10">
-                <a href="{!! route('admin_settings_store_gifts_manage') !!}" class="btn btn-primary">Create new</a>
-            </div>
+        <div>
             <div class="" aria-labelledby="general-tab">
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
@@ -54,8 +51,12 @@
                                class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                         </li>
                     </ul>
+                    <div class="text-right">
+                        <a href="{!! route('admin_settings_store_gifts_manage') !!}" class="btn btn-primary">Create new</a>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 @stop

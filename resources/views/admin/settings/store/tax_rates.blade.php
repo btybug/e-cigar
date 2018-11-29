@@ -38,11 +38,8 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
         </ul>
-        <div class="text-right mb-10">
-            <a href="{!! route('get_admin_settings_tax_create_or_update') !!}" class="btn btn-primary">Create new</a>
-        </div>
-        <div class="" id="myTabContent">
 
+        <div>
             <div class="" aria-labelledby="general-tab">
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
@@ -58,6 +55,9 @@
                                 </li>
                             @endforeach
                     </ul>
+                    <div class="text-right">
+                        <a href="{!! route('get_admin_settings_tax_create_or_update') !!}" class="btn btn-primary">Create new</a>
+                    </div>
                 </div>
             </div>
         </div>
