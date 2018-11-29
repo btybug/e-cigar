@@ -193,6 +193,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
         Route::post('/add-variation', 'Admin\InventoryController@addVariation')->name('admin_stock_variation_add');
+        Route::post('/add-package-variation', 'Admin\InventoryController@addPackageVariation')->name('admin_stock_package_variation_add');
         Route::post('/edit-variation', 'Admin\InventoryController@editVariation')->name('admin_stock_variation_add');
         Route::post('/get-option-by-id', 'Admin\InventoryController@getOptionById')->name('admin_stock_variation_get_option');
 

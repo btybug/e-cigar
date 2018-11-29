@@ -118,6 +118,43 @@ class StockService
         }
     }
 
+    public function savePackageVariation ($stock,array $data = [],$price)
+    {
+        if(count($data)){
+            $deletableArray = [];
+            foreach ($data as $variation_id => $data) {
+                $newData = $data;
+                $newData['stock_id'] = $stock->id;
+                $newData['price'] = $price;
+
+                if(isset($newData['id'])){
+                    $variation = StockVariation::find($newData['id']);
+                    $variation->update($newData);
+                }else{
+                    $variation = StockVariation::create($newData);
+                }
+                $deletableArray[] = $variation->id;
+            }
+
+            $stock->variations()->whereNotIn('id',$deletableArray)->delete();
+        }
+    }
+
+    public function saveSingleVariation ($stock,array $data = [])
+    {
+        if(count($data)) {
+            $data['stock_id'] = $stock->id;
+            if (isset($data['id'])) {
+                $variation = StockVariation::find($data['id']);
+                $variation->update($data);
+            } else {
+                $variation = StockVariation::create($data);
+            }
+
+            $stock->variations()->where('id','!=',$variation->id)->delete();
+        }
+    }
+
     public function saveProductVariations ($product,array $data = [], array $options = [])
     {
         $product->variations()->delete();

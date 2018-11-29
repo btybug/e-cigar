@@ -75,12 +75,19 @@ class InventoryController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'variations',
+        $data = $request->except('_token', 'translatable', 'attributes', 'options',
+            'variations','variation_single','package_variation_price','package_variation',
             'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
 
-        $this->stockService->saveVariations($stock, $request->get('variations', []));
+        if($data['type'] == 'variation_product'){
+            $this->stockService->saveVariations($stock, $request->get('variations', []));
+        }elseif ($data['type'] == 'simple_product'){
+            $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
+        }elseif ($data['type'] == 'package_product'){
+            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []),$request->get('package_variation_price'));
+        }
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->attrs()->sync($request->get('attributes'));
@@ -159,6 +166,14 @@ class InventoryController extends Controller
         $item = $request->except('_token');
         $stockItems = Items::all()->pluck('sku','sku')->all();
         $html = \View('admin.inventory._partials.variation_item', compact(['item','stockItems']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function addPackageVariation(Request $request)
+    {
+        $stockItems = Items::all()->pluck('sku','sku')->all();
+        $package_variation = null;
+        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation','stockItems']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

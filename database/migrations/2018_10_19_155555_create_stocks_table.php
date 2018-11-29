@@ -22,7 +22,9 @@ class CreateStocksTable extends Migration
             $table->text('other_images')->nullable();
             $table->text('videos')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('id')
+                ->on('users')->onDelete('CASCADE');
         });
     }
 

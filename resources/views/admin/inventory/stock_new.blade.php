@@ -325,7 +325,9 @@
                                     <div class="row">
                                         <label class="col-md-1">Product Type</label>
                                         <div class="col-md-3">
-                                            {!! Form::select('type',['' => 'Select','simple_product'=>'Simple Product','variation_product' => 'Variation Product'],null,
+                                            {!! Form::select('type',['' => 'Select','simple_product'=>'Simple Product',
+                                            'variation_product' => 'Variation Product','package_product' => 'Package product'
+                                            ],null,
                                             ['id'=>'variation-product-select','class' => 'form-control']) !!}
                                         </div>
                                     </div>
@@ -370,6 +372,9 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="sipmle-product-wall product-wall {{ ($model && $model->type =='simple_product') ? '' : 'hide' }}">
+                                                    @php
+                                                    $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
+                                                    @endphp
                                                     <table class="table table-style table-bordered" cellspacing="0" width="100%">
                                                         <thead>
                                                         <tr>
@@ -377,34 +382,62 @@
                                                             <th>SKU</th>
                                                             <th>Qty</th>
                                                             <th>Price</th>
-                                                            <th>Actions</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody>
                                                         <tr>
                                                             <td>
-                                                                <input type="text" class="form-control">
+                                                                {!! Form::text("variation_single[name]",($single_variation) ? $single_variation->name : null,['class' => 'form-control']) !!}
+                                                                {!! Form::hidden("variation_single[id]",($single_variation) ? $single_variation->id : null) !!}
                                                             </td>
                                                             <td>
-                                                                <select name="" id="" class="form-control">
-                                                                    <option value="">1</option>
-                                                                    <option value="">2</option>
-                                                                </select>
+                                                                {!! Form::select("variation_single[variation_id]",$stockItems,($single_variation) ? $single_variation->variation_id : null,['class' => 'form-control']) !!}
                                                             </td>
                                                             <td>
-                                                                99
+                                                                {!! (isset($item['qty'])) ? $item['qty'] : 0 !!}
+                                                                {!! Form::hidden("variation_single[qty]",($single_variation) ? $single_variation->qty : null) !!}
                                                             </td>
                                                             <td class="w-5">
-                                                                <input type="text" class="form-control">
-                                                            </td>
-                                                            <td class="w-10">
-                                                                <a class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
-                                                                <a class="btn btn-warning"><i class="fa fa-pencil"></i></a>
+                                                                {!! Form::text("variation_single[price]",($single_variation) ? $single_variation->price : null,['class' => 'form-control']) !!}
                                                             </td>
                                                         </tr>
-
                                                         </tbody>
                                                     </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="basic-center basic-wall">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                Price : {!! Form::text("package_variation_price",
+                                                                ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <button class="btn btn-primary pull-right add-package-item" type="button">
+                                                                    <i class="fa fa-plus"></i> Add new</button>
+                                                            </div>
+                                                        </div>
+                                                        <table class="table table-style table-bordered" cellspacing="0" width="100%">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>SKU</th>
+                                                                <th>Qty</th>
+                                                                <th>Actions</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="package-variation-box">
+                                                                @if($model && count($model->variations))
+                                                                    @foreach($model->variations as $package_variation)
+                                                                        @include('admin.inventory._partials.variation_package_item')
+                                                                    @endforeach
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -738,7 +771,7 @@
                 </div>
                 <div class="modal-body">
                     {!! Form::open(['id' => 'v-option-form']) !!}
-                    @include("admin.inventory._partials.variation_option_form")
+
                     {!! Form::close() !!}
                 </div>
                 <div class="modal-footer">
@@ -852,6 +885,18 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
+            $("body").on('click','.add-package-item',function () {
+                AjaxCall(
+                    "/admin/inventory/stock/add-package-variation",
+                    {},
+                    function(res) {
+                        if (!res.error) {
+                            $('.package-variation-box').append(res.html)
+                        }
+                    }
+                );
+            })
+
             $("body").on('click','.submit-form',function () {
                 $(".stock-form").submit();
             })
@@ -890,19 +935,28 @@
                 var value = $(this).val();
                 if (value == 'variation_product') {
                     $('.sipmle-product-wall').addClass('hide');
+                    $('.packge-product-wall').addClass('hide');
                     $('.variation-product-wall').removeClass('hide');
                     $('.table-product-variotion').removeClass('hide');
                 } else if (value == 'simple_product') {
                     $('.sipmle-product-wall').removeClass('hide');
                     $('.variation-product-wall').addClass('hide');
                     $('.table-product-variotion').addClass('hide');
+                    $('.packge-product-wall').addClass('hide');
+
+                }else if(value == 'package_product'){
+                    $('.packge-product-wall').removeClass('hide');
+                    $('.sipmle-product-wall').addClass('hide');
+                    $('.variation-product-wall').addClass('hide');
+                    $('.table-product-variotion').addClass('hide');
                 }else{
+                    $('.packge-product-wall').addClass('hide');
                     $('.sipmle-product-wall').addClass('hide');
                     $('.variation-product-wall').addClass('hide');
                     $('.table-product-variotion').addClass('hide');
                 }
-
             });
+
             $('body').on('click', '.add-variation-row', function () {
                 attributesJson = {};
 
@@ -943,13 +997,25 @@
                 return indexed_array;
             }
 
-//            var elementList = $('.select-attribute');
+            var elementList = $('.select-attribute');
 //
-//            console.log(elementList);
+            console.log(elementList);
 //
-//            for (var i = 0; i < elementList.length; i++) {
-//                var ele = elementList[i];
-//                if ($(ele).val() != '') {
+            for (var i = 0; i < elementList.length; i++) {
+                var ele = elementList[i];
+                console.log($(ele),78545511);
+                if ($(ele).val() != '') {
+                    $('.tag-input-v').tagsinput({
+                        typeaheadjs: {
+                            name: 'countries',
+                            displayKey: 'name',
+                            valueKey: 'name',
+                            source: $.post('/admin/inventory/attributes/get-options-by-id/'+$(ele).val())
+                        },
+
+                        freeInput: false
+                    });
+
 //                    makeSearchItem({
 //                        input:
 //                        ".v-input-" + $(ele).data("uid"),
@@ -961,8 +1027,8 @@
 //                        inputValues: "#tags-names",
 //                        containerForAppend: null
 //                    });
-//                }
-//            }
+                }
+            }
 
             $("body").on('click', '.option-elm-attributes', function () {
                 var data = $(this).find('.extra-item-data').val();
