@@ -7,7 +7,7 @@
         <div class="panel-heading"><h2 class="m-0">Cash Payment</h2></div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="panel-body">
                         {!! Form::model($model,['class'=>''])!!}
                         <div class="form-group row">
