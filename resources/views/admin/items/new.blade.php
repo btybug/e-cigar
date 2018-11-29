@@ -13,7 +13,7 @@
                         <label for="feature_image"
                                class="control-label col-sm-4"></label>
                         <div class="col-sm-8">
-                            <button class="btn btn-success" type="submit">Save</button>
+                            <button class="btn btn-primary" type="submit">Save</button>
                         </div>
                     </div>
                 </div>
