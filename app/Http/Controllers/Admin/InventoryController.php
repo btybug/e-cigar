@@ -78,7 +78,7 @@ class InventoryController extends Controller
     public function postStock(ProductsRequest $request)
     {
         $data = $request->except('_token', 'translatable', 'attributes', 'options','promotions',
-            'variations','variation_single','package_variation_price','package_variation',
+            'variations','variation_single','package_variation_price','package_variation','extra_product',
             'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
@@ -208,9 +208,14 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function addExtraOptionVariations (Request $request)
+    public function getPromotionVariations (Request $request)
     {
-        dd($request->all());
+        $model = Stock::where('is_promotion',true)->where('id',$request->id)->first();
+        if($model){
+            $html = \View("admin.inventory._partials.extra_item",compact(['model']))->render();
+            return \Response::json(['error' => false, 'html' => $html]);
+        }
+        return \Response::json(['error' => true]);
     }
 
     public function postRenderVariationNewOptions(Request $request)

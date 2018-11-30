@@ -492,7 +492,7 @@
                                                         <li style="display: flex" data-id="{{ $promotion->id }}" class="promotion-elm"><a
                                                                     href="#">{{ $promotion->name }}</a>
                                                             <div class="buttons">
-                                                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                             </div>
                                                             <input type="hidden" name="promotions[]" value="{{ $promotion->id }}">
                                                         </li>
@@ -509,36 +509,11 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="basic-center basic-wall">
-                                        {{--<div class="row">--}}
-                                            {{--<div class="col-md-12">--}}
-                                                {{--<a href="javascript:void(0)"--}}
-                                                   {{--class="btn btn-sm btn-primary add-variation pull-right"><i--}}
-                                                            {{--class="fa fa-plus mr-10"></i>New Variation</a>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="col-md-12">--}}
+                                        <div class="row">
+                                            <div class="col-md-12 extra-variations">
 
-                                                {{--<table id="variations-table" class="table table-style table-bordered"--}}
-                                                       {{--cellspacing="0" width="100%">--}}
-                                                    {{--<thead>--}}
-                                                    {{--<tr>--}}
-                                                        {{--<th>Name</th>--}}
-                                                        {{--<th>Attributes</th>--}}
-                                                        {{--<th>SKU</th>--}}
-                                                        {{--<th>Qty</th>--}}
-                                                        {{--<th>Price</th>--}}
-                                                        {{--<th>Actions</th>--}}
-                                                    {{--</tr>--}}
-                                                    {{--</thead>--}}
-                                                    {{--<tbody class="all-list-attrs-extra">--}}
-                                                    {{--@if($model)--}}
-                                                    {{--@foreach($model->variations as $variation)--}}
-                                                    {{--@include('admin.inventory._partials.variation_item',['item' => $variation])--}}
-                                                    {{--@endforeach--}}
-                                                    {{--@endif--}}
-                                                    {{--</tbody>--}}
-                                                {{--</table>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -869,6 +844,7 @@
             box-shadow: 0 0 4px #ccc;
             margin-bottom: 10px;
             align-items: center;
+            cursor:pointer;
             -webkit-transition: 0.5s ease;
             -moz-transition: 0.5s ease;
             -ms-transition: 0.5s ease;
@@ -899,8 +875,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
+
         $(document).ready(function () {
             $(".tag-input-v").select2({ width: '100%' });
+            setTimeout(function() {
+                $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
+            },5);
 
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
@@ -1027,6 +1007,19 @@
                 return indexed_array;
             }
 
+            $("body").on('click', '.promotion-elm', function (e) {
+                if(e.target != this) return false;
+
+                var id = $(this).data('id');
+                $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
+                $(this).addClass('active');
+                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {id: id}, function (res) {
+                    if (!res.error) {
+                        $(".extra-variations").html(res.html);
+                    }
+                });
+            })
+
             $("body").on('click', '.option-elm-attributes', function () {
                 var data = $(this).find('.extra-item-data').val();
                 var options = JSON.parse(data)
@@ -1068,6 +1061,12 @@
 
             $("body").on('click', '.remove-extra-option', function () {
                 $(this).closest('li').remove();
+            });
+
+            $("body").on('click', '.remove-promotion', function () {
+                var id = $(this).closest('li').data('id')
+                $(this).closest('li').remove();
+                $(".extra-variations").find("[data-promotion-v='"+id+"']").remove();
             });
 
             $("body").on('click', '.add-new-v-option', function () {
@@ -1153,7 +1152,7 @@
                     .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
                                 href="#">${name}</a>
                                 <div class="buttons">
-                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                                 <input type="hidden" name="promotions[]" value="${id}">
                                 </li>`);
