@@ -864,6 +864,32 @@
             color: red;
             font-style: italic;
         }
+
+        .get-all-extra-tab .promotion-elm{
+            box-shadow: 0 0 4px #ccc;
+            margin-bottom: 10px;
+            align-items: center;
+            -webkit-transition: 0.5s ease;
+            -moz-transition: 0.5s ease;
+            -ms-transition: 0.5s ease;
+            -o-transition: 0.5s ease;
+            transition: 0.5s ease;
+        }
+        .get-all-extra-tab .promotion-elm.active,.get-all-extra-tab .promotion-elm:hover{
+            background-color: #3eb3d7;
+        }
+        .get-all-extra-tab .promotion-elm.active>a,.get-all-extra-tab .promotion-elm:hover>a{
+            color: #ffffff;
+        }
+        .get-all-extra-tab .promotion-elm>a{
+            padding-left:5px;
+            font-size: 16px;
+            color: #000000;
+        }
+        .get-all-extra-tab .buttons{
+            margin-left: auto;
+        }
+
     </style>
 @stop
 @section('js')
