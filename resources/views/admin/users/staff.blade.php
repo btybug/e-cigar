@@ -3,15 +3,15 @@
 
 @stop
 @section('content')
-    <div class="row">
+    <div class="panel panel-default">
 
-        <div class="col-xs-12">
-            <div class="col-md-6 pull-left">
+        <div class="panel-heading clearfix">
+            <div class="pull-left">
                 <h2 class="m-0">Staff</h2>
             </div>
-        </div>
             <div class="pull-right"><a href="{!! route('admin_staff_new') !!}" class="btn btn-info">Create new staff</a></div>
-        <div class="col-xs-12">
+        </div>
+        <div class="panel-body">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>

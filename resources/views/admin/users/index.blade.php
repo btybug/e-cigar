@@ -3,14 +3,12 @@
 
 @stop
 @section('content')
-    <div class="row">
+    <div class="panel panel-default">
 
-        <div class="col-xs-12">
-            <div class="col-md-6 pull-left">
-                <h2 class="m-0">Users</h2>
-            </div>
+        <div class="panel-heading clearfix">
+            <h2 class="m-0 pull-left">Users</h2>
         </div>
-        <div class="col-xs-12">
+        <div class="panel-body">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>

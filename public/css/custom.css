@@ -1166,6 +1166,18 @@ resize: none;
     object-fit: cover;
 }
 /*Comments end*/
+/*Users*/
+.users-log-wrapper .dataTables_wrapper {
+    overflow: auto;
+}
+/*End Users*/
+
+
+
+
+
+
+
 .w-10{
     width: 10%;
 }

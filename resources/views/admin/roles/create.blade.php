@@ -3,28 +3,23 @@
 
 @stop
 @section('content')
-@section("css")
-    <link rel="stylesheet" href="http://laraframe.codemen.org/backend/assets/css/admin_lte.css">
-    <link rel="stylesheet" href="http://laraframe.codemen.org/common/vendors/iCheck/flat/_all.css">
-@stop
-<div class="row">
-    <div class="col-md-6">
-        <form action="" class="form-horizontal">
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2 class="m-0">Create Role</h2>
+    </div>
+        <div class="panel-body">
+        <div class="col-md-6">
 
-            <fieldset>
-
-                <!-- Form Name -->
-                <legend>Create Role</legend>
-
+            <form action="">
                 <!-- Password input-->
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-md-2" for="passwordinput">Title</label>
                     <div class="col-md-6">
                         {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
                     </div>
                 </div>
                 <!-- Password input-->
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-md-2" for="passwordinput">Type</label>
                     <div class="col-md-6">
                         {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
@@ -32,36 +27,43 @@
                 </div>
 
                 <!-- Password input-->
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-md-2" for="passwordinput">Description</label>
                     <div class="col-md-6">
                         {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
                     </div>
                 </div>
                 <!-- Button -->
-                <div class="form-group">
-                    <div class="col-md-4">
+                <div class="form-group row text-right">
+                    <div class="col-md-6">
                         <button id="singlebutton" class="btn btn-info save-role">Save</button>
                     </div>
                 </div>
-            </fieldset>
-        </form>
+            </form>
+        </div>
 
-    </div>
-    <div class="col-md-12">
-        <legend>Pages</legend>
+        <div class="col-md-12">
+            <legend>Pages</legend>
 
-        <div id="treeview_json"></div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="col-md-12">
-        <legend>Forms</legend>
+            <div id="treeview_json"></div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-12">
+            <legend>Forms</legend>
 
-        <div id="treeview_json2"></div>
-        <div class="clearfix"></div>
+            <div id="treeview_json2"></div>
+            <div class="clearfix"></div>
+        </div>
     </div>
+
+
 </div>
 
+@stop
+
+@section("css")
+    <link rel="stylesheet" href="http://laraframe.codemen.org/backend/assets/css/admin_lte.css">
+    <link rel="stylesheet" href="http://laraframe.codemen.org/common/vendors/iCheck/flat/_all.css">
 @stop
 
 
