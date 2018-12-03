@@ -3,236 +3,236 @@
 
 @stop
 @section('content')
-    {!! Form::model($model,['class'=>'form-horizontal']) !!}
+    {!! Form::model($model,['class'=>'']) !!}
     <div class="inventory_attributes container-fluid">
-        <div class="row dis-flex-wrap">
-            <div class="col-md-9">
-                <div class="panel panel-default mb-0">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-sm-7 pl-0">
-                                <h2>Attribute</h2>
-                            </div>
-                            <div class="col-sm-5 p-0">
-                                <div class="button-save  text-right">
-                                    <a class="btn btn-default pull-right"
-                                       href="{!! route('admin_store_attributes') !!}">Back</a>
-                                </div>
-                            </div>
-                        </div>
+        <div class="row">
+            <div class="panel panel-default mb-0">
+                <div class="panel-heading clearfix">
+                    <h2 class="m-0 pull-left">Add / Edit Attribute</h2>
+                    <div class="button-save pull-right">
+                        <a class="btn btn-default"
+                           href="{!! route('admin_store_attributes') !!}">Back</a>
                     </div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
-                    <div class="panel-body">
-                        <div>
-                            @if(count(get_languages()))
-                                <ul class="nav nav-tabs">
-                                    @foreach(get_languages() as $language)
-                                        <li class="@if($loop->first) active @endif"><a data-toggle="tab"
-                                                                                       href="#{{ strtolower($language->code) }}">
-                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                            </a></li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                            <div class="tab-content">
-                                @if(count(get_languages()))
-                                    @foreach(get_languages() as $language)
-                                        <div id="{{ strtolower($language->code) }}"
-                                             class="tab-pane fade  @if($loop->first) in active @endif">
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label"><span data-toggle="tooltip"
-                                                                                            title=""
-                                                                                            data-original-title="Attribute Name Title">Attribute Name</span></label>
-                                                <div class="col-sm-10">
-                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                              title=""
-                                                                                              data-original-title="Icon Title">Icon</span></label>
-                                <div class="col-sm-10">
-                                    {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
-                                </div>
-                                <div class="col-sm-1 text-center font-icon-added">
-                                    <i id="font-show-area"></i>
-                                </div>
-                            </div>
-                            <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                              title=""
-                                                                                              data-original-title="Available for blog Desc">Available for blog</span></label>
-                                <div class="col-sm-10">
-                                    {!! Form::select("name",['Blog','Tickets','Products','Stock'],null,['class'=>'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total">
-                                    <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
-                                <div class="col-sm-10">
-                                    YES {!! Form::radio('filter',1,null) !!}
-                                    NO {!! Form::radio('filter',0,null) !!}
-                                </div>
-                            </div>
-                            <div class="form-group bord-top">
-                                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                              title=""
-                                                                                              data-original-title="Image Title">Image</span></label>
-                                <div class="col-sm-10">
-                                    {!! media_button('image',$model) !!}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12 text-center">
-                                    {!! Form::submit('Save',['class' => 'btn btn-info button_save']) !!}
-                                </div>
-                            </div>
+                <div class="panel-body basic-details-tab">
+                       <div class="row">
+                           <div class="col-md-8">
+                               <div class="basic-wall">
+                                   @if(count(get_languages()))
+                                       <ul class="nav nav-tabs">
+                                           @foreach(get_languages() as $language)
+                                               <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                              href="#{{ strtolower($language->code) }}">
+                                                       <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                   </a></li>
+                                           @endforeach
+                                       </ul>
+                                   @endif
+                                   <div class="tab-content">
+                                       @if(count(get_languages()))
+                                           @foreach(get_languages() as $language)
+                                               <div id="{{ strtolower($language->code) }}"
+                                                    class="tab-pane fade  @if($loop->first) in active @endif">
+                                                   <div class="form-group row">
+                                                       <label class="col-md-2 control-label"><span data-toggle="tooltip"
+                                                                                                   title=""
+                                                                                                   data-original-title="Attribute Name Title">Attribute Name</span></label>
+                                                       <div class="col-md-10">
+                                                           {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           @endforeach
+                                       @endif
+                                   </div>
+                                   <div class="form-group row">
+                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                                     title=""
+                                                                                                     data-original-title="Icon Title">Icon</span></label>
+                                       <div class="col-md-10">
+                                           {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
+                                       </div>
+                                       <div class="col-md-1 text-center font-icon-added">
+                                           <i id="font-show-area"></i>
+                                       </div>
+                                   </div>
+                                   <div class="form-group row">
+                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                                     title=""
+                                                                                                     data-original-title="Available for blog Desc">Available for blog</span></label>
+                                       <div class="col-md-10">
+                                           {!! Form::select("name",['Blog','Tickets','Products','Stock'],null,['class'=>'form-control']) !!}
+                                       </div>
+                                   </div>
+                                   <div class="form-group row">
+                                       <label class="col-md-2 control-label" for="input-total">
+                                           <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
+                                       <div class="col-md-10">
+                                           YES {!! Form::radio('filter',1,null) !!}
+                                           NO {!! Form::radio('filter',0,null) !!}
+                                       </div>
+                                   </div>
+                                   <div class="form-group row">
+                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                                     title=""
+                                                                                                     data-original-title="Image Title">Image</span></label>
+                                       <div class="col-md-10">
+                                           {!! media_button('image',$model) !!}
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="col-sm-12 text-right">
+                                           {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                                       </div>
+                                   </div>
+                               </div>
 
-                        </div>
+                           </div>
+
+                           <div class="col-md-4">
+                               <div class="basic-wall">
+                                   <div class="right_col">
+                                       <div class="panel panel-default">
+                                           <div class="panel-heading">
+                                               <div class="row">
+                                                   <div class="col-sm-7 pl-0">
+                                                       Display as
+                                                   </div>
+                                                   <div class="col-sm-5 p-0">
+                                                       {!! Form::select('display_as',[
+                                                           'radio' => 'radio',
+                                                           'select' => 'select',
+                                                           'checkbox' => 'checkbox',
+                                                           'multy_select' => 'Multi select',
+
+                                                       ],null,['class' => 'form-control display_as-select']) !!}
+                                                   </div>
+                                                   {{--'multi_select_tag' => 'Multi select tag',--}}
+                                               </div>
+                                           </div>
+
+                                           <div class="panel-body">
+                                               <div class="right-main-content">
+                                                   <div class="display-as-wall " data-displayas="radio">
+                                                       @if($model && count($model->children))
+                                                           <h3>{{ $model->name }}</h3>
+                                                           @foreach($model->children as $item)
+                                                               <div class="form-group row bord-top bg-light attr-option"
+                                                                    data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                                   <div class="col-sm-1">
+                                                                       <input type="radio" id="radio-{!! $item->id !!}" name="radio_item">
+                                                                   </div>
+                                                                   <div class="col-sm-11">
+                                                                       <label for="radio-{!! $item->id !!}"> {!! $item->name !!}</label>
+                                                                   </div>
+                                                               </div>
+                                                           @endforeach
+                                                       @else
+                                                           No Options
+                                                       @endif
+                                                   </div>
+                                                   <div class="display-as-wall d-none" data-displayas="select_menu">
+                                                       <h3>Courier</h3>
+                                                       <select name="" id="" class="form-control">
+                                                           @if($model &&  count($model->children))
+                                                               @foreach($model->children as $item)
+                                                                   <option class="form-group attr-option" data-item-id="{!! $item->id !!}"
+                                                                           data-parent-id="{!! $model->id !!}">
+                                                                       {!! $item->name !!}
+
+                                                                   </option>
+                                                               @endforeach
+                                                           @else
+                                                               No Options
+                                                           @endif
+                                                       </select>
+
+                                                   </div>
+                                                   <div class="display-as-wall d-none" data-displayas="multi_select">
+                                                       <h3>Courier</h3>
+                                                       @if($model &&  count($model->children))
+                                                           @foreach($model->children as $item)
+                                                               <div class="form-group row bord-top bg-light attr-option"
+                                                                    data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
+                                                                   <div class="col-sm-1">
+                                                                       <input type="checkbox" id="checkbox-{!! $item->id !!}">
+                                                                   </div>
+                                                                   <div class="col-sm-11">
+                                                                       <label for="checkbox-{!! $item->id !!}"> {!! $item->name !!}</label>
+                                                                   </div>
+                                                               </div>
+                                                           @endforeach
+                                                       @else
+                                                           No Options
+                                                       @endif
+                                                   </div>
+                                                   <div class="display-as-wall d-none" data-displayas="multi_select_tag">
+                                                       <h3>Courier</h3>
+                                                       <div class="multi_select_tag_wall">
+                                                           <div class="row">
+                                                               <label class="col-sm-3 control-label" for="input-category">Tags</label>
+                                                               <div class="col-sm-9">
+                                                                   <input type="text" name="" value="" placeholder="Tags"
+                                                                          id="input-category" class="form-control" autocomplete="off">
+                                                                   <ul class="dropdown-menu"></ul>
+                                                                   <div id="coupon-category" class="well well-sm view-coupon">
+                                                                       <ul class="coupon-category-list">
+                                                                       </ul>
+                                                                   </div>
+                                                                   <input type="hidden" class="search-hidden-input" value=""
+                                                                          id="category-names">
+
+                                                               </div>
+                                                           </div>
+                                                       </div>
+
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+
+                               </div>
+                           </div>
+                       </div>
+
+                </div>
+
+
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading clearfix">
+                    {{--<h2>Options {{ $model->name }} </h2>--}}
+                    <h2 class="m-0 pull-left">Attributes</h2>
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add attribute</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="d-flex get-all-stickers-tab">
+                        @if(isset($model) && count($model->stickers))
+                            @foreach($model->stickers as $sticker)
+                                <div class="inventory-attr-item" data-id="{{ $sticker->id }}">
+                                    <h3 class="text">{!! $sticker->name !!}</h3>
+                                    <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
+                                    <input type="hidden" name="stickers[]" value="{{ $sticker->id }}">
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="right_col">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-sm-7 pl-0">
-                                    Display as
-                                </div>
-                                <div class="col-sm-5 p-0">
-                                    {!! Form::select('display_as',[
-                                        'radio' => 'radio',
-                                        'select' => 'select',
-                                        'checkbox' => 'checkbox',
-                                        'multy_select' => 'Multi select',
 
-                                    ],null,['class' => 'form-control display_as-select']) !!}
-                                </div>
-                                {{--'multi_select_tag' => 'Multi select tag',--}}
-                            </div>
-                        </div>
-
-                        <div class="panel-body">
-                            <div class="right-main-content">
-                                <div class="display-as-wall " data-displayas="radio">
-                                    @if($model && count($model->children))
-                                        <h3>{{ $model->name }}</h3>
-                                        @foreach($model->children as $item)
-                                            <div class="form-group row bord-top bg-light attr-option"
-                                                 data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
-                                                <div class="col-sm-1">
-                                                    <input type="radio" id="radio-{!! $item->id !!}" name="radio_item">
-                                                </div>
-                                                <div class="col-sm-11">
-                                                    <label for="radio-{!! $item->id !!}"> {!! $item->name !!}</label>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        No Options
-                                    @endif
-                                </div>
-                                <div class="display-as-wall d-none" data-displayas="select_menu">
-                                    <h3>Courier</h3>
-                                    <select name="" id="" class="form-control">
-                                        @if($model &&  count($model->children))
-                                            @foreach($model->children as $item)
-                                                <option class="form-group attr-option" data-item-id="{!! $item->id !!}"
-                                                        data-parent-id="{!! $model->id !!}">
-                                                    {!! $item->name !!}
-
-                                                </option>
-                                            @endforeach
-                                        @else
-                                            No Options
-                                        @endif
-                                    </select>
-
-                                </div>
-                                <div class="display-as-wall d-none" data-displayas="multi_select">
-                                    <h3>Courier</h3>
-                                    @if($model &&  count($model->children))
-                                        @foreach($model->children as $item)
-                                            <div class="form-group row bord-top bg-light attr-option"
-                                                 data-item-id="{!! $item->id !!}" data-parent-id="{!! $model->id !!}">
-                                                <div class="col-sm-1">
-                                                    <input type="checkbox" id="checkbox-{!! $item->id !!}">
-                                                </div>
-                                                <div class="col-sm-11">
-                                                    <label for="checkbox-{!! $item->id !!}"> {!! $item->name !!}</label>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @else
-                                        No Options
-                                    @endif
-                                </div>
-                                <div class="display-as-wall d-none" data-displayas="multi_select_tag">
-                                    <h3>Courier</h3>
-                                    <div class="multi_select_tag_wall">
-                                        <div class="row">
-                                            <label class="col-sm-3 control-label" for="input-category">Tags</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" name="" value="" placeholder="Tags"
-                                                       id="input-category" class="form-control" autocomplete="off">
-                                                <ul class="dropdown-menu"></ul>
-                                                <div id="coupon-category" class="well well-sm view-coupon">
-                                                    <ul class="coupon-category-list">
-                                                    </ul>
-                                                </div>
-                                                <input type="hidden" class="search-hidden-input" value=""
-                                                       id="category-names">
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="row">
-                                <div class="col-sm-12 clearfix">
-                                    {{--<h2>Options {{ $model->name }} </h2>--}}
-                                    <h2 class="pull-left">Attributes</h2>
-                                    <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add attribute</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="d-flex get-all-stickers-tab">
-                                @if(isset($model) && count($model->stickers))
-                                    @foreach($model->stickers as $sticker)
-                                        <div class="inventory-attr-item" data-id="{{ $sticker->id }}">
-                                            <h3 class="text">{!! $sticker->name !!}</h3>
-                                            <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
-                                            <input type="hidden" name="stickers[]" value="{{ $sticker->id }}">
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-            </div>
         </div>
     </div>
     {!! Form::close() !!}

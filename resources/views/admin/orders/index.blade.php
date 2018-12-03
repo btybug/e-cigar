@@ -3,16 +3,14 @@
 
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-md-6 pull-left"><h2 class="m-0">{!! __('orders') !!}</h2></div>
-                <div class="col-md-6 ">
-                    <a class="btn btn-warning pull-right" href="{!! route('admin_orders_settings') !!}">Settings</a>
-                </div>
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+           <h2 class="m-0 pull-left">{!! __('Orders') !!}</h2>
+            <div class="pull-right">
+                <a class="btn btn-warning pull-right" href="{!! route('admin_orders_settings') !!}">Settings</a>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="panel-body">
             <table id="orders-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>

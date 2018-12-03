@@ -4,33 +4,31 @@
 @stop
 
 @section('content')
-    <section class="content stock-page">
-        <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Settings</h2></div>
-        </div>
-        {!! Form::model($settings,[]) !!}
-            <div class="text-right btn-save">
-                <a href="{!! route('admin_orders') !!}" class="btn btn-action">Back</a>
+    {!! Form::model($settings,[]) !!}
+    <div class="panel panel-default stock-page">
+        <div class="panel-heading clearfix">
+            <h2 class="m-0 pull-left">Order Settings</h2>
+            <div class="pull-right">
+                <a href="{!! route('admin_orders') !!}" class="btn btn-default btn-action">Back</a>
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
+        </div>
+        <div class="panel-body">
+
             <div class="row sortable-panels">
-                <div class="col-md-9 ">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <div class="form-group">
-                                        <label>Select status - Order made</label>
-                                        {!! Form::select('open',$statuses,null,['class'=>'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
+                <div class="col-md-9">
+                    <div class="form-group row">
+                        <label class="col-md-2">Select status - Order made</label>
+                        <div class="col-md-10">
+                            {!! Form::select('open',$statuses,null,['class'=>'form-control']) !!}
                         </div>
                     </div>
                 </div>
             </div>
-        {!! Form::close() !!}
-    </section>
+        </div>
+    </div>
+    {!! Form::close() !!}
+
 @stop
 @section('css')
 
