@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-sm-2 control-label" for="supplier">
                         Reason</label>
                     <div class="col-sm-10">
@@ -50,7 +50,7 @@
 
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" for="input-status"></label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10 text-right">
                         {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                     </div>
                 </div>
