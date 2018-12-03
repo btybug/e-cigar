@@ -279,9 +279,9 @@
     margin-bottom: 0;
 }
 
-.coupons_new_page .form-group + .form-group {
-    border-top: 1px solid #ededed;
-}
+/*.coupons_new_page .form-group + .form-group {*/
+    /*border-top: 1px solid #ededed;*/
+/*}*/
 
 .coupons_new_page .nav-tabs {
     margin-bottom: 25px;
