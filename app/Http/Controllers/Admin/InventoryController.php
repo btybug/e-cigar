@@ -78,7 +78,7 @@ class InventoryController extends Controller
     public function postStock(ProductsRequest $request)
     {
         $data = $request->except('_token', 'translatable', 'attributes', 'options','promotions',
-            'variations','variation_single','package_variation_price','package_variation','extra_product',
+            'variations','variation_single','package_variation_price','package_variation','extra_product','promotion_prices',
             'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
@@ -92,7 +92,6 @@ class InventoryController extends Controller
             $this->stockService->savePackageVariation($stock, $request->get('package_variation', []),$request->get('package_variation_price'));
         }
 
-
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->attrs()->sync($request->get('attributes'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
@@ -104,6 +103,9 @@ class InventoryController extends Controller
         $stock->related_products()->sync($request->get('related_products'));
         $stock->promotions()->sync($request->get('promotions'));
         $stock->stickers()->sync($request->get('stickers'));
+
+        $this->stockService->savePromotionPrices($request->get('promotion_prices', []));
+
         $this->createOrUpdateSeo($request, $stock->id);
         //-------------------//
         return redirect()->route('admin_stock');
@@ -226,5 +228,10 @@ class InventoryController extends Controller
         $html = \View("admin.inventory._partials.variation_item_render_new_options",compact(['attributesJson','objData','variation']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function saveExtraOptions(Request $request)
+    {
+        return \Response::json(['error' => false, 'data' => json_encode($request->data,true)]);
     }
 }

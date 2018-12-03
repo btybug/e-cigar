@@ -66,6 +66,11 @@ class Stock extends Translatable
         return $this->hasMany(StockVariation::class, 'stock_id');
     }
 
+    public function promotion_prices()
+    {
+        return $this->hasMany(PromotionPrice::class, 'promotion_id');
+    }
+
     public function related_products()
     {
         return $this->belongsToMany(Stock::class, 'stock_related', 'stock_id', 'related_id');

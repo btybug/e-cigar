@@ -2,6 +2,8 @@
 
 use App\Models\ProductAttribute;
 use App\Models\ProductVariation;
+use App\Models\PromotionPrice;
+use App\Models\Stock;
 use App\Models\StockAttribute;
 use App\Models\StockTypeAttribute;
 use App\Models\StockVariation;
@@ -135,6 +137,29 @@ class StockService
             }
 
             $stock->variations()->whereNotIn('id',$deletableArray)->delete();
+        }
+    }
+
+    public function savePromotionPrices (array $data = [])
+    {
+        if(count($data)){
+            $deletableArray = [];
+            foreach ($data as $promotion_id => $jsonData) {
+                $newData = json_decode($jsonData,true);
+                $promotion = Stock::find($promotion_id);
+                if($promotion && count($newData)){
+                    foreach ($newData as $variation_id => $price) {
+                        $promotionPrice = $promotion->promotion_prices()->where('variation_id',$variation_id)->first();
+                        if($promotionPrice){
+                            $promotionPrice->update(['price' => $price]);
+                        }else{
+                            $promotionPrice = $promotion->promotion_prices()->create(['variation_id' => $variation_id,'price' => $price]);
+                        }
+                        $deletableArray[] = $promotionPrice->id;
+                    }
+                }
+                $promotion->promotion_prices()->whereNotIn('id',$deletableArray)->delete();
+            }
         }
     }
 

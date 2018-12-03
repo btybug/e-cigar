@@ -480,46 +480,6 @@
                             </div>
                         </div>
                     </div>
-                    <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="basic-left basic-wall">
-                                        <div class="all-list-extra">
-                                            <ul class="get-all-extra-tab">
-                                                @if($model)
-                                                    @foreach($model->promotions as $promotion)
-                                                        <li style="display: flex" data-id="{{ $promotion->id }}" class="promotion-elm"><a
-                                                                    href="#">{{ $promotion->name }}</a>
-                                                            <div class="buttons">
-                                                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                                            </div>
-                                                            <input type="hidden" name="promotions[]" value="{{ $promotion->id }}">
-                                                        </li>
-                                                    @endforeach
-                                                @endif
-                                            </ul>
-                                        </div>
-                                        <div class="button-add text-center">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-block select-promotions"><i
-                                                        class="fa fa-plus mr-10"></i>Add promotion</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="basic-center basic-wall">
-                                        <div class="row">
-                                            <div class="col-md-12 extra-variations">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
                     <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
                         <div class="container-fluid p-25">
                             <div class="row">
@@ -718,6 +678,48 @@
                             </div>
                         </div>
                     </div>
+                    <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
+                        <div class="container-fluid p-25">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="basic-left basic-wall">
+                                        <div class="all-list-extra">
+                                            <ul class="get-all-extra-tab">
+                                                @if($model)
+                                                    @foreach($model->promotions as $promotion)
+                                                        <li style="display: flex" data-id="{{ $promotion->id }}" class="promotion-elm"><a
+                                                                    href="#">{{ $promotion->name }}</a>
+                                                            <div class="buttons">
+                                                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                            </div>
+                                                            <input type="hidden" name="promotions[]" value="{{ $promotion->id }}">
+                                                            <input type="hidden" class="promotion_price" data-id="{{ $promotion->id }}" name="promotion_prices[{{ $promotion->id }}]" value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </div>
+                                        <div class="button-add text-center">
+                                            <a href="javascript:void(0)"
+                                               class="btn btn-primary btn-block select-promotions"><i
+                                                        class="fa fa-plus mr-10"></i>Add promotion</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <div class="basic-center basic-wall">
+                                        <div class="row">
+                                            <div class="col-md-12 extra-variations">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
@@ -1007,6 +1009,31 @@
                 return indexed_array;
             }
 
+            $("body").on('click', '.save-extra-variations', function (e) {
+                var type = $(this).data('type');
+                var list = $(".extra-item");
+                var promotionID = $(this).closest('.extra-item-data').data('promotion-v');
+                var promotionPrices = {};
+
+                if(type == 'normal'){
+                    list.each(function (i,e) {
+                        var variation = $(e).data('variation');
+                        promotionPrices[variation] = $(this).val();
+                    })
+                }else{
+                    list.each(function (i,e) {
+                        var variation = $(e).data('variation');
+                        promotionPrices[variation] = $(".extra-price").val();
+                    })
+                }
+
+                AjaxCall("/admin/inventory/stock/save-extra-option", {data: promotionPrices}, function (res) {
+                    if (!res.error) {
+                        $(".get-all-extra-tab").find('.promotion-elm').find(`[data-id='${promotionID}']`).val(res.data)
+                    }
+                });
+            })
+
             $("body").on('click', '.promotion-elm', function (e) {
                 if(e.target != this) return false;
 
@@ -1155,6 +1182,7 @@
                                 <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                                 <input type="hidden" name="promotions[]" value="${id}">
+                                <input type="hidden" class="promotion_price" data-id="${id}" name="promotion_prices[${id}]" value="">
                                 </li>`);
                 $(this)
                     .parent()

@@ -208,6 +208,7 @@ Route::group(['prefix' => 'inventory'], function () {
         //extra
         Route::post('/add-extra-option', 'Admin\InventoryController@addExtraOption')->name('admin_stock_extra_option');
         Route::post('/get-extra-option-variations', 'Admin\InventoryController@getPromotionVariations')->name('admin_stock_extra_option_variations');
+        Route::post('/save-extra-option', 'Admin\InventoryController@saveExtraOptions')->name('admin_stock_extra_option_save');
     });
 
     Route::group(['prefix' => 'attributes'], function () {
