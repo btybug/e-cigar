@@ -3,55 +3,70 @@
 
 @stop
 @section('content')
-    <div class="col-md-6">
-        {!! Form::model($role,['class'=>'form-horizontal']) !!}
-        {!! Form::hidden('id',$role->id) !!}
-        <fieldset>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="m-0">Create Role</h2>
+        </div>
+        <div class="panel-body">
+            <div class="col-md-6">
+                {!! Form::model($role,['class'=>'']) !!}
+                {!! Form::hidden('id',$role->id) !!}
 
-            <!-- Form Name -->
-            <legend>Create Role</legend>
+                    <!-- Password input-->
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="passwordinput">Title</label>
+                        <div class="col-md-10">
+                            {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                        </div>
+                    </div>
+                    <!-- Password input-->
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="passwordinput">Type</label>
+                        <div class="col-md-10">
+                            {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
+                        </div>
+                    </div>
 
-            <!-- Password input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="passwordinput">Title</label>
-                <div class="col-md-4">
-                    {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                    <!-- Password input-->
+                    <div class="form-group row">
+                        <label class="col-md-2 control-label" for="passwordinput">Description</label>
+                        <div class="col-md-10">
+                            {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
+                        </div>
+                    </div>
+                    <!-- Button -->
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
+                            <button id="singlebutton" class="btn btn-info save-role">Save</button>
+                        </div>
+                    </div>
+                {!! Form::close() !!}
+
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="m-0">Pages</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="treeview_json"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="m-0">Forms</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="treeview_json2"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Password input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="passwordinput">Type</label>
-                <div class="col-md-4">
-                    {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
-                </div>
-            </div>
 
-            <!-- Password input-->
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="passwordinput">Description</label>
-                <div class="col-md-4">
-                    {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
-                </div>
-            </div>
-            <!-- Button -->
-            <div class="form-group">
-                <div class="col-md-4">
-                    <button id="singlebutton" class="btn btn-primary save-role">Save</button>
-                </div>
-            </div>
-        </fieldset>
-        {!! Form::close() !!}
-
-    </div>
-    <div class="col-md-3">
-        <legend>Pages</legend>
-
-        <div id="treeview_json"></div>
-    </div>
-    <div class="col-md-3">
-        <legend>Forms</legend>
-
-        <div id="treeview_json2"></div>
+        </div>
     </div>
 @stop
 @section('js')

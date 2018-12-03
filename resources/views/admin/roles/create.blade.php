@@ -14,14 +14,14 @@
                 <!-- Password input-->
                 <div class="form-group row">
                     <label class="col-md-2" for="passwordinput">Title</label>
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
                     </div>
                 </div>
                 <!-- Password input-->
                 <div class="form-group row">
                     <label class="col-md-2" for="passwordinput">Type</label>
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
                     </div>
                 </div>
@@ -29,31 +29,42 @@
                 <!-- Password input-->
                 <div class="form-group row">
                     <label class="col-md-2" for="passwordinput">Description</label>
-                    <div class="col-md-6">
+                    <div class="col-md-10">
                         {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
                     </div>
                 </div>
                 <!-- Button -->
-                <div class="form-group row text-right">
-                    <div class="col-md-6">
+                <div class="form-group row">
+                    <div class="col-sm-12 text-right">
                         <button id="singlebutton" class="btn btn-info save-role">Save</button>
                     </div>
                 </div>
+
             </form>
         </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <h3 class="panel-heading m-0">Pages</h3>
+                        <div class="panel-body">
+                            <div id="treeview_json"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <h3 class="panel-heading m-0">Forms</h3>
+                        <div class="panel-body">
+                            <div id="treeview_json2"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-md-12">
-            <legend>Pages</legend>
+            </div>
 
-            <div id="treeview_json"></div>
-            <div class="clearfix"></div>
-        </div>
-        <div class="col-md-12">
-            <legend>Forms</legend>
 
-            <div id="treeview_json2"></div>
-            <div class="clearfix"></div>
-        </div>
     </div>
 
 
