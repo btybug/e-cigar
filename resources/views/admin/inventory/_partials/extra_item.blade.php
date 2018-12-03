@@ -6,7 +6,8 @@
                 $promotionPrice = $model->promotion_prices()->where('variation_id',$single_variation->id)->first();
             @endphp
             <div class="col-md-12 m-5">
-                <button type="button" class="btn btn-primary save-extra-variations pull-right" data-type="normal">Save</button>
+                <button type="button" class="btn btn-primary save-extra-variations pull-right" data-type="normal">Save
+                </button>
             </div>
             <table class="table table-style table-bordered" cellspacing="0"
                    width="100%">
@@ -39,7 +40,9 @@
             </table>
         @elseif($model->type == 'variation_product')
             <div class="col-md-12 m-5">
-                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">Save</button>
+                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
+                    Save
+                </button>
             </div>
             <table id="variations-table" class="table table-style table-bordered"
                    cellspacing="0" width="100%">
@@ -94,7 +97,9 @@
                 ['class' => 'form-control extra-item extra-price','data-variation' => ($variation) ? $variation->id : null]) !!}
             </div>
             <div class="col-md-6">
-                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="package">Save</button>
+                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="package">
+                    Save
+                </button>
             </div>
             <table class="table table-style table-bordered" cellspacing="0"
                    width="100%">

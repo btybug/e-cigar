@@ -47,49 +47,49 @@ class InventoryController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        $stockItems = Items::all()->pluck('sku','sku')->all();
+        $stockItems = Items::all()->pluck('sku', 'sku')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general','allAttrs','twitterSeo', 'fbSeo', 'robot', 'data','stockItems']));
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'data', 'stockItems']));
     }
 
     public function getStockEdit($id)
     {
-        $model = Stock::where('is_promotion',false)->where('id',$id)->first();
-        if(! $model) abort(404);
+        $model = Stock::where('is_promotion', false)->where('id', $id)->first();
+        if (!$model) abort(404);
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        $stockItems = Items::all()->pluck('sku','sku')->all();
+        $stockItems = Items::all()->pluck('sku', 'sku')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories','allAttrs', 'general','stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'attributes', 'options','promotions',
-            'variations','variation_single','package_variation_price','package_variation','extra_product','promotion_prices',
-            'categories', 'general', 'related_products', 'stickers','fb', 'twitter', 'general', 'robot','type_attributes','type_attributes_options');
+        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'promotions',
+            'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices',
+            'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
 
 
-        if($data['type'] == 'variation_product'){
+        if ($data['type'] == 'variation_product') {
             $this->stockService->saveVariations($stock, $request->get('variations', []));
-        }elseif ($data['type'] == 'simple_product'){
+        } elseif ($data['type'] == 'simple_product') {
             $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
-        }elseif ($data['type'] == 'package_product'){
-            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []),$request->get('package_variation_price'));
+        } elseif ($data['type'] == 'package_product') {
+            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []), $request->get('package_variation_price'));
         }
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
@@ -116,11 +116,11 @@ class InventoryController extends Controller
         $types = $request->only(['fb', 'general', 'twitter', 'robot']);
         foreach ($types as $type => $data) {
             foreach ($data as $name => $value) {
-                $seo= StockSeo::firstOrNew(['stock_id' => $stock_id, 'name' => $name,'type' => $type]);
+                $seo = StockSeo::firstOrNew(['stock_id' => $stock_id, 'name' => $name, 'type' => $type]);
                 if ($value) {
-                    $seo->content=$value;
+                    $seo->content = $value;
                     $seo->save();
-                }else{
+                } else {
                     $seo->delete();
                 }
             }
@@ -165,32 +165,32 @@ class InventoryController extends Controller
     public function getStocks(Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Stock::where('is_promotion',$promotion)->whereNotIn('id', $request->get('arr', []))->get();
+        $attr = Stock::where('is_promotion', $promotion)->whereNotIn('id', $request->get('arr', []))->get();
         return \Response::json(['error' => false, 'data' => $attr]);
     }
 
     public function addVariation(Request $request)
     {
         $item = $request->except('_token');
-        $stockItems = Items::all()->pluck('sku','sku')->all();
-        $html = \View('admin.inventory._partials.variation_item', compact(['item','stockItems']))->render();
+        $stockItems = Items::all()->pluck('sku', 'sku')->all();
+        $html = \View('admin.inventory._partials.variation_item', compact(['item', 'stockItems']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function addPackageVariation(Request $request)
     {
-        $stockItems = Items::all()->pluck('sku','sku')->all();
+        $stockItems = Items::all()->pluck('sku', 'sku')->all();
         $package_variation = null;
-        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation','stockItems']))->render();
+        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation', 'stockItems']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function editVariation (Request $request)
+    public function editVariation(Request $request)
     {
         $data = $request->get('data');
         $model = $request->get('model');
         $variationId = $request->get('variationId');
-        $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data','variationId']))->render();
+        $html = \View('admin.inventory._partials.variation_form', compact(['model', 'data', 'variationId']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
@@ -198,7 +198,7 @@ class InventoryController extends Controller
     {
         $selected = Attributes::find($request->id);
         $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
-        $html = \View("admin.inventory._partials.variation_option_item",compact(['selected','allAttrs']))->render();
+        $html = \View("admin.inventory._partials.variation_option_item", compact(['selected', 'allAttrs']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -206,15 +206,15 @@ class InventoryController extends Controller
     public function addExtraOption(Request $request)
     {
         $option = $request->except('_token');
-        $html = \View("admin.inventory._partials.extra_item",compact(['option']))->render();
+        $html = \View("admin.inventory._partials.extra_item", compact(['option']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getPromotionVariations (Request $request)
+    public function getPromotionVariations(Request $request)
     {
-        $model = Stock::where('is_promotion',true)->where('id',$request->id)->first();
-        if($model){
-            $html = \View("admin.inventory._partials.extra_item",compact(['model']))->render();
+        $model = Stock::where('is_promotion', true)->where('id', $request->id)->first();
+        if ($model) {
+            $html = \View("admin.inventory._partials.extra_item", compact(['model']))->render();
             return \Response::json(['error' => false, 'html' => $html]);
         }
         return \Response::json(['error' => true]);
@@ -225,13 +225,13 @@ class InventoryController extends Controller
         $attributesJson = $request->get('attributesJson');
         $objData = $request->get('objData');
         $variation = $request->get('variation');
-        $html = \View("admin.inventory._partials.variation_item_render_new_options",compact(['attributesJson','objData','variation']))->render();
+        $html = \View("admin.inventory._partials.variation_item_render_new_options", compact(['attributesJson', 'objData', 'variation']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function saveExtraOptions(Request $request)
     {
-        return \Response::json(['error' => false, 'data' => json_encode($request->data,true)]);
+        return \Response::json(['error' => false, 'data' => json_encode($request->data, true)]);
     }
 }
