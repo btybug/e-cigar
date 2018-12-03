@@ -9,23 +9,23 @@
                 {!! Form::model($model,['url' => route('post_admin_inventory_others_new'),'id' => 'form-coupon','class' => '']) !!}
                 {!! Form::hidden('id') !!}
                 <div class="form-group row required">
-                    <label class="col-sm-2 control-label" for="input-code">
+                    <label class="col-md-2 control-label" for="input-code">
                         <span data-toggle="tooltip" title="" data-original-title="">Item</span></label>
-                    <div class="col-sm-10">
+                    <div class="col-md-10">
                         {!! Form::select('item_id',$items,null,[ 'class'=> 'form-control select-sku']) !!}
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label" for="input-discount">Quantity</label>
-                    <div class="col-sm-10">
+                    <label class="col-md-2 control-label" for="input-discount">Quantity</label>
+                    <div class="col-md-10">
                         {!! Form::number('qty',null,['placeholder' => 'Item quantity','class'=> 'form-control']) !!}
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label" for="supplier">
+                    <label class="col-md-2 control-label" for="supplier">
                         Reason</label>
-                    <div class="col-sm-10">
+                    <div class="col-md-10">
                         {!! Form::select('reason',[
                         'Lost'=>'Lost',
                         'Damaged'=>'Damaged',
@@ -41,16 +41,16 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label" for="supplier">
+                    <label class="col-md-2 control-label" for="supplier">
                         Notes</label>
-                    <div class="col-sm-10">
+                    <div class="col-md-10">
                         {!! Form::textarea('notes',null,[ 'class'=> 'form-control']) !!}
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 control-label" for="input-status"></label>
-                    <div class="col-sm-10 text-right">
+                    <label class="col-md-2 control-label" for="input-status"></label>
+                    <div class="col-md-10 text-right">
                         {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                     </div>
                 </div>
