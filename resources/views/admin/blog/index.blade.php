@@ -3,14 +3,12 @@
 
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-md-6 pull-left"><h2 class="m-0">Posts</h2></div>
-                <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+              <h2 class="m-0 pull-left">Posts</h2>
+                <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>
         </div>
-        <div class="col-xs-12">
+        <div class="panel-body">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>

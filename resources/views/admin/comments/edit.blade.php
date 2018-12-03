@@ -3,11 +3,19 @@
 
 @stop
 @section('content')
-    <div class="box box-info">
-        {{ Form::model($comment,['url' => route('edit_comment_post',$comment->id), 'class' => 'form-horizontal']) }}
-        <div class="box-body">
+    {{ Form::model($comment,['url' => route('edit_comment_post',$comment->id), 'class' => '']) }}
+
+    <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+            <h2 class="m-0 pull-left">Edit Comment</h2>
+            <div class="pull-right">
+                <a href="{{route('show_comments')}}" class="btn btn-default mr-10">{!! trans('admin.cancel') !!}</a>
+                {{ Form::submit(trans('admin.save'), ['class' => 'btn btn-info pull-right']) }}
+            </div>
+        </div>
+        <div class="panel-body">
             @if(! $comment->author)
-                <div class="form-group">
+                <div class="form-group row">
                     {{Form::label('guest_name', trans('admin.guest_name'),['class' => 'col-sm-2 control-label'])}}
                     <div class="col-sm-10">
                         {{Form::text('guest_name', null,['id' => 'guest_name','class' => $errors->has('guest_name') ? 'form-control  is-invalid' : "form-control ",])}}
@@ -17,7 +25,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group row">
                     {{Form::label('guest_email', trans('admin.guest_email'),['class' => 'col-sm-2 control-label'])}}
                     <div class="col-sm-10">
                         {{Form::text('guest_email', null,['id' => 'guest_email','class' => $errors->has('guest_email') ? 'form-control  is-invalid' : "form-control ",])}}
@@ -29,7 +37,7 @@
             @endif
 
 
-            <div class="form-group">
+            <div class="form-group row">
                 {{Form::label('comment', trans('admin.comment'),['class' => 'col-sm-2 control-label'])}}
                 <div class="col-sm-10">
                     {{Form::textarea('comment', null,['id' => 'comment','class' => $errors->has('comment') ? 'form-control  is-invalid' : "form-control "])}}
@@ -41,9 +49,5 @@
         </div>
     </div>
 
-    <div class="box-footer">
-        <a href="{{route('show_comments')}}" class="btn btn-default">{!! trans('admin.cancel') !!}</a>
-        {{ Form::submit(trans('admin.save'), ['class' => 'btn btn-info pull-right']) }}
-    </div>
     {{ Form::close() }}
 @stop
