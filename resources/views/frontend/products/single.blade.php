@@ -389,6 +389,43 @@
                 }
             });
         }
+
+        function get_promotion_price() {
+//            price-place-promotion
+            var items = document.getElementsByClassName('select-variation-poption');
+//            $(".btn-add-to-cart").removeClass('add-to-cart');
+            let options = {};
+            for (var i = 0; i < items.length; i++) {
+                options[$(items[i]).data('name')] = $(items[i]).val();
+            }
+
+            $.map($(".poptions-group input:radio:checked"), function (elem, idx) {
+                options[$(elem).data('name')] = $(elem).val();
+            });
+
+            $.ajax({
+                type: "post",
+                url: "/products/get-price",
+                cache: false,
+                datatype: "json",
+                data: {options: options, uid: $("#vpid").val()},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $(".price-place-promotion").html("€" + data.price);
+//                        $("#variation_uid").val(data.variation_id);
+//                        $(".btn-add-to-cart").addClass('add-to-cart');
+                    } else {
+                        $(".price-place-promotion").html(data.message);
+//                        $("#variation_uid").val('');
+                    }
+                }
+            });
+        }
+
+
         $('.add-to-favorite').on('click', function () {
             let data = {'id': $(this).attr('data-id')}
             if ($(this).hasClass('active')) {

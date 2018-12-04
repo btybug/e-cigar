@@ -47,3 +47,10 @@
 </div>
 <p class="product-tab-main-content-price font-main-light price-place"></p>
 <input type="hidden" value="" id="variation_uid">
+@if(count($model->promotions))
+<h3>Promotions</h3>
+    @foreach($model->promotions as $promotion)
+        @include('frontend.products._partials.render_promotion')
+    @endforeach
+@endif
+
