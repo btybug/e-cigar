@@ -73,23 +73,23 @@
                                         <div class="carousel_1">
                                             @if($vape->image)
                                                 <div>
-                                                    <img src="{!! $vape->image !!}" alt="{!! getImage( $vape->image)->seo_alt !!}">
+                                                    <img src="{!! $vape->image !!}" alt="{!! @getImage( $vape->image)->seo_alt !!}">
                                                 </div>
                                             @endif
                                             @if(count($variations))
                                                 @foreach($variations as $v)
                                                     @if($v->image)
-                                                        <div><img src="{{ $v->image }}" alt="{!! getImage( $v->image)->seo_alt !!}"></div>
+                                                        <div><img src="{{ $v->image }}" alt="{!! @getImage( $v->image)->seo_alt !!}"></div>
                                                     @endif
                                                 @endforeach
                                             @endif
 
-                                            @if(count($vape->other_images))
+                                            @if($vape->other_images && count($vape->other_images))
                                                 @foreach($vape->other_images as $other_image)
-                                                    <div><img src="{{ $other_image }}" alt="{!! getImage($other_image)->seo_alt !!}"></div>
+                                                    <div><img src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}"></div>
                                                 @endforeach
                                             @endif
-                                            @if(count($vape->videos))
+                                            @if($vape->videos && count($vape->videos))
                                                 @foreach($vape->videos as $video)
                                                     <div>
                                                         <iframe width="100%" height="100%"
@@ -105,23 +105,23 @@
                                         <div class="carousel_2" data-carousel-controller-for=".carousel_1">
                                             @if($vape->image)
                                                 <div>
-                                                    <img src="{!! $vape->image !!}" alt="{!! getImage($vape->image)->seo_alt !!}">
+                                                    <img src="{!! $vape->image !!}" alt="{!! @getImage($vape->image)->seo_alt !!}">
                                                 </div>
                                             @endif
                                             @if(count($variations))
                                                 @foreach($variations as $v)
                                                     @if($v->image)
-                                                        <div><img src="{{ $v->image }}" alt="{!! getImage($v->image)->seo_alt !!}"></div>
+                                                        <div><img src="{{ $v->image }}" alt="{!! @getImage($v->image)->seo_alt !!}"></div>
                                                     @endif
                                                 @endforeach
                                             @endif
 
-                                            @if(count($vape->other_images))
+                                            @if($vape->other_images && count($vape->other_images))
                                                 @foreach($vape->other_images as $other_image)
-                                                    <div><img src="{{ $other_image }}" alt="{!! getImage($other_image)->seo_alt !!}"></div>
+                                                    <div><img src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}"></div>
                                                 @endforeach
                                             @endif
-                                            @if(count($vape->videos))
+                                            @if($vape->videos && count($vape->videos))
                                                 @foreach($vape->videos as $video)
                                                     <div><img src="http://img.youtube.com/vi/{{ $video }}/sddefault.jpg"
                                                               width="100%" height="100%" alt=""></div>
@@ -170,7 +170,7 @@
                                     <div class="col-sm-5">
                                         <div class="image">
                                             <img src="{!! $sticker->image !!}"
-                                                 alt="{!! getImage($sticker->image)->seo_alt !!}">
+                                                 alt="{!! @getImage($sticker->image)->seo_alt !!}">
                                         </div>
                                     </div>
                                     <div class="col-sm-7">
@@ -368,31 +368,26 @@
                 options[$(elem).data('name')] = $(elem).val();
             });
 
-            console.log(options);
-
-            if (JSON.stringify(options) !== "{}") {
-
-                $.ajax({
-                    type: "post",
-                    url: "/products/get-price",
-                    cache: false,
-                    datatype: "json",
-                    data: {options: options, uid: $("#vpid").val()},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            $(".price-place").html("€" + data.price);
-                            $("#variation_uid").val(data.variation_id);
-                            $(".btn-add-to-cart").addClass('add-to-cart');
-                        } else {
-                            $(".price-place").html(data.message);
-                            $("#variation_uid").val('');
-                        }
+            $.ajax({
+                type: "post",
+                url: "/products/get-price",
+                cache: false,
+                datatype: "json",
+                data: {options: options, uid: $("#vpid").val()},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $(".price-place").html("€" + data.price);
+                        $("#variation_uid").val(data.variation_id);
+                        $(".btn-add-to-cart").addClass('add-to-cart');
+                    } else {
+                        $(".price-place").html(data.message);
+                        $("#variation_uid").val('');
                     }
-                });
-            }
+                }
+            });
         }
         $('.add-to-favorite').on('click', function () {
             let data = {'id': $(this).attr('data-id')}

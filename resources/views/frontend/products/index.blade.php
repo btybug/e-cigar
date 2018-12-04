@@ -9,7 +9,7 @@
                         <h2 class="title"><a style="text-decoration: none;color: black;" href="{!! route('categories_types',$category->slug) !!}" class="item-link">{{ $category->name }}</a></h2>
                         <div class="images">
                             @if($category->image)
-                                <img src="{!! $category->image !!}" alt="{{getImage($category->image)->seo_alt}}">
+                                <img src="{!! $category->image !!}" alt="{{ @getImage($category->image)->seo_alt}}">
                             @else
                                 <img src="/public/images/no_image.jpg" alt="{{ $category->name }}">
                             @endif

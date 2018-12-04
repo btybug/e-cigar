@@ -41,7 +41,7 @@ class ProductsController extends Controller
 
     public function getSingle($type,$slug)
     {
-        $vape=Stock::with(['variations','stockAttrs'])->where('type',$type)->where('slug',$slug)->first();
+        $vape=Stock::with(['variations','stockAttrs'])->where('slug',$slug)->first();
 
         if(! $vape) abort(404);
 
@@ -119,25 +119,37 @@ class ProductsController extends Controller
     public function getPrice(Request $request)
     {
         $stock = Stock::find($request->uid);
-        $attributes = array_keys($request->options);
-        $options = array_values($request->options);
-        if($stock){
-            $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)
-                ->whereIn('options_id',$options)
-                ->whereIn('variation_id',$stock->variations()->pluck('id')->all())
-                ->groupBy('variation_id')
-                ->having('total',count($request->options))
-                ->orderBy('total','desc')->first();
+        $attributes = [];
+        $options = [];
+        if(is_array($request->options)){
+            $attributes = array_keys($request->options);
+            $options = array_values($request->options);
+        }
 
-            if($option && $option->variation){
-                if($option->variation->qty > 0){
-                    return \Response::json(['price' =>  $option->variation->price,'variation_id' =>$option->variation->variation_id ,'error' => false]);
+        if($stock){
+            $variation = null;
+            if($stock->type == 'variation_product'){
+                $option = StockVariationOption::select('*',\DB::raw('count(*) as total'))->whereIn('attributes_id',$attributes)
+                    ->whereIn('options_id',$options)
+                    ->whereIn('variation_id',$stock->variations()->pluck('id')->all())
+                    ->groupBy('variation_id')
+                    ->having('total',count($request->options))
+                    ->orderBy('total','desc')->first();
+                $variation = ($option && $option->variation) ? $option->variation : null;
+            }elseif ($stock->type == 'simple_product'){
+                $variation = $stock->variations->first();
+            }elseif ($stock->type == 'package_product'){
+                $variation = $stock->variations->first();
+            }
+
+            if($variation){
+                if($variation->qty > 0){
+                    return \Response::json(['price' =>  $variation->price,'variation_id' =>$variation->variation_id ,'error' => false]);
                 }else{
-                    return \Response::json(['message' =>  'Out of stock','variation_id' =>$option->variation->variation_id ,'error' => true]);
+                    return \Response::json(['message' =>  'Out of stock','variation_id' =>$variation->variation_id ,'error' => true]);
                 }
             }
         }
-
 
         return \Response::json(['message' =>  'See available options','error' => true]);
     }
