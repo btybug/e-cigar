@@ -1,4 +1,4 @@
-<div class="product-form-groups poptions-group">
+<div class="product-form-groups poptions-group" data-promotion="{{ $promotion->id }}">
     @if($promotion->type == 'variation_product')
         @foreach($promotion->type_attrs as $promotionAttr)
             @php

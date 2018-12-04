@@ -121,9 +121,11 @@ class ProductsController extends Controller
         $stock = Stock::find($request->uid);
         $attributes = [];
         $options = [];
+        $totalCount = 0;
         if(is_array($request->options)){
             $attributes = array_keys($request->options);
             $options = array_values($request->options);
+            $totalCount = count($request->options);
         }
 
         if($stock){
@@ -133,18 +135,25 @@ class ProductsController extends Controller
                     ->whereIn('options_id',$options)
                     ->whereIn('variation_id',$stock->variations()->pluck('id')->all())
                     ->groupBy('variation_id')
-                    ->having('total',count($request->options))
+                    ->having('total',$totalCount)
                     ->orderBy('total','desc')->first();
+
                 $variation = ($option && $option->variation) ? $option->variation : null;
             }elseif ($stock->type == 'simple_product'){
                 $variation = $stock->variations->first();
             }elseif ($stock->type == 'package_product'){
                 $variation = $stock->variations->first();
             }
-
             if($variation){
                 if($variation->qty > 0){
-                    return \Response::json(['price' =>  $variation->price,'variation_id' =>$variation->variation_id ,'error' => false]);
+                    if($request->promotion){
+                        $promotionPrice = $stock->promotion_prices()->where('variation_id',$variation->id)->first();
+                        $price = ($promotionPrice)? $promotionPrice->price : $variation->price;
+                    }else{
+                        $price = $variation->price;
+                    }
+
+                    return \Response::json(['price' =>  $price,'variation_id' =>$variation->variation_id ,'error' => false]);
                 }else{
                     return \Response::json(['message' =>  'Out of stock','variation_id' =>$variation->variation_id ,'error' => true]);
                 }

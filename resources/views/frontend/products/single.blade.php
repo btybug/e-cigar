@@ -325,7 +325,6 @@
                 get_price();
             });
 
-
             $("body").on('click', '.add-to-cart', function () {
                 var variationId = $("#variation_uid").val();
 
@@ -390,35 +389,50 @@
             });
         }
 
-        function get_promotion_price() {
-//            price-place-promotion
-            var items = document.getElementsByClassName('select-variation-poption');
-//            $(".btn-add-to-cart").removeClass('add-to-cart');
-            let options = {};
-            for (var i = 0; i < items.length; i++) {
-                options[$(items[i]).data('name')] = $(items[i]).val();
-            }
+        var plist = $(".poptions-group");
+        for (var i = 0; i < plist.length; i++) {
+            get_promotion_price($(plist[i]).data('promotion'))
+        }
 
-            $.map($(".poptions-group input:radio:checked"), function (elem, idx) {
+        $("body").on('change', '.select-variation-poption', function () {
+            var pid = $(this).closest('.poptions-group').data('promotion');
+            get_promotion_price(pid);
+        });
+
+        $("body").on('change', '.select-variation-radio-poption', function () {
+            var pid = $(this).closest('.poptions-group').data('promotion');
+            get_promotion_price(pid);
+        });
+
+        function get_promotion_price(pid) {
+            let options = {};
+
+            $.map($("[data-promotion='"+pid+"'] input:radio:checked"), function (elem, idx) {
                 options[$(elem).data('name')] = $(elem).val();
             });
 
+            $.map($("[data-promotion='"+pid+"'] .select-variation-poption"), function (elem, idx) {
+                options[$(elem).data('name')] = $(elem).val();
+            });
+
+            console.log(options);
+//            price-place-promotion
             $.ajax({
                 type: "post",
                 url: "/products/get-price",
                 cache: false,
                 datatype: "json",
-                data: {options: options, uid: $("#vpid").val()},
+                data: {options: options, uid: pid,promotion : true},
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
                 success: function (data) {
                     if (!data.error) {
-                        $(".price-place-promotion").html("€" + data.price);
+                        $("[data-promotion='"+pid+"'] .price-place-promotion").html("€" + data.price);
 //                        $("#variation_uid").val(data.variation_id);
 //                        $(".btn-add-to-cart").addClass('add-to-cart');
                     } else {
-                        $(".price-place-promotion").html(data.message);
+                        $("[data-promotion='"+pid+"'] .price-place-promotion").html(data.message);
 //                        $("#variation_uid").val('');
                     }
                 }
