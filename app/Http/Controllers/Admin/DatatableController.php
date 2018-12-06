@@ -231,7 +231,7 @@ class DatatableController extends Controller
 
     public function getAllStocks()
     {
-        return Datatables::of(Stock::where('is_promotion',false))
+        return Datatables::of(Stock::query())
             ->editColumn('image', function ($stock) {
                 return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
             })
@@ -241,22 +241,6 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions', 'name', 'image'])
-            ->make(true);
-    }
-
-    public function getAllPromotions()
-    {
-        return Datatables::of(Stock::where('is_promotion',true))
-            ->editColumn('image', function ($stock) {
-                return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
-            })
-            ->editColumn('created_at', function ($stock) {
-                return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
-            })
-            ->addColumn('actions', function ($stock) {
-                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='" . route("admin_promotion_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }

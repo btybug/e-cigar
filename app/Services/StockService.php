@@ -151,7 +151,7 @@ class StockService
             foreach ($data as $promotion_id => $jsonData) {
                 $newData = json_decode($jsonData, true);
                 $promotion = Stock::find($promotion_id);
-                if ($promotion && count($newData)) {
+                if ($promotion && $newData && count($newData)) {
                     foreach ($newData as $variation_id => $price) {
                         $promotionPrice = $promotion->promotion_prices()->where('variation_id', $variation_id)->first();
                         if ($promotionPrice) {
