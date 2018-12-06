@@ -5,12 +5,13 @@
     <td class="w-20">
         <select data-uid="{{ $uniqueID }}" name="type_attributes[{{ $uniqueID }}][attributes_id]" class="form-control select-attribute" placeholder="Select">
                <option val="">Select</option>
+
            @foreach($allAttrs as $allAttr)
                <option {{ (isset($selected) && $selected->id == $allAttr->id) ? 'selected' : '' }} value="{{ $allAttr->id }}">{{ $allAttr->name }}</option>
             @endforeach
         </select>
     </td>
-    <td class="w-70">
+    <td class="w-50">
         @php
             $type_options = [];
             $type_optionArray = [];
@@ -21,7 +22,7 @@
                 }
             }else{
                 $type_options = (isset($selected) && $selected) ? $selected->stickers->pluck('id')->all() : [];
-                $type_optionArray = (isset($selected) && $selected) ? $selected->stickers->pluck('name','id')->all() : [];;
+                $type_optionArray = (isset($selected) && $selected) ? $selected->stickers->pluck('name','id')->all() : [];
             }
 
         @endphp
@@ -29,11 +30,9 @@
         {!! Form::select("type_attributes[$uniqueID][options][]",$type_optionArray,$type_options,['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
     </td>
     <td>
-        <select class="form-control">
-            <option value="">radio</option>
-            <option value="">range</option>
-            <option value="">select</option>
-        </select>
+        {!! Form::select("type_attributes[$uniqueID][type]",['select' => 'Select','radio' => 'Range'],
+        (isset($selected) && $selected) ? $selected->pivot->type : null,
+        ['class' => "form-control"]) !!}
     </td>
     <td colspan="2" class="text-right">
         <button type="button" class="btn btn-danger"><i

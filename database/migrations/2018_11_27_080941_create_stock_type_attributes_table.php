@@ -18,6 +18,7 @@ class CreateStockTypeAttributesTable extends Migration
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('attributes_id');
             $table->unsignedInteger('sticker_id')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
 
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');

@@ -116,7 +116,7 @@ class Stock extends Translatable
     public function type_attrs()
     {
         return $this->belongsToMany(Attributes::class, 'stock_type_attributes', 'stock_id', 'attributes_id')
-            ->whereNull('stock_type_attributes.sticker_id');
+            ->whereNull('stock_type_attributes.sticker_id')->withPivot('type');
     }
 
     public function type_attrs_pivot()

@@ -48,8 +48,9 @@ class StockService
         if (count($data)) {
             foreach ($data as $datum) {
                 $attr_id = $datum['attributes_id'];
+                $type = $datum['type'];
                 $ids = $datum['options'];
-                $result[] = ['attributes_id' => $attr_id];
+                $result[] = ['attributes_id' => $attr_id,'type' => $type];
                 if (count($ids)) {
                     foreach ($ids as $id) {
                         if ($id) {
