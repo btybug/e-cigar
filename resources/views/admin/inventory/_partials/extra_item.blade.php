@@ -5,9 +5,24 @@
                 $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
                 $promotionPrice = $model->promotion_prices()->where('variation_id',$single_variation->id)->first();
             @endphp
-            <div class="col-md-12 m-5">
-                <button type="button" class="btn btn-primary save-extra-variations pull-right" data-type="normal">Save
-                </button>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="col-md-2">Type:</label>
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option value="">Optional</option>
+                                <option value="">Required</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
+                        Save
+                    </button>
+                </div>
             </div>
             <table class="table table-style table-bordered" cellspacing="0"
                    width="100%">
@@ -43,7 +58,7 @@
                 <div class="col-md-4">
                     <div class="row">
                         <label class="col-md-2">Type:</label>
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <select class="form-control">
                                 <option value="">Optional</option>
                                 <option value="">Required</option>
@@ -99,21 +114,40 @@
                 </tbody>
             </table>
         @elseif($model->type == 'package_product')
-            <div class="col-md-6">
-                @php
-                    $variation = ($model && count($model->variations)) ? $model->variations->first() : null;
-                    $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
-                @endphp
-                Price
-                :{!! Form::text("extra_product[$variation->id][price]",
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="col-md-2">Type:</label>
+                        <div class="col-sm-6">
+                            <select class="form-control">
+                                <option value="">Optional</option>
+                                <option value="">Required</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    @php
+                        $variation = ($model && count($model->variations)) ? $model->variations->first() : null;
+                        $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
+                    @endphp
+
+                    <div class="row">
+                        <label class="col-md-2">Price:</label>
+                        <div class="col-sm-6">
+                            {!! Form::text("extra_product[$variation->id][price]",
                 ($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null),
                 ['class' => 'form-control extra-item extra-price','data-variation' => ($variation) ? $variation->id : null]) !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
+                        Save
+                    </button>
+                </div>
             </div>
-            <div class="col-md-6">
-                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="package">
-                    Save
-                </button>
-            </div>
+
             <table class="table table-style table-bordered" cellspacing="0"
                    width="100%">
                 <thead>

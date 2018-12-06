@@ -59,8 +59,7 @@ class InventoryController extends Controller
 
     public function getStockEdit ($id)
     {
-        $model = Stock::where('is_promotion', false)->where('id', $id)->first();
-        if (! $model) abort(404);
+        $model = Stock::findOrFail($id);
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
@@ -169,7 +168,7 @@ class InventoryController extends Controller
     public function getStocks (Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Stock::where('is_promotion', $promotion)->whereNotIn('id', $request->get('arr', []))->get();
+        $attr = Stock::whereNotIn('id', $request->get('arr', []))->get();
 
         return \Response::json(['error' => false, 'data' => $attr]);
     }
@@ -221,14 +220,10 @@ class InventoryController extends Controller
 
     public function getPromotionVariations (Request $request)
     {
-        $model = Stock::where('is_promotion', true)->where('id', $request->id)->first();
-        if ($model) {
-            $html = \View("admin.inventory._partials.extra_item", compact(['model']))->render();
+        $model = Stock::findOrFail($request->id);
 
-            return \Response::json(['error' => false, 'html' => $html]);
-        }
-
-        return \Response::json(['error' => true]);
+        $html = \View("admin.inventory._partials.extra_item", compact(['model']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postRenderVariationNewOptions (Request $request)

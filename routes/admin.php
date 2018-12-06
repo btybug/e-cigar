@@ -118,13 +118,6 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/', 'Admin\StoreController@getSettings')->name('admin_store_settings');
     });
 
-    Route::group(['prefix' => 'promotions'], function () {
-        Route::get('/', 'Admin\PromotionController@getIndex')->name('admin_promotion');
-        Route::get('/new', 'Admin\PromotionController@getNew')->name('admin_promotion_new');
-        Route::get('/edit/{id}', 'Admin\PromotionController@getEdit')->name('admin_promotion_edit');
-        Route::post('/save', 'Admin\PromotionController@postSave')->name('admin_promotion_save');
-    });
-
     Route::group(['prefix' => 'purchase'], function () {
         Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_store_purchase');
         Route::get('/new', 'Admin\StoreController@getPurchaseNew')->name('admin_store_purchase_new');
