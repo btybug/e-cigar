@@ -28,6 +28,13 @@
         {{--<input  class="tag-input-v v-input-{{ $uniqueID }}" value="{{ $type_options_name }}">--}}
         {!! Form::select("type_attributes[$uniqueID][options][]",$type_optionArray,$type_options,['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
     </td>
+    <td>
+        <select class="form-control">
+            <option value="">radio</option>
+            <option value="">range</option>
+            <option value="">select</option>
+        </select>
+    </td>
     <td colspan="2" class="text-right">
         <button type="button" class="btn btn-danger"><i
                     class="fa fa-minus-circle delete-v-option"></i></button>
