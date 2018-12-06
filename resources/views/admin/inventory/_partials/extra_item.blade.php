@@ -39,10 +39,23 @@
                 </tbody>
             </table>
         @elseif($model->type == 'variation_product')
-            <div class="col-md-12 m-5">
-                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
-                    Save
-                </button>
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="row">
+                        <label class="col-md-2">Type:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control">
+                                <option value="">Optional</option>
+                                <option value="">Required</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
+                        Save
+                    </button>
+                </div>
             </div>
             <table id="variations-table" class="table table-style table-bordered"
                    cellspacing="0" width="100%">
