@@ -42,7 +42,10 @@ class ShoppingCartController extends Controller
 
     public function getCart()
     {
-        $items = $this->cartService->getCartItems();
+//        $items = $this->cartService->getCartItems();
+        $items = Cart::getContent();
+
+//        dd($items);
         $default_shipping = null;
         $shipping = null;
         $geoZone  = null;
@@ -140,11 +143,13 @@ class ShoppingCartController extends Controller
 
     public function postAddToCart(Request $request)
     {
-        $variation = StockVariation::where('variation_id',$request->uid)->first();
+        $variation = StockVariation::find($request->uid);
+//        dd($variation);
         if($variation){
             if(\Auth::check()){
                 $user = \Auth::user();
-                Cart::add($variation->variation_id,$variation->stock->sku,$variation->price,1,['variation' => $variation]);
+                Cart::add($variation->id,$variation->variation_id,$variation->price,1,
+                    ['variation' => $variation, 'requiredItems' => $request->get('requiredItems'),'optionalItems' => $request->get('optionalItems')]);
 
                 $default_shipping = $user->addresses()->where('type','default_shipping')->first();
                 $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
@@ -167,7 +172,7 @@ class ShoppingCartController extends Controller
                     }
                 }
             }else{
-                Cart::add($variation->variation_id,$variation->stock->sku,$variation->price,1,['variation' => $variation]);
+                Cart::add($variation->id,$variation->variation_id,$variation->price,1,['variation' => $variation]);
             }
 
             $headerhtml = \View('frontend._partials.shopping_cart_options')->render();

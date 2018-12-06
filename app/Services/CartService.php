@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 
+use App\Models\StockVariation;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 /**
@@ -12,6 +13,7 @@ class CartService
 {
     public function getCartItems(){
         $cartCollection = Cart::getContent();
+
         $items = [];
         if(! Cart::isEmpty()){
             foreach($cartCollection as $key => $value){
@@ -27,5 +29,10 @@ class CartService
     public function getCount() {
         $cartCollection = Cart::getContent();
         return $cartCollection->count();
+    }
+
+    public static function getVariation ($id)
+    {
+        return StockVariation::find($id);
     }
 }

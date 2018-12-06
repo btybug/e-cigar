@@ -329,12 +329,30 @@
                 var variationId = $("#variation_uid").val();
 
                 if (variationId && variationId != '') {
+                    var requiredItems = [];
+                    var optionalItems = [];
+
+                    var requiredItemsData = $(".required_item");
+                    var optionalItemsData = $(".optional_item");
+
+
+                    optionalItemsData.each(function (i,e) {
+                        if($(e).parent().find('.optional_checkbox').is(':checked')){
+                            optionalItems.push($(e).val());
+                        }
+                    });
+
+                    requiredItemsData.each(function (i,e) {
+                        requiredItems.push($(e).val());
+                    });
+//                    console.log(requiredItems)
+//                    return false;
                     $.ajax({
                         type: "post",
                         url: "/add-to-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: variationId},
+                        data: {uid: variationId,requiredItems: requiredItems,optionalItems: optionalItems},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -438,6 +456,7 @@
                         }
 
                         $("[data-promotion='"+pid+"'] .price-place-promotion").html(price);
+                        $("[data-promotion='"+pid+"'] .variation_items").val(data.variation_id);
 //                        $("#variation_uid").val(data.variation_id);
 //                        $(".btn-add-to-cart").addClass('add-to-cart');
                     } else {

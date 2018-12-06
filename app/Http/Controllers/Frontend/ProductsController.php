@@ -156,9 +156,9 @@ class ProductsController extends Controller
                 }
 
                 if ($variation->qty > 0) {
-                    return \Response::json(['price' => $price, 'variation_id' => $variation->variation_id, 'error' => false]);
+                    return \Response::json(['price' => $price, 'variation_id' => $variation->id, 'error' => false]);
                 } else {
-                    return \Response::json(['message' => 'Out of stock', 'price' => $price, 'variation_id' => $variation->variation_id, 'error' => false]);
+                    return \Response::json(['message' => 'Out of stock', 'price' => $price, 'variation_id' => $variation->id, 'error' => false]);
                 }
             }
         }

@@ -17,8 +17,9 @@
                         <tbody>
                         @if(count($items))
                             @foreach($items as $item)
+                                {{--{!! dd($item) !!}--}}
                                 @php
-                                    $stock = array_first($item)->attributes->variation->stock
+                                    $stock = $item->attributes->variation->stock
                                 @endphp
                                 <tr>
                                     <td align="left" class="item">
@@ -35,52 +36,96 @@
                                     </td>
 
                                     <td align="right" class="options">
-                                        @foreach($item as $option)
-                                            <div class="input-group">
-                                                @foreach($option->attributes->variation->options as $voption)
-                                                    <div class="form-group row">
-                                                        <label class="mr-2"
-                                                               for="color1"><strong>{{ $voption->attr->name }}
-                                                                : </strong> {{ $voption->option->name }}
-                                                        </label>
+                                        <div class="input-group">
+                                            @foreach($item->attributes->variation->options as $voption)
+                                                <div class="form-group row">
+                                                    <label class="mr-2"
+                                                           for="color1"><strong>{{ $voption->attr->name }}
+                                                            : </strong> {{ $voption->option->name }}
+                                                    </label>
 
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        @if(count($item->attributes->requiredItems))
+                                            @foreach($item->attributes->requiredItems as $vid)
+                                                <div class="input-group">
+                                                    @php
+                                                        $variationReq = \App\Services\CartService::getVariation($vid)
+                                                    @endphp
+                                                    <div class="col-md-12">
+                                                       <strong> {{ $variationReq->stock->name }} - free</strong>
                                                     </div>
-                                                @endforeach
-                                            </div>
-                                        @endforeach
+
+                                                    @if($variationReq->stock->type == 'variation_product')
+                                                        @foreach($variationReq->options as $voption)
+                                                            <div class="form-group row">
+                                                                <label class="mr-2"
+                                                                       for="color1"><strong>{{ $voption->attr->name }}
+                                                                        : </strong> {{ $voption->option->name }}
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        @endif
+
+                                        @if(count($item->attributes->optionalItems))
+                                            @foreach($item->attributes->optionalItems as $vid)
+                                                <div class="input-group">
+                                                    @php
+                                                        $variationOpt = \App\Services\CartService::getVariation($vid)
+                                                    @endphp
+                                                    <div class="col-md-12">
+                                                        <strong> {{ $variationOpt->stock->name }}</strong>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                    @if($variationOpt->stock->type == 'variation_product')
+                                                        @foreach($variationOpt->options as $voption)
+                                                            <div class="form-group row">
+                                                                <label class="mr-2"
+                                                                       for="color1"><strong>{{ $voption->attr->name }}
+                                                                        : </strong> {{ $voption->option->name }}
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <strong> ${{ $variationOpt->price }}</strong>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </td>
                                     <td align="right" class="Qty">
-                                        @foreach($item as $option)
-                                            <div class="input-group mb-4">
-                                                  <span data-condition="{{ false }}" data-uid="{{ $option->id }}" class="input-group-btn qtycount">
-                                                        <i class="fa fa-minus" aria-hidden="true"></i>
-                                                  </span>
-                                                <input name="quantity[]" type="text" readonly
-                                                       value="{{ $option->quantity }}"
-                                                       class="form-control qty">
-                                                <span data-condition="{{ true }}" data-uid="{{ $option->id }}" class="input-group-btn qtycount">
-                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
-                                                                  </span>
-                                            </div>
-                                        @endforeach
+                                        <div class="input-group mb-4">
+                                              <span data-condition="{{ false }}" data-uid="{{ $item->id }}" class="input-group-btn qtycount">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                              </span>
+                                            <input name="quantity[]" type="text" readonly
+                                                   value="{{ $item->quantity }}"
+                                                   class="form-control qty">
+                                            <span data-condition="{{ true }}" data-uid="{{ $item->id }}" class="input-group-btn qtycount">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                              </span>
+                                        </div>
                                     </td>
 
                                     <td align="right" class="price">
-                                        @foreach($item as $option)
-                                            <div class="d-flex justify-content-end">
-                                                <span class="d-block cart_price_4925 mb-4">${{ $option->price }}</span>
-                                                <a data-uid="{{ $option->id }}" href="javascript:void(0)"
-                                                   class="btn btn-danger btn-sm align-self-start ml-1 remove-from-cart"><i
-                                                            class="fa fa-times"></i></a>
-                                            </div>
-                                        @endforeach
+                                        <div class="d-flex justify-content-end">
+                                            <span class="d-block cart_price_4925 mb-4">${{ $item->price }}</span>
+                                            <a data-uid="{{ $item->id }}" href="javascript:void(0)"
+                                               class="btn btn-danger btn-sm align-self-start ml-1 remove-from-cart"><i
+                                                        class="fa fa-times"></i></a>
+                                        </div>
                                     </td>
                                     <td align="right" class="subtotal">
-                                        @foreach($item as $option)
-                                            <div class="d-flex justify-content-end">
-                                                <span class="d-block cart_price_4925 mb-4">${{ $option->getPriceSum() }}</span>
-                                            </div>
-                                        @endforeach
+                                        <div class="d-flex justify-content-end">
+                                            <span class="d-block cart_price_4925 mb-4">${{ $item->getPriceSum() }}</span>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
