@@ -17,6 +17,7 @@ class CreateProductPormotionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('promotion_id');
+            $table->tinyInteger('type')->default(0);
             $table->timestamps();
 
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');

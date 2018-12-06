@@ -693,8 +693,9 @@
                                                             <div class="buttons">
                                                                 <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                             </div>
-                                                            <input type="hidden" name="promotions[]" value="{{ $promotion->id }}">
+                                                            <input type="hidden" name="promotions[{{ $promotion->id }}][id]" value="{{ $promotion->id }}">
                                                             <input type="hidden" class="promotion_price" data-id="{{ $promotion->id }}" name="promotion_prices[{{ $promotion->id }}]" value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
+                                                            <input type="hidden" class="promotion_type" data-id="{{ $promotion->id }}" name="promotions[{{ $promotion->id }}][type]" value="{{ $promotion->pivot->type }}">
                                                         </li>
                                                     @endforeach
                                                 @endif
@@ -1014,6 +1015,7 @@
                 var type = $(this).data('type');
                 var list = $(".extra-item");
                 var promotionID = $(this).closest('.extra-item-data').data('promotion-v');
+                var promotionType = $(this).closest('.extra-item-data').find('.promotion-type').val();
                 var promotionPrices = {};
 
                 if(type == 'normal'){
@@ -1030,7 +1032,8 @@
 
                 AjaxCall("/admin/inventory/stock/save-extra-option", {data: promotionPrices}, function (res) {
                     if (!res.error) {
-                        $(".get-all-extra-tab").find('.promotion-elm').find(`[data-id='${promotionID}']`).val(res.data)
+                        $(".get-all-extra-tab").find('.promotion-elm').find(`.promotion_price[data-id='${promotionID}']`).val(res.data)
+                        $(".get-all-extra-tab").find('.promotion-elm').find(`.promotion_type[data-id='${promotionID}']`).val(promotionType)
                     }
                 });
             })
@@ -1039,9 +1042,12 @@
                 if(e.target != this) return false;
 
                 var id = $(this).data('id');
+                var type = $(this).find('.promotion_type').val();
+                var price = $(this).find('.promotion_price').val();
+                console.log(type);
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
-                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {id: id}, function (res) {
+                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {id: id,type : type, price: price}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                     }
@@ -1182,8 +1188,9 @@
                                 <div class="buttons">
                                 <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
-                                <input type="hidden" name="promotions[]" value="${id}">
+                                <input type="hidden" name="promotions[${id}][id]" value="${id}">
                                 <input type="hidden" class="promotion_price" data-id="${id}" name="promotion_prices[${id}]" value="">
+                                <input type="hidden" class="promotion_type" data-id="${id}" name="promotions[${id}][type]" value="0" />
                                 </li>`);
                 $(this)
                     .parent()
@@ -1199,7 +1206,7 @@
                                 <div class="buttons">
                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
-                                <input type="hidden" name="related_products[]" value="${id}">
+                                <input type="hidden" name="related_products[]" value="${id}" />
                                 </li>`);
                 $(this)
                     .parent()

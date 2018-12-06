@@ -11,10 +11,7 @@
                     <div class="row">
                         <label class="col-md-2">Type:</label>
                         <div class="col-sm-6">
-                            <select class="form-control">
-                                <option value="">Optional</option>
-                                <option value="">Required</option>
-                            </select>
+                            {!! Form::select('',['0' => 'Optional', '1' => 'Required'], (isset($type)) ? $type : (($model) ? $model->type : null), ['class' => 'form-control promotion-type']) !!}
                         </div>
                     </div>
                 </div>
@@ -47,7 +44,8 @@
                     </td>
                     <td>
                         {!! Form::text("extra_product[$single_variation->id][price]",
-                        ($promotionPrice) ? $promotionPrice->price : (($single_variation) ? $single_variation->price : null),
+                        (isset($price[$single_variation->id]) && $price[$single_variation->id]) ? $price[$single_variation->id] :
+                        (($promotionPrice) ? $promotionPrice->price : (($single_variation) ? $single_variation->price : null)),
                         ['class' => 'form-control extra-item','data-variation' => $single_variation->id]) !!}
                     </td>
                 </tr>
@@ -59,10 +57,7 @@
                     <div class="row">
                         <label class="col-md-2">Type:</label>
                         <div class="col-sm-6">
-                            <select class="form-control">
-                                <option value="">Optional</option>
-                                <option value="">Required</option>
-                            </select>
+                            {!! Form::select('',['0' => 'Optional', '1' => 'Required'], (isset($type)) ? $type : (($model) ? $model->type : null), ['class' => 'form-control promotion-type']) !!}
                         </div>
                     </div>
                 </div>
@@ -106,7 +101,8 @@
                                 $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
                             @endphp
                             {!! Form::text("extra_product[$variation->id][price]",
-                            ($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null),
+                            (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :
+                            (($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null)),
                             ['class' => 'form-control extra-item','data-variation' => $variation->id]) !!}
                         </td>
                     </tr>
@@ -119,10 +115,7 @@
                     <div class="row">
                         <label class="col-md-2">Type:</label>
                         <div class="col-sm-6">
-                            <select class="form-control">
-                                <option value="">Optional</option>
-                                <option value="">Required</option>
-                            </select>
+                            {!! Form::select('',['0' => 'Optional', '1' => 'Required'], (isset($type)) ? $type : (($model) ? $model->type : null), ['class' => 'form-control promotion-type']) !!}
                         </div>
                     </div>
                 </div>
@@ -136,7 +129,8 @@
                         <label class="col-md-2">Price:</label>
                         <div class="col-sm-6">
                             {!! Form::text("extra_product[$variation->id][price]",
-                ($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null),
+                            (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :
+                            (($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null)),
                 ['class' => 'form-control extra-item extra-price','data-variation' => ($variation) ? $variation->id : null]) !!}
                         </div>
                     </div>

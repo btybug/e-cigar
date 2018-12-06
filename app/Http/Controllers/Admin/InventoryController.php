@@ -79,11 +79,10 @@ class InventoryController extends Controller
     public function postStock (ProductsRequest $request)
     {
         $data = $request->except('_token', 'translatable', 'attributes', 'options', 'promotions',
-            'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices',
+            'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices','promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
-
 
         if ($data['type'] == 'variation_product') {
             $this->stockService->saveVariations($stock, $request->get('variations', []));
@@ -221,8 +220,10 @@ class InventoryController extends Controller
     public function getPromotionVariations (Request $request)
     {
         $model = Stock::findOrFail($request->id);
+        $type = $request->type;
+        $price = json_decode($request->price,true);
 
-        $html = \View("admin.inventory._partials.extra_item", compact(['model']))->render();
+        $html = \View("admin.inventory._partials.extra_item", compact(['model','type','price']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

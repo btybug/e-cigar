@@ -78,7 +78,7 @@ class Stock extends Translatable
 
     public function promotions()
     {
-        return $this->belongsToMany(Stock::class, 'product_promotions', 'stock_id', 'promotion_id');
+        return $this->belongsToMany(Stock::class, 'product_promotions', 'stock_id', 'promotion_id')->withPivot('type');
     }
 
     public function stickers()
