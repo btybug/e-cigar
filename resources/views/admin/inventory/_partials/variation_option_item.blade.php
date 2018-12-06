@@ -30,7 +30,7 @@
         {!! Form::select("type_attributes[$uniqueID][options][]",$type_optionArray,$type_options,['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
     </td>
     <td>
-        {!! Form::select("type_attributes[$uniqueID][type]",['select' => 'Select','radio' => 'Range'],
+        {!! Form::select("type_attributes[$uniqueID][type]",['select' => 'Select','radio' => 'Radio','range' => 'Range'],
         (isset($selected) && $selected) ? $selected->pivot->type : null,
         ['class' => "form-control"]) !!}
     </td>

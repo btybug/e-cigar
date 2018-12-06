@@ -4,7 +4,7 @@
             @php
                 $options = $model->type_attrs_pivot()->with('sticker')->where('attributes_id',$modelattr->id)->get();
             @endphp
-            @if($modelattr->pivot->type == 'radio')
+            @if($modelattr->pivot->type == 'range')
                 <div class="row align-items-center row-product-range mt-2">
                     <div class="col-md-5">
                         <label for="productPack" class="fnz-20 mb-md-0"> {!! $modelattr->name !!}</label>
@@ -26,7 +26,29 @@
                         @endif
                     </div>
                 </div>
-            @else
+            @elseif($modelattr->pivot->type == 'radio')
+                    <div class="row align-items-center row-product-range mt-2">
+                        <div class="col-md-5">
+                            <label for="productPack" class="fnz-20 mb-md-0"> {!! $modelattr->name !!}</label>
+                        </div>
+                        <div class="col-md-5">
+                            @if(count($options))
+                                <div class="d-flex">
+                                    @foreach($options as $item)
+                                        <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
+                                            <label for="r{{ $item->sticker->id }}"></label>
+                                            <input data-name="{{ $modelattr->id }}"
+                                                   {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
+                                                   type="radio" id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                                   name="rate{{ $modelattr->id }}">
+                                            <span class="count">{{ $item->sticker->name }}</span>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                @else
                 <div class="row align-items-center mt-2">
                     <div class="col-md-5">
                         <label for="productPack" class="fnz-20 mb-md-0">{!! $modelattr->name !!}</label>

@@ -4,7 +4,7 @@
             @php
                 $poptions = $promotion->type_attrs_pivot()->with('sticker')->where('attributes_id',$promotionAttr->id)->get();
             @endphp
-            @if($modelattr->display_as == 'radio')
+            @if($modelattr->pivot->type == 'range')
                 <div class="row align-items-center row-product-range mt-2">
                     <div class="col-md-5">
                         <label for="productPack" class="fnz-20 mb-md-0"> {!! $promotionAttr->name !!}</label>
@@ -12,6 +12,28 @@
                     <div class="col-md-5">
                         @if(count($poptions))
                             <div class="product-range d-flex">
+                                @foreach($poptions as $item)
+                                    <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
+                                        <label for="r{{ $item->sticker->id }}"></label>
+                                        <input data-name="{{ $promotionAttr->id }}"
+                                               {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
+                                               type="radio" id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                               name="rate{{ $promotionAttr->id }}">
+                                        <span class="count">{{ $item->sticker->name }}</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            @elseif($modelattr->pivot->type == 'radio')
+                <div class="row align-items-center row-product-range mt-2">
+                    <div class="col-md-5">
+                        <label for="productPack" class="fnz-20 mb-md-0"> {!! $promotionAttr->name !!}</label>
+                    </div>
+                    <div class="col-md-5">
+                        @if(count($poptions))
+                            <div class=" d-flex">
                                 @foreach($poptions as $item)
                                     <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
                                         <label for="r{{ $item->sticker->id }}"></label>
