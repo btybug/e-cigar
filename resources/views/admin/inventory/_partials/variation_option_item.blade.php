@@ -31,7 +31,7 @@
     </td>
     <td>
         {!! Form::select("type_attributes[$uniqueID][type]",['select' => 'Select','radio' => 'Radio','range' => 'Range'],
-        (isset($selected) && $selected) ? $selected->pivot->type : null,
+        (isset($selected) && $selected && $selected->pivot) ? $selected->pivot->type : null,
         ['class' => "form-control"]) !!}
     </td>
     <td colspan="2" class="text-right">
