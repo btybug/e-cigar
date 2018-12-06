@@ -148,17 +148,17 @@ class ProductsController extends Controller
                 $variation = $stock->variations->first();
             }
             if ($variation) {
-                if ($variation->qty > 0) {
-                    if ($request->promotion) {
-                        $promotionPrice = $stock->promotion_prices()->where('variation_id', $variation->id)->first();
-                        $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
-                    } else {
-                        $price = $variation->price;
-                    }
+                if ($request->promotion) {
+                    $promotionPrice = $stock->promotion_prices()->where('variation_id', $variation->id)->first();
+                    $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
+                } else {
+                    $price = $variation->price;
+                }
 
+                if ($variation->qty > 0) {
                     return \Response::json(['price' => $price, 'variation_id' => $variation->variation_id, 'error' => false]);
                 } else {
-                    return \Response::json(['message' => 'Out of stock', 'variation_id' => $variation->variation_id, 'error' => true]);
+                    return \Response::json(['message' => 'Out of stock', 'price' => $price, 'variation_id' => $variation->variation_id, 'error' => false]);
                 }
             }
         }

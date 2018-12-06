@@ -378,7 +378,11 @@
                 },
                 success: function (data) {
                     if (!data.error) {
-                        $(".price-place").html("€" + data.price);
+                        var price = "€" + data.price;
+                        if(data.message){
+                           price = data.message + " €" + data.price;
+                        }
+                        $(".price-place").html(price);
                         $("#variation_uid").val(data.variation_id);
                         $(".btn-add-to-cart").addClass('add-to-cart');
                     } else {
@@ -428,7 +432,12 @@
                 },
                 success: function (data) {
                     if (!data.error) {
-                        $("[data-promotion='"+pid+"'] .price-place-promotion").html("€" + data.price);
+                        var price = "€" + data.price;
+                        if(data.message){
+                            price = data.message + " €" + data.price;
+                        }
+
+                        $("[data-promotion='"+pid+"'] .price-place-promotion").html(price);
 //                        $("#variation_uid").val(data.variation_id);
 //                        $(".btn-add-to-cart").addClass('add-to-cart');
                     } else {
