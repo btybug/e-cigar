@@ -67,8 +67,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
+                                            <div class="product-extra">
+                                                <h4>Extra</h4>
+                                                @php
+                                                    $countMessage = true;
+                                                @endphp
                                                 @if($main->attributes->requiredItems && count($main->attributes->requiredItems))
+                                                    @php
+                                                        $countMessage = false;
+                                                    @endphp
                                                     @foreach($main->attributes->requiredItems as $vid)
                                                         <div class="single">
                                                             @php
@@ -90,7 +99,13 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-2 align-self-center">
-                                                                    <div class="h5"><span class="badge badge-secondary">Free</span></div>
+                                                                    @php
+                                                                        $promotionPrice = ($variationReq) ? $variationReq->stock->promotion_prices()
+                                                                        ->where('variation_id',$variationReq->id)->first() : null;
+                                                                    @endphp
+                                                                    <div class="h5"><span class="badge badge-secondary">
+                                                                            {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationReq) ? "$" . $variationReq->price : 0) !!}
+                                                                        </span></div>
                                                                 </div>
                                                                 <div class="col-sm-2">
 
@@ -99,12 +114,11 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                            </div>
-
-                                            <div class="product-extra">
-                                                <h4>Extra</h4>
 
                                                 @if(count($item))
+                                                    @php
+                                                        $countMessage = false;
+                                                    @endphp
                                                     @foreach($item as $vid)
                                                         <div class="single">
                                                             @php
@@ -127,7 +141,13 @@
 
                                                                 </div>
                                                                 <div class="col-sm-2 align-self-center">
-                                                                    <div class="h5"><span class="badge badge-secondary">${{ $variationOpt->price }}</span></div>
+                                                                    @php
+                                                                        $promotionPrice = ($variationOpt) ? $variationOpt->stock->promotion_prices()
+                                                                        ->where('variation_id',$variationOpt->id)->first() : null;
+                                                                    @endphp
+                                                                    <div class="h5"><span class="badge badge-secondary">
+                                                                            {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationOpt) ? "$" . $variationOpt->price : 0) !!}
+                                                                        </span></div>
                                                                 </div>
                                                                 <div class="col-sm-2">
                                                                     <a data-uid="{{ $variationOpt->id }}" href="javascript:void(0)"
@@ -137,7 +157,9 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
-                                                @else
+                                                @endif
+
+                                                @if($countMessage)
                                                     <h5>No Extra items</h5>
                                                 @endif
                                             </div>
