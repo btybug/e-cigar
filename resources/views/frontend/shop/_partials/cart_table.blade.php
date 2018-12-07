@@ -4,6 +4,130 @@
             <form method='POST' id="update_cart_form"
                   action='http://demo.laravelcommerce.com/updateCart'>
                 <div class="table-responsive">
+                    <table class="table table-bordered cart-table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th align="left">Product</th>
+                            <th align="right">Qty</th>
+                            <th align="right">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td valign="center" align="center">
+                                <a href="javascript:void(0)" class="btn btn-danger btn-sm">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                            <td class="table-product">
+                                <div class="d-flex">
+                                    <div class="col-4 p-0">
+                                        <div class="image-name">
+                                            <img class="img-responsive w-100"
+                                                 src="https://cdn.newsapi.com.au/image/v1/2b74874798de42d5de6e4711150946d3"
+                                                 alt="product">
+                                            <div class="name">
+                                                Product Name
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                        <div class="procudt-info">
+                                            <div class="procudt-main">
+                                                <div class="single">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="title">
+                                                                Color
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="h5"><span class="badge badge-secondary">red</span></div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="h5"><span class="badge badge-secondary">50</span></div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="single">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="title">
+                                                                Juice
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="d-flex flex-wrap">
+                                                                <div class="h5 mr-1"><span class="badge badge-secondary">Apple</span></div>
+                                                                <div class="h5"><span class="badge badge-secondary">1 Pack</span></div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm-2 align-self-center">
+                                                            <div class="h5"><span class="badge badge-secondary">0</span></div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="product-extra">
+                                                <h4>Extra</h4>
+                                                <div class="single">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <span class="title">
+                                                                Coil
+                                                            </span>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="h4"><span class="badge badge-primary">Yes</span></div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <div class="h5"><span class="badge badge-secondary">30</span></div>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <a href="javascript:void(0)" class="btn btn-danger btn-sm">
+                                                                <i class="fa fa-times"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td valign="center" align="center" class="Qty w-8">
+                                <div class="input-group">
+                                              <span data-condition="{{ false }}" data-uid=""
+                                                    class="input-group-btn qtycount">
+                                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                              </span>
+                                    <input name="quantity[]" type="text" readonly
+                                           value=""
+                                           class="form-control qty">
+                                    <span data-condition="{{ true }}" data-uid="" class="input-group-btn qtycount">
+                                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                              </span>
+                                </div>
+                            </td>
+                            <td valign="center" align="center" class="w-8">
+                                <span>
+                                    80
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <table class="table">
                         <thead>
                         <tr>
@@ -55,7 +179,7 @@
                                                         $variationReq = \App\Services\CartService::getVariation($vid)
                                                     @endphp
                                                     <div class="col-md-12">
-                                                       <strong> {{ $variationReq->stock->name }} - free</strong>
+                                                        <strong> {{ $variationReq->stock->name }} - free</strong>
                                                     </div>
 
                                                     @if($variationReq->stock->type == 'variation_product')
@@ -82,16 +206,16 @@
                                                         <strong> {{ $variationOpt->stock->name }}</strong>
                                                     </div>
                                                     <div class="col-md-12">
-                                                    @if($variationOpt->stock->type == 'variation_product')
-                                                        @foreach($variationOpt->options as $voption)
-                                                            <div class="form-group row">
-                                                                <label class="mr-2"
-                                                                       for="color1"><strong>{{ $voption->attr->name }}
-                                                                        : </strong> {{ $voption->option->name }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
+                                                        @if($variationOpt->stock->type == 'variation_product')
+                                                            @foreach($variationOpt->options as $voption)
+                                                                <div class="form-group row">
+                                                                    <label class="mr-2"
+                                                                           for="color1"><strong>{{ $voption->attr->name }}
+                                                                            : </strong> {{ $voption->option->name }}
+                                                                    </label>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-12">
                                                         <strong> ${{ $variationOpt->price }}</strong>
@@ -102,13 +226,15 @@
                                     </td>
                                     <td align="right" class="Qty">
                                         <div class="input-group mb-4">
-                                              <span data-condition="{{ false }}" data-uid="{{ $item->id }}" class="input-group-btn qtycount">
+                                              <span data-condition="{{ false }}" data-uid="{{ $item->id }}"
+                                                    class="input-group-btn qtycount">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                               </span>
                                             <input name="quantity[]" type="text" readonly
                                                    value="{{ $item->quantity }}"
                                                    class="form-control qty">
-                                            <span data-condition="{{ true }}" data-uid="{{ $item->id }}" class="input-group-btn qtycount">
+                                            <span data-condition="{{ true }}" data-uid="{{ $item->id }}"
+                                                  class="input-group-btn qtycount">
                                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                               </span>
                                         </div>
@@ -178,7 +304,9 @@
                             <td align="right" id="subtotal">$0</td>
                         </tr>
                         <tr>
-                            <td align="left"><span>Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}</span></td>
+                            <td align="left">
+                                <span>Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}</span>
+                            </td>
                             <td align="right" id="subtotal">${!! ($shipping) ? $shipping->getValue():0 !!}</td>
                         </tr>
                         <tr>

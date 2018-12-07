@@ -29,3 +29,25 @@
     /*vertical-align: top;*/
     /*border-top: 1px solid #f2f2f2;*/
 }
+/*new table*/
+.section-cart-page .cart-table tbody td:not(.table-product){
+    vertical-align: middle;
+}
+.section-cart-page .cart-table .image-name img{
+    height: 150px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+.section-cart-page .cart-table .image-name .name{
+    padding:5px 10px;
+    font-size: 12px;
+    border: 2px solid #ccc;
+}
+.section-cart-page .cart-table .w-8{
+    width: 8%;
+}
+.section-cart-page .cart-table .Qty .input-group{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
