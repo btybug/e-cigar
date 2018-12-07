@@ -48,7 +48,7 @@
                                             @endforeach
                                         </div>
 
-                                        @if(count($item->attributes->requiredItems))
+                                        @if($item->attributes->requiredItems && count($item->attributes->requiredItems))
                                             @foreach($item->attributes->requiredItems as $vid)
                                                 <div class="input-group">
                                                     @php
@@ -72,7 +72,7 @@
                                             @endforeach
                                         @endif
 
-                                        @if(count($item->attributes->optionalItems))
+                                        @if($item->attributes->optionalItems && count($item->attributes->optionalItems))
                                             @foreach($item->attributes->optionalItems as $vid)
                                                 <div class="input-group">
                                                     @php
