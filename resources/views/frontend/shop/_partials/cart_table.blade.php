@@ -15,14 +15,15 @@
                         </thead>
                         <tbody>
                         @if(count($items))
-                            @foreach($items as $item)
-                                {{--{!! dd($item) !!}--}}
+                            @foreach($items as $key => $item)
                                 @php
-                                    $stock = $item->attributes->variation->stock
+                                    $main = $item[$key];
+                                    unset($item[$key]);
+                                    $stock = $main->attributes->variation->stock;
                                 @endphp
                                 <tr>
                             <td valign="center" align="center">
-                                <a data-uid="{{ $item->id }}" href="javascript:void(0)"
+                                <a data-uid="{{ $main->id }}" href="javascript:void(0)"
                                    class="btn btn-danger btn-sm remove-from-cart"><i
                                             class="fa fa-times"></i></a>
                             </td>
@@ -41,24 +42,25 @@
                                     <div class="col-8">
                                         <div class="procudt-info">
                                             <div class="procudt-main">
+
                                                 <div class="single">
                                                     <div class="row">
                                                         <div class="col-sm-2">
                                                             <span class="title">
-                                                                {{ $item->attributes->variation->name }}
+                                                                {{ $main->attributes->variation->name }}
                                                             </span>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="d-flex flex-wrap">
                                                                 @if($stock->type == 'variation_product')
-                                                                    @foreach($item->attributes->variation->options as $voption)
+                                                                    @foreach($main->attributes->variation->options as $voption)
                                                                         <div class="h5 mr-1"><span class="badge badge-secondary">{{ $voption->option->name }}</span></div>
                                                                     @endforeach
                                                                 @endif
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-2 align-self-center">
-                                                            <div class="h5"><span class="badge badge-secondary">${{ $item->price }}</span></div>
+                                                            <div class="h5"><span class="badge badge-secondary">${{ $main->price }}</span></div>
                                                         </div>
                                                         <div class="col-sm-2">
 
@@ -66,8 +68,8 @@
                                                     </div>
                                                 </div>
 
-                                                @if($item->attributes->requiredItems && count($item->attributes->requiredItems))
-                                                    @foreach($item->attributes->requiredItems as $vid)
+                                                @if($main->attributes->requiredItems && count($main->attributes->requiredItems))
+                                                    @foreach($main->attributes->requiredItems as $vid)
                                                         <div class="single">
                                                             @php
                                                                 $variationReq = \App\Services\CartService::getVariation($vid)
@@ -98,13 +100,15 @@
                                                     @endforeach
                                                 @endif
                                             </div>
+
                                             <div class="product-extra">
                                                 <h4>Extra</h4>
-                                                @if($item->attributes->optionalItems && count($item->attributes->optionalItems))
-                                                    @foreach($item->attributes->optionalItems as $vid)
+
+                                                @if(count($item))
+                                                    @foreach($item as $vid)
                                                         <div class="single">
                                                             @php
-                                                                $variationOpt = \App\Services\CartService::getVariation($vid)
+                                                                $variationOpt = $vid->attributes->variation
                                                             @endphp
                                                             <div class="row">
                                                                 <div class="col-sm-2">
@@ -126,9 +130,9 @@
                                                                     <div class="h5"><span class="badge badge-secondary">${{ $variationOpt->price }}</span></div>
                                                                 </div>
                                                                 <div class="col-sm-2">
-                                                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm">
-                                                                        <i class="fa fa-times"></i>
-                                                                    </a>
+                                                                    <a data-uid="{{ $variationOpt->id }}" href="javascript:void(0)"
+                                                                       class="btn btn-danger btn-sm remove-from-cart"><i
+                                                                                class="fa fa-times"></i></a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -143,22 +147,21 @@
                             </td>
                             <td valign="center" align="center" class="Qty w-8">
                                 <div class="input-group">
-                                              <span data-condition="{{ false }}" data-uid="{{ $item->id }}"
+                                              <span data-condition="{{ false }}" data-uid="{{ $main->id }}"
                                                     class="input-group-btn qtycount">
                                                     <i class="fa fa-minus" aria-hidden="true"></i>
                                               </span>
                                     <input name="quantity[]" type="text" readonly
-                                           value="{{ $item->quantity }}"
+                                           value="{{ $main->quantity }}"
                                            class="form-control qty">
-                                    <span data-condition="{{ true }}" data-uid="{{ $item->id }}" class="input-group-btn qtycount">
+                                    <span data-condition="{{ true }}" data-uid="{{ $main->id }}" class="input-group-btn qtycount">
                                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                               </span>
                                 </div>
                             </td>
                             <td valign="center" align="center" class="w-8">
                                 <span>
-                                    {{--cart_price_4925--}}
-                                    ${{ $item->getPriceSum() }}
+                                    ${{ \App\Services\CartService::getPriceSum($main->id) }}
                                 </span>
                             </td>
                         </tr>

@@ -42,10 +42,8 @@ class ShoppingCartController extends Controller
 
     public function getCart()
     {
-//        $items = $this->cartService->getCartItems();
-        $items = Cart::getContent();
+        $items = $this->cartService->getCartItems();
 
-//        dd($items);
         $default_shipping = null;
         $shipping = null;
         $geoZone  = null;
@@ -148,8 +146,19 @@ class ShoppingCartController extends Controller
         if($variation){
             if(\Auth::check()){
                 $user = \Auth::user();
-                Cart::add($variation->id,$variation->variation_id,$variation->price,1,
-                    ['variation' => $variation, 'requiredItems' => $request->get('requiredItems'),'optionalItems' => $request->get('optionalItems')]);
+                Cart::add($variation->id,$variation->id,$variation->price,1,
+                    ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
+
+                $optionalItems = $request->get('optionalItems');
+                if($optionalItems && count($optionalItems)){
+                    foreach ($optionalItems as $opv){
+                        $optpVariation = StockVariation::find($opv);
+                        if($optpVariation){
+                            Cart::add($optpVariation->id,$variation->id,$optpVariation->price,1,
+                                ['variation' => $optpVariation]);
+                        }
+                    }
+                }
 
                 $default_shipping = $user->addresses()->where('type','default_shipping')->first();
                 $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
@@ -172,7 +181,18 @@ class ShoppingCartController extends Controller
                     }
                 }
             }else{
-                Cart::add($variation->id,$variation->variation_id,$variation->price,1,['variation' => $variation]);
+                Cart::add($variation->id,$variation->id,$variation->price,1,['variation' => $variation]);
+
+                $optionalItems = $request->get('optionalItems');
+                if($optionalItems && count($optionalItems)){
+                    foreach ($optionalItems as $opv){
+                        $optpVariation = StockVariation::find($opv);
+                        if($optpVariation){
+                            Cart::add($optpVariation->id,$variation->id,$optpVariation->price,1,
+                                ['variation' => $optpVariation]);
+                        }
+                    }
+                }
             }
 
             $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
@@ -187,6 +207,7 @@ class ShoppingCartController extends Controller
     {
         $qty = ($request->condition) ? 1 : -1;
 
+//        dd($request->all());
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
@@ -242,6 +263,7 @@ class ShoppingCartController extends Controller
         }
 
         $items = $this->cartService->getCartItems();
+//        dd($items);
         $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
         $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 
@@ -254,7 +276,8 @@ class ShoppingCartController extends Controller
         $shipping = null;
         $geoZone = null;
         if(\Auth::check()){
-            Cart::remove($request->uid);
+            $this->cartService->remove($request->uid);
+
             $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
@@ -277,7 +300,7 @@ class ShoppingCartController extends Controller
                 }
             }
         }else{
-            Cart::remove($request->uid);
+            $this->cartService->remove($request->uid);
         }
 
         $items = $this->cartService->getCartItems();

@@ -11,6 +11,8 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
  */
 class CartService
 {
+    public static $cartItems = [];
+
     public function getCartItems(){
         $cartCollection = Cart::getContent();
 
@@ -19,20 +21,46 @@ class CartService
             foreach($cartCollection as $key => $value){
                 $items[$value->name][$key] = $value;
             }
-        }else{
-
         }
+
+        self::$cartItems = $items;
 
         return $items;
     }
 
     public function getCount() {
-        $cartCollection = Cart::getContent();
-        return $cartCollection->count();
+        $cartCollection = count($this->getCartItems());
+        return $cartCollection;
     }
 
     public static function getVariation ($id)
     {
         return StockVariation::find($id);
+    }
+
+    public static function getPriceSum($id)
+    {
+        $data = (isset(self::$cartItems[$id])) ? self::$cartItems[$id] : [] ;
+        $price = 0;
+        if(count($data)){
+            foreach ($data as $datum){
+                $price += $datum->getPriceSum();
+            }
+        }
+        return $price;
+    }
+
+    public function remove($id)
+    {
+        $list = $this->getCartItems();
+        $data = (isset($list[$id])) ? $list[$id] : [] ;
+
+        if(count($data)){
+            foreach ($data as $datum){
+                Cart::remove($datum->id);
+            }
+        }else{
+            Cart::remove($id);
+        }
     }
 }
