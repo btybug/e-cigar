@@ -23,6 +23,6 @@ class StockVariationOption extends Model
 
     public function option()
     {
-        return $this->belongsTo(Attributes::class, 'options_id');
+        return $this->belongsTo(Stickers::class, 'options_id');
     }
 }

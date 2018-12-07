@@ -43,7 +43,6 @@ class ShoppingCartController extends Controller
     public function getCart()
     {
         $items = $this->cartService->getCartItems();
-
         $default_shipping = null;
         $shipping = null;
         $geoZone  = null;
