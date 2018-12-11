@@ -594,3 +594,39 @@ function getImage($url){
     $name=end($url);
     return \App\Models\Media\Items::where('original_name',$name)->first();
 }
+
+function generateRandomString($length = 6) {
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+}
+
+function check_customer_number($number){
+    return \DB::table('users')->where('customer_number',$number)->first();
+}
+
+function check_order_number($number){
+    return \DB::table('orders')->where('order_number',$number)->first();
+}
+
+function generate_number($prefix){
+    return $prefix ."-". generateRandomString();
+}
+
+function get_customer_number(){
+    $number = generate_number('AMC');
+    $data = check_customer_number($number);
+    if($data) {
+        get_customer_number();
+    }
+
+    return $number;
+}
+
+function get_order_number(){
+    $number = generate_number('AMO');
+    $data = check_order_number($number);
+    if($data) {
+        get_order_number();
+    }
+
+    return $number;
+}

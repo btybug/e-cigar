@@ -70,6 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $customer_number = get_customer_number();
         return User::create([
             'name' => $data['name'],
             'last_name' => $data['last_name'],
@@ -79,6 +80,7 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'status' => 0,
             'role_id' => Roles::where('slug','customer')->first()->id,
+            'customer_number' => $customer_number,
             'password' => Hash::make($data['password']),
         ]);
     }

@@ -82,6 +82,8 @@ class StripePaymentController extends Controller
         $order = \DB::transaction(function () use ($billingId,$shippingId,$transaction,$geoZone,$shippingAddress,$zone) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
+            $order_number = get_order_number();
+
             $order = Orders::create([
                 'user_id' => \Auth::id(),
                 'transaction_id' => $transaction->id,
@@ -92,6 +94,7 @@ class StripePaymentController extends Controller
                 'payment_method' => 'stripe',
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
+                'order_number' => $order_number,
             ]);
 
             $status = $setting = $this->settings->getData('order', 'open');

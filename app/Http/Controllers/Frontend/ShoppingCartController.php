@@ -43,6 +43,9 @@ class ShoppingCartController extends Controller
     public function getCart()
     {
 //        /tes
+        $a = get_customer_number();
+        dd($a);
+//        customer_number
         $items = $this->cartService->getCartItems();
         $default_shipping = null;
         $shipping = null;

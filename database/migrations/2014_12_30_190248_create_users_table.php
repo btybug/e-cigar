@@ -28,6 +28,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id')->nullable()->unsigned();
             $table->string('verification_type',20)->nullable();
             $table->string('verification_image')->nullable();
+            $table->string('customer_number')->unique();
             $table->rememberToken();
             $table->timestamps();
 

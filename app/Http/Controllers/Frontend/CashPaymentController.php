@@ -55,6 +55,8 @@ class CashPaymentController extends Controller
         $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
+            $order_number = get_order_number();
+
             $order = Orders::create([
                 'user_id' => \Auth::id(),
                 'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
@@ -64,6 +66,7 @@ class CashPaymentController extends Controller
                 'payment_method' => 'cash',
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
+                'order_number' => $order_number
             ]);
 
             $status = $setting = $this->settings->getData('order', 'open');

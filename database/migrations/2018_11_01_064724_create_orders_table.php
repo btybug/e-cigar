@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->decimal('shipping_price',6,2);
             $table->string('currency',3);
+            $table->string('order_number')->unique();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
