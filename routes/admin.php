@@ -153,6 +153,12 @@ Route::group(['prefix' => 'faq'], function () {
     Route::post('create-new', 'Admin\FaqController@newPost')->name('admin_faq_new');
 });
 
+Route::group(['prefix' => 'manage-api'], function () {
+    Route::get('/', 'Admin\ManageApiController@index')->name('admin_manage_api');
+    Route::get('/settings', 'Admin\ManageApiController@settings')->name('admin_manage_api_settings');
+    Route::post('/settings', 'Admin\ManageApiController@postSettings')->name('post_admin_manage_api_settings');
+});
+
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/', 'Admin\OrdersController@index')->name('admin_orders');
     Route::get('/manage/{id}', 'Admin\OrdersController@getManage')->name('admin_orders_manage');

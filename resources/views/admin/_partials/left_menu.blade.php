@@ -98,7 +98,7 @@
                     <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                     @endok
                     @ok('admin_orders')
-                        <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
+                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
 
@@ -207,7 +207,8 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a></li>
+                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a>
+                    </li>
                     @ok('admin_emails')
                     <li><a href="{{route('admin_emails')}}"><i class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
@@ -220,8 +221,25 @@
                     @ok('admin_settings_events')
                     <li><a href="{{route('admin_settings_events')}}"><i class="fa fa-circle-o"></i>Events</a></li>
                     @endok
-
                 </ul>
+            </li>
+            @endok
+            @ok('admin_manage_api')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-handshake-o"></i>
+                    <span>Manage Api</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>
+                    @ok('admin_manage_api_settings')
+                    <li><a href="{{route('admin_manage_api_settings')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
+                    @endok
+                </ul>
+
             </li>
             @endok
         </ul>
