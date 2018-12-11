@@ -22,6 +22,7 @@
                     <th>Gender</th>
                     <th>Status</th>
                     <th>Verification Type</th>
+                    <th>Customer Number</th>
                     <th>Registered</th>
                     <th>Actions</th>
                 </tr>
@@ -49,6 +50,7 @@
                     {data: 'gender', name: 'gender'},
                     {data: 'status', name: 'status'},
                     {data: 'verification_type', name: 'verification_type'},
+                    {data: 'customer_number', name: 'customer_number'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

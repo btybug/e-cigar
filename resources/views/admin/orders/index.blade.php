@@ -24,6 +24,7 @@
                     <th>Shipping method</th>
                     <th>Payment Method</th>
                     <th>Currency</th>
+                    <th>Order Number</th>
                     <th>Created At</th>
                     <th>Updated At</th>
                     <th>Actions</th>
@@ -49,6 +50,7 @@
                     {data: 'shipping_method', name: 'shipping_method'},
                     {data: 'payment_method', name: 'payment_method'},
                     {data: 'currency', name: 'currency'},
+                    {data: 'order_number', name: 'order_number'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
