@@ -33,6 +33,8 @@ class ManageApiController extends Controller
     {
         $data=$request->only(['client_id','client_secret']);
         $settings->updateOrCreateSettings('manage_api_settings',$data);
+        $service=new ManagerApiService;
+        $service->getAccessToken()->save();
         return redirect()->back();
     }
 
