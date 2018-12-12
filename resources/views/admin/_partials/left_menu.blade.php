@@ -238,6 +238,9 @@
                     @ok('admin_manage_api_settings')
                     <li><a href="{{route('admin_manage_api_settings')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
                     @endok
+                    @ok('admin_manage_api_stocks')
+                    <li><a href="{{route('admin_manage_api_stocks')}}"><i class="fa fa-circle-o"></i>Stocks</a></li>
+                    @endok
                 </ul>
 
             </li>

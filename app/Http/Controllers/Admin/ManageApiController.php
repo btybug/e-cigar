@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Settings;
+use App\Services\ManagerApiRequest;
 use App\Services\ManagerApiService;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,16 @@ class ManageApiController extends Controller
     {
         $data=$request->only(['client_id','client_secret']);
         $settings->updateOrCreateSettings('manage_api_settings',$data);
-        dd($apiService->getAccessToken());
         return redirect()->back();
+    }
+
+    public function getStocks()
+    {
+        return $this->view('stocks');
+    }
+
+    public function getAllStocks(Request $request,ManagerApiRequest $apiRequest)
+    {
+        return $apiRequest->getStocks($request);
     }
 }

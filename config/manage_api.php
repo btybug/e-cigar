@@ -13,5 +13,12 @@ return [
         'username' => 'taylor@laravel.com',
         'password' => 'my-password',
         'scope' => '*',
+        ],
+    'get_refresh_token'=>[
+        'grant_type' => 'refresh_token',
+        'refresh_token' => 'the-refresh-token',
+        'client_id' => 'client-id',
+        'client_secret' => 'client-secret',
+        'scope' => ''
         ]
 ];
