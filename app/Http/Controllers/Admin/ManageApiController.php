@@ -29,7 +29,7 @@ class ManageApiController extends Controller
         return $this->view('settings',compact('model'));
     }
 
-    public function postSettings(Request $request,Settings $settings,ManagerApiService $apiService)
+    public function postSettings(Request $request,Settings $settings)
     {
         $data=$request->only(['client_id','client_secret']);
         $settings->updateOrCreateSettings('manage_api_settings',$data);
