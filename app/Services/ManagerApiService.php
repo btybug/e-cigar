@@ -65,7 +65,7 @@ class ManagerApiService
         $this->password = env('MANAGE_API_PASSWORD');
         $this->http = new \GuzzleHttp\Client;
         if (!$this->id || !$this->secret || !$this->username || !$this->password) {
-            throw new Exception('Missing required param');
+            throw new Exception('Missing required param'. 'id='.$this->id.' Secret='.$this->secret.' Username='.$this->username.' password='.$this->password );
         }
         $this->settings= new Settings;
         $this->source = $settings->getEditableData('manage_api_connection')->toArray();
