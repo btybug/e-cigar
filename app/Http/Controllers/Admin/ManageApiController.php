@@ -38,7 +38,7 @@ class ManageApiController extends Controller
         return redirect()->back();
     }
 
-    public function getStocks()
+    public function getStocks(ManagerApiRequest $apiRequest)
     {
         return $this->view('stocks');
     }
