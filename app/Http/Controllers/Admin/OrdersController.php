@@ -161,6 +161,7 @@ class OrdersController extends Controller
     {
         $variation = StockVariation::find($request->uid);
         if($variation){
+            Cart::session(7);
 
             $user = \Auth::user();
             Cart::add($variation->id,$variation->id,$variation->price,1,
