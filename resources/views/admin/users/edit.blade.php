@@ -23,7 +23,7 @@
                             <img class="profile-user-img img-responsive img-circle"
                                  src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"
                                  alt="Václav profile picture">
-
+                                {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
                             <h3 class="profile-username text-center">{!! $user->name.' '.$user->last_name !!}</h3>
 
                             <p class="text-muted text-center">{!! ($user->role)?$user->role->title:'User' !!}</p>
@@ -57,6 +57,9 @@
                         </li>
                         <li>
                             <a href="#orders" data-toggle="tab">Orders</a>
+                        </li>
+                        <li>
+                            <a href="#addresses" data-toggle="tab">Addresses</a>
                         </li>
                     </ul>
                     <!-- /.box -->
@@ -214,6 +217,157 @@
                                     </div>
                                 </div>
                             </div>
+                            <div id="addresses" class="tab-pane fade">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="m-0">Addresses</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12">
+                                            <ul class="nav nav-pills nav-fill" role="tablist">
+                                                <li>
+                                                    <a class="btn btn-info nav-link nav-link--new-address active" id="billingAddress-tab"
+                                                       data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress"
+                                                       aria-selected="true" aria-expanded="true">Billing Address</a>
+                                                </li>
+                                                <li>
+                                                    <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab"
+                                                       data-toggle="tab"
+                                                       href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>
+                                                </li>
+                                            </ul>
+
+                                            <div class="tab-content">
+                                                <div class="tab-pane active in p-4" id="billingAddress" role="tabpanel"
+                                                     aria-labelledby="billingAddress-tab">
+                                                    {!! Form::model($billing_address,['class'=>'form-horizontal','url' => route('admin_users_address')]) !!}
+                                                    {!! Form::hidden('user_id',$user->id) !!}
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Name</label>
+                                                            <div class="col-sm-8">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Company name</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('company',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Country</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Regions</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('region',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">City</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Post Code</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {!! Form::hidden('type','billing_address') !!}
+                                                    {!! Form::hidden('id') !!}
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-offset-4 col-sm-8">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                    {!! Form::close() !!}
+                                                </div>
+                                                <div class="tab-pane fade p-4" id="addressBook" role="tabpanel"
+                                                     aria-labelledby="addressBook-tab">
+                                                    <div class="panel panel-default">
+
+                                                        <div class="panel-body">
+                                                            <div>
+                                                                <div class="p-5">
+
+                                                                    <div class="form-group row mb-5">
+                                                                        <div class="col-md-5">
+                                                                            <h5>
+                                                                                <label for="selectAddress" class="control-label text-muted">Select
+                                                                                    your address</label>
+                                                                            </h5>
+                                                                        </div>
+                                                                        <div class="col-md-7 d-flex">
+                                                                            {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
+                                                                            <button type="button"
+                                                                                    class="nav-link nav-link--new-address btn btn-info address-book-new">
+                                                                                + Add New
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="border py-3 px-4">
+                                                                        <div class="selected-form">
+                                                                            @include("frontend.my_account._partials.new_address",['address_book'=>$default_shipping,'default' => true])
+                                                                        </div>
+                                                                        {{--<button type="submit" class="btn btn-primary edit-address">Edit</button>--}}
+                                                                        <button type="button" class="btn btn-danger edit-address">Delete
+                                                                        </button>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            {{--Inner Tab Content--}}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <!-- /.tab-pane -->
                         </div>
                         <!-- /.tab-content -->
@@ -224,13 +378,206 @@
 
         </div>
     </div>
+
+    <div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog"
+         aria-labelledby="newAddressModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Address Book</h5>
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body address-form">
+
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    <style>
+        .errors {
+            color:red;
+        }
+    </style>
 @stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <script>
         $(function () {
+            $("body").on('click', '.save-address-book', function () {
+                var form = $(".address-book-form").serialize();
+                var user_id = $("#userID").val()
+
+                AjaxCall(
+                    "/admin/users/save-address-book",
+                    form + "&user_id="+user_id,
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    window.location.reload();
+                }
+            },
+                error =>
+                {
+                    if (error.status == 422) {
+                        $('.errors').html('');
+                        for (var err in error.responseJSON.errors) {
+                            $('.errors').append(error.responseJSON.errors[err] + '<br>');
+                        }
+                    }
+                }
+            )
+                ;
+            })
+
+            $("#country").select2();
+            $("#geo_country").select2();
+            function getRegionsPackage() {
+                let value = $("#country").val();
+                AjaxCall(
+                    "/get-regions-by-country",
+                    {country: value},
+                    res => {
+                    let select = document.getElementById('regions');
+                select.innerText = null;
+                if (!res.error) {
+                    $.each(res.data, function (index, value) {
+                        var opt = document.createElement('option');
+                        opt.value = res.data[value];
+                        opt.innerHTML = res.data[value];
+                        select.appendChild(opt);
+                    })
+
+                }
+            }
+            )
+                ;
+            }
+
+            $("body").on('click', '.address-book-new', function () {
+                var user_id = $("#userID").val()
+                AjaxCall(
+                    "/admin/users/address-book-form",
+                    { user_id: user_id},
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    $(".address-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    $("#newAddressModal").modal();
+                }
+            }
+            )
+                ;
+            });
+
+            $("body").on('change', '.edit-address', function () {
+                var id = $(this).val();
+                var user_id = $("#userID").val()
+                AjaxCall(
+                    "/admin/users/address-book-form",
+                    {id: id, user_id: user_id},
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    $(".selected-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    //                    $("#newAddressModal").modal();
+                }
+            }
+            )
+                ;
+            });
+
+            function getRegions() {
+                let value = $("#geo_country").val();
+                AjaxCall(
+                    "/get-regions-by-geozone",
+                    {country: value},
+                    res => {
+                    let select = document.getElementById('geo_region');
+                select.innerText = null;
+                if (!res.error) {
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
+
+                }
+            }
+            )
+                ;
+            }
+
+            function renderAddressBook() {
+                let value = $(".select-address").val();
+                AjaxCall(
+                    "/my-account/select-address-book",
+                    {id: value},
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    $(".render-address").html(res.html);
+                }
+            }
+            )
+                ;
+            }
+
+            $("body").on("change", ".select-address", function () {
+                renderAddressBook();
+            });
+
+            $("body").on("change", "#country", function () {
+                getRegionsPackage();
+            });
+
+            $("body").on("change", "#geo_country", function () {
+                getRegions();
+            });
+
+            $("body").on("change", "#geo_country_book", function () {
+                var value = $(this).val();
+                let $_this = $(this);
+                AjaxCall(
+                    "/get-regions-by-geozone",
+                    {country: value},
+                    res => {
+                    let select = $_this.closest('.address-book-form').find('.geo_region_book');
+                $(select).empty()
+                if (!res.error) {
+                    console.log($(select).val())
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
+                }
+            }
+            )
+                ;
+            });
+
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_user_activity',$user->id) !!}",
                 columns: [
@@ -250,7 +597,7 @@
                 order: [ [0, 'desc'] ]
             });
 
-                $('#orders-table').DataTable({
+            $('#orders-table').DataTable({
                     ajax: "{!! route('datatable_user_orders',$user->id) !!}",
                     columns: [
                         {data: 'id', name: 'id'},

@@ -93,6 +93,11 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/staff/new', 'Admin\UserController@newStaff')->name('admin_staff_new');
     Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
+    Route::post('/address-book-form', 'Admin\UserController@postAddressBookForm')->name('admin_users_address_book_form');
+    Route::post('/save-address-book', 'Admin\UserController@postAddressBookSave')->name('admin_users_address_book_save');
+    Route::post('/address', 'Admin\UserController@postAddress')->name('admin_users_address');
+
+
     Route::post('/edit/{id}', 'Admin\UserController@postEdit')->name('post_admin_users_edit');
     Route::post('/send-reset-password-email', 'Admin\UserController@sendResetLinkEmail')->name('post_admin_users_reset_pass');
     Route::get('/activity/{id}', 'Admin\UserController@getUserActivity')->name('admin_users_activity');

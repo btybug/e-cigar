@@ -90,7 +90,8 @@ class UserController extends Controller
         $user = \Auth::user();
         $billing_address = $user->addresses()->where('type', 'billing_address')->first();
         $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
-        $address = $user->addresses()->where('type', 'address_book')->orWhere('type','default_shipping')
+        $address = $user->addresses()->where(function ($query){
+        $query->where('type','address_book')->orWhere('type','default_shipping'); })
             ->pluck('first_line_address', 'id');
         $countries = $this->countries->all()->pluck('name.common', 'name.common')->toArray();
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
