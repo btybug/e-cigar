@@ -196,7 +196,7 @@
                 AjaxCall(
                     "/my-account/save-address-book",
                     form,
-                    res = > {
+                    res => {
                     if (
                 !res.error
                 )
@@ -204,8 +204,7 @@
                     window.location.reload();
                 }
             },
-                error =
-                >
+                error =>
                 {
                     if (error.status == 422) {
                         $('.errors').html('');
@@ -225,7 +224,7 @@
                 AjaxCall(
                     "/get-regions-by-country",
                     {country: value},
-                    res = > {
+                    res => {
                     let select = document.getElementById('regions');
                 select.innerText = null;
                 if (!res.error) {
@@ -246,7 +245,7 @@
                 AjaxCall(
                     "/my-account/address-book-form",
                     {},
-                    res = > {
+                    res => {
                     if (
                 !res.error
                 )
@@ -265,7 +264,7 @@
                 AjaxCall(
                     "/my-account/address-book-form",
                     {id: id},
-                    res = > {
+                    res => {
                     if (
                 !res.error
                 )
@@ -284,7 +283,7 @@
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
-                    res = > {
+                    res => {
                     let select = document.getElementById('geo_region');
                 select.innerText = null;
                 if (!res.error) {
@@ -307,7 +306,7 @@
                 AjaxCall(
                     "/my-account/select-address-book",
                     {id: value},
-                    res = > {
+                    res => {
                     if (
                 !res.error
             )
@@ -337,7 +336,7 @@
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
-                    res = > {
+                    res => {
                     let select = document.getElementById('geo_region_book');
                 select.innerText = null;
                 if (!res.error) {
