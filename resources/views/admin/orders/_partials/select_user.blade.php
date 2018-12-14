@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-12">
             @if($billing_address)
-                Country:{!! getCountryByZone($billing_address->country)->name !!}<br>
+                Country:{!! @getCountryByZone($billing_address->country)->name !!}<br>
                 Region:{!! getRegion($billing_address->region,'name')  !!}
                 <br>
                 First line:{!! $billing_address->first_line_address !!}<br>
@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-12">
             @if($default_shipping)
-                Country:{!! getCountryByZone($default_shipping->country)->name  !!}<br>
+                Country:{!! @getCountryByZone($default_shipping->country)->name  !!}<br>
                 Region:{!! getRegion($default_shipping->region,'name')  !!}<br>
                 City:{!! $default_shipping->city !!}<br>
                 First line:{!! $default_shipping->first_line_address !!}<br>
