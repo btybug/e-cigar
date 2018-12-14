@@ -8,6 +8,7 @@
            <h2 class="m-0 pull-left">{!! __('Orders') !!}</h2>
             <div class="pull-right">
                 <a class="btn btn-warning pull-right" href="{!! route('admin_orders_settings') !!}">Settings</a>
+                <a class="btn btn-info pull-right" href="{!! route('admin_orders_new') !!}">New Order</a>
             </div>
         </div>
         <div class="panel-body">

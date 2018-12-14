@@ -169,6 +169,14 @@ Route::group(['prefix' => 'orders'], function () {
     Route::post('/add-note', 'Admin\OrdersController@addNote')->name('orders_add_note');
     Route::get('/settings', 'Admin\OrdersController@getSettings')->name('admin_orders_settings');
     Route::post('/settings', 'Admin\OrdersController@postSettings')->name('admin_orders_settings_save');
+    Route::post('/get-product', 'Admin\OrdersController@getProduct')->name('orders_get_product');
+
+    Route::post('/get-user', 'Admin\OrdersController@postGetUser')->name('admin_orders_get_user');
+    Route::post('/add-user', 'Admin\OrdersController@postAddUser')->name('admin_orders_add_user');
+
+    Route::post('/add-to-cart', 'Admin\OrdersController@postAddToCart')->name('shop_add_to_cart_orders');
+    Route::post('/update-cart', 'Admin\OrdersController@postUpdateQty')->name('shop_update_cart_orders');
+    Route::post('/remove-from-cart', 'Admin\OrdersController@postRemoveFromCart')->name('shop_remove_from_cart_orders');
 });
 
 Route::group(['prefix' => 'inventory'], function () {
@@ -206,6 +214,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/edit-variation', 'Admin\InventoryController@editVariation')->name('admin_stock_variation_add');
         Route::post('/get-option-by-id', 'Admin\InventoryController@getOptionById')->name('admin_stock_variation_get_option');
         Route::post('/render-variation-new-options', 'Admin\InventoryController@postRenderVariationNewOptions')->name('admin_stock_variation_render_new_option');
+        Route::post('/get-by-id', 'Admin\InventoryController@getById')->name('admin_stock_get_by_id');
 
         //extra
         Route::post('/add-extra-option', 'Admin\InventoryController@addExtraOption')->name('admin_stock_extra_option');

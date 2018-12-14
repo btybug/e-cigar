@@ -241,4 +241,11 @@ class InventoryController extends Controller
     {
         return \Response::json(['error' => false, 'data' => json_encode($request->data, true)]);
     }
+
+    public function getById (Request $request)
+    {
+        $model = Stock::findOrFail($request->id);
+
+        return \Response::json(['error' => false, 'data' => $model]);
+    }
 }
