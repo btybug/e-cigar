@@ -62,7 +62,7 @@
     <div class="row">
         <label for="text" class="control-label col-sm-4">Regions</label>
         <div class="col-sm-8">
-            {!! Form::select('region',getRegionByZone(@$address_book->country),null,['class'=>'form-control','id' => 'geo_region_book']) !!}
+            {!! Form::select('region',getRegionByZone(@$address_book->country),null,['class'=>'form-control geo_region_book']) !!}
         </div>
     </div>
 </div>
@@ -82,18 +82,17 @@
         </div>
     </div>
 </div>
-@if(! $default )
+
 <div class="form-check">
     <div class="row">
         <div class="col-sm-8 offset-sm-4">
-            {!! Form::checkbox('make_default',true,null,['id' => 'newAddressCheck']) !!}
+            {!! Form::checkbox('make_default',true,$default,['id' => 'newAddressCheck']) !!}
             <label class="form-check-label text-muted" for="newAddressCheck">
                 Mark this shipping address as default
             </label>
         </div>
     </div>
 </div>
-@endif
 {!! Form::hidden('type','address_book') !!}
 {!! Form::hidden('id') !!}
 <div class="form-group row">

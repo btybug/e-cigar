@@ -129,8 +129,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="col-md-7 d-flex">
-                                                {!! Form::select('address_book',$address,null,['class' => 'form-control select-address']) !!}
-                                                <!-- Button trigger modal -->
+                                                {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
                                                     <button type="button"
                                                             class="nav-link nav-link--new-address btn btn-info address-book-new">
                                                         + Add New
@@ -138,10 +137,10 @@
                                                 </div>
                                             </div>
                                             <div class="border py-3 px-4">
-                                                <div class="render-address">
-
+                                                <div class="selected-form">
+                                                    @include("frontend.my_account._partials.new_address",['address_book'=>$default_shipping,'default' => true])
                                                 </div>
-                                                <button type="submit" class="btn btn-primary edit-address">Edit</button>
+                                                {{--<button type="submit" class="btn btn-primary edit-address">Edit</button>--}}
                                                 <button type="button" class="btn btn-danger edit-address">Delete
                                                 </button>
                                             </div>
@@ -184,7 +183,11 @@
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-
+    <style>
+        .errors {
+            color:red;
+        }
+    </style>
 @stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -259,21 +262,21 @@
                 ;
             });
 
-            $("body").on('click', '.edit-address', function () {
-                var id = $(".select-address").val();
+            $("body").on('change', '.edit-address', function () {
+                var id = $(this).val();
                 AjaxCall(
                     "/my-account/address-book-form",
                     {id: id},
                     res => {
-                    if (
-                !res.error
-                )
-                {
-                    $(".address-form").html(res.html);
-                    $("#geo_country_book").select2();
-                    $("#newAddressModal").modal();
-                }
-            }
+                            if (
+                        !res.error
+                        )
+                        {
+                            $(".selected-form").html(res.html);
+                            $("#geo_country_book").select2();
+        //                    $("#newAddressModal").modal();
+                        }
+                    }
                 )
                 ;
             });
@@ -318,7 +321,6 @@
                 ;
             }
 
-            renderAddressBook();
             $("body").on("change", ".select-address", function () {
                 renderAddressBook();
             });
@@ -333,21 +335,23 @@
 
             $("body").on("change", "#geo_country_book", function () {
                 var value = $(this).val();
+                let $_this = $(this);
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
                     res => {
-                    let select = document.getElementById('geo_region_book');
-                select.innerText = null;
-                if (!res.error) {
-                    var opt = document.createElement('option');
-                    $.each(res.data, function (k, v) {
-                        var option = $(opt).clone();
-                        option.val(k);
-                        option.text(v);
-                        $(select).append(option);
-                    });
-                }
+                    let select = $_this.closest('.address-book-form').find('.geo_region_book');
+                    $(select).empty()
+                    if (!res.error) {
+                        console.log($(select).val())
+                        var opt = document.createElement('option');
+                        $.each(res.data, function (k, v) {
+                            var option = $(opt).clone();
+                            option.val(k);
+                            option.text(v);
+                            $(select).append(option);
+                        });
+                    }
             }
                 )
                 ;
