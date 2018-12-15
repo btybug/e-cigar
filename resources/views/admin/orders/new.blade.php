@@ -50,43 +50,7 @@
                     <div class="cart-right">
                         <div class="order-summary-outer">
                             <div class="order-summary">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                        <tr>
-                                            <th align="left" colspan="2">Order Summary</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td align="left"><span>Sub Total</span></td>
-                                            <td align="right" id="subtotal">
-                                                1
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left"><span>Tax</span></td>
-                                            <td align="right" id="subtotal">$0</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left">
-                                                <span>Shipping </span>
-                                            </td>
-                                            <td align="right" id="subtotal">2</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left"><span>Discount (Coupon)</span></td>
-                                            <td align="right" id="discount">$0</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="last" align="left"><span>Total</span></td>
-                                            <td class="last" align="right" id="total_price">
-                                                3
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                @include("admin.orders._partials.order_summary")
                             </div>
                             <div class="coupons">
                                 <!-- applied copuns -->
@@ -700,6 +664,7 @@
                     if (!res.error) {
                         $(".user-add-details").html(res.html);
                         $(".shipping-payment").html(res.shippingHtml);
+                        $(".order-summary").html(res.summaryHtml);
                         $(".customer-details-modal").modal('hide')
                     }
                 });

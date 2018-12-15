@@ -13,7 +13,7 @@
                         <option value="{{ $option->id }}">  {!! $option->courier->name !!}</option>
                     </select>
                 @else
-                    Something wrong in delivery methods
+                    Customize delivery costs, so it support order ammount
                 @endif
             </div>
         </div>

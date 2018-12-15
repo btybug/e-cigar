@@ -164,9 +164,10 @@ class OrdersController extends Controller
 
         $html = $this->view("_partials.add_user",compact('user','countries','countriesShipping'))->render();
         $shippingHtml = $this->view("_partials.shipping_payment",compact('user','delivery','geoZone'))->render();
+        $orderSummary = $this->view("_partials.order_summary",compact('user','geoZone'))->render();
 
 
-        return \Response::json(['error' => false,'html' => $html,'shippingHtml' => $shippingHtml]);
+        return \Response::json(['error' => false,'html' => $html,'shippingHtml' => $shippingHtml,'summaryHtml' => $orderSummary]);
     }
 
     public function postAddToCart(Request $request)
