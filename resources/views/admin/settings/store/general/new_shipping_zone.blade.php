@@ -544,7 +544,7 @@ ${datax}
 
                 if (err.responseJSON.message) {
                     $(".error-place").empty()
-                    Object.entries(err.responseJSON.errors).forEach(([key, val]) = > {
+                    Object.entries(err.responseJSON.errors).forEach(([key, val]) => {
                         $(".error-place"
                 ).
                     append(`<p> ${val[0]}</p>`)
