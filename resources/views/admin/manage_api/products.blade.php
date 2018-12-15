@@ -16,6 +16,7 @@
                     <th>Name</th>
                     <th>Image</th>
                     <th>Added/Last Modified Date</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
             </table>
@@ -35,6 +36,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
+                    {data: 'actions', name: 'actions'}
                 ]
             });
         });
