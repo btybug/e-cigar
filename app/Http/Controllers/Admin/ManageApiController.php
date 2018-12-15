@@ -23,17 +23,18 @@ class ManageApiController extends Controller
     {
         return $this->view('index');
     }
+
     public function settings(Settings $settings)
     {
         $model = $settings->getEditableData('manage_api_settings');
-        return $this->view('settings',compact('model'));
+        return $this->view('settings', compact('model'));
     }
 
-    public function postSettings(Request $request,Settings $settings)
+    public function postSettings(Request $request, Settings $settings)
     {
-        $data=$request->only(['client_id','client_secret']);
-        $settings->updateOrCreateSettings('manage_api_settings',$data);
-        $service=new ManagerApiService;
+        $data = $request->only(['client_id', 'client_secret']);
+        $settings->updateOrCreateSettings('manage_api_settings', $data);
+        $service = new ManagerApiService;
         $service->getAccessToken()->save();
         return redirect()->back();
     }
@@ -42,16 +43,23 @@ class ManageApiController extends Controller
     {
         return $this->view('products');
     }
+
     public function getItems()
     {
         return $this->view('items');
     }
 
-    public function getAllProducts(Request $request,ManagerApiRequest $apiRequest)
+    public function postManage(Request $request)
+    {
+        dd($request->all());
+    }
+
+    public function getAllProducts(Request $request, ManagerApiRequest $apiRequest)
     {
         return $apiRequest->getProducts($request);
     }
-    public function getAllItems(Request $request,ManagerApiRequest $apiRequest)
+
+    public function getAllItems(Request $request, ManagerApiRequest $apiRequest)
     {
         return $apiRequest->getItems($request);
     }
