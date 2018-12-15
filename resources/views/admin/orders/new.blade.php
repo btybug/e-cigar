@@ -736,6 +736,7 @@
 
             $("body").on('click', '.add-to-cart', function () {
                 var variationId = $("#variation_uid").val();
+                var userID = $("#order_user").val();
 
                 if (variationId && variationId != '') {
                     var requiredItems = [];
@@ -761,7 +762,7 @@
                         url: "/admin/orders/add-to-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems},
+                        data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems,user_id : userID},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -784,13 +785,15 @@
             $("body").on('click', '.qtycount', function () {
                 var uid = $(this).data('uid');
                 var condition = $(this).data('condition');
+                var userID = $("#order_user").val();
+
                 if (uid && uid != '') {
                     $.ajax({
                         type: "post",
                         url: "/admin/orders/update-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: uid, condition: condition},
+                        data: {uid: uid, condition: condition,user_id : userID},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -811,13 +814,15 @@
                 var uid = $(this).data('uid');
                 var condition = 'inner';
                 var value = $(this).val();
+                var userID = $("#order_user").val();
+
                 if (uid && uid != '') {
                     $.ajax({
                         type: "post",
                         url: "/admin/orders/update-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: uid, condition: condition, value: value},
+                        data: {uid: uid, condition: condition, value: value, user_id: userID},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -837,6 +842,7 @@
 
             $("body").on('click', '.remove-from-cart', function () {
                 var uid = $(this).data('uid');
+                var userID = $("#order_user").val();
 
                 if (uid && uid != '') {
                     $.ajax({
@@ -844,7 +850,7 @@
                         url: "/admin/orders/remove-from-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: uid},
+                        data: {uid: uid, user_id:userID},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },

@@ -160,10 +160,9 @@ class OrdersController extends Controller
     public function postAddToCart(Request $request)
     {
         $variation = StockVariation::find($request->uid);
-        if($variation){
-            Cart::session(7);
-
-            $user = \Auth::user();
+        $user = User::find($request->user_id);
+        if($variation && $user){
+            Cart::session($user->id);
             Cart::add($variation->id,$variation->id,$variation->price,1,
                 ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
 
@@ -214,12 +213,13 @@ class OrdersController extends Controller
     public function postUpdateQty(Request $request)
     {
         $qty = ($request->condition) ? 1 : -1;
-
-//        dd($request->all());
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
-        if(\Auth::check()){
+        $user = User::find($request->user_id);
+
+        if($user){
+            Cart::session($user->id);
             if($request->condition == 'inner'){
                 Cart::update($request->uid, array(
                     'quantity' => array(
@@ -232,9 +232,7 @@ class OrdersController extends Controller
                 ));
             }
 
-
-
-            $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
+            $default_shipping = $user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone && count($geoZone->deliveries)){
@@ -281,10 +279,12 @@ class OrdersController extends Controller
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
-        if(\Auth::check()){
+        $user = User::find($request->user_id);
+
+        if($user){
             $this->cartService->remove($request->uid);
 
-            $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
+            $default_shipping = $user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone && count($geoZone->deliveries)){
