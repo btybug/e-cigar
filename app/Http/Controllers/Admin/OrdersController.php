@@ -84,8 +84,8 @@ class OrdersController extends Controller
 
         session()->forget('shipping_address','billing_address');
         session()->forget('shipping_address_id','billing_address_id');
-        Cart::clear();
-        Cart::removeConditionsByType('shipping');
+        Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
+        Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
         return $this->view('new',compact('statuses','products','users','user','countries','countriesShipping'));
     }
@@ -158,7 +158,7 @@ class OrdersController extends Controller
         $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
         if($geoZone && count($geoZone->deliveries)) {
-            $subtotal = Cart::getSubTotal();
+            $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
             $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
         }
 
@@ -175,8 +175,8 @@ class OrdersController extends Controller
         $variation = StockVariation::find($request->uid);
         $user = User::find($request->user_id);
         if($variation && $user){
-            Cart::session($user->id);
-            Cart::add($variation->id,$variation->id,$variation->price,1,
+            $delivery = null;
+            Cart::session(Orders::ORDER_NEW_SESSION_ID)->add($variation->id,$variation->id,$variation->price,1,
                 ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
 
             $optionalItems = $request->get('optionalItems');
@@ -184,7 +184,7 @@ class OrdersController extends Controller
                 foreach ($optionalItems as $opv){
                     $optpVariation = StockVariation::find($opv);
                     if($optpVariation){
-                        Cart::add($optpVariation->id,$variation->id,$optpVariation->price,1,
+                        Cart::session(Orders::ORDER_NEW_SESSION_ID)->add($optpVariation->id,$variation->id,$optpVariation->price,1,
                             ['variation' => $optpVariation]);
                     }
                 }
@@ -194,8 +194,8 @@ class OrdersController extends Controller
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone && count($geoZone->deliveries)) {
-                $subtotal = Cart::getSubTotal();
-                Cart::removeConditionsByType('shipping');
+                $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
                 $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max','>=',$subtotal)->first();
                 if($delivery && count($delivery->options)){
                     $shippingDefaultOption =  $delivery->options->first();
@@ -207,17 +207,22 @@ class OrdersController extends Controller
                         'order' => 1,
                         'attributes' => $shippingDefaultOption
                     ));
-                    Cart::condition($condition2);
+                    Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($condition2);
                 }
-                $shipping = Cart::getCondition($geoZone->name);
+                $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             }
 
 
-            $items = $this->cartService->getCartItems();
+            $items = $this->cartService->getCartItems(true);
 
             $html = $this->view('_partials.cart',compact(['items','default_shipping','shipping','geoZone']))->render();
+            $shippingHtml = $this->view("_partials.shipping_payment",compact('user','delivery','geoZone'))->render();
+            $orderSummary = $this->view("_partials.order_summary",compact('user','geoZone'))->render();
 
-            return \Response::json(['error' => false,'message' => 'added','count' => $this->cartService->getCount(),'html' => $html]);
+            return \Response::json(['error' => false,'message' => 'added',
+                                    'count' => $this->cartService->getCount(),'html' => $html,
+                                    'shippingHtml' => $shippingHtml,'summaryHtml' => $orderSummary
+            ]);
         }
 
         return \Response::json(['error' => true,'message' => 'try again']);
@@ -228,19 +233,19 @@ class OrdersController extends Controller
         $qty = ($request->condition) ? 1 : -1;
         $default_shipping = null;
         $shipping = null;
+        $delivery = null;
         $geoZone = null;
         $user = User::find($request->user_id);
 
         if($user){
-            Cart::session($user->id);
             if($request->condition == 'inner'){
-                Cart::update($request->uid, array(
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($request->uid, array(
                     'quantity' => array(
                         'relative' => false,
                         'value' => $request->value
                     )));
             }else{
-                $i = Cart::update($request->uid, array(
+                $i = Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($request->uid, array(
                     'quantity' => $qty
                 ));
             }
@@ -249,8 +254,8 @@ class OrdersController extends Controller
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone && count($geoZone->deliveries)){
-                $subtotal = Cart::getSubTotal();
-                Cart::removeConditionsByType('shipping');
+                $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
                 $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max','>=',$subtotal)->first();
                 if($delivery && count($delivery->options)){
                     $shippingDefaultOption =  $delivery->options->first();
@@ -262,29 +267,32 @@ class OrdersController extends Controller
                         'order' => 1,
                         'attributes' => $shippingDefaultOption
                     ));
-                    Cart::condition($condition2);
-                    $shipping = Cart::getCondition($geoZone->name);
+                    Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($condition2);
+                    $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
                 }
             }
 
         }else{
             if($request->condition == 'inner'){
-                Cart::update($request->uid, array(
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($request->uid, array(
                     'quantity' => array(
                         'relative' => false,
                         'value' => $request->value
                     )));
             }else{
-                $i = Cart::update($request->uid, array(
+                $i = Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($request->uid, array(
                     'quantity' => $qty
                 ));
             }
         }
 
-        $items = $this->cartService->getCartItems();
+        $items = $this->cartService->getCartItems(true);
+
+        $shippingHtml = $this->view("_partials.shipping_payment",compact('user','delivery','geoZone'))->render();
+        $orderSummary = $this->view("_partials.order_summary",compact('user','geoZone'))->render();
         $html = $this->view('_partials.cart',compact(['items','default_shipping','shipping','geoZone']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false,'html' => $html,'shippingHtml' => $shippingHtml,'summaryHtml' => $orderSummary]);
     }
 
     public function postRemoveFromCart (Request $request)
@@ -292,17 +300,19 @@ class OrdersController extends Controller
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
+        $delivery = null;
+
         $user = User::find($request->user_id);
 
         if($user){
-            $this->cartService->remove($request->uid);
+            $this->cartService->remove($request->uid,true);
 
             $default_shipping = $user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone && count($geoZone->deliveries)){
-                $subtotal = Cart::getSubTotal();
-                Cart::removeConditionsByType('shipping');
+                $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
                 $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max','>=',$subtotal)->first();
                 if($delivery && count($delivery->options)){
                     $shippingDefaultOption =  $delivery->options->first();
@@ -314,17 +324,19 @@ class OrdersController extends Controller
                         'order' => 1,
                         'attributes' => $shippingDefaultOption
                     ));
-                    Cart::condition($condition2);
-                    $shipping = Cart::getCondition($geoZone->name);
+                    Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($condition2);
+                    $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
                 }
             }
         }else{
-            $this->cartService->remove($request->uid);
+            $this->cartService->remove($request->uid,true);
         }
 
-        $items = $this->cartService->getCartItems();
+        $items = $this->cartService->getCartItems(true);
         $html = $this->view('_partials.cart',compact(['items','default_shipping','shipping','geoZone']))->render();
+        $shippingHtml = $this->view("_partials.shipping_payment",compact('user','delivery','geoZone'))->render();
+        $orderSummary = $this->view("_partials.order_summary",compact('user','geoZone'))->render();
 
-        return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount()]);
+        return \Response::json(['error' => false,'html' => $html,'count' => $this->cartService->getCount(),'shippingHtml' => $shippingHtml,'summaryHtml' => $orderSummary]);
     }
 }

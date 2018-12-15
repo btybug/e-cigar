@@ -9,7 +9,7 @@
         <tr>
             <td align="left"><span>Sub Total</span></td>
             <td align="right" id="subtotal">
-                ${!! (isset($user) && $user) ? \Cart::session($user->id)->getSubTotal() : 0 !!}
+                ${!! \Cart::session(\App\Models\Orders::ORDER_NEW_SESSION_ID)->getSubTotal() !!}
             </td>
         </tr>
         <tr>
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             @php
-                $shipping = (isset($user) && $user && $geoZone) ? \Cart::getCondition($geoZone->name) : null;
+                $shipping = (isset($geoZone) && $geoZone) ? \Cart::session(\App\Models\Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name) : null;
             @endphp
             <td align="left"><span>Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}</span></td>
             <td align="right" id="subtotal">${!! ($shipping) ? $shipping->getValue() : 0 !!}</td>
@@ -30,7 +30,7 @@
         <tr>
             <td class="last" align="left"><span>Total</span></td>
             <td class="last" align="right" id="total_price">
-                ${!! (isset($user) && $user) ? \Cart::session($user->id)->getTotal() : 0 !!}
+                ${!! \Cart::session(\App\Models\Orders::ORDER_NEW_SESSION_ID)->getTotal() !!}
             </td>
         </tr>
         </tbody>

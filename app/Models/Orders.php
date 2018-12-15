@@ -17,6 +17,8 @@ class Orders extends Model
     protected $table = 'orders';
     protected $guarded = ['id'];
 
+    const ORDER_NEW_SESSION_ID = 'order_new';
+
 
     public function shippingAddress()
     {

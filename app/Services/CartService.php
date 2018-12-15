@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 
+use App\Models\Orders;
 use App\Models\StockVariation;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
@@ -13,11 +14,12 @@ class CartService
 {
     public static $cartItems = [];
 
-    public function getCartItems(){
-        $cartCollection = Cart::getContent();
+    public function getCartItems($id = null){
+        $cartCollection = ($id) ? Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent() : Cart::getContent();
 
         $items = [];
-        if(! Cart::isEmpty()){
+        $empty = ($id) ? Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() : Cart::isEmpty();
+        if(! $empty){
             foreach($cartCollection as $key => $value){
                 $items[$value->name][$key] = $value;
             }
@@ -50,17 +52,25 @@ class CartService
         return $price;
     }
 
-    public function remove($id)
+    public function remove($id,$user_id = null)
     {
-        $list = $this->getCartItems();
+        $list = $this->getCartItems($user_id);
         $data = (isset($list[$id])) ? $list[$id] : [] ;
 
         if(count($data)){
             foreach ($data as $datum){
-                Cart::remove($datum->id);
+                if($user_id){
+                    Cart::session(Orders::ORDER_NEW_SESSION_ID)->remove($datum->id);
+                }else{
+                    Cart::remove($datum->id);
+                }
             }
         }else{
-            Cart::remove($id);
+            if($user_id){
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->remove($id);
+            }else{
+                Cart::remove($id);
+            }
         }
     }
 }
