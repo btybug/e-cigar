@@ -147,14 +147,26 @@ class OrdersController extends Controller
     public function postAddUser (Request $request)
     {
         $user = User::findOrFail($request->id);
+        $delivery = null;
         $countries = $this->countries->all()->pluck('name.common', 'name.common')->toArray();
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
-        $html = $this->view("_partials.add_user",compact('user','countries','countriesShipping'))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        $default_shipping = $user->addresses()->where('type','default_shipping')->first();
+        $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+        $geoZone = ($zone) ? $zone->geoZone : null;
+        if($geoZone && count($geoZone->deliveries)) {
+            $subtotal = Cart::getSubTotal();
+            $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+        }
+
+        $html = $this->view("_partials.add_user",compact('user','countries','countriesShipping'))->render();
+        $shippingHtml = $this->view("_partials.shipping_payment",compact('user','delivery','geoZone'))->render();
+
+
+        return \Response::json(['error' => false,'html' => $html,'shippingHtml' => $shippingHtml]);
     }
 
     public function postAddToCart(Request $request)

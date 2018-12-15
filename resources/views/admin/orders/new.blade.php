@@ -103,30 +103,8 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-md-4">Shipping Method</label>
-                                    <div class="col-md-8">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label class="col-md-4">Payment Method</label>
-                                    <div class="col-md-8">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <a href="#" class="btn btn-info">Pay Now</a>
+                            <div class="shipping-payment">
+                                @include("admin.orders._partials.shipping_payment")
                             </div>
                         </div>
                     </div>
@@ -721,6 +699,7 @@
                 AjaxCall("/admin/orders/add-user", {id: id}, function (res) {
                     if (!res.error) {
                         $(".user-add-details").html(res.html);
+                        $(".shipping-payment").html(res.shippingHtml);
                         $(".customer-details-modal").modal('hide')
                     }
                 });
