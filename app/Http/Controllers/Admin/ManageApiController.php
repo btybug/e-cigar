@@ -40,7 +40,7 @@ class ManageApiController extends Controller
 
     public function getProducts()
     {
-        return $this->view('stocks');
+        return $this->view('products');
     }
 
     public function getAllProducts(Request $request,ManagerApiRequest $apiRequest)
