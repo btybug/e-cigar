@@ -38,13 +38,13 @@ class ManageApiController extends Controller
         return redirect()->back();
     }
 
-    public function getStocks(ManagerApiRequest $apiRequest)
+    public function getProducts()
     {
         return $this->view('stocks');
     }
 
-    public function getAllStocks(Request $request,ManagerApiRequest $apiRequest)
+    public function getAllProducts(Request $request,ManagerApiRequest $apiRequest)
     {
-        return $apiRequest->getStocks($request);
+        return $apiRequest->getProducts($request);
     }
 }

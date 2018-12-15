@@ -163,8 +163,8 @@ Route::group(['prefix' => 'manage-api'], function () {
     Route::get('/settings', 'Admin\ManageApiController@settings')->name('admin_manage_api_settings');
     Route::post('/settings', 'Admin\ManageApiController@postSettings')->name('post_admin_manage_api_settings');
 
-    Route::get('/stocks', 'Admin\ManageApiController@getStocks')->name('admin_manage_api_stocks');
-    Route::get('/get-all-stocks', 'Admin\ManageApiController@getAllStocks')->name('admin_manage_api_all_stocks');
+    Route::get('/products', 'Admin\ManageApiController@getProducts')->name('admin_manage_api_products');
+    Route::get('/get-all-stocks', 'Admin\ManageApiController@getAllProducts')->name('admin_manage_api_all_products');
 });
 
 Route::group(['prefix' => 'orders'], function () {

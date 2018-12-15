@@ -27,7 +27,7 @@
     <script>
         $(function () {
             $('#stocks-table').DataTable({
-                ajax: "{!! route('admin_manage_api_all_stocks') !!}",
+                ajax: "{!! route('admin_manage_api_all_products') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,

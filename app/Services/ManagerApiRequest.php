@@ -36,9 +36,9 @@ final class ManagerApiRequest
         return json_decode((string)$response->getBody(), true);
     }
 
-    public function getStocks(Request $request)
+    public function getProducts(Request $request)
     {
-        $response = $this->http->post($this->url('oauth-channel/get-all-stocks'),  [
+        $response = $this->http->post($this->url('oauth-channel/get-all-products'),  [
             'headers'=>$this->headers(),
             'form_params' => $request->except('_token')]);
         return json_decode((string)$response->getBody(), true);
