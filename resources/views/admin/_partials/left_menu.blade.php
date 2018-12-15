@@ -241,6 +241,9 @@
                     @ok('admin_manage_api_products')
                     <li><a href="{{route('admin_manage_api_products')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok
+                    @ok('admin_manage_api_items')
+                    <li><a href="{{route('admin_manage_api_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
+                    @endok
                 </ul>
 
             </li>
