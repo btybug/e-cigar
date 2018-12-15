@@ -44,6 +44,14 @@ final class ManagerApiRequest
         return json_decode((string)$response->getBody(), true);
     }
 
+    public function getItems(Request $request)
+    {
+        $response = $this->http->post($this->url('oauth-channel/get-all-items'),  [
+            'headers'=>$this->headers(),
+            'form_params' => $request->except('_token')]);
+        return json_decode((string)$response->getBody(), true);
+    }
+
     protected function url($path)
     {
         return env('MANAGE_API_DOMAIN') . '/api/' . $path;

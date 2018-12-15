@@ -42,9 +42,17 @@ class ManageApiController extends Controller
     {
         return $this->view('products');
     }
+    public function getItems()
+    {
+        return $this->view('products');
+    }
 
     public function getAllProducts(Request $request,ManagerApiRequest $apiRequest)
     {
         return $apiRequest->getProducts($request);
+    }
+    public function getAllItems(Request $request,ManagerApiRequest $apiRequest)
+    {
+        return $apiRequest->getItems($request);
     }
 }
