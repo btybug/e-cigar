@@ -14,6 +14,7 @@
                     <th>SKU</th>
                     <th>Quantity</th>
                     <th>Image</th>
+                    <th>Group</th>
                     <th>Description</th>
                     <th>Created At</th>
                     <th>Actions</th>
@@ -37,6 +38,7 @@
                     {data: 'sku', name: 'sku'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'image', name: 'image'},
+                    {data: 'filter', name: 'filter'},
                     {data: 'short_description', name: 'short_description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
