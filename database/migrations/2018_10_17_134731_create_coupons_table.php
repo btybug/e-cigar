@@ -26,6 +26,7 @@ class CreateCouponsTable extends Migration
             $table->string('end_date')->nullable();
             $table->string('user_per_coupon')->nullable();
             $table->string('user_per_customer')->nullable();
+            $table->string('based')->nullable();
             $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
