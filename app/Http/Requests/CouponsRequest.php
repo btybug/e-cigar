@@ -25,7 +25,7 @@ class CouponsRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            "code"    => "required|string|min:3",
+            "code"    => "required|string|min:3|unique:coupons,code,".$this->id,
             "type"    => "required",
             "discount"  => "required|integer",
             "total_amount"  => "required|integer",

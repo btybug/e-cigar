@@ -13,15 +13,6 @@
                         <button type="submit" class="btn btn-info">Save</button>
                     </div>
                 </div>
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-7">
@@ -96,7 +87,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group row product-box">
+                                <div class="form-group row product-box {{ ($coupons->based == 'cart') ? 'hide' :'' }}">
                                     <label class="col-sm-2 control-label" for="input-product"><span
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
