@@ -168,6 +168,7 @@ Route::group(['prefix' => 'manage-api'], function () {
     Route::get('/get-all-stocks', 'Admin\ManageApiController@getAllProducts')->name('admin_manage_api_all_products');
     Route::get('/items', 'Admin\ManageApiController@getItems')->name('admin_manage_api_items');
     Route::get('/get-all-items', 'Admin\ManageApiController@getAllItems')->name('admin_manage_api_all_items');
+    Route::get('/export-user', 'Admin\ManageApiController@exportCustomers');
 });
 
 Route::group(['prefix' => 'orders'], function () {

@@ -9,6 +9,9 @@
 namespace App\Services;
 
 
+use App\Models\Roles;
+use App\Models\Settings;
+use App\User;
 use Illuminate\Http\Request;
 
 final class ManagerApiRequest
@@ -63,5 +66,30 @@ final class ManagerApiRequest
         'Accept' => 'application/json',
         'Authorization' => 'Bearer '.$this->service->getFreshToken(),
     ];
+    }
+
+    public function exportCustomers()
+    {
+
+        $response = $this->http->post($this->url('oauth-channel/import-customers'),  [
+            'headers'=>$this->headers(),
+            'form_params' =>$this->makeCustomers()
+        ]);
+        return json_decode((string)$response->getBody(), true);
+    }
+    protected function makeCustomers(){
+        $settings=new Settings();
+        $model=$settings->getEditableData('manage_api_export_users');
+        $columns=$model->toArray();
+        $users=User::whereIn('role_id',Roles::where('type','frontend')->pluck('id'))->get()->toArray();
+        $result=[];
+        foreach ($users as $key=>$user){
+            foreach ($columns as $field=>$value){
+                if($value && array_key_exists($field,$user)){
+                    $result[$key][$field]= ($user[$field])?:'null';
+                }
+            }
+        }
+     return $result;
     }
 }
