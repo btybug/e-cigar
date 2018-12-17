@@ -87,7 +87,7 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group row product-box {{ ($coupons->based == 'cart') ? 'hide' :'' }}">
+                                <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
                                     <label class="col-sm-2 control-label" for="input-product"><span
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
