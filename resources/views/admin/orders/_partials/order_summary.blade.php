@@ -1,4 +1,5 @@
 <div class="order-summary">
+    {!! Form::hidden('order_product_subtotal',\Cart::session(\App\Models\Orders::ORDER_NEW_SESSION_ID)->getSubTotal(),['id' => 'order_product_subtotal']) !!}
     <table class="table">
         <thead>
         <tr>

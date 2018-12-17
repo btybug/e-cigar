@@ -173,7 +173,7 @@
                 <div class="modal-body">
                     <div id="stripe-method" class="d-none payment-method-data">
                         <script src="https://js.stripe.com/v3/"></script>
-                        <form action="/stripe-charge" method="post" id="payment-form">
+                        <form action="/admin/orders/stripe-charge" method="post" id="payment-form">
                             {!! csrf_field()!!}
                             <div class="form-row">
                                 <label for="card-element">
@@ -659,23 +659,32 @@
         $(function () {
 
             $("body").on('click','.pay-button',function () {
+                let user = $("#order_user").val();
+                let product = $("#order_product_subtotal").val();
                 let method =  $("input[name='payment_method']:checked"). val();
-                console.log(method)
+                console.log(user,product)
+
+                if(user == '' || user == undefined){
+                    alert('Please select User...')
+                    return false;
+                }
+
+                if(product == 0 || product == undefined){
+                    alert('Please select products...')
+                    return false;
+                }
 
                 if(method =='cash'){
                     AjaxCall(
-                        "/cash-orderssssss",
+                        "/admin/orders/cash-payment",
                         {},
                         res => {
                             if (!res.error) {
-                                $(".container").css('opacity','1');
-                                $(".loader-img").toggleClass('d-none');
                                 window.location = res.url;
                             }
                         },
                         error => {
-                            $(".container").css('opacity','1');
-                            $(".loader-img").toggleClass('d-none');
+                            alert('error');
                         }
                     );
                 }else if(method == 'stripe'){
