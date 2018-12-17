@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="col-md-6">
-        {!! Form::open(['class'=>'form-horizontal']) !!}
+        {!! Form::model($model,['class'=>'form-horizontal']) !!}
             <fieldset>
 
                 <!-- Form Name -->

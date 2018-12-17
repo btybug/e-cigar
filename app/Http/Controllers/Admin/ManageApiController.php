@@ -19,9 +19,10 @@ class ManageApiController extends Controller
 {
     protected $view = 'admin.manage_api';
 
-    public function index()
+    public function index(Settings $settings)
     {
-        return $this->view('index');
+        $model=$settings->getEditableData('manage_api_export_users');
+        return $this->view('index',compact('model'));
     }
 
     public function settings(Settings $settings)
@@ -49,9 +50,10 @@ class ManageApiController extends Controller
         return $this->view('items');
     }
 
-    public function postManage(Request $request)
+    public function postManage(Request $request,Settings $settings)
     {
-        dd($request->all());
+        $settings->updateOrCreateSettings('manage_api_export_users',$request->except('_token'));
+        return redirect()->back();
     }
 
     public function getAllProducts(Request $request, ManagerApiRequest $apiRequest)
