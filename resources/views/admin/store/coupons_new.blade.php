@@ -75,6 +75,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-2 control-label">Coupon Based</label>
+                                    <div class="col-sm-10">
+                                        <label class="radio-inline">{!! Form::radio('based','product',true,['class' => 'coupon_type']) !!}
+                                            Product base
+                                        </label>
+                                        <label class="radio-inline">{!! Form::radio('based','cart',false,['class' => 'coupon_type']) !!}
+                                            Cart base
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-2 control-label">Free Shipping</label>
                                     <div class="col-sm-10">
                                         <label class="radio-inline">{!! Form::radio('shipping_type',$coupons->shipping_type??null,true,['value' => 1]) !!}
@@ -85,15 +96,12 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group row product-box">
                                     <label class="col-sm-2 control-label" for="input-product"><span
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
                                     <div class="col-sm-10">
-                                        {!! Form::text('products',$coupons->products??null,['placeholder' => 'Products',
-                                           'id'=>'input-total', 'class'=> 'form-control','autocomplete' => 'off']) !!}
-                                        <ul class="dropdown-menu"></ul>
-                                        <div id="coupon-product" class="well well-sm view-coupon"></div>
+                                        {!! Form::select('products[]',$products,null,['class'=> 'form-control input-select2','multiple' => true]) !!}
                                     </div>
                                 </div>
 
@@ -152,13 +160,25 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+
 @stop
 @section('js')
-<script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
-<script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/bootstrap-tagsinput.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
+
+    $(".input-select2").select2();
+
+
+    $("body").on('change','.coupon_type',function () {
+        if($(this).val() == 'product'){
+            $(".product-box").removeClass('hide')
+        }else{
+            $(".product-box").addClass('hide')
+        }
+    });
+
 $('#input-date-start').daterangepicker({
     singleDatePicker: true,
     showDropdowns: true,

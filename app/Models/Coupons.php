@@ -21,7 +21,11 @@ class Coupons extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'code', 'type', 'discount','total_amount','shipping_type','products','start_date','end_date','user_per_coupon','user_per_customer','status'
+        'name', 'code', 'type', 'discount','total_amount','shipping_type','products','start_date','end_date','user_per_coupon','user_per_customer','based','status'
+    ];
+
+    protected $casts = [
+        'products' => "json"
     ];
 
     public static function updateOrCreate(int $id = null, array $data)

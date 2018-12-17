@@ -17,6 +17,7 @@ use App\Models\Items;
 use App\Models\Products;
 use App\Models\Purchase;
 use App\Models\ShippingZones;
+use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\Suppliers;
 use Carbon\Carbon;
@@ -46,7 +47,8 @@ class StoreController extends Controller
     public function getCouponsNew()
     {
         $coupons = null;
-        return $this->view('coupons_new', compact('coupons'));
+        $products = Stock::all()->pluck('name','id')->all();
+        return $this->view('coupons_new', compact('coupons','products'));
     }
 
     public function CouponsSave(CouponsRequest $request)
@@ -65,7 +67,9 @@ class StoreController extends Controller
     public function Edit($id)
     {
         $coupons = Coupons::find($id);
-        return $this->view('coupons_new', compact('coupons'));
+        $products = Stock::all()->pluck('name','id')->all();
+
+        return $this->view('coupons_new', compact('coupons','products'));
     }
 
     public function saveTags(Request $request)
