@@ -74,6 +74,6 @@ class ManageApiController extends Controller
 
     public function exportCustomers(ManagerApiRequest $apiRequest)
     {
-        return $apiRequest->exportCustomers();
+        return dd($apiRequest->exportCustomers());
     }
 }
