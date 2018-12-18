@@ -119,7 +119,11 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
-            $("body").on('click', '.select-promotions', function () {
+            setTimeout(function() {
+                $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
+            },5);
+
+            $("body").on('click', '.add-promotions', function () {
                 let id = guid();
                 $(".get-all-extra-tab")
                     .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
@@ -135,13 +139,27 @@
                     </li>`);
             });
 
-            $("body").on('click','.add-promotions',function () {
+            $("body").on('click','.promotion-elm',function () {
+                if(e.target != this) return false;
+
                 let stock_id = $("#stock-id").val();
+                var id = $(this).data('id');
+                var price = $(this).find('.promotion_price').val();
+
+                $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
+                $(this).addClass('active');
+
                 AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                     }
                 });
+            });
+
+            $("body").on('click', '.remove-promotion', function () {
+                var id = $(this).closest('li').data('id')
+                $(this).closest('li').remove();
+                $(".extra-variations").find("[data-promotion-v='"+id+"']").remove();
             });
         })
         $('#input-date-start').daterangepicker({
