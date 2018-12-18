@@ -4,7 +4,7 @@
 @stop
 @section('content')
     {!! Form::model($model,['class'=>'form-horizontal stock-form']) !!}
-
+    {!! Form::hidden('id',null,['id' => 'stock-id']) !!}
     <section class="content-top">
         <div class="row m-0">
             <div class="col-md-4">
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="button-add text-center">
                                     <a href="javascript:void(0)"
-                                       class="btn btn-primary btn-block select-promotions"><i
+                                       class="btn btn-primary btn-block add-promotions"><i
                                                 class="fa fa-plus mr-10"></i>Add promotion</a>
                                 </div>
                             </div>
@@ -118,6 +118,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
+        $(document).ready(function () {
+            $("body").on('click', '.select-promotions', function () {
+                let id = guid();
+                $(".get-all-extra-tab")
+                    .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
+                                href="#">New promotion</a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                    <input type="hidden" name="promotions[${id}][id]" value="${id}">
+                    <input type="hidden" name="promotions[${id}][va]" value="${id}">
+                    <input type="hidden" class="promotion_price" data-id="${id}" name="promotions[${id}][price]" value="">
+                    <input type="hidden" class="promotion_start_date" data-id="${id}" name="promotions[${id}][start_date]" value="0" />
+                    <input type="hidden" class="promotion_end_date" data-id="${id}" name="promotions[${id}][end_date]" value="0" />
+                    </li>`);
+            });
+
+            $("body").on('click','.add-promotions',function () {
+                let stock_id = $("#stock-id").val();
+                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id}, function (res) {
+                    if (!res.error) {
+                        $(".extra-variations").html(res.html);
+                    }
+                });
+            });
+        })
         $('#input-date-start').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
@@ -136,5 +162,15 @@
             var years = moment().diff(start, 'years');
             // alert("You are " + years + " years old!");
         });
+
+        function guid() {
+            return "ss".replace(/s/g, s4);
+        }
+
+        function s4() {
+            return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(7)
+                .substring(1);
+        }
     </script>
 @stop

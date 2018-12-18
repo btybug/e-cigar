@@ -255,4 +255,12 @@ class InventoryController extends Controller
 
         return \Response::json(['error' => false, 'data' => $model]);
     }
+
+    public function getPromotion (Request $request)
+    {
+        $model = Stock::findOrFail($request->stock_id);
+
+        $html = \View("admin.inventory._partials.promotion_item", compact(['model']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }
