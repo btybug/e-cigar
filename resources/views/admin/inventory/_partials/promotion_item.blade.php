@@ -58,7 +58,8 @@
                     <th>Name</th>
                     <th>SKU</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Old Price</th>
+                    <th>New Price</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,6 +72,9 @@
                     </td>
                     <td>
                         {!! (isset($item['qty'])) ? $item['qty'] : 0 !!}
+                    </td>
+                    <td>
+                        {!! ($promotionPrice) ? $promotionPrice->price : ($single_variation) ? $single_variation->price : null !!}
                     </td>
                     <td>
                         {!! Form::text("extra_product[$single_variation->id][price]",
@@ -91,7 +95,8 @@
                     <th>Attributes</th>
                     <th>SKU</th>
                     <th>Qty</th>
-                    <th>Price</th>
+                    <th>Old Price</th>
+                    <th>New Price</th>
                 </tr>
                 </thead>
                 <tbody class="all-list-attrs">
@@ -116,6 +121,9 @@
                             @php
                                 $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
                             @endphp
+                            {!! ($promotionPrice) ? $promotionPrice->price : ($variation) ? $variation->price : null !!}
+                        </td>
+                        <td>
                             {!! Form::text("extra_product[$variation->id][price]",
                             (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :
                             (($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null)),
@@ -134,7 +142,13 @@
                     @endphp
 
                     <div class="row">
-                        <label class="col-md-2">Price:</label>
+                        <label class="col-md-2">Old Price:</label>
+                        <div class="col-sm-6">
+                            {!! ($promotionPrice) ? $promotionPrice->price : ($variation) ? $variation->price : null !!}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-md-2">New Price:</label>
                         <div class="col-sm-6">
                             {!! Form::text("extra_product[$variation->id][price]",
                             (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :

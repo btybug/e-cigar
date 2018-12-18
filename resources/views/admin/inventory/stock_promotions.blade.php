@@ -33,6 +33,7 @@
                                                 <li style="display: flex" data-id="1" class="promotion-elm"><a
                                                             href="#">Discount Christmas</a>
                                                     <div class="buttons">
+                                                        <a href="javascript:void(0)" class="btn btn-sm btn-success">Active</a>
                                                         <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                     <input type="hidden" name="promotions[1][id]" value="{{ @$promotion->id }}">
@@ -129,6 +130,7 @@
                     .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
                                 href="#">New promotion</a>
                                 <div class="buttons">
+                                <a href="javascript:void(0)" class="btn btn-sm btn-warning">Expired</a>
                                 <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                     <input type="hidden" name="promotions[${id}][id]" value="${id}">
@@ -139,7 +141,7 @@
                     </li>`);
             });
 
-            $("body").on('click','.promotion-elm',function () {
+            $("body").on('click','.promotion-elm',function (e) {
                 if(e.target != this) return false;
 
                 let stock_id = $("#stock-id").val();
