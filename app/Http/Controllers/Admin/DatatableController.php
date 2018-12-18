@@ -240,7 +240,8 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($stock) {
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>";
+                    <a class='badge btn-warning' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>
+                    <a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>";
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }

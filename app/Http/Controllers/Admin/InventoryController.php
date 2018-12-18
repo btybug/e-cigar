@@ -112,6 +112,13 @@ class InventoryController extends Controller
         return redirect()->route('admin_stock');
     }
 
+    public function getPromotionEdit ($id)
+    {
+        $model = Stock::findOrFail($id);
+        return $this->view('stock_promotions', compact(['model']));
+
+    }
+
     private function createOrUpdateSeo ($request, $stock_id)
     {
         $types = $request->only(['fb', 'general', 'twitter', 'robot']);
