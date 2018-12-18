@@ -63,7 +63,7 @@
                         <div class="checkbox">
                             <label for="gender">
                                 <input type="hidden" name="checkboxes" value="0">
-                                {!! Form::checkbox('checkboxes',1,null,['id'=>'gender']) !!}
+                                {!! Form::checkbox('gender',1,null,['id'=>'gender']) !!}
                                 gender
                             </label>
                         </div>
