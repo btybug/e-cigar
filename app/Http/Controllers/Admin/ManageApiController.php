@@ -58,7 +58,7 @@ class ManageApiController extends Controller
         $data['customer_number']=1;
         $data['id']=1;
         $data['created_at']=1;
-        $settings->updateOrCreateSettings('manage_api_export_users', $request->except('_token'));
+        $settings->updateOrCreateSettings('manage_api_export_users', $data);
         return redirect()->back();
     }
 
