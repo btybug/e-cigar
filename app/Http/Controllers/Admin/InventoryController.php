@@ -283,12 +283,12 @@ class InventoryController extends Controller
         $data = $request->except('extra_product','stock_id');
         $stock = Stock::findOrFail($request->stock_id);
 
-        $sale = $stock->sales()->where('canceled',false)->where('start_date','<=',$data['start_date'])->where('end_date','>=',$data['start_date'])
+        $sale = $stock->sales()->where('canceled',false)->where('start_date','<=',strtotime($data['start_date']))->where('end_date','>=',strtotime($data['start_date']))
             ->orWhere(function ($query) use($data){
-                $query->where('canceled',false)->where('start_date','<=',$data['end_date'])->where('end_date','>=',$data['end_date']);
+                $query->where('canceled',false)->where('start_date','<=',strtotime($data['end_date']))->where('end_date','>=',strtotime($data['end_date']));
             })
             ->first();
-
+        
         if($sale) return \Response::json(['error' => true,'message' => 'Please select another dates for promotion, we have active promotion with these dates...']);
 
         if($request->get('extra_product') && count($request->get('extra_product'))){

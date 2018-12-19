@@ -165,7 +165,7 @@
                 let form = $(this).closest('form');
                 AjaxCall(form.attr('action'), form.serialize(), function (res) {
                     if (!res.error) {
-                        location.reload();
+//                        location.reload();
                     }else{
                         alert(res.message)
                     }
