@@ -37,11 +37,14 @@ class ExportOrders extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(ManagerApiRequest $request)
     {
-        $request = new ManagerApiRequest;
+//        $request = new ManagerApiRequest;
         \File::put(public_path('test.txt'), now());
          $redayJobs = OrdersJob::where('status', '<', 3)->first();
+         if($redayJobs){
+
+
          try{
             $result = $request->exportOrder($redayJobs->order_id);
          }catch (\Exception $exception){
@@ -54,6 +57,8 @@ class ExportOrders extends Command
              $redayJobs->status=$redayJobs->status+1;
              $redayJobs->save();
          }
-         return 'success';
+         echo 'success';
+         }
+         echo 'no order available to export';
     }
 }
