@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\OrdersJob;
+use App\Services\ManagerApiRequest;
 use Illuminate\Console\Command;
 
 class ExportOrders extends Command
@@ -38,8 +39,21 @@ class ExportOrders extends Command
      */
     public function handle()
     {
-        \File::put(public_path('test.txt'),now());
-//        $redayJobs = OrdersJob::where('status', '<', 3)->pluck('id');
-//        $orders=
+        $request = new ManagerApiRequest;
+        \File::put(public_path('test.txt'), now());
+         $redayJobs = OrdersJob::where('status', '<', 3)->first();
+         try{
+            $result = $request->exportOrder($redayJobs->order_id);
+         }catch (\Exception $exception){
+             $redayJobs->log= $redayJobs->log.'\r\n'.$exception->getMessage();
+             $redayJobs->status=$redayJobs->status+1;
+             $redayJobs->save();
+         }
+         if($result['error']){
+             $redayJobs->log= $redayJobs->log.'\r\n'.$result['message'];
+             $redayJobs->status=$redayJobs->status+1;
+             $redayJobs->save();
+         }
+         return 'success';
     }
 }

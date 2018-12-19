@@ -58,9 +58,6 @@ class OrdersController extends Controller
 
     public function index(ManagerApiRequest $request)
     {
-        $redayJobs = OrdersJob::where('status', '<', 3)->first();
-       $result= $request->exportOrder($redayJobs->order_id);
-       dd($result);
 
         return $this->view('index');
     }
