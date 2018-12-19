@@ -84,9 +84,12 @@
                         {!! ($promotionPrice) ? $promotionPrice->price : ($single_variation) ? $single_variation->price : null !!}
                     </td>
                     <td>
+                        @php
+                            $salePrice = ($promotion) ? ( ($single_variation) ? $single_variation->sale()->where('slug',$promotion->slug)->first() :  null) : null;
+                        @endphp
                         {!! Form::text("extra_product[$single_variation->id][price]",
-                        (isset($price[$single_variation->id]) && $price[$single_variation->id]) ? $price[$single_variation->id] :
-                        (($promotionPrice) ? $promotionPrice->price : (($single_variation) ? $single_variation->price : null)),
+                            ($salePrice) ? $salePrice->price : 0
+                        ,
                         ['class' => 'form-control extra-item','data-variation' => $single_variation->id]) !!}
                     </td>
                 </tr>
@@ -146,6 +149,8 @@
                     @php
                         $variation = ($model && count($model->variations)) ? $model->variations->first() : null;
                         $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
+
+                        $salePrice = ($promotion) ? ( ($variation) ? $variation->sale()->where('slug',$promotion->slug)->first() :  null) : null;
                     @endphp
 
                     <div class="row">
@@ -158,8 +163,7 @@
                         <label class="col-md-2">New Price:</label>
                         <div class="col-sm-6">
                             {!! Form::text("extra_product[$variation->id][price]",
-                            (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :
-                            (($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null)),
+                            ($salePrice) ? $salePrice->price : 0,
                 ['class' => 'form-control extra-item extra-price','data-variation' => ($variation) ? $variation->id : null]) !!}
                         </div>
                     </div>
