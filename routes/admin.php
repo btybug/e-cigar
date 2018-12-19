@@ -220,6 +220,9 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/edit/{id}', 'Admin\InventoryController@getStockEdit')->name('admin_stock_edit');
         Route::get('/promotions/{id}', 'Admin\InventoryController@getPromotionEdit')->name('admin_stock_promotion_edit');
         Route::post('/get-promotion', 'Admin\InventoryController@getPromotion')->name('admin_stock_get_promotion');
+        Route::post('/promotion-save', 'Admin\InventoryController@savePromotion')->name('admin_stock_sales_save');
+        Route::post('/delete-promotion', 'Admin\InventoryController@deleteSale')->name('admin_stock_sales_delete');
+
         Route::post('/save-stock', 'Admin\InventoryController@postStock')->name('admin_stock_save');
         Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
         Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');

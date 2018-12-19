@@ -17,6 +17,7 @@ use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\Stock;
+use App\Models\StockSales;
 use App\Models\StockSeo;
 use App\Models\StockVariationOption;
 use App\Services\StockService;
@@ -115,7 +116,9 @@ class InventoryController extends Controller
     public function getPromotionEdit ($id)
     {
         $model = Stock::findOrFail($id);
-        return $this->view('stock_promotions', compact(['model']));
+        $sales = $model->sales()->groupBy('slug')->get();
+
+        return $this->view('stock_promotions', compact(['model','sales']));
 
     }
 
@@ -259,8 +262,36 @@ class InventoryController extends Controller
     public function getPromotion (Request $request)
     {
         $model = Stock::findOrFail($request->stock_id);
-
-        $html = \View("admin.inventory._partials.promotion_item", compact(['model']))->render();
+        $promotion = ($request->get('slug')) ? StockSales::where('slug',$request->get('slug'))->first() : null;
+        $html = \View("admin.inventory._partials.promotion_item", compact(['model','promotion']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function savePromotion(Request $request)
+    {
+        $data = $request->except('extra_product','stock_id');
+        $stock = Stock::findOrFail($request->stock_id);
+        if($request->get('extra_product') && count($request->get('extra_product'))){
+            foreach ($request->get('extra_product') as $key => $item){
+                $sale = $stock->sales()->where('variation_id',$key)->where('slug',$data['slug'])->first();
+                $data['variation_id'] = $key;
+                $data['price'] = $item['price'];
+                if($sale){
+                    $sale->update($data);
+                }else{
+                    $stock->sales()->create($data);
+                }
+            }
+        }
+
+        return \Response::json(['error' => false]);
+    }
+
+    public function deleteSale(Request $request)
+    {
+        $stock = Stock::findOrFail($request->stock_id);
+        $stock->sales()->where('slug',$request->slug)->delete();
+
+        return \Response::json(['error' => false]);
     }
 }

@@ -1,5 +1,12 @@
 <div data-promotion-v="{{ $model->id }}" class="extra-item-data">
-
+    {!! Form::model($promotion,['url' => route('admin_stock_sales_save'),'id' => 'promotion-form']) !!}
+    {!! Form::hidden('stock_id',$model->id) !!}
+    {!! Form::hidden('slug',($promotion) ? $promotion->slug: uniqid()) !!}
+    @if(! $promotion)
+        <div class="row mb-4">
+            <h3>Create new</h3>
+        </div>
+    @endif
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="row">
@@ -120,13 +127,13 @@
                         <td>
                             @php
                                 $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
+                                $salePrice = ($promotion) ? $variation->sale()->where('slug',$promotion->slug)->first() : null
                             @endphp
                             {!! ($promotionPrice) ? $promotionPrice->price : ($variation) ? $variation->price : null !!}
                         </td>
                         <td>
                             {!! Form::text("extra_product[$variation->id][price]",
-                            (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :
-                            (($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null)),
+                            ($salePrice) ? $salePrice->price : 0,
                             ['class' => 'form-control extra-item','data-variation' => $variation->id]) !!}
                         </td>
                     </tr>
@@ -187,4 +194,6 @@
     @else
         NO Variations
     @endif
+    {!! Form::close() !!}
+
 </div>

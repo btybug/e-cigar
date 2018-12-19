@@ -124,4 +124,9 @@ class Stock extends Translatable
         return $this->hasMany(StockTypeAttribute::class, 'stock_id', 'id')
             ->whereNotNull('stock_type_attributes.sticker_id');
     }
+
+    public function sales()
+    {
+        return $this->hasMany(StockSales::class, 'stock_id');
+    }
 }

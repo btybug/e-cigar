@@ -18,7 +18,7 @@
             </div>
         </div>
     </section>
-
+    {!! Form::close() !!}
     <section class="content stock-page">
         <div class="row">
             <div class="col-md-12">
@@ -28,20 +28,23 @@
                             <div class="basic-left basic-wall">
                                 <div class="all-list-extra">
                                     <ul class="get-all-extra-tab">
-                                        {{--@if($model)--}}
-                                            {{--@foreach($model->promotions as $promotion)--}}
-                                                <li style="display: flex" data-id="1" class="promotion-elm"><a
-                                                            href="#">Discount Christmas</a>
-                                                    <div class="buttons">
-                                                        <a href="javascript:void(0)" class="btn btn-sm btn-success">Active</a>
-                                                        <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                                    </div>
-                                                    <input type="hidden" name="promotions[1][id]" value="{{ @$promotion->id }}">
-                                                    <input type="hidden" class="promotion_price" data-id="{{ @$promotion->id }}" name="promotion_prices[{{ @$promotion->id }}]" value="{{ '' }}">
-                                                    <input type="hidden" class="promotion_type" data-id="{{ @$promotion->id }}" name="promotions[{{ @$promotion->id }}][type]" value="{{ @$promotion->pivot->type }}">
-                                                </li>
-                                            {{--@endforeach--}}
-                                        {{--@endif--}}
+                                        @foreach($sales as $sale)
+                                            <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
+                                                        href="#">{{ $sale->name }}</a>
+                                                <div class="buttons">
+                                                    @php
+                                                        $color = 'success';
+                                                        if($sale->availability == 'pending'){
+                                                            $color = 'info';
+                                                        }elseif ($sale->availability == 'expired'){
+                                                            $color = 'warning';
+                                                        }
+                                                    @endphp
+                                                    <a href="javascript:void(0)" class="btn btn-sm btn-{{ $color }}">{{ $sale->availability }}</a>
+                                                    <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div class="button-add text-center">
@@ -55,7 +58,7 @@
                             <div class="basic-center basic-wall">
                                 <div class="row">
                                     <div class="col-md-12 extra-variations">
-                                        @include("admin.inventory._partials.promotion_item")
+                                        {{--@include("admin.inventory._partials.promotion_item")--}}
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +67,6 @@
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
         </div>
         <!-- /.col -->
     </section>
@@ -124,64 +126,89 @@
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             },5);
 
+            $("body").on('click', '.save-extra-variations', function () {
+                let form = $(this).closest('form');
+                AjaxCall(form.attr('action'), form.serialize(), function (res) {
+                    if (!res.error) {
+                        location.reload();
+                    }
+                });
+            });
+
             $("body").on('click', '.add-promotions', function () {
-                let id = guid();
-                $(".get-all-extra-tab")
-                    .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
-                                href="#">New promotion</a>
-                                <div class="buttons">
-                                <a href="javascript:void(0)" class="btn btn-sm btn-warning">Expired</a>
-                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                </div>
-                    <input type="hidden" name="promotions[${id}][id]" value="${id}">
-                    <input type="hidden" name="promotions[${id}][va]" value="${id}">
-                    <input type="hidden" class="promotion_price" data-id="${id}" name="promotions[${id}][price]" value="">
-                    <input type="hidden" class="promotion_start_date" data-id="${id}" name="promotions[${id}][start_date]" value="0" />
-                    <input type="hidden" class="promotion_end_date" data-id="${id}" name="promotions[${id}][end_date]" value="0" />
-                    </li>`);
+                let stock_id = $("#stock-id").val();
+                $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
+                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id}, function (res) {
+                    if (!res.error) {
+                        $(".extra-variations").html(res.html);
+                        runDatepicker();
+                    }
+                });
+
+//                $(".get-all-extra-tab")
+//                    .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
+//                                href="#">New promotion</a>
+//                                <div class="buttons">
+//                                <a href="javascript:void(0)" class="btn btn-sm btn-warning">Expired</a>
+//                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+//                                </div>
+//                    <input type="hidden" name="promotions[${id}][id]" value="${id}">
+//                    <input type="hidden" name="promotions[${id}][va]" value="${id}">
+//                    <input type="hidden" class="promotion_price" data-id="${id}" name="promotions[${id}][price]" value="">
+//                    <input type="hidden" class="promotion_start_date" data-id="${id}" name="promotions[${id}][start_date]" value="0" />
+//                    <input type="hidden" class="promotion_end_date" data-id="${id}" name="promotions[${id}][end_date]" value="0" />
+//                    </li>`);
             });
 
             $("body").on('click','.promotion-elm',function (e) {
                 if(e.target != this) return false;
 
                 let stock_id = $("#stock-id").val();
-                var id = $(this).data('id');
-                var price = $(this).find('.promotion_price').val();
+                let slug = $(this).data('slug');
 
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
 
-                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id}, function (res) {
+                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id,slug : slug}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
+                        runDatepicker();
                     }
                 });
             });
 
             $("body").on('click', '.remove-promotion', function () {
-                var id = $(this).closest('li').data('id')
-                $(this).closest('li').remove();
-                $(".extra-variations").find("[data-promotion-v='"+id+"']").remove();
+                let slug = $(this).closest('li').data('slug');
+                let stock_id = $("#stock-id").val();
+                AjaxCall("/admin/inventory/stock/delete-promotion", {stock_id: stock_id,slug : slug}, function (res) {
+                    if (!res.error) {
+                        location.reload();
+                    }
+                });
             });
         })
-        $('#input-date-start').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            // minYear: 1901,
-            // maxYear: parseInt(moment().format('YYYY'),10)
-        }, function(start, end, label) {
-            var years = moment().diff(start, 'years');
-            // alert("You are " + years + " years old!");
-        });
-        $('#input-date-end').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            // minYear: 1901,
-            // maxYear: parseInt(moment().format('YYYY'),10)
-        }, function(start, end, label) {
-            var years = moment().diff(start, 'years');
-            // alert("You are " + years + " years old!");
-        });
+
+        function runDatepicker() {
+            $('#input-date-start').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                // minYear: 1901,
+                // maxYear: parseInt(moment().format('YYYY'),10)
+            }, function(start, end, label) {
+                var years = moment().diff(start, 'years');
+                // alert("You are " + years + " years old!");
+            });
+            $('#input-date-end').daterangepicker({
+                singleDatePicker: true,
+                showDropdowns: true,
+                // minYear: 1901,
+                // maxYear: parseInt(moment().format('YYYY'),10)
+            }, function(start, end, label) {
+                var years = moment().diff(start, 'years');
+                // alert("You are " + years + " years old!");
+            });
+        }
+        runDatepicker();
 
         function guid() {
             return "ss".replace(/s/g, s4);

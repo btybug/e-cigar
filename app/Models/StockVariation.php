@@ -27,4 +27,9 @@ class StockVariation extends Model
     {
         return $this->hasMany(StockVariationOption::class, 'variation_id');
     }
+
+    public function sale()
+    {
+        return $this->hasOne(StockSales::class, 'variation_id');
+    }
 }
