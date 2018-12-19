@@ -157,6 +157,8 @@ Promotions
                 AjaxCall(form.attr('action'), form.serialize(), function (res) {
                     if (!res.error) {
                         location.reload();
+                    }else{
+                        alert(res.message)
                     }
                 });
             });
