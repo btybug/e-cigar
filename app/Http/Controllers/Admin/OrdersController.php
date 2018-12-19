@@ -15,6 +15,7 @@ use App\Models\Addresses;
 use App\Models\OrderHistory;
 use App\Models\OrderItem;
 use App\Models\Orders;
+use App\Models\OrdersJob;
 use App\Models\Statuses;
 use App\Models\Settings;
 use App\Models\Stock;
@@ -22,6 +23,7 @@ use App\Models\StockVariation;
 use App\Models\StripePayments;
 use App\Models\ZoneCountries;
 use App\Services\CartService;
+use App\Services\ManagerApiRequest;
 use App\User;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use PragmaRX\Countries\Package\Countries;
@@ -54,8 +56,11 @@ class OrdersController extends Controller
         $this->geoZones = $geoZones;
     }
 
-    public function index()
+    public function index(ManagerApiRequest $request)
     {
+        $redayJobs = OrdersJob::where('status', '<', 3)->first();
+       $result= $request->exportOrder($redayJobs->order_id);
+       dd($result);
 
         return $this->view('index');
     }
@@ -68,6 +73,7 @@ class OrdersController extends Controller
             ->with('history')
             ->with('items')
             ->with('user')->first();
+
         if (!$order) abort(404);
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
         return $this->view('manage', compact('order', 'statuses'));

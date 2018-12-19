@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\OrderItem;
 use App\Models\Orders;
+use App\Models\OrdersJob;
 use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\StripePayments;
@@ -128,7 +129,7 @@ class StripePaymentController extends Controller
                     'options' => $options
                 ]);
             }
-
+            OrdersJob::makeNew($order->id);
             return $order;
         });
 

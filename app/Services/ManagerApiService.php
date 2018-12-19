@@ -154,7 +154,7 @@ class ManagerApiService
     {
 
         if ($this->tokenExpired()) {
-            return $this->refreshToken()->source['access_token'];
+            return $this->getAccessToken()->source['access_token'];
         }
         return $this->source['access_token'];
     }

@@ -14,6 +14,7 @@ use App\Models\Addresses;
 use App\Models\OrderAddresses;
 use App\Models\OrderItem;
 use App\Models\Orders;
+use App\Models\OrdersJob;
 use App\Models\StripePayments;
 use App\Models\Statuses;
 use App\Models\Settings;
@@ -99,6 +100,7 @@ class CashPaymentController extends Controller
                     'image' => $item->attributes->variation->stock->image,
                     'options' => $options
                 ]);
+                OrdersJob::makeNew($order->id);
             }
 
             return $order;

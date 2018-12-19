@@ -9,6 +9,7 @@
 namespace App\Services;
 
 
+use App\Models\Orders;
 use App\Models\Roles;
 use App\Models\Settings;
 use App\User;
@@ -91,5 +92,17 @@ final class ManagerApiRequest
             }
         }
      return $result;
+    }
+
+    public function exportOrder(int $order_id)
+    {
+        $order = Orders::where('id',$order_id)
+            ->with('shippingAddress')
+            ->with('items')->first();
+        $response = $this->http->post($this->url('oauth-channel/import-order'),  [
+            'headers'=>$this->headers(),
+            'form_params' =>$order->toArray()
+        ]);
+        return json_decode((string)$response->getBody(), true);
     }
 }
