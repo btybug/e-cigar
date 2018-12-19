@@ -26,27 +26,79 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="basic-left basic-wall">
-                                <div class="all-list-extra">
-                                    <ul class="get-all-extra-tab">
-                                        @foreach($sales as $sale)
-                                            <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
-                                                        href="#">{{ $sale->name }}</a>
-                                                <div class="buttons">
-                                                    @php
-                                                        $color = 'success';
-                                                        if($sale->availability == 'pending'){
-                                                            $color = 'info';
-                                                        }elseif ($sale->availability == 'expired'){
-                                                            $color = 'warning';
-                                                        }
-                                                    @endphp
-                                                    <a href="javascript:void(0)" class="btn btn-sm btn-{{ $color }}">{{ $sale->availability }}</a>
-                                                    <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Current promotions</div>
+                                    <div class="panel-body">
+                                        <ul class="get-all-extra-tab">
+                                            @foreach($sales as $sale)
+                                                <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
+                                                            href="#">{{ $sale->name }}</a>
+                                                    <div class="buttons">
+                                                        @php
+                                                            $color = 'success';
+                                                            if($sale->availability == 'pending'){
+                                                                $color = 'info';
+                                                            }elseif ($sale->availability == 'expired'){
+                                                                $color = 'warning';
+                                                            }
+                                                        @endphp
+                                                        <a href="javascript:void(0)" class="btn btn-sm btn-{{ $color }}">{{ $sale->availability }}</a>
+                                                        {{--<a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>--}}
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Coming promtions</div>
+                                    <div class="panel-body">
+                                        <ul class="get-all-extra-tab">
+                                            @foreach($sales as $sale)
+                                                <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
+                                                            href="#">{{ $sale->name }}</a>
+                                                    <div class="buttons">
+                                                        @php
+                                                            $color = 'success';
+                                                            if($sale->availability == 'pending'){
+                                                                $color = 'info';
+                                                            }elseif ($sale->availability == 'expired'){
+                                                                $color = 'warning';
+                                                            }
+                                                        @endphp
+                                                        <a href="javascript:void(0)" class="btn btn-sm btn-{{ $color }}">{{ $sale->availability }}</a>
+                                                        {{--<a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>--}}
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Archived promotions</div>
+                                    <div class="panel-body">
+                                        <ul class="get-all-extra-tab">
+                                            @foreach($sales as $sale)
+                                                <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
+                                                            href="#">{{ $sale->name }}</a>
+                                                    <div class="buttons">
+                                                        @php
+                                                            $color = 'success';
+                                                            if($sale->availability == 'pending'){
+                                                                $color = 'info';
+                                                            }elseif ($sale->availability == 'expired'){
+                                                                $color = 'warning';
+                                                            }
+                                                        @endphp
+                                                        <a href="javascript:void(0)" class="btn btn-sm btn-{{ $color }}">{{ $sale->availability }}</a>
+                                                        {{--<a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>--}}
+                                                    </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+
                                 <div class="button-add text-center">
                                     <a href="javascript:void(0)"
                                        class="btn btn-primary btn-block add-promotions"><i
