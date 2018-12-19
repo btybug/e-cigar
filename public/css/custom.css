@@ -1207,3 +1207,12 @@ resize: none;
     align-items: center;
     flex-wrap: wrap;
 }
+.panel--promotions .panel-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.panel--promotions .panel-body{
+    height: calc(100vh - 280px);
+    overflow: auto;
+}
