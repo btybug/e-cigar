@@ -40,7 +40,7 @@ class ExportOrders extends Command
     public function handle(ManagerApiRequest $request)
     {
 //        $request = new ManagerApiRequest;
-        \File::put(public_path('test.txt'), now());
+     //   \File::put(public_path('test.txt'), now());
          $redayJobs = OrdersJob::where('status', '<', 3)->first();
          if($redayJobs){
 
