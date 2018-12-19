@@ -29,15 +29,19 @@
                                 <div class="panel panel-default panel--promotions">
                                     <div class="panel-heading ">
                                         <div>
-Promotions
+                                            Promotions
                                         </div>
                                         <div>
-                                            <select name="" id="" class="form-control">
-                                                <option value="">All</option>
-                                                <option value="">Current</option>
-                                                <option value="">Coming</option>
-                                                <option value="">Archived</option>
-                                            </select>
+                                            {!! Form::select('p_t',[
+                                                'all' => 'All',
+                                                'current' => 'Current',
+                                                'coming' => 'Coming',
+                                                'archived' => 'Archived'
+                                            ],$type,[
+                                                'class' => 'form-control',
+                                                'id' => 'promotionType'
+                                            ]) !!}
+
                                         </div>
                                     </div>
                                     <div class="panel-body">
@@ -148,6 +152,11 @@ Promotions
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
+            $("body").on('change','#promotionType',function () {
+                let val = $(this).val();
+                window.location.href='?type='+val;
+            });
+
             setTimeout(function() {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             },5);

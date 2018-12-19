@@ -12,14 +12,20 @@
             <div class="row">
                 <label class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-6">
-                   {!! Form::text('name',null,['class' => 'form-control']) !!}
+                    @if($promotion)
+                       <div class="form-control">{{  $promotion->name }} </div>
+                    @else
+                        {!! Form::text('name',null,['class' => 'form-control']) !!}
+                    @endif
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
-                Save
-            </button>
+            @if(! $promotion)
+                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
+                    Save
+                </button>
+            @endif
         </div>
     </div>
     <div class="row mb-4">
@@ -27,12 +33,17 @@
             <div class="row">
                 <label class="col-sm-2 control-label" for="input-date-start">Date Start</label>
                 <div class="col-sm-6">
-                    <div class="input-group date">
-                        {!! Form::text('start_date',@$coupons->start_date??null,['placeholder' => 'Date Start',
-                      'id'=>'input-date-start', 'class'=> 'form-control','data-date-format'=>'YYYY-MM-DD']) !!}
-                        <span class="input-group-btn">
-<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-</span></div>
+                    @if($promotion)
+                        {{ BBgetDateFormat($promotion->start_date,'m/d/Y') }}
+                    @else
+                        <div class="input-group date">
+                            {!! Form::text('start_date',null,['placeholder' => 'Date Start',
+                          'id'=>'input-date-start', 'class'=> 'form-control','data-date-format'=>'YYYY-MM-DD']) !!}
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -40,12 +51,16 @@
             <div class="row">
                 <label class="col-sm-2 control-label" for="input-date-end">Date End</label>
                 <div class="col-sm-6">
-                    <div class="input-group date">
-                        {!! Form::text('end_date',@$coupons->end_date??null,['placeholder' => 'Date end',
-                      'id'=>'input-date-end', 'class'=> 'form-control','data-date-format'=>'YYYY-MM-DD']) !!}
-                        <span class="input-group-btn">
-<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
-</span></div>
+                    @if($promotion)
+                        {{ BBgetDateFormat($promotion->end_date,'m/d/Y') }}
+                    @else
+                        <div class="input-group date">
+                            {!! Form::text('end_date',null,['placeholder' => 'Date end',
+                          'id'=>'input-date-end', 'class'=> 'form-control','data-date-format'=>'YYYY-MM-DD']) !!}
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                        </span></div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -87,10 +102,14 @@
                         @php
                             $salePrice = ($promotion) ? ( ($single_variation) ? $single_variation->sale()->where('slug',$promotion->slug)->first() :  null) : null;
                         @endphp
-                        {!! Form::text("extra_product[$single_variation->id][price]",
-                            ($salePrice) ? $salePrice->price : 0
-                        ,
-                        ['class' => 'form-control extra-item','data-variation' => $single_variation->id]) !!}
+                        @if($promotion)
+                            {{  ($salePrice) ? $salePrice->price : 0 }}
+                        @else
+                            {!! Form::text("extra_product[$single_variation->id][price]",
+                                ($salePrice) ? $salePrice->price : 0
+                            ,
+                            ['class' => 'form-control extra-item','data-variation' => $single_variation->id]) !!}
+                        @endif
                     </td>
                 </tr>
                 </tbody>
@@ -138,9 +157,13 @@
                             {!! ($promotionPrice) ? $promotionPrice->price : ($variation) ? $variation->price : null !!}
                         </td>
                         <td>
+                            @if($promotion)
+                                {{  ($salePrice) ? $salePrice->price : 0 }}
+                            @else
                             {!! Form::text("extra_product[$variation->id][price]",
                             ($salePrice) ? $salePrice->price : 0,
                             ['class' => 'form-control extra-item','data-variation' => $variation->id]) !!}
+                            @endif
                         </td>
                     </tr>
                 @endforeach
@@ -167,9 +190,13 @@
                     <div class="row">
                         <label class="col-md-2">New Price:</label>
                         <div class="col-sm-6">
+                            @if($promotion)
+                                {{  ($salePrice) ? $salePrice->price : 0 }}
+                            @else
                             {!! Form::text("extra_product[$variation->id][price]",
                             ($salePrice) ? $salePrice->price : 0,
                 ['class' => 'form-control extra-item extra-price','data-variation' => ($variation) ? $variation->id : null]) !!}
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -206,12 +233,14 @@
     {!! Form::close() !!}
     @if($promotion)
         <div class="row mb-4">
+            @if(! $promotion->canceled)
             <div class="text-right">
                 <button data-id="{{ $model->id }}" data-slug="{{ $promotion->slug }}" class="btn btn-danger cancel-promotion">Cancel Promotion</button>
             </div>
+            @endif
             <p><strong>Created : </strong> {{ BBgetDateFormat($promotion->created_at) }}</p>
             @if($promotion->canceled)
-            <p><strong>Updated : </strong> {{ BBgetDateFormat($promotion->updated_at) }}</p>
+                <p><strong>Updated : </strong> {{ BBgetDateFormat($promotion->updated_at) }}</p>
             @endif
         </div>
     @endif

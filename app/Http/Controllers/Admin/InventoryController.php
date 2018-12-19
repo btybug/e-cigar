@@ -113,12 +113,23 @@ class InventoryController extends Controller
         return redirect()->route('admin_stock');
     }
 
-    public function getPromotionEdit ($id)
+    public function getPromotionEdit ($id,Request $request)
     {
         $model = Stock::findOrFail($id);
-        $sales = $model->sales()->groupBy('slug')->get();
+        $type = $request->get('type','all');
+        $now = strtotime(today()->toDateString());
 
-        return $this->view('stock_promotions', compact(['model','sales']));
+        if($type == 'all'){
+            $sales = $model->sales()->groupBy('slug')->get();
+        }else if($type == 'archived'){
+            $sales = $model->sales()->where('canceled',true)->groupBy('slug')->get();
+        }else if($type == 'coming'){
+            $sales = $model->sales()->where('canceled',false)->where('start_date','>',$now)->groupBy('slug')->get();
+        }else if($type == 'current'){
+            $sales = $model->sales()->where('canceled',false)->where('start_date','<=',$now)->where('end_date','>=',$now)->groupBy('slug')->get();
+        }
+
+        return $this->view('stock_promotions', compact(['model','sales','type']));
 
     }
 
