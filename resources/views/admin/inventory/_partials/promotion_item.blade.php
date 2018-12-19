@@ -146,9 +146,7 @@
                 @endforeach
                 </tbody>
             </table>
-        <div class="text-right">
-            <button class="btn btn-danger">Cancel Promotion</button>
-        </div>
+
 
         @elseif($model->type == 'package_product')
             <div class="row mb-4">
@@ -206,5 +204,15 @@
         NO Variations
     @endif
     {!! Form::close() !!}
-
+    @if($promotion)
+        <div class="row mb-4">
+            <div class="text-right">
+                <button data-id="{{ $model->id }}" data-slug="{{ $promotion->slug }}" class="btn btn-danger cancel-promotion">Cancel Promotion</button>
+            </div>
+            <p><strong>Created : </strong> {{ BBgetDateFormat($promotion->created_at) }}</p>
+            @if($promotion->canceled)
+            <p><strong>Updated : </strong> {{ BBgetDateFormat($promotion->updated_at) }}</p>
+            @endif
+        </div>
+    @endif
 </div>

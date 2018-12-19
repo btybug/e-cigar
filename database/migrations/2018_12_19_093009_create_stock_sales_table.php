@@ -18,9 +18,11 @@ class CreateStockSalesTable extends Migration
             $table->unsignedInteger('variation_id');
             $table->unsignedInteger('stock_id');
             $table->string('name')->nullable();
+            $table->string('slug');
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->float('price')->default(0);
+            $table->tinyInteger('canceled')->default(0);
             $table->timestamps();
 
             $table->foreign('variation_id')->references('id')->on('stock_variations')->onDelete('cascade');

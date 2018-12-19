@@ -46,16 +46,11 @@ Promotions
                                                 <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
                                                             href="#">{{ $sale->name }}</a>
                                                     <div class="buttons">
-                                                        @php
-                                                            $color = 'success';
-                                                            if($sale->availability == 'pending'){
-                                                                $color = 'info';
-                                                            }elseif ($sale->availability == 'expired'){
-                                                                $color = 'warning';
-                                                            }
-                                                        @endphp
-                                                        <a href="javascript:void(0)" class="btn btn-sm btn-{{ $color }}">{{ $sale->availability }}</a>
-                                                        {{--<a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>--}}
+                                                       @if($sale->canceled)
+                                                            <a href="javascript:void(0)" class="btn btn-sm btn-canceled">Canceled</a>
+                                                        @else
+                                                            <a href="javascript:void(0)" class="btn btn-sm btn-{{ $sale->availability }}">{{ $sale->availability }}</a>
+                                                        @endif
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -94,6 +89,21 @@ Promotions
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
+        .btn-coming {
+            background-color: #0f4de0;
+            border-color: #0f4de0;
+        }
+
+        .btn-current {
+            background-color: #9de050;
+            border-color: #9de050;
+        }
+
+        .btn-canceled {
+            background-color: #e05543;
+            border-color: #e05543;
+        }
+
         .errors {
             color: red;
             font-style: italic;
@@ -193,10 +203,10 @@ Promotions
                 });
             });
 
-            $("body").on('click', '.remove-promotion', function () {
-                let slug = $(this).closest('li').data('slug');
+            $("body").on('click', '.cancel-promotion', function () {
+                let slug = $(this).data('slug');
                 let stock_id = $("#stock-id").val();
-                AjaxCall("/admin/inventory/stock/delete-promotion", {stock_id: stock_id,slug : slug}, function (res) {
+                AjaxCall("/admin/inventory/stock/cancel-promotion", {stock_id: stock_id,slug : slug}, function (res) {
                     if (!res.error) {
                         location.reload();
                     }

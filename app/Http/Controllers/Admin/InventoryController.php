@@ -287,10 +287,10 @@ class InventoryController extends Controller
         return \Response::json(['error' => false]);
     }
 
-    public function deleteSale(Request $request)
+    public function cancelSale(Request $request)
     {
         $stock = Stock::findOrFail($request->stock_id);
-        $stock->sales()->where('slug',$request->slug)->delete();
+        $stock->sales()->where('slug',$request->slug)->update(['canceled'=>true]);
 
         return \Response::json(['error' => false]);
     }

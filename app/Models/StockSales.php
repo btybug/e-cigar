@@ -33,11 +33,11 @@ class StockSales extends Model
         $now = strtotime(today()->toDateString());
 
         if($now >= $start && $now <= $end){
-            $result = 'active';
+            $result = 'current';
         }elseif ($now < $start){
-            $result = 'pending';
+            $result = 'coming';
         }elseif ($now > $end){
-            $result = 'expired';
+            $result = 'canceled';
         }
 
         return $result;
