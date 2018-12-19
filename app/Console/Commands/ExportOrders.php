@@ -57,7 +57,10 @@ class ExportOrders extends Command
              $redayJobs->log= $redayJobs->log.'\r\n'.$result['message'];
              $redayJobs->status=$redayJobs->status+1;
              $redayJobs->save();
+             echo $result['message'];die;
          }
+             $redayJobs->status=4;
+             $redayJobs->save();
          echo 'success';die;
          }
          echo 'no order available to export';die;
