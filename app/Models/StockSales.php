@@ -37,7 +37,6 @@ class StockSales extends Model
         }elseif ($now < $start){
             $result = 'pending';
         }elseif ($now > $end){
-            dd($start,$now,$end);
             $result = 'expired';
         }
 
