@@ -26,10 +26,18 @@ class StockSales extends Model
         return $this->calculateActivity($this->start_date,$this->end_date);
     }
 
+    public function setStartDateAttribute($value)
+    {
+        $this->attributes['start_date'] = strtotime($value);
+    }
+
+    public function setEndDateAttribute($value)
+    {
+        $this->attributes['end_date'] = strtotime($value);
+    }
+
     private function calculateActivity($start,$end){
         $result = null;
-        $start = strtotime($start);
-        $end = strtotime($end);
         $now = strtotime(today()->toDateString());
 
         if($now >= $start && $now <= $end){
