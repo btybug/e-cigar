@@ -47,7 +47,7 @@ Promotions
                                                             href="#">{{ $sale->name }}</a>
                                                     <div class="buttons">
                                                        @if($sale->canceled)
-                                                            <a href="javascript:void(0)" class="btn btn-sm btn-canceled">Canceled</a>
+                                                            <a href="javascript:void(0)" class="btn btn-sm btn-archive">Archive</a>
                                                         @else
                                                             <a href="javascript:void(0)" class="btn btn-sm btn-{{ $sale->availability }}">{{ $sale->availability }}</a>
                                                         @endif
@@ -99,7 +99,7 @@ Promotions
             border-color: #9de050;
         }
 
-        .btn-canceled {
+        .btn-archive {
             background-color: #e05543;
             border-color: #e05543;
         }

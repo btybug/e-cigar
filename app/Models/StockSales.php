@@ -37,7 +37,7 @@ class StockSales extends Model
         }elseif ($now < $start){
             $result = 'coming';
         }elseif ($now > $end){
-            $result = 'canceled';
+            $result = 'archive';
         }
 
         return $result;
