@@ -95,6 +95,9 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="text-right">
+                <button class="btn btn-danger">Cancel Promotion</button>
+            </div>
         @elseif($model->type == 'variation_product')
 
             <table id="variations-table" class="table table-style table-bordered"
@@ -143,6 +146,10 @@
                 @endforeach
                 </tbody>
             </table>
+        <div class="text-right">
+            <button class="btn btn-danger">Cancel Promotion</button>
+        </div>
+
         @elseif($model->type == 'package_product')
             <div class="row mb-4">
                 <div class="col-md-8">
