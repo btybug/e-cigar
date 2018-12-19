@@ -56,9 +56,8 @@ class OrdersController extends Controller
         $this->geoZones = $geoZones;
     }
 
-    public function index(ManagerApiRequest $request)
+    public function index()
     {
-
         return $this->view('index');
     }
 
