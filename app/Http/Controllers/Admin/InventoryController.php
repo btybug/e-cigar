@@ -270,6 +270,13 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'data' => $model]);
     }
 
+    public function getVariationsById (Request $request)
+    {
+        $model = Stock::findOrFail($request->id);
+
+        return \Response::json(['error' => false, 'data' => $model->variations]);
+    }
+
     public function getPromotion (Request $request)
     {
         $model = Stock::findOrFail($request->stock_id);

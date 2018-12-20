@@ -93,7 +93,15 @@
                                         data-toggle="tooltip" title=""
                                         data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
                             <div class="col-sm-10">
-                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2']) !!}
+                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
+                            <label class="col-sm-2 control-label" for="input-product"><span
+                                        data-toggle="tooltip" title=""
+                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
+                            <div class="col-md-10 variations-box">
+
                             </div>
                         </div>
                         <div class="form-group row">
@@ -160,6 +168,13 @@
         </div>
         {!! Form::close() !!}
     </div>
+
+    <script type="template" id="variation_template">
+        <div class="col-md-3">
+            <label for="variation_{id}">{name}</label>
+            {!! Form::checkbox('variations[]',"{id}",null,['id' => 'variation_{id}']) !!}
+        </div>
+    </script>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
@@ -173,6 +188,27 @@
 
         $(".input-select2").select2();
 
+//        let html = $('#variation_template').html();
+//        let data_p=$(this).attr('data-p');
+//        let lang=$('.languages-'+data_p).length+1;
+//        html= html.replace(/{p}/g,data_p).replace(/{l}/g,lang);
+//        $(this).closest('.languages').append(html) ;
+
+        $("body").on('change', '.product-select', function () {
+            AjaxCall("/admin/inventory/stock/get-variations-by-id", {id: $(this).val()}, function (res) {
+                if (!res.error) {
+                    if(res.data.length){
+                        for(let i in res.data){
+                            var item = res.data[i];
+                            let html = $('#variation_template').html();
+                            html= html.replace(/{name}/g,item.name).replace(/{id}/g,item.id);
+                            $(".variations-box").append(html)
+                            console.log(res.data[i])
+                        }
+                    }
+                }
+            });
+        });
 
         $("body").on('change', '.coupon_type', function () {
             if ($(this).val() == 'product') {
