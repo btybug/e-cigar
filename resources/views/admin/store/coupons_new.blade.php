@@ -19,53 +19,46 @@
                 </div>
             </div>
             <div class="panel-body">
-                <div class="row">
+                <div class="form-group row required">
+                    <label class="col-sm-2 control-label" for="input-name">Coupon Name</label>
                     <div class="col-sm-7">
-                        <div class="form-group row required">
-                            <label class="col-sm-2 control-label" for="input-name">Coupon Name</label>
-                            <div class="col-sm-10">
-                                {!! Form::text('name',$coupons->name??null,['placeholder' => 'Coupon Name',
-                                       'id'=>'input-name', 'class'=> 'form-control']) !!}
-                            </div>
-                        </div>
+                        {!! Form::text('name',$coupons->name??null,['placeholder' => 'Coupon Name',
+                               'id'=>'input-name', 'class'=> 'form-control']) !!}
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="col-md-12">
 
-                        <div class="form-group row required">
-                            <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip"
-                                                                                         title=""
-                                                                                         data-original-title="The code the customer enters to get the discount.">Code</span></label>
-                            <div class="col-sm-10">
-                                {!! Form::text('code',$coupons->code??null,['placeholder' => 'Code',
-                                   'id'=>'input-code', 'class'=> 'form-control']) !!}
-                            </div>
-                        </div>
-
+                <div class="form-group row required">
+                    <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip"
+                                                                                 title=""
+                                                                                 data-original-title="The code the customer enters to get the discount.">Code</span></label>
+                    <div class="col-sm-7">
+                        {!! Form::text('code',$coupons->code??null,['placeholder' => 'Code',
+                           'id'=>'input-code', 'class'=> 'form-control']) !!}
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-default">Generate code</button>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Application</div>
+                    <div class="panel-body">
                         <div class="form-group row">
                             <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                           title=""
-                                    data-original-title="The total amount that must be reached before the coupon is valid.">Discount Amount</span></label>
+                                                                                          data-original-title="The total amount that must be reached before the coupon is valid.">Discount Amount</span></label>
                             <div class="col-sm-10">
-                                <div class="col-sm-6">
-                                    {!! Form::text('discount',$coupons->discount??null,['placeholder' => 'Discount',
-                                            'id'=>'input-discount', 'class'=> 'form-control']) !!}
-                                </div>
-                                <div class="col-sm-6">
-                                    {!! Form::select('type',['p' => 'Percentage','f' => 'Fixed Amount'],[$coupons->type??null],[ 'id'=>'input-type', 'class'=> 'form-control']) !!}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        {!! Form::text('discount',$coupons->discount??null,['placeholder' => 'Discount',
+                                                'id'=>'input-discount', 'class'=> 'form-control']) !!}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        {!! Form::select('type',['p' => 'Percentage','f' => 'Fixed Amount'],[$coupons->type??null],[ 'id'=>'input-type', 'class'=> 'form-control']) !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                          title=""
-                                                                                          data-original-title="The total amount that must be reached before the coupon is valid.">Total Amount</span></label>
-                            <div class="col-sm-10">
-                                {!! Form::text('total_amount',$coupons->total_amount??null,['placeholder' => 'Total Amount',
-                                   'id'=>'input-total', 'class'=> 'form-control']) !!}
-                            </div>
-                        </div>
+
                         <div class="form-group row">
                             <label class="col-sm-2 control-label">Coupon Based</label>
                             <div class="col-sm-10">
@@ -88,22 +81,33 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
-                            <label class="col-sm-2 control-label" for="input-product"><span
-                                        data-toggle="tooltip" title=""
-                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Target</div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label">Target</label>
                             <div class="col-sm-10">
-                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
-                            <label class="col-sm-2 control-label" for="input-product"><span
-                                        data-toggle="tooltip" title=""
-                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
-                            <div class="col-md-10 variations-box">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <select name="" id="" class="form-control">
+                                            <option value="">Specific</option>
+                                            <option value="">2</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Validity</div>
+                    <div class="panel-body">
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="form-group row">
@@ -120,7 +124,8 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group row">
-                                    <label class="col-sm-4 control-label text-right" for="input-date-end">Date End</label>
+                                    <label class="col-sm-4 control-label text-right" for="input-date-end">Date
+                                        End</label>
                                     <div class="col-sm-8">
                                         <div class="input-group date">
                                             {!! Form::text('end_date',$coupons->end_date??null,['placeholder' => 'Date end',
@@ -132,26 +137,59 @@
                                 </div>
                             </div>
                         </div>
-
-
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                          title=""
+                                                                                          data-original-title="The total amount that must be reached before the coupon is valid.">Minimal order amount</span></label>
+                            <div class="col-sm-10">
+                                {!! Form::text('total_amount',$coupons->total_amount??null,['placeholder' => 'Minimal order amount',
+                                   'id'=>'input-total', 'class'=> 'form-control']) !!}
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 control-label" for="input-uses-total"><span
                                         data-toggle="tooltip" title=""
-                                        data-original-title="The maximum number of times the coupon can be used by any customer. Leave blank for unlimited">Uses Per Coupon</span></label>
+                                        data-original-title="The maximum number of times the coupon can be used by any customer. Leave blank for unlimited">Total card use</span></label>
                             <div class="col-sm-10">
-                                {!! Form::text('user_per_coupon',$coupons->user_per_coupon??null,['placeholder' => 'Uses Per Coupon',
+                                {!! Form::text('user_per_coupon',$coupons->user_per_coupon??null,['placeholder' => 'Total card use',
                                    'id'=>'input-uses-total', 'class'=> 'form-control']) !!}
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 control-label" for="input-uses-customer"><span
                                         data-toggle="tooltip" title=""
-                                        data-original-title="The maximum number of times the coupon can be used by a single customer. Leave blank for unlimited">Uses Per Customer</span></label>
+                                        data-original-title="The maximum number of times the coupon can be used by a single customer. Leave blank for unlimited">Each user for</span></label>
                             <div class="col-sm-10">
-                                {!! Form::text('user_per_customer',$coupons->user_per_customer??null,['placeholder' => 'Uses Per Customer',
+                                {!! Form::text('user_per_customer',$coupons->user_per_customer??null,['placeholder' => 'Each user for',
                                   'id'=>'input-uses-customer', 'class'=> 'form-control']) !!}
                             </div>
                         </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-8">
+                    <div class="col-md-12">
+
+
+                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
+                            <label class="col-sm-2 control-label" for="input-product"><span
+                                        data-toggle="tooltip" title=""
+                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
+                            <div class="col-sm-10">
+                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
+                            <label class="col-sm-2 control-label" for="input-product"><span
+                                        data-toggle="tooltip" title=""
+                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
+                            <div class="col-md-10 variations-box">
+
+                            </div>
+                        </div>
+
+
                         <div class="form-group row">
                             <label class="col-sm-2 control-label" for="input-status">Status</label>
                             <div class="col-sm-10">
@@ -188,20 +226,20 @@
 
         $(".input-select2").select2();
 
-//        let html = $('#variation_template').html();
-//        let data_p=$(this).attr('data-p');
-//        let lang=$('.languages-'+data_p).length+1;
-//        html= html.replace(/{p}/g,data_p).replace(/{l}/g,lang);
-//        $(this).closest('.languages').append(html) ;
+        //        let html = $('#variation_template').html();
+        //        let data_p=$(this).attr('data-p');
+        //        let lang=$('.languages-'+data_p).length+1;
+        //        html= html.replace(/{p}/g,data_p).replace(/{l}/g,lang);
+        //        $(this).closest('.languages').append(html) ;
 
         $("body").on('change', '.product-select', function () {
             AjaxCall("/admin/inventory/stock/get-variations-by-id", {id: $(this).val()}, function (res) {
                 if (!res.error) {
-                    if(res.data.length){
-                        for(let i in res.data){
+                    if (res.data.length) {
+                        for (let i in res.data) {
                             var item = res.data[i];
                             let html = $('#variation_template').html();
-                            html= html.replace(/{name}/g,item.name).replace(/{id}/g,item.id);
+                            html = html.replace(/{name}/g, item.name).replace(/{id}/g, item.id);
                             $(".variations-box").append(html)
                             console.log(res.data[i])
                         }
