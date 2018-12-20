@@ -80,7 +80,7 @@ class StoreController extends Controller
     public function Edit($id)
     {
         $coupons = Coupons::findOrFail($id);
-        
+
         $products = Stock::all()->pluck('name','id')->all();
         $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
             ->whereNull('role_id')
