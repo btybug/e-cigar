@@ -10,20 +10,7 @@
             <div class="panel-heading">
                 <div class="left-head">
                     <h2 class="m-0 pull-left">New Coupon</h2>
-                    <div class="discount-amount">
-                        <div>
-                            Discount Amount
-                        </div>
-                        <div class="ml-5">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="ml-5">
-                            <select name="" id="" class="form-control">
-                                <option value="">Percentage</option>
-                                <option value="">Fixed</option>
-                            </select>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="right-head">
                     <div class="button-save">
@@ -43,12 +30,8 @@
                         </div>
                     </div>
                 </div>
-
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane active" id="tab-general">
+                <div class="col-md-8">
+                    <div class="col-md-12">
 
                         <div class="form-group row required">
                             <label class="col-sm-2 control-label" for="input-code"><span data-toggle="tooltip"
@@ -59,21 +42,21 @@
                                    'id'=>'input-code', 'class'=> 'form-control']) !!}
                             </div>
                         </div>
-                        {{--<div class="form-group row">--}}
-                            {{--<label class="col-sm-2 control-label" for="input-type"><span data-toggle="tooltip"--}}
-                                                                                         {{--title=""--}}
-                                                                                         {{--data-original-title="Percentage or Fixed Amount.">Type</span></label>--}}
-                            {{--<div class="col-sm-10">--}}
-                                {{--{!! Form::select('type',['p' => 'Percentage','f' => 'Fixed Amount'],[$coupons->type??null],[ 'id'=>'input-type', 'class'=> 'form-control']) !!}--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="form-group row">--}}
-                            {{--<label class="col-sm-2 control-label" for="input-discount">Discount</label>--}}
-                            {{--<div class="col-sm-10">--}}
-                                {{--{!! Form::text('discount',$coupons->discount??null,['placeholder' => 'Discount',--}}
-                                   {{--'id'=>'input-discount', 'class'=> 'form-control']) !!}--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                                                                          title=""
+                                    data-original-title="The total amount that must be reached before the coupon is valid.">Discount Amount</span></label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-6">
+                                    {!! Form::text('discount',$coupons->discount??null,['placeholder' => 'Discount',
+                                            'id'=>'input-discount', 'class'=> 'form-control']) !!}
+                                </div>
+                                <div class="col-sm-6">
+                                    {!! Form::select('type',['p' => 'Percentage','f' => 'Fixed Amount'],[$coupons->type??null],[ 'id'=>'input-type', 'class'=> 'form-control']) !!}
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                           title=""
@@ -110,7 +93,7 @@
                                         data-toggle="tooltip" title=""
                                         data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
                             <div class="col-sm-10">
-                                {!! Form::select('products[]',$products,null,['class'=> 'form-control input-select2','multiple' => true]) !!}
+                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2']) !!}
                             </div>
                         </div>
                         <div class="form-group row">
@@ -169,6 +152,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+
+                </div>
+
             </div>
         </div>
         {!! Form::close() !!}

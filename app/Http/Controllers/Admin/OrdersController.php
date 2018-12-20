@@ -525,7 +525,7 @@ class OrdersController extends Controller
 
     public function postApplyCoupon(Request $request)
     {
-        $coupon = Coupons::where('code',$request->code)->first();
+        $coupon = Coupons::where('code',$request->code)->where('status',true)->first();
 
         if($coupon){
             dd($coupon);
