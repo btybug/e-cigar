@@ -1216,3 +1216,17 @@ resize: none;
     height: calc(100vh - 280px);
     overflow: auto;
 }
+/*coupons page panel*/
+.coupons_page-panel .panel-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.coupons_page-panel .panel-heading .discount-amount{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.coupons_page-panel .panel-heading h2{
+    margin-right:50px;
+}
