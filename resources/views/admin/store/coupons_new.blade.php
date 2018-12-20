@@ -12,8 +12,11 @@
                     <h2 class="m-0 pull-left">New Coupon</h2>
 
                 </div>
-                <div class="right-head">
-                    <div class="button-save">
+                <div class="right-head d-flex">
+                    <div class="cancel-coupon">
+                        <button class="btn btn-danger">Cancel the coupon</button>
+                    </div>
+                    <div class="button-save ml-5">
                         <button type="submit" class="btn btn-info">Save</button>
                     </div>
                 </div>
@@ -68,6 +71,22 @@
                                 <label class="radio-inline">{!! Form::radio('based','cart',false,['class' => 'coupon_type']) !!}
                                     Cart base
                                 </label>
+                            </div>
+                        </div>
+                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
+                            <label class="col-sm-2 control-label" for="input-product"><span
+                                        data-toggle="tooltip" title=""
+                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
+                            <div class="col-sm-4">
+                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
+                            <label class="col-sm-2 control-label" for="input-product"><span
+                                        data-toggle="tooltip" title=""
+                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
+                            <div class="col-md-10 variations-box">
+
                             </div>
                         </div>
                         <div class="form-group row">
@@ -170,32 +189,12 @@
 
                 <div class="col-md-8">
                     <div class="col-md-12">
-
-
-                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
-                            <label class="col-sm-2 control-label" for="input-product"><span
-                                        data-toggle="tooltip" title=""
-                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
-                            <div class="col-sm-10">
-                                {!! Form::select('products',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
-                            <label class="col-sm-2 control-label" for="input-product"><span
-                                        data-toggle="tooltip" title=""
-                                        data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
-                            <div class="col-md-10 variations-box">
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label" for="input-status">Status</label>
-                            <div class="col-sm-10">
-                                {!! Form::select('status',['1' => 'Enabled','0' => 'Disabled'],[$coupons->status??null],[ 'id'=>'input-status', 'class'=> 'form-control']) !!}
-                            </div>
-                        </div>
+                        {{--<div class="form-group row">--}}
+                            {{--<label class="col-sm-2 control-label" for="input-status">Status</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                                {{--{!! Form::select('status',['1' => 'Enabled','0' => 'Disabled'],[$coupons->status??null],[ 'id'=>'input-status', 'class'=> 'form-control']) !!}--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
                 <div class="col-md-4">
