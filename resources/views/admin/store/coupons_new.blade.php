@@ -91,7 +91,7 @@
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
                                     <div class="col-md-10 variations-box">
-                                        @if($coupons->stock)
+                                        @if($coupons && $coupons->stock)
                                             @foreach($coupons->stock->variations as $variation)
                                                 <div class="col-md-3">
                                                     <label for="variation_{{ $variation->id }}">{{ get_stock_variation($variation->id) }}</label>
