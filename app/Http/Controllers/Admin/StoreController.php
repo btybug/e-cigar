@@ -63,6 +63,14 @@ class StoreController extends Controller
         return redirect(route('admin_store_coupons'));
     }
 
+    public function cancelCoupon(Request $request)
+    {
+        $coupons = Coupons::findOrFail($request->id);
+        $coupons->update(['status'=>false]);
+
+        return redirect(route('admin_store_coupons'));
+    }
+
     public function Delete($id)
     {
         Coupons::find($id)->delete();
@@ -71,7 +79,8 @@ class StoreController extends Controller
 
     public function Edit($id)
     {
-        $coupons = Coupons::find($id);
+        $coupons = Coupons::findOrFail($id);
+        
         $products = Stock::all()->pluck('name','id')->all();
         $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
             ->whereNull('role_id')

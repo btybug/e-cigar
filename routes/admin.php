@@ -117,6 +117,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/delete/{id}', 'Admin\StoreController@Delete')->name('admin_store_coupons_delete');
         Route::get('/edit/{id}', 'Admin\StoreController@Edit')->name('admin_store_coupons_edit');
         Route::post('/coupons-save', 'Admin\StoreController@CouponsSave')->name('admin_store_coupons_save');
+        Route::post('/cancel-coupon', 'Admin\InventoryController@cancelCoupon')->name('admin_store_coupons_cancel');
     });
 
     Route::group(['prefix' => 'settings'], function () {

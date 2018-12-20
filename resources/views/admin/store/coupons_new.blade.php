@@ -7,8 +7,7 @@
         <div class="col-md-8">
             <div class="coupons_new_page">
                 <div class="panel panel-default coupons_page-panel">
-                    {!! Form::model($coupons,['url' => route('admin_store_coupons_save'),'files' => true,'id' => 'form-coupon','class' => '']) !!}
-                    {!! Form::hidden('id',null) !!}
+
                     <div class="panel-heading">
                         <div class="left-head">
                             <h2 class="m-0 pull-left">New Coupon</h2>
@@ -17,10 +16,14 @@
                         <div class="right-head d-flex">
                             @if($coupons)
                             <div class="cancel-coupon">
-                                <button type="button" data-id="{{ $coupons->id }}" class="btn btn-danger">Cancel the coupon</button>
+                                {!! Form::model($coupons,['url' => route('admin_store_coupons_cancel'),'class' => '']) !!}
+                                    {!! Form::hidden('id',null) !!}
+                                    <button type="submit" class="btn btn-danger">Cancel the coupon</button>
+                                {!! Form::close() !!}
                             </div>
                             @endif
-
+                    {!! Form::model($coupons,['url' => route('admin_store_coupons_save'),'files' => true,'id' => 'form-coupon','class' => '']) !!}
+                    {!! Form::hidden('id',null) !!}
                             <div class="button-save ml-5">
                                 <button type="submit" class="btn btn-info">Save</button>
                             </div>
