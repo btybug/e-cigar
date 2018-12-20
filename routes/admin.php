@@ -186,6 +186,7 @@ Route::group(['prefix' => 'orders'], function () {
     Route::post('/add-to-cart', 'Admin\OrdersController@postAddToCart')->name('shop_add_to_cart_orders');
     Route::post('/update-cart', 'Admin\OrdersController@postUpdateQty')->name('shop_update_cart_orders');
     Route::post('/remove-from-cart', 'Admin\OrdersController@postRemoveFromCart')->name('shop_remove_from_cart_orders');
+    Route::post('/apply-coupon', 'Admin\OrdersController@postApplyCoupon')->name('admin_orders_apply_coupon');
 
     Route::post('/cash-payment', 'Admin\OrdersController@orderCash')->name('admin_orders_new_cash');
     Route::post('/stripe-charge', 'Admin\OrdersController@stripeCharge')->name('admin_orders_new_cash');

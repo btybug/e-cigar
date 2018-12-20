@@ -58,11 +58,7 @@
                                     <div class="form-group">
                                         <label>Coupon Code</label>
                                         <input type="text" name="coupon_code" class="form-control" id="coupon_code">
-
-                                        <div id="coupon_error" class="help-block" style="display: none"></div>
-                                        <div id="coupon_require_error" class="help-block" style="display: none">Please
-                                            enter
-                                            a valid coupon code
+                                        <div id="coupon_require_error" class="help-block errors hide">
                                         </div>
                                     </div>
                                 </form>
@@ -657,6 +653,30 @@
 
     <script>
         $(function () {
+
+            var timeout = null;
+
+            $("body").on('keyup','#coupon_code',function () {
+                let value = $(this).val();
+                $("#coupon_require_error").addClass('hide');
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    console.log(value);
+                    AjaxCall("/admin/orders/apply-coupon", {code: value}, function (res) {
+                        if (!res.error) {
+
+                        }else{
+                            $("#coupon_require_error").text(res.message);
+                            $("#coupon_require_error").removeClass('hide');
+                        }
+                    });
+                }, 500);
+            });
+//
+//
+//            $("body").on('keypast','#coupon_code',function () {
+//                console.log($(this).val());
+//            });
 
             $("body").on('click','.pay-button',function () {
                 let user = $("#order_user").val();

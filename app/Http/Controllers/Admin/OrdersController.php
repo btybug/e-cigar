@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Requests\OrderHistoryRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
+use App\Models\Coupons;
 use App\Models\OrderHistory;
 use App\Models\OrderItem;
 use App\Models\Orders;
@@ -520,5 +521,16 @@ class OrdersController extends Controller
         });
 
         return \Response::json(['error' => false, 'url' => route('admin_orders')]);
+    }
+
+    public function postApplyCoupon(Request $request)
+    {
+        $coupon = Coupons::where('code',$request->code)->first();
+
+        if($coupon){
+            dd($coupon);
+        }
+
+        return \Response::json(['error' => true, 'message' => 'Please enter a valid coupon code']);
     }
 }
