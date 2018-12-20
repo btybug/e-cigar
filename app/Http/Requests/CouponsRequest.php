@@ -29,8 +29,7 @@ class CouponsRequest extends FormRequest
             "type"    => "required",
             "discount"  => "required|integer",
             "total_amount"  => "required|integer",
-            "shipping_type"  => "required|string",
-            "status" => "required",
+            "shipping_type"  => "required|string"
         ];
     }
 

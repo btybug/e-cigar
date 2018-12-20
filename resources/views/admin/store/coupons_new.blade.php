@@ -15,9 +15,12 @@
 
                         </div>
                         <div class="right-head d-flex">
+                            @if($coupons)
                             <div class="cancel-coupon">
-                                <button class="btn btn-danger">Cancel the coupon</button>
+                                <button type="button" data-id="{{ $coupons->id }}" class="btn btn-danger">Cancel the coupon</button>
                             </div>
+                            @endif
+
                             <div class="button-save ml-5">
                                 <button type="submit" class="btn btn-info">Save</button>
                             </div>
@@ -41,7 +44,7 @@
                                    'id'=>'input-code', 'class'=> 'form-control']) !!}
                             </div>
                             <div class="col-sm-3">
-                                <button class="btn btn-default">Generate code</button>
+                                <button type="button" class="btn btn-default generate-code">Generate code</button>
                             </div>
                         </div>
                         <div class="panel panel-default">
@@ -80,7 +83,7 @@
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
                                     <div class="col-sm-4">
-                                        {!! Form::select('products',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
+                                        {!! Form::select('product',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">
@@ -88,7 +91,14 @@
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Variations</span></label>
                                     <div class="col-md-10 variations-box">
-
+                                        @if($coupons->stock)
+                                            @foreach($coupons->stock->variations as $variation)
+                                                <div class="col-md-3">
+                                                    <label for="variation_{{ $variation->id }}">{{ get_stock_variation($variation->id) }}</label>
+                                                    {!! Form::checkbox('variations[]',$variation->id,null,['id' => 'variation_'.$variation->id]) !!}
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -112,13 +122,13 @@
                                     <div class="col-sm-10">
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <select name="" id="" class="form-control">
-                                                    <option value="">Specific</option>
-                                                    <option value="">2</option>
-                                                </select>
+                                                {!! Form::select('target',[
+                                                    '0' => "All",
+                                                    '1' => "Specific"
+                                                ],null,['class' => 'form-control select-target']) !!}
                                             </div>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control">
+                                            <div class="col-sm-6 user-box {{ (isset($coupons) && $coupons->target) ? '' :'hide' }}">
+                                                {!! Form::select('users[]',$users,null,['class'=> 'form-control input-select2','multiple' => true]) !!}
                                             </div>
                                         </div>
 
@@ -230,16 +240,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
-
         $(".input-select2").select2();
 
-        //        let html = $('#variation_template').html();
-        //        let data_p=$(this).attr('data-p');
-        //        let lang=$('.languages-'+data_p).length+1;
-        //        html= html.replace(/{p}/g,data_p).replace(/{l}/g,lang);
-        //        $(this).closest('.languages').append(html) ;
-
         $("body").on('change', '.product-select', function () {
+            $(".variations-box").html('');
             AjaxCall("/admin/inventory/stock/get-variations-by-id", {id: $(this).val()}, function (res) {
                 if (!res.error) {
                     if (res.data.length) {
@@ -260,6 +264,14 @@
                 $(".product-box").removeClass('hide')
             } else {
                 $(".product-box").addClass('hide')
+            }
+        });
+
+        $("body").on('change', '.select-target', function () {
+            if ($(this).val() == '1') {
+                $(".user-box").removeClass('hide')
+            } else {
+                $(".user-box").addClass('hide')
             }
         });
 
@@ -295,74 +307,21 @@
                 userList = data;
             }
         });
-        $("#input-category").tagsinput({
-            maxTags: 5,
-            confirmKeys: [13, 32, 44],
-            typeaheadjs: {
-                // name: "citynames",
-                displayKey: "name",
-                valueKey: "name",
-                source: function (query, processSync, processAsync) {
-                    return $.ajax({
-                        url: "/admin/get-categories",
-                        type: "POST",
-                        data: {query: query},
-                        dataType: "json",
-                        headers: {
-                            "X-CSRF-TOKEN": $("input[name='_token']").val()
-                        },
-                        success: function (json) {
-                            return processAsync(json);
-                        }
-                    });
-                },
-                templates: {
-                    empty: ['<div class="empty-message">', "No results", "</div>"].join(
-                        "\n"
-                    ),
-                    header: "<h4>Categoris</h4><hr>",
-                    suggestion: function (data) {
-                        return `<div class="user-search-result"><span> ${data.name} </span></div>`;
-                    }
-                }
-            }
-        });
-        $("#input-category").on("beforeItemAdd", function (event) {
-            event.cancel = true;
-            let valueCatergorayName = $("#category-names").val()
-            if (!valueCatergorayName.includes(event.item)) {
-                $(".coupon-category-list").append(makeSearchHtml(event.item))
-                if ($("#category-names").val().trim()) {
-                    let arr = JSON.parse($("#category-names").val())
-                    arr.push(event.item)
-                    $("#category-names").val(JSON.stringify(arr))
 
-                    console.log(1)
-                    return
-                }
-                console.log(2)
-                let elm = [event.item]
-                $("#category-names").val(JSON.stringify(elm))
-                return
-
-            }
+        $("body").on("click", ".generate-code", function () {
+            console.log(4545)
+            $("#input-code").val(generateCode());
         });
 
-        function makeSearchHtml(data) {
+        function generateCode() {
+            var text = "";
+            var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-            return `<li>${data}<span class="remove-search-tag"><i class="fa fa-trash"></i></span></li>`
+            for (var i = 0; i < 10; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
 
+            return text;
         }
-
-        $("body").on("click", ".remove-search-tag", function () {
-            let text = $(this).closest("li").text()
-            let arr = JSON.parse($("#category-names").val())
-            let index = arr.indexOf(text)
-            arr.splice(index, 1)
-            $("#category-names").val(JSON.stringify(arr))
-            $(this).closest("li").remove()
-
-        })
 
     </script>
 @stop

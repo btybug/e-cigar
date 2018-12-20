@@ -630,3 +630,8 @@ function get_order_number(){
 
     return $number;
 }
+
+function get_stock_variation($id,$column = 'name'){
+    $v = \App\Models\StockVariation::find($id);
+    return ($v) ? $v->{$column} : null;
+}

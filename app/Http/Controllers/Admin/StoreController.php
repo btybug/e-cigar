@@ -20,6 +20,7 @@ use App\Models\ShippingZones;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\Suppliers;
+use App\User;
 use Carbon\Carbon;
 use PragmaRX\Countries\Package\Countries;
 use Illuminate\Http\Request;
@@ -48,7 +49,11 @@ class StoreController extends Controller
     {
         $coupons = null;
         $products = Stock::all()->pluck('name','id')->all();
-        return $this->view('coupons_new', compact('coupons','products'));
+        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNull('role_id')
+            ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title')->pluck('name', 'users.id');
+
+        return $this->view('coupons_new', compact('coupons','products','users'));
     }
 
     public function CouponsSave(CouponsRequest $request)
@@ -68,8 +73,11 @@ class StoreController extends Controller
     {
         $coupons = Coupons::find($id);
         $products = Stock::all()->pluck('name','id')->all();
+        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNull('role_id')
+            ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title')->pluck('name', 'users.id');
 
-        return $this->view('coupons_new', compact('coupons','products'));
+        return $this->view('coupons_new', compact('coupons','products','users'));
     }
 
     public function saveTags(Request $request)

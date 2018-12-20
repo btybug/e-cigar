@@ -21,13 +21,16 @@ class CreateCouponsTable extends Migration
             $table->integer('discount')->nullable();
             $table->integer('total_amount')->nullable();
             $table->string('shipping_type')->nullable();
-            $table->longText('products')->nullable();
+            $table->unsignedInteger('product')->nullable();
+            $table->string('variations')->nullable();
             $table->string('start_date')->nullable();
             $table->string('end_date')->nullable();
             $table->string('user_per_coupon')->nullable();
             $table->string('user_per_customer')->nullable();
             $table->string('based')->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('target')->default(0);
+            $table->string('users')->nullable();
             $table->timestamps();
         });
     }

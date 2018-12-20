@@ -20,12 +20,11 @@ class Coupons extends Model
     /**
      * @var array
      */
-    protected $fillable = [
-        'name', 'code', 'type', 'discount','total_amount','shipping_type','products','start_date','end_date','user_per_coupon','user_per_customer','based','status'
-    ];
+    protected $guarded = ['id'];
 
     protected $casts = [
-        'products' => "json"
+        'variations' => "json",
+        'users' => "json",
     ];
 
     public static function updateOrCreate(int $id = null, array $data)
@@ -33,5 +32,10 @@ class Coupons extends Model
         $model = self::find($id)??new static();
         (isset($model->id)) ? $model->update($data) : $model->fill($data) ;
         return $model->save();
+    }
+
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class,'product');
     }
 }
