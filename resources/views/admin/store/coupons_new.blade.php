@@ -83,7 +83,7 @@
                                                 data-toggle="tooltip" title=""
                                                 data-original-title="Choose specific products the coupon will apply to. Select no products to apply coupon to entire cart.">Products</span></label>
                                     <div class="col-sm-4">
-                                        {!! Form::select('product',$products,null,['class'=> 'form-control input-select2 product-select']) !!}
+                                        {!! Form::select('product',['' => 'Select'] + $products,null,['class'=> 'form-control input-select2 product-select']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group row product-box {{ (isset($coupons) && $coupons->based == 'cart') ? 'hide' :'' }}">

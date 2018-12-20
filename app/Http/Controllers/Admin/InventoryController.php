@@ -272,7 +272,9 @@ class InventoryController extends Controller
 
     public function getVariationsById (Request $request)
     {
-        $model = Stock::findOrFail($request->id);
+        $model = Stock::find($request->id);
+
+        if(! $model) return \Response::json(['error' => true, 'message' => 'Not found']);
 
         return \Response::json(['error' => false, 'data' => $model->variations]);
     }
