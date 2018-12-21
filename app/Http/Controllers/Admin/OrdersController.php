@@ -528,21 +528,50 @@ class OrdersController extends Controller
         $now = strtotime(today()->toDateString());
         $coupon = Coupons::where('code',$request->code)->where('status',true)
             ->where('start_date','<=',$now)->where('end_date','>=',$now)->first();
+        Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('coupon');
+        $error = false;
+        $message = '';
         if($coupon){
             //checking if user can apply this coupon
             if($coupon->target){
-                $user = \Auth::user();
-                if($coupon->users && count($coupon->users) && !in_array($user->id,$coupon->users)){
-                    return \Response::json(['error' => true, 'message' => 'Please enter a valid coupon code, ... you can not use this(testing)']);
+                if($coupon->users && count($coupon->users) && !in_array(\Auth::id(),$coupon->users)){
+                    $error = true;
+                    $message = 'Please enter a valid coupon code, ... you can not use this(testing)';
                 }
             }
-            
-            $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
-            if($subtotal >  $coupon->total_amount){
 
+            if($error == false){
+                $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+                if($subtotal >=  $coupon->total_amount){
+                    if($coupon->based = 'cart'){
+                        $cc = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $coupon->name,
+                            'type' => 'coupon',
+                            'value' => ($coupon->type == 'p') ? "-".$coupon->discount."%" : "-".$coupon->discount
+                        ));
+
+                        Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($cc);
+                    }else{
+
+                    }
+                }
             }
+        }else{
+            $error = true;
+            $message = 'Please enter a valid coupon ';
         }
 
-        return \Response::json(['error' => true, 'message' => 'Please enter a valid coupon code']);
+        $user = User::find($request->user_id);
+        $items = $this->cartService->getCartItems(true);
+        $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+        $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+        $geoZone = ($zone) ? $zone->geoZone : null;
+        $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+        $delivery = ($geoZone) ? $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first() : null;
+
+        $shippingHtml = $this->view("_partials.shipping_payment", compact('user', 'delivery', 'geoZone'))->render();
+        $orderSummary = $this->view("_partials.order_summary", compact('user', 'geoZone'))->render();
+
+        return \Response::json(['error' => $error, 'message' => $message,'shippingHtml' => $shippingHtml, 'summaryHtml' => $orderSummary]);
     }
 }

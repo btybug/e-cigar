@@ -25,8 +25,11 @@
             <td align="right" id="subtotal">${!! ($shipping) ? $shipping->getValue() : 0 !!}</td>
         </tr>
         <tr>
-            <td align="left"><span>Discount (Coupon)</span></td>
-            <td align="right" id="discount">$0</td>
+            @php
+                $c = \Cart::session(\App\Models\Orders::ORDER_NEW_SESSION_ID)->getConditionsByType('coupon');
+            @endphp
+            <td align="left"><span>Discount ({{ ($c && count($c)) ? $c->first()->getName() : 'Coupon' }})</span></td>
+            <td align="right" id="discount">{{ ($c && count($c)) ? $c->first()->getValue() : 0 }}</td>
         </tr>
         <tr>
             <td class="last" align="left"><span>Total</span></td>

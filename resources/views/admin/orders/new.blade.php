@@ -662,9 +662,10 @@
                 clearTimeout(timeout);
                 timeout = setTimeout(function () {
                     console.log(value);
-                    AjaxCall("/admin/orders/apply-coupon", {code: value}, function (res) {
+                    AjaxCall("/admin/orders/apply-coupon", {code: value, user_id: $("#order_user").val()}, function (res) {
                         if (!res.error) {
-
+                            $(".shipping-payment").html(res.shippingHtml);
+                            $(".order-summary").html(res.summaryHtml);
                         }else{
                             $("#coupon_require_error").text(res.message);
                             $("#coupon_require_error").removeClass('hide');
