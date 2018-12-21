@@ -528,7 +528,15 @@ class OrdersController extends Controller
         $now = strtotime(today()->toDateString());
         $coupon = Coupons::where('code',$request->code)->where('status',true)
             ->where('start_date','<=',$now)->where('end_date','>=',$now)->first();
+//        Cart::getConditions();
+//        dd(Cart::session(Orders::ORDER_NEW_SESSION_ID)->getConditions());
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('coupon');
+        $cartItems = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+        foreach ($cartItems as $cartItem){
+            Cart::session(Orders::ORDER_NEW_SESSION_ID)->clearItemConditions($cartItem->id);
+        }
+
+
         $error = false;
         $message = '';
         if($coupon){
@@ -543,7 +551,7 @@ class OrdersController extends Controller
             if($error == false){
                 $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
                 if($subtotal >=  $coupon->total_amount){
-                    if($coupon->based = 'cart'){
+                    if($coupon->based == 'cart'){
                         $cc = new \Darryldecode\Cart\CartCondition(array(
                             'name' => $coupon->name,
                             'type' => 'coupon',
@@ -553,6 +561,18 @@ class OrdersController extends Controller
 
                         Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($cc);
                     }else{
+                        if($coupon->variations && count($coupon->variations)){
+                            $cc = new \Darryldecode\Cart\CartCondition(array(
+                                'name' => $coupon->name,
+                                'type' => 'coupon',
+                                'value' => ($coupon->type == 'p') ? "-".$coupon->discount."%" : "-".$coupon->discount
+                            ));
+                            foreach ($cartItems as $item){
+                                if(in_array($item->id,$coupon->variations)){
+                                    \Cart::addItemCondition($item->id, $cc);
+                                }
+                            }
+                        }
 
                     }
                 }
