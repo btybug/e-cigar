@@ -49,9 +49,7 @@ class StoreController extends Controller
     {
         $coupons = null;
         $products = Stock::all()->pluck('name','id')->all();
-        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
-            ->whereNull('role_id')
-            ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title')->pluck('name', 'users.id');
+        $users = User::pluck('name', 'users.id')->all();
 
         return $this->view('coupons_new', compact('coupons','products','users'));
     }

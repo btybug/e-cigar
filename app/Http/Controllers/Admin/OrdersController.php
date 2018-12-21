@@ -525,10 +525,22 @@ class OrdersController extends Controller
 
     public function postApplyCoupon(Request $request)
     {
-        $coupon = Coupons::where('code',$request->code)->where('status',true)->first();
-
+        $now = strtotime(today()->toDateString());
+        $coupon = Coupons::where('code',$request->code)->where('status',true)
+            ->where('start_date','<=',$now)->where('end_date','>=',$now)->first();
         if($coupon){
-            dd($coupon);
+            //checking if user can apply this coupon
+            if($coupon->target){
+                $user = \Auth::user();
+                if($coupon->users && count($coupon->users) && !in_array($user->id,$coupon->users)){
+                    return \Response::json(['error' => true, 'message' => 'Please enter a valid coupon code, ... you can not use this(testing)']);
+                }
+            }
+            
+            $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+            if($subtotal >  $coupon->total_amount){
+
+            }
         }
 
         return \Response::json(['error' => true, 'message' => 'Please enter a valid coupon code']);
