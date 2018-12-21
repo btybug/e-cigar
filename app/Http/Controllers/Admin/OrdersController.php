@@ -547,6 +547,7 @@ class OrdersController extends Controller
                         $cc = new \Darryldecode\Cart\CartCondition(array(
                             'name' => $coupon->name,
                             'type' => 'coupon',
+                            'target' => 'total',
                             'value' => ($coupon->type == 'p') ? "-".$coupon->discount."%" : "-".$coupon->discount
                         ));
 
@@ -557,8 +558,13 @@ class OrdersController extends Controller
                 }
             }
         }else{
-            $error = true;
-            $message = 'Please enter a valid coupon ';
+            if($request->code == '') {
+                $error = false;
+                $message = '';
+            }else{
+                $error = true;
+                $message = 'Please enter a valid coupon ';
+            }
         }
 
         $user = User::find($request->user_id);
