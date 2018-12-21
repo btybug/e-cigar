@@ -81,12 +81,7 @@ class StoreController extends Controller
     {
         $coupons = Coupons::findOrFail($id);
 
-        $products = Stock::all()->pluck('name','id')->all();
-        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
-            ->whereNull('role_id')
-            ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title')->pluck('name', 'users.id');
-
-        return $this->view('coupons_new', compact('coupons','products','users'));
+        return $this->view('coupons_edit', compact('coupons'));
     }
 
     public function saveTags(Request $request)

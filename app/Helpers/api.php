@@ -635,3 +635,8 @@ function get_stock_variation($id,$column = 'name'){
     $v = \App\Models\StockVariation::find($id);
     return ($v) ? $v->{$column} : null;
 }
+
+function get_user($id,$column = 'name'){
+    $v = \App\User::find($id);
+    return ($v) ? $v->{$column} : null;
+}

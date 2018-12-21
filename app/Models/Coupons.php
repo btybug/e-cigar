@@ -27,6 +27,16 @@ class Coupons extends Model
         'users' => "json",
     ];
 
+    public function setStartDateAttribute($value)
+    {
+        $this->attributes['start_date'] = strtotime($value);
+    }
+
+    public function setEndDateAttribute($value)
+    {
+        $this->attributes['end_date'] = strtotime($value);
+    }
+
     public static function updateOrCreate(int $id = null, array $data)
     {
         $model = self::find($id)??new static();
