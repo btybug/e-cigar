@@ -19,8 +19,8 @@
                     <th>Code</th>
                     <th>type</th>
                     <th>Discount</th>
-                    <th>Total Amount</th>
-                    <th>Shipping type</th>
+                    <th>Minimal order amount</th>
+                    <th>Coupon Based</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Status</th>
@@ -46,7 +46,7 @@
             {data: 'type', name: 'type'},
             {data: 'discount', name: 'discount'},
             {data: 'total_amount', name: 'total_amount'},
-            {data: 'shipping_type', name: 'shipping_type'},
+            {data: 'based', name: 'shipping_type'},
             {data: 'start_date', name: 'start_date'},
             {data: 'end_date', name: 'end_date'},
             {data: 'status', name: 'status'},

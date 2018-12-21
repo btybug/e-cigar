@@ -222,10 +222,22 @@ class DatatableController extends Controller
     public function getAllCoupons()
     {
         return Datatables::of(Coupons::query())
+            ->editColumn('type', function ($coupons) {
+                return ($coupons->type == 'p') ? "Percentage" : "Fixed Amount";
+            })->editColumn('discount', function ($coupons) {
+                return ($coupons->type == 'p') ? "-".$coupons->discount."%" : "-".$coupons->discount;
+            })
+            ->editColumn('start_date', function ($coupons) {
+                return BBgetDateFormat($coupons->start_date);
+            })
+            ->editColumn('end_date', function ($coupons) {
+                return BBgetDateFormat($coupons->end_date);
+            })->editColumn('status', function ($coupons) {
+                return $coupons->availability;
+            })
             ->addColumn('actions', function ($coupons) {
-                return "<a class='badge btn-danger' href='" . route("admin_store_coupons_delete", $coupons->id) . "'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='" . route("admin_store_coupons_edit", $coupons->id) . "'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions', 'name', 'code', 'replies'])
+                return "<a class='badge btn-warning' href='" . route("admin_store_coupons_edit", $coupons->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions', 'name', 'end_date', 'start_date'])
             ->make(true);
     }
 

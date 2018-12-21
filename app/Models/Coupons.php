@@ -26,6 +26,32 @@ class Coupons extends Model
         'variations' => "json",
         'users' => "json",
     ];
+    protected $appends = array('availability');
+
+    public function getAvailabilityAttribute()
+    {
+        return $this->calculateActivity($this->start_date,$this->end_date,$this->status);
+    }
+
+    private function calculateActivity($start,$end,$status){
+        $result = null;
+        $now = strtotime(today()->toDateString());
+
+        if($status == 0) {
+            $result = 'canceled';
+        }else{
+            if($now >= $start && $now <= $end){
+                $result = 'active';
+            }elseif ($now < $start){
+                $result = 'coming';
+            }elseif ($now > $end){
+                $result = 'expired';
+            }
+        }
+
+
+        return $result;
+    }
 
     public function setStartDateAttribute($value)
     {
