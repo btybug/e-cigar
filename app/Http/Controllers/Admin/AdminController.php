@@ -32,7 +32,7 @@ class AdminController extends Controller
     }
     public function test(ManagerApiRequest $request)
     {
-        $request->exportOrder(8);
+        dd($request->exportOrder(8));
     }
 
     public function getPassport()
