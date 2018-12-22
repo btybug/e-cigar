@@ -68,395 +68,443 @@
                         <div class="tab-content tab-content-store-settings">
                             <div class="tab-pane fade active in" id="general" role="tabpanel"
                                  aria-labelledby="general-tab">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order
-                                                    Details</h3>
-                                            </div>
-                                            <table class="table">
-                                                <tbody>
-                                                <tr>
-                                                    <td style="width: 1%;">
-                                                        <button data-toggle="tooltip" title=""
-                                                                class="btn btn-info btn-xs"
-                                                                data-original-title="Store"><i
-                                                                    class="fa fa-shopping-cart fa-fw"></i></button>
-                                                    </td>
-                                                    <td><a href="https://demo.opencart.com/" target="_blank">Your
-                                                            Store</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <button data-toggle="tooltip" title=""
-                                                                class="btn btn-info btn-xs"
-                                                                data-original-title="Date Added"><i
-                                                                    class="fa fa-calendar fa-fw"></i></button>
-                                                    </td>
-                                                    <td>{!! BBgetDateFormat($order->created_at) !!}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <button data-toggle="tooltip" title=""
-                                                                class="btn btn-info btn-xs"
-                                                                data-original-title="Payment Method"><i
-                                                                    class="fa fa-credit-card fa-fw"></i></button>
-                                                    </td>
-                                                    <td>{!! $order->payment_method !!}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <button data-toggle="tooltip" title=""
-                                                                class="btn btn-info btn-xs"
-                                                                data-original-title="Shipping Method"><i
-                                                                    class="fa fa-truck fa-fw"></i></button>
-                                                    </td>
-                                                    <td>{!! $order->shipping_method !!}</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="details">
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    <div class="user-img-name">
-                                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIz-Vq2guLXBClPdqx9lLCN7lrSO_sSirya67ETwY4Zq4gXc9U"
-                                                             alt="product">
-                                                        <div class="name">User Name</div>
-                                                    </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order
+                                                        Details</h3>
                                                 </div>
-                                                <div class="col-md-8">
-                                                    <div class="tabs-address">
-                                                        <ul class="nav nav-tabs">
-
-                                                            <li class="active"><a data-toggle="tab" href="#shipping-address">Shipping
-                                                                    address</a></li>
-                                                        </ul>
-                                                        <div class="tab-content">
-                                                            <div id="shipping-address" class="tab-pane fade">
-                                                                <h3> Shipping address</h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
+                                                <table class="table">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td style="width: 1%;">
+                                                            <button data-toggle="tooltip" title=""
+                                                                    class="btn btn-info btn-xs"
+                                                                    data-original-title="Store"><i
+                                                                        class="fa fa-shopping-cart fa-fw"></i></button>
+                                                        </td>
+                                                        <td><a href="https://demo.opencart.com/" target="_blank">Your
+                                                                Store</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <button data-toggle="tooltip" title=""
+                                                                    class="btn btn-info btn-xs"
+                                                                    data-original-title="Date Added"><i
+                                                                        class="fa fa-calendar fa-fw"></i></button>
+                                                        </td>
+                                                        <td>{!! BBgetDateFormat($order->created_at) !!}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <button data-toggle="tooltip" title=""
+                                                                    class="btn btn-info btn-xs"
+                                                                    data-original-title="Payment Method"><i
+                                                                        class="fa fa-credit-card fa-fw"></i></button>
+                                                        </td>
+                                                        <td>{!! $order->payment_method !!}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <button data-toggle="tooltip" title=""
+                                                                    class="btn btn-info btn-xs"
+                                                                    data-original-title="Shipping Method"><i
+                                                                        class="fa fa-truck fa-fw"></i></button>
+                                                        </td>
+                                                        <td>{!! $order->shipping_method !!}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="panel panel-default panel--orders-addresses customer-notes">
-                                            <div class="panel-heading">Customer Notes</div>
-                                            <div class="panel-body">
-                                                <div class="wall danger">
-                                                    <p><strong>Danger!</strong> Some text...</p>
-                                                </div>
-
-                                                <div class="wall success">
-                                                    <p><strong>Success!</strong> Some text...</p>
-                                                </div>
-
-                                                <div class="wall info">
-                                                    <p><strong>Info!</strong> Some text...</p>
+                                        <div class="col-lg-4">
+                                            <div class="panel panel-default panel--orders-addresses customer-notes">
+                                                <div class="panel-heading">Customer Name ID</div>
+                                                <div class="panel-body">
+                                                    Shipping Address
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <table class="table table-bordered table--order-dtls">
-                                            <thead>
-                                            <tr>
-                                                <td class="text-left">Product</td>
-                                                <td class="text-left">SKU</td>
-                                                <td class="text-right">Quantity</td>
-                                                <td class="text-right">Unit Price</td>
-                                                <td class="text-right">Total</td>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-
-                                            @foreach($order->items as $item)
-                                                <tr>
-                                                    <td class="text-left"><a
-                                                                href="">{!! $item->name !!}</a>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        {!! $item->sku !!}<br>
-                                                        @php
-                                                            $options=(is_array($item->options))?$item->options:[];
-                                                                $lastElement = end($options);
-                                                        @endphp
-                                                        <b>
-                                                            @foreach($options as $key=>$option)
-                                                                {!! $key !!}: {!! $option !!} @if($option!=$lastElement)
-                                                                    , @endif
-                                                            @endforeach
-                                                        </b>
-
-                                                    </td>
-                                                    <td class="text-right">{!! $item->qty !!}</td>
-                                                    <td class="text-right">$@convert($item->amount/$item->qty)</td>
-                                                    <td class="text-right">$@convert($item->amount)</td>
-                                                </tr>
-                                            @endforeach
-                                            <tr>
-                                                <td colspan="4" class="text-right">Sub-Total</td>
-                                                <td class="text-right">
-                                                    $@convert($order->amount-$order->shipping_price)
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="text-right">Shipping
-                                                    ({!! $order->shipping_method !!})
-                                                </td>
-                                                <td class="text-right">$@convert($order->shipping_price)</td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="4" class="text-right">Total</td>
-                                                <td class="text-right">$@convert($order->amount)</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
 
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
-                                 aria-labelledby="invoiceOrder-tab">
-                                <div class="tabbable">
-                                    <ul class="nav nav-pills nav-stacked col-md-3">
-                                        <li><a href="#invoice-doc" data-toggle="tab">Invoice</a></li>
-                                        <li class="active"><a href="#shipping-doc" data-toggle="tab">Shipping label</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content col-md-9">
-                                        <div class="tab-pane" id="invoice-doc">
-
-                                        </div>
-                                        <div class="tab-pane active" id="shipping-doc">
-                                            <div class="col-md-12">
-                                                @include('admin.pdf.shipping')
-                                            </div>
-                                            <div class="col-md-12">
-                                                <a href="{{ URL::to('/admin/pdf/order/shipping/'.$order->id) }}">Export
-                                                    PDF</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
-                                 aria-labelledby="managementOrder-tab">
-
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered managmentorder-table">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered table--order-dtls order-table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Image</th>
-                                                    <th>Product Name</th>
-                                                    <th>Qty</th>
-                                                    <th></th>
+                                                    <td></td>
+                                                    <td class="text-left">Product</td>
+                                                    <td>
+                                                        <div class="head-stock-price">
+                                                            <div>
+                                                                Stocks
+                                                            </div>
+                                                            <div>
+                                                                Price
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-right">Quantity</td>
+                                                    <td class="text-right">Unit Price</td>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                @foreach($order->items as $item)
-                                                    <tr>
-                                                        <td class="images w-20">
-                                                            <div class="image">
-                                                                <img src="{{ $item->image }}"
-                                                                     alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="product-name-id">
-                                                                <div class="name">{{ $item->name }}</div>
-                                                                <div class="product-id">{{ $item->sku }}</div>
-                                                                <div class="">
-                                                                    @if($item->options && count($item->options))
-                                                                        @foreach($item->options as $attribute => $sticker)
-                                                                            <p><strong>{{ $attribute }}
-                                                                                    : </strong> {{ $sticker }}</p>
-                                                                        @endforeach
-                                                                    @endif
+                                                <tr>
+                                                    <td class="w-5" align="center">
+                                                    </td>
+                                                    <td class="text-left w-20">
+                                                        <div class="product-name">
+                                                            <img src="/public/media/drive/d7f0a8b1c6ac9d9cf0d23aadf49775cc.jpg" alt="Kaliony vape with Free juice">
+                                                            <div class="name">Kaliony vape with Free juice</div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="stock-price">
+                                                        <div class="stock-row">
+                                                            <div class="left">
+                                                                <div class="stock-name">
+                                                                    <span>Kaliony red</span>
+                                                                </div>
+                                                                <div class="d-flex flex-wrap">
+                                                                    <div class="h5 mr-1"><span class="badge badge-secondary">red</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </td>
-                                                        <td align="center" class="w-6"><span>{{ $item->qty }}</span>
-                                                        </td>
-                                                        <td align="center" class="w-6">
-                                                            <div class="check-product">
-                                                                <label class="contains">
-                                                                    <input type="checkbox">
-                                                                    <span class="checkmark"></span>
-                                                                </label>
+                                                            <div class="right">
+                                                                <div class="stock-count">
+                                                                    <span>$50</span>
+                                                                </div>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                                        </div>
 
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                    <td colspan="2"><span class="total-items">Total Items</span></td>
-                                                    <td>
-                                                        <div class="form-control">{{ $order->items()->sum('qty') }}</div>
+                                                        <div class="extra-stock">
+                                                            <h4>Extra</h4>
+                                                            <div class="stock-row">
+                                                                <div class="left">
+                                                                    <div class="stock-name">
+                                                                        <span> e juice</span>
+                                                                    </div>
+                                                                    <div class="d-flex flex-wrap">
+                                                                        <div class="h5 mr-1"><span class="badge badge-secondary">Banana</span>
+                                                                        </div>
+                                                                        <div class="h5 mr-1"><span class="badge badge-secondary">1 Pack</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right extra-del">
+                                                                    <div class="stock-count">
+                                                                        <span> $0</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
                                                     </td>
-
-                                                    <td></td>
+                                                    <td class="Qty w-8" align="center">
+                                                        <div class="input-group">
+                                                            <span data-condition="" data-uid="103" class="qtycount"></span>
+                                                            <input name="quantity[]" type="text" readonly="" value="1" class="form-control qty">
+                                                            <span data-condition="1" data-uid="103" class="qtycount"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="w-8" align="center"> $50</td>
                                                 </tr>
-                                                </tfoot>
+                                                </tbody>
                                             </table>
+
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="scan-your-item">
-                                            <div class="panel panel-default panel-scan">
-                                                <div class="panel-heading">Scanned Items</div>
-                                                <div class="panel-body">
-                                                    <div class="scan">
-                                                        <span> Scan your item</span>
-                                                    </div>
-                                                    <div class="input-wall">
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                    <div class="qty">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                Qty
-                                                            </div>
-                                                            <div class="col-md-10">
-                                                                <input type="number" class="form-control" value="1">
-                                                            </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="panel panel-default panel--orders-addresses customer-notes">
+                                        <div class="panel-heading">Customer Notes</div>
+                                        <div class="panel-body">
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default panel--orders-addresses customer-notes">
+                                        <div class="panel-heading">Order Summary</div>
+                                        <div class="panel-body">
+                                            <div class="cart-right">
+                                                <div class="order-summary-outer">
+                                                    <div class="order-summary">
+                                                        <div class="order-summary">
+                                                            <input id="order_product_subtotal"
+                                                                   name="order_product_subtotal" type="hidden"
+                                                                   value="0">
+                                                            <table class="table">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td align="left"><span>Sub Total</span></td>
+                                                                    <td align="right" id="subtotal">
+                                                                        $0
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left"><span>Tax</span></td>
+                                                                    <td align="right" id="subtotal">$0</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left"><span>Shipping </span></td>
+                                                                    <td align="right" id="subtotal">$0</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left"><span>Discount (Coupon)</span></td>
+                                                                    <td align="right" id="discount">0</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="last" align="left"><span>Total</span>
+                                                                    </td>
+                                                                    <td class="last" align="right" id="total_price">
+                                                                        $0
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-right mr-30 managmentorder-table collecting">
-                                    <div class="check-product">
-                                        <label class="contains">Check as Collecting is complete
-                                            <input type="checkbox">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div class="tab-pane tabe-pane--shipping-order fade" id="shippingOrder" role="tabpanel"
-                                 aria-labelledby="shippingOrder-tab">
-                                shipping
-                            </div>
-                            <div class="tab-pane tabe-pane--log-tab fade" id="log-tab" role="tabpanel"
-                                 aria-labelledby="log-tabid">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8 order-main-cnt_right-col">
-                                    <div class="order-notes panel panel-default mb-0">
-                                        {{--@foreach($order->history as $history)--}}
-                                        {{--<div class="order-notes_message {!! $history->color !!}">--}}
-                                        {{--<p>--}}
-                                        {{--on <span class="underlined">11/11/2011</span>--}}
-                                        {{--at <span class="underlined">11:11</span>--}}
-                                        {{--</p>--}}
-                                        {{--<p>--}}
-                                        {{--Status <span class="font-bold">{!! $history->status !!}</span>--}}
-                                        {{--</p>--}}
-                                        {{--@if($history->admin)--}}
-                                        {{--<p>--}}
-                                        {{--order status changed by <span--}}
-                                        {{--class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>--}}
-                                        {{--</p>--}}
-                                        {{--@endif--}}
-                                        {{--</div>--}}
-                                        {{--@endforeach--}}
-
-
-                                        <div class="order-notes_timeline">
-                                            <ul class="list-unstyled order-timeline">
-                                                @include('admin.orders._partials.timeline_item',['histories' => $order->history()->orderBy('created_at','desc')->get()])
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div class="row order-main-cnt_control-btns">
-                                        <button id="btnAddStatus" class="btn btn-default col-sm-6 btn--add-status"><i
-                                                    class="fa fa-plus" aria-hidden="true"></i> Add Status
-                                        </button>
-                                        <button id="btnAddNote" class="btn btn-default col-sm-6 btn--add-note"><i
-                                                    class="fa fa-plus" aria-hidden="true"></i> Add Note
-                                        </button>
-                                    </div>
-                                    <div class="hidden-add-field" id="addStatusField">
-                                        <div class="panel-default hidden-add-field_heading">
-                                            <p class="panel-heading text-center">Add Status <span class="pull-right"><i
-                                                            class="fa fa-close"></i></span></p>
-                                        </div>
-                                        <div class="hidden-add-field_body">
-                                            {!! Form::open(['url' =>route('orders_add_note')]) !!}
-                                            {!! Form::hidden('id',$order->id) !!}
-                                            <div class="errors"></div>
-                                            <div class="form-group mb-20 w-100">
-                                                <label class="col-sm-4 control-label" for="changeStatusSelect">Change
-                                                    status to</label>
-                                                <div class="col-sm-8">
-                                                    {!! Form::select('status_id',$statuses,null,['class' => 'form-control']) !!}
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="ChangeMessage"
-                                                       class="control-label col-sm-4">Message</label>
-                                                <div class="col-sm-8">
-                                                    {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="confirm-btn-outer" style="padding-left: 15px">
-                                                {!! Form::submit('Change',['class' => 'btn btn-primary change-status-btn']) !!}
-                                            </div>
-                                            {!! Form::close() !!}
-                                        </div>
-                                    </div>
-
-                                    <div class="hidden-add-field" id="addNoteField">
-                                        <div class="panel-default hidden-add-field_heading">
-                                            <p class="panel-heading text-center">Add Note <span class="pull-right"><i
-                                                            class="fa fa-close"></i></span></p>
-                                        </div>
-                                        <div class="hidden-add-field_body">
-                                            {!! Form::open(['url' =>route('orders_add_note')]) !!}
-                                            <div class="errors"></div>
-                                            {!! Form::hidden('id',$order->id) !!}
-                                            <div class="form-group w-100">
-                                                <label class="control-label" for="addNoteArea">Add your note</label>
-                                                {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
-                                            </div>
-                                            <div class="confirm-btn-outer">
-                                                {!! Form::submit('Submit',['class' => 'btn btn-primary change-status-btn']) !!}
-                                            </div>
-                                            {!! Form::close() !!}
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-                                <div class="col-md-2"></div>
                             </div>
                         </div>
-                    </div>
+                        <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
+                             aria-labelledby="invoiceOrder-tab">
+                            <div class="tabbable">
+                                <ul class="nav nav-pills nav-stacked col-md-3">
+                                    <li><a href="#invoice-doc" data-toggle="tab">Invoice</a></li>
+                                    <li class="active"><a href="#shipping-doc" data-toggle="tab">Shipping label</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content col-md-9">
+                                    <div class="tab-pane" id="invoice-doc">
 
+                                    </div>
+                                    <div class="tab-pane active" id="shipping-doc">
+                                        <div class="col-md-12">
+                                            @include('admin.pdf.shipping')
+                                        </div>
+                                        <div class="col-md-12">
+                                            <a href="{{ URL::to('/admin/pdf/order/shipping/'.$order->id) }}">Export
+                                                PDF</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
+                             aria-labelledby="managementOrder-tab">
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered managmentorder-table">
+                                            <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Product Name</th>
+                                                <th>Qty</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($order->items as $item)
+                                                <tr>
+                                                    <td class="images w-20">
+                                                        <div class="image">
+                                                            <img src="{{ $item->image }}"
+                                                                 alt="">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="product-name-id">
+                                                            <div class="name">{{ $item->name }}</div>
+                                                            <div class="product-id">{{ $item->sku }}</div>
+                                                            <div class="">
+                                                                @if($item->options && count($item->options))
+                                                                    @foreach($item->options as $attribute => $sticker)
+                                                                        <p><strong>{{ $attribute }}
+                                                                                : </strong> {{ $sticker }}</p>
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td align="center" class="w-6"><span>{{ $item->qty }}</span>
+                                                    </td>
+                                                    <td align="center" class="w-6">
+                                                        <div class="check-product">
+                                                            <label class="contains">
+                                                                <input type="checkbox">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
+                                            </tbody>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="2"><span class="total-items">Total Items</span></td>
+                                                <td>
+                                                    <div class="form-control">{{ $order->items()->sum('qty') }}</div>
+                                                </td>
+
+                                                <td></td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="scan-your-item">
+                                        <div class="panel panel-default panel-scan">
+                                            <div class="panel-heading">Scanned Items</div>
+                                            <div class="panel-body">
+                                                <div class="scan">
+                                                    <span> Scan your item</span>
+                                                </div>
+                                                <div class="input-wall">
+                                                    <input type="text" class="form-control">
+                                                </div>
+                                                <div class="qty">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            Qty
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <input type="number" class="form-control" value="1">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right mr-30 managmentorder-table collecting">
+                                <div class="check-product">
+                                    <label class="contains">Check as Collecting is complete
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="tab-pane tabe-pane--shipping-order fade" id="shippingOrder" role="tabpanel"
+                             aria-labelledby="shippingOrder-tab">
+                            shipping
+                        </div>
+                        <div class="tab-pane tabe-pane--log-tab fade" id="log-tab" role="tabpanel"
+                             aria-labelledby="log-tabid">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8 order-main-cnt_right-col">
+                                <div class="order-notes panel panel-default mb-0">
+                                    {{--@foreach($order->history as $history)--}}
+                                    {{--<div class="order-notes_message {!! $history->color !!}">--}}
+                                    {{--<p>--}}
+                                    {{--on <span class="underlined">11/11/2011</span>--}}
+                                    {{--at <span class="underlined">11:11</span>--}}
+                                    {{--</p>--}}
+                                    {{--<p>--}}
+                                    {{--Status <span class="font-bold">{!! $history->status !!}</span>--}}
+                                    {{--</p>--}}
+                                    {{--@if($history->admin)--}}
+                                    {{--<p>--}}
+                                    {{--order status changed by <span--}}
+                                    {{--class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>--}}
+                                    {{--</p>--}}
+                                    {{--@endif--}}
+                                    {{--</div>--}}
+                                    {{--@endforeach--}}
+
+
+                                    <div class="order-notes_timeline">
+                                        <ul class="list-unstyled order-timeline">
+                                            @include('admin.orders._partials.timeline_item',['histories' => $order->history()->orderBy('created_at','desc')->get()])
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="row order-main-cnt_control-btns">
+                                    <button id="btnAddStatus" class="btn btn-default col-sm-6 btn--add-status"><i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add Status
+                                    </button>
+                                    <button id="btnAddNote" class="btn btn-default col-sm-6 btn--add-note"><i
+                                                class="fa fa-plus" aria-hidden="true"></i> Add Note
+                                    </button>
+                                </div>
+                                <div class="hidden-add-field" id="addStatusField">
+                                    <div class="panel-default hidden-add-field_heading">
+                                        <p class="panel-heading text-center">Add Status <span class="pull-right"><i
+                                                        class="fa fa-close"></i></span></p>
+                                    </div>
+                                    <div class="hidden-add-field_body">
+                                        {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                                        {!! Form::hidden('id',$order->id) !!}
+                                        <div class="errors"></div>
+                                        <div class="form-group mb-20 w-100">
+                                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change
+                                                status to</label>
+                                            <div class="col-sm-8">
+                                                {!! Form::select('status_id',$statuses,null,['class' => 'form-control']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ChangeMessage"
+                                                   class="control-label col-sm-4">Message</label>
+                                            <div class="col-sm-8">
+                                                {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
+                                            </div>
+                                        </div>
+                                        <div class="confirm-btn-outer" style="padding-left: 15px">
+                                            {!! Form::submit('Change',['class' => 'btn btn-primary change-status-btn']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+
+                                <div class="hidden-add-field" id="addNoteField">
+                                    <div class="panel-default hidden-add-field_heading">
+                                        <p class="panel-heading text-center">Add Note <span class="pull-right"><i
+                                                        class="fa fa-close"></i></span></p>
+                                    </div>
+                                    <div class="hidden-add-field_body">
+                                        {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                                        <div class="errors"></div>
+                                        {!! Form::hidden('id',$order->id) !!}
+                                        <div class="form-group w-100">
+                                            <label class="control-label" for="addNoteArea">Add your note</label>
+                                            {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
+                                        </div>
+                                        <div class="confirm-btn-outer">
+                                            {!! Form::submit('Submit',['class' => 'btn btn-primary change-status-btn']) !!}
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
+    </div>
 
     </div>
 
