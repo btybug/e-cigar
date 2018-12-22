@@ -3,6 +3,7 @@
         @inject('settings','\App\Models\Settings')
         @php
             $payment_options = ($geoZone) ? $geoZone->payment_options : [];
+            dd($payment_options);
             $active_payments_gateways = $settings->getEditableData('active_payments_gateways');
         @endphp
         @if(count($payment_options))
