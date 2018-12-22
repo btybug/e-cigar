@@ -66,7 +66,7 @@
                             </li>
                         </ul>
                         <div class="tab-content tab-content-store-settings">
-                            <div class="tab-pane fade active in" id="general" role="tabpanel"
+                            <div class="tab-pane active in" id="general" role="tabpanel"
                                  aria-labelledby="general-tab">
                                 <div class="col-md-9">
                                     <div class="row">
@@ -273,139 +273,138 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
-                             aria-labelledby="invoiceOrder-tab">
-                            <div class="tabbable">
-                                <ul class="nav nav-pills nav-stacked col-md-3">
-                                    <li><a href="#invoice-doc" data-toggle="tab">Invoice</a></li>
-                                    <li class="active"><a href="#shipping-doc" data-toggle="tab">Shipping label</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content col-md-9">
-                                    <div class="tab-pane" id="invoice-doc">
+                            <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
+                                 aria-labelledby="invoiceOrder-tab">
+                                <div class="tabbable">
+                                    <ul class="nav nav-pills nav-stacked col-md-3">
+                                        <li><a href="#invoice-doc" data-toggle="tab">Invoice</a></li>
+                                        <li class="active"><a href="#shipping-doc" data-toggle="tab">Shipping label</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content col-md-9">
+                                        <div class="tab-pane" id="invoice-doc">
 
-                                    </div>
-                                    <div class="tab-pane active" id="shipping-doc">
-                                        <div class="col-md-12">
-                                            @include('admin.pdf.shipping')
                                         </div>
-                                        <div class="col-md-12">
-                                            <a href="{{ URL::to('/admin/pdf/order/shipping/'.$order->id) }}">Export
-                                                PDF</a>
+                                        <div class="tab-pane active" id="shipping-doc">
+                                            <div class="col-md-12">
+                                                @include('admin.pdf.shipping')
+                                            </div>
+                                            <div class="col-md-12">
+                                                <a href="{{ URL::to('/admin/pdf/order/shipping/'.$order->id) }}">Export
+                                                    PDF</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
-                             aria-labelledby="managementOrder-tab">
+                            <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
+                                 aria-labelledby="managementOrder-tab">
 
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered managmentorder-table">
-                                            <thead>
-                                            <tr>
-                                                <th>Image</th>
-                                                <th>Product Name</th>
-                                                <th>Qty</th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($order->items as $item)
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered managmentorder-table">
+                                                <thead>
                                                 <tr>
-                                                    <td class="images w-20">
-                                                        <div class="image">
-                                                            <img src="{{ $item->image }}"
-                                                                 alt="">
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="product-name-id">
-                                                            <div class="name">{{ $item->name }}</div>
-                                                            <div class="product-id">{{ $item->sku }}</div>
-                                                            <div class="">
-                                                                @if($item->options && count($item->options))
-                                                                    @foreach($item->options as $attribute => $sticker)
-                                                                        <p><strong>{{ $attribute }}
-                                                                                : </strong> {{ $sticker }}</p>
-                                                                    @endforeach
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td align="center" class="w-6"><span>{{ $item->qty }}</span>
-                                                    </td>
-                                                    <td align="center" class="w-6">
-                                                        <div class="check-product">
-                                                            <label class="contains">
-                                                                <input type="checkbox">
-                                                                <span class="checkmark"></span>
-                                                            </label>
-                                                        </div>
-                                                    </td>
+                                                    <th>Image</th>
+                                                    <th>Product Name</th>
+                                                    <th>Qty</th>
+                                                    <th></th>
                                                 </tr>
-                                            @endforeach
+                                                </thead>
+                                                <tbody>
+                                                @foreach($order->items as $item)
+                                                    <tr>
+                                                        <td class="images w-20">
+                                                            <div class="image">
+                                                                <img src="{{ $item->image }}"
+                                                                     alt="">
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="product-name-id">
+                                                                <div class="name">{{ $item->name }}</div>
+                                                                <div class="product-id">{{ $item->sku }}</div>
+                                                                <div class="">
+                                                                    @if($item->options && count($item->options))
+                                                                        @foreach($item->options as $attribute => $sticker)
+                                                                            <p><strong>{{ $attribute }}
+                                                                                    : </strong> {{ $sticker }}</p>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td align="center" class="w-6"><span>{{ $item->qty }}</span>
+                                                        </td>
+                                                        <td align="center" class="w-6">
+                                                            <div class="check-product">
+                                                                <label class="contains">
+                                                                    <input type="checkbox">
+                                                                    <span class="checkmark"></span>
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
 
-                                            </tbody>
-                                            <tfoot>
-                                            <tr>
-                                                <td colspan="2"><span class="total-items">Total Items</span></td>
-                                                <td>
-                                                    <div class="form-control">{{ $order->items()->sum('qty') }}</div>
-                                                </td>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="2"><span class="total-items">Total Items</span></td>
+                                                    <td>
+                                                        <div class="form-control">{{ $order->items()->sum('qty') }}</div>
+                                                    </td>
 
-                                                <td></td>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
+                                                    <td></td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="scan-your-item">
-                                        <div class="panel panel-default panel-scan">
-                                            <div class="panel-heading">Scanned Items</div>
-                                            <div class="panel-body">
-                                                <div class="scan">
-                                                    <span> Scan your item</span>
-                                                </div>
-                                                <div class="input-wall">
-                                                    <input type="text" class="form-control">
-                                                </div>
-                                                <div class="qty">
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                            Qty
-                                                        </div>
-                                                        <div class="col-md-10">
-                                                            <input type="number" class="form-control" value="1">
+                                    <div class="col-md-3">
+                                        <div class="scan-your-item">
+                                            <div class="panel panel-default panel-scan">
+                                                <div class="panel-heading">Scanned Items</div>
+                                                <div class="panel-body">
+                                                    <div class="scan">
+                                                        <span> Scan your item</span>
+                                                    </div>
+                                                    <div class="input-wall">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                    <div class="qty">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                Qty
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <input type="number" class="form-control" value="1">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="text-right mr-30 managmentorder-table collecting">
-                                <div class="check-product">
-                                    <label class="contains">Check as Collecting is complete
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                <div class="text-right mr-30 managmentorder-table collecting">
+                                    <div class="check-product">
+                                        <label class="contains">Check as Collecting is complete
+                                            <input type="checkbox">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
                                 </div>
+
+
                             </div>
-
-
-                        </div>
-                        <div class="tab-pane tabe-pane--shipping-order fade" id="shippingOrder" role="tabpanel"
-                             aria-labelledby="shippingOrder-tab">
-                            shipping
-                        </div>
-                        <div class="tab-pane tabe-pane--log-tab fade" id="log-tab" role="tabpanel"
+                            <div class="tab-pane tabe-pane--shipping-order fade" id="shippingOrder" role="tabpanel"
+                                 aria-labelledby="shippingOrder-tab">
+                                shipping
+                            </div>
+                            <div class="tab-pane tabe-pane--log-tab fade" id="log-tab" role="tabpanel"
                              aria-labelledby="log-tabid">
                             <div class="col-md-2"></div>
                             <div class="col-md-8 order-main-cnt_right-col">
@@ -498,6 +497,7 @@
 
                             </div>
                             <div class="col-md-2"></div>
+                        </div>
                         </div>
                     </div>
                 </div>
