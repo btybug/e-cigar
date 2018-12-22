@@ -11,7 +11,7 @@
                     <div class="row">
                         <label class="col-md-4">Order Number</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control">
+                            <div class="form-control">{{ $order->order_number }}</div>
                         </div>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                     <div class="row">
                         <label class="col-md-4">Customer</label>
                         <div class="col-md-8">
-                            <input type="text" class="form-control">
+                            <div class="form-control">{{ $order->user->name }}</div>
                         </div>
                     </div>
                 </div>
@@ -121,9 +121,15 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="panel panel-default panel--orders-addresses customer-notes">
-                                                <div class="panel-heading">Customer Name ID</div>
+                                                <div class="panel-heading">{{ $order->user->name }} - {{ $order->user->id }}</div>
                                                 <div class="panel-body">
-                                                    Shipping Address
+                                                    <h3>Shipping Address</h3>
+                                                    Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
+                                                    Region:{!! getRegion($order->shippingAddress->region,'name')  !!}
+                                                    <br>
+                                                    First line:{!! $order->shippingAddress->first_line_address !!}<br>
+                                                    Second line:{!! $order->shippingAddress->second_line_address !!}<br>
+                                                    Post code:{!! $order->shippingAddress->post_code !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -151,67 +157,69 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                @foreach($order->items as $item)
                                                 <tr>
                                                     <td class="w-5" align="center">
                                                     </td>
                                                     <td class="text-left w-20">
                                                         <div class="product-name">
-                                                            <img src="/public/media/drive/d7f0a8b1c6ac9d9cf0d23aadf49775cc.jpg" alt="Kaliony vape with Free juice">
-                                                            <div class="name">Kaliony vape with Free juice</div>
+                                                            <img src="{{ $item->image }}" alt="{{ $item->name }}" width="100">
+                                                            <div class="name">{{ $item->name }}</div>
                                                         </div>
                                                     </td>
                                                     <td class="stock-price">
                                                         <div class="stock-row">
                                                             <div class="left">
                                                                 <div class="stock-name">
-                                                                    <span>Kaliony red</span>
+                                                                    <span>{{ $item->name }}</span>
                                                                 </div>
                                                                 <div class="d-flex flex-wrap">
-                                                                    <div class="h5 mr-1"><span class="badge badge-secondary">red</span>
-                                                                    </div>
+                                                                    @if(count($item->options))
+                                                                        @foreach($item->options as $option)
+                                                                            <div class="h5 mr-1"><span class="badge badge-secondary">{{ $option }}</span>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                             <div class="right">
                                                                 <div class="stock-count">
-                                                                    <span>$50</span>
+                                                                    <span>${{ $item->price }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="extra-stock">
                                                             <h4>Extra</h4>
-                                                            <div class="stock-row">
-                                                                <div class="left">
-                                                                    <div class="stock-name">
-                                                                        <span> e juice</span>
-                                                                    </div>
-                                                                    <div class="d-flex flex-wrap">
-                                                                        <div class="h5 mr-1"><span class="badge badge-secondary">Banana</span>
-                                                                        </div>
-                                                                        <div class="h5 mr-1"><span class="badge badge-secondary">1 Pack</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="right extra-del">
-                                                                    <div class="stock-count">
-                                                                        <span> $0</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-
+                                                            {{--<div class="stock-row">--}}
+                                                                {{--<div class="left">--}}
+                                                                    {{--<div class="stock-name">--}}
+                                                                        {{--<span> e juice</span>--}}
+                                                                    {{--</div>--}}
+                                                                    {{--<div class="d-flex flex-wrap">--}}
+                                                                        {{--<div class="h5 mr-1"><span class="badge badge-secondary">Banana</span>--}}
+                                                                        {{--</div>--}}
+                                                                        {{--<div class="h5 mr-1"><span class="badge badge-secondary">1 Pack</span>--}}
+                                                                        {{--</div>--}}
+                                                                    {{--</div>--}}
+                                                                {{--</div>--}}
+                                                                {{--<div class="right extra-del">--}}
+                                                                    {{--<div class="stock-count">--}}
+                                                                        {{--<span> $0</span>--}}
+                                                                    {{--</div>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
                                                         </div>
 
                                                     </td>
                                                     <td class="Qty w-8" align="center">
                                                         <div class="input-group">
-                                                            <span data-condition="" data-uid="103" class="qtycount"></span>
-                                                            <input name="quantity[]" type="text" readonly="" value="1" class="form-control qty">
-                                                            <span data-condition="1" data-uid="103" class="qtycount"></span>
+                                                            {{ $item->qty }}
                                                         </div>
                                                     </td>
-                                                    <td class="w-8" align="center"> $50</td>
+                                                    <td class="w-8" align="center"> ${{ $item->amount }}</td>
                                                 </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
 
@@ -241,7 +249,7 @@
                                                                 <tr>
                                                                     <td align="left"><span>Sub Total</span></td>
                                                                     <td align="right" id="subtotal">
-                                                                        $0
+                                                                        $ {{ $order->items()->sum('amount') }}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -250,7 +258,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left"><span>Shipping </span></td>
-                                                                    <td align="right" id="subtotal">$0</td>
+                                                                    <td align="right" id="subtotal">${{ $order->shipping_price }}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td align="left"><span>Discount (Coupon)</span></td>
@@ -260,7 +268,7 @@
                                                                     <td class="last" align="left"><span>Total</span>
                                                                     </td>
                                                                     <td class="last" align="right" id="total_price">
-                                                                        $0
+                                                                        ${{ $order->amount }}
                                                                     </td>
                                                                 </tr>
                                                                 </tbody>
