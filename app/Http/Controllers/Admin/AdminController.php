@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Services\ManagerApiRequest;
 
 class AdminController extends Controller
 {
@@ -28,6 +29,10 @@ class AdminController extends Controller
 //            'role_id'=>2
 //        ]);
         return view('admin.dashboard');
+    }
+    public function test(ManagerApiRequest $request)
+    {
+        $request->exportOrder(8);
     }
 
     public function getPassport()

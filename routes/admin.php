@@ -7,6 +7,7 @@
  */
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+Route::get('/test', 'Admin\AdminController@test')->name('admin_dashboard_test');
 Route::get('/menu-manager', function () {
     return view('admin.menu_manager');
 });
