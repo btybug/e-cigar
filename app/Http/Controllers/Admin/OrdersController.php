@@ -409,6 +409,7 @@ class OrdersController extends Controller
                     'options' => $options
                 ]);
             }
+            OrdersJob::makeNew($order->id);
 
             session()->forget('order_new_shipping_address_id', 'order_new_user_id');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
@@ -516,6 +517,8 @@ class OrdersController extends Controller
                     'options' => $options
                 ]);
             }
+
+            OrdersJob::makeNew($order->id);
 
             return $order;
         });
