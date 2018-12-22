@@ -46,7 +46,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-4 order-main-cnt_right-col">
+                <div class="col-md-4 scroll_content">
                     <div class="cart-right">
                         <div class="order-summary-outer">
                             <div class="order-summary">
@@ -199,6 +199,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
     <style>
+        .scroll_content {
+            padding-top: 30px;
+            height: calc(100vh - 236px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
         .panels-address .panel-heading {
             display: flex;
             justify-content: space-between;
