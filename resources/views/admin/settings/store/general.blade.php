@@ -10,7 +10,7 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
             <li class="nav-item  ">
-                <a class="nav-link" id="payment_gateways" href="#"
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_orders') !!}"
                    role="tab"
                    aria-controls="orders" aria-selected="false">Orders</a>
             </li>
