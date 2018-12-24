@@ -28,6 +28,7 @@ class CreateOrderItemsTable extends Migration
             $table->text('options')->nullable();
             $table->text('note')->nullable();
             $table->text('additional_data')->nullable();
+            $table->tinyInteger('collected')->default(0);
             $table->timestamps();
 
             $table->foreign('order_id')

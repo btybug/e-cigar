@@ -151,6 +151,25 @@ class OrdersController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function postCollecting($id,Request $request)
+    {
+        $order = Orders::findOrfail($id);
+        $error = true;
+        $item = $order->items()->where('order_items.id',$request->item_id)->first();
+        $message = '';
+        if($item) {
+            $error = false;
+            $item->update(['collected' => $request->value]);
+
+            $count = $order->items()->count();
+            $collected = $order->items()->where('collected',true)->count();
+            $itemsNeedCollect = $count - $collected;
+            $message = ($count == $collected) ? "All collected, Congratulations !!!" : "You need collect $itemsNeedCollect item(s)";
+        }
+
+        return \Response::json(['error' => $error,'message' => $message]);
+    }
+
     public function postAddUser(Request $request)
     {
         $user = User::findOrFail($request->id);

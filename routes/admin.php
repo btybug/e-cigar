@@ -182,6 +182,9 @@ Route::group(['prefix' => 'orders'], function () {
     Route::post('/settings', 'Admin\OrdersController@postSettings')->name('admin_orders_settings_save');
     Route::post('/get-product', 'Admin\OrdersController@getProduct')->name('orders_get_product');
 
+    Route::post('/collecting/{id}', 'Admin\OrdersController@postCollecting')->name('admin_orders_collecting');
+
+
     Route::post('/get-user', 'Admin\OrdersController@postGetUser')->name('admin_orders_get_user');
     Route::post('/add-user', 'Admin\OrdersController@postAddUser')->name('admin_orders_add_user');
 

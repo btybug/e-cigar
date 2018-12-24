@@ -385,7 +385,7 @@
                                                         <td align="center" class="w-6">
                                                             <div class="check-product">
                                                                 <label class="contains">
-                                                                    <input type="checkbox">
+                                                                    <input data-id={{ $item->id }} {{ ($item->collected) ? 'checked' : "" }} type="checkbox" value="1" class="check-collecting">
                                                                     <span class="checkmark"></span>
                                                                 </label>
                                                             </div>
@@ -409,6 +409,22 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="scan-your-item">
+                                            <div class="panel panel-default panel-scan">
+                                                <div class="panel-heading">Status</div>
+                                                <div class="panel-body">
+                                                    <div class="status-box">
+                                                        @php
+                                                            $count = $order->items()->count();
+                                                            $collected = $order->items()->where('collected',true)->count();
+                                                        @endphp
+                                                        @if($count == $collected)
+                                                            All collected, Congratulations !!!
+                                                        @else
+                                                            You need collect {{ $count - $collected }} item(s)
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="panel panel-default panel-scan">
                                                 <div class="panel-heading">Scanned Items</div>
                                                 <div class="panel-body">
@@ -791,6 +807,24 @@
 @section('js')
     <script>
         $(function () {
+
+            $('body').on('click', '.check-collecting', function (event) {
+                let value;
+                let item_id = $(this).data('id')
+                if($(this).is(':checked')) {
+                    value = 1;
+                } else {
+                    value = 0;
+                }
+
+                AjaxCall("{!! route('admin_orders_collecting',$order->id) !!}", {item_id : item_id,value: value}, function (res) {
+                    if (!res.error) {
+                        $(".status-box").html(res.message);
+                    }
+                });
+            });
+
+            $('#check1').click(function() { if($(this).is(':checked')) alert('checked'); else alert('unchecked'); });
 
             $('body').on('click', '.change-status-btn', function (event) {
                 event.preventDefault();
