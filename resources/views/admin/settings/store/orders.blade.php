@@ -65,6 +65,13 @@
                                         <label for="text" class="col-md-8">notify customer</label>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-4">
+                                        {!! Form::hidden('email_submitted',0) !!}
+                                        {!! Form::checkbox('email_submitted',1) !!}
+                                    </div>
+                                    <label for="text" class="col-md-8">email customer</label>
+                                </div>
                             </div>
                         </div>
 
@@ -84,6 +91,13 @@
                                         <label for="text" class="col-md-8">notify customer</label>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-4">
+                                        {!! Form::hidden('email_canceled',0) !!}
+                                        {!! Form::checkbox('email_canceled',1) !!}
+                                    </div>
+                                    <label for="text" class="col-md-8">email customer</label>
+                                </div>
 
                             </div>
                         </div>
@@ -102,6 +116,13 @@
                                         <label for="text" class="col-md-8">notify customer</label>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-4">
+                                        {!! Form::hidden('email_partially_collected',0) !!}
+                                        {!! Form::checkbox('email_partially_collected',1) !!}
+                                    </div>
+                                    <label for="text" class="col-md-8">email customer</label>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,8 +140,16 @@
                                         <label for="text" class="col-md-8">notify customer</label>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-4">
+                                        {!! Form::hidden('email_collected',0) !!}
+                                        {!! Form::checkbox('email_collected',1) !!}
+                                    </div>
+                                    <label for="text" class="col-md-8">email customer</label>
+                                </div>
                             </div>
                         </div>
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-8">
@@ -135,7 +164,13 @@
                                             </div>
                                             <label for="text" class="col-md-8">notify customer</label>
                                         </div>
-
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="col-md-4">
+                                        {!! Form::hidden('email_completed',0) !!}
+                                        {!! Form::checkbox('email_completed',1) !!}
+                                    </div>
+                                    <label for="text" class="col-md-8">email customer</label>
                                 </div>
                             </div>
                         </div>
