@@ -70,6 +70,7 @@ Route::group(['prefix' => 'settings'], function () {
         });
         Route::group(['prefix' => 'orders'], function () {
             Route::get('/', 'Admin\SettingsController@getOrders')->name('admin_settings_store_orders');
+            Route::post('/', 'Admin\SettingsController@postOrders')->name('post_admin_settings_store_orders');
 
         });
     });

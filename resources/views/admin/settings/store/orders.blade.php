@@ -48,12 +48,13 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Orders Status</div>
                     <div class="panel-body">
+                        {!! Form::model($model) !!}
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is submitted. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
+                                        {!! Form::select('submitted',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -61,9 +62,9 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="text" class="col-md-4">when order is caneclled. Order status  is</label>
+                                    <label for="text" class="col-md-4">when order is cancelled. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
+                                        {!! Form::select('cancelled',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +74,7 @@
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is completed. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
+                                        {!! Form::select('completed',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -83,11 +84,18 @@
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is collected. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
+                                        {!! Form::select('collected',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+                            <div class="col-md-4">
+                                <button  type="submit" class="btn btn-primary">Button</button>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

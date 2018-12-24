@@ -399,10 +399,17 @@ class SettingsController extends Controller
     {
         return $this->view('store.gifts');
     }
-    public function getOrders()
+    public function getOrders(Settings $settings)
     {
+        $model=$settings->getEditableData('orders_statuses');
         $statuses=Statuses::where('type','order')->get()->pluck('name','id');
-        return $this->view('store.orders',compact('statuses'));
+        return $this->view('store.orders',compact('statuses','model'));
+    }
+
+    public function postOrders( Request $request,Settings $settings)
+    {
+        $settings->updateOrCreateSettings('orders_statuses', $request->except('_token'));
+        return redirect()->back();
     }
 
     public function getGiftsManage($id = null)
