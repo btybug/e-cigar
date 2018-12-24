@@ -99,6 +99,8 @@ final class ManagerApiRequest
         $order = Orders::where('id',$order_id)
             ->with('shippingAddress')
             ->with('items')->first();
+        $order->shippingAddress->setAttribute('country',getCountryByZone($order->shippingAddress->country)->name);
+        $order->shippingAddress->setAttribute('region',getRegion($order->shippingAddress->region,'name'));
         $response = $this->http->post($this->url('oauth-channel/import-order'),  [
             'headers'=>$this->headers(),
             'form_params' =>$order->toArray()
