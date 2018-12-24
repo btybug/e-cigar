@@ -165,11 +165,28 @@ class OrdersController extends Controller
         if($item) {
             $error = false;
             $item->update(['collected' => $request->value]);
+            $settings = $this->settings->getEditableData('orders_statuses');
 
             $count = $order->items()->count();
             $collected = $order->items()->where('collected',true)->count();
             $itemsNeedCollect = $count - $collected;
-            $message = ($count == $collected) ? "All collected, Congratulations !!!" : "You need collect $itemsNeedCollect item(s)";
+            if($count == $collected) {
+                $message = "All collected, Congratulations !!!";
+
+                if($settings && isset($settings['collected'])){
+                    $historyData['user_id'] = \Auth::id();
+                    $historyData['status_id'] = $settings['collected'];
+                    $order->history()->create($historyData);
+                }
+            }else{
+                $message = "You need collect $itemsNeedCollect item(s)";
+
+                if($collected == 1 && $settings && isset($settings['partially_collected'])){
+                    $historyData['user_id'] = \Auth::id();
+                    $historyData['status_id'] = $settings['partially_collected'];
+                    $order->history()->create($historyData);
+                }
+            }
         }
 
         return \Response::json(['error' => $error,'message' => $message]);
@@ -402,12 +419,12 @@ class OrdersController extends Controller
                 'order_number' => $order_number
             ]);
 
-            $status = $setting = $this->settings->getData('order', 'open');
-            $historyData['user_id'] = $user->id;
-            $historyData['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'order')->first()->id;
-            $historyData['note'] = 'Order made';
-
-            $order->history()->create($historyData);
+            $settings = $this->settings->getEditableData('orders_statuses');
+            if($settings && isset($settings['submitted'])){
+                $historyData['user_id'] = $user->id;
+                $historyData['status_id'] = $settings['submitted'];
+                $order->history()->create($historyData);
+            }
 
             $shippingAddress = $shippingAddress->toArray();
             unset($shippingAddress['id']);
@@ -495,12 +512,12 @@ class OrdersController extends Controller
                 'order_number' => $order_number,
             ]);
 
-            $status = $setting = $this->settings->getData('order', 'open');
-            $historyData['user_id'] = $user->id;
-            $historyData['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'order')->first()->id;
-            $historyData['note'] = 'Order made';
-
-            $order->history()->create($historyData);
+            $settings = $this->settings->getEditableData('orders_statuses');
+            if($settings && isset($settings['submitted'])){
+                $historyData['user_id'] = $user->id;
+                $historyData['status_id'] = $settings['submitted'];
+                $order->history()->create($historyData);
+            }
 
             $shippingAddress = $shippingAddress->toArray();
             unset($shippingAddress['id']);
