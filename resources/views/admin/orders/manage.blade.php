@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="panel panel-default panel--orders-addresses customer-notes">
-                                                <div class="panel-heading">{{ $order->user->name }} - {{ $order->user->id }}</div>
+                                                <div class="panel-heading">{{ $order->user->name ." ". $order->user->last_name }} - {{ $order->user->customer_number }}</div>
                                                 <div class="panel-body">
                                                     <h3>Shipping Address</h3>
                                                     Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
