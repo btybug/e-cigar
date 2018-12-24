@@ -53,7 +53,7 @@
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is submitted. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is caneclled. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is completed. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                 <div class="col-md-5">
                                     <label for="text" class="col-md-4">when order is collected. Order status  is</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                        {!! Form::select('order_submited',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>

@@ -25,6 +25,7 @@ use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
+use App\Models\Statuses;
 use App\Models\TaxRates;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
@@ -400,7 +401,8 @@ class SettingsController extends Controller
     }
     public function getOrders()
     {
-        return $this->view('store.orders');
+        $statuses=Statuses::where('type','order')->get()->pluck('name','id');
+        return $this->view('store.orders',compact('statuses'));
     }
 
     public function getGiftsManage($id = null)
