@@ -72,8 +72,12 @@ class OrdersController extends Controller
             ->with('user')->first();
 
         if (!$order) abort(404);
+        $hidden=[];
         $model=$settings->getEditableData('orders_statuses');
-        $statuses = $this->statuses->where('type', 'order')->where('id','!=',$model->submitted)->get()->pluck('name', 'id');
+        $hidden[]=$model->submitted;
+        $hidden[]=$model->partially_collected;
+        $hidden[]=$model->collected;
+        $statuses = $this->statuses->where('type', 'order')->whereNotIn('id',$hidden)->get()->pluck('name', 'id');
         return $this->view('manage', compact('order', 'statuses'));
     }
 
