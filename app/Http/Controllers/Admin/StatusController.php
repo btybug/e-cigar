@@ -60,4 +60,13 @@ class StatusController extends Controller
         $html=\View::make($path)->with(['model'=>$model])->render();
         return \Response::json(['error'=>false,'html'=>$html]);
     }
+
+    public function  postStatusesDelete(Request $request)
+    {
+        $model=Statuses::findOrFail($request->get('id'));
+
+        if(! $model->is_default) $model->delete();
+
+        return back();
+    }
 }
