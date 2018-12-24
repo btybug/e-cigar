@@ -52,52 +52,90 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-8">
                                     <label for="text" class="col-md-4">when order is submitted</label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         {!! Form::select('submitted',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label for="text" class="col-md-4">when order is completed</label>
-                                    <div class="col-md-8">
-                                        {!! Form::select('completed',$statuses,null,['class'=>'form-control']) !!}
+                                    <div class="col-md-4">
+                                        <div class="col-md-4">
+                                            {!! Form::hidden('notify_if_submitted',0) !!}
+                                            {!! Form::checkbox('notify_if_submitted',1) !!}
+                                        </div>
+                                        <label for="text" class="col-md-8">notify customer</label>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-8">
                                     <label for="text" class="col-md-4">when order is Canceled</label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         {!! Form::select('canceled',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="col-md-4">
+                                            {!! Form::hidden('notify_if_canceled',0) !!}
+                                            {!! Form::checkbox('notify_if_canceled',1) !!}
+                                        </div>
+                                        <label for="text" class="col-md-8">notify customer</label>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-8">
                                     <label for="text" class="col-md-4">when order is Partially collected</label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         {!! Form::select('partially_collected',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="col-md-4">
+                                            {!! Form::hidden('notify_if_partially_collected',0) !!}
+                                            {!! Form::checkbox('notify_if_partially_collected',1) !!}
+                                        </div>
+                                        <label for="text" class="col-md-8">notify customer</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-8">
                                     <label for="text" class="col-md-4">when order is  completely collected</label>
-                                    <div class="col-md-8">
+                                    <div class="col-md-4">
                                         {!! Form::select('collected',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="col-md-4">
+                                            {!! Form::hidden('notify_if_collected',0) !!}
+                                            {!! Form::checkbox('notify_if_collected',1) !!}
+                                        </div>
+                                        <label for="text" class="col-md-8">notify customer</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label for="text" class="col-md-4">when order is completed</label>
+                                        <div class="col-md-4">
+                                            {!! Form::select('completed',$statuses,null,['class'=>'form-control']) !!}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="col-md-4">
+                                                {!! Form::hidden('notify_if_completed',0) !!}
+                                            {!! Form::checkbox('notify_if_completed',1) !!}
+                                            </div>
+                                            <label for="text" class="col-md-8">notify customer</label>
+                                        </div>
+
                                 </div>
                             </div>
                         </div>
