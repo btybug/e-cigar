@@ -28,8 +28,7 @@ class OrderHistoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'status_id' => 'sometimes|exists:statuses,id',
-            'note' => 'required'
+            'status_id' => 'sometimes|exists:statuses,id'
         ];
     }
 }
