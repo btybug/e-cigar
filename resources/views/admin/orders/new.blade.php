@@ -706,7 +706,7 @@
                         {},
                         res => {
                             if (!res.error) {
-//                                window.location = res.url;
+                                window.location = res.url;
                             }
                         },
                         error => {
