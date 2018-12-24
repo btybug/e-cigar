@@ -23,293 +23,305 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="text-right">
-                        <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
-                           data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
-                        <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
-                           data-original-title="Print Shipping List"><i class="fa fa-truck"></i></a>
-                        <a href="#"
-                           data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i
-                                    class="fa fa-reply"></i></a>
+                <div class="col-md-2">
+                    <div class="row">
+                        <label class="col-md-4">Current Status</label>
+                        <div class="col-md-8">
+                            @php
+                                $status = $order->history()->whereNotNull('status_id')->orderBy('created_at','desc')->first()
+                            @endphp
+                                <div class="form-control">{{ ($status) ? $status->status->name : 'No status' }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-right">
+                            <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
+                               data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
+                            <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
+                               data-original-title="Print Shipping List"><i class="fa fa-truck"></i></a>
+                            <a href="#"
+                               data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i
+                                        class="fa fa-reply"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="panel-body">
-            <div class="row order-main-cnt">
-                <div class="col-md-12">
-                    <div class="order-main-cnt_left-col">
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li class="nav-item active">
-                                <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab"
-                                   aria-controls="general" aria-selected="true" aria-expanded="true">Order Details</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="invoiceOrder-tab" data-toggle="tab" href="#invoiceOrder"
-                                   role="tab"
-                                   aria-controls="invoiceOrder" aria-selected="false">Docs</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="managementOrder-tab" data-toggle="tab" href="#managementOrder"
-                                   role="tab"
-                                   aria-controls="managementOrder" aria-selected="false">Collecting</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="shippingOrder-tab" data-toggle="tab" href="#shippingOrder"
-                                   role="tab"
-                                   aria-controls="shippingOrder" aria-selected="false">Shipping</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="log-tabid" data-toggle="tab" href="#log-tab" role="tab"
-                                   aria-controls="log-tab" aria-selected="false">Logs</a>
-                            </li>
-                        </ul>
-                        <div class="tab-content tab-content-store-settings">
-                            <div class="tab-pane active in" id="general" role="tabpanel"
-                                 aria-labelledby="general-tab">
-                                <div class="col-md-9">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order
-                                                        Details</h3>
+            <div class="panel-body">
+                <div class="row order-main-cnt">
+                    <div class="col-md-12">
+                        <div class="order-main-cnt_left-col">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item active">
+                                    <a class="nav-link" id="general-tab" data-toggle="tab" href="#general" role="tab"
+                                       aria-controls="general" aria-selected="true" aria-expanded="true">Order Details</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="invoiceOrder-tab" data-toggle="tab" href="#invoiceOrder"
+                                       role="tab"
+                                       aria-controls="invoiceOrder" aria-selected="false">Docs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="managementOrder-tab" data-toggle="tab" href="#managementOrder"
+                                       role="tab"
+                                       aria-controls="managementOrder" aria-selected="false">Collecting</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="shippingOrder-tab" data-toggle="tab" href="#shippingOrder"
+                                       role="tab"
+                                       aria-controls="shippingOrder" aria-selected="false">Shipping</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="log-tabid" data-toggle="tab" href="#log-tab" role="tab"
+                                       aria-controls="log-tab" aria-selected="false">Logs</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content tab-content-store-settings">
+                                <div class="tab-pane active in" id="general" role="tabpanel"
+                                     aria-labelledby="general-tab">
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading">
+                                                        <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> Order
+                                                            Details</h3>
+                                                    </div>
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td style="width: 1%;">
+                                                                <button data-toggle="tooltip" title=""
+                                                                        class="btn btn-info btn-xs"
+                                                                        data-original-title="Store"><i
+                                                                            class="fa fa-shopping-cart fa-fw"></i></button>
+                                                            </td>
+                                                            <td><a href="https://demo.opencart.com/" target="_blank">Your
+                                                                    Store</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <button data-toggle="tooltip" title=""
+                                                                        class="btn btn-info btn-xs"
+                                                                        data-original-title="Date Added"><i
+                                                                            class="fa fa-calendar fa-fw"></i></button>
+                                                            </td>
+                                                            <td>{!! BBgetDateFormat($order->created_at) !!}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <button data-toggle="tooltip" title=""
+                                                                        class="btn btn-info btn-xs"
+                                                                        data-original-title="Payment Method"><i
+                                                                            class="fa fa-credit-card fa-fw"></i></button>
+                                                            </td>
+                                                            <td>{!! $order->payment_method !!}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <button data-toggle="tooltip" title=""
+                                                                        class="btn btn-info btn-xs"
+                                                                        data-original-title="Shipping Method"><i
+                                                                            class="fa fa-truck fa-fw"></i></button>
+                                                            </td>
+                                                            <td>{!! $order->shipping_method !!}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                                <table class="table">
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="panel panel-default panel--orders-addresses customer-notes">
+                                                    <div class="panel-heading">{{ $order->user->name ." ". $order->user->last_name }} - {{ $order->user->customer_number }}</div>
+                                                    <div class="panel-body">
+                                                        <h3>Shipping Address</h3>
+                                                        Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
+                                                        Region:{!! getRegion($order->shippingAddress->region,'name')  !!}
+                                                        <br>
+                                                        First line:{!! $order->shippingAddress->first_line_address !!}<br>
+                                                        Second line:{!! $order->shippingAddress->second_line_address !!}<br>
+                                                        Post code:{!! $order->shippingAddress->post_code !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table class="table table-bordered table--order-dtls order-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td class="text-left">Product</td>
+                                                        <td>
+                                                            <div class="head-stock-price">
+                                                                <div>
+                                                                    Stocks
+                                                                </div>
+                                                                <div>
+                                                                    Price
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-right">Quantity</td>
+                                                        <td class="text-right">Unit Price</td>
+                                                    </tr>
+                                                    </thead>
                                                     <tbody>
+                                                    @foreach($order->items()->main()->get() as $item)
                                                     <tr>
-                                                        <td style="width: 1%;">
-                                                            <button data-toggle="tooltip" title=""
-                                                                    class="btn btn-info btn-xs"
-                                                                    data-original-title="Store"><i
-                                                                        class="fa fa-shopping-cart fa-fw"></i></button>
+                                                        <td class="w-5" align="center">
                                                         </td>
-                                                        <td><a href="https://demo.opencart.com/" target="_blank">Your
-                                                                Store</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <button data-toggle="tooltip" title=""
-                                                                    class="btn btn-info btn-xs"
-                                                                    data-original-title="Date Added"><i
-                                                                        class="fa fa-calendar fa-fw"></i></button>
+                                                        <td class="text-left w-20">
+                                                            <div class="product-name">
+                                                                <img src="{{ $item->image }}" alt="{{ $item->name }}" width="100">
+                                                                <div class="name">{{ $item->name }}</div>
+                                                            </div>
                                                         </td>
-                                                        <td>{!! BBgetDateFormat($order->created_at) !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <button data-toggle="tooltip" title=""
-                                                                    class="btn btn-info btn-xs"
-                                                                    data-original-title="Payment Method"><i
-                                                                        class="fa fa-credit-card fa-fw"></i></button>
+                                                        <td class="stock-price">
+                                                            <div class="stock-row">
+                                                                <div class="left">
+                                                                    <div class="stock-name">
+                                                                        <span>{{ $item->name }}</span>
+                                                                    </div>
+                                                                    <div class="d-flex flex-wrap">
+                                                                        @if(count($item->options))
+                                                                            @foreach($item->options as $option)
+                                                                                <div class="h5 mr-1 inline-el"><span class="badge badge-secondary">{{ $option }}</span>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right">
+                                                                    <div class="stock-count">
+                                                                        <span>${{ $item->price }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="extra-stock">
+                                                                <h4>Extra</h4>
+                                                                @if(count($item->required_items))
+                                                                    @foreach($item->required_items as  $required_item)
+                                                                        <div class="stock-row row">
+                                                                            <div class="col-md-8">
+                                                                                <div class="stock-name">
+                                                                                    <span>{{ $required_item->name }}</span>
+                                                                                </div>
+                                                                                <div class="d-flex flex-wrap">
+                                                                                    @if(count($required_item->options))
+                                                                                        @foreach($required_item->options as $option)
+                                                                                            <div class="h5 mr-1 inline-el"><span class="badge badge-secondary">{{ $option }}</span>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4 extra-del">
+                                                                                <div class="stock-count">
+                                                                                    <span> qty: {{ $required_item->qty }}</span>
+                                                                                </div>
+                                                                                <div class="stock-count">
+                                                                                    <span> ${{ $required_item->price }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
+
+                                                                @if(count($item->optional_items))
+                                                                    @foreach($item->optional_items as  $optional_item)
+                                                                        <div class="stock-row row">
+                                                                            <div class="col-md-8">
+                                                                                <div class="stock-name">
+                                                                                    <span>{{ $optional_item->name }}</span>
+                                                                                </div>
+                                                                                <div class="d-flex flex-wrap">
+                                                                                    @if(count($optional_item->options))
+                                                                                        @foreach($optional_item->options as $option)
+                                                                                            <div class="h5 mr-1 inline-el"><span class="badge badge-secondary">{{ $option }}</span>
+                                                                                            </div>
+                                                                                        @endforeach
+                                                                                    @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-4 extra-del">
+                                                                                <div class="stock-count">
+                                                                                    <span> qty: {{ $optional_item->qty }}</span>
+                                                                                </div>
+                                                                                <div class="stock-count">
+                                                                                    <span> ${{ $optional_item->price }}</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+
                                                         </td>
-                                                        <td>{!! $order->payment_method !!}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <button data-toggle="tooltip" title=""
-                                                                    class="btn btn-info btn-xs"
-                                                                    data-original-title="Shipping Method"><i
-                                                                        class="fa fa-truck fa-fw"></i></button>
+                                                        <td class="Qty w-8" align="center">
+                                                            <div class="input-group">
+                                                                {{ $item->qty }}
+                                                            </div>
                                                         </td>
-                                                        <td>{!! $order->shipping_method !!}</td>
+                                                        <td class="w-8" align="center"> ${{ $item->amount }}</td>
                                                     </tr>
+                                                    @endforeach
                                                     </tbody>
                                                 </table>
+
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <div class="panel panel-default panel--orders-addresses customer-notes">
-                                                <div class="panel-heading">{{ $order->user->name ." ". $order->user->last_name }} - {{ $order->user->customer_number }}</div>
-                                                <div class="panel-body">
-                                                    <h3>Shipping Address</h3>
-                                                    Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
-                                                    Region:{!! getRegion($order->shippingAddress->region,'name')  !!}
-                                                    <br>
-                                                    First line:{!! $order->shippingAddress->first_line_address !!}<br>
-                                                    Second line:{!! $order->shippingAddress->second_line_address !!}<br>
-                                                    Post code:{!! $order->shippingAddress->post_code !!}
-                                                </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <div class="panel panel-default panel--orders-addresses customer-notes">
+                                            <div class="panel-heading">Customer Notes</div>
+                                            <div class="panel-body">
+                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
                                             </div>
                                         </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <table class="table table-bordered table--order-dtls order-table">
-                                                <thead>
-                                                <tr>
-                                                    <td></td>
-                                                    <td class="text-left">Product</td>
-                                                    <td>
-                                                        <div class="head-stock-price">
-                                                            <div>
-                                                                Stocks
-                                                            </div>
-                                                            <div>
-                                                                Price
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-right">Quantity</td>
-                                                    <td class="text-right">Unit Price</td>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($order->items()->main()->get() as $item)
-                                                <tr>
-                                                    <td class="w-5" align="center">
-                                                    </td>
-                                                    <td class="text-left w-20">
-                                                        <div class="product-name">
-                                                            <img src="{{ $item->image }}" alt="{{ $item->name }}" width="100">
-                                                            <div class="name">{{ $item->name }}</div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="stock-price">
-                                                        <div class="stock-row">
-                                                            <div class="left">
-                                                                <div class="stock-name">
-                                                                    <span>{{ $item->name }}</span>
-                                                                </div>
-                                                                <div class="d-flex flex-wrap">
-                                                                    @if(count($item->options))
-                                                                        @foreach($item->options as $option)
-                                                                            <div class="h5 mr-1 inline-el"><span class="badge badge-secondary">{{ $option }}</span>
-                                                                            </div>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                            <div class="right">
-                                                                <div class="stock-count">
-                                                                    <span>${{ $item->price }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="extra-stock">
-                                                            <h4>Extra</h4>
-                                                            @if(count($item->required_items))
-                                                                @foreach($item->required_items as  $required_item)
-                                                                    <div class="stock-row row">
-                                                                        <div class="col-md-8">
-                                                                            <div class="stock-name">
-                                                                                <span>{{ $required_item->name }}</span>
-                                                                            </div>
-                                                                            <div class="d-flex flex-wrap">
-                                                                                @if(count($required_item->options))
-                                                                                    @foreach($required_item->options as $option)
-                                                                                        <div class="h5 mr-1 inline-el"><span class="badge badge-secondary">{{ $option }}</span>
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                @endif
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4 extra-del">
-                                                                            <div class="stock-count">
-                                                                                <span> qty: {{ $required_item->qty }}</span>
-                                                                            </div>
-                                                                            <div class="stock-count">
-                                                                                <span> ${{ $required_item->price }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            @endif
-
-                                                            @if(count($item->optional_items))
-                                                                @foreach($item->optional_items as  $optional_item)
-                                                                    <div class="stock-row row">
-                                                                        <div class="col-md-8">
-                                                                            <div class="stock-name">
-                                                                                <span>{{ $optional_item->name }}</span>
-                                                                            </div>
-                                                                            <div class="d-flex flex-wrap">
-                                                                                @if(count($optional_item->options))
-                                                                                    @foreach($optional_item->options as $option)
-                                                                                        <div class="h5 mr-1 inline-el"><span class="badge badge-secondary">{{ $option }}</span>
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                @endif
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="col-md-4 extra-del">
-                                                                            <div class="stock-count">
-                                                                                <span> qty: {{ $optional_item->qty }}</span>
-                                                                            </div>
-                                                                            <div class="stock-count">
-                                                                                <span> ${{ $optional_item->price }}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
-
-                                                    </td>
-                                                    <td class="Qty w-8" align="center">
-                                                        <div class="input-group">
-                                                            {{ $item->qty }}
-                                                        </div>
-                                                    </td>
-                                                    <td class="w-8" align="center"> ${{ $item->amount }}</td>
-                                                </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="panel panel-default panel--orders-addresses customer-notes">
-                                        <div class="panel-heading">Customer Notes</div>
-                                        <div class="panel-body">
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                                        </div>
-                                    </div>
-                                    <div class="panel panel-default panel--orders-addresses customer-notes">
-                                        <div class="panel-heading">Order Summary</div>
-                                        <div class="panel-body">
-                                            <div class="cart-right">
-                                                <div class="order-summary-outer">
-                                                    <div class="order-summary">
+                                        <div class="panel panel-default panel--orders-addresses customer-notes">
+                                            <div class="panel-heading">Order Summary</div>
+                                            <div class="panel-body">
+                                                <div class="cart-right">
+                                                    <div class="order-summary-outer">
                                                         <div class="order-summary">
-                                                            <input id="order_product_subtotal"
-                                                                   name="order_product_subtotal" type="hidden"
-                                                                   value="0">
-                                                            <table class="table">
-                                                                <tbody>
-                                                                <tr>
-                                                                    <td align="left"><span>Sub Total</span></td>
-                                                                    <td align="right" id="subtotal">
-                                                                        $ {{ $order->items()->sum('amount') }}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td align="left"><span>Tax</span></td>
-                                                                    <td align="right" id="subtotal">$0</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td align="left"><span>Shipping </span></td>
-                                                                    <td align="right" id="subtotal">${{ $order->shipping_price }}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td align="left"><span>Discount (Coupon)</span></td>
-                                                                    <td align="right" id="discount">0</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="last" align="left"><span>Total</span>
-                                                                    </td>
-                                                                    <td class="last" align="right" id="total_price">
-                                                                        ${{ $order->amount }}
-                                                                    </td>
-                                                                </tr>
-                                                                </tbody>
-                                                            </table>
+                                                            <div class="order-summary">
+                                                                <input id="order_product_subtotal"
+                                                                       name="order_product_subtotal" type="hidden"
+                                                                       value="0">
+                                                                <table class="table">
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td align="left"><span>Sub Total</span></td>
+                                                                        <td align="right" id="subtotal">
+                                                                            $ {{ $order->items()->sum('amount') }}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left"><span>Tax</span></td>
+                                                                        <td align="right" id="subtotal">$0</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left"><span>Shipping </span></td>
+                                                                        <td align="right" id="subtotal">${{ $order->shipping_price }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left"><span>Discount (Coupon)</span></td>
+                                                                        <td align="right" id="discount">0</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="last" align="left"><span>Total</span>
+                                                                        </td>
+                                                                        <td class="last" align="right" id="total_price">
+                                                                            ${{ $order->amount }}
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -317,105 +329,104 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
-                                 aria-labelledby="invoiceOrder-tab">
-                                <div class="tabbable">
-                                    <ul class="nav nav-pills nav-stacked col-md-3">
-                                        <li><a href="#invoice-doc" data-toggle="tab">Invoice</a></li>
-                                        <li class="active"><a href="#shipping-doc" data-toggle="tab">Shipping label</a>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content col-md-9">
-                                        <div class="tab-pane" id="invoice-doc">
+                                <div class="tab-pane tabe-pane--invoice-order fade" id="invoiceOrder" role="tabpanel"
+                                     aria-labelledby="invoiceOrder-tab">
+                                    <div class="tabbable">
+                                        <ul class="nav nav-pills nav-stacked col-md-3">
+                                            <li><a href="#invoice-doc" data-toggle="tab">Invoice</a></li>
+                                            <li class="active"><a href="#shipping-doc" data-toggle="tab">Shipping label</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content col-md-9">
+                                            <div class="tab-pane" id="invoice-doc">
 
-                                        </div>
-                                        <div class="tab-pane active" id="shipping-doc">
-                                            <div class="col-md-12">
-                                                @include('admin.pdf.shipping')
                                             </div>
-                                            <div class="col-md-12">
-                                                <a href="{{ URL::to('/admin/pdf/order/shipping/'.$order->id) }}">Export
-                                                    PDF</a>
+                                            <div class="tab-pane active" id="shipping-doc">
+                                                <div class="col-md-12">
+                                                    @include('admin.pdf.shipping')
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <a href="{{ URL::to('/admin/pdf/order/shipping/'.$order->id) }}">Export
+                                                        PDF</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
-                                 aria-labelledby="managementOrder-tab">
+                                <div class="tab-pane tabe-pane--management-order fade" id="managementOrder" role="tabpanel"
+                                     aria-labelledby="managementOrder-tab">
 
-                                <div class="row">
-                                    <div class="col-md-9">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered managmentorder-table">
-                                                <thead>
-                                                <tr>
-                                                    <th>Image</th>
-                                                    <th>Product Name</th>
-                                                    <th>Qty</th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($order->items as $item)
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered managmentorder-table">
+                                                    <thead>
                                                     <tr>
-                                                        <td class="images w-20">
-                                                            <div class="image">
-                                                                <img src="{{ $item->image }}"
-                                                                     alt="">
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="product-name-id">
-                                                                <div class="name">{{ $item->name }}</div>
-                                                                <div class="product-id">{{ $item->sku }}</div>
-                                                                <div class="">
-                                                                    @if($item->options && count($item->options))
-                                                                        @foreach($item->options as $attribute => $sticker)
-                                                                            <p><strong>{{ $attribute }}
-                                                                                    : </strong> {{ $sticker }}</p>
-                                                                        @endforeach
-                                                                    @endif
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td align="center" class="w-6"><span>{{ $item->qty }}</span>
-                                                        </td>
-                                                        <td align="center" class="w-6">
-                                                            <div class="check-product">
-                                                                <label class="contains">
-                                                                    <input data-id={{ $item->id }} {{ ($item->collected) ? 'checked' : "" }} type="checkbox" value="1" class="check-collecting">
-                                                                    <span class="checkmark"></span>
-                                                                </label>
-                                                            </div>
-                                                        </td>
+                                                        <th>Image</th>
+                                                        <th>Product Name</th>
+                                                        <th>Qty</th>
+                                                        <th></th>
                                                     </tr>
-                                                @endforeach
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($order->items as $item)
+                                                        <tr>
+                                                            <td class="images w-20">
+                                                                <div class="image">
+                                                                    <img src="{{ $item->image }}"
+                                                                         alt="">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="product-name-id">
+                                                                    <div class="name">{{ $item->name }}</div>
+                                                                    <div class="product-id">{{ $item->sku }}</div>
+                                                                    <div class="">
+                                                                        @if($item->options && count($item->options))
+                                                                            @foreach($item->options as $attribute => $sticker)
+                                                                                <p><strong>{{ $attribute }}
+                                                                                        : </strong> {{ $sticker }}</p>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td align="center" class="w-6"><span>{{ $item->qty }}</span>
+                                                            </td>
+                                                            <td align="center" class="w-6">
+                                                                <div class="check-product">
+                                                                    <label class="contains">
+                                                                        <input data-id={{ $item->id }} {{ ($item->collected) ? 'checked' : "" }} type="checkbox" value="1" class="check-collecting">
+                                                                        <span class="checkmark"></span>
+                                                                    </label>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
 
-                                                </tbody>
-                                                <tfoot>
-                                                <tr>
-                                                    <td colspan="2"><span class="total-items">Total Items</span></td>
-                                                    <td>
-                                                        <div class="form-control">{{ $order->items()->sum('qty') }}</div>
-                                                    </td>
+                                                    </tbody>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <td colspan="2"><span class="total-items">Total Items</span></td>
+                                                        <td>
+                                                            <div class="form-control">{{ $order->items()->sum('qty') }}</div>
+                                                        </td>
 
-                                                    <td></td>
-                                                </tr>
-                                                </tfoot>
-                                            </table>
+                                                        <td></td>
+                                                    </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="scan-your-item">
-                                            <div class="panel panel-default panel-scan">
-                                                <div class="panel-heading">Status</div>
-                                                <div class="panel-body">
-                                                    <div class="status-box">
-                                                        @php
-                                                            $count = $order->items()->count();
-                                                            $collected = $order->items()->where('collected',true)->count();
+                                        <div class="col-md-3">
+                                            <div class="scan-your-item">
+                                                <div class="panel panel-default panel-scan">
+                                                    <div class="panel-heading">Status</div>
+                                                    <div class="panel-body">
+                                                        <div class="status-box">
+                                                            @php
+                                                                $count = $order->items()->count();
+                                                                $collected = $order->items()->where('collected',true)->count();
                                                         @endphp
                                                         @if($count == $collected)
                                                             All collected, Congratulations !!!
