@@ -152,6 +152,8 @@ class DatatableController extends Controller
         return Datatables::of(MailTemplates::where('is_for_admin', 0))
             ->addColumn('actions', function ($email) {
                 return '<a href="' . route('admin_mail_create_templates', $email->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+            }) ->addColumn('module', function ($email) {
+                return null;
             })
             ->editColumn('is_active', function ($email) {
                 return ($email->is_active) ? 'Yes' : 'No';

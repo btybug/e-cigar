@@ -17,7 +17,8 @@
             <tr>
                 <th>#</th>
                 <th>Slug</th>
-                <th>Is Active</th>
+                <th>Status</th>
+                <th>Module</th>
                 <th>Created At</th>
                 <th>Actions</th>
             </tr>
@@ -40,6 +41,7 @@
                     {data: 'id',name: 'id'},
                     {data: 'slug',name: 'slug'},
                     {data: 'is_active', name: 'is_active'},
+                    {data: 'module', name: 'module'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
