@@ -398,6 +398,10 @@ class SettingsController extends Controller
     {
         return $this->view('store.gifts');
     }
+    public function getOrders()
+    {
+        return $this->view('store.orders');
+    }
 
     public function getGiftsManage($id = null)
     {

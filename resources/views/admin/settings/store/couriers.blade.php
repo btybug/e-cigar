@@ -11,6 +11,11 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
             @endok
+            <li class="nav-item">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_orders') !!}"
+                   role="tab"
+                   aria-controls="orders" aria-selected="false">Orders</a>
+            </li>
             @ok('admin_settings_shipping')
             <li class="nav-item ">
                 <a class="nav-link" id="shipping-tab" href="{!! route('admin_settings_shipping') !!}" role="tab"

@@ -9,6 +9,11 @@
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" id="payment_gateways" href="{!! route('admin_settings_store_orders') !!}"
+                   role="tab"
+                   aria-controls="orders" aria-selected="false">Orders</a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" id="shipping-tab" href="{!! route('admin_settings_shipping') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Shipping</a>
