@@ -48,6 +48,46 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Orders Status</div>
                     <div class="panel-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="text" class="col-md-4">when order is submitted. Order status  is</label>
+                                    <div class="col-md-8">
+                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="text" class="col-md-4">when order is caneclled. Order status  is</label>
+                                    <div class="col-md-8">
+                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="text" class="col-md-4">when order is completed. Order status  is</label>
+                                    <div class="col-md-8">
+                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <label for="text" class="col-md-4">when order is collected. Order status  is</label>
+                                    <div class="col-md-8">
+                                        {!! Form::select('order_submited',[],null,['class'=>'form-control']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
