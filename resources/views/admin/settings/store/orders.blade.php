@@ -45,10 +45,11 @@
         </ul>
         <div>
             <div class="" aria-labelledby="general-tab">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Orders Status</div>
-                    <div class="panel-body">
                         {!! Form::model($model) !!}
+                <button  type="submit" class="btn btn-primary pull-right">Save</button>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Orders Status </div>
+                    <div class="panel-body">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
@@ -89,15 +90,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
-                            <div class="col-md-4">
-                                <button  type="submit" class="btn btn-primary">Button</button>
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
+                        {!! Form::close() !!}
             </div>
 
         </div>
