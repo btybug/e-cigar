@@ -62,7 +62,7 @@ class OrdersController extends Controller
         return $this->view('index');
     }
 
-    public function getManage($id)
+    public function getManage($id,Settings $settings)
     {
         $order = Orders::where('id', $id)
             ->with('shippingAddress')
@@ -72,7 +72,8 @@ class OrdersController extends Controller
             ->with('user')->first();
 
         if (!$order) abort(404);
-        $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
+        $model=$settings->getEditableData('orders_statuses');
+        $statuses = $this->statuses->where('type', 'order')->where('id','!=',$model->submitted)->get()->pluck('name', 'id');
         return $this->view('manage', compact('order', 'statuses'));
     }
 
