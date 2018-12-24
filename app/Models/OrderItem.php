@@ -18,4 +18,19 @@ class OrderItem extends Model
     {
         return $this->belongsTo(Orders::class,'order_id');
     }
+
+    public function scopeMain($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
+    public function required_items()
+    {
+        return $this->hasMany(self::class,'parent_id','id')->where('type','required');
+    }
+
+    public function optional_items()
+    {
+        return $this->hasMany(self::class,'parent_id','id')->where('type','optional');
+    }
 }

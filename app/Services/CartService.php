@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 
+use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\StockVariation;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -70,6 +71,82 @@ class CartService
                 Cart::session(Orders::ORDER_NEW_SESSION_ID)->remove($id);
             }else{
                 Cart::remove($id);
+            }
+        }
+    }
+
+    public function saveOrderItems($items,$order)
+    {
+        foreach ($items as $variation_id => $item) {
+            $main = $item[$variation_id];
+            unset($item[$variation_id]);
+            $options = [];
+            foreach ($main->attributes->variation->options as $option) {
+                $options[$option->attr->name] = $option->option->name;
+            }
+
+            $mainOrder = OrderItem::create([
+                'order_id' => $order->id,
+                'name' => $main->attributes->variation->stock->name,
+                'sku' => $main->name,
+                'variation_id' => $variation_id,
+                'price' => $main->price,
+                'qty' => $main->quantity,
+                'amount' => $main->price * $main->quantity,
+                'image' => $main->attributes->variation->stock->image,
+                'options' => $options
+            ]);
+
+            if($main->attributes->requiredItems && count($main->attributes->requiredItems)){
+                foreach($main->attributes->requiredItems as $vid){
+                    $reqV = StockVariation::find($vid);
+                    $voptions = [];
+                    foreach ($reqV->options as $option) {
+                        $voptions[$option->attr->name] = $option->option->name;
+                    }
+
+                    $promotionPrice = ($reqV) ? $reqV->stock->promotion_prices()
+                        ->where('variation_id',$reqV->id)->first() : null;
+                    $price = ($promotionPrice) ? $promotionPrice->price : (($reqV) ? $reqV->price : 0);
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'name' => $reqV->name,
+                        'sku' => $reqV->variation_id,
+                        'variation_id' => $vid,
+                        'price' => $price,
+                        'qty' => 1,
+                        'amount' => $price,
+                        'image' => $reqV->stock->image,
+                        'options' => $voptions,
+                        'type' => 'required',
+                        'parent_id' => $mainOrder->id
+                    ]);
+                }
+            }
+
+            if(count($item)){
+                foreach($item as $vid){
+                    $variationOpt = $vid->attributes->variation;
+
+                    $options = [];
+                    foreach ($variationOpt->options as $option) {
+                        $options[$option->attr->name] = $option->option->name;
+                    }
+
+                    OrderItem::create([
+                        'order_id' => $order->id,
+                        'name' => $variationOpt->stock->name,
+                        'sku' => $variationOpt->name,
+                        'variation_id' => $variationOpt->variation_id,
+                        'price' => $vid->price,
+                        'qty' => $vid->quantity,
+                        'amount' => $vid->price * $vid->quantity,
+                        'image' => $variationOpt->stock->image,
+                        'options' => $options,
+                        'parent_id' => $mainOrder->id,
+                        'type' => 'optional'
+                    ]);
+                }
             }
         }
     }

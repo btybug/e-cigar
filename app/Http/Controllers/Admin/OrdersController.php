@@ -363,7 +363,7 @@ class OrdersController extends Controller
 
         $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
-            $items = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+            $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
 
             $order = Orders::create([
@@ -391,24 +391,9 @@ class OrdersController extends Controller
             unset($shippingAddress['updated_at']);
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
-            foreach ($items as $variation_id => $item) {
-                $options = [];
-                foreach ($item->attributes->variation->options as $option) {
-                    $options[$option->attr->name] = $option->option->name;
-                }
 
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'name' => $item->attributes->variation->stock->name,
-                    'sku' => $item->name,
-                    'variation_id' => $variation_id,
-                    'price' => $item->price,
-                    'qty' => $item->quantity,
-                    'amount' => $item->price * $item->quantity,
-                    'image' => $item->attributes->variation->stock->image,
-                    'options' => $options
-                ]);
-            }
+            $this->cartService->saveOrderItems($items,$order);
+
             OrdersJob::makeNew($order->id);
 
             session()->forget('order_new_shipping_address_id', 'order_new_user_id');
@@ -470,7 +455,7 @@ class OrdersController extends Controller
 
         $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone,$user) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
-            $items = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+            $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
 
             $order = Orders::create([
@@ -499,24 +484,8 @@ class OrdersController extends Controller
             unset($shippingAddress['updated_at']);
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
-            foreach ($items as $variation_id => $item) {
-                $options = [];
-                foreach ($item->attributes->variation->options as $option) {
-                    $options[$option->attr->name] = $option->option->name;
-                }
 
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'name' => $item->attributes->variation->stock->name,
-                    'sku' => $item->name,
-                    'variation_id' => $variation_id,
-                    'price' => $item->price,
-                    'qty' => $item->quantity,
-                    'amount' => $item->price * $item->quantity,
-                    'image' => $item->attributes->variation->stock->image,
-                    'options' => $options
-                ]);
-            }
+            $this->cartService->saveOrderItems($items,$order);
 
             OrdersJob::makeNew($order->id);
 
