@@ -74,9 +74,9 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-5">
-                                    <label for="text" class="col-md-4">when order is completed</label>
+                                    <label for="text" class="col-md-4">when order is Canceled</label>
                                     <div class="col-md-8">
-                                        {!! Form::select('completed',$statuses,null,['class'=>'form-control']) !!}
+                                        {!! Form::select('canceled',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
