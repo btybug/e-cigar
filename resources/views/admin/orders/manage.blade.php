@@ -309,8 +309,8 @@
                                                                         <td align="right" id="subtotal">${{ $order->shipping_price }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td align="left"><span>Discount (Coupon)</span></td>
-                                                                        <td align="right" id="discount">{{ ($order->coupon) ?
+                                                                        <td align="left"><span>Discount ({{ ($order->coupon && $order->coupon->based == 'product') ? 'Product based' : 'Coupon'}})</span></td>
+                                                                        <td align="right" id="discount">{{ ($order->coupon && $order->coupon->based == 'cart') ?
                                                                         ( ($order->coupon->type == 'p') ? $order->coupon->discount."%" : "$" . $order->coupon->discount)
                                                                         : 0 }}</td>
                                                                     </tr>
