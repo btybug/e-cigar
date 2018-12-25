@@ -85,16 +85,18 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::post('/get-languages', 'Admin\SettingsController@postLanguageGetWithCode')->name('post_admin_settings_get_languages');
     });
-    Route::group(['prefix' => 'emails'], function () {
-        Route::get('/', 'Admin\SettingsController@getEmails')->name('admin_emails');
-        Route::get('/edit-template/{id?}', 'Admin\SettingsController@getCreateMailTemplates')->name('admin_mail_create_templates');
-        Route::post('/edit-template/{id?}', 'Admin\SettingsController@postCreateOrUpdate')->name('    post_admin_mail_create_templates');
-    });
-    Route::group(['prefix' => 'notifications'], function () {
-        Route::get('/', 'Admin\SettingsController@getNotifications')->name('admin_notifications');
-    });
-});
 
+
+});
+Route::group(['prefix' => 'emails-notifications'], function () {
+    Route::get('/', 'Admin\EmailsNotificationsController@settings')->name('admin_emails_notifications');
+    Route::get('/emails', 'Admin\EmailsNotificationsController@emails')->name('admin_emails_notifications_emails');
+    Route::get('/edit-template/{id?}', 'Admin\EmailsNotificationsController@getCreateMailTemplates')->name('admin_mail_create_templates');
+    Route::post('/edit-template/{id?}', 'Admin\EmailsNotificationsController@postCreateOrUpdate')->name('post_admin_mail_create_templates');
+
+    Route::get('/notifications', 'Admin\EmailsNotificationsController@settings')->name('admin_emails_notifications_notifications');
+
+});
 
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_customers');

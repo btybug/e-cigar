@@ -197,6 +197,29 @@
                 </ul>
             </li>
             @endok
+            @ok('admin_emails_notifications')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Emails & Notifications</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    @ok('admin_emails_notifications_emails')
+                    <li><a href="{{route('admin_emails_notifications_emails')}}"><i class="fa fa-circle-o"></i>Emails</a></li>
+                    @endok
+                    @ok('admin_emails_notifications_notifications')
+                    <li><a href="{{route('admin_emails_notifications_notifications')}}"><i class="fa fa-circle-o"></i>Notifications</a></li>
+                    @endok
+                    @ok('admin_emails_notifications')
+                    <li><a href="{{route('admin_emails_notifications')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
+                    @endok
+
+                </ul>
+            </li>
+            @endok
             @ok('admin_settings_languages')
             <li class="treeview">
                 <a href="#">
@@ -209,12 +232,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a>
                     </li>
-                    @ok('admin_emails')
-                    <li><a href="{{route('admin_emails')}}"><i class="fa fa-circle-o"></i>Emails</a></li>
-                    @endok
-                    @ok('admin_emails')
-                    <li><a href="{{route('admin_notifications')}}"><i class="fa fa-circle-o"></i>Notifications</a></li>
-                    @endok
+
                     @ok('admin_settings_general')
                     <li><a href="{{route('admin_settings_general')}}"><i class="fa fa-circle-o"></i> General</a></li>
                     @endok

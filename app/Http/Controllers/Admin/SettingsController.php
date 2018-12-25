@@ -70,33 +70,7 @@ class SettingsController extends Controller
         return $this->view('mail_templates');
     }
 
-    public function getCreateMailTemplates($id = null)
-    {
 
-        $model = MailTemplates::find($id);
-        $froms = Emails::where('type', 'from')->pluck('email', 'email');
-        $tos = Emails::where('type', 'to')->pluck('email', 'email');
-        $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
-        $shortcodes = new ShortCodes();
-        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model', 'froms', 'tos'));
-    }
-
-    public function postCreateOrUpdate(MailTemplatesRequest $request)
-    {
-        $mail = MailTemplates::findOrFail($request->id);
-        $data = $request->except('admin', 'translatable', '_token');
-        $translatable = $request->get('translatable');
-        $admin_data = $request->get('admin');
-        MailTemplates::updateOrCreate($request->id, $data, $translatable);
-        $translatable = $admin_data['translatable'];
-        unset($admin_data['translatable']);
-        $admin_data['slug'] = 'admin_' . $mail->slug;
-        $admin_model = MailTemplates::where('slug', $admin_data['slug'])->first();
-        $admin_data['is_for_admin'] = 1;
-        $id = ($admin_model) ? $admin_model->id : null;
-        MailTemplates::updateOrCreate($id, $admin_data, $translatable);
-        return redirect()->route('admin_emails');
-    }
 
     public function postLanguageGetWithCode(Request $request)
     {
@@ -425,9 +399,5 @@ class SettingsController extends Controller
         dd($request->all());
     }
 
-    public function getNotifications()
-    {
-        return $this->view('notifications');
-}
 
 }
