@@ -26,7 +26,7 @@
                                         <div class="panel-heading">Customer Notes</div>
                                         <div class="panel-body">
                                             <div class="form-group">
-                                        <textarea name="" id="" cols="30" rows="10" class="form-control"
+                                        <textarea name="" id="customer_notes" cols="30" rows="10" class="form-control"
                                                   placeholder="Notes"></textarea>
                                             </div>
                                         </div>
@@ -675,6 +675,18 @@
                         }
                         $(".shipping-payment").html(res.shippingHtml);
                         $(".order-summary").html(res.summaryHtml);
+                    });
+                }, 500);
+            });
+
+            $("body").on('keyup','#customer_notes',function () {
+                let value = $(this).val();
+                clearTimeout(timeout);
+                timeout = setTimeout(function () {
+                    AjaxCall("/admin/orders/order-new-customer-notes", {note: value, user_id: $("#order_user").val()}, function (res) {
+                        if (res.error) {
+
+                        }
                     });
                 }, 500);
             });

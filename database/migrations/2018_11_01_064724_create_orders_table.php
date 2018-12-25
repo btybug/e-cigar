@@ -25,6 +25,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('shipping_price',6,2);
             $table->string('currency',3);
             $table->string('order_number')->unique();
+            $table->longText('customer_notes')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -95,7 +95,7 @@ class OrdersController extends Controller
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        session()->forget('order_new_shipping_address_id', 'order_new_user_id');
+        session()->forget('order_new_shipping_address_id', 'order_new_user_id','order_new_customer_notes');
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -396,13 +396,14 @@ class OrdersController extends Controller
         $billingId = $shippingId = session()->get('order_new_shipping_address_id');
         $userId = session()->get('order_new_user_id');
         $user = User::findOrFail($userId);
+        $customer_notes = session()->get('order_new_customer_notes');
 
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
         $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user, $customer_notes) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
@@ -416,7 +417,8 @@ class OrdersController extends Controller
                 'payment_method' => 'cash',
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
-                'order_number' => $order_number
+                'order_number' => $order_number,
+                'customer_notes' => $customer_notes
             ]);
 
             $settings = $this->settings->getEditableData('orders_statuses');
@@ -437,7 +439,7 @@ class OrdersController extends Controller
 
             OrdersJob::makeNew($order->id);
 
-            session()->forget('order_new_shipping_address_id', 'order_new_user_id');
+            session()->forget('order_new_shipping_address_id', 'order_new_user_id','order_new_customer_notes');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -477,7 +479,7 @@ class OrdersController extends Controller
         $order = $this->orderStripe($transaction,$user);
 
         if(! Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() && session()->has('order_new_shipping_address_id') &&  session()->has('order_new_user_id') && $order){
-            session()->forget('order_new_user_id','order_new_shipping_address_id');
+            session()->forget('order_new_user_id','order_new_shipping_address_id','order_new_customer_notes');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -488,13 +490,13 @@ class OrdersController extends Controller
     private function orderStripe($transaction,$user)
     {
         $billingId = $shippingId = session()->get('order_new_shipping_address_id');
-
+        $customer_notes = session()->get('order_new_customer_notes');
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
         $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone,$user) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone,$user,$customer_notes) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
@@ -510,6 +512,7 @@ class OrdersController extends Controller
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
                 'order_number' => $order_number,
+                'customer_notes' => $customer_notes,
             ]);
 
             $settings = $this->settings->getEditableData('orders_statuses');
@@ -612,5 +615,13 @@ class OrdersController extends Controller
         $orderSummary = $this->view("_partials.order_summary", compact('user', 'geoZone'))->render();
 
         return \Response::json(['error' => $error, 'message' => $message,'shippingHtml' => $shippingHtml, 'summaryHtml' => $orderSummary]);
+    }
+
+    public function postApplyCustomerNotes(Request $request)
+    {
+        session()->put('order_new_customer_notes', $request->note);
+
+        return \Response::json(['error' => false]);
+
     }
 }

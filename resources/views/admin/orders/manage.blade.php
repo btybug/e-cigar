@@ -279,7 +279,7 @@
                                         <div class="panel panel-default panel--orders-addresses customer-notes">
                                             <div class="panel-heading">Customer Notes</div>
                                             <div class="panel-body">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
+                                               {!! $order->customer_notes !!}
                                             </div>
                                         </div>
                                         <div class="panel panel-default panel--orders-addresses customer-notes">
