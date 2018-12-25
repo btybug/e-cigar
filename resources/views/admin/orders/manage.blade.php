@@ -481,97 +481,101 @@
                             </div>
                             <div class="tab-pane tabe-pane--log-tab fade" id="log-tab" role="tabpanel"
                              aria-labelledby="log-tabid">
-                            <div class="col-md-2"></div>
-                            <div class="col-md-8 order-main-cnt_right-col">
-                                <div class="order-notes panel panel-default mb-0">
-                                    {{--@foreach($order->history as $history)--}}
-                                    {{--<div class="order-notes_message {!! $history->color !!}">--}}
-                                    {{--<p>--}}
-                                    {{--on <span class="underlined">11/11/2011</span>--}}
-                                    {{--at <span class="underlined">11:11</span>--}}
-                                    {{--</p>--}}
-                                    {{--<p>--}}
-                                    {{--Status <span class="font-bold">{!! $history->status !!}</span>--}}
-                                    {{--</p>--}}
-                                    {{--@if($history->admin)--}}
-                                    {{--<p>--}}
-                                    {{--order status changed by <span--}}
-                                    {{--class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>--}}
-                                    {{--</p>--}}
-                                    {{--@endif--}}
-                                    {{--</div>--}}
-                                    {{--@endforeach--}}
+                            <div class="row">
+                                <div class="col-md-9 order-main-cnt_right-col">
+                                    <div class="order-notes panel panel-default mb-0">
+                                        {{--@foreach($order->history as $history)--}}
+                                        {{--<div class="order-notes_message {!! $history->color !!}">--}}
+                                        {{--<p>--}}
+                                        {{--on <span class="underlined">11/11/2011</span>--}}
+                                        {{--at <span class="underlined">11:11</span>--}}
+                                        {{--</p>--}}
+                                        {{--<p>--}}
+                                        {{--Status <span class="font-bold">{!! $history->status !!}</span>--}}
+                                        {{--</p>--}}
+                                        {{--@if($history->admin)--}}
+                                        {{--<p>--}}
+                                        {{--order status changed by <span--}}
+                                        {{--class="text-bold">{!! $history->admin->name.' '.$history->admin->last_name !!} </span>--}}
+                                        {{--</p>--}}
+                                        {{--@endif--}}
+                                        {{--</div>--}}
+                                        {{--@endforeach--}}
 
 
-                                    <div class="order-notes_timeline">
-                                        <ul class="list-unstyled order-timeline">
-                                            @include('admin.orders._partials.timeline_item',['histories' => $order->history()->orderBy('created_at','desc')->get()])
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div class="row order-main-cnt_control-btns">
-                                    <button id="btnAddStatus" class="btn btn-default col-sm-6 btn--add-status"><i
-                                                class="fa fa-plus" aria-hidden="true"></i> Add Status
-                                    </button>
-                                    <button id="btnAddNote" class="btn btn-default col-sm-6 btn--add-note"><i
-                                                class="fa fa-plus" aria-hidden="true"></i> Add Note
-                                    </button>
-                                </div>
-                                <div class="hidden-add-field" id="addStatusField">
-                                    <div class="panel-default hidden-add-field_heading">
-                                        <p class="panel-heading text-center">Add Status <span class="pull-right"><i
-                                                        class="fa fa-close"></i></span></p>
-                                    </div>
-                                    <div class="hidden-add-field_body">
-                                        {!! Form::open(['url' =>route('orders_add_note')]) !!}
-                                        {!! Form::hidden('id',$order->id) !!}
-                                        <div class="errors"></div>
-                                        <div class="form-group mb-20 w-100">
-                                            <label class="col-sm-4 control-label" for="changeStatusSelect">Change
-                                                status to</label>
-                                            <div class="col-sm-8">
-                                                {!! Form::select('status_id',$statuses,null,['class' => 'form-control']) !!}
-                                            </div>
+                                        <div class="order-notes_timeline">
+                                            <ul class="list-unstyled order-timeline">
+                                                @include('admin.orders._partials.timeline_item',['histories' => $order->history()->orderBy('created_at','desc')->get()])
+                                            </ul>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="ChangeMessage"
-                                                   class="control-label col-sm-4">Message</label>
-                                            <div class="col-sm-8">
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-3">
+
+                                    <div class="row order-main-cnt_control-btns">
+                                        <button id="btnAddStatus" class="btn btn-default col-sm-6 btn--add-status"><i
+                                                    class="fa fa-plus" aria-hidden="true"></i> Add Status
+                                        </button>
+                                        <button id="btnAddNote" class="btn btn-default col-sm-6 btn--add-note"><i
+                                                    class="fa fa-plus" aria-hidden="true"></i> Add Note
+                                        </button>
+                                    </div>
+                                    <div class="hidden-add-field" id="addStatusField">
+                                        <div class="panel-default hidden-add-field_heading">
+                                            <p class="panel-heading text-center">Add Status <span class="pull-right"><i
+                                                            class="fa fa-close"></i></span></p>
+                                        </div>
+                                        <div class="hidden-add-field_body">
+                                            {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                                            {!! Form::hidden('id',$order->id) !!}
+                                            <div class="errors"></div>
+                                            <div class="form-group mb-20 w-100">
+                                                <label class="col-sm-4 control-label" for="changeStatusSelect">Change
+                                                    status to</label>
+                                                <div class="col-sm-8">
+                                                    {!! Form::select('status_id',$statuses,null,['class' => 'form-control']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ChangeMessage"
+                                                       class="control-label col-sm-4">Message</label>
+                                                <div class="col-sm-8">
+                                                    {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
+                                                </div>
+                                            </div>
+                                            <div class="confirm-btn-outer" style="padding-left: 15px">
+                                                {!! Form::submit('Change',['class' => 'btn btn-primary change-status-btn']) !!}
+                                            </div>
+                                            {!! Form::close() !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="hidden-add-field" id="addNoteField">
+                                        <div class="panel-default hidden-add-field_heading">
+                                            <p class="panel-heading text-center">Add Note <span class="pull-right"><i
+                                                            class="fa fa-close"></i></span></p>
+                                        </div>
+                                        <div class="hidden-add-field_body">
+                                            {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                                            <div class="errors"></div>
+                                            {!! Form::hidden('id',$order->id) !!}
+                                            <div class="form-group w-100">
+                                                <label class="control-label" for="addNoteArea">Add your note</label>
                                                 {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
                                             </div>
+                                            <div class="confirm-btn-outer">
+                                                {!! Form::submit('Submit',['class' => 'btn btn-primary change-status-btn']) !!}
+                                            </div>
+                                            {!! Form::close() !!}
                                         </div>
-                                        <div class="confirm-btn-outer" style="padding-left: 15px">
-                                            {!! Form::submit('Change',['class' => 'btn btn-primary change-status-btn']) !!}
-                                        </div>
-                                        {!! Form::close() !!}
+
+
                                     </div>
                                 </div>
-
-                                <div class="hidden-add-field" id="addNoteField">
-                                    <div class="panel-default hidden-add-field_heading">
-                                        <p class="panel-heading text-center">Add Note <span class="pull-right"><i
-                                                        class="fa fa-close"></i></span></p>
-                                    </div>
-                                    <div class="hidden-add-field_body">
-                                        {!! Form::open(['url' =>route('orders_add_note')]) !!}
-                                        <div class="errors"></div>
-                                        {!! Form::hidden('id',$order->id) !!}
-                                        <div class="form-group w-100">
-                                            <label class="control-label" for="addNoteArea">Add your note</label>
-                                            {!! Form::textarea('note',null,['class' => 'd-block w-100','rows' => 6]) !!}
-                                        </div>
-                                        <div class="confirm-btn-outer">
-                                            {!! Form::submit('Submit',['class' => 'btn btn-primary change-status-btn']) !!}
-                                        </div>
-                                        {!! Form::close() !!}
-                                    </div>
-
-
-                                </div>
-
                             </div>
-                            <div class="col-md-2"></div>
+
                         </div>
                         </div>
                     </div>
@@ -591,6 +595,9 @@
 
 @section('css')
     <style>
+        .order-main-cnt_right-col{
+            height: calc(100vh - 285px);
+        }
         .inline-el {
             display: inline;
         }
@@ -659,9 +666,6 @@
             color: white;
         }
 
-        .tab-content-store-settings .details .tabs-address {
-
-        }
 
         .tab-content-store-settings .details .tabs-address .nav {
             display: flex;
