@@ -62,7 +62,7 @@ class OrdersController extends Controller
         return $this->view('index');
     }
 
-    public function getManage($id,Settings $settings)
+    public function getManage($id, Settings $settings)
     {
         $order = Orders::where('id', $id)
             ->with('shippingAddress')
@@ -72,12 +72,12 @@ class OrdersController extends Controller
             ->with('user')->first();
 
         if (!$order) abort(404);
-        $hidden=[];
-        $model=$settings->getEditableData('orders_statuses');
-        $hidden[]=$model->submitted;
-        $hidden[]=$model->partially_collected;
-        $hidden[]=$model->collected;
-        $statuses = $this->statuses->where('type', 'order')->whereNotIn('id',$hidden)->get()->pluck('name', 'id');
+        $hidden = [];
+        $model = $settings->getEditableData('orders_statuses');
+        $hidden[] = $model->submitted;
+        $hidden[] = $model->partially_collected;
+        $hidden[] = $model->collected;
+        $statuses = $this->statuses->where('type', 'order')->whereNotIn('id', $hidden)->get()->pluck('name', 'id');
         return $this->view('manage', compact('order', 'statuses'));
     }
 
@@ -95,7 +95,7 @@ class OrdersController extends Controller
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        session()->forget('order_new_shipping_address_id', 'order_new_user_id','order_new_customer_notes');
+        session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes','order_new_coupon');
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -156,32 +156,32 @@ class OrdersController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function postCollecting($id,Request $request)
+    public function postCollecting($id, Request $request)
     {
         $order = Orders::findOrfail($id);
         $error = true;
-        $item = $order->items()->where('order_items.id',$request->item_id)->first();
+        $item = $order->items()->where('order_items.id', $request->item_id)->first();
         $message = '';
-        if($item) {
+        if ($item) {
             $error = false;
             $item->update(['collected' => $request->value]);
             $settings = $this->settings->getEditableData('orders_statuses');
 
             $count = $order->items()->count();
-            $collected = $order->items()->where('collected',true)->count();
+            $collected = $order->items()->where('collected', true)->count();
             $itemsNeedCollect = $count - $collected;
-            if($count == $collected) {
+            if ($count == $collected) {
                 $message = "All collected, Congratulations !!!";
 
-                if($settings && isset($settings['collected'])){
+                if ($settings && isset($settings['collected'])) {
                     $historyData['user_id'] = \Auth::id();
                     $historyData['status_id'] = $settings['collected'];
                     $order->history()->create($historyData);
                 }
-            }else{
+            } else {
                 $message = "You need collect $itemsNeedCollect item(s)";
 
-                if($collected == 1 && $settings && isset($settings['partially_collected'])){
+                if ($collected == 1 && $settings && isset($settings['partially_collected'])) {
                     $historyData['user_id'] = \Auth::id();
                     $historyData['status_id'] = $settings['partially_collected'];
                     $order->history()->create($historyData);
@@ -189,7 +189,7 @@ class OrdersController extends Controller
             }
         }
 
-        return \Response::json(['error' => $error,'message' => $message]);
+        return \Response::json(['error' => $error, 'message' => $message]);
     }
 
     public function postAddUser(Request $request)
@@ -397,13 +397,14 @@ class OrdersController extends Controller
         $userId = session()->get('order_new_user_id');
         $user = User::findOrFail($userId);
         $customer_notes = session()->get('order_new_customer_notes');
+        $coupon = session()->get('order_new_coupon');
 
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
         $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user, $customer_notes) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user, $customer_notes,$coupon) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
@@ -418,11 +419,12 @@ class OrdersController extends Controller
                 'shipping_price' => $shipping->getValue(),
                 'currency' => 'usd',
                 'order_number' => $order_number,
-                'customer_notes' => $customer_notes
+                'customer_notes' => $customer_notes,
+                'coupon_code' => $coupon,
             ]);
 
             $settings = $this->settings->getEditableData('orders_statuses');
-            if($settings && isset($settings['submitted'])){
+            if ($settings && isset($settings['submitted'])) {
                 $historyData['user_id'] = $user->id;
                 $historyData['status_id'] = $settings['submitted'];
                 $order->history()->create($historyData);
@@ -435,11 +437,11 @@ class OrdersController extends Controller
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
 
-            $this->cartService->saveOrderItems($items,$order);
+            $this->cartService->saveOrderItems($items, $order);
 
             OrdersJob::makeNew($order->id);
 
-            session()->forget('order_new_shipping_address_id', 'order_new_user_id','order_new_customer_notes');
+            session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes','order_new_coupon');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -476,10 +478,10 @@ class OrdersController extends Controller
         $data['currency_code'] = $charge['currency'];
         $data['payment_status'] = $charge['status'];
         $transaction = StripePayments::create($data);
-        $order = $this->orderStripe($transaction,$user);
+        $order = $this->orderStripe($transaction, $user);
 
-        if(! Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() && session()->has('order_new_shipping_address_id') &&  session()->has('order_new_user_id') && $order){
-            session()->forget('order_new_user_id','order_new_shipping_address_id','order_new_customer_notes');
+        if (!Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() && session()->has('order_new_shipping_address_id') && session()->has('order_new_user_id') && $order) {
+            session()->forget('order_new_user_id', 'order_new_shipping_address_id', 'order_new_customer_notes','order_new_coupon');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -487,22 +489,24 @@ class OrdersController extends Controller
         }
     }
 
-    private function orderStripe($transaction,$user)
+    private function orderStripe($transaction, $user)
     {
         $billingId = $shippingId = session()->get('order_new_shipping_address_id');
         $customer_notes = session()->get('order_new_customer_notes');
+        $coupon = session()->get('order_new_coupon');
+
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
         $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone,$user,$customer_notes) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone, $user, $customer_notes,$coupon) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
 
             $order = Orders::create([
-                'user_id' =>$user->id,
+                'user_id' => $user->id,
                 'transaction_id' => $transaction->id,
                 'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => Cart::session(Orders::ORDER_NEW_SESSION_ID)->getTotal(),
@@ -513,10 +517,11 @@ class OrdersController extends Controller
                 'currency' => 'usd',
                 'order_number' => $order_number,
                 'customer_notes' => $customer_notes,
+                'coupon_code' => $coupon,
             ]);
 
             $settings = $this->settings->getEditableData('orders_statuses');
-            if($settings && isset($settings['submitted'])){
+            if ($settings && isset($settings['submitted'])) {
                 $historyData['user_id'] = $user->id;
                 $historyData['status_id'] = $settings['submitted'];
                 $order->history()->create($historyData);
@@ -529,7 +534,7 @@ class OrdersController extends Controller
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
 
-            $this->cartService->saveOrderItems($items,$order);
+            $this->cartService->saveOrderItems($items, $order);
 
             OrdersJob::makeNew($order->id);
 
@@ -542,62 +547,62 @@ class OrdersController extends Controller
     public function postApplyCoupon(Request $request)
     {
         $now = strtotime(today()->toDateString());
-        $coupon = Coupons::where('code',$request->code)->where('status',true)
-            ->where('start_date','<=',$now)->where('end_date','>=',$now)->first();
+        $coupon = Coupons::where('code', $request->code)->where('status', true)
+            ->where('start_date', '<=', $now)->where('end_date', '>=', $now)->first();
 //        Cart::getConditions();
 //        dd(Cart::session(Orders::ORDER_NEW_SESSION_ID)->getConditions());
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('coupon');
         $cartItems = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
-        foreach ($cartItems as $cartItem){
+        foreach ($cartItems as $cartItem) {
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clearItemConditions($cartItem->id);
         }
 
-
         $error = false;
         $message = '';
-        if($coupon){
+        if ($coupon) {
+            session()->put('order_new_coupon', $request->code);
+
             //checking if user can apply this coupon
-            if($coupon->target){
-                if($coupon->users && count($coupon->users) && !in_array(\Auth::id(),$coupon->users)){
+            if ($coupon->target) {
+                if ($coupon->users && count($coupon->users) && !in_array(\Auth::id(), $coupon->users)) {
                     $error = true;
                     $message = 'Please enter a valid coupon code, ... you can not use this(testing)';
                 }
             }
 
-            if($error == false){
+            if ($error == false) {
                 $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
-                if($subtotal >=  $coupon->total_amount){
-                    if($coupon->based == 'cart'){
+                if ($subtotal >= $coupon->total_amount) {
+                    if ($coupon->based == 'cart') {
                         $cc = new \Darryldecode\Cart\CartCondition(array(
                             'name' => $coupon->name,
                             'type' => 'coupon',
                             'target' => 'total',
-                            'value' => ($coupon->type == 'p') ? "-".$coupon->discount."%" : "-".$coupon->discount
+                            'value' => ($coupon->type == 'p') ? "-" . $coupon->discount . "%" : "-" . $coupon->discount
                         ));
 
                         Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($cc);
-                    }else{
-                        if($coupon->variations && count($coupon->variations)){
+                    } else {
+                        if ($coupon->variations && count($coupon->variations)) {
                             $cc = new \Darryldecode\Cart\CartCondition(array(
                                 'name' => $coupon->name,
                                 'type' => 'coupon',
-                                'value' => ($coupon->type == 'p') ? "-".$coupon->discount."%" : "-".$coupon->discount
+                                'value' => ($coupon->type == 'p') ? "-" . $coupon->discount . "%" : "-" . $coupon->discount
                             ));
-                            foreach ($cartItems as $item){
-                                if(in_array($item->id,$coupon->variations)){
+                            foreach ($cartItems as $item) {
+                                if (in_array($item->id, $coupon->variations)) {
                                     \Cart::addItemCondition($item->id, $cc);
                                 }
                             }
                         }
-
                     }
                 }
             }
-        }else{
-            if($request->code == '') {
+        } else {
+            if ($request->code == '') {
                 $error = false;
                 $message = '';
-            }else{
+            } else {
                 $error = true;
                 $message = 'Please enter a valid coupon ';
             }
@@ -614,7 +619,7 @@ class OrdersController extends Controller
         $shippingHtml = $this->view("_partials.shipping_payment", compact('user', 'delivery', 'geoZone'))->render();
         $orderSummary = $this->view("_partials.order_summary", compact('user', 'geoZone'))->render();
 
-        return \Response::json(['error' => $error, 'message' => $message,'shippingHtml' => $shippingHtml, 'summaryHtml' => $orderSummary]);
+        return \Response::json(['error' => $error, 'message' => $message, 'shippingHtml' => $shippingHtml, 'summaryHtml' => $orderSummary]);
     }
 
     public function postApplyCustomerNotes(Request $request)

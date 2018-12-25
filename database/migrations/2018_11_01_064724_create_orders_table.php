@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_method');
             $table->decimal('shipping_price',6,2);
             $table->string('currency',3);
+            $table->string('coupon_code')->nullable();
             $table->string('order_number')->unique();
             $table->longText('customer_notes')->nullable();
             $table->timestamps();

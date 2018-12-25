@@ -310,7 +310,9 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td align="left"><span>Discount (Coupon)</span></td>
-                                                                        <td align="right" id="discount">0</td>
+                                                                        <td align="right" id="discount">{{ ($order->coupon) ?
+                                                                        ( ($order->coupon->type == 'p') ? $order->coupon->discount."%" : "$" . $order->coupon->discount)
+                                                                        : 0 }}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="last" align="left"><span>Total</span>
