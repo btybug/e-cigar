@@ -425,5 +425,9 @@ class SettingsController extends Controller
         dd($request->all());
     }
 
+    public function getNotifications()
+    {
+        return $this->view('notifications');
+}
 
 }

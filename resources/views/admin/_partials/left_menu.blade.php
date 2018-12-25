@@ -212,6 +212,9 @@
                     @ok('admin_emails')
                     <li><a href="{{route('admin_emails')}}"><i class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
+                    @ok('admin_emails')
+                    <li><a href="{{route('admin_notifications')}}"><i class="fa fa-circle-o"></i>Notifications</a></li>
+                    @endok
                     @ok('admin_settings_general')
                     <li><a href="{{route('admin_settings_general')}}"><i class="fa fa-circle-o"></i> General</a></li>
                     @endok

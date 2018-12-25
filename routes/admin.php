@@ -90,6 +90,9 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/edit-template/{id?}', 'Admin\SettingsController@getCreateMailTemplates')->name('admin_mail_create_templates');
         Route::post('/edit-template/{id?}', 'Admin\SettingsController@postCreateOrUpdate')->name('    post_admin_mail_create_templates');
     });
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::get('/', 'Admin\SettingsController@getNotifications')->name('admin_notifications');
+    });
 });
 
 
