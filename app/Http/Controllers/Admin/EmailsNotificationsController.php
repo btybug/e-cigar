@@ -33,7 +33,8 @@ class EmailsNotificationsController extends Controller
 
     public function sendNotificationCreate()
     {
-        return $this->view('send.notification_create');
+        $users=User::all()->pluck('name','id');
+        return $this->view('send.notification_create',compact('users'));
     }
 
     public function sendNotifications()
