@@ -89,7 +89,11 @@ Route::group(['prefix' => 'settings'], function () {
 
 });
 Route::group(['prefix' => 'emails-notifications'], function () {
-    Route::get('/', 'Admin\EmailsNotificationsController@settings')->name('admin_emails_notifications');
+    Route::get('/send-email', 'Admin\EmailsNotificationsController@sendEmail')->name('admin_emails_notifications_send_email');
+    Route::get('/send-email/create', 'Admin\EmailsNotificationsController@sendEmailCreate')->name('create_admin_emails_notifications_send_email');
+    Route::get('/send-notifications', 'Admin\EmailsNotificationsController@sendNotifications')->name('admin_emails_notifications_send_notifications');
+    Route::get('/send-notifications/create', 'Admin\EmailsNotificationsController@sendNotificationCreate')->name('create_admin_emails_notifications_send_notifications');
+
     Route::get('/emails', 'Admin\EmailsNotificationsController@emails')->name('admin_emails_notifications_emails');
     Route::get('/edit-template/{id?}', 'Admin\EmailsNotificationsController@getCreateMailTemplates')->name('admin_mail_create_templates');
     Route::post('/edit-template/{id?}', 'Admin\EmailsNotificationsController@postCreateOrUpdate')->name('post_admin_mail_create_templates');

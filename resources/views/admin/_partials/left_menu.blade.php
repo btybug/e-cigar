@@ -197,7 +197,7 @@
                 </ul>
             </li>
             @endok
-            @ok('admin_emails_notifications')
+            @ok('admin_emails_notifications_send_email')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-newspaper-o"></i>
@@ -213,8 +213,8 @@
                     @ok('admin_emails_notifications_notifications')
                     <li><a href="{{route('admin_emails_notifications_notifications')}}"><i class="fa fa-circle-o"></i>Notifications</a></li>
                     @endok
-                    @ok('admin_emails_notifications')
-                    <li><a href="{{route('admin_emails_notifications')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
+                    @ok('admin_emails_notifications_send_email')
+                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Send</a></li>
                     @endok
 
                 </ul>

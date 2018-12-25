@@ -19,9 +19,24 @@ class EmailsNotificationsController extends Controller
 {
     protected $view = 'admin.emails_notifications';
 
-    public function settings()
+    public function sendEmail()
     {
-        return $this->view('settings');
+        return $this->view('send.emails');
+    }
+
+    public function sendEmailCreate()
+    {
+        return $this->view('send.email_create');
+    }
+
+    public function sendNotificationCreate()
+    {
+        return $this->view('send.notification_create');
+    }
+
+    public function sendNotifications()
+    {
+        return $this->view('send.notifications');
     }
 
     public function emails()
