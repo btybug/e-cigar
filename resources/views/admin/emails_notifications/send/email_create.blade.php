@@ -39,9 +39,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="to" class="col-sm-3">To</label>
+                                        <label for="to" class="col-sm-3">Enable</label>
                                         <div class="col-sm-9">
-                                            <input class="form-control" id="from" readonly="" disabled="" type="text" value="{user}">
+                                            <input type="checkbox">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -125,26 +125,6 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <table class="table table-striped table--email-temp mb-50">
-                    <thead>
-                    <tr class="table--email-temp_top">
-                        <th colspan="3">Specific shortcodes for this type</th>
-                    </tr>
-                    <tr class="table--email-temp_bottom">
-                        <th></th>
-                        <th>Code</th>
-                        <th>Description</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[confirmation_link]</b></td>
-                        <td>url witch will confirm user email</td>
-                    </tr>
-                    </tbody>
-                </table>
                 <table class="table table-striped table--email-temp">
                     <thead>
                     <tr class="table--email-temp_top">
