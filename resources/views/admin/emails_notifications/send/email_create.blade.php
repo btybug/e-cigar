@@ -180,6 +180,16 @@
                         </select>
                     </div>
                 </div>
+                <div class="form-group row border-top">
+                    <label for="is_active" class="col-sm-3">Type</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="to_admin" name="is_active">
+                            <option value="1" selected="selected">Coomunication</option>
+                            <option value="2">Marketing</option>
+                            <option value="3">Newsletter</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
 
