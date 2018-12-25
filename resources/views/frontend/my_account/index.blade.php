@@ -101,6 +101,20 @@
                                     Change Password
                                 </button>
                             </div>
+                            <!-- Multiple Checkboxes (inline) -->
+                            <div class="form-group">
+                                <label class="col-md-8 control-label" for="checkboxes">Subscribe To</label>
+                                <div class="col-md-4">
+                                    <label class="checkbox-inline" for="checkboxes-0">
+                                        <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                                        Marketing
+                                    </label>
+                                    <label class="checkbox-inline" for="checkboxes-1">
+                                        <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+                                        Newsletter
+                                    </label>
+                                </div>
+                            </div>
 
 
                             <!-- Modal -->
@@ -152,6 +166,8 @@
                                             <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
+
+
                                     {!! Form::close() !!}
                                 </div>
                             </div>
