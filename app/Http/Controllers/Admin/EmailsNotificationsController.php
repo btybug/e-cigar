@@ -14,6 +14,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Emails;
 use App\Models\MailTemplates;
 use App\Services\ShortCodes;
+use App\User;
 
 class EmailsNotificationsController extends Controller
 {
@@ -26,7 +27,8 @@ class EmailsNotificationsController extends Controller
 
     public function sendEmailCreate()
     {
-        return $this->view('send.email_create');
+        $users=User::all()->pluck('name','id');
+        return $this->view('send.email_create',compact('users'));
     }
 
     public function sendNotificationCreate()
