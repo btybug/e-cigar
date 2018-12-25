@@ -40,8 +40,8 @@
                                data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
                             <a href="#" target="_blank" data-toggle="tooltip" title="" class="btn btn-info"
                                data-original-title="Print Shipping List"><i class="fa fa-truck"></i></a>
-                            <a href="#"
-                               data-toggle="tooltip" title="" class="btn btn-default" data-original-title="Cancel"><i
+                            <a href="{{ route('admin_orders') }}"
+                               class="btn btn-default" data-original-title="Cancel"><i
                                         class="fa fa-reply"></i></a>
                         </div>
                     </div>
@@ -396,7 +396,8 @@
                                                             <td align="center" class="w-6">
                                                                 <div class="check-product">
                                                                     <label class="contains">
-                                                                        <input data-id={{ $item->id }} {{ ($item->collected) ? 'checked' : "" }} type="checkbox" value="1" class="check-collecting">
+                                                                        <input data-id={{ $item->id }} {{ ($item->collected) ? 'checked disabled' : "" }} type="checkbox"
+                                                                               value="1" class="{{ ($item->collected)?: 'check-collecting'  }}">
                                                                         <span class="checkmark"></span>
                                                                     </label>
                                                                 </div>
@@ -820,19 +821,17 @@
         $(function () {
 
             $('body').on('click', '.check-collecting', function (event) {
-                let value;
-                let item_id = $(this).data('id')
-                if($(this).is(':checked')) {
-                    value = 1;
-                } else {
-                    value = 0;
+                let $_this = $(this);
+                let item_id = $_this.data('id')
+                if($_this.is(':checked')) {
+                    AjaxCall("{!! route('admin_orders_collecting',$order->id) !!}", {item_id : item_id,value: 1}, function (res) {
+                        if (!res.error) {
+                            $_this.attr('disabled',true);
+                            $_this.removeClass('check-collecting');
+                            $(".status-box").html(res.message);
+                        }
+                    });
                 }
-
-                AjaxCall("{!! route('admin_orders_collecting',$order->id) !!}", {item_id : item_id,value: value}, function (res) {
-                    if (!res.error) {
-                        $(".status-box").html(res.message);
-                    }
-                });
             });
 
             $('#check1').click(function() { if($(this).is(':checked')) alert('checked'); else alert('unchecked'); });
