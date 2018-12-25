@@ -3,7 +3,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="m-0 pull-left">Notifications</h2>
-         
+
 
         </div>
         <div class="panel-body">

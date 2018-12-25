@@ -6,11 +6,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h2 class="m-0 pull-left">Emails</h2>
-        <div class="text-right">
-            <a class="btn btn-primary" href="{!! route('admin_mail_create_templates') !!}">Create Email</a>
-        </div>
-
-    </div>
+           </div>
     <div class="panel-body">
         <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
             <thead>
