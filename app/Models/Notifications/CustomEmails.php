@@ -14,6 +14,7 @@ use App\User;
  */
 class CustomEmails extends Translatable
 {
+
     protected $table='custom_emails';
 
     protected $guarded = ['id'];
