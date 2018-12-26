@@ -11,6 +11,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Date</th>
                             <th scope="col">Notification</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Actions</th>
                         </tr>
                         </thead>
@@ -20,6 +21,7 @@
                             <th scope="row"><input type="checkbox"></th>
                             <td>{!! $message->updated_at !!}</td>
                             <td>{!! $message->subject !!}</td>
+                            <td>{!! $message->type !!}</td>
                             <td><button class="btn btn-info"><i class="fa fa-eye"></i></button></td>
                         </tr>
                         @endforeach
