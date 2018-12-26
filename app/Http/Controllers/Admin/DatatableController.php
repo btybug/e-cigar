@@ -15,6 +15,7 @@ use App\Models\LogActivities;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
+use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Others;
 use App\Models\Posts;
@@ -653,5 +654,18 @@ class DatatableController extends Controller
                 })->make(true);
         }
 
+    }
+
+    public function getAllCustomEmails()
+    {
+        return DataTables::of(CustomEmails::query())
+            ->editColumn('status', function ($message) {
+            return $message->status?'sent out':'in progress';
+        })
+            ->editColumn('created_at', function ($faq) {
+            return BBgetDateFormat($faq->created_at);
+        })->addColumn('actions',function ($message){
+             return (!$message->status?'<button class="btn btn-success">Send Now</button>':'<button class="btn btn-info">Copy</button>').'<button class="btn btn-warning"><i class="fa fa-eye"></i></button>';
+        })->rawColumns(['actions'])->make(true);
     }
 }

@@ -27,9 +27,10 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Slug</th>
                     <th>Status</th>
-                    <th>Module</th>
+                    <th>Type</th>
+                    <th>From</th>
+                    <th>Subject</th>
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
@@ -41,7 +42,23 @@
 @section('js')
     <script>
         $(function () {
-            $('#users-table').DataTable();
+            $('#users-table').DataTable(
+                {
+                    ajax:  "{!! route('datatable_all_custom_emails') !!}",
+                    "processing": true,
+                    "serverSide": true,
+                    "bPaginate": true,
+                    columns: [
+                        {data: 'id',name: 'id'},
+                        {data: 'status',name: 'status'},
+                        {data: 'type', name: 'type'},
+                        {data: 'from', name: 'from'},
+                        {data: 'subject', name: 'subject'},
+                        {data: 'created_at', name: 'created_at'},
+                        {data: 'actions', name: 'actions'}
+                    ]
+                }
+            );
         });
 
     </script>

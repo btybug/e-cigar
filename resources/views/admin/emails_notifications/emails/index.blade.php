@@ -28,7 +28,8 @@
 @section('js')
     <script>
         $(function () {
-            $('#users-table').DataTable({
+            $('#users-table').DataTable(
+                {
                 ajax:  "{!! route('datatable_all_emails') !!}",
                 "processing": true,
                 "serverSide": true,
@@ -41,7 +42,8 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
-            });
+            }
+            );
         });
 
     </script>
