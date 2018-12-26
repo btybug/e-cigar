@@ -91,6 +91,8 @@ Route::group(['prefix' => 'settings'], function () {
 Route::group(['prefix' => 'emails-notifications'], function () {
     Route::get('/send-email', 'Admin\EmailsNotificationsController@sendEmail')->name('admin_emails_notifications_send_email');
     Route::get('/send-email/create', 'Admin\EmailsNotificationsController@sendEmailCreate')->name('create_admin_emails_notifications_send_email');
+    Route::post('/send-email/create', 'Admin\EmailsNotificationsController@postSendEmailCreate')->name('post_create_admin_emails_notifications_send_email');
+    Route::post('/send-email/create-send', 'Admin\EmailsNotificationsController@postSendEmailCreateSend')->name('post_create_send_admin_emails_notifications_send_email');
     Route::get('/send-notifications', 'Admin\EmailsNotificationsController@sendNotifications')->name('admin_emails_notifications_send_notifications');
     Route::get('/send-notifications/create', 'Admin\EmailsNotificationsController@sendNotificationCreate')->name('create_admin_emails_notifications_send_notifications');
 

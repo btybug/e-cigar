@@ -280,7 +280,9 @@ class UserController extends Controller
 
     public function getNotifications()
     {
-        return $this->view('notifications');
+        $user=\Auth::getUser();
+        $messages=$user->customEmails()->where('custom_email_user.status',1)->orderBy('id','DESC')->get();
+        return $this->view('notifications',compact('messages'));
     }
 
 }

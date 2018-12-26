@@ -5,6 +5,7 @@ namespace App;
 use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
 use App\Models\Favorites;
+use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Roles;
 use App\Models\Stock;
@@ -83,6 +84,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdministrator()
     {
         return (bool)$this->role_id;
+    }
+
+    public function customEmails()
+    {
+        return $this->belongsToMany(CustomEmails::class,'custom_email_user','user_id','custom_email_id');
     }
 
 }

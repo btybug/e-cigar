@@ -13,8 +13,10 @@ use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Emails;
 use App\Models\MailTemplates;
+use App\Models\Notifications\CustomEmails;
 use App\Services\ShortCodes;
 use App\User;
+use Illuminate\Http\Request;
 
 class EmailsNotificationsController extends Controller
 {
@@ -27,14 +29,36 @@ class EmailsNotificationsController extends Controller
 
     public function sendEmailCreate()
     {
-        $users=User::all()->pluck('name','id');
-        return $this->view('send.email_create',compact('users'));
+        $froms = Emails::where('type', 'from')->pluck('email', 'email');
+        $shortcodes = new ShortCodes();
+        $users = User::all()->pluck('name', 'id');
+        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms'));
+    }
+
+    public function postSendEmailCreate(Request $request)
+    {
+        $data = $request->only('from', 'type');
+        $users = $request->get('users');
+        $translatable = $request->get('translatable');
+        $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
+        $email->users()->attach($users, ['status' => 0]);
+        return redirect()->route('admin_emails_notifications_send_email');
+    }
+    public function postSendEmailCreateSend(Request $request)
+    {
+        $data = $request->only('from', 'type');
+        $users = $request->get('users');
+        $translatable = $request->get('translatable');
+        $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
+        $email->users()->attach($users, ['status' => 1]);
+        return redirect()->route('admin_emails_notifications_send_email');
     }
 
     public function sendNotificationCreate()
     {
-        $users=User::all()->pluck('name','id');
-        return $this->view('send.notification_create',compact('users'));
+
+        $users = User::all()->pluck('name', 'id');
+        return $this->view('send.notification_create', compact('users'));
     }
 
     public function sendNotifications()

@@ -15,24 +15,14 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($messages as $message)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>30/10/1988</td>
-                            <td>Otto</td>
+                            <th scope="row"><input type="checkbox"></th>
+                            <td>{!! $message->updated_at !!}</td>
+                            <td>{!! $message->subject !!}</td>
                             <td><button class="btn btn-info"><i class="fa fa-eye"></i></button></td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>30/10/1988</td>
-                            <td>Thornton</td>
-                            <td><button class="btn btn-info"><i class="fa fa-eye"></i></button></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>30/10/1988</td>
-                            <td>the Bird</td>
-                            <td><button class="btn btn-info"><i class="fa fa-eye"></i></button></td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

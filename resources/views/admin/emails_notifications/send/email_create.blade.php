@@ -4,15 +4,12 @@
         <div class="panel-heading clearfix">
             <div class="pull-left">
                 <h3></h3>
-                <form method="POST" action="http://core.bootydev.co.uk/admin/emails-notifications/edit-template/1"
-                      accept-charset="UTF-8"><input name="_token" type="hidden"
-                                                    value="WvhiiJekhAQ769WfjUlxZuBC761WdW80g2vSROjw">
-                </form>
+                {!! Form::open(['method'=>'POST','id'=>'form']) !!}
             </div>
             <div class="pull-right">
                 <div class="text-right btn-save">
-                    <button type="submit" class="btn btn-success btn-view">View Template</button>
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="button" class="btn btn-success save btn-view create">Save for later</button>
+                    <button type="button" class="btn btn-info save send_now">Send Now</button>
                 </div>
             </div>
         </div>
@@ -34,90 +31,99 @@
                                 </li>
                             </ul>
                             <div class="tab-content tab-content-store-settings">
-                                <div class="tab-pane fade active in" id="tab1" aria-labelledby="tab1-tab">
+                                <div class="tab-pane fade active in" id="tab1"
+                                     aria-labelledby="tab1-tab">
                                     <div class="form-group row">
-                                        <label for="from" class="col-sm-3">From</label>
+                                        {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
                                         <div class="col-sm-9">
-                                            <select class="form-control" id="from" name="from">
-                                                <option value="hakobyan.sahak88@gmail.com">hakobyan.sahak88@gmail.com
-                                                </option>
-                                                <option value="hr@hook.am" selected="selected">hr@hook.am</option>
-                                            </select>
+                                            {{Form::select('from',$froms,null,['class' =>'form-control','id'=>'from'])}}
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="to" class="col-sm-3">To</label>
+                                        {{Form::label('to', 'To',['class' => 'col-sm-3'])}}
                                         <div class="col-sm-9">
-                                            {!! Form::select('users[]',$users,null,['class' => 'form-control tag-input-v select-user','placeholder' => 'Search','multiple'=>'multiple']) !!}
+                                            {!! Form::select('users[]',$users,null,['class' => 'form-control tag-input-v select-user','multiple'=>'multiple']) !!}
 
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <ul class="nav nav-tabs">
-                                            <li class=" active "><a data-toggle="tab" href="#gb">
-                                                    <span class="flag-icon flag-icon-gb"></span> gb
-                                                </a></li>
-                                        </ul>
+                                        @if(count(get_languages()))
+                                            <ul class="nav nav-tabs">
+                                                @foreach(get_languages() as $language)
+                                                    <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                                   href="#{{ strtolower($language->code) }}">
+                                                            <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                        </a></li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
                                         <div class="tab-content pt-25">
-                                            <div id="gb" class="tab-pane fade   in active ">
-                                                <div class="form-group row">
-                                                    <label for="subject_gb" class="col-sm-3">Subject</label>
-                                                    <div class="col-sm-9">
-                                                        <input class="form-control" id="subject_am"
-                                                               placeholder="Subject" name="translatable[gb][subject]"
-                                                               type="text" value="please confirm">
+                                            @if(count(get_languages()))
+                                                @foreach(get_languages() as $language)
+                                                    <div id="{{ strtolower($language->code) }}"
+                                                         class="tab-pane fade  @if($loop->first) in active @endif">
+                                                        <div class="form-group row">
+                                                            {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {{Form::text('translatable['.strtolower($language->code).'][subject]',null,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {{Form::textarea('translatable['.strtolower($language->code).'][content]',null ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    {{Form::label('content_', 'Content',['class' => 'col-sm-3'])}}
-                                                    <div class="col-sm-9">
-                                                        {{Form::textarea('admin[translatable][content]',null,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                    </div>
-                                                </div>
-                                            </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                                     <div class="form-group row">
-                                        <label for="admin_from" class="col-sm-3">From</label>
+                                        {{Form::label('admin_from', 'From',['class' => 'col-sm-3'])}}
                                         <div class="col-sm-9">
-                                            <select class="form-control" id="admin_from" name="admin[from]">
-                                                <option value="hakobyan.sahak88@gmail.com">hakobyan.sahak88@gmail.com
-                                                </option>
-                                                <option value="hr@hook.am" selected="selected">hr@hook.am</option>
-                                            </select>
+                                            {{Form::select('admin[from]',$froms,null,['class' =>'form-control','id'=>'admin_from'])}}
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="to_admin" class="col-sm-3">To</label>
+                                        {{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}
                                         <div class="col-sm-9">
-                                            <select class="form-control" id="to_admin" name="admin[to]">
-                                                <option value="hakobyan.sahak88@gmail.com" selected="selected">
-                                                    hakobyan.sahak88@gmail.com
-                                                </option>
-                                            </select>
+                                            {{Form::select('admin[to]',$users,null,['class' =>'form-control','id'=>'to_admin'])}}
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <ul class="nav nav-tabs">
-                                            <li class=" active "><a data-toggle="tab" href="#gb">
-                                                    <span class="flag-icon flag-icon-gb"></span> gb
-                                                </a></li>
-                                        </ul>
+                                        @if(count(get_languages()))
+                                            <ul class="nav nav-tabs">
+                                                @foreach(get_languages() as $language)
+                                                    <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                                                                                   href="#{{ strtolower($language->code) }}">
+                                                            <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                        </a></li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
                                         <div class="tab-content pt-25">
-                                            <div id="gb" class="tab-pane fade   in active ">
-                                                <div class="form-group row">
-                                                    <label for="subject_gb" class="col-sm-3">Subject</label>
-                                                    <div class="col-sm-9">
-                                                        <input class="form-control" id="admin_subject_am"
-                                                               placeholder="Subject"
-                                                               name="admin[translatable][gb][subject]" type="text"
-                                                               value="xascsdcsd">
+                                            @if(count(get_languages()))
+                                                @foreach(get_languages() as $language)
+                                                    <div id="{{ strtolower($language->code) }}"
+                                                         class="tab-pane fade  @if($loop->first) in active @endif">
+                                                        <div class="form-group row">
+                                                            {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',null ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',null ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-
-                                            </div>
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -139,68 +145,33 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[app_name]</b></td>
-                        <td>your site name</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[app_name]</b></td>
-                        <td>your site url</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[app_blog_url]</b></td>
-                        <td>your site blog url</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[receiver_name]</b></td>
-                        <td>email receiver user name</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[receiver_last_name]</b></td>
-                        <td>email receiver user last name</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
-                        <td><b>[receiver_last_phone]</b></td>
-                        <td>email receiver user last name</td>
-                    </tr>
+                    @foreach($shortcodes->mailShortcodes as $shortcode)
+                        <tr>
+                            <td><i class="fa fa-file-text-o table--email-temp_icon" aria-hidden="true"></i></td>
+                            <td><b>{!! '['.$shortcode['code'].']' !!}</b></td>
+                            <td>{!! $shortcode['description'] !!}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
                 <div class="form-group row border-top">
-                    <label for="is_active" class="col-sm-3">Status</label>
+                    <label for="email_type" class="col-sm-3">Type</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="to_admin" name="is_active">
-                            <option value="1" selected="selected">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row border-top">
-                    <label for="is_active" class="col-sm-3">Type</label>
-                    <div class="col-sm-9">
-                        <select class="form-control" id="to_admin" name="is_active">
-                            <option value="1" selected="selected">Coomunication</option>
-                            <option value="2">Marketing</option>
-                            <option value="3">Newsletter</option>
+                        <select class="form-control" id="email_type" name="type">
+                            <option value="coomunication" selected="selected">Coomunication</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="newsletter">Newsletter</option>
                         </select>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
+        {!! Form::close() !!}
     </div>
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    @stop
+@stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="/public/js/tinymce/tinymce.min.js"></script>
@@ -224,11 +195,21 @@
                 ]
             });
         }
-        initTinyMce(".content_editor")
+        initTinyMce(".content_editor");
         $('#form').submit(function () {
             tinyMCE.triggerSave()
             // DO STUFF...
             return true; // return false to cancel form action
+        });
+        $('body').on('click', '.create', function () {
+            $('body').find('#form')
+                .attr('action', '{!! route('post_create_admin_emails_notifications_send_email') !!}')
+                .submit();
+        });
+        $('body').on('click', '.send_now', function () {
+            $('body').find('#form')
+                .attr('action', '{!! route('post_create_send_admin_emails_notifications_send_email') !!}')
+                .submit();
         });
     </script>
 @stop
