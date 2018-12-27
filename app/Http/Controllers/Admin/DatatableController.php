@@ -358,8 +358,8 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })->editColumn('status', function ($attr) {
                 $status = $attr->history()->whereNotNull('status_id')->latest()->first();
-                return ($status) ?
-                    '<span class="badge" style="background-color: ' . $status->status->color . '">' . $status->status->name . '</span>' : null;
+                return ($status && $status->status) ?
+                    '<span class="badge" style="background-color: ' . $status->status->color  . '">' . $status->status->name . '</span>' : null;
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
