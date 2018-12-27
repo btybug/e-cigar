@@ -57,20 +57,6 @@
                                     <div class="col-md-4">
                                         {!! Form::select('submitted',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="col-md-4">
-                                            {!! Form::hidden('notify_if_submitted',0) !!}
-                                            {!! Form::checkbox('notify_if_submitted',1) !!}
-                                        </div>
-                                        <label for="text" class="col-md-8">notify customer</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4">
-                                        {!! Form::hidden('email_submitted',0) !!}
-                                        {!! Form::checkbox('email_submitted',1) !!}
-                                    </div>
-                                    <label for="text" class="col-md-8">email customer</label>
                                 </div>
                             </div>
                         </div>
@@ -83,22 +69,7 @@
                                     <div class="col-md-4">
                                         {!! Form::select('canceled',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="col-md-4">
-                                            {!! Form::hidden('notify_if_canceled',0) !!}
-                                            {!! Form::checkbox('notify_if_canceled',1) !!}
-                                        </div>
-                                        <label for="text" class="col-md-8">notify customer</label>
-                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4">
-                                        {!! Form::hidden('email_canceled',0) !!}
-                                        {!! Form::checkbox('email_canceled',1) !!}
-                                    </div>
-                                    <label for="text" class="col-md-8">email customer</label>
-                                </div>
-
                             </div>
                         </div>
                         <div class="form-group">
@@ -108,20 +79,6 @@
                                     <div class="col-md-4">
                                         {!! Form::select('partially_collected',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="col-md-4">
-                                            {!! Form::hidden('notify_if_partially_collected',0) !!}
-                                            {!! Form::checkbox('notify_if_partially_collected',1) !!}
-                                        </div>
-                                        <label for="text" class="col-md-8">notify customer</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4">
-                                        {!! Form::hidden('email_partially_collected',0) !!}
-                                        {!! Form::checkbox('email_partially_collected',1) !!}
-                                    </div>
-                                    <label for="text" class="col-md-8">email customer</label>
                                 </div>
                             </div>
                         </div>
@@ -132,20 +89,6 @@
                                     <div class="col-md-4">
                                         {!! Form::select('collected',$statuses,null,['class'=>'form-control']) !!}
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="col-md-4">
-                                            {!! Form::hidden('notify_if_collected',0) !!}
-                                            {!! Form::checkbox('notify_if_collected',1) !!}
-                                        </div>
-                                        <label for="text" class="col-md-8">notify customer</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4">
-                                        {!! Form::hidden('email_collected',0) !!}
-                                        {!! Form::checkbox('email_collected',1) !!}
-                                    </div>
-                                    <label for="text" class="col-md-8">email customer</label>
                                 </div>
                             </div>
                         </div>
@@ -157,20 +100,6 @@
                                         <div class="col-md-4">
                                             {!! Form::select('completed',$statuses,null,['class'=>'form-control']) !!}
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="col-md-4">
-                                                {!! Form::hidden('notify_if_completed',0) !!}
-                                            {!! Form::checkbox('notify_if_completed',1) !!}
-                                            </div>
-                                            <label for="text" class="col-md-8">notify customer</label>
-                                        </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="col-md-4">
-                                        {!! Form::hidden('email_completed',0) !!}
-                                        {!! Form::checkbox('email_completed',1) !!}
-                                    </div>
-                                    <label for="text" class="col-md-8">email customer</label>
                                 </div>
                             </div>
                         </div>
