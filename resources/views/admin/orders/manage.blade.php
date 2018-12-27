@@ -90,23 +90,13 @@
                                                     <table class="table">
                                                         <tbody>
                                                         <tr>
-                                                            <td style="width: 1%;">
-                                                                <button data-toggle="tooltip" title=""
-                                                                        class="btn btn-info btn-xs"
-                                                                        data-original-title="Store"><i
-                                                                            class="fa fa-shopping-cart fa-fw"></i></button>
-                                                            </td>
-                                                            <td><a href="https://demo.opencart.com/" target="_blank">Your
-                                                                    Store</a></td>
-                                                        </tr>
-                                                        <tr>
                                                             <td>
                                                                 <button data-toggle="tooltip" title=""
                                                                         class="btn btn-info btn-xs"
                                                                         data-original-title="Date Added"><i
                                                                             class="fa fa-calendar fa-fw"></i></button>
                                                             </td>
-                                                            <td>{!! BBgetDateFormat($order->created_at) !!}</td>
+                                                            <td>{!! BBgetDateFormat($order->created_at) !!} {!! BBgetTimeFormat($order->created_at) !!}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>
@@ -132,7 +122,14 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="panel panel-default panel--orders-addresses customer-notes">
-                                                    <div class="panel-heading">{{ $order->user->name ." ". $order->user->last_name }} - {{ $order->user->customer_number }}</div>
+                                                    <div class="panel-heading clearfix">
+                                                        <div class="col-md-8">
+                                                            {{ $order->user->name ." ". $order->user->last_name }} - {{ $order->user->customer_number }}
+                                                        </div>
+                                                        <div class="col-md-4 text-right">
+                                                           <strong> {!! ($order->user->status) ? "<span style='color:green;'><i class='fa fa-check'></i>Verified</span>" : "<span style='color:red;'><i class='fa fa-exclamation-circle'></i>Not verified</span>" !!}</strong>
+                                                        </div>
+                                                    </div>
                                                     <div class="panel-body">
                                                         <h3>Shipping Address</h3>
                                                         Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
