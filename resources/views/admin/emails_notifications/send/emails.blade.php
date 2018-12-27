@@ -9,10 +9,6 @@
             <a class="nav-link "  href="{!! route('admin_emails_notifications_send_email') !!}" role="tab"
                aria-controls="general" aria-selected="true" aria-expanded="true">Send Email</a>
         </li>
-        <li class="nav-item ">
-            <a class="nav-link "  href="{!! route('admin_emails_notifications_send_notifications') !!}" role="tab"
-               aria-controls="general" aria-selected="true" aria-expanded="true">Send Notifications</a>
-        </li>
     </ul>
     <div class="panel panel-default">
         <div class="panel-heading">

@@ -38,17 +38,18 @@ class EmailsNotificationsController extends Controller
     public function postSendEmailCreate(Request $request)
     {
         $data = $request->only('from', 'type');
-        $data['status']=0;
+        $data['status'] = 0;
         $users = $request->get('users');
         $translatable = $request->get('translatable');
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
         $email->users()->attach($users, ['status' => 0]);
         return redirect()->route('admin_emails_notifications_send_email');
     }
+
     public function postSendEmailCreateSend(Request $request)
     {
         $data = $request->only('from', 'type');
-        $data['status']=1;
+        $data['status'] = 1;
         $users = $request->get('users');
         $translatable = $request->get('translatable');
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
@@ -56,26 +57,9 @@ class EmailsNotificationsController extends Controller
         return redirect()->route('admin_emails_notifications_send_email');
     }
 
-    public function sendNotificationCreate()
-    {
-
-        $users = User::all()->pluck('name', 'id');
-        return $this->view('send.notification_create', compact('users'));
-    }
-
-    public function sendNotifications()
-    {
-        return $this->view('send.notifications');
-    }
-
     public function emails()
     {
         return $this->view('emails.index');
-    }
-
-    public function notifications()
-    {
-        return $this->view('notifications.index');
     }
 
     public function getCreateMailTemplates($id = null)

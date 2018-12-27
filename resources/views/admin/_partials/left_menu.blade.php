@@ -210,9 +210,6 @@
                     @ok('admin_emails_notifications_emails')
                     <li><a href="{{route('admin_emails_notifications_emails')}}"><i class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
-                    @ok('admin_emails_notifications_notifications')
-                    <li><a href="{{route('admin_emails_notifications_notifications')}}"><i class="fa fa-circle-o"></i>Notifications</a></li>
-                    @endok
                     @ok('admin_emails_notifications_send_email')
                     <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Send</a></li>
                     @endok
