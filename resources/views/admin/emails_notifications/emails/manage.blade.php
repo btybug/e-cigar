@@ -133,7 +133,7 @@
                </div>
            </div>
            <div class="col-md-4">
-               @if($shortcodes->relatedShortcoders[$model->slug])
+               @if(isset($shortcodes->relatedShortcoders[$model->slug]))
                    <table class="table table-striped table--email-temp mb-50">
                        <thead>
                        <tr class="table--email-temp_top">
