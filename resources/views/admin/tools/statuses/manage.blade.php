@@ -26,10 +26,12 @@
                                    <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
                                </div>
                                <div class="col-md-2 text-right">
+                                   @if(!$status->is_default)
                                    {!! Form::model($status,['url' => route('post_admin_stock_statuses_delete')]) !!}
                                    {!! Form::hidden('id',null) !!}
                                    <button class="btn btn-sm btn-danger" type="submit"><i class='fa fa-trash'></i></button>
                                    {!! Form::close() !!}
+                                       @endif
                                </div>
                            </div>
                        @endforeach
