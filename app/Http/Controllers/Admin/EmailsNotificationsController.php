@@ -87,6 +87,6 @@ class EmailsNotificationsController extends Controller
         $admin_data['is_for_admin'] = 1;
         $id = ($admin_model) ? $admin_model->id : null;
         MailTemplates::updateOrCreate($id, $admin_data, $translatable);
-        return redirect()->route('admin_emails');
+        return redirect()->route('admin_emails_notifications_emails');
     }
 }

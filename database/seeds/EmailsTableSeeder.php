@@ -36,25 +36,25 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'order_is_submitted','from'=>'hr@hook.am']);
+        $email = new \App\Models\MailTemplates(['slug' => 'order_is_submitted','from'=>'hr@hook.am','module'=>'orders']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'order_is_Canceled','from'=>'hr@hook.am']);
+        $email = new \App\Models\MailTemplates(['slug' => 'order_is_Canceled','from'=>'hr@hook.am','module'=>'orders']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'order_is_completely_collected','from'=>'hr@hook.am']);
+        $email = new \App\Models\MailTemplates(['slug' => 'order_is_completely_collected','from'=>'hr@hook.am','module'=>'orders']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'order_is_completed','from'=>'hr@hook.am']);
+        $email = new \App\Models\MailTemplates(['slug' => 'order_is_completed','from'=>'hr@hook.am','module'=>'orders']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
         $email->translateOrNew($locale)->content = '';
