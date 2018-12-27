@@ -18,6 +18,9 @@ class ShortCodes
         'ticket' => [
 
         ],
+        'order' => [
+
+        ],
     ];
     public $mailShortcodes = [
         'app_name' => ['code' => 'app_name', 'description' => 'your site name '],
