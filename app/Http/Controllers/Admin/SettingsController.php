@@ -373,16 +373,7 @@ class SettingsController extends Controller
     {
         return $this->view('store.gifts');
     }
-    public function getOrders(Settings $settings)
-    {
-        $model=$settings->where('section','orders_statuses')
-            ->leftJoin('statuses', 'bty_settings.val', '=', 'statuses.id')
-            ->leftJoin('statuses_translations', 'statuses.id', '=', 'statuses_translations.statuses_id')
-            ->where('locale',app()->getLocale())
-            ->select('bty_settings.key','statuses_translations.name')->pluck('name','key');
-        $statuses=Statuses::where('type','order')->get()->pluck('name','id');
-        return $this->view('store.orders',compact('statuses','model'));
-    }
+ 
 
     public function getGiftsManage($id = null)
     {
