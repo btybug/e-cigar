@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Events\OrderSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\OrderAddresses;
@@ -101,6 +102,7 @@ class CashPaymentController extends Controller
                     'options' => $options
                 ]);
                 OrdersJob::makeNew($order->id);
+                event(new OrderSubmitted(\Auth::getUser(),$order));
             }
 
             return $order;
