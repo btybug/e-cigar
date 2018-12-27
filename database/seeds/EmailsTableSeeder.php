@@ -18,6 +18,12 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
+        $email = new \App\Models\MailTemplates(['slug' => 'reset_password','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'Reset password';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
+
         $email = new \App\Models\MailTemplates(['slug' => 'forgot_password','from'=>'hr@hook.am']);
         $email->save();
         $email->translateOrNew($locale)->subject = 'Forgot password';
