@@ -375,15 +375,13 @@ class SettingsController extends Controller
     }
     public function getOrders(Settings $settings)
     {
-        $model=$settings->getEditableData('orders_statuses');
+        $model=$settings->where('section','orders_statuses')
+            ->leftJoin('statuses', 'bty_settings.val', '=', 'statuses.id')
+            ->leftJoin('statuses_translations', 'statuses.id', '=', 'statuses_translations.statuses_id')
+            ->where('locale',app()->getLocale())
+            ->select('bty_settings.key','statuses_translations.name')->pluck('name','key');
         $statuses=Statuses::where('type','order')->get()->pluck('name','id');
         return $this->view('store.orders',compact('statuses','model'));
-    }
-
-    public function postOrders( Request $request,Settings $settings)
-    {
-        $settings->updateOrCreateSettings('orders_statuses', $request->except('_token'));
-        return redirect()->back();
     }
 
     public function getGiftsManage($id = null)
