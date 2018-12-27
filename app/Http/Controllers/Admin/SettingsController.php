@@ -373,7 +373,7 @@ class SettingsController extends Controller
     {
         return $this->view('store.gifts');
     }
- 
+
 
     public function getGiftsManage($id = null)
     {

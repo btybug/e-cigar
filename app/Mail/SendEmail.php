@@ -38,6 +38,7 @@ class SendEmail extends Mailable
             ->with([
             'email'=>$this->job->email,
             'user'=>User::where('email',$this->job->email->to)->first(),
+            'job'=>$this->job,
         ]);
     }
 }

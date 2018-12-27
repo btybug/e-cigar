@@ -18,8 +18,55 @@ class ShortCodes
         'ticket' => [
 
         ],
-        'order' => [
-
+        'order_is_Canceled' => [
+            ['code' => 'order_code', 'description' => 'order unique code'],
+            ['code' => 'order_amount', 'description' => 'order total amount'],
+            ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
+            ['code' => 'order_shipping_price', 'description' => 'order shipping price'],
+            ['code' => 'order_number', 'description' => 'order number'],
+            ['code' => 'order_currency', 'description' => 'order currency'],
+            ['code' => 'order_created_at', 'description' => 'order create date'],
+            ['code' => 'order_updated_at', 'description' => 'order updated date'],
+        ],
+        'order_is_completed' => [
+            ['code' => 'order_code', 'description' => 'order unique code'],
+            ['code' => 'order_amount', 'description' => 'order total amount'],
+            ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
+            ['code' => 'order_shipping_price', 'description' => 'order shipping price'],
+            ['code' => 'order_number', 'description' => 'order number'],
+            ['code' => 'order_currency', 'description' => 'order currency'],
+            ['code' => 'order_created_at', 'description' => 'order create date'],
+            ['code' => 'order_updated_at', 'description' => 'order updated date'],
+        ],
+        'order_is_completely_collected' => [
+            ['code' => 'order_code', 'description' => 'order unique code'],
+            ['code' => 'order_amount', 'description' => 'order total amount'],
+            ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
+            ['code' => 'order_shipping_price', 'description' => 'order shipping price'],
+            ['code' => 'order_number', 'description' => 'order number'],
+            ['code' => 'order_currency', 'description' => 'order currency'],
+            ['code' => 'order_created_at', 'description' => 'order create date'],
+            ['code' => 'order_updated_at', 'description' => 'order updated date'],
+        ],
+        'order_is_partially_collected' => [
+            ['code' => 'order_code', 'description' => 'order unique code'],
+            ['code' => 'order_amount', 'description' => 'order total amount'],
+            ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
+            ['code' => 'order_shipping_price', 'description' => 'order shipping price'],
+            ['code' => 'order_number', 'description' => 'order number'],
+            ['code' => 'order_currency', 'description' => 'order currency'],
+            ['code' => 'order_created_at', 'description' => 'order create date'],
+            ['code' => 'order_updated_at', 'description' => 'order updated date'],
+        ],
+        'order_is_submitted' => [
+            ['code' => 'order_code', 'description' => 'order unique code'],
+            ['code' => 'order_amount', 'description' => 'order total amount'],
+            ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
+            ['code' => 'order_shipping_price', 'description' => 'order shipping price'],
+            ['code' => 'order_number', 'description' => 'order number'],
+            ['code' => 'order_currency', 'description' => 'order currency'],
+            ['code' => 'order_created_at', 'description' => 'order create date'],
+            ['code' => 'order_updated_at', 'description' => 'order updated date'],
         ],
     ];
     public $mailShortcodes = [
@@ -43,13 +90,14 @@ class ShortCodes
         return $content;
     }
 
-    function relatedShortcoder($content, $user = null)
+    function relatedShortcoder($content, $user = null,$job)
     {
+        $external=$job->additional_data;
         foreach ($this->relatedShortcoders as $relatedShortcoders) {
             foreach ($relatedShortcoders as $shortcode) {
                 if (function_exists($shortcode['code'])) {
                     $fn = $shortcode['code'];
-                    $content = str_replace('[' . $shortcode['code'] . ']', $fn($user),$content);
+                    $content = str_replace('[' . $shortcode['code'] . ']', $fn($user,$external),$content);
 
                 }
             }

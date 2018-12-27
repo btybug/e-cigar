@@ -87,12 +87,13 @@ function userCan($permission)
     if ($role->slug == 'superadmin') return true;
     return $role->hasAccess($permission);
 }
+
 function getFrontendPages($permissions = [])
 {
     $routes = array();
     $routeCollection = \Route::getRoutes();
     foreach ($routeCollection as $value) {
-        if(!starts_with($value->uri(),'admin')){
+        if (!starts_with($value->uri(), 'admin')) {
             if (isset($permissions[$value->getName()])) {
 
                 $routes[$value->methods()[0]][$value->uri()] = ['url' => $value->uri(), 'text' => $value->getName(), 'state' => ['checked' => true]];
@@ -225,6 +226,7 @@ function get_default_language()
     return $lang;
 }
 
+//start short codes
 function reset_password_link($token)
 {
     return url(config('app.url') . route('password.reset', $token, false));
@@ -272,14 +274,55 @@ function shortUniqueID()
     return base_convert(microtime(false), 10, 36);
 }
 
-function sc($content, $user)
+function order_code($user, $order)
+{
+    return $order['code'];
+}
+
+function order_amount($user, $order)
+{
+    return $order['amount'];
+}
+
+function order_shipping_method($user, $order)
+{
+    return $order['shipping_method'];
+}
+
+function order_shipping_price($user, $order)
+{
+    return $order['shipping_price'];
+}
+
+function order_number($user, $order)
+{
+    return $order['order_number'];
+}
+
+function order_currency($user, $order)
+{
+    return $order['currency'];
+}
+
+function order_created_at($user, $order)
+{
+    return BBgetDateFormat($order['created_at']);
+}
+
+function order_updated_at($user, $order)
+{
+    return BBgetDateFormat($order['updated_at']);
+}
+
+function sc($content, $user, $job)
 {
     $ShortCodes = new \App\Services\ShortCodes();
     $content = $ShortCodes->MailShortcoder($content, $user);
-    $content = $ShortCodes->relatedShortcoder($content, $user);
+    $content = $ShortCodes->relatedShortcoder($content, $user, $job);
     return $content;
 }
 
+//end short codes
 function cartCount()
 {
     $cartService = new \App\Services\CartService();
@@ -316,11 +359,11 @@ function getCountryByZone($country)
     return ($country) ? $country : null;
 }
 
-function getRegion($region ,$attr=null)
+function getRegion($region, $attr = null)
 {
     if (!$region) return null;
     $region = \App\Models\ZoneCountryRegions::find($region);
-    return ($attr && $region)?$region->$attr:null;
+    return ($attr && $region) ? $region->$attr : null;
 }
 
 function stripe_key()
@@ -492,13 +535,12 @@ function renderCategory($replies, $i = 0, $parent = false)
             echo '<ul class="list-unstyled list-category">';
         }
         $active = ($i == 0 && $parent == false) ? "active" : "";
-        echo '<li><a href="javasript:void(0);" data-uid="'.$reply->id.'" class="btn btn-primary cat-link select-faq-category '.$active.'">'.$reply->name.'</a>';
+        echo '<li><a href="javasript:void(0);" data-uid="' . $reply->id . '" class="btn btn-primary cat-link select-faq-category ' . $active . '">' . $reply->name . '</a>';
 
         if (count($reply->children)) {
             renderCategory($reply->children, 0, true);
         }
         echo '</li>';
-
 
 
         $i = $i + 1;
@@ -589,54 +631,64 @@ function mergeCollections($collection1, $collection2)
     $data = $collection->sortByDesc('created_at');
     return $data->merge([]);
 }
-function getImage($url){
-    $url=explode('/',$url);
-    $name=end($url);
-    return \App\Models\Media\Items::where('original_name',$name)->first();
+
+function getImage($url)
+{
+    $url = explode('/', $url);
+    $name = end($url);
+    return \App\Models\Media\Items::where('original_name', $name)->first();
 }
 
-function generateRandomString($length = 6) {
-    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+function generateRandomString($length = 6)
+{
+    return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
 }
 
-function check_customer_number($number){
-    return \DB::table('users')->where('customer_number',$number)->first();
+function check_customer_number($number)
+{
+    return \DB::table('users')->where('customer_number', $number)->first();
 }
 
-function check_order_number($number){
-    return \DB::table('orders')->where('order_number',$number)->first();
+function check_order_number($number)
+{
+    return \DB::table('orders')->where('order_number', $number)->first();
 }
 
-function generate_number($prefix){
-    return $prefix ."-". generateRandomString();
+function generate_number($prefix)
+{
+    return $prefix . "-" . generateRandomString();
 }
 
-function get_customer_number(){
+function get_customer_number()
+{
     $number = generate_number('AMC');
     $data = check_customer_number($number);
-    if($data) {
+    if ($data) {
         get_customer_number();
     }
 
     return $number;
 }
 
-function get_order_number(){
+function get_order_number()
+{
     $number = generate_number('AMO');
     $data = check_order_number($number);
-    if($data) {
+    if ($data) {
         get_order_number();
     }
 
     return $number;
 }
 
-function get_stock_variation($id,$column = 'name'){
+function get_stock_variation($id, $column = 'name')
+{
     $v = \App\Models\StockVariation::find($id);
     return ($v) ? $v->{$column} : null;
 }
 
-function get_user($id,$column = 'name'){
+function get_user($id, $column = 'name')
+{
     $v = \App\User::find($id);
     return ($v) ? $v->{$column} : null;
 }
