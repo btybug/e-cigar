@@ -123,8 +123,14 @@
                                         <div class="form-group row">
                                             <label for="inputExperience" class="col-sm-2 control-label">Status</label>
                                             <div class="col-sm-10">
-                                                {!! Form::select('status',[0=>'In Active',1=>'Active'],null,['class'=>'form-control']) !!}
-
+                                                {!! Form::hidden('status',null) !!}
+                                                @if($user->email_verified_at == null)
+                                                    <div class="form-control">Email Not Verified</div>
+                                                @elseif($user->email_verified_at && ! $user->status)
+                                                    <div class="form-control">ID Not Verified</div>
+                                                @elseif($user->email_verified_at && $user->status)
+                                                    <div class="form-control">Active</div>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -148,6 +154,35 @@
                                             <button type="submit" class="btn btn-warning">Send reset password email</button>
                                             {!! Form::close() !!}
                                         </div>
+
+
+                                        @if($user->verification_type && $user->verification_image)
+                                            {!! Form::open() !!}
+                                            <div class="form-group col-md-6">
+                                                <label for="inputExperience" class="col-sm-4 control-label">Uploaded Doc : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
+                                                <div class="col-sm-8">
+                                                    <img class="img" src="{{ $user->verification_image }}" width="100"/>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <button type="button" class="btn btn-info">View</button>
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @if(! $user->status)
+                                                    <div class="col-sm-10">
+                                                        <button type="button" class="btn btn-success approve-verify">Approve</button>
+                                                    </div>
+                                                    <div class="col-sm-10">
+                                                        <button type="button" class="btn btn-danger reject-verify">Reject</button>
+                                                    </div>
+                                                @else
+                                                    <div class="col-sm-10">
+                                                        <div class="alert alert-success">Verified</div>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            {!! Form::close() !!}
+                                        @endif
                                     </div>
                                 </div>
 
@@ -411,6 +446,29 @@
 
     <script>
         $(function () {
+            $("body").on('click', '.reject-verify', function () {
+                var user_id = $("#userID").val()
+                AjaxCall(
+                    "/admin/users/reject-verify",
+                    { user_id: user_id},
+                   function (res) {
+                       window.location.reload();
+                   }
+                );
+            });
+
+            $("body").on('click', '.approve-verify', function () {
+                var user_id = $("#userID").val()
+                AjaxCall(
+                    "/admin/users/approve-verify",
+                    { user_id: user_id},
+                   function (res) {
+                       window.location.reload();
+                   }
+                );
+            });
+
+
             $("body").on('click', '.save-address-book', function () {
                 var form = $(".address-book-form").serialize();
                 var user_id = $("#userID").val()

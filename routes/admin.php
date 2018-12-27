@@ -108,6 +108,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/address-book-form', 'Admin\UserController@postAddressBookForm')->name('admin_users_address_book_form');
     Route::post('/save-address-book', 'Admin\UserController@postAddressBookSave')->name('admin_users_address_book_save');
     Route::post('/address', 'Admin\UserController@postAddress')->name('admin_users_address');
+    Route::post('/reject-verify', 'Admin\UserController@postReject')->name('admin_users_reject');
+    Route::post('/approve-verify', 'Admin\UserController@postApprove')->name('admin_users_approve');
 
 
     Route::post('/edit/{id}', 'Admin\UserController@postEdit')->name('post_admin_users_edit');

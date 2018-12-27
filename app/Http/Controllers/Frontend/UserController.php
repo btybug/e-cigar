@@ -246,6 +246,8 @@ class UserController extends Controller
 
     public function getVerification()
     {
+        if(\Auth::user()->status) abort(404);
+
         return $this->view('verification');
     }
 
@@ -256,8 +258,11 @@ class UserController extends Controller
 
     public function postVerification(VerificationRequest $request)
     {
-        $item = $request->file('verification_image');
         $user = \Auth::user();
+
+        if($user->status) abort(404);
+
+        $item = $request->file('verification_image');
         $folder = Folders::where('name', 'drive')->first();
         if ($folder && \File::isDirectory($folder->path())) {
             $realName = $user->id . '.' . $request->get('verification_type');

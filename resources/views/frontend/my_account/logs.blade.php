@@ -5,6 +5,8 @@
     @include('frontend._partials.left_bar')
             <div class="main-right-wrapp">
             </div>
+            @include('frontend.my_account._partials.verify_bar')
+
         </div>
     </main>
 @stop

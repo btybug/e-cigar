@@ -44,6 +44,8 @@
             </table>
         </div>
     </div>
+            @include('frontend.my_account._partials.verify_bar')
+
         </div>
     </main>
 @stop

@@ -18,9 +18,9 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'reset_password','from'=>'hr@hook.am']);
+        $email = new \App\Models\MailTemplates(['slug' => 'forgot_password','from'=>'hr@hook.am']);
         $email->save();
-        $email->translateOrNew($locale)->subject = 'please reset';
+        $email->translateOrNew($locale)->subject = 'Forgot password';
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
@@ -51,6 +51,24 @@ class EmailsTableSeeder extends Seeder
         $email = new \App\Models\MailTemplates(['slug' => 'order_is_completed','from'=>'hr@hook.am']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
+
+        $email = new \App\Models\MailTemplates(['slug' => 'verify_id','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'Verify ID';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
+
+        $email = new \App\Models\MailTemplates(['slug' => 'reject_verify_id','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'Reject Verification ID';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
+
+        $email = new \App\Models\MailTemplates(['slug' => 'approve_verify_id','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'Approve Verification ID';
         $email->translateOrNew($locale)->content = '';
         $email->save();
     }

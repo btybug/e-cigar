@@ -136,4 +136,32 @@ class UserController extends Controller
         return redirect()->back()
             ->with('status', trans($response));
     }
+
+    public function postReject(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        if($user->email_verified_at && ! $user->status) {
+            $user->update([
+                'verification_type' => null,
+                'verification_image' => null
+            ]);
+            return \Response::json(['error' => false]);
+        }
+
+        abort(404);
+    }
+
+    public function postApprove(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        if($user->email_verified_at && ! $user->status) {
+            $user->update([
+                'status' => true
+            ]);
+
+            return \Response::json(['error' => false]);
+        }
+
+        abort(404);
+    }
 }
