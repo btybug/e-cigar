@@ -19,6 +19,7 @@ class ShortCodes
 
         ],
         'order_is_Canceled' => [
+            ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
             ['code' => 'order_amount', 'description' => 'order total amount'],
             ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
@@ -29,6 +30,7 @@ class ShortCodes
             ['code' => 'order_updated_at', 'description' => 'order updated date'],
         ],
         'order_is_completed' => [
+            ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
             ['code' => 'order_amount', 'description' => 'order total amount'],
             ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
@@ -39,6 +41,7 @@ class ShortCodes
             ['code' => 'order_updated_at', 'description' => 'order updated date'],
         ],
         'order_is_completely_collected' => [
+            ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
             ['code' => 'order_amount', 'description' => 'order total amount'],
             ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
@@ -49,6 +52,7 @@ class ShortCodes
             ['code' => 'order_updated_at', 'description' => 'order updated date'],
         ],
         'order_is_partially_collected' => [
+            ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
             ['code' => 'order_amount', 'description' => 'order total amount'],
             ['code' => 'order_shipping_method', 'description' => 'order shipping method'],
@@ -59,6 +63,7 @@ class ShortCodes
             ['code' => 'order_updated_at', 'description' => 'order updated date'],
         ],
         'order_is_submitted' => [
+            ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
             ['code' => 'order_amount', 'description' => 'order total amount'],
             ['code' => 'order_shipping_method', 'description' => 'order shipping method'],

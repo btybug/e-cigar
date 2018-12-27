@@ -313,6 +313,10 @@ function order_updated_at($user, $order)
 {
     return BBgetDateFormat($order['updated_at']);
 }
+function order_status($user, $order){
+    $order=\App\Models\Orders::find($order['id']);
+    return $order->history()->first()->status->name;
+}
 
 function sc($content, $user, $job)
 {
