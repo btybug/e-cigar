@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Events\Tickets;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\ChangePasswordRequest;
+use App\Http\Controllers\Frontend\Requests\MyAccountContactRequest;
 use App\Http\Controllers\Frontend\Requests\MyAccountRequest;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
 use App\Http\Requests\AddressesRequest;
@@ -71,6 +72,17 @@ class UserController extends Controller
         $data = $request->except('_token');
         $user = \Auth::user();
         $user->update($data);
+        return redirect()->back();
+    }
+
+    public function saveMyAccountContact(MyAccountContactRequest $request)
+    {
+        $data = $request->except('_token');
+        $user = \Auth::user();
+        $user->update([
+            'email' => $data['email'],
+            'phone' => $data['phone']
+        ]);
         return redirect()->back();
     }
 

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class CompetitionRequest
  * @package App\Http\Controllers\Admin\Requests
  */
-class MyAccountRequest extends FormRequest
+class MyAccountContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,12 +28,8 @@ class MyAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'last_name' =>'required|string|max:255',
             'phone' => 'required|regex:/[0-9]{9}/|unique:users,phone,'.\Auth::id(),
-            'email' => 'required|string|email|max:255|unique:users,email,'.\Auth::id(),
-            'gender' => 'required|in:male,female',
-            'dob' => 'required|date',
+            'email' => 'required|string|email|max:255|unique:users,email,'.\Auth::id()
         ];
     }
 }

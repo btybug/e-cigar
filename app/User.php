@@ -24,7 +24,11 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status', 'role_id', 'verification_type', 'verification_image','customer_number'
+        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status', 'role_id', 'verification_type', 'verification_image','customer_number','dob'
+    ];
+
+    protected $appends = [
+      'age'
     ];
 
     /**
@@ -35,6 +39,17 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getAgeAttribute()
+    {
+        $dateOfBirth = $this->dob;
+        if($dateOfBirth == '0000-00-00'){
+            return null;
+        }
+
+        $years = \Carbon\Carbon::parse($dateOfBirth)->age;
+        return $years;
+    }
 
     public function role()
     {
@@ -83,7 +98,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdministrator()
     {
-        return (bool)$this->role_id;
+        return  ($this->role->type == 'backend') ? true : false;
     }
 
     public function customEmails()

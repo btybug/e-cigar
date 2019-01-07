@@ -21,25 +21,103 @@
                     <div class="my-account p-5 card">
                         <div class="container">
                             <div class="mb-4">
-                                {!! Form::model($user) !!}
-                                <div class="form-group row">
-                                    <label for="username" class="col-md-4">
-                                        First Name
-                                        <span class="required text-danger">*</span>
-                                    </label>
-                                    <div class="col-md-8">
-                                        {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                @if($user->status)
+                                    {!! Form::model($user,['url' => route('my_account_save_contact_data')]) !!}
+                                @else
+                                    {!! Form::model($user) !!}
+                                @endif
+                                <h3>Essential</h3>
+                                @if($user->status)
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            First Name
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="form-control">{{ $user->name }}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="username" class="col-md-4">
-                                        Last Name
-                                        <span class="required text-danger">*</span>
-                                    </label>
-                                    <div class="col-md-8">
-                                        {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            Last Name
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="form-control">{{ $user->last_name }}</div>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            Date of birth
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <div class="form-control">{{ $user->dob }}</div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            {{ ($user->age) ? $user->age .' years' : null }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            Gender
+                                        </label>
+                                        <div class="col-md-8">
+                                            <div class="form-control">{{ ucfirst($user->gender) }}</div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            First Name
+                                            <span class="required text-danger">*</span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            Last Name
+                                            <span class="required text-danger">*</span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            Date of birth
+                                            <span class="required text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <div class="input-group date">
+                                                {!! Form::text('dob',null,['placeholder' => 'Date of Birth',
+                                              'id'=>'dob', 'class'=> 'form-control date']) !!}
+                                                <span class="input-group-btn">
+<button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+</span></div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            {{ ($user->age) ? $user->age .' years' : null }}
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-4">
+                                            Gender
+                                            <span class="required text-danger">*</span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <h3>Contact</h3>
+
                                 <div class="form-group row mail">
                                     <label for="username" class="col-md-4">
                                         Email address
@@ -50,24 +128,16 @@
                                         {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="username" class="col-md-4">
-                                        Gender
-                                        <span class="required text-danger">*</span>
-                                    </label>
-                                    <div class="col-md-8">
-                                        {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="username" class="col-md-4">
-                                        Country
-                                        <span class="required text-danger">*</span>
-                                    </label>
-                                    <div class="col-md-8">
-                                        {!! Form::text('country',null,['class'=>'form-control']) !!}
-                                    </div>
-                                </div>
+
+                                {{--<div class="form-group row">--}}
+                                {{--<label for="username" class="col-md-4">--}}
+                                {{--Country--}}
+                                {{--<span class="required text-danger">*</span>--}}
+                                {{--</label>--}}
+                                {{--<div class="col-md-8">--}}
+                                {{--{!! Form::text('country',null,['class'=>'form-control']) !!}--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
                                 <div class="form-group row">
 
                                     <label for="username" class="col-md-4">
@@ -136,7 +206,8 @@
                                                         Current Password
                                                     </label>
                                                     <div class="col-md-8">
-                                                        <input type="password" name='current_password' class="form-control"
+                                                        <input type="password" name='current_password'
+                                                               class="form-control"
                                                                id="currentPass">
                                                     </div>
                                                 </div>
@@ -150,11 +221,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row confirm">
-                                                    <label for="exampleInputPassword3"  class="one col-md-4">
+                                                    <label for="exampleInputPassword3" class="one col-md-4">
                                                         Confirm New Password
                                                     </label>
                                                     <div class="col-md-8">
-                                                        <input type="password" name="password_confirmation" class="form-control"
+                                                        <input type="password" name="password_confirmation"
+                                                               class="form-control"
                                                                id="exampleInputPassword3">
                                                     </div>
                                                 </div>
@@ -181,5 +253,22 @@
     </main>
 @stop
 @section('css')
-    {{--<link rel="stylesheet" href="{{asset('public/frontend/css/my-account.css?v='.rand(111,999))}}">--}}
+    {!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
+@stop
+
+@section('js')
+    {!! Html::script("public/admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
+    <script>
+        $(function () {
+            $("#dob").datepicker({
+                format: 'yyyy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                singleDatePicker: true,
+                showDropdowns: true,
+                minYear: 1901,
+                // maxYear: parseInt(moment().format('YYYY'),10)
+            });
+        });
+    </script>
 @stop

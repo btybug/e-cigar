@@ -17,8 +17,8 @@ class AdminMiddleware
     {
             if (\Auth::check()) {
                 $user=\Auth::user();
-                if($user->role){
-                return $next($request);
+                if($user->isAdministrator()){
+                    return $next($request);
                 }
             }
             abort('404');

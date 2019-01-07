@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('avatar')->nullable();
             $table->string('country',100);
             $table->enum('gender',['male','female']);
+            $table->date('dob');
             $table->tinyInteger('status')->default(0);
             $table->integer('role_id')->nullable()->unsigned();
             $table->string('verification_type',20)->nullable();
