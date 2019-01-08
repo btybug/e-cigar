@@ -1,4 +1,4 @@
-<div class="product-form-groups options-group">
+<div class="product-form-groups options-group" data-main-stock="{{ $model->id }}">
     @if($model->type == 'variation_product')
         @foreach($model->type_attrs as $modelattr)
             @php
@@ -17,7 +17,7 @@
                                         <label for="r{{ $item->sticker->id }}"></label>
                                         <input data-name="{{ $modelattr->id }}"
                                                {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
-                                               type="radio" id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                               type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
                                                name="rate{{ $modelattr->id }}">
                                         <span class="count">{{ $item->sticker->name }}</span>
                                     </div>
@@ -39,7 +39,7 @@
                                             <label for="r{{ $item->sticker->id }}"></label>
                                             <input data-name="{{ $modelattr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
-                                                   type="radio" id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                                   type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
                                                    name="rate{{ $modelattr->id }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
@@ -56,7 +56,7 @@
                     <div class="col-md-5">
                         <select data-name="{{ $modelattr->id }}"
                                 class="select-default product-pack-select fnz-20 select-variation-option"
-                                id="productPack{{ $modelattr->id }}">
+                                data-id="productPack{{ $modelattr->id }}">
                             @foreach($options as $item)
                                 <option value="{{ $item->sticker->id }}">{{ $item->sticker->name }}</option>
                             @endforeach

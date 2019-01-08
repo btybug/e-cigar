@@ -29,8 +29,8 @@
                                             <label for="r{{ $item->sticker->id }}"></label>
                                             <input data-name="{{ $promotionAttr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
-                                                   type="radio" id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
-                                                   name="rate{{ $promotionAttr->id }}">
+                                                   type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                                   name="pr{{ $promotionAttr->id }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
                                     @endforeach
@@ -51,8 +51,8 @@
                                             <label for="r{{ $item->sticker->id }}"></label>
                                             <input data-name="{{ $promotionAttr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
-                                                   type="radio" id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
-                                                   name="rate{{ $promotionAttr->id }}">
+                                                   type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                                   name="pr{{ $promotionAttr->id }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
                                     @endforeach
@@ -68,7 +68,7 @@
                         <div class="col-md-5">
                             <select data-name="{{ $promotionAttr->id }}"
                                     class="select-default product-pack-select fnz-20 select-variation-poption"
-                                    id="productPack{{ $promotionAttr->id }}">
+                                    data-id="productPack{{ $promotionAttr->id }}">
                                 @foreach($poptions as $item)
                                     <option value="{{ $item->sticker->id }}">{{ $item->sticker->name }}</option>
                                 @endforeach
