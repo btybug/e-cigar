@@ -17,7 +17,7 @@
                                         <label for="r{{ $item->sticker->id }}"></label>
                                         <input data-name="{{ $modelattr->id }}"
                                                {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
-                                               type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                               type="radio" id="rm{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
                                                name="rate{{ $modelattr->id }}">
                                         <span class="count">{{ $item->sticker->name }}</span>
                                     </div>
@@ -39,7 +39,7 @@
                                             <label for="r{{ $item->sticker->id }}"></label>
                                             <input data-name="{{ $modelattr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
-                                                   type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                                   type="radio" id="rm{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
                                                    name="rate{{ $modelattr->id }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
