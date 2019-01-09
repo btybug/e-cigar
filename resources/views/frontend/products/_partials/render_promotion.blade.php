@@ -26,7 +26,7 @@
                                 <div class="product-range d-flex">
                                     @foreach($poptions as $item)
                                         <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
-                                            <label for="r{{ $item->sticker->id }}"></label>
+                                            <label for="pr{{ $item->sticker->id }}"></label>
                                             <input data-name="{{ $promotionAttr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
                                                    type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
@@ -48,7 +48,7 @@
                                 <div class=" d-flex">
                                     @foreach($poptions as $item)
                                         <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
-                                            <label for="r{{ $item->sticker->id }}"></label>
+                                            <label for="pr{{ $item->sticker->id }}"></label>
                                             <input data-name="{{ $promotionAttr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
                                                    type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
