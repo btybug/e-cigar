@@ -579,9 +579,9 @@ class DatatableController extends Controller
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
             })->editColumn('status', function ($attr) {
-                $status = $attr->history()->whereNotNull('status_id')->latest()->first();
-                return ($status) ?
-                    '<span class="badge" style="background-color: ' . $status->status->color . '">' . $status->status->name . '</span>' : null;
+                $history = $attr->history()->whereNotNull('status_id')->latest()->first();
+                return ($history && $history->status) ?
+                    '<span class="badge" style="background-color: ' . $history->status->color . '">' . $history->status->name . '</span>' : null;
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
