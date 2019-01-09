@@ -108,6 +108,7 @@ class EmailsNotificationsController extends Controller
             $new_language->custom_emails_id = $new_email->id;
             $new_language->push();
         }
+        $new_email->users()->attach($email->users->pluck('id'), ['status' => 0]);
         return response()->json(['error' => false]);
     }
 }
