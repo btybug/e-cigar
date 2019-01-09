@@ -6,7 +6,7 @@
     <ul class="nav nav-tabs" id="myTab" role="tablist">
 
         <li class="nav-item active">
-            <a class="nav-link "  href="{!! route('admin_emails_notifications_send_email') !!}" role="tab"
+            <a class="nav-link " href="{!! route('admin_emails_notifications_send_email') !!}" role="tab"
                aria-controls="general" aria-selected="true" aria-expanded="true">Send Email</a>
         </li>
     </ul>
@@ -14,7 +14,8 @@
         <div class="panel-heading">
             <h2 class="m-0 pull-left">Emails</h2>
             <div class="text-right">
-                <a class="btn btn-primary" href="{!! route('create_admin_emails_notifications_send_email') !!}">Create Email</a>
+                <a class="btn btn-primary" href="{!! route('create_admin_emails_notifications_send_email') !!}">Create
+                    Email</a>
             </div>
 
         </div>
@@ -38,44 +39,66 @@
 @section('js')
     <script>
         $(function () {
-           var datatable= $('#users-table').DataTable(
+            var datatable = $('#users-table').DataTable(
                 {
-                    ajax:  "{!! route('datatable_all_custom_emails') !!}",
+                    ajax: "{!! route('datatable_all_custom_emails') !!}",
                     "processing": true,
                     "serverSide": true,
                     "bPaginate": true,
                     columns: [
-                        {data: 'id',name: 'id'},
-                        {data: 'status',name: 'status'},
+                        {data: 'id', name: 'id'},
+                        {data: 'status', name: 'status'},
                         {data: 'type', name: 'type'},
                         {data: 'from', name: 'from'},
                         {data: 'subject', name: 'subject'},
                         {data: 'created_at', name: 'created_at'},
                         {data: 'actions', name: 'actions'}
-                    ]
+                    ],
+                    order: [ [1, 'ASC'] ]
                 }
             );
-           $('body').on('click','.send-now',function () {
-               var data={'id':$(this).attr('data-id')};
-               $.ajax({
-                   url: "{!! route('admin_emails_notifications_send_now') !!}",
-                   type: 'POST',
-                   data: data,
-                   headers: {
-                       "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                   },
-                   success: function (data) {
-                       $('.error-box').html('');
-                       if (data.error == false) {
-                           datatable.ajax.reload();
-                       }
-                   },
-                   error: function (data) {
-                       // alert(data.err);
-                   }
-               });
-           });
-           });
+            $('body').on('click', '.send-now', function () {
+                var data = {'id': $(this).attr('data-id')};
+                $.ajax({
+                    url: "{!! route('admin_emails_notifications_send_now') !!}",
+                    type: 'POST',
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        $('.error-box').html('');
+                        if (data.error == false) {
+                            datatable.ajax.reload();
+                        }
+                    },
+                    error: function (data) {
+                        // alert(data.err);
+                    }
+                });
+            });
+            $('body').on('click', '.copy-message', function () {
+                var data = {'id': $(this).attr('data-id')};
+                $.ajax({
+                    url: "{!! route('admin_emails_notifications_copy') !!}",
+                    type: 'POST',
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        $('.error-box').html('');
+                        if (data.error == false) {
+                            datatable.ajax.reload();
+                        }
+                    },
+                    error: function (data) {
+                        // alert(data.err);
+                    }
+                });
+            });
+
+        });
 
 
     </script>

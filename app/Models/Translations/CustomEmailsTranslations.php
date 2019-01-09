@@ -15,5 +15,5 @@ class CustomEmailsTranslations extends Model
 {
     protected $table = 'custom_emails_translations';
     public $timestamps = false;
-    protected $fillable = ['subject','content'];
+    protected $fillable = ['subject','content','custom_emails_id'];
 }

@@ -27,13 +27,13 @@ class EmailsNotificationsController extends Controller
         return $this->view('send.emails');
     }
 
-    public function sendEmailCreate($id=null)
+    public function sendEmailCreate($id = null)
     {
-        $model=CustomEmails::find($id);
+        $model = CustomEmails::find($id);
         $froms = Emails::where('type', 'from')->pluck('email', 'email');
         $shortcodes = new ShortCodes();
         $users = User::all()->pluck('name', 'id');
-        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms','model'));
+        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model'));
     }
 
     public function postSendEmailCreate(Request $request)
@@ -93,7 +93,21 @@ class EmailsNotificationsController extends Controller
 
     public function sendEmailSendNow(Request $request)
     {
-        CustomEmails::where('id',$request->id)->update(['status' => 1]);
-        return response()->json(['error'=>false]);
+        CustomEmails::where('id', $request->id)->update(['status' => 1]);
+        return response()->json(['error' => false]);
+    }
+
+    public function sendEmailCopy(Request $request)
+    {
+        $email = CustomEmails::find($request->id);
+        $new_email = $email->replicate();
+        $new_email->status = 0;
+        $new_email->push();
+        foreach ($email->languages as $language) {
+            $new_language = $language->replicate();
+            $new_language->custom_emails_id = $new_email->id;
+            $new_language->push();
+        }
+        return response()->json(['error' => false]);
     }
 }

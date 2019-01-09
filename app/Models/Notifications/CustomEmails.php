@@ -24,4 +24,9 @@ class CustomEmails extends Translatable
     {
         return $this->belongsToMany(User::class,'custom_email_user','custom_email_id');
     }
+
+    public function languages()
+    {
+        return $this->hasMany(CustomEmailsTranslations::class,'custom_emails_id');
+    }
 }
