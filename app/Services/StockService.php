@@ -47,18 +47,19 @@ class StockService
 
         if (count($data)) {
             foreach ($data as $datum) {
-                $attr_id = $datum['attributes_id'];
-                $type = $datum['type'];
-                $ids = $datum['options'];
-                $result[] = ['attributes_id' => $attr_id,'type' => $type];
-                if (count($ids)) {
-                    foreach ($ids as $id) {
-                        if ($id) {
-                            $result[] = ['attributes_id' => $attr_id, 'sticker_id' => $id];
+                if(isset($datum['attributes_id']) && isset($datum['type']) && isset($datum['options'])){
+                    $attr_id = $datum['attributes_id'];
+                    $type = $datum['type'];
+                    $ids = $datum['options'];
+                    $result[] = ['attributes_id' => $attr_id,'type' => $type];
+                    if (count($ids)) {
+                        foreach ($ids as $id) {
+                            if ($id) {
+                                $result[] = ['attributes_id' => $attr_id, 'sticker_id' => $id];
+                            }
                         }
                     }
                 }
-
             }
         }
 
