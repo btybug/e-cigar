@@ -14,10 +14,10 @@
                             <div class="product-range d-flex">
                                 @foreach($options as $item)
                                     <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
-                                        <label for="rm{{ $item->sticker->id }}"></label>
+                                        <label for="rm{{ $item->id }}"></label>
                                         <input data-name="{{ $modelattr->id }}"
                                                {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
-                                               type="radio" id="rm{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                               type="radio" id="rm{{ $item->id }}" value="{{ $item->sticker->id }}"
                                                name="rate{{ $modelattr->id }}">
                                         <span class="count">{{ $item->sticker->name }}</span>
                                     </div>
@@ -36,10 +36,10 @@
                                 <div class="d-flex">
                                     @foreach($options as $item)
                                         <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
-                                            <label for="rm{{ $item->sticker->id }}"></label>
+                                            <label for="rm{{ $item->id }}"></label>
                                             <input data-name="{{ $modelattr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-option"
-                                                   type="radio" id="rm{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
+                                                   type="radio" id="rm{{ $item->id }}" value="{{ $item->sticker->id }}"
                                                    name="rate{{ $modelattr->id }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
@@ -71,7 +71,7 @@
 <input type="hidden" value="" id="variation_uid">
 @if(count($model->promotions))
 <h3>Promotions</h3>
-    @foreach($model->promotions as $promotion)
+    @foreach($model->promotions as $pkey => $promotion)
         @include('frontend.products._partials.render_promotion')
     @endforeach
 @endif

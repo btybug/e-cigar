@@ -26,11 +26,11 @@
                                 <div class="product-range d-flex">
                                     @foreach($poptions as $item)
                                         <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
-                                            <label for="pr{{ $item->sticker->id }}"></label>
+                                            <label for="pr{{ $item->id.$pkey }}"></label>
                                             <input data-name="{{ $promotionAttr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
-                                                   type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
-                                                   name="pr{{ $promotionAttr->id }}">
+                                                   type="radio" id="pr{{ $item->id.$pkey }}" value="{{ $item->sticker->id }}"
+                                                   name="pr{{ $promotionAttr->id.$pkey }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
                                     @endforeach
@@ -48,11 +48,11 @@
                                 <div class=" d-flex">
                                     @foreach($poptions as $item)
                                         <div class="item {{ ($loop->first) ? 'active' : '' }} line-none">
-                                            <label for="pr{{ $item->sticker->id }}"></label>
+                                            <label for="pr{{ $item->id.$pkey }}"></label>
                                             <input data-name="{{ $promotionAttr->id }}"
                                                    {{ ($loop->first) ? 'checked' : '' }} class="select-variation-radio-poption"
-                                                   type="radio" data-id="r{{ $item->sticker->id }}" value="{{ $item->sticker->id }}"
-                                                   name="pr{{ $promotionAttr->id }}">
+                                                   type="radio" id="pr{{ $item->id.$pkey }}" value="{{ $item->sticker->id }}"
+                                                   name="pr{{ $promotionAttr->id.$pkey }}">
                                             <span class="count">{{ $item->sticker->name }}</span>
                                         </div>
                                     @endforeach
