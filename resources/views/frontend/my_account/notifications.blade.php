@@ -22,9 +22,33 @@
                             <td>{!! $message->updated_at !!}</td>
                             <td>{!! $message->subject !!}</td>
                             <td>{!! $message->type !!}</td>
-                            <td><button class="btn btn-info"><i class="fa fa-eye"></i></button></td>
+                            <td><button class="btn btn-info __modal" data-toggle="modal" data-id="{!! $message->id !!}"><i class="fa fa-eye"></i></button></td>
                         </tr>
                         @endforeach
+
+                        {{-- Modal --}}
+                        <div class="modal" id="notif_modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Modal Heading</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
                         </tbody>
                     </table>
                 </div>
@@ -33,4 +57,9 @@
 
         </div>
     </main>
+@stop
+
+@section("js")
+    <script src={{asset("public/js/my-account/notifications.js")}}></script>
+
 @stop

@@ -302,5 +302,14 @@ class UserController extends Controller
         return $this->view('notifications',compact('messages'));
     }
 
+    public function getNotificationsContent(Request $request)
+    {
+        $user=\Auth::getUser();
+        $messages=$user->customEmails()
+                        ->where('custom_emails.status',1)
+                        ->where('custom_emails.id','=',$request->id)
+                        ->first();
+        echo $messages['content'];
+    }
 }
 
