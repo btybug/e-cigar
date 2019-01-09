@@ -27,12 +27,13 @@ class EmailsNotificationsController extends Controller
         return $this->view('send.emails');
     }
 
-    public function sendEmailCreate()
+    public function sendEmailCreate($id=null)
     {
+        $model=CustomEmails::find($id);
         $froms = Emails::where('type', 'from')->pluck('email', 'email');
         $shortcodes = new ShortCodes();
         $users = User::all()->pluck('name', 'id');
-        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms'));
+        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms','model'));
     }
 
     public function postSendEmailCreate(Request $request)
@@ -88,5 +89,11 @@ class EmailsNotificationsController extends Controller
         $id = ($admin_model) ? $admin_model->id : null;
         MailTemplates::updateOrCreate($id, $admin_data, $translatable);
         return redirect()->route('admin_emails_notifications_emails');
+    }
+
+    public function sendEmailSendNow(Request $request)
+    {
+        CustomEmails::where('id',$request->id)->update(['status' => 1]);
+        return response()->json(['error'=>false]);
     }
 }

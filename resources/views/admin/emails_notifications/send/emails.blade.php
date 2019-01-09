@@ -38,7 +38,7 @@
 @section('js')
     <script>
         $(function () {
-            $('#users-table').DataTable(
+           var datatable= $('#users-table').DataTable(
                 {
                     ajax:  "{!! route('datatable_all_custom_emails') !!}",
                     "processing": true,
@@ -55,7 +55,28 @@
                     ]
                 }
             );
-        });
+           $('body').on('click','.send-now',function () {
+               var data={'id':$(this).attr('data-id')};
+               $.ajax({
+                   url: "{!! route('admin_emails_notifications_send_now') !!}",
+                   type: 'POST',
+                   data: data,
+                   headers: {
+                       "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                   },
+                   success: function (data) {
+                       $('.error-box').html('');
+                       if (data.error == false) {
+                           datatable.ajax.reload();
+                       }
+                   },
+                   error: function (data) {
+                       // alert(data.err);
+                   }
+               });
+           });
+           });
+
 
     </script>
 @stop

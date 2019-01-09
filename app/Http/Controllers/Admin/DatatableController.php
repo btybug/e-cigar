@@ -656,14 +656,15 @@ class DatatableController extends Controller
 
     public function getAllCustomEmails()
     {
+
         return DataTables::of(CustomEmails::query())
             ->editColumn('status', function ($message) {
             return $message->status?'sent out':'in progress';
         })
-            ->editColumn('created_at', function ($faq) {
-            return BBgetDateFormat($faq->created_at);
+            ->editColumn('created_at', function ($message) {
+            return BBgetDateFormat($message->created_at);
         })->addColumn('actions',function ($message){
-             return (!$message->status?'<button class="btn btn-success">Send Now</button><button class="btn btn-danger"><i class="fa fa-edit"></i></button>':'<button class="btn btn-info">Copy</button><button class="btn btn-warning"><i class="fa fa-eye"></i></button>');
+             return (!$message->status?'<button class="btn btn-success send-now" data-id="'.$message->id.'">Send Now</button><a href="'.route('edit_admin_emails_notifications_send_email',$message->id).'" class="btn btn-danger"><i class="fa fa-edit"></i></a>':'<button class="btn btn-info">Copy</button><button class="btn btn-warning"><i class="fa fa-eye"></i></button>');
         })->rawColumns(['actions'])->make(true);
     }
 }
