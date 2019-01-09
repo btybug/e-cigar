@@ -97,6 +97,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::post('/', 'Frontend\UserController@saveMyAccount')->name('my_account_save_data');
     Route::post('/contact', 'Frontend\UserController@saveMyAccountContact')->name('my_account_save_contact_data');
     Route::get('/notifications', 'Frontend\UserController@getNotifications')->name('notifications');
+    Route::post('/notifications', 'Frontend\UserController@getNotificationsContent')->name('notifications_content');
     Route::post('/changePassword', 'Frontend\UserController@changePassword')->name('my_account_change_password');
     Route::get('/logs', 'Frontend\UserController@getLogs')->name('my_account_logs');
     Route::get('/password', 'Frontend\UserController@getPassword')->name('my_account_password');
