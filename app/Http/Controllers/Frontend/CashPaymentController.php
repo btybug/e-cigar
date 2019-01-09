@@ -20,6 +20,7 @@ use App\Models\StripePayments;
 use App\Models\Statuses;
 use App\Models\Settings;
 use App\Models\ZoneCountries;
+use App\Models\ZoneCountryRegions;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -51,10 +52,11 @@ class CashPaymentController extends Controller
         if(\Auth::check()){
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
+            $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-        $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone) {
+        $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone,$region) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order_number = get_order_number();
@@ -79,6 +81,9 @@ class CashPaymentController extends Controller
             $order->history()->create($historyData);
 
             $shippingAddress = $shippingAddress->toArray();
+            $shippingAddress['country'] = ($zone) ? $zone->name : null;
+            $shippingAddress['region'] = ($region) ? $region->name : null;
+
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);
             unset($shippingAddress['updated_at']);

@@ -112,6 +112,8 @@ class UserController extends Controller
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
+//        dd($countriesShipping);
+
         return $this->view('address', compact('billing_address', 'default_shipping', 'address', 'user', 'countries', 'countriesShipping'));
     }
 
@@ -127,7 +129,6 @@ class UserController extends Controller
     {
         $id = $request->get('id', 0);
         $default = $request->get('default', false);
-
         $address_book = \Auth::user()->addresses()->find($id);
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')

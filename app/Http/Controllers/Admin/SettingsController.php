@@ -178,6 +178,7 @@ class SettingsController extends Controller
         $geo_zone = GeoZones::find($id);
         $delivery_types = DeliveryCostsTypes::all()->pluck('title', 'id');
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
+
         return $this->view('store.general.new_shipping_zone', compact(
             'countries',
             'geo_zone',
@@ -385,7 +386,7 @@ class SettingsController extends Controller
     public function postGiftsManage(Request $request)
     {
         $gifts = $request->except('_token');
-        dd($request->all());
+//        dd($request->all());
     }
 
 

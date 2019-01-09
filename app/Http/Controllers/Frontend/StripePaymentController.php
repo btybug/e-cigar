@@ -18,6 +18,8 @@ use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\StripePayments;
 use App\Models\ZoneCountries;
+use App\Models\ZoneCountryRegions;
+use Cartalyst\Stripe\Exception\StripeException;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -44,13 +46,18 @@ class StripePaymentController extends Controller
         $stripe = new Stripe();
 
 // This is a $20.00 charge in US Dollar.
-        $charge = $stripe->charges()->create(
-            array(
-                'amount' => Cart::getTotal(),
-                'currency' => 'usd',
-                'source' => $request->get('stripeToken')
-            )
-        );
+        try{
+            $charge = $stripe->charges()->create(
+                array(
+                    'amount' => Cart::getTotal(),
+                    'currency' => 'usd',
+                    'source' => $request->get('stripeToken')
+                )
+            );
+        }catch (StripeException $exception){
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+
         $data=[];
         $data['user_id']=\Auth::id();
         $data['transaction_id']=$charge['id'];
@@ -77,10 +84,11 @@ class StripePaymentController extends Controller
         if(\Auth::check()){
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
+            $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-        $order = \DB::transaction(function () use ($billingId,$shippingId,$transaction,$geoZone,$shippingAddress,$zone) {
+        $order = \DB::transaction(function () use ($billingId,$shippingId,$transaction,$geoZone,$shippingAddress,$zone,$region) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order_number = get_order_number();
@@ -106,6 +114,9 @@ class StripePaymentController extends Controller
             $order->history()->create($historyData);
 
             $shippingAddress = $shippingAddress->toArray();
+            $shippingAddress['country'] = ($zone) ? $zone->name : null;
+            $shippingAddress['region'] = ($region) ? $region->name : null;
+
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);
             unset($shippingAddress['updated_at']);

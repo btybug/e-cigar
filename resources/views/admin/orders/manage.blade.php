@@ -132,8 +132,8 @@
                                                     </div>
                                                     <div class="panel-body">
                                                         <h3>Shipping Address</h3>
-                                                        Country:{!! getCountryByZone($order->shippingAddress->country)->name !!}<br>
-                                                        Region:{!! getRegion($order->shippingAddress->region,'name')  !!}
+                                                        Country:{!! $order->shippingAddress->country !!}<br>
+                                                        Region:{!! $order->shippingAddress->region  !!}
                                                         <br>
                                                         First line:{!! $order->shippingAddress->first_line_address !!}<br>
                                                         Second line:{!! $order->shippingAddress->second_line_address !!}<br>
