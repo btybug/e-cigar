@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="panel panel-default">
-
+        {!! Form::model($model) !!}
         <div class="panel-body">
 
             <div class="tab-content tabs_content col-md-12">
@@ -23,22 +23,19 @@
                                      aria-labelledby="tab1-tab">
                                     <div class="form-group row">
                                         {{Form::label('from', 'From',['class' => 'col-sm-3'])}}
-                                        <div class="col-sm-9">
-                                            <ul>
-                                            @foreach($froms as $k => $from)
-                                                <li>{{$k}}</li>
-                                            @endforeach
-                                            </ul>
-{{--                                            {{Form::select('from',$froms,null,['class' =>'form-control','id'=>'from'])}}--}}
+                                        <div class="col-md-9">
+
+                                            {{Form::text('from',$model->from,['class' =>'form-control','id'=>'from','readonly'])}}
                                         </div>
                                     </div>
-                                    {{--<div class="form-group row">--}}
-                                        {{--{{Form::label('to', 'To',['class' => 'col-sm-3'])}}--}}
-                                        {{--<div class="col-sm-9">--}}
-                                            {{--{!! Form::select('users[]',$users,null,['class' => 'form-control tag-input-v select-user','multiple'=>'multiple']) !!}--}}
-
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                    <div class="form-group row">
+                                        {{Form::label('to', 'To',['class' => 'col-sm-3'])}}
+                                        <div class="col-sm-9">
+                                            @foreach($model->users->pluck('name') as $user)
+                                                <span class="badge badge-dark">{!! $user !!}</span>
+                                            @endforeach
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         @if(count(get_languages()))
                                             <ul class="nav nav-tabs">
@@ -57,14 +54,15 @@
                                                     <div id="{{ strtolower($language->code) }}"
                                                          class="tab-pane fade  @if($loop->first) in active @endif">
                                                         <div class="form-group row">
-{{--                                                            {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}--}}
+                                                            {{--                                                            {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}--}}
                                                             <label class="col-sm-3">
                                                                 {{__('Subject')}}
                                                             </label>
                                                             <div class="col-sm-9">
                                                                 {{--{{Form::text('translatable['.strtolower($language->code).'][subject]',get_translated($model,strtolower($language->code),'subject'),['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}--}}
 
-                                                                {!! get_translated($model,strtolower($language->code),'subject') !!}
+                                                                <div class="form-control">{!! get_translated($model,strtolower($language->code),'subject') !!}</div>
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
@@ -72,7 +70,9 @@
                                                             <label class="col-sm-3">{{__('Content')}}</label>
                                                             <div class="col-sm-9">
                                                                 {{--{{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}--}}
-                                                                {!! get_translated($model,strtolower($language->code),'content') !!}
+                                                                <div class="">
+                                                                    {!! get_translated($model,strtolower($language->code),'content') !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -87,18 +87,18 @@
                                         <div class="col-sm-9">
                                             {{--{{dd($froms)}}--}}
                                             <ul>
-                                            @foreach($froms as $k => $from)
-                                                <li>{{$k}}</li>
-                                            @endforeach
+                                                {{--@foreach($froms as $k => $from)--}}
+                                                {{--<li>{{$k}}</li>--}}
+                                                {{--@endforeach--}}
                                             </ul>
-{{--                                            {{Form::select('admin[from]',$froms,null,['class' =>'form-control','id'=>'admin_from'])}}--}}
+                                            {{--                                            {{Form::select('admin[from]',$froms,null,['class' =>'form-control','id'=>'admin_from'])}}--}}
                                         </div>
                                     </div>
                                     {{--<div class="form-group row">--}}
-                                        {{--{{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}--}}
-                                        {{--<div class="col-sm-9">--}}
-                                            {{--{{Form::select('admin[to]',$users,null,['class' =>'form-control','id'=>'to_admin'])}}--}}
-                                        {{--</div>--}}
+                                    {{--{{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}--}}
+                                    {{--<div class="col-sm-9">--}}
+                                    {{--{{Form::select('admin[to]',$users,null,['class' =>'form-control','id'=>'to_admin'])}}--}}
+                                    {{--</div>--}}
                                     {{--</div>--}}
                                     <div class="form-group">
                                         @if(count(get_languages()))

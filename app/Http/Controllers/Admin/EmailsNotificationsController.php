@@ -39,12 +39,8 @@ class EmailsNotificationsController extends Controller
     public function sendEmailView($id = null)
     {
         $model = CustomEmails::find($id);
-//        dd($model->toArray());
-        $froms = Emails::where('type', 'from')->pluck('email', 'email');
-        $shortcodes = new ShortCodes();
-        $users = User::all()->pluck('name', 'id');
         ($model['status']==0) ? abort("404") : "";
-        return $this->view('send.email_view', compact('users', 'shortcodes', 'froms', 'model'));
+        return $this->view('send.email_view', compact( 'model'));
     }
 
     public function postSendEmailCreate(Request $request)
