@@ -664,7 +664,7 @@ class DatatableController extends Controller
             ->editColumn('created_at', function ($message) {
             return BBgetDateFormat($message->created_at);
         })->addColumn('actions',function ($message){
-             return (!$message->status?'<button class="btn btn-success send-now" data-id="'.$message->id.'">Send Now</button><a href="'.route('edit_admin_emails_notifications_send_email',$message->id).'" class="btn btn-danger"><i class="fa fa-edit"></i></a>':'<button class="btn btn-info copy-message" data-id="'.$message->id.'">Copy</button><button class="btn btn-warning"><i class="fa fa-eye"></i></button>');
+             return (!$message->status?'<button class="btn btn-success send-now" data-id="'.$message->id.'">Send Now</button><a href="'.route('edit_admin_emails_notifications_send_email',$message->id).'" class="btn btn-danger"><i class="fa fa-edit"></i></a>':'<button class="btn btn-info copy-message" data-id="'.$message->id.'">Copy</button><a href="'.route('view_admin_emails_notifications_send_email',$message->id).'" class="btn btn-warning"><i class="fa fa-eye"></i></a>');
         })->rawColumns(['actions'])->make(true);
     }
 }
