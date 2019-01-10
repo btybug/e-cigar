@@ -101,7 +101,7 @@
                 </div>
                 <div class="footer-info col-md-5 col-lg-4 col-xl-3 text-md-right p-0 mt-md-0 mt-4 text-sm-left text-center">
                     <a href="#" class="d-block footer-logo">
-                        <img src="img/vapors-logo.png" alt="logo">
+                        <img src="/public/img/vapors-logo.png" alt="logo">
                     </a>
                     <div class="footer-desc">
                         <p class="mb-0">There are many variations of passages<br/>
@@ -109,10 +109,10 @@
                     </div>
                     <div class="footer-payment">
                         <div>
-                            <img src="img/paypal.png" alt="paypal">
-                            <img src="img/visa.png" alt="visa">
-                            <img src="img/maestro.png" alt="maestro">
-                            <img src="img/mc.png" alt="mc">
+                            <img src="/public/img/paypal.png" alt="paypal">
+                            <img src="/public/img/visa.png" alt="visa">
+                            <img src="/public/img/maestro.png" alt="maestro">
+                            <img src="/public/img/mc.png" alt="mc">
                         </div>
                     </div>
                     <div class="footer-social">

@@ -7,14 +7,14 @@
                             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div id="ptofileBtn" class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline">
+                    <div id="ptofileBtn" class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer">
                         @if(Auth::check())
                             <div class="user-img">
                                 <img src="{!! url('/public/img/user.png') !!}" alt="user">
                             </div>
-                            <div class="user-name font-15 text-sec-clr font-main-bold">
+                            <span class="user-name font-15 text-sec-clr font-main-bold">
                                 Hi {{ Auth::user()->name }}
-                            </div>
+                            </span>
                         @else
                             <span class="d-inline-block">
                             <a href="{!! route('login') !!}" class="header-login-link">Login</a>
