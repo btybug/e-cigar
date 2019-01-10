@@ -43,9 +43,7 @@ class EmailsNotificationsController extends Controller
         $froms = Emails::where('type', 'from')->pluck('email', 'email');
         $shortcodes = new ShortCodes();
         $users = User::all()->pluck('name', 'id');
-        if($model['status'] == 0){
-            abort("404");
-        }
+        ($model['status']==0) ? abort("404") : "";
         return $this->view('send.email_view', compact('users', 'shortcodes', 'froms', 'model'));
     }
 
