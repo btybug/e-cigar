@@ -72,6 +72,9 @@ Route::group(['prefix' => 'settings'], function () {
     });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
+
+        Route::post('/', 'Admin\SettingsController@setLanguageDefault')->name('admin_settings_set_language_default');
+
         Route::get('/new', 'Admin\SettingsController@getLanguagesNew')->name('admin_settings_languages_new');
         Route::post('/new-or-update', 'Admin\SettingsController@postLanguages')->name('admin_settings_languages_new_post');
         Route::get('/delete/{id}', 'Admin\SettingsController@getLanguagesDelete')->name('admin_settings_languages_delete');

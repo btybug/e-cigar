@@ -38,9 +38,18 @@ class SettingsController extends Controller
 
     public function getLanguages()
     {
-        $languages = SiteLanguages::all();
+        $languages = SiteLanguages::query();
         return $this->view('languages', compact(['languages']));
     }
+
+
+    public function setLanguageDefault(Request $request)
+    {
+        $lang_id = $request->language_id;
+        SiteLanguages::query()->update(["default" => 0]);
+        SiteLanguages::find($lang_id)->update(["default" => 1]);
+    }
+
 
     public function getLanguagesNew()
     {

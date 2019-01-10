@@ -76,5 +76,23 @@
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
+    <script>
+        $(document).ready(function(){
+            $(".default_language").click(function(){
+                var language_id = $(this).val();
 
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: "/admin/settings/languages",
+                    method: "POST",
+                    data:{
+                        language_id: language_id
+                    },
+                    success:function(r){
+                        location.reload()
+                    }
+                })
+            })
+        })
+    </script>
 @stop
