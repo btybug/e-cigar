@@ -8,17 +8,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('meta')
     <title>Document</title>
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/global.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/products.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/product-cards.css")}} rel="stylesheet" />
-
+    <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
+    <link href={{asset("public/css/fonts.css?v=".rand(111,999))}} rel="stylesheet" />
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
+    {{--<link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">--}}
+    {{----}}
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
     <script src={{asset("public/js/jQuery3.3.1.js")}}></script>
@@ -35,6 +31,10 @@
         <script src={{asset("public/js/adult.js")}}></script>
         @endif
     @yield('css')
+
+
+    {{--<script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>--}}
+
 </head>
 <body>
 @include('frontend._partials.header')
@@ -57,11 +57,6 @@
 </div>
 <img src="/public/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 
-
-@include('frontend._partials.footer')
-
-<script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>
-<script src={{asset("public/js/hover-slider.js")}}></script>
 <script src={{asset("public/js/main.js")}}></script>
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {
@@ -177,5 +172,4 @@
 </script>
 @yield('js')
 </body>
-
 </html>

@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('content')
     <main class="page-main-content">
         <div class="d-flex h-100">
