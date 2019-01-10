@@ -38,6 +38,7 @@
 </head>
 <body>
 @include('frontend._partials.header')
+@include('cookieConsent::index')
 @yield('content')
 <div class="modal fade modal-request" id="msgModal">
     <div class="modal-dialog modal-dialog-centered">
