@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
     <script src={{asset("public/js/jQuery3.3.1.js")}}></script>
+    <script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script>
     <!--[if lt IE 9]>
     <script src={{asset("public/plugins/crossbrowserjs/html5shiv.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/respond.min.js")}}></script>
@@ -30,7 +31,7 @@
     <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
     <!--<![endif]-->
-    <script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
+
     @if(!Auth::check())
         <script src={{asset("public/js/adult.js")}}></script>
         @endif
@@ -59,7 +60,7 @@
 
 
 @include('frontend._partials.footer')
-
+<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
 <script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>
 <script src={{asset("public/js/hover-slider.js")}}></script>
 <script src={{asset("public/js/main.js")}}></script>

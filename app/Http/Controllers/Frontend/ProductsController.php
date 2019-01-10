@@ -18,7 +18,7 @@ class ProductsController extends Controller
 
     public function index ()
     {
-        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
 
         return $this->view('index', compact('categories'));
     }

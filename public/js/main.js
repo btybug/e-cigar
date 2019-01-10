@@ -83,7 +83,7 @@ function openSidbar(btn, sidebar) {
 }
 
 ////new
-$( function() {
+$(function() {
     $('.select-2--no-search').select2({
         minimumResultsForSearch: Infinity
     });
