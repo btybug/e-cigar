@@ -16,7 +16,7 @@
     <link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />
     <link href={{asset("public/css/global.css")}} rel="stylesheet" />
     <link href={{asset("public/css/products.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/product-cards.css")}} rel="stylesheet" />
+    <link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />
 
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
