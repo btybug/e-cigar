@@ -15,7 +15,7 @@
         <div class="col-md-8">
             <div class="content-area category-form-place">
                 {{--@include('admin.store.categories.create_or_update')--}}
-                <h4 class="text-center">New Category</h4>
+                <h4 class="text-center dddd">New Category</h4>
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">
@@ -40,6 +40,7 @@
                 if(! res.error){
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
+                    $("#select-stickers").select2();
                 }
             });
         });
@@ -101,6 +102,7 @@
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
                     $("#select-stickers").select2();
+
                 }
             });
         });
