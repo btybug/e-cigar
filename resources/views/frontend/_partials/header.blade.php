@@ -43,7 +43,7 @@
 
                                 <div class="nav-item--has-dropdown_dropdown">
                                     <div class="products-menu-item row">
-                                        <div class="col-md-3 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             <div class="single-product">
                                                 <div class="product-photo">
                                                     <img src="{!! url('/public/img/temp/product_1.jpg') !!}" alt="product1">
@@ -76,7 +76,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             <div class="single-product">
                                                 <div class="product-photo">
                                                     <img src="{!! url('/public/img/temp/product_2.jpg') !!}" alt="product1">
@@ -109,7 +109,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             <div class="single-product">
                                                 <div class="product-photo">
                                                     <img src="{!! url('/public/img/temp/product_3.jpg') !!}" alt="product1">
@@ -142,7 +142,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 col-sm-6">
+                                        <div class="col-lg-3 col-sm-6">
                                             <div class="single-product">
                                                 <div class="product-photo">
                                                     <img src="{!! url('/public/img/temp/product_4.jpg') !!}" alt="product1">
@@ -196,7 +196,7 @@
     </div>
     <div class="header-bottom">
         <div class="container main-max-width">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center header-bottom-wrapper">
                 <a href="{!! url('/') !!}" class="d-block logo">
                     <img src="{!! url('/public/img/vapors-logo.png') !!}" alt="logo">
                 </a>
