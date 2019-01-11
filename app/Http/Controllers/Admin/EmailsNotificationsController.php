@@ -39,8 +39,10 @@ class EmailsNotificationsController extends Controller
     public function sendEmailView($id = null)
     {
         $model = CustomEmails::find($id);
-        ($model['status']==0) ? abort("404") : "";
-        return $this->view('send.email_view', compact( 'model'));
+        $admin_model = CustomEmails::where("parent_id", "=", $id)->first();
+//        dd($admin_model);
+        ($model['status']==0 || $model['is_for_admin']==1) ? abort("404") : "";
+        return $this->view('send.email_view', compact( ['model','admin_model']));
     }
 
     public function postSendEmailCreate(Request $request)
@@ -50,7 +52,17 @@ class EmailsNotificationsController extends Controller
         $users = $request->get('users');
         $translatable = $request->get('translatable');
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
+        $current_id = $email['id'];
         $email->users()->attach($users, ['status' => 0]);
+
+
+
+        $data['is_for_admin'] = 1;
+        $data['parent_id'] = $current_id;
+        $translatable_for_admin = $request->get('admin')["translatable"];
+        $email = CustomEmails::updateOrCreate($request->id, $data, $translatable_for_admin);
+        $email->users()->attach( [1], ['status' => 0]);
+
         return redirect()->route('admin_emails_notifications_send_email');
     }
 

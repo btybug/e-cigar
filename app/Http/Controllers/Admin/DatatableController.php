@@ -657,7 +657,7 @@ class DatatableController extends Controller
     public function getAllCustomEmails()
     {
 
-        return DataTables::of(CustomEmails::query())
+        return DataTables::of(CustomEmails::query()->where("is_for_admin","=","0"))
             ->editColumn('status', function ($message) {
             return $message->status?'sent out':'in progress';
         })

@@ -85,12 +85,7 @@
                                     <div class="form-group row">
                                         {{Form::label('admin_from', 'From',['class' => 'col-sm-3'])}}
                                         <div class="col-sm-9">
-                                            {{--{{dd($froms)}}--}}
-                                            <ul>
-                                                {{--@foreach($froms as $k => $from)--}}
-                                                {{--<li>{{$k}}</li>--}}
-                                                {{--@endforeach--}}
-                                            </ul>
+                                            {{Form::text('from',$model->from,['class' =>'form-control','id'=>'from','readonly'])}}
                                             {{--                                            {{Form::select('admin[from]',$froms,null,['class' =>'form-control','id'=>'admin_from'])}}--}}
                                         </div>
                                     </div>
@@ -121,14 +116,14 @@
                                                             {{--{{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-sm-3'])}}--}}
                                                             <div class="col-sm-9">
                                                                 {{--{{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',null ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}--}}
-                                                                {!! get_translated($model,strtolower($language->code),'subject') !!}
+                                                                {!! get_translated($admin_model,strtolower($language->code),'subject') !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label class="col-sm-3">{{__('Conent')}}</label>
                                                             <div class="col-sm-9">
                                                                 {{--{{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',null ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}--}}
-                                                                {!! get_translated($model,strtolower($language->code),'content') !!}
+                                                                {!! get_translated($admin_model,strtolower($language->code),'content') !!}
                                                             </div>
                                                         </div>
                                                     </div>
