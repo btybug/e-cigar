@@ -121,7 +121,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .product-card_view {
     background: #e3e6ed;
-    padding: 40px 20px 0;
+    padding: 0;
     height: 290px;
     overflow-y: hidden;
     width: 31%;
@@ -332,6 +332,19 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
         max-width: 50%;
         flex: 0 0 50%;
     }
+
+    .scroll-top-btn {
+        right: 15px;
+        height: 45px;
+        width: 45px;
+    }
+}
+
+@media (max-width: 991px) {
+    .product-card_btn {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 @media(max-width: 768px) {
@@ -344,5 +357,16 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     .display-grid .products-wrap_col {
         max-width: 100%;
         flex: 0 0 100%;
+    }
+}
+
+@media(max-width: 660px) {
+    .products-wrap {
+        padding-bottom: 45px;
+        margin-bottom: 0;
+    }
+
+    .scroll-top-btn {
+        bottom: 15px;
     }
 }
