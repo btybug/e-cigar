@@ -16,7 +16,7 @@ class ProductsController extends Controller
 {
     protected $view = 'frontend.products';
 
-    public function index ()
+    public function index ($type = null)
     {
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
 

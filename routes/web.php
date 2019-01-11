@@ -46,19 +46,20 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/get-price', 'Frontend\ProductsController@getPrice')->name('product_get_price');
     Route::post('/add-to-favorites', 'Frontend\ProductsController@attachFavorite')->name('product_add_to_favorites');
     Route::post('/remove-from-favorites', 'Frontend\ProductsController@detachFavorite')->name('product_remove_from_favorites');
+    Route::get('/{type?}', 'Frontend\ProductsController@index')->name('categories_front');
     Route::group(['prefix' => '{type}'], function () {
-            Route::get('/{slug}', 'Frontend\ProductsController@getSingle')->name('product_single');
+        Route::get('/{slug}', 'Frontend\ProductsController@getSingle')->name('product_single');
     });
 });
 
-Route::group(['prefix' => 'categories'], function () {
-    Route::get('/', 'Frontend\ProductsController@index')->name('categories_front');
-    Route::group(['prefix' => '{type}'], function () {
-        Route::group(['prefix' => '{category?}'], function () {
-            Route::get('/', 'Frontend\ProductsController@getType')->name('categories_types');
-        });
-    });
-});
+//Route::group(['prefix' => 'categories'], function () {
+//    Route::get('/', 'Frontend\ProductsController@index')->name('categories_front');
+//    Route::group(['prefix' => '{type}'], function () {
+//        Route::group(['prefix' => '{category?}'], function () {
+//            Route::get('/', 'Frontend\ProductsController@getType')->name('categories_types');
+//        });
+//    });
+//});
 
 Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
