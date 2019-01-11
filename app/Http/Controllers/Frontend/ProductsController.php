@@ -9,6 +9,7 @@ use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Stock;
 use App\Models\StockVariationOption;
+use App\ProductSearch\ProductSearch;
 use View;
 use Illuminate\Http\Request;
 
@@ -16,11 +17,13 @@ class ProductsController extends Controller
 {
     protected $view = 'frontend.products';
 
-    public function index ($type = null)
+    public function index ($type = null,Request $request)
     {
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
 
-        return $this->view('index', compact('categories'));
+        $products = ProductSearch::apply($request);
+
+        return $this->view('index', compact('categories','products'));
     }
 
     public function getType ($type, $category_slug = null)
