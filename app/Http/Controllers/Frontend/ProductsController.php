@@ -17,13 +17,14 @@ class ProductsController extends Controller
 {
     protected $view = 'frontend.products';
 
-    public function index ($type = null,Request $request)
+    public function index (Request $request,$type = null)
     {
+        $category = Category::where('type','stocks')->whereNull('parent_id')->where('slug',$type)->first();
+        if(! $category && $type != null) abort(404);
+
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
-
-        $products = ProductSearch::apply($request);
-
-        return $this->view('index', compact('categories','products'));
+        $products = ProductSearch::apply($request,$category);
+        return $this->view('index', compact('categories','products','category','products'));
     }
 
     public function getType ($type, $category_slug = null)
