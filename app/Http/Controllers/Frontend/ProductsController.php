@@ -24,7 +24,10 @@ class ProductsController extends Controller
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
         $products = ProductSearch::apply($request,$category);
-        return $this->view('index', compact('categories','products','category','products'));
+
+        $filters = Attributes::where('filter',true)->get();
+
+        return $this->view('index', compact('categories','products','category','products','filters'));
     }
 
     public function getType ($type, $category_slug = null)

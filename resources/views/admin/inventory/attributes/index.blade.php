@@ -16,6 +16,8 @@
                     <th>Name</th>
                     <th>Image</th>
                     <th>Icon</th>
+                    <th>Is Filter</th>
+                    <th>Render Style</th>
                     <th>Added/Last Modified Date</th>
                     <th>Actions</th>
                 </tr>
@@ -37,6 +39,8 @@
                     {data: 'name', name: 'name'},
                     {data: 'image', name: 'image'},
                     {data: 'icon', name: 'icon'},
+                    {data: 'filter', name: 'filter'},
+                    {data: 'display_as', name: 'display_as'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

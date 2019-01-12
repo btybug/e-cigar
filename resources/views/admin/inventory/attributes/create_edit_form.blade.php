@@ -110,10 +110,11 @@
                                                    </div>
                                                    <div class="col-sm-5 p-0">
                                                        {!! Form::select('display_as',[
-                                                           'radio' => 'radio',
-                                                           'select' => 'select',
-                                                           'checkbox' => 'checkbox',
+                                                           'radio' => 'Radio',
+                                                           'select' => 'Select',
+                                                           'checkbox' => 'Checkbox',
                                                            'multy_select' => 'Multi select',
+                                                           'color' => 'Color',
 
                                                        ],null,['class' => 'form-control display_as-select']) !!}
                                                    </div>
