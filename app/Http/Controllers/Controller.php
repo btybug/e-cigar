@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    protected $view;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    protected $view;
 
     public function view(string $path,$data=[],$mergeData=[])
     {

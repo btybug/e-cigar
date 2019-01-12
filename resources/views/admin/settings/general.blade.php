@@ -18,6 +18,10 @@
                     <a class="nav-link " id="general-tab" href="{!! route('admin_settings_regions') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Regions</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_footer') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Footer</a>
+                </li>
             </ul>
             <div class="tab-content">
                 {!! Form::model($model) !!}

@@ -167,6 +167,16 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    public function getFooter()
+    {
+        return $this->view('footer');
+    }
+
+    public function postFooter()
+    {
+
+    }
+
     public function getGeoZones()
     {
         return $this->view('store.shipping');
