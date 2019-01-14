@@ -17,6 +17,7 @@ use App\Models\Couriers;
 use App\Models\Currencies;
 use App\Models\DeliveryCostsTypes;
 use App\Models\Emails;
+use App\Models\FooterLinks;
 use App\Models\GeoZones;
 use App\Models\GetForexData;
 use App\Models\Languages;
@@ -27,6 +28,7 @@ use App\Models\ShippingZones;
 use App\Models\SiteLanguages;
 use App\Models\Statuses;
 use App\Models\TaxRates;
+use App\Models\Translations\FooterLinkTranslation;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
@@ -78,7 +80,6 @@ class SettingsController extends Controller
     {
         return $this->view('mail_templates');
     }
-
 
 
     public function postLanguageGetWithCode(Request $request)
@@ -145,7 +146,7 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
-    public function getRegions(SiteLanguages $languages, Settings $settings,Countries $countries)
+    public function getRegions(SiteLanguages $languages, Settings $settings, Countries $countries)
     {
         $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
         $siteCurrencies = array_keys(($default) ? [$default->val => 1] + $settings->getEditableData('currencies', $default->val)->toArray() : []);
@@ -153,28 +154,49 @@ class SettingsController extends Controller
         foreach ($siteCurrencies as $siteCurrency) {
             $currencies[$siteCurrency] = $siteCurrency;
         };
-        $regions = $settings->where('section','site_regions')->where('key','regions')->first();
-        $regions=($regions)?json_decode($regions->val,true):[];
+        $regions = $settings->where('section', 'site_regions')->where('key', 'regions')->first();
+        $regions = ($regions) ? json_decode($regions->val, true) : [];
         $languages = $languages->all()->pluck('name', 'name');
-        $countries= $countries->all()->pluck('name.common', 'name.common')->toArray();
-        return $this->view('regions', compact('languages', 'currencies','regions','countries'));
+        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
+        return $this->view('regions', compact('languages', 'currencies', 'regions', 'countries'));
     }
 
     public function postRegions(Request $request)
     {
         $data = $request->except('_token');
-        Settings::updateOrCreate(['section'=>'site_regions', 'key' => 'regions'], ['val' => json_encode($data, true)]);
+        Settings::updateOrCreate(['section' => 'site_regions', 'key' => 'regions'], ['val' => json_encode($data, true)]);
         return redirect()->back();
     }
 
     public function getFooter()
     {
-        return $this->view('footer');
+        $links=FooterLinks::leftJoin('footer_links_translations','footer_links.id','=','footer_links_translations.footer_links_id')
+        ->whereNull('footer_links.parent_id')->select('footer_links.*','footer_links_translations.title','footer_links_translations.locale')
+            ->with('children')->get()->toArray();
+        $footer_links=[];
+        foreach ($links as $footer_link) {
+            $footer_links[$footer_link['locale']][]=$footer_link;
+        }
+        return $this->view('footer',compact('footer_links'));
     }
 
-    public function postFooter()
+    public function postFooter(Request $request)
     {
+        FooterLinkTranslation::truncate();
+        FooterLinks::whereNotNull('id')->delete();
+        $translatables = $request->get('translatable');
+        foreach ($translatables as $lang => $translatable) {
+            foreach ($translatable['name'] as $block => $name) {
+                $footer_main = FooterLinks::create([]);
+                FooterLinkTranslation::create(['title' => $name, 'locale' => $lang, 'footer_links_id' => $footer_main->id]);
+                foreach ($translatable['link'][$block] as $key => $val) {
+                    $footer = FooterLinks::create(['link' => $val,'parent_id'=>$footer_main->id]);
+                    FooterLinkTranslation::create(['title' => $translatable['title'][$block][$key], 'locale' => $lang, 'footer_links_id' => $footer->id]);
+                }
+            }
 
+        }
+        return redirect()->back();
     }
 
     public function getGeoZones()
@@ -258,7 +280,7 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public function getStore(Currencies $currencies, Settings $settings,Request $request)
+    public function getStore(Currencies $currencies, Settings $settings, Request $request)
     {
         $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
         $p = $request->get('p', ($default) ? $default->val : null);
