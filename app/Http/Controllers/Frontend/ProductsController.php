@@ -25,7 +25,7 @@ class ProductsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
         $products = ProductSearch::apply($request,$category);
 
-//        dd($products->toArray());
+//        dd($products);
 
         $filters = Attributes::where('filter',true)->get();
 
