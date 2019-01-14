@@ -120,7 +120,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .product-card_view {
     background: #e3e6ed;
-    padding: 0;
+    padding: 40px 20px 0;
     height: 290px;
     overflow-y: hidden;
     width: 31%;
