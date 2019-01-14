@@ -9,6 +9,7 @@ use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Roles;
 use App\Models\Stock;
+use App\Models\StockVariation;
 use App\Models\Ticket;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -73,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function favorites()
     {
-        return $this->belongsToMany(Stock::class, 'favorites','user_id','stock_id');
+        return $this->belongsToMany(StockVariation::class, 'favorites','user_id','variation_id');
     }
 
     public function authorAttributes()

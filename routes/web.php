@@ -103,6 +103,10 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::get('/logs', 'Frontend\UserController@getLogs')->name('my_account_logs');
     Route::get('/password', 'Frontend\UserController@getPassword')->name('my_account_password');
     Route::get('/favourites', 'Frontend\UserController@getFavourites')->name('my_account_favourites');
+
+    Route::post('/add_favourites', 'Frontend\UserController@attachFavorite')->name('add_favourites');
+    Route::post('/delete_favourites', 'Frontend\UserController@detachFavorite')->name('delete_favourites');
+
     Route::get('/address', 'Frontend\UserController@getAddress')->name('my_account_address');
     Route::post('/address', 'Frontend\UserController@postAddress')->name('post_my_account_address');
     Route::post('/address-book-form', 'Frontend\UserController@postAddressBookForm')->name('post_my_account_address_book_form');

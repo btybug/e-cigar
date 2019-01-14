@@ -56,6 +56,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .product-card_btn:hover {
     color: #fff;
+    cursor: pointer;
 }
 
 .display-grid .product-card_btn {

@@ -64,6 +64,8 @@ class UserController extends Controller
     public function getFavourites()
     {
         $user = \Auth::user();
+
+//        dd($user->favorites->toArray());
         return $this->view('favourites', compact('user'));
     }
 
@@ -311,6 +313,24 @@ class UserController extends Controller
                         ->where('custom_emails.id','=',$request->id)
                         ->first();
         echo $messages['content'];
+    }
+
+    public function attachFavorite (Request $request)
+    {
+        $id = $request->get('id');
+        $user = \Auth::user();
+        $user->favorites()->attach($id);
+
+        return ['error' => false];
+    }
+
+    public function detachFavorite (Request $request)
+    {
+        $id = $request->get('id');
+        $user = \Auth::user();
+        $user->favorites()->detach($id);
+
+        return ['error' => false];
     }
 }
 

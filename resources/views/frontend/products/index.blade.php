@@ -6,7 +6,11 @@
                 <div class="d-flex align-items-center position-relative">
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
-                        ['class' => 'select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark','style' =>'width: 100%']) !!}
+                        [
+                            'class' => 'select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                            'style' =>'width: 100%',
+                            'id' => 'choose_product'
+                        ]) !!}
                     </div>
                     <div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">
                         <span class="btn btn--filter text-tert-clr pointer">Filters</span>
@@ -149,11 +153,11 @@
                                                 <img class="card-img-top" src="{{ $product->image }}" alt="">
                                             </div>
                                             <!--like icon-->
-                                            <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute active"> <!--gets class active-->
+                                            <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute" data-id="{{ $product->variation_id }}"> <!--gets class active-->
                                                 <svg viewBox="0 0 20 18" width="20px" height="18px">
-                                    <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
+                                                    <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
                                           d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
-                                    </svg>
+                                                </svg>
                                             </span>
                                             <!--new label-->
                                             <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
@@ -176,7 +180,9 @@
                                             </div>
                                             <div class="product-card_body-text">
                                                 <h2 class="card-title font-21 font-sec-bold">
-                                                    {{ $product->name }}
+                                                    <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}">
+                                                        {{ $product->name }}
+                                                    </a>
                                                 </h2>
                                                 <p class="card-text font-main-light font-15 text-light-clr">
                                                     {{ $product->short_description }}
@@ -220,8 +226,9 @@
                                                 </div>
                                             </div>
                                             <!--btn-->
-                                            <a href="#"
-                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase">
+
+                                            <a
+                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer __add_to_card" data-id="{{ $product->variation_id }}">
                                                 <span class="product-card_btn-text">add to cart</span>
                                                 <span class="d-inline-block ml-auto">
                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -260,7 +267,79 @@
 @section("js")
 
     <script>
+        $(document).ready(function(){
+            $("body").on('click', '.__add_to_card', function () {
+                var variationId = $(this).data("id");
 
+                if (variationId && variationId != '') {
+//                    console.log(requiredItems)
+//                    return false;
+                    console.log(variationId);
+                    $.ajax({
+                        type: "post",
+                        url: "/add-to-cart",
+                        cache: false,
+                        datatype: "json",
+                        data: {
+                            uid: variationId
+                        },
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (!data.error) {
+                                $(".cart-count").html(data.count)
+                                $('#cartSidebar').html(data.headerHtml)
+                                $("#headerShopCartBtn").trigger('click');
+                            } else {
+
+                            }
+                        }
+                    });
+                } else {
+                    alert('Select available variation');
+                }
+            });
+
+            $("#choose_product").change(function(){
+                $(location).attr("href","/products/"+$(this).val())
+            });
+
+            $(".product-card_like-icon").click(function () {
+                let url;
+                let is_active = $(this).hasClass("active");
+
+                url = (is_active) ? "/my-account/delete_favourites" : "/my-account/add_favourites";
+
+                let variation_id = $(this).data("id");
+                let _this = $(this);
+
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    cache: false,
+                    data: {
+                        id: variation_id
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (!data.error) {
+                            _this.toggleClass("active")
+                        } else {
+                            alert("error");
+                        }
+                    }
+                })
+            });
+
+
+
+
+        });
     </script>
 
 @stop

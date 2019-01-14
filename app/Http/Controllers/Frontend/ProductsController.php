@@ -25,6 +25,8 @@ class ProductsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
         $products = ProductSearch::apply($request,$category);
 
+//        dd($products->toArray());
+
         $filters = Attributes::where('filter',true)->get();
 
         return $this->view('index', compact('categories','products','category','products','filters'));
@@ -173,21 +175,5 @@ class ProductsController extends Controller
         return \Response::json(['message' => 'See available options', 'error' => true]);
     }
 
-    public function attachFavorite (Request $request)
-    {
-        $id = $request->get('id');
-        $user = \Auth::user();
-        $user->favorites()->attach($id);
 
-        return ['error' => false];
-    }
-
-    public function detachFavorite (Request $request)
-    {
-        $id = $request->get('id');
-        $user = \Auth::user();
-        $user->favorites()->detach($id);
-
-        return ['error' => false];
-    }
 }
