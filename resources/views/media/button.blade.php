@@ -31,8 +31,8 @@
             @endif
         @endif
         <button type="button" data-multiple="{!! ($multiple)?'true':'false' !!}" id="{!! $uniqId !!}"
-                class="btn btn-lg " data-toggle="modal" data-target="#myModal">Open
-            Modal
+                class="btn btn-lg " data-toggle="modal" data-target="#myModal">
+            Open Modal
         </button>
     </div>
     @if($multiple)
@@ -42,9 +42,11 @@
                     @if($image)
                         <div class="img-thumb-container" style="margin: 10px;">
                             <div class="inner"><img src="{{ $image }}" width=200>
-                                    <span data-src="{{ $image }}" data-id="{!! $uniqId !!}" class="remove-thumb-img"
-                                                                                   data-is-multiple="true"><i
-                                            class="fa fa-trash"></i> </span></div>
+                                <span data-src="{{ $image }}" data-id="{!! $uniqId !!}" class="remove-thumb-img"
+                                                                               data-is-multiple="true">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </div>
                         </div>
                     @endif
                 @endforeach

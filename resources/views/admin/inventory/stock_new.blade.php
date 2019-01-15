@@ -345,11 +345,11 @@
                                         </thead>
 
                                         <tbody class="v-options-list get-all-attributes-tab">
-                                        @if($model)
-                                            @foreach($model->type_attrs as $typeAttr)
-                                                @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
-                                            @endforeach
-                                        @endif
+                                        {{--@if($model)--}}
+                                            {{--@foreach($model->type_attrs as $typeAttr)--}}
+                                                {{--@include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])--}}
+                                            {{--@endforeach--}}
+                                        {{--@endif--}}
                                         </tbody>
 
                                         <tfoot>
@@ -434,11 +434,11 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody class="package-variation-box">
-                                                        @if($model && count($model->variations))
-                                                            @foreach($model->variations as $package_variation)
-                                                                @include('admin.inventory._partials.variation_package_item')
-                                                            @endforeach
-                                                        @endif
+                                                        {{--@if($model && count($model->variations))--}}
+                                                            {{--@foreach($model->variations as $package_variation)--}}
+                                                                {{--@include('admin.inventory._partials.variation_package_item')--}}
+                                                            {{--@endforeach--}}
+                                                        {{--@endif--}}
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -774,8 +774,7 @@
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Select Products</h4>
                 </div>
                 <div class="modal-body">

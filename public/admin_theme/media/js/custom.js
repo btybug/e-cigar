@@ -774,6 +774,7 @@ function App() {
             }
         },
         open_images(elm, e) {
+            console.log(multiple);
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
@@ -841,6 +842,10 @@ function App() {
             e.target.closest(".modal").remove();
         },
         open_uploader(elm, e) {
+            document
+                .querySelector(".uploader-container")
+                .classList.remove("d-none");
+
             document
                 .querySelector(".media-modal-content-upload")
                 .classList.add("d-block");
