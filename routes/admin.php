@@ -391,4 +391,12 @@ Route::post('/get-stocks', 'Admin\InventoryController@getStocks')->name('admin_i
 Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 
 
+Route::group(['prefix' => 'import'], function () {
+
+    Route::get('/', 'Admin\ImportController@index')->name('import_index');
+
+    Route::post('/', 'Admin\ImportController@import')->name('import_import');
+
+});
+
 

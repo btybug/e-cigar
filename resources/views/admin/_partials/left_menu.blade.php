@@ -266,6 +266,9 @@
 
             </li>
             @endok
+            {{--@ok('admin_dashboard')--}}
+            <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i> <span>Import</span></a></li>
+            {{--@endok--}}
         </ul>
     </section>
     <!-- /.sidebar -->
