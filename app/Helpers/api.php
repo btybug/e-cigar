@@ -696,3 +696,10 @@ function get_user($id, $column = 'name')
     $v = \App\User::find($id);
     return ($v) ? $v->{$column} : null;
 }
+function get_footer_links(){
+    return \App\Models\FooterLinks::leftJoin('footer_links_translations','footer_links.id','=','footer_links_translations.footer_links_id')
+        ->whereNull('footer_links.parent_id')
+        ->select('footer_links.*','footer_links_translations.title','footer_links_translations.locale')
+        ->where('footer_links_translations.locale',app()->getLocale())
+        ->with('children')->get()->toArray();
+}

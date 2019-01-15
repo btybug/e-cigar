@@ -1,3 +1,4 @@
+
 <footer class="font-main-light">
     <div class="footer-top">
         <div class="container main-max-width">
@@ -5,82 +6,20 @@
                 <div class="footer-menu-subscribe col-lg-8 col-md-7 col-xl-9 p-0">
                     <div class="footer-menu">
                         <div class="row">
+                            @foreach(get_footer_links() as $footer_link)
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="menus text-sm-left text-center  mt-lg-0 mt-2">
-                                    <h5 class="font-main-bold text-uppercase font-17">MARKET</h5>
+                                    <h5 class="font-main-bold text-uppercase font-17">{!! $footer_link['title'] !!}</h5>
                                     <ul>
+                                        @foreach($footer_link['children'] as $child)
                                         <li>
-                                            <a href="#">Terms</a>
+                                            <a href="{!! $child['link'] !!}" target="_blank">{!! $child['title'] !!}</a>
                                         </li>
-                                        <li>
-                                            <a href="#">Licensees</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Market API</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Become an affilate</a>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="menus text-sm-left text-center  mt-lg-0 mt-2">
-                                    <h5 class="font-main-bold text-uppercase font-17">HELP</h5>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Themes and Templates</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Websites</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Authors</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Help Center</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="menus text-sm-left text-center mt-lg-0 mt-2">
-                                    <h5 class="font-main-bold text-uppercase font-17">OUR COMMUNITY</h5>
-                                    <ul>
-                                        <li>
-                                            <a href="#">Community</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Blog</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Forums</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Meetups</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="menus text-sm-left text-center mt-lg-0 mt-2">
-                                    <h5 class="font-main-bold text-uppercase font-17">Section title</h5>
-                                    <ul>
-                                        <li>
-                                            <a href="#" class="font-main-light">Section1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Section2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Section3</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Section4</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="footer-subscribe">
