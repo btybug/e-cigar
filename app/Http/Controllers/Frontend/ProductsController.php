@@ -23,13 +23,12 @@ class ProductsController extends Controller
         if(! $category && $type != null) abort(404);
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
-        $products = ProductSearch::apply($request,$category);
-
-//        dd($products);
-
+//        $products = ProductSearch::apply($request,$category);
+        $products = ProductSearch::apply($request,$category,true);
+        dd($products);
         $filters = Attributes::where('filter',true)->get();
 
-        return $this->view('index', compact('categories','products','category','products','filters'));
+        return $this->view('index', compact('categories','products','category','products','filters'))->with('filterModel',$request->all());
     }
 
     public function getType ($type, $category_slug = null)

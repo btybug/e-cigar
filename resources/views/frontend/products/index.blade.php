@@ -3,6 +3,7 @@
     <main class="main-content products-page position-relative">
         <div class="top-filters">
             <div class="container main-max-width">
+                {!! Form::model($filterModel,['url' => route('categories_front'),'method' => 'GET','id' => 'filter-form']) !!}
                 <div class="d-flex align-items-center position-relative">
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
@@ -64,6 +65,7 @@
                         </div>
                     </div>
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
         <div class="main-content-wrapper">
@@ -268,6 +270,10 @@
 
     <script>
         $(document).ready(function(){
+            $("body").on('change','.select-filter',function () {
+                $("#filter-form").submit();
+            });
+
             $("body").on('click', '.__add_to_card', function () {
                 var variationId = $(this).data("id");
 

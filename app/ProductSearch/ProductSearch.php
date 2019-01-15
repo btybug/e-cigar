@@ -11,7 +11,6 @@ class ProductSearch
 {
     public static function apply(Request $filters, $category = null, $sql = false)
     {
-
         $query = static::applyDecoratorsFromRequest(
                 $filters, static::createObject($category)
             );
@@ -24,6 +23,9 @@ class ProductSearch
         foreach ($request->all() as $filterName => $value) {
 
             $decorator = static::createFilterDecorator($filterName);
+//            if($filterName =='select_filter'){
+//                dd($decorator,static::isValidDecorator($decorator));
+//            }
 
             if (static::isValidDecorator($decorator) && static::isValidValue($value)) {
                 $query = $decorator::apply($query, $value);
@@ -71,7 +73,8 @@ class ProductSearch
     }
 
     private static function createObject($category = null) {
-        $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
+        $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->join('stock_type_attributes', 'stocks.id', '=', 'stock_type_attributes.stock_id');
 
         if($category){
             $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
@@ -81,7 +84,7 @@ class ProductSearch
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale',app()->getLocale());
         return $query->select('stocks.*','stock_translations.name','stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite')
-            ->groupBy('stock_variations.stock_id');
+            ->groupBy('stock_variations.stock_id')->;
     }
 
 }
