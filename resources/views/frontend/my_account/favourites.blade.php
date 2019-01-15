@@ -46,7 +46,7 @@
                             </div>
                             <div class="product-card_body">
                                 <!--product image thumbs-->
-                                <div class="d-flex product-card-thumbs">
+                                <div class="d-flex product-card-thumbs flex-wrap">
                                     <div class="product-card_thumb-img-holder pointer active_slider">
                                         <img class="" src="{!! $favorite->stock->image !!}" alt="">
                                     </div>
