@@ -5,11 +5,9 @@
     @include('frontend._partials.left_bar')
     <div class="main-right-wrapp">
         <div class="container mt-5">
-            <div class="row justify-content-md-start justify-content-center">
+            <div class="row justify-content-md-start justify-content-center display-grid">
 
-                   {{--{{dd($user->favorites)}}--}}
             @foreach($user->favorites as $favorite)
-{{--                    {{dd($favorite->stock)}}--}}
                     {{--<div class="col-sm-4 items">--}}
                         {{--<div class="view-fav-item mb-4">--}}
                             {{--<button class="btn btn-danger view-fav-item_btn-dlt pull-right remove-from-favorite"--}}
@@ -34,11 +32,12 @@
                                     <img class="card-img-top" src="{!! $favorite->stock->image !!}" alt="">
                                 </div>
                                 <!--like icon-->
-                                <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute" data-id="{{ $favorite->id }}"> <!--gets class active-->
-                                    <svg viewBox="0 0 20 18" width="20px" height="18px">
-                                        <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
-                                              d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
-                                    </svg>
+                                <span class="remove-from-favorite product-card_like-icon d-inline-block pointer position-absolute" data-id="{{ $favorite->id }}"> <!--gets class active-->
+                                    {{--<svg viewBox="0 0 20 18" width="20px" height="18px">--}}
+                                        {{--<path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"--}}
+                                              {{--d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>--}}
+                                    {{--</svg>--}}
+                                    X
                                 </span>
                                 <!--new label-->
                                 <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
@@ -130,24 +129,31 @@
         $(function () {
             $('.remove-from-favorite').on('click', function () {
 
-                let data = {'id': $(this).attr('data-id')}
-                $(this).closest(".items").remove();
+
+
+                let variation_id = $(this).data("id");
+                let _this = $(this);
+
                 $.ajax({
-                    type: "POST",
-                    url: "{!! route('product_remove_from_favorites') !!}",
-                    datatype: "json",
-                    data: data,
+                    type: "post",
+                    url: "/my-account/delete_favourites",
+                    cache: false,
+                    data: {
+                        id: variation_id
+                    },
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
                     success: function (data) {
+                        console.log(data);
                         if (!data.error) {
-
-
+                            _this.closest(".products-wrap_col").remove();
+                        } else {
+                            alert("error");
                         }
                     }
-                });
-            })
+                })
+            });
 
 
 
