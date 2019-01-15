@@ -84,7 +84,7 @@ class ProductSearch
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale',app()->getLocale());
         return $query->select('stocks.*','stock_translations.name','stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite')
-            ->groupBy('stock_variations.stock_id')->;
+            ->groupBy('stock_variations.stock_id');
     }
 
 }
