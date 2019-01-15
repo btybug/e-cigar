@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <main class="page-main-content">
+    <main class="main-content">
         <div class="d-flex h-100">
             <div class="main-left-tabs d-flex flex-column kaliony-menu">
                 <div class="nav flex-column justify-content-center nav-pills" id="v-pills-tab" role="tablist"

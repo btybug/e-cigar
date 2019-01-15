@@ -1,3 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1 0 auto;
+}
+
+.main-footer {
+    flex-shrink: 0;
+}
+
 footer .footer-top .footer-menu-subscribe .footer-subscribe > div .form-control,
 header .header-bottom .cat-search .search .form-control {
     padding-right: 40px;

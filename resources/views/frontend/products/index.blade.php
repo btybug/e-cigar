@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <main class="products-page position-relative">
+    <main class="main-content products-page position-relative">
         <div class="top-filters">
             <div class="container main-max-width">
                 <div class="d-flex align-items-center position-relative">

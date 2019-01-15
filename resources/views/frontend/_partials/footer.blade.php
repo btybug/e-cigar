@@ -1,5 +1,5 @@
 
-<footer class="font-main-light">
+<footer class="main-footer font-main-light">
     <div class="footer-top">
         <div class="container main-max-width">
             <div class="d-flex flex-wrap">
