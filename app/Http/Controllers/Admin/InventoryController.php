@@ -83,6 +83,8 @@ class InventoryController extends Controller
             'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices','promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
+
+
         $stock = Stock::updateOrCreate($request->id, $data);
 
         if ($data['type'] == 'variation_product') {

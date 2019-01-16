@@ -345,11 +345,11 @@
                                         </thead>
 
                                         <tbody class="v-options-list get-all-attributes-tab">
-                                        {{--@if($model)--}}
-                                            {{--@foreach($model->type_attrs as $typeAttr)--}}
-                                                {{--@include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])--}}
-                                            {{--@endforeach--}}
-                                        {{--@endif--}}
+                                        @if($model)
+                                            @foreach($model->type_attrs as $typeAttr)
+                                                @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
+                                            @endforeach
+                                        @endif
                                         </tbody>
 
                                         <tfoot>

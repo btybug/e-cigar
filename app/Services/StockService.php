@@ -1,5 +1,6 @@
 <?php namespace App\Services;
 
+use App\Models\AttributeStickers;
 use App\Models\ProductAttribute;
 use App\Models\ProductVariation;
 use App\Models\PromotionPrice;
@@ -114,7 +115,10 @@ class StockService
                 $variation->options()->delete();
                 if (isset($attributes) && count($attributes)) {
                     foreach ($attributes as $option) {
-                        $variation->options()->create($option);
+                        $as = AttributeStickers::where('attributes_id',$option['attributes_id'])->where('sticker_id',$option['options_id'])->first();
+                        if($as){
+                            $variation->options()->create(['attribute_sticker_id' => $as->id]);
+                        }
                     }
                 }
             }

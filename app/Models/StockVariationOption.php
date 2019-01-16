@@ -7,7 +7,7 @@ class StockVariationOption extends Model
 {
     protected $table = 'stock_variation_options';
 
-    protected $fillable = ['variation_id','attributes_id','options_id'];
+    protected $fillable = ['variation_id','attribute_sticker_id'];
 
     protected $dates = ['created_at','updated_at'];
 
@@ -16,13 +16,8 @@ class StockVariationOption extends Model
         return $this->belongsTo(StockVariation::class, 'variation_id');
     }
 
-    public function attr()
+    public function attribute_sticker()
     {
-        return $this->belongsTo(Attributes::class, 'attributes_id');
-    }
-
-    public function option()
-    {
-        return $this->belongsTo(Stickers::class, 'options_id');
+        return $this->belongsTo(AttributeStickers::class, 'attribute_sticker_id');
     }
 }

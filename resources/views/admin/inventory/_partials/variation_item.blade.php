@@ -14,17 +14,25 @@
         @if(count($item['options']))
             @if(isset($model) && $model)
                 @foreach($item['options'] as $items)
-                    {{--$model->type_attrs_pivot--}}
-                    {!! Form::hidden("variations[$uniqueID][options][".$items['attributes_id']."][attributes_id]",$items['attributes_id'],['class' => 'option-class']) !!}
                     @php
-                        $selectedValue = $items['options_id'];
-                        $optionData = $model->type_attrs_pivot()->where('attributes_id',$items['attributes_id'])->get();
+                        $attributeSticker = \App\Models\AttributeStickers::find($items['attribute_sticker_id']);
                     @endphp
-                    <select data-attribute_id="{{ $items['attributes_id'] }}" name="variations[{{ $uniqueID }}][options][{{ $items['attributes_id'] }}][options_id]" class="form-control">
-                        @foreach($optionData as $option)
-                                <option {{ ($selectedValue == $option->sticker_id) ? 'selected' : '' }} value="{{ $option->sticker_id }}">{{ \App\Models\Stickers::getById($option->sticker_id) }}</option>
-                        @endforeach
-                    </select>
+
+                    @if($attributeSticker)
+
+                        {{--$model->type_attrs_pivot--}}
+                        {!! Form::hidden("variations[$uniqueID][options][".$attributeSticker->attributes_id."][attributes_id]",$attributeSticker->attributes_id,['class' => 'option-class']) !!}
+                        @php
+                            $selectedValue = $attributeSticker->sticker_id;
+                            $optionData = $model->type_attrs_pivot()->where('attributes_id',$attributeSticker->attributes_id)->get();
+                        @endphp
+
+                        <select data-attribute_id="{{ $attributeSticker->attributes_id }}" name="variations[{{ $uniqueID }}][options][{{ $attributeSticker->attributes_id }}][options_id]" class="form-control">
+                            @foreach($optionData as $option)
+                                    <option {{ ($selectedValue == $option->sticker_id) ? 'selected' : '' }} value="{{ $option->sticker_id }}">{{ \App\Models\Stickers::getById($option->sticker_id) }}</option>
+                            @endforeach
+                        </select>
+                    @endif
                 @endforeach
             @else
                 @foreach($item['options'] as $key => $items)

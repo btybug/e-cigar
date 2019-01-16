@@ -14,6 +14,7 @@ class CreateAttributesStickersTable extends Migration
     public function up()
     {
         Schema::create('attributes_stickers', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('attributes_id');
             $table->unsignedInteger('sticker_id');
             $table->unique(['sticker_id','attributes_id']);

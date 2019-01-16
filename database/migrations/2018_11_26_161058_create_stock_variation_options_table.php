@@ -16,13 +16,11 @@ class CreateStockVariationOptionsTable extends Migration
         Schema::create('stock_variation_options', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('variation_id');
-            $table->unsignedInteger('attributes_id');
-            $table->unsignedInteger('options_id');
+            $table->unsignedInteger('attribute_sticker_id');
             $table->timestamps();
 
             $table->foreign('variation_id')->references('id')->on('stock_variations')->onDelete('cascade');
-            $table->foreign('attributes_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('options_id')->references('id')->on('stickers')->onDelete('cascade');
+            $table->foreign('attribute_sticker_id')->references('id')->on('attributes_stickers')->onDelete('cascade');
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\ProductSearch;
 
+use App\Models\AttributeStickers;
 use App\Models\Category;
 use App\Models\Stock;
 use Illuminate\Http\Request;
@@ -12,10 +13,10 @@ class ProductSearch
     public static function apply(Request $filters, $category = null, $sql = false)
     {
         $query = static::applyDecoratorsFromRequest(
-                $filters, static::createObject($category)
+                $filters, static::createObject($category,$filters)
             );
 
-        return static::getResults($query, $sql);
+        return static::getResults($query, $sql, $filters);
     }
 
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)
@@ -52,9 +53,10 @@ class ProductSearch
         return ($value && $value != '') ? true : false;
     }
 
-    private static function getResults(Builder $query, $sql)
+    private static function getResults(Builder $query, $sql, $filters)
     {
-        return ($sql) ? ['data' => $query->get(), 'sql' => static::getSql($query->toSql(),$query->getBindings())] : $query->get();
+        $response = static::checkGroupBy($filters,$query);
+        return ($sql) ? ['data' => $response, 'sql' => static::getSql($query->toSql(),$query->getBindings())] : $response;
     }
 
     private static function getSql($sql, $bindings)
@@ -72,19 +74,45 @@ class ProductSearch
         return $sql;
     }
 
-    private static function createObject($category = null) {
-        $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
-            ->join('stock_type_attributes', 'stocks.id', '=', 'stock_type_attributes.stock_id');
+    private static function checkGroupBy(Request $request,$query){
+        $selectFilters = array_filter($request->get('select_filter',[]));
+        if(count($selectFilters)){
+            return $query->groupBy('stock_variations.id')->get();
+        }else{
+            return  $query->groupBy('stocks.id')->get();
+        }
+    }
+
+    private static function createObject($category = null,$request) {
+        $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
 
         if($category){
             $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
             ->where('stock_categories.categories_id',$category->id);
         }
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
+            ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')
+            ->leftJoin('attributes_stickers', 'stock_variation_options.attribute_sticker_id', '=', 'attributes_stickers.id')
+
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale',app()->getLocale());
-        return $query->select('stocks.*','stock_translations.name','stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite')
-            ->groupBy('stock_variations.stock_id');
+        return $query->select('stocks.*','attributes_stickers.*','stock_translations.name','stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite');
     }
+//    private static function createObject($category = null,$request) {
+//        $query = AttributeStickers::leftJoin('stock_variation_options', 'attributes_stickers.id', '=', 'stock_variation_options.attribute_sticker_id');
+//
+//
+//        $query->leftJoin('stock_variations', 'stock_variation_options.variation_id', '=', 'stock_variations.id')
+//            ->leftJoin('stocks', 'stock_variations.stock_id', '=', 'stocks.id')
+//            ->leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+//
+//            ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
+//            ->where('stock_translations.locale',app()->getLocale());
+////        if($category){
+////            $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
+////                ->where('stock_categories.categories_id',$category->id);
+////        }
+//        return $query->select('stocks.*','attributes_stickers.*','stock_translations.name','stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite');
+//    }
 
 }
