@@ -38,7 +38,7 @@
                             <div id="slider-range" class="col-lg-8 col-7"></div>
                         </div>
                         <div class="align-self-center reset-wrapper">
-                            <a href="#" class="text-tert-clr text-uderlined font-15">Reset</a>
+                            <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
                         </div>
 
                     </div>
@@ -54,13 +54,33 @@
 </span>
                         <div class="nav-item--has-dropdown_dropdown">
                             <div class="all-filters row">
-                                @foreach($filters as $filter)
-                                    @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
-                                        <div class="col-lg-3 col-md-6">
-                                            @include('frontend.products._partials.filters.'.$filter->display_as)
-                                        </div>
-                                    @endif
-                                @endforeach
+                                <div class="col-lg-5 col-md-12 filter-left-col">
+                                    @foreach($filters as $filter)
+                                        @if(in_array($filter->display_as,['select','multy_select']))
+                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
+                                                @include('frontend.products._partials.filters.'.$filter->display_as)
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    @foreach($filters as $filter)
+                                        @if($filter->display_as == 'color')
+                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
+                                                @include('frontend.products._partials.filters.'.$filter->display_as)
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    @foreach($filters as $filter)
+                                        @if(in_array($filter->display_as,['radio','checkbox']))
+                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
+                                                @include('frontend.products._partials.filters.'.$filter->display_as)
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -272,6 +292,10 @@
         $(document).ready(function(){
             $("body").on('change','.select-filter',function () {
                 $("#filter-form").submit();
+            });
+
+            $("body").on('click','.reset-form',function () {
+                $(location).attr("href","/products/"+ $("#choose_product").val())
             });
 
             $("body").on('click', '.__add_to_card', function () {
