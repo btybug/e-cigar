@@ -15,7 +15,7 @@
     <link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />
     <link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />
     <link href={{asset("public/css/global.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/products.css")}} rel="stylesheet" />
+    <link href={{asset("public/css/products.css?v=".rand(111,999))}} rel="stylesheet" />
     <link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />
 
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
