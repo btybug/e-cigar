@@ -96,7 +96,8 @@ class ProductSearch
 
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale',app()->getLocale());
-        return $query->select('stocks.*','attributes_stickers.*','stock_translations.name','stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite');
+        return $query->select('stocks.*','stock_translations.name',
+            'stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite');
     }
 //    private static function createObject($category = null,$request) {
 //        $query = AttributeStickers::leftJoin('stock_variation_options', 'attributes_stickers.id', '=', 'stock_variation_options.attribute_sticker_id');
