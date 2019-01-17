@@ -22,14 +22,44 @@ class SelectFilter implements Filter
             $value = array_filter($value);
 //            $attributeStickerIDs = [];
             $str = '';
+//            dd($value);
+//            sum(attributes_id = 21 and sticker_id = 16) > 0 and sum((`attributes_id` = 6 and `sticker_id` = "8" ) or (`attributes_id` = 6 and `sticker_id` = "7" ) ) > 0
             foreach ($value as $aID => $sID){
-                if(end($value) == $sID){
-                    $str.= 'sum(attributes_id = '.$aID.' and sticker_id = '.$sID.') = 1';
+                end($value);         // move the internal pointer to the end of the array
+                $key = key($value);
+                if($key == $aID){
+                    if(is_array($sID)){
+                        $str.='sum(';
+                        foreach ($sID as $multy_id){
+                            if(end($sID) == $multy_id){
+                                $str.= '(attributes_id = '.$aID.' and sticker_id = '.$multy_id.')';
+                            }else{
+                                $str.= '(attributes_id = '.$aID.' and sticker_id = '.$multy_id.') or';
+                            }
+                        }
+                        $str.=') > 0 ';
+                    }else{
+                        $str.= 'sum(attributes_id = '.$aID.' and sticker_id = '.$sID.') > 0 ';
+                    }
                 }else{
-                    $str.= 'sum(attributes_id = '.$aID.' and sticker_id = '.$sID.') = 1 and ';
+                    if(is_array($sID)){
+                        $str.='sum(';
+                        foreach ($sID as $multy_id){
+                            if(end($sID) == $multy_id){
+                                $str.= '(attributes_id = '.$aID.' and sticker_id = '.$multy_id.')';
+                            }else{
+                                $str.= '(attributes_id = '.$aID.' and sticker_id = '.$multy_id.') or';
+                            }
+                        }
+                        $str.=') > 0 and ';
+                    }else{
+                        $str.= 'sum(attributes_id = '.$aID.' and sticker_id = '.$sID.') > 0 and ';
+                    }
+
                 }
             }
 
+//            dd($str);
 //            foreach ($attributeStickerIDs as $id){
 //            having sum(a.aid = 1 and a.val = 'avalue1') > 0 and
 //            sum(a.aid = 2 and a.val = 'avalue2') > 0;
