@@ -77,7 +77,7 @@ class ProductSearch
     private static function checkGroupBy(Request $request,$query){
         $selectFilters = array_filter($request->get('select_filter',[]));
         if(count($selectFilters)){
-            return $query->groupBy('stock_variations.id')->get();
+            return $query->groupBy('stock_variations.id')->get()->keyBy('id')->all();
         }else{
             return  $query->groupBy('stocks.id')->get();
         }
