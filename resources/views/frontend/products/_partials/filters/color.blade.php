@@ -3,13 +3,14 @@
     <div class="d-flex flex-wrap">
         @foreach($filter->stickers as $sticker)
             <div class="col-sm-3 single-wall">
-                <div class="custom-control custom-radio custom-control-inline" style="position: relative">
+                <div class="custom-control custom-radio custom-control-inline">
                     <input type="radio" class="custom-control-input" name="colors{{ $filter->name }}"
                            id="customRadio{{ $filter->id.$sticker->id }}">
-                    <label class="custom-control-label pointer"
+                    <label class="custom-control-label pointer" style="background: #000"
 
-                           for="customRadio{{ $filter->id.$sticker->id }}">{{ $sticker->name }}</label>
-                    <span style="background: #454656;position: absolute;left:0;top:0;width: 100%;height: 100%;"></span>
+                           for="customRadio{{ $filter->id.$sticker->id }}">
+                        <span class="d-block custom-control-label-text">{{ $sticker->name }}</span>
+                    </label>
                 </div>
             </div>
         @endforeach
