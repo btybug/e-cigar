@@ -70,15 +70,17 @@
                     <img src="{!! url('/public/img/vapors-logo.png') !!}" alt="logo">
                 </a>
                 <div class="d-flex align-self-center cat-search">
-                    <div class="category-select">
-                        <select id="filterSort"
-                                class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected"
-                                style="width: 160px;">
-                            <option class="selected">All Categories</option>
-                            <option>Cat 1</option>
-                            <option>Cat 2</option>
-                        </select>
-                    </div>
+                    @if(\Request::route()->getName() != 'categories_front')
+                        <div class="category-select">
+                            <select id="filterSort"
+                                    class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected"
+                                    style="width: 160px;">
+                                <option class="selected">All Categories</option>
+                                <option>Cat 1</option>
+                                <option>Cat 2</option>
+                            </select>
+                        </div>
+                    @endif
                     <div class="search position-relative">
                         <input type="search" class="form-control" placeholder="Serach for anything">
                         <span class="position-absolute d-flex align-items-center">
