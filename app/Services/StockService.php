@@ -45,18 +45,18 @@ class StockService
     public function makeTypeOptions ($stock, array $data = [])
     {
         $result = [];
-
+        $stock->type_attrs_all()->delete();
         if (count($data)) {
             foreach ($data as $datum) {
                 if(isset($datum['attributes_id']) && isset($datum['type']) && isset($datum['options'])){
                     $attr_id = $datum['attributes_id'];
                     $type = $datum['type'];
                     $ids = $datum['options'];
-                    $result[] = ['attributes_id' => $attr_id,'type' => $type];
+                    $result[] = ['attributes_id' => $attr_id,'type' => $type,'sticker_id' => null];
                     if (count($ids)) {
                         foreach ($ids as $id) {
                             if ($id) {
-                                $result[] = ['attributes_id' => $attr_id, 'sticker_id' => $id];
+                                $result[] = ['attributes_id' => $attr_id,'sticker_id' => $id];
                             }
                         }
                     }
@@ -65,9 +65,6 @@ class StockService
         }
 
         $stock->type_attrs()->sync($result);
-
-//        $stock->type_attrs()->syncWithoutDetaching($type_options);
-
         return $result;
     }
 

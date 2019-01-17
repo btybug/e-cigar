@@ -14,7 +14,7 @@ class StockTypeAttribute extends Model
 {
     protected $table = 'stock_type_attributes';
 
-    protected $guarded = ['id'];
+    protected $fillable = ['stock_id','attributes_id', 'sticker_id','type'];
 
     protected $dates = ['created_at','updated_at'];
 

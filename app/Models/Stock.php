@@ -119,6 +119,11 @@ class Stock extends Translatable
             ->whereNull('stock_type_attributes.sticker_id')->withPivot('type');
     }
 
+    public function type_attrs_all()
+    {
+        return $this->hasMany(StockTypeAttribute::class, 'stock_id', 'id');
+    }
+
     public function type_attrs_pivot()
     {
         return $this->hasMany(StockTypeAttribute::class, 'stock_id', 'id')

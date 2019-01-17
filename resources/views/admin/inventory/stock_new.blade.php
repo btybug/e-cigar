@@ -434,11 +434,11 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody class="package-variation-box">
-                                                        {{--@if($model && count($model->variations))--}}
-                                                            {{--@foreach($model->variations as $package_variation)--}}
-                                                                {{--@include('admin.inventory._partials.variation_package_item')--}}
-                                                            {{--@endforeach--}}
-                                                        {{--@endif--}}
+                                                        @if($model && count($model->variations))
+                                                            @foreach($model->variations as $package_variation)
+                                                                @include('admin.inventory._partials.variation_package_item')
+                                                            @endforeach
+                                                        @endif
                                                         </tbody>
                                                     </table>
                                                 </div>
