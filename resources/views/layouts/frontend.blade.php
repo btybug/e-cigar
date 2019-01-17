@@ -91,6 +91,15 @@
     };
 
     $(document).ready(function () {
+        document.getElementById("search-product")
+            .addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    let category = $(".all_categories").val();
+                    window.location = "/products/"+category +"?q="+$(this).val();
+                }
+            });
+
         $("body").on('click','.qtycount',function () {
             var uid = $(this).data('uid');
             var condition = $(this).data('condition');

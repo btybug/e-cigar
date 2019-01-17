@@ -8,7 +8,7 @@
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
                         [
-                            'class' => 'select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                            'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
                             'style' =>'width: 100%',
                             'id' => 'choose_product'
                         ]) !!}

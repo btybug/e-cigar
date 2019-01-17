@@ -72,17 +72,19 @@
                 <div class="d-flex align-self-center cat-search">
                     @if(\Request::route()->getName() != 'categories_front')
                         <div class="category-select">
-                            <select id="filterSort"
-                                    class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected"
-                                    style="width: 160px;">
-                                <option class="selected">All Categories</option>
-                                <option>Cat 1</option>
-                                <option>Cat 2</option>
-                            </select>
+                            @php
+                                $categories = \App\Models\Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
+                            @endphp
+                            {!! Form::select('category',['' => 'All Categories'] + $categories->toArray(),null,
+                                [
+                                    'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected',
+                                    'style' =>'width: 160px',
+                                    'id' => 'filter_sort'
+                                ]) !!}
                         </div>
                     @endif
                     <div class="search position-relative">
-                        <input type="search" class="form-control" placeholder="Serach for anything">
+                        <input type="search" class="form-control" id="search-product" value="{{ (\Request::has('q')) ? \Request::get('q') :null }}" placeholder="Serach for anything">
                         <span class="position-absolute d-flex align-items-center">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
