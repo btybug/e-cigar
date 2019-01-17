@@ -715,9 +715,17 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     padding-left: 0;
 }
 
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after,
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    opacity: .8;
+}
+
 .products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
     background-size: 12px;
-    opacity: .8;
+}
+
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+    background-size: 8px;
 }
 
 .products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-control-label::before {
@@ -741,16 +749,22 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     margin-left: 40px;
 }
 
-.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before,
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-radio .custom-control-input:checked ~ .custom-control-label::before {
     background-color: #5184e5;
     left: -2.5rem;
+}
+
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-radio .custom-control-label::before {
+    border-radius: 50%;
 }
 
 .products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .amount {
     margin-left: 10px;
 }
 
-.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .custom-control-input:checked ~ .custom-control-label {
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-checkbox .custom-control-input:checked ~ .custom-control-label,
+.products-page .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-radio .custom-control-input:checked ~ .custom-control-label {
     color: #353535;
 }
 
