@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\AttributeStickers;
 use App\Models\Category;
 use App\Models\Posts;
 use App\Models\Products;
@@ -142,13 +143,14 @@ class ProductsController extends Controller
         if ($stock) {
             $variation = null;
             if ($stock->type == 'variation_product') {
-                $option = StockVariationOption::select('*', \DB::raw('count(*) as total'))->whereIn('attributes_id', $attributes)
-                    ->whereIn('options_id', $options)
+                $option = StockVariationOption::select('stock_variation_options.*', \DB::raw('count(*) as total'))
+                    ->leftJoin('attributes_stickers','stock_variation_options.attribute_sticker_id','attributes_stickers.id')
+                    ->whereIn('attributes_stickers.attributes_id', $attributes)
+                    ->whereIn('attributes_stickers.sticker_id', $options)
                     ->whereIn('variation_id', $stock->variations()->pluck('id')->all())
                     ->groupBy('variation_id')
                     ->having('total', $totalCount)
                     ->orderBy('total', 'desc')->first();
-
                 $variation = ($option && $option->variation) ? $option->variation : null;
             } elseif ($stock->type == 'simple_product') {
                 $variation = $stock->variations->first();

@@ -37,7 +37,7 @@
         @endif
     @yield('css')
 </head>
-<body>
+<body @if(\Request::route()->getName() == 'product_single')class="single-product-page" @endif>
 @include('frontend._partials.header')
 @include('cookieConsent::index')
 @yield('content')
@@ -60,6 +60,9 @@
 
 
 @include('frontend._partials.footer')
+
+@yield('afterFooter')
+
 <script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
 <script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>
 <script src={{asset("public/js/hover-slider.js")}}></script>

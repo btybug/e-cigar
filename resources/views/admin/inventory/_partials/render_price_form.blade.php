@@ -1,3 +1,7 @@
+
+
+
+
 <div class="product-form-groups options-group" data-main-stock="{{ $model->id }}">
     @if($model->type == 'variation_product')
         @foreach($model->type_attrs as $modelattr)
@@ -48,7 +52,7 @@
                             @endif
                         </div>
                     </div>
-                @else
+            @else
                 <div class="row align-items-center mt-2">
                     <div class="col-md-5">
                         <label for="productPack" class="fnz-20 mb-md-0">{!! $modelattr->name !!}</label>
