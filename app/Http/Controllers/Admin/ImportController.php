@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Import;
+use App\Models\Posts;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Auth;
@@ -119,6 +120,27 @@ class ImportController extends Controller
             }
             $data['user_id'] = Auth::id();
             Stock::updateOrCreate(null,array_filter($data),$translatableData);
+        }
+
+    }
+
+    public function post($file){
+        $excels = Excel::toArray(new UsersImport, $file->path)[0];
+        $row = array_shift($excels);
+        $object = new Posts();
+        $translatable = $object->translatedAttributes;
+        foreach($excels as $excel){
+            $data = [];
+            $translatableData = [];
+            foreach ($row as $i => $item){
+                if(in_array($item,$translatable)){
+                    $translatableData[app()->getLocale()][$item] = $excel[$i];
+                }else{
+                    $data[$item] = $excel[$i];
+                }
+            }
+            $data['user_id'] = Auth::id();
+            Posts::updateOrCreate(null,array_filter($data),$translatableData);
         }
 
     }
