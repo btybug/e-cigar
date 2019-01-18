@@ -70,11 +70,38 @@ class ProductSearch
 
     private static function checkGroupBy(Request $request,$query){
         $selectFilters = array_filter($request->get('select_filter',[]));
+        $orderFilter = static::generateOrderBy($request->get('sort_by',null));
         if(count($selectFilters)){
-            return $query->groupBy('stock_variations.id')->orderBy('created_at')->get()->keyBy('id')->all();
+            return $query->groupBy('stock_variations.id')->orderBy($orderFilter[0],$orderFilter[1])->get()->keyBy('id')->all();
         }else{
-            return  $query->groupBy('stocks.id')->orderBy('created_at','desc')->get();
+            return  $query->groupBy('stocks.id')->orderBy($orderFilter[0],$orderFilter[1])->get();
         }
+    }
+
+    private static function generateOrderBy(?string $orderBy){
+        switch ($orderBy){
+            case "newest":
+                $defaultCol = 'created_at';
+                $ordering = 'desc';
+                break;
+            case "oldest":
+                $defaultCol = 'created_at';
+                $ordering = 'asc';
+                break;
+            case "price_desc":
+                $defaultCol = 'price';
+                $ordering = 'desc';
+                break;
+            case "price_asc":
+                $defaultCol = 'price';
+                $ordering = 'asc';
+                break;
+            default:
+                $defaultCol = 'created_at';
+                $ordering = 'desc';
+        }
+
+        return [$defaultCol,$ordering];
     }
 
     private static function createObject($category = null,$request) {

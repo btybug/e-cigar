@@ -152,10 +152,10 @@
                             <div class="select-wall">
                                 {!! Form::select('sort_by',[
                                     '' => 'Select',
-                                    'asc' => 'Newest',
-                                    'desc' => 'Oldest',
-                                    'price_asc' => 'Price high',
-                                    'price_desc' => 'Price low',
+                                    'newest' => 'Newest',
+                                    'oldest' => 'Oldest',
+                                    'price_desc' => 'Price high',
+                                    'price_asc' => 'Price low',
                                 ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
                                     'id' => 'sortBy',
                                     'class' => 'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
@@ -317,9 +317,8 @@
                 form.submit();
             }
 
-            var rangeDataString = "{{ (\Request::has('amount')) ? \Request::get('amount') : "0,500" }}";
+            var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,500" }}";
             var rangeArray = rangeDataString.split(',');
-
             $("#slider-range").slider({
                 range: true,
                 min: 0,
