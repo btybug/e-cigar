@@ -60,7 +60,7 @@ div.dataTables_wrapper div.dataTables_filter input {
     float: left;
 }
 .modal-footer .btn {
-    background-color: transparent;
+    /*background-color: transparent;*/
     border: 1px solid #fafafa;
     border-radius: 2px;
 }

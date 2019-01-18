@@ -397,6 +397,11 @@ Route::group(['prefix' => 'import'], function () {
 
     Route::post('/', 'Admin\ImportController@import')->name('import_import');
 
+//    Route::get('/export', 'Admin\ImportController@export')->name('import_export');
+
+    Route::post("/delete-file", 'Admin\ImportController@delete_file')->name('delete_file');
+
+    Route::post("/add-file", 'Admin\ImportController@add_file')->name('add_file');
 });
 
 

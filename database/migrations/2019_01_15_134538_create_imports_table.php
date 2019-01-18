@@ -17,6 +17,8 @@ class CreateImportsTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('category');
+            $table->string('path');
+            $table->integer('is_imported')->default(0);
             $table->timestamps();
         });
     }

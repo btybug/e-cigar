@@ -16,6 +16,7 @@
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.4.0",
+        "maatwebsite/excel": "^3.1",
         "milon/barcode": "^5.3",
         "pragmarx/countries-laravel": "^0.6.2",
         "spatie/laravel-cookie-consent": "^2.5",
@@ -64,6 +65,11 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta"
         ]
     },
     "config": {

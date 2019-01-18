@@ -171,6 +171,7 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         /*
          * Application Service Providers...
          */
