@@ -95,8 +95,23 @@
             .addEventListener("keyup", function(event) {
                 event.preventDefault();
                 if (event.keyCode === 13) {
-                    let category = $(".all_categories").val();
-                    window.location = "/products/"+category +"?q="+$(this).val();
+                    let form = $("#filter-form");
+                    let category = $('.all_categories').val();
+                    let search_text = $("#search-product").val();
+                    let url = "/products/"+category;
+
+                    if(form.length > 0){
+                        if(search_text){
+                            var input = $("<input>")
+                                .attr("type", "hidden")
+                                .attr("name", "q").val(search_text);
+                            form.append(input);
+                        }
+                        form.attr('action',url);
+                        form.submit();
+                    }else{
+                        window.location = "/products/"+category +"?q="+$(this).val();
+                    }
                 }
             });
 

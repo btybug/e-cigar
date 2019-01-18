@@ -22,16 +22,10 @@ class ProductSearch
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)
     {
         foreach ($request->all() as $filterName => $value) {
-
             $decorator = static::createFilterDecorator($filterName);
-//            if($filterName =='select_filter'){
-//                dd($decorator,static::isValidDecorator($decorator));
-//            }
-
             if (static::isValidDecorator($decorator) && static::isValidValue($value)) {
                 $query = $decorator::apply($query, $value);
             }
-
         }
         return $query;
     }
@@ -77,9 +71,9 @@ class ProductSearch
     private static function checkGroupBy(Request $request,$query){
         $selectFilters = array_filter($request->get('select_filter',[]));
         if(count($selectFilters)){
-            return $query->groupBy('stock_variations.id')->get()->keyBy('id')->all();
+            return $query->groupBy('stock_variations.id')->orderBy('created_at')->get()->keyBy('id')->all();
         }else{
-            return  $query->groupBy('stocks.id')->get();
+            return  $query->groupBy('stocks.id')->orderBy('created_at','desc')->get();
         }
     }
 
@@ -93,7 +87,6 @@ class ProductSearch
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
             ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')
             ->leftJoin('attributes_stickers', 'stock_variation_options.attribute_sticker_id', '=', 'attributes_stickers.id')
-
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale',app()->getLocale());
         return $query->select('stocks.*','stock_translations.name',

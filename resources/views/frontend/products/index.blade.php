@@ -8,7 +8,7 @@
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
                         [
-                            'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                            'class' => 'select-filter all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
                             'style' =>'width: 100%',
                             'id' => 'choose_product'
                         ]) !!}
@@ -33,7 +33,8 @@
                         </div>
                         <div class="slider-range d-flex flex-wrap align-items-center">
                             <div class="amount col-lg-4 col-5 pl-0">
-                                <input type="text" id="amount" readonly class="font-main-bold font-16 w-100 border-0">
+                                <input type="text" id="amount" name="" readonly class="font-main-bold font-16 w-100 border-0">
+                                <input type="hidden" id="amount_range" name="amount" value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
                             </div>
                             <div id="slider-range" class="col-lg-8 col-7"></div>
                         </div>
@@ -149,13 +150,17 @@
                         <div class="sort-by_select d-flex align-items-center position-relative">
                             <label for="sortBy" class="text-main-clr mb-0">SORT BY: </label>
                             <div class="select-wall">
-                                <select id="sortBy"
-                                        class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark "
-                                        style="width: 100%">
-                                    <option selected="selected">NEWEST</option>
-                                    <option>Brandos</option>
-                                    <option>Eleaf</option>
-                                </select>
+                                {!! Form::select('sort_by',[
+                                    '' => 'Select',
+                                    'asc' => 'Newest',
+                                    'desc' => 'Oldest',
+                                    'price_asc' => 'Price high',
+                                    'price_desc' => 'Price low',
+                                ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
+                                    'id' => 'sortBy',
+                                    'class' => 'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                                    'style' => 'width: 100%',
+                                ]) !!}
                             </div>
                         </div>
                     </div>
@@ -290,8 +295,50 @@
 
     <script>
         $(document).ready(function(){
+            function doSubmitForm() {
+                let form = $("#filter-form");
+                let category = $('.all_categories').val();
+                let search_text = $("#search-product").val();
+                let sort_by = $("#sortBy").val();
+                let url = "/products/"+category;
+
+                if(search_text){
+                    var input = $("<input>")
+                        .attr("type", "hidden")
+                        .attr("name", "q").val(search_text);
+                    form.append(input);
+                }if(sort_by){
+                    var input = $("<input>")
+                        .attr("type", "hidden")
+                        .attr("name", "sort_by").val(sort_by);
+                    form.append(input);
+                }
+                form.attr('action',url);
+                form.submit();
+            }
+
+            var rangeDataString = "{{ (\Request::has('amount')) ? \Request::get('amount') : "0,500" }}";
+            var rangeArray = rangeDataString.split(',');
+
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 500,
+                values: rangeArray,
+                slide: function( event, ui ) {
+                    $( "#amount" ).val("$" + ui.values[ 0 ] + " - " + "$" +ui.values[ 1 ] );
+                    $( "#amount_range" ).val(ui.values[ 0 ] + "," + ui.values[ 1 ] );
+                },
+                change: function(event, ui) {
+                    doSubmitForm();
+                }
+            });
+
+            $( "#amount" ).val("$" + $("#slider-range").slider( "values", 0 ) +
+                " - $" + $("#slider-range").slider( "values", 1 ) );
+
             $("body").on('change','.select-filter',function () {
-                $("#filter-form").submit();
+                doSubmitForm();
             });
 
             $("body").on('click','.reset-form',function () {
@@ -332,9 +379,7 @@
                 }
             });
 
-            $("#choose_product").change(function(){
-                $(location).attr("href","/products/"+$(this).val())
-            });
+
 
             $(".product-card_like-icon").click(function () {
                 let url;
