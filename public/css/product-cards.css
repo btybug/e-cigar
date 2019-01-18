@@ -405,7 +405,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .product-single-info_row {
-    padding: 30px 0 40px;
+    padding: 10px 0 40px;
 }
 
 .product-single-info_row:not(:last-child),
@@ -469,7 +469,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .product-single-info_custom-control:not(:last-of-type) {
-    margin-right: 70px;
+    margin-right: 40px;
 }
 
 .product-single-info_title {
@@ -646,7 +646,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 /*range single product*/
 .range-steps {
-    width: 442px;
+    width: 412px;
     padding-top: 45px;
 }
 
@@ -980,6 +980,11 @@ body.get-cover:after {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+/*new css for single page items*/
+.single-product-row-repeatable:not(:last-of-type) {
+    margin-bottom: 25px;
 }
 
 
