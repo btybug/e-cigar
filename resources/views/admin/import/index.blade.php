@@ -180,7 +180,7 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-//                            location.reload()
+                            location.reload()
                         } else {
                             alert('error')
                         }

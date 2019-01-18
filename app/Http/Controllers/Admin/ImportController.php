@@ -86,13 +86,14 @@ class ImportController extends Controller
         $id = $request->id;
         \DB::transaction(function () use($id){
             $file = Import::find($id);
-            $file->update([
-               "is_imported" => "1"
-            ]);
+
 
             if(isset($file)){
                 $fn = $file->category;
                 $this->$fn($file);
+                $file->update([
+                    "is_imported" => "1"
+                ]);
             }
 
         });
