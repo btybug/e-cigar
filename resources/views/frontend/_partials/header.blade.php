@@ -1,4 +1,4 @@
-<header>
+<header class="main-header">
     <div class="header-top">
         <div class="container main-max-width">
             <div class="d-flex flex-wrap justify-content-between">

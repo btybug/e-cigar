@@ -16,13 +16,16 @@
 .font-20  {font-size: 1.25rem;}
 .font-21  {font-size: 1.3125rem;}
 .font-22 {font-size: 1.375rem;}
+.font-23 {font-size: 1.4375rem;}
 .font-24 {font-size: 1.5rem;}
 .font-25 {font-size: 1.563rem;}
 .font-26 {font-size: 1.625rem;}
 .font-28 {font-size: 1.75rem;}
 .font-30 {font-size:1.875rem;}
+.font-35 {font-size:2.1875rem;}
 .font-36 {font-size:2.25rem;}
 .font-40 {font-size: 2.5rem;}
+.font-41 {font-size: 2.5625rem}
 .font-44 {font-size: 2.75rem;}
 .font-48 {font-size: 3rem;}
 .font-50 {font-size: 3.125rem;}
@@ -128,7 +131,6 @@
 
 html,
 body {
-    height: 100%;
     font-size: 14px;
 }
 
@@ -139,6 +141,7 @@ body {
 }
 
 body {
+    position: relative;
     color: #353535;
     font-family: "Roboto-Regular", sans-serif;
 }
@@ -151,6 +154,7 @@ ul{
 
 a:focus, a:hover {
     text-decoration: none;
+    color: #353535;
 }
 
 textarea {
@@ -267,7 +271,6 @@ textarea {
 }
 
 .main-scrollbar::-webkit-scrollbar {  width: 5px;}
-.main-scrollbar::-webkit-scrollbar-track {  background: #E8E7ED; }
-.main-scrollbar::-webkit-scrollbar-thumb {  background: rgba(0, 0, 0, .8); }
-.main-scrollbar::-webkit-scrollbar-thumb:hover {  background: rgba(0, 0, 0, .9) }
+.main-scrollbar::-webkit-scrollbar-track {  background: #ebeef4; }
+.main-scrollbar::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 

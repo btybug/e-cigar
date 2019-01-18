@@ -89,6 +89,11 @@ $(function() {
     });
     $('.select_with-tag').select2();
 
+    // header search for mobile
+    $('body').on('click', '.search-icon-mobile .icon', function () {
+        $(this).closest('.header-bottom').find('.cat-search').toggleClass('closed')
+    });
+
 
     $('.nav-item.nav-item--has-dropdown').hover(
         function() {
@@ -123,32 +128,58 @@ $(function() {
         $(this).closest('body').toggleClass('show-filter')
     })
 
+    // range
+    $('.range-steps_item.active').nextAll($('.range-steps_item')).addClass('line-none');
 
-    // cards display
+
+    // cards change display
     $('body').on('click', '.display-icon', function (e) {
         e.preventDefault();
         $('.display-icon').removeClass('active');
         $(this).addClass('active');
         if($(this).attr('id') === 'dispGrid'){
-            $('.products-wrap').addClass('display-grid')
+            $('.change-display-wrap').addClass('display-grid');
         }else {
-            $('.products-wrap').removeClass('display-grid')
+            $('.change-display-wrap').removeClass('display-grid');
         }
     });
 
-    // scroll top
+    // scroll top button
     $('#scrollTopBtn').on('click', function () {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 800);
-    })
+
+        if($('#singleProductPageCnt').length) {
+            $('#singleProductPageCnt').animate({
+                scrollTop: 0
+            }, 800);
+        } else {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
     // display filter for mobile
     $('body').on('click', '.filters-for-mobile .btn--filter', function () {
-        $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile')
+        $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
     });
     // menu click mobile
     $('body').on('click', '.header-top .nav-item--has-dropdown', function () {
-        $(this).toggleClass('active')
-        $('body').find('.dark-bg_body').removeClass('show')
+        $(this).toggleClass('active');
+        $('body').find('.dark-bg_body').removeClass('show');
     });
+
+    // sidebar profile
+    openSidebar($('#profileBtn'), $('#profileSidebar'));
+
 } );

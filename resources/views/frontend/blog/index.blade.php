@@ -1,116 +1,169 @@
 @extends('layouts.frontend')
 @section('content')
-<main class="page-main-content">
-    <div class="d-flex h-100">
-        <div class="main-left-tabs d-flex flex-column kaliony-menu">
-            @include('frontend._partials.individual_left_bar',['type' => 'news'])
-
-            <div class="user-status mt-auto">
-                <span class="status-color"></span>
-                <div class="user d-flex flex-column align-items-center">
-                    <svg width="42px" height="41px">
-                        <path fill-rule="evenodd" opacity="0.8" fill="rgb(240, 240, 240)"
-                              d="M39.150,33.633 C35.126,31.496 32.040,30.298 29.293,29.839 L29.577,29.447 C29.712,29.312 29.780,29.110 29.712,28.907 L29.081,26.377 C29.309,26.052 29.525,25.717 29.728,25.373 C32.240,24.516 33.510,23.069 33.724,20.938 C34.827,20.881 35.779,19.894 35.779,18.781 L35.779,13.717 C35.779,12.609 34.899,11.626 33.745,11.561 C33.597,7.661 31.880,0.013 20.949,0.013 C10.018,0.013 8.301,7.661 8.153,11.561 C7.059,11.626 6.119,12.546 6.119,13.717 L6.119,18.781 C6.119,19.928 7.130,20.941 8.343,20.941 L9.354,20.941 C9.726,20.941 10.083,20.834 10.394,20.651 C10.777,22.683 11.620,24.682 12.817,26.376 L12.186,28.907 C12.186,29.042 12.186,29.245 12.321,29.447 L12.605,29.839 C9.858,30.298 6.772,31.496 2.748,33.633 C1.468,34.240 0.726,35.523 0.726,36.941 L0.726,39.844 C0.726,40.249 0.996,40.519 1.400,40.519 L17.578,40.519 L17.848,40.519 L24.050,40.519 L24.319,40.519 L40.498,40.519 C40.902,40.519 41.172,40.249 41.172,39.844 L41.172,36.941 C41.172,35.591 40.363,34.308 39.150,33.633 ZM20.953,32.089 L22.567,35.793 L19.309,35.793 L20.953,32.089 ZM18.819,37.143 L23.077,37.143 L23.471,39.169 L18.414,39.169 L18.819,37.143 ZM28.027,27.692 L28.297,28.907 L27.608,29.854 C27.564,29.890 27.523,29.934 27.488,29.987 L24.684,33.876 L23.794,35.099 L21.977,31.004 C24.193,30.733 26.167,29.602 27.750,27.981 C27.843,27.886 27.936,27.790 28.027,27.692 ZM30.659,23.492 C31.039,22.566 31.326,21.603 31.507,20.632 C31.764,20.788 32.056,20.892 32.371,20.927 C32.254,21.881 31.831,22.782 30.659,23.492 ZM34.363,13.650 L34.363,18.713 C34.363,19.118 34.026,19.523 33.555,19.523 L32.543,19.523 C32.139,19.523 31.734,19.186 31.734,18.713 L31.734,18.240 L31.734,13.650 C31.734,13.245 32.072,12.840 32.543,12.840 L33.555,12.840 C33.959,12.840 34.363,13.177 34.363,13.650 ZM20.949,1.363 C25.104,1.363 32.097,2.721 32.397,11.568 C32.115,11.597 31.844,11.683 31.600,11.815 C30.779,6.674 26.304,2.713 20.949,2.713 C15.595,2.713 11.120,6.673 10.299,11.813 C10.058,11.682 9.788,11.596 9.501,11.568 C9.801,2.721 16.794,1.363 20.949,1.363 ZM10.096,18.713 C10.096,19.118 9.759,19.523 9.287,19.523 L8.276,19.523 C7.871,19.523 7.467,19.186 7.467,18.713 L7.467,13.650 C7.467,13.245 7.804,12.840 8.276,12.840 L9.287,12.840 C9.692,12.840 10.096,13.177 10.096,13.650 L10.096,18.713 ZM11.512,13.515 C11.512,8.316 15.758,4.063 20.949,4.063 C26.140,4.063 30.386,8.316 30.386,13.515 L30.386,18.240 C30.386,20.474 29.806,22.519 28.864,24.244 C27.255,24.712 24.941,24.991 21.623,24.991 C21.219,24.991 20.949,25.262 20.949,25.667 C20.949,26.072 21.219,26.342 21.623,26.342 C24.052,26.342 26.083,26.192 27.747,25.880 C27.705,25.921 27.664,25.963 27.623,26.004 C27.283,26.457 26.926,26.870 26.552,27.242 C24.964,28.723 23.071,29.620 21.247,29.709 C21.155,29.670 21.052,29.650 20.949,29.650 C20.845,29.650 20.752,29.670 20.668,29.710 C19.552,29.659 18.409,29.304 17.325,28.698 C16.228,28.066 15.196,27.156 14.275,26.004 C14.208,25.937 14.141,25.869 14.073,25.802 L14.034,25.788 C12.520,23.800 11.512,21.184 11.512,18.240 L11.512,13.515 L11.512,13.515 ZM19.921,31.004 L18.104,35.099 L17.214,33.876 L14.410,29.987 C14.389,29.966 14.365,29.945 14.340,29.924 L13.601,28.907 L13.871,27.692 C13.962,27.790 14.055,27.886 14.148,27.981 C15.731,29.602 17.705,30.733 19.921,31.004 ZM2.074,36.941 C2.074,36.063 2.546,35.253 3.355,34.848 C7.652,32.562 10.745,31.415 13.500,31.072 L17.523,36.611 L17.012,39.169 L2.074,39.169 L2.074,36.941 ZM39.824,39.169 L24.886,39.169 L24.375,36.611 L28.441,31.012 C31.187,31.427 34.336,32.573 38.543,34.781 C39.352,35.253 39.824,36.063 39.824,36.941 L39.824,39.169 L39.824,39.169 Z"/>
-                    </svg>
-                    <span class="status">Online</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="main-right-wrapp kaliony-page">
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-hit" role="tabpanel"
-                     aria-labelledby="v-pills-hit-tab">
-                    <div class="main-content">
-                        <div class="row">
-                            <div class="toolbar mb-3">
-                                <div class="form-inline">
-                                    <div class="form-group col-12 col-md-4">
-                                        <label class="col-sm-12 col-lg-5 col-form-label">Display</label>
-                                        <div class="col-sm-12 col-lg-7 btn-group">
-                                            <a href="javascript:void(0);" id="grid_news" class="btn btn-default active change-view-blog"> <i class="fa fa-th-large" aria-hidden="true"></i> </a>
-                                            <a href="javascript:void(0);" id="list_news" class="btn btn-default change-view-blog"> <i class="fa fa-list" aria-hidden="true"></i> </a>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-12 col-md-4 center">
-                                        <label class="col-sm-12 col-lg-4 col-form-label">Sort</label>
-                                        <select class="col-sm-12 col-lg-6 form-control sortbynews" name="type">
-                                            <option value="desc" selected="">Newest</option>
-                                            <option value="asc">Oldest</option>
-                                            <option value="atoz">A - Z</option>
-                                            <option value="ztoa">Z - A</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12 col-md-4">
-                                        <label class="col-sm-12 col-lg-4 col-form-label">Limit</label>
-                                        <select class="col-sm-12 col-lg-4 form-control sortbynews" name="limit">
-                                            <option value="16" selected="">16</option>
-                                            <option value="32">32</option>
-                                            <option value="64">64</option>
-                                        </select>
-                                        <label class="col-sm-12 col-lg-4 col-form-label">per page</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="blogs blogs-4x" id="listing-news">
-
-                                @foreach($posts as $post)
-                                    <div class="blog-post">
-                                        <a href="{!! post_url($post) !!}" class="d-block blog-post_link shadow-sm bg-white py-3 px-4 clearfix">
-                        <span href="http://e-cigar.loc/blog/test" class="d-inline-block blog-thumb">
-
-                        <span class="blog-date">
-                            <strong>{!! BBgetDateFormat($post->created_at,'d') !!}</strong>{!! BBgetDateFormat($post->created_at,'M') !!}
-                        </span>
-
-                            <img class="img-fluid" src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="{!! ($post->image)?getImage($post->image)->seo_alt:'' !!}">
-                        </span>
-
-                                            <span class="d-block blog-block">
-                            <span class="blog-title">{!! $post->title !!} </span>
+    <main class="main-content">
+        <div class="top-filters">
+            <div class="container main-max-width">
+                <div class="d-flex align-items-center position-relative">
+                    @include('frontend._partials.individual_left_bar',['type' => 'news'])
 
 
-                            <span class="d-block blog-text">
-                                <span class="txt">{!! $post->short_description !!}</span>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <button class="btn d-md-none toggler ml-auto pointer bg-transparent" data-toggle="collapse" data-target="#sortBySelects">Sort By:</button>
+
+                    <div  id="sortBySelects" class="sort-by-selects collapse d-md-flex align-items-center ml-sm-auto">
+                        <div class="product-grid-list d-flex align-self-center">
+                            <span id="dispGrid" class="d-inline-block pointer display-icon active">
+                <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        width="15px" height="15px"
+                        viewBox="0 0 15 15">
+                <path fill-rule="evenodd" fill="rgb(188, 188, 188)"
+                      d="M13.769,8.730 C13.090,8.730 12.539,8.179 12.539,7.500 C12.539,6.821 13.090,6.270 13.769,6.270 C14.448,6.270 14.998,6.821 14.998,7.500 C14.998,8.179 14.448,8.730 13.769,8.730 ZM13.769,2.462 C13.090,2.462 12.539,1.911 12.539,1.232 C12.539,0.553 13.090,0.003 13.769,0.003 C14.448,0.003 14.998,0.553 14.998,1.232 C14.998,1.911 14.448,2.462 13.769,2.462 ZM7.501,14.997 C6.822,14.997 6.271,14.447 6.271,13.768 C6.271,13.089 6.822,12.538 7.501,12.538 C8.180,12.538 8.730,13.089 8.730,13.768 C8.730,14.447 8.180,14.997 7.501,14.997 ZM7.501,8.730 C6.822,8.730 6.271,8.179 6.271,7.500 C6.271,6.821 6.822,6.270 7.501,6.270 C8.180,6.270 8.730,6.821 8.730,7.500 C8.730,8.179 8.180,8.730 7.501,8.730 ZM7.501,2.462 C6.822,2.462 6.271,1.911 6.271,1.232 C6.271,0.553 6.822,0.003 7.501,0.003 C8.180,0.003 8.730,0.553 8.730,1.232 C8.730,1.911 8.180,2.462 7.501,2.462 ZM1.233,14.997 C0.554,14.997 0.004,14.447 0.004,13.768 C0.004,13.089 0.554,12.538 1.233,12.538 C1.912,12.538 2.462,13.089 2.462,13.768 C2.462,14.447 1.912,14.997 1.233,14.997 ZM1.233,8.730 C0.554,8.730 0.004,8.179 0.004,7.500 C0.004,6.821 0.554,6.270 1.233,6.270 C1.912,6.270 2.462,6.821 2.462,7.500 C2.462,8.179 1.912,8.730 1.233,8.730 ZM1.233,2.462 C0.554,2.462 0.004,1.911 0.004,1.232 C0.004,0.553 0.554,0.003 1.233,0.003 C1.912,0.003 2.462,0.553 2.462,1.232 C2.462,1.911 1.912,2.462 1.233,2.462 ZM13.769,12.538 C14.448,12.538 14.998,13.089 14.998,13.768 C14.998,14.447 14.448,14.997 13.769,14.997 C13.090,14.997 12.539,14.447 12.539,13.768 C12.539,13.089 13.090,12.538 13.769,12.538 Z"/>
+                </svg>
                             </span>
-                            <span class="blog-link">Readmore</span>
-                        </span>
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <div class="mx-auto pt-5">
-                                <nav aria-label="...">
-                                    <ul class="pagination pagination-lg">
-                                        <li class="page-item disabled">
-                                            <span class="page-link">Previous</span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item active">
-                      <span class="page-link">
-                        2
-                            <span class="sr-only">(current)</span>
-                        </span>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">6</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">7</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">8</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                            <span id="displVertBtn" class="d-inline-block pointer display-icon">
+                <svg
+                        width="15px" height="15px"
+                        viewBox="0 0 15 15">
+                <path fill-rule="evenodd" opacity="0.502" fill="rgb(121, 121, 121)"
+                      d="M0.011,15.000 L0.011,13.586 L15.004,13.586 L15.004,15.000 L0.011,15.000 ZM0.011,6.791 L15.004,6.791 L15.004,8.205 L0.011,8.205 L0.011,6.791 ZM0.011,-0.004 L15.004,-0.004 L15.004,1.410 L0.011,1.410 L0.011,-0.004 Z"/>
+                </svg>
+                            </span>
+                        </div>
+                        <div class="sort-by_select d-flex align-items-center position-relative">
+                            <label for="sortByLimit" class="text-main-clr mb-0 text-uppercase">Limit: </label>
+                            <div class="select-wall">
+                                <select id="sortByLimit" class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark " style="width: 250px">
+                                    <option class="text-uppercase" selected="selected">15 per page</option>
+                                    <option class="text-uppercase">30 per page</option>
+                                    <option class="text-uppercase">5 perpage</option>
+                                </select>
                             </div>
                         </div>
+                        <div class="sort-by_select d-flex align-items-center position-relative">
+                            <label for="sortBy" class="text-main-clr mb-0 text-uppercase">SORT BY: </label>
+                            <div class="select-wall">
+                                <select id="sortBy" class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark " style="width: 250px">
+                                    <option class="text-uppercase" selected="selected">NEWEST</option>
+                                    <option class="text-uppercase">Brandos</option>
+                                    <option class="text-uppercase">Eleaf</option>
+                                </select>
+                            </div>
+                        </div>
+
+
                     </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="news-wrap change-display-wrap display-grid">
+            <div class="container main-max-width">
+                <div class="row justify-content-md-start justify-content-center">
+                    @foreach($posts as $post)
+
+                        <a href="#" class="news-wrap_col">
+                            <span class="news-card main-transition position-relative">
+                                <span class="news-card_view d-block position-relative">
+                                    <!--news main image-->
+                                        <img class="card-img-top" src="img/temp/news-1.jpg" alt="">
+                                    <!--share icon-->
+                                    <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
+                                    <svg iewBox="0 0 20 21" width="20px" height="21px">
+                                        <path fill-rule="evenodd"  opacity="0.6" fill="rgb(255, 255, 255)" d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
+                                    </svg>
+                                </span>
+
+                                </span>
+                                <span class="news-card_body">
+                                    <span class="news-card_body-text d-block">
+                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
+                                        <span class="card-text d-block font-main-light font-15 text-light-clr">
+                                            Hello dribbble community . We started
+                                            our new design team .
+                                        </span>
+                                    </span>
+                                    <span class="news-card_footer d-flex align-items-center">
+                                        <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
+                                        <span class="ml-auto">
+                                            <span class="news-card_views d-inline-flex align-items-center position-relative">
+                                                <svg viewBox="0 0 16 11" width="16px" height="11px">
+                                                    <path fill-rule="evenodd"  fill="rgb(188, 188, 188)" d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
+                                                </svg>
+                                                <span class="d-inline-block text-main-clr ml-2">123</span>
+                                                <!--views tooltip-->
+                                                <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
+                                            </span>
+                                            <span class="d-inline-flex align-items-center">
+                                                <svg viewBox="0 0 15 12" ="15px" height="12px">
+                                                    <path fill-rule="evenodd"  fill="rgb(188, 188, 188)" d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
+                                                </svg>
+                                                <span class="d-inline-block text-main-clr ml-2">10</span>
+                                            </span>
+                                        </span>
+                                    </span>
+                                </span>
+
+                            </span>
+                        </a>
+
+                    @endforeach
+
+
+
+                    <!-- The END -->
+
+
+
+
                 </div>
             </div>
         </div>
-    </div>
-</main>
+
+
+        <div class="container main-max-width">
+            <!--view more dotes-->
+            <div class="view-more-dots text-center">
+                <span class="view-more-dots_item d-inline-block"></span>
+                <span class="view-more-dots_item d-inline-block"></span>
+                <span class="view-more-dots_item d-inline-block"></span>
+            </div>
+            <!--pagination-->
+            <nav class="main-pagination-wrapp d-flex justify-content-center" aria-label="page navigation">
+                <ul class="pagination flex-wrap rounded-0">
+                    <li class="page-item disabled"><a class="page-link text-tert-clr font-15 rounded-0" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link text-gray-clr font-16" href="#">1<span class="sr-only">(current)</span></a></li>
+                    <li class="page-item"><a class="page-link text-gray-clr font-16" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link text-gray-clr font-16" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link text-gray-clr font-16" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link text-gray-clr font-16" href="#">&#8228;&#8228;&#8228;</a></li>
+                    <li class="page-item"><a class="page-link text-tert-clr font-15 rounded-0" href="#">Next</a></li>
+                </ul>
+            </nav>
+
+        </div>
+
+
+        <!--scroll top button-->
+        <button id="scrollTopBtn" class="scroll-top-btn d-flex align-items-center justify-content-center pointer">
+            <svg viewBox="0 0 17 10" width="17px" height="10px">
+                <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M0.000,8.111 L1.984,10.005 L8.498,3.789 L15.010,10.005 L16.995,8.111 L8.498,0.001 L0.000,8.111 Z"></path>
+            </svg>
+        </button>
+    </main>
 @stop
 @section("js")
 

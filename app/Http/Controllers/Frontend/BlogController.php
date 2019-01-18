@@ -15,6 +15,7 @@ class BlogController extends Controller
     public function index()
     {
         $posts = Posts::active()->orderby('created_at','desc')->get();
+        dd($posts->toArray());
         return $this->view('index',compact('posts'));
     }
 

@@ -25,7 +25,7 @@
 
     <div class="row">
         @foreach($imports as $import)
-            <div class="card col-md-2">
+            <div class="card col-md-2 col-sm-4">
                 <div class="files">
                     <div class="delete_file text-center" data-id="{{$import["id"]}}">X</div>
                     <div class="category text-center bg-primary">{{$import["category"]}}</div>
@@ -78,12 +78,12 @@
         }
         .files {
             position: relative;
-            background: url("/public/img/file.jpg");
+            background: url("/public/img/excel.png");
             width: 100%;
             height: 200px;
             -webkit-background-size:cover;
             background-size: cover;
-            border: 1px solid #337ab7;
+            border: 1px solid #227547;
         }
         .delete_file{
             position: absolute;
