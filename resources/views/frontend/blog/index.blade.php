@@ -75,7 +75,7 @@
                 <div class="row justify-content-md-start justify-content-center">
                     @foreach($posts as $post)
 
-                        <a href="#" class="news-wrap_col">
+                        <a href="{!! post_url($post) !!}" class="news-wrap_col">
                             <span class="news-card main-transition position-relative">
                                 <span class="news-card_view d-block position-relative">
                                     <!--news main image-->
