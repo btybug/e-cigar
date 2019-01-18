@@ -982,11 +982,6 @@ body.get-cover:after {
     box-shadow: none;
 }
 
-/*new css for single page items*/
-.single-product-row-repeatable:not(:last-of-type) {
-    margin-bottom: 25px;
-}
-
 
 @media (min-width: 769px) {
 
@@ -1258,4 +1253,10 @@ body.get-cover:after {
     .product-single-view-outer {
         width: 220px;
     }
+}
+
+/*new css for single page items*/
+
+.single-product-row-repeatable:not(:last-of-type) {
+    margin-bottom: 25px;
 }
