@@ -159,7 +159,20 @@ $(function() {
 
     });
 
+    // product range count
+    $('body').on('click','.range-steps_count',function () {
+        let rangeItem = $(this).closest('.range-steps_item')
 
+        if(!rangeItem.find('input').is(":checked")){
+            $('.range-steps_item').removeClass('active line-none')
+            rangeItem.find('input').attr('checked','checked')
+            $(this).closest('.range-steps_item').addClass('active').nextAll().addClass('line-none')
+            // rangeItem.addClass('active line-none')
+        }else{
+
+        }
+
+    });
 
 
 

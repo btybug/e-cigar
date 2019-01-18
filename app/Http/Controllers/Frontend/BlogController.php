@@ -12,11 +12,15 @@ class BlogController extends Controller
 {
     protected $view='frontend.blog';
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Posts::active()->orderby('created_at','desc')->get();
+        $per_page = $request->get('per-page',15);
+        $sort = $request->get('sort',"desc");
+
+
+        $posts = Posts::active()->orderby('created_at',$sort)->paginate($per_page);
 //        dd($posts->toArray());
-        return $this->view('index',compact('posts'));
+        return $this->view('index',compact('posts'))->with('filterModel',$request->all());
     }
 
     public function getSingle($post_url)

@@ -3,6 +3,8 @@
     <main class="main-content">
         <div class="top-filters">
             <div class="container main-max-width">
+                {!! Form::model($filterModel,['url' => route('blog'),'id' =>'news-filter','method' => 'GET']) !!}
+
                 <div class="d-flex align-items-center position-relative">
                     @include('frontend._partials.individual_left_bar',['type' => 'news'])
 
@@ -43,30 +45,37 @@
                             </span>
                         </div>
                         <div class="sort-by_select d-flex align-items-center position-relative">
-                            <label for="sortByLimit" class="text-main-clr mb-0 text-uppercase">Limit: </label>
+                            <label for="sortByLimit" class="text-main-clr mb-0 text-uppercase">LIMIT: </label>
                             <div class="select-wall">
-                                <select id="sortByLimit" class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark " style="width: 250px">
-                                    <option class="text-uppercase" selected="selected">15 per page</option>
-                                    <option class="text-uppercase">30 per page</option>
-                                    <option class="text-uppercase">5 perpage</option>
-                                </select>
+                                {!! Form::select('per-page',[
+                                    '' => "Select",
+                                    '15' =>'15 per page',
+                                    '5' =>'5 per page',
+                                    '30' =>'30 per page'
+                                ], null,[
+                                    'class' =>'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                                    'style' => 'width: 250px'
+                                ]) !!}
                             </div>
                         </div>
                         <div class="sort-by_select d-flex align-items-center position-relative">
                             <label for="sortBy" class="text-main-clr mb-0 text-uppercase">SORT BY: </label>
                             <div class="select-wall">
-                                <select id="sortBy" class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark " style="width: 250px">
-                                    <option class="text-uppercase" selected="selected">NEWEST</option>
-                                    <option class="text-uppercase">Brandos</option>
-                                    <option class="text-uppercase">Eleaf</option>
-                                </select>
+                                {!! Form::select('sort',[
+                                    '' => "Select",
+                                    'desc' => "NEWEST",
+                                    'asc' => "OLDEST",
+                                ],null,[
+                                    'class' => 'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                                    'style' => 'width: 250px'
+                                ]) !!}
                             </div>
                         </div>
 
 
                     </div>
                 </div>
-
+                {!! Form::close() !!}
             </div>
         </div>
 
@@ -79,7 +88,7 @@
                             <span class="news-card main-transition position-relative">
                                 <span class="news-card_view d-block position-relative">
                                     <!--news main image-->
-                                        <img class="card-img-top" src="img/temp/news-1.jpg" alt="">
+                                        <img class="card-img-top"  src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="{!! ($post->image)?getImage($post->image)->seo_alt:'' !!}">
                                     <!--share icon-->
                                     <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
                                     <svg iewBox="0 0 20 21" width="20px" height="21px">
@@ -90,10 +99,9 @@
                                 </span>
                                 <span class="news-card_body">
                                     <span class="news-card_body-text d-block">
-                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
+                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">{!! $post->title !!}</span>
                                         <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                            Hello dribbble community . We started
-                                            our new design team .
+                                            {!! $post->short_description !!}
                                         </span>
                                     </span>
                                     <span class="news-card_footer d-flex align-items-center">
@@ -119,6 +127,8 @@
 
                             </span>
                         </a>
+
+{{--                        <strong>{!! BBgetDateFormat($post->created_at,'d') !!}</strong>{!! BBgetDateFormat($post->created_at,'M') !!}--}}
 
                     @endforeach
 
@@ -154,6 +164,8 @@
                 </ul>
             </nav>
 
+            {{--{{$posts->links()}}--}}
+
         </div>
 
 
@@ -177,6 +189,12 @@
         }else {
             $(".blogs").removeClass("blogs-list")
         }
+    })
+
+    $(document).ready(function(){
+        $("body").on('change','.select-filter',function () {
+            $("#news-filter").submit()
+        })
     })
 </script>
 

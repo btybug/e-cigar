@@ -588,12 +588,16 @@ function time_ago($datetime, $full = false)
 
 function meta($object, $type = 'seo_posts')
 {
+
     $settings = new \App\Models\Settings();
     $metaTags = $settings->getEditableData($type);
     if (!$metaTags) return null;
     $metaTags = $metaTags->toArray();
     $columns = $object->toArray();
-    $HTML = Html::meta('og:image', url($object->image))->toHtml() . "\n\r";
+    $HTML = "";
+    if($object->image){
+        $HTML .= Html::meta('og:image', url($object->image))->toHtml() . "\n\r";
+    }
     foreach ($metaTags as $name => $metaTag) {
         if (!is_null($metaTag)) {
             $objSeo = $object->seo()->where('name', $name)->where('type', 'general')->first();
