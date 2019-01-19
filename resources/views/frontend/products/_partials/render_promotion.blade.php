@@ -17,9 +17,8 @@
                     @php
                         $poptions = $promotion->type_attrs_pivot()->with('sticker')->where('attributes_id',$promotionAttr->id)->get();
                     @endphp
-
-                    @if(\View::exists('frontend.products._partials.singleExtra.'.$promotion->pivot->type))
-                        @include('frontend.products._partials.singleExtra.'.$promotion->pivot->type)
+                    @if(\View::exists('frontend.products._partials.singleExtra.'.$promotionAttr->pivot->type))
+                        @include('frontend.products._partials.singleExtra.'.$promotionAttr->pivot->type)
                     @endif
                 @endforeach
             </div>
@@ -30,7 +29,7 @@
                 $promotionPrice = ($variation) ? $model->promotion_prices()->where('variation_id',$variation->id)->first() : null;
             @endphp
             <div>
-
+                {{ $variation->name }}:
             </div>
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-place-promotion">
                   {!! ($promotionPrice) ? "€" . $promotionPrice->price : (($variation) ? "€" . $variation->price : "no price") !!}
