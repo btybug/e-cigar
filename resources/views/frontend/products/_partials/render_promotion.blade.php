@@ -1,9 +1,14 @@
 <div class="product-single-info_row poptions-group" data-promotion="{{ $promotion->id }}">
-    <h3 class="product-single-info_title font-main-bold font-20 text-uppercase text-tert-clr">
+    <h3 class="product-single-info_title d-flex align-items-center font-main-bold font-20 text-uppercase text-tert-clr">
         {{ $promotion->name }}
         @if(! $promotion->pivot->type)
             <div class="col-md-6">
-                {!! Form::checkbox('',1,null,['class' => 'optional_checkbox']) !!}
+                <div class="custom-control custom-checkbox">
+                    {!! Form::checkbox('',1,null,['class' => 'optional_checkbox custom-control-input','id' => 'optionalCheckbox']) !!}
+                    <label for="optionalCheckbox" class="product-single-info_radio-label custom-control-label pointer"></label>
+                </div>
+
+
                 <input type="hidden" value="" class="variation_items optional_item">
             </div>
         @else

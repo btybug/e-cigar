@@ -654,6 +654,12 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     margin-bottom: 10px;
 }
 
+.price-place-promotion {
+    width: 100px;
+    word-wrap: break-word;
+    text-align: center;
+}
+
 /*range single product*/
 .range-steps {
     width: 412px;

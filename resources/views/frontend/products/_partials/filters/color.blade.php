@@ -5,11 +5,12 @@
             <div class="col-sm-3 single-wall">
                 <div class="custom-control custom-radio custom-control-inline" style="position: relative">
                     {!! Form::radio("select_filter[$filter->id]",$sticker->id,null,['class' => 'select-filter custom-control-input','id' => 'customColor'.$filter->id.$sticker->id]) !!}
-                    <label class="custom-control-label pointer"
-                           for="customColor{{ $filter->id.$sticker->id }}">
-                        {{ $sticker->name }}
+                    <label class="custom-control-label pointer position-relative"
+                           for="customColor{{ $filter->id.$sticker->id }}" style="background: {{ $sticker->color }}">
+
+                        <span class="d-inline-block custom-control-label-txt position-absolute"> {{ $sticker->name }}</span>
+
                     </label>
-                    <span style="background: {{ $sticker->color }};position: absolute;left:0;top:0;width: 100%;height: 100%;"></span>
                 </div>
             </div>
         @endforeach

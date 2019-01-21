@@ -458,7 +458,7 @@
 
                         </div>
 
-                        <div class="col-lg-1 col-2 offset-lg-1 d-flex flex-column pr-0 product-single-share-col">
+                        <div class="col-lg-1 col-2 ml-auto d-flex flex-column pr-0 product-single-share-col">
                             <div class="ml-auto">
                                 <div class="product-single-share-outer d-flex flex-column align-items-center justify-content-center">
                                     <span class="d-inline-block font-main-bold font-22">87</span>
