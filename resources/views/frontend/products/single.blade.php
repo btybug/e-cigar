@@ -527,22 +527,21 @@
             <div class="continue-shp-wrapp position-absolute">
                 <div class="container main-max-width h-100 p-0">
                     <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between h-100">
-                        <a href="#" class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">continue
+                        <a href="{{ route('categories_front') }}" class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">continue
                             shopping</a>
                         <div class="d-flex align-items-center ml-lg-auto continue-shp-wrapp_right">
                             <div class="continue-shp-wrapp_qty position-relative">
                                 <!--minus qty-->
-                                <span class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus">
+                                <span data-type="minus" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count">
                         <svg viewBox="0 0 20 3"
                              width="20px" height="3px">
 <path fill-rule="evenodd" fill="rgb(214, 217, 225)"
       d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"/>
 </svg>
                     </span>
-                                <input type="number" class="field-input w-100 h-100 font-23 text-center border-0"
-                                       value="1" min="number">
+                                {!! Form::number('',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 product-qty-select','min' => 'number']) !!}
                                 <!--plus qty-->
-                                <span class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus">
+                                <span data-type="plus" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count">
                         <svg
                                 viewBox="0 0 20 20"
                                 width="20px" height="20px">
@@ -551,7 +550,7 @@
 </svg></span>
                             </div>
                             <a href="#"
-                               class="product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
+                               class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
                                 <span class="product-card_btn-text">add to cart</span>
                                 <span class="d-inline-block ml-auto">
                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -635,6 +634,20 @@
                     src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
             <script>
                 $(document).ready(function () {
+                    $("body").on('click','.qty-count',function () {
+                        let qty = $('.product-qty-select').val();
+                        let type = $(this).data('type');
+                        if(type == 'plus'){
+                            qty = parseInt(qty) + 1;
+                            $('.product-qty-select').val(qty)
+                        }else{
+                            if(qty > 1){
+                                qty -=1;
+                                $('.product-qty-select').val(qty)
+                            }
+                        }
+                    })
+
                     get_price();
 
                     $("body").on('change', '.select-variation-option', function () {

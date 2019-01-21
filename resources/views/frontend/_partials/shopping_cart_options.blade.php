@@ -26,7 +26,7 @@
                 <h3 class="cart-product-qty-title text-white">{!! $stock->name !!}</h3>
                 <div class="cart-product-dtls font-main-light">
                     @foreach($item->attributes->variation->options as $voption)
-                        <span class="d-block">{{ $voption->attr->name }} : {{ $voption->option->name }}</span>
+                        <span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>
                     @endforeach
                 </div>
             </div>

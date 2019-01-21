@@ -16,4 +16,14 @@ class AttributeStickers extends Model
      * @var array
      */
     protected $guarded = ['id'];
+
+    public function attr()
+    {
+        return $this->belongsTo(Attributes::class, 'attributes_id');
+    }
+
+    public function sticker()
+    {
+        return $this->belongsTo(Stickers::class, 'sticker_id');
+    }
 }

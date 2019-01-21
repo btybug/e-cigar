@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <section class="site-content section-cart-page">
+    <section class="main-content site-content section-cart-page">
         <div class="container">
             <div class="breadcum-area">
                 <div class="breadcum-inner">

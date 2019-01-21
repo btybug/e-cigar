@@ -54,7 +54,7 @@
                                                             <div class="d-flex flex-wrap">
                                                                 @if($stock->type == 'variation_product')
                                                                     @foreach($main->attributes->variation->options as $voption)
-                                                                        <div class="h5 mr-1"><span class="badge badge-secondary">{{ $voption->option->name }}</span></div>
+                                                                        <div class="h5 mr-1"><span class="badge badge-secondary">{{ $voption->attribute_sticker->sticker->name }}</span></div>
                                                                     @endforeach
                                                                 @endif
                                                             </div>
@@ -93,7 +93,7 @@
                                                                     <div class="d-flex flex-wrap">
                                                                         @if($variationReq->stock->type == 'variation_product')
                                                                             @foreach($variationReq->options as $voption)
-                                                                                <div class="h5 mr-1"><span class="badge badge-secondary">{{ $voption->option->name }}</span></div>
+                                                                                <div class="h5 mr-1"><span class="badge badge-secondary">{{ $voption->attribute_sticker->sticker->name }}</span></div>
                                                                             @endforeach
                                                                         @endif
                                                                     </div>
