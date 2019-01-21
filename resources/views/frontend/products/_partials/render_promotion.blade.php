@@ -3,10 +3,7 @@
         {{ $promotion->name }}
         @if(! $promotion->pivot->type)
             <div class="col-md-6">
-                <div class="custom-control custom-checkbox">
-                    {!! Form::checkbox('',1,null,['class' => 'optional_checkbox custom-control-input','id' => 'optionalCheckbox']) !!}
-                    <label for="optionalCheckbox" class="product-single-info_radio-label custom-control-label pointer"></label>
-                </div>
+                    {!! Form::checkbox('',1,null,['class' => 'optional_checkbox','id' => 'optionalCheckbox']) !!}
 
 
                 <input type="hidden" value="" class="variation_items optional_item">

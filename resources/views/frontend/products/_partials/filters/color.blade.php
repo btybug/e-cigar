@@ -8,7 +8,7 @@
                     <label class="custom-control-label pointer position-relative"
                            for="customColor{{ $filter->id.$sticker->id }}" style="background: {{ $sticker->color }}">
 
-                        <span class="d-inline-block custom-control-label-txt position-absolute"> {{ $sticker->name }}</span>
+                        <span class="d-inline-block custom-control-label-txt text-capitalize position-absolute"> {{ $sticker->name }}</span>
 
                     </label>
                 </div>

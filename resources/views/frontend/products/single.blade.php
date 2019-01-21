@@ -785,7 +785,8 @@
                                 if (!data.error) {
                                     var price = "€" + data.price;
                                     if (data.message) {
-                                        price = data.message + " €" + data.price;
+//                                        price = data.message + " €" + data.price;
+                                        price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + " €" + data.price;
                                     }
 
                                     $("[data-promotion='" + pid + "'] .price-place-promotion").html(price);
@@ -793,7 +794,7 @@
 //                        $("#variation_uid").val(data.variation_id);
 //                        $(".btn-add-to-cart").addClass('add-to-cart');
                                 } else {
-                                    $("[data-promotion='" + pid + "'] .price-place-promotion").html(data.message);
+                                    $("[data-promotion='" + pid + "'] .price-place-promotion").html('<span class="d-inline-block font-16">' + data.message + '</span>');
 //                        $("#variation_uid").val('');
                                 }
                             }
