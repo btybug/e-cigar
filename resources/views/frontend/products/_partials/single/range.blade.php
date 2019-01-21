@@ -5,7 +5,7 @@
             @foreach($options as $item)
                 <div class="range-steps_item {{ ($loop->first) ? 'active' : '' }}">
                     <label for="rm{{ $item->id }}"></label>
-                    <input type="radio" class="select-variation-radio-option" id="rm{{ $item->id }}" data-name="{{ $modelattr->id }}"
+                    <input type="radio" id="rm{{ $item->id }}"  class="select-variation-radio-option"  data-name="{{ $modelattr->id }}"
                            {{ ($loop->first) ? 'checked' : '' }} value="{{ $item->sticker->id }}" name="rate{{ $modelattr->id }}">
                     <span class="range-steps_count font-15 font-sec-bold">{{ $item->sticker->name }}</span>
                 </div>
@@ -13,3 +13,5 @@
         @endif
     </div>
 </div>
+
+
