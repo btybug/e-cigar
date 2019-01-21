@@ -2,12 +2,14 @@
     <h3 class="product-single-info_title d-flex align-items-center font-main-bold font-20 text-uppercase text-tert-clr">
         {{ $promotion->name }}
         @if(! $promotion->pivot->type)
-            <div class="col-md-6">
-                    {!! Form::checkbox('',1,null,['class' => 'optional_checkbox','id' => 'optionalCheckbox']) !!}
+            <div class="custom-control custom-checkbox">
+                {!! Form::checkbox('',1,null,['class' => 'optional_checkbox custom-control-input product-single-info_title-check','id' => 'optionalCheckbox']) !!}
+
+                <label class="custom-control-label product-single-info_title-label product-single-info_check-label pointer" for="optionalCheckbox"></label>
+            </div>
 
 
                 <input type="hidden" value="" class="variation_items optional_item">
-            </div>
         @else
             <input type="hidden" value="" class="variation_items required_item">
         @endif
