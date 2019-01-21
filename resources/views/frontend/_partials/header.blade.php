@@ -7,22 +7,32 @@
                             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
+                    @if(Auth::check())
                     <div id="ptofileBtn" class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer">
-                        @if(Auth::check())
                             <div class="user-img">
                                 <img src="{!! url('/public/img/user.png') !!}" alt="user">
                             </div>
                             <span class="user-name font-15 text-sec-clr font-main-bold">
                                 Hi {{ Auth::user()->name }}
                             </span>
-                        @else
-                            <span class="d-inline-block">
-                            <a href="{!! route('login') !!}" class="header-login-link">Login</a>
-                            <span class="header-login-icon">&nbsp;&#47;&nbsp;</span>
-                            <a href="{!! route('register') !!}" class="header-login-link">Register</a>
-                            </span>
-                        @endif
                     </div>
+                        @else
+                            {{--<span class="d-inline-block">--}}
+                            {{--<a href="{!! route('login') !!}" class="header-login-link">Login</a>--}}
+                            {{--<span class="header-login-icon">&nbsp;&#47;&nbsp;</span>--}}
+                            {{--<a href="{!! route('register') !!}" class="header-login-link">Register</a>--}}
+                            {{--</span>--}}
+
+
+                            <div class="form-inline my-lg-0 h-100 align-self-lg-auto align-self-baseline pointer">
+                                <span class="d-inline-block">
+                                    <a href="javascript:void(0);" class="text-sec-clr header-login-link"  data-toggle="modal" data-target="#loginModal">Login</a>
+                                    <span class="text-sec-clr">&nbsp;/&nbsp;</span>
+                                    <a href="javascript:void(0);" class="text-sec-clr header-login-link" data-toggle="modal" data-target="#registerModal">Register</a>
+                                </span>
+                            </div>
+                        @endif
+
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
@@ -301,11 +311,17 @@
             </a>
         </li>
     </ul>
-    {!! Form::open(['url'=>route('logout')]) !!}
-        <button class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer mt-auto">Logout</button>
+    {!! Form::open(['url'=>route('logout'),'class' => 'mt-auto']) !!}
+        <button class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">Logout</button>
     {!! Form::close() !!}
 </div>
 @endif
 <div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column">
    @include('frontend._partials.shopping_cart_options')
 </div>
+
+<!--modal Login-->
+@include("frontend._partials.login_modal")
+
+<!--modal Register-->
+@include("frontend._partials.register_modal")

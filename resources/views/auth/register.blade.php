@@ -52,8 +52,8 @@
 
                                     @if ($errors->has('name'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('name') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -68,8 +68,8 @@
 
                                     @if ($errors->has('last_name'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('last_name') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -85,8 +85,8 @@
 
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -101,8 +101,8 @@
 
                                     @if ($errors->has('phone'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('phone') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('phone') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -376,9 +376,7 @@
                                        for="gender">{{ __('Gender') }}</label>
                                 <div class="col-md-6">
                                     <label class="radio-inline" for="male">
-                                        <input type="radio" name="gender" id="male"
-                                               class="{{ $errors->has('gender') ? ' is-invalid' : '' }}" value="male"
-                                               checked="checked">
+                                        <input type="radio" name="gender" id="male" class="{{ $errors->has('gender') ? ' is-invalid' : '' }}" value="male" checked="checked">
                                         Male
                                     </label>
                                     <label class="radio-inline" for="female">
@@ -388,8 +386,8 @@
                                     </label>
                                     @if ($errors->has('gender'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('gender') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('gender') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
@@ -405,8 +403,8 @@
 
                                     @if ($errors->has('password'))
                                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('password') }}</strong>
-                                </span>
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>

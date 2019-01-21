@@ -168,8 +168,6 @@ $(function() {
             rangeItem.find('input').attr('checked','checked')
             $(this).closest('.range-steps_item').addClass('active').nextAll().addClass('line-none')
             // rangeItem.addClass('active line-none')
-        }else{
-
         }
 
     });
@@ -193,6 +191,6 @@ $(function() {
     });
 
     // sidebar profile
-    openSidebar($('#profileBtn'), $('#profileSidebar'));
+    // openSidebar($('#profileBtn'), $('#profileSidebar'));
 
 } );
