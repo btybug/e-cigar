@@ -314,13 +314,13 @@ a:hover {
     background: #353636;
 }
 
-.hidden-sidebar {
-    height: calc(100% - 100px);
-    overflow-y: auto;
-    position: absolute;
-    transition: right .5s;
-    z-index:999999;
-}
+/*.hidden-sidebar {*/
+    /*height: calc(100% - 100px);*/
+    /*overflow-y: auto;*/
+    /*position: absolute;*/
+    /*transition: right .5s;*/
+    /*z-index:999999;*/
+/*}*/
 
 .hidden-sidebar.show {
     right: 0;

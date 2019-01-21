@@ -982,6 +982,10 @@ body.get-cover:after {
     box-shadow: none;
 }
 
+.modal {
+    z-index: 99999;
+}
+
 
 @media (min-width: 769px) {
 
