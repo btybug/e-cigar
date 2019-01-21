@@ -200,7 +200,7 @@ header .header-top .navbar-nav .nav-item.nav-item--has-dropdown a {
     padding-right: 8px !important;
 }
 
-header .header-top .navbar-nav a {
+header .header-top .navbar-nav .nav-link {
     color: #ffffff !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
