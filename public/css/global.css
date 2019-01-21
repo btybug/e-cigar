@@ -274,3 +274,6 @@ textarea {
 .main-scrollbar::-webkit-scrollbar-track {  background: #ebeef4; }
 .main-scrollbar::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 
+body::-webkit-scrollbar {  width: 5px;}
+body::-webkit-scrollbar-track {  background: #ebeef4; }
+body::-webkit-scrollbar-thumb {  background: #9cbcf9; }
