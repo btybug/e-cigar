@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="loginPass" class="text-gray-clr register-form_label">Password</label>
-                                <input id="loginPass" type="text" class="form-control register-form_input-text register-form_input-text--login{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password">
+                                <input id="loginPass" type="password" class="form-control register-form_input-text register-form_input-text--login{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password">
                                 @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
