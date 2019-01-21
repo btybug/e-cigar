@@ -244,8 +244,11 @@ class InventoryController extends Controller
         $model = Stock::findOrFail($request->id);
         $type = $request->type;
         $price = json_decode($request->price,true);
+//        dd($price);
 
         $html = \View("admin.inventory._partials.extra_item", compact(['model','type','price']))->render();
+//        dd($html);
+//        dd(\Response::json(['error' => false, 'html' => $html]));
         return \Response::json(['error' => false, 'html' => $html]);
     }
 

@@ -86,8 +86,8 @@
                         </td>
                         <td class="variation-options-place">
                             @foreach($variation->options as $items)
-                                <p><strong> {{ \App\Models\Attributes::getById($items->attributes_id) }}
-                                        :</strong> {{ \App\Models\Stickers::getById($items->options_id) }}</p>
+                                <p><strong> {{ $items->attribute_sticker->attr->name }}
+                                        :</strong> {{ $items->attribute_sticker->sticker->name }}</p>
                             @endforeach
                         </td>
                         <td>
