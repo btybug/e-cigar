@@ -818,10 +818,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .top-filters .all-filters .filter-wall.colors .custom-control-label {
-    top: 42px;
-}
-
-.top-filters .all-filters .filter-wall.colors .custom-control-label {
     width: 36px;
     height: 36px;
     border-radius: 0;

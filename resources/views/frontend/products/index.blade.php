@@ -167,7 +167,7 @@
 
                 </div>
             </div>
-            <div class="products-wrap display-grid">
+            <div class="products-wrap change-display-wrap display-grid">
                 <div class="container main-max-width">
                     <div class="row justify-content-md-start justify-content-center">
                         @if(count($products))
