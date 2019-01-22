@@ -59,6 +59,7 @@ class RegisterController extends Controller
             'gender' => 'required|in:male,female',
             'country' => 'required',
             'password' => 'required|string|min:6|confirmed',
+            'g-recaptcha-response' => ['required', 'recaptcha']
         ]);
     }
 

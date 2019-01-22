@@ -48,4 +48,13 @@ class LoginController extends Controller
             $this->redirectTo = '/admin';
         };
     }
+
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'g-recaptcha-response' => ['required', 'recaptcha']
+        ]);
+    }
 }
