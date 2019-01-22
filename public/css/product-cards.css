@@ -413,6 +413,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .product-single-info_label {
     margin-right: 40px;
+    min-width: 100px;
 }
 
 .product-single-info_row {
