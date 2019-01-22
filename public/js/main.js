@@ -182,13 +182,6 @@ $(function() {
     })
 
 
-
-
-
-
-
-
-
     // display filter for mobile
     $('body').on('click', '.filters-for-mobile .btn--filter', function () {
         $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
@@ -199,7 +192,21 @@ $(function() {
         $('body').find('.dark-bg_body').removeClass('show');
     });
 
+    // remove cart-info from cart sidbar
+    $('.cart-sidebar_item-close').on('click', function (e) {
+        e.stopPropagation();
+        $(this).parent($('.cart-sidebar_item')).remove();
+        if(!$('.cart-sidebar_item').length) {
+            $('#cartSidebarEmptyMsg').show();
+        } else {
+            $('#cartSidebarEmptyMsg').hide();
+        }
+    });
+
     // sidebar profile
-    // openSidebar($('#profileBtn'), $('#profileSidebar'));
+    openSidebar($('#profileBtn'), $('#profileSidebar'));
+
+    // sidebar shopping cart
+    openSidebar($('#shpCartSidebarBtn'), $('#shpCartSidebar'));
 
 } );

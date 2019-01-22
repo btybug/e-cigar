@@ -428,11 +428,11 @@ a:hover {
     display: none;
 }
 
-.cart-product-qty-select {
-    background-position: right 6px center;
-    padding: 6px;
-    width: 55px;
-}
+/*.cart-product-qty-select {*/
+    /*background-position: right 6px center;*/
+    /*padding: 6px;*/
+    /*width: 55px;*/
+/*}*/
 
 .number-input-no-arrows::-webkit-inner-spin-button,
 .number-input-no-arrows::-webkit-outer-spin-button {
