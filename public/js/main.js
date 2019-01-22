@@ -168,9 +168,11 @@ $(function() {
             $(this).parent().nextAll($('.range-steps_item')).addClass('line-none');
         }
     });
+
+
     $('body').on('click','.range-steps_count',function () {
         let rangeItem = $(this).closest('.range-steps_item')
-
+        $(this).closest('.range-steps').find('input').removeAttr('checked');
         if(!rangeItem.find('input').is(":checked")){
             $(this).closest('.range-steps').find('.range-steps_item').removeClass('active line-none')
             rangeItem.find('input').attr('checked','checked')
