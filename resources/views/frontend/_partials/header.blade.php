@@ -240,6 +240,12 @@
 
 
 
+    {{--use App\Models\Orders;--}}
+
+    {{--$count_orders = Orders::where("user_id",Auth::id())->count();--}}
+    {{--$count_favorites = \App\Models\Favorites::where("user_id",Auth::id())->count();--}}
+    {{--dd($count_orders,$count_favorites);--}}
+
 
 
 
@@ -273,6 +279,9 @@
                     </svg>
                 </span>
                 <span class="d-inline-block">Favorites</span>
+                <span class="profile-sidebar-menu_item-amount d-inline-flex align-items-center justify-content-center font-14">
+                    {{\App\Models\Favorites::where("user_id",Auth::id())->count()}}
+                </span>
             </a>
         </li>
         <li class="profile-sidebar-menu_item">
@@ -285,7 +294,9 @@
                 </span>
                 <span class="d-inline-block">Orders</span>
                 <!--order amount-->
-                <span class="profile-sidebar-menu_item-amount d-inline-flex align-items-center justify-content-center font-14">1</span>
+                <span class="profile-sidebar-menu_item-amount d-inline-flex align-items-center justify-content-center font-14">
+                    {{\App\Models\Orders::where("user_id",Auth::id())->count()}}
+                </span>
             </a>
         </li>
         <li class="profile-sidebar-menu_item">
