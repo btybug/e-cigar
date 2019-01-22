@@ -415,26 +415,38 @@
                         get_price();
                     });
 
-                    $("body").on('click', '.__add_to_card', function () {
-                        var variationId = $(this).data("id");
+                    $("body").on('click', '.add-to-cart', function () {
+                        var variationId = $("#variation_uid").val();
 
                         if (variationId && variationId != '') {
+                            var requiredItems = [];
+                            var optionalItems = [];
+
+                            var requiredItemsData = $(".required_item");
+                            var optionalItemsData = $(".optional_item");
+
+
+                            optionalItemsData.each(function (i, e) {
+                                if ($(e).parent().find('.optional_checkbox').is(':checked')) {
+                                    optionalItems.push($(e).val());
+                                }
+                            });
+
+                            requiredItemsData.each(function (i, e) {
+                                requiredItems.push($(e).val());
+                            });
 //                    console.log(requiredItems)
 //                    return false;
-                            console.log(variationId);
                             $.ajax({
                                 type: "post",
                                 url: "/add-to-cart",
                                 cache: false,
                                 datatype: "json",
-                                data: {
-                                    uid: variationId
-                                },
+                                data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems},
                                 headers: {
                                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                                 },
                                 success: function (data) {
-                                    console.log(data);
                                     if (!data.error) {
                                         $(".cart-count").html(data.count)
                                         $('#cartSidebar').html(data.headerHtml)
@@ -447,7 +459,7 @@
                         } else {
                             alert('Select available variation');
                         }
-                    });
+                    })
 
 
                     function get_price() {

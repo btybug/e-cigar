@@ -253,7 +253,7 @@
                                                 </div>
                                             </div>
                                             <!--btn-->
-                                            <a
+                                            <a href="javascript:void(0)"
                                                class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer __add_to_card" data-id="{{ $product->variation_id }}">
                                                 <span class="product-card_btn-text">add to cart</span>
                                                 <span class="d-inline-block ml-auto">

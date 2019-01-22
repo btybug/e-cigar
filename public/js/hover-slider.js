@@ -5,16 +5,13 @@ $(document).ready(function () {
 
         this.myEvents = function () {
 
-            $(".change-display-wrap .product-card_thumb-img-holder").mouseover(function () {
-                // console.log(1)
-
+            $(".product-card_thumb-img-holder").mouseover(function(){
                 let img_path = $(this).find("img").attr("src")
-                let data_img = $(this).find("img").attr("data-img")
-
-                $(".products-wrap_col:nth-child(" + data_img + ") .product-card_thumb-img-holder").removeClass("active_slider")
-                $(this).addClass("active_slider")
-
-                $(".products-wrap_col:nth-child(" + data_img + ") img.card-img-top").attr("src", img_path)
+                $(this).closest('.product-card_thumb-img-holder')
+                $(this).parent().find('.product-card_thumb-img-holder').removeClass("active_slider")
+                $(this).addClass("active_slider");
+                console.log()
+                $(this).closest(".product-card").find('.card-img-top').attr("src",img_path)
             })
 
         };
