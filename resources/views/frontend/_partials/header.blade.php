@@ -1,13 +1,20 @@
 <header class="main-header">
     <div class="header-top">
-        <div class="container main-max-width">
-            <div class="d-flex flex-wrap justify-content-between">
+        <div class="container main-max-width h-100">
+            <div class="d-flex flex-wrap justify-content-between h-100">
                 <nav class="navbar navbar-expand-md flex-md-row-reverse w-100 navbar-dark">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarTogglerDemo01"
-                            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                    <div class="d-flex align-items-center">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarTogglerDemo01"
+                                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="logo-small-screens d-md-none d-flex align-items-center ml-3">
+                            <img src="{!! url('/public/img/logo-icon.png') !!}"  alt="" class="logo-small-screens_logo">
+                            <h1 class="font-14 font-sec-bold text-sec-clr text-uppercase ml-2 mb-0">The Vapors Hub</h1>
+                        </div>
+                    </div>
+
                     @if(Auth::check())
                         <div id="ptofileBtn"
                              class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer">
@@ -64,8 +71,26 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{!! route('product_sales') !!}">Sales</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{!! route('blog') !!}">Community</a>
+                            <li class="nav-item nav-item--has-dropdown position-relative">
+                                <a class="nav-link" href="{!! route('blog') !!}">
+                                    Community
+                                    <span class="ml-2 d-inline-block arrow main-transition pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9px" height="6px">
+<path fill-rule="evenodd" fill="rgb(121, 121, 121)" d="M0.003,0.001 L8.998,0.001 L4.501,5.999 L0.003,0.001 Z"></path>
+</svg>
+                        </span>
+                                </a>
+                                <ul class="nav-item--has-dropdown_dropdown list-unstyled p-0">
+                                    <li class="nav-item--has-dropdown_dropdown-item">
+                                        <a href="{!! route('blog') !!}" class="nav-item--has-dropdown_dropdown-link d-inline-block w-100 text-gray-clr font-15 main-transition">News</a>
+                                    </li>
+                                    <li class="nav-item--has-dropdown_dropdown-item">
+                                        <a href="#" class="nav-item--has-dropdown_dropdown-link d-inline-block w-100 text-gray-clr font-15 main-transition">Forums</a>
+                                    </li>
+                                    <li class="nav-item--has-dropdown_dropdown-item">
+                                        <a href="#" class="nav-item--has-dropdown_dropdown-link d-inline-block w-100 text-gray-clr font-15 main-transition">Social</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link " href="{!! route('product_support') !!}">Support</a>
@@ -80,7 +105,7 @@
     <div class="header-bottom">
         <div class="container main-max-width">
             <div class="d-flex justify-content-between align-items-center header-bottom-wrapper">
-                <a href="{!! url('/') !!}" class="d-block logo">
+                <a href="{!! url('/') !!}" class="d-md-block d-none logo">
                     <img src="{!! url('/public/img/vapors-logo.png') !!}" alt="logo">
                 </a>
                 <div class="d-flex align-self-center cat-search">

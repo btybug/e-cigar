@@ -292,10 +292,10 @@ a:hover {
     outline-color: #973e4f;
 }
 
-.header-login-link {
-    color: #fff;
-    font-size: 15px;
-}
+/*.header-login-link {*/
+    /*color: #fff;*/
+    /*font-size: 15px;*/
+/*}*/
 
 .header-login-link:hover,
 .header-shop-icons-outer a:hover {
@@ -1288,13 +1288,13 @@ a:hover {
         text-align: center;
     }
 
-    .navbar-collapse {
-        background: rgba(34, 36, 35, .8);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-    }
+    /*.navbar-collapse {*/
+        /*background: rgba(34, 36, 35, .8);*/
+        /*position: absolute;*/
+        /*top: 100%;*/
+        /*left: 0;*/
+        /*width: 100%;*/
+    /*}*/
 }
 
 @media (max-width: 610px) {

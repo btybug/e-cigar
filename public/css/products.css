@@ -185,6 +185,7 @@ header .header-top {
     background-color: #353535;
     z-index: 110;
     position: relative;
+    height: 50px;
 }
 
 header .header-top .navbar {
@@ -263,6 +264,7 @@ header .header-top .products-menu-item .single-product .product-desc {
 
 header .header-bottom {
     padding: 15px 0;
+    height: 94px;
 }
 
 @media screen and (max-width: 576px) {
@@ -1462,24 +1464,7 @@ header .search-icon-mobile {
 
 }
 @media screen and (max-width: 991px) {
-    header .header-bottom .header-bottom-wrapper {
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    }
-    header .header-bottom .header-bottom-wrapper .favorite-add-cart{
-        -ms-flex-order: 2;
-        order: 2;
-    }
-    header .header-bottom .header-bottom-wrapper .logo{
-        -ms-flex-order: 1;
-        order: 1;
-    }
-    header .header-bottom .header-bottom-wrapper .cat-search{
-        width: 100%;
-        -ms-flex-order: 3;
-        order: 3;
-        margin: 5px 0 0;
-    }
+
     header .search-icon-mobile{
         display: block;
         margin-right: 25px;
@@ -1487,13 +1472,8 @@ header .search-icon-mobile {
     header .cat-search.closed{
         display: none !important;
     }
-    header .cat-search{
-        position: absolute;
-        top: 100%;
-        margin: 0 !important;
-        left: 0;
-        right: 0;
-    }
+
+
     header .header-bottom .cat-search .select2.select2-container.select2-container--default{
         width: 170px !important;
     }
