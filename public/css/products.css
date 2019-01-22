@@ -1300,6 +1300,7 @@ header .search-icon-mobile {
     cursor: pointer;
     position: absolute;
     top: -9px;
+    z-index: 1;
 }
 .range-steps .range-steps_item .range-steps_count{
     left: -3px;

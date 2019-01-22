@@ -129,7 +129,7 @@ $(function() {
     })
 
     // range
-    $('.range-steps_item.active').nextAll($('.range-steps_item')).addClass('line-none');
+    // $('.range-steps_item.active').nextAll($('.range-steps_item')).addClass('line-none');
 
 
     // cards change display
@@ -160,17 +160,24 @@ $(function() {
     });
 
     // product range count
+    $('body').on('change',' .range-steps input',function () {
+        $(this).closest('.range-steps').find('.range-steps_item').removeClass('active line-none');
+        if($(this).is(":checked")){
+            $(this).parent().addClass('active');
+            $(this).parent().addClass('line-none');
+            $(this).parent().nextAll($('.range-steps_item')).addClass('line-none');
+        }
+    });
     $('body').on('click','.range-steps_count',function () {
         let rangeItem = $(this).closest('.range-steps_item')
 
         if(!rangeItem.find('input').is(":checked")){
-            $('.range-steps_item').removeClass('active line-none')
+            $(this).closest('.range-steps').find('.range-steps_item').removeClass('active line-none')
             rangeItem.find('input').attr('checked','checked')
             $(this).closest('.range-steps_item').addClass('active').nextAll().addClass('line-none')
-            // rangeItem.addClass('active line-none')
         }
 
-    });
+    })
 
 
 
