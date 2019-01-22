@@ -32,10 +32,14 @@
     <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
     <!--<![endif]-->
 
+
+
     @if(!Auth::check())
+        <script src='https://www.google.com/recaptcha/api.js?render={!! env('GOOGLE_RECAPTCHA_KEY') !!}'></script>
         <script src={{asset("public/js/adult.js")}}></script>
         @endif
     @yield('css')
+
 </head>
 <body @if(\Request::route()->getName() == 'product_single')class="single-product-page" @endif>
 @include('frontend._partials.header')
@@ -204,6 +208,8 @@
     });
 </script>
 @yield('js')
+
+@stack('javascript')
 </body>
 
 </html>
