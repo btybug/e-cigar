@@ -53,8 +53,6 @@ class ProductsController extends Controller
     {
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
         $related_products = $vape->related_products;
-//            $a = $related_products[0]->variations[0]->price;
-//        dd($a);
 
         if (! $vape) abort(404);
 
