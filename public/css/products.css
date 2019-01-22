@@ -818,6 +818,10 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .top-filters .all-filters .filter-wall.colors .custom-control-label {
+    top: 42px;
+}
+
+.top-filters .all-filters .filter-wall.colors .custom-control-label {
     width: 36px;
     height: 36px;
     border-radius: 0;
@@ -1116,6 +1120,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     z-index: 1051;
     color: #353535;
 }
+
 .modal-accounts .close:focus{
     outline: none;
 }
@@ -1285,6 +1290,124 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 header .search-icon-mobile {
     display: none;
 }
+
+.range-steps .range-steps_item label{
+    height: 18px;
+    width: 3px;
+    border-radius: 0;
+    background-color: #b2cdff;
+    margin: 0;
+    cursor: pointer;
+    position: absolute;
+    top: -9px;
+}
+.range-steps .range-steps_item .range-steps_count{
+    left: -3px;
+    cursor: pointer;
+}
+.range-steps .range-steps_item.active:before {
+    background-image: none;
+}
+/*news inner page*/
+@media (min-width: 1630px){
+    .news-inner-wrapper .main-max-width{
+        max-width: 1310px;
+    }
+}
+.news-inner-wrapper .right-content{
+    border: 1px solid #d7d7d7;
+    padding:20px;
+}
+.news-inner-wrapper .right-content .mt-20{
+    margin-top: 20px;
+}
+.news-inner-wrapper .right-content img{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
+}
+.news-inner-wrapper .main-photo img{
+    width: 100%;
+    height: 545px;
+    object-fit: cover;
+    font-family: 'object-fit: cover;'
+}
+.news-inner-wrapper .title-cat{
+    margin-top: 36px;
+}
+.news-inner-wrapper .admin-tags{
+    margin: 30px 0;
+}
+.news-inner-wrapper .admin-tags img{
+    width: 34px;
+    height: 34px;
+    object-fit: cover;
+    font-family: 'object-fit: cover;'
+}
+.news-inner-wrapper .admin-tags .admin-photo{
+    flex: none;
+    margin-right: 22px;
+}
+.news-inner-wrapper .admin-tags .tags ul li {
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.news-inner-wrapper .admin-tags .tags ul li a {
+    display: block;
+    padding: 8px 18px;
+    border: 1px solid #d7d7d7;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    transition: 0.5s ease;
+}
+
+.news-inner-wrapper .admin-tags .tags ul li a:hover {
+    color: #5184e5;
+    border-color: #5184e5;
+}
+.news-inner-wrapper .content-images{
+    margin: 40px 0;
+}
+.news-inner-wrapper .content-images img{
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    font-family: 'object-fit: cover;'
+}
+.news-inner-wrapper .news-main-content .mb-22{
+    margin-bottom: 22px;
+}
+.news-inner-wrapper .line-wall{
+    margin: 45px 0;
+    height:1px;
+    background-color: #e3e6ed;
+    width: 100%;
+}
+.news-inner-wrapper .news-share h5{
+    margin: 25px 0;
+}
+.news-inner-wrapper .news-share li a{
+    border: 1px solid #d7d7d7;
+    padding: 15px;
+    color: #353535;
+}
+.news-inner-wrapper .news-share li a:hover{
+    color: #5184e5;
+}
+.news-inner-wrapper .tabs-wrap .nav-link{
+    color: #bdc1c9;
+}
+.news-inner-wrapper .tabs-wrap .nav-link.active,.news-inner-wrapper .tabs-wrap .nav-link:hover{
+    color: #5184e5;
+}
+.news-inner-wrapper .mb-50{
+    margin-bottom: 50px;
+}
+
 @media (min-width: 1660px) {
     .nav-item--has-dropdown_dropdown {
         margin-right: -30px;
@@ -1292,6 +1415,11 @@ header .search-icon-mobile {
     }
 }
 
+@media (max-width: 1629px) {
+    .news-inner-wrapper .products-tab .display-grid{
+        margin-bottom: 50px;
+    }
+}
 @media (max-width: 767px) {
     .header-top .main-max-width {
         max-width: 100%;
@@ -1334,6 +1462,7 @@ header .search-icon-mobile {
     header .search-icon-mobile{
         margin-right: 15px;
     }
+
 }
 @media screen and (max-width: 991px) {
     header .header-bottom .header-bottom-wrapper {
@@ -1370,6 +1499,15 @@ header .search-icon-mobile {
     }
     header .header-bottom .cat-search .select2.select2-container.select2-container--default{
         width: 170px !important;
+    }
+    .news-inner-wrapper .main-photo img{
+        height: 300px;
+    }
+    .news-inner-wrapper .right-content img{
+        height: 300px;
+    }
+    .news-inner-wrapper .content-images img{
+        height: 250px;
     }
 }
 
