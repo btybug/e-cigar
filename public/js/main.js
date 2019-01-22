@@ -160,7 +160,7 @@ $(function() {
     });
 
     // product range count
-    $('body').on('change',' .range-steps input',function () {
+    $('body').on('click ',' .range-steps input',function () {
         $(this).closest('.range-steps').find('.range-steps_item').removeClass('active line-none');
         if($(this).is(":checked")){
             $(this).parent().addClass('active');
@@ -171,15 +171,23 @@ $(function() {
 
 
     $('body').on('click','.range-steps_count',function () {
-        let rangeItem = $(this).closest('.range-steps_item')
+        let rangeItem = $(this).closest('.range-steps_item');
         $(this).closest('.range-steps').find('input').removeAttr('checked');
-        if(!rangeItem.find('input').is(":checked")){
-            $(this).closest('.range-steps').find('.range-steps_item').removeClass('active line-none')
-            rangeItem.find('input').attr('checked','checked')
-            $(this).closest('.range-steps_item').addClass('active').nextAll().addClass('line-none')
-        }
+        // if(!rangeItem.find('input').is(":checked")){
+        console.log("check, div");
+        $(this).closest('.range-steps').find('.range-steps_item').removeClass('active line-none');
+        rangeItem.find('input').removeAttr('checked');
+        $(this).closest('.range-steps_item').addClass('active').nextAll().addClass('line-none');
+        // }
 
     })
+
+
+
+
+
+
+
 
 
     // display filter for mobile

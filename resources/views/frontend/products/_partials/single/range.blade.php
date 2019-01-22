@@ -7,7 +7,7 @@
                     <label for="rm{{ $item->id }}"></label>
                     <input type="radio" id="rm{{ $item->id }}"  class="select-variation-radio-option"  data-name="{{ $modelattr->id }}"
                            {{ ($loop->first) ? 'checked' : '' }} value="{{ $item->sticker->id }}" name="rate{{ $modelattr->id }}">
-                    <span class="range-steps_count font-15 font-sec-bold">{{ $item->sticker->name }}</span>
+                    <span class="range-steps_count font-15 font-sec-bold">{{ $item->sticker->name }}aaa</span>
                 </div>
             @endforeach
         @endif
