@@ -12,6 +12,10 @@ class ValidatorServiceProvider extends ServiceProvider {
 //
 //            return false;
 //        });
+        \Validator::extend(
+            'recaptcha',
+            'App\\Validators\\ReCaptcha@validate'
+        );
         $validator->extend(
             'uniqueWhitColume',
             function ($attribute, $value, $parameters)
