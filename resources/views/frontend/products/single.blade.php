@@ -207,7 +207,7 @@
                                                                 </div>
                                                             </div>
                                                             <!--btn-->
-                                                            <a data-id="{{ $related_product->variations->first()->id }}" class="product-card_btn d-inline-flex align-items-center text-center font-15 text-white text-sec-clr text-uppercase __add_to_card">
+                                                            <a href="javascript:void(0)" data-id="{{ $related_product->variations->first()->id }}" class="product-card_btn d-inline-flex align-items-center text-center font-15 text-white text-sec-clr text-uppercase __add_to_card">
                                                                 <span class="product-card_btn-text">add to cart</span>
                                                                 <span class="d-inline-block ml-auto">
                                                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -413,6 +413,41 @@
 
                     $("body").on('change', '.select-variation-radio-option', function () {
                         get_price();
+                    });
+
+
+                    $("body").on('click', '.__add_to_card', function () {
+                        var variationId = $(this).data("id");
+
+                        if (variationId && variationId != '') {
+//                    console.log(requiredItems)
+//                    return false;
+                            console.log(variationId);
+                            $.ajax({
+                                type: "post",
+                                url: "/add-to-cart",
+                                cache: false,
+                                datatype: "json",
+                                data: {
+                                    uid: variationId
+                                },
+                                headers: {
+                                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                                },
+                                success: function (data) {
+                                    console.log(data);
+                                    if (!data.error) {
+                                        $(".cart-count").html(data.count)
+                                        $('#cartSidebar').html(data.headerHtml)
+                                        $("#headerShopCartBtn").trigger('click');
+                                    } else {
+
+                                    }
+                                }
+                            });
+                        } else {
+                            alert('Select available variation');
+                        }
                     });
 
                     $("body").on('click', '.add-to-cart', function () {
