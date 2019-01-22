@@ -55,6 +55,7 @@
                                     <button type="submit" class="btn text-uppercase btn-submit font-15">Sign in</button>
                                 </div>
                             </div>
+                            {!! Form::hidden('g-recaptcha-response',null,['id'=>'g-recaptcha-response']) !!}
                         </form>
                         <div class="row">
                             <div class="col-md-6">
