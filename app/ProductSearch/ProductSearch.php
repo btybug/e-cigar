@@ -13,8 +13,8 @@ class ProductSearch
     public static function apply(Request $filters, $category = null, $sql = false)
     {
         $query = static::applyDecoratorsFromRequest(
-                $filters, static::createObject($category,$filters)
-            );
+            $filters, static::createObject($category, $filters)
+        );
 
         return static::getResults($query, $sql, $filters);
     }
@@ -49,8 +49,8 @@ class ProductSearch
 
     private static function getResults(Builder $query, $sql, $filters)
     {
-        $response = static::checkGroupBy($filters,$query);
-        return ($sql) ? ['data' => $response, 'sql' => static::getSql($query->toSql(),$query->getBindings())] : $response;
+        $response = static::checkGroupBy($filters, $query);
+        return ($sql) ? ['data' => $response, 'sql' => static::getSql($query->toSql(), $query->getBindings())] : $response;
     }
 
     private static function getSql($sql, $bindings)
@@ -68,18 +68,20 @@ class ProductSearch
         return $sql;
     }
 
-    private static function checkGroupBy(Request $request,$query){
-        $selectFilters = array_filter($request->get('select_filter',[]));
-        $orderFilter = static::generateOrderBy($request->get('sort_by',null));
-        if(count($selectFilters)){
-            return $query->groupBy('stock_variations.id')->orderBy($orderFilter[0],$orderFilter[1])->get()->keyBy('id')->all();
-        }else{
-            return  $query->groupBy('stocks.id')->orderBy($orderFilter[0],$orderFilter[1])->get();
+    private static function checkGroupBy(Request $request, $query)
+    {
+        $selectFilters = array_filter($request->get('select_filter', []));
+        $orderFilter = static::generateOrderBy($request->get('sort_by', null));
+        if (count($selectFilters)) {
+            return $query->groupBy('stock_variations.id')->orderBy($orderFilter[0], $orderFilter[1])->get()->keyBy('id')->all();
+        } else {
+            return $query->groupBy('stocks.id')->orderBy($orderFilter[0], $orderFilter[1])->get();
         }
     }
 
-    private static function generateOrderBy(?string $orderBy){
-        switch ($orderBy){
+    private static function generateOrderBy(?string $orderBy)
+    {
+        switch ($orderBy) {
             case "newest":
                 $defaultCol = 'created_at';
                 $ordering = 'desc';
@@ -101,25 +103,26 @@ class ProductSearch
                 $ordering = 'desc';
         }
 
-        return [$defaultCol,$ordering];
+        return [$defaultCol, $ordering];
     }
 
-    private static function createObject($category = null,$request) {
+    private static function createObject($category = null, $request)
+    {
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
 
-        if($category){
+        if ($category) {
             $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
-            ->where('stock_categories.categories_id',$category->id);
+                ->where('stock_categories.categories_id', $category->id);
         }
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
             ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')
             ->leftJoin('stock_sales', 'stock_variations.id', '=', 'stock_sales.variation_id')
             ->leftJoin('attributes_stickers', 'stock_variation_options.attribute_sticker_id', '=', 'attributes_stickers.id')
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
-            ->where('stock_translations.locale',app()->getLocale())
-            ->where('stocks.status',true);
-        return $query->select('stocks.*','stock_translations.name',
-            'stock_translations.short_description','stock_variations.price','stock_variations.id as variation_id','favorites.id as is_favorite','stock_sales.price as new_price');
+            ->where('stock_translations.locale', app()->getLocale())
+            ->where('stocks.status', true);
+        return $query->select('stocks.*', 'stock_translations.name',
+            'stock_translations.short_description', 'stock_variations.price', 'stock_variations.id as variation_id', 'favorites.id as is_favorite', 'stock_sales.price as new_price');
     }
 //    private static function createObject($category = null,$request) {
 //        $query = AttributeStickers::leftJoin('stock_variation_options', 'attributes_stickers.id', '=', 'stock_variation_options.attribute_sticker_id');
