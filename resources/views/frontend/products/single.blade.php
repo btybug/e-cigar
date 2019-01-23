@@ -162,10 +162,8 @@
                                             </span>@endif
                                                 <h2 class="font-36 mb-0">{!! $vape->name !!}</h2>
                                             </div>
-
                                             <input type="hidden" value="{{ $vape->id }}" id="vpid">
                                             @include("admin.inventory._partials.render_price_form",['model' => $vape])
-
                                         </div>
                                     </div>
                                 </div>
