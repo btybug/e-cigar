@@ -1,256 +1,365 @@
 @extends('layouts.frontend')
 @section('content')
-    <main class="page-main-content">
-        <div class="d-flex h-100">
+    <main class="main-content position-relative">
+            <div class="d-flex">
+                {{--acoount sidebar--}}
+                <div class="profile-sidebar profile-sidebar--inner-pages d-flex flex-column align-items-center">
+                    <ul class="profile-sidebar-menu list-unstyled mb-0 w-100">
+                        <li class="profile-sidebar-menu_item active">
+                            <a href="{!! route('my_account') !!}" class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon">
+                    <svg
+                            viewBox="0 0 22 24"
+                            width="22px" height="24px">
+                    <path fill-rule="evenodd"  fill="rgb(81, 132, 229)"
+                          d="M20.454,23.292 C18.787,19.625 15.097,17.266 10.998,17.266 C6.903,17.266 3.213,19.625 1.542,23.292 L0.001,23.292 C1.184,20.274 3.596,17.879 6.674,16.685 L7.252,16.460 L6.711,16.160 C3.948,14.627 2.231,11.743 2.231,8.634 C2.231,3.874 6.163,0.002 10.998,0.002 C15.832,0.002 19.765,3.874 19.765,8.634 C19.765,11.744 18.050,14.628 15.289,16.160 L14.747,16.460 L15.325,16.685 C18.400,17.879 20.812,20.274 21.997,23.292 L20.454,23.292 ZM10.998,1.402 C6.949,1.402 3.655,4.646 3.655,8.634 C3.655,12.622 6.949,15.866 10.998,15.866 C15.049,15.866 18.344,12.622 18.344,8.634 C18.344,4.646 15.049,1.402 10.998,1.402 Z"/>
+                </svg>
+                </span>
+                                <span class="d-inline-block">Account</span>
+                            </a>
+                        </li>
+                        <li class="profile-sidebar-menu_item">
+                            <a href="{!! route('my_account_favourites') !!}" class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon">
+                    <svg
+                            viewBox="0 0 22 21"
+                            width="22px" height="21px">
+                    <path fill-rule="evenodd"  fill="rgb(81, 132, 229)"
+                          d="M15.952,1.493 C18.635,1.493 20.659,3.532 20.659,6.235 C20.659,9.774 17.405,12.847 11.653,17.972 L11.624,17.999 L11.596,18.027 L11.000,18.625 L10.404,18.027 L10.376,17.999 L10.346,17.972 C4.595,12.847 1.342,9.774 1.342,6.235 C1.342,3.532 3.365,1.493 6.048,1.493 C7.514,1.493 9.020,2.201 9.978,3.342 L11.000,4.560 L12.023,3.342 C12.981,2.201 14.486,1.493 15.952,1.493 M15.952,0.144 C14.077,0.144 12.208,1.031 11.000,2.470 C9.791,1.031 7.923,0.144 6.048,0.144 C2.644,0.144 0.002,2.806 0.002,6.235 C0.002,10.450 3.740,13.886 9.459,18.983 L11.000,20.530 L12.541,18.983 C18.260,13.886 21.998,10.450 21.998,6.235 C21.998,2.806 19.356,0.144 15.952,0.144 L15.952,0.144 Z"/>
+                </svg>
+                </span>
+                                <span class="d-inline-block">Favorites</span>
+                            </a>
+                        </li>
+                        <li class="profile-sidebar-menu_item">
+                            <a href="{!! route('my_account_orders') !!}" class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon">
+                    <svg
+                            viewBox="0 0 21 24"
+                            width="21px" height="24px">
+                    <path fill-rule="evenodd"  fill="rgb(81, 132, 229)"
+                          d="M16.116,4.279 L16.116,0.439 L4.839,0.439 L4.839,4.279 L0.909,4.279 L0.909,23.736 L20.046,23.736 L20.046,4.279 L16.116,4.279 ZM6.158,1.706 L14.796,1.706 L14.796,4.279 L6.158,4.279 L6.158,1.706 ZM18.726,22.468 L2.228,22.468 L2.228,5.547 L4.839,5.547 L4.839,8.095 L6.158,8.095 L6.158,5.547 L14.796,5.547 L14.796,8.095 L16.116,8.095 L16.116,5.547 L18.726,5.547 L18.726,22.468 Z"/>
+                </svg>
+                </span>
+                                <span class="d-inline-block">Orders</span>
+                            </a>
+                        </li>
+                        <li class="profile-sidebar-menu_item">
+                            <a href="{!! route('my_account_address') !!}" class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon">
+                    <svg
+                            viewBox="0 0 21 21"
+                            width="21px" height="21px">
+                    <path fill-rule="evenodd"  fill="rgb(81, 132, 229)"
+                          d="M2.709,0.614 L2.709,3.948 L0.917,3.948 L0.917,5.239 L2.709,5.239 L2.709,10.161 L0.917,10.161 L0.917,11.452 L2.709,11.452 L2.709,16.359 L0.917,16.359 L0.917,17.650 L2.709,17.650 L2.709,20.999 L20.041,20.999 L20.041,0.614 L2.709,0.614 ZM18.769,19.818 L3.980,19.818 L3.980,17.650 L7.229,17.650 L7.229,16.359 L3.980,16.359 L3.980,11.452 L7.229,11.452 L7.229,10.161 L3.980,10.161 L3.980,5.239 L7.229,5.239 L7.229,3.948 L3.980,3.948 L3.980,1.795 L18.769,1.795 L18.769,19.818 Z"/>
+                </svg>
+                </span>
+                                <span class="d-inline-block">Address</span>
+                            </a>
+                        </li>
+                        <li class="profile-sidebar-menu_item">
+                            <a href="{!! route('my_account_tickets') !!}" class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
+                <span class="d-inline-block profile-sidebar-menu_icon">
+                    <svg
+                            viewBox="0 0 15 21"
+                            width="15px" height="21px">
+                    <path fill-rule="evenodd"  fill="rgb(81, 132, 229)"
+                          d="M11.421,20.998 L10.105,20.998 C10.105,20.553 9.984,20.139 9.781,19.778 C9.331,19.003 8.476,18.477 7.499,18.477 C6.523,18.477 5.667,19.003 5.218,19.778 C5.015,20.139 4.894,20.553 4.894,20.998 L3.578,20.998 L-0.003,20.998 L-0.003,-0.003 L15.002,-0.003 L15.002,20.998 L11.421,20.998 ZM13.741,6.639 L12.028,6.639 L12.028,5.305 L13.741,5.305 L13.741,1.218 L1.258,1.218 L1.258,5.305 L2.970,5.305 L2.970,6.639 L1.258,6.639 L1.258,19.778 L3.792,19.778 C4.313,18.281 5.777,17.204 7.499,17.204 C9.222,17.204 10.686,18.281 11.207,19.778 L13.741,19.778 L13.741,6.639 ZM5.464,5.305 L9.534,5.305 L9.534,6.639 L5.464,6.639 L5.464,5.305 Z"/>
+                </svg>
+                </span>
+                                <span class="d-inline-block">Tickets</span>
 
-            @include('frontend._partials.left_bar')
-            <div class="main-right-wrapp">
-                <div class="container mt-5">
-                    {{--<div class="col-md-4">--}}
-                    {{--@include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account'])--}}
-                    {{--</div>--}}
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="mt-auto">
+                        {!! Form::open(['url'=>route('logout')]) !!}
+                        <div class="text-center">
+                            <button type="submit" class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">Logout</button>
                         </div>
-                    @endif
-                    <div class="my-account p-5 card">
-                        <div class="container">
-                            <div class="mb-4">
-                                @if($user->status)
-                                    {!! Form::model($user,['url' => route('my_account_save_contact_data')]) !!}
-                                @else
-                                    {!! Form::model($user) !!}
-                                @endif
-                                <h3>Essential</h3>
-                                @if($user->status)
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            First Name
-                                        </label>
-                                        <div class="col-md-8">
-                                            <div class="form-control">{{ $user->name }}</div>
+                        {!! Form::close() !!}
+                    </div>
+
+                </div>
+
+                <div class="profile-inner-pg-right-cnt">
+                    <div class="profile-inner-pg-right-cnt_inner">
+                        {{--<div class="col-md-4">--}}
+                        {{--@include('frontend.my_account._partials.left_menu',['activeItem' => 'my_account'])--}}
+                        {{--</div>--}}
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="profile-info">
+                                    <div class="row">
+                                        <div class="col-xl-4">
+                                            <div class="profile-info_avatar-holder position-relative mb-3 mb-xl-0">
+                                                <img class="img-fluid" src="img/profile.png" alt="">
+                                                <a href="#" class="d-flex align-items-center justify-content-center profile-info_change-avatar-btn font-13 main-transition position-absolute">Change</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            Last Name
-                                        </label>
-                                        <div class="col-md-8">
-                                            <div class="form-control">{{ $user->last_name }}</div>
+                                        <div class="col-xl-8">
+                                            <div class="text-xl-left text-center">
+                                                <h1 class="font-20 font-main-bold text-uppercase">Edit Profile</h1>
+                                                <p class="mb-0 font-13 text-gray-clr profile-info_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                    <br>
+                                                    Lorem Ipsum has been the industry's standard dummy.</p>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            Date of birth
-                                        </label>
-                                        <div class="col-sm-6">
-                                            <div class="form-control">{{ $user->dob }}</div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="my-account p-5 card">
+                            <div class="container">
+                                <div class="mb-4">
+                                    @if($user->status)
+                                        {!! Form::model($user,['url' => route('my_account_save_contact_data')]) !!}
+                                    @else
+                                        {!! Form::model($user) !!}
+                                    @endif
+                                    @if($user->status)
+                                        <div class="form-group row">
+                                            <label for="username" class="col-md-4">
+                                                First Name
+                                            </label>
+                                            <div class="col-md-8">
+                                                <div class="form-control">{{ $user->name }}</div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            {{ ($user->age) ? $user->age .' years' : null }}
+                                        <div class="form-group row">
+                                            <label for="username" class="col-md-4">
+                                                Last Name
+                                            </label>
+                                            <div class="col-md-8">
+                                                <div class="form-control">{{ $user->last_name }}</div>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                        <div class="form-group row">
+                                            <label for="username" class="col-md-4">
+                                                Date of birth
+                                            </label>
+                                            <div class="col-sm-6">
+                                                <div class="form-control">{{ $user->dob }}</div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                {{ ($user->age) ? $user->age .' years' : null }}
+                                            </div>
+                                        </div>
 
 
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            Gender
-                                        </label>
-                                        <div class="col-md-8">
-                                            <div class="form-control">{{ ucfirst($user->gender) }}</div>
+                                        <div class="form-group row">
+                                            <label for="username" class="col-md-4">
+                                                Gender
+                                            </label>
+                                            <div class="col-md-8">
+                                                <div class="form-control">{{ ucfirst($user->gender) }}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                @else
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            First Name
-                                            <span class="required text-danger">*</span>
-                                        </label>
-                                        <div class="col-md-8">
-                                            {!! Form::text('name',null,['class'=>'form-control']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            Last Name
-                                            <span class="required text-danger">*</span>
-                                        </label>
-                                        <div class="col-md-8">
-                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                                        </div>
-                                    </div>
+                                    @else
+                                        <div class="profile-form">
+                                            <div class="row">
+                                                <div class="col-xl-8">
+                                                    <div class="form-group row">
+                                                        <label for="username" class="col-md-4">
+                                                            First Name
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="username" class="col-md-4">
+                                                            Last Name
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
 
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            Date of birth
-                                            <span class="required text-danger">*</span>
-                                        </label>
-                                        <div class="col-sm-6">
-                                            <div class="input-group date">
-                                                {!! Form::text('dob',null,['placeholder' => 'Date of Birth',
-                                              'id'=>'dob', 'class'=> 'form-control date']) !!}
-                                                <span class="input-group-btn">
+                                                    <div class="form-group row">
+                                                        <label for="username" class="col-md-4">
+                                                            Date of birth
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-sm-6">
+                                                            <div class="input-group date">
+                                                                {!! Form::text('dob',null,['placeholder' => 'Date of Birth',
+                                                              'id'=>'dob', 'class'=> 'form-control date']) !!}
+                                                                <span class="input-group-btn">
 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
 </span></div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            {{ ($user->age) ? $user->age .' years' : null }}
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group row">
-                                        <label for="username" class="col-md-4">
-                                            Gender
-                                            <span class="required text-danger">*</span>
-                                        </label>
-                                        <div class="col-md-8">
-                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
-                                        </div>
-                                    </div>
-                                @endif
-
-                                <h3>Contact</h3>
-
-                                <div class="form-group row mail">
-                                    <label for="username" class="col-md-4">
-                                        Email address
-                                        <span class="required text-danger">*</span>
-                                    </label>
-
-                                    <div class="col-md-8">
-                                        {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
-                                    </div>
-                                </div>
-
-                                {{--<div class="form-group row">--}}
-                                {{--<label for="username" class="col-md-4">--}}
-                                {{--Country--}}
-                                {{--<span class="required text-danger">*</span>--}}
-                                {{--</label>--}}
-                                {{--<div class="col-md-8">--}}
-                                {{--{!! Form::text('country',null,['class'=>'form-control']) !!}--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
-                                <div class="form-group row">
-
-                                    <label for="username" class="col-md-4">
-                                        Phone
-                                        <span class="required text-danger">*</span>
-                                    </label>
-                                    <div class="col-md-8">
-                                        {!! Form::text('phone',null,['class'=>'form-control']) !!}
-                                    </div>
-                                </div>
-
-                                <div class="form-group row avatar align-items-center mb-4 border-top border-bottom py-3">
-                                    <span class="col-md-4">Avatar</span>
-                                    <div class="col-md-8">
-                                        <img width="150" src="/public/images/{!!$user->gender!!}.png" alt="">
-                                        <div>
-                                            <button type="button" class="btn btn-secondary">Change Avatar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-
-                                    <input type="submit" class="btn btn-primary" value="Save changes">
-                                </div>
-                                {!! Form::close() !!}
-                            </div>
-                            <div class="mb-4">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                        data-target="#exampleModal">
-                                    Change Password
-                                </button>
-                            </div>
-                            <!-- Multiple Checkboxes (inline) -->
-                            <div class="form-group">
-                                <label class="col-md-8 control-label" for="checkboxes">Subscribe To</label>
-                                <div class="col-md-4">
-                                    <label class="checkbox-inline" for="checkboxes-0">
-                                        <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
-                                        Marketing
-                                    </label>
-                                    <label class="checkbox-inline" for="checkboxes-1">
-                                        <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
-                                        Newsletter
-                                    </label>
-                                </div>
-                            </div>
-
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    {!! Form::open(['url'=>route('my_account_change_password')]) !!}
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div>
-                                                <div class="form-group row username">
-                                                    <label for="currentPass" class="col-md-4">
-                                                        Current Password
-                                                    </label>
-                                                    <div class="col-md-8">
-                                                        <input type="password" name='current_password'
-                                                               class="form-control"
-                                                               id="currentPass">
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            {{ ($user->age) ? $user->age .' years' : null }}
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group row confirm">
-                                                    <label for="exampleInputPassword2" class="col-md-4">
-                                                        New Password
-                                                    </label>
-                                                    <div class="col-md-8">
-                                                        <input type="password" name="password" class="form-control"
-                                                               id="exampleInputPassword2">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row confirm">
-                                                    <label for="exampleInputPassword3" class="one col-md-4">
-                                                        Confirm New Password
-                                                    </label>
-                                                    <div class="col-md-8">
-                                                        <input type="password" name="password_confirmation"
-                                                               class="form-control"
-                                                               id="exampleInputPassword3">
+
+
+                                                    <div class="form-group row">
+                                                        <label for="username" class="col-md-4">
+                                                            Gender
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+
+                                    @endif
+
+
+                                    <div class="form-group row mail">
+                                        <label for="username" class="col-md-4">
+                                            Email address
+                                            <span class="required text-danger">*</span>
+                                        </label>
+
+                                        <div class="col-md-8">
+                                            {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
                                         </div>
                                     </div>
 
+                                    {{--<div class="form-group row">--}}
+                                    {{--<label for="username" class="col-md-4">--}}
+                                    {{--Country--}}
+                                    {{--<span class="required text-danger">*</span>--}}
+                                    {{--</label>--}}
+                                    {{--<div class="col-md-8">--}}
+                                    {{--{!! Form::text('country',null,['class'=>'form-control']) !!}--}}
+                                    {{--</div>--}}
+                                    {{--</div>--}}
+                                    <div class="form-group row">
 
+                                        <label for="username" class="col-md-4">
+                                            Phone
+                                            <span class="required text-danger">*</span>
+                                        </label>
+                                        <div class="col-md-8">
+                                            {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row avatar align-items-center mb-4 border-top border-bottom py-3">
+                                        <span class="col-md-4">Avatar</span>
+                                        <div class="col-md-8">
+                                            <img width="150" src="/public/images/{!!$user->gender!!}.png" alt="">
+                                            <div>
+                                                <button type="button" class="btn btn-secondary">Change Avatar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+
+                                        <input type="submit" class="btn btn-primary" value="Save changes">
+                                    </div>
                                     {!! Form::close() !!}
                                 </div>
-                            </div>
-                        </div>
+                                <div class="mb-4">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModal">
+                                        Change Password
+                                    </button>
+                                </div>
+                                <!-- Multiple Checkboxes (inline) -->
+                                <div class="form-group">
+                                    <label class="col-md-8 control-label" for="checkboxes">Subscribe To</label>
+                                    <div class="col-md-4">
+                                        <label class="checkbox-inline" for="checkboxes-0">
+                                            <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+                                            Marketing
+                                        </label>
+                                        <label class="checkbox-inline" for="checkboxes-1">
+                                            <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+                                            Newsletter
+                                        </label>
+                                    </div>
+                                </div>
 
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        {!! Form::open(['url'=>route('my_account_change_password')]) !!}
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div>
+                                                    <div class="form-group row username">
+                                                        <label for="currentPass" class="col-md-4">
+                                                            Current Password
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="password" name='current_password'
+                                                                   class="form-control"
+                                                                   id="currentPass">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row confirm">
+                                                        <label for="exampleInputPassword2" class="col-md-4">
+                                                            New Password
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="password" name="password" class="form-control"
+                                                                   id="exampleInputPassword2">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row confirm">
+                                                        <label for="exampleInputPassword3" class="one col-md-4">
+                                                            Confirm New Password
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            <input type="password" name="password_confirmation"
+                                                                   class="form-control"
+                                                                   id="exampleInputPassword3">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                                </button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+
+
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
+                @include('frontend.my_account._partials.verify_bar')
             </div>
-            @include('frontend.my_account._partials.verify_bar')
-        </div>
-    </main>
+        </main>
+
 @stop
 @section('css')
     {!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}

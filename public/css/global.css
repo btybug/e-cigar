@@ -132,6 +132,7 @@
 html,
 body {
     font-size: 14px;
+    height: 100%;
 }
 
 @media (min-width: 1630px) {

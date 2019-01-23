@@ -1,4 +1,4 @@
-<div class="d-flex flex-md-row flex-column align-items-center product-single-info_range-outer">
+<div class="d-flex align-items-center product-single-info_range-outer">
     <label class="product-single-info_label text-uppercase mb-0">{!! $modelattr->name !!}:</label>
     <div class="range-steps d-flex">
         @if(count($options))

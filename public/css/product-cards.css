@@ -8,18 +8,23 @@ body {
 }
 
 .main-content {
-    padding-top: 145px; /*equals header height*/
     flex: 1 0 auto;
     position: relative;
 }
 
 .main-header {
-    position: fixed;
-    width: 100%;
-    z-index: 9999;
-    height: 145px;
     border-bottom: 1px solid #d7d7d7;
     background: #fff;
+    padding-top: 50px;
+}
+
+.main-header .header-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    height: 50px;
 }
 
 .content-head .page-back {
@@ -387,7 +392,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 
-.product-single-info .like-icon {
+.single-product-main-title .like-icon {
     background: #e3e6ed;
     height: 50px;
     width: 50px;
@@ -434,7 +439,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .single-product-dtls-wrap-outer {
-    padding-left: 8%;
     padding-top: 18px;
 }
 
@@ -515,13 +519,16 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .continue-shp-wrapp {
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
+    background: #fff;
     height: 95px;
     -webkit-box-shadow: 0px 0px 5px rgba(0,0,0,.2);
     -moz-box-shadow: 0px 0px 5px rgba(0,0,0,.2);
     box-shadow: 0px 0px 5px rgba(0,0,0,.2);
+    z-index: 9999;
 }
 
 .continue-shp-wrapp .product-card_btn {
@@ -567,14 +574,16 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     max-width: 875px;
 }
 
-.single-product-page-cnt {
-    height: calc(100% - 77px); /*minus breadcrump height*/
+.single-product-page {
+    height: auto;
     margin-bottom: 95px; /*equals bottom fixed area height*/
 }
 
-.single-product-page {
-    overflow: hidden;
-}
+/*.single-product-page-cnt {*/
+    /*height: calc(100% - 77px); !*minus breadcrump height*!*/
+    /*margin-bottom: 95px; !*equals bottom fixed area height*!*/
+/*}*/
+
 
 .continue-shp-wrapp_qty {
     border: 1px solid #d7d7d7;
@@ -832,6 +841,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     outline: none;
     background: #5184e5;
     height: 42px;
+    padding: 10px 25px;
 }
 
 .hidden-sidebar .profile-sidebar_logout-btn {
@@ -1141,6 +1151,154 @@ body.get-cover:after {
 }
 
 
+/*Account page*/
+.profile-sidebar--inner-pages {
+    width: 145px;
+    padding-top: 38px;
+}
+
+.profile-sidebar--inner-pages .profile-sidebar-menu_link{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+
+}
+
+.profile-sidebar--inner-pages .profile-sidebar-menu_icon {
+    margin-bottom: 5px;
+}
+
+
+.profile-sidebar--inner-pages .profile-sidebar-menu_item.active .profile-sidebar-menu_link {
+    color: #5184e5;
+}
+
+.profile-sidebar--inner-pages .profile-sidebar-menu_item {
+    margin-bottom: 15px;
+}
+
+.profile-sidebar--inner-pages .profile-sidebar-menu_item.active .profile-sidebar-menu_link,
+.profile-sidebar--inner-pages .profile-sidebar-menu_link:hover {
+    border-color: #5184e5;
+}
+
+.profile-info {
+    margin-bottom: 30px;
+}
+
+.profile-info_avatar-holder {
+    background: #c8c8d2;
+    border: 2px solid #c8c8d2;
+    height: 130px;
+    width: 130px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.profile-info_change-avatar-btn {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    background: rgba(81, 132, 229, .8);
+    color: rgba(255,255,255, .8);
+    height: 30px;
+    line-height: 1;
+    width: 100%;
+    z-index: 99;
+}
+
+.profile-info_text {
+    line-height: 1.8;
+}
+
+.profile-info_change-avatar-btn:hover {
+    color: #fff;
+    height: 100%;
+}
+
+.btn--shopping {
+    border-radius: 20px;
+    height: 36px;
+    padding: 0 22px;
+}
+
+.btn--change-pass {
+    border: 1px solid #e8e7ed;
+    background: #e8e7ed;
+    margin: 0 auto;
+}
+
+.profile-required-icon {
+    color: #5184e5;
+}
+
+.profile-form .register-form_input-text {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.profile-form .account-country-select + .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #21213b;
+    padding-left: 20px;
+}
+
+
+.profile-form .register-form_input-text:not([readonly]),
+.profile-form .account-country-select + .select2-container--default .select2-selection--single {
+    border-color: #c8c8d2;
+    background: #fff;
+    color: #21213b;
+}
+
+.profile-form .register-form_input-radio + label:before {
+    background-color: #e8e7ed;
+    border-color: #e8e7ed;
+    height: 26px;
+    width: 26px;
+}
+
+.profile-form .register-form_input-radio:checked + label:before {
+    background: #fff;
+    border-color: #5184e5;
+    box-shadow: inset 0 0 0 9px #5184e5;
+}
+
+.profile-form .form-checkes-outer {
+    min-height: 38px;
+}
+
+.profile-form .form-group {
+    margin-bottom: 40px;
+}
+
+.btn--change-pass-holder {
+    padding-top: 30px;
+}
+
+.btn--save-changes {
+    border: 1px solid #5184e5;
+    background: #5184e5;
+    color: #fff;
+}
+
+.profile-inner-pg-right-cnt {
+    background: #fff;
+    padding: 4% 5%;
+    flex: auto;
+
+}
+
+.profile-sidebar--inner-pages,
+.profile-inner-pg-right-cnt_inner {
+    background: #e3e6ed47;
+}
+
+.profile-inner-pg-right-cnt_inner {
+    padding: 35px;
+}
+
+
 @media (min-width: 769px) {
 
     .display-grid .product-card:hover .product-card_view,
@@ -1207,6 +1365,15 @@ body.get-cover:after {
 
     .single-product-dtls-wrap-outer {
         padding-left: 15px;
+    }
+
+    .single-product-main-title {
+        display: none !important;
+    }
+
+
+    .single-product-main-title.visible-on-small {
+        display: flex !important;
     }
 }
 
@@ -1297,6 +1464,14 @@ body.get-cover:after {
 
     .sort-by-selects .sort-by_select:not(:last-of-type) {
         margin-right: 15px;
+    }
+
+    .single-product-main-title .font-36{
+        font-size: 30px;
+    }
+
+    .single-product-main-title .like-icon {
+        margin-right: 10px;
     }
 }
 
@@ -1425,6 +1600,15 @@ body.get-cover:after {
 
     .header-login-link {
         font-size: 13px;
+    }
+
+    header .header-top .user-name {
+        margin-left: 4px;
+    }
+
+    .profile-inner-pg-right-cnt_inner {
+        padding-left: 2px;
+        padding-right: 2px;
     }
 }
 
