@@ -66,7 +66,7 @@ Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
 Route::group(['prefix'=>'/support'], function (){
     Route::get('/', 'Frontend\CommonController@getSupport')->name('product_support');
 
-    Route::get('/faq', 'GuestController@getFaq')->name('faq');
+    Route::get('/faq', 'GuestController@getFaq')->name('faq_page');
     Route::post('/faq-by-category', 'GuestController@getFaqByCategory')->name('faq');
     Route::get('/knowledge-base', 'GuestController@getKnowledgeBase')->name('knowledge_base');
     Route::get('/manuals', 'GuestController@getManuals')->name('manuals');

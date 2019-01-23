@@ -6,7 +6,7 @@
             <h1 class="mb-5 text-uppercase text-my-yellow">Support</h1>
             <div class="row">
                 <div class="col-sm-3">
-                    <a href="{!! route('faq') !!}" class="text-center mb-4 px-5 py-4 d-flex flex-column d-block shadow-sm bg-white">
+                    <a href="{!! route('faq_page') !!}" class="text-center mb-4 px-5 py-4 d-flex flex-column d-block shadow-sm bg-white">
                         <span class="d-inline-block mb-3"><i class="fa fa-5x fa-file-text" aria-hidden="true"></i></span>
                         <strong>FAQ</strong>
                         <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, sequi..</span>
