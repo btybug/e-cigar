@@ -463,6 +463,7 @@
                                                         <th>SKU</th>
                                                         <th>Qty</th>
                                                         <th>Price</th>
+                                                        <th>Image</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                     </thead>
