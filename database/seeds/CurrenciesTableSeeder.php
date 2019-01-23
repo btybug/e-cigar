@@ -9,17 +9,36 @@
 use Illuminate\Database\Seeder;
 class CurrenciesTableSeeder extends Seeder
 {
-    public function run(\App\Models\GetForexData $forexData)
+    public function run(\App\Models\GetForexData $forexData,\App\Helpers\Currencies $currencies)
     {
-        $rates=$forexData->latest();
-        $data=[];
-        foreach ($rates['rates'] as $key=>$rate){
-            if($key=='USDC'){
-                $data[]=['currency'=>'USD','rate'=>1];
+        $data = [];
+        $rates = $forexData->latest();
+
+        foreach ($currencies->getData() as $code => $datum){
+            if($code == 'USD'){
+                $data[] = [
+                    'currency'=>'USD',
+                    'rate'=>1,
+                    'name'=>$datum['name'],
+                    'symbol'=>$datum['symbol'],
+                    'format'=>$datum['format'],
+                ];
             }else{
-                $data[]=['currency'=>$key,'rate'=>$rate];
-            };
+                $rate = 0;
+                if(isset($rates['rates'][$code])){
+                    $rate =  $rates['rates'][$code];
+                }
+
+                $data[] = [
+                    'currency'=>$code,
+                    'rate'=>$rate,
+                    'name'=>$datum['name'],
+                    'symbol'=>$datum['symbol'],
+                    'format'=>$datum['format'],
+                ];
+            }
         }
+
         \DB::table('currencies')->insert($data);
     }
 }

@@ -14,5 +14,5 @@ use Illuminate\Database\Eloquent\Model;
 class Currencies extends Model
 {
     protected $table = 'currencies';
-    protected $fillable = ['currency', 'rate'];
+    protected $guarded = ['id'];
 }

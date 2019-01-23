@@ -66,7 +66,7 @@
         {!! Form::text("variations[$uniqueID][price]",(isset($item['price'])) ? $item['price'] : null,['class' => 'form-control']) !!}
     </td>
     <td>
-        {!! media_button("variations[$uniqueID][image]",(isset($item['image'])) ? $item['image'] : null) !!}
+        {!! media_button("variations[$uniqueID][image]",( (isset($item['image'])) ? $item['image'] : null) ) !!}
     </td>
     <td>
         <a class="remove-variation btn btn-danger"><i class="fa fa-trash-o"></i></a>

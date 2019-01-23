@@ -280,8 +280,11 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public function getStore(Currencies $currencies, Settings $settings, Request $request)
+    public function getStore(Currencies $currencies, Settings $settings, Request $request,\App\Models\GetForexData $forexData)
     {
+        $rates=$forexData->latest();
+        dd($rates);
+
         $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
         $p = $request->get('p', ($default) ? $default->val : null);
         $siteCurrencies = ($p) ? $settings->getEditableData('currencies', $p)->toArray() : [];
