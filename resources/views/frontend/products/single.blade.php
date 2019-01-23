@@ -185,6 +185,16 @@
                                            data-toggle="pill" href="#pills-reviews" role="tab"
                                            aria-controls="pills-reviews" aria-selected="false">Reviews</a>
                                     </li>
+                                    <li class="nav-item product-single-tab_item">
+                                        <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
+                                           data-toggle="pill" href="#pills-gallery" role="tab"
+                                           aria-controls="pills-gallery" aria-selected="false">Gallery</a>
+                                    </li>
+                                    <li class="nav-item product-single-tab_item">
+                                        <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
+                                           data-toggle="pill" href="#pills-faq" role="tab"
+                                           aria-controls="pills-faq" aria-selected="false">FAQ</a>
+                                    </li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="pills-tecnical" role="tabpanel"
@@ -277,11 +287,40 @@
                                             {{--the end--}}
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade show active" id="pills-reviews" role="tabpanel"
+                                    <div class="tab-pane fade" id="pills-reviews" role="tabpanel"
                                          aria-labelledby="pills-tecnical-tab">
                                         <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
                                             I bought one.
                                         </p>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-gallery" role="tabpanel"
+                                         aria-labelledby="pills-gallery-tab">
+                                        <p class="product-single-gallery-text font-15 font-main-light text-light-clr mb-0">
+                                            gallery
+                                        </p>
+                                    </div>
+                                    <div class="tab-pane fade " id="pills-faq" role="tabpanel"
+                                         aria-labelledby="pills-faq-tab">
+                                        <div class="faq-wrapper">
+                                            <div class="accordion offset-top-0" role="tablist" aria-multiselectable="true" id="accordion-3">
+                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-0-content" id="accordion-3--card-0-header" aria-expanded="false" aria-controls="accordion-3--card-0-content">Lorem ipsum dolor sit amet.</a>
+                                                    <div class="collapse" id="accordion-3--card-0-content" aria-labelledby="accordion-3--card-0-header" data-parent="#accordion-3" style="">
+                                                        <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci atque consectetur eligendi explicabo, in iste laudantium magnam molestiae nam necessitatibus nobis pariatur placeat quae repudiandae tempore ut voluptates. Iure, praesentium.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-1-content" id="accordion-3--card-1-header" aria-expanded="false" aria-controls="accordion-3--card-1-content">Lorem ipsum dolor sit amet, consectetur.?</a>
+                                                    <div class="collapse" id="accordion-3--card-1-content" aria-labelledby="accordion-3--card-1-header" data-parent="#accordion-3" style="">
+                                                        <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi aperiam aut, dignissimos distinctio doloremque eaque explicabo, impedit in labore laborum molestiae obcaecati officiis reiciendis reprehenderit sint sit voluptatem. Cum dolorem et incidunt inventore nesciunt nostrum perspiciatis quae saepe vero voluptate. A consequatur debitis deleniti facilis, in neque non quaerat quisquam similique sit temporibus, voluptatibus! Dicta id incidunt laudantium nulla voluptate? Architecto, asperiores assumenda cum cumque deleniti dicta dolorum ducimus ex inventore minus nemo optio porro quam quibusdam repellat reprehenderit sed sequi, sit soluta ullam vel voluptas voluptates. Adipisci inventore necessitatibus quaerat unde? Ab neque provident totam, vero voluptate voluptatum.</div>
+                                                    </div>
+                                                </div>
+                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-2-content" id="accordion-3--card-2-header" aria-expanded="false" aria-controls="accordion-3--card-2-content">Lorem ipsum dolor.</a>
+                                                    <div class="collapse" id="accordion-3--card-2-content" aria-labelledby="accordion-3--card-2-header" data-parent="#accordion-3" style="">
+                                                        <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid aperiam atque corporis, cum distinctio doloremque eius eligendi est et ex explicabo fuga fugiat hic inventore libero maiores minima nemo nihil nulla porro quae quasi quia quo sit sunt suscipit ullam. Accusantium alias, beatae blanditiis corporis, deserunt dignissimos eos, expedita harum impedit in ipsa itaque laboriosam magni minima provident quidem vitae! Aliquam illo labore sint voluptatem voluptatibus? Enim, optio, quidem.</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>

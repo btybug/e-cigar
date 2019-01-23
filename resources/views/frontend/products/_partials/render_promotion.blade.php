@@ -16,7 +16,7 @@
     </h3>
     <div class="d-flex align-items-center">
         @if($promotion->type == 'variation_product')
-            <div>
+            <div class="col-sm-10 pl-0">
                 @foreach($promotion->type_attrs as $promotionAttr)
                     @php
                         $poptions = $promotion->type_attrs_pivot()->with('sticker')->where('attributes_id',$promotionAttr->id)->get();
@@ -26,7 +26,10 @@
                     @endif
                 @endforeach
             </div>
+        <div class="col-sm-2 p-0 text-sm-center">
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-place-promotion"></span>
+        </div>
+
         @else
             @php
                 $variation = (count($promotion->variations)) ? $promotion->variations->first() : null;
