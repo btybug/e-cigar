@@ -24,9 +24,13 @@
                 <input type="text" name="{!! $name !!}"
                        value="{!! (isset($model[$name]))?$model[$name]:null !!}" placeholder="file name"
                        class="modal-input-path {!! $uniqId !!}" readonly>
-            @else
+            @elseif($model && is_object($model))
                 <input type="text" name="{!! $name !!}"
                        value="{!! ($model)?((isset($model->$name))?$model->$name:null):null !!}" placeholder="file name"
+                       class="modal-input-path {!! $uniqId !!}" readonly>
+            @else
+                <input type="text" name="{!! $name !!}"
+                       value="{!! ($model)?$model:null !!}" placeholder="file name"
                        class="modal-input-path {!! $uniqId !!}" readonly>
             @endif
         @endif
