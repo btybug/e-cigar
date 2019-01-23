@@ -11,10 +11,10 @@ class Amount implements Filter
 
     public static function apply(Builder $builder, $value)
     {
-        $builder->where(function ($query) use ($value){
-            $query->whereBetween('stock_sales.price', explode(',',$value))
-                ->orWhere(function ($query) use($value) {
-                    $query->whereBetween('stock_variations.price', explode(',',$value))
+        $builder->where(function ($query) use ($value) {
+            $query->whereBetween('stock_sales.price', explode(',', $value))
+                ->orWhere(function ($query) use ($value) {
+                    $query->whereBetween('stock_variations.price', explode(',', $value))
                         ->whereNull('stock_sales.price');
                 });
         });
