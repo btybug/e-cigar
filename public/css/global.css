@@ -211,7 +211,6 @@ textarea {
 .select-2.main-select + .select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 100%;
 }
-
 .select-2 + .select2-container--default .select2-selection--single .select2-selection__arrow {
     background: url(../img/arrow-down-blue.svg) center no-repeat;
 }
