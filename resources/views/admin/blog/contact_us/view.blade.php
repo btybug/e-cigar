@@ -4,7 +4,7 @@
 @section('content')
     <section class="tickets-edit-page">
         <div class="panel panel-default">
-            <h2 class="panel-heading mt-0">Edit ticket</h2>
+            <h2 class="panel-heading mt-0">View Message</h2>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-7 ">
