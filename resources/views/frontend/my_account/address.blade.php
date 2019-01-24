@@ -135,12 +135,12 @@
                    <div class="row">
                        <div class="col-lg-9">
                            <ul class="nav nav-pills nav-fill" role="tablist">
-                               <li>
-                                   <a class="btn btn-info nav-link nav-link--new-address active" id="billingAddress-tab"
-                                      data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress"
-                                      aria-selected="true" aria-expanded="true">Billing Address</a>
-                               </li>
-                               <li>
+                               {{--<li>--}}
+                                   {{--<a class="btn btn-info nav-link nav-link--new-address active" id="billingAddress-tab"--}}
+                                      {{--data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress"--}}
+                                      {{--aria-selected="true" aria-expanded="true">Billing Address</a>--}}
+                               {{--</li>--}}
+                               <li class="active">
                                    <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab"
                                       data-toggle="tab"
                                       href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>
@@ -148,90 +148,90 @@
                            </ul>
 
                            <div class="tab-content">
-                               <div class="tab-pane fade active in show p-4" id="billingAddress" role="tabpanel"
-                                    aria-labelledby="billingAddress-tab">
-                                   {!! Form::model($billing_address,['class'=>'form-horizontal']) !!}
-                                   <div class="form-group">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">Name</label>
-                                           <div class="col-sm-8">
-                                               <div class="row">
-                                                   <div class="col-sm-6">
-                                                       {!! Form::text('first_name',null,['class'=>'form-control']) !!}
-                                                   </div>
-                                                   <div class="col-sm-6">
-                                                       {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                                                   </div>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">Company name</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::text('company',null,['class'=>'form-control']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">1st Line address</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">2nd line address</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">Country</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group hide">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">Regions</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group hide">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">City</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::text('city',null,['class'=>'form-control']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                       <div class="row">
-                                           <label for="text" class="control-label col-sm-4">Post Code</label>
-                                           <div class="col-sm-8">
-                                               {!! Form::text('post_code',null,['class'=>'form-control']) !!}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   {!! Form::hidden('type','billing_address') !!}
-                                   {!! Form::hidden('id') !!}
-                                   <div class="form-group row">
-                                       <div class="col-sm-offset-4 col-sm-8">
-                                           <button type="submit" class="btn btn-primary">Submit</button>
-                                       </div>
-                                   </div>
-                                   {!! Form::close() !!}
-                               </div>
-                               <div class="tab-pane fade p-4" id="addressBook" role="tabpanel"
+                               {{--<div class="tab-pane fade active in show p-4" id="billingAddress" role="tabpanel"--}}
+                                    {{--aria-labelledby="billingAddress-tab">--}}
+                                   {{--{!! Form::model($billing_address,['class'=>'form-horizontal']) !!}--}}
+                                   {{--<div class="form-group">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">Name</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--<div class="row">--}}
+                                                   {{--<div class="col-sm-6">--}}
+                                                       {{--{!! Form::text('first_name',null,['class'=>'form-control']) !!}--}}
+                                                   {{--</div>--}}
+                                                   {{--<div class="col-sm-6">--}}
+                                                       {{--{!! Form::text('last_name',null,['class'=>'form-control']) !!}--}}
+                                                   {{--</div>--}}
+                                               {{--</div>--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">Company name</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::text('company',null,['class'=>'form-control']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">1st Line address</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::text('first_line_address',null,['class'=>'form-control']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">2nd line address</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::text('second_line_address',null,['class'=>'form-control']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">Country</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group hide">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">Regions</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group hide">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">City</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::text('city',null,['class'=>'form-control']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--<div class="form-group">--}}
+                                       {{--<div class="row">--}}
+                                           {{--<label for="text" class="control-label col-sm-4">Post Code</label>--}}
+                                           {{--<div class="col-sm-8">--}}
+                                               {{--{!! Form::text('post_code',null,['class'=>'form-control']) !!}--}}
+                                           {{--</div>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--{!! Form::hidden('type','billing_address') !!}--}}
+                                   {{--{!! Form::hidden('id') !!}--}}
+                                   {{--<div class="form-group row">--}}
+                                       {{--<div class="col-sm-offset-4 col-sm-8">--}}
+                                           {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
+                                       {{--</div>--}}
+                                   {{--</div>--}}
+                                   {{--{!! Form::close() !!}--}}
+                               {{--</div>--}}
+                               <div class="tab-pane fade active in show p-4" id="addressBook" role="tabpanel"
                                     aria-labelledby="addressBook-tab">
                                    <div class="panel panel-default">
 

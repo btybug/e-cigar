@@ -304,27 +304,87 @@
                                                 <h2 class="card-title font-20">Billing Address</h2>
 
                                                 <div class="card-body">
-                                                    <div class="form-group row mail">
-                                                        <label for="username" class="col-md-4">
-                                                            Address 1
-                                                            <span class="required text-danger">*</span>
-                                                        </label>
-
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control">
+                                                    {!! Form::model(@$billing_address,['class'=>'form-horizontal']) !!}
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Name</label>
+                                                            <div class="col-sm-8">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        {!! Form::text('first_name',null,['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Company name</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('company',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">1st Line address</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">2nd line address</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Country</label>
+                                                            <div class="col-sm-8">
+                                                                {{--{!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}--}}
+                                                                {!! Form::select('country',['' => 'SELECT'],null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group hide">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Regions</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group hide">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">City</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Post Code</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {!! Form::hidden('type','billing_address') !!}
+                                                    {!! Form::hidden('id') !!}
                                                     <div class="form-group row">
-
-                                                        <label for="username" class="col-md-4">
-                                                            Address 2
-                                                            <span class="required text-danger">*</span>
-                                                        </label>
-
-                                                        <div class="col-md-8">
-                                                            <input type="text" class="form-control">
+                                                        <div class="col-sm-offset-4 col-sm-8">
+                                                            <button type="submit" class="btn btn-primary">Submit</button>
                                                         </div>
                                                     </div>
+                                                    {!! Form::close() !!}
                                                 </div>
 
                                             </div>
@@ -459,7 +519,179 @@
 
 @section('js')
     {!! Html::script("public/admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <script>
+        $(document).ready(function () {
+            $("body").on('click', '.save-address-book', function () {
+                var form = $(".address-book-form").serialize();
+                AjaxCall(
+                    "/my-account/save-address-book",
+                    form,
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    window.location.reload();
+                }
+            },
+                error =>
+                {
+                    if (error.status == 422) {
+                        $('.errors').html('');
+                        for (var err in error.responseJSON.errors) {
+                            $('.errors').append(error.responseJSON.errors[err] + '<br>');
+                        }
+                    }
+                }
+            )
+                ;
+            })
+
+            $("#country").select2();
+            $("#geo_country").select2();
+            function getRegionsPackage() {
+                let value = $("#country").val();
+                AjaxCall(
+                    "/get-regions-by-country",
+                    {country: value},
+                    res => {
+                    let select = document.getElementById('regions');
+                select.innerText = null;
+                if (!res.error) {
+                    $.each(res.data, function (index, value) {
+                        var opt = document.createElement('option');
+                        opt.value = res.data[value];
+                        opt.innerHTML = res.data[value];
+                        select.appendChild(opt);
+                    })
+
+                }
+            }
+            )
+                ;
+            }
+
+            $("body").on('click', '.address-book-new', function () {
+                AjaxCall(
+                    "/my-account/address-book-form",
+                    {},
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    $(".address-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    $("#newAddressModal").modal();
+                }
+            }
+            )
+                ;
+            });
+
+            $("body").on('change', '.edit-address', function () {
+                var id = $(this).val();
+                AjaxCall(
+                    "/my-account/address-book-form",
+                    {id: id},
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    $(".selected-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    //                    $("#newAddressModal").modal();
+                }
+            }
+            )
+                ;
+            });
+
+            function getRegions() {
+                let value = $("#geo_country").val();
+                AjaxCall(
+                    "/get-regions-by-geozone",
+                    {country: value},
+                    res => {
+                    let select = document.getElementById('geo_region');
+                select.innerText = null;
+                if (!res.error) {
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
+
+                }
+            }
+            )
+                ;
+            }
+
+            function renderAddressBook() {
+                let value = $(".select-address").val();
+                AjaxCall(
+                    "/my-account/select-address-book",
+                    {id: value},
+                    res => {
+                    if (
+                !res.error
+            )
+                {
+                    $(".render-address").html(res.html);
+                }
+            }
+            )
+                ;
+            }
+
+            $("body").on("change", ".select-address", function () {
+                renderAddressBook();
+            });
+
+            $("body").on("change", "#country", function () {
+                getRegionsPackage();
+            });
+
+            $("body").on("change", "#geo_country", function () {
+                getRegions();
+            });
+
+            $("body").on("change", "#geo_country_book", function () {
+                var value = $(this).val();
+                let $_this = $(this);
+                AjaxCall(
+                    "/get-regions-by-geozone",
+                    {country: value},
+                    res => {
+                    let select = $_this.closest('.address-book-form').find('.geo_region_book');
+                $(select).empty()
+                if (!res.error) {
+                    console.log($(select).val())
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
+                }
+            }
+            )
+                ;
+            });
+        })
+
+
+
+
+
+
         $(function () {
             $("#dob").datepicker({
                 format: 'yyyy-mm-dd',
