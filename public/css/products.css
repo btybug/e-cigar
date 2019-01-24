@@ -1288,6 +1288,10 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     padding: 0.42rem 3.1rem;
 }
 
+.copyright {
+    padding-top: 25px;
+}
+
 @media (max-width: 768px) {
     .modal_right {
         padding: 30px 33px 26px;

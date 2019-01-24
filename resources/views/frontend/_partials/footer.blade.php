@@ -42,19 +42,20 @@
                     <a href="#" class="d-block footer-logo">
                         <img src="/public/img/vapors-logo.png" alt="logo">
                     </a>
-                    <div class="footer-desc">
+                    <div class="footer-desc mb-3">
                         <p class="mb-0">There are many variations of passages<br/>
                             of Lorem Ipsum available, but the majority</p>
                     </div>
-                    <div class="footer-payment">
-                        <div>
-                            <img src="/public/img/paypal.png" alt="paypal">
-                            <img src="/public/img/visa.png" alt="visa">
-                            <img src="/public/img/maestro.png" alt="maestro">
-                            <img src="/public/img/mc.png" alt="mc">
-                        </div>
-                    </div>
-                    <div class="footer-social">
+                    {{--<div class="footer-payment">--}}
+                        {{--<div>--}}
+                            {{--<img src="/public/img/paypal.png" alt="paypal">--}}
+                            {{--<img src="/public/img/visa.png" alt="visa">--}}
+                            {{--<img src="/public/img/maestro.png" alt="maestro">--}}
+                            {{--<img src="/public/img/mc.png" alt="mc">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+
+                    <div class="footer-social mb-3">
                         <ul class="d-inline-flex flex-wrap">
                             <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
                                                 class="fab fa-facebook-f"></i></span></a></li>
@@ -69,29 +70,32 @@
                                                 class="fab fa-youtube"></i></span></a></li>
                         </ul>
                     </div>
+                    <div class="copyright">
+                        &#9400; Copyright 2019 Kaliony UK
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="footer-bottom">
-        <div class="container main-max-width">
-            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                <div class="footer_select-lang d-flex align-items-center">
-                    <label for="langSelect" class="text-tert-clr mb-0">Language:</label>
-                    <select id="langSelect"
-                            class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected"
-                            style="width: 95px;">
-                        <option class="selected">English</option>
-                        <option>Arm</option>
-                        <option>Russian</option>
-                    </select>
-                </div>
-                <div class="copyright">
-                    &#9400; Copyright 2019 Kaliony UK
-                </div>
-            </div>
-        </div>
+    {{--<div class="footer-bottom">--}}
+        {{--<div class="container main-max-width">--}}
+            {{--<div class="d-flex flex-wrap justify-content-between align-items-center">--}}
+                {{--<div class="footer_select-lang d-flex align-items-center">--}}
+                    {{--<label for="langSelect" class="text-tert-clr mb-0">Language:</label>--}}
+                    {{--<select id="langSelect"--}}
+                            {{--class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected"--}}
+                            {{--style="width: 95px;">--}}
+                        {{--<option class="selected">English</option>--}}
+                        {{--<option>Arm</option>--}}
+                        {{--<option>Russian</option>--}}
+                    {{--</select>--}}
+                {{--</div>--}}
+                {{--<div class="copyright">--}}
+                    {{--&#9400; Copyright 2019 Kaliony UK--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
-    </div>
+    {{--</div>--}}
 </footer>
 <div class="dark-bg_body"></div>
