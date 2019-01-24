@@ -115,14 +115,16 @@ $(function() {
         }
     );
 // filter show
-    $('body').on('click','.top-filters .arrow-wrap .arrow',function () {
+    $('body').on('click','.top-filters .arrow-wrap .arrow-filters',function () {
         let darkBg = $(this).closest('body').find('.dark-bg_body');
         if(darkBg.hasClass('show')){
             darkBg.removeClass('show')
         }else{
             darkBg.addClass('show')
         }
-        $(this).toggleClass('opened');
+        $(this).find('.arrow').toggleClass('opened');
+        // console.log(55)
+        $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
         $(this).closest('.arrow-wrap').find('.nav-item--has-dropdown_dropdown').toggleClass('open');
 
         $(this).closest('body').toggleClass('show-filter')

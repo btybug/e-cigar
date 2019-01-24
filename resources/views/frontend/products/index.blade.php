@@ -13,9 +13,9 @@
                             'id' => 'choose_product'
                         ]) !!}
                     </div>
-                    <div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">
-                        <span class="btn btn--filter text-tert-clr pointer">Filters</span>
-                    </div>
+                    {{--<div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">--}}
+                        {{--<span class="btn btn--filter text-tert-clr pointer">Filters</span>--}}
+                    {{--</div>--}}
                     <div class="main-filters d-flex closed-mobile">
                         <div class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
                             <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
@@ -45,8 +45,9 @@
 
                     </div>
                     <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">
-                        <div class="d-flex">
-                            <span class="mr-2 text-uppercase d-lg-block d-none">Filters</span>
+                        <div class="d-flex arrow-filters pointer">
+
+                            <span class="mr-2 text-uppercase">Filters</span>
                             <span class="icon pointer arrow main-transition">
     <svg
             xmlns="http://www.w3.org/2000/svg"
