@@ -60,6 +60,13 @@
                         <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, sequi..</span>
                     </a>
                 </div>
+                <div class="col-sm-3">
+                    <a href="{!! route('support_contact_us') !!}" class="text-center mb-4 px-5 py-4 d-flex flex-column d-block shadow-sm bg-white">
+                        <span class="d-inline-block mb-3"><i class="fas fa-5x fa-file-contract"></i></span>
+                        <strong>Contact us</strong>
+                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum, sequi..</span>
+                    </a>
+                </div>
 
             </div>
         </div>

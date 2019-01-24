@@ -190,10 +190,10 @@ class DatatableController extends Controller
     {
         return Datatables::of(ContactUs::query())
 
-            ->addColumn('actions', function ($post) {
+            ->addColumn('action', function ($post) {
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
-            })->rawColumns(['actions'])
+            })->rawColumns(['action'])
             ->make(true);
     }
 
