@@ -9,6 +9,7 @@ $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
 @foreach($categories as $category)
     <div class="col-lg-3 col-sm-6">
         <div class="single-product">
+            <a href="{!! route('categories_front',$category->slug) !!}" class="d-block">
             <div class="product-photo">
                 <img src="{!! $category['image'] !!}" alt="product1">
             </div>
@@ -19,7 +20,7 @@ $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
                     </div>
                     <div class="product-more">
                         <div class="d-flex align-items-center">
-                            <a href="{!! route('categories_front',$category->slug) !!}" class="text-tert-clr font-13">View more</a>
+                            <span class="text-tert-clr font-13 view-more">View more</span>
                             <span class="icon">
                         <svg width="22px" height="9px"
                                 viewBox="0 0 22 9">
@@ -34,6 +35,7 @@ $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
                     <p class="mb-0 font-main-light text-light-clr font-15">{!! $category->description !!}</p>
                 </div>
             </div>
+            </a>
         </div>
     </div>
 @endforeach

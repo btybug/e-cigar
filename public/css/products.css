@@ -256,7 +256,7 @@ header .header-top .products-menu-item .single-product .product-content .product
     display: none;
 }
 
-header .header-top .products-menu-item .single-product .product-content .product-more a {
+header .header-top .products-menu-item .single-product .product-content .product-more .view-more {
     color: #5184e5 !important;
 }
 
