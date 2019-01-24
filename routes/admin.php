@@ -406,6 +406,8 @@ Route::group(['prefix' => 'import'], function () {
     Route::post("/delete-file", 'Admin\ImportController@delete_file')->name('delete_file');
 
     Route::post("/add-file", 'Admin\ImportController@add_file')->name('add_file');
+
+    Route::post("/view_file", 'Admin\ImportController@view_file')->name('view_file');
 });
 
 

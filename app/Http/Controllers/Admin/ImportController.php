@@ -102,6 +102,16 @@ class ImportController extends Controller
 
     }
 
+    public function view_file(Request $request)
+    {
+        $id = ($request->id) ? $request->id : 1;
+        $file = Import::find($id);
+        $excels = Excel::toArray(new UsersImport, $file->path)[0];
+        dd($excels);
+
+
+
+    }
 
     public function stock($file){
         $excels = Excel::toArray(new UsersImport, $file->path)[0];

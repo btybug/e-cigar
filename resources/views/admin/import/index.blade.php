@@ -28,7 +28,7 @@
             <div class="card col-md-2 col-sm-4">
                 <div class="files">
                     <div class="delete_file text-center" data-id="{{$import["id"]}}">X</div>
-                    <div class="category text-center bg-primary">{{$import["category"]}}</div>
+                    <div class="category text-center bg-primary __view" data-toggle="modal" data-target="#view_modal" data-id="{{$import["id"]}}">{{$import["category"]}}</div>
                     @if($import["is_imported"])
                         <div class="btn btn-info import_file" data-id="{{$import["id"]}}">Imported</div>
                     @else
@@ -39,7 +39,7 @@
         @endforeach
     </div>
 
-    <!-- Modal -->
+    <!-- Modal to save-->
     <div id="import_modal" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
@@ -50,6 +50,29 @@
                 {{--</div>--}}
                 <div class="modal-body">
                     <h1 class="text-center">Are You Sure to Import this file ?</h1>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success __import_file" data-id="">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal to view-->
+    <div id="view_modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="text-center">File Content</h1>
+                </div>
+                <div class="modal-body">
+                    <table>
+
+                    </table>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-success __import_file" data-id="">Yes</button>
@@ -181,6 +204,30 @@
                     success: function (data) {
                         if (!data.error) {
                             location.reload()
+                        } else {
+                            alert('error')
+                        }
+                    }
+                });
+            })
+
+            $("body").on("click",".__view",function(){
+                let id = $(this).data("id");
+                console.log(id)
+
+                $.ajax({
+                    type: "post",
+                    url: "/admin/import/view_file",
+                    cache: false,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    data: {
+                        id: id,
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+//                            location.reload()
                         } else {
                             alert('error')
                         }
