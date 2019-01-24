@@ -118,7 +118,7 @@
                                 @foreach($siteCurrencies as $currency)
                                     <tr>
                                         <td>
-                                            {!! Form::radio('is_default',null,($currency->is_default)?true:false,['class'=>'c-default']) !!}
+                                            {!! Form::radio('is_default',$currency->code,($currency->is_default)?true:null,['class'=>'c-default']) !!}
                                         </td>
                                         <td>
                                             {!! Form::select("currencies[$currency->id][code]",$currencies,$currency->code,['class'=>'form-control c-code']) !!}

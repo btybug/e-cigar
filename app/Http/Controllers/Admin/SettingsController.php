@@ -302,20 +302,30 @@ class SettingsController extends Controller
     public function postStore(Request $request, SiteCurrencies $siteCurrencies)
     {
         $data = $request->get('currencies');
-
+        $notDeletable = [];
         if(count($data)){
             foreach ($data as $key => $currency) {
+
                 if($currency['code'] == $request->is_default){
                     $currency['is_default'] = true;
+                }else{
+                    $currency['is_default'] = false;
                 }
+
                 $v = $siteCurrencies->where('code',$currency['code'])->first();
+
                 if($v){
                     $v->update($currency);
                 }else{
-                    $siteCurrencies->create($currency);
+                    $v = $siteCurrencies->create($currency);
                 }
+
+                $notDeletable[] = $v->id;
             }
         }
+
+        $siteCurrencies->whereNotIn('id',$notDeletable)->delete();
+
         return redirect()->back();
     }
 
