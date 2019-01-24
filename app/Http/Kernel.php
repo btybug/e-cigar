@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\ActivityMiddleware;
+use App\Http\Middleware\CurrencyMiddleware;
 use App\Http\Middleware\UserCan;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -38,6 +39,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ActivityMiddleware::class,
+            CurrencyMiddleware::class,
         ],
         'admin' => [
             \App\Http\Middleware\EncryptCookies::class,

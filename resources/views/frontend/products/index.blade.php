@@ -258,7 +258,9 @@
                                                         {{--<span class="product-card_old-price font-sec-reg font-18 text-gray-clr lh-1 position-absolute">$77</span>--}}
                                                     {{--</span>--}}
                                                     <!--Price-->
-                                                    <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">${{ $product->price }}</span>
+                                                    <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
+                                                       {{ convert_price($product->price,$currency) }}
+                                                    </span>
                                                 </div>
                                             </div>
                                             <!--btn-->

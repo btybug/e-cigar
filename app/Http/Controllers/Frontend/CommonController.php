@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\SiteCurrencies;
+use Illuminate\Http\Request;
 
 class CommonController extends Controller
 {
@@ -32,4 +34,17 @@ class CommonController extends Controller
     {
         return $this->view('contact_us');
     }
+
+    public function changeCurrency(Request $request,SiteCurrencies $siteCurrencies)
+    {
+        $currency = $siteCurrencies->where('code',$request->code)->first();
+
+        if ($currency) {
+            \Cookie::queue('currency', $request->code);
+        }
+
+        return $request->code;
+    }
+
+
 }

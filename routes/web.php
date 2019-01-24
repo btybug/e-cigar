@@ -63,6 +63,7 @@ Route::group(['prefix' => 'products'], function () {
 
 Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
+Route::post('/change-currency', 'Frontend\CommonController@changeCurrency')->name('change_currency');
 Route::group(['prefix'=>'/support'], function (){
     Route::get('/', 'Frontend\CommonController@getSupport')->name('product_support');
 

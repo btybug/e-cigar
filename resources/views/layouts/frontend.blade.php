@@ -204,6 +204,25 @@
                 alert('Select available variation');
             }
         })
+
+        $("#change-currency").change(function () {
+            let code = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/change-currency",
+                cache: false,
+                datatype: "json",
+                data: {
+                    code: code
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    window.location.reload();
+                }
+            });
+        })
     });
 </script>
 @yield('js')

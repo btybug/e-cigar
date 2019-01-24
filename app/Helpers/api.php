@@ -860,3 +860,28 @@ function colors(){
         "yellowgreen" => "#9acd32"
     ];
 }
+
+function site_currencies(){
+    return (new \App\Models\SiteCurrencies())->pluck('symbol','code')->all();
+}
+
+function site_default_currency(){
+    return (new \App\Models\SiteCurrencies())->where('is_default',true)->first();
+}
+
+function convert_price($price,$currency){
+    $default = site_default_currency();
+    if($default){
+        if($default->code == $currency){
+            return $default->symbol."".number_format($price);
+        }else{
+            $changed = (new \App\Models\SiteCurrencies())->where('code',$currency)->first();
+            if($changed){
+                $price = $price * $changed->rate;
+                return $changed->symbol."".number_format($price);
+            }
+        }
+    }
+
+    return $price;
+}
