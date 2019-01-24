@@ -70,7 +70,7 @@
 <script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
 <script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>
 <script src={{asset("public/js/hover-slider.js")}}></script>
-<script src={{asset("public/js/main.js")}}></script>
+<script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>
 <script>
     window.AjaxCall = function postSendAjax(url, data, success, error) {
         $.ajax({
