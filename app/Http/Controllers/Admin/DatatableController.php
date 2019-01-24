@@ -192,7 +192,7 @@ class DatatableController extends Controller
 
             ->addColumn('action', function ($post) {
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+                    <a class='badge btn-info' href='#'><i class='fa fa-eye'></i></a>";
             })->rawColumns(['action'])
             ->make(true);
     }
