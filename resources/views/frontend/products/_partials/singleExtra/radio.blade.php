@@ -1,7 +1,7 @@
 <div class="single-product-row-repeatable d-flex flex-wrap align-items-center">
-    <p class="product-single-info_label text-uppercase mb-0 col-sm-2 product_left_col pl-0 mr-0">{!! $promotionAttr->name !!}:</p>
+    <p class="product-single-info_label text-uppercase mb-0 col-sm-2  pl-0 mr-0">{!! $promotionAttr->name !!}:</p>
     @if(count($poptions))
-        <div class="col-sm-10 product_center_col px-sm-3 px-0">
+        <div class="col-sm-10 px-sm-3 px-0">
             <div class="d-flex flex-md-row flex-column">
                 @foreach($poptions as $item)
                     <div class="product-single-info_custom-control custom-control custom-radio">

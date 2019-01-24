@@ -1,6 +1,6 @@
 <div class="d-flex align-items-center product-single-info_range-outer">
-    <label class="product-single-info_label text-uppercase mb-0 col-sm-2 product_left_col pl-0 mr-0">{!! $promotionAttr->name !!}:</label>
-    <div class="col-sm-10 product_center_col px-sm-3 px-0">
+    <label class="product-single-info_label text-uppercase mb-0 col-sm-2 pl-0 mr-0">{!! $promotionAttr->name !!}:</label>
+    <div class="col-sm-10 px-sm-3 px-0">
         <div class="range-steps d-flex">
             @if(count($poptions))
                 @foreach($poptions as $item)

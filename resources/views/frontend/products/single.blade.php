@@ -84,7 +84,7 @@
                     <div class="row">
                         <div class="col-md-10 col-12">
                             <div class="single-product-dtls-wrap">
-                                <div class="d-flex flex-wrap">
+                                <div class="d-flex flex-xl-nowrap flex-wrap">
                                     <div class="product-single-view-outer">
                                         <div class="align-items-center single-product-main-title mb-3 d-none visible-on-small">
                                             <!--like icon-->
@@ -202,6 +202,55 @@
                                         <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
                                             {!! $vape->long_description !!}
                                         </p>
+
+
+
+                                        <div class="table-responsive mt-2">
+                                            <table class="table table-striped table-bordered">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col" colspan="2" class="text-center">Specification</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="w-25">Model:</td>
+                                                    <td>Magic 710</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">Capacity:</td>
+                                                    <td>380mAh</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">Size:</td>
+                                                    <td>13.5*28*56.8mm</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">Weight:</td>
+                                                    <td>35.2g</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">Output voltage:</td>
+                                                    <td>3.5v</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">Puff:</td>
+                                                    <td>300-350puffs</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">Thread:</td>
+                                                    <td>510</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">OEM & ODM</td>
+                                                    <td>Welcom</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div>
+
+                                        </div>
                                     </div>
                                     <div class="tab-pane related-tab-pane fade" id="pills-related" role="tabpanel"
                                          aria-labelledby="pills-related-tab">
@@ -293,11 +342,42 @@
                                             I bought one.
                                         </p>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-gallery" role="tabpanel"
+                                    <div class="tab-pane fade gallery--tabs" id="pills-gallery" role="tabpanel"
                                          aria-labelledby="pills-gallery-tab">
-                                        <p class="product-single-gallery-text font-15 font-main-light text-light-clr mb-0">
-                                            gallery
-                                        </p>
+                                        <div class="galley-wrapper">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <a href="/public/img/temp/product_1.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
+                                                        <img src="/public/img/temp/product_1.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <a href="/public/img/temp/product_2.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
+                                                        <img src="/public/img/temp/product_2.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
+                                                        <img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <a href="/public/img/temp/product_2.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
+                                                        <img src="/public/img/temp/product_2.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
+                                                        <img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="col-lg-3 col-sm-6">
+                                                    <a href="/public/img/temp/product_1.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
+                                                        <img src="/public/img/temp/product_1.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="tab-pane fade " id="pills-faq" role="tabpanel"
                                          aria-labelledby="pills-faq-tab">
@@ -425,6 +505,8 @@
 
         @section('css')
             <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+            <link href="/public/plugins/formstone/lightbox/lightbox.css" rel="stylesheet">
+            <link href="/public/plugins/formstone/light.css" rel="stylesheet">
             <link type="text/css" rel="stylesheet"
                   href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css"/>
             <link type="text/css" rel="stylesheet"
@@ -480,11 +562,22 @@
             <script src="/public/plugins/formstone/core.js"></script>
             <script src="/public/plugins/formstone/mediaquery.js"></script>
             <script src="/public/plugins/formstone/touch.js"></script>
+            <script src="/public/plugins/formstone/transition.js"></script>
+            <script src="/public/plugins/formstone/lightbox/lightbox.js"></script>
             <script src="/public/plugins/formstone/carousel/carousel.js"></script>
             <script type="text/javascript"
                     src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
             <script>
                 $(document).ready(function () {
+                    $(".lightbox-product").lightbox();
+                    $('body').on('change','.products_custom_check input',function () {
+                        if ($(this).is(':checked')) {
+                            $(this).closest('.product-single-info_title').next().removeClass('products_closed')
+                        }else{
+                            $(this).closest('.product-single-info_title').next().addClass('products_closed')
+                        }
+
+                    })
                     $("body").on('click','.qty-count',function () {
                         let qty = $('.product-qty-select').val();
                         let type = $(this).data('type');
@@ -617,13 +710,14 @@
                                 if (!data.error) {
                                     var price = "€" + data.price;
                                     if (data.message) {
-                                        price = data.message + " €" + data.price;
+//                                        price = data.message + " €" + data.price;
+                                        price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + " €" + data.price;
                                     }
                                     $(".price-place").html(price);
                                     $("#variation_uid").val(data.variation_id);
                                     $(".btn-add-to-cart").addClass('add-to-cart');
                                 } else {
-                                    $(".price-place").html(data.message);
+                                    $(".price-place").html('<span class="d-inline-block font-16">' + data.message + '</span>');
                                     $("#variation_uid").val('');
                                 }
                             }
