@@ -14,7 +14,7 @@
             <input type="hidden" value="" class="variation_items required_item">
         @endif
     </h3>
-    <div class="d-flex align-items-center products_closed">
+    <div class="d-flex flex-wrap align-items-center products_closed">
         @if($promotion->type == 'variation_product')
             <div class="col-sm-10 pl-0">
                 @foreach($promotion->type_attrs as $promotionAttr)

@@ -2231,7 +2231,7 @@ td.shp-cart-table_price-td {
 /*end gallery tabs*/
 @media (max-width: 1199px){
     .product-single-view-outer{
-        width: 100%;
+        width:100% !important;
         flex: none;
     }
 
