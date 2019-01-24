@@ -10,6 +10,7 @@
                 <div class="panel-heading clearfix">
                     <h2 class="m-0 pull-left">Add / Edit Attribute</h2>
                     <div class="button-save pull-right">
+                        {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                         <a class="btn btn-default"
                            href="{!! route('admin_store_attributes') !!}">Back</a>
                     </div>
@@ -74,14 +75,7 @@
                                            {!! Form::select("name",['Blog','Tickets','Products','Stock'],null,['class'=>'form-control']) !!}
                                        </div>
                                    </div>
-                                   <div class="form-group row">
-                                       <label class="col-md-2 control-label" for="input-total">
-                                           <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
-                                       <div class="col-md-10">
-                                           YES {!! Form::radio('filter',1,null) !!}
-                                           NO {!! Form::radio('filter',0,null) !!}
-                                       </div>
-                                   </div>
+
                                    <div class="form-group row">
                                        <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                                      title=""
@@ -90,11 +84,7 @@
                                            {!! media_button('image',$model) !!}
                                        </div>
                                    </div>
-                                   <div class="form-group">
-                                       <div class="col-sm-12 text-right">
-                                           {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-                                       </div>
-                                   </div>
+
                                </div>
 
                            </div>
@@ -102,6 +92,14 @@
                            <div class="col-md-4">
                                <div class="basic-wall">
                                    <div class="right_col">
+                                       <div class="form-group row">
+                                           <label class="col-md-2 control-label" for="input-total">
+                                               <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
+                                           <div class="col-md-10">
+                                               YES {!! Form::radio('filter',1,null) !!}
+                                               NO {!! Form::radio('filter',0,null) !!}
+                                           </div>
+                                       </div>
                                        <div class="panel panel-default">
                                            <div class="panel-heading">
                                                <div class="row">
