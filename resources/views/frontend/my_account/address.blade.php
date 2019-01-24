@@ -134,18 +134,18 @@
                 <div class="profile-inner-pg-right-cnt_inner h-100">
                    <div class="row">
                        <div class="col-lg-9">
-                           <ul class="nav nav-pills nav-fill" role="tablist">
+                           {{--<ul class="nav nav-pills nav-fill" role="tablist">--}}
                                {{--<li>--}}
                                    {{--<a class="btn btn-info nav-link nav-link--new-address active" id="billingAddress-tab"--}}
                                       {{--data-toggle="tab" href="#billingAddress" role="tab" aria-controls="billingAddress"--}}
                                       {{--aria-selected="true" aria-expanded="true">Billing Address</a>--}}
                                {{--</li>--}}
-                               <li class="active">
-                                   <a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab"
-                                      data-toggle="tab"
-                                      href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>
-                               </li>
-                           </ul>
+                               {{--<li class="active">--}}
+                                   {{--<a class="btn btn-info nav-link nav-link--new-address" id="addressBook-tab"--}}
+                                      {{--data-toggle="tab"--}}
+                                      {{--href="#addressBook" role="tab" aria-controls="addressBook">Address Book</a>--}}
+                               {{--</li>--}}
+                           {{--</ul>--}}
 
                            <div class="tab-content">
                                {{--<div class="tab-pane fade active in show p-4" id="billingAddress" role="tabpanel"--}}
@@ -242,8 +242,7 @@
                                                    <div class="form-group row mb-5">
                                                        <div class="col-md-5">
                                                            <h5>
-                                                               <label for="selectAddress" class="control-label text-muted">Select
-                                                                   your address</label>
+                                                               <label for="selectAddress" class="control-label text-muted">Default Shipping Address</label>
                                                            </h5>
                                                        </div>
                                                        <div class="col-md-7 d-flex">
