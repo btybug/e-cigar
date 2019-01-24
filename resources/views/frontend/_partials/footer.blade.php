@@ -22,21 +22,6 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="footer-subscribe">
-                        <div class="d-flex position-relative align-items-center">
-                            <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">SUBSCRIBE
-                                |</label>
-                            <input id="footer-subscribe" type="email" placeholder="Your email" class="form-control">
-                            <span class="arrow position-absolute">
-                                <svg
-                                        viewBox="0 0 24 8"
-                                        width="24px" height="8px">
-<path fill-rule="evenodd" fill="rgb(81, 132, 229)"
-      d="M23.791,3.998 L18.090,0.000 L18.090,2.888 L0.791,2.888 L0.791,5.109 L18.090,5.109 L18.090,7.997 L23.791,3.998 Z"/>
-</svg>
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 <div class="footer-info col-md-5 col-lg-4 col-xl-3 text-md-right p-0 mt-md-0 mt-4 text-sm-left text-center">
                     <a href="#" class="d-block footer-logo">
@@ -70,6 +55,22 @@
                                                 class="fab fa-youtube"></i></span></a></li>
                         </ul>
                     </div>
+                    <div class="footer-subscribe">
+                        <div class="d-flex position-relative align-items-center">
+                            <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">SUBSCRIBE
+                                |</label>
+                            <input id="footer-subscribe" type="email" placeholder="Your email" class="form-control">
+                            <span class="arrow position-absolute">
+                                <svg
+                                        viewBox="0 0 24 8"
+                                        width="24px" height="8px">
+<path fill-rule="evenodd" fill="rgb(81, 132, 229)"
+      d="M23.791,3.998 L18.090,0.000 L18.090,2.888 L0.791,2.888 L0.791,5.109 L18.090,5.109 L18.090,7.997 L23.791,3.998 Z"/>
+</svg>
+                            </span>
+                        </div>
+                    </div>
+
                     <div class="copyright">
                         &#9400; Copyright 2019 Kaliony UK
                     </div>

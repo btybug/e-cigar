@@ -412,31 +412,30 @@ footer .footer-top .footer-menu-subscribe .footer-menu .menus a {
 }
 
 footer .footer-top .footer-menu-subscribe .footer-menu .menus ul li:not(:last-of-type) {
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 }
 
-footer .footer-top .footer-menu-subscribe .footer-subscribe {
+ .footer-subscribe {
     max-width: 611px;
-    margin-top: 65px;
 }
 
-footer .footer-top .footer-menu-subscribe .footer-subscribe > div {
+ .footer-subscribe > div {
     background-color: #ffffff;
 }
 
-footer .footer-top .footer-menu-subscribe .footer-subscribe > div label {
+.footer-subscribe > div label {
     letter-spacing: 2px;
     margin-left: 15px;
     margin-right: 5px;
 }
 
-footer .footer-top .footer-menu-subscribe .footer-subscribe > div .form-control {
+ .footer-subscribe > div .form-control {
     height: 42px;
     border: none;
     box-shadow: none;
 }
 
-footer .footer-top .footer-menu-subscribe .footer-subscribe .arrow {
+ .footer-subscribe .arrow {
     right: 15px;
 }
 
