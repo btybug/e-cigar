@@ -212,8 +212,8 @@ textarea {
     height: 100%;
 }
 
-.select-2.main-select-transparent + .select2-container--default .select2-selection--single .select2-selection__arrow {
-    background: url(../img/arrow-down.png) center no-repeat;
+.select-2 + .select2-container--default .select2-selection--single .select2-selection__arrow {
+    background: url(../img/arrow-down-blue.svg) center no-repeat;
 }
 
 .select-2.main-select-transparent + .select2-container--default .select2-selection--single .select2-selection__rendered {

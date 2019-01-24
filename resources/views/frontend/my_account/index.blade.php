@@ -360,28 +360,19 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="text" class="control-label col-sm-4">Country</label>
-                                                            <div class="col-sm-8">
-                                                                {{--{!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}--}}
-                                                                {!! Form::select('country',['' => 'SELECT'],null,['class'=>'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group hide">
-                                                        <div class="row">
-                                                            <label for="text" class="control-label col-sm-4">Regions</label>
-                                                            <div class="col-sm-8">
-                                                                {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="form-group hide">
                                                         <div class="row">
                                                             <label for="text" class="control-label col-sm-4">City</label>
                                                             <div class="col-sm-8">
                                                                 {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group hide">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Region</label>
+                                                            <div class="col-sm-8">
+                                                                {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -393,6 +384,24 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="text" class="control-label col-sm-4">Country</label>
+                                                            <div class="col-sm-8">
+                                                                {{--{!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}--}}
+                                                                {{--{!! Form::select('country',['' => 'SELECT'],null,['class'=>'form-control']) !!}--}}
+                                                                <select id="country" class="form-control select-2 select-2--no-search main-select account-country-select" style="width: 100%">
+
+                                                                    <option class="selected">Armenia</option>
+                                                                    <option>UK</option>
+                                                                    <option>USA</option>
+
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
                                                     {!! Form::hidden('type','billing_address') !!}
                                                     {!! Form::hidden('id') !!}
                                                     {{--<div class="form-group row">--}}
