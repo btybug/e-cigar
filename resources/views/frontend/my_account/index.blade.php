@@ -147,9 +147,25 @@
                                                 <div class="col-xl-8">
                                                     <div class="text-xl-left text-center">
                                                         <h1 class="font-20 font-main-bold text-uppercase">Edit Profile</h1>
-                                                        <p class="mb-0 font-13 text-gray-clr profile-info_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                            <br>
-                                                            Lorem Ipsum has been the industry's standard dummy.</p>
+                                                        <div class="font-13 text-gray-clr">
+                                                            <p class="profile-info_text">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                                                Lorem Ipsum has been the industry's standard dummy.
+                                                            </p>
+                                                            <p class="mb-2">
+                                                                <span class="d-inline-block mr-2">{{ $user->name }}</span>
+                                                                <span>{{ $user->last_name }}</span>
+                                                            </p>
+                                                            <p class="mb-2">
+                                                                <span class="d-inline-block mr-2">{{ $user->dob }}</span>
+                                                                <span>{{ ($user->age) ? $user->age .' years' : null }}</span>
+
+                                                            </p>
+                                                            <p>{{ ucfirst($user->gender) }}</p>
+                                                        </div>
+
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,44 +183,44 @@
                                                 {!! Form::model($user) !!}
                                             @endif
                                             @if($user->status)
-                                                <div class="form-group row">
-                                                    <label for="username" class="col-md-4">
-                                                        First Name
-                                                    </label>
-                                                    <div class="col-md-8">
-                                                        <div class="form-control">{{ $user->name }}</div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="username" class="col-md-4">
-                                                        Last Name
-                                                    </label>
-                                                    <div class="col-md-8">
-                                                        <div class="form-control">{{ $user->last_name }}</div>
-                                                    </div>
-                                                </div>
+                                                {{--<div class="form-group row">--}}
+                                                    {{--<label for="username" class="col-md-4">--}}
+                                                        {{--First Name--}}
+                                                    {{--</label>--}}
+                                                    {{--<div class="col-md-8">--}}
+                                                        {{--<div class="form-control">{{ $user->name }}</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="form-group row">--}}
+                                                    {{--<label for="username" class="col-md-4">--}}
+                                                        {{--Last Name--}}
+                                                    {{--</label>--}}
+                                                    {{--<div class="col-md-8">--}}
+                                                        {{--<div class="form-control">{{ $user->last_name }}</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
 
-                                                <div class="form-group row">
-                                                    <label for="username" class="col-md-4">
-                                                        Date of birth
-                                                    </label>
-                                                    <div class="col-sm-6">
-                                                        <div class="form-control">{{ $user->dob }}</div>
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        {{ ($user->age) ? $user->age .' years' : null }}
-                                                    </div>
-                                                </div>
+                                                {{--<div class="form-group row">--}}
+                                                    {{--<label for="username" class="col-md-4">--}}
+                                                        {{--Date of birth--}}
+                                                    {{--</label>--}}
+                                                    {{--<div class="col-sm-6">--}}
+                                                        {{--<div class="form-control">{{ $user->dob }}</div>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="col-md-2">--}}
+                                                        {{--{{ ($user->age) ? $user->age .' years' : null }}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
 
 
-                                                <div class="form-group row">
-                                                    <label for="username" class="col-md-4">
-                                                        Gender
-                                                    </label>
-                                                    <div class="col-md-8">
-                                                        <div class="form-control">{{ ucfirst($user->gender) }}</div>
-                                                    </div>
-                                                </div>
+                                                {{--<div class="form-group row">--}}
+                                                    {{--<label for="username" class="col-md-4">--}}
+                                                        {{--Gender--}}
+                                                    {{--</label>--}}
+                                                    {{--<div class="col-md-8">--}}
+                                                        {{--<div class="form-control">{{ ucfirst($user->gender) }}</div>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
                                             @else
                                                 <div class="profile-form">
                                                     <div class="row">
@@ -295,15 +311,15 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row avatar align-items-center mb-4 border-top border-bottom py-3">
-                                                <span class="col-md-4">Avatar</span>
-                                                <div class="col-md-8">
-                                                    <img width="150" src="/public/images/{!!$user->gender!!}.png" alt="">
-                                                    <div>
-                                                        <button type="button" class="btn btn-secondary">Change Avatar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {{--<div class="form-group row avatar align-items-center mb-4 border-top border-bottom py-3">--}}
+                                                {{--<span class="col-md-4">Avatar</span>--}}
+                                                {{--<div class="col-md-8">--}}
+                                                    {{--<img width="150" src="/public/images/{!!$user->gender!!}.png" alt="">--}}
+                                                    {{--<div>--}}
+                                                        {{--<button type="button" class="btn btn-secondary">Change Avatar</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
                                             <div class="form-group row">
 
                                                 <input type="submit" class="btn btn-primary" value="Save changes">
