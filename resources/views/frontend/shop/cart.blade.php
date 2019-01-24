@@ -47,7 +47,6 @@
                         </li>
                     </ul>
                 </div>
-{{--                @include('frontend.shop._partials.cart_table_old')--}}
                 @include('frontend.shop._partials.cart_table')
             </div>
         </div>

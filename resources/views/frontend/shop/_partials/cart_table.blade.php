@@ -31,7 +31,7 @@
                                                 <div class="shp-cart-table_img-holder">
                                                     <img src="{{ $stock->image }}" alt=" {!! $stock->name !!}">
                                                 </div>
-                                                <span class="shp-cart-product_remove font-13 pointer">Remove</span>
+                                                <span data-uid="{{ $main->id }}" class="shp-cart-product_remove font-13 pointer remove-from-cart">Remove</span>
                                             </div>
                                             <div class="shp-cart-product_right">
                                                 <h2 class="shp-cart-product_right_title font-main-bold font-20 text-uppercase">
@@ -48,7 +48,7 @@
                                                                 @endif
                                                             </span>
                                                         </p>
-                                                        <span class="font-15 font-main-bold">$50</span>
+                                                        <span class="font-15 font-main-bold">${{ $main->price }}</span>
                                                     </li>
                                                     <li class="shp-cart-product_row shp-cart-product_extra font-main-bold font-15 text-uppercase">
                                                         extra
