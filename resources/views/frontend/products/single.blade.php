@@ -382,23 +382,15 @@
                                     <div class="tab-pane fade " id="pills-faq" role="tabpanel"
                                          aria-labelledby="pills-faq-tab">
                                         <div class="faq-wrapper">
+                                            @foreach($vape->faqs as $faq)
                                             <div class="accordion offset-top-0" role="tablist" aria-multiselectable="true" id="accordion-3">
-                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-0-content" id="accordion-3--card-0-header" aria-expanded="false" aria-controls="accordion-3--card-0-content">Lorem ipsum dolor sit amet.</a>
+                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-0-content" id="accordion-3--card-0-header" aria-expanded="false" aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
                                                     <div class="collapse" id="accordion-3--card-0-content" aria-labelledby="accordion-3--card-0-header" data-parent="#accordion-3" style="">
-                                                        <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci atque consectetur eligendi explicabo, in iste laudantium magnam molestiae nam necessitatibus nobis pariatur placeat quae repudiandae tempore ut voluptates. Iure, praesentium.</div>
-                                                    </div>
-                                                </div>
-                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-1-content" id="accordion-3--card-1-header" aria-expanded="false" aria-controls="accordion-3--card-1-content">Lorem ipsum dolor sit amet, consectetur.?</a>
-                                                    <div class="collapse" id="accordion-3--card-1-content" aria-labelledby="accordion-3--card-1-header" data-parent="#accordion-3" style="">
-                                                        <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi aperiam aut, dignissimos distinctio doloremque eaque explicabo, impedit in labore laborum molestiae obcaecati officiis reiciendis reprehenderit sint sit voluptatem. Cum dolorem et incidunt inventore nesciunt nostrum perspiciatis quae saepe vero voluptate. A consequatur debitis deleniti facilis, in neque non quaerat quisquam similique sit temporibus, voluptatibus! Dicta id incidunt laudantium nulla voluptate? Architecto, asperiores assumenda cum cumque deleniti dicta dolorum ducimus ex inventore minus nemo optio porro quam quibusdam repellat reprehenderit sed sequi, sit soluta ullam vel voluptas voluptates. Adipisci inventore necessitatibus quaerat unde? Ab neque provident totam, vero voluptate voluptatum.</div>
-                                                    </div>
-                                                </div>
-                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-2-content" id="accordion-3--card-2-header" aria-expanded="false" aria-controls="accordion-3--card-2-content">Lorem ipsum dolor.</a>
-                                                    <div class="collapse" id="accordion-3--card-2-content" aria-labelledby="accordion-3--card-2-header" data-parent="#accordion-3" style="">
-                                                        <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aliquid aperiam atque corporis, cum distinctio doloremque eius eligendi est et ex explicabo fuga fugiat hic inventore libero maiores minima nemo nihil nulla porro quae quasi quia quo sit sunt suscipit ullam. Accusantium alias, beatae blanditiis corporis, deserunt dignissimos eos, expedita harum impedit in ipsa itaque laboriosam magni minima provident quidem vitae! Aliquam illo labore sint voluptatem voluptatibus? Enim, optio, quidem.</div>
+                                                        <div class="card-body">{!! $faq->ansver !!}</div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endforeach
                                         </div>
 
                                     </div>

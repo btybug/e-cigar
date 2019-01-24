@@ -134,4 +134,9 @@ class Stock extends Translatable
     {
         return $this->hasMany(StockSales::class, 'stock_id');
     }
+
+    public function faqs()
+    {
+        return $this->belongsToMany(Faq::class, 'faq_stocks', 'stock_id', 'faq_id');
+    }
 }

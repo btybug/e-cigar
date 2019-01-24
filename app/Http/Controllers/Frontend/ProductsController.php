@@ -58,7 +58,6 @@ class ProductsController extends Controller
 
         $variations = $vape->variations()->with('options')->get();
 
-//        dd($variations);
         return $this->view('single', compact(['vape', 'variations', 'related_products']));
     }
 
