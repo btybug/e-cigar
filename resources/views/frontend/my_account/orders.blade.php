@@ -168,13 +168,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-lg-3 mb-xl-0 mb-4">
-                            <!--profile status-->
-                            <div class="profile-status-wrap text-centet">
-                                <h2 class="profile-status-wrap_title font-20 font-main-bold text-uppercase text-center mb-3">Status</h2>
-                                <p>Verified User</p>
-                            </div>
-                        </div>
                     </div>
 
                 </div>

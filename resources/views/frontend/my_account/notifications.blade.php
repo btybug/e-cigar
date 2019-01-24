@@ -122,61 +122,55 @@
 
             <div class="profile-inner-pg-right-cnt">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-6 mb-4 ml-md-auto">
-                            <!--profile status-->
-                            <div class="profile-status-wrap text-centet">
-                                <h2 class="profile-status-wrap_title font-20 font-main-bold text-uppercase text-center mb-3">Status</h2>
-                                <p>Verified User</p>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-striped table-ntfs">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Notification</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($messages as $message)
-                        <tr>
-                            <th scope="row"><input type="checkbox"></th>
-                            <td>{!! $message->updated_at !!}</td>
-                            <td>{!! $message->subject !!}</td>
-                            <td>{!! $message->type !!}</td>
-                            <td><button class="ntfs-btn btn btn-info __modal rounded-0" data-toggle="modal" data-id="{!! $message->id !!}"><i class="fa fa-eye"></i></button></td>
-                        </tr>
-                        @endforeach
+                   <div class="col-lg-9">
+                       <table class="table table-striped table-ntfs">
+                           <thead>
+                           <tr>
+                               <th scope="col">#</th>
+                               <th scope="col">Date</th>
+                               <th scope="col">Notification</th>
+                               <th scope="col">Type</th>
+                               <th scope="col">Actions</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           @foreach($messages as $message)
+                               <tr>
+                                   <th scope="row"><input type="checkbox"></th>
+                                   <td>{!! $message->updated_at !!}</td>
+                                   <td>{!! $message->subject !!}</td>
+                                   <td>{!! $message->type !!}</td>
+                                   <td><button class="ntfs-btn btn btn-info __modal rounded-0" data-toggle="modal" data-id="{!! $message->id !!}"><i class="fa fa-eye"></i></button></td>
+                               </tr>
+                           @endforeach
 
-                        {{-- Modal --}}
-                        <div class="modal" id="notif_modal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
+                           {{-- Modal --}}
+                           <div class="modal" id="notif_modal">
+                               <div class="modal-dialog">
+                                   <div class="modal-content">
 
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Modal Heading</h4>
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
+                                       <div class="modal-header">
+                                           <h4 class="modal-title">Modal Heading</h4>
+                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                       </div>
 
-                                    <div class="modal-body">
+                                       <div class="modal-body">
 
-                                    </div>
+                                       </div>
 
-                                    <div class="modal-footer">
-                                        <button type="button" class="ntfs-btn btn btn-info rounded-0" data-dismiss="modal">Close</button>
-                                    </div>
+                                       <div class="modal-footer">
+                                           <button type="button" class="ntfs-btn btn btn-info rounded-0" data-dismiss="modal">Close</button>
+                                       </div>
 
-                                </div>
-                            </div>
-                        </div>
+                                   </div>
+                               </div>
+                           </div>
 
 
-                        </tbody>
-                    </table>
+                           </tbody>
+                       </table>
+
+                   </div>
                 </div>
             </div>
             {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
