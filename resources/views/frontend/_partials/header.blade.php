@@ -377,7 +377,9 @@
         grecaptcha.ready(function () {
             grecaptcha.execute('{!! env('GOOGLE_RECAPTCHA_KEY') !!}', {action: 'action_name'})
                 .then(function (token) {
-                    document.getElementById('g-recaptcha-response').value = token
+                    console.log(token);
+                    $('.g-recaptcha-response').val(token);
+//                    document.getElementsByClassName('g-recaptcha-response').value = token
                 });
         });
     </script>
