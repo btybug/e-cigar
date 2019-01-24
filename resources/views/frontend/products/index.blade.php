@@ -18,12 +18,12 @@
                     </div>
                     <div class="main-filters d-flex closed-mobile">
                         <div class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
-                            <label for="brandSelect" class="text-main-clr mb-0">BRAND</label>
+                            <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
                             <div class="select-wall">
                                 <select id="brandSelect"
                                         class="select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected"
                                         multiple="multiple">
-                                    <option selected="selected">DaVinci</option>
+                                    <option>DaVinci</option>
                                     <option>Brandos</option>
                                     <option>Eleaf</option>
                                 </select>
@@ -31,20 +31,23 @@
 
                             <span class="arrow-select"><b></b></span>
                         </div>
-                        <div class="slider-range d-flex flex-wrap align-items-center">
+                        <div class="align-self-center reset-wrapper">
+                            <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
+                        </div>
+                        <div class="slider-range d-flex flex-wrap align-items-center mr-4">
                             <div class="amount col-lg-4 col-5 pl-0">
                                 <input type="text" id="amount" name="" readonly class="font-main-bold font-16 w-100 border-0">
                                 <input type="hidden" id="amount_range" name="amount" value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
                             </div>
                             <div id="slider-range" class="col-lg-8 col-7"></div>
                         </div>
-                        <div class="align-self-center reset-wrapper">
-                            <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
-                        </div>
+
 
                     </div>
                     <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">
-<span class="icon pointer arrow main-transition">
+                        <div class="d-flex">
+                            <span class="mr-2 text-uppercase d-lg-block d-none">Filters</span>
+                            <span class="icon pointer arrow main-transition">
     <svg
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -53,6 +56,8 @@
       d="M5.998,7.783 L5.991,7.790 L-0.001,1.336 L1.239,-0.000 L5.998,5.126 L10.756,-0.000 L11.997,1.336 L6.005,7.790 L5.998,7.783 ZM5.998,12.335 L10.756,7.209 L11.997,8.545 L6.005,15.000 L5.998,14.992 L5.991,15.000 L-0.001,8.545 L1.239,7.209 L5.998,12.335 Z"/>
 </svg>
 </span>
+                        </div>
+
                         <div class="nav-item--has-dropdown_dropdown">
                             <div class="all-filters row">
                                 <div class="col-lg-5 col-md-12 filter-left-col">
@@ -81,6 +86,9 @@
                                             @endif
                                         @endif
                                     @endforeach
+                                </div>
+                                <div class="col-12 text-right">
+                                    <button class="btn save-filter-btn">Save</button>
                                 </div>
                             </div>
                         </div>

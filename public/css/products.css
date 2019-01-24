@@ -159,6 +159,7 @@ body.show-filter .main-filters .reset-wrapper {
 .select_with-tag-wrapper .select2-container--default .select2-selection--multiple {
     border-radius: 0;
     border-color: #d7d7d7;
+    height: 42px;
 }
 
 .simple_select_wrapper .select2.select2-container.select2-container--default {
@@ -587,6 +588,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     .top-filters .main-filters .brand_select {
         width: 100%;
         margin-right: 15px;
+        order: 1;
     }
 }
 
@@ -615,16 +617,28 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 @media screen and (min-width: 1200px) {
     .top-filters .main-filters .slider-range {
-        margin-left: 50px;
+        margin-left: 15px;
     }
 }
 
 @media screen and (max-width: 575px) {
     .top-filters .main-filters .slider-range {
         max-width: 100%;
+        order: 2;
     }
 }
-
+.save-filter-btn{
+    border: 0;
+    outline: none;
+    background: #5184e5;
+    height: 42px;
+    padding: 10px 25px;
+    color: #fff;
+    border-radius: 0;
+}
+.save-filter-btn:focus{
+    box-shadow: none;
+}
 .top-filters .main-filters .slider-range .ui-widget.ui-widget-content {
     background-color: #e3e6ed;
     border-radius: 0;
@@ -665,11 +679,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .top-filters .main-filters .reset-wrapper {
-    flex: auto;
-    text-align: right;
-    margin-right: 28px;
-    display: none;
-    margin-left: 8px;
+    /*display: none;*/
+    margin-left: 15px;
 }
 
 .top-filters .arrow-wrap {
@@ -1561,6 +1572,9 @@ header .search-icon-mobile {
 @media screen and (max-width: 575px) {
     .top-filters .main-filters .reset-wrapper {
         margin-right: 15px;
+        order: 3;
+        width: 100%;
+        text-align: right;
     }
 
     header .header-bottom .cat-search .select2.select2-container.select2-container--default {
