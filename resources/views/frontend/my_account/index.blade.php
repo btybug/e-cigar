@@ -146,16 +146,11 @@
                                                 </div>
                                                 <div class="col-xl-8">
                                                     <div class="text-xl-left text-center">
-                                                        <h1 class="font-20 font-main-bold text-uppercase">Edit Profile</h1>
+                                                        <h1 class="mb-2 font-20 font-main-bold text-uppercase">
+                                                            <span class="d-inline-block mr-2">{{ $user->name }}</span>
+                                                            <span>{{ $user->last_name }}</span>
+                                                        </h1>
                                                         <div class="font-13 text-gray-clr">
-                                                            <p class="profile-info_text">
-                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                                                Lorem Ipsum has been the industry's standard dummy.
-                                                            </p>
-                                                            <p class="mb-2">
-                                                                <span class="d-inline-block mr-2">{{ $user->name }}</span>
-                                                                <span>{{ $user->last_name }}</span>
-                                                            </p>
                                                             <p class="mb-2">
                                                                 <span class="d-inline-block mr-2">{{ $user->dob }}</span>
                                                                 <span>{{ ($user->age) ? $user->age .' years' : null }}</span>
@@ -163,9 +158,6 @@
                                                             </p>
                                                             <p>{{ ucfirst($user->gender) }}</p>
                                                         </div>
-
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,15 +272,61 @@
                                             @endif
 
 
-                                            <div class="form-group row mail">
-                                                <label for="username" class="col-md-4">
-                                                    Email address
-                                                    <span class="required text-danger">*</span>
-                                                </label>
+                                            <div class="card account-card mb-4">
+                                                <h2 class="card-title font-20"> Contact Details</h2>
 
-                                                <div class="col-md-8">
-                                                    {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
+                                                <div class="card-body">
+                                                    <div class="form-group row mail">
+                                                        <label for="username" class="col-md-4">
+                                                            Email address
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-8">
+                                                            {!! Form::email('email',null,['class'=>'form-control','id'=>'exampleInputEmail1','aria-describedby'=>"emailHelp"]) !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+
+                                                        <label for="username" class="col-md-4">
+                                                            Phone
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+                                                        <div class="col-md-8">
+                                                            {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                            </div>
+
+                                            <div class="card account-card">
+                                                <h2 class="card-title font-20">Billing Address</h2>
+
+                                                <div class="card-body">
+                                                    <div class="form-group row mail">
+                                                        <label for="username" class="col-md-4">
+                                                            Address 1
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+
+                                                        <label for="username" class="col-md-4">
+                                                            Address 2
+                                                            <span class="required text-danger">*</span>
+                                                        </label>
+
+                                                        <div class="col-md-8">
+                                                            <input type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             {{--<div class="form-group row">--}}
@@ -300,16 +338,7 @@
                                             {{--{!! Form::text('country',null,['class'=>'form-control']) !!}--}}
                                             {{--</div>--}}
                                             {{--</div>--}}
-                                            <div class="form-group row">
 
-                                                <label for="username" class="col-md-4">
-                                                    Phone
-                                                    <span class="required text-danger">*</span>
-                                                </label>
-                                                <div class="col-md-8">
-                                                    {!! Form::text('phone',null,['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
 
                                             {{--<div class="form-group row avatar align-items-center mb-4 border-top border-bottom py-3">--}}
                                                 {{--<span class="col-md-4">Avatar</span>--}}

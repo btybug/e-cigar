@@ -1335,6 +1335,11 @@ body.get-cover:after {
     color: #5184e5;
 }
 
+.account-card .card-title {
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    padding: 1.25rem;
+}
+
 
 @media (min-width: 769px) {
 
