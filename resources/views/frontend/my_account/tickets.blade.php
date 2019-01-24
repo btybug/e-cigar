@@ -47,7 +47,7 @@
                        </tbody>
                    </table>
                    <div class="col-md-12 my-4">
-                       {!! $tickets->links() !!}
+                       {!! $tickets->links('vendor.pagination.default') !!}
                    </div>
                </div>
            </div>
