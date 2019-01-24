@@ -386,7 +386,7 @@
                                             <div class="accordion offset-top-0" role="tablist" aria-multiselectable="true" id="accordion-3">
                                                 <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-0-content" id="accordion-3--card-0-header" aria-expanded="false" aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
                                                     <div class="collapse" id="accordion-3--card-0-content" aria-labelledby="accordion-3--card-0-header" data-parent="#accordion-3" style="">
-                                                        <div class="card-body">{!! $faq->ansver !!}</div>
+                                                        <div class="card-body">{!! $faq->answer !!}</div>
                                                     </div>
                                                 </div>
                                             </div>
