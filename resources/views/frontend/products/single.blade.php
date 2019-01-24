@@ -4,43 +4,36 @@
     <div class="continue-shp-wrapp">
         <div class="container main-max-width h-100 p-0">
             <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between h-100">
-                <a href="{{ route('categories_front') }}" class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">continue
-                    shopping</a>
+                <a href="{{ route('categories_front') }}" class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">continue shopping</a>
                 <div class="d-flex align-items-center ml-lg-auto continue-shp-wrapp_right">
                     <div class="continue-shp-wrapp_qty position-relative">
                         <!--minus qty-->
                         <span data-type="minus" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count">
-                        <svg viewBox="0 0 20 3"
-                             width="20px" height="3px">
-<path fill-rule="evenodd" fill="rgb(214, 217, 225)"
-      d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"/>
-</svg>
-                    </span>
-                    {!! Form::number('',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 product-qty-select','min' => 'number']) !!}
-                    <!--plus qty-->
+                            <svg viewBox="0 0 20 3" width="20px" height="3px">
+                                <path fill-rule="evenodd" fill="rgb(214, 217, 225)" d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"/>
+                            </svg>
+                        </span>
+                        {!! Form::number('',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 product-qty-select','min' => 'number']) !!}
+                        <!--plus qty-->
                         <span data-type="plus" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count">
-                        <svg
-                                viewBox="0 0 20 20"
-                                width="20px" height="20px">
-<path fill-rule="evenodd" fill="rgb(211, 214, 223)"
-      d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"/>
-</svg></span>
+                            <svg viewBox="0 0 20 20" width="20px" height="20px">
+                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)" d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"/>
+                            </svg>
+                        </span>
                     </div>
-                    <a href="#"
-                       class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
+                    <a href="#" class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
                         <span class="product-card_btn-text">add to cart</span>
                         <span class="d-inline-block ml-auto">
-                                    <svg viewBox="0 0 18 22" width="18px" height="22px">
-<path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
-      d="M14.305,3.679 L14.305,0.003 L3.694,0.003 L3.694,3.679 L-0.004,3.679 L-0.004,21.998 L18.003,21.998 L18.003,3.679 L14.305,3.679 ZM4.935,1.216 L13.064,1.216 L13.064,3.679 L4.935,3.679 L4.935,1.216 ZM16.761,20.785 L1.238,20.785 L1.238,4.891 L3.694,4.891 L3.694,7.329 L4.935,7.329 L4.935,4.891 L13.064,4.891 L13.064,7.329 L14.305,7.329 L14.305,4.891 L16.761,4.891 L16.761,20.785 Z"></path>
-</svg>
-                                </span>
+                            <svg viewBox="0 0 18 22" width="18px" height="22px">
+                                <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)" d="M14.305,3.679 L14.305,0.003 L3.694,0.003 L3.694,3.679 L-0.004,3.679 L-0.004,21.998 L18.003,21.998 L18.003,3.679 L14.305,3.679 ZM4.935,1.216 L13.064,1.216 L13.064,3.679 L4.935,3.679 L4.935,1.216 ZM16.761,20.785 L1.238,20.785 L1.238,4.891 L3.694,4.891 L3.694,7.329 L4.935,7.329 L4.935,4.891 L13.064,4.891 L13.064,7.329 L14.305,7.329 L14.305,4.891 L16.761,4.891 L16.761,20.785 Z"></path>
+                            </svg>
+                        </span>
                     </a>
                     <span class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
-                                <span class="price-place">$77.5</span>
+                        <span class="price-place">$77.5</span>
                         <!--old price-->
-                                <span class="product-card_old-price font-sec-reg font-30 text-gray-clr lh-1 position-absolute">$90</span>
-                            </span>
+                        <span class="product-card_old-price font-sec-reg font-30 text-gray-clr lh-1 position-absolute">$90</span>
+                    </span>
                 </div>
             </div>
 
@@ -57,11 +50,10 @@
                     <div class="left-head d-flex align-items-center mb-lg-0 mb-2">
                         <div class="page-back">
                             <a href="#">
-        <span class="back-icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                     width="22px" height="9px">
-<path fill-rule="evenodd" fill="rgb(53, 53, 53)"
-      d="M21.998,3.382 L5.929,3.382 L5.929,0.000 L0.004,4.500 L5.929,9.000 L5.929,5.617 L21.998,5.617 L21.998,3.382 Z"></path>
-</svg></span>
+                                <span class="back-icon"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="9px">
+                                        <path fill-rule="evenodd" fill="rgb(53, 53, 53)" d="M21.998,3.382 L5.929,3.382 L5.929,0.000 L0.004,4.500 L5.929,9.000 L5.929,5.617 L21.998,5.617 L21.998,3.382 Z"></path>
+                                    </svg>
+                                </span>
                             </a>
                         </div>
                         <div class="breadcrumbs-page font-13">
@@ -73,10 +65,8 @@
                                     <li class="breadcrumb-item active" aria-current="page">Product Name</li>
                                 </ol>
                             </nav>
-
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="products-wrap">
@@ -88,23 +78,23 @@
                                     <div class="product-single-view-outer">
                                         <div class="align-items-center single-product-main-title mb-3 d-none visible-on-small">
                                             <!--like icon-->
-                                            @if(Auth::check()) <span class="like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
-                                                <svg viewBox="0 0 20 18" width="20px" height="18px">
-                                    <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
-                                          d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
-                                    </svg>
-                                            </span>@endif
+                                            @if(Auth::check())
+                                                <span class="like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
+                                                    <svg viewBox="0 0 20 18" width="20px" height="18px">
+                                                        <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)" d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
+                                                    </svg>
+                                                </span>
+                                            @endif
                                             <h2 class="font-36 mb-0">{!! $vape->name !!}</h2>
                                         </div>
                                         <div class="product-card_view product-card_view--single position-relative">
                                             <!--product main image-->
                                             @if($vape->image)
                                                 <div>
-                                                    <img class="single-product_top-img" src="{!! $vape->image !!}"
-                                                         alt="{!! @getImage( $vape->image)->seo_alt !!}">
+                                                    <img class="single-product_top-img" src="{!! $vape->image !!}" alt="{!! @getImage( $vape->image)->seo_alt !!}">
                                                 </div>
                                             @endif
-                                        <!--new label-->
+                                            <!--new label-->
                                             <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
                                             <!--sale label-->
                                             <span class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">-10%</span>
@@ -116,38 +106,39 @@
                                                     <img class="" src="{!! $vape->image !!}" alt="{!! @getImage( $vape->image)->seo_alt !!}">
                                                 </div>
                                             @endif
-                                            @if($vape->other_images && count($vape->other_images))
-                                                @foreach($vape->other_images as $other_image)
+                                            {{--@if($vape->other_images && count($vape->other_images))--}}
+                                                {{--@foreach($vape->other_images as $other_image)--}}
+                                                    {{--<div class="product-card_thumb-img-holder pointer">--}}
+                                                        {{--<img class="" src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}">--}}
+                                                    {{--</div>--}}
+                                                {{--@endforeach--}}
+                                            {{--@endif--}}
+
+                                            @if($vape->variations && count($vape->variations))
+                                                @foreach($vape->variations as $variation)
                                                     <div class="product-card_thumb-img-holder pointer">
-                                                        <img class="" src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}">
+                                                        <img class="" src="{{$variation["image"]}}" alt="{!! @getImage($variation["image"])->seo_alt !!}">
                                                     </div>
                                                 @endforeach
                                             @endif
                                         </div>
 
                                         <div class="product-card_icons mb-4">
-                                    <span class="product-card_icon d-inline-block">
-                                      <svg viewBox="0 0 22 22"
-                                           width="22px" height="22px">
-<path fill-rule="evenodd" fill="rgb(124, 124, 124)"
-      d="M21.685,8.354 C21.411,8.531 21.027,8.476 20.832,8.228 C19.735,6.842 18.346,5.753 16.700,4.994 C13.203,3.372 8.736,3.377 5.244,5.005 C3.593,5.775 2.198,6.870 1.107,8.266 C0.986,8.415 0.796,8.492 0.608,8.492 C0.486,8.492 0.364,8.459 0.254,8.393 C-0.020,8.217 -0.087,7.876 0.108,7.628 C1.314,6.088 2.856,4.878 4.684,4.026 C8.517,2.239 13.416,2.233 17.255,4.015 C19.076,4.862 20.612,6.061 21.824,7.590 C22.020,7.837 21.959,8.178 21.685,8.354 ZM18.047,2.717 C17.949,2.717 17.858,2.695 17.767,2.656 C15.433,1.567 13.403,1.100 10.978,1.100 C8.559,1.100 6.281,1.622 4.190,2.651 C3.892,2.794 3.526,2.701 3.362,2.431 C3.204,2.162 3.307,1.831 3.606,1.683 C5.879,0.566 8.359,-0.000 10.978,-0.000 C13.574,-0.000 15.841,0.517 18.327,1.678 C18.626,1.815 18.742,2.150 18.589,2.420 C18.479,2.607 18.266,2.717 18.047,2.717 ZM10.923,5.313 C16.463,5.313 20.972,9.179 20.972,13.931 C20.972,15.719 19.283,17.171 17.218,17.171 C15.153,17.171 13.464,15.719 13.464,13.931 C13.464,12.754 12.325,11.792 10.930,11.792 C9.534,11.792 8.395,12.749 8.395,13.931 C8.395,15.807 9.205,17.572 10.674,18.892 C11.825,19.926 12.947,20.498 14.665,20.922 C14.988,21.004 15.183,21.307 15.091,21.598 C15.018,21.840 14.775,22.000 14.507,22.000 C14.452,22.000 14.397,21.994 14.348,21.978 C12.404,21.499 11.137,20.850 9.821,19.668 C8.121,18.139 7.182,16.098 7.182,13.926 C7.182,12.138 8.864,10.686 10.936,10.686 C13.008,10.686 14.689,12.138 14.689,13.926 C14.689,15.103 15.829,16.065 17.225,16.065 C18.619,16.065 19.759,15.108 19.759,13.926 C19.759,9.779 15.798,6.408 10.930,6.408 C7.462,6.408 4.300,8.145 2.874,10.840 C2.399,11.731 2.162,12.771 2.162,13.926 C2.162,14.784 2.247,16.137 2.972,17.891 C3.088,18.177 2.930,18.491 2.612,18.601 C2.295,18.705 1.949,18.562 1.827,18.277 C1.229,16.830 0.937,15.411 0.937,13.926 C0.937,12.606 1.217,11.407 1.772,10.367 C3.398,7.299 6.993,5.313 10.923,5.313 ZM10.967,7.992 C14.775,7.992 17.870,10.648 17.870,13.920 C17.870,14.223 17.596,14.470 17.261,14.470 C16.926,14.470 16.651,14.223 16.651,13.920 C16.651,11.258 14.104,9.091 10.967,9.091 C7.835,9.091 5.281,11.258 5.281,13.920 C5.281,15.504 5.671,16.967 6.409,18.161 C7.195,19.426 7.719,19.971 8.657,20.823 C8.895,21.037 8.895,21.389 8.651,21.598 C8.541,21.714 8.383,21.763 8.230,21.763 C8.072,21.763 7.920,21.708 7.798,21.598 C6.744,20.636 6.171,20.025 5.349,18.700 C4.507,17.347 4.062,15.691 4.062,13.920 C4.062,10.653 7.158,7.992 10.967,7.992 ZM10.290,13.926 C10.290,13.624 10.564,13.376 10.899,13.376 C11.235,13.376 11.508,13.624 11.508,13.926 C11.508,15.472 12.392,16.934 13.873,17.842 C14.732,18.370 15.743,18.629 16.962,18.629 C17.255,18.629 17.748,18.601 18.236,18.524 C18.565,18.469 18.882,18.672 18.943,18.969 C19.004,19.266 18.778,19.552 18.449,19.607 C17.736,19.723 17.133,19.728 16.962,19.728 C15.512,19.728 14.239,19.398 13.184,18.755 C11.374,17.644 10.290,15.840 10.290,13.926 Z"/>
-</svg>
-                                    </span>
                                             <span class="product-card_icon d-inline-block">
-                                       <svg
-                                               viewBox="0 0 21 21"
-                                               width="21px" height="21px">
-<path fill-rule="evenodd" fill="rgb(124, 124, 124)"
-      d="M20.261,5.781 C20.261,5.496 20.112,5.247 19.879,5.122 L10.825,0.298 C10.608,0.192 10.358,0.192 10.158,0.334 C9.957,0.459 9.841,0.708 9.841,0.957 L9.841,9.430 L1.788,5.122 C1.454,4.944 1.037,5.087 0.870,5.443 C0.704,5.799 0.837,6.244 1.171,6.422 L8.990,10.587 L1.171,14.788 C0.837,14.966 0.687,15.411 0.870,15.767 C0.987,16.016 1.237,16.176 1.488,16.176 C1.587,16.176 1.687,16.158 1.788,16.105 L9.841,11.797 L9.841,20.270 C9.841,20.519 9.957,20.751 10.158,20.893 C10.274,20.964 10.391,21.000 10.525,21.000 C10.625,21.000 10.742,20.982 10.825,20.929 L19.879,16.105 C20.112,15.980 20.261,15.731 20.261,15.446 C20.261,15.162 20.112,14.912 19.879,14.788 L12.058,10.605 L19.879,6.440 C20.112,6.315 20.261,6.065 20.261,5.781 ZM11.208,19.078 L11.208,11.797 L18.044,15.446 L11.208,19.078 ZM11.208,9.430 L11.208,2.132 L18.044,5.781 L11.208,9.430 Z"/>
-</svg>
-                                    </span>
+                                                <svg viewBox="0 0 22 22" width="22px" height="22px">
+                                                    <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M21.685,8.354 C21.411,8.531 21.027,8.476 20.832,8.228 C19.735,6.842 18.346,5.753 16.700,4.994 C13.203,3.372 8.736,3.377 5.244,5.005 C3.593,5.775 2.198,6.870 1.107,8.266 C0.986,8.415 0.796,8.492 0.608,8.492 C0.486,8.492 0.364,8.459 0.254,8.393 C-0.020,8.217 -0.087,7.876 0.108,7.628 C1.314,6.088 2.856,4.878 4.684,4.026 C8.517,2.239 13.416,2.233 17.255,4.015 C19.076,4.862 20.612,6.061 21.824,7.590 C22.020,7.837 21.959,8.178 21.685,8.354 ZM18.047,2.717 C17.949,2.717 17.858,2.695 17.767,2.656 C15.433,1.567 13.403,1.100 10.978,1.100 C8.559,1.100 6.281,1.622 4.190,2.651 C3.892,2.794 3.526,2.701 3.362,2.431 C3.204,2.162 3.307,1.831 3.606,1.683 C5.879,0.566 8.359,-0.000 10.978,-0.000 C13.574,-0.000 15.841,0.517 18.327,1.678 C18.626,1.815 18.742,2.150 18.589,2.420 C18.479,2.607 18.266,2.717 18.047,2.717 ZM10.923,5.313 C16.463,5.313 20.972,9.179 20.972,13.931 C20.972,15.719 19.283,17.171 17.218,17.171 C15.153,17.171 13.464,15.719 13.464,13.931 C13.464,12.754 12.325,11.792 10.930,11.792 C9.534,11.792 8.395,12.749 8.395,13.931 C8.395,15.807 9.205,17.572 10.674,18.892 C11.825,19.926 12.947,20.498 14.665,20.922 C14.988,21.004 15.183,21.307 15.091,21.598 C15.018,21.840 14.775,22.000 14.507,22.000 C14.452,22.000 14.397,21.994 14.348,21.978 C12.404,21.499 11.137,20.850 9.821,19.668 C8.121,18.139 7.182,16.098 7.182,13.926 C7.182,12.138 8.864,10.686 10.936,10.686 C13.008,10.686 14.689,12.138 14.689,13.926 C14.689,15.103 15.829,16.065 17.225,16.065 C18.619,16.065 19.759,15.108 19.759,13.926 C19.759,9.779 15.798,6.408 10.930,6.408 C7.462,6.408 4.300,8.145 2.874,10.840 C2.399,11.731 2.162,12.771 2.162,13.926 C2.162,14.784 2.247,16.137 2.972,17.891 C3.088,18.177 2.930,18.491 2.612,18.601 C2.295,18.705 1.949,18.562 1.827,18.277 C1.229,16.830 0.937,15.411 0.937,13.926 C0.937,12.606 1.217,11.407 1.772,10.367 C3.398,7.299 6.993,5.313 10.923,5.313 ZM10.967,7.992 C14.775,7.992 17.870,10.648 17.870,13.920 C17.870,14.223 17.596,14.470 17.261,14.470 C16.926,14.470 16.651,14.223 16.651,13.920 C16.651,11.258 14.104,9.091 10.967,9.091 C7.835,9.091 5.281,11.258 5.281,13.920 C5.281,15.504 5.671,16.967 6.409,18.161 C7.195,19.426 7.719,19.971 8.657,20.823 C8.895,21.037 8.895,21.389 8.651,21.598 C8.541,21.714 8.383,21.763 8.230,21.763 C8.072,21.763 7.920,21.708 7.798,21.598 C6.744,20.636 6.171,20.025 5.349,18.700 C4.507,17.347 4.062,15.691 4.062,13.920 C4.062,10.653 7.158,7.992 10.967,7.992 ZM10.290,13.926 C10.290,13.624 10.564,13.376 10.899,13.376 C11.235,13.376 11.508,13.624 11.508,13.926 C11.508,15.472 12.392,16.934 13.873,17.842 C14.732,18.370 15.743,18.629 16.962,18.629 C17.255,18.629 17.748,18.601 18.236,18.524 C18.565,18.469 18.882,18.672 18.943,18.969 C19.004,19.266 18.778,19.552 18.449,19.607 C17.736,19.723 17.133,19.728 16.962,19.728 C15.512,19.728 14.239,19.398 13.184,18.755 C11.374,17.644 10.290,15.840 10.290,13.926 Z"/>
+                                                </svg>
+                                            </span>
                                             <span class="product-card_icon d-inline-block">
-                                      <svg viewBox="0 0 24 18"
-                                           width="24px" height="18px">
-<path fill-rule="evenodd" fill="rgb(124, 124, 124)"
-      d="M23.772,6.847 C23.644,6.962 23.479,7.025 23.305,7.025 C23.114,7.025 22.936,6.950 22.805,6.815 C20.000,3.898 16.204,2.291 12.114,2.291 C8.025,2.291 4.228,3.898 1.423,6.815 C1.293,6.951 1.114,7.025 0.922,7.025 C0.749,7.025 0.584,6.962 0.457,6.847 C0.181,6.599 0.166,6.178 0.423,5.911 C3.489,2.722 7.641,0.966 12.114,0.966 C16.587,0.966 20.739,2.722 23.805,5.911 C24.062,6.178 24.047,6.599 23.772,6.847 ZM12.114,5.689 C15.157,5.688 18.075,6.901 20.329,9.102 C20.458,9.228 20.528,9.394 20.528,9.571 C20.526,9.748 20.455,9.914 20.325,10.039 C20.196,10.163 20.025,10.231 19.844,10.231 C19.660,10.231 19.488,10.162 19.358,10.036 C17.363,8.087 14.791,7.014 12.115,7.014 C9.437,7.014 6.864,8.087 4.870,10.036 C4.741,10.162 4.568,10.231 4.384,10.231 C4.202,10.231 4.032,10.163 3.903,10.039 C3.635,9.782 3.634,9.361 3.899,9.102 C6.152,6.901 9.070,5.689 12.114,5.689 ZM12.035,10.453 L12.105,10.453 C13.651,10.453 15.348,11.161 16.535,12.300 C16.664,12.425 16.736,12.591 16.737,12.768 C16.738,12.944 16.667,13.111 16.539,13.237 C16.410,13.364 16.237,13.433 16.054,13.433 C15.872,13.433 15.701,13.365 15.572,13.242 C14.647,12.353 13.286,11.779 12.105,11.779 L12.036,11.779 C10.854,11.779 9.493,12.353 8.568,13.242 C8.439,13.365 8.269,13.433 8.087,13.433 C7.903,13.433 7.731,13.364 7.602,13.237 C7.336,12.978 7.338,12.557 7.605,12.300 C8.792,11.161 10.489,10.453 12.035,10.453 ZM12.066,15.450 C12.783,15.450 13.367,16.015 13.367,16.710 C13.367,17.405 12.783,17.971 12.066,17.971 C11.349,17.971 10.767,17.405 10.767,16.710 C10.767,16.015 11.349,15.450 12.066,15.450 Z"/>
-</svg>
-                                    </span>
+                                                <svg viewBox="0 0 21 21" width="21px" height="21px">
+                                                    <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M20.261,5.781 C20.261,5.496 20.112,5.247 19.879,5.122 L10.825,0.298 C10.608,0.192 10.358,0.192 10.158,0.334 C9.957,0.459 9.841,0.708 9.841,0.957 L9.841,9.430 L1.788,5.122 C1.454,4.944 1.037,5.087 0.870,5.443 C0.704,5.799 0.837,6.244 1.171,6.422 L8.990,10.587 L1.171,14.788 C0.837,14.966 0.687,15.411 0.870,15.767 C0.987,16.016 1.237,16.176 1.488,16.176 C1.587,16.176 1.687,16.158 1.788,16.105 L9.841,11.797 L9.841,20.270 C9.841,20.519 9.957,20.751 10.158,20.893 C10.274,20.964 10.391,21.000 10.525,21.000 C10.625,21.000 10.742,20.982 10.825,20.929 L19.879,16.105 C20.112,15.980 20.261,15.731 20.261,15.446 C20.261,15.162 20.112,14.912 19.879,14.788 L12.058,10.605 L19.879,6.440 C20.112,6.315 20.261,6.065 20.261,5.781 ZM11.208,19.078 L11.208,11.797 L18.044,15.446 L11.208,19.078 ZM11.208,9.430 L11.208,2.132 L18.044,5.781 L11.208,9.430 Z"/>
+                                                </svg>
+                                            </span>
+                                            <span class="product-card_icon d-inline-block">
+                                                <svg viewBox="0 0 24 18" width="24px" height="18px">
+                                                    <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M23.772,6.847 C23.644,6.962 23.479,7.025 23.305,7.025 C23.114,7.025 22.936,6.950 22.805,6.815 C20.000,3.898 16.204,2.291 12.114,2.291 C8.025,2.291 4.228,3.898 1.423,6.815 C1.293,6.951 1.114,7.025 0.922,7.025 C0.749,7.025 0.584,6.962 0.457,6.847 C0.181,6.599 0.166,6.178 0.423,5.911 C3.489,2.722 7.641,0.966 12.114,0.966 C16.587,0.966 20.739,2.722 23.805,5.911 C24.062,6.178 24.047,6.599 23.772,6.847 ZM12.114,5.689 C15.157,5.688 18.075,6.901 20.329,9.102 C20.458,9.228 20.528,9.394 20.528,9.571 C20.526,9.748 20.455,9.914 20.325,10.039 C20.196,10.163 20.025,10.231 19.844,10.231 C19.660,10.231 19.488,10.162 19.358,10.036 C17.363,8.087 14.791,7.014 12.115,7.014 C9.437,7.014 6.864,8.087 4.870,10.036 C4.741,10.162 4.568,10.231 4.384,10.231 C4.202,10.231 4.032,10.163 3.903,10.039 C3.635,9.782 3.634,9.361 3.899,9.102 C6.152,6.901 9.070,5.689 12.114,5.689 ZM12.035,10.453 L12.105,10.453 C13.651,10.453 15.348,11.161 16.535,12.300 C16.664,12.425 16.736,12.591 16.737,12.768 C16.738,12.944 16.667,13.111 16.539,13.237 C16.410,13.364 16.237,13.433 16.054,13.433 C15.872,13.433 15.701,13.365 15.572,13.242 C14.647,12.353 13.286,11.779 12.105,11.779 L12.036,11.779 C10.854,11.779 9.493,12.353 8.568,13.242 C8.439,13.365 8.269,13.433 8.087,13.433 C7.903,13.433 7.731,13.364 7.602,13.237 C7.336,12.978 7.338,12.557 7.605,12.300 C8.792,11.161 10.489,10.453 12.035,10.453 ZM12.066,15.450 C12.783,15.450 13.367,16.015 13.367,16.710 C13.367,17.405 12.783,17.971 12.066,17.971 C11.349,17.971 10.767,17.405 10.767,16.710 C10.767,16.015 11.349,15.450 12.066,15.450 Z"/>
+                                                </svg>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="product-single-info-outer">
@@ -256,6 +247,7 @@
                                          aria-labelledby="pills-related-tab">
                                         <div class="display-grid row">
                                             {{--Start--}}
+
                                             @foreach($related_products as $related_product)
                                                 {{--{{ dd($related_product) }}--}}
                                                 <div class="col-md-3 products-wrap_col">
@@ -283,7 +275,9 @@
                                                                          data-img="1">
                                                                 </div>
                                                                 @if($related_product->other_images && is_array($related_product->other_images))
+
                                                                     @foreach($related_product->other_images as $other_image)
+
                                                                         <div class="product-card_thumb-img-holder pointer">
                                                                             <img class="" src="{{ $other_image }}" alt="">
                                                                         </div>
@@ -342,43 +336,46 @@
                                             I bought one.
                                         </p>
                                     </div>
-                                    <div class="tab-pane fade gallery--tabs" id="pills-gallery" role="tabpanel"
-                                         aria-labelledby="pills-gallery-tab">
+
+                                    {{-- Gallery --}}
+                                    <div class="tab-pane fade gallery--tabs" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab">
                                         <div class="galley-wrapper">
                                             <div class="row">
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <a href="/public/img/temp/product_1.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
-                                                        <img src="/public/img/temp/product_1.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <a href="/public/img/temp/product_2.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
-                                                        <img src="/public/img/temp/product_2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
-                                                        <img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <a href="/public/img/temp/product_2.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
-                                                        <img src="/public/img/temp/product_2.jpg" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
-                                                        <img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">
-                                                    </a>
-                                                </div>
-                                                <div class="col-lg-3 col-sm-6">
-                                                    <a href="/public/img/temp/product_1.jpg" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">
-                                                        <img src="/public/img/temp/product_1.jpg" alt="">
-                                                    </a>
-                                                </div>
+
+                                                @if($vape->other_images && count($vape->other_images))
+                                                    @foreach($vape->other_images as $other_image)
+                                                        <div class="col-lg-3 col-sm-6">
+                                                            <a href="{{ $other_image }}" class="lightbox-product" data-lightbox-gallery="gallery_name" title="{!! @getImage($other_image)->seo_alt !!}">
+                                                                <img src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}">
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+
+                                                @if($vape->videos && count($vape->videos))
+                                                    @foreach($vape->videos as $vidoe)
+                                                        <div class="col-lg-3 col-sm-6">
+                                                            <a href="{{ $vidoe }}" class="lightbox-product" data-lightbox-gallery="gallery_name" title="{!! @getImage($other_image)->seo_alt !!}">
+                                                                <img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                                {{--<div class="col-lg-3 col-sm-6">--}}
+                                                    {{--<a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">--}}
+                                                        {{--<img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">--}}
+                                                    {{--</a>--}}
+                                                {{--</div>--}}
+                                                {{--<div class="col-lg-3 col-sm-6">--}}
+                                                    {{--<a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">--}}
+                                                        {{--<img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">--}}
+                                                    {{--</a>--}}
+                                                {{--</div>--}}
                                             </div>
                                         </div>
                                     </div>
+                                    {{--End Gallery--}}
+
                                     <div class="tab-pane fade " id="pills-faq" role="tabpanel"
                                          aria-labelledby="pills-faq-tab">
                                         <div class="faq-wrapper">
