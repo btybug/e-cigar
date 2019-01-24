@@ -171,14 +171,14 @@ class SettingsController extends Controller
 
     public function getFooter()
     {
-        $links=FooterLinks::leftJoin('footer_links_translations','footer_links.id','=','footer_links_translations.footer_links_id')
-        ->whereNull('footer_links.parent_id')->select('footer_links.*','footer_links_translations.title','footer_links_translations.locale')
+        $links = FooterLinks::leftJoin('footer_links_translations', 'footer_links.id', '=', 'footer_links_translations.footer_links_id')
+            ->whereNull('footer_links.parent_id')->select('footer_links.*', 'footer_links_translations.title', 'footer_links_translations.locale')
             ->with('children')->get()->toArray();
-        $footer_links=[];
+        $footer_links = [];
         foreach ($links as $footer_link) {
-            $footer_links[$footer_link['locale']][]=$footer_link;
+            $footer_links[$footer_link['locale']][] = $footer_link;
         }
-        return $this->view('footer',compact('footer_links'));
+        return $this->view('footer', compact('footer_links'));
     }
 
     public function postFooter(Request $request)
@@ -191,7 +191,7 @@ class SettingsController extends Controller
                 $footer_main = FooterLinks::create([]);
                 FooterLinkTranslation::create(['title' => $name, 'locale' => $lang, 'footer_links_id' => $footer_main->id]);
                 foreach ($translatable['link'][$block] as $key => $val) {
-                    $footer = FooterLinks::create(['link' => $val,'parent_id'=>$footer_main->id]);
+                    $footer = FooterLinks::create(['link' => $val, 'parent_id' => $footer_main->id]);
                     FooterLinkTranslation::create(['title' => $translatable['title'][$block][$key], 'locale' => $lang, 'footer_links_id' => $footer->id]);
                 }
             }
@@ -289,22 +289,22 @@ class SettingsController extends Controller
         return $this->view('store.general', compact('currencies', 'siteCurrencies'));
     }
 
-    public function currencyGetLive(Request $request,\App\Models\GetForexData $forexData)
+    public function currencyGetLive(Request $request, \App\Models\GetForexData $forexData)
     {
         $rates = $forexData->latest($request->code);
-        if(isset($rates['rates'][$request->code])){
-            $rate =  $rates['rates'][$request->code];
-            return \Response::json(['error' => false,'rate' =>$rate]);
+        if (isset($rates['rates'][$request->code])) {
+            $rate = $rates['rates'][$request->code];
+            return \Response::json(['error' => false, 'rate' => $rate]);
         }
 
         return \Response::json(['error' => true]);
     }
 
-    public function currencyData(Request $request,Currencies $currencies)
+    public function currencyData(Request $request, Currencies $currencies)
     {
-        $model = $currencies->where('currency',$request->code)->first();
-        if($model){
-            return \Response::json(['error' => false,'data' =>$model]);
+        $model = $currencies->where('currency', $request->code)->first();
+        if ($model) {
+            return \Response::json(['error' => false, 'data' => $model]);
         }
 
         return \Response::json(['error' => true]);
@@ -314,20 +314,20 @@ class SettingsController extends Controller
     {
         $data = $request->get('currencies');
         $notDeletable = [];
-        if(count($data)){
+        if (count($data)) {
             foreach ($data as $key => $currency) {
 
-                if($currency['code'] == $request->is_default){
+                if ($currency['code'] == $request->is_default) {
                     $currency['is_default'] = true;
-                }else{
+                } else {
                     $currency['is_default'] = false;
                 }
 
-                $v = $siteCurrencies->where('code',$currency['code'])->first();
+                $v = $siteCurrencies->where('code', $currency['code'])->first();
 
-                if($v){
+                if ($v) {
                     $v->update($currency);
-                }else{
+                } else {
                     $v = $siteCurrencies->create($currency);
                 }
 
@@ -335,7 +335,7 @@ class SettingsController extends Controller
             }
         }
 
-        $siteCurrencies->whereNotIn('id',$notDeletable)->delete();
+        $siteCurrencies->whereNotIn('id', $notDeletable)->delete();
 
         return redirect()->back();
     }

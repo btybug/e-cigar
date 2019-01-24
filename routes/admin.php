@@ -165,8 +165,8 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
     Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
     Route::group(['prefix' => 'contact-us'], function () {
-        Route::get('/','Admin\ContactUsController@index')->name('admin_blog_contact_us');
-        Route::get('/view/{id}','Admin\ContactUsController@getView')->name('admin_blog_contact_us_view');
+        Route::get('/', 'Admin\ContactUsController@index')->name('admin_blog_contact_us');
+        Route::get('/view/{id}', 'Admin\ContactUsController@getView')->name('admin_blog_contact_us_view');
     });
 //    Route::group(['prefix' => 'comments'], function () {
 //        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
