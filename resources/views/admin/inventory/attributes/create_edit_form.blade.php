@@ -95,12 +95,12 @@
                                        <div class="form-group row">
                                            <label class="col-md-2 control-label" for="input-total">
                                                <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
-                                           <div class="col-md-10">
+                                           <div class="col-md-10 filter--display">
                                                YES {!! Form::radio('filter',1,null) !!}
                                                NO {!! Form::radio('filter',0,null) !!}
                                            </div>
                                        </div>
-                                       <div class="panel panel-default">
+                                       <div class="panel panel-default panel-display-as">
                                            <div class="panel-heading">
                                                <div class="row">
                                                    <div class="col-sm-7 pl-0">
@@ -122,7 +122,7 @@
 
                                            <div class="panel-body">
                                                <div class="right-main-content">
-                                                   <div class="display-as-wall " data-displayas="radio">
+                                                   <div class="display-as-wall d-none" data-displayas="radio">
                                                        @if($model && count($model->children))
                                                            <h3>{{ $model->name }}</h3>
                                                            @foreach($model->children as $item)
@@ -140,7 +140,7 @@
                                                            No Options
                                                        @endif
                                                    </div>
-                                                   <div class="display-as-wall d-none" data-displayas="select_menu">
+                                                   <div class="display-as-wall d-none" data-displayas="select">
                                                        <h3>Courier</h3>
                                                        <select name="" id="" class="form-control">
                                                            @if($model &&  count($model->children))
@@ -157,7 +157,7 @@
                                                        </select>
 
                                                    </div>
-                                                   <div class="display-as-wall d-none" data-displayas="multi_select">
+                                                   <div class="display-as-wall d-none" data-displayas="checkbox">
                                                        <h3>Courier</h3>
                                                        @if($model &&  count($model->children))
                                                            @foreach($model->children as $item)
@@ -175,7 +175,7 @@
                                                            No Options
                                                        @endif
                                                    </div>
-                                                   <div class="display-as-wall d-none" data-displayas="multi_select_tag">
+                                                   <div class="display-as-wall d-none" data-displayas="multy_select">
                                                        <h3>Courier</h3>
                                                        <div class="multi_select_tag_wall">
                                                            <div class="row">
@@ -194,6 +194,11 @@
                                                                </div>
                                                            </div>
                                                        </div>
+
+                                                   </div>
+                                                   <div class="display-as-wall d-none" data-displayas="color">
+                                                       <h3>Courier</h3>
+                                                       Color
 
                                                    </div>
                                                </div>
@@ -262,6 +267,17 @@
 @section('js')
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
+        $('.filter--display input:radio[name="filter"]').change(function() {
+            var filter = $(this).filter(':checked').val();
+
+            if(filter === '1') {
+                $('.panel-display-as').removeClass('hide')
+            }else {
+                $('.panel-display-as').addClass('hide')
+            }
+        });
+
+
 
         $("body").on('click', '.remove-all-attributes', function () {
             $(this).closest('.inventory-attr-item').remove();
@@ -305,7 +321,6 @@
 
         $('body').on('change', '.inventory_attributes .display_as-select', function () {
             $(".display-as-wall").addClass("d-none")
-            console.log($(this).val())
             $(`[data-displayas="${$(this).val()}"]`).removeClass("d-none")
 
         });
@@ -351,6 +366,9 @@
         #font-show-area {
             font-size: 50px;
             margin-top: 15px;
+        }
+        .basic-details-tab .basic-wall{
+            height: auto;
         }
     </style>
 @stop
