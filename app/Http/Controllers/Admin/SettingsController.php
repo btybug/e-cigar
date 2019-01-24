@@ -289,6 +289,17 @@ class SettingsController extends Controller
         return $this->view('store.general', compact('currencies', 'siteCurrencies'));
     }
 
+    public function currencyGetLive(Request $request,\App\Models\GetForexData $forexData)
+    {
+        $rates = $forexData->latest($request->code);
+        if(isset($rates['rates'][$request->code])){
+            $rate =  $rates['rates'][$request->code];
+            return \Response::json(['error' => false,'rate' =>$rate]);
+        }
+
+        return \Response::json(['error' => true]);
+    }
+
     public function currencyData(Request $request,Currencies $currencies)
     {
         $model = $currencies->where('currency',$request->code)->first();

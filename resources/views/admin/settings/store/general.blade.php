@@ -133,7 +133,7 @@
                                             {!! Form::text("currencies[$currency->id][rate]",$currency->rate,['class'=>'form-control c-rate']) !!}
                                         </td>
                                         <td class="w-10">
-                                            <button type="button" class="btn btn-primary">Get live rate</button>
+                                            <button type="button" data-code="{{ $currency->code }}" class="btn btn-primary get-live-rate">Get live rate</button>
                                         </td>
                                         <td class="text-right w-5">
                                             <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
@@ -180,7 +180,7 @@
                 {!! Form::text('currencies[{id}][rate]',null,['class'=>'form-control c-rate']) !!}
             </td>
             <td class="w-10">
-                <button type="button" class="btn btn-primary">Get live rate</button>
+                <button type="button" data-code="" class="btn btn-primary get-live-rate">Get live rate</button>
             </td>
             <td class="text-right w-5">
                 <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
@@ -220,6 +220,31 @@
                 $(this).closest('tr').remove();
             });
 
+            $('body').on('click', '.get-live-rate' ,function () {
+                let code = $(this).data('code');
+                let parent = $(this).closest('tr');
+
+                $.ajax({
+                    type: "post",
+                    url: "/admin/settings/store/general/currency-get-live",
+                    cache: false,
+                    datatype: "json",
+                    data: {
+                        code: code
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            parent.find('.c-rate').val(data.rate)
+                        }else{
+                            alert('NO live data with this code');
+                        }
+                    }
+                });
+            });
+
             $("body").on('change','.c-code',function () {
                 let code = $(this).val();
                 let parent = $(this).closest('tr');
@@ -240,6 +265,7 @@
                             parent.find('.c-symbol').val(data.data.symbol)
                             parent.find('.c-rate').val(data.data.rate)
                             parent.find('.c-default').val(data.data.currency)
+                            parent.find('.get-live-rate').data('code',data.data.currency)
                         }
                     }
                 });
