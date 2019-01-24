@@ -872,8 +872,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .top-filters .filters-for-mobile {
     display: none;
     flex: auto;
-    border-right: 1px solid #d7d7d7;
-    border-left: 1px solid #d7d7d7;
+    padding: 0 5px;
+    /*border-right: 1px solid #d7d7d7;*/
+    /*border-left: 1px solid #d7d7d7;*/
 }
 
 .top-filters .filters-for-mobile .btn--filter {
@@ -2293,5 +2294,21 @@ td.shp-cart-table_price-td {
     .product-single-view-outer {
         width: 100% !important;
         flex: none;
+    }
+}
+@media (max-width: 767px) {
+    .all-filters .filter-wall{
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        max-width: 475px;
+    }
+}
+@media (max-width: 575px) {
+    .all-filters .filter-wall{
+        max-width: initial;
     }
 }

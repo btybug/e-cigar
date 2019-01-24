@@ -193,9 +193,9 @@ $(function() {
 
 
     // display filter for mobile
-    $('body').on('click', '.filters-for-mobile .btn--filter', function () {
-        $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
-    });
+    // $('body').on('click', '.filters-for-mobile .btn--filter', function () {
+    //     $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
+    // });
     // menu click mobile
     $('body').on('click', '.header-top .nav-item--has-dropdown', function () {
         $(this).toggleClass('active');
