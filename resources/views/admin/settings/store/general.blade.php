@@ -126,7 +126,9 @@
                             <table class="table table-responsive table-striped table-bordered">
                                 <thead>
                                 <tr class="info">
-                                    <th>Currency Code</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Symbol</th>
                                     <th>Currency Exchange Rate</th>
                                     <th>Update using Api</th>
                                     <th></th>
@@ -154,7 +156,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="4" class="text-right">
+                                    <td colspan="6" class="text-right">
                                         <button type="button" class="btn btn-info btn-sm " id="add-more-currency"><i
                                                     class="fa fa-plus"></i></button>
                                     </td>
@@ -175,11 +177,17 @@
     <script type="template" id="currency_row">
         <tr>
             <td>
-                {!! Form::select('currency_code[]',$currencies,null,['class'=>'form-control']) !!}
-
+                {!! Form::select('currencies[{id}][code]',$currencies,null,['class'=>'form-control c-code']) !!}
+                {!! Form::hidden('currencies[{id}][id]',null,['class'=>'c-id']) !!}
             </td>
             <td>
-                <input type="text" name="rate[]" class="form-control">
+                {!! Form::text('currencies[{id}][name]',null,['class'=>'form-control c-name']) !!}
+            </td>
+            <td>
+                {!! Form::text('currencies[{id}][symbol]',null,['class'=>'form-control c-symbol']) !!}
+            </td>
+            <td>
+                {!! Form::text('currencies[{id}][rate]',null,['class'=>'form-control c-rate']) !!}
             </td>
             <td class="w-10">
                 <button type="button" class="btn btn-primary">Get live rate</button>
@@ -203,12 +211,41 @@
                 window.location.href='?p='+value;
             })
             $('#add-more-currency').on('click', function () {
+                let unqiueID = "{{ uniqid() }}";
                 let html = $('#currency_row').html();
+                html=html.replace(/{id}/g,unqiueID);
                 $('#currency-list').append(html);
             });
             $('body').on('click', '.remove-row', function () {
                 $(this).closest('tr').remove();
             });
+
+            $("body").on('change','.c-code',function () {
+                let code = $(this).val();
+                let parent = $(this).closest('tr');
+                $.ajax({
+                    type: "post",
+                    url: "/admin/settings/store/general/currency-data",
+                    cache: false,
+                    datatype: "json",
+                    data: {
+                        code: code
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            parent.find('.c-id').val(data.data.id)
+                            parent.find('.c-name').val(data.data.name)
+                            parent.find('.c-symbol').val(data.data.symbol)
+                            parent.find('.c-rate').val(data.data.rate)
+                        }
+                    }
+                });
+            });
+
+
         })
     </script>
 

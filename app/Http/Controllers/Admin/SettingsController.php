@@ -25,6 +25,7 @@ use App\Models\MailTemplates;
 use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
+use App\Models\SiteCurrencies;
 use App\Models\SiteLanguages;
 use App\Models\Statuses;
 use App\Models\TaxRates;
@@ -280,29 +281,42 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public function getStore(Currencies $currencies, Settings $settings, Request $request)
+    public function getStore(Currencies $currencies, SiteCurrencies $siteCurrencies, Request $request)
     {
-        $default = $settings->where('section', 'currencies')->where('key', 'default_currency_code')->first();
+        $default = $siteCurrencies->where('is_default',true)->first();
         $p = $request->get('p', ($default) ? $default->val : null);
-        $siteCurrencies = ($p) ? $settings->getEditableData('currencies', $p)->toArray() : [];
-        $currencies = $currencies->all()->pluck('currency', 'currency');
+        $siteCurrencies = ($p) ? $siteCurrencies->where('is_default',false)->get() : [];
+        $currencies = $currencies->all()->pluck('name', 'currency');
+
         return $this->view('store.general', compact('currencies', 'p', 'siteCurrencies'));
     }
 
-    public function postStore(Request $request, Settings $settings)
+    public function currencyData(Request $request,Currencies $currencies)
     {
-        $data = [];
-        $settings->updateOrCreateSettings('currencies', ['default_currency_code' => $request->get('default_currency_code')]);
-        $currencies = $request->get('currency_code', []);
-        $rates = $request->get('rate', []);
-        foreach ($currencies as $key => $currency) {
-            $data[$currency] = $rates[$key];
+        $model = $currencies->where('currency',$request->code)->first();
+        if($model){
+            return \Response::json(['error' => false,'data' =>$model]);
         }
-        $settings
-            ->where('section', 'currencies')
-            ->where('sub_id', $request->get('default_currency_code'))
-            ->whereNotIn('key', $currencies)->delete();
-        $settings->updateOrCreateSettings('currencies', $data, $request->get('default_currency_code'));
+
+        return \Response::json(['error' => true]);
+    }
+
+    public function postStore(Request $request, SiteCurrencies $siteCurrencies)
+    {
+        dd($request->all());
+//        $data = [];
+//        $settings->updateOrCreateSettings('currencies', ['default_currency_code' => $request->get('default_currency_code')]);
+//        $currencies = $request->get('currency_code', []);
+//        $rates = $request->get('rate', []);
+//
+//        foreach ($currencies as $key => $currency) {
+//            $data[$currency] = $rates[$key];
+//        }
+//        $settings
+//            ->where('section', 'currencies')
+//            ->where('sub_id', $request->get('default_currency_code'))
+//            ->whereNotIn('key', $currencies)->delete();
+//        $settings->updateOrCreateSettings('currencies', $data, $request->get('default_currency_code'));
         return redirect()->back();
     }
 

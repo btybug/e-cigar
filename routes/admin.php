@@ -63,6 +63,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::group(['prefix' => 'general'], function () {
             Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
             Route::post('/', 'Admin\SettingsController@postStore')->name('post_admin_settings_store');
+            Route::post('/currency-data', 'Admin\SettingsController@currencyData')->name('post_admin_settings_store_currency_data');
 
         });
         Route::group(['prefix' => 'gifts'], function () {
