@@ -283,12 +283,10 @@ class SettingsController extends Controller
 
     public function getStore(Currencies $currencies, SiteCurrencies $siteCurrencies, Request $request)
     {
-        $default = $siteCurrencies->where('is_default',true)->first();
-        $p = $request->get('p', ($default) ? $default->val : null);
-        $siteCurrencies = ($p) ? $siteCurrencies->where('is_default',false)->get() : [];
+        $siteCurrencies = $siteCurrencies->get();
         $currencies = $currencies->all()->pluck('name', 'currency');
 
-        return $this->view('store.general', compact('currencies', 'p', 'siteCurrencies'));
+        return $this->view('store.general', compact('currencies', 'siteCurrencies'));
     }
 
     public function currencyData(Request $request,Currencies $currencies)
@@ -303,20 +301,21 @@ class SettingsController extends Controller
 
     public function postStore(Request $request, SiteCurrencies $siteCurrencies)
     {
-        dd($request->all());
-//        $data = [];
-//        $settings->updateOrCreateSettings('currencies', ['default_currency_code' => $request->get('default_currency_code')]);
-//        $currencies = $request->get('currency_code', []);
-//        $rates = $request->get('rate', []);
-//
-//        foreach ($currencies as $key => $currency) {
-//            $data[$currency] = $rates[$key];
-//        }
-//        $settings
-//            ->where('section', 'currencies')
-//            ->where('sub_id', $request->get('default_currency_code'))
-//            ->whereNotIn('key', $currencies)->delete();
-//        $settings->updateOrCreateSettings('currencies', $data, $request->get('default_currency_code'));
+        $data = $request->get('currencies');
+
+        if(count($data)){
+            foreach ($data as $key => $currency) {
+                if($currency['code'] == $request->is_default){
+                    $currency['is_default'] = true;
+                }
+                $v = $siteCurrencies->where('code',$currency['code'])->first();
+                if($v){
+                    $v->update($currency);
+                }else{
+                    $siteCurrencies->create($currency);
+                }
+            }
+        }
         return redirect()->back();
     }
 

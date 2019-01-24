@@ -102,30 +102,10 @@
                     <div class="panel-heading">Currency</div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-4">Default product price in </label>
-                                    <div class="col-md-8">
-                                        {!! Form::select('default_currency_code',$currencies,$p,['class'=>'form-control default-currency']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label class="col-md-4">Other currencies </label>
-                                    <div class="col-md-8">
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
                             <table class="table table-responsive table-striped table-bordered">
                                 <thead>
                                 <tr class="info">
+                                    <th>Default</th>
                                     <th>Code</th>
                                     <th>Name</th>
                                     <th>Symbol</th>
@@ -135,14 +115,22 @@
                                 </tr>
                                 </thead>
                                 <tbody id="currency-list">
-                                @foreach($siteCurrencies as $currency=>$rate)
+                                @foreach($siteCurrencies as $currency)
                                     <tr>
                                         <td>
-                                            {!! Form::select('currency_code[]',$currencies,$currency,['class'=>'form-control']) !!}
-
+                                            {!! Form::radio('is_default',null,($currency->is_default)?true:false,['class'=>'c-default']) !!}
                                         </td>
                                         <td>
-                                            <input type="text" name="rate[]"  value="{!! $rate !!}" class="form-control">
+                                            {!! Form::select("currencies[$currency->id][code]",$currencies,$currency->code,['class'=>'form-control c-code']) !!}
+                                        </td>
+                                        <td>
+                                            {!! Form::text("currencies[$currency->id][name]",$currency->name,['class'=>'form-control c-name']) !!}
+                                        </td>
+                                        <td>
+                                            {!! Form::text("currencies[$currency->id][symbol]",$currency->symbol,['class'=>'form-control c-symbol']) !!}
+                                        </td>
+                                        <td>
+                                            {!! Form::text("currencies[$currency->id][rate]",$currency->rate,['class'=>'form-control c-rate']) !!}
                                         </td>
                                         <td class="w-10">
                                             <button type="button" class="btn btn-primary">Get live rate</button>
@@ -156,7 +144,7 @@
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="6" class="text-right">
+                                    <td colspan="7" class="text-right">
                                         <button type="button" class="btn btn-info btn-sm " id="add-more-currency"><i
                                                     class="fa fa-plus"></i></button>
                                     </td>
@@ -177,8 +165,10 @@
     <script type="template" id="currency_row">
         <tr>
             <td>
+                {!! Form::radio('is_default',null,null,['class'=>'c-default']) !!}
+            </td>
+            <td>
                 {!! Form::select('currencies[{id}][code]',$currencies,null,['class'=>'form-control c-code']) !!}
-                {!! Form::hidden('currencies[{id}][id]',null,['class'=>'c-id']) !!}
             </td>
             <td>
                 {!! Form::text('currencies[{id}][name]',null,['class'=>'form-control c-name']) !!}
@@ -206,12 +196,22 @@
 @section('js')
     <script>
         $(function () {
-            $('.default-currency').on('change', function () {
-                let value = $(this).val();
-                window.location.href='?p='+value;
-            })
+            function makeid() {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for (var i = 0; i < 9; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }
+
+//            $('.default-currency').on('change', function () {
+//                let value = $(this).val();
+//                window.location.href='?p='+value;
+//            })
             $('#add-more-currency').on('click', function () {
-                let unqiueID = "{{ uniqid() }}";
+                let unqiueID = makeid();
                 let html = $('#currency_row').html();
                 html=html.replace(/{id}/g,unqiueID);
                 $('#currency-list').append(html);
@@ -236,10 +236,10 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-                            parent.find('.c-id').val(data.data.id)
                             parent.find('.c-name').val(data.data.name)
                             parent.find('.c-symbol').val(data.data.symbol)
                             parent.find('.c-rate').val(data.data.rate)
+                            parent.find('.c-default').val(data.data.currency)
                         }
                     }
                 });
