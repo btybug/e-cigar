@@ -135,17 +135,18 @@
                         <div class="row">
                             <div class="col-lg-9">
                                 <div class="row">
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-7 col-md-7">
                                         <div class="profile-info">
                                             <div class="row">
-                                                <div class="col-xl-4">
-                                                    <div class="profile-info_avatar-holder position-relative mb-3 mb-xl-0">
+                                                <div class="col-xl-3 col-lg-4">
+                                                    <div class="profile-info_avatar-holder position-relative mb-3 mx-md-0 mx-auto">
                                                         <img class="img-fluid" src="img/profile.png" alt="">
                                                         <a href="#" class="d-flex align-items-center justify-content-center profile-info_change-avatar-btn font-13 main-transition position-absolute">Change</a>
                                                     </div>
+
                                                 </div>
-                                                <div class="col-xl-8">
-                                                    <div class="text-xl-left text-center">
+                                                <div class="col-xl-9 col-lg-8">
+                                                    <div class="text-md-left text-center">
                                                         <h1 class="mb-2 font-20 font-main-bold text-uppercase">
                                                             <span class="d-inline-block mr-2">{{ $user->name }}</span>
                                                             <span>{{ $user->last_name }}</span>
@@ -161,14 +162,29 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!-- Button trigger modal -->
+                                            <div class="text-md-left text-center">
+                                                <button type="button" class="btn btn-transp rounded-0" data-toggle="modal"
+                                                        data-target="#exampleModal">
+                                                    Change Password
+                                                </button>
+                                            </div>
+
 
 
                                         </div>
                                     </div>
+                                    <div class="col-xl-5 col-md-5 mb-md-0 mb-4">
+                                        <!--profile status-->
+                                        <div class="profile-status-wrap text-centet">
+                                            <h2 class="profile-status-wrap_title font-20 font-main-bold text-uppercase text-center mb-3">Status</h2>
+                                            <p>Verified User</p>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <div class="my-account p-5 card">
-                                    <div class="container">
-                                        <div class="mb-4">
+                                <div>
+                                        <div class="mb-5">
                                             @if($user->status)
                                                 {!! Form::model($user,['url' => route('my_account_save_contact_data')]) !!}
                                             @else
@@ -272,7 +288,7 @@
                                             @endif
 
 
-                                            <div class="card account-card mb-4">
+                                            <div class="card account-card rounded-0 mb-5">
                                                 <h2 class="card-title font-20"> Contact Details</h2>
 
                                                 <div class="card-body">
@@ -300,26 +316,26 @@
 
                                             </div>
 
-                                            <div class="card account-card">
-                                                <h2 class="card-title font-20">Billing Address</h2>
+                                            <div class="card account-card rounded-0 mb-5">
+                                                <h2 class="card-title font-20 mb-0">Billing Address</h2>
 
                                                 <div class="card-body">
                                                     {!! Form::model(@$billing_address,['class'=>'form-horizontal']) !!}
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="text" class="control-label col-sm-4">Name</label>
-                                                            <div class="col-sm-8">
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        {!! Form::text('first_name',null,['class'=>'form-control']) !!}
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {{--<div class="form-group">--}}
+                                                        {{--<div class="row">--}}
+                                                            {{--<label for="text" class="control-label col-sm-4">Name</label>--}}
+                                                            {{--<div class="col-sm-8">--}}
+                                                                {{--<div class="row">--}}
+                                                                    {{--<div class="col-sm-6">--}}
+                                                                        {{--{!! Form::text('first_name',null,['class'=>'form-control']) !!}--}}
+                                                                    {{--</div>--}}
+                                                                    {{--<div class="col-sm-6">--}}
+                                                                        {{--{!! Form::text('last_name',null,['class'=>'form-control']) !!}--}}
+                                                                    {{--</div>--}}
+                                                                {{--</div>--}}
+                                                            {{--</div>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <label for="text" class="control-label col-sm-4">Company name</label>
@@ -409,33 +425,54 @@
                                                     {{--</div>--}}
                                                 {{--</div>--}}
                                             {{--</div>--}}
-                                            <div class="form-group row">
+                                            <div class="form-group">
 
-                                                <input type="submit" class="btn btn-primary" value="Save changes">
+                                                <input type="submit" class="btn ntfs-btn rounded-0" value="Save changes">
                                             </div>
                                             {!! Form::close() !!}
                                         </div>
-                                        <div class="mb-4">
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#exampleModal">
-                                                Change Password
-                                            </button>
-                                        </div>
-                                        <!-- Multiple Checkboxes (inline) -->
-                                        <div class="form-group">
-                                            <label class="col-md-8 control-label" for="checkboxes">Subscribe To</label>
-                                            <div class="col-md-4">
-                                                <label class="checkbox-inline" for="checkboxes-0">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">
+
+                                    <!--subscribe to-->
+                                    <div>
+                                        <p class="mb-2">Subscribe to:</p>
+                                        <div class="modal-accounts d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
+                                            <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
+                                                <input class="form-check-input register-form_input-check" type="checkbox" value="" id="subscribeCheck1">
+                                                <label class="form-check-label text-gray-clr register-form_label pointer" for="subscribeCheck1">
                                                     Marketing
+                                                    <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                        <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
+</svg>
+                                    </span>
                                                 </label>
-                                                <label class="checkbox-inline" for="checkboxes-1">
-                                                    <input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">
+                                            </div>
+                                            <div class="position-relative">
+                                                <input class="form-check-input register-form_input-check" type="checkbox" value="" id="subscribeCheck2">
+                                                <label class="form-check-label text-gray-clr register-form_label pointer" for="subscribeCheck2">
                                                     Newsletter
+                                                    <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                        <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
+</svg>
+                                    </span>
                                                 </label>
                                             </div>
                                         </div>
+                                    </div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-md-8 control-label" for="checkboxes">Subscribe To</label>--}}
+                                            {{--<div class="col-md-4">--}}
+                                                {{--<label class="checkbox-inline" for="checkboxes-0">--}}
+                                                    {{--<input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">--}}
+                                                    {{--Marketing--}}
+                                                {{--</label>--}}
+                                                {{--<label class="checkbox-inline" for="checkboxes-1">--}}
+                                                    {{--<input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">--}}
+                                                    {{--Newsletter--}}
+                                                {{--</label>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
 
 
                                         <!-- Modal -->
@@ -484,9 +521,9 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                                        <button type="button" class="btn btn-transp rounded-0" data-dismiss="modal">Close
                                                         </button>
-                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                        <button type="submit" class="btn ntfs-btn rounded-0">Save changes</button>
                                                     </div>
                                                 </div>
 
@@ -496,14 +533,6 @@
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-5 mb-md-0 mb-4">
-                                <!--profile status-->
-                                <div class="profile-status-wrap text-centet">
-                                    <h2 class="profile-status-wrap_title font-20 font-main-bold text-uppercase text-center mb-3">Status</h2>
-                                    <p>Verified User</p>
-                                </div>
                             </div>
                         </div>
                     </div>

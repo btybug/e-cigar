@@ -1312,6 +1312,7 @@ body.get-cover:after {
 
 .profile-status-wrap_title {
     border-bottom: 1px solid #5184e5;
+    padding-bottom: 10px;
 }
 
 .ntfs-btn,
@@ -1335,11 +1336,16 @@ body.get-cover:after {
     color: #5184e5;
 }
 
+
 .account-card .card-title {
-    border-bottom: 1px solid rgba(0,0,0,.125);
-    padding: 1.25rem;
+    background: #e8e7ed;
+    padding: 10px 1.25rem;
 }
 
+/*cookie*/
+.page-cookie {
+    background: #000;
+}
 
 @media (min-width: 769px) {
 
