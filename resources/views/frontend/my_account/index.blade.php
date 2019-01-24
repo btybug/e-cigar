@@ -379,11 +379,11 @@
                                                     </div>
                                                     {!! Form::hidden('type','billing_address') !!}
                                                     {!! Form::hidden('id') !!}
-                                                    <div class="form-group row">
-                                                        <div class="col-sm-offset-4 col-sm-8">
-                                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                                        </div>
-                                                    </div>
+                                                    {{--<div class="form-group row">--}}
+                                                        {{--<div class="col-sm-offset-4 col-sm-8">--}}
+                                                            {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
                                                     {!! Form::close() !!}
                                                 </div>
 
