@@ -954,7 +954,9 @@ body.get-cover:after {
 
 .cart-sidebar_view-btn:focus,
 .cart-sidebar_check-btn:focus,
-.cart-sidebar_check-btn {
+.cart-sidebar_check-btn:focus,
+.ntfs-btn:focus,
+.ntfs-btn:active {
     outline: none;
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -1182,6 +1184,10 @@ body.get-cover:after {
     border-color: #5184e5;
 }
 
+.profile-sidebar--inner-pages .profile-sidebar-menu_link svg {
+    width: 24px;
+}
+
 .profile-info {
     margin-bottom: 30px;
 }
@@ -1192,14 +1198,12 @@ body.get-cover:after {
     height: 130px;
     width: 130px;
     overflow: hidden;
-    margin: 0 auto;
 }
 
 .profile-info_change-avatar-btn {
     left: 0;
     right: 0;
     bottom: 0;
-    margin: 0 auto;
     background: rgba(81, 132, 229, .8);
     color: rgba(255,255,255, .8);
     height: 30px;
@@ -1226,7 +1230,6 @@ body.get-cover:after {
 .btn--change-pass {
     border: 1px solid #e8e7ed;
     background: #e8e7ed;
-    margin: 0 auto;
 }
 
 .profile-required-icon {
@@ -1284,18 +1287,52 @@ body.get-cover:after {
 
 .profile-inner-pg-right-cnt {
     background: #fff;
-    padding: 4% 5%;
+    padding: 2%;
     flex: auto;
 
 }
 
 .profile-sidebar--inner-pages,
-.profile-inner-pg-right-cnt_inner {
+.profile-inner-pg-right-cnt_inner{
     background: #e3e6ed47;
 }
 
 .profile-inner-pg-right-cnt_inner {
     padding: 35px;
+}
+
+.profile-status-wrap,
+.table-ntfs.table-striped tbody tr:nth-of-type(odd) {
+    background: #e8e7ed;
+}
+
+.profile-status-wrap {
+    padding: 15px;
+}
+
+.profile-status-wrap_title {
+    border-bottom: 1px solid #5184e5;
+}
+
+.ntfs-btn,
+.ntfs-btn:hover,
+.ntfs-btn:focus,
+.ntfs-btn:active {
+    background: #5184e5;
+    border-color: #5184e5;
+    color: #fff;
+}
+
+/*Notifications*/
+
+.profile-inner-pg-right-cnt .display-grid .products-wrap_col, .display-grid .news-wrap_col {
+    width: 25%;
+}
+
+.btn-transp {
+    background: transparent;
+    border-color: #5184e5;
+    color: #5184e5;
 }
 
 
@@ -1367,14 +1404,6 @@ body.get-cover:after {
         padding-left: 15px;
     }
 
-    .single-product-main-title {
-        display: none !important;
-    }
-
-
-    .single-product-main-title.visible-on-small {
-        display: flex !important;
-    }
 }
 
 @media (max-width: 1629px) {
@@ -1391,6 +1420,14 @@ body.get-cover:after {
     .display-grid .news-wrap_col{
         max-width: 50%;
         flex: 0 0 50%;
+    }
+
+    .single-product-main-title.visible-on-small {
+        display: flex !important;
+    }
+
+    .single-product-main-title {
+        display: none !important;
     }
 }
 

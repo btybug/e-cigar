@@ -188,6 +188,12 @@ textarea {
     line-height: 1;
 }
 
+.btn:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 
 /*Select2*/
 .select-2.main-select + .select2-container--default .select2-selection--single {
