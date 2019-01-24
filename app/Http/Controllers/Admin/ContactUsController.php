@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactUs;
 
 class ContactUsController extends Controller
 {
@@ -18,5 +19,11 @@ class ContactUsController extends Controller
     public function index()
     {
         return $this->view('index');
+    }
+
+    public function getView($id)
+    {
+        $model=ContactUs::findOrFail($id);
+        return $this->view('view',compact('model'));
     }
 }
