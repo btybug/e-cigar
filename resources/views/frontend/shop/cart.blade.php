@@ -47,7 +47,9 @@
                         </li>
                     </ul>
                 </div>
+                <span class="cart-area">
                 @include('frontend.shop._partials.cart_table')
+                </span>
             </div>
         </div>
 

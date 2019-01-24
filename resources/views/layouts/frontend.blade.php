@@ -180,7 +180,6 @@
 
         $("body").on('click','.remove-from-cart',function () {
             var uid = $(this).data('uid');
-            console.log(uid,454545);
             if(uid && uid != ''){
                 $.ajax({
                     type: "post",

@@ -51,45 +51,122 @@
                                                         <span class="font-15 font-main-bold">${{ $main->price }}</span>
                                                     </li>
                                                     <li class="shp-cart-product_row shp-cart-product_extra font-main-bold font-15 text-uppercase">
-                                                        extra
+                                                        Extra
                                                     </li>
-                                                    <li class="shp-cart-product_row shp-cart-product_prd-2 d-flex justify-content-between">
-                                                        <p class="mb-0">Product 2</p>
-                                                        <span class="font-15 font-main-bold">$0</span>
-                                                    </li>
-                                                    <li class="shp-cart-product_row d-flex justify-content-between position-relative">
-                                                        <p class="mb-0"><span>Parts:</span> <span
-                                                                    class="font-main-bold">1 Pack, Red</span>
-                                                        </p>
-                                                        <span class="font-15 font-main-bold">$20</span>
-                                                        <span class="shp-cart-product_close pointer position-absolute">
-                                                            <svg viewBox="0 0 8 8" width="8px" height="8px">
-                                                                <path fill-rule="evenodd" fill="rgb(171, 168, 182)" d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
-                                                            </svg>
-                                                        </span>
-                                                    </li>
+                                                    @php
+                                                        $countMessage = true;
+                                                    @endphp
+                                                    @if($main->attributes->requiredItems && count($main->attributes->requiredItems))
+                                                        @php
+                                                            $countMessage = false;
+                                                        @endphp
+                                                        @foreach($main->attributes->requiredItems as $vid)
+                                                            @php
+                                                                $variationReq = \App\Services\CartService::getVariation($vid)
+                                                            @endphp
+                                                            <li class="shp-cart-product_row shp-cart-product_prd-2 d-flex justify-content-between">
+                                                                <p class="mb-0">{{ $variationReq->stock->name }}</p>
+                                                                <span class="font-15 font-main-bold">
+                                                                    @php
+                                                                        $promotionPrice = ($variationReq) ? $variationReq->stock->promotion_prices()
+                                                                        ->where('variation_id',$variationReq->id)->first() : null;
+                                                                    @endphp
+                                                                    {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationReq) ? "$" . $variationReq->price : 0) !!}
+                                                                </span>
+                                                            </li>
+
+                                                        @endforeach
+                                                    @endif
+
+                                                    @if(count($item))
+                                                        @php
+                                                            $countMessage = false;
+                                                        @endphp
+                                                        @foreach($item as $vid)
+                                                            @php
+                                                                $variationOpt = $vid->attributes->variation
+                                                            @endphp
+                                                            <li class="shp-cart-product_row d-flex justify-content-between position-relative">
+                                                                <p class="mb-0">
+                                                                    <span>{{ $variationOpt->stock->name }}</span>
+                                                                    <span class="font-main-bold">
+                                                                        @if($variationOpt->stock->type == 'variation_product')
+                                                                            @foreach($variationOpt->options as $voption)
+                                                                               {{ $voption->option->name }},
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </span>
+                                                                </p>
+                                                                <span class="font-15 font-main-bold">
+                                                                    @php
+                                                                        $promotionPrice = ($variationOpt) ? $variationOpt->stock->promotion_prices()
+                                                                        ->where('variation_id',$variationOpt->id)->first() : null;
+                                                                    @endphp
+                                                                    {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationOpt) ? "$" . $variationOpt->price : 0) !!}
+                                                                </span>
+                                                                <span class="shp-cart-product_close pointer position-absolute remove-from-cart" data-uid="{{ $variationOpt->id }}">
+                                                                    <svg viewBox="0 0 8 8" width="8px" height="8px">
+                                                                        <path fill-rule="evenodd" fill="rgb(171, 168, 182)" d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
+                                                                    </svg>
+                                                                </span>
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
+
+                                                    @if($countMessage)
+                                                        <li>No Extra items</li>
+                                                    @endif
                                                 </ul>
                                             </div>
                                         </div>
                                     </td>
+
                                     <td width="180" class="text-center">
                                         <div class="simple_select_wrapper">
-                                            <select class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select"
-                                                    style="width: 120px;">
-                                                <option class="selected">1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                            </select>
+                                            {{--<select class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select"--}}
+                                                    {{--style="width: 120px;">--}}
+                                                {{--<option class="selected">1</option>--}}
+                                                {{--<option>2</option>--}}
+                                                {{--<option>3</option>--}}
+                                            {{--</select>--}}
+
+                                            {{--<span data-condition="{{ false }}" data-uid="{{ $main->id }}" class="input-group-btn qtycount">--}}
+                                                {{--<i class="fa fa-minus" aria-hidden="true"></i>--}}
+                                            {{--</span>--}}
+
+                                            <div class="continue-shp-wrapp_qty position-relative" style="margin-right: 0;">
+                                                <!--minus qty-->
+                                                <span data-type="minus" data-condition="{{ false }}" data-uid="{{ $main->id }}" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count qtycount">
+                                                    <svg viewBox="0 0 20 3" width="20px" height="3px">
+                                                        <path fill-rule="evenodd" fill="rgb(214, 217, 225)" d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
+                                                    </svg>
+                                                </span>
+
+
+                                                <input data-uid="{{ $main->id }}" class="qtycount field-input w-100 h-100 font-23 text-center border-0 product-qty-select" min="number" name="" type="number" value="{{ $main->quantity }}">
+                                                <!--plus qty-->
+                                                <span data-type="plus" data-condition="{{ true }}" data-uid="{{ $main->id }}" data-uid="{{ $main->id }}" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count qtycount">
+                                                    <svg viewBox="0 0 20 20" width="20px" height="20px">
+                                                        <path fill-rule="evenodd" fill="rgb(211, 214, 223)" d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+
+                                            {{--<input name="quantity[]" type="number" min="1" value="{{ $main->quantity }}" data-uid="{{ $main->id }}" class="form-control qty __qty">--}}
+
+                                            {{--<span data-condition="{{ true }}" data-uid="{{ $main->id }}" class="input-group-btn qtycount">--}}
+                                                {{--<i class="fa fa-plus" aria-hidden="true"></i>--}}
+                                            {{--</span>--}}
                                         </div>
                                     </td>
+
+
+
                                     <td width="180" class="shp-cart-table_price-td">
                                         <span class="d-flex font-main-bold font-28 card--inner-product_price position-relative">
                                             <span class="position-relative">${{ \App\Services\CartService::getPriceSum($main->id) }}
-                                                {{--Here we have to write some if--}}
                                                 <!--old price-->
-                                                @if(false)
                                                     <span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>
-                                                @endif
                                             </span>
                                         </span>
                                     </td>
@@ -97,6 +174,7 @@
 
                             @endforeach
                         @endif
+
                         </tbody>
                     </table>
                 </div>
@@ -173,3 +251,22 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function(){
+        $("body").on('click','.qty-count',function () {
+            let qty = $(this).closest(".continue-shp-wrapp_qty").find('.product-qty-select').val();
+            let type = $(this).data('type');
+            if(type == 'plus'){
+                qty = parseInt(qty) + 1;
+                $(this).closest(".continue-shp-wrapp_qty").find('.product-qty-select').val(qty)
+            }else{
+                if(qty > 1){
+                    qty -=1;
+                    $(this).closest(".continue-shp-wrapp_qty").find('.product-qty-select').val(qty)
+                }
+            }
+        })
+    })
+</script>
