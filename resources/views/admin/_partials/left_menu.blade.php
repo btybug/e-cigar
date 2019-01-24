@@ -118,6 +118,9 @@
                     <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
                     <li><a href="{{route('show_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>
                     <li><a href="{{route('admin_faq')}}"><i class="fa fa-circle-o"></i> FAQ</a></li>
+                    @ok('admin_blog_contact_us')
+                    <li><a href="{{route('admin_blog_contact_us')}}"><i class="fa fa-circle-o"></i>Contact us</a></li>
+                    @endok
                 </ul>
             </li>
             @endok
@@ -208,10 +211,12 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_emails_notifications_emails')
-                    <li><a href="{{route('admin_emails_notifications_emails')}}"><i class="fa fa-circle-o"></i>Emails</a></li>
+                    <li><a href="{{route('admin_emails_notifications_emails')}}"><i
+                                    class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
                     @ok('admin_emails_notifications_send_email')
-                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Send</a></li>
+                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Send</a>
+                    </li>
                     @endok
 
                 </ul>
@@ -267,7 +272,8 @@
             </li>
             @endok
             {{--@ok('admin_dashboard')--}}
-            <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i> <span>Import</span></a></li>
+            <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i>
+                    <span>Import</span></a></li>
             {{--@endok--}}
         </ul>
     </section>

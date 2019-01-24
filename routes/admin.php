@@ -163,6 +163,9 @@ Route::group(['prefix' => 'blog'], function () {
     Route::get('delete/{id}', 'Admin\PostController@getDelete')->name('admin_post_delete');
     Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
     Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
+    Route::group(['prefix' => 'contact-us'], function () {
+        Route::get('/','Admin\ContactUsController@index')->name('admin_blog_contact_us');
+    });
 //    Route::group(['prefix' => 'comments'], function () {
 //        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
 //        Route::get('/settings', 'Admin\PostController@getCommentSettings')->name('admin_blog_comments_settings');
@@ -222,25 +225,25 @@ Route::group(['prefix' => 'orders'], function () {
 Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'suppliers'], function () {
-        Route::get('/','Admin\ItemsController@getSuppliers')->name('admin_suppliers');
-        Route::get('/new','Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
-        Route::get('/edit/{id}','Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
-        Route::post('/new','Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
+        Route::get('/', 'Admin\ItemsController@getSuppliers')->name('admin_suppliers');
+        Route::get('/new', 'Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
+        Route::get('/edit/{id}', 'Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
+        Route::post('/new', 'Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
     });
     Route::group(['prefix' => 'sale-channels'], function () {
-        Route::get('/','Admin\ItemsController@getSaleChannels')->name('admin_sale_channels');
+        Route::get('/', 'Admin\ItemsController@getSaleChannels')->name('admin_sale_channels');
     });
     Route::group(['prefix' => 'other'], function () {
-        Route::get('/','Admin\OtherController@getIndex')->name('admin_inventory_other');
-        Route::get('/manage/{id?}','Admin\OtherController@getNew')->name('admin_inventory_others_new');
-        Route::post('/new','Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
+        Route::get('/', 'Admin\OtherController@getIndex')->name('admin_inventory_other');
+        Route::get('/manage/{id?}', 'Admin\OtherController@getNew')->name('admin_inventory_others_new');
+        Route::post('/new', 'Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
     });
 
     Route::group(['prefix' => 'items'], function () {
-        Route::get('/','Admin\ItemsController@index')->name('admin_items');
-        Route::get('/new','Admin\ItemsController@getNew')->name('admin_items_new');
-        Route::post('/new','Admin\ItemsController@postNew')->name('post_admin_items_new');
-        Route::get('/purchase/{item_id}','Admin\ItemsController@getPurchase')->name('admin_items_purchase');
+        Route::get('/', 'Admin\ItemsController@index')->name('admin_items');
+        Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
+        Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
+        Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
     });
     Route::group(['prefix' => 'stock'], function () {
         Route::get('/', 'Admin\InventoryController@stock')->name('admin_stock');

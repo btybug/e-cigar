@@ -6,6 +6,7 @@ use App\Models\Attributes;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Competitions;
+use App\Models\ContactUs;
 use App\Models\Coupons;
 use App\Models\Emails;
 use App\Models\Faq;
@@ -183,6 +184,16 @@ class DatatableController extends Controller
                 return "<a class='badge btn-danger' href='" . route("admin_post_delete", $post->id) . "'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions', 'url', 'short_description', 'created_at', 'status'])
+            ->make(true);
+    }
+    public function getAllContactUs()
+    {
+        return Datatables::of(ContactUs::query())
+
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
+                    <a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions'])
             ->make(true);
     }
 
