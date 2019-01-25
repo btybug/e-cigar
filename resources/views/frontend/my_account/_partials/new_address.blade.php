@@ -97,7 +97,7 @@
 {!! Form::hidden('id') !!}
 <div class="form-group row">
     <div class="col-sm-offset-4 col-sm-8">
-        <button type="button" class="btn btn-primary save-address-book">Submit</button>
+        <button type="button" class="btn ntfs-btn save-address-book rounded-0">Submit</button>
     </div>
 </div>
 {!! Form::close() !!}

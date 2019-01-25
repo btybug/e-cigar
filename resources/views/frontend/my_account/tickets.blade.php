@@ -110,7 +110,7 @@
                 <div class="mt-auto">
                     {!! Form::open(['url'=>route('logout')]) !!}
                     <div class="text-center">
-                        <button type="submit" class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">Logout</button>
+                        <button type="submit" class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer rounded-0">Logout</button>
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -123,9 +123,9 @@
            <div class="row">
                <div class="col-lg-9">
                    <div class="my-4">
-                       <a class="btn btn-primary" href="{!! route('my_account_tickets_new') !!}">Open ticket</a>
+                       <a class="btn ntfs-btn rounded-0" href="{!! route('my_account_tickets_new') !!}">Open ticket</a>
                    </div>
-                   <table class="table table-bordered table-striped table-responsive-lg order-table">
+                   <table class="table table-ntfs table-bordered table-striped table-responsive-lg order-table">
                        <thead>
                        <tr>
                            <th class="text-capitalize">ticket ID</th>
@@ -144,12 +144,12 @@
                                    <td>{!! BBgetDateFormat($ticket->updated_at) . ' ' . BBgetTimeFormat($ticket->updated_at); !!}</td>
                                    <td>
                                 <span style="background: {{ ($ticket->status->color)??'cornflowerblue' }}"
-                                      class="btn order-table_btn order-table_btn--status">{!! $ticket->status->name !!} </span>
+                                      class="btn order-table_btn order-table_btn--status rounded-0">{!! $ticket->status->name !!} </span>
                                    </td>
                                    <td>
                                        <div class="mb-2">
                                            <a href="{!! route('my_account_tickets_view',$ticket->id) !!}"
-                                              class="btn btn-dark order-table_btn">View</a>
+                                              class="btn ntfs-btn order-table_btn rounded-0">View</a>
                                        </div>
                                    </td>
                                </tr>

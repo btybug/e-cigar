@@ -248,7 +248,7 @@
                                                        <div class="col-md-7 d-flex">
                                                            {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
                                                            <button type="button"
-                                                                   class="nav-link nav-link--new-address btn btn-info address-book-new">
+                                                                   class="nav-link nav-link--new-address btn ntfs-btn address-book-new rounded-0">
                                                                + Add New
                                                            </button>
                                                        </div>
@@ -258,7 +258,7 @@
                                                            @include("frontend.my_account._partials.new_address",['address_book'=>$default_shipping,'default' => true])
                                                        </div>
                                                        {{--<button type="submit" class="btn btn-primary edit-address">Edit</button>--}}
-                                                       <button type="button" class="btn btn-danger edit-address">Delete
+                                                       <button type="button" class="btn btn-transp edit-address rounded-0">Delete
                                                        </button>
                                                    </div>
 

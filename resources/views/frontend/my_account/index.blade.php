@@ -390,7 +390,7 @@
                                                             <div class="col-sm-8">
                                                                 {{--{!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}--}}
                                                                 {{--{!! Form::select('country',['' => 'SELECT'],null,['class'=>'form-control']) !!}--}}
-                                                                <select id="country" class="form-control select-2 select-2--no-search main-select account-country-select" style="width: 100%">
+                                                                <select id="country" class="select-2 select-2--no-search main-select account-country-select" style="width: 100%">
 
                                                                     <option class="selected">Armenia</option>
                                                                     <option>UK</option>
