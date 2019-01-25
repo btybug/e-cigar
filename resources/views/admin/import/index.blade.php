@@ -28,7 +28,8 @@
             <div class="card col-md-2 col-sm-4">
                 <div class="files">
                     <div class="delete_file text-center" data-id="{{$import["id"]}}">X</div>
-                    <div class="category text-center bg-primary __view" data-target="#view_modal" data-id="{{$import["id"]}}">{{$import["category"]}}</div>
+                    <div class="category text-center bg-primary" data-id="{{$import["id"]}}">{{$import["category"]}}</div>
+                    <div class="view_button text-center bg-primary __view" data-target="#view_modal" data-id="{{$import["id"]}}">View</div>
                     @if($import["is_imported"])
                         <div class="btn btn-info import_file" data-id="{{$import["id"]}}">Imported</div>
                     @else
@@ -127,9 +128,20 @@
         .category{
             position: absolute;
             bottom: 0;
-            width: 100%;
+            right: 0;
+            width: 49%;
             font-size: 18px;
             padding: 5px 0;
+        }
+
+        .view_button{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 49%;
+            font-size: 18px;
+            padding: 5px 0;
+            cursor: pointer;
         }
 
         .import_file {
