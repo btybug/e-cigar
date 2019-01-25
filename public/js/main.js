@@ -4,9 +4,7 @@ $(function() {
         heightBlock('.main-left-tabs .nav','.main-left-tabs .nav a');
     });
 
-    // // hidden sidebars slide from right
-    // openSidbar($('#ptofileBtn'), $('#profileSidebar'));
-    // openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));
+
 
     // // remove cart-info from cart sidbar
     // $('.cart-item-close').on('click', function (e) {
@@ -164,11 +162,18 @@ $(function() {
     })
 
     // cookies
-    // console.log($('.js-cookie-consent.cookie-consent').length)
-    // if($('.js-cookie-consent.cookie-consent').length) {
-    //     var cookieHeight = $('.js-cookie-consent.cookie-consent').height;
-    //     $('.main-header .header-top').css('top', cookieHeight);
-    // }
+
+    if($('.js-cookie-consent.cookie-consent').length) {
+
+        var cookieHeight = $('.js-cookie-consent.cookie-consent').height();
+        $('.main-header .header-top').css('top', cookieHeight);
+        var headerPaddingTop  =  parseInt($('.main-header').css('padding-top'));
+
+        var headerPaddingTopNew =  headerPaddingTop + cookieHeight + 'px';
+
+        $('.main-header').css('padding-top', headerPaddingTopNew)
+
+    }
 
 
 
@@ -199,11 +204,9 @@ $(function() {
         }
     });
 
-    // sidebar profile
-    openSidebar($('#profileBtn'), $('#profileSidebar'));
-
-    // sidebar shopping cart
-    openSidebar($('#shpCartSidebarBtn'), $('#shpCartSidebar'));
+    // hidden sidebars slide from right
+    openSidbar($('#ptofileBtn'), $('#profileSidebar'));
+    openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));
 
 } );
 
