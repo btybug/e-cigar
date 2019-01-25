@@ -16,7 +16,17 @@ class AdminController extends Controller
 {
     public function getDashboard()
     {
-        dd(\LaravelGmail::message()->all());
+        $emails=\LaravelGmail::message()->all();
+        $messages = \LaravelGmail::message()->unread()->preload()->all();
+        foreach ( $messages as $message ) {
+            $body = $message->getHtmlBody();
+            $subject = $message->getSubject();
+            echo $subject.'<br>'.$body.'<hr>';
+        }
+        die;
+        //1688496308af6e9c
+//        dd($emails[0]->getId());
+        dd(\LaravelGmail::message()->get('16884bacc2ccc24d'));
 //        \DB::table('users')->insert([
 //            'name' => 'Manager',
 //            'username' => 'supermanager',
