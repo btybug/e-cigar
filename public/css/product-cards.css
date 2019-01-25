@@ -1354,7 +1354,7 @@ body.get-cover:after {
     align-items: center;
     position: fixed;
     width: 100%;
-    height: 80px;
+    height: 50px;
     z-index: 99999;
 }
 
