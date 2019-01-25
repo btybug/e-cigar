@@ -134,7 +134,6 @@ class ShoppingCartController extends Controller
             }
         }
 
-
         return $this->view('check_out',compact(['billing_address','default_shipping','countries','countriesShipping','geoZone','shipping','delivery','address','address_id']));
     }
 

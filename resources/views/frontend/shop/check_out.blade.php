@@ -182,13 +182,14 @@
                 form,
                 res => {
                     if (!res.error) {
+                        console.log(res.data)
                         let select = $(".select-address")
                         var opt = document.createElement('option');
                         opt.value = res.data.id;
-                        opt.innerHTML = res.data.name;
+                        opt.innerHTML = res.data.company;
                         select.append(opt);
                         $("#newAddressModal").modal('hide');
-
+//
                         select.val(res.data.id).trigger('change');
                     }
                 },
@@ -228,7 +229,7 @@
                 $(".container").css('opacity','1');
                 $(".loader-img").toggleClass('d-none');
                 $("#address").html(res.html);
-                $("#changeAddressModal").modal();
+                $("#changeAddressModal").modal('hide');
             }
         },
             error => {

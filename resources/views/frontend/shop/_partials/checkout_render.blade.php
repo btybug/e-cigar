@@ -84,7 +84,7 @@
                     <span class="font-22 text-quatr-clr font-bold">${!! \Cart::getTotal() !!}</span>
                 </div>
                 <div class="checkout-btn text-center">
-                    <button class="btn btn-primary text-uppercase font-15">
+                    <button class="btn btn-primary text-uppercase font-15 go-to-payment">
                         CHECKOUT
                     </button>
                 </div>
@@ -127,8 +127,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {!! Form::button('Select',['class' => 'save-address-book']) !!}
                 </form>
             </div>
 
