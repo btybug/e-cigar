@@ -26,7 +26,7 @@ class AdminController extends Controller
 //        die;
         //1688496308af6e9c
 //        dd($emails[0]->getId());
-        dd(\LaravelGmail::message()->get('16884bacc2ccc24d'));
+//        dd(\LaravelGmail::message()->get('16884bacc2ccc24d'));
 //        \DB::table('users')->insert([
 //            'name' => 'Manager',
 //            'username' => 'supermanager',
