@@ -10,13 +10,24 @@
                             <div class="col-lg-3 col-md-6 col-sm-6">
                                 <div class="menus text-sm-left text-center  mt-lg-0 mt-2">
                                     <h5 class="font-main-bold text-uppercase font-17">{!! $footer_link['title'] !!}</h5>
-                                    <ul>
-                                        @foreach($footer_link['children'] as $child)
-                                        <li>
-                                            <a href="{!! $child['link'] !!}" target="_blank">{!! $child['title'] !!}</a>
-                                        </li>
-                                        @endforeach
-                                    </ul>
+                                   <div class="d-flex justify-content-center justify-content-sm-start">
+                                       {{--first column--}}
+                                       <ul>
+                                           @foreach($footer_link['children'] as $child)
+                                               <li>
+                                                   <a href="{!! $child['link'] !!}" target="_blank">{!! $child['title'] !!}</a>
+                                               </li>
+                                           @endforeach
+                                       </ul>
+                                       {{--second column--}}
+                                       <ul class="ml-4">
+                                           @foreach($footer_link['children'] as $child)
+                                               <li>
+                                                   <a href="{!! $child['link'] !!}" target="_blank">{!! $child['title'] !!}</a>
+                                               </li>
+                                           @endforeach
+                                       </ul>
+                                   </div>
                                 </div>
                             </div>
                             @endforeach
