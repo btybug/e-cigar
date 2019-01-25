@@ -1429,6 +1429,7 @@ body.get-cover:after {
 @media (max-width: 1630px) {
     .product-single-view-outer {
         width: 360px;
+        flex: none;
     }
 
     .single-product-dtls-wrap-outer {

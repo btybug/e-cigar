@@ -2308,6 +2308,11 @@ td.shp-cart-table_price-td {
 }
 
 /*end gallery tabs*/
+@media (max-width: 1700px) {
+    .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
+        width: 100% !important;
+    }
+}
 @media (max-width: 1199px) {
     .product-single-view-outer {
         width: 100% !important;

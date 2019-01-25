@@ -1,4 +1,4 @@
-<div class="single-product-row-repeatable d-flex flex-wrap align-items-center">
+<div class="single-product-row-repeatable d-flex align-items-center">
     <label class="product-single-info_label text-uppercase mb-0 col-sm-2 pl-0 mr-0">{!! $promotionAttr->name !!}:</label>
     <div class="col-sm-10 px-sm-3 px-0">
         <select  data-name="{{ $promotionAttr->id }}" data-id="productPack{{ $promotionAttr->id }}"

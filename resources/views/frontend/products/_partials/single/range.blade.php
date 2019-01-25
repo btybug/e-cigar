@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap align-items-center product-single-info_range-outer">
+<div class="d-flex align-items-center product-single-info_range-outer">
     <label class="product-single-info_label text-uppercase mb-0 col-sm-2 pl-0 mr-0">{!! $modelattr->name !!}:</label>
     <div class="col-sm-10 px-sm-3 px-0">
         <div class="range-steps d-flex">

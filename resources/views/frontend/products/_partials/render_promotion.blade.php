@@ -26,7 +26,7 @@
                     @endif
                 @endforeach
             </div>
-        <div class="col-sm-2 p-0 text-sm-center">
+        <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-place-promotion"></span>
         </div>
 
