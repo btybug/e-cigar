@@ -1,4 +1,4 @@
-{!! Form::model($address_book,['class'=>'form-horizontal address-book-form','url' => route('post_my_account_address_book_save')]) !!}
+{!! Form::model($address_book,['class'=>'checkout-form address-book-form','url' => route('post_my_account_address_book_save')]) !!}
 <div class="errors">
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -11,93 +11,137 @@
     @endif
 </div>
 
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">Name</label>
-        <div class="col-sm-8">
-            <div class="row">
-                <div class="col-sm-6">
-                    {!! Form::text('first_name',null,['class'=>'form-control']) !!}
-                </div>
-                <div class="col-sm-6">
-                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                </div>
-            </div>
+
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="fullName" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">First Name<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::text('first_name',null,['class'=>'form-control checkout-form_input-text']) !!}
+            <p class="err-msg">name is not valid</p>
         </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">Company name</label>
-        <div class="col-sm-8">
-            {!! Form::text('company',null,['class'=>'form-control']) !!}
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">1st Line address</label>
-        <div class="col-sm-8">
-            {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">2nd line address</label>
-        <div class="col-sm-8">
-            {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">Country</label>
-        <div class="col-sm-8">
-            {!! Form::select('country',$countriesShipping,null,['class'=>'form-control','id' => 'geo_country_book']) !!}
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">Regions</label>
-        <div class="col-sm-8">
-            {!! Form::select('region',getRegionByZone(@$address_book->country),null,['class'=>'form-control geo_region_book']) !!}
-        </div>
-    </div>
-</div>
-<div class="form-group hide">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">City</label>
-        <div class="col-sm-8">
-            {!! Form::text('city',null,['class'=>'form-control']) !!}
-        </div>
-    </div>
-</div>
-<div class="form-group">
-    <div class="row">
-        <label for="text" class="control-label col-sm-4">Post Code</label>
-        <div class="col-sm-8">
-            {!! Form::text('post_code',null,['class'=>'form-control']) !!}
-        </div>
+
     </div>
 </div>
 
-{{--<div class="form-check">--}}
-    {{--<div class="row">--}}
-        {{--<div class="col-sm-8 offset-sm-4">--}}
-            {{--{!! Form::checkbox('make_default',true,$default,['id' => 'newAddressCheck']) !!}--}}
-            {{--<label class="form-check-label text-muted" for="newAddressCheck">--}}
-                {{--Mark this shipping address as default--}}
-            {{--</label>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
-{!! Form::hidden('type','address_book') !!}
-{!! Form::hidden('id') !!}
-<div class="form-group row">
-    <div class="col-sm-offset-4 col-sm-8">
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="fullName" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Last Name<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {{--<input id="fullName" type="text" class="form-control checkout-form_input-text">--}}
+            {!! Form::text('last_name',null,['class'=>'form-control checkout-form_input-text']) !!}
+            <p class="err-msg">name is not valid</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="companyName" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Company Name</label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::text('company',null,['class'=>'form-control checkout-form_input-text']) !!}
+            <p class="err-msg">name is not valid</p>
+        </div>
+
+    </div>
+</div>
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="address1" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Address 1<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::text('first_line_address',null,['class'=>'form-control checkout-form_input-text']) !!}
+            <p class="err-msg">address is not valid</p>
+        </div>
+
+    </div>
+</div>
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="address2" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">
+        AddressS 2<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span>
+    </label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::text('second_line_address',null,['class'=>'form-control checkout-form_input-text']) !!}
+            <p class="err-msg">address is not valid</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="country" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Country<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::select('country',$countriesShipping,null,['class'=>'select-2 select-2--no-search main-select main-select-2arrows checkout-form_select','id' => 'geo_country_book','style' => 'width: 100%;']) !!}
+            <p class="err-msg">country is not valid</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="region" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Region<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::select('region',getRegionByZone(@$address_book->country),null,['class'=>'form-control select-2 select-2--no-search main-select main-select-2arrows checkout-form_select','id' => 'geo_region_book','style' => 'width: 100%;']) !!}
+
+            <p class="err-msg">region is not valid</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="city" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">City<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::text('city',null,['class'=>'form-control checkout-form_input-text']) !!}
+            <p class="err-msg">city is not valid</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <label for="posatalCode" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Zip/Postal Code:<span
+                class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+    <div class="col-md-9">
+        <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+            {!! Form::text('post_code',null,['class'=>'form-control checkout-form_input-text']) !!}
+
+            <p class="err-msg">code is not valid</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+    <div class="d-flex align-items-center pl-md-0 pl-3 mb-md-0 mb-3">
+        <div class="position-relative">
+            <input class="form-check-input register-form_input-check" type="checkbox" value="" id="defaultCheckModal">
+            <label class="form-check-label text-gray-clr pointer" for="defaultCheckModal">
+                Set as default
+                <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                            <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+                                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"/>
+                                            </svg>
+                                        </span>
+            </label>
+        </div>
+    </div>
+    {!! Form::hidden('type','address_book') !!}
+    {!! Form::hidden('id') !!}
+    <div class="col-md-9 d-flex flex-sm-row flex-column-reverse justify-content-sm-end">
+        <button type="button" class="btn text-uppercase btn-submit btn-submit-cancel font-15 mr-sm-3">Cancel</button>
         <button type="button" class="btn ntfs-btn save-address-book rounded-0">Submit</button>
     </div>
 </div>
+
 {!! Form::close() !!}

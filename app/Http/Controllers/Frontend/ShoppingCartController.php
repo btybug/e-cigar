@@ -379,7 +379,7 @@ class ShoppingCartController extends Controller
             }
         }
 
-        $html = $this->view('_partials.checkout_render',
+        $html = $this->view('_partials.address',
             compact(['billing_address','default_shipping','countries','countriesShipping','geoZone','shipping','delivery','address']))->with('address_id',$request->addressId)->render();
 
         return \Response::json(['error' => false,'html' => $html]);
