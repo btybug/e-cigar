@@ -178,7 +178,7 @@
             <img src="@if(Auth::user()->avatar) {!! Auth::user()->avatar !!} @else /public/images/{!!Auth::user()->gender!!}.png  @endif"
                  alt="">
         </div>
-        <ul class="profile-sidebar-menu list-unstyled mb-0 w-100">
+        <ul class="profile-sidebar-menu list-unstyled w-100 main-scrollbar">
             <li class="profile-sidebar-menu_item">
                 <a href="{!! url('my-account') !!}"
                    class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">

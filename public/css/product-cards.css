@@ -807,6 +807,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .hidden-sidebar .profile-sidebar-menu {
     border-top: 10px solid #353535;
+    margin-bottom: 30px;
 }
 
 .profile-sidebar-menu_item {
@@ -1683,8 +1684,29 @@ body.get-cover:after {
         padding-left: 2px;
         padding-right: 2px;
     }
+
+    .profile-sidebar {
+        width: 255px;
+        right: -255px;
+    }
 }
 
+/*responsive height*/
+@media (max-height: 490px) {
+    .profile-sidebar_avatar-holder img,
+    .profile-sidebar_avatar-holder {
+        height: 100px;
+    }
+
+    .profile-sidebar-menu_link {
+        padding-top: 8px;
+        padding-bottom: 8px;
+    }
+
+    .profile-sidebar {
+        padding-bottom: 18px;
+    }
+}
 /*new css for single page items*/
 
 .single-product-row-repeatable:not(:last-of-type) {
