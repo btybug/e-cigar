@@ -1182,7 +1182,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .register-form_input-text:focus,
 .account-country-select + .select2-container--default .select2-selection--single:focus {
-    border-color: #ad294b;
     background-color: transparent;
 }
 
