@@ -1342,6 +1342,26 @@ body.get-cover:after {
     padding: 10px 1.25rem;
 }
 
+.js-cookie-consent.cookie-consent {
+    position: fixed;
+    z-index: 99999;
+}
+
+.js-cookie-consent.cookie-consent:after {
+    position: static;
+    content: '';
+    display: block;
+    margin-bottom: 50px;
+}
+
+.js-cookie-consent-agree.cookie-consent__agree {
+    background: #5184e5;
+    outline: none;
+    border: 0;
+    color: #fff;
+    padding: .375rem .75rem;
+}
+
 /*cookie*/
 .page-cookie {
     background: #000;

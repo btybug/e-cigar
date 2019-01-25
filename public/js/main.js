@@ -4,9 +4,9 @@ $(function() {
         heightBlock('.main-left-tabs .nav','.main-left-tabs .nav a');
     });
 
-    // hidden sidebars slide from right
-    openSidbar($('#ptofileBtn'), $('#profileSidebar'));
-    openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));
+    // // hidden sidebars slide from right
+    // openSidbar($('#ptofileBtn'), $('#profileSidebar'));
+    // openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));
 
     // // remove cart-info from cart sidbar
     // $('.cart-item-close').on('click', function (e) {
@@ -60,27 +60,6 @@ function heightBlock(mainDiv,element) {
     }
 }
 
-function openSidbar(btn, sidebar) {
-    btn.on('click', function (e) {
-        e.stopPropagation();
-        if(!sidebar.hasClass('show')){
-            $('.hidden-sidebar').removeClass('show')
-        }
-        if(sidebar.hasClass('show')){
-            sidebar.removeClass('show');
-        }else{
-            sidebar.addClass('show');
-        }
-
-    });
-
-    $('body').on('click', function (e) {
-        if(e.target !== sidebar[0] && !$(e.target).closest(sidebar).length) {
-            sidebar.removeClass('show');
-        }
-    });
-
-}
 
 ////new
 $(function() {
@@ -184,6 +163,13 @@ $(function() {
 
     })
 
+    // cookies
+    // console.log($('.js-cookie-consent.cookie-consent').length)
+    // if($('.js-cookie-consent.cookie-consent').length) {
+    //     var cookieHeight = $('.js-cookie-consent.cookie-consent').height;
+    //     $('.main-header .header-top').css('top', cookieHeight);
+    // }
+
 
 
 
@@ -220,3 +206,26 @@ $(function() {
     openSidebar($('#shpCartSidebarBtn'), $('#shpCartSidebar'));
 
 } );
+
+
+function openSidbar(btn, sidebar) {
+    btn.on('click', function (e) {
+        e.stopPropagation();
+        if(!sidebar.hasClass('show')){
+            $('.hidden-sidebar').removeClass('show')
+        }
+        if(sidebar.hasClass('show')){
+            sidebar.removeClass('show');
+        }else{
+            sidebar.addClass('show');
+        }
+
+    });
+
+    $('body').on('click', function (e) {
+        if(e.target !== sidebar[0] && !$(e.target).closest(sidebar).length) {
+            sidebar.removeClass('show');
+        }
+    });
+
+}
