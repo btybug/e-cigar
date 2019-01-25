@@ -2274,7 +2274,9 @@ td.shp-cart-table_price-td {
     fill: transparent;
     transition: stroke-dashoffset .5s .3s linear, fill .5s;
 }
-
+.modal-checkout .select-2 + .select2-container--default .select2-selection--single .select2-selection__arrow{
+    background-image: none;
+}
 /*Modal checkout*/
 .products_closed {
     display: none !important;

@@ -8,23 +8,6 @@
             </span>
         </span>
 
-        <div class="d-flex align-items-center checkout-address-wrap">
-            <label for="cartShpAddr" class="mr-3 text-light-clr mb-0">Enter Shipping address</label>
-            <div class="mr-4" style="width: 450px;">
-                <div class="simple_select_wrapper">
-                    <select id="cartShpAddr"  class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select" >
-                        <option class="selected">Select address</option>
-                        <option>address 1</option>
-                        <option>address 2</option>
-                    </select>
-                </div>
-            </div>
-            <span data-toggle="modal" data-target="#addNewAddress" class="d-inline-flex align-items-center text-quatr-clr font-main-bold font-15 text-uppercase pointer">
-                add new
-                <span class="d-inline-block ml-1">&#43;</span>
-            </span>
-        </div>
-
         <div class="checkout-note-wrap">
             <div class="row">
                 <div class="col-md-4">
@@ -42,15 +25,32 @@
                                 <path fill-rule="evenodd"  fill="rgb(132, 129, 157)" d="M7.672,17.772 C7.488,17.923 7.244,17.999 7.000,17.999 C6.756,17.999 6.513,17.923 6.328,17.772 C6.328,17.772 -0.000,12.588 -0.000,6.990 C-0.000,3.129 3.134,-0.000 7.000,-0.000 C10.866,-0.000 14.000,3.129 14.000,6.990 C14.000,12.588 7.672,17.772 7.672,17.772 ZM7.000,0.993 C3.688,0.993 0.994,3.683 0.994,6.990 C0.994,8.429 1.506,10.789 3.943,13.864 C5.391,15.690 6.842,16.907 6.952,16.999 C6.959,17.002 6.976,17.006 7.000,17.006 C7.023,17.006 7.041,17.002 7.048,16.999 C7.276,16.809 13.006,11.970 13.006,6.990 C13.006,3.683 10.312,0.993 7.000,0.993 ZM7.000,8.457 C6.232,8.457 5.610,7.836 5.610,7.069 C5.610,6.303 6.232,5.681 7.000,5.681 C7.767,5.681 8.390,6.303 8.390,7.069 C8.390,7.836 7.767,8.457 7.000,8.457 Z"/>
                             </svg>
                         </span>
-                        <ul class="col-10 list-unstyled mb-0 font-16">
-                            <li>Company name</li>
-                            <li>Flat 5</li>
-                            <li>111 street name</li>
-                            <li>City Name</li>
-                            <li>Region</li>
-                            <li>AA 11 (post code in uk)</li>
-                            <li>Country Name</li>
-                        </ul>
+                        <div class="col-10">
+                            <ul class="list-unstyled mb-0 font-16">
+                                <li>Company name</li>
+                                <li>Flat 5</li>
+                                <li>111 street name</li>
+                                <li>City Name</li>
+                                <li>Region</li>
+                                <li>AA 11 (post code in uk)</li>
+                                <li>Country Name</li>
+                            </ul>
+                            <div class="d-flex flex-wrap change-new-btn mt-4">
+                                <div class="mr-3">
+                                     <span data-toggle="modal" data-target="#changeAddressModal" class="d-inline-flex align-items-center text-quatr-clr font-main-bold font-15 text-uppercase pointer">
+                change
+                <span class="d-inline-block ml-1">&#9998;</span>
+            </span>
+
+                                </div>
+                                    <div>
+                                        <span data-toggle="modal" data-target="#addNewAddress" class="d-inline-flex align-items-center text-quatr-clr font-main-bold font-15 text-uppercase pointer">
+                add new
+                <span class="d-inline-block ml-1">&#43;</span>
+            </span>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-8">

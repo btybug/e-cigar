@@ -131,6 +131,213 @@
             </div>
         </div>
     </div>
+    <!--modal new address-->
+    <div class="modal modal-checkout fade" id="addNewAddress" tabindex="-1" role="dialog" aria-labelledby="addNewAddress">
+        <div class="modal-dialog main-scrollbar" role="document">
+            <div class="modal-content">
+                <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-checkout_header text-center">
+                    <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">add a new address</h2>
+                    <p class="font-15 text-gray-clr modal-text">  Praesent sollicitudin lorem at orci tincidunt imperdiet.</p>
+                </div>
+                <div>
+                    <form action="" class="checkout-form">
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="title" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Title<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group form-has-err">   <!--gets form-has-err class-->
+                                    <select id="title" class="select-2 select-2--no-search main-select main-select-2arrows checkout-form_select" style="width: 100%">
+                                        <option></option>
+                                        <option>title 1</option>
+                                        <option>title 2</option>
+                                        <option>title 3</option>
+
+                                    </select>
+                                    <p class="err-msg">title is not valid</p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="fullName" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Full Name<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <input id="fullName" type="text" class="form-control checkout-form_input-text">
+                                    <p class="err-msg">name is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="companyName" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Company Name</label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <input id="companyName" type="text" class="form-control checkout-form_input-text">
+                                    <p class="err-msg">name is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="address1" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Address 1<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <input id="address1" type="text" class="form-control checkout-form_input-text">
+                                    <p class="err-msg">address is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="address2" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Address 2<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <input id="address2" type="text" class="form-control checkout-form_input-text">
+                                    <p class="err-msg">address is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="city" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">City<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <input id="city" type="text" class="form-control checkout-form_input-text">
+                                    <p class="err-msg">city is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="region" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Region<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <select id="region" class="select-2 select-2--no-search main-select main-select-2arrows checkout-form_select" style="width: 100%">
+                                        <option></option>
+                                        <option>region 1</option>
+                                        <option>region 2</option>
+                                        <option>region 3</option>
+                                        <option>region 4</option>
+                                        <option>region 5</option>
+                                        <option>region 6</option>
+                                        <option>region 7</option>
+                                        <option>region 8</option>
+                                        <option>region 9</option>
+                                        <option>region 10</option>
+                                        <option>region 11</option>
+                                        <option>region 12</option>
+                                        <option>region 13</option>
+                                        <option>region 14</option>
+                                        <option>region 15</option>
+
+
+                                    </select>
+                                    <p class="err-msg">region is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="posatalCode" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Zip/Postal Code:<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <input id="posatalCode" type="text" class="form-control checkout-form_input-text">
+                                    <p class="err-msg">code is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <label for="country" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3">Country<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-9">
+                                <div class="checkout-form_input-group">   <!--gets form-has-err class-->
+                                    <select id="countryModal" class="select-2 select-2--no-search main-select main-select-2arrows checkout-form_select" style="width: 100%">
+                                        <option></option>
+                                        <option>Armenia</option>
+                                        <option>UK</option>
+                                        <option>USA</option>
+
+
+                                    </select>
+                                    <p class="err-msg">country is not valid</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-md-row flex-column align-items-md-center justify-content-between">
+                            <div class="d-flex align-items-center pl-md-0 pl-3 mb-md-0 mb-3">
+                                <div class="position-relative">
+                                    <input class="form-check-input register-form_input-check" type="checkbox" value="" id="defaultCheckModal">
+                                    <label class="form-check-label text-gray-clr pointer" for="defaultCheckModal">
+                                        Set as default
+                                        <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                    <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"/>
+</svg>
+                                </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-9 d-flex flex-sm-row flex-column-reverse justify-content-sm-end">
+                                <button type="submit" class="btn text-uppercase btn-submit btn-submit-cancel font-15 mr-sm-3">Cancel</button>
+
+                                <button type="submit" class="btn text-uppercase btn-submit font-15 mb-sm-0 mb-3">Add</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--modal change address-->
+    <div class="modal modal-checkout fade" id="changeAddressModal" tabindex="-1" role="dialog" aria-labelledby="changeAddressModal">
+        <div class="modal-dialog main-scrollbar" role="document">
+            <div class="modal-content">
+                <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="modal-checkout_header text-center">
+                    <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">Change address</h2>
+                    <p class="font-15 text-gray-clr modal-text">  Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+                </div>
+                <div>
+                    <form action="" class="checkout-form">
+
+                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between ">
+                            <label for="title" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3 pb-0">Enter Shipping address<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                            <div class="col-md-8">
+                                <div class="simple_select_wrapper">
+                                    <select id="cartShpAddr"  class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select" >
+                                        <option class="selected">Select address</option>
+                                        <option>address 1</option>
+                                        <option>address 2</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="d-flex flex-md-row flex-column align-items-md-center justify-content-end mt-5">
+                            <div class="col-md-9 d-flex flex-sm-row flex-column-reverse justify-content-sm-end">
+                                <button type="submit" class="btn text-uppercase btn-submit btn-submit-cancel font-15 mr-sm-3">Cancel</button>
+
+                                <button type="submit" class="btn text-uppercase btn-submit font-15 mb-sm-0 mb-3">Save</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
