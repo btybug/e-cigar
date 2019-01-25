@@ -74,9 +74,7 @@ class CommentsController extends Controller
     public function delete(Request $request, $id)
     {
         $comment = $this->comment->find($id);
-
         if($comment) $comment->delete();
-
         return redirect()->back();
     }
 }

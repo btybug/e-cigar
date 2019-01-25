@@ -414,13 +414,15 @@ Route::group(['prefix' => 'import'], function () {
 });
 Route::group(['prefix' => 'gmail'], function () {
     Route::get('/', 'Admin\GmailController@index')->name('admin_gmail');
+    Route::get('/settings', 'Admin\GmailController@settings')->name('admin_gmail_settings');
+    Route::post('/settings', 'Admin\GmailController@postSettings')->name('post_admin_gmail_settings');
     Route::get('/oauth/gmail', function (){
         return LaravelGmail::redirect();
     });
 
     Route::get('/oauth/callback', function (){
         LaravelGmail::makeToken();
-        return redirect()->to('/');
+        return redirect()->route('admin_gmail');
     });
 
     Route::get('/oauth/gmail/logout', function (){
