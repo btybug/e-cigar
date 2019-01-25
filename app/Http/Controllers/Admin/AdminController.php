@@ -16,6 +16,7 @@ class AdminController extends Controller
 {
     public function getDashboard()
     {
+        dd(\LaravelGmail::message()->all());
 //        \DB::table('users')->insert([
 //            'name' => 'Manager',
 //            'username' => 'supermanager',
