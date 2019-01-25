@@ -28,7 +28,7 @@
             <div class="card col-md-2 col-sm-4">
                 <div class="files">
                     <div class="delete_file text-center" data-id="{{$import["id"]}}">X</div>
-                    <div class="category text-center bg-primary __view" data-toggle="modal" data-target="#view_modal" data-id="{{$import["id"]}}">{{$import["category"]}}</div>
+                    <div class="category text-center bg-primary __view" data-target="#view_modal" data-id="{{$import["id"]}}">{{$import["category"]}}</div>
                     @if($import["is_imported"])
                         <div class="btn btn-info import_file" data-id="{{$import["id"]}}">Imported</div>
                     @else
@@ -70,13 +70,12 @@
                     <h1 class="text-center">File Content</h1>
                 </div>
                 <div class="modal-body">
-                    <table>
+                    <table class="table table-striped">
 
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-success __import_file" data-id="">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 150px;">Close</button>
                 </div>
             </div>
 
@@ -152,6 +151,18 @@
         .modal-footer .btn{
             width: 49%;
         }
+        .table>tr>td {
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+
+        @media (min-width: 768px){
+            #view_modal .modal-dialog {
+                width: calc(100% - 120px);
+                margin: 30px auto;
+            }
+        }
+
 
 
     </style>
@@ -213,7 +224,6 @@
 
             $("body").on("click",".__view",function(){
                 let id = $(this).data("id");
-                console.log(id)
 
                 $.ajax({
                     type: "post",
@@ -227,7 +237,25 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-//                            location.reload()
+                            $("#view_modal table").empty()
+                            data.forEach(function(element) {
+                                let tr = $("<tr></tr>");
+                                element.forEach(function(el) {
+                                    if(el == null){
+                                        return
+                                    }
+                                    if(el!=null && (typeof el == "string") && (el.slice(-5) == ".jpeg" || el.slice(-4) == ".png" || el.slice(-4) == ".jpg")){
+                                        var td = $("<td><img src='"+el+"'  width='200'></td>");
+                                    }else{
+                                        var td = $("<td>"+el+"</td>");
+                                    }
+                                    tr.append(td);
+                                    console.log(el);
+                                });
+                                $("#view_modal table").append(tr)
+                                $("#view_modal").modal()
+//                                console.log(element);
+                            });
                         } else {
                             alert('error')
                         }

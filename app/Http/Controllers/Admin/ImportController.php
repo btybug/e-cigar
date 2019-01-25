@@ -107,10 +107,14 @@ class ImportController extends Controller
         $id = ($request->id) ? $request->id : 1;
         $file = Import::find($id);
         $excels = Excel::toArray(new UsersImport, $file->path)[0];
-        dd($excels);
+//        $row = array_shift($excels);
+//        $data = [];
+//        dd($row,$excels);
 
-
-
+//        foreach ($row as $i => $item){
+//            $data[$item] = $excel[$i];
+//        }
+        return response()->json($excels);
     }
 
     public function stock($file){
