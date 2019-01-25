@@ -422,7 +422,7 @@ Route::group(['prefix' => 'gmail'], function () {
 
     Route::get('/oauth/callback', function (){
         LaravelGmail::makeToken();
-        return redirect()->route('admin_gmail');
+        return redirect()->route('admin_gmail_settings');
     });
 
     Route::get('/oauth/gmail/logout', function (){
