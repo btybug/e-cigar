@@ -9,6 +9,7 @@
         "actuallymab/laravel-comment": "^0.6.1",
         "barryvdh/laravel-ide-helper": "^2.5",
         "cartalyst/stripe-laravel": "9.0.*",
+        "dacastro4/laravel-gmail": "v0.6.1.1",
         "darryldecode/cart": "~4.0",
         "dimsav/laravel-translatable": "^9.2",
         "fideloper/proxy": "^4.0",

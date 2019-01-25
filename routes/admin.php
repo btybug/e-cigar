@@ -11,6 +11,7 @@ Route::get('/test', 'Admin\AdminController@test')->name('admin_dashboard_test');
 Route::get('/menu-manager', function () {
     return view('admin.menu_manager');
 });
+Route::get('/gmail-call-back','GmailController@callBack');
 
 Route::group(['prefix' => 'settings'], function () {
     Route::group(['prefix' => 'general'], function () {
@@ -410,6 +411,22 @@ Route::group(['prefix' => 'import'], function () {
     Route::post("/add-file", 'Admin\ImportController@add_file')->name('add_file');
 
     Route::post("/view_file", 'Admin\ImportController@view_file')->name('view_file');
+});
+Route::group(['prefix' => 'gmail'], function () {
+    Route::get('/', 'Admin\GmailController@index')->name('admin_gmail');
+    Route::get('/oauth/gmail', function (){
+        return LaravelGmail::redirect();
+    });
+
+    Route::get('/oauth/callback', function (){
+        LaravelGmail::makeToken();
+        return redirect()->to('/');
+    });
+
+    Route::get('/oauth/gmail/logout', function (){
+        LaravelGmail::logout(); //It returns exception if fails
+        return redirect()->to('/');
+    });
 });
 
 
