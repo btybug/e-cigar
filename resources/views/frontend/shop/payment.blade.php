@@ -7,7 +7,7 @@
                 <div class="shopping-cart-head">
                     <ul class="nav nav-pills">
                         <li class="nav-item col-md-3">
-                            <a class="item visited d-flex align-items-center justify-content-between" href="order-shopping-cart.html">
+                            <a class="item visited d-flex align-items-center justify-content-between" href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21px" height="21px">
@@ -17,7 +17,7 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item active d-flex align-items-center justify-content-between" href="javascript:void(0);">
+                            <a class="item visited d-flex align-items-center justify-content-between" href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">CHECKOUT</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21px" height="21px">
@@ -27,7 +27,7 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between" href="order-payment.html">
+                            <a class="item active d-flex align-items-center justify-content-between" href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">Payment</span>
                                 <span class="icon">
                                     <svg width="21px" height="21px">
@@ -37,7 +37,7 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between" href="#">
+                            <a class="item d-flex align-items-center justify-content-between" href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21px" height="21px">
@@ -52,8 +52,7 @@
                 <div class="shopping-cart-content">
                     <div class="shopping-cart-inner">
                         <div class="d-flex flex-wrap">
-                            @include('frontend.shop._partials.checkout_render')
-{{--                            @include('frontend.shop._partials.checkout_render_old')--}}
+                            @include('frontend.shop._partials.checkout_payment')
                         </div>
                     </div>
                 </div>
@@ -67,55 +66,6 @@
         </button>
 
     </main>
-
-
-    <div class="modal modal-checkout fade" id="newAddressModal" tabindex="-1" role="dialog"
-         aria-labelledby="newAddressModal" aria-hidden="true">
-        <div class="modal-dialog main-scrollbar" role="document">
-            <div class="modal-content">
-                <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-checkout_header text-center">
-                    <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">add a new address</h2>
-                    <p class="font-15 text-gray-clr modal-text">  Praesent sollicitudin lorem at orci tincidunt imperdiet.</p>
-                </div>
-                <div class="modal-body address-form">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-    {{--<div class="modal modal-checkout fade" id="addNewAddress" tabindex="-1" role="dialog" aria-labelledby="addNewAddress">--}}
-        {{--<div class="modal-dialog main-scrollbar" role="document">--}}
-            {{--<div class="modal-content">--}}
-                {{--<button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">--}}
-                    {{--<span aria-hidden="true">&times;</span>--}}
-                {{--</button>--}}
-                {{--<div class="modal-checkout_header text-center">--}}
-                    {{--<h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">add a new address</h2>--}}
-                    {{--<p class="font-15 text-gray-clr modal-text">  Praesent sollicitudin lorem at orci tincidunt imperdiet.</p>--}}
-                {{--</div>--}}
-                {{--<div class="modal-body address-form">--}}
-
-                {{--</div>--}}
-
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-
-
-
-
-
-
-
-
 
 @stop
 @section('css')
@@ -145,103 +95,35 @@
         .StripeElement--webkit-autofill {
             background-color: #fefde5 !important;
         }
+
+        .success,
+        .error {
+            display: none;
+            font-size: 13px;
+        }
+
+        .success.visible,
+        .error.visible {
+            display: inline;
+        }
+
+        .error {
+            color: #E4584C;
+        }
+
+        .success {
+            color: #666EE8;
+        }
+
+        .success .token {
+            font-weight: 500;
+            font-size: 13px;
+        }
     </style>
 @stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <script>
-
-        //addresses js
-        $("body").on('click','.save-address-book',function () {
-            var form = $(".address-book-form").serialize();
-            AjaxCall(
-                "/my-account/save-address-book",
-                form,
-                res => {
-                    if (!res.error) {
-                        console.log(res.data)
-                        let select = $(".select-address")
-                        var opt = document.createElement('option');
-                        opt.value = res.data.id;
-                        opt.innerHTML = res.data.company;
-                        select.append(opt);
-                        $("#newAddressModal").modal('hide');
-//
-                        select.val(res.data.id).trigger('change');
-                    }
-                },
-                error => {
-                    if(error.status == 422) {
-                        $('.errors').html('');
-                        for (var err in error.responseJSON.errors) {
-                            $('.errors').append(error.responseJSON.errors[err] + '<br>');
-                        }
-                    }
-                }
-            );
-        })
-
-        $("body").on('click','.address-book-new',function () {
-            AjaxCall(
-                "/my-account/address-book-form",
-                { default:true},
-                res => {
-                    if (!res.error) {
-                        $(".address-form").html(res.html);
-                        $("#geo_country_book").select2();
-                        $("#newAddressModal").modal();
-                    }
-                }
-            );
-        });
-
-        $("body").on("change", ".select-address", function() {
-            $(".container").css('opacity','0.6');
-            $(".loader-img").toggleClass('d-none');
-            AjaxCall(
-                "/change-shipping-method",
-                {addressId:$(this).val()},
-                res => {
-                if (!res.error) {
-                $(".container").css('opacity','1');
-                $(".loader-img").toggleClass('d-none');
-                $("#address").html(res.html);
-                $("#changeAddressModal").modal('hide');
-            }
-        },
-            error => {
-                $(".container").css('opacity','1');
-                $(".loader-img").toggleClass('d-none');
-            }
-            );
-        });
-
-        $("body").on("change", "#geo_country_book", function() {
-            var value = $(this).val();
-            AjaxCall(
-                "/get-regions-by-geozone",
-                { country: value},
-                res => {
-
-                if (!res.error) {
-                var $el = $("#geo_region_book");
-                $el.empty(); // remove old options
-                console.log(res.data)
-                var x= res.data;
-                for (var item in x) {
-                    console.log(x[item]);
-                    var opt = document.createElement('option');
-                    opt.value = item;
-                    opt.innerHTML = x[item];
-                    $el.append(opt);
-                }
-
-            }
-        }
-            );
-        });
-    </script>
 
     <script>
         var stripe = Stripe("{!! stripe_key() !!}");
@@ -249,7 +131,9 @@
         // Custom Styling
         var style = {
             base: {
-                color: '#32325d',
+                color: '#21213b',
+                borderRadius: 0,
+                borderColor: '#c8c8d2',
                 lineHeight: '24px',
                 fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                 fontSmoothing: 'antialiased',
@@ -263,19 +147,76 @@
                 iconColor: '#fa755a'
             }
         };
-        // Create an instance of the card Element
-        var card = elements.create('card', {style: style});
-        // Add an instance of the card Element into the `card-element` <div>
-        card.mount('#card-element');
-        // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function(event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
+
+        var card  = elements.create('cardNumber', {
+            style: style
         });
+        card.mount('#cardNumber');
+
+        var cardExpiryElement = elements.create('cardExpiry', {
+            style: style
+        });
+        cardExpiryElement.mount('#card-expiry-element');
+
+        var cardCvcElement = elements.create('cardCvc', {
+            style: style
+        });
+        cardCvcElement.mount('#secureCode');
+
+
+        function setOutcome(result) {
+            var successElement = document.querySelector('.success');
+            var errorElement = document.querySelector('.error');
+            successElement.classList.remove('visible');
+            errorElement.classList.remove('visible');
+
+            if (result.token) {
+                // In this example, we're simply displaying the token
+                successElement.querySelector('.token').textContent = result.token.id;
+                successElement.classList.add('visible');
+
+                // In a real integration, you'd submit the form with the token to your backend server
+                //var form = document.querySelector('form');
+                //form.querySelector('input[name="token"]').setAttribute('value', result.token.id);
+                //form.submit();
+            } else if (result.error) {
+                errorElement.textContent = result.error.message;
+                errorElement.classList.add('visible');
+            }
+        }
+
+        var cardBrandToPfClass = {
+            'visa': 'pf-visa',
+            'mastercard': 'pf-mastercard',
+            'amex': 'pf-american-express',
+            'discover': 'pf-discover',
+            'diners': 'pf-diners',
+            'jcb': 'pf-jcb',
+            'unknown': 'pf-credit-card',
+        }
+
+//        function setBrandIcon(brand) {
+//            var brandIconElement = document.getElementById('brand-icon');
+//            var pfClass = 'pf-credit-card';
+//            if (brand in cardBrandToPfClass) {
+//                pfClass = cardBrandToPfClass[brand];
+//            }
+//            for (var i = brandIconElement.classList.length - 1; i >= 0; i--) {
+//                brandIconElement.classList.remove(brandIconElement.classList[i]);
+//            }
+//            brandIconElement.classList.add('pf');
+//            brandIconElement.classList.add(pfClass);
+//        }
+
+        card.on('change', function(event) {
+            // Switch brand logo
+//            if (event.brand) {
+//                setBrandIcon(event.brand);
+//            }
+
+            setOutcome(event);
+        });
+
         // Handle form submission
         var form = document.getElementById('payment-form');
         form.addEventListener('submit', function(event) {
@@ -283,7 +224,7 @@
             stripe.createToken(card).then(function(result) {
                 if (result.error) {
                     // Inform the user if there was an error
-                    var errorElement = document.getElementById('card-errors');
+                    var errorElement = document.querySelector('.error');
                     errorElement.textContent = result.error.message;
                 } else {
                     stripeTokenHandler(result.token);
@@ -303,20 +244,28 @@
 // Submit form
             form.submit();
         }
+
+
+
+
+
+        //        // Create an instance of the card Element
+//        var card = elements.create('card', {style: style});
+//        // Add an instance of the card Element into the `card-element` <div>
+//        card.mount('#card-element');
+//        // Handle real-time validation errors from the card Element.
+//        card.addEventListener('change', function(event) {
+//            var displayError = document.getElementById('card-errors');
+//            if (event.error) {
+//                displayError.textContent = event.error.message;
+//            } else {
+//                displayError.textContent = '';
+//            }
+//        });
+
     </script>
     <script>
-        $(document).ready(function () {
-            $("body").on("click", ".go-to-payment", function (event) {
-                AjaxCall(
-                    "/get-payment-options",
-                    {},
-                    res => {
-                        if (!res.error) {
-                            window.location = res.url;
-                        }
-                    }
-                );
-            });
+//        $(document).ready(function () {
 
             $("body").on("click", ".back-step", function (event) {
                 $(".nav-link").each(function (index,value) {
@@ -335,20 +284,33 @@
                 event.stopImmediatePropagation();
             });
 
-            $('body').on('change', '.payment_methods input[type=radio][name=payment_method]', function () {
-                var method = $(this).val();
-                if ($(this).is(':checked')) {
-                    $('.payment_box').slideUp();
-                    $(this).closest('li').find('.payment_box').slideDown();
-
-                    $(".payment-method-data").each(function (index,value) {
-                        $(value).addClass('d-none')
-                    })
-
-                    $("#" + method + "-method").removeClass('d-none')
+            function paymentMethod() {
+                var method = $("input[name='payment_method']:checked"). val();
+                var el = $(".checkout-btn");
+                var button = '';
+                if(method == 'cash'){
+                    button = '<button class="btn btn-primary text-uppercase font-15 submit-cash">PAY CASH</button>';
+                }else if(method == 'stripe'){
+                    button = '<button class="btn btn-primary text-uppercase font-15 submit-stripe">PAY WITH CARD</button>';
                 }
+console.log(method)
+                el.html(button);
+            }
+
+paymentMethod();
+
+
+
+            $("body").on('click','.submit-stripe',function () {
+//                $("#payment-form").submit();
+                $('.submit-stripe-btn').trigger('click');
+            });
+
+
+            $('body').on('change', '.payment_methods', function () {
+                paymentMethod();
             })
-        });
+//        });
 
     </script>
     <script>

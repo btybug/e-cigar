@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\GeoZones;
 use App\Models\Posts;
+use App\Models\Settings;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
@@ -88,7 +89,7 @@ class ShoppingCartController extends Controller
         $items = $this->cartService->getCartItems();
         if(! count($items)) return redirect('/');
 
-        session()->forget('shipping_address','billing_address');
+        session()->forget('shipping_address','billing_address','payment_token');
         $billing_address = [];
         $default_shipping = [];
         $geoZone = null; //need to change
@@ -388,7 +389,55 @@ class ShoppingCartController extends Controller
     {
         session()->put('shipping_address', session()->get('shipping_address_id'));
         session()->put('billing_address', session()->get('billing_address_id'));
+        $token = md5(uniqid());
+        session()->put('payment_token', $token);
 
-        return  \Response::json(['error' => false]);
+        return  \Response::json(['error' => false,'url' => route('shop_payment',$token)]);
+    }
+
+    public function getPayment($token)
+    {
+        $createdToken = session()->get('payment_token');
+        if($createdToken != $token){
+            abort(404);
+        }
+
+        $items = $this->cartService->getCartItems();
+        if(! count($items)) return redirect('/');
+        
+        $billing_address = [];
+        $default_shipping = [];
+        $geoZone = null; //need to change
+        $shipping = null;
+        $delivery = null;
+        $address_id = null;
+        $address = [];
+        $countries = $this->countries->all()->pluck('name.common','name.common')->toArray();
+        $countriesShipping = [null => 'Select Country'] + $this->geoZones
+                ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
+                ->select('zone_countries.*','zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'id')->toArray();
+
+        $active_payments_gateways = ( new Settings() )->getEditableData('active_payments_gateways');
+        $cash = ( new Settings() )->getEditableData('payments_gateways_cash');
+        $stripe = ( new Settings() )->getEditableData('payments_gateways');
+        if(\Auth::check()){
+            $user=\Auth::user();
+            $default_shipping=$user->addresses()->where('id',session()->get('shipping_address_id'))->first();
+            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+            $geoZone = ($zone) ? $zone->geoZone : null;
+            if($geoZone){
+                if(count($geoZone->deliveries)){
+                    $subtotal = Cart::getSubTotal();
+                    $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max','>=',$subtotal)->first();
+                    if($delivery && count($delivery->options)){
+                        $shippingDefaultOption =  $delivery->options->first();
+                        $shipping = Cart::getCondition($geoZone->name);
+                    }
+                }
+            }
+        }
+
+        return $this->view('payment',compact(['cash','stripe','active_payments_gateways','billing_address','default_shipping','countries','countriesShipping','geoZone','shipping','delivery','address','address_id']));
     }
 }

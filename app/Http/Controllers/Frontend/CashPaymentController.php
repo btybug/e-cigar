@@ -92,7 +92,7 @@ class CashPaymentController extends Controller
             foreach ($items as $variation_id => $item){
                 $options = [];
                 foreach ($item->attributes->variation->options as $option){
-                    $options[$option->attr->name] = $option->option->name;
+                    $options[$option->attribute_sticker->attr->name] = $option->attribute_sticker->sticker->name;
                 }
 
                 OrderItem::create([

@@ -80,6 +80,7 @@ class StripePaymentController extends Controller
     {
         $shippingId = session()->get('shipping_address');
         $billingId = session()->get('billing_address');
+
         $geoZone = null;
         if(\Auth::check()){
             $shippingAddress = Addresses::find($shippingId);
@@ -125,7 +126,7 @@ class StripePaymentController extends Controller
             foreach ($items as $variation_id => $item){
                 $options = [];
                 foreach ($item->attributes->variation->options as $option){
-                    $options[$option->attr->name] = $option->option->name;
+                    $options[$option->attribute_sticker->attr->name] = $option->attribute_sticker->sticker->name;
                 }
 
                 OrderItem::create([
