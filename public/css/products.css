@@ -2322,6 +2322,21 @@ td.shp-cart-table_price-td {
     padding: 10px 12px;
     display: none;
 }
+.btn-no-shadow{
+    background: none;
+    border: none;
+    border-bottom: 1px solid #e1e1e1;
+    cursor: pointer;
+}
+.btn-no-shadow:hover{
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+}
+.btn-no-shadow:focus{
+    box-shadow: none;
+    border: none;
+}
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;

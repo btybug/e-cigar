@@ -118,7 +118,7 @@
                             <span class="d-inline-block">Address</span>
                         </a>
                     </li>
-                    <li class="profile-sidebar-menu_item">
+                    <li class="profile-sidebar-menu_item mb-0">
                         <a href="{!! route('my_account_tickets') !!}"
                            class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
                 <span class="d-inline-block profile-sidebar-menu_icon">
@@ -132,6 +132,13 @@
                             <span class="d-inline-block">Tickets</span>
 
                         </a>
+                    </li>
+                    <li class="profile-sidebar-menu_item">
+                        {!! Form::open(['url'=>route('logout')]) !!}
+                        <button class="btn-no-shadow profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
+                            Logout
+                        </button>
+                        {!! Form::close() !!}
                     </li>
                 </ul>
                 <div class="mt-auto">
