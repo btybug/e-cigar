@@ -885,3 +885,10 @@ function convert_price($price,$currency){
 
     return $price;
 }
+
+function get_currency(){
+    $default = site_default_currency();
+
+    return (\Cookie::get('currency')) ? \Cookie::get('currency')
+        : (($default) ? $default->code : null);
+}

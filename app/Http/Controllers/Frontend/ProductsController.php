@@ -172,9 +172,9 @@ class ProductsController extends Controller
                 }
 
                 if ($variation->qty > 0) {
-                    return \Response::json(['price' => $price, 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
+                    return \Response::json(['price' => convert_price($price,get_currency()), 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
                 } else {
-                    return \Response::json(['message' => 'Out of stock', 'price' => $price, 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
+                    return \Response::json(['message' => 'Out of stock', 'price' => convert_price($price,get_currency()), 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
                 }
             }
         }

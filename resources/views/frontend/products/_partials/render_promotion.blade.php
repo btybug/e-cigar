@@ -26,10 +26,9 @@
                     @endif
                 @endforeach
             </div>
-        <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
-            <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-place-promotion"></span>
-        </div>
-
+            <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
+                <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-place-promotion"></span>
+            </div>
         @else
             @php
                 $variation = (count($promotion->variations)) ? $promotion->variations->first() : null;
@@ -39,7 +38,10 @@
                 {{ $variation->name }}:
             </div>
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-place-promotion">
-                  {!! ($promotionPrice) ? "€" . $promotionPrice->price : (($variation) ? "€" . $variation->price : "no price") !!}
+                  @php
+                      $price = ($promotionPrice) ? $promotionPrice->price : (($variation) ? $variation->price : null)
+                  @endphp
+                {{ convert_price($price,$currency) }}
             </span>
         @endif
     </div>

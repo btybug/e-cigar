@@ -650,10 +650,9 @@
                             },
                             success: function (data) {
                                 if (!data.error) {
-                                    var price = "€" + data.price;
+                                    var price = data.price;
                                     if (data.message) {
-//                                        price = data.message + " €" + data.price;
-                                        price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + " €" + data.price;
+                                        price = "<span class='d-inline-block font-16'>" + data.message + "</span>" +data.price;
                                     }
                                     $(".price-place").html(price);
                                     $("#variation_uid").val(data.variation_id);
@@ -712,10 +711,9 @@
                             },
                             success: function (data) {
                                 if (!data.error) {
-                                    var price = "€" + data.price;
+                                    var price = data.price;
                                     if (data.message) {
-//                                        price = data.message + " €" + data.price;
-                                        price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + " €" + data.price;
+                                        price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + data.price;
                                     }
 
                                     $("[data-promotion='" + pid + "'] .price-place-promotion").html(price);
