@@ -1233,11 +1233,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     height: 21px;
     margin-right: 15px;
     width: 21px;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    -ms-transition: all .5s;
-    -o-transition: all .5s;
-    transition: all .5s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
 }
 
 .register-form_input-radio:checked + label:before {
