@@ -69,9 +69,9 @@ Route::group(['prefix'=>'/support'], function (){
 
     Route::get('/faq', 'GuestController@getFaq')->name('faq_page');
     Route::post('/faq-by-category', 'GuestController@getFaqByCategory')->name('faq');
-    Route::get('/knowledge-base', 'GuestController@getKnowledgeBase')->name('knowledge_base');
-    Route::get('/manuals', 'GuestController@getManuals')->name('manuals');
-    Route::get('/ticket', 'GuestController@getTicket')->name('ticket');
+//    Route::get('/knowledge-base', 'GuestController@getKnowledgeBase')->name('knowledge_base');
+//    Route::get('/manuals', 'GuestController@getManuals')->name('manuals');
+//    Route::get('/ticket', 'GuestController@getTicket')->name('ticket');
     Route::get('/terms-&-conditions', 'GuestController@getTermsConditions')->name('terms_conditions');
     Route::get('/delivery', 'GuestController@getDelivery')->name('delivery');
     Route::post('/get-cities', 'GuestController@getCities')->name('delivery_get_countries');
