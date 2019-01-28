@@ -153,7 +153,11 @@
                                            {{--<path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"--}}
                                            {{--d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>--}}
                                            {{--</svg>--}}
-                                           X
+                                           <span class="d-inline-flex justify-content-center align-items-center cart-sidebar_item-close">
+                                               <svg width="16px" height="16px" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" fill="rgb(255, 255, 255)" d="M15.120,-0.000 L7.996,7.177 L0.818,0.053 L-0.000,0.879 L7.177,8.003 L0.053,15.180 L0.879,16.000 L8.003,8.823 L15.180,15.946 L16.000,15.121 L8.822,7.997 L15.946,0.820 L15.120,-0.000 Z"></path>
+                </svg>
+                                           </span>
                                 </span>
                                        <!--new label-->
                                        <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>

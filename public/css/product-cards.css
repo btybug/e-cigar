@@ -865,18 +865,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     position: relative;
 }
 
-body.get-cover:after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, .15);
-    z-index: 9999;
-}
-
 
 /*sidebar cart*/
 .cart-sidebar {
@@ -1319,13 +1307,12 @@ body.get-cover:after {
 .ntfs-btn,
 .ntfs-btn:hover,
 .ntfs-btn:focus,
-.ntfs-btn:active {
+.ntfs-btn:active,
+.btn-transp:hover {
     background: #5184e5;
     border-color: #5184e5;
     color: #fff;
 }
-
-/*Notifications*/
 
 .profile-inner-pg-right-cnt .display-grid .products-wrap_col, .display-grid .news-wrap_col {
     width: 25%;
@@ -1337,12 +1324,70 @@ body.get-cover:after {
     color: #5184e5;
 }
 
-
 .account-card .card-title {
     background: #e8e7ed;
     padding: 10px 1.25rem;
 }
 
+.nav-link--new-address {
+    padding-top: .375rem;
+    padding-bottom: .375rem;
+    font-size: 14px;
+}
+
+.tickets-comments .user-img,
+.comments-refresh .admin_updated .image {
+    background: #e8e7ed;
+}
+
+.tickets-comments .user-img,
+.tickets-comments .user-img img,
+.comments-refresh .admin_updated .image,
+.comments-refresh .admin_updated .image img {
+    width: 45px;
+    height: 45px;
+}
+
+.tickets-comments .user-img img {
+    object-fit: cover;
+    font-family:"object-fit: cover;";
+}
+
+.comments-refresh .admin_updated,
+.user-add-comment.tickets-comments,
+.ticket-reply-title {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 25px;
+}
+
+.comments-refresh .admin_updated {
+    margin-bottom: 35px;
+}
+
+.comments-refresh .admin_updated .image {
+    margin-bottom: 5px;
+}
+
+.comments-refresh .card,
+.add-comment_field {
+    background: transparent;
+    border: 1px solid #e1e1e1;
+    border-radius: 0;
+}
+
+.add-comment_field {
+    padding: 1.25rem;
+}
+
+.add-comment_field:focus {
+    background: transparent;
+}
+
+
+
+
+
+/*cookie*/
 .cookie-consent__message {
     display: inline-block;
     color: #fff;
@@ -1365,11 +1410,6 @@ body.get-cover:after {
     border: 0;
     color: #fff;
     padding: .375rem .75rem;
-}
-
-/*cookie*/
-.page-cookie {
-    background: #000;
 }
 
 @media (min-width: 769px) {
@@ -1688,6 +1728,10 @@ body.get-cover:after {
     .profile-sidebar {
         width: 255px;
         right: -255px;
+    }
+
+    header .header-bottom .cat-search .select2.select2-container.select2-container--default {
+        width: 90px !important;
     }
 }
 

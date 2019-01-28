@@ -278,23 +278,27 @@ header .header-bottom {
 
 header .header-bottom .favorite-add-cart .add-links-wrap_favorite {
     margin-right: 50px;
+    margin-left: 50px;
 }
 
 @media screen and (max-width: 992px) {
     header .header-bottom .favorite-add-cart .add-links-wrap_favorite {
         margin-right: 25px;
+        margin-left: 25px;
     }
 }
 
 @media screen and (max-width: 767px) {
     header .header-bottom .favorite-add-cart .add-links-wrap_favorite {
         margin-right: 15px;
+        margin-left: 15px;
     }
 }
 
 @media screen and (max-width: 575px) {
     header .header-bottom .favorite-add-cart .add-links-wrap_favorite {
         margin-right: 5px;
+        margin-left: 5px;
     }
 }
 
@@ -306,8 +310,8 @@ header .header-bottom .favorite-add-cart .add-links-wrap_favorite:not(.active) p
 
 header .header-bottom .cat-search {
     flex: auto;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 0;
+    margin-right: 15px;
 }
 
 @media screen and (min-width: 576px) {

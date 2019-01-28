@@ -471,7 +471,7 @@ function replyRender($replies, $i = 0, $parent = false)
         if ($reply->getTable() == 'history') {
             echo '<div class="admin_updated">
 <div class="image label label-default"><img src="/public/images/male.png" alt="img"></div>
-<h4><span class="label label-default">' . $reply->user->name . ' has ' . $reply->body . '</span></h4>
+<p class="font-18 text-gray-clr mb-0"><span class="label label-default">' . $reply->user->name . ' has ' . $reply->body . '</span></p>
 </div>';
         } else {
             //render main content
@@ -508,7 +508,7 @@ function replyRender($replies, $i = 0, $parent = false)
             echo '<div class="comment-post">';
             echo '<p>' . $reply->reply . '</p>';
             echo '</div>';
-            echo '<p class="text-right"><a href="#" data-id="' . $reply->id . '" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
+            echo '<p class="text-right"><a href="#" data-id="' . $reply->id . '" class="btn btn-transp btn-sm reply rounded-0"><i class="fa fa-reply"></i> reply</a></p>';
             echo '</div>';
             echo '</div>';
             echo '</div>';

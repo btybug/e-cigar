@@ -185,29 +185,35 @@ $(function() {
     });
 
     // hidden sidebars slide from right
-    openSidbar($('#ptofileBtn'), $('#profileSidebar'));
-    openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));
+    openSidebar($('#ptofileBtn'), $('#profileSidebar'));
+    openSidebar($('#headerShopCartBtn'), $('#cartSidebar'));
 
 } );
 
 
-function openSidbar(btn, sidebar) {
+function openSidebar(btn, sidebar) {
     btn.on('click', function (e) {
+
         e.stopPropagation();
-        if(!sidebar.hasClass('show')){
-            $('.hidden-sidebar').removeClass('show')
+        $(this).toggleClass('active');
+
+        if(($('.hidden-sidebar')).removeClass('show')) {
+            ($('.hidden-sidebar')).removeClass('show')
         }
-        if(sidebar.hasClass('show')){
-            sidebar.removeClass('show');
-        }else{
-            sidebar.addClass('show');
-        }
+
+        sidebar.toggleClass('show');
+
+        $('.dark-bg_body').addClass('show');
 
     });
 
     $('body').on('click', function (e) {
-        if(e.target !== sidebar[0] && !$(e.target).closest(sidebar).length) {
+        if(btn.hasClass('active')) {
+            btn.removeClass('active')
+        }
+        if(!$(e.target).closest(sidebar).length) {
             sidebar.removeClass('show');
+            $('.dark-bg_body').removeClass('show');
         }
     });
 

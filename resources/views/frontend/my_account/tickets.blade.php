@@ -122,7 +122,7 @@
         <div class="profile-inner-pg-right-cnt_inner h-100">
            <div class="row">
                <div class="col-lg-9">
-                   <div class="my-4">
+                   <div class="mb-4">
                        <a class="btn ntfs-btn rounded-0" href="{!! route('my_account_tickets_new') !!}">Open ticket</a>
                    </div>
                    <table class="table table-ntfs table-bordered table-striped table-responsive-lg order-table">

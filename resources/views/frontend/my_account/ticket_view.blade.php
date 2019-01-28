@@ -126,10 +126,10 @@
                    <div class="row">
                        <div class="col-md-6">
                            <div class="col-md-12 mb-4">
-                               <a class="btn btn-primary" href="{!! route('my_account_tickets') !!}">Back</a>
+                               <a class="btn btn-transp rounded-0" href="{!! route('my_account_tickets') !!}">Back</a>
                            </div>
                            <div class="col-md-12">
-                               <div class="content">
+                               <div class="tickets-comments">
                                    <div class="attachments mb-2">
                                        <span class="title">Attachments</span>
                                        <ul>
@@ -159,9 +159,9 @@
                                    </div>
                                    <div class="row user-comment-img user-commmet-add">
                                        <div class="comments_wall">
-                                           <h2>Reply</h2>
+                                           <h2 class="ticket-reply-title font-25 mb-4">Reply</h2>
                                            <div class="divider"></div>
-                                           <div class="user-add-comment mt-md-5 my-4">
+                                           <div class="user-add-comment mb-4">
                                                <div class="row">
                                                    <div class="col-sm-2">
                                                        <div class="user-img">
@@ -173,9 +173,9 @@
                                                            {!! Form::open(['url' => 'admin_tickets_reply']) !!}
                                                            {!! Form::hidden('ticket_id',$ticket->id) !!}
                                                            <textarea name="reply" id="" rows="0"
-                                                                     placeholder="Your reply"></textarea>
+                                                                     placeholder="Your reply" class="add-comment_field form-control w-100 p-2"></textarea>
                                                            <span class="error-box invalid-feedback comment"></span>
-                                                           <div class="row mt-1">
+                                                           <div class="row mt-3">
                                                                <div class="col-sm-6">
                                                                    {{--<button type="button"--}}
                                                                    {{--class="btn btn-outline-warning btn-block cancel-comment">--}}
@@ -184,7 +184,7 @@
                                                                </div>
                                                                <div class="col-sm-6 text-right">
                                                                    <button type="button"
-                                                                           class="btn btn-outline-warning add-comment-btn">
+                                                                           class="btn ntfs-btn add-comment-btn rounded-0">
                                                                        Submit
                                                                    </button>
                                                                </div>
@@ -210,11 +210,11 @@
                                <p></p>
                            </div>
 
-                           <div class="card well well-sm mb-5">
-                               <h2 class="header card-header">
-                                   {{ $ticket->subject }}
+                           <div class="card card account-card rounded-0 mb-5">
+                               <h2 class="card-title font-20">
+                                  <span class="d-inline-block mb-3"> {{ $ticket->subject }}</span>
                                    {!! Form::open(['url' => route('my_account_tickets_mark_completed',$ticket->id)]) !!}
-                                   {!! Form::submit('Mark Complete',['class' => 'btn btn-success']) !!}
+                                   {!! Form::submit('Mark Complete',['class' => 'btn rounded-0 ntfs-btn']) !!}
                                    {!! Form::close() !!}
                                </h2>
                                <div class="panel-body card-body">
