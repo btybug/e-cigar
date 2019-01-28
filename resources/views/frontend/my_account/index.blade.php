@@ -603,6 +603,14 @@
 
     <script>
         $(document).ready(function () {
+            $(document).on('scroll', function() {
+                let sumHead = $('.main-header').outerHeight() + $('.header-bottom').outerHeight();
+                if($(this).scrollTop()>=sumHead){
+                    $('.my-account--selects').addClass('fixing')
+                }else {
+                    $('.my-account--selects').removeClass('fixing')
+                }
+            })
             $("body").on('click', '.save-address-book', function () {
                 var form = $(".address-book-form").serialize();
                 AjaxCall(

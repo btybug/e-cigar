@@ -2390,4 +2390,11 @@ td.shp-cart-table_price-td {
     .my-account--selects{
         display: block;
     }
+    .my-account--selects.fixing{
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 50px;
+        z-index: 9999;
+    }
 }

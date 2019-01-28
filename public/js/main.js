@@ -70,7 +70,7 @@ $(function () {
     $('.select_with-tag').select2();
 
 // my account select start
-    $('.select-2--no-search').on('select2:select', function (e) {
+    $('#accounts--selects').on('select2:select', function (e) {
         var locUrl = e.params.data.id;
         window.location.replace(locUrl);
     });
