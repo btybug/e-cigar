@@ -21,6 +21,10 @@
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_footer') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Footer</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tc') !!}" role="tab"
+                   aria-controls="general" aria-selected="true" aria-expanded="true">T&C</a>
+            </li>
         </ul>
         <div class="tab-pane fade in" id="admin_settings_regions">
 

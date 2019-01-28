@@ -464,5 +464,9 @@ class SettingsController extends Controller
 //        dd($request->all());
     }
 
+    public function getTC()
+    {
+        return $this->view('tc', compact(''));
+    }
 
 }

@@ -75,7 +75,7 @@ Route::group(['prefix'=>'/support'], function (){
     Route::get('/terms-&-conditions', 'GuestController@getTermsConditions')->name('terms_conditions');
     Route::get('/delivery', 'GuestController@getDelivery')->name('delivery');
     Route::post('/get-cities', 'GuestController@getCities')->name('delivery_get_countries');
-    Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
+//    Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
     if(LaravelGmail::check()){
         Route::get('/contact-us', 'GuestController@getContactUs')->name('support_contact_us');
         Route::post('/contact-us', 'GuestController@postContactUs')->name('post_contact_us');

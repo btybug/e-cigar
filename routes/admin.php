@@ -26,6 +26,9 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::get('/footer', 'Admin\SettingsController@getFooter')->name('admin_settings_footer');
         Route::post('/footer', 'Admin\SettingsController@postFooter')->name('post_admin_settings_footer');
+
+        Route::get('/tc', 'Admin\SettingsController@getTC')->name('admin_settings_tc');
+        Route::post('/tc', 'Admin\SettingsController@postTC')->name('post_admin_settings_tc');
     });
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', 'Admin\EventsController@getIndex')->name('admin_settings_events');
