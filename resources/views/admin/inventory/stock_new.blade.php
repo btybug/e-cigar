@@ -303,7 +303,7 @@
                                                     <tr class="add-new-ship-filed-container">
                                                         <td colspan="4" class="text-right">
                                                             <button type="button" class="btn btn-primary"><i
-                                                                        class="fa fa-plus-circle add-new-v-option"></i>
+                                                                        class="fa fa-plus-circle add-specification"></i>
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -1113,6 +1113,18 @@
                 });
             });
 
+
+            $("body").on('click', '.add-specification', function () {
+                let $this = $(this);
+                AjaxCall("/admin/inventory/stock/get-specifications", {id: null}, function (res) {
+                    if (!res.error) {
+                        $this.closest("table").find(".v-options-list").append(res.html);
+                        $(".tag-input-v").select2({ width: '100%' });
+                    }
+                });
+            });
+
+
             $("body").on('change', '.select-attribute', function () {
                 var value = $(this).val();
                 let vID = $(this).data('uid');
@@ -1120,6 +1132,20 @@
                     AjaxCall("/admin/inventory/stock/get-option-by-id", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-attribute[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
+                            $(".tag-input-v").select2({ width: '100%' });
+                            changeVariationOptions();
+                        }
+                    });
+                }
+            });
+
+            $("body").on('change', '.select-specification', function () {
+                var value = $(this).val();
+                let vID = $(this).data('uid');
+                if (value != '') {
+                    AjaxCall("/admin/inventory/stock/get-specifications", {id: value}, function (res) {
+                        if (!res.error) {
+                            $(".select-specification[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
                             $(".tag-input-v").select2({ width: '100%' });
                             changeVariationOptions();
                         }

@@ -232,6 +232,15 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function getSpecification (Request $request)
+    {
+        $selected = Attributes::find($request->id);
+        $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
+        $html = \View("admin.inventory._partials.specifications", compact(['selected', 'allAttrs']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function addExtraOption (Request $request)
     {
         $option = $request->except('_token');
