@@ -165,11 +165,16 @@ class ProductsController extends Controller
                 } else {
                     $price = $variation->price;
                 }
+                $isFavorite = false;
+
+                if(\Auth::check()) {
+                    $isFavorite = \Auth::user()->favorites()->where('favorites.variation_id',$variation->id)->first();
+                }
 
                 if ($variation->qty > 0) {
-                    return \Response::json(['price' => $price, 'variation_id' => $variation->id, 'error' => false]);
+                    return \Response::json(['price' => $price, 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
                 } else {
-                    return \Response::json(['message' => 'Out of stock', 'price' => $price, 'variation_id' => $variation->id, 'error' => false]);
+                    return \Response::json(['message' => 'Out of stock', 'price' => $price, 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
                 }
             }
         }

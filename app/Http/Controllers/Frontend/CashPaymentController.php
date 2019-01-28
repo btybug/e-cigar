@@ -123,6 +123,7 @@ class CashPaymentController extends Controller
         if(! Cart::isEmpty() && session()->has('shipping_address') &&  session()->has('billing_address') && $order){
             session()->forget('shipping_address','billing_address');
             session()->forget('shipping_address_id','billing_address_id');
+            session()->forget('payment_token');
             Cart::clear();
             Cart::removeConditionsByType('shipping');
 

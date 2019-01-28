@@ -70,7 +70,8 @@
                                                                     <span class="font-main-bold">
                                                                         @if($variationReq->stock->type == 'variation_product')
                                                                             @foreach($variationReq->options as $voption)
-                                                                                {{ $voption->option->name }},
+                                                                                {{ $voption->attribute_sticker->sticker->name }}
+                                                                                {{ ($loop->last)?'':',' }}
                                                                             @endforeach
                                                                         @endif
                                                                     </span>

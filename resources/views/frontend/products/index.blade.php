@@ -399,25 +399,27 @@
                 let variation_id = $(this).data("id");
                 let _this = $(this);
 
-                $.ajax({
-                    type: "post",
-                    url: url,
-                    cache: false,
-                    data: {
-                        id: variation_id
-                    },
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        console.log(data);
-                        if (!data.error) {
-                            _this.toggleClass("active")
-                        } else {
-                            alert("error");
+                if(variation_id){
+                    $.ajax({
+                        type: "post",
+                        url: url,
+                        cache: false,
+                        data: {
+                            id: variation_id
+                        },
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (!data.error) {
+                                _this.toggleClass("active")
+                            } else {
+                                alert("error");
+                            }
                         }
-                    }
-                })
+                    })
+                }
             });
 
 
