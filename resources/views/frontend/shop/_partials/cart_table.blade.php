@@ -64,17 +64,25 @@
                                                             @php
                                                                 $variationReq = \App\Services\CartService::getVariation($vid)
                                                             @endphp
-                                                            <li class="shp-cart-product_row shp-cart-product_prd-2 d-flex justify-content-between">
-                                                                <p class="mb-0">{{ $variationReq->stock->name }}</p>
+                                                            <li class="shp-cart-product_row d-flex justify-content-between position-relative">
+                                                                <p class="mb-0">
+                                                                    <span>{{ $variationReq->stock->name }}</span>
+                                                                    <span class="font-main-bold">
+                                                                        @if($variationReq->stock->type == 'variation_product')
+                                                                            @foreach($variationReq->options as $voption)
+                                                                                {{ $voption->option->name }},
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </span>
+                                                                </p>
                                                                 <span class="font-15 font-main-bold">
-                                                                    @php
-                                                                        $promotionPrice = ($variationReq) ? $variationReq->stock->promotion_prices()
-                                                                        ->where('variation_id',$variationReq->id)->first() : null;
-                                                                    @endphp
+                                                                   @php
+                                                                       $promotionPrice = ($variationReq) ? $variationReq->stock->promotion_prices()
+                                                                       ->where('variation_id',$variationReq->id)->first() : null;
+                                                                   @endphp
                                                                     {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationReq) ? "$" . $variationReq->price : 0) !!}
                                                                 </span>
                                                             </li>
-
                                                         @endforeach
                                                     @endif
 
@@ -92,7 +100,9 @@
                                                                     <span class="font-main-bold">
                                                                         @if($variationOpt->stock->type == 'variation_product')
                                                                             @foreach($variationOpt->options as $voption)
-                                                                               {{ $voption->option->name }},
+                                                                                {{ $voption->attribute_sticker->sticker->name }}
+                                                                                {{ ($loop->last)?'':',' }}
+
                                                                             @endforeach
                                                                         @endif
                                                                     </span>
