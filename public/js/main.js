@@ -69,6 +69,13 @@ $(function () {
     });
     $('.select_with-tag').select2();
 
+// my account select start
+    $('.select-2--no-search').on('select2:select', function (e) {
+        var locUrl = e.params.data.id;
+        window.location.replace(locUrl);
+    });
+    // my account select end
+
     // header search for mobile
     $('body').on('click', '.search-icon-mobile .icon', function () {
         $(this).closest('.header-bottom').find('.cat-search').toggleClass('closed')

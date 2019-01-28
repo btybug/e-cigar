@@ -2310,12 +2310,16 @@ td.shp-cart-table_price-td {
     background-color: #000;
     opacity: .3;
 }
-
 /*end gallery tabs*/
 .header-bottom .currency-mobile-icon {
     display: none;
 }
 .header-bottom .search-mobile-icon{
+    display: none;
+}
+.my-account--selects{
+    background-color: #e3e6ed;
+    padding: 10px 12px;
     display: none;
 }
 @media (max-width: 1700px) {
@@ -2379,5 +2383,11 @@ td.shp-cart-table_price-td {
     }
     header .header-bottom .cat-search .search > span{
         right: 12px;
+    }
+    .profile-sidebar--inner-pages{
+        display: none !important;
+    }
+    .my-account--selects{
+        display: block;
     }
 }
