@@ -184,17 +184,6 @@ $(function() {
         $('body').find('.dark-bg_body').removeClass('show');
     });
 
-    // remove cart-info from cart sidbar
-    $('.cart-sidebar_item-close').on('click', function (e) {
-        e.stopPropagation();
-        $(this).parent($('.cart-sidebar_item')).remove();
-        if(!$('.cart-sidebar_item').length) {
-            $('#cartSidebarEmptyMsg').show();
-        } else {
-            $('#cartSidebarEmptyMsg').hide();
-        }
-    });
-
     // hidden sidebars slide from right
     openSidbar($('#ptofileBtn'), $('#profileSidebar'));
     openSidbar($('#headerShopCartBtn'), $('#cartSidebar'));

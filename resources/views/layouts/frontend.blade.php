@@ -178,8 +178,10 @@
         });
 
 
-        $("body").on('click','.remove-from-cart',function () {
+        $("body").on('click','.remove-from-cart',function (e) {
+            e.stopPropagation();
             var uid = $(this).data('uid');
+            console.log(44444)
             if(uid && uid != ''){
                 $.ajax({
                     type: "post",
