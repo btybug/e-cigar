@@ -877,6 +877,8 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script src="/public/js/tinymce/tinymce.min.js"></script>
+
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
 
@@ -1342,40 +1344,25 @@
             return arr;
         }
 
-        {{--// var tree2 =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]--}}
-        {{--// var tree =[{!! //json_encode(['nodes' => $categories]) !!}]--}}
-        // $('#treeview_json').treeview({
-        //     data: tree,
-        //     showCheckbox: true,
-        //     onNodeChecked: function(event, node) {
-        //         if(typeof node.parentId !== "undefined") {
-        //             checkParent(node.parentId, "#treeview_json")
-        //         }
-        //     },
-        //     onNodeUnchecked: function (event, node) {
-        //         unCheckChildren(node.nodeId, "#treeview_json")
-        //     }
-        // });
-        // function checkParent(id, selecetor) {
-        //         let parrentId = id;
-        //         $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
-        //         if(parrentId){
-        //             let parent = $('#treeview_json').treeview('getNode', parrentId);
-        //             let pId = parent.parentId
-        //             checkParent(pId, selecetor)
-        //         }
+        function initTinyMce(e) {
+            tinymce.init({
+                selector: e,
+                height: 500,
+                theme: 'modern',
+                plugins: 'print preview fullpage  searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help',
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+                image_advtab: true,
+                templates: [
+                    {title: 'Test template 1', content: 'Test 1'},
+                    {title: 'Test template 2', content: 'Test 2'}
+                ],
+                content_css: [
+                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                    '//www.tinymce.com/css/codepen.min.css'
+                ]
+            });
+        }
 
-        //     }
-        // function unCheckChildren(id, selecetor){
-        //     let currentNode = $('#treeview_json').treeview('getNode', id);
-        //     $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
-        //     if (currentNode.nodes){
-        //         Object.values(currentNode.nodes).forEach(item => {
-        //             unCheckChildren(item.nodeId, selecetor )
-        //         })
-        //     }
-
-
-        // }
+        initTinyMce(".tinyMcArea")
     </script>
 @stop
