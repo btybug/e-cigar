@@ -2312,6 +2312,12 @@ td.shp-cart-table_price-td {
 }
 
 /*end gallery tabs*/
+.header-bottom .currency-mobile-icon {
+    display: none;
+}
+.header-bottom .search-mobile-icon{
+    display: none;
+}
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;
@@ -2338,5 +2344,40 @@ td.shp-cart-table_price-td {
     .all-filters .filter-wall {
         max-width: initial;
         margin-right: -15px;
+    }
+    .header-bottom .currency-block{
+        display: none !important;
+    }
+    .header-bottom .currency-mobile-icon{
+        display: block;
+    }
+   .header-bottom .favorite-add-cart{
+       flex: auto;
+       justify-content: space-between;
+    }
+   .header-bottom .cat-search{
+       display: none !important;
+       /*width: 0% !important;*/
+       transition:  0.5s ease-out;
+   }
+    header .header-bottom{
+        align-items: center;
+        display: flex;
+        height: 60px;
+    }
+    .header-bottom .search-mobile-icon{
+        display: block;
+    }
+    .header-bottom .opened-full{
+        display: flex !important;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0;
+        z-index: 9;
+        width: 100%;
+    }
+    header .header-bottom .cat-search .search > span{
+        right: 12px;
     }
 }

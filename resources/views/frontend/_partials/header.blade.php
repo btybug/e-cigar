@@ -138,7 +138,25 @@
                     </div>
                 </div>
                 <div class="favorite-add-cart d-flex align-items-center">
-                    <span class="d-inline-block position-relative pointer add-links-wrap_icon">
+                    <span class="position-relative pointer add-links-wrap_icon search-mobile-icon">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="26px" height="22px" viewBox="0 0 29 22">
+<path fill-rule="evenodd"  fill="rgb(121, 121, 121)"
+      d="M19.996,18.987 L16.406,15.260 C19.498,11.613 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.724,2.715 C-0.909,6.339 -0.909,12.216 2.724,15.840 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.002 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.026 7.136,1.185 9.303,1.185 C11.469,1.185 13.506,2.026 15.038,3.555 C18.201,6.710 18.201,11.844 15.038,15.000 C13.506,16.528 11.469,17.370 9.303,17.370 Z"/>
+</svg>
+                    </span>
+                    <span class="position-relative pointer add-links-wrap_icon currency-mobile-icon">
+                        <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="26" height="22px" viewBox="0 0 29 22">
+<path fill-rule="evenodd"  fill="rgb(121, 121, 121)"
+      d="M12.471,4.644 C10.984,3.461 9.555,2.870 7.926,2.690 L7.926,9.909 C12.190,10.731 13.985,12.196 13.985,14.714 C13.985,17.438 11.489,19.365 7.984,19.468 L7.984,21.986 L6.638,21.986 L6.638,19.443 C4.085,19.235 2.009,18.338 -0.010,16.694 L0.915,15.691 C2.656,17.206 4.393,18.081 6.693,18.286 L6.693,10.964 C2.487,10.116 0.746,8.702 0.746,6.133 C0.746,3.539 3.215,1.560 6.638,1.482 L6.638,-0.007 L7.984,-0.007 L7.984,1.535 C10.144,1.715 11.713,2.407 13.396,3.641 L12.471,4.644 ZM6.693,9.654 L6.693,2.639 C3.973,2.690 2.178,4.181 2.178,6.031 C2.178,7.752 3.019,8.832 6.693,9.654 ZM7.926,11.221 L7.926,18.311 C10.733,18.260 12.556,16.769 12.556,14.817 C12.556,13.070 11.630,11.991 7.926,11.221 Z"/>
+</svg>
+                    </span>
+                    <span class="d-inline-block position-relative pointer add-links-wrap_icon currency-block">
                         Currency
                         {!! Form::select('currency',site_currencies(),$currency,[
                             'class' =>'form-control',
