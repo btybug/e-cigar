@@ -135,6 +135,12 @@ Route::group(['prefix' => 'users'], function () {
     });
 });
 Route::group(['prefix' => 'store'], function () {
+
+    Route::group(['prefix' => 'transactions'], function () {
+        Route::get('/', 'Admin\TransactionsController@getIndex')->name('admin_store_transactions');
+        Route::get('/view/{id}', 'Admin\TransactionsController@getView')->name('admin_store_transactions_view');
+    });
+
     Route::group(['prefix' => 'coupons'], function () {
         Route::get('/', 'Admin\StoreController@getCoupons')->name('admin_store_coupons');
         Route::get('/new', 'Admin\StoreController@getCouponsNew')->name('admin_store_coupons_new');

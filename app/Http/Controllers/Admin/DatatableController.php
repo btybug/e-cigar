@@ -678,4 +678,23 @@ class DatatableController extends Controller
              return (!$message->status?'<button class="btn btn-success send-now" data-id="'.$message->id.'">Send Now</button><a href="'.route('edit_admin_emails_notifications_send_email',$message->id).'" class="btn btn-danger"><i class="fa fa-edit"></i></a>':'<button class="btn btn-info copy-message" data-id="'.$message->id.'">Copy</button><a href="'.route('view_admin_emails_notifications_send_email',$message->id).'" class="btn btn-warning"><i class="fa fa-eye"></i></a>');
         })->rawColumns(['actions'])->make(true);
     }
+
+    public function getAllTransactions()
+    {
+        return Datatables::of(
+            Orders::leftJoin('orders_addresses', 'orders.id', '=', 'orders_addresses.order_id')
+                ->select('orders.*', 'orders_addresses.country', 'orders_addresses.region', 'orders_addresses.city')
+        )
+            ->editColumn('date', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })->editColumn('time', function ($attr) {
+                return BBgetTimeFormat($attr->created_at);
+            })->editColumn('user', function ($attr) {
+                return $attr->user->name . ' ' . $attr->user->last_name;
+            })
+            ->addColumn('actions', function ($post) {
+                return "<a class='badge btn-info' href='" . route('admin_store_transactions_view', $post->id) . "'><i class='fa fa-eye'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
 }

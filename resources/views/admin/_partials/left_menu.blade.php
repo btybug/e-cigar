@@ -100,6 +100,10 @@
                     @ok('admin_orders')
                     <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
+
+                    @ok('admin_store_transactions')
+                    <li><a href="{{route('admin_store_transactions')}}"><i class="fa fa-circle-o"></i> Transactions</a></li>
+                    @endok
                     <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
 
                 </ul>

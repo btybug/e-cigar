@@ -42,6 +42,8 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/inventory/get-all-others/{id?}','Admin\DatatableController@getAllOthers')->name('datatable_all_others');
 
     Route::get('/emails-notifications/get-all-custom-emails','Admin\DatatableController@getAllCustomEmails')->name('datatable_all_custom_emails');
+
+    Route::get('/settings/get-all-transactions','Admin\DatatableController@getAllTransactions')->name('datatable_all_transactions');
 });
 
 
