@@ -55,21 +55,8 @@ class TransactionsController extends Controller
 
     public function getView($id)
     {
-        $order = Orders::where('id', $id)
-            ->with('shippingAddress')
-            ->with('billingAddress')
-            ->with('history')
-            ->with('items')
-            ->with('user')->first();
 
-        if (!$order) abort(404);
-        $hidden = [];
-        $model = $this->settings->getEditableData('orders_statuses');
-        $hidden[] = $model->submitted;
-        $hidden[] = $model->partially_collected;
-        $hidden[] = $model->collected;
-        $statuses = $this->statuses->where('type', 'order')->whereNotIn('id', $hidden)->get()->pluck('name', 'id');
-        return $this->view('view', compact('order', 'statuses'));
+        return $this->view('view', compact(''));
     }
 
 }

@@ -17,6 +17,7 @@ use App\Models\OrdersJob;
 use App\Models\Settings;
 use App\Models\Statuses;
 use App\Models\StripePayments;
+use App\Models\Transaction;
 use App\Models\ZoneCountries;
 use App\Models\ZoneCountryRegions;
 use Cartalyst\Stripe\Exception\StripeException;
@@ -58,14 +59,7 @@ class StripePaymentController extends Controller
             return redirect()->back()->with('error', $exception->getMessage());
         }
 
-        $data=[];
-        $data['user_id']=\Auth::id();
-        $data['transaction_id']=$charge['id'];
-        $data['amount']=$charge['amount'];
-        $data['currency_code']=$charge['currency'];
-        $data['payment_status']=$charge['status'];
-        $transaction=StripePayments::create($data);
-        $order=$this->order($transaction);
+        $order=$this->order($charge);
         if(! Cart::isEmpty() && session()->has('shipping_address') &&  session()->has('billing_address') && $order){
             session()->forget('shipping_address','billing_address');
             session()->forget('shipping_address_id','billing_address_id');
@@ -75,6 +69,33 @@ class StripePaymentController extends Controller
 
             return $this->view('_partials.cash_success');
         }
+    }
+
+    private function makeTransaction($charge,$order){
+        return Transaction::create([
+            'user_id' => \Auth::id(),
+            'order_id' => $order->id,
+            'payment_method' => 'stripe',
+            'transaction_id' => $charge['id'],
+            'object' => $charge['object'],
+            'amount' => $order->amount,
+            'amount_refunded' => $charge['amount_refunded'],
+            'currency' => $charge['currency'],
+            'invoice' => $charge['invoice'],
+            'paid' => $charge['paid'],
+            'receipt_number' => $charge['receipt_number'],
+            'receipt_url' => $charge['receipt_url'],
+            'refunds_url' => $charge['refunds']['url'],
+            'source_id' => $charge['source']['id'],
+            'source_object' => $charge['source']['object'],
+            'source_brand' => $charge['source']['brand'],
+            'source_country' => $charge['source']['country'],
+            'source_exp_month' => $charge['source']['exp_month'],
+            'source_exp_year' => $charge['source']['exp_year'],
+            'source_funding' => $charge['source']['funding'],
+            'source_last4' => $charge['source']['last4'],
+            'status' => $charge['status'],
+        ]);
     }
 
     private function order($transaction)
@@ -97,7 +118,7 @@ class StripePaymentController extends Controller
 
             $order = Orders::create([
                 'user_id' => \Auth::id(),
-                'transaction_id' => $transaction->id,
+//                'transaction_id' => $transaction->id,
                 'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => Cart::getTotal(),
                 'billing_addresses_id' => $billingId,
@@ -107,6 +128,8 @@ class StripePaymentController extends Controller
                 'currency' => 'usd',
                 'order_number' => $order_number,
             ]);
+
+            $this->makeTransaction($transaction,$order);
 
             $status = $setting = $this->settings->getData('order', 'open');
             $historyData['user_id'] = \Auth::id();

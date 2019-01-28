@@ -32,6 +32,7 @@ use App\Models\Stock;
 use App\Models\Suppliers;
 use App\Models\Teams;
 use App\Models\Ticket;
+use App\Models\Transaction;
 use App\Models\Translations;
 use App\Models\TranslationsEntry;
 use App\User;
@@ -682,8 +683,7 @@ class DatatableController extends Controller
     public function getAllTransactions()
     {
         return Datatables::of(
-            Orders::leftJoin('orders_addresses', 'orders.id', '=', 'orders_addresses.order_id')
-                ->select('orders.*', 'orders_addresses.country', 'orders_addresses.region', 'orders_addresses.city')
+            Transaction::query()
         )
             ->editColumn('date', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
