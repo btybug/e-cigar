@@ -79,6 +79,7 @@ class InventoryController extends Controller
 
     public function postStock (ProductsRequest $request)
     {
+        dd($request->all());
         $data = $request->except('_token', 'translatable', 'attributes', 'options', 'promotions',
             'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices','promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
