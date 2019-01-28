@@ -355,24 +355,14 @@
                                                 @endif
 
                                                 @if($vape->videos && count($vape->videos))
-                                                    @foreach($vape->videos as $vidoe)
+                                                    @foreach($vape->videos as $video)
                                                         <div class="col-lg-3 col-sm-6">
-                                                            <a href="{{ $vidoe }}" class="lightbox-product" data-lightbox-gallery="gallery_name" title="{!! @getImage($other_image)->seo_alt !!}">
-                                                                <img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">
+                                                            <a href="https://www.youtube.com/watch?v={{ $video }}" class="lightbox-product" data-lightbox-gallery="gallery_name">
+                                                                <img src="http://i1.ytimg.com/vi/{{ $video }}/default.jpg" alt="">
                                                             </a>
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                {{--<div class="col-lg-3 col-sm-6">--}}
-                                                    {{--<a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">--}}
-                                                        {{--<img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">--}}
-                                                    {{--</a>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="col-lg-3 col-sm-6">--}}
-                                                    {{--<a href="https://www.youtube.com/watch?v=0zhV99Bvrgg&index=39&list=PLjzeyhEA84sQKuXp-rpM1dFuL2aQM_a3S" class="lightbox-product" data-lightbox-gallery="gallery_name" title="Image caption text.">--}}
-                                                        {{--<img src="https://intranet.tuck.dartmouth.edu/assets/img/tc-img-grid-video.png" alt="">--}}
-                                                    {{--</a>--}}
-                                                {{--</div>--}}
                                             </div>
                                         </div>
                                     </div>
