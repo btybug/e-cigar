@@ -346,7 +346,7 @@
                 doSubmitForm();
             });
 
-            $("body").on('click','.select-filter',function () {
+            $("body").on('change','.select-filter',function () {
                 doSubmitForm();
             });
 
