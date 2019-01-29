@@ -240,7 +240,7 @@ return [
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
-        'LaravelGmail' => Dacastro4\LaravelGmail\Facade\LaravelGmail::class,
+        'Gmail' => \App\Models\Gmail::class,
     ],
 
 ];

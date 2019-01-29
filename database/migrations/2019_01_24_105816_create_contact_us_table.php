@@ -20,7 +20,14 @@ class CreateContactUsTable extends Migration
             $table->string('phone')->nullable();
             $table->text('message');
             $table->string('category');
+            $table->string('uniq_id');
+            $table->string('gmail_id')->nullable();
+            $table->tinyInteger('cron_status')->default(0);
+            $table->unsignedInteger('parent_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('parent_id')->references('id')->on('contact_us')->onDelete('cascade');
+
         });
     }
 

@@ -31,7 +31,7 @@ class ContactUs extends Mailable
     public function build()
     {
         $message = $this->view('email.contact')
-            ->with('data',$this->data)->subject($this->data['category']);
+            ->with('data',$this->data)->subject($this->data['uniq_id']);
         return $message;
     }
 }

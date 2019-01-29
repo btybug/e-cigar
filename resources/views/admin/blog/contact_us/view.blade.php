@@ -2,6 +2,7 @@
 @section('content-header')
 @stop
 @section('content')
+
     <section class="tickets-edit-page">
         <div class="panel panel-default">
             <h2 class="panel-heading mt-0">View Message</h2>
@@ -25,31 +26,31 @@
                                     <div class="user-content h-100">
                                         <h3>{!! $model->email !!}</h3>
                                         <p class="info">
-                                            {!! $model->message !!}
+                                            {!! \App\Models\Gmail::getDecodedBody($model->message) !!}
                                         </p>
                                         <div class="attachments">
                                             <span class="title">Attachments</span>
                                             <ul>
                                                 {{--@if(count($model->attachments))--}}
-                                                    {{--@foreach($model->attachments as $attachment)--}}
-                                                        {{--@if($attachment->type == 'image')--}}
-                                                            {{--<li class="item-attach">--}}
-                                                                {{--<img src="{{ $attachment->file_path }}" alt="">--}}
-                                                            {{--</li>--}}
-                                                        {{--@elseif($attachment->type == 'document')--}}
-                                                            {{--<li class="item-attach">--}}
-                                                                {{--<iframe src="{{ $attachment->file_path }}" style="width: 100%;height: 100%;border: none;"></iframe>--}}
-                                                            {{--</li>--}}
-                                                        {{--@endif--}}
-                                                    {{--@endforeach--}}
+                                                {{--@foreach($model->attachments as $attachment)--}}
+                                                {{--@if($attachment->type == 'image')--}}
+                                                {{--<li class="item-attach">--}}
+                                                {{--<img src="{{ $attachment->file_path }}" alt="">--}}
+                                                {{--</li>--}}
+                                                {{--@elseif($attachment->type == 'document')--}}
+                                                {{--<li class="item-attach">--}}
+                                                {{--<iframe src="{{ $attachment->file_path }}" style="width: 100%;height: 100%;border: none;"></iframe>--}}
+                                                {{--</li>--}}
+                                                {{--@endif--}}
+                                                {{--@endforeach--}}
 
-                                                    {{--<li class="item-attach">--}}
-                                                    {{--<audio controls>--}}
-                                                    {{--<source src="https://www.computerhope.com/jargon/m/example.mp3" />--}}
-                                                    {{--</audio>--}}
-                                                    {{--</li>--}}
+                                                {{--<li class="item-attach">--}}
+                                                {{--<audio controls>--}}
+                                                {{--<source src="https://www.computerhope.com/jargon/m/example.mp3" />--}}
+                                                {{--</audio>--}}
+                                                {{--</li>--}}
                                                 {{--@else--}}
-                                                    <li>No Attachments</li>
+                                                <li>No Attachments</li>
                                                 {{--@endif--}}
                                             </ul>
                                         </div>

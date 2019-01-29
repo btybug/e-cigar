@@ -7,7 +7,9 @@ use App\Mail\ContactUs;
 use App\Models\Category;
 use App\Models\Faq;
 use App\Models\GeoZones;
+use App\Models\Gmail;
 use App\Models\ZoneCountries;
+use Dacastro4\LaravelGmail\Services\Message\Mail;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -36,19 +38,19 @@ class GuestController extends Controller
 
     public function getFaq()
     {
-        $categories = Category::with('faqs')->where('type','faq')->whereNull('parent_id')->get();
+        $categories = Category::with('faqs')->where('type', 'faq')->whereNull('parent_id')->get();
         $category = $categories->first();
 
-        return $this->view('faq',compact(['categories','category']));
+        return $this->view('faq', compact(['categories', 'category']));
     }
 
     public function getFaqByCategory(Request $request)
     {
-        $category = Category::with('faqs')->where('type','faq')->where('id',$request->uid)->first();
-        if($category){
-            $html = $this->view('_partials.faq_questions',compact(['category']))->render();
+        $category = Category::with('faqs')->where('type', 'faq')->where('id', $request->uid)->first();
+        if ($category) {
+            $html = $this->view('_partials.faq_questions', compact(['category']))->render();
 
-            return \Response::json(['error' => false,'html' => $html,'count' => $category->faqs->count()]);
+            return \Response::json(['error' => false, 'html' => $html, 'count' => $category->faqs->count()]);
         }
 
         return \Response::json(['error' => true]);
@@ -78,8 +80,8 @@ class GuestController extends Controller
     {
 
         $countries = [null => 'Select Country'] + $geoZones
-                ->join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
-                ->select('zone_countries.*','zone_countries.name as country')
+                ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
+                ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'country')->toArray();
         return $this->view('delivery', compact('countries'));
     }
@@ -91,10 +93,10 @@ class GuestController extends Controller
 
     public function getCities(Request $request)
     {
-        $zones=GeoZones::join('zone_countries','geo_zones.id','=','zone_countries.geo_zone_id')
-            ->select('zone_countries.*','zone_countries.name as country')
-        ->orderBy('name');
-        return ['error'=>false,'html'=>\View::make($this->view.'._partials,regions')] ;
+        $zones = GeoZones::join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
+            ->select('zone_countries.*', 'zone_countries.name as country')
+            ->orderBy('name');
+        return ['error' => false, 'html' => \View::make($this->view . '._partials,regions')];
     }
 
     public function getDeliveryPrices(Request $request)
@@ -104,44 +106,51 @@ class GuestController extends Controller
 
     public function getRegionsByCountry(Request $request)
     {
-        if(! $request->country) return ['error' => true];
+        if (!$request->country) return ['error' => true];
 
         $data = $this->countries->where('name.common', $request->country)->first()->hydrateStates()->states->pluck('name', 'name')->toArray();
-        return ['error'=>false,'data'=> $data] ;
+        return ['error' => false, 'data' => $data];
     }
 
     public function getRegionsByGeoZone(Request $request)
     {
-        $country = ZoneCountries::find($request->get('country',0));
-        if(! $request->country) return ['error' => true];
+        $country = ZoneCountries::find($request->get('country', 0));
+        if (!$request->country) return ['error' => true];
 
-        $data = $country->regions->pluck('name','id');
-        if($data)
-        return ['error'=>false,'data'=> $data] ;
+        $data = $country->regions->pluck('name', 'id');
+        if ($data)
+            return ['error' => false, 'data' => $data];
     }
 
     public function getContactUs()
     {
-       return $this->view('contact_us');
+        return $this->view('contact_us');
     }
 
     public function postContactUs(ContactUsRequest $request)
     {
         $data = $request->all();
-        try{
-            $result = [
-                'name' => trim(htmlspecialchars($data['name'])),
-                'phone' => isset($data['phone'])?trim(htmlspecialchars($data['phone'])):null,
-                'category' => trim(htmlspecialchars($data['category'])),
-                'email' => $data['email'],
-                'message' => trim(htmlspecialchars($data['message'])),
-            ];
-            $email = new ContactUs($result);
-            \Mail::to('hakobyan.sahak88@gmail.com')->send($email);
-            \App\Models\ContactUs::create($result);
-        }catch (\Exception $exception){
-            \Log::emergency("message: " . $exception->getMessage(). "  --file-  line : " . $exception->getFile(). ' - ' .$exception->getLine());
-        }
+//        try{
+        $result = [
+            'name' => trim(htmlspecialchars($data['name'])),
+            'phone' => isset($data['phone']) ? trim(htmlspecialchars($data['phone'])) : null,
+            'category' => trim(htmlspecialchars($data['category'])),
+            'email' => $data['email'],
+            'uniq_id' => uniqid($data['category'] . "_"),
+            'message' => trim(htmlspecialchars($data['message'])),
+        ];
+//            $mail=Gmail::message()->subject('about_team_5c4ef6c1e44b1')->preload()->all();
+//        dd($mail);
+
+        $email = new ContactUs($result);
+        \Config::set('mail.from.address',$data['email']);
+        \Config::set('mail.from.name',$data['name']);
+        \Mail::to(Gmail::user())->send($email);
+        $contact_us=\App\Models\ContactUs::create($result);
+        $contact_us->recipients()->create(['name'=>env('APP_NAME'),'email'=>Gmail::user()]);
+//        }catch (\Exception $exception){
+//            \Log::emergency("message: " . $exception->getMessage(). "  --file-  line : " . $exception->getFile(). ' - ' .$exception->getLine());
+//        }
 
         return redirect()->back();
     }

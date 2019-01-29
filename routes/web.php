@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
@@ -21,7 +20,41 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
     return ['error' => false, 'data' => $product->makeReady()->toArray()];
 });
 
+Route::get('mail-crone', function () {
+    $emails = \App\Models\ContactUs::whereNull('parent_id')->get();
 
+    foreach ($emails as $email) {
+        $gmail = \App\Models\Gmail::message()->subject($email->uniq_id)->preload()->all();
+
+        $count=count($gmail);
+        if ($count) {
+            if ($gmail[0]->getId() != $email->gmail_id) {
+                $email->gmail_id=$gmail[0]->getId();
+                $email->cron_status=1;
+                $email->cron_status=1;
+            }
+            $email->message=$gmail[0]->getHtmlBody(true);
+            if(($count-1) > $email->children()->count()){
+                $missed_from=($count-1)-$email->children()->count();
+               foreach ($gmail as $key=>$mail) {
+                   if($key==$missed_from){
+                       $child=$email->children()->create([
+                           'name' => $mail->getFrom()['name'],
+                           'phone' => $email->phone,
+                           'category' => $email->category,
+                           'email' =>$mail->getFrom()['email'],
+                           'gmail_id' =>$mail->getId() ,
+                           'message' => $mail->getHtmlBody(true),
+                       ]);
+                       foreach ($mail->getTo() as $to)
+                       $child->recipients()->create($to);
+                   }
+               }
+            }
+        }
+        $email->save();
+    }
+});
 
 //Knowledge base
 //Manuals
@@ -29,7 +62,6 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
 //Terms & conditions
 //Delivery
 //Whole sellers
-
 
 
 Auth::routes();
@@ -64,7 +96,7 @@ Route::group(['prefix' => 'products'], function () {
 Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
 Route::post('/change-currency', 'Frontend\CommonController@changeCurrency')->name('change_currency');
-Route::group(['prefix'=>'/support'], function (){
+Route::group(['prefix' => '/support'], function () {
     Route::get('/', 'Frontend\CommonController@getSupport')->name('product_support');
 
     Route::get('/faq', 'GuestController@getFaq')->name('faq_page');
@@ -75,12 +107,12 @@ Route::group(['prefix'=>'/support'], function (){
     Route::get('/terms-&-conditions', 'GuestController@getTermsConditions')->name('terms_conditions');
     Route::get('/delivery', 'GuestController@getDelivery')->name('delivery');
     Route::post('/get-cities', 'GuestController@getCities')->name('delivery_get_countries');
+
 //    Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
-    if(LaravelGmail::check()){
+    if (Gmail::check()) {
         Route::get('/contact-us', 'GuestController@getContactUs')->name('support_contact_us');
         Route::post('/contact-us', 'GuestController@postContactUs')->name('post_contact_us');
     }
-
 });
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 Route::post('/get-regions-by-country', 'GuestController@getRegionsByCountry')->name('get_regions_by_country');
@@ -133,4 +165,4 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
     Route::post('/verification', 'Frontend\UserController@postVerification')->name('post_my_account_verification');
     Route::get('/payments', 'Frontend\UserController@getPayments')->name('my_account_payment');
-   });
+});

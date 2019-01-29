@@ -1230,3 +1230,7 @@ resize: none;
 .coupons_page-panel .panel-heading h2{
     margin-right:50px;
 }
+
+.unread{
+    font-weight: bold;
+}

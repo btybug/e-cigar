@@ -12,7 +12,7 @@
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th><input type="checkbox" data-action="select-all"></th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone</th>
@@ -35,8 +35,17 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                "drawCallback": function(settings) {
+                    var table_rows=$('body').find('#posts-table tr');
+                    console.log(settings.json.data);
+                   $.each(settings.json.data,function (k,v) {
+                       if(v.is_readed){
+                           $(table_rows[k+1]).addClass('unread');
+                       }
+                   })
+                },
                 columns: [
-                    {data: 'id', name: 'id'},
+                    {data: 'options', name: 'options'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},

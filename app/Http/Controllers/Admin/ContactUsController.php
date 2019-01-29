@@ -24,6 +24,10 @@ class ContactUsController extends Controller
     public function getView($id)
     {
         $model=ContactUs::findOrFail($id);
+        $model->is_readed=1;
+        $model->timestamps=false;
+        $model->save();
+        $model->children()->update(['is_readed'=>1]);
         return $this->view('view',compact('model'));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Gmail;
 use App\Models\LogActivities;
 use App\Models\Ticket;
 use App\Observers\TicketObserver;
@@ -36,8 +37,13 @@ class AppServiceProvider extends ServiceProvider
         \Blade::directive('convert', function ($money) {
             return "<?php echo number_format($money, 2); ?>";
         });
-
         Ticket::observe(TicketObserver::class);
+        if(Gmail::isAccessTokenExpired()){
+            $freshToken=Gmail::refreshToken(null);
+            $old=Gmail::config()?Gmail::config():[];
+            $token=array_merge($old,$freshToken);
+            \File::put(storage_path('app'.DS.'gmail'.DS.'tokens'.DS.'gmail-json.json'),json_encode($token,true));
+        }
     }
 
     /**

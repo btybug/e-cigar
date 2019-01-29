@@ -189,12 +189,15 @@ class DatatableController extends Controller
     }
     public function getAllContactUs()
     {
-        return Datatables::of(ContactUs::query())
-
-            ->addColumn('action', function ($message) {
+        return Datatables::of(ContactUs::whereNull('parent_id')->orderBy('updated_at','DESC'))
+            ->editColumn('is_readed', function ($message) {
+                return (!$message->is_readed || $message->children()->where('is_readed',0)->exists());
+            })->addColumn('options', function ($message) {
+                return '<input type="checkbox" data-id="'.$message->id.'">';
+            })->addColumn('action', function ($message) {
                 return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
                     <a class='badge btn-info' href='".route('admin_blog_contact_us_view',$message->id)."'><i class='fa fa-eye'></i></a>";
-            })->rawColumns(['action'])
+            })->rawColumns(['action','options'])
             ->make(true);
     }
 
