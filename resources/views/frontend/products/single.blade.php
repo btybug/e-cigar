@@ -252,7 +252,7 @@
                                                 @if($vape->videos && count($vape->videos))
                                                     @foreach($vape->videos as $video)
                                                         <a href="https://www.youtube.com/watch?v={{ $video }}" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="gallery_name">
-                                                            <img src="http://i1.ytimg.com/vi/{{ $video }}/default.jpg" alt="">
+                                                            <img src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg" alt="">
                                                         </a>
                                                     @endforeach
                                                 @endif
