@@ -17,23 +17,27 @@
                         {{--<span class="btn btn--filter text-tert-clr pointer">Filters</span>--}}
                     {{--</div>--}}
                     <div class="main-filters d-flex closed-mobile">
-                        <div class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
-                            <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
-                            <div class="select-wall">
-                                {!! Form::select('',$selecteds,array_keys($selecteds),
-                                ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
-                                'multiple' =>true,'id' => 'brandSelect']) !!}
+                        @if(count($selecteds))
+                            <div class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
+                                <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
+                                <div class="select-wall">
+                                    {!! Form::select('',$selecteds,array_keys($selecteds),
+                                    ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
+                                    'multiple' =>true,'id' => 'brandSelect']) !!}
+                                </div>
+
+                                <span class="arrow-select"><b></b></span>
                             </div>
 
-                            <span class="arrow-select"><b></b></span>
-                        </div>
-                        <div class="align-self-center reset-wrapper">
-                            <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
-                        </div>
+                            <div class="align-self-center reset-wrapper">
+                                <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
+                            </div>
+                        @endif
                         <div class="slider-range d-flex flex-wrap align-items-center mr-4">
                             <div class="amount col-lg-4 col-5 pl-0">
-                                <input type="text" id="amount" name="" readonly class="font-main-bold font-16 w-100 border-0">
+                                Price
                                 <input type="hidden" id="amount_range" name="amount" value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
+                                <input type="text" id="amount" name="" readonly class="font-main-bold font-16 w-100 border-0">
                             </div>
                             <div id="slider-range" class="col-lg-8 col-7"></div>
                         </div>
@@ -43,7 +47,7 @@
                     <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">
                         <div class="d-flex arrow-filters pointer">
 
-                            <span class="mr-2 text-uppercase">Filters</span>
+                            <span class="mr-2 text-uppercase">Advanced Filters</span>
                             <span class="icon pointer arrow main-transition">
     <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -121,15 +125,7 @@
                         </div>
                     </div>
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
-                        <div class="sale-only d-flex align-items-center">
-                    <span class="text-gray-clr">
-                        On Sale Only:
-                    </span>
-                            <label class="switch-custom">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+                        
                         <div class="product-grid-list align-self-center">
                     <span class="d-inline-block products-filter-wrap_display-icons">
             <span id="dispGrid" class="d-inline-block pointer display-icon active">
