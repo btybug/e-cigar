@@ -550,8 +550,8 @@
 }
 
 .basic-details-tab .basic-wall {
-    height: calc(100vh - 340px);
-    overflow: auto;
+    /*height: calc(100vh - 340px);*/
+    /*overflow: auto;*/
 }
 
 .basic-details-tab .basic-wall,
