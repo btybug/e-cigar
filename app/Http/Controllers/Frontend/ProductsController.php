@@ -8,6 +8,7 @@ use App\Models\AttributeStickers;
 use App\Models\Category;
 use App\Models\Posts;
 use App\Models\Products;
+use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockVariationOption;
 use App\ProductSearch\ProductSearch;
@@ -29,7 +30,34 @@ class ProductsController extends Controller
 //        dd($products);
         $filters = Attributes::where('filter',true)->get();
 
-        return $this->view('index', compact('categories','products','category','products','filters'))->with('filterModel',$request->all());
+        $data =  $request->except('_token');
+        $selecteds = [];
+        if(isset($data['select_filter']) && count($data['select_filter'])){
+            foreach ($data['select_filter'] as $k => $v){
+                if($v && is_array($v)){
+                    foreach ($v as $key => $value){
+                        $attr = Attributes::getById($key);
+                        $sticker = Stickers::getById($value);
+                        $selecteds[$k.",".$value] = $sticker;
+                    }
+                }elseif ($v){
+                    $sticker = Stickers::getById($v);
+                    $attr = Attributes::getById($k);
+                    $selecteds[$k] = $sticker;
+                }
+            }
+        }
+
+//        dd($data,$selecteds);
+
+//        Stickers::getById()
+//        $result = array_map('array_filter', $data);
+//
+//        dd($result, $request->except('_token'));
+//        $count = array_map('count', $result);
+//        $selectedData = array_sum($count);
+
+        return $this->view('index', compact('categories','category','products','filters','selecteds'))->with('filterModel',$request->all());
     }
 
     public function getType ($type, $category_slug = null)

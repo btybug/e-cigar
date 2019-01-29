@@ -20,7 +20,7 @@
                         <div class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
                             <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
                             <div class="select-wall">
-                                {!! Form::select('',$filterModel,null,
+                                {!! Form::select('',$selecteds,array_keys($selecteds),
                                 ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
                                 'multiple' =>true,'id' => 'brandSelect']) !!}
                             </div>
