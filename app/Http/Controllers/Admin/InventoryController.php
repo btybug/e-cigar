@@ -65,7 +65,6 @@ class InventoryController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
-        $attrs = $model->attrs()->with('children')->where('attributes.parent_id', null)->get();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::all()->pluck('sku', 'sku')->all();
 
@@ -74,13 +73,12 @@ class InventoryController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'attrs', 'data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model', 'data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock (ProductsRequest $request)
     {
-        dd($request->all());
-        $data = $request->except('_token', 'translatable', 'attributes', 'options', 'promotions',
+        $data = $request->except('_token', 'translatable', 'options', 'promotions','specifications',
             'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices','promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
@@ -96,9 +94,9 @@ class InventoryController extends Controller
         }
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
-        $stock->attrs()->sync($request->get('attributes'));
+        $stock->specifications()->sync($request->get('specifications'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
-        $stock->attrs()->syncWithoutDetaching($options);
+        $stock->specifications()->syncWithoutDetaching($options);
 
 
         //-------------------//

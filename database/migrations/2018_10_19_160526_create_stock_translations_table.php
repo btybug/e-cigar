@@ -21,6 +21,7 @@ class CreateStockTranslationsTable extends Migration
             $table->string('name');
             $table->text('short_description')->nullable();
             $table->text('long_description')->nullable();
+            $table->text('what_is_content')->nullable();
 
             $table->unique(['stock_id','locale']);
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');

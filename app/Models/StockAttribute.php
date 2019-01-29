@@ -14,7 +14,7 @@ class StockAttribute extends Model
 {
     protected $table = 'stock_attributes';
 
-    protected $fillable = ['stock_id','attributes_id','parent_id','is_shared'];
+    protected $guarded = ['id'];
 
     protected $dates = ['created_at','updated_at'];
 
@@ -36,5 +36,10 @@ class StockAttribute extends Model
     public function attr()
     {
         return $this->belongsTo(Attributes::class, 'attributes_id');
+    }
+
+    public function sticker()
+    {
+        return $this->belongsTo(Stickers::class, 'sticker_id');
     }
 }

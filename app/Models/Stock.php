@@ -21,7 +21,7 @@ class Stock extends Translatable
 
     public $translationModel = StockTranslation::class;
 
-    public $translatedAttributes = ['name', 'short_description', 'long_description'];
+    public $translatedAttributes = ['name', 'short_description', 'long_description','what_is_content'];
     /**
      * @var array
      */
@@ -44,10 +44,9 @@ class Stock extends Translatable
         '1' => 'Published'
     ];
 
-    public function attrs()
+    public function specifications()
     {
-        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id')
-            ->select('attributes.*', 'stock_attributes.is_shared as is_shared')->whereNull('attributes.parent_id');
+        return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id');
     }
 
     public function categories()

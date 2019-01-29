@@ -17,16 +17,14 @@ class CreateStockAttributesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('attributes_id');
+            $table->unsignedInteger('sticker_id')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
-            $table->tinyInteger('is_shared')->nullable();
-
-            $table->unique(['stock_id','attributes_id']);
             $table->timestamps();
 
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
             $table->foreign('attributes_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')
-                ->on('stock_attributes')->onDelete('CASCADE');
+            $table->foreign('sticker_id')->references('id')
+                ->on('stickers')->onDelete('CASCADE');
         });
     }
 

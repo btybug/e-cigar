@@ -179,9 +179,6 @@
                                            data-toggle="pill" href="#pills-reviews" role="tab"
                                            aria-controls="pills-reviews" aria-selected="false">Reviews</a>
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
-                                           data-toggle="pill" href="#pills-gallery" role="tab"
-                                           aria-controls="pills-gallery" aria-selected="false">Gallery</a>
-                                        <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                            data-toggle="pill" href="#pills-faq" role="tab"
                                            aria-controls="pills-faq" aria-selected="false">FAQ</a>
                                     </div>
@@ -196,44 +193,24 @@
                                             <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">Description</h3>
                                             <div class="tecnical-desc_heading">
                                                 <div class="row">
-                                                    <div class="col-lg-6 font-15 text-gray-clr">
+                                                    <div class="col-lg-12 font-15 text-gray-clr">
                                                         <div class="tecnical-desc_info-col font-15 text-gray-clr">
-                                                            <p class="tecnical-desc_info-space">Praesent sollicitudin lorem at orci tincidunt imperdiet. Vestibulum dictum dui sollicitudin,
-                                                                tincidunt ex quis, consequat tortor. Etiam tincidunt tortor libero, volutpat gravida.
-                                                            </p>
-                                                            <p>
-                                                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                                                                of classical Latin literature from 45 BC making it over 2000 years old
-                                                            </p>
+                                                            {!! $vape->long_description !!}
                                                         </div>
 
                                                     </div>
-                                                    <div class="tecnical-desc_info-col col-lg-6">
-                                                        <div class="tecnical-tab_info-col font-15 text-gray-clr">
-                                                            <p>
-                                                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
-                                                                of classical Latin literature from 45 BC making it over 2000 years old  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots                                                   napiece
-                                                                of classical Latin literature from 45 BC making it over 2000 years old.
-                                                            </p>
-                                                        </div>
-
-                                                    </div>
-
                                                 </div>
                                             </div>
                                             <ul class="tecnical-labels list-unstyled d-flex">
+                                                @foreach($vape->stickers as $sticker)
                                                 <li class="tecnical-labels_item d-flex align-items-center">
-                                                    <img src="/public/img/label-best-seller.png" alt="" class="tecnical-labels_item-img rounded-circle">
-                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">Best Seller</span>
+                                                    <img src="{{ $sticker->image }}" alt="" class="tecnical-labels_item-img rounded-circle">
+                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">
+                                                        {{ $sticker->name }}
+                                                    </span>
                                                 </li>
-                                                <li class="tecnical-labels_item d-flex align-items-center">
-                                                    <img src="/public/img/label-uk.png" alt="" class="tecnical-labels_item-img rounded-circle">
-                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">Made in UK</span>
-                                                </li>
-                                                <li class="tecnical-labels_item d-flex align-items-center">
-                                                    <img src="/public/img/label-garanty.png" alt="" class="tecnical-labels_item-img rounded-circle">
-                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">Garanty on one year</span>
-                                                </li>
+                                                @endforeach
+
                                             </ul>
                                         </div>
                                         <div class="tecnical-dtls tecnical_row">
@@ -241,19 +218,15 @@
 
                                             <div class="d-flex">
                                                 <div class="tecnical-dtls_holder">
-                                                    <img src="/public/img/temp/psoduct-descr.png" alt="">
+                                                    @if($vape->what_is_image)
+                                                        <img src="{{ $vape->what_is_image }}" alt="">
+                                                    @else
+                                                        <img src="/public/img/temp/psoduct-descr.png" alt="">
+                                                    @endif
                                                 </div>
-                                                <ul class="tecnical-dtls_list list-unstyled mb-0">
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">1 x RunAbout battery</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">2 x RunAbout battery</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">3 x RunAbout battery</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">4 x RunAbout battery</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">lorem ipsum dolor</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">dolor sit amet.</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center"> elit. Aliquid, repellendus.</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">consectetur adipisicing elit</li>
-                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">dolor sit amet.</li>
-                                                </ul>
+                                                <div class="tecnical-dtls_list list-unstyled mb-0">
+                                                   {!! $vape->what_is_content !!}
+                                                </div>
                                             </div>
 
                                         </div>
@@ -261,44 +234,46 @@
                                             <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">Specification</h3>
 
                                             <table class="tecnical_spf-table table font-16 w-100">
-                                                <tr>
-                                                    <th class="text-tert-clr">Model</th>
-                                                    <td>Magic 710</td>
-                                                    <th class="text-tert-clr">Output voltage:</th>
-                                                    <td>35v</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-tert-clr">Capacity:</th>
-                                                    <td>380mAh</td>
-                                                    <th class="text-tert-clr">Puff:</th>
-                                                    <td>300-350 puff</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-tert-clr">Size:</th>
-                                                    <td>12.5*28*56.8 mm</td>
-                                                    <th class="text-tert-clr">Thread:</th>
-                                                    <td>520</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="text-tert-clr">Weight:</th>
-                                                    <td>35.2g</td>
-                                                    <th class="text-tert-clr">Model</th>
-                                                    <td>welcome</td>
-                                                </tr>
-
+                                                @foreach($vape->stockAttrs as $stockAttr)
+                                                    <tr>
+                                                        <th class="text-tert-clr">{{ $stockAttr->attr->name }}</th>
+                                                        <td>
+                                                            @foreach($stockAttr->children as $child)
+                                                                {{ $child->sticker->name }} @if(! $loop->last) , @endif
+                                                            @endforeach
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </table>
                                         </div>
                                         <div class="tecnical_gallery tecnical_row">
                                             <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">Gallery</h3>
                                             <div class="tecnical_gallery-container mx-auto">
-                                                <a href="/public/img/temp/psoduct-descr.png" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">
-                                                    <img src="/public/img/temp/gallery-1.jpg" alt="">
-                                                </a>
-                                                <a href="/public/img/temp/gallery-1.jpg" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">
-                                                    <img src="/public/img/temp/psoduct-descr.png" alt="">
-                                                </a>
-                                            </div>
+                                                @if($vape->videos && count($vape->videos))
+                                                    @foreach($vape->videos as $video)
+                                                        <a href="https://www.youtube.com/watch?v={{ $video }}" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="gallery_name">
+                                                            <img src="http://i1.ytimg.com/vi/{{ $video }}/default.jpg" alt="">
+                                                        </a>
+                                                    @endforeach
+                                                @endif
 
+                                                @if($vape->other_images && count($vape->other_images))
+                                                    @foreach($vape->other_images as $other_image)
+                                                            <a href="{{ $other_image }}" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="gallery_name" title="{!! @getImage($other_image)->seo_alt !!}">
+                                                                <img src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}">
+                                                            </a>
+                                                    @endforeach
+                                                @endif
+
+
+
+                                                {{--<a href="/public/img/temp/psoduct-descr.png" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">--}}
+                                                    {{--<img src="/public/img/temp/gallery-1.jpg" alt="">--}}
+                                                {{--</a>--}}
+                                                {{--<a href="/public/img/temp/gallery-1.jpg" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">--}}
+                                                    {{--<img src="/public/img/temp/psoduct-descr.png" alt="">--}}
+                                                {{--</a>--}}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane related-tab-pane fade show" id="pills-related" role="tabpanel"
@@ -394,35 +369,6 @@
                                             I bought one.
                                         </p>
                                     </div>
-
-                                    {{-- Gallery --}}
-                                    <div class="tab-pane fade show gallery--tabs" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab">
-                                        <div class="galley-wrapper">
-                                            <div class="row">
-
-                                                @if($vape->other_images && count($vape->other_images))
-                                                    @foreach($vape->other_images as $other_image)
-                                                        <div class="col-lg-3 col-sm-6">
-                                                            <a href="{{ $other_image }}" class="lightbox-product" data-lightbox-gallery="gallery_name" title="{!! @getImage($other_image)->seo_alt !!}">
-                                                                <img src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}">
-                                                            </a>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
-
-                                                @if($vape->videos && count($vape->videos))
-                                                    @foreach($vape->videos as $video)
-                                                        <div class="col-lg-3 col-sm-6">
-                                                            <a href="https://www.youtube.com/watch?v={{ $video }}" class="lightbox-product" data-lightbox-gallery="gallery_name">
-                                                                <img src="http://i1.ytimg.com/vi/{{ $video }}/default.jpg" alt="">
-                                                            </a>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{--End Gallery--}}
 
                                     <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
                                          aria-labelledby="pills-faq-tab">

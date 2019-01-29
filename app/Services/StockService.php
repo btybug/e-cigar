@@ -27,15 +27,13 @@ class StockService
                 $parent = StockAttribute::where('stock_id', $stock->id)
                     ->where('attributes_id', $parent_id)->where('parent_id', null)->first();
 
-                $ids = explode(',', $ids);
-                if (count($ids)) {
+                if ($parent && count($ids)) {
                     foreach ($ids as $id) {
                         if ($id) {
-                            $result[$id] = ['parent_id' => $parent->id];
+                            $result[] = ['parent_id' => $parent->id,'sticker_id' =>$id,'attributes_id' => $parent_id];
                         }
                     }
                 }
-
             }
         }
 
@@ -66,6 +64,35 @@ class StockService
 
         $stock->type_attrs()->sync($result);
         return $result;
+    }
+
+    public function saveSpecifications ($stock, array $data = [])
+    {
+        $result = [];
+        $stock->stockAttrs()->delete();
+        if (count($data)) {
+            foreach ($data as $datum) {
+                if(isset($datum['attributes_id'])){
+                    $parent = ( new StockAttribute())->create([
+                        'stock_id' => $stock->id,
+                        'attributes_id' => $datum['attributes_id']
+                    ]);
+
+                    if(isset($datum['options']) && count($datum['options'])){
+                        foreach ($datum['options'] as $sticker){
+                            ( new StockAttribute())->create([
+                                'stock_id' => $stock->id,
+                                'attributes_id' => $datum['attributes_id'],
+                                'sticker_id' => $sticker,
+                                'parent_id' => $parent->id,
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     public function makeProductOptions ($product, array $data = [])
