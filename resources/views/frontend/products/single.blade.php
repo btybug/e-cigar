@@ -175,12 +175,16 @@
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                            data-toggle="pill" href="#pills-related" role="tab"
                                            aria-controls="pills-related" aria-selected="false">Related</a>
-                                        <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
-                                           data-toggle="pill" href="#pills-reviews" role="tab"
-                                           aria-controls="pills-reviews" aria-selected="false">Reviews</a>
-                                        <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
-                                           data-toggle="pill" href="#pills-faq" role="tab"
-                                           aria-controls="pills-faq" aria-selected="false">FAQ</a>
+                                        @if($vape->reviews_tab)
+                                            <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
+                                               data-toggle="pill" href="#pills-reviews" role="tab"
+                                               aria-controls="pills-reviews" aria-selected="false">Reviews</a>
+                                        @endif
+                                        @if($vape->faq_tab)
+                                            <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
+                                               data-toggle="pill" href="#pills-faq" role="tab"
+                                               aria-controls="pills-faq" aria-selected="false">FAQ</a>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="tab-content">
@@ -363,14 +367,16 @@
                                             {{--the end--}}
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
+                                    @if($vape->reviews_tab)
+                                        <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
                                          aria-labelledby="pills-tecnical-tab">
                                         <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
                                             I bought one.
                                         </p>
                                     </div>
-
-                                    <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
+                                    @endif
+                                    @if($vape->faq_tab)
+                                        <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
                                          aria-labelledby="pills-faq-tab">
                                         <div class="faq-wrapper">
                                             @foreach($vape->faqs as $faq)
@@ -385,6 +391,7 @@
                                         </div>
 
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             {{--carousel--}}

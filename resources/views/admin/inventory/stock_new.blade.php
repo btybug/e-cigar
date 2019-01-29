@@ -120,6 +120,26 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="faq_tab"
+                                                               class="control-label col-sm-4">Faq Tab</label>
+                                                        <div class="col-sm-8">
+                                                            {!! Form::checkbox('faq_tab', true,null,
+                                                             ['class' => '','id' => 'faq_tab']) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="reviews_tab"
+                                                               class="control-label col-sm-4">Reviews Tab</label>
+                                                        <div class="col-sm-8">
+                                                            {!! Form::checkbox('reviews_tab', true,null,
+                                                             ['class' => '','id' => 'reviews_tab']) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="row">
