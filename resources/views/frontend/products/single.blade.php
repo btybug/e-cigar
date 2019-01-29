@@ -189,56 +189,115 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="pills-tecnical" role="tabpanel"
                                          aria-labelledby="pills-tecnical-tab">
-                                        <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
-                                            {!! $vape->long_description !!}
-                                        </p>
+                                        {{--<p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">--}}
+                                            {{--{!! $vape->long_description !!}--}}
+                                        {{--</p>--}}
+                                        <div class="tecnical-desc tecnical_row">
+                                            <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">Description</h3>
+                                            <div class="tecnical-desc_heading">
+                                                <div class="row">
+                                                    <div class="col-lg-6 font-15 text-gray-clr">
+                                                        <div class="tecnical-desc_info-col font-15 text-gray-clr">
+                                                            <p class="tecnical-desc_info-space">Praesent sollicitudin lorem at orci tincidunt imperdiet. Vestibulum dictum dui sollicitudin,
+                                                                tincidunt ex quis, consequat tortor. Etiam tincidunt tortor libero, volutpat gravida.
+                                                            </p>
+                                                            <p>
+                                                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                                                                of classical Latin literature from 45 BC making it over 2000 years old
+                                                            </p>
+                                                        </div>
 
+                                                    </div>
+                                                    <div class="tecnical-desc_info-col col-lg-6">
+                                                        <div class="tecnical-tab_info-col font-15 text-gray-clr">
+                                                            <p>
+                                                                Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece
+                                                                of classical Latin literature from 45 BC making it over 2000 years old  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots                                                   napiece
+                                                                of classical Latin literature from 45 BC making it over 2000 years old.
+                                                            </p>
+                                                        </div>
 
+                                                    </div>
 
-                                        <div class="table-responsive mt-2">
-                                            <table class="table table-striped table-bordered">
-                                                <thead>
+                                                </div>
+                                            </div>
+                                            <ul class="tecnical-labels list-unstyled d-flex">
+                                                <li class="tecnical-labels_item d-flex align-items-center">
+                                                    <img src="/public/img/label-best-seller.png" alt="" class="tecnical-labels_item-img rounded-circle">
+                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">Best Seller</span>
+                                                </li>
+                                                <li class="tecnical-labels_item d-flex align-items-center">
+                                                    <img src="/public/img/label-uk.png" alt="" class="tecnical-labels_item-img rounded-circle">
+                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">Made in UK</span>
+                                                </li>
+                                                <li class="tecnical-labels_item d-flex align-items-center">
+                                                    <img src="/public/img/label-garanty.png" alt="" class="tecnical-labels_item-img rounded-circle">
+                                                    <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">Garanty on one year</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tecnical-dtls tecnical_row">
+                                            <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">What's in the box</h3>
+
+                                            <div class="d-flex">
+                                                <div class="tecnical-dtls_holder">
+                                                    <img src="/public/img/temp/psoduct-descr.png" alt="">
+                                                </div>
+                                                <ul class="tecnical-dtls_list list-unstyled mb-0">
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">1 x RunAbout battery</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">2 x RunAbout battery</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">3 x RunAbout battery</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">4 x RunAbout battery</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">lorem ipsum dolor</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">dolor sit amet.</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center"> elit. Aliquid, repellendus.</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">consectetur adipisicing elit</li>
+                                                    <li class="font-15 tecnical-dtls_list-item d-flex align-items-center">dolor sit amet.</li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                        <div class="tecnical_spf tecnical_row">
+                                            <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">Specification</h3>
+
+                                            <table class="tecnical_spf-table table font-16 w-100">
                                                 <tr>
-                                                    <th scope="col" colspan="2" class="text-center">Specification</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="w-25">Model:</td>
+                                                    <th class="text-tert-clr">Model</th>
                                                     <td>Magic 710</td>
+                                                    <th class="text-tert-clr">Output voltage:</th>
+                                                    <td>35v</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="w-25">Capacity:</td>
+                                                    <th class="text-tert-clr">Capacity:</th>
                                                     <td>380mAh</td>
+                                                    <th class="text-tert-clr">Puff:</th>
+                                                    <td>300-350 puff</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="w-25">Size:</td>
-                                                    <td>13.5*28*56.8mm</td>
+                                                    <th class="text-tert-clr">Size:</th>
+                                                    <td>12.5*28*56.8 mm</td>
+                                                    <th class="text-tert-clr">Thread:</th>
+                                                    <td>520</td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="w-25">Weight:</td>
+                                                    <th class="text-tert-clr">Weight:</th>
                                                     <td>35.2g</td>
+                                                    <th class="text-tert-clr">Model</th>
+                                                    <td>welcome</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="w-25">Output voltage:</td>
-                                                    <td>3.5v</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="w-25">Puff:</td>
-                                                    <td>300-350puffs</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="w-25">Thread:</td>
-                                                    <td>510</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="w-25">OEM & ODM</td>
-                                                    <td>Welcom</td>
-                                                </tr>
-                                                </tbody>
+
                                             </table>
                                         </div>
-                                        <div>
+                                        <div class="tecnical_gallery tecnical_row">
+                                            <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">Gallery</h3>
+                                            <div class="tecnical_gallery-container mx-auto">
+                                                <a href="/public/img/temp/psoduct-descr.png" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">
+                                                    <img src="/public/img/temp/gallery-1.jpg" alt="">
+                                                </a>
+                                                <a href="/public/img/temp/gallery-1.jpg" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">
+                                                    <img src="/public/img/temp/psoduct-descr.png" alt="">
+                                                </a>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -500,6 +559,7 @@
                     src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
             <script>
                 $(document).ready(function () {
+                    $(".tecnical_gallery_obj-holder").lightbox();
 //                    start carousel tabs
                     let activeTab = $('#carousel-tabs-wrap a').filter('.active');
                     $('#carousel-tabs-wrap a').on('click', function (e) {

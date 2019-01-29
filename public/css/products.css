@@ -2346,7 +2346,117 @@ td.shp-cart-table_price-td {
 
 /*end carousel tabs*/
 
+/*start tecnical tabs product*/
+.tecnical_row {
+    border-bottom: 1px solid #c5c5cf;
+    padding-bottom: 35px;
+    margin-bottom: 40px;
+}
 
+.tecnical_row:last-of-type {
+    border-bottom: 0;
+}
+
+.tecnical-desc_info-space {
+    margin-bottom: 25px;
+}
+
+.tecnical-desc_info-col,
+.tecnical_spf {
+    padding-right: 110px;
+}
+
+.tecnical-desc_title {
+    margin-bottom: 15px;
+}
+
+.tecnical-desc_sub-title {
+    margin-bottom: 17px;
+}
+
+.tecnical-labels_item-img {
+    margin-right: 20px;
+    height: 37px;
+    width: 37px;
+    object-fit: cover;
+    font-family: "object-fit: cover;";
+}
+
+.tecnical-labels_item:not(:last-of-type) {
+    margin-right: 6%;
+}
+
+.tecnical-desc_heading {
+    margin-bottom: 20px;
+}
+
+.tecnical-dtls_list-item {
+    margin-bottom: 20px;
+}
+
+.tecnical-dtls_list-item:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.tecnical-dtls_list-item:before {
+    content: '';
+    display: inline-block;
+    background: #5184e5;
+    border-radius: 50%;
+    height: 6px;
+    width: 6px;
+    margin-right: 30px;
+}
+
+.tecnical-dtls_holder {
+    border: 1px solid #d7d7d7;
+    background: #e8e7ed;
+    padding: 25px 0;
+    height: 365px;
+    width: 325px;
+    margin-right: 6%;
+}
+
+.tecnical-dtls_holder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    font-family: "object-fit: contain;";
+}
+
+.tecnical_spf-table tr:nth-child(odd){
+    background: #f3f3f3;
+}
+
+.tecnical_spf-table tr {
+    border: none;
+}
+
+.tecnical_spf-table td,
+.tecnical_spf-table th {
+    border-right: solid 1px #c5c5cf;
+    border-left: solid 1px #c5c5cf;
+}
+
+.tecnical_gallery-container {
+    max-width: 1000px;
+}
+
+.tecnical_gallery_obj-holder:not(:last-of-type) {
+    margin-bottom: 70px;
+}
+
+.tecnical_gallery_obj-holder,
+.tecnical_gallery_obj-holder img {
+    height: 585px;
+}
+
+.tecnical_gallery_obj-holder img {
+    width: 100%;
+    object-fit: contain;
+    font-family:"object-fit: contain;";
+}
+/*end tecnical tabs product*/
 
 
 @media (max-width: 1700px) {
