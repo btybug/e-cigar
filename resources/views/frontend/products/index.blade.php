@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
-                        
+
                         <div class="product-grid-list align-self-center">
                     <span class="d-inline-block products-filter-wrap_display-icons">
             <span id="dispGrid" class="d-inline-block pointer display-icon active">
