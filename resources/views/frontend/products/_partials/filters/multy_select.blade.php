@@ -7,7 +7,7 @@
             $dataOptions = $filter->stickers->pluck('name','id')->toArray();
         @endphp
         {!! Form::select("select_filter[$filter->id][]",$dataOptions,null,
-        ['class' => 'select-filter select-2 main-select main-select-2arrows products-filter-wrap_select not-selected select_with-tag','multiple' => true,'id' => 'fieldTitle'.$filter->id] ) !!}
+        ['class' => 'select-2 main-select main-select-2arrows products-filter-wrap_select not-selected select_with-tag','multiple' => true,'id' => 'fieldTitle'.$filter->id] ) !!}
         <span class="arrow-select"><b></b></span>
     </div>
 </div>

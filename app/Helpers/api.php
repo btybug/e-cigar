@@ -869,16 +869,22 @@ function site_default_currency(){
     return (new \App\Models\SiteCurrencies())->where('is_default',true)->first();
 }
 
-function convert_price($price,$currency){
+function convert_price($price,$currency,$number_format = true,$withoutSymbol = false){
     $default = site_default_currency();
     if($default){
         if($default->code == $currency){
-            return $default->symbol."".number_format($price);
+            if($number_format){
+                $price = number_format($price);
+            }
+            return ($withoutSymbol) ? $price :$default->symbol."".$price;
         }else{
             $changed = (new \App\Models\SiteCurrencies())->where('code',$currency)->first();
             if($changed){
                 $price = $price * $changed->rate;
-                return $changed->symbol."".number_format($price);
+                if($number_format){
+                    $price = number_format($price);
+                }
+                return ($withoutSymbol) ? $price : $changed->symbol."".$price;
             }
         }
     }

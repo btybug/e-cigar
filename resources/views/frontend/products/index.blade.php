@@ -20,13 +20,9 @@
                         <div class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
                             <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
                             <div class="select-wall">
-                                <select id="brandSelect"
-                                        class="select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected"
-                                        multiple="multiple">
-                                    <option>DaVinci</option>
-                                    <option>Brandos</option>
-                                    <option>Eleaf</option>
-                                </select>
+                                {!! Form::select('',$filterModel,null,
+                                ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
+                                'multiple' =>true,'id' => 'brandSelect']) !!}
                             </div>
 
                             <span class="arrow-select"><b></b></span>
@@ -217,11 +213,11 @@
                                             <div class="product-card_body-text">
                                                 <h2 class="card-title font-21 font-sec-bold">
                                                     <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}">
-                                                        {{ $product->name }}
+                                                        {{ str_limit($product->name,30) }}
                                                     </a>
                                                 </h2>
                                                 <p class="card-text font-main-light font-15 text-light-clr">
-                                                    {{ $product->short_description }}
+                                                    {{ str_limit($product->short_description,30) }}
                                                 </p>
                                                 <div class="product-card_icons-outer d-flex justify-content-between align-items-center">
                                                     <!--icons-->
@@ -326,16 +322,16 @@
                 form.attr('action',url);
                 form.submit();
             }
-
-            var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,500" }}";
+            var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,".(convert_price(500,$currency,false,true)) }}";
+            console.log(rangeDataString);
             var rangeArray = rangeDataString.split(',');
             $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: 500,
+                max: '{{ convert_price(500,$currency,false,true) }}',
                 values: rangeArray,
                 slide: function( event, ui ) {
-                    $( "#amount" ).val("$" + ui.values[ 0 ] + " - " + "$" +ui.values[ 1 ] );
+                    $( "#amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
                     $( "#amount_range" ).val(ui.values[ 0 ] + "," + ui.values[ 1 ] );
                 },
                 change: function(event, ui) {
@@ -343,10 +339,14 @@
                 }
             });
 
-            $( "#amount" ).val("$" + $("#slider-range").slider( "values", 0 ) +
-                " - $" + $("#slider-range").slider( "values", 1 ) );
+            $( "#amount" ).val($("#slider-range").slider( "values", 0 ) +
+                " - " + $("#slider-range").slider( "values", 1 ) );
 
-            $("body").on('change','.select-filter',function () {
+            $("body").on('click','.save-filter-btn',function () {
+                doSubmitForm();
+            });
+
+            $("body").on('click','.select-filter',function () {
                 doSubmitForm();
             });
 

@@ -1,5 +1,6 @@
 <?php namespace App\Http\Middleware;
 
+use App\Models\Currencies;
 use Closure;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;

@@ -5,7 +5,7 @@
             @foreach($filter->stickers as $sticker)
                 <div class="col-xl-3 col-lg-4 col-md-3 col-4 single-wall">
                     <div class="custom-control custom-radio custom-control-inline" style="position: relative">
-                        {!! Form::radio("select_filter[$filter->id]",$sticker->id,null,['class' => 'select-filter custom-control-input','id' => 'customColor'.$filter->id.$sticker->id]) !!}
+                        {!! Form::radio("select_filter[$filter->id]",$sticker->id,null,['class' => 'custom-control-input','id' => 'customColor'.$filter->id.$sticker->id]) !!}
                         <label class="custom-control-label pointer position-relative"
                                for="customColor{{ $filter->id.$sticker->id }}" style="background: {{ $sticker->color }}">
 
