@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
-                    <li><a data-toggle="tab" href="#media">Media</a></li>
+                    <li><a data-toggle="tab" href="#technical">Technical</a></li>
                     <li><a data-toggle="tab" href="#variations">Variations</a></li>
                     <li><a data-toggle="tab" href="#extra">Extra</a></li>
                     <li><a data-toggle="tab" href="#seo">Seo</a></li>
@@ -83,15 +83,6 @@
                                                                                 data-original-title="Short Description">Short Description</span></label>
                                                                     <div class="col-sm-10">
                                                                         {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label"><span
-                                                                                data-toggle="tooltip"
-                                                                                title=""
-                                                                                data-original-title="Short Description">Long Description</span></label>
-                                                                    <div class="col-sm-10">
-                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -172,22 +163,20 @@
                             </div>
                         </div>
                     </div>
-                    <div id="media" class="tab-pane basic-details-tab media-new-tab fade ">
+                    <div id="technical" class="tab-pane basic-details-tab media-new-tab fade ">
                         <div class="container-fluid p-25">
                             <div class="row d-flex">
                                 <div class="col-md-3">
                                     <div class="basic-left basic-wall h-100">
                                         <div class="all-list">
                                             <ul class="nav nav-tabs media-list">
-                                                <li><a data-toggle="tab" href="#mediaotherimage">Other images</a></li>
-                                                <li class="active"><a data-toggle="tab" href="#mediavideos">Videos</a>
+                                                <li class="active"><a data-toggle="tab" href="#long_desc">Long Description</a></li>
                                                 <li><a data-toggle="tab" href="#mediastickers">Stickers</a></li>
-                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related
-                                                        Products</a></li>
-                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a>
-                                                </li>
-                                                <li><a data-toggle="tab" href="#wiitb">What's in the box</a>
-                                                </li>
+                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a></li>
+                                                <li><a data-toggle="tab" href="#mediavideos">Videos</a>
+                                                <li><a data-toggle="tab" href="#mediaotherimage">Images</a></li>
+                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related Products</a></li>
+                                                <li><a data-toggle="tab" href="#wiitb">What's in the box</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -198,7 +187,7 @@
                                             <div id="mediaotherimage" class="tab-pane fade ">
                                                 {!! media_button('other_images',$model,true) !!}
                                             </div>
-                                            <div id="mediavideos" class="tab-pane fade in active">
+                                            <div id="mediavideos" class="tab-pane fade">
                                                 <div class="media-videos">
                                                     <div class="input-group " style="display: flex">
                                                         <input type="text" class="form-control video-url-link"
@@ -358,6 +347,43 @@
                                                                         {!! media_button('what_is_image',$model) !!}
                                                                     </div>
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="long_desc" class="tab-pane fade in active">
+                                                <div class="basic-center basic-wall">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            @if(count(get_languages()))
+                                                                <ul class="nav nav-tabs">
+                                                                    @foreach(get_languages() as $language)
+                                                                        <li class="@if($loop->first) active @endif"><a
+                                                                                    data-toggle="tab"
+                                                                                    href="#{{ strtolower($language->code) }}">
+                                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                            </a></li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                            <div class="tab-content">
+                                                                @if(count(get_languages()))
+                                                                    @foreach(get_languages() as $language)
+                                                                        <div id="{{ strtolower($language->code) }}"
+                                                                             class="tab-pane fade  @if($loop->first) in active @endif">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-2 control-label"><span
+                                                                                            data-toggle="tooltip"
+                                                                                            title=""
+                                                                                            data-original-title="Short Description">Long Description</span></label>
+                                                                                <div class="col-sm-10">
+                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
