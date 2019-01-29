@@ -2337,6 +2337,18 @@ td.shp-cart-table_price-td {
     box-shadow: none;
     border: none;
 }
+
+/*start carousel tabs*/
+
+#carousel-tabs-wrap .fs-carousel-enabled.fs-carousel-ltr .fs-carousel-item {
+    margin: 0 50px 0 0;
+}
+
+/*end carousel tabs*/
+
+
+
+
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;

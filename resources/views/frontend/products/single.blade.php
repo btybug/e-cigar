@@ -161,34 +161,31 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            {{--carousel--}}
+
                             <div class="product-single-tab">
-                                <ul class="nav nav-pill product-single-tab_nav-pills" id="pills-tab" role="tablist">
-                                    <li class="nav-item product-single-tab_item">
+                                <div id="carousel-tabs-wrap" class="product-single-tab_nav-pills" role="tablist">
+                                    <div class="carousel-tabs">
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition active"
                                            data-toggle="pill" href="#pills-tecnical" role="tab"
                                            aria-controls="pills-tecnical" aria-selected="true">Tecnical</a>
-                                    </li>
-                                    <li class="nav-item product-single-tab_item">
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                            data-toggle="pill" href="#pills-related" role="tab"
                                            aria-controls="pills-related" aria-selected="false">Related</a>
-                                    </li>
-                                    <li class="nav-item product-single-tab_item">
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                            data-toggle="pill" href="#pills-reviews" role="tab"
                                            aria-controls="pills-reviews" aria-selected="false">Reviews</a>
-                                    </li>
-                                    <li class="nav-item product-single-tab_item">
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                            data-toggle="pill" href="#pills-gallery" role="tab"
                                            aria-controls="pills-gallery" aria-selected="false">Gallery</a>
-                                    </li>
-                                    <li class="nav-item product-single-tab_item">
                                         <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                            data-toggle="pill" href="#pills-faq" role="tab"
                                            aria-controls="pills-faq" aria-selected="false">FAQ</a>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </div>
                                 <div class="tab-content">
                                     <div class="tab-pane fade show active" id="pills-tecnical" role="tabpanel"
                                          aria-labelledby="pills-tecnical-tab">
@@ -245,7 +242,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="tab-pane related-tab-pane fade" id="pills-related" role="tabpanel"
+                                    <div class="tab-pane related-tab-pane fade show" id="pills-related" role="tabpanel"
                                          aria-labelledby="pills-related-tab">
                                         <div class="display-grid row">
                                             {{--Start--}}
@@ -310,9 +307,9 @@
                                                                             </svg>
                                                                         </span>
                                                                     </div>
-{{--                                                                    {{dd($related_product->variations->first()->variation_id)}}--}}
-                                                                    {{--{{dd($related_product->variations->first()->id)}}--}}
-                                                                    <!--Price-->
+                                                                {{--                                                                    {{dd($related_product->variations->first()->variation_id)}}--}}
+                                                                {{--{{dd($related_product->variations->first()->id)}}--}}
+                                                                <!--Price-->
                                                                     <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">${{$related_product->variations->first()->price}}</span>
                                                                 </div>
                                                             </div>
@@ -332,7 +329,7 @@
                                             {{--the end--}}
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-reviews" role="tabpanel"
+                                    <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
                                          aria-labelledby="pills-tecnical-tab">
                                         <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
                                             I bought one.
@@ -340,7 +337,7 @@
                                     </div>
 
                                     {{-- Gallery --}}
-                                    <div class="tab-pane fade gallery--tabs" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab">
+                                    <div class="tab-pane fade show gallery--tabs" id="pills-gallery" role="tabpanel" aria-labelledby="pills-gallery-tab">
                                         <div class="galley-wrapper">
                                             <div class="row">
 
@@ -368,23 +365,25 @@
                                     </div>
                                     {{--End Gallery--}}
 
-                                    <div class="tab-pane fade " id="pills-faq" role="tabpanel"
+                                    <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
                                          aria-labelledby="pills-faq-tab">
                                         <div class="faq-wrapper">
                                             @foreach($vape->faqs as $faq)
-                                            <div class="accordion offset-top-0" role="tablist" aria-multiselectable="true" id="accordion-3">
-                                                <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-0-content" id="accordion-3--card-0-header" aria-expanded="false" aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
-                                                    <div class="collapse" id="accordion-3--card-0-content" aria-labelledby="accordion-3--card-0-header" data-parent="#accordion-3" style="">
-                                                        <div class="card-body">{!! $faq->answer !!}</div>
+                                                <div class="accordion offset-top-0" role="tablist" aria-multiselectable="true" id="accordion-3">
+                                                    <div class="card card-accordion"><a class="card-header collapsed" href="#" data-toggle="collapse" data-target="#accordion-3--card-0-content" id="accordion-3--card-0-header" aria-expanded="false" aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
+                                                        <div class="collapse" id="accordion-3--card-0-content" aria-labelledby="accordion-3--card-0-header" data-parent="#accordion-3" style="">
+                                                            <div class="card-body">{!! $faq->answer !!}</div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             @endforeach
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
+                            {{--carousel--}}
+
                         </div>
                         <div class="col-lg-1 col-2 ml-auto d-flex flex-column pr-0 product-single-share-col">
                             <div class="ml-auto">
@@ -501,6 +500,48 @@
                     src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
             <script>
                 $(document).ready(function () {
+//                    start carousel tabs
+                    let activeTab = $('#carousel-tabs-wrap a').filter('.active');
+                    $('#carousel-tabs-wrap a').on('click', function (e) {
+                        e.preventDefault();
+                        activeTab.removeClass('active');
+                        $(activeTab.attr('href')).removeClass('active');
+                        activeTab = $(this);
+                        activeTab.addClass("active");
+                        $(activeTab.attr('href')).addClass('active');
+                    })
+                    $(".carousel-tabs").carousel({
+                        show: {
+                            "740px": 2,
+                            "980px": 3,
+                            "1220px": 2
+                        },
+                        matchWidth: false,
+                        controls: false,
+                        pagination: false
+                    });
+                    if ($(window).width() >1400) {
+                        console.log('metca')
+                        $(".fs-touch-element").touch("destroy");
+                    }
+                    else {
+                        $(".fs-touch-element").touch();
+                    }
+                    $(window).resize(function() {
+                        if ($(window).width() >1400) {
+                            $(".fs-touch-element").touch("destroy");
+                        }
+                        else {
+                            $(".fs-touch-element").touch();
+                        }
+                    });
+
+
+//                    end carousel tabs
+
+
+
+
                     $(".lightbox-product").lightbox();
                     $('body').on('change','.products_custom_check input',function () {
                         if ($(this).is(':checked')) {
