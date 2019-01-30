@@ -159,13 +159,13 @@
       d="M12.471,4.644 C10.984,3.461 9.555,2.870 7.926,2.690 L7.926,9.909 C12.190,10.731 13.985,12.196 13.985,14.714 C13.985,17.438 11.489,19.365 7.984,19.468 L7.984,21.986 L6.638,21.986 L6.638,19.443 C4.085,19.235 2.009,18.338 -0.010,16.694 L0.915,15.691 C2.656,17.206 4.393,18.081 6.693,18.286 L6.693,10.964 C2.487,10.116 0.746,8.702 0.746,6.133 C0.746,3.539 3.215,1.560 6.638,1.482 L6.638,-0.007 L7.984,-0.007 L7.984,1.535 C10.144,1.715 11.713,2.407 13.396,3.641 L12.471,4.644 ZM6.693,9.654 L6.693,2.639 C3.973,2.690 2.178,4.181 2.178,6.031 C2.178,7.752 3.019,8.832 6.693,9.654 ZM7.926,11.221 L7.926,18.311 C10.733,18.260 12.556,16.769 12.556,14.817 C12.556,13.070 11.630,11.991 7.926,11.221 Z"/>
 </svg>
                     </span>
-                    <span class="d-inline-block position-relative pointer add-links-wrap_icon currency-block">
-                        Currency
+                    <div class="d-inline-block simple_select_wrapper currency--wrap">
                         {!! Form::select('currency',site_currencies(),$currency,[
-                            'class' =>'form-control',
-                            'id' => 'change-currency'
-                        ]) !!}
-                    </span>
+                           'class' =>'select-2 currency--select-2 main-select',
+                           'id' => 'change-currency'
+                       ]) !!}
+                    </div>
+
 
                     <a href="{!! route('my_account_favourites') !!}"
                        class="d-inline-block pointer add-links-wrap_icon add-links-wrap_favorite active">

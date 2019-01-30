@@ -2487,7 +2487,18 @@ td.shp-cart-table_price-td {
     -moz-box-shadow: 9px 9px 12px 0 rgba(16,16,20,0.2);
     box-shadow: 9px 9px 12px 0 rgba(16,16,20,0.2);
 }
+/*start currency*/
+.currency--wrap{
+    width: 48px;
+}
 
+.currency--wrap .select2-selection__arrow{
+    display: none;
+}
+.currency-dropdown {
+    text-align: center;
+}
+/*end currency*/
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;

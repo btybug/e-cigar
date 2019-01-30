@@ -64,6 +64,10 @@ function heightBlock(mainDiv, element) {
 
 ////new
 $(function () {
+    $('.currency--select-2').select2({
+        minimumResultsForSearch: Infinity,
+           dropdownCssClass: "currency-dropdown"
+    });
     $('.select-2--no-search').select2({
         minimumResultsForSearch: Infinity
     });
