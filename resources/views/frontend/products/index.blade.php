@@ -257,7 +257,7 @@
                                             </div>
                                             <!--btn-->
                                             <a href="javascript:void(0)"
-                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer __add_to_card" data-id="{{ $product->variation_id }}">
+                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer add-to-card-modal" data-id="{{ $product->id }}">
                                                 <span class="product-card_btn-text">add to cart</span>
                                                 <span class="d-inline-block ml-auto">
                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -291,8 +291,50 @@
         </button>
 
     </main>
-@stop
 
+    <div class="modal fade" id="addToCardModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select variation</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a href="javascript:void(0)"
+                       class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
+                        <span class="product-card_btn-text">add to cart</span>
+                        <span class="d-inline-block ml-auto">
+                            <svg viewBox="0 0 18 22" width="18px" height="22px">
+                                <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
+                                      d="M14.305,3.679 L14.305,0.003 L3.694,0.003 L3.694,3.679 L-0.004,3.679 L-0.004,21.998 L18.003,21.998 L18.003,3.679 L14.305,3.679 ZM4.935,1.216 L13.064,1.216 L13.064,3.679 L4.935,3.679 L4.935,1.216 ZM16.761,20.785 L1.238,20.785 L1.238,4.891 L3.694,4.891 L3.694,7.329 L4.935,7.329 L4.935,4.891 L13.064,4.891 L13.064,7.329 L14.305,7.329 L14.305,4.891 L16.761,4.891 L16.761,20.785 Z"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+@stop
+@section('css')
+    <style>
+        @media (min-width: 992px){
+            #addToCardModal .modal-lg {
+                max-width: 1400px;
+            }
+        }
+
+        #addToCardModal .product-card_view.product-card_view--single {
+            height: 300px;
+        }
+
+    </style>
+@stop
 @section("js")
 
     <script>
@@ -350,30 +392,31 @@
                 $(location).attr("href","/products/"+ $("#choose_product").val())
             });
 
-            $("body").on('click', '.__add_to_card', function () {
-                var variationId = $(this).data("id");
+            $("body").on('click', '.add-to-card-modal', function () {
+                var id = $(this).data("id");
 
-                if (variationId && variationId != '') {
-//                    console.log(requiredItems)
-//                    return false;
-                    console.log(variationId);
+                if (id && id != '') {
                     $.ajax({
                         type: "post",
-                        url: "/add-to-cart",
+                        url: "/products/get-product-variations",
                         cache: false,
                         datatype: "json",
                         data: {
-                            uid: variationId
+                            id: id
                         },
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
                         success: function (data) {
-                            console.log(data);
                             if (!data.error) {
-                                $(".cart-count").html(data.count)
-                                $('#cartSidebar').html(data.headerHtml)
-                                $("#headerShopCartBtn").trigger('click');
+                                $("#addToCardModal").find('.modal-body').html(data.html);
+                                get_price();
+
+                                var plist = $(".poptions-group");
+                                for (var i = 0; i < plist.length; i++) {
+                                    get_promotion_price($(plist[i]).data('promotion'))
+                                }
+                                $("#addToCardModal").modal();
                             } else {
 
                             }
@@ -385,6 +428,162 @@
             });
 
 
+
+            $("body").on('change', '.select-variation-option', function () {
+                get_price();
+            });
+
+            $("body").on('change', '.select-variation-radio-option', function () {
+                get_price();
+            });
+
+            $("body").on('click', '.add-to-cart', function () {
+                var variationId = $("#variation_uid").val();
+
+                if (variationId && variationId != '') {
+                    var requiredItems = [];
+                    var optionalItems = [];
+
+                    var requiredItemsData = $(".required_item");
+                    var optionalItemsData = $(".optional_item");
+
+
+                    optionalItemsData.each(function (i, e) {
+                        if ($(e).parent().find('.optional_checkbox').is(':checked')) {
+                            optionalItems.push($(e).val());
+                        }
+                    });
+
+                    requiredItemsData.each(function (i, e) {
+                        requiredItems.push($(e).val());
+                    });
+//                    console.log(requiredItems)
+//                    return false;
+                    $.ajax({
+                        type: "post",
+                        url: "/add-to-cart",
+                        cache: false,
+                        datatype: "json",
+                        data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems},
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                $(".cart-count").html(data.count)
+                                $('#cartSidebar').html(data.headerHtml)
+                                $("#addToCardModal").modal('hide');
+                                $("#headerShopCartBtn").trigger('click');
+                            } else {
+
+                            }
+                        }
+                    });
+                } else {
+                    alert('Select available variation');
+                }
+            })
+
+            function get_price() {
+                var uid = $("#vpid").val();
+                var items = document.getElementsByClassName('select-variation-option');
+                $(".btn-add-to-cart").removeClass('add-to-cart');
+                let options = {};
+                for (var i = 0; i < items.length; i++) {
+                    options[$(items[i]).data('name')] = $(items[i]).val();
+                }
+
+                $.map($("[data-main-stock='" + uid + "'] input:radio:checked"), function (elem, idx) {
+                    options[$(elem).data('name')] = $(elem).val();
+                });
+
+                $.ajax({
+                    type: "post",
+                    url: "/products/get-price",
+                    cache: false,
+                    datatype: "json",
+                    data: {options: options, uid: uid},
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            var price = data.price;
+                            if (data.message) {
+                                price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + data.price;
+                            }
+                            $(".price-place").html(price);
+                            $("#variation_uid").val(data.variation_id);
+                            $(".btn-add-to-cart").addClass('add-to-cart');
+
+                        } else {
+                            $(".price-place").html('<span class="d-inline-block font-16">' + data.message + '</span>');
+                            $("#variation_uid").val('');
+                            $(".add-fav-variation").addClass('d-none').data('id', '').removeClass('active');
+                        }
+                    }
+                });
+            }
+
+            $("body").on('change', '.select-variation-poption', function () {
+                var pid = $(this).closest('.poptions-group').data('promotion');
+                get_promotion_price(pid);
+            });
+
+            $("body").on('change', '.select-variation-radio-poption', function () {
+                var pid = $(this).closest('.poptions-group').data('promotion');
+                get_promotion_price(pid);
+            });
+
+            function get_promotion_price(pid) {
+                let options = {};
+
+                $.map($("[data-promotion='" + pid + "'] input:radio:checked"), function (elem, idx) {
+                    options[$(elem).data('name')] = $(elem).val();
+                });
+
+                $.map($("[data-promotion='" + pid + "'] .select-variation-poption"), function (elem, idx) {
+                    options[$(elem).data('name')] = $(elem).val();
+                });
+
+                console.log(options);
+//            price-place-promotion
+                $.ajax({
+                    type: "post",
+                    url: "/products/get-price",
+                    cache: false,
+                    datatype: "json",
+                    data: {options: options, uid: pid, promotion: true},
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            var price = data.price;
+                            if (data.message) {
+                                price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + data.price;
+                            }
+
+                            $("[data-promotion='" + pid + "'] .price-place-promotion").html(price);
+                            $("[data-promotion='" + pid + "'] .variation_items").val(data.variation_id);
+//                        $("#variation_uid").val(data.variation_id);
+//                        $(".btn-add-to-cart").addClass('add-to-cart');
+                        } else {
+                            $("[data-promotion='" + pid + "'] .price-place-promotion").html('<span class="d-inline-block font-16">' + data.message + '</span>');
+//                        $("#variation_uid").val('');
+                        }
+                    }
+                });
+            }
+
+            $('body').on('change', '.products_custom_check input', function () {
+                if ($(this).is(':checked')) {
+                    $(this).closest('.product-single-info_title').next().removeClass('products_closed')
+                } else {
+                    $(this).closest('.product-single-info_title').next().addClass('products_closed')
+                }
+
+            })
 
             $(".product-card_like-icon").click(function () {
                 let url;
@@ -417,9 +616,6 @@
                     })
                 }
             });
-
-
-
 
         });
     </script>

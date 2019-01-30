@@ -19,9 +19,11 @@
             <div class="col-7">
                 <h3 class="font-20 font-sec-bold">{!! $stock->name !!}</h3>
                 <div class="font-main-light text-sec-clr">
-                    @foreach($item->attributes->variation->options as $voption)
-                        <span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>
-                    @endforeach
+                    @if($stock->type == 'variation_product')
+                        @foreach($item->attributes->variation->options as $voption)
+                            <span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

@@ -48,33 +48,7 @@ class ProductsController extends Controller
             }
         }
 
-//        dd($data,$selecteds);
-
-//        Stickers::getById()
-//        $result = array_map('array_filter', $data);
-//
-//        dd($result, $request->except('_token'));
-//        $count = array_map('count', $result);
-//        $selectedData = array_sum($count);
-
         return $this->view('index', compact('categories','category','products','filters','selecteds'))->with('filterModel',$request->all());
-    }
-
-    public function getType ($type, $category_slug = null)
-    {
-//        dd($category,$slug);
-        $topCategory = Category::with('children')->where('slug', $type)->whereNull('parent_id')->first();
-
-        if (! $topCategory) abort(404);
-
-        $categories = $topCategory->children;
-        $category = ((count($categories)) ? $categories->where('slug', $category_slug)->first() : null);
-
-        if (! $category && $category_slug != null) abort(404);
-
-        $attributes = Attributes::where('filter', 1)->whereNull('parent_id')->with('children')->get();
-
-        return $this->view('product_types', compact('attributes', 'categories', 'category', 'type'));
     }
 
     public function getSingle ($type, $slug)
@@ -85,74 +59,6 @@ class ProductsController extends Controller
         $variations = $vape->variations()->with('options')->get();
 
         return $this->view('single', compact(['vape', 'variations']));
-    }
-
-
-    public function getVape (Request $request)
-    {
-        $orderBy = $request->get('orderBy');
-        $orderByArray = explode(',', $request->get('orderBy', 'id,DESC'));
-        $column = $orderByArray[0];
-        $direction = $orderByArray[1];
-
-        $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
-            ->where('stock_translations.locale', app()->getLocale())
-            ->where('type', 'DEV')
-            ->where('status', true)
-            ->select('stocks.*', 'stock_translations.name')
-            ->orderBy($column, $direction)->paginate(5);
-        $attributes = Attributes::where('filter', 1)->whereNull('parent_id')->with('children')->get();
-
-        return $this->view('vapes', compact('products', 'orderBy', 'attributes'));
-    }
-
-    public function singleVape ($id)
-    {
-        $vape = Stock::findOrFail($id);
-        $variations = $vape->variations()->with('options')->get();
-
-        return $this->view('single_vape', compact('vape', 'variations'));
-    }
-
-    public function getJuice (Request $request, $slug = null)
-    {
-        $orderBy = $request->get('orderBy');
-        $products = [];
-        $orderByArray = explode(',', $request->get('orderBy', 'id,DESC'));
-        $column = $orderByArray[0];
-        $direction = $orderByArray[1];
-        $categories = Category::find(Category::JUICE_ID);
-        $category = ($slug) ? Category::where('slug', $slug)->first() : ((count($categories->children)) ? $categories->children->first() : null);
-
-        if ($category) {
-            $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
-                ->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
-                ->select('stocks.*', 'stock_translations.name')
-                ->where('stock_translations.locale', app()->getLocale())
-                ->where('type', 'JUE')
-                ->where('status', true)
-                ->where('stock_categories.categories_id', $category->id)
-                ->orderBy($column, $direction)->get();
-        }
-
-        $attributes = Attributes::where('filter', 1)->whereNull('parent_id')->with('children')->get();
-
-        return $this->view('juice', compact('products', 'orderBy', 'attributes', 'categories', 'category'));
-    }
-
-    public function categoryJuice ($id)
-    {
-//        $vape=Stock::findOrFail($id);
-//        $variations = $vape->variations()->with('options')->get();
-        return $this->view('category_juice');
-    }
-
-    public function singleJuice ($slug, $id)
-    {
-        $vape = Stock::with(['variations', 'stockAttrs'])->findOrFail($id);
-        $variations = $vape->variations()->with('options')->get();
-
-        return $this->view('single_vape', compact('vape', 'variations'));
     }
 
     public function getPrice (Request $request)
@@ -209,4 +115,14 @@ class ProductsController extends Controller
     }
 
 
+    public function getVariations(Request $request)
+    {
+        $model = Stock::with(['variations', 'stockAttrs'])->find($request->id);
+
+        if (! $model) return \Response::json(['error' => true]);
+
+        $html = \View('frontend.products._partials.add_to_card_modal_content',compact(['model']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
 }
