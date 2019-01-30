@@ -48,7 +48,7 @@ class ProductsController extends Controller
             }
         }
 
-        return $this->view('index', compact('categories','category','products','filters','selecteds'))->with('filterModel',$request->all());
+        return $this->view('index', compact('categories','category','products','filters','selecteds','type'))->with('filterModel',$request->all());
     }
 
     public function getSingle ($type, $slug)
@@ -58,7 +58,7 @@ class ProductsController extends Controller
 
         $variations = $vape->variations()->with('options')->get();
 
-        return $this->view('single', compact(['vape', 'variations']));
+        return $this->view('single', compact(['vape', 'variations', 'type']));
     }
 
     public function getPrice (Request $request)

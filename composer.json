@@ -11,6 +11,7 @@
         "cartalyst/stripe-laravel": "9.0.*",
         "dacastro4/laravel-gmail": "v0.6.1.1",
         "darryldecode/cart": "~4.0",
+        "davejamesmiller/laravel-breadcrumbs": "5.x",
         "dimsav/laravel-translatable": "^9.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.3",
