@@ -14,7 +14,7 @@
                         ]) !!}
                     </div>
                     {{--<div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">--}}
-                        {{--<span class="btn btn--filter text-tert-clr pointer">Filters</span>--}}
+                    {{--<span class="btn btn--filter text-tert-clr pointer">Filters</span>--}}
                     {{--</div>--}}
                     <div class="main-filters d-flex closed-mobile">
                         @if(count($selecteds))
@@ -36,8 +36,10 @@
                         <div class="slider-range d-flex flex-wrap align-items-center mr-4">
                             <div class="amount col-lg-4 col-5 pl-0">
                                 Price
-                                <input type="hidden" id="amount_range" name="amount" value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
-                                <input type="text" id="amount" name="" readonly class="font-main-bold font-16 w-100 border-0">
+                                <input type="hidden" id="amount_range" name="amount"
+                                       value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
+                                <input type="text" id="amount" name="" readonly
+                                       class="font-main-bold font-16 w-100 border-0">
                             </div>
                             <div id="slider-range" class="col-lg-8 col-7"></div>
                         </div>
@@ -181,10 +183,11 @@
                                                 <img class="card-img-top" src="{{ $product->image }}" alt="">
                                             </div>
                                             <!--like icon-->
-                                            <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute {{ (! $product->is_favorite)?:'active' }}" data-id="{{ $product->variation_id }}"> <!--gets class active-->
+                                            <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute {{ (! $product->is_favorite)?:'active' }}"
+                                                  data-id="{{ $product->variation_id }}"> <!--gets class active-->
                                                 <svg viewBox="0 0 20 18" width="20px" height="18px">
                                                     <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
-                                          d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
+                                                          d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
                                                 </svg>
                                             </span>
                                             <!--new label-->
@@ -244,12 +247,12 @@
                                                         </span>
                                                     </div>
                                                     <!--Price-->
-                                                    {{--<span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">--}}
-                                                        {{--$70--}}
-                                                        {{--<!--old price-->--}}
-                                                        {{--<span class="product-card_old-price font-sec-reg font-18 text-gray-clr lh-1 position-absolute">$77</span>--}}
-                                                    {{--</span>--}}
-                                                    <!--Price-->
+                                                {{--<span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">--}}
+                                                {{--$70--}}
+                                                {{--<!--old price-->--}}
+                                                {{--<span class="product-card_old-price font-sec-reg font-18 text-gray-clr lh-1 position-absolute">$77</span>--}}
+                                                {{--</span>--}}
+                                                <!--Price-->
                                                     <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
                                                        {{ convert_price($product->price,$currency) }}
                                                     </span>
@@ -257,7 +260,8 @@
                                             </div>
                                             <!--btn-->
                                             <a href="javascript:void(0)"
-                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer add-to-card-modal" data-id="{{ $product->id }}">
+                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer add-to-card-modal"
+                                               data-id="{{ $product->id }}">
                                                 <span class="product-card_btn-text">add to cart</span>
                                                 <span class="d-inline-block ml-auto">
                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -323,7 +327,7 @@
 @stop
 @section('css')
     <style>
-        @media (min-width: 992px){
+        @media (min-width: 992px) {
             #addToCardModal .modal-lg {
                 max-width: 1400px;
             }
@@ -338,28 +342,42 @@
 @section("js")
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
+
+            $(document).click(function (e) {
+                const containerBlock = $(".top-filters .arrow-wrap .nav-item--has-dropdown_dropdown");
+                let arrowLink = $('.top-filters .arrow-wrap .arrow-filters');
+                if (arrowLink.has(e.target).length === 0 && containerBlock.has(e.target).length === 0) {
+                    if (containerBlock.hasClass('open')) {
+                        containerBlock.removeClass('open')
+                        arrowLink.find('.icon.arrow').removeClass('opened')
+                    }
+                }
+            })
+
             function doSubmitForm() {
                 let form = $("#filter-form");
                 let category = $('.all_categories').val();
                 let search_text = $("#search-product").val();
                 let sort_by = $("#sortBy").val();
-                let url = "/products/"+category;
+                let url = "/products/" + category;
 
-                if(search_text){
+                if (search_text) {
                     var input = $("<input>")
                         .attr("type", "hidden")
                         .attr("name", "q").val(search_text);
                     form.append(input);
-                }if(sort_by){
+                }
+                if (sort_by) {
                     var input = $("<input>")
                         .attr("type", "hidden")
                         .attr("name", "sort_by").val(sort_by);
                     form.append(input);
                 }
-                form.attr('action',url);
+                form.attr('action', url);
                 form.submit();
             }
+
             var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,".(convert_price(500,$currency,false,true)) }}";
             console.log(rangeDataString);
             var rangeArray = rangeDataString.split(',');
@@ -368,28 +386,28 @@
                 min: 0,
                 max: '{{ convert_price(500,$currency,false,true) }}',
                 values: rangeArray,
-                slide: function( event, ui ) {
-                    $( "#amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-                    $( "#amount_range" ).val(ui.values[ 0 ] + "," + ui.values[ 1 ] );
+                slide: function (event, ui) {
+                    $("#amount").val(ui.values[0] + " - " + ui.values[1]);
+                    $("#amount_range").val(ui.values[0] + "," + ui.values[1]);
                 },
-                change: function(event, ui) {
+                change: function (event, ui) {
                     doSubmitForm();
                 }
             });
 
-            $( "#amount" ).val($("#slider-range").slider( "values", 0 ) +
-                " - " + $("#slider-range").slider( "values", 1 ) );
+            $("#amount").val($("#slider-range").slider("values", 0) +
+                " - " + $("#slider-range").slider("values", 1));
 
-            $("body").on('click','.save-filter-btn',function () {
+            $("body").on('click', '.save-filter-btn', function () {
                 doSubmitForm();
             });
 
-            $("body").on('change','.select-filter',function () {
+            $("body").on('change', '.select-filter', function () {
                 doSubmitForm();
             });
 
-            $("body").on('click','.reset-form',function () {
-                $(location).attr("href","/products/"+ $("#choose_product").val())
+            $("body").on('click', '.reset-form', function () {
+                $(location).attr("href", "/products/" + $("#choose_product").val())
             });
 
             $("body").on('click', '.add-to-card-modal', function () {
@@ -426,7 +444,6 @@
                     alert('Select available variation');
                 }
             });
-
 
 
             $("body").on('change', '.select-variation-option', function () {
@@ -594,7 +611,7 @@
                 let variation_id = $(this).data("id");
                 let _this = $(this);
 
-                if(variation_id){
+                if (variation_id) {
                     $.ajax({
                         type: "post",
                         url: url,
