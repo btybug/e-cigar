@@ -78,7 +78,7 @@ Route::group(['prefix' => '/support'], function () {
     Route::post('/get-cities', 'GuestController@getCities')->name('delivery_get_countries');
 
 //    Route::get('/whole-sellers', 'GuestController@getWholeSellers')->name('whole_sellers');
-    if (Gmail::check()) {
+    if (\App\Models\Gmail::check()) {
         Route::get('/contact-us', 'GuestController@getContactUs')->name('support_contact_us');
         Route::post('/contact-us', 'GuestController@postContactUs')->name('post_contact_us');
     }
