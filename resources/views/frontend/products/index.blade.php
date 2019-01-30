@@ -246,16 +246,21 @@
                     </svg>
                                                         </span>
                                                     </div>
-                                                    <!--Price-->
-                                                {{--<span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">--}}
-                                                {{--$70--}}
-                                                {{--<!--old price-->--}}
-                                                {{--<span class="product-card_old-price font-sec-reg font-18 text-gray-clr lh-1 position-absolute">$77</span>--}}
-                                                {{--</span>--}}
-                                                <!--Price-->
-                                                    <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
-                                                       {{ convert_price($product->price,$currency) }}
-                                                    </span>
+                                                    @if($product->new_price)
+                                                        <!--Price-->
+                                                        <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
+                                                             {{ convert_price($product->new_price,$currency) }}
+                                                             <!--old price-->
+                                                            <span class="product-card_old-price font-sec-reg font-18 text-gray-clr lh-1 position-absolute">
+                                                                 {{ convert_price($product->price,$currency) }}
+                                                            </span>
+                                                        </span>
+                                                    @else
+                                                        <!--Price-->
+                                                        <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
+                                                           {{ convert_price($product->price,$currency) }}
+                                                        </span>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <!--btn-->

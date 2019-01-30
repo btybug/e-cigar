@@ -21,7 +21,9 @@
                 <div class="font-main-light text-sec-clr">
                     @if($stock->type == 'variation_product')
                         @foreach($item->attributes->variation->options as $voption)
+                            @if($voption->attribute_sticker)
                             <span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>
+                            @endif
                         @endforeach
                     @endif
                 </div>
