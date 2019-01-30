@@ -42,6 +42,12 @@ class AppServiceProvider extends ServiceProvider
             $freshToken=Gmail::refreshToken(null);
             $old=Gmail::config()?Gmail::config():[];
             $token=array_merge($old,$freshToken);
+            if(!\File::isDirectory(storage_path('app'.DS.'gmail'))){
+                \File::makeDirectory(storage_path('app'.DS.'gmail'));
+            }
+            if(!\File::isDirectory(storage_path('app'.DS.'gmail'.DS.'tokens'))){
+                \File::makeDirectory(storage_path('app'.DS.'gmail'.DS.'tokens'));
+            }
             \File::put(storage_path('app'.DS.'gmail'.DS.'tokens'.DS.'gmail-json.json'),json_encode($token,true));
         }
     }
