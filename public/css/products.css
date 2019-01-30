@@ -608,7 +608,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .top-filters .main-filters .slider-range {
-    max-width: 375px;
+    max-width: 400px;
     width: 100%;
     margin-left: 20px;
 }
@@ -2502,6 +2502,14 @@ td.shp-cart-table_price-td {
 @media (max-width: 991px) {
     .all-filters .filter-wall {
         margin-right: 25px;
+    }
+}
+@media (min-width: 769px){
+    .two-links-wrap.products-wrap_col .product-card{
+        min-height: 481px
+    }
+    .two-links-wrap.products-wrap_col .product-card:hover .product-card-thumbs {
+        min-height: 52px;
     }
 }
 @media (max-width: 768px) {

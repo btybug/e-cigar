@@ -34,14 +34,17 @@
                             </div>
                         @endif
                         <div class="slider-range d-flex flex-wrap align-items-center mr-4">
-                            <div class="amount col-lg-4 col-5 pl-0">
+                            <div class="col-lg-2 col-2 ">
                                 Price
+                            </div>
+                            <div id="slider-range" class="col-lg-6 col-5"></div>
+                            <div class="amount col-lg-4 col-5">
+
                                 <input type="hidden" id="amount_range" name="amount"
                                        value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
                                 <input type="text" id="amount" name="" readonly
                                        class="font-main-bold font-16 w-100 border-0">
                             </div>
-                            <div id="slider-range" class="col-lg-8 col-7"></div>
                         </div>
 
 
