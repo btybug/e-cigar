@@ -43,7 +43,7 @@ class UpdateContactUs extends Command
             if(\File::exists(base_path('test.txt'))){
                 $content=\File::get(base_path('test.txt'));
             }
-            $content=date('Y-m-d h:m:s')."\r\n";
+            $content=$content.date('Y-m-d h:m:s')."\r\n";
             \File::put(base_path('test.txt'),$content);
 
 
