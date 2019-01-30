@@ -278,16 +278,27 @@
                                                 Gallery</h3>
                                             <div class="tecnical_gallery-container mx-auto">
 
-                                                @if($vape->videos && count($vape->videos))
-                                                    @foreach($vape->videos as $video)
-                                                        <a href="https://www.youtube.com/watch?v={{ $video }}"
-                                                           class="tecnical_gallery_obj-holder lightbox-item"
-                                                           data-lightbox-gallery="gallery_name">
-                                                            <img src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
-                                                                 alt="">
-                                                        </a>
-                                                    @endforeach
-                                                @endif
+                                                <div class="row video-carousel-wrap">
+                                                    <div class="col-2">
+                                                        <div class="video--carousel-thumb d-flex flex-column" data-carousel-controller-for=".video--carousel">
+                                                            @if($vape->videos && count($vape->videos))
+                                                                @foreach($vape->videos as $video)
+                                                            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg" alt="{{ $video }}"></div>
+                                                                @endforeach
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <div class="video--carousel">
+                                                            @if($vape->videos && count($vape->videos))
+                                                                @foreach($vape->videos as $video)
+                                                                    <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/{{ $video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                                                @endforeach
+                                                            @endif
+
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                                 @if($vape->other_images && count($vape->other_images))
                                                     @foreach($vape->other_images as $other_image)
@@ -300,34 +311,6 @@
                                                         </a>
                                                     @endforeach
                                                 @endif
-
-
-
-                                                {{--<a href="/public/img/temp/psoduct-descr.png" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">--}}
-                                                {{--<img src="/public/img/temp/gallery-1.jpg" alt="">--}}
-                                                {{--</a>--}}
-                                                {{--<a href="/public/img/temp/gallery-1.jpg" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">--}}
-                                                {{--<img src="/public/img/temp/psoduct-descr.png" alt="">--}}
-                                                {{--</a>--}}
-<div class="d-flex flex video-carousel-wrap">
-    <div class="col-2">
-        <div class="video--carousel-thumb d-flex flex-column" data-carousel-controller-for=".video--carousel">
-            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/71Gt46aX9Z4/3.jpg" alt=""></div>
-            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/hD5hIqeKNVE/2.jpg" alt=""></div>
-            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/WNeLUngb-Xg/3.jpg" alt=""></div>
-            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/Fjl48u_qWdI/3.jpg" alt=""></div>
-        </div>
-    </div>
-    <div class="col-10">
-        <div class="video--carousel">
-            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/71Gt46aX9Z4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/hD5hIqeKNVE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/WNeLUngb-Xg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/Fjl48u_qWdI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-        </div>
-    </div>
-</div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -576,6 +559,14 @@
         .share-social-btn:hover .product-share-social {
             visibility: visible;
             opacity: 1;
+        }
+
+        .video--carousel-thumb .fs-carousel-active{
+            border: 2px solid #5184e5 !important;
+        }
+
+        .video--carousel-thumb .fs-carousel-item{
+            border: 2px solid transparent;
         }
     </style>
 @stop
