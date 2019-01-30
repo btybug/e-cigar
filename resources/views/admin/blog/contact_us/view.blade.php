@@ -25,9 +25,9 @@
                                 <div class="col-md-9 col-xs-12">
                                     <div class="user-content h-100">
                                         <h3>{!! $model->email !!}</h3>
-                                        <p class="info">
+                                        <div class="info">
                                             {!! \App\Models\Gmail::getDecodedBody($model->message) !!}
-                                        </p>
+                                        </div>
                                         <div class="attachments">
                                             <span class="title">Attachments</span>
                                             <ul>
