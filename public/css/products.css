@@ -2456,6 +2456,25 @@ td.shp-cart-table_price-td {
     object-fit: contain;
     font-family:"object-fit: contain;";
 }
+.video-carousel-wrap .video--carousel-thumb .fs-carousel-canister{
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100% !important;
+    transform: none!important;
+}
+.video-carousel-wrap .video-item-thumb{
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+.video-carousel-wrap .video-item-thumb img{
+ width: 100%;
+    height: 100px;
+    object-fit: cover;
+    font-family:"object-fit: cover;";
+}
+
 /*end tecnical tabs product*/
 
 

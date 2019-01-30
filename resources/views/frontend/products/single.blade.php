@@ -277,6 +277,7 @@
                                             <h3 class="tecnical-desc_sub-title font-main-bold font-22 text-uppercase">
                                                 Gallery</h3>
                                             <div class="tecnical_gallery-container mx-auto">
+
                                                 @if($vape->videos && count($vape->videos))
                                                     @foreach($vape->videos as $video)
                                                         <a href="https://www.youtube.com/watch?v={{ $video }}"
@@ -308,6 +309,25 @@
                                                 {{--<a href="/public/img/temp/gallery-1.jpg" class="tecnical_gallery_obj-holder lightbox-item" data-lightbox-gallery="photo_gallery">--}}
                                                 {{--<img src="/public/img/temp/psoduct-descr.png" alt="">--}}
                                                 {{--</a>--}}
+<div class="d-flex flex video-carousel-wrap">
+    <div class="col-2">
+        <div class="video--carousel-thumb d-flex flex-column" data-carousel-controller-for=".video--carousel">
+            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/71Gt46aX9Z4/3.jpg" alt=""></div>
+            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/hD5hIqeKNVE/2.jpg" alt=""></div>
+            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/WNeLUngb-Xg/3.jpg" alt=""></div>
+            <div class="video-item-thumb"><img src="https://img.youtube.com/vi/Fjl48u_qWdI/3.jpg" alt=""></div>
+        </div>
+    </div>
+    <div class="col-10">
+        <div class="video--carousel">
+            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/71Gt46aX9Z4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/hD5hIqeKNVE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/WNeLUngb-Xg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/Fjl48u_qWdI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        </div>
+    </div>
+</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -571,6 +591,23 @@
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
         $(document).ready(function () {
+//          ----start  video carousel----
+
+            $(".video--carousel").carousel({
+                pagination: false,
+                controls: false,
+            });
+
+            $(".video--carousel-thumb").carousel({
+                controls: false,
+                pagination: false,
+//                show: 4,
+                matchWidth:false
+            });
+
+
+//          ----end  video carousel----
+
             $(".tecnical_gallery_obj-holder").lightbox();
 //                    start carousel tabs
             let activeTab = $('#carousel-tabs-wrap a').filter('.active');
@@ -593,18 +630,17 @@
                 pagination: false
             });
             if ($(window).width() > 1400) {
-                console.log('metca')
-                $(".fs-touch-element").touch("destroy");
+                $(".carousel-tabs .fs-touch-element").touch("destroy");
             }
             else {
-                $(".fs-touch-element").touch();
+                $(".carousel-tabs .fs-touch-element").touch();
             }
             $(window).resize(function () {
                 if ($(window).width() > 1400) {
-                    $(".fs-touch-element").touch("destroy");
+                    $(".carousel-tabs .fs-touch-element").touch("destroy");
                 }
                 else {
-                    $(".fs-touch-element").touch();
+                    $(".carousel-tabs .fs-touch-element").touch();
                 }
             });
 
