@@ -116,13 +116,23 @@ class ProductSearch
         }
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
             ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')
-            ->leftJoin('stock_sales', 'stock_variations.id', '=', 'stock_sales.variation_id')
+            ->leftJoin('stock_sales', function($join) {
+                $now = strtotime(now());
+                $join->on('stock_sales.variation_id', '=', 'stock_variations.id');
+                $join->where('stock_sales.canceled', 0);
+                $join->whereRaw("stock_sales.start_date <= ? AND stock_sales.end_date >= ?",
+                    array($now, $now)
+                );
+            })
+
             ->leftJoin('attributes_stickers', 'stock_variation_options.attribute_sticker_id', '=', 'attributes_stickers.id')
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale', app()->getLocale())
             ->where('stocks.status', true);
+
         return $query->select('stocks.*', 'stock_translations.name',
-            'stock_translations.short_description', 'stock_variations.price', 'stock_variations.id as variation_id', 'favorites.id as is_favorite', 'stock_sales.price as new_price');
+            'stock_translations.short_description', 'stock_variations.price', 'stock_variations.id as variation_id',
+            'favorites.id as is_favorite', 'stock_sales.price as new_price');
     }
 //    private static function createObject($category = null,$request) {
 //        $query = AttributeStickers::leftJoin('stock_variation_options', 'attributes_stickers.id', '=', 'stock_variation_options.attribute_sticker_id');
