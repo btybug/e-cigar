@@ -27,6 +27,8 @@ class Kernel extends ConsoleKernel
     {
          $schedule->command('send:emails')
                   ->everyMinute();
+         $schedule->command('gmail:update')
+                  ->everyMinute();
     }
 
     /**
