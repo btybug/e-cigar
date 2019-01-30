@@ -3,7 +3,7 @@
     <div class="col-8 p-sm-0">
         @foreach($filter->stickers as $sticker)
             <div class="single-wrap">
-                <div class="custom-control custom-radio custom-control-inline align-items-center">
+                <div class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
                     {!! Form::radio("select_filter[$filter->id]",$sticker->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$filter->id.$sticker->id]) !!}
                     <label class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
                            for="customRadio{{ $filter->id.$sticker->id }}">{{ $sticker->name }}

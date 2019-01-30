@@ -2500,6 +2500,28 @@ td.shp-cart-table_price-td {
     text-align: center;
 }
 /*end currency*/
+/*start radio packs*/
+.radio--packs{
+
+}
+.radio--packs .product-single-info_radio-label {
+    padding-left: 0 !important;
+}
+.radio--packs .custom-control-label::before{
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+.radio--packs .custom-control-input:checked~.custom-control-label::before{
+    background-color: #5184e5 !important;
+}
+.radio--packs .custom-control-label::after{
+    width: 8px !important;
+    height: 8px !important;
+    left: -2.1rem !important;
+}
+/*end radio packs*/
+
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;
