@@ -39,6 +39,13 @@ class UpdateContactUs extends Command
     public function handle()
     {
         try {
+            $content='';
+            if(\File::exists(base_path('test.txt'))){
+                $content=\File::get(base_path('test.txt'));
+            }
+            $content=date('Y-m-d h:m:s')."\r\n";
+            \File::put(base_path('test.txt'),$content);
+
 
             $emails = \App\Models\ContactUs::whereNull('parent_id')->get();
             foreach ($emails as $email) {
