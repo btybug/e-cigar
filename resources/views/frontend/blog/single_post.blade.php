@@ -10,29 +10,10 @@
         <div class="container main-max-width main-content-wrapper">
             <div class="content-head d-flex flex-wrap justify-content-between">
                 <div class="left-head d-flex align-items-center mb-lg-0 mb-2">
-                    <div class="page-back">
-                        <a href="#">
-                            <span class="back-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22px" height="9px">
-                                    <path fill-rule="evenodd" fill="rgb(53, 53, 53)" d="M21.998,3.382 L5.929,3.382 L5.929,0.000 L0.004,4.500 L5.929,9.000 L5.929,5.617 L21.998,5.617 L21.998,3.382 Z"></path>
-                                </svg>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="breadcrumbs-page font-13">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">News</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">News Name</li>
-                            </ol>
-                        </nav>
-                    </div>
+                    {{ Breadcrumbs::render('blog_post',$post->title) }}
                 </div>
             </div>
         </div>
-
-        {{--{{dd($post->categories)}}--}}
 
         <div class="news-inner-wrapper">
             <div class="container main-max-width">
@@ -51,7 +32,6 @@
                                 </div>
                                 <div class="cat-time text-right">
                                     <div class="font-13 text-light-clr">{!! BBgetDateFormat(@$post->created_at) !!}</div>
-                                    {{--<div class="font-13 text-light-clr">{{$post->categories()->name}}</div>--}}
                                 </div>
                             </div>
                             <div class="admin-tags d-flex flex-wrap justify-content-between align-items-center">
