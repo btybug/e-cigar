@@ -175,9 +175,13 @@
                                                 </svg>
                                             </span>
                                             <!--new label-->
-                                            <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
-                                            <!--sale label-->
-                                            <span class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">-10%</span>
+                                            {{--<span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>--}}
+                                            @if($product->new_price)
+                                                <!--sale label-->
+                                                <span class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">
+                                                    sale
+                                                </span>
+                                            @endif
                                         </div>
                                         <div class="product-card_body">
                                             <!--product image thumbs-->
