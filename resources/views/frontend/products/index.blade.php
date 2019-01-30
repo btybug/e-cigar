@@ -175,8 +175,9 @@
                     <div class="row justify-content-md-start justify-content-center">
                         @if(count($products))
                             @foreach($products as $product)
-                                <div class="products-wrap_col">
+                                <div class="products-wrap_col two-links-wrap">
                                     <div class="product-card position-relative">
+                                        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}">
                                         <div class="product-card_view position-relative">
                                             <!--product main image-->
                                             <div>
@@ -211,9 +212,9 @@
                                             </div>
                                             <div class="product-card_body-text">
                                                 <h2 class="card-title font-21 font-sec-bold">
-                                                    <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}">
+                                                    <span class="text-tert-clr">
                                                         {{ str_limit($product->name,30) }}
-                                                    </a>
+                                                    </span>
                                                 </h2>
                                                 <p class="card-text font-main-light font-15 text-light-clr">
                                                     {{ str_limit($product->short_description,30) }}
@@ -264,19 +265,19 @@
                                                 </div>
                                             </div>
                                             <!--btn-->
-                                            <a href="javascript:void(0)"
-                                               class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer add-to-card-modal"
-                                               data-id="{{ $product->id }}">
-                                                <span class="product-card_btn-text">add to cart</span>
-                                                <span class="d-inline-block ml-auto">
+                                        </div>
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer add-to-card-modal"
+                                           data-id="{{ $product->id }}">
+                                            <span class="product-card_btn-text">add to cart</span>
+                                            <span class="d-inline-block ml-auto">
                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
 <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
       d="M14.305,3.679 L14.305,0.003 L3.694,0.003 L3.694,3.679 L-0.004,3.679 L-0.004,21.998 L18.003,21.998 L18.003,3.679 L14.305,3.679 ZM4.935,1.216 L13.064,1.216 L13.064,3.679 L4.935,3.679 L4.935,1.216 ZM16.761,20.785 L1.238,20.785 L1.238,4.891 L3.694,4.891 L3.694,7.329 L4.935,7.329 L4.935,4.891 L13.064,4.891 L13.064,7.329 L14.305,7.329 L14.305,4.891 L16.761,4.891 L16.761,20.785 Z"/>
 </svg>
                                 </span>
-                                            </a>
-                                        </div>
-
+                                        </a>
                                     </div>
                                 </div>
                             @endforeach
@@ -354,7 +355,8 @@
                 let arrowLink = $('.top-filters .arrow-wrap .arrow-filters');
                 if (arrowLink.has(e.target).length === 0 && containerBlock.has(e.target).length === 0) {
                     if (containerBlock.hasClass('open')) {
-                        containerBlock.removeClass('open')
+                        containerBlock.removeClass('open');
+                        $('.top-filters .main-filters').addClass('closed-mobile');
                         arrowLink.find('.icon.arrow').removeClass('opened')
                     }
                 }
