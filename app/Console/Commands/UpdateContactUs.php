@@ -45,13 +45,15 @@ class UpdateContactUs extends Command
             }
             $content=$content.date('Y-m-d h:m:s')."\r\n";
             \File::put(base_path('test.txt'),$content);
-
-
             $emails = \App\Models\ContactUs::whereNull('parent_id')->get();
             foreach ($emails as $email) {
+                $content=$content."1\r\n";
+                \File::put(base_path('test.txt'),$content);
                 $gmail = \App\Models\Gmail::message()->subject($email->uniq_id)->preload()->all();
                 $count = count($gmail);
                 if ($count) {
+                    $content=$content."2\r\n";
+                    \File::put(base_path('test.txt'),$content);
                     if ($gmail[0]->getId() != $email->gmail_id) {
                         $email->gmail_id = $gmail[0]->getId();
                         $email->cron_status = 1;
@@ -59,6 +61,8 @@ class UpdateContactUs extends Command
                     }
                     $email->message = $gmail[0]->getHtmlBody(true);
                     if (($count - 1) > $email->children()->count()) {
+                        $content=$content."3\r\n";
+                        \File::put(base_path('test.txt'),$content);
                         $missed_from = ($count - 1) - $email->children()->count();
                         foreach ($gmail as $key => $mail) {
                             if ($key == $missed_from) {
