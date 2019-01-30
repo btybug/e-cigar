@@ -21,7 +21,7 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
 });
 
 Route::get('mail-crone', function () {
-
+return view('mail.contact_us');
 });
 
 //Knowledge base

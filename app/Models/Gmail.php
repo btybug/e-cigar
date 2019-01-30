@@ -37,4 +37,9 @@ class Gmail extends \LaravelGmail
         $content = str_replace('_', '/', str_replace('-', '+', $content));
         return base64_decode($content);
     }
+    public static function getEncodedBody($content)
+    {
+        $content= base64_encode($content);
+        return str_replace('/', '_', str_replace('+', '-', $content));
+    }
 }

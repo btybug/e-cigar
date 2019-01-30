@@ -129,6 +129,7 @@ class GuestController extends Controller
 
     public function postContactUs(ContactUsRequest $request)
     {
+
         $data = $request->all();
 //        try{
         $result = [
@@ -146,6 +147,7 @@ class GuestController extends Controller
         \Config::set('mail.from.address',$data['email']);
         \Config::set('mail.from.name',$data['name']);
         \Mail::to(Gmail::user())->send($email);
+        $result['message']=Gmail::getEncodedBody($result['message']);
         $contact_us=\App\Models\ContactUs::create($result);
         $contact_us->recipients()->create(['name'=>env('APP_NAME'),'email'=>Gmail::user()]);
 //        }catch (\Exception $exception){
