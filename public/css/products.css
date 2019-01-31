@@ -2629,4 +2629,11 @@ td.shp-cart-table_price-td {
         white-space: nowrap;
         width: 50%;
     }
+    .single-product-dtls-wrap .price-place-promotion{
+        text-align: left;
+    }
+    .tecnical_row .tecnical-labels.list-unstyled{
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
 }
