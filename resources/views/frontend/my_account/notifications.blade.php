@@ -122,6 +122,18 @@
 
             <div class="profile-inner-pg-right-cnt">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
+                   <div class="col-md-9">
+                       <div class="col-md-6 float-left">
+                        <h3>Notifications</h3>
+                       </div>
+                       <div class="col-md-6 float-right">
+                           <div class="notification-actions-bar d-none">
+                               <a class="btn btn-danger">Delete</a>
+                               <a class="btn btn-info">Mark us Read</a>
+                               <a class="btn btn-warning">Mark us Unread</a>
+                           </div>
+                       </div>
+                   </div>
                    <div class="col-lg-9">
                        <table class="table table-striped table-ntfs">
                            <thead>
@@ -135,11 +147,13 @@
                            </thead>
                            <tbody>
                            @foreach($messages as $message)
-                               <tr>
-                                   <th scope="row"><input type="checkbox"></th>
+                               <tr style="{{ (! $message->is_read) ? 'color:black;font-wight:bold;background:gray' : '' }}">
+                                   <th scope="row">
+                                       <input name="notifications" value="{{ $message->id }}" class="message-checkbox" type="checkbox">
+                                   </th>
                                    <td>{!! $message->updated_at !!}</td>
                                    <td>{!! $message->subject !!}</td>
-                                   <td>{!! $message->type !!}</td>
+                                   <td>{!! $message->type !!} </td>
                                    <td><button class="ntfs-btn btn btn-info __modal rounded-0" data-toggle="modal" data-id="{!! $message->id !!}"><i class="fa fa-eye"></i></button></td>
                                </tr>
                            @endforeach
@@ -181,5 +195,18 @@
 
 @section("js")
     <script src={{asset("public/js/my-account/notifications.js")}}></script>
+    <script>
+        $("body").on('change','.message-checkbox',function () {
+            var notifications = [];
+            $. each($("input[name='notifications']:checked"), function(){
+                notifications.push($(this). val());
+            });
 
+            if(notifications.length > 0){
+                $(".notification-actions-bar").removeClass('d-none').addClass('d-flex')
+            }else{
+                $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+            }
+        });
+    </script>
 @stop

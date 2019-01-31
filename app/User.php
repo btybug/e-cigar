@@ -104,7 +104,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function customEmails()
     {
-        return $this->belongsToMany(CustomEmails::class,'custom_email_user','user_id','custom_email_id');
+        return $this->belongsToMany(CustomEmails::class,'custom_email_user','user_id','custom_email_id')->withPivot(['status as is_read']);
     }
 
 }
