@@ -2623,4 +2623,10 @@ td.shp-cart-table_price-td {
         top: 50px;
         z-index: 9999;
     }
+    .breadcrumbs-page .breadcrumb-item:last-of-type{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 50%;
+    }
 }

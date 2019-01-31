@@ -63,7 +63,7 @@ function heightBlock(mainDiv, element) {
 
 
 ////new
-$(function () {
+
     $('.currency--select-2').select2({
         minimumResultsForSearch: Infinity,
            dropdownCssClass: "currency-dropdown"
@@ -193,7 +193,7 @@ $(function () {
     openSidebar($('#ptofileBtn'), $('#profileSidebar'));
     openSidebar($('#headerShopCartBtn'), $('#cartSidebar'));
 
-});
+
 
 
 function openSidebar(btn, sidebar) {
