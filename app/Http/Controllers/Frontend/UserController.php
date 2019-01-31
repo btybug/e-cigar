@@ -261,7 +261,7 @@ class UserController extends Controller
 
     public function getVerification()
     {
-        if(\Auth::user()->status) abort(404);
+        if (\Auth::user()->status) abort(404);
 
         return $this->view('verification');
     }
@@ -275,7 +275,7 @@ class UserController extends Controller
     {
         $user = \Auth::user();
 
-        if($user->status) abort(404);
+        if ($user->status) abort(404);
 
         $item = $request->file('verification_image');
         $folder = Folders::where('name', 'drive')->first();
@@ -300,22 +300,22 @@ class UserController extends Controller
 
     public function getNotifications()
     {
-        $user=\Auth::getUser();
-        $messages=$user->customEmails()->where('custom_emails.status',1)->orderBy('id','DESC')->get();
-        return $this->view('notifications',compact('messages'));
+        $user = \Auth::getUser();
+        $messages = $user->customEmails()->where('custom_emails.status', 1)->orderBy('id', 'DESC')->get();
+        return $this->view('notifications', compact('messages'));
     }
 
     public function getNotificationsContent(Request $request)
     {
-        $user=\Auth::getUser();
-        $messages=$user->customEmails()
-                        ->where('custom_emails.status',1)
-                        ->where('custom_emails.id','=',$request->id)
-                        ->first();
+        $user = \Auth::getUser();
+        $messages = $user->customEmails()
+            ->where('custom_emails.status', 1)
+            ->where('custom_emails.id', '=', $request->id)
+            ->first();
         echo $messages['content'];
     }
 
-    public function attachFavorite (Request $request)
+    public function attachFavorite(Request $request)
     {
         $id = $request->get('id');
         $user = \Auth::user();
@@ -324,13 +324,25 @@ class UserController extends Controller
         return ['error' => false];
     }
 
-    public function detachFavorite (Request $request)
+    public function detachFavorite(Request $request)
     {
         $id = $request->get('id');
         $user = \Auth::user();
         $user->favorites()->detach($id);
 
         return ['error' => false];
+    }
+
+    public function postTicketsCategory(Request $request)
+    {
+        $category_id=$request->get('category');
+        $user=\Auth::user();
+        $category=Category::where('id',$category_id)->where('type','tickets')->first();
+        if($category && \View::exists($this->view.'.ticket_categories.'.$category->slug)){
+            $html=\View::make($this->view.'.ticket_categories.'.$category->slug,compact('user','category'))->render();
+            return response()->json(['error'=>false,'html'=>$html]);
+        }
+        return response()->json(['error'=>true]);
     }
 }
 

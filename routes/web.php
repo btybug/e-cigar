@@ -128,6 +128,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
         Route::get('/', 'Frontend\UserController@getTickets')->name('my_account_tickets');
         Route::get('/new', 'Frontend\UserController@getTicketsNew')->name('my_account_tickets_new');
         Route::post('/new', 'Frontend\UserController@postTicketsNew')->name('my_account_tickets_new_post');
+        Route::post('/category-select', 'Frontend\UserController@postTicketsCategory');
         Route::get('/view/{id}', 'Frontend\UserController@getTicketsView')->name('my_account_tickets_view');
         Route::post('/mark-complete/{id}', 'Frontend\UserController@ticketMarkCompleted')->name('my_account_tickets_mark_completed');
     });
