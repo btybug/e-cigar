@@ -436,7 +436,7 @@ Route::group(['prefix' => 'gmail'], function () {
 
     Route::get('/oauth/callback', function (){
         LaravelGmail::makeToken();
-        return redirect()->route('admin_gmail_settings');
+        return redirect()->route('admin_settings_connections');
     });
 
     Route::get('/oauth/gmail/logout', function (){
