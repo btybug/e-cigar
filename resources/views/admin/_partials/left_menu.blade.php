@@ -145,20 +145,6 @@
                 </ul>
             </li>
             @endok
-            @ok('admin_forum')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-forumbee"></i>
-                    <span>Forum</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('admin_forum')}}"><i class="fa fa-circle-o"></i> Show</a></li>
-                </ul>
-            </li>
-            @endok
             @ok('admin_tickets')
             <li class="treeview">
                 <a href="#">
@@ -183,9 +169,6 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    @ok('admin_tools')
-                    <li><a href="{{route('admin_tools')}}"><i class="fa fa-circle-o"></i> Tools</a></li>
-                    @endok
                     @ok('admin_categories_list')
                     <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     @endok
