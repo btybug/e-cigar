@@ -307,7 +307,7 @@
                                                     </thead>
 
                                                     <tbody class="v-options-list">
-                                                        @if($model->stockAttrs)
+                                                        @if($model && $model->stockAttrs)
                                                             @foreach($model->stockAttrs as $selected)
                                                                 @include('admin.inventory._partials.specifications')
                                                             @endforeach
@@ -561,7 +561,6 @@
                                                         <th>SKU</th>
                                                         <th>Qty</th>
                                                         <th>Price</th>
-                                                        <th>Image</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                     </thead>
@@ -1080,7 +1079,7 @@
                     {options: attributesJson},
                     function (res) {
                         if (!res.error) {
-                            $('#variations-table .all-list-attrs').append(res.html)
+                            $('#variations .all-list-attrs').append(res.html)
                         }
                     }
                 );

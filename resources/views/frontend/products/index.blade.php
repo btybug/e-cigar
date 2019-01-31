@@ -189,11 +189,13 @@
                                                 <div class="product-card_thumb-img-holder pointer active_slider">
                                                     <img class="" src="{{ $product->image }}" alt="">
                                                 </div>
-                                                @if($product->other_images && is_array($product->other_images))
-                                                    @foreach($product->other_images as $other_image)
-                                                        <div class="product-card_thumb-img-holder pointer">
-                                                            <img class="" src="{{ $other_image }}" alt="">
-                                                        </div>
+                                                @if($product->variations)
+                                                    @foreach($product->variations as $variation)
+                                                        @if($variation->image)
+                                                            <div class="product-card_thumb-img-holder pointer">
+                                                                <img class="" src="{{ $variation->image }}" alt="{{ $variation->name }}">
+                                                            </div>
+                                                        @endif
                                                     @endforeach
                                                 @endif
                                             </div>
