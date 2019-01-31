@@ -29,10 +29,60 @@
                 </li>
             </ul>
             <div class="tab-content">
-                {!! Form::open() !!}
+                {!! Form::open(['class'=>'form-horizontal']) !!}
                 <button class="btn btn-info pull-right mb-20 mt20" type="submit">Save</button>
                 <div class="tab-pane fade active in" id="admin_settings_general">
                     <div class="row">
+                        <fieldset>
+                            <!-- Form Name -->
+                            <legend>Google Api Credentials</legend>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">MAIL DRIVER</label>
+                                <div class="col-md-4">
+                                    {!! Form::text('MAIL_DRIVER',env('MAIL_DRIVER'),['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">MAIL HOST</label>
+                                <div class="col-md-4">
+                                    {!! Form::text('MAIL_HOST',env('MAIL_HOST'),['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">MAIL PORT</label>
+                                <div class="col-md-4">
+                                    {!! Form::text('MAIL_PORT',env('MAIL_PORT'),['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">MAIL USERNAME</label>
+                                <div class="col-md-4">
+                                    {!! Form::text('MAIL_USERNAME',env('MAIL_USERNAME'),['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">MAIL PASSWORD</label>
+                                <div class="col-md-4">
+                                    {!! Form::text('MAIL_PASSWORD',env('MAIL_PASSWORD'),['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="textinput">MAIL ENCRYPTION</label>
+                                <div class="col-md-4">
+                                    {!! Form::text('MAIL_ENCRYPTION',env('MAIL_ENCRYPTION'),['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <!-- Button -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="singlebutton"></label>
+                                <div class="col-md-4">
+                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                 </div>
                 {!! Form::close() !!}
