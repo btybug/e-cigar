@@ -62,7 +62,7 @@
                                                         @endforeach
                                                     </ul>
                                                 @endif
-                                                <div class="tab-content">
+                                                <div class="tab-content mt-20">
                                                     @if(count(get_languages()))
                                                         @foreach(get_languages() as $language)
                                                             <div id="{{ strtolower($language->code) }}"
@@ -202,7 +202,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9">
-                                    <div class="basic-center basic-wall scrollbar_media_tab">
+                                    <div class="basic-center basic-wall scrollbar_media_tab h-100">
                                         <div class="tab-content">
                                             <div id="mediaotherimage" class="tab-pane fade ">
                                                 {!! media_button('other_images',$model,true) !!}
@@ -219,7 +219,7 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="media-videos-preview" style="display: flex">
+                                                    <div class="media-videos-preview mt-20" style="display: flex;flex-wrap: wrap">
                                                         @if(isset($model->videos) && $model->videos && count($model->videos))
                                                             @foreach($model->videos as $video)
                                                                 <div class="video-single-item" style="display: flex">
@@ -227,7 +227,7 @@
                                                                             src="https://www.youtube.com/embed/{{ $video }}">
                                                                     </iframe>
                                                                     <div>
-                                                                        <button class="btn btn-danger remove-video-single-item">
+                                                                        <button class="btn btn-danger remove-video-single-item btn-sm">
                                                                             <i class="fa fa-trash"></i></button>
                                                                     </div>
                                                                     <input type="hidden" name="videos[]"
@@ -241,19 +241,19 @@
                                             </div>
                                             <div id="mediastickers" class="tab-pane fade ">
                                                 <div class="panel-heading d-flex justify-content-between align-items-center">
-                                                    <span>
+                                                    <h4>
                                                        Stickers
-                                                    </span>
+                                                    </h4>
                                                     <button type="button" class="btn btn-info select-stickers">Select
                                                     </button>
                                                 </div>
                                                 <div class="panel-body product-body">
-                                                    <ul class="get-all-stickers-tab">
+                                                    <ul class="get-all-stickers-tab stickers--all--lists">
                                                         @if(isset($model) && count($model->stickers))
                                                             @foreach($model->stickers as $sticker)
                                                                 <li style="display: flex" data-id="{{ $sticker->id }}"
                                                                     class="option-elm-attributes">
-                                                                    <a href="#">{!! $sticker->name !!}</a>
+                                                                    <a href="#" class="stick--link">{!! $sticker->name !!}</a>
                                                                     <div class="buttons">
                                                                         <a href="javascript:void(0)"
                                                                            class="remove-all-attributes btn btn-sm btn-danger">
@@ -269,20 +269,20 @@
                                             </div>
                                             <div id="mediarelatedproducts" class="tab-pane fade ">
                                                 <div class="panel-heading d-flex justify-content-between align-items-center">
-                                                    <span>
+                                                    <h4>
                                                         Related Products
-                                                    </span>
+                                                    </h4>
                                                     <button type="button" class="btn btn-info select-products">Select
                                                     </button>
                                                 </div>
                                                 <div class="panel-body product-body">
-                                                    <ul class="get-all-products-tab">
+                                                    <ul class="get-all-products-tab stickers--all--lists">
                                                         @if(isset($model) && count($model->related_products))
                                                             @foreach($model->related_products as $related_product)
                                                                 <li style="display: flex"
                                                                     data-id="{{ $related_product->id }}"
                                                                     class="option-elm-attributes">
-                                                                    <a href="#">{!! $related_product->name !!}</a>
+                                                                    <a href="#" class="stick--link">{!! $related_product->name !!}</a>
                                                                     <div class="buttons">
                                                                         <a href="javascript:void(0)"
                                                                            class="remove-all-attributes btn btn-sm btn-danger">
@@ -589,7 +589,7 @@
                                         <div class="panel panel-default mt-20">
                                             <div class="panel-heading">FB</div>
                                             <div class="panel-body">
-                                                <div class="form-group">
+                                                <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook
                                                             Title</label>
@@ -598,7 +598,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook
                                                             Description</label>
@@ -607,7 +607,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label class="col-md-2 col-xs-12">Facebook Image</label>
                                                         <div class="col-md-5 col-xs-12">
@@ -622,7 +622,7 @@
                                         <div class="panel panel-default mt-20">
                                             <div class="panel-heading">Twitter</div>
                                             <div class="panel-body">
-                                                <div class="form-group">
+                                                <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter
                                                             Title</label>
@@ -632,7 +632,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter
                                                             Description</label>
@@ -642,7 +642,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label class="col-md-2 col-xs-12">Twitter Image</label>
                                                         <div class="col-md-5 col-xs-12">
@@ -870,28 +870,26 @@
     </div>
 
     <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Select Products</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="all-list">
-                        <ul>
+                    <ul class="all-list modal-stickers--list">
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
     <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -899,14 +897,12 @@
                     <h4 class="modal-title">Select Stickers</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="all-list">
-                        <ul>
+                    <ul class="all-list modal-stickers--list">
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

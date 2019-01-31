@@ -739,6 +739,7 @@
     color: white;
     background-color: red;
     padding: 6px;
+    cursor: pointer;
 }
 
 .multiple-image-placeholder .img-thumb-container img {
@@ -1202,6 +1203,9 @@ resize: none;
 .ml-5{
     margin-left: 5px;
 }
+.p-0-15{
+    padding:0 15px;
+}
 #myExtraTabModal .bootstrap-tagsinput{
     display: flex;
     align-items: center;
@@ -1234,3 +1238,43 @@ resize: none;
 .unread{
     font-weight: bold;
 }
+/*mediastickers tabs start*/
+.stickers--all--lists{
+    display: flex;
+    flex-wrap: wrap;
+}
+.stickers--all--lists> li{
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+.stickers--all--lists .stick--link{
+    background: #3c8dbc;
+    color: #fff;
+    padding: 5px 10px;
+}
+.stickers--all--lists .remove-all-attributes{
+border-radius: 0;
+}
+/*mediastickers tabs end*/
+/*stickerModal start*/
+.modal-stickers--list{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+.modal-stickers--list >li{
+    margin-right: 5px;
+    margin-bottom: 5px;
+    display: flex;
+}
+.modal-stickers--list >li a:first-of-type{
+    background: #3c8dbc;
+    color: #fff;
+    padding: 5px 10px;
+}
+.modal-stickers--list .add-sticker-event,.modal-stickers--list .add-related-event{
+    border-radius: 0;
+}
+/*stickerModal end*/
