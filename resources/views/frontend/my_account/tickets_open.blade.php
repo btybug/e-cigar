@@ -180,15 +180,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="status-wall wall">
-                                            <div class="row">
-                                                {{Form::label('priority_id', 'Priority',['class' => 'col-sm-3'])}}
-                                                <div class="col-sm-9">
-                                                    {!! Form::select('priority_id',$priorities,null,
-                                                                ['class' => 'form-control','id'=> 'priority']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
