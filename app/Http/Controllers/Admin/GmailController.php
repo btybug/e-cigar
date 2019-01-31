@@ -34,6 +34,8 @@ class GmailController extends Controller
 
     public function postSettings(Request $request, Settings $settings)
     {
+        \LaravelGmail::logout();
+
         $data=$request->only(['GOOGLE_PROJECT_ID','GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','GOOGLE_REDIRECT_URI']);
         $path = base_path('.env');
         if (file_exists($path)) {
@@ -50,7 +52,6 @@ class GmailController extends Controller
                 'GOOGLE_REDIRECT_URI='.env('GOOGLE_REDIRECT_URI'), 'GOOGLE_REDIRECT_URI='.$data['GOOGLE_REDIRECT_URI'], file_get_contents($path)
             ));
         }
-        \LaravelGmail::logout();
         return redirect()->route('admin_gmail_login');
     }
 }
