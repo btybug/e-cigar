@@ -432,7 +432,7 @@ Route::group(['prefix' => 'gmail'], function () {
     Route::post('/settings', 'Admin\GmailController@postSettings')->name('post_admin_gmail_settings');
     Route::get('/oauth/gmail', function (){
         return LaravelGmail::redirect();
-    });
+    })->name('admin_gmail_login');
 
     Route::get('/oauth/callback', function (){
         LaravelGmail::makeToken();

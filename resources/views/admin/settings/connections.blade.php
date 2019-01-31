@@ -29,7 +29,6 @@
                 </li>
             </ul>
             <div class="tab-content">
-                {!! Form::open(['class'=>'form-horizontal']) !!}
                 <button class="btn btn-info pull-right mb-20 mt20" type="submit">Save</button>
                 <div class="tab-pane fade active in" id="admin_settings_general">
                     <div class="row">
@@ -37,6 +36,8 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">SMTP SERVICE</div>
                                 <div class="panel-body">
+                                    {!! Form::open(['class'=>'form-horizontal']) !!}
+
                                     <fieldset>
                                         <!-- Text input-->
                                         <div class="form-group">
@@ -85,6 +86,7 @@
                                             </div>
                                         </div>
                                     </fieldset>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
 
@@ -95,12 +97,8 @@
                                 <div class="panel-body">
 
                                     <h1>{{ LaravelGmail::user() }}</h1>
-                                    @if(LaravelGmail::check())
-                                        <a class="btn btn-warning" href="{{ url('admin/gmail/oauth/gmail/logout') }}">logout</a>
-                                    @else
                                         {!! Form::open(['class'=>'form-horizontal','url'=>route('post_admin_gmail_settings')]) !!}
                                         <fieldset>
-
                                             <!-- Form Name -->
                                             <legend>Google Api Credentials</legend>
                                             <!-- Text input-->
@@ -135,14 +133,11 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="singlebutton"></label>
                                                 <div class="col-md-4">
-                                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+                                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Login</button>
                                                 </div>
                                             </div>
                                         </fieldset>
                                         {!! Form::close() !!}
-
-                                        <a class="btn btn-success" href="{{ url('admin/gmail/oauth/gmail') }}">login</a>
-                                    @endif
                                 </div>
                             </div>
 
@@ -150,11 +145,8 @@
 
                     </div>
                 </div>
-                {!! Form::close() !!}
             </div>
         </div>
-
-
     </div>
 @stop
 

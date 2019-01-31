@@ -50,6 +50,7 @@ class GmailController extends Controller
                 'GOOGLE_REDIRECT_URI='.env('GOOGLE_REDIRECT_URI'), 'GOOGLE_REDIRECT_URI='.$data['GOOGLE_REDIRECT_URI'], file_get_contents($path)
             ));
         }
-        return redirect()->back();
+        \LaravelGmail::logout();
+        return redirect()->route('admin_gmail_login');
     }
 }
