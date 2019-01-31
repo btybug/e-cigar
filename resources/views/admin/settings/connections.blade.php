@@ -33,56 +33,121 @@
                 <button class="btn btn-info pull-right mb-20 mt20" type="submit">Save</button>
                 <div class="tab-pane fade active in" id="admin_settings_general">
                     <div class="row">
-                        <fieldset>
-                            <!-- Form Name -->
-                            <legend>Google Api Credentials</legend>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">MAIL DRIVER</label>
-                                <div class="col-md-4">
-                                    {!! Form::text('MAIL_DRIVER',env('MAIL_DRIVER'),['class'=>'form-control input-md']) !!}
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">SMTP SERVICE</div>
+                                <div class="panel-body">
+                                    <fieldset>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">MAIL DRIVER</label>
+                                            <div class="col-md-4">
+                                                {!! Form::text('MAIL_DRIVER',env('MAIL_DRIVER'),['class'=>'form-control input-md']) !!}
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">MAIL HOST</label>
+                                            <div class="col-md-4">
+                                                {!! Form::text('MAIL_HOST',env('MAIL_HOST'),['class'=>'form-control input-md']) !!}
+                                            </div>
+                                        </div>
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">MAIL PORT</label>
+                                            <div class="col-md-4">
+                                                {!! Form::text('MAIL_PORT',env('MAIL_PORT'),['class'=>'form-control input-md']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">MAIL USERNAME</label>
+                                            <div class="col-md-4">
+                                                {!! Form::text('MAIL_USERNAME',env('MAIL_USERNAME'),['class'=>'form-control input-md']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">MAIL PASSWORD</label>
+                                            <div class="col-md-4">
+                                                {!! Form::text('MAIL_PASSWORD',env('MAIL_PASSWORD'),['class'=>'form-control input-md']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="textinput">MAIL ENCRYPTION</label>
+                                            <div class="col-md-4">
+                                                {!! Form::text('MAIL_ENCRYPTION',env('MAIL_ENCRYPTION'),['class'=>'form-control input-md']) !!}
+                                            </div>
+                                        </div>
+                                        <!-- Button -->
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" for="singlebutton"></label>
+                                            <div class="col-md-4">
+                                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
                                 </div>
                             </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">MAIL HOST</label>
-                                <div class="col-md-4">
-                                    {!! Form::text('MAIL_HOST',env('MAIL_HOST'),['class'=>'form-control input-md']) !!}
+
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">GMAIL API</div>
+                                <div class="panel-body">
+
+                                    <h1>{{ LaravelGmail::user() }}</h1>
+                                    @if(LaravelGmail::check())
+                                        <a class="btn btn-warning" href="{{ url('admin/gmail/oauth/gmail/logout') }}">logout</a>
+                                    @else
+                                        {!! Form::open(['class'=>'form-horizontal','url'=>route('post_admin_gmail_settings')]) !!}
+                                        <fieldset>
+
+                                            <!-- Form Name -->
+                                            <legend>Google Api Credentials</legend>
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="textinput">GOOGLE PROJECT ID</label>
+                                                <div class="col-md-4">
+                                                    {!! Form::text('GOOGLE_PROJECT_ID',env('GOOGLE_PROJECT_ID'),['class'=>'form-control input-md']) !!}
+                                                </div>
+                                            </div>
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="textinput">GOOGLE CLIENT ID</label>
+                                                <div class="col-md-4">
+                                                    {!! Form::text('GOOGLE_CLIENT_ID',env('GOOGLE_CLIENT_ID'),['class'=>'form-control input-md']) !!}
+                                                </div>
+                                            </div>
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="textinput">GOOGLE CLIENT SECRET</label>
+                                                <div class="col-md-4">
+                                                    {!! Form::text('GOOGLE_CLIENT_SECRET',env('GOOGLE_CLIENT_SECRET'),['class'=>'form-control input-md']) !!}
+                                                </div>
+                                            </div>
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="textinput">GOOGLE REDIRECT URI</label>
+                                                <div class="col-md-4">
+                                                    {!! Form::text('GOOGLE_REDIRECT_URI',env('GOOGLE_REDIRECT_URI'),['class'=>'form-control input-md']) !!}
+                                                </div>
+                                            </div>
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="singlebutton"></label>
+                                                <div class="col-md-4">
+                                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        {!! Form::close() !!}
+
+                                        <a class="btn btn-success" href="{{ url('admin/gmail/oauth/gmail') }}">login</a>
+                                    @endif
                                 </div>
                             </div>
-                            <!-- Text input-->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">MAIL PORT</label>
-                                <div class="col-md-4">
-                                    {!! Form::text('MAIL_PORT',env('MAIL_PORT'),['class'=>'form-control input-md']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">MAIL USERNAME</label>
-                                <div class="col-md-4">
-                                    {!! Form::text('MAIL_USERNAME',env('MAIL_USERNAME'),['class'=>'form-control input-md']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">MAIL PASSWORD</label>
-                                <div class="col-md-4">
-                                    {!! Form::text('MAIL_PASSWORD',env('MAIL_PASSWORD'),['class'=>'form-control input-md']) !!}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="textinput">MAIL ENCRYPTION</label>
-                                <div class="col-md-4">
-                                    {!! Form::text('MAIL_ENCRYPTION',env('MAIL_ENCRYPTION'),['class'=>'form-control input-md']) !!}
-                                </div>
-                            </div>
-                            <!-- Button -->
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" for="singlebutton"></label>
-                                <div class="col-md-4">
-                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
-                                </div>
-                            </div>
-                        </fieldset>
+
+                        </div>
+
                     </div>
                 </div>
                 {!! Form::close() !!}
