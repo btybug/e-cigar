@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\GeoZones;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
+use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Statuses;
 use App\Models\Ticket;
@@ -303,6 +304,51 @@ class UserController extends Controller
         $user = \Auth::getUser();
         $messages = $user->customEmails()->where('custom_emails.status', 1)->orderBy('id', 'DESC')->get();
         return $this->view('notifications', compact('messages'));
+    }
+
+    public function postDeleteNotifications(Request $request)
+    {
+        $user = \Auth::getUser();
+        $ids = $request->get('ids');
+        $messages  = CustomEmails::whereIn('id', $ids)->get();
+        foreach($messages as $message)
+            $message->users()->detach($user->id);
+
+        $messages = $user->customEmails()
+            ->where('custom_emails.status', 1)->get();
+        $html = \View('frontend.my_account._partials.notification_list',compact(['messages']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function postMarkReadNotifications(Request $request)
+    {
+        $user = \Auth::getUser();
+        $ids = $request->get('ids');
+        $messages  = CustomEmails::whereIn('id', $ids)->get();
+        foreach($messages as $message)
+            $message->users()->updateExistingPivot($user, array('status' => 1), false);
+
+        $messages = $user->customEmails()
+            ->where('custom_emails.status', 1)->get();
+        $html = \View('frontend.my_account._partials.notification_list',compact(['messages']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
+
+    public function postMarkUnreadNotifications(Request $request)
+    {
+        $user = \Auth::getUser();
+        $ids = $request->get('ids');
+        $messages  = CustomEmails::whereIn('id', $ids)->get();
+        foreach($messages as $message)
+            $message->users()->updateExistingPivot($user, array('status' => 0), false);
+
+        $messages = $user->customEmails()
+            ->where('custom_emails.status', 1)->get();
+        $html = \View('frontend.my_account._partials.notification_list',compact(['messages']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
     }
 
     public function getNotificationsContent(Request $request)

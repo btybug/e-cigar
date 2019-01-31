@@ -122,15 +122,15 @@
 
             <div class="profile-inner-pg-right-cnt">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
-                   <div class="col-md-9">
+                   <div class="col-md-9 clearfix">
                        <div class="col-md-6 float-left">
                         <h3>Notifications</h3>
                        </div>
                        <div class="col-md-6 float-right">
                            <div class="notification-actions-bar d-none">
-                               <a class="btn btn-danger">Delete</a>
-                               <a class="btn btn-info">Mark us Read</a>
-                               <a class="btn btn-warning">Mark us Unread</a>
+                               <a href="javascript:void(0)" class="btn btn-danger delete-selected-notifications">Delete</a>
+                               <a href="javascript:void(0)" class="btn btn-info mark-us-read">Mark us Read</a>
+                               <a href="javascript:void(0)" class="btn btn-warning mark-us-unread">Mark us Unread</a>
                            </div>
                        </div>
                    </div>
@@ -145,42 +145,8 @@
                                <th scope="col">Actions</th>
                            </tr>
                            </thead>
-                           <tbody>
-                           @foreach($messages as $message)
-                               <tr style="{{ (! $message->is_read) ? 'color:black;font-wight:bold;background:gray' : '' }}">
-                                   <th scope="row">
-                                       <input name="notifications" value="{{ $message->id }}" class="message-checkbox" type="checkbox">
-                                   </th>
-                                   <td>{!! $message->updated_at !!}</td>
-                                   <td>{!! $message->subject !!}</td>
-                                   <td>{!! $message->type !!} </td>
-                                   <td><button class="ntfs-btn btn btn-info __modal rounded-0" data-toggle="modal" data-id="{!! $message->id !!}"><i class="fa fa-eye"></i></button></td>
-                               </tr>
-                           @endforeach
-
-                           {{-- Modal --}}
-                           <div class="modal" id="notif_modal">
-                               <div class="modal-dialog">
-                                   <div class="modal-content">
-
-                                       <div class="modal-header">
-                                           <h4 class="modal-title">Modal Heading</h4>
-                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                       </div>
-
-                                       <div class="modal-body">
-
-                                       </div>
-
-                                       <div class="modal-footer">
-                                           <button type="button" class="ntfs-btn btn btn-info rounded-0" data-dismiss="modal">Close</button>
-                                       </div>
-
-                                   </div>
-                               </div>
-                           </div>
-
-
+                           <tbody id="notification-list">
+                               @include('frontend.my_account._partials.notification_list')
                            </tbody>
                        </table>
 
@@ -188,9 +154,30 @@
                 </div>
             </div>
             {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
-
         </div>
     </main>
+
+    {{-- Modal --}}
+    <div class="modal" id="notif_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="ntfs-btn btn btn-info rounded-0" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @stop
 
 @section("js")
@@ -208,5 +195,89 @@
                 $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
             }
         });
+
+        $("body").on('click','.mark-us-read',function () {
+            var notifications = [];
+            $. each($("input[name='notifications']:checked"), function(){
+                notifications.push($(this). val());
+            });
+
+            if(notifications.length > 0){
+                $.ajax({
+                    type: "post",
+                    url: "/my-account/mark-us-read-notifications",
+                    cache: false,
+                    datatype: "json",
+                    data: {  ids : notifications },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $("#notification-list").html(data.html);
+                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                        }else{
+                            alert('error')
+                        }
+                    }
+                });
+            }
+        });
+
+        $("body").on('click','.mark-us-unread',function () {
+            var notifications = [];
+            $. each($("input[name='notifications']:checked"), function(){
+                notifications.push($(this). val());
+            });
+
+            if(notifications.length > 0){
+                $.ajax({
+                    type: "post",
+                    url: "/my-account/mark-us-unread-notifications",
+                    cache: false,
+                    datatype: "json",
+                    data: {  ids : notifications },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $("#notification-list").html(data.html);
+                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                        }else{
+                            alert('error')
+                        }
+                    }
+                });
+            }
+        })
+
+        $("body").on('click','.delete-selected-notifications',function () {
+            var notifications = [];
+            $. each($("input[name='notifications']:checked"), function(){
+                notifications.push($(this). val());
+            });
+
+            if(notifications.length > 0){
+                $.ajax({
+                    type: "post",
+                    url: "/my-account/delete-notifications",
+                    cache: false,
+                    datatype: "json",
+                    data: {  ids : notifications },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $("#notification-list").html(data.html);
+                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                        }else{
+                            alert('error')
+                        }
+                    }
+                });
+            }
+        })
     </script>
 @stop

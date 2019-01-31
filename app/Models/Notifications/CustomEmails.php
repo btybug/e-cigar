@@ -20,6 +20,7 @@ class CustomEmails extends Translatable
     protected $guarded = ['id'];
     public $translationModel = CustomEmailsTranslations::class;
     public $translatedAttributes = ['subject', 'content'];
+
     public function users()
     {
         return $this->belongsToMany(User::class,'custom_email_user','custom_email_id');
