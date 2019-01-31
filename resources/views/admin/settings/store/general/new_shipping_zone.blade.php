@@ -57,13 +57,13 @@
                                             <div class="col-sm-9 payment-container">
                                                 @if($geo_zone && $geo_zone->payment_options && count($geo_zone->payment_options))
                                                     @foreach($geo_zone->payment_options as $payment_option)
-                                                        <div class="payment-option-container d-flex">
+                                                        <div class="payment-option-container mb-10 d-flex">
                                                             {!! Form::select('payment_options[]',["paypal"=>"paypal", "stripe"=>"stripe", "cash"=>"cash"],
                                                             $payment_option,['class' => 'form-control','id'=>'payment_options']) !!}
                                                             @if($loop->last)
-                                                                <button type="button" class="btn btn-primary add-new-payment-option"><i class="fa fa-plus"></i></button>
+                                                                <button type="button" class="btn btn-primary add-new-payment-option ml-5"><i class="fa fa-plus"></i></button>
                                                             @else
-                                                                <button type="button" class="btn btn-danger remove-new-payment-option"><i class="fa fa-trash"></i></button>
+                                                                <button type="button" class="btn btn-danger remove-new-payment-option ml-5"><i class="fa fa-trash"></i></button>
                                                             @endif
                                                         </div>
                                                     @endforeach

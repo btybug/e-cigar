@@ -701,6 +701,11 @@ textarea {
     margin-right: 2px;
 }
 /*user datatable end*/
+.setting-general-footer--tabs .panel-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 
 

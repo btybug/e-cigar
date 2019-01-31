@@ -29,14 +29,14 @@
             </ul>
             <div class="tab-content">
                 {!! Form::open(['class'=>'form-horizontal']) !!}
-                <div class="pull-right">
-                    <button class="btn btn-success">Save</button>
+                <div class="text-right mb-20 mt20">
+                    <button class="btn btn-info">Save</button>
                 </div>
                 <div class="clearfix"></div>
-                <div class="tab-content tab-content-store-settings">
+                <div class="tab-content setting-general-footer--tabs">
                     <div class="tab-pane fade active in" id="tab1"
                          aria-labelledby="tab1-tab">
-                        <div class="form-group">
+                        <div>
                             @if(count(get_languages()))
                                 <ul class="nav nav-tabs">
                                     @foreach(get_languages() as $language)
@@ -56,7 +56,7 @@
                                                 <div class="panel-group">
                                                     <div class="panel panel-default">
                                                         <div class="panel-heading">Panel Header
-                                                            <div class="pull-right">
+                                                            <div>
                                                                 <button type="button"
                                                                         class="btn btn-success add-section"
                                                                         data-lang="{!!strtolower($language->code)!!}"
@@ -67,12 +67,15 @@
                                                         <div class="panel-body">
                                                             <!-- Text input-->
                                                             <div class="form-group">
-                                                                <label class="col-md-4 control-label"
-                                                                       for="textinput">Name</label>
-                                                                <div class="col-md-4">
-                                                                    {!! Form::text('translatable['.strtolower($language->code).'][name][0]',null,['class'=>'form-control input-md']) !!}
+                                                                <div class="row mb-20">
+                                                                    <label class="col-md-4 control-label"
+                                                                           for="textinput">Name</label>
+                                                                    <div class="col-md-4">
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name][0]',null,['class'=>'form-control input-md']) !!}
 
-                                                                </div> <!-- Text input-->
+                                                                    </div> <!-- Text input-->
+                                                                </div>
+
                                                                 <div class="links">
                                                                     <div class="form-group">
                                                                         <div class="col-md-5">
@@ -110,7 +113,7 @@
                                                     @foreach($footer_links[strtolower($language->code)] as $key=>$footer_link)
                                                         <div class="panel panel-default">
                                                             <div class="panel-heading">Panel Header
-                                                                <div class="pull-right">
+                                                                <div>
                                                                     <button type="button"
                                                                             class="btn btn-success add-section"
                                                                             data-lang="{!!strtolower($language->code)!!}"
@@ -121,11 +124,14 @@
                                                             <div class="panel-body">
                                                                 <!-- Text input-->
                                                                 <div class="form-group">
-                                                                    <label class="col-md-4 control-label"
-                                                                           for="textinput">Name</label>
-                                                                    <div class="col-md-4">
-                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name]['.$key.']',$footer_link['title'],['class'=>'form-control input-md']) !!}
-                                                                    </div> <!-- Text input-->
+                                                                    <div class="row mb-20">
+                                                                        <label class="col-md-4 control-label"
+                                                                               for="textinput">Name</label>
+                                                                        <div class="col-md-4">
+                                                                            {!! Form::text('translatable['.strtolower($language->code).'][name]['.$key.']',$footer_link['title'],['class'=>'form-control input-md']) !!}
+                                                                        </div> <!-- Text input-->
+                                                                    </div>
+
                                                                     <div class="links">
                                                                         @foreach($footer_link['children'] as $child)
                                                                         <div class="form-group">
@@ -282,4 +288,5 @@
                     });
                 })
             </script>
+    </div>
 @stop
