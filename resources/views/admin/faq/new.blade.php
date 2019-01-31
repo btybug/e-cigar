@@ -73,13 +73,13 @@
                                                 <button type="button" class="btn btn-info select-products">Select</button>
                                             </div>
                                             <div class="panel-body product-body">
-                                                <ul class="get-all-attributes-tab">
+                                                <ul class="get-all-attributes-tab stickers--all--lists">
                                                     {{--TODO: make stocks--}}
                                                     @if($model && count($model->stocks))
                                                         @foreach($model->stocks as $stock)
                                                             <li style="display: flex" data-id="{{ $stock->id }}"
                                                                 class="option-elm-attributes">
-                                                                <a href="#">{!! $stock->name !!}</a>
+                                                                <a href="#" class="stick--link">{!! $stock->name !!}</a>
                                                                 <div class="buttons">
                                                                     <a href="javascript:void(0)"
                                                                        class="remove-all-attributes btn btn-sm btn-danger">

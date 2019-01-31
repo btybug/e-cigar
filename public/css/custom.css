@@ -1206,6 +1206,9 @@ resize: none;
 .p-0-15{
     padding:0 15px;
 }
+.mt-10{
+    margin-top: 10px;
+}
 #myExtraTabModal .bootstrap-tagsinput{
     display: flex;
     align-items: center;
@@ -1242,6 +1245,7 @@ resize: none;
 .stickers--all--lists{
     display: flex;
     flex-wrap: wrap;
+    padding: 0;
 }
 .stickers--all--lists> li{
     margin-right: 5px;

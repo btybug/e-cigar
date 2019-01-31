@@ -4,8 +4,8 @@
 @stop
 @section('content')
     <div class="panel panel-default">
-        <div class="pull-right">
-            <a class="btn btn-warning mr-10" href="{!! route('admin_gmail_settings') !!}">Settings</a>
+        <div class="text-right">
+            <a class="btn btn-warning mr-10 mt-10" href="{!! route('admin_gmail_settings') !!}">Settings</a>
         </div>
         @if(LaravelGmail::check())
         <div class="panel-body">
