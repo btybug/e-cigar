@@ -17,6 +17,9 @@ $(function () {
               if(!data.error){
                   $('#category-related').html(data.html)
               }
+              else {
+                  $('#category-related').html('')
+              }
             },
             error: function(errorThrown) {
                 // if (error) {
