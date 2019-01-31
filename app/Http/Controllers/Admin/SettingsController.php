@@ -466,7 +466,16 @@ class SettingsController extends Controller
 
     public function getTC()
     {
-        return $this->view('tc', compact(''));
+        return $this->view('tc');
+    }
+
+    public function getConnections()
+    {
+        return $this->view('connections');
+    }
+    public function postConnections()
+    {
+       dd(1);
     }
 
 }

@@ -29,6 +29,9 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::get('/tc', 'Admin\SettingsController@getTC')->name('admin_settings_tc');
         Route::post('/tc', 'Admin\SettingsController@postTC')->name('post_admin_settings_tc');
+
+        Route::get('/connections', 'Admin\SettingsController@getConnections')->name('admin_settings_connections');
+        Route::post('/connections', 'Admin\SettingsController@postConnections')->name('post_admin_settings_connections');
     });
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', 'Admin\EventsController@getIndex')->name('admin_settings_events');
@@ -177,6 +180,7 @@ Route::group(['prefix' => 'blog'], function () {
     Route::group(['prefix' => 'contact-us'], function () {
         Route::get('/', 'Admin\ContactUsController@index')->name('admin_blog_contact_us');
         Route::get('/view/{id}', 'Admin\ContactUsController@getView')->name('admin_blog_contact_us_view');
+        Route::post('/replay/{id}', 'Admin\ContactUsController@postReplay')->name('admin_post_blog_contact_us_replay');
     });
 //    Route::group(['prefix' => 'comments'], function () {
 //        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
