@@ -5,11 +5,11 @@
         </div>
         <input type="hidden" value="{{ $model->id }}" id="vpid">
         <div class="d-flex flex-wrap">
-            <div class="col-md-4">
-                <div class="product-card_view product-card_view--single position-relative">
+            <div class="col-md-4 product-card d-block">
+                <div class="product-single-view-outer product-card_view product-card_view--single position-relative">
                     @if($model->image)
                         <div>
-                            <img class="single-product_top-img" src="{!! $model->image !!}"
+                            <img class="single-product_top-img card-img-top" src="{!! $model->image !!}"
                                  alt="{!! @getImage( $model->image)->seo_alt !!}">
                         </div>
                     @endif
