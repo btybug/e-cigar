@@ -1,7 +1,2 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: sahak
- * Date: 1/31/2019
- * Time: 8:09 PM
- */
+<label>Select Order Code</label>
+{!! Form::select('products',\App\Models\Stock::all()->pluck('name','id'),null,['class'=>'form-control']) !!}
