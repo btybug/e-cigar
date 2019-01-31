@@ -175,7 +175,7 @@
                                             <div class="row">
                                                 {{Form::label('category_id', 'Category',['class' => 'col-sm-3'])}}
                                                 <div class="col-sm-9">
-                                                    {!! Form::select('category_id',$categories,null,
+                                                    {!! Form::select('category_id',[null=>'Select Category']+$categories,null,
                                                                 ['class' => 'form-control','id'=> 'category']) !!}
                                                 </div>
                                             </div>
