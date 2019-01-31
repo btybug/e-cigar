@@ -693,7 +693,14 @@ textarea {
     width: 150px;
     height: 150px;
 }
-
+/*user datatable start*/
+.users-table--td-btn{
+    display: flex;
+}
+.users-table--td-btn a{
+    margin-right: 2px;
+}
+/*user datatable end*/
 
 
 

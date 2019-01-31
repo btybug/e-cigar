@@ -9,6 +9,7 @@
             <h2 class="m-0 pull-left">Users</h2>
         </div>
         <div class="panel-body">
+            <div class="table-responsive">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -28,6 +29,7 @@
                 </tr>
                 </thead>
             </table>
+            </div>
         </div>
     </div>
 @stop
