@@ -111,10 +111,12 @@
 
                                             @if($vape->variations && count($vape->variations))
                                                 @foreach($vape->variations as $variation)
-                                                    <div class="product-card_thumb-img-holder pointer">
-                                                        <img class="" src="{{$variation["image"]}}"
-                                                             alt="{!! @getImage($variation["image"])->seo_alt !!}">
-                                                    </div>
+                                                    @if(isset($variation['image']))
+                                                        <div class="product-card_thumb-img-holder pointer" data-id="{{ $variation['id'] }}">
+                                                            <img class="" src="{{$variation["image"]}}"
+                                                                 alt="{!! @getImage($variation["image"])->seo_alt !!}">
+                                                        </div>
+                                                    @endif
                                                 @endforeach
                                             @endif
                                         </div>
@@ -765,6 +767,8 @@
                             $(".price-place").html(price);
                             $("#variation_uid").val(data.variation_id);
                             $(".btn-add-to-cart").addClass('add-to-cart');
+
+                            $(".product-card-thumbs").find('[data-id="'+data.variation_id+'"]').trigger("mouseover");
                             if (data.isFavorite) {
                                 $(".add-fav-variation").removeClass('d-none').data('id', data.variation_id).addClass('active');
                             } else {
