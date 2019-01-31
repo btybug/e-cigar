@@ -441,7 +441,7 @@ Route::group(['prefix' => 'gmail'], function () {
 
     Route::get('/oauth/gmail/logout', function (){
         LaravelGmail::logout(); //It returns exception if fails
-        return redirect()->route('admin_gmail_settings');
+        return redirect()->route('admin_settings_connections');
     });
 });
 
