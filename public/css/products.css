@@ -2314,9 +2314,6 @@ td.shp-cart-table_price-td {
     opacity: .3;
 }
 /*end gallery tabs*/
-.header-bottom .currency-mobile-icon {
-    display: none;
-}
 .header-bottom .search-mobile-icon{
     display: none;
 }
@@ -2499,6 +2496,7 @@ td.shp-cart-table_price-td {
 .currency-dropdown {
     text-align: center;
 }
+
 /*end currency*/
 /*start radio packs*/
 .radio--packs{
@@ -2558,6 +2556,10 @@ td.shp-cart-table_price-td {
     .all-filters .filter-wall {
         max-width: 475px;
     }
+    .main-content-wrapper .content-head .right-head .sort-by_select{
+        /*max-width: 100%;*/
+        margin-left: 0;
+    }
 }
 
 @media (max-width: 575px) {
@@ -2567,9 +2569,6 @@ td.shp-cart-table_price-td {
     }
     .header-bottom .currency-block{
         display: none !important;
-    }
-    .header-bottom .currency-mobile-icon{
-        display: block;
     }
    .header-bottom .favorite-add-cart{
        flex: auto;
@@ -2599,6 +2598,12 @@ td.shp-cart-table_price-td {
     }
     header .header-bottom .cat-search .search > span{
         right: 12px;
+    }
+    .currency--wrap .select-2.main-select + .select2-container--default .select2-selection--single{
+        border:none;
+    }
+    .currency--wrap .select2-container--default .select2-selection--single .select2-selection__rendered{
+        font-size: 20px;
     }
     .profile-sidebar--inner-pages{
         display: none !important;
