@@ -34,7 +34,6 @@ class GmailController extends Controller
 
     public function postSettings(Request $request, Settings $settings)
     {
-        \LaravelGmail::logout();
 
         $data=$request->only(['GOOGLE_PROJECT_ID','GOOGLE_CLIENT_ID','GOOGLE_CLIENT_SECRET','GOOGLE_REDIRECT_URI']);
         $path = base_path('.env');
