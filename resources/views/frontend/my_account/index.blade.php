@@ -507,7 +507,8 @@
                                                 @foreach($categories as $category)
                                                 <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
                                                     <input name="email_settings[]" class="form-check-input register-form_input-check" type="checkbox"
-                                                           value="{{ $category->id }}" id="subscribeCheck{{ $category->id }}">
+                                                           value="{{ $category->id }}" id="subscribeCheck{{ $category->id }}"
+                                                            {{ ($category->slug == 'communications') ? 'disabled="disabled"' : '' }}>
                                                     <label class="form-check-label text-gray-clr register-form_label pointer"
                                                            for="subscribeCheck{{ $category->id }}">
                                                         {{ $category->name }}
