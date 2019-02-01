@@ -59,7 +59,9 @@ class UserController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        return $this->view('index', compact('user'));
+        $categories = Category::where('type','notifications')->get();
+
+        return $this->view('index', compact('user','categories'));
     }
 
     public function getFavourites()

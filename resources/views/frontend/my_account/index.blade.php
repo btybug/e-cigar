@@ -504,18 +504,20 @@
                                     {{--</span>--}}
                                                     {{--</label>--}}
                                                 {{--</div>--}}
+                                                @foreach($categories as $category)
                                                 <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
-                                                    <input class="form-check-input register-form_input-check" type="checkbox"
-                                                           value="" id="subscribeCheck2">
+                                                    <input name="email_settings[]" class="form-check-input register-form_input-check" type="checkbox"
+                                                           value="{{ $category->id }}" id="subscribeCheck{{ $category->id }}">
                                                     <label class="form-check-label text-gray-clr register-form_label pointer"
-                                                           for="subscribeCheck2">
-                                                        Newsletter
+                                                           for="subscribeCheck{{ $category->id }}">
+                                                        {{ $category->name }}
                                                         <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                         <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
 <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
 </svg></span>
                                                     </label>
                                                 </div>
+                                                @endforeach
 
 
                                             </div>
