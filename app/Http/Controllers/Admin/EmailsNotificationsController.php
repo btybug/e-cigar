@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Emails;
 use App\Models\MailTemplates;
 use App\Models\Newsletter;
@@ -33,8 +34,9 @@ class EmailsNotificationsController extends Controller
         $model = CustomEmails::find($id);
         $froms = Emails::where('type', 'from')->pluck('email', 'email');
         $shortcodes = new ShortCodes();
+        $categories = Category::where('type','notifications')->get()->pluck('name','id');
         $users = User::all()->pluck('name', 'id');
-        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model'));
+        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories'));
     }
 
     public function sendEmailView($id = null)

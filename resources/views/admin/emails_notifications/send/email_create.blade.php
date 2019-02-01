@@ -158,11 +158,7 @@
                 <div class="form-group row border-top">
                     <label for="email_type" class="col-sm-3">Type</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="email_type" name="type">
-                            <option value="coomunication" selected="selected">Coomunication</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="newsletter">Newsletter</option>
-                        </select>
+                        {!! Form::select('category',$categories,null,['class'=>'form-control','id'=>'email_type']) !!}
                     </div>
                 </div>
             </div>
