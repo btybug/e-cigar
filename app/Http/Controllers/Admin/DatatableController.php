@@ -709,11 +709,11 @@ class DatatableController extends Controller
         )
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
-            })->editColumn('user', function ($attr) {
+            })->editColumn('user_id', function ($attr) {
                 return ($attr->user) ? $attr->user->name . ' ' . $attr->user->last_name : 'Not member';
             })
             ->addColumn('actions', function ($post) {
-//                return "<a class='badge btn-info' href='" . route('admin_store_transactions_view', $post->id) . "'><i class='fa fa-eye'></i></a>";
+                return "<a class='badge btn-danger' href='" . route('admin_emails_newsletter_delete', $post->id) . "'><i class='fa fa-trash-o'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }

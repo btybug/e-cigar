@@ -10,7 +10,10 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SubscribeRequest;
+use App\Models\Newsletter;
 use App\Models\SiteCurrencies;
+use App\User;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller
@@ -46,5 +49,15 @@ class CommonController extends Controller
         return $request->code;
     }
 
+    public function postSubscribe(SubscribeRequest $request)
+    {
+        $email = $request->get('subscribe_email');
+        $user = User::where('email',$email)->first();
+        Newsletter::create([
+           'email' => $email,
+            'user_id' => ($user) ? $user->id : null
+        ]);
 
+        return redirect()->back()->with('message','You have successfully subscribed to newsletter');
+    }
 }

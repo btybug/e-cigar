@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Emails;
 use App\Models\MailTemplates;
+use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
 use App\Services\ShortCodes;
 use App\User;
@@ -134,6 +135,14 @@ class EmailsNotificationsController extends Controller
     public function getNewsletters()
     {
         return $this->view('newsletters', compact(''));
+    }
 
+    public function postDeleteNewsletter($id)
+    {
+        $newsletter = Newsletter::findOrFail($id);
+
+        $newsletter->delete();
+
+        return redirect()->back();
     }
 }
