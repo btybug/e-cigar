@@ -92,8 +92,9 @@ class EmailsNotificationsController extends Controller
         $froms = Emails::where('type', 'from')->pluck('email', 'email');
         $tos = Emails::where('type', 'to')->pluck('email', 'email');
         $admin_model = MailTemplates::where('slug', 'admin_' . $model->slug)->first();
+        $categories = Category::where('type','notifications')->get()->pluck('name','id');
         $shortcodes = new ShortCodes();
-        return $this->view('emails.manage', compact('model', 'shortcodes', 'admin_model', 'froms', 'tos'));
+        return $this->view('emails.manage', compact('model', 'shortcodes','categories', 'admin_model', 'froms', 'tos'));
     }
 
     public function postCreateOrUpdate(MailTemplatesRequest $request)
