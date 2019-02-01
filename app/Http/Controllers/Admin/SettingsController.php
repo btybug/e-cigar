@@ -493,33 +493,41 @@ class SettingsController extends Controller
     public function getConnections(Settings $settings)
     {
         $manage_api_settings = $settings->getEditableData('manage_api_settings');
-        return $this->view('connections',compact('manage_api_settings'));
+        return $this->view('connections', compact('manage_api_settings'));
     }
+
     public function postConnections(Request $request, Settings $settings)
     {
-        $data=$request->only(['MAIL_DRIVER','MAIL_PORT','MAIL_HOST','MAIL_USERNAME','MAIL_PASSWORD','MAIL_ENCRYPTION']);
-        $path = base_path('.env');
-        if (file_exists($path)) {
-            file_put_contents($path, str_replace(
-                'MAIL_DRIVER='.env('MAIL_DRIVER'), 'MAIL_DRIVER='.$data['MAIL_DRIVER'], file_get_contents($path)
-            ));
-            file_put_contents($path, str_replace(
-                'MAIL_HOST='.env('MAIL_HOST'), 'MAIL_HOST='.$data['MAIL_HOST'], file_get_contents($path)
-            ));
-            file_put_contents($path, str_replace(
-                'MAIL_PORT='.env('MAIL_PORT'), 'MAIL_PORT='.$data['MAIL_PORT'], file_get_contents($path)
-            ));
-            file_put_contents($path, str_replace(
-                'MAIL_USERNAME='.env('MAIL_USERNAME'), 'MAIL_USERNAME='.$data['MAIL_USERNAME'], file_get_contents($path)
-            ));
-            file_put_contents($path, str_replace(
-                'MAIL_PASSWORD='.env('MAIL_PASSWORD'), 'MAIL_PASSWORD='.$data['MAIL_PASSWORD'], file_get_contents($path)
-            ));
-            file_put_contents($path, str_replace(
-                'MAIL_ENCRYPTION='.env('MAIL_ENCRYPTION'), 'MAIL_ENCRYPTION='.$data['MAIL_ENCRYPTION'], file_get_contents($path)
-            ));
+        try {
+            $data = $request->only(['MAIL_DRIVER', 'MAIL_PORT', 'MAIL_HOST', 'MAIL_USERNAME', 'MAIL_PASSWORD', 'MAIL_ENCRYPTION']);
+            $path = base_path('.env');
+            if (file_exists($path)) {
+                file_put_contents($path, str_replace(
+                    'MAIL_DRIVER=' . env('MAIL_DRIVER'), 'MAIL_DRIVER=' . $data['MAIL_DRIVER'], file_get_contents($path)
+                ));
+                file_put_contents($path, str_replace(
+                    'MAIL_HOST=' . env('MAIL_HOST'), 'MAIL_HOST=' . $data['MAIL_HOST'], file_get_contents($path)
+                ));
+                file_put_contents($path, str_replace(
+                    'MAIL_PORT=' . env('MAIL_PORT'), 'MAIL_PORT=' . $data['MAIL_PORT'], file_get_contents($path)
+                ));
+                file_put_contents($path, str_replace(
+                    'MAIL_USERNAME=' . env('MAIL_USERNAME'), 'MAIL_USERNAME=' . $data['MAIL_USERNAME'], file_get_contents($path)
+                ));
+                file_put_contents($path, str_replace(
+                    'MAIL_PASSWORD=' . env('MAIL_PASSWORD'), 'MAIL_PASSWORD=' . $data['MAIL_PASSWORD'], file_get_contents($path)
+                ));
+                file_put_contents($path, str_replace(
+                    'MAIL_ENCRYPTION=' . env('MAIL_ENCRYPTION'), 'MAIL_ENCRYPTION=' . $data['MAIL_ENCRYPTION'], file_get_contents($path)
+                ));
+            }
+        } catch (\Exception $exception) {
+            return redirect()->back()->with(['alert' => ['message' => $exception->getMessage(), 'class' => 'danger']]);
         }
-        return redirect()->back();
+
+        return redirect()
+            ->back()
+            ->with(['alert' => ['message' => 'New SMTP service connection made successfully!!!', 'class' => 'success']]);
     }
 
 }

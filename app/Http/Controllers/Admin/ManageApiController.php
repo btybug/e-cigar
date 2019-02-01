@@ -39,7 +39,9 @@ class ManageApiController extends Controller
             return redirect()->back()->with(['alert'=>['message'=>$exception->getMessage(),'class'=>'danger']]);
         }
 
-        return redirect()->back()->with(['alert'=>['message'=>'New Connection made successfully!!!','class'=>'success']]);;
+        return redirect()
+            ->back()
+            ->with(['alert'=>['message'=>'New Connection made successfully!!!','class'=>'success']]);
     }
 
     public function getProducts()
