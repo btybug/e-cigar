@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Requests\AccountsRequest;
 use App\Http\Controllers\Admin\Requests\GeoZonesRequest;
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Common;
 use App\Models\Couriers;
 use App\Models\Currencies;
 use App\Models\DeliveryCostsTypes;
@@ -467,6 +468,26 @@ class SettingsController extends Controller
     public function getTC()
     {
         return $this->view('tc');
+    }
+
+    public function postTC()
+    {
+        return $this->view('tc');
+    }
+
+    public function getAboutUs()
+    {
+        $model = Common::where('type','about_us')->first();
+
+        return $this->view('about_us',compact(['model']));
+    }
+
+    public function postAboutUs(Request $request)
+    {
+        $data = $request->except('_token');
+        Common::updateOrCreate($request->id, $data);
+
+        return redirect()->back();
     }
 
     public function getConnections(Settings $settings)

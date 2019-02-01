@@ -37,6 +37,10 @@ class CommonController extends Controller
     {
         return $this->view('contact_us');
     }
+    public function getAboutUs()
+    {
+        return $this->view('about_us');
+    }
 
     public function changeCurrency(Request $request,SiteCurrencies $siteCurrencies)
     {

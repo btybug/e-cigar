@@ -27,6 +27,10 @@
                     <a class="nav-link " id="general-tab" href="{!! route('admin_settings_connections') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Connections</a>
                 </li>
+                <li class="nav-item ">
+                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_about_us') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">About us</a>
+                </li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="admin_settings_general">

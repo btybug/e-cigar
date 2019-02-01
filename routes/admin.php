@@ -30,6 +30,9 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/tc', 'Admin\SettingsController@getTC')->name('admin_settings_tc');
         Route::post('/tc', 'Admin\SettingsController@postTC')->name('post_admin_settings_tc');
 
+        Route::get('/about-us', 'Admin\SettingsController@getAboutUs')->name('admin_settings_about_us');
+        Route::post('/about-us', 'Admin\SettingsController@postAboutUs')->name('post_admin_settings_about_us');
+
         Route::get('/connections', 'Admin\SettingsController@getConnections')->name('admin_settings_connections');
         Route::post('/connections', 'Admin\SettingsController@postConnections')->name('post_admin_settings_connections');
     });

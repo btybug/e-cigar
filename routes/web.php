@@ -84,6 +84,7 @@ Route::group(['prefix' => '/support'], function () {
     }
 });
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
+Route::get('/about-us', 'Frontend\CommonController@getAboutUs')->name('about_us');
 Route::post('/get-regions-by-country', 'GuestController@getRegionsByCountry')->name('get_regions_by_country');
 Route::post('/get-regions-by-geozone', 'GuestController@getRegionsByGeoZone')->name('get_regions_by_geozone');
 Route::post('/subscribe-to-newsletter', 'Frontend\CommonController@postSubscribe')->name('subscribe_to_newsletter');
