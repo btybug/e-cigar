@@ -204,7 +204,6 @@ Route::group(['prefix' => 'faq'], function () {
 Route::group(['prefix' => 'manage-api'], function () {
     Route::get('/', 'Admin\ManageApiController@index')->name('admin_manage_api');
     Route::post('/', 'Admin\ManageApiController@postManage')->name('post_admin_manage_api');
-    Route::get('/settings', 'Admin\ManageApiController@settings')->name('admin_manage_api_settings');
     Route::post('/settings', 'Admin\ManageApiController@postSettings')->name('post_admin_manage_api_settings');
 
     Route::get('/products', 'Admin\ManageApiController@getProducts')->name('admin_manage_api_products');

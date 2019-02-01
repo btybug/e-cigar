@@ -29,7 +29,6 @@
                 </li>
             </ul>
             <div class="tab-content">
-                <button class="btn btn-info pull-right mb-20 mt20" type="submit">Save</button>
                 <div class="tab-pane fade active in" id="admin_settings_general">
                     <div class="row">
                         <div class="col-md-9">
@@ -140,7 +139,46 @@
                                         {!! Form::close() !!}
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">MANAGE SITE API</div>
+                                <div class="panel-body">
 
+                                    <div class="col-md-6">
+                                        {!! Form::model($manage_api_settings,['class'=>'form-horizontal','url'=>route('post_admin_manage_api_settings')]) !!}
+                                        <fieldset>
+                                            <!-- Form Name -->
+                                            <legend>Connection</legend>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="textinput">Client ID</label>
+                                                <div class="col-md-6">
+                                                    {!! Form::text('client_id',null,['class'=>'form-control input-md']) !!}
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="textinput">Secret</label>
+                                                <div class="col-md-6">
+                                                    {!! Form::text('client_secret',null,['class'=>'form-control input-md']) !!}
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="singlebutton"></label>
+                                                <div class="col-md-4">
+                                                    <button  type="submit" name="singlebutton" class="btn btn-primary">Connect</button>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

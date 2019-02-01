@@ -249,9 +249,6 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>
-                    @ok('admin_manage_api_settings')
-                    <li><a href="{{route('admin_manage_api_settings')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
-                    @endok
                     @ok('admin_manage_api_products')
                     <li><a href="{{route('admin_manage_api_products')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok

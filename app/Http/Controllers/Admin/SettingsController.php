@@ -469,9 +469,10 @@ class SettingsController extends Controller
         return $this->view('tc');
     }
 
-    public function getConnections()
+    public function getConnections(Settings $settings)
     {
-        return $this->view('connections');
+        $manage_api_settings = $settings->getEditableData('manage_api_settings');
+        return $this->view('connections',compact('manage_api_settings'));
     }
     public function postConnections(Request $request, Settings $settings)
     {

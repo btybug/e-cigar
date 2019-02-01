@@ -16,6 +16,7 @@ use App\Services\ManagerApiRequest;
 use App\Services\ManagerApiService;
 use App\User;
 use Illuminate\Http\Request;
+use Matrix\Exception;
 
 class ManageApiController extends Controller
 {
@@ -27,19 +28,18 @@ class ManageApiController extends Controller
         return $this->view('index', compact('model'));
     }
 
-    public function settings(Settings $settings)
-    {
-        $model = $settings->getEditableData('manage_api_settings');
-        return $this->view('settings', compact('model'));
-    }
-
     public function postSettings(Request $request, Settings $settings)
     {
-        $data = $request->only(['client_id', 'client_secret']);
-        $settings->updateOrCreateSettings('manage_api_settings', $data);
-        $service = new ManagerApiService;
-        $service->getAccessToken()->save();
-        return redirect()->back();
+        try{
+            $data = $request->only(['client_id', 'client_secret']);
+            $settings->updateOrCreateSettings('manage_api_settings', $data);
+            $service = new ManagerApiService;
+            $service->getAccessToken()->save();
+        }catch (\Exception $exception){
+            return redirect()->back()->with(['alert'=>['message'=>$exception->getMessage(),'class'=>'danger']]);
+        }
+
+        return redirect()->back()->with(['alert'=>['message'=>'New Connection made successfully!!!','class'=>'success']]);;
     }
 
     public function getProducts()
