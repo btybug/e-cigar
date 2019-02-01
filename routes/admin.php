@@ -113,6 +113,7 @@ Route::group(['prefix' => 'emails-notifications'], function () {
     Route::get('/edit-template/{id?}', 'Admin\EmailsNotificationsController@getCreateMailTemplates')->name('admin_mail_create_templates');
     Route::post('/edit-template/{id?}', 'Admin\EmailsNotificationsController@postCreateOrUpdate')->name('post_admin_mail_create_templates');
 
+    Route::get('/newsletters', 'Admin\EmailsNotificationsController@getNewsletters')->name('admin_emails_newsletters');
 });
 
 Route::group(['prefix' => 'users'], function () {

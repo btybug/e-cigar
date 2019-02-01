@@ -16,6 +16,7 @@ use App\Models\LogActivities;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
 use App\Models\Matches;
+use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Others;
@@ -697,6 +698,22 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-info' href='" . route('admin_store_transactions_view', $post->id) . "'><i class='fa fa-eye'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function getAllNewsletters()
+    {
+        return Datatables::of(
+            Newsletter::query()
+        )
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })->editColumn('user', function ($attr) {
+                return ($attr->user) ? $attr->user->name . ' ' . $attr->user->last_name : 'Not member';
+            })
+            ->addColumn('actions', function ($post) {
+//                return "<a class='badge btn-info' href='" . route('admin_store_transactions_view', $post->id) . "'><i class='fa fa-eye'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }
