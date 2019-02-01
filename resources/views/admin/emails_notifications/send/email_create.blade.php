@@ -156,7 +156,7 @@
                     </tbody>
                 </table>
                 <div class="form-group row border-top">
-                    <label for="email_type" class="col-sm-3">Create</label>
+                    <label for="email_type" class="col-sm-3">Type</label>
                     <div class="col-sm-9">
                         {!! Form::select('category',$categories,null,['class'=>'form-control','id'=>'email_type']) !!}
                     </div>
