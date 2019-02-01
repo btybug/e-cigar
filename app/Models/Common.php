@@ -12,7 +12,7 @@ class Common extends Translatable
     /**
      * @var string
      */
-    protected $table = 'common';
+    protected $table = 'commons';
 
     public $translationModel = CommonTranslation::class;
 

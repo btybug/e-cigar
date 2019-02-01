@@ -483,51 +483,48 @@
                                     {!! Form::close() !!}
                                 </div>
 
-                                <!--subscribe to-->
-                                <div>
-                                    <p class="mb-2">Subscribe to:</p>
-                                    <div class="modal-accounts d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
-                                        <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
-                                            <input class="form-check-input register-form_input-check" type="checkbox"
-                                                   value="" id="subscribeCheck1">
-                                            <label class="form-check-label text-gray-clr register-form_label pointer"
-                                                   for="subscribeCheck1">
-                                                Special offers
-                                                <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                <div class="card account-card rounded-0 mb-5">
+                                    <h2 class="card-title font-20"> Email settings </h2>
+
+                                    <div class="card-body">
+                                        <!--subscribe to-->
+                                        <div>
+                                            <p class="mb-2">Subscribe to:</p>
+                                            <div class="modal-accounts d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
+                                                {{--<div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">--}}
+                                                    {{--<input class="form-check-input register-form_input-check" type="checkbox"--}}
+                                                           {{--value="" id="subscribeCheck1">--}}
+                                                    {{--<label class="form-check-label text-gray-clr register-form_label pointer"--}}
+                                                           {{--for="subscribeCheck1">--}}
+                                                        {{--Special offers--}}
+                                                        {{--<span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">--}}
+                                        {{--<svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">--}}
+{{--<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>--}}
+{{--</svg>--}}
+                                    {{--</span>--}}
+                                                    {{--</label>--}}
+                                                {{--</div>--}}
+                                                <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
+                                                    <input class="form-check-input register-form_input-check" type="checkbox"
+                                                           value="" id="subscribeCheck2">
+                                                    <label class="form-check-label text-gray-clr register-form_label pointer"
+                                                           for="subscribeCheck2">
+                                                        Newsletter
+                                                        <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                         <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
 <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
-</svg>
-                                    </span>
-                                            </label>
-                                        </div>
-                                        <div class="position-relative">
-                                            <input class="form-check-input register-form_input-check" type="checkbox"
-                                                   value="" id="subscribeCheck2">
-                                            <label class="form-check-label text-gray-clr register-form_label pointer"
-                                                   for="subscribeCheck2">
-                                                Newsletter
-                                                <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
-                                        <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
-<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
-</svg>
-                                    </span>
-                                            </label>
+</svg></span>
+                                                    </label>
+                                                </div>
+
+
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
-                            {{--<div class="form-group">--}}
-                            {{--<label class="col-md-8 control-label" for="checkboxes">Subscribe To</label>--}}
-                            {{--<div class="col-md-4">--}}
-                            {{--<label class="checkbox-inline" for="checkboxes-0">--}}
-                            {{--<input type="checkbox" name="checkboxes" id="checkboxes-0" value="1">--}}
-                            {{--Marketing--}}
-                            {{--</label>--}}
-                            {{--<label class="checkbox-inline" for="checkboxes-1">--}}
-                            {{--<input type="checkbox" name="checkboxes" id="checkboxes-1" value="2">--}}
-                            {{--Newsletter--}}
-                            {{--</label>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
+
+
 
 
                             <!-- Modal -->
