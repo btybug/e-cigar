@@ -676,6 +676,8 @@ class DatatableController extends Controller
         return DataTables::of(CustomEmails::query()->where("is_for_admin","=","0"))
             ->editColumn('status', function ($message) {
             return $message->status?'sent out':'in progress';
+        })->editColumn('category_id', function ($message) {
+            return ($message->category) ? $message->category->name : '';
         })
             ->editColumn('created_at', function ($message) {
             return BBgetDateFormat($message->created_at);

@@ -2,6 +2,7 @@
 
 namespace App\Models\Notifications;
 
+use App\Models\Category;
 use App\Models\Common\Translatable;
 use App\Models\Translations\CustomEmailsTranslations;
 use App\User;
@@ -34,5 +35,10 @@ class CustomEmails extends Translatable
     public function admin()
     {
         return $this->hasOne(CustomEmails::class,'parent_id');
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class,'id','category_id');
     }
 }

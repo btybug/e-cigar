@@ -50,7 +50,7 @@ class EmailsNotificationsController extends Controller
 
     public function postSendEmailCreate(Request $request)
     {
-        $data = $request->only('from', 'type');
+        $data = $request->only('from', 'category_id');
         $data['status'] = 0;
         $users = $request->get('users');
         $translatable = $request->get('translatable');
@@ -71,7 +71,7 @@ class EmailsNotificationsController extends Controller
 
     public function postSendEmailCreateSend(Request $request)
     {
-        $data = $request->only('from', 'type');
+        $data = $request->only('from', 'category_id');
         $data['status'] = 1;
         $users = $request->get('users');
         $translatable = $request->get('translatable');

@@ -41,7 +41,7 @@
                     columns: [
                         {data: 'id', name: 'id'},
                         {data: 'status', name: 'status'},
-                        {data: 'type', name: 'type'},
+                        {data: 'category_id', name: 'category_id'},
                         {data: 'from', name: 'from'},
                         {data: 'subject', name: 'subject'},
                         {data: 'created_at', name: 'created_at'},
