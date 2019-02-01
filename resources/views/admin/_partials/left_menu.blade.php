@@ -206,7 +206,7 @@
                                     class="fa fa-circle-o"></i>Newsletters</a></li>
                     @endok
                     @ok('admin_emails_notifications_send_email')
-                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Send</a>
+                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Notifications</a>
                     </li>
                     @endok
 
