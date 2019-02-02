@@ -467,12 +467,17 @@ class SettingsController extends Controller
 
     public function getTC()
     {
-        return $this->view('tc');
+        $model = Common::where('type','tc')->first();
+
+        return $this->view('tc',compact(['model']));
     }
 
-    public function postTC()
+    public function postTC(Request $request)
     {
-        return $this->view('tc');
+        $data = $request->except('_token','translatable');
+        Common::updateOrCreate($request->id, $data,$request->get('translatable'));
+
+        return redirect()->back();
     }
 
     public function getAboutUs()
@@ -485,7 +490,6 @@ class SettingsController extends Controller
     public function postAboutUs(Request $request)
     {
         $data = $request->except('_token','translatable');
-//        dd($data,$request->all());/
         Common::updateOrCreate($request->id, $data,$request->get('translatable'));
 
         return redirect()->back();
