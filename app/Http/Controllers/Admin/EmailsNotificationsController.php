@@ -148,4 +148,15 @@ class EmailsNotificationsController extends Controller
 
         return redirect()->back();
     }
+
+    public function postSendEmailCheckCategroy(Request $request)
+    {
+        $categeory = Category::where('type','notifications')->where('id',$request->id)->first();
+
+        if($categeory){
+            return response()->json(['error' => false,'slug' => $categeory->slug]);
+        }
+
+        return response()->json(['error' => true]);
+    }
 }

@@ -43,8 +43,13 @@
                                     <div class="form-group row">
                                         {{Form::label('to', 'To',['class' => 'col-sm-3'])}}
                                         <div class="col-sm-9">
-                                            {!! Form::select('users[]',$users,null,['class' => 'form-control tag-input-v select-user','multiple'=>'multiple']) !!}
-
+                                            <div class="to_select">
+                                                {!! Form::select('users[]',$users,null,['class' => 'form-control tag-input-v select-user','multiple'=>'multiple']) !!}
+                                            </div>
+                                            <div class="form-control all_memebers_selected hide">
+                                                <span class="badge">All member accounts</span>
+                                                <span class="badge">Subscribers emails</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -208,5 +213,21 @@
                 .attr('action', '{!! route('post_create_send_admin_emails_notifications_send_email') !!}')
                 .submit();
         });
+
+        $('body').on('change','#email_type',function () {
+            let id = $(this).val();
+
+            AjaxCall("{!! route('post_create_send_admin_check_category') !!}", {id: id}, function (res) {
+                if (!res.error) {
+                    if(res.slug == 'newsletter'){
+                        $(".to_select").removeClass('show').addClass('hide');
+                        $(".all_memebers_selected").removeClass('hide').addClass('show');
+                    }else{
+                        $(".all_memebers_selected").removeClass('show').addClass('hide');
+                        $(".to_select").removeClass('hide').addClass('show');
+                    }
+                }
+            });
+        })
     </script>
 @stop
