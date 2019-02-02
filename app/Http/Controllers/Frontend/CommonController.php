@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscribeRequest;
+use App\Models\Common;
 use App\Models\Newsletter;
 use App\Models\SiteCurrencies;
 use App\User;
@@ -35,11 +36,15 @@ class CommonController extends Controller
     }
     public function getContactUs()
     {
-        return $this->view('contact_us');
+        $model = Common::where('type','tc')->first();
+
+        return $this->view('contact_us',compact(['model']));
     }
     public function getAboutUs()
     {
-        return $this->view('about_us');
+        $model = Common::where('type','about_us')->first();
+
+        return $this->view('about_us',compact(['model']));
     }
 
     public function changeCurrency(Request $request,SiteCurrencies $siteCurrencies)
