@@ -3,16 +3,16 @@
 namespace App\Models;
 use App\Models\Common\Translatable;
 use App\Models\Translations\CategoryTranslation;
-use App\Models\Translations\CommonTranslation;
+use App\Models\Translations\CommonTranslations;
 
 class Common extends Translatable
 {
     /**
      * @var string
      */
-    protected $table = 'commons';
+    protected $table = 'common';
 
-    public $translationModel = CommonTranslation::class;
+    public $translationModel = CommonTranslations::class;
 
     public $translatedAttributes = ['description'];
     /**

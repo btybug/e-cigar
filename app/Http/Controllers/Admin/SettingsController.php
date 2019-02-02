@@ -484,8 +484,9 @@ class SettingsController extends Controller
 
     public function postAboutUs(Request $request)
     {
-        $data = $request->except('_token');
-        Common::updateOrCreate($request->id, $data);
+        $data = $request->except('_token','translatable');
+//        dd($data,$request->all());/
+        Common::updateOrCreate($request->id, $data,$request->get('translatable'));
 
         return redirect()->back();
     }
