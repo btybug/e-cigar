@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Models;
-
-
 use App\Models\Common\Translatable;
 use App\Models\Translations\CategoryTranslation;
 use App\Models\Translations\CommonTranslation;
