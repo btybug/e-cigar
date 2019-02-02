@@ -3,6 +3,6 @@
     <h3>About US</h3>
 
     <div>
-        {!! $model->description !!}
+        {!! @$model->description !!}
     </div>
 @stop
