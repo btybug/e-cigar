@@ -73,7 +73,9 @@ class GuestController extends Controller
 
     public function getTermsConditions()
     {
-        return $this->view('terms_conditions');
+        $model = Common::where('type','tc')->first();
+
+        return $this->view('terms_conditions',compact(['model']));
     }
 
     public function getDelivery(GeoZones $geoZones)
