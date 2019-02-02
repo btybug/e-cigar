@@ -713,6 +713,8 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })->editColumn('user_id', function ($attr) {
                 return ($attr->user) ? $attr->user->name . ' ' . $attr->user->last_name : 'Not member';
+            })->editColumn('category_id', function ($attr) {
+                return ($attr->category) ? $attr->category->name  : '';
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger' href='" . route('admin_emails_newsletter_delete', $post->id) . "'><i class='fa fa-trash-o'></i></a>";

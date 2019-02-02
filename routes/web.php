@@ -113,6 +113,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::post('/delete-notifications', 'Frontend\UserController@postDeleteNotifications')->name('notifications_delete');
     Route::post('/mark-us-read-notifications', 'Frontend\UserController@postMarkReadNotifications')->name('notifications_mark_read');
     Route::post('/mark-us-unread-notifications', 'Frontend\UserController@postMarkUnreadNotifications')->name('notifications_mark_unread');
+    Route::post('/save-email-settings', 'Frontend\UserController@postEmailSettings')->name('account_email_settings');
 
     Route::post('/changePassword', 'Frontend\UserController@changePassword')->name('my_account_change_password');
     Route::get('/logs', 'Frontend\UserController@getLogs')->name('my_account_logs');

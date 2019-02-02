@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SubscribeRequest;
+use App\Models\Category;
 use App\Models\Common;
 use App\Models\Newsletter;
 use App\Models\SiteCurrencies;
@@ -62,8 +63,10 @@ class CommonController extends Controller
     {
         $email = $request->get('subscribe_email');
         $user = User::where('email',$email)->first();
+        $newsletter = Category::where('type','notifications')->where('slug','newsletter')->first();
         Newsletter::create([
            'email' => $email,
+           'category_id' => $newsletter->id,
             'user_id' => ($user) ? $user->id : null
         ]);
 

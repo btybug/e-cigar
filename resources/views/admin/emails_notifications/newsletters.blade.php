@@ -14,6 +14,7 @@
                 <th>#</th>
                 <th>Email</th>
                 <th>Is Member</th>
+                <th>Type/Category</th>
                 <th>Subscribed Date</th>
                 <th>Actions</th>
             </tr>
@@ -37,6 +38,7 @@
                     {data: 'id',name: 'id'},
                     {data: 'email',name: 'email'},
                     {data: 'user_id', name: 'user_id'},
+                    {data: 'category_id', name: 'category_id'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

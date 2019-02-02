@@ -4,7 +4,8 @@
         <div class="my-account--selects">
             <div class="simple_select_wrapper">
                 <select id="accounts--selects"
-                        class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark" style="width: 100%">
+                        class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark"
+                        style="width: 100%">
                     <option value="{!! route('my_account') !!}">Account</option>
                     <option value="{!! route('notifications') !!}">Notifications</option>
                     <option value="{!! route('my_account_favourites') !!}">Favorites</option>
@@ -14,10 +15,10 @@
                     <option value="">Address</option>
                 </select>
                 {{--<select id="accounts"--}}
-                        {{--class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark" style="width: 100%">--}}
-                    {{--<option value="{!! route('my_account') !!}">Account</option>--}}
-                    {{--<option>Brandos</option>--}}
-                    {{--<option>Eleaf</option>--}}
+                {{--class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark" style="width: 100%">--}}
+                {{--<option value="{!! route('my_account') !!}">Account</option>--}}
+                {{--<option>Brandos</option>--}}
+                {{--<option>Eleaf</option>--}}
                 {{--</select>--}}
             </div>
         </div>
@@ -483,6 +484,8 @@
                                     {!! Form::close() !!}
                                 </div>
 
+                                {!! Form::model($newsletters,['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}
+{{--                                {!! Form::model('email_settings[22,21]',['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}--}}
                                 <div class="card account-card rounded-0 mb-5">
                                     <h2 class="card-title font-20"> Email settings </h2>
 
@@ -491,46 +494,39 @@
                                         <div>
                                             <p class="mb-2">Subscribe to:</p>
                                             <div class="modal-accounts d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
-                                                {{--<div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">--}}
-                                                    {{--<input class="form-check-input register-form_input-check" type="checkbox"--}}
-                                                           {{--value="" id="subscribeCheck1">--}}
-                                                    {{--<label class="form-check-label text-gray-clr register-form_label pointer"--}}
-                                                           {{--for="subscribeCheck1">--}}
-                                                        {{--Special offers--}}
-                                                        {{--<span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">--}}
-                                        {{--<svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">--}}
-{{--<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>--}}
-{{--</svg>--}}
-                                    {{--</span>--}}
-                                                    {{--</label>--}}
-                                                {{--</div>--}}
-                                                @foreach($categories as $category)
-                                                <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
-                                                    <input name="email_settings[]" class="form-check-input register-form_input-check" type="checkbox"
-                                                           value="{{ $category->id }}" id="subscribeCheck{{ $category->id }}"
-                                                            {{ ($category->slug == 'communications') ? 'disabled="disabled"' : '' }}>
-                                                    <label class="form-check-label text-gray-clr register-form_label pointer"
-                                                           for="subscribeCheck{{ $category->id }}">
-                                                        {{ $category->name }}
-                                                        <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
-                                        <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
-<path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
-</svg></span>
-                                                    </label>
+                                                    @foreach($categories as $category)
+                                                        <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
+                                                            <input name="{{ ($category->slug != 'communications')
+                                                                    ? 'email_settings[]' : '' }}"
+                                                                   class="form-check-input register-form_input-check"
+                                                                   type="checkbox"
+
+                                                                   value="{{ $category->id }}"
+                                                                   id="subscribeCheck{{ $category->id }}"
+                                                                    {{ ($category->slug == 'communications') ?
+                                                                    'checked="checked" disabled="disabled"'
+                                                                    : ((in_array($category->id,$newsletters)) ? 'checked="checked"':'') }}>
+                                                            <label class="form-check-label text-gray-clr register-form_label pointer"
+                                                                   for="subscribeCheck{{ $category->id }}">
+                                                                {{ $category->name }}
+                                                                <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                            <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+    <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
+    </svg></span>
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
+                                                <div class="form-group">
+                                                    <input type="submit" class="btn ntfs-btn rounded-0" value="Save settings">
                                                 </div>
-                                                @endforeach
-
-
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
+                            {!! Form::close() !!}
 
 
-
-
-                            <!-- Modal -->
+                                <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -610,11 +606,11 @@
 
     <script>
         $(document).ready(function () {
-            $(document).on('scroll', function() {
+            $(document).on('scroll', function () {
                 let sumHead = $('.main-header').outerHeight() + $('.header-bottom').outerHeight();
-                if($(this).scrollTop()>=sumHead){
+                if ($(this).scrollTop() >= sumHead) {
                     $('.my-account--selects').addClass('fixing')
-                }else {
+                } else {
                     $('.my-account--selects').removeClass('fixing')
                 }
             })
@@ -623,21 +619,24 @@
                 AjaxCall(
                     "/my-account/save-address-book",
                     form,
-                    res => {
-                        if (
-                            !res.error
-                        ) {
-                            window.location.reload();
-                        }
-                    },
-                    error => {
-                        if (error.status == 422) {
-                            $('.errors').html('');
-                            for (var err in error.responseJSON.errors) {
-                                $('.errors').append(error.responseJSON.errors[err] + '<br>');
-                            }
+                    res = > {
+                    if (
+                !res.error
+                )
+                {
+                    window.location.reload();
+                }
+            },
+                error =
+                >
+                {
+                    if (error.status == 422) {
+                        $('.errors').html('');
+                        for (var err in error.responseJSON.errors) {
+                            $('.errors').append(error.responseJSON.errors[err] + '<br>');
                         }
                     }
+                }
                 )
                 ;
             })
@@ -650,20 +649,20 @@
                 AjaxCall(
                     "/get-regions-by-country",
                     {country: value},
-                    res => {
-                        let select = document.getElementById('regions');
-                        select.innerText = null;
-                        if (!res.error) {
-                            $.each(res.data, function (index, value) {
-                                var opt = document.createElement('option');
-                                opt.value = res.data[value];
-                                opt.innerHTML = res.data[value];
-                                select.appendChild(opt);
-                            })
+                    res = > {
+                    let select = document.getElementById('regions');
+                select.innerText = null;
+                if (!res.error) {
+                    $.each(res.data, function (index, value) {
+                        var opt = document.createElement('option');
+                        opt.value = res.data[value];
+                        opt.innerHTML = res.data[value];
+                        select.appendChild(opt);
+                    })
 
-                        }
-                    }
-                )
+                }
+            }
+            )
                 ;
             }
 
@@ -671,15 +670,16 @@
                 AjaxCall(
                     "/my-account/address-book-form",
                     {},
-                    res => {
-                        if (
-                            !res.error
-                        ) {
-                            $(".address-form").html(res.html);
-                            $("#geo_country_book").select2();
-                            $("#newAddressModal").modal();
-                        }
-                    }
+                    res = > {
+                    if (
+                !res.error
+                )
+                {
+                    $(".address-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    $("#newAddressModal").modal();
+                }
+            }
                 )
                 ;
             });
@@ -689,15 +689,16 @@
                 AjaxCall(
                     "/my-account/address-book-form",
                     {id: id},
-                    res => {
-                        if (
-                            !res.error
-                        ) {
-                            $(".selected-form").html(res.html);
-                            $("#geo_country_book").select2();
-                            //                    $("#newAddressModal").modal();
-                        }
-                    }
+                    res = > {
+                    if (
+                !res.error
+                )
+                {
+                    $(".selected-form").html(res.html);
+                    $("#geo_country_book").select2();
+                    //                    $("#newAddressModal").modal();
+                }
+            }
                 )
                 ;
             });
@@ -707,21 +708,21 @@
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
-                    res => {
-                        let select = document.getElementById('geo_region');
-                        select.innerText = null;
-                        if (!res.error) {
-                            var opt = document.createElement('option');
-                            $.each(res.data, function (k, v) {
-                                var option = $(opt).clone();
-                                option.val(k);
-                                option.text(v);
-                                $(select).append(option);
-                            });
+                    res = > {
+                    let select = document.getElementById('geo_region');
+                select.innerText = null;
+                if (!res.error) {
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
 
-                        }
-                    }
-                )
+                }
+            }
+            )
                 ;
             }
 
@@ -730,14 +731,15 @@
                 AjaxCall(
                     "/my-account/select-address-book",
                     {id: value},
-                    res => {
-                        if (
-                            !res.error
-                        ) {
-                            $(".render-address").html(res.html);
-                        }
-                    }
-                )
+                    res = > {
+                    if (
+                !res.error
+            )
+                {
+                    $(".render-address").html(res.html);
+                }
+            }
+            )
                 ;
             }
 
@@ -759,20 +761,20 @@
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
-                    res => {
-                        let select = $_this.closest('.address-book-form').find('.geo_region_book');
-                        $(select).empty()
-                        if (!res.error) {
-                            console.log($(select).val())
-                            var opt = document.createElement('option');
-                            $.each(res.data, function (k, v) {
-                                var option = $(opt).clone();
-                                option.val(k);
-                                option.text(v);
-                                $(select).append(option);
-                            });
-                        }
-                    }
+                    res = > {
+                    let select = $_this.closest('.address-book-form').find('.geo_region_book');
+                $(select).empty()
+                if (!res.error) {
+                    console.log($(select).val())
+                    var opt = document.createElement('option');
+                    $.each(res.data, function (k, v) {
+                        var option = $(opt).clone();
+                        option.val(k);
+                        option.text(v);
+                        $(select).append(option);
+                    });
+                }
+            }
                 )
                 ;
             });

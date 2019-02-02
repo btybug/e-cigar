@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\GeoZones;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
+use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Statuses;
@@ -60,8 +61,9 @@ class UserController extends Controller
     {
         $user = \Auth::user();
         $categories = Category::where('type','notifications')->get();
+        $newsletters = Newsletter::where('user_id',\Auth::id())->pluck('category_id','category_id')->all();
 
-        return $this->view('index', compact('user','categories'));
+        return $this->view('index', compact('user','categories','newsletters'));
     }
 
     public function getFavourites()
@@ -391,6 +393,28 @@ class UserController extends Controller
             return response()->json(['error'=>false,'html'=>$html]);
         }
         return response()->json(['error'=>true]);
+    }
+
+    public function postEmailSettings(Request $request)
+    {
+        $emailSettings = $request->get('email_settings');
+
+        if(count($emailSettings)){
+            foreach ($emailSettings as $category_id){
+                $response = Newsletter::where('user_id',\Auth::id())->where('category_id',$category_id)->first();
+                if(! $response){
+                    Newsletter::create([
+                        'user_id' => \Auth::id(),
+                        'email' => \Auth::user()->email,
+                        'category_id' => $category_id,
+                    ]);
+                }
+            }
+        }
+
+        Newsletter::whereNotIn('category_id',$emailSettings)->where('user_id',\Auth::id())->delete();
+
+        return redirect()->back();
     }
 }
 
