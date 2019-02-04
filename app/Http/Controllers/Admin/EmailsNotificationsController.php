@@ -62,22 +62,15 @@ class EmailsNotificationsController extends Controller
     public function postSendEmailCreate(Request $request)
     {
         $category = Category::findOrFail($request->category_id);
+        $users = $this->getEmailUsers($request->get('users'),$request->get('groups'),$category);
 
         $data = $request->only('from', 'category_id');
         $data['status'] = 0;
-        if($category->slug == 'newsletter'){
-            $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
-                ->whereNull('role_id')
-                ->orWhere('roles.type', 'frontend')->pluck('users.id');
-        }else{
-            $users = $request->get('users');
-        }
+
         $translatable = $request->get('translatable');
         $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
         $current_id = $emailCustomer['id'];
         $emailCustomer->users()->attach($users, ['status' => 0]);
-
-
 
         $data['is_for_admin'] = 1;
 //        $data['parent_id'] = $current_id;
@@ -102,17 +95,13 @@ class EmailsNotificationsController extends Controller
 
     public function postSendEmailCreateSend(Request $request)
     {
+
         $category = Category::findOrFail($request->category_id);
+        $users = $this->getEmailUsers($request->get('users'),$request->get('groups'),$category);
 
         $data = $request->only('from', 'category_id');
         $data['status'] = 1;
-        if($category->slug == 'newsletter'){
-            $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
-                ->whereNull('role_id')
-                ->orWhere('roles.type', 'frontend')->pluck('users.id');
-        }else{
-            $users = $request->get('users');
-        }
+
         $translatable = $request->get('translatable');
         $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
         $emailCustomer->users()->attach($users, ['status' => 1]);
@@ -133,17 +122,26 @@ class EmailsNotificationsController extends Controller
         return redirect()->route('admin_emails_notifications_send_email');
     }
 
-    public function getSubscribersByType()
+    public function getEmailUsers($users,$groups,$category)
     {
+        if($category->slug == 'newsletter'){
+            $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+                ->whereNull('role_id')
+                ->orWhere('roles.type', 'frontend')->pluck('users.id')->all();
+        }
+        $result = [];
+        if($groups && count($groups)){
+            foreach ($groups as $group){
+                $capaign = Campaign::find($group);
+                if($capaign){
+                    $x = collect(\DB::select($capaign->sql_query));
+                    $result = array_merge($result,$x->pluck('id')->all());
+                }
+            }
+        }
 
-
-//        dd($redayEmailsJobs);
-
-//        $users = $users->pluck('id')->all();
-//        $newsletters = Newsletter::where('category_id',$category_id)->whereIn('user_id',$users)->get();
-//        if(count($newsletters)){
-//
-//        }
+        $response = array_merge($users,$result);
+        return array_unique($response);
     }
 
     public function emails()
