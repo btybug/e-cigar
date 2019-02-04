@@ -32,6 +32,9 @@ class Kernel extends ConsoleKernel
 
          $schedule->command('subscription:send')
                   ->everyMinute();
+
+         $schedule->command('guests:send')
+                  ->everyMinute();
     }
 
     /**

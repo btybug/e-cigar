@@ -19,6 +19,7 @@ use App\Models\MailTemplates;
 use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Notifications\CustomEmailUser;
+use App\Models\NewsletterJob;
 use App\Services\ShortCodes;
 use App\User;
 use Carbon\Carbon;
@@ -70,9 +71,9 @@ class EmailsNotificationsController extends Controller
             $users = $request->get('users');
         }
         $translatable = $request->get('translatable');
-        $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
-        $current_id = $email['id'];
-        $email->users()->attach($users, ['status' => 0]);
+        $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
+        $current_id = $emailCustomer['id'];
+        $emailCustomer->users()->attach($users, ['status' => 0]);
 
 
 
@@ -81,6 +82,18 @@ class EmailsNotificationsController extends Controller
         $translatable_for_admin = $request->get('admin')["translatable"];
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable_for_admin);
         $email->users()->attach( [1], ['status' => 0]);
+
+        if($category->slug == 'newsletter'){
+            $guestSubscribed = Newsletter::whereNull('user_id')->where('category_id',$category->id)->get();
+            if(count($guestSubscribed)){
+                foreach ($guestSubscribed as $guest){
+                    NewsletterJob::create([
+                       'custom_email_id' => $emailCustomer->id,
+                       'newsletter_id' => $guest->id
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('admin_emails_notifications_send_email');
     }
@@ -99,8 +112,22 @@ class EmailsNotificationsController extends Controller
             $users = $request->get('users');
         }
         $translatable = $request->get('translatable');
-        $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
-        $email->users()->attach($users, ['status' => 1]);
+        $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
+        $emailCustomer->users()->attach($users, ['status' => 1]);
+
+        if($category->slug == 'newsletter'){
+            $guestSubscribed = Newsletter::whereNull('user_id')->where('category_id',$category->id)->get();
+            if(count($guestSubscribed)){
+                foreach ($guestSubscribed as $guest){
+                    NewsletterJob::create([
+                        'custom_email_id' => $emailCustomer->id,
+                        'newsletter_id' => $guest->id,
+                        'status' => 1,
+                    ]);
+                }
+            }
+        }
+
         return redirect()->route('admin_emails_notifications_send_email');
     }
 
@@ -154,8 +181,18 @@ class EmailsNotificationsController extends Controller
     public function sendEmailSendNow(Request $request)
     {
         $email = CustomEmails::where('id', $request->id)->first();
+        $category = Category::find($email->category_id);
         $email->update(['status' => 1]);
         $email->custom_email_users()->update(['custom_email_user.status' => 1,'custom_email_user.updated_at' => Carbon::now()]);
+
+        if($category->slug == 'newsletter'){
+            $guestSubscribed = Newsletter::whereNull('user_id')->where('category_id',$category->id)->get();
+            if(count($guestSubscribed)){
+                foreach ($guestSubscribed as $guest){
+                    NewsletterJob::where('newsletter_id',$guest->id)->where('custom_email_id',$email->id)->update(['status'=>1]);
+                }
+            }
+        }
 
         return response()->json(['error' => false]);
     }
