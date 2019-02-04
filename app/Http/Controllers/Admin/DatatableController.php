@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Attributes;
+use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Competitions;
@@ -720,5 +721,23 @@ class DatatableController extends Controller
                 return "<a class='badge btn-danger' href='" . route('admin_emails_newsletter_delete', $post->id) . "'><i class='fa fa-trash-o'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
+    }
+
+    public function getCampaigns()
+    {
+        return Datatables::of(
+            Campaign::query()
+        )->editColumn('created_at', function ($faq) {
+            return BBgetDateFormat($faq->created_at);
+        }) ->addColumn('actions', function ($attr) {
+            return "<a class='badge btn-warning' href='".route('admin_campaign_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
+        })->rawColumns(['actions'])->make(true);
+    }
+
+    public function getAllChannelCustomers($id=null)
+    {
+        return Datatables::of(
+            User::query()
+        )->make(true);
     }
 }

@@ -13,6 +13,8 @@ Route::get('/menu-manager', function () {
 });
 Route::get('/gmail-call-back','GmailController@callBack');
 
+Route::post('/search', 'Admin\SearchController@filter')->name('admin_search');
+
 Route::group(['prefix' => 'settings'], function () {
     Route::group(['prefix' => 'general'], function () {
         Route::get('/', 'Admin\SettingsController@getGeneral')->name('admin_settings_general');
@@ -144,6 +146,14 @@ Route::group(['prefix' => 'users'], function () {
         Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
         Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
         Route::post('/edit', 'Admin\RolesController@postEdit')->name('post_admin_edit_role');
+    });
+
+    Route::group(['prefix' => 'campaign'], function () {
+        Route::get('/', 'Admin\CampaignController@index')->name('admin_campaign');
+        Route::get('/create', 'Admin\CampaignController@create')->name('admin_campaign_create');
+        Route::post('/create', 'Admin\CampaignController@postCreate')->name('admin_campaign_create_post');
+        Route::get('/edit/{id}', 'Admin\CampaignController@edit')->name('admin_campaign_edit');
+        Route::post('/edit/{id}', 'Admin\CampaignController@postEdit')->name('admin_campaign_edit_post');
     });
 });
 Route::group(['prefix' => 'store'], function () {

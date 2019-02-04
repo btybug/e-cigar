@@ -50,6 +50,10 @@
                     <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
                     </li>
                     @endok
+                    @ok('admin_campaign')
+                    <li><a href="{{route('admin_campaign')}}"><i class="fa fa-circle-o"></i>Campaign</a>
+                    </li>
+                    @endok
                 </ul>
             </li>
             @endok
