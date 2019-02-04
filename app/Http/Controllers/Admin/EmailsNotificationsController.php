@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Mail\SendEmail;
 use App\Mail\SendSubscriptionEmail;
+use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\Emails;
 use App\Models\MailTemplates;
@@ -42,16 +43,17 @@ class EmailsNotificationsController extends Controller
         $shortcodes = new ShortCodes();
         $categories = Category::where('type','notifications')->get()->pluck('name','id');
         $users = User::all()->pluck('name', 'id');
+        $campaings = Campaign::all()->pluck('title', 'id');
 
 
 //        dd($this->getSubscribersByType());
-        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories'));
+        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories','campaings'));
     }
 
     public function sendEmailView($id = null)
     {
         $model = CustomEmails::find($id);
-        $admin_model = CustomEmails::where("parent_id", "=", $id)->first();
+        $admin_model = null;//CustomEmails::where("parent_id", "=", $id)->first();
 //        dd($admin_model);
         ($model['status']==0 || $model['is_for_admin']==1) ? abort("404") : "";
         return $this->view('send.email_view', compact( ['model','admin_model']));

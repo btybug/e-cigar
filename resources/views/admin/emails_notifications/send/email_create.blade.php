@@ -52,6 +52,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        {{Form::label('to_groups', 'To Groups',['class' => 'col-sm-3'])}}
+                                        <div class="col-sm-9">
+                                            {!! Form::select('groups[]',$campaings,null,['id' => 'to_groups','class' => 'form-control tag-input-v','multiple'=>'multiple']) !!}
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         @if(count(get_languages()))
                                             <ul class="nav nav-tabs">
