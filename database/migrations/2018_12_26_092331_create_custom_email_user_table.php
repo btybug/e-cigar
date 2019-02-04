@@ -18,6 +18,7 @@ class CreateCustomEmailUserTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('custom_email_id');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('is_read')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -1,5 +1,5 @@
 @foreach($messages as $message)
-    <tr style="{{ (! $message->is_read) ? 'color:black;font-wight:bold;background:gray' : '' }}">
+    <tr style="{{ (! $message->pivot->is_read) ? 'color:black;font-wight:bold;background:gray' : '' }}">
         <th scope="row">
             <input name="notifications" value="{{ $message->id }}" class="message-checkbox" type="checkbox">
         </th>

@@ -80,6 +80,15 @@ class EmailsNotificationsController extends Controller
         return redirect()->route('admin_emails_notifications_send_email');
     }
 
+    public function getSubscribersByType($category_id,$users)
+    {
+        $users = $users->pluck('id')->all();
+        $newsletters = Newsletter::where('category_id',$category_id)->whereIn('user_id',$users)->get();
+        if(count($newsletters)){
+
+        }
+    }
+
     public function emails()
     {
         return $this->view('emails.index');

@@ -331,7 +331,7 @@ class UserController extends Controller
         $ids = $request->get('ids');
         $messages  = CustomEmails::whereIn('id', $ids)->get();
         foreach($messages as $message)
-            $message->users()->updateExistingPivot($user, array('status' => 1), false);
+            $message->users()->updateExistingPivot($user, array('is_read' => 1), false);
 
         $messages = $user->customEmails()
             ->where('custom_emails.status', 1)->get();
@@ -346,7 +346,7 @@ class UserController extends Controller
         $ids = $request->get('ids');
         $messages  = CustomEmails::whereIn('id', $ids)->get();
         foreach($messages as $message)
-            $message->users()->updateExistingPivot($user, array('status' => 0), false);
+            $message->users()->updateExistingPivot($user, array('is_read' => 0), false);
 
         $messages = $user->customEmails()
             ->where('custom_emails.status', 1)->get();
