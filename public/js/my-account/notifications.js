@@ -10,16 +10,14 @@ $(document).ready(function(){
         this.myEvents = function(){
 
             $(".__modal").click(function(){
-                let id = $(this).attr("data-id");
+                let data = {id:$(this).attr("data-id"),object:$(this).attr("data-object")};
 
 
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: "/my-account/notifications",
                     method: "POST",
-                    data:{
-                        id: id
-                    },
+                    data:data,
                     success:function(r){
                         $(".modal-body").html(r);
                         $("#notif_modal").modal();

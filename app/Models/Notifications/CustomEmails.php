@@ -21,6 +21,12 @@ class CustomEmails extends Translatable
     protected $guarded = ['id'];
     public $translationModel = CustomEmailsTranslations::class;
     public $translatedAttributes = ['subject', 'content'];
+    protected $appends = array('object');
+
+    public function getObjectAttribute()
+    {
+       return 'custom_emails';
+    }
 
     public function users()
     {

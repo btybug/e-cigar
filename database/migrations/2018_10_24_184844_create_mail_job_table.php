@@ -22,6 +22,7 @@ class CreateMailJobTable extends Migration
             $table->timestamp('must_be_done')->nullable();
             $table->text('log')->nullable();
             $table->longText('additional_data')->nullable();
+            $table->tinyInteger('is_read')->default(0);
             $table->timestamps();
 
             $table->foreign('template_id')

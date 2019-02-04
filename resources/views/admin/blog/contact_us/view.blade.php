@@ -71,8 +71,7 @@
                                             </div>
                                             <div class="col-sm-11">
                                                 <div class="add-comment">
-                                                    {!! Form::open(['url' => 'admin_tickets_reply']) !!}
-                                                    {!! Form::hidden('ticket_id',$model->id) !!}
+                                                    {!! Form::open(['url' => route('admin_post_blog_contact_us_replay',$model->id)]) !!}
                                                     <textarea name="reply" id="" rows="0"
                                                               placeholder="Your reply"></textarea>
                                                     <span class="error-box invalid-feedback comment"></span>
@@ -84,7 +83,7 @@
                                                             {{--</button>--}}
                                                         </div>
                                                         <div class="col-sm-6 text-right">
-                                                            <button type="button"
+                                                            <button type="submit"
                                                                     class="btn btn-outline-warning add-comment-btn">
                                                                 Submit
                                                             </button>
@@ -193,81 +192,6 @@
 @stop
 @section('js')
     <script>
-        $(document).ready(function () {
-            $('body').on('click', '.cancel-comment', function (event) {
-                $(this).parents('form:first')[0].reset();
-            });
 
-            $('body').on('click', '.cancel-reply', function (event) {
-                $(this).parents('.user-add-comment').remove();
-            });
-
-            $('body').on('click', '.add-comment-btn', function (event) {
-                event.preventDefault();
-                var form = $(this).parents('form:first');
-                var data = form.serialize();
-                $.ajax({
-                    url: "{!! route('admin_tickets_reply') !!}",
-                    type: 'POST',
-                    data: data,
-                    success: function (data) {
-                        $('.error-box').html('');
-                        if (data.success == false) {
-                            $.map(data.errors, function (k, v) {
-                                form.find('.' + v).text(k[0]);
-                            });
-                        } else {
-                            form[0].reset();
-                            $(".user-add-comment-secondry").remove();
-
-                            $("#msgModal .message-place").text(data.message);
-                            $("#msgModal").modal();
-
-                            $(".comments-refresh").html(data.html);
-                        }
-                    },
-                    error: function (data) {
-                        // alert(data.err);
-                    }
-                });
-            });
-
-
-            $('body').on('click', '.reply', function (e) {
-                e.preventDefault();
-                $(".user-add-comment-secondry").remove();
-                var parentID = $(this).data('id');
-                var data = '<div class="user-add-comment user-add-comment-secondry w-100 mt-md-5 my-4">\n' +
-                    '                                    <div class="row m-0">\n' +
-                    '                                        <div class="col-sm-12">\n' +
-                    '                                            <div class="add-comment">\n' +
-                    '                                            {!! Form::open(["route" => "admin_tickets_reply"]) !!}\n' +
-                    '                            {!! Form::hidden("ticket_id",$model->id) !!}\n' +
-                    '                        <input type="hidden" name="parent_id" value="' + parentID + '" />\n' +
-                    '\n' +
-                    '                        <textarea name="reply" id="" rows="0"\n' +
-                    '                                  placeholder="Your reply"></textarea>\n' +
-                    '                        <span class="error-box invalid-feedback comment"></span>\n' +
-                    '                        <div class="row mt-1">\n' +
-                    '                            <div class="col-sm-6">\n' +
-                    '<button type="button" class="btn btn-outline-warning btn-block cancel-reply">Cancel </button>\n' +
-                    '                            </div>\n' +
-                    '                            <div class="col-sm-6 text-right">\n' +
-                    '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-warning add-comment-btn">\n' +
-                    '                                    Submit\n' +
-                    '                                </button>\n' +
-                    '                            </div>\n' +
-                    '                        </div>\n' +
-                    '{!! Form::close() !!}\n' +
-                    '                        </div>\n' +
-                    '                    </div>\n' +
-                    '                </div>\n' +
-                    '            </div>';
-                $(this).closest(".user-comment-img").append(data);
-                $(this).closest(".user-comment-img").addClass("user-commmet-add")
-
-            })
-        });
     </script>
 @stop

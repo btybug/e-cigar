@@ -60,7 +60,8 @@ class UpdateContactUs extends Command
                         $email->cron_status = 1;
                     }
                     if (($count - 1) > $email->children()->count()) {
-                        $email->message = $gmail[0]->getHtmlBody(true);
+                        echo 1;
+                        $email->message = ($gmail[0]->getHtmlBody(true))?$gmail[0]->getHtmlBody(true):$email->message;
                         $content=$content."3\r\n";
                         \File::put(base_path('test.txt'),$content);
                         $missed_from = ($count - 1) - $email->children()->count();

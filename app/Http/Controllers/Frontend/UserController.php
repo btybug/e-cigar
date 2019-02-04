@@ -12,6 +12,7 @@ use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
 use App\Models\Category;
 use App\Models\GeoZones;
+use App\Models\MailJob;
 use App\Models\Media\Folders;
 use App\Models\Media\Items;
 use App\Models\Newsletter;
@@ -23,6 +24,7 @@ use App\Models\Settings;
 use App\Models\ZoneCountries;
 use App\Services\FileService;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -306,7 +308,27 @@ class UserController extends Controller
     public function getNotifications()
     {
         $user = \Auth::getUser();
-        $messages = $user->customEmails()->where('custom_emails.status', 1)->orderBy('id', 'DESC')->get();
+        $messages = CustomEmails::leftJoin('categories', 'custom_emails.category_id', '=', 'categories.id')
+            ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
+            ->leftJoin('custom_email_user', 'custom_emails.id', '=', 'custom_email_user.custom_email_id')
+            ->leftJoin('users', 'custom_email_user.user_id', '=', 'users.id')
+            ->where('categories_translations.locale',app()->getLocale())
+            ->where('users.id', $user->id)
+            ->where('custom_emails.status', 1)
+            ->select('custom_emails.*','categories_translations.name as category','custom_email_user.is_read')
+            ->orderBy('id', 'DESC')
+            ->get()->toArray();
+
+        $mailJob = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
+            ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
+            ->leftJoin('categories', 'mail_templates.category_id', '=', 'categories.id')
+            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->where('mail_templates_translations.locale', app()->getLocale())
+            ->where('categories_translations.locale', app()->getLocale())
+            ->whereNotNull('mail_job.to')
+            ->where('mail_job.must_be_done', '<', Carbon::now())
+            ->select('mail_job.*', 'mail_templates_translations.subject','categories_translations.name as category')->get()->toArray();
+        $messages = collect(array_merge($messages, $mailJob))->sortBy('created_at');
         return $this->view('notifications', compact('messages'));
     }
 
@@ -314,15 +336,15 @@ class UserController extends Controller
     {
         $user = \Auth::getUser();
         $ids = $request->get('ids');
-        $messages  = CustomEmails::whereIn('id', $ids)->get();
-        foreach($messages as $message)
+        $messages = CustomEmails::whereIn('id', $ids)->get();
+        foreach ($messages as $message)
             $message->users()->detach($user->id);
 
         $messages = $user->customEmails()
             ->where('custom_emails.status', 1)->get();
-        $html = \View('frontend.my_account._partials.notification_list',compact(['messages']))->render();
+        $html = \View('frontend.my_account._partials.notification_list', compact(['messages']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postMarkReadNotifications(Request $request)
@@ -335,9 +357,9 @@ class UserController extends Controller
 
         $messages = $user->customEmails()
             ->where('custom_emails.status', 1)->get();
-        $html = \View('frontend.my_account._partials.notification_list',compact(['messages']))->render();
+        $html = \View('frontend.my_account._partials.notification_list', compact(['messages']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postMarkUnreadNotifications(Request $request)
@@ -350,14 +372,15 @@ class UserController extends Controller
 
         $messages = $user->customEmails()
             ->where('custom_emails.status', 1)->get();
-        $html = \View('frontend.my_account._partials.notification_list',compact(['messages']))->render();
+        $html = \View('frontend.my_account._partials.notification_list', compact(['messages']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function getNotificationsContent(Request $request)
     {
-        $user = \Auth::getUser();
+        dd($request->all());
+        $user = \Auth::user();
         $messages = $user->customEmails()
             ->where('custom_emails.status', 1)
             ->where('custom_emails.id', '=', $request->id)
@@ -385,14 +408,14 @@ class UserController extends Controller
 
     public function postTicketsCategory(Request $request)
     {
-        $category_id=$request->get('category');
-        $user=\Auth::user();
-        $category=Category::where('id',$category_id)->where('type','tickets')->first();
-        if($category && \View::exists($this->view.'.ticket_categories.'.$category->slug)){
-            $html=\View::make($this->view.'.ticket_categories.'.$category->slug,compact('user','category'))->render();
-            return response()->json(['error'=>false,'html'=>$html]);
+        $category_id = $request->get('category');
+        $user = \Auth::user();
+        $category = Category::where('id', $category_id)->where('type', 'tickets')->first();
+        if ($category && \View::exists($this->view . '.ticket_categories.' . $category->slug)) {
+            $html = \View::make($this->view . '.ticket_categories.' . $category->slug, compact('user', 'category'))->render();
+            return response()->json(['error' => false, 'html' => $html]);
         }
-        return response()->json(['error'=>true]);
+        return response()->json(['error' => true]);
     }
 
     public function postEmailSettings(Request $request)
