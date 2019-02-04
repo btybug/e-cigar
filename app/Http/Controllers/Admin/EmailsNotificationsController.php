@@ -43,7 +43,7 @@ class EmailsNotificationsController extends Controller
         $users = User::all()->pluck('name', 'id');
 
 
-        dd($this->getSubscribersByType());
+//        dd($this->getSubscribersByType());
         return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories'));
     }
 
