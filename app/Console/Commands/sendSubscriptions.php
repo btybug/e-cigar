@@ -6,6 +6,8 @@ use App\Mail\SendSubscriptionEmail;
 use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmailUser;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Mail;
+
 
 class sendSubscriptions extends Command
 {
