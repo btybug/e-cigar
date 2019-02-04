@@ -11,14 +11,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
+use App\Mail\SendEmail;
+use App\Mail\SendSubscriptionEmail;
 use App\Models\Category;
 use App\Models\Emails;
 use App\Models\MailTemplates;
 use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
+use App\Models\Notifications\CustomEmailUser;
 use App\Services\ShortCodes;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EmailsNotificationsController extends Controller
 {
@@ -36,6 +41,9 @@ class EmailsNotificationsController extends Controller
         $shortcodes = new ShortCodes();
         $categories = Category::where('type','notifications')->get()->pluck('name','id');
         $users = User::all()->pluck('name', 'id');
+
+
+        dd($this->getSubscribersByType());
         return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories'));
     }
 
@@ -50,9 +58,17 @@ class EmailsNotificationsController extends Controller
 
     public function postSendEmailCreate(Request $request)
     {
+        $category = Category::findOrFail($request->category_id);
+
         $data = $request->only('from', 'category_id');
         $data['status'] = 0;
-        $users = $request->get('users');
+        if($category->slug == 'newsletter'){
+            $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+                ->whereNull('role_id')
+                ->orWhere('roles.type', 'frontend')->pluck('users.id');
+        }else{
+            $users = $request->get('users');
+        }
         $translatable = $request->get('translatable');
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
         $current_id = $email['id'];
@@ -61,7 +77,7 @@ class EmailsNotificationsController extends Controller
 
 
         $data['is_for_admin'] = 1;
-        $data['parent_id'] = $current_id;
+//        $data['parent_id'] = $current_id;
         $translatable_for_admin = $request->get('admin')["translatable"];
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable_for_admin);
         $email->users()->attach( [1], ['status' => 0]);
@@ -71,22 +87,34 @@ class EmailsNotificationsController extends Controller
 
     public function postSendEmailCreateSend(Request $request)
     {
+        $category = Category::findOrFail($request->category_id);
+
         $data = $request->only('from', 'category_id');
         $data['status'] = 1;
-        $users = $request->get('users');
+        if($category->slug == 'newsletter'){
+            $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+                ->whereNull('role_id')
+                ->orWhere('roles.type', 'frontend')->pluck('users.id');
+        }else{
+            $users = $request->get('users');
+        }
         $translatable = $request->get('translatable');
         $email = CustomEmails::updateOrCreate($request->id, $data, $translatable);
         $email->users()->attach($users, ['status' => 1]);
         return redirect()->route('admin_emails_notifications_send_email');
     }
 
-    public function getSubscribersByType($category_id,$users)
+    public function getSubscribersByType()
     {
-        $users = $users->pluck('id')->all();
-        $newsletters = Newsletter::where('category_id',$category_id)->whereIn('user_id',$users)->get();
-        if(count($newsletters)){
 
-        }
+
+//        dd($redayEmailsJobs);
+
+//        $users = $users->pluck('id')->all();
+//        $newsletters = Newsletter::where('category_id',$category_id)->whereIn('user_id',$users)->get();
+//        if(count($newsletters)){
+//
+//        }
     }
 
     public function emails()
@@ -125,7 +153,10 @@ class EmailsNotificationsController extends Controller
 
     public function sendEmailSendNow(Request $request)
     {
-        CustomEmails::where('id', $request->id)->update(['status' => 1]);
+        $email = CustomEmails::where('id', $request->id)->first();
+        $email->update(['status' => 1]);
+        $email->custom_email_users()->update(['custom_email_user.status' => 1,'custom_email_user.updated_at' => Carbon::now()]);
+
         return response()->json(['error' => false]);
     }
 

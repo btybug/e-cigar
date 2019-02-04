@@ -32,6 +32,11 @@ class CustomEmails extends Translatable
         return $this->hasMany(CustomEmailsTranslations::class,'custom_emails_id');
     }
 
+    public function custom_email_users()
+    {
+        return $this->hasMany(CustomEmailUser::class,'custom_email_id');
+    }
+
     public function admin()
     {
         return $this->hasOne(CustomEmails::class,'parent_id');

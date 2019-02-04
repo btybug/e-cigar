@@ -326,6 +326,13 @@ function sc($content, $user, $job)
     return $content;
 }
 
+function sc2($content, $user, $job)
+{
+    $ShortCodes = new \App\Services\ShortCodes();
+    $content = $ShortCodes->MailShortcoder($content, $user);
+    return $content;
+}
+
 //end short codes
 function cartCount()
 {
