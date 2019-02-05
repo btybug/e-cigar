@@ -1,7 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
     <!--shopping dtls fixed at the bottom-->
-    <div class="main-content">
         <div class="continue-shp-wrapp">
             <div class="container main-max-width h-100 p-0">
                 <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between h-100">
@@ -51,6 +50,8 @@
         </div>
 
         <!--main-content-->
+    <div class="main-content">
+
         <div id="singleProductPageCnt" class="single-product-page-cnt d-flex flex-column">
             <main class="position-relative">
                 <!--breadcrump-->
