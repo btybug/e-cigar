@@ -103,7 +103,7 @@
                                             Status</h2>
                                         <p>Verified User</p>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row no-gutters p-0">
                                         <label for="username" class="col-md-2">
                                            Referred by
                                         </label>
