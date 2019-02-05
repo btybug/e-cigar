@@ -25,7 +25,7 @@ class ReferralsController extends Controller
         $user=\Auth::user();
         if($user->orders()->count())return abort(404);
         $data=$request->all();
-        $v=\Validator::make($data,['referred_by'=>'required|alpha_num|unique:users']);
+        $v=\Validator::make($data,['referred_by'=>'required|alpha_num|unique:users|exists_except:users,referral_code,id,'.$user->id]);
         if ($v->fails()){
             return redirect()->back()->withInput()->withErrors($v);
         }

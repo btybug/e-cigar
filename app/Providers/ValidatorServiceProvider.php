@@ -48,6 +48,15 @@ class ValidatorServiceProvider extends ServiceProvider {
                 return FALSE;
             }
         );
+        $validator->extend(
+            'exists_except',
+            function ($attribute, $value, $parameters)
+            {
+               return DB::table($parameters[0])
+                    ->where($parameters[1],$value)
+                    ->where($parameters[2],'!=',$parameters[3])->exists();
+            }
+        );
     }
 
     public function register()
