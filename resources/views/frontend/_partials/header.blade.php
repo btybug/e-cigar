@@ -287,6 +287,7 @@
                 .then(function (token) {
                     console.log(token);
                     $('.g-recaptcha-response').val(token);
+                    $('.sign_in').attr('disabled', false);
 //                    document.getElementsByClassName('g-recaptcha-response').value = token
                 });
         });
