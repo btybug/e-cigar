@@ -50,10 +50,9 @@
         </div>
 
         <!--main-content-->
-    <div class="main-content">
 
         <div id="singleProductPageCnt" class="single-product-page-cnt d-flex flex-column">
-            <main class="position-relative">
+            <main class="main-content position-relative">
                 <!--breadcrump-->
                 <div class="main-content container main-max-width main-content-wrapper">
                     <div class="content-head d-flex flex-wrap justify-content-between">
@@ -490,7 +489,6 @@
                 </button>
             </main>
         </div>
-    </div>
 @stop
 
 @section('css')
