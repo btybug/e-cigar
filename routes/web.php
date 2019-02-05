@@ -140,6 +140,9 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
         Route::get('/view/{id}', 'Frontend\UserController@getTicketsView')->name('my_account_tickets_view');
         Route::post('/mark-complete/{id}', 'Frontend\UserController@ticketMarkCompleted')->name('my_account_tickets_mark_completed');
     });
+    Route::group(['prefix' => 'referrals'], function () {
+        Route::get('/', 'Frontend\ReferralsController@getIndex')->name('my_account_referrals');
+    });
     Route::get('/verification', 'Frontend\UserController@getVerification')->name('my_account_verification');
     Route::post('/verification', 'Frontend\UserController@postVerification')->name('post_my_account_verification');
     Route::get('/payments', 'Frontend\UserController@getPayments')->name('my_account_payment');

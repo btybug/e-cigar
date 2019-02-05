@@ -44,7 +44,9 @@
 <body @if(\Request::route()->getName() == 'product_single')class="single-product-page" @endif>
 @include('cookieConsent::index')
 @include('frontend._partials.header')
+
 @yield('content')
+
 <div class="modal fade modal-request" id="msgModal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
