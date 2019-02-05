@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <main class="page-main-content">
+    <main class="page-main-content main-content">
         <div class="d-flex h-100">
     @include('frontend._partials.left_bar')
 

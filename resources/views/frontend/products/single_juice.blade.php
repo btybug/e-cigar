@@ -1,154 +1,156 @@
 @extends('layouts.frontend')
 @section('content')
-    <div class="container container--vape">
-        <div class="row mb-5">
-            <div class="col-md-4">
-                <a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">
-                    <img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">
-                </a>
-                <ul class="single-product_btns pl-0 mb-0 d-md-flex justify-content-md-between">
-                    <li><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
-                    <li class="single-product_btns_share"><a href="#" class="btn btn-outline-dark">share</a>
-                        <div id="share" class="share-social"></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h1 class="product_title entry-title mb-4 p-0">{!! $vape->name !!}</h1>
-                <p>
-                    {!! $vape->long_description !!}
-                </p>
-            </div>
-            <div class="col-md-4">
-                <form>
-                    <h2 class="mb-4">Price Calculator</h2>
-                    <input type="hidden" value="{{ $vape->id }}" id="vpid">
-                    @include("admin.inventory._partials.render_price_form",['model' => $vape])
+    <main class="main-content">
+        <div class="container container--vape">
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <a href="#" class="d-inline-block woocommerce-main-image zoom mb-3">
+                        <img width="100%" src="{!! $vape->image !!}" class="attachment-single-product-thumb wp-post-image" alt="">
+                    </a>
+                    <ul class="single-product_btns pl-0 mb-0 d-md-flex justify-content-md-between">
+                        <li><a href="#" class="btn btn-outline-dark"><i class="fa fa-heart-o mr-2"></i>Add To</a></li>
+                        <li class="single-product_btns_share"><a href="#" class="btn btn-outline-dark">share</a>
+                            <div id="share" class="share-social"></div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h1 class="product_title entry-title mb-4 p-0">{!! $vape->name !!}</h1>
+                    <p>
+                        {!! $vape->long_description !!}
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <form>
+                        <h2 class="mb-4">Price Calculator</h2>
+                        <input type="hidden" value="{{ $vape->id }}" id="vpid">
+                        @include("admin.inventory._partials.render_price_form",['model' => $vape])
 
-                    <a href="javascript:void(0)" class="btn btn-outline-dark btn-success add-to-cart">Add To Cart</a>
-                </form>
-            </div>
-        </div>
-
-        <ul class="nav nav-tabs d-flex" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="feature-tab" data-toggle="tab" href="#feature" role="tab" aria-controls="home" aria-selected="true">Feature</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="false">Media</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="technical-tab" data-toggle="tab" href="#technical" role="tab" aria-controls="technical" aria-selected="false">Technical</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="extra-tab" data-toggle="tab" href="#extra" role="tab" aria-controls="extra" aria-selected="false">Extra</a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
-            </li>
-        </ul>
-        <div class="tab-content tab-content--features">
-            <div class="tab-pane fade show active" id="feature" role="tabpanel" aria-labelledby="feature-tab">
-                @if($vape->posters && count($vape->posters))
-                    @foreach($vape->posters as $poster)
-                        <div class="row mb-2">
-                            <div class="col-md-12">
-                                <div class="tab-content--features_left" style="background-image: url({{ $poster }});"></div>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    NO Posters
-                @endif
-            </div>
-
-            <div class="tab-pane fade" id="media" role="tabpanel" aria-labelledby="media-tab">
-                @if($vape->videos && count($vape->videos))
-                    <div id="jssorVideos" class="media-slider">
-                        <!-- Loading Screen -->
-                        <div data-u="slides" class="media-slider_slides">
-                            @foreach($vape->videos as $video)
-                                <div>
-                                    <div data-u="image">
-                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                    </div>
-                                    <div data-u="thumb">
-                                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <!-- Thumbnail Navigator -->
-                        <div data-u="thumbnavigator" class="jssort101 media-slider_thumbnavigator" data-autocenter="1" data-scale-bottom="0.75">
-                            <div data-u="slides">
-                                <div data-u="prototype" class="p">
-                                    <div data-u="thumbnailtemplate" class="t"></div>
-                                    <svg viewbox="0 0 16000 16000" class="cv">
-                                        <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
-                                        <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
-                                        <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Arrow Navigator -->
-                        <div data-u="arrowleft" class="jssora106 media-slider_arrownavigator media-slider_arrownavigator--left" data-scale="0.75">
-                            <svg viewbox="0 0 16000 16000" class="icon">
-                                <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
-                                <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
-                                <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
-                            </svg>
-                        </div>
-                        <div data-u="arrowright" class="jssora106 media-slider_arrownavigator media-slider_arrownavigator--right" data-scale="0.75">
-                            <svg viewbox="0 0 16000 16000" class="icon">
-                                <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
-                                <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
-                                <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
-                            </svg>
-                        </div>
-                    </div>
-                @else
-                    NO Videos
-                @endif
-
-            </div>
-            <div class="tab-pane fade" id="technical" role="tabpanel" aria-labelledby="technical-tab">
-                <div class="row">
-                    <table class="table-responsive table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Attributes</th>
-                            <th>Options</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if(count($vape->attrs))
-                            @foreach($vape->attrs as $attr)
-                                <tr>
-                                    <td>{!! $attr->name !!}</td>
-                                    <td>
-                                        @if(count($attr->children))
-                                            @foreach($attr->children as $option)
-                                                <span class="badge badge-primary">{!! $option->name !!}</span>
-                                            @endforeach
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr colspan="2">
-                                <td>No Attributes</td>
-                            </tr>
-                        @endif
-                        </tbody>
-                    </table>
+                        <a href="javascript:void(0)" class="btn btn-outline-dark btn-success add-to-cart">Add To Cart</a>
+                    </form>
                 </div>
             </div>
-            <div class="tab-pane fade" id="extra" role="tabpanel" aria-labelledby="extra-tab">5</div>
-            <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">6</div>
+
+            <ul class="nav nav-tabs d-flex" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="feature-tab" data-toggle="tab" href="#feature" role="tab" aria-controls="home" aria-selected="true">Feature</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="false">Media</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="technical-tab" data-toggle="tab" href="#technical" role="tab" aria-controls="technical" aria-selected="false">Technical</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="extra-tab" data-toggle="tab" href="#extra" role="tab" aria-controls="extra" aria-selected="false">Extra</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                </li>
+            </ul>
+            <div class="tab-content tab-content--features">
+                <div class="tab-pane fade show active" id="feature" role="tabpanel" aria-labelledby="feature-tab">
+                    @if($vape->posters && count($vape->posters))
+                        @foreach($vape->posters as $poster)
+                            <div class="row mb-2">
+                                <div class="col-md-12">
+                                    <div class="tab-content--features_left" style="background-image: url({{ $poster }});"></div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        NO Posters
+                    @endif
+                </div>
+
+                <div class="tab-pane fade" id="media" role="tabpanel" aria-labelledby="media-tab">
+                    @if($vape->videos && count($vape->videos))
+                        <div id="jssorVideos" class="media-slider">
+                            <!-- Loading Screen -->
+                            <div data-u="slides" class="media-slider_slides">
+                                @foreach($vape->videos as $video)
+                                    <div>
+                                        <div data-u="image">
+                                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                        <div data-u="thumb">
+                                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{$video}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!-- Thumbnail Navigator -->
+                            <div data-u="thumbnavigator" class="jssort101 media-slider_thumbnavigator" data-autocenter="1" data-scale-bottom="0.75">
+                                <div data-u="slides">
+                                    <div data-u="prototype" class="p">
+                                        <div data-u="thumbnailtemplate" class="t"></div>
+                                        <svg viewbox="0 0 16000 16000" class="cv">
+                                            <circle class="a" cx="8000" cy="8000" r="3238.1"></circle>
+                                            <line class="a" x1="6190.5" y1="8000" x2="9809.5" y2="8000"></line>
+                                            <line class="a" x1="8000" y1="9809.5" x2="8000" y2="6190.5"></line>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Arrow Navigator -->
+                            <div data-u="arrowleft" class="jssora106 media-slider_arrownavigator media-slider_arrownavigator--left" data-scale="0.75">
+                                <svg viewbox="0 0 16000 16000" class="icon">
+                                    <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                                    <polyline class="a" points="7930.4,5495.7 5426.1,8000 7930.4,10504.3 "></polyline>
+                                    <line class="a" x1="10573.9" y1="8000" x2="5426.1" y2="8000"></line>
+                                </svg>
+                            </div>
+                            <div data-u="arrowright" class="jssora106 media-slider_arrownavigator media-slider_arrownavigator--right" data-scale="0.75">
+                                <svg viewbox="0 0 16000 16000" class="icon">
+                                    <circle class="c" cx="8000" cy="8000" r="6260.9"></circle>
+                                    <polyline class="a" points="8069.6,5495.7 10573.9,8000 8069.6,10504.3 "></polyline>
+                                    <line class="a" x1="5426.1" y1="8000" x2="10573.9" y2="8000"></line>
+                                </svg>
+                            </div>
+                        </div>
+                    @else
+                        NO Videos
+                    @endif
+
+                </div>
+                <div class="tab-pane fade" id="technical" role="tabpanel" aria-labelledby="technical-tab">
+                    <div class="row">
+                        <table class="table-responsive table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Attributes</th>
+                                <th>Options</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @if(count($vape->attrs))
+                                @foreach($vape->attrs as $attr)
+                                    <tr>
+                                        <td>{!! $attr->name !!}</td>
+                                        <td>
+                                            @if(count($attr->children))
+                                                @foreach($attr->children as $option)
+                                                    <span class="badge badge-primary">{!! $option->name !!}</span>
+                                                @endforeach
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr colspan="2">
+                                    <td>No Attributes</td>
+                                </tr>
+                            @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="extra" role="tabpanel" aria-labelledby="extra-tab">5</div>
+                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">6</div>
+            </div>
         </div>
-    </div>
+    </main>
 
 
 @stop
