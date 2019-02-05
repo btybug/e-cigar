@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone',100)->unique();
             $table->text('avatar')->nullable();
+            $table->text('referred_by')->nullable();
             $table->string('country',100);
             $table->enum('gender',['male','female']);
             $table->date('dob');

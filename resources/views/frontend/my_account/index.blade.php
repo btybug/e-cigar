@@ -103,17 +103,34 @@
                                             Status</h2>
                                         <p>Verified User</p>
                                     </div>
+                                    @if(!$user->orders()->count() && !$user->referred_by)
+                                        {!! Form::model($user,['url'=>route('post_my_account_referrals')]) !!}
+                                    @endif
                                     <div class="form-group row no-gutters p-0">
                                         <label for="username" class="col-md-2">
-                                           Referred by
+                                            Referred by
                                         </label>
                                         <div class="col-md-6">
-                                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                            @if(!$user->orders()->count() && !$user->referred_by)
+                                                {!! Form::text('referred_by',null,['class'=>'form-control '.($errors->has('referred_by') ? ' is-invalid' : '')]) !!}
+
+                                                @if ($errors->has('referred_by'))
+                                                    <span class="invalid-feedback"
+                                                          role="alert"><strong>{{ $errors->first('referred_by') }}</strong></span>
+                                                @endif
+                                            @else
+                                                <span class="form-control">{!! $user->referred_by !!}</span>
+                                            @endif
                                         </div>
-                                        <div class="col-md-2">
-                                            <button class="btn btn-success">Submit</button>
-                                        </div>
+                                        @if(!$user->orders()->count() && !$user->referred_by)
+                                            <div class="col-md-2">
+                                                <button type="submit" class="btn btn-success">Submit</button>
+                                            </div>
+                                        @endif
                                     </div>
+                                    @if(!$user->orders()->count() && !$user->referred_by)
+                                        {!! Form::close() !!}
+                                    @endif
                                 </div>
 
                             </div>
@@ -381,7 +398,7 @@
                                 </div>
 
                                 {!! Form::model($newsletters,['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}
-{{--                                {!! Form::model('email_settings[22,21]',['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}--}}
+                                {{--                                {!! Form::model('email_settings[22,21]',['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}--}}
                                 <div class="card account-card rounded-0 mb-5">
                                     <h2 class="card-title font-20"> Email settings </h2>
 
@@ -390,30 +407,31 @@
                                         <div>
                                             <p class="mb-2">Subscribe to:</p>
                                             <div class="modal-accounts d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
-                                                    @foreach($categories as $category)
-                                                        <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
-                                                            <input name="{{ ($category->slug != 'communications')
+                                                @foreach($categories as $category)
+                                                    <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
+                                                        <input name="{{ ($category->slug != 'communications')
                                                                     ? 'email_settings[]' : '' }}"
-                                                                   class="form-check-input register-form_input-check"
-                                                                   type="checkbox"
+                                                               class="form-check-input register-form_input-check"
+                                                               type="checkbox"
 
-                                                                   value="{{ $category->id }}"
-                                                                   id="subscribeCheck{{ $category->id }}"
-                                                                    {{ ($category->slug == 'communications') ?
-                                                                    'checked="checked" disabled="disabled"'
-                                                                    : ((in_array($category->id,$newsletters)) ? 'checked="checked"':'') }}>
-                                                            <label class="form-check-label text-gray-clr register-form_label pointer"
-                                                                   for="subscribeCheck{{ $category->id }}">
-                                                                {{ $category->name }}
-                                                                <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                                               value="{{ $category->id }}"
+                                                               id="subscribeCheck{{ $category->id }}"
+                                                                {{ ($category->slug == 'communications') ?
+                                                                'checked="checked" disabled="disabled"'
+                                                                : ((in_array($category->id,$newsletters)) ? 'checked="checked"':'') }}>
+                                                        <label class="form-check-label text-gray-clr register-form_label pointer"
+                                                               for="subscribeCheck{{ $category->id }}">
+                                                            {{ $category->name }}
+                                                            <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                             <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
     <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
     </svg></span>
-                                                            </label>
-                                                        </div>
-                                                    @endforeach
+                                                        </label>
+                                                    </div>
+                                                @endforeach
                                                 <div class="form-group">
-                                                    <input type="submit" class="btn ntfs-btn rounded-0" value="Save settings">
+                                                    <input type="submit" class="btn ntfs-btn rounded-0"
+                                                           value="Save settings">
                                                 </div>
                                             </div>
                                         </div>
@@ -422,7 +440,7 @@
                             {!! Form::close() !!}
 
 
-                                <!-- Modal -->
+                            <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
