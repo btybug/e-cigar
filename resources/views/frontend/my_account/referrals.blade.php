@@ -36,6 +36,32 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col">Referred user</th>
+                                <th scope="col">Active</th>
+                                <th scope="col">Offers</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Mark</td>
+                                <td>Yes</td>
+                                <td>claim offer</td>
+                            </tr>
+                            <tr>
+                                <td>Jacob</td>
+                                <td>No</td>
+                                <td>Pending</td>
+                            </tr>
+                            <tr>
+                                <th>Edo</th>
+                                <td >no</td>
+                                <td>Pending</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
