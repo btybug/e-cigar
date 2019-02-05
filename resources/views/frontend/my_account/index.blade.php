@@ -103,6 +103,17 @@
                                             Status</h2>
                                         <p>Verified User</p>
                                     </div>
+                                    <div class="form-group row">
+                                        <label for="username" class="col-md-2">
+                                           Referred by
+                                        </label>
+                                        <div class="col-md-6">
+                                            {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </div>
