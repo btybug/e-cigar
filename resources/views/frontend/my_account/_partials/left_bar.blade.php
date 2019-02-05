@@ -122,4 +122,19 @@
 
         </a>
     </li>
+    <li class="profile-sidebar-menu_item">
+        <a href="{!! route('my_account_special_offers') !!}"
+           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
+                <span class="d-inline-block profile-sidebar-menu_icon">
+                    <svg
+                            viewBox="0 0 15 21"
+                            width="15px" height="21px">
+                    <path fill-rule="evenodd" fill="rgb(81, 132, 229)"
+                          d="M11.421,20.998 L10.105,20.998 C10.105,20.553 9.984,20.139 9.781,19.778 C9.331,19.003 8.476,18.477 7.499,18.477 C6.523,18.477 5.667,19.003 5.218,19.778 C5.015,20.139 4.894,20.553 4.894,20.998 L3.578,20.998 L-0.003,20.998 L-0.003,-0.003 L15.002,-0.003 L15.002,20.998 L11.421,20.998 ZM13.741,6.639 L12.028,6.639 L12.028,5.305 L13.741,5.305 L13.741,1.218 L1.258,1.218 L1.258,5.305 L2.970,5.305 L2.970,6.639 L1.258,6.639 L1.258,19.778 L3.792,19.778 C4.313,18.281 5.777,17.204 7.499,17.204 C9.222,17.204 10.686,18.281 11.207,19.778 L13.741,19.778 L13.741,6.639 ZM5.464,5.305 L9.534,5.305 L9.534,6.639 L5.464,6.639 L5.464,5.305 Z"/>
+                </svg>
+                </span>
+            <span class="d-inline-block">Special offer</span>
+
+        </a>
+    </li>
 </ul>
