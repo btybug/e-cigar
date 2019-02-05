@@ -313,9 +313,11 @@ function order_updated_at($user, $order)
 {
     return BBgetDateFormat($order['updated_at']);
 }
-function order_status($user, $order){
-    $order=\App\Models\Orders::find($order['id']);
-    return $order->history()->first()->status->name;
+
+function order_status($user, $order)
+{
+    $order = \App\Models\Orders::find($order['id']);
+    return ($order)?$order->history()->first()->status->name:null;
 }
 
 function sc($content, $user, $job)
@@ -602,7 +604,7 @@ function meta($object, $type = 'seo_posts')
     $metaTags = $metaTags->toArray();
     $columns = $object->toArray();
     $HTML = "";
-    if($object->image){
+    if ($object->image) {
         $HTML .= Html::meta('og:image', url($object->image))->toHtml() . "\n\r";
     }
     foreach ($metaTags as $name => $metaTag) {
@@ -707,15 +709,18 @@ function get_user($id, $column = 'name')
     $v = \App\User::find($id);
     return ($v) ? $v->{$column} : null;
 }
-function get_footer_links(){
-    return \App\Models\FooterLinks::leftJoin('footer_links_translations','footer_links.id','=','footer_links_translations.footer_links_id')
+
+function get_footer_links()
+{
+    return \App\Models\FooterLinks::leftJoin('footer_links_translations', 'footer_links.id', '=', 'footer_links_translations.footer_links_id')
         ->whereNull('footer_links.parent_id')
-        ->select('footer_links.*','footer_links_translations.title','footer_links_translations.locale')
-        ->where('footer_links_translations.locale',app()->getLocale())
+        ->select('footer_links.*', 'footer_links_translations.title', 'footer_links_translations.locale')
+        ->where('footer_links_translations.locale', app()->getLocale())
         ->with('children')->get()->toArray();
 }
 
-function colors(){
+function colors()
+{
     return [
         "aliceblue" => "#f0f8ff",
         "antiquewhite" => "#faebd7",
@@ -868,30 +873,33 @@ function colors(){
     ];
 }
 
-function site_currencies(){
-    return (new \App\Models\SiteCurrencies())->pluck('symbol','code')->all();
+function site_currencies()
+{
+    return (new \App\Models\SiteCurrencies())->pluck('symbol', 'code')->all();
 }
 
-function site_default_currency(){
-    return (new \App\Models\SiteCurrencies())->where('is_default',true)->first();
+function site_default_currency()
+{
+    return (new \App\Models\SiteCurrencies())->where('is_default', true)->first();
 }
 
-function convert_price($price,$currency,$number_format = true,$withoutSymbol = false){
+function convert_price($price, $currency, $number_format = true, $withoutSymbol = false)
+{
     $default = site_default_currency();
-    if($default){
-        if($default->code == $currency){
-            if($number_format){
+    if ($default) {
+        if ($default->code == $currency) {
+            if ($number_format) {
                 $price = number_format($price);
             }
-            return ($withoutSymbol) ? $price :$default->symbol."".$price;
-        }else{
-            $changed = (new \App\Models\SiteCurrencies())->where('code',$currency)->first();
-            if($changed){
+            return ($withoutSymbol) ? $price : $default->symbol . "" . $price;
+        } else {
+            $changed = (new \App\Models\SiteCurrencies())->where('code', $currency)->first();
+            if ($changed) {
                 $price = $price * $changed->rate;
-                if($number_format){
+                if ($number_format) {
                     $price = number_format($price);
                 }
-                return ($withoutSymbol) ? $price : $changed->symbol."".$price;
+                return ($withoutSymbol) ? $price : $changed->symbol . "" . $price;
             }
         }
     }
@@ -899,7 +907,8 @@ function convert_price($price,$currency,$number_format = true,$withoutSymbol = f
     return $price;
 }
 
-function get_currency(){
+function get_currency()
+{
     $default = site_default_currency();
 
     return (\Cookie::get('currency')) ? \Cookie::get('currency')

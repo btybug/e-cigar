@@ -11,16 +11,20 @@ $(document).ready(function(){
 
             $(".__modal").click(function(){
                 let data = {id:$(this).attr("data-id"),object:$(this).attr("data-object")};
-
+                var button=$(this);
 
                 $.ajax({
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     url: "/my-account/notifications",
                     method: "POST",
                     data:data,
-                    success:function(r){
-                        $(".modal-body").html(r);
-                        $("#notif_modal").modal();
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success:function(responce){
+                        if(!responce.error){
+                            $(".modal-body").html(responce.message.content);
+                            $("#notif_modal").modal();
+                            button.closest('tr').attr('style','')
+                        }
+
                     }
                 })
             })

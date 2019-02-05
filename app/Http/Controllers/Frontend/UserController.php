@@ -17,6 +17,7 @@ use App\Models\Media\Folders;
 use App\Models\Media\Items;
 use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
+use App\Models\Notifications\CustomEmailUser;
 use App\Models\Orders;
 use App\Models\Statuses;
 use App\Models\Ticket;
@@ -62,10 +63,10 @@ class UserController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $categories = Category::where('type','notifications')->get();
-        $newsletters = Newsletter::where('user_id',\Auth::id())->pluck('category_id','category_id')->all();
+        $categories = Category::where('type', 'notifications')->get();
+        $newsletters = Newsletter::where('user_id', \Auth::id())->pluck('category_id', 'category_id')->all();
 
-        return $this->view('index', compact('user','categories','newsletters'));
+        return $this->view('index', compact('user', 'categories', 'newsletters'));
     }
 
     public function getFavourites()
@@ -312,10 +313,10 @@ class UserController extends Controller
             ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
             ->leftJoin('custom_email_user', 'custom_emails.id', '=', 'custom_email_user.custom_email_id')
             ->leftJoin('users', 'custom_email_user.user_id', '=', 'users.id')
-            ->where('categories_translations.locale',app()->getLocale())
+            ->where('categories_translations.locale', app()->getLocale())
             ->where('users.id', $user->id)
             ->where('custom_emails.status', 1)
-            ->select('custom_emails.*','categories_translations.name as category','custom_email_user.is_read')
+            ->select('custom_emails.*', 'categories_translations.name as category', 'custom_email_user.is_read')
             ->orderBy('id', 'DESC')
             ->get()->toArray();
 
@@ -325,9 +326,10 @@ class UserController extends Controller
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->where('mail_templates_translations.locale', app()->getLocale())
             ->where('categories_translations.locale', app()->getLocale())
-            ->whereNotNull('mail_job.to')
+            ->where('mail_job.to', $user->email)
             ->where('mail_job.must_be_done', '<', Carbon::now())
-            ->select('mail_job.*', 'mail_templates_translations.subject','categories_translations.name as category')->get()->toArray();
+            ->select('mail_job.*', 'mail_templates_translations.subject', 'categories_translations.name as category')
+            ->get()->toArray();
         $messages = collect(array_merge($messages, $mailJob))->sortBy('created_at');
         return $this->view('notifications', compact('messages'));
     }
@@ -351,8 +353,8 @@ class UserController extends Controller
     {
         $user = \Auth::getUser();
         $ids = $request->get('ids');
-        $messages  = CustomEmails::whereIn('id', $ids)->get();
-        foreach($messages as $message)
+        $messages = CustomEmails::whereIn('id', $ids)->get();
+        foreach ($messages as $message)
             $message->users()->updateExistingPivot($user, array('is_read' => 1), false);
 
         $messages = $user->customEmails()
@@ -366,8 +368,8 @@ class UserController extends Controller
     {
         $user = \Auth::getUser();
         $ids = $request->get('ids');
-        $messages  = CustomEmails::whereIn('id', $ids)->get();
-        foreach($messages as $message)
+        $messages = CustomEmails::whereIn('id', $ids)->get();
+        foreach ($messages as $message)
             $message->users()->updateExistingPivot($user, array('is_read' => 0), false);
 
         $messages = $user->customEmails()
@@ -379,13 +381,35 @@ class UserController extends Controller
 
     public function getNotificationsContent(Request $request)
     {
-        dd($request->all());
+        $object = $request->get('object');
+        $id = $request->get('id');
         $user = \Auth::user();
-        $messages = $user->customEmails()
-            ->where('custom_emails.status', 1)
-            ->where('custom_emails.id', '=', $request->id)
-            ->first();
-        echo $messages['content'];
+        $user = \Auth::user();
+        if ($object == 'custom_emails') {
+            $messages = CustomEmails::leftJoin('custom_email_user', 'custom_emails.id', '=', 'custom_email_user.custom_email_id')
+                ->leftJoin('users', 'custom_email_user.user_id', '=', 'users.id')
+                ->leftJoin('custom_emails_translations', 'custom_emails.id', '=', 'custom_emails_translations.custom_emails_id')
+                ->where('custom_emails_translations.locale', app()->getLocale())
+                ->where('users.id', $user->id)
+                ->where('custom_emails.id', $id)
+                ->where('custom_emails.status', 1)
+                ->select('custom_emails.*', 'users.id as user_id', 'custom_emails_translations.subject', 'custom_emails_translations.content')
+                ->first();
+            CustomEmailUser::where('user_id', $messages->user_id)->where('custom_email_id', $id)->update(['is_read'=> 1]);
+        } elseif ($object == 'mail_job') {
+            $messages = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
+                ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
+                ->where('mail_templates_translations.locale', app()->getLocale())
+                ->where('mail_job.to', $user->email)
+                ->whereNotNull('mail_job.to')
+                ->where('mail_job.must_be_done', '<', Carbon::now())
+                ->select('mail_job.*', 'mail_templates_translations.subject', 'mail_templates_translations.content')->first();
+            $messages->is_read = 1;
+            $messages->save();
+        }
+
+        $messages->content = sc($messages->content, $user, $messages);
+        return response()->json(['error' => false, 'message' => $messages]);
     }
 
     public function attachFavorite(Request $request)
@@ -422,10 +446,10 @@ class UserController extends Controller
     {
         $emailSettings = $request->get('email_settings');
 
-        if(count($emailSettings)){
-            foreach ($emailSettings as $category_id){
-                $response = Newsletter::where('user_id',\Auth::id())->where('category_id',$category_id)->first();
-                if(! $response){
+        if (count($emailSettings)) {
+            foreach ($emailSettings as $category_id) {
+                $response = Newsletter::where('user_id', \Auth::id())->where('category_id', $category_id)->first();
+                if (!$response) {
                     Newsletter::create([
                         'user_id' => \Auth::id(),
                         'email' => \Auth::user()->email,
@@ -435,7 +459,7 @@ class UserController extends Controller
             }
         }
 
-        Newsletter::whereNotIn('category_id',$emailSettings)->where('user_id',\Auth::id())->delete();
+        Newsletter::whereNotIn('category_id', $emailSettings)->where('user_id', \Auth::id())->delete();
 
         return redirect()->back();
     }
