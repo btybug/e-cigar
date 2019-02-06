@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 
 class ReferralsController extends Controller
@@ -30,8 +31,11 @@ class ReferralsController extends Controller
         if ($v->fails()){
             return redirect()->back()->withInput()->withErrors($v);
         }
+        $inviter=User::where('customer_number',$data['referred_by'])->first();
         $user->referred_by=$data['referred_by'];
         $user->save();
+        $inviter->bonus_bringers()->attach($user->id,['type'=>'referral','status'=>0]);
+        $user->bonus_bringers()->attach($inviter->id,['type'=>'invited','status'=>0]);
         return redirect()->back();
 
     }

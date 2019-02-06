@@ -8,6 +8,7 @@ use App\Models\Favorites;
 use App\Models\MailJob;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
+use App\Models\ReferralBonus;
 use App\Models\Roles;
 use App\Models\Stock;
 use App\Models\StockVariation;
@@ -116,6 +117,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function mail_job()
     {
         return $this->hasMany(MailJob::class,'to','email');
+    }
+
+    public function referralBonus()
+    {
+        return $this->hasMany(ReferralBonus::class,'user_id');
+    }
+
+    public function bonus_bringers()
+    {
+       return $this->belongsToMany(User::class,'referral_bonus','bonus_bringing_user_id')->withPivot('status', 'type');
     }
 
 }
