@@ -19,26 +19,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="firstName" class="text-gray-clr register-form_label">First Name</label>
-                                        <input id="firstName" type="text" class="form-control register-form_input-text{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}">
-
-                                        @if ($errors->has('name'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('name') }}</strong>
-                                            </span>
-                                        @endif
+                                        <input id="firstName" type="text" class="form-control register-form_input-text" name="name" value="{{ old('name') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="lastName" class="text-gray-clr register-form_label">Last Name</label>
-                                        <input id="lastName" type="text" class="form-control register-form_input-text{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
+                                        <input id="lastName" type="text" class="form-control register-form_input-text"
                                                name="last_name" value="{{ old('last_name') }}">
-
-                                        @if ($errors->has('last_name'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('last_name') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -46,27 +34,17 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="e-mail" class="text-gray-clr register-form_label">E-Mail Address</label>
-                                        <input id="e-mail" type="text" class="form-control register-form_input-text{{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                        <input id="e-mail" type="text" class="form-control register-form_input-text"
                                                name="email" value="{{ old('email') }}">
 
-                                        @if ($errors->has('email'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="phoneNumber" class="text-gray-clr register-form_label">Phone Number</label>
-                                        <input id="phoneNumber" type="text" class="form-control register-form_input-text{{ $errors->has('phone') ? ' is-invalid' : '' }}"
+                                        <input id="phoneNumber" type="text" class="form-control register-form_input-text"
                                                name="phone" value="{{ old('phone') }}" autofocus>
 
-                                        @if ($errors->has('phone'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('phone') }}</strong>
-                                            </span>
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -74,13 +52,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="password" class="text-gray-clr register-form_label">Password</label>
-                                        <input id="password" name="password" type="password" class="form-control register-form_input-text{{ $errors->has('password') ? ' is-invalid' : '' }}">
-
-                                        @if ($errors->has('password'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                            </span>
-                                        @endif
+                                        <input id="password" name="password" type="password" class="form-control register-form_input-text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -98,7 +70,7 @@
                                     </div>
                                     <div class="form-group">
                                         <!--gets class not-selected for changing arrow color-->
-                                        <select id="country" class="select-2 select-2--no-search main-select main-select-2arrows account-country-select{{ $errors->has('country') ? ' is-invalid' : '' }}" name="country" style="width: 100%">
+                                        <select id="country" class="select-2 select-2--no-search main-select main-select-2arrows account-country-select" name="country" style="width: 100%">
 
                                             <option value="AFG">Afghanistan</option>
                                             <option value="ALA">Åland Islands</option>
@@ -352,11 +324,6 @@
 
                                         </select>
 
-                                        @if ($errors->has('country'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('country') }}</strong>
-                                            </span>
-                                        @endif
 
                                     </div>
                                 </div>
@@ -366,22 +333,17 @@
                                     </div>
                                     <div class="row no-gutters form-checkes-outer d-flex justify-content-between">
                                         <div>
-                                            <input class="form-check-input register-form_input-radio{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio"  name="gender" id="genderRadios1" value="male" checked>
+                                            <input class="form-check-input register-form_input-radio" type="radio"  name="gender" id="genderRadios1" value="male" checked>
                                             <label class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer" for="genderRadios1">
                                                 Male
                                             </label>
                                         </div>
                                         <div>
-                                            <input class="form-check-input register-form_input-radio{{ $errors->has('gender') ? ' is-invalid' : '' }}" type="radio" name="gender" id="genderRadios2" value="female">
+                                            <input class="form-check-input register-form_input-radio" type="radio" name="gender" id="genderRadios2" value="female">
                                             <label class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer" for="genderRadios2">
                                                 Female
                                             </label>
                                         </div>
-                                        @if ($errors->has('gender'))
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('gender') }}</strong>
-                                        </span>
-                                        @endif
                                     </div>
                                 </div>
 
