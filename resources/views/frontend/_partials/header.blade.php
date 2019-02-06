@@ -282,7 +282,7 @@
 
 @push('javascript')
     <script>
-        grecaptcha.ready(function () {
+     let a=   grecaptcha.ready(function () {
             grecaptcha.execute('{!! env('GOOGLE_RECAPTCHA_KEY') !!}', {action: 'action_name'})
                 .then(function (token) {
                     $('.g-recaptcha-response').val(token);

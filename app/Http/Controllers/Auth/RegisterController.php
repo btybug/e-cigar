@@ -52,8 +52,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'last_name' =>'required|string|max:255',
+            'name' => 'required|string|min:2|max:255',
+            'last_name' =>'required|string|min:2|max:255',
             'phone' => 'required|unique:users|regex:/[0-9]{9}/',
             'email' => 'required|string|email|max:255|unique:users',
             'gender' => 'required|in:male,female',
@@ -94,7 +94,6 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+        return response()->json(['error' => false, 'redirectPath' => $this->redirectPath()]);
     }
 }

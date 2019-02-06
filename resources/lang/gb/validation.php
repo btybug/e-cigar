@@ -113,6 +113,7 @@ return [
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
     'exists_except'                  => 'The selected :attribute is invalid.',
+    'recaptcha'                  => 'The recaptcha is expired',
 
     /*
     |--------------------------------------------------------------------------
