@@ -30,7 +30,7 @@ class ActivityMiddleware
                 $log['user_id'] = \Auth::id();
                 LogActivities::create($log);
             } catch (\Exception $e) {
-                dd($e->getMessage());
+                
             }
         }
         return $next($request);
