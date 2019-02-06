@@ -21,10 +21,19 @@
             </div>
 
             <div class="profile-inner-pg-right-cnt">
-                <div class="profile-inner-pg-right-cnt_inner h-100">
-                    <div class="float-right">
-                        <input type="text" readonly value="{!! $user->customer_number !!}">
+                <div class="col-md-12">
+                    <div class="form-horizontal float-right">
+
+                        <div class="form-group row">
+                            <label class="col-md-6 control-label" for="customer_number">Your customer number</label>
+                            <div class="col-md-6">
+                                <input readonly id="customer_number" value="{!! $user->customer_number !!}"  type="text"  class="form-control input-md">
+                            </div>
+                        </div>
                     </div>
+                </div>
+                <div class="profile-inner-pg-right-cnt_inner h-100">
+
                     <div class="col-md-9 clearfix">
                         <div class="col-md-6 float-left">
                             <h3>Referrals</h3>
