@@ -35,4 +35,121 @@ $(document).ready(function(){
 
     var app = new Get_content();
 
+    $("body").on('change', '.message-checkbox', function () {
+        var notifications = [];
+        $.each($("input[name='notifications']:checked"), function () {
+            var not_checkbox = $(this);
+            notifications.push({id: not_checkbox.attr('data-id'), object: not_checkbox.attr('data-object')});
+        });
+
+        if (notifications.length > 0) {
+            $(".notification-actions-bar").removeClass('d-none').addClass('d-flex')
+        } else {
+            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+        }
+    });
+
+    $("body").on('click', '.mark-us-read', function () {
+        var notifications = [];
+        $.each($("input[name='notifications']:checked"), function () {
+            var not_checkbox = $(this);
+            notifications.push({id: not_checkbox.attr('data-id'), object: not_checkbox.attr('data-object')});
+        });
+        console.log('mark-us-read', notifications)
+        if (notifications.length > 0) {
+            $.ajax({
+                type: "post",
+                url: "/my-account/mark-us-read-notifications",
+                cache: false,
+                datatype: "json",
+                data: {ids: notifications},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+//                            $("#notification-list").html(data.html);
+//                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                    } else {
+                        alert('error')
+                    }
+                }
+            });
+        }
+    });
+
+    $("body").on('click', '.mark-us-unread', function () {
+        var notifications = [];
+        $.each($("input[name='notifications']:checked"), function () {
+            var not_checkbox = $(this);
+            notifications.push({id: not_checkbox.attr('data-id'), object: not_checkbox.attr('data-object')});
+        });
+        console.log('mark-us-unread', notifications)
+        if (notifications.length > 0) {
+            $.ajax({
+                type: "post",
+                url: "/my-account/mark-us-unread-notifications",
+                cache: false,
+                datatype: "json",
+                data: {ids: notifications},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+//                            $("#notification-list").html(data.html);
+//                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                    } else {
+                        alert('error')
+                    }
+                }
+            });
+        }
+    })
+
+    $("body").on('click', '.delete-selected-notifications', function () {
+        var notifications = [];
+        $.each($("input[name='notifications']:checked"), function () {
+            var not_checkbox = $(this);
+            notifications.push({id: not_checkbox.attr('data-id'), object: not_checkbox.attr('data-object')});
+        });
+        console.log('delete-selected-notifications', notifications)
+        if (notifications.length > 0) {
+            $.ajax({
+                type: "post",
+                url: "/my-account/delete-notifications",
+                cache: false,
+                datatype: "json",
+                data: {ids: notifications},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+//                            $("#notification-list").html(data.html);
+//                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                    } else {
+                        alert('error')
+                    }
+                }
+            });
+        }
+    })
+    $("body").on('click', "input[name='notifications']", function () {
+        if(Array.prototype.slice.call(document.querySelectorAll('.message-checkbox')).every(function(el) {return el.checked === true})) {
+            $('#message-checkbox-all').prop('checked', true)
+        } else {
+            $('#message-checkbox-all').prop('checked', false)
+        }
+    })
+
+    $('#message-checkbox-all').on('change', function() {
+        if($('#message-checkbox-all').is(':checked')) {
+            $('.message-checkbox').prop('checked', true);
+            $(".notification-actions-bar").removeClass('d-none').addClass('d-flex')
+        } else {
+            $('.message-checkbox').prop('checked', false);
+            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+        }
+    });
 })

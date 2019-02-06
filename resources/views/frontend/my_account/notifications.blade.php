@@ -62,7 +62,9 @@
                         <table class="table table-striped table-ntfs">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">
+                                    <input name="notifications-all" id="message-checkbox-all" type="checkbox">
+                                </th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Notification</th>
                                 <th scope="col">Type</th>
@@ -106,102 +108,4 @@
 
 @section("js")
     <script src={{asset("public/js/my-account/notifications.js")}}></script>
-    <script>
-        $("body").on('change', '.message-checkbox', function () {
-            var notifications = [];
-            $.each($("input[name='notifications']:checked"), function () {
-                notifications.push($(this).val());
-            });
-
-            if (notifications.length > 0) {
-                $(".notification-actions-bar").removeClass('d-none').addClass('d-flex')
-            } else {
-                $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
-            }
-        });
-
-        $("body").on('click', '.mark-us-read', function () {
-            var notifications = [];
-            $.each($("input[name='notifications']:checked"), function () {
-                notifications.push($(this).val());
-            });
-
-            if (notifications.length > 0) {
-                $.ajax({
-                    type: "post",
-                    url: "/my-account/mark-us-read-notifications",
-                    cache: false,
-                    datatype: "json",
-                    data: {ids: notifications},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            $("#notification-list").html(data.html);
-                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
-                        } else {
-                            alert('error')
-                        }
-                    }
-                });
-            }
-        });
-
-        $("body").on('click', '.mark-us-unread', function () {
-            var notifications = [];
-            $.each($("input[name='notifications']:checked"), function () {
-                notifications.push($(this).val());
-            });
-
-            if (notifications.length > 0) {
-                $.ajax({
-                    type: "post",
-                    url: "/my-account/mark-us-unread-notifications",
-                    cache: false,
-                    datatype: "json",
-                    data: {ids: notifications},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            $("#notification-list").html(data.html);
-                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
-                        } else {
-                            alert('error')
-                        }
-                    }
-                });
-            }
-        })
-
-        $("body").on('click', '.delete-selected-notifications', function () {
-            var notifications = [];
-            $.each($("input[name='notifications']:checked"), function () {
-                notifications.push($(this).val());
-            });
-
-            if (notifications.length > 0) {
-                $.ajax({
-                    type: "post",
-                    url: "/my-account/delete-notifications",
-                    cache: false,
-                    datatype: "json",
-                    data: {ids: notifications},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            $("#notification-list").html(data.html);
-                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
-                        } else {
-                            alert('error')
-                        }
-                    }
-                });
-            }
-        })
-    </script>
 @stop
