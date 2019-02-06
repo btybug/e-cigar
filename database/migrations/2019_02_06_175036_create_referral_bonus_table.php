@@ -17,7 +17,7 @@ class CreateReferralBonusTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('bonus_bringing_user_id')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(0);
             $table->string('type');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
