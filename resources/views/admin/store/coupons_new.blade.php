@@ -212,6 +212,13 @@
             </div>
         </div>
         <div class="col-md-4">
+            <div class="form-group">
+                <select name="voucherThemeSelect" id="voucherThemeSelect" class="form-control">
+                    <option value="theme 1">theme 1</option>
+                    <option value="theme 2">theme 2</option>
+                    <option value="theme 3">theme 3</option>
+                </select>
+            </div>
             <div class="voucher-card">
                 <div class="d-flex">
                     <div class="col-xs-5 p-0">

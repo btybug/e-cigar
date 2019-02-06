@@ -5,7 +5,7 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2019-01-25 10:14:44.
+    * Generated on 2019-02-06 13:00:16.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
@@ -14,6 +14,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -169,6 +171,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -324,6 +328,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -479,6 +485,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -634,6 +642,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -789,6 +799,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -944,6 +956,8 @@ namespace PHPSTORM_META {
         '' => '@',
         'DNS1D' => \Milon\Barcode\DNS1D::class,
         'DNS2D' => \Milon\Barcode\DNS2D::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator::class,
+        'DaveJamesMiller\Breadcrumbs\BreadcrumbsManager' => \DaveJamesMiller\Breadcrumbs\BreadcrumbsManager::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
