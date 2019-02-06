@@ -121,75 +121,12 @@
 
 @section('css')
     <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <style>
-        .carousel_2 {
-            position: absolute !important;
-            bottom: 22px;
-        }
-        .home-sliders .fs-carousel-item{
-position: relative;
-        }
-        .home-sliders .fs-carousel-item .info{
-            position: absolute;
-            margin: 0 auto;
-            left: 0;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #0000007a;
-        }
-        .home-sliders .fs-carousel-item .info .title{
-            font-size: 70px;
-            color: #fff;
-            font-weight: bold;
-            text-shadow: -3px 5px black;
+    <link href="/public/css/carousel.css" rel="stylesheet">
 
-        }
-        .slider-logo .header-logo-img{
-            width: 210px;
-            margin-right: 15px;
-            transform-style: preserve-3d;
-            animation: mymove 5s infinite;
-        }
-        .slider-logo >img{
-            width: auto;
-            height: auto;
-        }
-        @keyframes mymove {
-            0%{
-                transform: rotate3d(0,180, 0,0deg);
-            }
-            100%{
-                transform: rotate3d(0,180, 0,360deg);
-            }
-        }
-    </style>
 @stop
 
 @section('js')
 
-    <script src="/public/js/bootstrap.bundle.min.js"></script>
-    <script src="/public/plugins/formstone/core.js"></script>
-    <script src="/public/plugins/formstone/mediaquery.js"></script>
-    <script src="/public/plugins/formstone/touch.js"></script>
-    <script src="/public/plugins/formstone/carousel/carousel.js"></script>
-    <script>
-        $(".carousel_1").carousel({
-            pagination: false,
-            controls: false
-        });
-        $(".carousel_2").carousel({
-            controls: false,
-            pagination: false,
-            autoAdvance: true,
-            show: {
-                "0px": 1,
-                "500px": 2,
-                "980px": 3
-            }
-        });
-
-    </script>
+    <script src={{asset("public/js/bundle/carousel.js")}}></script>
 
 @stop

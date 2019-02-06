@@ -11,18 +11,25 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/global.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/products.css?v=".rand(111,999))}} rel="stylesheet" />
-    <link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />
 
-    <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
-    <script src={{asset("public/js/jQuery3.3.1.js")}}></script>
-    <script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script>
+    {{-- ********************************************* --}}
+    {{--<link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/global.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/products.css?v=".rand(111,999))}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>--}}
+    {{--<link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />--}}
+    {{-- *****packed in public/css/bundle.css***** --}}
+    <link rel="stylesheet" href="{{asset('public/css/bundle.css')}}">
+    {{-- ********************************************* --}}
+    {{--<script src={{asset("public/js/jQuery3.3.1.js")}}></script>--}}
+    {{--<script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script>--}}
+    {{-- *****packed in public/plugins/jquery.js***** --}}
+    <script src={{asset("public/js/bundle/jquery.js")}}></script>
+
     <!--[if lt IE 9]>
     <script src={{asset("public/plugins/crossbrowserjs/html5shiv.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/respond.min.js")}}></script>
@@ -69,166 +76,15 @@
 
 @yield('afterFooter')
 
-<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
-<script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>
-<script src={{asset("public/js/hover-slider.js")}}></script>
-<script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>
-<script>
-    window.AjaxCall = function postSendAjax(url, data, success, error) {
-        $.ajax({
-            type: "post",
-            url: url,
-            cache: false,
-            datatype: "json",
-            data: data,
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-            },
-            success: function(data) {
-                if (success) {
-                    success(data);
-                }
-                return data;
-            },
-            error: function(errorThrown) {
-                if (error) {
-                    error(errorThrown);
-                }
-                return errorThrown;
-            }
-        });
-    };
 
-    $(document).ready(function () {
-        document.getElementById("search-product")
-            .addEventListener("keyup", function(event) {
-                event.preventDefault();
-                if (event.keyCode === 13) {
-                    let form = $("#filter-form");
-                    let category = $('.all_categories').val();
-                    let search_text = $("#search-product").val();
-                    let url = "/products/"+category;
+{{-- ********************************************* --}}
+{{--<script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>--}}
+{{--<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>--}}
+{{--<script src={{asset("public/js/hover-slider.js")}}></script>--}}
+{{--<script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>--}}
+{{-- *****packed in public/js/bundle/bundle.js***** --}}
+<script src={{asset("public/js/bundle/bundle.js")}}></script>
 
-                    if(form.length > 0){
-                        if(search_text){
-                            var input = $("<input>")
-                                .attr("type", "hidden")
-                                .attr("name", "q").val(search_text);
-                            form.append(input);
-                        }
-                        form.attr('action',url);
-                        form.submit();
-                    }else{
-                        window.location = "/products/"+category +"?q="+$(this).val();
-                    }
-                }
-            });
-
-        $("body").on('click','.qtycount',function () {
-            var uid = $(this).data('uid');
-            var condition = $(this).data('condition');
-            if(uid && uid != ''){
-                $.ajax({
-                    type: "post",
-                    url: "/update-cart",
-                    cache: false,
-                    datatype: "json",
-                    data: {  uid : uid, condition: condition },
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function(data) {
-                        if(! data.error){
-                            $('.cart-area').html(data.html)
-                            $('#cartSidebar').html(data.headerHtml)
-                        }else{
-                            alert('error')
-                        }
-                    }
-                });
-            }else{
-                alert('Select available variation');
-            }
-        });
-
-        $("body").on('change', '.qty-input' ,function () {
-            var uid = $(this).data('uid');
-            var condition = 'inner';
-            var value = $(this).val();
-            if(uid && uid != ''){
-                $.ajax({
-                    type: "post",
-                    url: "/update-cart",
-                    cache: false,
-                    datatype: "json",
-                    data: {  uid : uid, condition: condition,value :value },
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function(data) {
-                        if(! data.error){
-                            $('.cart-area').html(data.html)
-                            $('#cartSidebar').html(data.headerHtml)
-                        }else{
-                            alert('error')
-                        }
-                    }
-                });
-            }else{
-                alert('Select available variation');
-            }
-        });
-
-
-        $("body").on('click','.remove-from-cart',function (e) {
-            e.stopPropagation();
-            var uid = $(this).data('uid');
-            console.log(44444)
-            if(uid && uid != ''){
-                $.ajax({
-                    type: "post",
-                    url: "/remove-from-cart",
-                    cache: false,
-                    datatype: "json",
-                    data: {  uid : uid },
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function(data) {
-                        if(! data.error){
-                            $('.cart-area').html(data.html)
-                            $('#cartSidebar').html(data.headerHtml)
-                            $(".cart-count").html(data.count)
-                        }else{
-                            alert('error')
-                        }
-                    }
-                });
-            }else{
-                alert('Select available variation');
-            }
-        })
-
-        $("#change-currency").change(function () {
-            let code = $(this).val();
-            $.ajax({
-                type: "post",
-                url: "/change-currency",
-                cache: false,
-                datatype: "json",
-                data: {
-                    code: code
-                },
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    window.location.reload();
-                }
-            });
-        })
-    });
-</script>
 @yield('js')
 
 @stack('javascript')

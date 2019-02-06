@@ -2,24 +2,22 @@
  * Created by sahak on 1/7/2019.
  */
 $(document).ready(function () {
-
-
-    var  modalHtml='<div class="modal adult-modal" tabindex="-1" role="dialog">' +
-        '<div class="modal-dialog" role="document"> ' +
-        '<div class="modal-content"> ' +
-        '<div class="modal-header"> ' +
-        '<h5 class="modal-title">Modal title</h5> ' +
-        '</div> ' +
-        '<div class="modal-body"> ' +
-        '<p>Are you 21 or older ?</p> ' +
-        '</div> ' +
-        '<div class="modal-footer"> ' +
-        '<button type="button" class="btn btn-primary adult">Yes</button> ' +
-        '<button type="button" class="btn btn-secondary not-adult" data-dismiss="modal">No</button> ' +
-        '</div> ' +
-        '</div> ' +
-        '</div> ' +
-        '</div>'
+    var modalHtml='<div class="modal adult-modal" tabindex="-1" role="dialog">' +
+        '<div class="modal-dialog" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h5 class="modal-title">Modal title</h5>' +
+        '</div>' +
+        '<div class="modal-body">' +
+        '<p>Are you 21 or older ?</p>' +
+        '</div>' +
+        '<div class="modal-footer">' +
+        '<button type="button" class="btn btn-primary adult">Yes</button>' +
+        '<button type="button" class="btn btn-secondary not-adult" data-dismiss="modal">No</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '</div>';
 
     function getCookie(name) {
         var matches = document.cookie.match(new RegExp(

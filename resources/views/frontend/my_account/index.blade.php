@@ -534,7 +534,7 @@
                 AjaxCall(
                     "/my-account/save-address-book",
                     form,
-                    res = > {
+                    res => {
                     if (
                 !res.error
                 )
