@@ -429,7 +429,7 @@
                 }
 
                 $('.register-form').on('submit', function(ev) {
-                    ev.preventDefault()
+                    ev.preventDefault();
 
                     var firstName = this.name.value;
                     var lastName = this.last_name.value;
@@ -445,7 +445,7 @@
                             url: "/register",
                             cache: false,
                             datatype: "json",
-                            data: {token: data},
+                            data:data,
                             headers: {
                                 "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                             },
