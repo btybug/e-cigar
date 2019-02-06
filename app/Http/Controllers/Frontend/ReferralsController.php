@@ -18,14 +18,15 @@ class ReferralsController extends Controller
 
     public function getIndex()
     {
-        return $this->view('referrals');
+        $user=\Auth::user();
+        return $this->view('referrals',compact('user'));
     }
 
     public function postReferredBy(Request $request){
         $user=\Auth::user();
         if($user->orders()->count())return abort(404);
         $data=$request->all();
-        $v=\Validator::make($data,['referred_by'=>'required|alpha_num|unique:users|exists_except:users,referral_code,id,'.$user->id]);
+        $v=\Validator::make($data,['referred_by'=>'required|exists_except:users,customer_number,id,'.$user->id]);
         if ($v->fails()){
             return redirect()->back()->withInput()->withErrors($v);
         }

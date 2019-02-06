@@ -22,6 +22,9 @@
 
             <div class="profile-inner-pg-right-cnt">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
+                    <div class="float-right">
+                        <input type="text" readonly value="{!! $user->customer_number !!}">
+                    </div>
                     <div class="col-md-9 clearfix">
                         <div class="col-md-6 float-left">
                             <h3>Referrals</h3>
@@ -35,6 +38,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-9">
                         <table class="table table-bordered">
                             <thead>
@@ -45,29 +49,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Yes</td>
-                                <td>claim offer</td>
-                            </tr>
-                            <tr>
-                                <td>Jacob</td>
-                                <td>No</td>
-                                <td>Pending</td>
-                            </tr>
-                            <tr>
-                                <th>Edo</th>
-                                <td >no</td>
-                                <td>Pending</td>
-                            </tr>
+                            @foreach($user->referrals as $referral)
+                                <tr>
+                                    <td>{!! $referral->name.' '.$referral->name !!}</td>
+
+                                    <td>{!! $referral->orders()->count()?'YES':'NO' !!}</td>
+                                    <td>{!! $referral->orders()->count()?'<a href="javascript:void(0)">claim offer</a>':'Pending' !!}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
+
         </div>
     </main>
-
-    {{-- Modal --}}
 @stop

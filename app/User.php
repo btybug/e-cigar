@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status','referred_by','referral_code', 'role_id', 'verification_type', 'verification_image','customer_number','dob'
+        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status','referred_by', 'role_id', 'verification_type', 'verification_image','customer_number','dob'
     ];
 
     protected $appends = [
@@ -105,6 +105,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function customEmails()
     {
         return $this->belongsToMany(CustomEmails::class,'custom_email_user','user_id','custom_email_id')->withPivot(['is_read']);
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class,'referred_by','customer_number');
     }
 
 }
