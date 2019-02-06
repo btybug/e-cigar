@@ -43,9 +43,13 @@
                 </div>
                 <div class="checkout-btn text-center">
                     @if($default_shipping)
-                    <button class="btn btn-primary text-uppercase font-15 go-to-payment">
-                        CHECKOUT
-                    </button>
+                        <button class="btn btn-primary text-uppercase font-15 go-to-payment">
+                            CHECKOUT
+                        </button>
+                    @else
+                        <button class="btn btn-primary text-uppercase font-15 btn-checkout-message address-book-new">
+                            CHECKOUT
+                        </button>
                     @endif
                 </div>
             </div>
