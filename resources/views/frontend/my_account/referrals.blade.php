@@ -81,12 +81,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($user->referrals as $referral)
+                            @foreach($user->referral_bonuses as $referral)
                                 <tr>
                                     <td>{!! $referral->name.' '.$referral->name !!}</td>
 
                                     <td>{!! $referral->orders()->count()?'YES':'NO' !!}</td>
-                                    <td>{!! $referral->orders()->count()?'<a href="javascript:void(0)">claim offer</a>':'Pending' !!}</td>
+                                    <td>{!! (!$referral->pivot->status)? $referral->orders()->count()?'<a href="'.route('my_account_referrals_claim_bonus',$referral->pivot->id).'">claim offer</a>':'Pending':'Sorted' !!}</td>
                                 </tr>
                             @endforeach
                             </tbody>

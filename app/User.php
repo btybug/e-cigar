@@ -113,6 +113,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(User::class,'referred_by','customer_number');
     }
+    public function referral_bonuses()
+    {
+        return $this->belongsToMany(User::class,'referral_bonus','user_id','bonus_bringing_user_id')->withPivot('status', 'type','id')->wherePivot('type', 'referral');
+    }
 
     public function mail_job()
     {
@@ -126,7 +130,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function bonus_bringers()
     {
-       return $this->belongsToMany(User::class,'referral_bonus','bonus_bringing_user_id')->withPivot('status', 'type');
+       return $this->belongsToMany(User::class,'referral_bonus','user_id','bonus_bringing_user_id')->withPivot('status', 'type');
     }
+
 
 }

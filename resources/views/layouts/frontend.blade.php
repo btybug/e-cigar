@@ -51,7 +51,14 @@
 <body @if(\Request::route()->getName() == 'product_single')class="single-product-page" @endif>
 @include('cookieConsent::index')
 @include('frontend._partials.header')
-
+@if(Session::has('alert'))
+    <div class="alert alert-messages alert-{!! Session::get('alert.class','success') !!} alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <h4><i class="icon {!! getAlertIconByClass(Session::get('alert.class')) !!}"></i> Alert!</h4>
+        {!! Session::get('alert.message') !!}
+    </div>
+    {!! Session::forget('alert') !!}
+@endif
 @yield('content')
 
 <div class="modal fade modal-request" id="msgModal">
