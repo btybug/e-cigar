@@ -1,5 +1,5 @@
 @foreach($messages as $message)
-    <tr style="{{ (! $message['is_read']) ? 'color:black;font-wight:bold;background:gray' : '' }}">
+    <tr style="{{ (! $message['is_read']) ? 'color:black;font-wight:bold;background:gray' : '' }}" id="{!! $message['object'].'_'.$message['id'] !!}" >
         <th scope="row">
             <input data-id="{!! $message['id'] !!}" data-object="{!! $message['object'] !!}" name="notifications" value="{{ $message['id'] }}" class="message-checkbox" type="checkbox">
         </th>

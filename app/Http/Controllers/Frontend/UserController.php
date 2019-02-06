@@ -343,6 +343,7 @@ class UserController extends Controller
                 $custom_message = CustomEmails::findOrFail($message['id']);
                 $messages[$key]['success'] = $custom_message->users()->detach($user->id);
             }
+            $messages[$key]['attr_id'] = '#' . $message['object'] . '_' . $message['id'];
         }
 
         return \Response::json(['error' => false, 'result' => $messages]);
@@ -361,6 +362,7 @@ class UserController extends Controller
                 $custom_message = CustomEmails::findOrFail($message['id']);
                 $messages[$key]['success'] = $custom_message->users()->updateExistingPivot($user, array('is_read' => 1), false);
             }
+            $messages[$key]['attr_id'] = '#' . $message['object'] . '_' . $message['id'];
         }
         return \Response::json(['error' => false, 'result' => $messages]);
     }
@@ -378,6 +380,7 @@ class UserController extends Controller
                 $custom_message = CustomEmails::findOrFail($message['id']);
                 $messages[$key]['success'] = $custom_message->users()->updateExistingPivot($user, array('is_read' => 0), false);
             }
+            $messages[$key]['attr_id'] = '#' . $message['object'] . '_' . $message['id'];
         }
         return \Response::json(['error' => false, 'result' => $messages]);
     }
