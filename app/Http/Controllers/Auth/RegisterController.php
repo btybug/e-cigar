@@ -94,6 +94,6 @@ class RegisterController extends Controller
 
         $this->guard()->login($user);
 
-        return response()->json(['error' => false, 'redirectPath' => $this->redirectPath()]);
+        return response()->json(['success' => true, 'redirectPath' => $this->redirectPath()]);
     }
 }
