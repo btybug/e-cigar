@@ -332,17 +332,20 @@ class UserController extends Controller
 
     public function postDeleteNotifications(Request $request)
     {
-        $user = \Auth::getUser();
-        $ids = $request->get('ids');
-        $messages = CustomEmails::whereIn('id', $ids)->get();
-        foreach ($messages as $message)
-            $message->users()->detach($user->id);
+        $messages = $request->get('ids');
+        $user = \Auth::user();
+        foreach ($messages as $key => $message) {
+            if ($message['object'] == 'mail_job') {
+                $job = $user->mail_job()->find($message['id'])->delete();
+                $job->is_read = 1;
+                $messages[$key]['success'] = $job->save();
+            } elseif ($message['object'] == 'custom_emails') {
+                $custom_message = CustomEmails::findOrFail($message['id']);
+                $messages[$key]['success'] = $custom_message->users()->detach($user->id);
+            }
+        }
 
-        $messages = $user->customEmails()
-            ->where('custom_emails.status', 1)->get();
-        $html = \View('frontend.my_account._partials.notification_list', compact(['messages']))->render();
-
-        return \Response::json(['error' => false, 'html' => $html]);
+        return \Response::json(['error' => false, 'result' => $messages]);
     }
 
     public function postMarkReadNotifications(Request $request)
