@@ -12731,7 +12731,13 @@ border-radius: 0;
 }
 /*stickerModal end*/
 
-
+/*notification*/
+tr.notification-is_read {
+    color: black;
+    font-weight: bold;
+    background-color: gray !important;
+}
+/*notification end*/
 /*Montserrat*/
 @font-face {
     font-family: 'Montserrat Light';
@@ -15426,13 +15432,28 @@ td.shp-cart-table_price-td {
     opacity: .3;
 }
 /*end gallery tabs*/
-.header-bottom .search-mobile-icon{
+.header-bottom .search-mobile-icon {
     display: none;
 }
-.my-account--selects{
+
+.my-account--selects {
     background-color: #e3e6ed;
     padding: 10px 12px;
     display: none;
+}
+
+.my-account--selects.pos-fixed {
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    z-index: 999;
+    background: transparent;
+    padding: 0;
+}
+
+.my-account--selects .select2-container--default .select2-results>.select2-results__options {
+    max-height: none;
+    overflow-y: visible;
 }
 .btn-no-shadow{
     background: none;
@@ -16575,6 +16596,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background: #353535;
 }
 
+.profile-sidebar--inner-pages .profile-sidebar-menu_link {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .profile-sidebar-menu_link {
     color: #9f9f9f;
     padding: 20px 10px;
@@ -16901,7 +16927,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 /*Account page*/
 .profile-sidebar--inner-pages {
-    width: 145px;
+    width: 150px;
     padding-top: 38px;
 }
 

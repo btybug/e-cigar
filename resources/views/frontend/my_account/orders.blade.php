@@ -59,7 +59,7 @@
                                     {{--{{ dd($order->history->first()->status->name) }}--}}
                                     {{--{{ dd($order->history->first()->toArray()) }}--}}
                                     <tr>
-                                        <td>#4949</td>
+                                        <td>#{{ $order->order_number }}</td>
                                         <td>{!! BBgetDateFormat($order->created_at).' '.BBgetTimeFormat($order->created_at)  !!}</td>
                                         <td>{!! $order->items->count() !!}</td>
                                         <td>@convert($order->amount)$</td>
@@ -68,7 +68,6 @@
                                                 <button type="button"
                                                         class="btn order-table_btn order-table_btn--status text-sec-clr rounded-0" style="background: {!! $order->history->first()['status']['color'] !!}">
                                                     {!! $order->history->first()->status->name !!}
-                                                    {{--{!! $order->history->first()['status']['name'] !!}--}}
                                                 </button>
                                             @else
                                                 No Status

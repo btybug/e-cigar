@@ -1283,3 +1283,10 @@ border-radius: 0;
 }
 /*stickerModal end*/
 
+/*notification*/
+tr.notification-is_read {
+    color: black;
+    font-weight: bold;
+    background-color: gray !important;
+}
+/*notification end*/

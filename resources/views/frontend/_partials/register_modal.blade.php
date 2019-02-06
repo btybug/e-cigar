@@ -13,7 +13,7 @@
                         <h2 class="text-uppercase text-main-clr font-20 modal-title">Create account</h2>
                         <p class="font-13 text-gray-clr modal-text">  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum has been the industry's standard dummy.</p>
-                        <form method="POST" action="{{ route('register') }}" class="register-form">
+                        <form method="POST" action="{{ route('register') }}" class="register-form" id="register-form-1">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -418,18 +418,10 @@
                 </div>
             </div>
             <script>
-                var testinput = function(re, str){
-                    var midstring;
-                    if (re.test(str)) {
-                        midstring = ' содержит ';
-                    } else {
-                        midstring = ' не содержит ';
-                    }
-                    console.log(str + midstring + re.source);
-                }
+               
 
-                $('.register-form').on('submit', function(ev) {
-                    ev.preventDefault();
+                $('#register-form-1').on('submit', function(ev) {
+                    ev.preventDefault()
 
                     var firstName = this.name.value;
                     var lastName = this.last_name.value;
@@ -437,7 +429,7 @@
                     var phone = this.phone.value;
                     var password = this.password.value;
                     var passwordConfirm = this.password_confirmation.value;
-                    
+
                         var data = $(this).serialize();
 
                         $.ajax({
@@ -451,16 +443,13 @@
                             },
                             success: function (data) {
                                 if (!data.error) {
+
                                 } else {
                                     alert('error')
                                 }
-                            },
-                            error: function() {
-                                alert('error')
                             }
                         });
-
-                })
+                });
             </script>
         </div>
     </div>
