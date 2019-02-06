@@ -350,15 +350,13 @@ class UserController extends Controller
         $messages = $request->get('ids');
         $user = \Auth::user();
         foreach ($messages as $key => $message) {
-            if ($message['object']=='mail_job') {
-               $job=$user->mail_job()->find($message['id']);
-               $job->is_read = 1;
-                $messages[$key]['success']=$job->save();
-
-            } elseif ($message['object']=='custom_emails') {
+            if ($message['object'] == 'mail_job') {
+                $job = $user->mail_job()->find($message['id']);
+                $job->is_read = 1;
+                $messages[$key]['success'] = $job->save();
+            } elseif ($message['object'] == 'custom_emails') {
                 $custom_message = CustomEmails::findOrFail($message['id']);
                 $messages[$key]['success'] = $custom_message->users()->updateExistingPivot($user, array('is_read' => 1), false);
-
             }
         }
         return \Response::json(['error' => false, 'result' => $messages]);
@@ -369,15 +367,13 @@ class UserController extends Controller
         $messages = $request->get('ids');
         $user = \Auth::user();
         foreach ($messages as $key => $message) {
-            if ($message['object']=='mail_job') {
-                $job=$user->mail_job()->find($message['id']);
+            if ($message['object'] == 'mail_job') {
+                $job = $user->mail_job()->find($message['id']);
                 $job->is_read = 0;
-                $messages[$key]['success']=$job->save();
-
-            } elseif ($message['object']=='custom_emails') {
+                $messages[$key]['success'] = $job->save();
+            } elseif ($message['object'] == 'custom_emails') {
                 $custom_message = CustomEmails::findOrFail($message['id']);
                 $messages[$key]['success'] = $custom_message->users()->updateExistingPivot($user, array('is_read' => 0), false);
-
             }
         }
         return \Response::json(['error' => false, 'result' => $messages]);
