@@ -73,6 +73,13 @@ function heightBlock(mainDiv, element) {
     });
     $('.select_with-tag').select2();
 
+    $('#accounts--selects').select2({
+        dropdownParent: $('.my-account--selects'),
+        minimumResultsForSearch: Infinity
+    });
+
+
+
 // my account select start
     $('#accounts--selects').on('select2:select', function (e) {
         var locUrl = e.params.data.id;
@@ -183,6 +190,8 @@ function heightBlock(mainDiv, element) {
     // $('body').on('click', '.filters-for-mobile .btn--filter', function () {
     //     $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
     // });
+
+
     // menu click mobile
     $('body').on('click', '.header-top .nav-item--has-dropdown', function () {
         $(this).toggleClass('active');
@@ -193,9 +202,17 @@ function heightBlock(mainDiv, element) {
     openSidebar($('#ptofileBtn'), $('#profileSidebar'));
     openSidebar($('#headerShopCartBtn'), $('#cartSidebar'));
 
+    // my account select make fixed when scrolled
     $(window).scroll(function () {
-        $('.my-account--selects').addClass('pos-fixed');
-    })
+        var wScroll = $(this).scrollTop();
+
+
+        if (wScroll > 0) {
+            $('.my-account--selects').addClass('pos-fixed');
+        } else {
+            $('.my-account--selects').removeClass('pos-fixed');
+        }
+    });
 
 
 
@@ -239,16 +256,11 @@ function changeHeaderWhenIsCookie() {
 
         $('.main-header').css('padding-top', headerPaddingTopNew);
 
+        var headerHeight = $('.header-top').height();
 
+        var accountSelectPT = headerHeight + cookieHeight;
 
-
-
-        // $(window).scroll(function () {
-        //     var headerHeight = $('.main-header').height();
-        //     var accountselectsTop = cookieHeight + headerHeight;
-        //
-        //     $('.my-account--selects').css('top', accountselectsTop);
-        // })
+        $('.my-account--selects').css('top', accountSelectPT)
 
 
     }

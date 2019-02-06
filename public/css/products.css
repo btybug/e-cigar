@@ -2309,10 +2309,11 @@ td.shp-cart-table_price-td {
     opacity: .3;
 }
 /*end gallery tabs*/
-.header-bottom .search-mobile-icon{
+.header-bottom .search-mobile-icon {
     display: none;
 }
-.my-account--selects{
+
+.my-account--selects {
     background-color: #e3e6ed;
     padding: 10px 12px;
     display: none;
@@ -2320,8 +2321,16 @@ td.shp-cart-table_price-td {
 
 .my-account--selects.pos-fixed {
     position: fixed;
+    top: 50px;
     width: 100%;
     z-index: 999;
+    background: transparent;
+    padding: 0;
+}
+
+.my-account--selects .select2-container--default .select2-results>.select2-results__options {
+    max-height: none;
+    overflow-y: visible;
 }
 .btn-no-shadow{
     background: none;
