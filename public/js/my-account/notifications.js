@@ -67,6 +67,7 @@ $(document).ready(function(){
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
                 success: function (data) {
+                    $("body").html(data);
                     if (!data.error) {
 //                            $("#notification-list").html(data.html);
 //                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')

@@ -5,6 +5,7 @@ namespace App;
 use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
 use App\Models\Favorites;
+use App\Models\MailJob;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Orders;
 use App\Models\Roles;
@@ -110,6 +111,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function referrals()
     {
         return $this->hasMany(User::class,'referred_by','customer_number');
+    }
+
+    public function mail_job()
+    {
+        return $this->hasMany(MailJob::class,'to','email');
     }
 
 }

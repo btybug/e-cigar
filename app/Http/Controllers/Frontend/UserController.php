@@ -314,7 +314,7 @@ class UserController extends Controller
             ->leftJoin('custom_email_user', 'custom_emails.id', '=', 'custom_email_user.custom_email_id')
             ->leftJoin('users', 'custom_email_user.user_id', '=', 'users.id')
             ->where('custom_email_user.user_id', $user->id)
-            ->where('custom_emails.status','>=', 1)
+            ->where('custom_emails.status', '>=', 1)
             ->select('custom_emails.*', 'categories_translations.name as category', 'custom_email_user.is_read')
             ->get()->toArray();
 
@@ -347,32 +347,40 @@ class UserController extends Controller
 
     public function postMarkReadNotifications(Request $request)
     {
-        $user = \Auth::getUser();
-        $ids = $request->get('ids');
-        $messages = CustomEmails::whereIn('id', $ids)->get();
-        foreach ($messages as $message)
-            $message->users()->updateExistingPivot($user, array('is_read' => 1), false);
+        $messages = $request->get('ids');
+        $user = \Auth::user();
+        foreach ($messages as $key => $message) {
+            if ($message['object']=='mail_job') {
+               $job=$user->mail_job()->find($message['id']);
+               $job->is_read = 1;
+                $messages[$key]['success']=$job->save();
 
-        $messages = $user->customEmails()
-            ->where('custom_emails.status', 1)->get();
-        $html = \View('frontend.my_account._partials.notification_list', compact(['messages']))->render();
+            } elseif ($message['object']=='custom_emails') {
+                $custom_message = CustomEmails::findOrFail($message['id']);
+                $messages[$key]['success'] = $custom_message->users()->updateExistingPivot($user, array('is_read' => 1), false);
 
-        return \Response::json(['error' => false, 'html' => $html]);
+            }
+        }
+        return \Response::json(['error' => false, 'result' => $messages]);
     }
 
     public function postMarkUnreadNotifications(Request $request)
     {
-        $user = \Auth::getUser();
-        $ids = $request->get('ids');
-        $messages = CustomEmails::whereIn('id', $ids)->get();
-        foreach ($messages as $message)
-            $message->users()->updateExistingPivot($user, array('is_read' => 0), false);
+        $messages = $request->get('ids');
+        $user = \Auth::user();
+        foreach ($messages as $key => $message) {
+            if ($message['object']=='mail_job') {
+                $job=$user->mail_job()->find($message['id']);
+                $job->is_read = 0;
+                $messages[$key]['success']=$job->save();
 
-        $messages = $user->customEmails()
-            ->where('custom_emails.status', 1)->get();
-        $html = \View('frontend.my_account._partials.notification_list', compact(['messages']))->render();
+            } elseif ($message['object']=='custom_emails') {
+                $custom_message = CustomEmails::findOrFail($message['id']);
+                $messages[$key]['success'] = $custom_message->users()->updateExistingPivot($user, array('is_read' => 0), false);
 
-        return \Response::json(['error' => false, 'html' => $html]);
+            }
+        }
+        return \Response::json(['error' => false, 'result' => $messages]);
     }
 
     public function getNotificationsContent(Request $request)
@@ -391,7 +399,7 @@ class UserController extends Controller
                 ->where('custom_emails.status', 1)
                 ->select('custom_emails.*', 'users.id as user_id', 'custom_emails_translations.subject', 'custom_emails_translations.content')
                 ->first();
-            CustomEmailUser::where('user_id', $messages->user_id)->where('custom_email_id', $id)->update(['is_read'=> 1]);
+            CustomEmailUser::where('user_id', $messages->user_id)->where('custom_email_id', $id)->update(['is_read' => 1]);
         } elseif ($object == 'mail_job') {
             $messages = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
                 ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
