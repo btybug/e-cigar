@@ -105,7 +105,7 @@ class ShoppingCartController extends Controller
 
         if(\Auth::check()){
             $user=\Auth::user();
-            $address=$user->addresses()->where('type','address_book')->pluck('company','id');
+            $address=$user->addresses()->whereIn('type',['address_book','default_shipping'])->pluck('company','id');
 //            $billing_address=$user->addresses()->where('type','billing_address')->first();
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
@@ -379,7 +379,7 @@ class ShoppingCartController extends Controller
             }
         }
 
-        $html = $this->view('_partials.address',
+        $html = $this->view('_partials.checkout_render',
             compact(['billing_address','default_shipping','countries','countriesShipping','geoZone','shipping','delivery','address']))->with('address_id',$request->addressId)->render();
 
         return \Response::json(['error' => false,'html' => $html]);

@@ -1,50 +1,8 @@
 <div class="col-lg-9 pl-md-left">
-
-    {{--{{dd($billing_address)}}--}}
     <div class="left-content">
-        <span class="head d-flex align-items-center">
-            <span class="d-inline-block font-20 font-main-bold text-quatr-clr text-uppercase mr-4">Address</span>
-            <span>
-                <span class="profile-required-icon font-main-bold">&#42;</span>
-                Your Billing address is same as your account
-            </span>
-        </span>
-
-        <div class="checkout-note-wrap">
-            {{--{!! Form::model($billing_address,['class'=>'form-horizontal']) !!}--}}
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="d-flex flex-wrap mb-4">
-                        <span class="col-2">
-                            <svg viewBox="0 0 17 18" width="17px" height="18px">
-                                <path fill-rule="evenodd"  fill="rgb(132, 129, 157)" d="M15.807,18.000 C14.518,15.165 11.667,13.342 8.498,13.342 C5.333,13.342 2.482,15.165 1.190,18.000 L-0.000,18.000 C0.913,15.667 2.778,13.816 5.157,12.893 L5.604,12.720 L5.185,12.488 C3.049,11.302 1.722,9.074 1.722,6.671 C1.722,2.992 4.762,-0.000 8.498,-0.000 C12.235,-0.000 15.274,2.992 15.274,6.671 C15.274,9.075 13.949,11.304 11.815,12.488 L11.396,12.720 L11.843,12.893 C14.220,13.816 16.083,15.667 17.000,18.000 L15.807,18.000 ZM8.498,1.081 C5.369,1.081 2.824,3.589 2.824,6.671 C2.824,9.753 5.369,12.261 8.498,12.261 C11.629,12.261 14.176,9.753 14.176,6.671 C14.176,3.589 11.629,1.081 8.498,1.081 Z"/>
-                            </svg>
-                        </span>
-                        <span class="col-10 font-16 text-uppercase font-main-bold">
-                            {!! Auth::user()->name !!}
-                            {!! Auth::user()->last_name !!}
-                        </span>
-                    </div>
-                    <div id="address">
-
-                        @include("frontend.shop._partials.address")
-                    </div>
-                </div>
-                <div class="col-md-8">
-                    <label for="orderNotes" class="text-gray-clr mb-4">Special Notes</label>
-                    <div class="position-relative">
-                        <textarea name="" id="orderNotes" class="oreder-notes-area w-100">
-
-                        </textarea>
-                        <span class="msg-textarea position-absolute font-12 text-gray-clr">Max 500 character</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @include("frontend.shop._partials.shipping_options")
+        @include('frontend.shop._partials.address')
     </div>
 </div>
-
 
 <div class="col-lg-3 pr-md-right">
     <div class="right-content">
@@ -84,9 +42,11 @@
                     <span class="font-22 text-quatr-clr font-bold">${!! \Cart::getTotal() !!}</span>
                 </div>
                 <div class="checkout-btn text-center">
+                    @if($default_shipping)
                     <button class="btn btn-primary text-uppercase font-15 go-to-payment">
                         CHECKOUT
                     </button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -105,34 +65,7 @@
 </div>
 
 
-<!--modal change address-->
-<div class="modal modal-checkout fade" id="changeAddressModal" tabindex="-1" role="dialog" aria-labelledby="changeAddressModal">
-    <div class="modal-dialog main-scrollbar" role="document">
-        <div class="modal-content">
-            <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-checkout_header text-center">
-                <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">Change address</h2>
-                <p class="font-15 text-gray-clr modal-text">  Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-            </div>
-            <div>
-                <form action="" class="checkout-form">
 
-                    <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between ">
-                        <label for="title" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3 pb-0">Enter Shipping address<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
-                        <div class="col-md-8">
-                            <div class="simple_select_wrapper">
-                                {!! Form::select('address_book',['' => 'Select'] + $address->toArray(),$address_id,['class' => 'form-control select-address']) !!}
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 
 
