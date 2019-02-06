@@ -19,6 +19,9 @@ class CreateStickersTable extends Migration
             $table->string('color')->nullable();
             $table->timestamps();
         });
+        Schema::table('stock_attributes', function (Blueprint $table) {
+            $table->foreign('sticker_id')->references('id')->on('stickers')->onDelete('CASCADE');
+        });
     }
 
     /**

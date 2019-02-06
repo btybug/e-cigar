@@ -23,8 +23,6 @@ class CreateStockAttributesTable extends Migration
 
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
             $table->foreign('attributes_id')->references('id')->on('attributes')->onDelete('cascade');
-            $table->foreign('sticker_id')->references('id')
-                ->on('stickers')->onDelete('CASCADE');
         });
     }
 
