@@ -389,7 +389,7 @@
                             <div class="row pt-4 row--modal-bottom">
                                 <div class="col-md-7 d-flex align-items-center">
                                     <div class="position-relative">
-                                        <input class="form-check-input register-form_input-check" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input register-form_input-check" name="terms_conditions" type="checkbox" value="1" id="defaultCheck1">
                                         <label class="form-check-label text-gray-clr register-form_label pointer" for="defaultCheck1">
                                             I agree to&nbsp;&nbsp; <a href="#" class="text-uderlined text-gray-clr">Terms and conditions</a>
                                             <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
