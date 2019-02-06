@@ -412,7 +412,7 @@
                                     </p>
                                 </div>
                             </div>
-                            {!! Form::hidden('g-recaptcha-response',null,['id'=>'g-recaptcha-response']) !!}
+                            {!! Form::hidden('g-recaptcha-response',null,['class'=>'g-recaptcha-response']) !!}
                         </form>
                     </div>
                 </div>
