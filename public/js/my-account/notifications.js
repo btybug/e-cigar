@@ -51,6 +51,7 @@ $(document).ready(function(){
 
     $("body").on('click', '.mark-us-read', function () {
         var notifications = [];
+        var button=$(this);
         $.each($("input[name='notifications']:checked"), function () {
             var not_checkbox = $(this);
             notifications.push({id: not_checkbox.attr('data-id'), object: not_checkbox.attr('data-object')});
@@ -67,10 +68,10 @@ $(document).ready(function(){
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
                 success: function (data) {
-                    $("body").html(data);
                     if (!data.error) {
-//                            $("#notification-list").html(data.html);
-//                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                        data.result.map(function(element) {
+                            $(element.attr_id).addClass('notification-is_read');
+                        });
                     } else {
                         alert('error')
                     }
@@ -98,8 +99,9 @@ $(document).ready(function(){
                 },
                 success: function (data) {
                     if (!data.error) {
-//                            $("#notification-list").html(data.html);
-//                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                        data.result.map(function(element) {
+                            $(element.attr_id).removeClass('notification-is_read');
+                        });
                     } else {
                         alert('error')
                     }
