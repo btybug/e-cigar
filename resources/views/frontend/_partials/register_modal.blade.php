@@ -437,11 +437,7 @@
                     var phone = this.phone.value;
                     var password = this.password.value;
                     var passwordConfirm = this.password_confirmation.value;
-                    if(
-                        {{--/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i.test(password)--}}
-                    ) {
-                        console.log('true')
-                    }
+                    
                         var data = $(this).serialize();
 
                         $.ajax({
@@ -455,7 +451,6 @@
                             },
                             success: function (data) {
                                 if (!data.error) {
-                                    $()
                                 } else {
                                     alert('error')
                                 }
