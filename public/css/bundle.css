@@ -12738,6 +12738,27 @@ tr.notification-is_read {
     background-color: gray !important;
 }
 /*notification end*/
+
+/*registration error*/
+@keyframes example {
+    20% {transform: translate(3px, 0);}
+    40% {transform: translate(0, 0);}
+    60% {transform: translate(3px, 0);}
+    80% {transform: translate(0, 0);}
+    100% {transform: translate(3px, 0);}
+}
+
+.transitionHorizonal {
+    outline: 1px solid red !important;
+    animation-name: example;
+    animation-duration: 500ms;
+}
+
+.error-outline {
+
+}
+/*registration error end*/
+
 /*Montserrat*/
 @font-face {
     font-family: 'Montserrat Light';

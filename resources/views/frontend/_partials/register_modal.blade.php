@@ -418,37 +418,70 @@
                 </div>
             </div>
             <script>
-               
+//                var testinput = function(re, str){
+//                    var midstring;
+//                    if (re.test(str)) {
+//                        midstring = '';
+//                    } else {
+//                        midstring = '';
+//                    }
+//                    console.log(str + midstring + re.source);
+//                }
 
                 $('#register-form-1').on('submit', function(ev) {
                     ev.preventDefault()
 
-                    var firstName = this.name.value;
-                    var lastName = this.last_name.value;
-                    var email = this.email.value;
-                    var phone = this.phone.value;
-                    var password = this.password.value;
-                    var passwordConfirm = this.password_confirmation.value;
+//                    var firstName = this.name.value;
+//                    var lastName = this.last_name.value;
+//                    var email = this.email.value;
+//                    var phone = this.phone.value;
+//                    var password = this.password.value;
+//                    var passwordConfirm = this.password_confirmation.value;
 
-                        var data = $(this).serialize();
+                    var data = $(this).serialize();
 
-                        $.ajax({
-                            type: "post",
-                            url: "/register",
-                            cache: false,
-                            datatype: "json",
-                            data:data,
-                            headers: {
-                                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                            },
-                            success: function (data) {
-                                if (!data.error) {
+                    var errorHandler = function(fieldElement, errorObject, message, fieldElementName) {
+                        var change = function(fieldElementChange, fieldElementNameChange) {
+                            fieldElementChange.removeClass('transitionHorizonal');
+                            $(fieldElementNameChange+'~p').remove();
+                        };
+                        if(errorObject && message) {
+                            fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
+                            fieldElement.addClass('transitionHorizonal');
+                        }
+                        fieldElement.on('keypress', function() {change(fieldElement, fieldElementName)});
+                        fieldElement.on('change', function() {change(fieldElement, fieldElementName)});
+                    };
 
-                                } else {
-                                    alert('error')
-                                }
+                    $.ajax({
+                        type: "post",
+                        url: "/register",
+                        cache: false,
+                        datatype: "json",
+                        data:data,
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                console.log(data)
+                            } else {
+                                alert('error')
                             }
-                        });
+                        },
+                        error: function(error) {
+                            var firstNameEl = $('#firstName');
+                            var lastNameEl = $('#lastName');
+                            var emailEl = $('#e-mail');
+                            var phoneEl = $('#phoneNumber');
+                            var passwordEl = $('#password');
+                            errorHandler(firstNameEl, error.responseJSON.errors, error.responseJSON.errors.name, '#firstName');
+                            errorHandler(lastNameEl, error.responseJSON.errors, error.responseJSON.errors.last_name, '#lastName');
+                            errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#e-mail');
+                            errorHandler(phoneEl, error.responseJSON.errors, error.responseJSON.errors.phone, '#phoneNumber');
+                            errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#password');
+                        }
+                    });
                 });
             </script>
         </div>

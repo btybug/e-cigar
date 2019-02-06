@@ -117,6 +117,7 @@ $(document).ready(function(){
             notifications.push({id: not_checkbox.attr('data-id'), object: not_checkbox.attr('data-object')});
         });
         console.log('delete-selected-notifications', notifications)
+
         if (notifications.length > 0) {
             $.ajax({
                 type: "post",
@@ -129,8 +130,9 @@ $(document).ready(function(){
                 },
                 success: function (data) {
                     if (!data.error) {
-//                            $("#notification-list").html(data.html);
-//                            $(".notification-actions-bar").removeClass('d-flex').addClass('d-none')
+                        data.result.map(function(element) {
+                            $(element.attr_id).remove();
+                        });
                     } else {
                         alert('error')
                     }
