@@ -445,6 +445,7 @@
                             fieldElementChange.removeClass('transitionHorizonal');
                             $(fieldElementNameChange+'~p').remove();
                         };
+                        change(fieldElement, fieldElementName);
                         if(errorObject && message) {
                             fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
                             fieldElement.addClass('transitionHorizonal');
