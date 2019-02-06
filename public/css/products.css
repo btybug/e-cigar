@@ -2317,6 +2317,12 @@ td.shp-cart-table_price-td {
     padding: 10px 12px;
     display: none;
 }
+
+.my-account--selects.pos-fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+}
 .btn-no-shadow{
     background: none;
     border: none;

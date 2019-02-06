@@ -193,6 +193,10 @@ function heightBlock(mainDiv, element) {
     openSidebar($('#ptofileBtn'), $('#profileSidebar'));
     openSidebar($('#headerShopCartBtn'), $('#cartSidebar'));
 
+    $(window).scroll(function () {
+        $('.my-account--selects').addClass('pos-fixed');
+    })
+
 
 
 
@@ -233,7 +237,19 @@ function changeHeaderWhenIsCookie() {
 
         var headerPaddingTopNew = headerPaddingTop + cookieHeight + 'px';
 
-        $('.main-header').css('padding-top', headerPaddingTopNew)
+        $('.main-header').css('padding-top', headerPaddingTopNew);
+
+
+
+
+
+        // $(window).scroll(function () {
+        //     var headerHeight = $('.main-header').height();
+        //     var accountselectsTop = cookieHeight + headerHeight;
+        //
+        //     $('.my-account--selects').css('top', accountselectsTop);
+        // })
+
 
     }
 }

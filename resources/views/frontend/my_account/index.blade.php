@@ -12,7 +12,8 @@
                     <option value="{!! route('my_account_orders') !!}">Orders</option>
                     <option value="{!! route('my_account_address') !!}">Address</option>
                     <option value="{!! route('my_account_tickets') !!}">Tickets</option>
-                    <option value="{!! route('my_account_tickets') !!}">Referals</option>
+                    <option value="{!! route('my_account_referrals') !!}">Referals</option>
+                    <option value="{!! route('my_account_special_offers') !!}">Special Offers</option>
                     <option value="">Address</option>
                 </select>
                 {{--<select id="accounts"--}}
@@ -429,7 +430,7 @@
                                                         </label>
                                                     </div>
                                                 @endforeach
-                                                <div class="form-group">
+                                                <div class="form-group mb-0">
                                                     <input type="submit" class="btn ntfs-btn rounded-0"
                                                            value="Save settings">
                                                 </div>

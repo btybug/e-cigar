@@ -1,6 +1,29 @@
 @extends('layouts.frontend')
 @section('content')
     <main class="main-content position-relative">
+        <div class="my-account--selects">
+            <div class="simple_select_wrapper">
+                <select id="accounts--selects"
+                        class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark"
+                        style="width: 100%">
+                    <option value="{!! route('my_account') !!}">Account</option>
+                    <option value="{!! route('notifications') !!}">Notifications</option>
+                    <option value="{!! route('my_account_favourites') !!}">Favorites</option>
+                    <option value="{!! route('my_account_orders') !!}">Orders</option>
+                    <option value="{!! route('my_account_address') !!}">Address</option>
+                    <option value="{!! route('my_account_tickets') !!}">Tickets</option>
+                    <option value="{!! route('my_account_referrals') !!}">Referals</option>
+                    <option value="{!! route('my_account_special_offers') !!}">Special Offers</option>
+                    <option value="">Address</option>
+                </select>
+                {{--<select id="accounts"--}}
+                {{--class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark" style="width: 100%">--}}
+                {{--<option value="{!! route('my_account') !!}">Account</option>--}}
+                {{--<option>Brandos</option>--}}
+                {{--<option>Eleaf</option>--}}
+                {{--</select>--}}
+            </div>
+        </div>
         <div class="d-flex">
 
             @if ($errors->any())
