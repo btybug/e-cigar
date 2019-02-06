@@ -10,6 +10,7 @@ namespace App\Models;
 
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 class Coupons extends Model
 {
@@ -36,6 +37,8 @@ class Coupons extends Model
     private function calculateActivity($start,$end,$status){
         $result = null;
         $now = strtotime(today()->toDateString());
+        $start = strtotime($start);
+        $end = strtotime($end);
 
         if($status == 0) {
             $result = 'canceled';

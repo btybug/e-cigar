@@ -106,12 +106,12 @@ class ShoppingCartController extends Controller
         if(\Auth::check()){
             $user=\Auth::user();
             $address=$user->addresses()->where('type','address_book')->pluck('company','id');
-            $billing_address=$user->addresses()->where('type','billing_address')->first();
+//            $billing_address=$user->addresses()->where('type','billing_address')->first();
             $default_shipping=$user->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if($geoZone){
-                session()->put('billing_address_id',$billing_address->id );
+                session()->put('billing_address_id',$default_shipping->id );
                 session()->put('shipping_address_id', $default_shipping->id);
 
                 Cart::removeConditionsByType('shipping');
@@ -327,7 +327,7 @@ class ShoppingCartController extends Controller
         if(\Auth::check()){
             $user=\Auth::user();
             $address = $user->addresses()->where('type','address_book')->pluck('company','id');
-            $billing_address=$user->addresses()->where('type','billing_address')->first();
+//            $billing_address = $user->addresses()->where('type','billing_address')->first();
 
             if($request->addressId){
                 $default_shipping=$user->addresses()->where('id',$request->addressId)->first();
@@ -373,7 +373,7 @@ class ShoppingCartController extends Controller
                    }
                }
 
-                session()->put('billing_address_id',$billing_address->id );
+                session()->put('billing_address_id',$default_shipping->id );
                 session()->put('shipping_address_id', $default_shipping->id);
                 $shipping = Cart::getCondition($geoZone->name);
             }

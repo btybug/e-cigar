@@ -8,16 +8,18 @@
     </span>
     <div class="col-10">
         @if($default_shipping)
-        <ul class="list-unstyled mb-0 font-16">
-            <li>{!! $default_shipping->company !!}</li>
-            <li>{!! $default_shipping->first_line_address !!}</li>
-            <li>{!! $default_shipping->second_line_address !!}</li>
-            <li>{!! $default_shipping->city !!}</li>
-            <li>{!! $countriesShipping[$default_shipping->country] !!}</li>
-            <li>{!! getRegionByZone(@$default_shipping->country)[$default_shipping->region] !!}</li>
-            <li>111 street name</li>
-            <li>{!! $default_shipping->post_code !!}</li>
-        </ul>
+            <ul class="list-unstyled mb-0 font-16">
+                <li>{!! $default_shipping->company !!}</li>
+                <li>{!! $default_shipping->first_line_address !!}</li>
+                <li>{!! $default_shipping->second_line_address !!}</li>
+                <li>{!! $default_shipping->city !!}</li>
+                <li>{!! $countriesShipping[$default_shipping->country] !!}</li>
+                <li>{!! getRegionByZone(@$default_shipping->country)[$default_shipping->region] !!}</li>
+                <li>111 street name</li>
+                <li>{!! $default_shipping->post_code !!}</li>
+            </ul>
+        @else
+            NO Address
         @endif
         <div class="d-flex flex-wrap change-new-btn mt-4">
             <div class="mr-3">
