@@ -417,7 +417,56 @@
                     </div>
                 </div>
             </div>
+            <script>
+                var testinput = function(re, str){
+                    var midstring;
+                    if (re.test(str)) {
+                        midstring = ' содержит ';
+                    } else {
+                        midstring = ' не содержит ';
+                    }
+                    console.log(str + midstring + re.source);
+                }
 
+                $('.register-form').on('submit', function(ev) {
+                    ev.preventDefault()
+
+                    var firstName = this.name.value;
+                    var lastName = this.last_name.value;
+                    var email = this.email.value;
+                    var phone = this.phone.value;
+                    var password = this.password.value;
+                    var passwordConfirm = this.password_confirmation.value;
+                    if(
+                        {{--/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i.test(password)--}}
+                    ) {
+                        console.log('true')
+                    }
+                        var data = $(this).serialize();
+
+                        $.ajax({
+                            type: "post",
+                            url: "/register",
+                            cache: false,
+                            datatype: "json",
+                            data: {token: data},
+                            headers: {
+                                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                            },
+                            success: function (data) {
+                                if (!data.error) {
+                                    $()
+                                } else {
+                                    alert('error')
+                                }
+                            },
+                            error: function() {
+                                alert('error')
+                            }
+                        });
+
+                })
+            </script>
         </div>
     </div>
 </div>
