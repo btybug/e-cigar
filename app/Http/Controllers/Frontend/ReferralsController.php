@@ -45,19 +45,18 @@ class ReferralsController extends Controller
     public function getClaimBonus($id)
     {
         $user = \Auth::user();
-        $referal_bonus=$user->referralBonus()->findOrFail($id);
+        $referal_bonus = $user->referralBonus()->findOrFail($id);
         if (!$referal_bonus->status) {
-            $referal_bonus->status=1;
+            $referal_bonus->status = 1;
             $userService = new UserService();
             $user_id = $user->id; //parent ID na
             $referal_id = $referal_bonus->bonus_bringing_user_id; //Referal ID na
             $result = $userService->giveCoupon($user_id, $referal_id);
-            if($result){
-            $referal_bonus->save();
-            return redirect()->back()->with(['alert' => ['message' => 'Congratulations you get your Bonus ', 'class' => 'success']]);
+            if ($result) {
+                $referal_bonus->save();
+                return redirect()->back()->with(['alert' => ['message' => 'Congratulations you get your Bonus ', 'class' => 'success']]);
             }
             return redirect()->back()->with(['alert' => ['message' => 'Something went wrong!  please try again or contact to support', 'class' => 'warning']]);
-
         }
         return redirect()->back()->with(['alert' => ['message' => 'this bonus already sorted', 'class' => 'danger']]);
 
