@@ -22,9 +22,12 @@ class UserService
             $referal = User::findOrFail($referal_id);
             $coupon = Coupons::create($this->couponData($referal,$user_id));
 
-            ReferalCoupon::create([
-
+            $referal = ReferalCoupon::create([
+                'user_id' => $user_id,
+                'coupon_id' => $coupon->id,
             ]);
+
+            return $referal;
         }catch (\Exception $exception){
             \Log::emergency($exception->getMessage());
             return false;
@@ -50,6 +53,7 @@ class UserService
             "total_amount" => "1",
             "user_per_coupon" => "1",
             "user_per_customer" => "1",
+            "created_by" => "referral by system",
         ];
     }
 

@@ -16,12 +16,10 @@ class CreateReferalCoupons extends Migration
         Schema::create('referal_coupons', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('referal_id');
             $table->unsignedInteger('coupon_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('referal_id')->references('id')->on('users');
             $table->foreign('coupon_id')->references('id')->on('coupons');
         });
     }

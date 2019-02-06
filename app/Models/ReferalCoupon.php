@@ -30,11 +30,6 @@ class ReferalCoupon extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function referal()
-    {
-        return $this->belongsTo(User::class, 'referal_id');
-    }
-
     public function coupon()
     {
         return $this->belongsTo(Coupons::class, 'coupon_id');

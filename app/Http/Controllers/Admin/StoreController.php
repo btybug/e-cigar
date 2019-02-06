@@ -55,8 +55,9 @@ class StoreController extends Controller
         return $this->view('coupons_new', compact('coupons','products','users'));
     }
 
-    public function CouponsSave(CouponsRequest $request)
+    public function CouponsSave(CouponsRequest $request,UserService $userService)
     {
+//        $userService->giveCoupon(1,9);
         $data = $request->except('_token');
         Coupons::updateOrCreate($request->id, $data);
         return redirect(route('admin_store_coupons'));

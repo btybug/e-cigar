@@ -20,7 +20,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/newsletters-all','Admin\DatatableController@getAllNewsletters')->name('datatable_all_newsletters');
     Route::get('/blog/get-all','Admin\DatatableController@getAllPosts')->name('datatable_all_posts');
     Route::get('/blog/get-contact-us','Admin\DatatableController@getAllContactUs')->name('datatable_all_contact_us');
-    Route::get('/coupons/get-all','Admin\DatatableController@getAllCoupons')->name('datatable_all_coupons');
+    Route::get('/coupons/get-all/{is_archive}','Admin\DatatableController@getAllCoupons')->name('datatable_all_coupons');
     Route::get('/blog/comments/get-all','Admin\DatatableController@getAllPostComments')->name('datatable_all_post_comments');
     Route::get('/stock/get-all','Admin\DatatableController@getAllStocks')->name('datatable_all_stocks');
     Route::get('/settings/get-all-geo-zones','Admin\DatatableController@getAllGeoZones')->name('datatable_all_geo_zones');

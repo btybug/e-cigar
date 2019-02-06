@@ -237,9 +237,16 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-    public function getAllCoupons()
+    public function getAllCoupons($isArchive)
     {
-        return Datatables::of(Coupons::query())
+//        dd($isArchive);
+        if($isArchive){
+            $query = Coupons::where('status',0);
+        }else{
+            $query = Coupons::query();
+        }
+
+        return Datatables::of($query)
             ->editColumn('type', function ($coupons) {
                 return ($coupons->type == 'p') ? "Percentage" : "Fixed Amount";
             })->editColumn('discount', function ($coupons) {
