@@ -656,9 +656,9 @@ function getImage($url)
     return \App\Models\Media\Items::where('original_name', $name)->first();
 }
 
-function generateRandomString($length = 6)
+function generateRandomString($length = 7)
 {
-    return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+    return substr(str_shuffle(str_repeat($x = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
 }
 
 function check_customer_number($number)
