@@ -1,8 +1,8 @@
 <ul class="profile-sidebar-menu list-unstyled mb-0 w-100">
     <li class="profile-sidebar-menu_item active">
         <a href="{!! route('my_account') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-3">
                     <svg
                             viewBox="0 0 22 24"
                             width="22px" height="24px">
@@ -15,8 +15,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('notifications') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
-                                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
+                                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
 
                     <svg x="0px" y="0px"
                          viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -52,8 +52,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('my_account_favourites') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                             viewBox="0 0 22 21"
                             width="22px" height="21px">
@@ -66,8 +66,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('my_account_orders') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                             viewBox="0 0 21 24"
                             width="21px" height="24px">
@@ -80,8 +80,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('my_account_address') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15 main-transition">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                             viewBox="0 0 21 21"
                             width="21px" height="21px">
@@ -94,8 +94,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('my_account_tickets') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                             viewBox="0 0 15 21"
                             width="15px" height="21px">
@@ -109,8 +109,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('my_account_referrals') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                             viewBox="0 0 15 21"
                             width="15px" height="21px">
@@ -124,8 +124,8 @@
     </li>
     <li class="profile-sidebar-menu_item">
         <a href="{!! route('my_account_special_offers') !!}"
-           class="profile-sidebar-menu_link d-inline-flex flex-column align-items-center font-15">
-                <span class="d-inline-block profile-sidebar-menu_icon">
+           class="profile-sidebar-menu_link d-inline-flex align-items-center font-15">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                             viewBox="0 0 15 21"
                             width="15px" height="21px">

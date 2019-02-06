@@ -818,6 +818,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background: #353535;
 }
 
+.profile-sidebar--inner-pages .profile-sidebar-menu_link {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .profile-sidebar-menu_link {
     color: #9f9f9f;
     padding: 20px 10px;
@@ -1144,7 +1149,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 /*Account page*/
 .profile-sidebar--inner-pages {
-    width: 145px;
+    width: 150px;
     padding-top: 38px;
 }
 
