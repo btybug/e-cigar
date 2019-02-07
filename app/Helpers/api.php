@@ -317,7 +317,7 @@ function order_updated_at($user, $order)
 function order_status($user, $order)
 {
     $order = \App\Models\Orders::find($order['id']);
-    return ($order)?$order->history()->first()->status->name:null;
+    return ($order) ? $order->history()->first()->status->name : null;
 }
 
 function sc($content, $user, $job)
@@ -913,4 +913,53 @@ function get_currency()
 
     return (\Cookie::get('currency')) ? \Cookie::get('currency')
         : (($default) ? $default->code : null);
+}
+
+[['code' => 'referral_name', 'description' => 'Invited user name'],
+    ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
+    ['code' => 'referral_email', 'description' => 'Invited user name'],
+    ['code' => 'invitation_date', 'description' => 'data when user inserted referred by code'],
+    ['code' => 'bonus_name', 'description' => 'Name of the coupon'],
+    ['code' => 'bonus_coupon_code', 'description' => 'Coupon code what can be used in shopping cart'],
+    ['code' => 'bonus_coupon_start_date', 'description' => 'Data when coupon will be active'],
+    ['code' => 'bonus_coupon_end_date', 'description' => 'Data when coupon will be expired'],];
+
+function referral_name($user, $external)
+{
+    return $external['referral']['name'];
+}
+
+function referral_last_name($user, $referral)
+{
+    return $referral['referral']['last_name'];
+}
+
+function referral_email($user, $external)
+{
+    return $external['referral']['email'];
+}
+
+function invitation_date($user, $external)
+{
+    return BBgetDateFormat($user->referralBonus()->where('bonus_bringing_user_id', $external['referral']['id'])->first()->created_at);
+}
+
+function bonus_name($user, $external)
+{
+    return $external['bonus']['name'];
+}
+
+function bonus_coupon_code($user, $external)
+{
+    return $external['bonus']['code'];
+}
+
+function bonus_coupon_start_date($user, $external)
+{
+    return BBgetDateFormat($external['bonus']['start_date']);
+}
+
+function bonus_coupon_end_date($user, $external)
+{
+    return BBgetDateFormat($external['bonus']['end_date']);
 }

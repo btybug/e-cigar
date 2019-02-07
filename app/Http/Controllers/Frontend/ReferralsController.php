@@ -10,7 +10,9 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Events\NewReferral;
+use App\Events\ReferralBonus;
 use App\Http\Controllers\Controller;
+use App\Models\MailJob;
 use App\Services\UserService;
 use App\User;
 use Illuminate\Http\Request;
@@ -21,6 +23,8 @@ class ReferralsController extends Controller
 
     public function getIndex()
     {
+//       $job= MailJob::find(13);
+//       dd($job);
         $user = \Auth::user();
         return $this->view('referrals', compact('user'));
     }
@@ -37,7 +41,7 @@ class ReferralsController extends Controller
         $inviter = User::where('customer_number', $data['referred_by'])->first();
         $user->referred_by = $data['referred_by'];
         $user->save();
-        $bonus=$inviter->bonus_bringers()->attach($user->id, ['type' => 'referral', 'status' => 0]);
+        $bonus = $inviter->bonus_bringers()->attach($user->id, ['type' => 'referral', 'status' => 0,'created_at' => date('Y-m-d h:i:s'),'updated_at'=>date('Y-m-d h:i:s')]);
         event(new NewReferral($inviter, $user));
         $user->bonus_bringers()->attach($inviter->id, ['type' => 'invited', 'status' => 0]);
         return redirect()->back();
@@ -58,6 +62,7 @@ class ReferralsController extends Controller
                 $referal_bonus->status = 1;
                 $referal_bonus->referral_coupon_id = $result->id;
                 $referal_bonus->save();
+                event(new ReferralBonus($user, User::find($referal_id), $result->coupon));
                 return redirect()->back()->with(['alert' => ['message' => 'Congratulations you get your Bonus ', 'class' => 'success']]);
             }
             return redirect()->back()->with(['alert' => ['message' => 'Something went wrong!  please try again or contact to support', 'class' => 'warning']]);

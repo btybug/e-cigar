@@ -21,6 +21,7 @@ class ReferralBonus
      * @var \Illuminate\Contracts\Auth\Authenticatable
      */
     public $user;
+    public $referral;
     public $bonus;
 
     /**
@@ -29,9 +30,10 @@ class ReferralBonus
      * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
      * @return void
      */
-    public function __construct($user,$bonus)
+    public function __construct($user,$referral,$bonus)
     {
         $this->user = $user;
+        $this->referral = $referral;
         $this->bonus = $bonus;
     }
 }

@@ -105,24 +105,26 @@ class ShortCodes
         foreach ($this->mailShortcodes as $shortcode) {
             if (function_exists($shortcode['code'])) {
                 $fn = $shortcode['code'];
-                $content = str_replace('[' . $shortcode['code'] . ']', $fn($user),$content);
+                $content = str_replace('[' . $shortcode['code'] . ']', $fn($user), $content);
             }
         }
         return $content;
     }
 
-    function relatedShortcoder($content, $user = null,$job)
+    function relatedShortcoder($content, $user = null, $job)
     {
-        $external=$job->additional_data;
-        foreach ($this->relatedShortcoders as $relatedShortcoders) {
-            foreach ($relatedShortcoders as $shortcode) {
+        $email = $job->email;
+        $external = $job->additional_data;
+        if (isset($this->relatedShortcoders[$job->email->slug])) {
+            foreach ($this->relatedShortcoders[$job->email->slug] as $shortcode) {
                 if (function_exists($shortcode['code'])) {
                     $fn = $shortcode['code'];
-                    $content = str_replace('[' . $shortcode['code'] . ']', $fn($user,$external),$content);
+                    $content = str_replace('[' . $shortcode['code'] . ']', $fn($user, $external), $content);
 
                 }
             }
         }
+
         return $content;
     }
 

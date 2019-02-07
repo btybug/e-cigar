@@ -13,7 +13,7 @@ use App\Events\ReferralBonus;
 use App\Models\MailJob;
 use App\Models\MailTemplates;
 
-class RefferalBonusListener
+class ReferralBonusListener
 {
     public function handle(ReferralBonus $event)
     {
@@ -25,7 +25,7 @@ class RefferalBonusListener
                 'template_id' => $mailTemplate->id,
                 'must_be_done' => now(),
                 'to' => $event->user->email,
-                'additional_data' => $event->bonus,
+                'additional_data' => ['bonus'=>$event->bonus,'referral'=>$event->referral],
             ]);
             if (MailTemplates::where('slug', 'admin_' . $mailTemplate->slug)->exists()) {
                 $adminMailTemplate = MailTemplates::where('slug', 'admin_' . $mailTemplate->slug)
