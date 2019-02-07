@@ -17,7 +17,9 @@ class SpecialOffersController extends Controller
 
     public function getIndex()
     {
-        $coupons = \Auth::user()->coupons;
+        $now = strtotime(today()->toDateString());
+
+        $coupons = \Auth::user()->coupons()->where('start_date','<=',$now)->where('end_date','>=',$now)->where('status',true)->get();
 
         return $this->view('special_offers',compact(['coupons']));
     }

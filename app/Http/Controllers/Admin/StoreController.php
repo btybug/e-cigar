@@ -19,6 +19,7 @@ use App\Models\Items;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Products;
 use App\Models\Purchase;
+use App\Models\ReferalCoupon;
 use App\Models\ShippingZones;
 use App\Models\Stock;
 use App\Models\StockVariation;
@@ -87,6 +88,15 @@ class StoreController extends Controller
 
             $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
             $emailCustomer->users()->attach($users, ['status' => 1]);
+
+            if(count($users)){
+                foreach ($users as $user_id){
+                    ReferalCoupon::create([
+                        'user_id' => $user_id,
+                        'coupon_id' => $coupon->id,
+                    ]);
+                }
+            }
         }
 
         return redirect(route('admin_store_coupons'));
