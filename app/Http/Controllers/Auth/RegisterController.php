@@ -44,9 +44,19 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        abort(404);
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
@@ -54,7 +64,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'terms_conditions' => 'required|in:1',
             'name' => 'required|string|min:2|max:255',
-            'last_name' =>'required|string|min:2|max:255',
+            'last_name' => 'required|string|min:2|max:255',
             'phone' => 'required|unique:users|regex:/[0-9]{9}/',
             'email' => 'required|string|email|max:255|unique:users',
             'gender' => 'required|in:male,female',
@@ -67,7 +77,7 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \App\User
      */
     protected function create(array $data)
@@ -81,7 +91,7 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'gender' => $data['gender'],
             'status' => 0,
-            'role_id' => Roles::where('slug','customer')->first()->id,
+            'role_id' => Roles::where('slug', 'customer')->first()->id,
             'customer_number' => $customer_number,
             'password' => Hash::make($data['password']),
         ]);

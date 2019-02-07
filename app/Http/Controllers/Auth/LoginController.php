@@ -39,6 +39,16 @@ class LoginController extends Controller
     }
 
     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showLoginForm()
+    {
+        abort(404);
+    }
+
+    /**
      * @param Request $request
      * @param $user
      */
