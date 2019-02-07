@@ -5,10 +5,12 @@
 @section('content')
     <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
         <li class="nav-item active">
-            <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One" aria-selected="true">Active</a>
+            <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One"
+               aria-selected="true">Active</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two" aria-selected="false">Archive</a>
+            <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="Two"
+               aria-selected="false">Archive</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">

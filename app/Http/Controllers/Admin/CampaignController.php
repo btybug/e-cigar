@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -28,9 +29,9 @@ class CampaignController extends Controller
     public function create()
     {
         $model = null;
-        $countries = array_filter($this->countries->all()->pluck('name.common', 'iso_a3')->toArray(),'strlen' );
+        $countries = array_filter($this->countries->all()->pluck('name.common', 'iso_a3')->toArray(), 'strlen');
 
-        return $this->view('create',compact(['model','countries']));
+        return $this->view('create', compact(['model', 'countries']));
     }
 
     public function postCreate(CampaignRequest $request)
@@ -41,15 +42,15 @@ class CampaignController extends Controller
         return redirect()->route('admin_campaign');
     }
 
-    public function edit ($id)
+    public function edit($id)
     {
         $model = Campaign::findOrFail($id);
         $countries = $this->countries->all()->pluck('name.common', 'iso_a3')->toArray();
 
-        return $this->view('create',compact(['model','countries']));
+        return $this->view('create', compact(['model', 'countries']));
     }
 
-    public function postEdit($id,CampaignRequest $request)
+    public function postEdit($id, CampaignRequest $request)
     {
         $model = Campaign::findOrFail($id);
         $data = $request->except('_token');
