@@ -12739,7 +12739,7 @@ tr.notification-is_read {
 }
 /*notification end*/
 
-/*registration error*/
+/*registration and login error*/
 @keyframes example {
     20% {transform: translate(3px, 0);}
     40% {transform: translate(0, 0);}
@@ -12753,11 +12753,7 @@ tr.notification-is_read {
     animation-name: example;
     animation-duration: 500ms;
 }
-
-.error-outline {
-
-}
-/*registration error end*/
+/*registration and login error end*/
 
 /*Montserrat*/
 @font-face {

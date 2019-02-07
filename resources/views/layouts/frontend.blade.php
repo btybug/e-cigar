@@ -43,7 +43,6 @@
 
     @if(!Auth::check())
         <script src='https://www.google.com/recaptcha/api.js?render={!! env('GOOGLE_RECAPTCHA_KEY') !!}'></script>
-        <script src={{asset("public/js/adult.js")}}></script>
         @endif
     @yield('css')
 

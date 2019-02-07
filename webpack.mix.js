@@ -20,7 +20,9 @@ mix.babel([
                 'public/js/bootstrap.bundle.min.js',
                 'public/js/hover-slider.js',
                 'public/js/main.js',
-                'public/js/util.js'
+                'public/js/util.js',
+                'public/js/register.js',
+                'public/js/adult.js'
             ], 'public/js/bundle/bundle.js')
     .babel([
         'public/plugins/formstone/core.js',
@@ -42,4 +44,6 @@ mix.babel([
         'public/css/product-cards.css',
         'public/css/main.css',
         'public/css/flag-icon.css'
-    ], 'public/css/bundle.css');
+    ], 'public/css/bundle.css')
+
+

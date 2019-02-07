@@ -3036,6 +3036,64 @@ $(document).ready(function () {
         });
     });
 });
+
+(function () {
+    $('#register-form-1').on('submit', function (ev) {
+        ev.preventDefault();
+
+        var data = $(this).serialize();
+
+        var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
+            var change = function change(fieldElementChange, fieldElementNameChange) {
+                fieldElementChange.removeClass('transitionHorizonal');
+                $(fieldElementNameChange + '~p').remove();
+            };
+            change(fieldElement, fieldElementName);
+            var pTag = fieldElement.next().prop("tagName") !== 'p';
+
+            if (errorObject && message && pTag) {
+                fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
+                fieldElement.addClass('transitionHorizonal');
+            }
+            fieldElement.on('keypress', function () {
+                return change(fieldElement, fieldElementName);
+            });
+            fieldElement.on('change', function () {
+                return change(fieldElement, fieldElementName);
+            });
+        };
+
+        $.ajax({
+            type: "post",
+            url: "/register",
+            cache: false,
+            datatype: "json",
+            data: data,
+            headers: {
+                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            },
+            success: function success(data) {
+                if (!data.error) {
+                    console.log(data);
+                }
+            },
+            error: function error(_error2) {
+                var firstNameEl = $('#firstName');
+                var lastNameEl = $('#lastName');
+                var emailEl = $('#e-mail');
+                var phoneEl = $('#phoneNumber');
+                var passwordEl = $('#password');
+                console.log($('form')[0]);
+                errorHandler(firstNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.name, '#firstName');
+                errorHandler(lastNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.last_name, '#lastName');
+                errorHandler(emailEl, _error2.responseJSON.errors, _error2.responseJSON.errors.email, '#e-mail');
+                errorHandler(phoneEl, _error2.responseJSON.errors, _error2.responseJSON.errors.phone, '#phoneNumber');
+                errorHandler(passwordEl, _error2.responseJSON.errors, _error2.responseJSON.errors.password, '#password');
+            }
+        });
+    });
+})();
+
 /**
  * Created by sahak on 1/7/2019.
  */
