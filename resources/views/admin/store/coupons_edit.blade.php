@@ -207,7 +207,6 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-
                         </div>
 
                     </div>
@@ -216,7 +215,7 @@
             </div>
         </div>
         <div class="col-md-4">
-
+            {!! $coupons->renderVoucher() !!}
         </div>
     </div>
 
