@@ -3039,57 +3039,131 @@ $(document).ready(function () {
 
 (function () {
     $('#register-form-1').on('submit', function (ev) {
+        var _this2 = this;
+
         ev.preventDefault();
 
         var data = $(this).serialize();
 
-        var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
-            var change = function change(fieldElementChange, fieldElementNameChange) {
-                fieldElementChange.removeClass('transitionHorizonal');
-                $(fieldElementNameChange + '~p').remove();
-            };
-            change(fieldElement, fieldElementName);
-            var pTag = fieldElement.next().prop("tagName") !== 'p';
+        var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
+        grecaptcha.ready(function () {
+            grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
+                console.log('recaptcha');
+                $('.g-recaptcha-response').val(token);
+            }).then(function () {
+                var data = $(_this2).serialize();
 
-            if (errorObject && message && pTag) {
-                fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
-                fieldElement.addClass('transitionHorizonal');
-            }
-            fieldElement.on('keypress', function () {
-                return change(fieldElement, fieldElementName);
-            });
-            fieldElement.on('change', function () {
-                return change(fieldElement, fieldElementName);
-            });
-        };
+                var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
+                    var change = function change(fieldElementChange, fieldElementNameChange) {
+                        fieldElementChange.removeClass('transitionHorizonal');
+                        $(fieldElementNameChange + '~p').remove();
+                    };
+                    change(fieldElement, fieldElementName);
+                    var pTag = fieldElement.next().prop("tagName") !== 'p';
 
-        $.ajax({
-            type: "post",
-            url: "/register",
-            cache: false,
-            datatype: "json",
-            data: data,
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-            },
-            success: function success(data) {
-                if (!data.error) {
-                    console.log(data);
-                }
-            },
-            error: function error(_error2) {
-                var firstNameEl = $('#firstName');
-                var lastNameEl = $('#lastName');
-                var emailEl = $('#e-mail');
-                var phoneEl = $('#phoneNumber');
-                var passwordEl = $('#password');
-                console.log($('form')[0]);
-                errorHandler(firstNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.name, '#firstName');
-                errorHandler(lastNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.last_name, '#lastName');
-                errorHandler(emailEl, _error2.responseJSON.errors, _error2.responseJSON.errors.email, '#e-mail');
-                errorHandler(phoneEl, _error2.responseJSON.errors, _error2.responseJSON.errors.phone, '#phoneNumber');
-                errorHandler(passwordEl, _error2.responseJSON.errors, _error2.responseJSON.errors.password, '#password');
-            }
+                    if (errorObject && message && pTag) {
+                        fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
+                        fieldElement.addClass('transitionHorizonal');
+                    }
+                    fieldElement.on('keypress', function () {
+                        return change(fieldElement, fieldElementName);
+                    });
+                    fieldElement.on('change', function () {
+                        return change(fieldElement, fieldElementName);
+                    });
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "/register",
+                    cache: false,
+                    datatype: "json",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function success(data) {
+                        if (!data.error) {
+                            console.log(data);
+                        }
+                    },
+                    error: function error(_error2) {
+                        var firstNameEl = $('#firstName');
+                        var lastNameEl = $('#lastName');
+                        var emailEl = $('#e-mail');
+                        var phoneEl = $('#phoneNumber');
+                        var passwordEl = $('#password');
+                        console.log($('form')[0]);
+                        errorHandler(firstNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.name, '#firstName');
+                        errorHandler(lastNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.last_name, '#lastName');
+                        errorHandler(emailEl, _error2.responseJSON.errors, _error2.responseJSON.errors.email, '#e-mail');
+                        errorHandler(phoneEl, _error2.responseJSON.errors, _error2.responseJSON.errors.phone, '#phoneNumber');
+                        errorHandler(passwordEl, _error2.responseJSON.errors, _error2.responseJSON.errors.password, '#password');
+                    }
+                });
+            });
+        });
+    });
+})();
+
+(function () {
+    $('#login-form').on('submit', function (ev) {
+        var _this3 = this;
+
+        ev.preventDefault();
+
+        var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
+        grecaptcha.ready(function () {
+            grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
+                console.log('recaptcha');
+                $('.g-recaptcha-response').val(token);
+            }).then(function () {
+                var data = $(_this3).serialize();
+
+                var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
+                    var change = function change(fieldElementChange, fieldElementNameChange) {
+                        fieldElementChange.removeClass('transitionHorizonal');
+                        $(fieldElementNameChange + '~p').remove();
+                    };
+                    change(fieldElement, fieldElementName);
+                    var pTag = fieldElement.next().prop("tagName") !== 'p';
+                    if (errorObject && message && pTag) {
+                        fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
+                        fieldElement.addClass('transitionHorizonal');
+                    }
+                    fieldElement.on('keypress', function () {
+                        change(fieldElement, fieldElementName);
+                    });
+                    fieldElement.on('change', function () {
+                        change(fieldElement, fieldElementName);
+                    });
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "/login",
+                    cache: false,
+                    datatype: "json",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function success(data) {
+                        if (!data.error) {
+                            location.href = data.redirectPath;
+                            console.log(data);
+                        } else {
+                            alert('error');
+                        }
+                    },
+                    error: function error(_error3) {
+                        var emailEl = $('#loginEmail');
+                        var passwordEl = $('#loginPass');
+                        errorHandler(emailEl, _error3.responseJSON.errors, _error3.responseJSON.errors.email, '#loginEmail');
+                        errorHandler(passwordEl, _error3.responseJSON.errors, _error3.responseJSON.errors.password, '#loginPass');
+                    }
+                });
+            });
         });
     });
 })();
@@ -3098,7 +3172,7 @@ $(document).ready(function () {
  * Created by sahak on 1/7/2019.
  */
 $(document).ready(function () {
-    var modalHtml = '<div class="modal adult-modal" tabindex="-1" role="dialog">' + '<div class="modal-dialog modal-lg modal-dialog-centered" role="document">' + '<div class="modal-content">' + '<div class="modal-body d-flex flex-column">' + '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age?</h2>' + '<div class="d-flex justify-content-center">' + '<button type="button" class="btn ntfs-btn adult col-3 mr-4 rounded-0">Yes (21+)</button>' + '<button type="button" class="btn btn-transp not-adult col-3 rounded-0" data-dismiss="modal">No (under 21)</button>' + '</div>' + '<div class="mt-auto text-center">' + '<p class="text-uppercase mb-0 font-12"><i>The products of this website are intended for adults only.</i></p>' + '<p class="font-12"><i>By entering this website, you certify that you are of legel smoking age, in the state in which you reside.</i></p>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>';
+    var modalHtml = '<div class="modal adult-modal" tabindex="-1" role="dialog">' + '<div class="modal-dialog modal-lg modal-dialog-centered" role="document">' + '<div class="modal-content">' + '<div class="modal-body d-flex flex-column">' + '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age ?</h2>' + '<div class="d-flex justify-content-center">' + '<button type="button" class="btn ntfs-btn adult col-3 mr-4 rounded-0">Yes (21+)</button>' + '<button type="button" class="btn btn-transp not-adult col-3 rounded-0" data-dismiss="modal">No (under 21)</button>' + '</div>' + '<div class="mt-auto text-center">' + '<p class="text-uppercase mb-0 font-12"><i>The products of this website are intended for adults only.</i></p>' + '<p class="font-12"><i>By entering this website, you certify that you are of legel smoking age, in the state in which you reside.</i></p>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>';
 
     function getCookie(name) {
         var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));

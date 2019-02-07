@@ -394,7 +394,7 @@
     @include("frontend._partials.register_modal")
 
 @push('javascript')
-    <script>
+    {{-- <script>
      let a=   grecaptcha.ready(function () {
             grecaptcha.execute('{!! env('GOOGLE_RECAPTCHA_KEY') !!}', {action: 'action_name'})
                 .then(function (token) {
@@ -403,6 +403,6 @@
 //                    document.getElementsByClassName('g-recaptcha-response').value = token
                 });
         });
-    </script>
+    </script> --}}
 @endpush
 @endif

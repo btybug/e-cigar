@@ -22,6 +22,7 @@ mix.babel([
                 'public/js/main.js',
                 'public/js/util.js',
                 'public/js/register.js',
+                'public/js/login.js',
                 'public/js/adult.js'
             ], 'public/js/bundle/bundle.js')
     .babel([
