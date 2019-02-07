@@ -842,6 +842,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     margin-right: 40px;
 }
 
+.hidden-sidebar .profile-sidebar-menu_icon svg {
+    width: 26px;
+}
+
+.hidden-sidebar .profile-sidebar-menu_icon svg path {
+    fill: #5184e5;
+}
+
 .profile-sidebar_logout-btn {
     border: 0;
     outline: none;
@@ -1180,6 +1188,10 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .profile-sidebar--inner-pages .profile-sidebar-menu_link svg {
     width: 24px;
+}
+
+.profile-sidebar--inner-pages .profile-sidebar-menu_link svg path {
+    fill: #5184e5;
 }
 
 .profile-info {
