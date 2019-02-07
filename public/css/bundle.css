@@ -15640,11 +15640,18 @@ td.shp-cart-table_price-td {
     width: 48px;
 }
 
-.currency--wrap .select2-selection__arrow{
-    display: none;
+/*.currency--wrap .select2-selection__arrow{*/
+    /*display: none;*/
+/*}*/
+
+
+.currency--wrap .select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding-left: 10px;
+    color: #5184e5;
 }
-.currency-dropdown {
-    text-align: center;
+
+.currency--wrap .select-2.main-select + .select2-container--default .select2-selection--single {
+    border-color: #5184e5;
 }
 
 /*end currency*/
