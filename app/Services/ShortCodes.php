@@ -79,6 +79,12 @@ class ShortCodes
             ['code' => 'referral_email', 'description' => 'Invited user name'],
             ['code' => 'invitation_date', 'description' => 'data when user inserted referred by code'],
         ],
+        'referral_bonus_claim' => [
+            ['code' => 'referral_name', 'description' => 'Invited user name'],
+            ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
+            ['code' => 'referral_email', 'description' => 'Invited user name'],
+            ['code' => 'invitation_date', 'description' => 'data when user inserted referred by code'],
+        ],
         'referral_bonus' => [
             ['code' => 'referral_name', 'description' => 'Invited user name'],
             ['code' => 'referral_last_name', 'description' => 'Invited user last name'],

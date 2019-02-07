@@ -28,11 +28,11 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status','referred_by', 'role_id', 'verification_type', 'verification_image','customer_number','dob'
+        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status', 'referred_by', 'role_id', 'verification_type', 'verification_image', 'customer_number', 'dob'
     ];
 
     protected $appends = [
-      'age'
+        'age'
     ];
 
     /**
@@ -47,7 +47,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAgeAttribute()
     {
         $dateOfBirth = $this->dob;
-        if($dateOfBirth == '0000-00-00'){
+        if ($dateOfBirth == '0000-00-00') {
             return null;
         }
 
@@ -77,7 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function favorites()
     {
-        return $this->belongsToMany(StockVariation::class, 'favorites','user_id','variation_id');
+        return $this->belongsToMany(StockVariation::class, 'favorites', 'user_id', 'variation_id');
     }
 
     public function authorAttributes()
@@ -102,41 +102,47 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdministrator()
     {
-        return  ($this->role->type == 'backend') ? true : false;
+        return ($this->role->type == 'backend') ? true : false;
     }
 
     public function customEmails()
     {
-        return $this->belongsToMany(CustomEmails::class,'custom_email_user','user_id','custom_email_id')->withPivot(['is_read']);
+        return $this->belongsToMany(CustomEmails::class, 'custom_email_user', 'user_id', 'custom_email_id')->withPivot(['is_read']);
     }
 
     public function referrals()
     {
-        return $this->hasMany(User::class,'referred_by','customer_number');
+        return $this->hasMany(User::class, 'referred_by', 'customer_number');
     }
+
+    public function inviter()
+    {
+        return $this->belongsTo(User::class, 'referred_by', 'customer_number');
+    }
+
     public function referral_bonuses()
     {
-        return $this->belongsToMany(User::class,'referral_bonus','user_id','bonus_bringing_user_id')->withPivot('status', 'type','id')->wherePivot('type', 'referral');
+        return $this->belongsToMany(User::class, 'referral_bonus', 'user_id', 'bonus_bringing_user_id')->withPivot('status', 'type', 'id')->wherePivot('type', 'referral');
     }
 
     public function mail_job()
     {
-        return $this->hasMany(MailJob::class,'to','email');
+        return $this->hasMany(MailJob::class, 'to', 'email');
     }
 
     public function referralBonus()
     {
-        return $this->hasMany(ReferralBonus::class,'user_id');
+        return $this->hasMany(ReferralBonus::class, 'user_id');
     }
 
     public function bonus_bringers()
     {
-       return $this->belongsToMany(User::class,'referral_bonus','user_id','bonus_bringing_user_id')->withPivot('status', 'type');
+        return $this->belongsToMany(User::class, 'referral_bonus', 'user_id', 'bonus_bringing_user_id')->withPivot('status', 'type');
     }
 
     public function coupons()
     {
-        return $this->belongsToMany(Coupons::class,'referal_coupons','user_id','coupon_id');
+        return $this->belongsToMany(Coupons::class, 'referal_coupons', 'user_id', 'coupon_id');
     }
 
 }

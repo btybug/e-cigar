@@ -84,6 +84,12 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
+        $email = new \App\Models\MailTemplates(['slug' => 'referral_bonus_claim','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'You can claim your bonus';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
+
         $email = new \App\Models\MailTemplates(['slug' => 'referral_bonus','from'=>'hr@hook.am']);
         $email->save();
         $email->translateOrNew($locale)->subject = 'Bonus from your referral';

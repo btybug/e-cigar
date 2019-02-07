@@ -12,7 +12,7 @@ use App\Events\NewReferral;
 use App\Models\MailJob;
 use App\Models\MailTemplates;
 
-class NewRefferalListener
+class NewReferralListener
 {
     public function handle(NewReferral $event)
     {

@@ -963,3 +963,14 @@ function bonus_coupon_end_date($user, $external)
 {
     return BBgetDateFormat($external['bonus']['end_date']);
 }
+
+function user_can_claim($user)
+{
+    if ($user->inviter && $user->orders()->count() == 1) {
+        $bonus = $user->inviter->referral_bonuses()->wherePivot('bonus_bringing_user_id', $user->id)->first();
+        if($bonus){
+          return  !(bool)$bonus->pivot->status;
+        }
+    }
+    return false;
+}

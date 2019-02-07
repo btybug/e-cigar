@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Events\ClaimReferralBonus;
 use App\Http\Controllers\Admin\Requests\OrderHistoryRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
@@ -95,7 +96,7 @@ class OrdersController extends Controller
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes','order_new_coupon');
+        session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes', 'order_new_coupon');
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -404,7 +405,7 @@ class OrdersController extends Controller
         $geoZone = ($zone) ? $zone->geoZone : null;
         $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user, $customer_notes,$coupon) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user, $customer_notes, $coupon) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
@@ -422,7 +423,9 @@ class OrdersController extends Controller
                 'customer_notes' => $customer_notes,
                 'coupon_code' => $coupon,
             ]);
-
+            if (user_can_claim($user)) {
+                event(new ClaimReferralBonus($user->inviter, $user));
+            }
             $settings = $this->settings->getEditableData('orders_statuses');
             if ($settings && isset($settings['submitted'])) {
                 $historyData['user_id'] = $user->id;
@@ -441,7 +444,7 @@ class OrdersController extends Controller
 
             OrdersJob::makeNew($order->id);
 
-            session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes','order_new_coupon');
+            session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes', 'order_new_coupon');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -481,7 +484,7 @@ class OrdersController extends Controller
         $order = $this->orderStripe($transaction, $user);
 
         if (!Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() && session()->has('order_new_shipping_address_id') && session()->has('order_new_user_id') && $order) {
-            session()->forget('order_new_user_id', 'order_new_shipping_address_id', 'order_new_customer_notes','order_new_coupon');
+            session()->forget('order_new_user_id', 'order_new_shipping_address_id', 'order_new_customer_notes', 'order_new_coupon');
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
             Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
@@ -500,7 +503,7 @@ class OrdersController extends Controller
         $geoZone = ($zone) ? $zone->geoZone : null;
         $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone, $user, $customer_notes,$coupon) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone, $user, $customer_notes, $coupon) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
@@ -519,7 +522,9 @@ class OrdersController extends Controller
                 'customer_notes' => $customer_notes,
                 'coupon_code' => $coupon,
             ]);
-
+            if (user_can_claim($user)) {
+                event(new ClaimReferralBonus($user->inviter, $user));
+            }
             $settings = $this->settings->getEditableData('orders_statuses');
             if ($settings && isset($settings['submitted'])) {
                 $historyData['user_id'] = $user->id;

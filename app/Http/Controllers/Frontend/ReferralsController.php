@@ -23,8 +23,6 @@ class ReferralsController extends Controller
 
     public function getIndex()
     {
-//       $job= MailJob::find(13);
-//       dd($job);
         $user = \Auth::user();
         return $this->view('referrals', compact('user'));
     }
