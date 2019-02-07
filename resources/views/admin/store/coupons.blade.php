@@ -12,7 +12,7 @@
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show p-3 active in" id="one" role="tabpanel" aria-labelledby="one-tab">
+        <div class="tab-pane fade p-3 active in" id="one" role="tabpanel" aria-labelledby="one-tab">
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <h2 class="pull-left m-0">Coupons</h2>
