@@ -73,6 +73,22 @@ class ShortCodes
             ['code' => 'order_created_at', 'description' => 'order create date'],
             ['code' => 'order_updated_at', 'description' => 'order updated date'],
         ],
+        'new_referral' => [
+            ['code' => 'referral_name', 'description' => 'Invited user name'],
+            ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
+            ['code' => 'referral_email', 'description' => 'Invited user name'],
+            ['code' => 'invitation_date', 'description' => 'data when user inserted referred by code'],
+        ],
+        'referral_bonus' => [
+            ['code' => 'referral_name', 'description' => 'Invited user name'],
+            ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
+            ['code' => 'referral_email', 'description' => 'Invited user name'],
+            ['code' => 'invitation_date', 'description' => 'data when user inserted referred by code'],
+            ['code' => 'bonus_name', 'description' => 'Name of the coupon'],
+            ['code' => 'bonus_coupon_code', 'description' => 'Coupon code what can be used in shopping cart'],
+            ['code' => 'bonus_coupon_start_date', 'description' => 'Data when coupon will be active'],
+            ['code' => 'bonus_coupon_end_date', 'description' => 'Data when coupon will be expired'],
+        ],
     ];
     public $mailShortcodes = [
         'app_name' => ['code' => 'app_name', 'description' => 'your site name '],

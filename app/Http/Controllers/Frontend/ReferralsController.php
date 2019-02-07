@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Events\NewReferral;
 use App\Http\Controllers\Controller;
 use App\Services\UserService;
 use App\User;
@@ -36,7 +37,8 @@ class ReferralsController extends Controller
         $inviter = User::where('customer_number', $data['referred_by'])->first();
         $user->referred_by = $data['referred_by'];
         $user->save();
-        $inviter->bonus_bringers()->attach($user->id, ['type' => 'referral', 'status' => 0]);
+        $bonus=$inviter->bonus_bringers()->attach($user->id, ['type' => 'referral', 'status' => 0]);
+        event(new NewReferral($inviter, $user));
         $user->bonus_bringers()->attach($inviter->id, ['type' => 'invited', 'status' => 0]);
         return redirect()->back();
 
@@ -47,12 +49,14 @@ class ReferralsController extends Controller
         $user = \Auth::user();
         $referal_bonus = $user->referralBonus()->findOrFail($id);
         if (!$referal_bonus->status) {
-            $referal_bonus->status = 1;
+
             $userService = new UserService();
             $user_id = $user->id; //parent ID na
             $referal_id = $referal_bonus->bonus_bringing_user_id; //Referal ID na
             $result = $userService->giveCoupon($user_id, $referal_id);
             if ($result) {
+                $referal_bonus->status = 1;
+                $referal_bonus->referral_coupon_id = $result->id;
                 $referal_bonus->save();
                 return redirect()->back()->with(['alert' => ['message' => 'Congratulations you get your Bonus ', 'class' => 'success']]);
             }
