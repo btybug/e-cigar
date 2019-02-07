@@ -324,7 +324,9 @@ function sc($content, $user, $job)
 {
     $ShortCodes = new \App\Services\ShortCodes();
     $content = $ShortCodes->MailShortcoder($content, $user);
-    $content = $ShortCodes->relatedShortcoder($content, $user, $job);
+    if ($job instanceof \App\Models\MailJob) {
+        $content = $ShortCodes->relatedShortcoder($content, $user, $job);
+    }
     return $content;
 }
 
@@ -968,8 +970,8 @@ function user_can_claim($user)
 {
     if ($user->inviter && $user->orders()->count() == 1) {
         $bonus = $user->inviter->referral_bonuses()->wherePivot('bonus_bringing_user_id', $user->id)->first();
-        if($bonus){
-          return  !(bool)$bonus->pivot->status;
+        if ($bonus) {
+            return !(bool)$bonus->pivot->status;
         }
     }
     return false;
