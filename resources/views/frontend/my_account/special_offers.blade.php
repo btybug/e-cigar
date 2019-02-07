@@ -59,6 +59,11 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
+                        @foreach($coupons as $coupon)
+                            <div class="col-ld-3 m-3">
+                                {!! $coupon->renderVoucher() !!}
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

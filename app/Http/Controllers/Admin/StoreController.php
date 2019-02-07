@@ -84,6 +84,17 @@ class StoreController extends Controller
         return $this->view('coupons_edit', compact('coupons'));
     }
 
+    public function postCouponTheme(Request $request)
+    {
+        $model = Coupons::find($request->id);
+        $html = '';
+        if(\View::exists("admin.store.coupon_themes.$request->theme")){
+            $html = \View("admin.store.coupon_themes.$request->theme",compact(['model']))->with('data',$request->all())->render();
+        }
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function saveTags(Request $request)
     {
         dd($request->all());

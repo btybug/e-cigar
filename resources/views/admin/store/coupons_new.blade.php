@@ -4,10 +4,11 @@
 @stop
 @section('content')
     <div class="row">
+        {!! Form::model($coupons,['url' => route('admin_store_coupons_save'),'files' => true,'id' => 'form-coupon','class' => '']) !!}
+
         <div class="col-md-8">
             <div class="coupons_new_page">
                 <div class="panel panel-default coupons_page-panel">
-                {!! Form::model($coupons,['url' => route('admin_store_coupons_save'),'files' => true,'id' => 'form-coupon','class' => '']) !!}
                     {!! Form::hidden('id',null) !!}
                     <div class="panel-heading">
                         <div class="left-head">
@@ -208,48 +209,21 @@
 
                     </div>
                 </div>
-                {!! Form::close() !!}
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <select name="voucherThemeSelect" id="voucherThemeSelect" class="form-control">
-                    <option value="theme 1">theme 1</option>
-                    <option value="theme 2">theme 2</option>
-                    <option value="theme 3">theme 3</option>
-                </select>
+                {!! Form::select('theme', [
+                    '' => "Select",
+                    'voucher_blue' => "Theme blue",
+                    'voucher_red' => "Theme red",
+                ],null,['class' => 'form-control','id' => 'voucherThemeSelect']) !!}
             </div>
-            <div class="voucher-card">
-                <div class="d-flex">
-                    <div class="col-xs-5 p-0">
-                        <div class="voucher-card_left">
-                            <p class="voucher-card_left_title text-uppercase mb-0">gift</p>
-                            <p class="voucher-card_left_subtitle text-uppercase">voucher</p>
-                            <a href="{!! url('/') !!}" class="d-block voucher-card_left-logo-holder">
-                                <img src="{!! url('/public/img/vapors-logo.png') !!}" alt="logo">
-                            </a>
-                        </div>
-                    </div>
+            <div class="voucher-box">
 
-                    <div class="col-xs-7">
-                        <div class="voucher-card_right">
-                            <p class="voucher-card_price"><strong>500$</strong></p>
-                            <p class="voucher-card_price_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium assumenda distinctio doloremque, eaque facere facilis id libero nihil officiis praesentium quia soluta, tempora voluptate voluptatum?</p>
-                            <div class="voucher-card_footer">
-                                <p><strong>Lorem ipsum dolor sit amet.</strong></p>
-                                <ul class="voucher-card_footer-list d-flex">
-                                    <li><a href="#">example@mail.ifo</a></li>
-                                    <li><a href="#">77 88588556</a></li>
-                                    <li><a href="#">sitename.com</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
 
 
@@ -270,6 +244,19 @@
 
     <script>
         $(".input-select2").select2();
+
+        $("body").on('change', '#voucherThemeSelect', function () {
+            $(".voucher-box").html('');
+            let data = $("#form-coupon").serialize();
+            if($(this).val() != ""){
+                AjaxCall("/admin/store/coupons/get-theme", data, function (res) {
+                    if (!res.error) {
+                        $(".voucher-box").append(res.html)
+                    }
+                });
+            }
+
+        });
 
         $("body").on('change', '.product-select', function () {
             $(".variations-box").html('');

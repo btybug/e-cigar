@@ -170,6 +170,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/edit/{id}', 'Admin\StoreController@Edit')->name('admin_store_coupons_edit');
         Route::post('/coupons-save', 'Admin\StoreController@CouponsSave')->name('admin_store_coupons_save');
         Route::post('/cancel-coupon', 'Admin\StoreController@cancelCoupon')->name('admin_store_coupons_cancel');
+        Route::post('/get-theme', 'Admin\StoreController@postCouponTheme')->name('admin_store_coupons_theme');
     });
 
     Route::group(['prefix' => 'settings'], function () {

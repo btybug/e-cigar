@@ -31,6 +31,8 @@ class CreateCouponsTable extends Migration
             $table->tinyInteger('status')->default(1);
             $table->tinyInteger('target')->default(0);
             $table->string('users')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('theme')->nullable();
             $table->timestamps();
         });
     }

@@ -75,4 +75,13 @@ class Coupons extends Model
     {
         return $this->belongsTo(Stock::class,'product');
     }
+
+    public function renderVoucher(){
+        $html = '';
+        if(\View::exists("admin.store.coupon_themes.$this->theme")){
+            $html = \View("admin.store.coupon_themes.$this->theme")->with('model',$this)->with('data',[])->render();
+        }
+
+        return $html;
+    }
 }

@@ -4,6 +4,7 @@ namespace App;
 
 use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
+use App\Models\Coupons;
 use App\Models\Favorites;
 use App\Models\MailJob;
 use App\Models\Notifications\CustomEmails;
@@ -133,9 +134,9 @@ class User extends Authenticatable implements MustVerifyEmail
        return $this->belongsToMany(User::class,'referral_bonus','user_id','bonus_bringing_user_id')->withPivot('status', 'type');
     }
 
-    public function coupon()
+    public function coupons()
     {
-        return $this->belongsToMany(Coupons::class,'referal_coupons','user_id','referral_coupon_id')->withPivot('status', 'type');
+        return $this->belongsToMany(Coupons::class,'referal_coupons','user_id','coupon_id');
     }
 
 }

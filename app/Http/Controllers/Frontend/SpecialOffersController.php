@@ -17,6 +17,8 @@ class SpecialOffersController extends Controller
 
     public function getIndex()
     {
-        return $this->view('special_offers');
+        $coupons = \Auth::user()->coupons;
+
+        return $this->view('special_offers',compact(['coupons']));
     }
 }
