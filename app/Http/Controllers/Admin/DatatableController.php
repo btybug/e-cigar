@@ -239,11 +239,14 @@ class DatatableController extends Controller
 
     public function getAllCoupons($isArchive)
     {
+        $now = strtotime(today()->toDateString());
 //        dd($isArchive);
-        if($isArchive){
-            $query = Coupons::where('status',0);
+        if($isArchive == 'archive'){
+            $query = Coupons::where('status',0)->orWhere(function ($q) use ($now){
+               $q->where('start_date','>',$now)->orWhere('end_date','>',$now);
+            });
         }else{
-            $query = Coupons::query();
+            $query = Coupons::where('start_date','<=',$now)->where('end_date','>=',$now);
         }
 
         return Datatables::of($query)

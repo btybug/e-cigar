@@ -76,7 +76,7 @@
     <script>
         $(function () {
             $('#categories-table').DataTable({
-                ajax: "{!! route('datatable_all_coupons','0') !!}",
+                ajax: "{!! route('datatable_all_coupons','active') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
@@ -97,7 +97,7 @@
             });
 
             $('#archive-table').DataTable({
-                ajax: "{!! route('datatable_all_coupons','1') !!}",
+                ajax: "{!! route('datatable_all_coupons','archive') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
