@@ -84,21 +84,21 @@
     </main>
 
     {{-- Modal --}}
-    <div class="modal fade" id="notif_modal">
-        <div class="modal-dialog">
+    <div class="modal fade notif-modal" id="notif_modal">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content rounded-0">
-                <div class="row no-gutters">
+                <div class="row no-gutters h-100">
                     <div class="col-md-4">
                         <div class="modal_left-img-holder h-100" style="background-image: url(/public/img/temp/modal-login-bg.jpg)"></div>
                     </div>
                     <div class="col-md-8">
-                      <div class="modal-body">
+                      <div class="modal-body h-100 d-flex flex-column">
                           <h2 class="text-uppercase text-main-clr font-20 modal-title mb-2">Message</h2>
 
 
                           <p class="text-gray-clr modal-body-info">  </p>
 
-                          <div class="text-right">
+                          <div class="text-right mt-auto">
                               <button type="button" class="ntfs-btn btn rounded-0 font-14" data-dismiss="modal">Close</button>
                           </div>
                       </div>

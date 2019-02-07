@@ -1156,6 +1156,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 
 /*Account page*/
+.notif-modal .modal-content{
+    height: 250px;
+}
 .profile-sidebar--inner-pages {
     width: 150px;
     padding-top: 38px;
