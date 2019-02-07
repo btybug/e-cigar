@@ -108,7 +108,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::post('/', 'Frontend\UserController@saveMyAccount')->name('my_account_save_data');
     Route::post('/contact', 'Frontend\UserController@saveMyAccountContact')->name('my_account_save_contact_data');
 
-    Route::get('/notifications', 'Frontend\UserController@getNotifications')->name('notifications');
+    Route::get('/messages', 'Frontend\UserController@getNotifications')->name('messages');
     Route::post('/notifications', 'Frontend\UserController@getNotificationsContent')->name('notifications_content');
     Route::post('/delete-notifications', 'Frontend\UserController@postDeleteNotifications')->name('notifications_delete');
     Route::post('/mark-us-read-notifications', 'Frontend\UserController@postMarkReadNotifications')->name('notifications_mark_read');

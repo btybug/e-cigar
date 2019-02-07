@@ -7,7 +7,7 @@
                         class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark"
                         style="width: 100%">
                     <option value="{!! route('my_account') !!}">Account</option>
-                    <option value="{!! route('notifications') !!}">Notifications</option>
+                    <option value="{!! route('messages') !!}">Notifications</option>
                     <option value="{!! route('my_account_favourites') !!}">Favorites</option>
                     <option value="{!! route('my_account_orders') !!}">Orders</option>
                     <option value="{!! route('my_account_address') !!}">Address</option>

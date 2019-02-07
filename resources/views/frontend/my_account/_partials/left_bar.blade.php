@@ -14,7 +14,7 @@
         </a>
     </li>
     <li class="profile-sidebar-menu_item">
-        <a href="{!! route('notifications') !!}"
+        <a href="{!! route('messages') !!}"
            class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
                                 <span class="d-inline-block profile-sidebar-menu_icon mr-2">
 
@@ -47,7 +47,7 @@
 </g>
 </svg>
                 </span>
-            <span class="d-inline-block">Notifications</span>
+            <span class="d-inline-block">Messages </span>
         </a>
     </li>
     <li class="profile-sidebar-menu_item">
