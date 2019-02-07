@@ -15,6 +15,7 @@ use App\Mail\SendEmail;
 use App\Mail\SendSubscriptionEmail;
 use App\Models\Campaign;
 use App\Models\Category;
+use App\Models\Coupons;
 use App\Models\Emails;
 use App\Models\MailTemplates;
 use App\Models\Newsletter;
@@ -44,10 +45,16 @@ class EmailsNotificationsController extends Controller
         $categories = Category::where('type','notifications')->get()->pluck('name','id');
         $users = User::all()->pluck('name', 'id');
         $campaings = Campaign::all()->pluck('title', 'id');
-
+        $now = strtotime(today()->toDateString());
+        $coupons = Coupons::where(function ($q) use ($now){
+            $q->where('start_date','<=',$now)->where('end_date','>=',$now)->where('status',true);
+        })->orWhere(function ($q) use ($now) {
+            $q->where('start_date','>',$now)->where('status',true);
+        })->get()->pluck('name', 'id')->all();
+//        dd($coupons);
 
 //        dd($this->getSubscribersByType());
-        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories','campaings'));
+        return $this->view('send.email_create', compact('users', 'shortcodes', 'froms', 'model','categories','campaings','coupons'));
     }
 
     public function sendEmailView($id = null)
@@ -64,7 +71,7 @@ class EmailsNotificationsController extends Controller
         $category = Category::findOrFail($request->category_id);
         $users = $this->getEmailUsers($request->get('users'),$request->get('groups'),$category);
 
-        $data = $request->only('from', 'category_id');
+        $data = $request->only('from', 'category_id','coupon_id');
         $data['status'] = 0;
 
         $translatable = $request->get('translatable');
@@ -99,7 +106,7 @@ class EmailsNotificationsController extends Controller
         $category = Category::findOrFail($request->category_id);
         $users = $this->getEmailUsers($request->get('users'),$request->get('groups'),$category);
 
-        $data = $request->only('from', 'category_id');
+        $data = $request->only('from', 'category_id','coupon_id');
         $data['status'] = 1;
 
         $translatable = $request->get('translatable');

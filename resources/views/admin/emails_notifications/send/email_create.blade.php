@@ -58,6 +58,13 @@
                                             {!! Form::select('groups[]',$campaings,null,['id' => 'to_groups','class' => 'form-control tag-input-v','multiple'=>'multiple']) !!}
                                         </div>
                                     </div>
+
+                                    <div class="form-group row voucher-box hide">
+                                        {{Form::label('voucher', 'Voucher',['class' => 'col-sm-3'])}}
+                                        <div class="col-sm-9">
+                                            {!! Form::select('coupon_id',[''=>'Select'] + $coupons,null,['id' => 'voucher','class' => 'form-control tag-input-v']) !!}
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         @if(count(get_languages()))
                                             <ul class="nav nav-tabs">
@@ -225,10 +232,16 @@
 
             AjaxCall("{!! route('post_create_send_admin_check_category') !!}", {id: id}, function (res) {
                 if (!res.error) {
+                    $(".voucher-box").removeClass('show').addClass('hide');
+
                     if(res.slug == 'newsletter'){
                         $(".to_select").removeClass('show').addClass('hide');
                         $(".all_memebers_selected").removeClass('hide').addClass('show');
-                    }else{
+                    }else if(res.slug == 'special_offer') {
+                        $(".all_memebers_selected").removeClass('show').addClass('hide');
+                        $(".to_select").removeClass('hide').addClass('show');
+                        $(".voucher-box").removeClass('hide').addClass('show');
+                    }else {
                         $(".all_memebers_selected").removeClass('show').addClass('hide');
                         $(".to_select").removeClass('hide').addClass('show');
                     }

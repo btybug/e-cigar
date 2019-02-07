@@ -18,7 +18,8 @@ class CreateCustomEmailsTable extends Migration
             $table->string('from');
             $table->string('type');
             $table->tinyInteger('status')->default(0);
-            $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedInteger('coupon_id')->nullable();
             $table->tinyInteger('is_for_admin')->default(0);
             $table->timestamps();
 
