@@ -84,26 +84,56 @@
     </main>
 
     {{-- Modal --}}
-    <div class="modal" id="notif_modal">
+    <div class="modal fade" id="notif_modal">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content rounded-0">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <div class="modal_left-img-holder h-100" style="background-image: url(/public/img/temp/modal-login-bg.jpg)"></div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="modal-body">
+                          <h2 class="text-uppercase text-main-clr font-20 modal-title mb-2">Message</h2>
 
-                <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                          <p class="text-gray-clr modal-body-info">  </p>
+
+                          <div class="text-right">
+                              <button type="button" class="ntfs-btn btn rounded-0 font-14" data-dismiss="modal">Close</button>
+                          </div>
+                      </div>
+                    </div>
                 </div>
 
-                <div class="modal-body">
 
-                </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="ntfs-btn btn btn-info rounded-0" data-dismiss="modal">Close</button>
-                </div>
+
 
             </div>
         </div>
     </div>
+
+    {{--<div class="modal fade" id="notif_modal" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">--}}
+        {{--<div class="modal-dialog modal-dialog-centered" role="document">--}}
+            {{--<div class="modal-content">--}}
+                {{--<div class="row no-gutters modal-content_inner">--}}
+                    {{--<div class="col-md-4 col-sm-2">--}}
+                        {{--<div class="modal_left-img-holder h-100" style="background-image: url(/public/img/temp/modal-login-bg.jpg)"></div>--}}
+                    {{--</div>--}}
+
+                    {{--<div class="col-md-8 col-sm-10">--}}
+                        {{--<div class="modal-body">--}}
+                            {{--<h2 class="text-uppercase text-main-clr font-20 modal-title">Message</h2>--}}
+                            {{--<p class="font-13 text-gray-clr modal-body-info">  </p>--}}
+                        {{--</div>--}}
+                        {{--<div class="modal-footer">--}}
+                            {{--<button type="button" class="ntfs-btn btn btn-info rounded-0" data-dismiss="modal">Close</button>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 @stop
 
 @section("js")

@@ -20,7 +20,7 @@ $(document).ready(function(){
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success:function(responce){
                         if(!responce.error){
-                            $(".modal-body").html(responce.message.content);
+                            $(".modal-body-info").html(responce.message.content);
                             $("#notif_modal").modal();
                             button.closest('tr').attr('style','')
                         }

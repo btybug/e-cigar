@@ -17207,7 +17207,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .cookie-consent__message {
     display: inline-block;
     color: #fff;
-    margin-right: 30px;
+}
+
+.cookie-consent__message a{
+    color: #5184e5;
+}
+
+.cookie-consent__message a:hover {
+    text-decoration: underline;
 }
 
 .js-cookie-consent.cookie-consent {
@@ -17216,7 +17223,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     align-items: center;
     position: fixed;
     width: 100%;
-    height: 50px;
     z-index: 99999;
 }
 
@@ -17226,6 +17232,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     border: 0;
     color: #fff;
     padding: .375rem .75rem;
+    flex: none;
 }
 
 @media (min-width: 769px) {
