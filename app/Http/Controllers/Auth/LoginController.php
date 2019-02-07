@@ -47,6 +47,7 @@ class LoginController extends Controller
         if ($user->isAdministrator()) {
             $this->redirectTo = '/admin';
         };
+        return response()->json(['success' => true, 'redirectPath' => $this->redirectPath()]);
     }
 
     protected function validateLogin(Request $request)
