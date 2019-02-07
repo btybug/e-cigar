@@ -12,8 +12,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponsRequest;
 use App\Http\Requests\PurchaseRequest;
+use App\Models\Category;
 use App\Models\Coupons;
+use App\Models\Emails;
 use App\Models\Items;
+use App\Models\Notifications\CustomEmails;
 use App\Models\Products;
 use App\Models\Purchase;
 use App\Models\ShippingZones;
@@ -57,9 +60,35 @@ class StoreController extends Controller
 
     public function CouponsSave(CouponsRequest $request,UserService $userService)
     {
-//        $userService->giveCoupon(1,9);
         $data = $request->except('_token');
-        Coupons::updateOrCreate($request->id, $data);
+        $coupon = Coupons::updateOrCreate($request->id, $data);
+
+        if($coupon && $coupon->send_email){
+            $category = Category::where('slug','special_offer')->first();
+            $from = Emails::where('type', 'from')->first();
+            $data = [
+                'category_id' => $category->id,
+                'coupon_id' => $coupon->id,
+                'from' => $from->email,
+                'status' => 1,
+            ];
+            $translatable = [
+               'gb' => [
+                   'subject' => $coupon->name,
+                   'content' => 'Content of coupon '.$coupon->name
+               ]
+            ];
+
+            if($coupon->target){
+                $users = $coupon->users;
+            }else{
+                $users = User::all()->pluck( 'id');
+            }
+
+            $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
+            $emailCustomer->users()->attach($users, ['status' => 1]);
+        }
+
         return redirect(route('admin_store_coupons'));
     }
 

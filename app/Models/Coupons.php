@@ -67,8 +67,9 @@ class Coupons extends Model
     public static function updateOrCreate(int $id = null, array $data)
     {
         $model = self::find($id)??new static();
-        (isset($model->id)) ? $model->update($data) : $model->fill($data) ;
-        return $model->save();
+        (isset($model->id)) ? $model->update($data) : $model->fill($data);
+        $model->save();
+        return $model;
     }
 
     public function stock()

@@ -33,6 +33,7 @@ class CreateCouponsTable extends Migration
             $table->string('users')->nullable();
             $table->string('created_by')->nullable();
             $table->string('theme')->nullable();
+            $table->tinyInteger('send_email')->default(0);
             $table->timestamps();
         });
     }

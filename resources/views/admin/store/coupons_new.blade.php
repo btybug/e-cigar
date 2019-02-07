@@ -111,7 +111,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">Target</div>
                             <div class="panel-body">
-                                <div class="form-group row">
+                                <div class="form-group col-md-8">
                                     <label class="col-sm-2 control-label">Target</label>
                                     <div class="col-sm-10">
                                         <div class="row">
@@ -126,6 +126,12 @@
                                             </div>
                                         </div>
 
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label  for="send_email" class="col-sm-9 control-label">Send email(notification)</label>
+                                    <div class="col-sm-3">
+                                        {!! Form::checkbox('send_email',1,null,['id' => 'send_email']) !!}
                                     </div>
                                 </div>
                             </div>
