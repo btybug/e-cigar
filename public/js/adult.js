@@ -6,7 +6,7 @@ $(document).ready(function () {
         '<div class="modal-dialog modal-lg modal-dialog-centered" role="document">' +
         '<div class="modal-content">' +
         '<div class="modal-body d-flex flex-column">' +
-        '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age?</h2>' +
+        '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age ?</h2>' +
         '<div class="d-flex justify-content-center">' +
         '<button type="button" class="btn ntfs-btn adult col-3 mr-4 rounded-0">Yes (21+)</button>' +
         '<button type="button" class="btn btn-transp not-adult col-3 rounded-0" data-dismiss="modal">No (under 21)</button>' +

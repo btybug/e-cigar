@@ -17204,24 +17204,13 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .adult-modal .modal-content {
     position: relative;
-    background: url('../img/modal-bg.jpg') center;
+    background: rgba(0, 0, 0, .4);
     background-size: cover;
     padding-top: 50px;
     height: 300px;
-    z-index: 1;
 }
 
-.adult-modal .modal-content:after {
-    content: '';
-    display: block;
-    background: rgba(0, 0, 0, .3);
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -1;
-}
+
 
 
 
