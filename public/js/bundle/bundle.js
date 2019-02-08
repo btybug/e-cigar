@@ -3048,7 +3048,6 @@ $(document).ready(function () {
         var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(function () {
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
-                console.log('recaptcha');
                 $('.g-recaptcha-response').val(token);
             }).then(function () {
                 var data = $(_this2).serialize();
@@ -3115,7 +3114,6 @@ $(document).ready(function () {
         var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(function () {
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
-                console.log('recaptcha');
                 $('.g-recaptcha-response').val(token);
             }).then(function () {
                 var data = $(_this3).serialize();
