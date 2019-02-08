@@ -8,7 +8,6 @@
         grecaptcha.ready(() => {
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' })
                 .then((token) => {
-                    console.log('recaptcha')
                     $('.g-recaptcha-response').val(token);
                 })
                 .then(() => {
