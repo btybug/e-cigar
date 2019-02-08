@@ -2,8 +2,6 @@
 	$('#register-form-1').on('submit', function(ev) {
 		ev.preventDefault();
 
-		const data = $(this).serialize();
-
         const GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(() => {
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' })
