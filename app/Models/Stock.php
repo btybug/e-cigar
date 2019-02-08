@@ -134,6 +134,15 @@ class Stock extends Translatable
         return $this->hasMany(StockSales::class, 'stock_id');
     }
 
+    public function active_sales()
+    {
+        $now = strtotime(now());
+        return $this->hasMany(StockSales::class, 'stock_id')->where('canceled',false)
+            ->whereRaw("stock_sales.start_date <= ? AND stock_sales.end_date >= ?",
+            array($now, $now)
+        );
+    }
+
     public function faqs()
     {
         return $this->belongsToMany(Faq::class, 'faq_stocks', 'stock_id', 'faq_id');

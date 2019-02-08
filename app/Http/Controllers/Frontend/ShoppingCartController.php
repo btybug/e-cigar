@@ -145,7 +145,7 @@ class ShoppingCartController extends Controller
         if($variation){
             if(\Auth::check()){
                 $user = \Auth::user();
-                $promotionPrice = $variation->stock->sales()->where('variation_id', $variation->id)->first();
+                $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
                 $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
                 Cart::add($variation->id,$variation->id,$price,1,
                     ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);

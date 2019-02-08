@@ -96,8 +96,8 @@ class ProductsController extends Controller
                 if ($request->promotion) {
                     $promotionPrice = $stock->promotion_prices()->where('variation_id', $variation->id)->first();
                     $price = ($promotionPrice) ? $promotionPrice->price : $price;
-                } elseif(count($stock->sales)) {
-                    $promotionPrice = $stock->sales()->where('variation_id', $variation->id)->first();
+                } elseif(count($stock->active_sales)) {
+                    $promotionPrice = $stock->active_sales()->where('variation_id', $variation->id)->first();
                     $price = ($promotionPrice) ? $promotionPrice->price : $price;
                 }
                 $isFavorite = false;

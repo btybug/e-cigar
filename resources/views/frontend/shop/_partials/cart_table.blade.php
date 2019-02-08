@@ -267,22 +267,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function(){
-        $("body").on('click','.qty-count',function () {
-            let qty = $(this).closest(".continue-shp-wrapp_qty").find('.product-qty-select').val();
-            let type = $(this).data('type');
-            if(type == 'plus'){
-                qty = parseInt(qty) + 1;
-                $(this).closest(".continue-shp-wrapp_qty").find('.product-qty-select').val(qty)
-            }else{
-                if(qty > 1){
-                    qty -=1;
-                    $(this).closest(".continue-shp-wrapp_qty").find('.product-qty-select').val(qty)
-                }
-            }
-        })
-    })
-</script>

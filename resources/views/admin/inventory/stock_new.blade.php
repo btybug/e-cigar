@@ -1129,6 +1129,7 @@
                     if (!res.error) {
                         $(".get-all-extra-tab").find('.promotion-elm').find(`.promotion_price[data-id='${promotionID}']`).val(res.data)
                         $(".get-all-extra-tab").find('.promotion-elm').find(`.promotion_type[data-id='${promotionID}']`).val(promotionType)
+                        window.location.reload();
                     }
                 });
             })
