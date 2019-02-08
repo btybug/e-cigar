@@ -121,12 +121,17 @@ class Items extends Model
         if ($item) {
             if ($folder && \File::isDirectory($folder->path())) {
                 $oldFolder = $item->folder;
-                if (\File::copy($oldFolder->url($item->original_name, false), $folder->path() . DS . $item->original_name))
-                    $item->folder_id = $folder_id;
-                if ($item->save()) {
-                    unlink($oldFolder->url($item->original_name, false));
-                    return $item;
+                if(\File::exists($oldFolder->url($item->original_name, false))){
+                    if (\File::copy($oldFolder->url($item->original_name, false), $folder->path() . DS . $item->original_name))
+                        $item->folder_id = $folder_id;
+                    if ($item->save()) {
+                        unlink($oldFolder->url($item->original_name, false));
+                        return $item;
+                    }
+                }else{
+                  return  $item->delete();
                 }
+
             }
         }
 
