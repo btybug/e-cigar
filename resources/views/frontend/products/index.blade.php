@@ -164,7 +164,7 @@
                                         <div class="product-card_view position-relative">
                                             <!--product main image-->
                                             <div>
-                                                <img class="card-img-top" src="{{ $product->image }}" alt="">
+                                                <img class="card-img-top" src="{{ checkImage($product->image) }}" alt="">
                                             </div>
                                             <!--like icon-->
                                             <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute {{ (! $product->is_favorite)?:'active' }}"
@@ -187,13 +187,13 @@
                                             <!--product image thumbs-->
                                             <div class="d-flex product-card-thumbs flex-wrap">
                                                 <div class="product-card_thumb-img-holder pointer active_slider">
-                                                    <img class="" src="{{ $product->image }}" alt="">
+                                                    <img src="{{ checkImage($product->image) }}" alt="{{ $product->name }}">
                                                 </div>
                                                 @if($product->variations)
                                                     @foreach($product->variations as $variation)
                                                         @if($variation->image)
                                                             <div class="product-card_thumb-img-holder pointer">
-                                                                <img class="" src="{{ $variation->image }}" alt="{{ $variation->name }}">
+                                                                <img class="" src="{{ checkImage($variation->image) }}" alt="{{ $variation->name }}">
                                                             </div>
                                                         @endif
                                                     @endforeach

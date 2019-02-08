@@ -85,10 +85,10 @@
                                                <!--product main image-->
                                                @if($vape->image)
                                                    <div>
-                                                       <img class="single-product_top-img" src="{!! $vape->image !!}"
+                                                       <img class="single-product_top-img" src="{!! checkImage($vape->image) !!}"
                                                             alt="{!! @getImage( $vape->image)->seo_alt !!}">
                                                    </div>
-                                           @endif
+                                                @endif
                                            <!--new label-->
                                                <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
                                                <!--sale label-->
@@ -98,23 +98,15 @@
                                            <div class="d-flex product-card-thumbs product-card-thumbs--single">
                                                @if($vape->image)
                                                    <div class="product-card_thumb-img-holder pointer active_slider">
-                                                       <img class="" src="{!! $vape->image !!}"
+                                                       <img class="" src="{!! checkImage($vape->image) !!}"
                                                             alt="{!! @getImage( $vape->image)->seo_alt !!}">
                                                    </div>
                                                @endif
-                                               {{--@if($vape->other_images && count($vape->other_images))--}}
-                                               {{--@foreach($vape->other_images as $other_image)--}}
-                                               {{--<div class="product-card_thumb-img-holder pointer">--}}
-                                               {{--<img class="" src="{{ $other_image }}" alt="{!! @getImage($other_image)->seo_alt !!}">--}}
-                                               {{--</div>--}}
-                                               {{--@endforeach--}}
-                                               {{--@endif--}}
-
                                                @if($vape->variations && count($vape->variations))
                                                    @foreach($vape->variations as $variation)
                                                        @if(isset($variation['image']))
                                                            <div class="product-card_thumb-img-holder pointer" data-id="{{ $variation['id'] }}">
-                                                               <img class="" src="{{$variation["image"]}}"
+                                                               <img class="" src="{{ checkImage($variation["image"]) }}"
                                                                     alt="{!! @getImage($variation["image"])->seo_alt !!}">
                                                            </div>
                                                        @endif
@@ -289,7 +281,7 @@
                                                               class="tecnical_gallery_obj-holder lightbox-item"
                                                               data-lightbox-gallery="gallery_name"
                                                               title="{!! @getImage($other_image)->seo_alt !!}">
-                                                               <img src="{{ $other_image }}"
+                                                               <img src="{{ checkImage($other_image) }}"
                                                                     alt="{!! @getImage($other_image)->seo_alt !!}">
                                                            </a>
                                                        @endforeach
@@ -309,7 +301,7 @@
                                                                <!--product main image-->
                                                                <div>
                                                                    <img class="card-img-top"
-                                                                        src="{{$related_product->image}}"
+                                                                        src="{{ checkImage($related_product->image) }}"
                                                                         alt="">
                                                                </div>
                                                                <!--like icon-->
@@ -327,16 +319,18 @@
                                                                <!--product image thumbs-->
                                                                <div class="d-flex product-card-thumbs">
                                                                    <div class="product-card_thumb-img-holder pointer active_slider">
-                                                                       <img class="" src="{{$related_product->image}}"
+                                                                       <img class="" src="{{checkImage($related_product->image)}}"
                                                                             alt=""
                                                                             data-img="1">
                                                                    </div>
-                                                                   @if($related_product->other_images && is_array($related_product->other_images))
-                                                                       @foreach($related_product->other_images as $other_image)
-                                                                           <div class="product-card_thumb-img-holder pointer">
-                                                                               <img class="" src="{{ $other_image }}"
-                                                                                    alt="">
-                                                                           </div>
+
+                                                                   @if($related_product->variations)
+                                                                       @foreach($related_product->variations as $related_product_v)
+                                                                           @if($related_product_v->image)
+                                                                               <div class="product-card_thumb-img-holder pointer">
+                                                                                   <img class="" src="{{ checkImage($related_product_v->image) }}" alt="{{ $related_product_v->name }}">
+                                                                               </div>
+                                                                           @endif
                                                                        @endforeach
                                                                    @endif
                                                                </div>
