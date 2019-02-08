@@ -145,7 +145,9 @@ class ShoppingCartController extends Controller
         if($variation){
             if(\Auth::check()){
                 $user = \Auth::user();
-                Cart::add($variation->id,$variation->id,$variation->price,1,
+                $promotionPrice = $variation->stock->sales()->where('variation_id', $variation->id)->first();
+                $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
+                Cart::add($variation->id,$variation->id,$price,1,
                     ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
 
                 $optionalItems = $request->get('optionalItems');
@@ -153,7 +155,9 @@ class ShoppingCartController extends Controller
                     foreach ($optionalItems as $opv){
                         $optpVariation = StockVariation::find($opv);
                         if($optpVariation){
-                            Cart::add($optpVariation->id,$variation->id,$optpVariation->price,1,
+                            $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
+                            $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
+                            Cart::add($optpVariation->id,$variation->id,$reqPrice,1,
                                 ['variation' => $optpVariation]);
                         }
                     }
