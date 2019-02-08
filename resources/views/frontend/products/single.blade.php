@@ -39,7 +39,7 @@
                         </span>
                        </a>
                        <span class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
-                        <span class="price-place-summary">$77.5</span>
+                        <span class="price-place-summary"></span>
                     </span>
                    </div>
                </div>
@@ -642,10 +642,12 @@
 
             $("body").on('change', '.select-variation-option', function () {
                 get_price();
+                get_subTotalPrice();
             });
 
             $("body").on('change', '.select-variation-radio-option', function () {
                 get_price();
+                get_subTotalPrice();
             });
 
 
@@ -778,6 +780,47 @@
                 });
             }
 
+            function get_subTotalPrice() {
+                var variationId = $("#variation_uid").val();
+                if (variationId && variationId != '') {
+                    var requiredItems = [];
+                    var optionalItems = [];
+
+                    var requiredItemsData = $(".required_item");
+                    var optionalItemsData = $(".optional_item");
+
+
+                    optionalItemsData.each(function (i, e) {
+                        if ($(e).parent().find('.optional_checkbox').is(':checked')) {
+                            optionalItems.push($(e).val());
+                        }
+                    });
+
+                    requiredItemsData.each(function (i, e) {
+                        requiredItems.push($(e).val());
+                    });
+
+                    $.ajax({
+                        type: "post",
+                        url: "/products/get-subtotal-price",
+                        cache: false,
+                        datatype: "json",
+                        data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems},
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                $(".price-place-summary").html(data.price)
+                            } else {
+                                $(".price-place-summary").html(data.message)
+                            }
+                        }
+                    });
+                }
+            }
+
+
             var plist = $(".poptions-group");
             for (var i = 0; i < plist.length; i++) {
                 get_promotion_price($(plist[i]).data('promotion'))
@@ -786,11 +829,13 @@
             $("body").on('change', '.select-variation-poption', function () {
                 var pid = $(this).closest('.poptions-group').data('promotion');
                 get_promotion_price(pid);
+                get_subTotalPrice();
             });
 
             $("body").on('change', '.select-variation-radio-poption', function () {
                 var pid = $(this).closest('.poptions-group').data('promotion');
                 get_promotion_price(pid);
+                get_subTotalPrice();
             });
 
             function get_promotion_price(pid) {
@@ -833,6 +878,11 @@
                     }
                 });
             }
+
+            setTimeout(
+                function() {
+                    get_subTotalPrice();
+                }, 300);
 
 
             $("body").on('click', '.product-card_like-icon', function () {

@@ -10,6 +10,7 @@ use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Stickers;
 use App\Models\Stock;
+use App\Models\StockVariation;
 use App\Models\StockVariationOption;
 use App\ProductSearch\ProductSearch;
 use View;
@@ -67,6 +68,7 @@ class ProductsController extends Controller
         $attributes = [];
         $options = [];
         $totalCount = 0;
+        $subTotal = null;
         if (is_array($request->options)) {
             $attributes = array_keys($request->options);
             $options = array_values($request->options);
@@ -106,12 +108,57 @@ class ProductsController extends Controller
                     $isFavorite = \Auth::user()->favorites()->where('favorites.variation_id',$variation->id)->exists();
                 }
 
+                if(! $request->promotion){
+//                    $requriedItems = $stock->promotions()->where('type',true)->pluck('variation_id');
+                }
+
                 if ($variation->qty > 0) {
                     return \Response::json(['price' => convert_price($price,get_currency()), 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
                 } else {
                     return \Response::json(['message' => 'Out of stock', 'price' => convert_price($price,get_currency()), 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
                 }
             }
+        }
+
+        return \Response::json(['message' => 'See available options', 'error' => true]);
+    }
+
+    public function getSubtotalPrice(Request $request)
+    {
+        $variation = StockVariation::find($request->uid);
+        if($variation){
+            $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
+            $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
+//            dd($price);
+            $optionalItems = $request->get('optionalItems');
+            if($optionalItems && count($optionalItems)){
+                foreach ($optionalItems as $opv){
+                    $optpVariation = StockVariation::find($opv);
+                    if($optpVariation){
+                        $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
+                        $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
+                        $price+=$reqPrice;
+                    }
+                }
+            }
+//            dd($price,1);
+            $requiredItems = $request->get('requiredItems');
+            if($requiredItems && count($requiredItems)){
+                foreach ($requiredItems as $opv){
+
+                    $optpVariation = StockVariation::find($opv);
+                    if($optpVariation){
+                        $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
+                        dd($variation->promotion_prices,$promotionPrice);
+
+                        $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
+                        $price+=$reqPrice;
+                    }
+                }
+            }
+            dd($price,2);
+
+            return \Response::json(['price' => convert_price($price,get_currency()), 'error' => false]);
         }
 
         return \Response::json(['message' => 'See available options', 'error' => true]);

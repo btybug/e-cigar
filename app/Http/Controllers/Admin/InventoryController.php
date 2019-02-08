@@ -102,12 +102,15 @@ class InventoryController extends Controller
         //-------------------//
         $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
+
         $stock->promotions()->detach();
+
         if(count($request->promotions)){
             foreach ($request->promotions as $promotion){
-                $stock->promotions()->attach($promotion);
+                $stock->promotions()->attach($promotion['id'],['type' => $promotion['type']]);
             }
         }
+
         $stock->stickers()->sync($request->get('stickers'));
         $this->stockService->savePromotionPrices($request->get('promotion_prices', []));
 
