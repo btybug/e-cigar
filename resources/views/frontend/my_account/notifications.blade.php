@@ -53,8 +53,8 @@
                             <div class="notification-actions-bar d-none">
                                 <a href="javascript:void(0)"
                                    class="btn btn-danger delete-selected-notifications">Delete</a>
-                                <a href="javascript:void(0)" class="btn btn-info mark-us-read">Mark us Read</a>
-                                <a href="javascript:void(0)" class="btn btn-warning mark-us-unread">Mark us Unread</a>
+                                <a href="javascript:void(0)" class="btn btn-info mark-us-unread">Mark us Unread</a>
+                                <a href="javascript:void(0)" class="btn btn-warning mark-us-read">Mark us Read</a>
                             </div>
                         </div>
                     </div>

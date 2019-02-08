@@ -12,7 +12,7 @@
             <div class="col-5">
                 <div class="cart-sidebar_item-img-holder">
                     <img
-                         src="{{ $stock->image }}"
+                         src="{{ checkImage($stock->image) }}"
                          alt="{!! $stock->name !!}">
                 </div>
             </div>

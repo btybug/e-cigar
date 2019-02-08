@@ -29,7 +29,7 @@
                                         <div class="shp-cart-product d-flex flex-md-row flex-column">
                                             <div class="shp-cart-product_left d-flex flex-md-column justify-content-between mb-md-0 mb-3">
                                                 <div class="shp-cart-table_img-holder">
-                                                    <img src="{{ $stock->image }}" alt=" {!! $stock->name !!}">
+                                                    <img src="{{ checkImage($stock->image) }}" alt=" {!! $stock->name !!}">
                                                 </div>
                                                 <span data-uid="{{ $main->id }}" class="shp-cart-product_remove font-13 pointer remove-from-cart">Remove</span>
                                             </div>
@@ -181,8 +181,8 @@
                                     <td width="180" class="shp-cart-table_price-td">
                                         <span class="d-flex font-main-bold font-28 card--inner-product_price position-relative">
                                             <span class="position-relative">${{ \App\Services\CartService::getPriceSum($main->id) }}
-                                                <!--old price-->
-                                                    <span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>
+                                                {{--<!--old price-->--}}
+                                                    {{--<span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>--}}
                                             </span>
                                         </span>
                                     </td>
