@@ -91,11 +91,14 @@ class ProductsController extends Controller
                 $variation = $stock->variations->first();
             }
             if ($variation) {
+                $price = $variation->price;
+
                 if ($request->promotion) {
                     $promotionPrice = $stock->promotion_prices()->where('variation_id', $variation->id)->first();
-                    $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
-                } else {
-                    $price = $variation->price;
+                    $price = ($promotionPrice) ? $promotionPrice->price : $price;
+                } elseif(count($stock->sales)) {
+                    $promotionPrice = $stock->sales()->where('variation_id', $variation->id)->first();
+                    $price = ($promotionPrice) ? $promotionPrice->price : $price;
                 }
                 $isFavorite = false;
 

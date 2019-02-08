@@ -82,7 +82,7 @@ class InventoryController extends Controller
             'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices','promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
-
+//        dd($request->get('promotions'),array_values($request->get('promotions')));
         $stock = Stock::updateOrCreate($request->id, $data);
 
         if ($data['type'] == 'variation_product') {
@@ -102,9 +102,13 @@ class InventoryController extends Controller
         //-------------------//
         $stock->categories()->sync(json_decode($request->get('categories', [])));
         $stock->related_products()->sync($request->get('related_products'));
-        $stock->promotions()->sync($request->get('promotions'));
+        $stock->promotions()->detach();
+        if(count($request->promotions)){
+            foreach ($request->promotions as $promotion){
+                $stock->promotions()->attach($promotion);
+            }
+        }
         $stock->stickers()->sync($request->get('stickers'));
-
         $this->stockService->savePromotionPrices($request->get('promotion_prices', []));
 
         $this->createOrUpdateSeo($request, $stock->id);
