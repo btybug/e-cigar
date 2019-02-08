@@ -39,9 +39,7 @@
                         </span>
                        </a>
                        <span class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
-                        <span class="price-place">$77.5</span>
-                           <!--old price-->
-                        <span class="product-card_old-price font-sec-reg font-30 text-gray-clr lh-1 position-absolute">$90</span>
+                        <span class="price-place-summary">$77.5</span>
                     </span>
                    </div>
                </div>

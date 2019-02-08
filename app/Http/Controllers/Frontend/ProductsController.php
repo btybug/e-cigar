@@ -103,7 +103,7 @@ class ProductsController extends Controller
                 $isFavorite = false;
 
                 if(\Auth::check()) {
-                    $isFavorite = \Auth::user()->favorites()->where('favorites.variation_id',$variation->id)->first();
+                    $isFavorite = \Auth::user()->favorites()->where('favorites.variation_id',$variation->id)->exists();
                 }
 
                 if ($variation->qty > 0) {
