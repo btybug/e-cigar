@@ -4,7 +4,7 @@
 $(document).ready(function () {
     var modalHtml='<div class="modal adult-modal" tabindex="-1" role="dialog">' +
         '<div class="modal-dialog modal-lg modal-dialog-centered" role="document">' +
-        '<div class="modal-content">' +
+        '<div class="modal-content rounded-0">' +
         '<div class="modal-body d-flex flex-column">' +
         '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age ?</h2>' +
         '<div class="d-flex justify-content-center">' +
