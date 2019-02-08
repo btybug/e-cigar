@@ -44,7 +44,7 @@ function App() {
                 data.id
             }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
                 <span class="corner"></span>
-        
+
                 <div class="icon">
                     <i class="fa fa-folder"></i>
                 </div>
@@ -62,7 +62,7 @@ function App() {
             }" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
-    
+
             <div class="icon">
                 <img width="180px" data-lightbox="image" src="${data.url}">
             </div>
@@ -79,12 +79,12 @@ function App() {
                 data.id
             }" data-id="${
                 data.id
-            }" style="display: flex; justify-content: space-between;"> 
+            }" style="display: flex; justify-content: space-between;">
 <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
                   <div style="margin-right: 5px">
                   <span data-id="${
                       data.id
-                  }" bb-media-click="get_folder_items" >${data.title}</span>
+                  }" bb-media-click="get_folder_items">${data.title}</span>
                   </div></div>
                   <div>
                     <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
@@ -103,7 +103,7 @@ function App() {
         editNameModal(id, name) {
             return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -118,7 +118,7 @@ function App() {
                 <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
         </div>
       </div>
-      
+
     </div>
   </div>`;
         },
@@ -130,11 +130,11 @@ function App() {
                         <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
                         <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
-                        
+
                     </div>
                     <div class="modal-body text-center">
                     <div class="modal-title">
-                        
+
                     <img src="${
                         data.url
                     }" data-slideshow="typeext" style="width:100%">
@@ -143,20 +143,20 @@ function App() {
                         countId === 0 ? "disabled" : ""
                     } data-id="${countId -
                 1}" class="popuparrow" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
-                    
-                    <span data-slideshow="title">${data.real_name}</span> 
+
+                    <span data-slideshow="title">${data.real_name}</span>
                     <button class="popuparrow" href="#" type="button" role="button" ${
                         countId ===
                         document.querySelectorAll(".image-container").length - 1
                             ? "disabled"
                             : ""
                     } data-id="${countId +
-                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button> 
+                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button>
                     </div>
                     </div>
                     <div class="modal-footer col-md-8">
-                        
-                        
+
+
             </div>
                     </div>
                 </div>
@@ -238,14 +238,14 @@ function App() {
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row rowsection collapse"  data-tabcontent="seo">
                         <div class="loadingimg lodingSeo hide" data-loadin="seo"></div>
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="fa fa-bars text-primary"></i> Seo Detail</h4>
                             <div class="table-responsive">
                                 <table class="table tableborder0">
-    
+
                                     <tr>
                                         <th width="23%">Alt Tags</th>
                                         <td>
@@ -253,14 +253,14 @@ function App() {
                                             <div class="altTagsdata"></div>
                                         </td>
                                     </tr>
-    
+
                                     <tr>
                                         <th width="23%">Keywords</th>
                                         <td>
                                             <input type="text" data-slideshow="keywords" class="form-control" >
                                         </td>
                                     </tr>
-    
+
                                     <tr>
                                         <th width="23%">Caption</th>
                                         <td>
@@ -270,7 +270,7 @@ function App() {
                                     <tr>
                                         <th width="23%">Description</th>
                                         <td><textarea name="description" data-slideshow="description" class="form-control"></textarea>
-    
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -279,12 +279,12 @@ function App() {
                                             <input type="text" data-slideshow="alt_text" class="form-control" >
                                         </td>
                                     </tr>
-    
-    
+
+
                                     <tr>
                                         <th></th>
                                         <td>
-    
+
                                             <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="saveSeo">Save Detail</button>
                                         </td>
                                     </tr>
@@ -292,7 +292,7 @@ function App() {
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row rowsection hide" data-slideshow="getlink">
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="glyphicon glyphicon-link text-primary"></i> GET lINKS</h4>

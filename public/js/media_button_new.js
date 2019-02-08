@@ -63,7 +63,7 @@ function App() {
                 data.id
             }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
                 <span class="corner"></span>
-        
+
                 <div class="icon">
                     <i class="fa fa-folder"></i>
                 </div>
@@ -84,7 +84,7 @@ function App() {
             return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
-    
+
             <div class="icon">
                 <img width="180px" data-lightbox="image" src="${data.url}">
                 <i class="fa fa-file"></i>
@@ -107,7 +107,7 @@ function App() {
                 data.id
             }" data-id="${
                 data.id
-            }" style="display: flex; justify-content: space-between;"> 
+            }" style="display: flex; justify-content: space-between;">
 <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
                   <div style="margin-right: 5px">
                   <span data-id="${
@@ -131,7 +131,7 @@ function App() {
         editNameModal(id, name) {
             return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -146,7 +146,7 @@ function App() {
                 <button type="button" data-id=${id} bb-media-click="close_name_modal" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
         </div>
       </div>
-      
+
     </div>
   </div>`;
         },
@@ -166,20 +166,20 @@ function App() {
                     <button href="#" type="button" role="button" ${
                         countId === 0 ? "disabled" : ""
                     } data-id="${countId - 1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
-                   
-                    <span data-slideshow="title">${data.real_name}</span> 
+
+                    <span data-slideshow="title">${data.real_name}</span>
                     <button class="popuparrow go-next-image" href="#" type="button" role="button" ${
                         countId ===
                         document.querySelectorAll(".image-container").length - 1
                             ? "disabled"
                             : ""
                     } data-id="${countId +
-                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button> 
+                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button>
                     </div>
                     </div>
                     <div class="modal-footer col-md-8">
-                        
-                        
+
+
             </div>
                     </div>
                 </div>
@@ -261,7 +261,7 @@ function App() {
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row rowsection collapse"  data-tabcontent="seo">
                         <div class="loadingimg lodingSeo hide" data-loadin="seo"></div>
                         <div class="col-xs-12 col-md-12">
@@ -269,7 +269,7 @@ function App() {
                             <div class="table-responsive">
                             <form>
                                 <table class="table tableborder0">
-    
+
                                     <tr>
                                         <th width="23%">Alt Tags</th>
                                         <td>
@@ -277,14 +277,14 @@ function App() {
                                             <div class="altTagsdata"></div>
                                         </td>
                                     </tr>
-    
+
                                     <tr>
                                         <th width="23%">Keywords</th>
                                         <td>
                                             <input type="text" data-slideshow="keywords" name="seo_keywords" class="form-control" value="${data.seo_keywords}">
                                         </td>
                                     </tr>
-    
+
                                     <tr>
                                         <th width="23%">Caption</th>
                                         <td>
@@ -294,7 +294,7 @@ function App() {
                                     <tr>
                                         <th width="23%">Description</th>
                                         <td><textarea name="seo_description" data-slideshow="description" class="form-control">${data.seo_description}</textarea>
-    
+
                                         </td>
                                     </tr>
                                     <tr>
@@ -303,12 +303,12 @@ function App() {
                                             <input type="text" data-slideshow="alt_text" class="form-control" name="seo_alt" value="${data.seo_alt}">
                                         </td>
                                     </tr>
-    
-    
+
+
                                     <tr>
                                         <th></th>
                                         <td>
-    
+
                                             <button type="button" class="btn btn-default p-l-5 p-r-5" bb-media-click="save_seo" data-action="saveSeo">Save Detail</button>
                                         </td>
                                     </tr>
@@ -318,7 +318,7 @@ function App() {
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row rowsection hide" data-slideshow="getlink">
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="glyphicon glyphicon-link text-primary"></i> GET lINKS</h4>
@@ -572,12 +572,6 @@ function App() {
                     );
                     treeFolderContainer.innerHTML = "";
 
-                    res.data.items.forEach((image, index) => {
-                        let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
-                            image
-                        )}</div>`;
-                        mainContainer.innerHTML += html;
-                    });
                     res.data.childs.forEach((folder, index) => {
                         let html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
                             folder
@@ -590,6 +584,12 @@ function App() {
                         } else {
                             cb(self.htmlMaker.makeTreeFolder(folder));
                         }
+                    });
+                    res.data.items.forEach((image, index) => {
+                        let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
+                            image
+                        )}</div>`;
+                        mainContainer.innerHTML += html;
                     });
                     globalFolderId = res.settings.id;
                     self.helpers.makeBreadCrumbs(res.settings.id);
