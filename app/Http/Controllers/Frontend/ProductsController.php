@@ -126,37 +126,32 @@ class ProductsController extends Controller
     public function getSubtotalPrice(Request $request)
     {
         $variation = StockVariation::find($request->uid);
+
         if($variation){
             $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
             $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
-//            dd($price);
             $optionalItems = $request->get('optionalItems');
             if($optionalItems && count($optionalItems)){
                 foreach ($optionalItems as $opv){
                     $optpVariation = StockVariation::find($opv);
                     if($optpVariation){
-                        $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
+                        $promotionPrice = $optpVariation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
                         $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
                         $price+=$reqPrice;
                     }
                 }
             }
-//            dd($price,1);
             $requiredItems = $request->get('requiredItems');
             if($requiredItems && count($requiredItems)){
                 foreach ($requiredItems as $opv){
-
                     $optpVariation = StockVariation::find($opv);
                     if($optpVariation){
-                        $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
-                        dd($variation->promotion_prices,$promotionPrice);
-
+                        $promotionPrice = $optpVariation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
                         $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
                         $price+=$reqPrice;
                     }
                 }
             }
-            dd($price,2);
 
             return \Response::json(['price' => convert_price($price,get_currency()), 'error' => false]);
         }

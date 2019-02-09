@@ -685,6 +685,12 @@
                 }
             });
 
+
+
+            $("body").on('click', '.optional_checkbox', function () {
+                get_subTotalPrice();
+            });
+
             $("body").on('click', '.add-to-cart', function () {
                 var variationId = $("#variation_uid").val();
 
