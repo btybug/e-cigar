@@ -105,7 +105,7 @@ class InventoryController extends Controller
 
         $stock->promotions()->detach();
 
-        if(count($request->promotions)){
+        if($request->promotions && count($request->promotions)){
             foreach ($request->promotions as $promotion){
                 $stock->promotions()->attach($promotion['id'],['type' => $promotion['type']]);
             }
