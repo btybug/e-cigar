@@ -29,7 +29,7 @@
                                         <div class="shp-cart-product d-flex flex-md-row flex-column">
                                             <div class="shp-cart-product_left d-flex flex-md-column justify-content-between mb-md-0 mb-3">
                                                 <div class="shp-cart-table_img-holder">
-                                                    <img src="{{ checkImage($stock->image) }}" alt=" {!! $stock->name !!}">
+                                                    <img src="{{ checkImage(media_image_tmb($stock->image)) }}" alt=" {!! $stock->name !!}">
                                                 </div>
                                                 <span data-uid="{{ $main->id }}" class="shp-cart-product_remove font-13 pointer remove-from-cart">Remove</span>
                                             </div>

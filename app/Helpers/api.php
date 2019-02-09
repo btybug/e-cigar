@@ -982,3 +982,9 @@ function checkImage($img){
 function no_image(){
     return "/public/images/no_image.png";
 }
+function media_image_tmb($path){
+ $e=explode('/',$path);
+ $image='public/media/tmp/'.end($e);
+ return (File::exists(base_path($image))) ? url($image) : no_image();
+
+}

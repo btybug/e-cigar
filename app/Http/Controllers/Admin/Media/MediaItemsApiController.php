@@ -16,7 +16,7 @@ class MediaItemsApiController extends Controller
             'item_id' => 'required',
         ]);
         if ($validator->fails()) {
-            return \Response::json(['error' => true, 'message' => $validator->messages(),'uuu'=>'ppp']);
+            return \Response::json(['error' => true, 'message' => $validator->messages(), 'uuu' => 'ppp']);
         }
         if (isset($data['item_id']) and is_array($data['item_id'])) {
             $vdata = $data['item_id'];
@@ -32,8 +32,8 @@ class MediaItemsApiController extends Controller
         if ($validator->fails()) {
             return \Response::json(['error' => true, 'message' => $validator->messages()]);
         }
-        $result=Items::sort($data);
-        return \Response::json(['error' =>!(boolean)$result, 'data' => $result]);
+        $result = Items::sort($data);
+        return \Response::json(['error' => !(boolean)$result, 'data' => $result]);
 
     }
 
@@ -84,10 +84,17 @@ class MediaItemsApiController extends Controller
                         'original_name' => $originalName,
                         'real_name' => $realName,
                         'extension' => $item->getClientOriginalExtension(),
-                        'size' => \File::size($folder->path().DIRECTORY_SEPARATOR.$originalName),
+                        'size' => \File::size($folder->path() . DIRECTORY_SEPARATOR . $originalName),
                         'folder_id' => $folder->id
                     ]);
+
+                    if ($this->ifIsImage($originalName)) {
+                        $img = \Image::make($folder->path() . DIRECTORY_SEPARATOR . $originalName)->resize(300, 290);
+                        $img->save(public_path("media/tmp/$originalName"), 60);
+                    }
                 }
+
+
             }
             return \Response::json(['uploaded' => 'OK', 'message' => 'File has been uploaded successfully.']);
         }
@@ -183,8 +190,8 @@ class MediaItemsApiController extends Controller
 
     public function getTransferItems(Request $request)
     {
-        ini_set('allow_url_fopen',"On");
-        ini_set('allow_url_include',"On");
+        ini_set('allow_url_fopen', "On");
+        ini_set('allow_url_include', "On");
 
         $data = $request->all();
         $validator = \Validator::make($data, [
@@ -210,7 +217,9 @@ class MediaItemsApiController extends Controller
 
         return \Response::json(['error' => false, "data" => $result]);
     }
-    public function getItemDetalis(Request $request){
+
+    public function getItemDetalis(Request $request)
+    {
         $validator = \Validator::make($request->all(), [
             'item_id' => 'required|exists:drive_items,id'
         ]);
@@ -222,7 +231,7 @@ class MediaItemsApiController extends Controller
             return \Response::json(['error' => false, 'data' => $item]);
         }
         return \Response::json(['error' => true, 'message' => 'Could not send data.']);
-        
+
 
     }
 
@@ -240,5 +249,11 @@ class MediaItemsApiController extends Controller
             return \Response::json(['error' => false, 'data' => $item]);
         }
         return \Response::json(['error' => true, 'message' => 'Could not send data.']);
+    }
+
+    public function ifIsImage($inage_name)
+    {
+        $allowed = array('.jpg', '.jpeg', '.gif', '.png', '.flv');
+        return (in_array(strtolower(strrchr($inage_name, '.')), $allowed));
     }
 }
