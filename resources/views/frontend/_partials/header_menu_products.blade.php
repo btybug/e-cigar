@@ -11,7 +11,7 @@ $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
         <div class="single-product">
             <a href="{!! route('categories_front',$category->slug) !!}" class="d-block">
             <div class="product-photo">
-                <img src="{!! checkImage($category['image']) !!}" alt="{!! $category['name'] !!}">
+                <img src="{!! media_image_tmb($category['image']) !!}" alt="{!! $category['name'] !!}">
             </div>
             <div class="product-content">
                 <div class="product-title-more d-flex flex-wrap justify-content-between align-items-center">
