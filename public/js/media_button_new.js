@@ -86,7 +86,7 @@ function App() {
             <span class="corner"></span>
 
             <div class="icon">
-                <img width="180px" data-lightbox="image" src="${data.url}">
+                <img width="180px" data-lightbox="image" src="${data.tmp}">
                 <i class="fa fa-file"></i>
             </div>
             <div class="file-name">

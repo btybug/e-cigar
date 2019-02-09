@@ -89,8 +89,8 @@ class MediaItemsApiController extends Controller
                     ]);
 
                     if ($this->ifIsImage($originalName)) {
-                        $img = \Image::make($folder->path() . DIRECTORY_SEPARATOR . $originalName)->resize(300, 290);
-                        $img->save(public_path("media/tmp/$originalName"), 60);
+                        $img = \Image::make($folder->path() . DIRECTORY_SEPARATOR . $originalName)->resize(300, 400);
+                        $img->save(public_path("media/tmp/$originalName"), 120);
                     }
                 }
 

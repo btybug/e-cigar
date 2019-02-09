@@ -36,7 +36,7 @@ class Folders extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $appends = ['title','childrenCount','itemsCount','text'];
+    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text'];
 
     public function getChildrenCountAttribute()
     {
@@ -47,6 +47,7 @@ class Folders extends Model
     {
         return $this->name;
     }
+
     public function getItemsCountAttribute()
     {
         return $this->items()->count();
@@ -156,10 +157,27 @@ class Folders extends Model
         $result['childs'] = $this->childs->toArray();
         $result['url'] = $this->url();
         if ($files) {
-            $result['items'] = $this->items->toArray();
+            $result['items'] = $this->itemsTmp();
         }
 
         return $result;
+    }
+
+    public function itemsTmp()
+    {
+        $childs = $this->items->toArray();
+        foreach ($childs as $key=>$child){
+            if($this->ifIsImage($child['original_name'])){
+                $childs[$key]['tmp']=media_image_tmb($child['original_name']);
+            }
+        }
+        return $childs;
+    }
+
+    public function ifIsImage($inage_name)
+    {
+        $allowed = array('.jpg', '.jpeg', '.gif', '.png', '.flv');
+        return (in_array(strtolower(strrchr($inage_name, '.')), $allowed));
     }
 
     public function getChildren($files)
@@ -218,17 +236,18 @@ class Folders extends Model
         $path = $path . $file;
         return (public_path(rtrim($path, '/')));
     }
-    public function url($file = null,$url = true)
+
+    public function url($file = null, $url = true)
     {
         $parents = \DB::select('SELECT T2.id, T2.name,T2.prefix FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM drive_folders WHERE id = _id) AS parent_id, @l := @l + 1 AS lvl FROM (SELECT @r := ' . $this->id . ', @l := 0) vars, drive_folders m WHERE @r <> 0) T1 JOIN drive_folders T2 ON T1._id = T2.id ORDER BY T1.lvl DESC;');
-        $path = ($url)?'public/media/':'public/media/';
+        $path = ($url) ? 'public/media/' : 'public/media/';
         foreach ($parents as $parent) {
             $prefix = null;
             if ($parent->prefix) $prefix = "($parent->prefix)";
             $path .= $parent->name . $prefix . '/';
         }
         $path = $path . $file;
-        return ($url == false) ? base_path(rtrim($path, '/')) :(url(rtrim($path, '/')));
+        return ($url == false) ? base_path(rtrim($path, '/')) : (url(rtrim($path, '/')));
     }
 
     public function editFolder($data)
