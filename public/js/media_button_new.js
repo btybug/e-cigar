@@ -81,6 +81,7 @@ function App() {
         </div>`;
         },
         makeImage: function(data) {
+            // data.relativeUrl  is image
             return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>

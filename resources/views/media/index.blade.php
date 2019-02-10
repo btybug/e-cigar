@@ -14,7 +14,7 @@
                                 {{--<a href="#" class="file-control">Audio</a>--}}
                                 {{--<a href="#" class="file-control">Images</a>--}}
                                 <div class="hr-line-dashed"></div>
-                                <button class="btn btn-info btn-block {!! $settings['uploadbutton']??null !!}">
+                                <button class="btn btn-info btn-block upload-file_button {!! $settings['uploadbutton']??null !!}">
                                     Upload Files
                                 </button>
                                 <div class="hr-line-dashed">
@@ -71,7 +71,7 @@
                             <div class="uploader-container d-none">
                                 <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
                             </div>
-                                <button type="button" class="btn btn-default mb-20" data-role="btnUploader" bb-media-click="show_uploader">Uploader</button>
+                                <button type="button" class="btn btn-default mb-20 uploader_button" data-role="btnUploader" bb-media-click="show_uploader">Uploader</button>
                             </div>
                             </div>
                         </div>
@@ -259,8 +259,9 @@
             retryDrawing();
             $("body").find(".show-uploder").removeClass("in");
         })
-        $("body").on("click", ".file-drop-zone", function() {
-            $(".btn.btn-file>input[type='file']").click()
+        $("body").on("click", ".upload-file_button", function() {
+            $(".uploader_button").click();
+            $(".btn.btn-file>input[type='file']").click();
         });
     </script>
 @stop
