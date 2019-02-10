@@ -34,6 +34,11 @@
                                     </span>
                                     </div><!-- /input-group -->
                                 </div>
+                                <script>
+                                    // $('.new-folder-input').addEventListener('keypress', function(ev) {
+                                    //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
+                                    // })
+                                </script>
                                 <ul class="folder-list" style="padding: 0;" data-media="folder">
 
                                 </ul>
@@ -255,8 +260,7 @@
             $("body").find(".show-uploder").removeClass("in");
         })
         $("body").on("click", ".file-drop-zone", function() {
-            console.log($(".kv-file-content")['length'])
-            $(".kv-file-content")['length'] === 0 ? $(".btn.btn-file>input[type='file']").click() : null;
+            $(".btn.btn-file>input[type='file']").click()
         });
     </script>
 @stop

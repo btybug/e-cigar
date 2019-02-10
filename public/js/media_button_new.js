@@ -716,7 +716,8 @@ function App() {
             }
         },
         add_new_folder(elm, e) {
-            let name = document.querySelector(".new-folder-input").value;
+            let inputElement = document.querySelector(".new-folder-input");
+            let name = inputElement.value;
             self.requests.addNewFolder(
                 {
                     folder_id: globalFolderId,
@@ -725,6 +726,7 @@ function App() {
                 },
                 true
             );
+            inputElement.value = '';
         },
         open_full_modal(elm, e) {5
             e.stopPropagation();
@@ -880,3 +882,7 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 //         }
 //     }
 // });
+
+$('.new-folder-input').on('keypress', function (ev) {
+        ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
+})
