@@ -250,12 +250,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 
     <script>
-    // $("body").on("click", ".fileinput-remove", function(){
-    //     retryDrawing()
-    //     $("body").find(".show-uploder").removeClass("in")
-    // })
-    // $("body").on("click", ".file-drop-zone", function() {
-    // $(".btn.btn-file>input[type='file']").click();
-//});
+        $("body").on("click", ".fileinput-remove", function(){
+            retryDrawing();
+            $("body").find(".show-uploder").removeClass("in");
+        })
+        $("body").on("click", ".file-drop-zone", function() {
+            console.log($(".kv-file-content")['length'])
+            $(".kv-file-content")['length'] === 0 ? $(".btn.btn-file>input[type='file']").click() : null;
+        });
     </script>
 @stop

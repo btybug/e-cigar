@@ -699,7 +699,7 @@ function App() {
                     trash: 0,
                     access_token: "string"
                 },
-                () => elm.closest("li").remove()
+                () => elm.closest(".folder-container").remove()
             );
         },
         get_folder_items(elm, e) {

@@ -4146,7 +4146,7 @@
         showCancel: true,
         showClose: true,
         showUploadedThumbs: true,
-        browseOnZoneClick: false,
+        browseOnZoneClick: true,
         autoReplace: false,
         autoOrientImage: true, // for JPEG images based on EXIF orientation tag
         required: false,
@@ -4251,6 +4251,7 @@
         slugCallback: null,
         dropZoneEnabled: true,
         dropZoneTitleClass: 'file-drop-zone-title',
+        browseOnZoneClick: true,
         fileActionSettings: {},
         otherActionButtons: '',
         textEncoding: 'UTF-8',
