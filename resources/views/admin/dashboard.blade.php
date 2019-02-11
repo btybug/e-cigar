@@ -19,7 +19,7 @@
         </div>
     </aside>
     <div class="col-md-12">
-
+        <div id="embed-api-auth-container"></div>
         <div class="Dashboard Dashboard--full">
             <header class="Dashboard-header">
                 <div class="Titles">
@@ -514,12 +514,20 @@
              * If no access has been created, render an authorize button inside the
              * element with the ID "embed-api-auth-container".
              */
+
             gapi.analytics.auth.authorize({
                 container: 'embed-api-auth-container',
-                serverAuth: {
-                    access_token: "{!! Gmail::getFreshToken() !!}"
-                }
+                clientid: '{!! env('GOOGLE_CLIENT_ID') !!}',
+                {{--serverAuth: {--}}
+                    {{--access_token: "{!! Gmail::getFreshToken() !!}"--}}
+                {{--}--}}
             });
+            {{--gapi.analytics.auth.authorize({--}}
+                {{--container: 'embed-api-auth-container',--}}
+                {{--serverAuth: {--}}
+                    {{--access_token: "{!! Gmail::getFreshToken() !!}"--}}
+                {{--}--}}
+            {{--});--}}
             {{--gapi.auth.authorize({--}}
                 {{--client_id: "{!! env('GOOGLE_CLIENT_ID') !!}",--}}
                 {{--access_token: "{!! Gmail::getFreshToken() !!}",--}}
