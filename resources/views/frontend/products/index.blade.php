@@ -133,7 +133,7 @@
             </span>
         </span>
                         </div>
-                        <div class="sort-by_select d-flex align-items-center position-relative">
+                        <div class="sort-by_select sort-by-products d-flex align-items-center position-relative">
                             <label for="sortBy" class="text-main-clr mb-0">SORT BY: </label>
                             <div class="select-wall">
                                 {!! Form::select('sort_by',[

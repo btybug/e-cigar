@@ -2580,6 +2580,9 @@ td.shp-cart-table_price-td {
 .products-wrap.display-grid .product--single .main--link{
     flex-direction: column;
 }
+#sortBySelects{
+    
+}
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;
