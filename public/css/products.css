@@ -2536,7 +2536,14 @@ td.shp-cart-table_price-td {
     left: -2.1rem !important;
 }
 /*end radio packs*/
-
+#addToCardModal .modal-header{
+    background-color: #353535;
+    color: white;
+}
+#addToCardModal .modal-header .close{
+    color: white;
+    opacity: 1;
+}
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{
         width: 100% !important;

@@ -306,8 +306,8 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <a href="javascript:void(0)"
-                       class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
-                        <span class="product-card_btn-text">add to cart</span>
+                       class="btn border-0 rounded-0 btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
+                        <span class="product-card_btn-text mr-2">add to cart</span>
                         <span class="d-inline-block ml-auto">
                             <svg viewBox="0 0 18 22" width="18px" height="22px">
                                 <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
