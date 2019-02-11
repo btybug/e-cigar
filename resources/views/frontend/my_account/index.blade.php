@@ -542,8 +542,7 @@
                     window.location.reload();
                 }
             },
-                error =
-                >
+                error =>
                 {
                     if (error.status == 422) {
                         $('.errors').html('');

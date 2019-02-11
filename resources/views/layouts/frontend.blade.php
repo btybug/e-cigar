@@ -33,10 +33,10 @@
     {{-- *****packed in public/plugins/jquery.js***** --}}
     <script src={{asset("public/js/bundle/jquery.js")}}></script>
 
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]>-->
     <script src={{asset("public/plugins/crossbrowserjs/html5shiv.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/respond.min.js")}}></script>
-    <![endif]-->
+    <!--<![endif]-->
     <!--[if !IE]><!-->
     <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
