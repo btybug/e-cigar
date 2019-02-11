@@ -786,7 +786,7 @@
 
             function get_subTotalPrice() {
                 var variationId = $("#variation_uid").val();
-                console.log(variationId,445445454465)
+
                 if (variationId && variationId != '') {
                     var requiredItems = [];
                     var optionalItems = [];
@@ -879,6 +879,7 @@
 //                        $(".btn-add-to-cart").addClass('add-to-cart');
                         } else {
                             $("[data-promotion='" + pid + "'] .price-place-promotion").html('<span class="d-inline-block font-16">' + data.message + '</span>');
+                            $("[data-promotion='" + pid + "'] .variation_items").val('');
 //                        $("#variation_uid").val('');
                         }
                     }
