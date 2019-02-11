@@ -158,9 +158,9 @@
                     <div class="row justify-content-md-start justify-content-center">
                         @if(count($products))
                             @foreach($products as $product)
-                                <div class="products-wrap_col two-links-wrap">
+                                <div class="products-wrap_col two-links-wrap product--single">
                                     <div class="product-card position-relative">
-                                        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}">
+                                        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}" class="main--link">
                                         <div class="product-card_view position-relative">
                                             <!--product main image-->
                                             <div>

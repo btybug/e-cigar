@@ -1561,7 +1561,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
 
     .sort-by_select .select-2 + .select2-container {
-        width: 110px !important;
+        /*width: 110px !important;*/
     }
 }
 
