@@ -13,14 +13,19 @@
 
                     var errorHandler = function (fieldElement, errorObject, message, fieldElementName) {
                         var change = function (fieldElementChange, fieldElementNameChange) {
-                            fieldElementChange.removeClass('transitionHorizonal');
+                            fieldElementChange.removeClass('transition-horizontal input-error');
                             $(fieldElementNameChange + '~p').remove();
                         };
                         change(fieldElement, fieldElementName);
+
                         var pTag = fieldElement.next().prop("tagName") !== 'p';
+
                         if (errorObject && message && pTag) {
                             fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
-                            fieldElement.addClass('transitionHorizonal');
+                            fieldElement.addClass('transition-horizontal input-error');
+                            setTimeout(() => {
+                                fieldElement.removeClass('transition-horizontal');
+                            }, 500)
                         }
                         fieldElement.on('keypress', function () { change(fieldElement, fieldElementName) });
                         fieldElement.on('change', function () { change(fieldElement, fieldElementName) });

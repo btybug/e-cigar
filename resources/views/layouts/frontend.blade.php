@@ -25,6 +25,7 @@
     <link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
     <link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />
+    <link href="{{asset('public/css/custom.css')}}" rel="stylesheet" />
      *****packed in public/css/bundle.css***** --}}
     {{-- <link rel="stylesheet" href="{{asset('public/css/bundle.css?v=".rand(111,999)')}}"> --}}
     {{-- ********************************************* --}}
@@ -91,6 +92,8 @@
 <script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
 <script src={{asset("public/js/hover-slider.js")}}></script>
 <script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>
+<script src={{asset("public/js/login.js")}}></script>
+<script src={{asset("public/js/register.js")}}></script>
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
 {{-- <script src={{asset("public/js/bundle/bundle.js")}}></script> --}}
 

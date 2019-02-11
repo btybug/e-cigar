@@ -1300,8 +1300,11 @@ tr.notification-is_read {
     100% {transform: translate(3px, 0);}
 }
 
-.transitionHorizonal {
+.input-error {
     outline: 1px solid red !important;
+}
+
+.transition-horizontal {
     animation-name: example;
     animation-duration: 500ms;
 }
