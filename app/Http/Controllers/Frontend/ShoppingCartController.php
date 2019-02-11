@@ -141,36 +141,36 @@ class ShoppingCartController extends Controller
     public function postAddToCart(Request $request)
     {
         $variation = StockVariation::find($request->uid);
-        if($variation){
-            if(\Auth::check()){
+        if ($variation) {
+            if (\Auth::check()) {
                 $user = \Auth::user();
                 $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
                 $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
-                Cart::add($variation->id,$variation->id,$price,1,
+                Cart::add($variation->id, $variation->id, $price, 1,
                     ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
 
                 $optionalItems = $request->get('optionalItems');
-                if($optionalItems && count($optionalItems)){
-                    foreach ($optionalItems as $opv){
+                if ($optionalItems && count($optionalItems)) {
+                    foreach ($optionalItems as $opv) {
                         $optpVariation = StockVariation::find($opv);
-                        if($optpVariation){
+                        if ($optpVariation) {
                             $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
-                            $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
-                            Cart::add($optpVariation->id,$variation->id,$reqPrice,1,
+                            $reqPrice = ($promotionPrice) ? $promotionPrice->price : $optpVariation->price;
+                            Cart::add($optpVariation->id, $variation->id, $reqPrice, 1,
                                 ['variation' => $optpVariation]);
                         }
                     }
                 }
 
-                $default_shipping = $user->addresses()->where('type','default_shipping')->first();
+                $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
                 $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
                 $geoZone = ($zone) ? $zone->geoZone : null;
-                if($geoZone && count($geoZone->deliveries)) {
+                if ($geoZone && count($geoZone->deliveries)) {
                     $subtotal = Cart::getSubTotal();
                     Cart::removeConditionsByType('shipping');
-                    $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max','>=',$subtotal)->first();
-                    if($delivery && count($delivery->options)){
-                        $shippingDefaultOption =  $delivery->options->first();
+                    $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+                    if ($delivery && count($delivery->options)) {
+                        $shippingDefaultOption = $delivery->options->first();
                         $condition2 = new \Darryldecode\Cart\CartCondition(array(
                             'name' => $geoZone->name,
                             'type' => 'shipping',
@@ -182,15 +182,15 @@ class ShoppingCartController extends Controller
                         Cart::condition($condition2);
                     }
                 }
-            }else{
-                Cart::add($variation->id,$variation->id,$variation->price,1,['variation' => $variation]);
+            } else {
+                Cart::add($variation->id, $variation->id, $variation->price, 1, ['variation' => $variation]);
 
                 $optionalItems = $request->get('optionalItems');
-                if($optionalItems && count($optionalItems)){
-                    foreach ($optionalItems as $opv){
+                if ($optionalItems && count($optionalItems)) {
+                    foreach ($optionalItems as $opv) {
                         $optpVariation = StockVariation::find($opv);
-                        if($optpVariation){
-                            Cart::add($optpVariation->id,$variation->id,$optpVariation->price,1,
+                        if ($optpVariation) {
+                            Cart::add($optpVariation->id, $variation->id, $optpVariation->price, 1,
                                 ['variation' => $optpVariation]);
                         }
                     }
@@ -199,10 +199,10 @@ class ShoppingCartController extends Controller
 
             $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 
-            return \Response::json(['error' => false,'message' => 'added','count' => $this->cartService->getCount(),'headerHtml' => $headerhtml]);
+            return \Response::json(['error' => false, 'message' => 'added', 'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml]);
         }
 
-       return \Response::json(['error' => true,'message' => 'try again']);
+        return \Response::json(['error' => true, 'message' => 'try again']);
     }
 
     public function postUpdateQty(Request $request)
