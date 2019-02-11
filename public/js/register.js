@@ -36,14 +36,14 @@
                         fieldElement.on('keypress', () => change(fieldElement, fieldElementName));
                         fieldElement.on('change', () => change(fieldElement, fieldElementName));
                     };
-                    const validation = () => {
-                        !firstNameEl.val() && errorHandler(firstNameEl, true, 'The name field is required.', '#firstName');
-
-                        firstNameEl.val().length === 1 && errorHandler(firstNameEl, true, 'The name must be at least 2 characters.', '#firstName');
-                        !lastNameEl.val() && errorHandler(lastNameEl, true, 'The name field is required.', '#lastName');
-                        lastNameEl.val().length === 1 && errorHandler(lastNameEl, true, 'The name must be at least 2 characters.', '#lastName');
-                    }
-                    validation() && $.ajax({
+                    // const validation = () => {
+                    //     !firstNameEl.val() && errorHandler(firstNameEl, true, 'The name field is required.', '#firstName');
+                    //     firstNameEl.val().length === 1 && errorHandler(firstNameEl, true, 'The name must be at least 2 characters.', '#firstName');
+                    //     !lastNameEl.val() && errorHandler(lastNameEl, true, 'The name field is required.', '#lastName');
+                    //     lastNameEl.val().length === 1 && errorHandler(lastNameEl, true, 'The name must be at least 2 characters.', '#lastName');
+                    // }
+                    // validation() &&
+                    $.ajax({
                         type: "post",
                         url: "/register",
                         cache: false,

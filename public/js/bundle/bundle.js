@@ -3043,8 +3043,6 @@ $(document).ready(function () {
 
         ev.preventDefault();
 
-        var data = $(this).serialize();
-
         var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(function () {
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
@@ -3170,7 +3168,7 @@ $(document).ready(function () {
  * Created by sahak on 1/7/2019.
  */
 $(document).ready(function () {
-    var modalHtml = '<div class="modal adult-modal" tabindex="-1" role="dialog">' + '<div class="modal-dialog modal-lg modal-dialog-centered" role="document">' + '<div class="modal-content">' + '<div class="modal-body d-flex flex-column">' + '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age ?</h2>' + '<div class="d-flex justify-content-center">' + '<button type="button" class="btn ntfs-btn adult col-3 mr-4 rounded-0">Yes (21+)</button>' + '<button type="button" class="btn btn-transp not-adult col-3 rounded-0" data-dismiss="modal">No (under 21)</button>' + '</div>' + '<div class="mt-auto text-center">' + '<p class="text-uppercase mb-0 font-12"><i>The products of this website are intended for adults only.</i></p>' + '<p class="font-12"><i>By entering this website, you certify that you are of legel smoking age, in the state in which you reside.</i></p>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>';
+    var modalHtml = '<div class="modal adult-modal" tabindex="-1" role="dialog">' + '<div class="modal-dialog modal-lg modal-dialog-centered" role="document">' + '<div class="modal-content rounded-0">' + '<div class="modal-body d-flex flex-column">' + '<h2 class="font-25 font-main-bold text-uppercase text-center mb-5">Are you of legal smoking age ?</h2>' + '<div class="d-flex justify-content-center">' + '<button type="button" class="btn ntfs-btn adult col-3 mr-4 rounded-0">Yes (21+)</button>' + '<button type="button" class="btn btn-transp not-adult col-3 rounded-0" data-dismiss="modal">No (under 21)</button>' + '</div>' + '<div class="mt-auto text-center">' + '<p class="text-uppercase mb-0 font-12"><i>The products of this website are intended for adults only.</i></p>' + '<p class="font-12"><i>By entering this website, you certify that you are of legel smoking age, in the state in which you reside.</i></p>' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>';
 
     function getCookie(name) {
         var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
