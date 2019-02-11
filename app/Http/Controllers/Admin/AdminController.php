@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\ManagerApiRequest;
+use App\Services\Widgets;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -54,5 +56,11 @@ class AdminController extends Controller
     public function roles()
     {
         return view('');
+    }
+
+    public function quickEmail(Request $request,Widgets $widgets)
+    {
+        $widgets->quickEmailSend($request);
+        return ['error'=>false];
     }
 }
