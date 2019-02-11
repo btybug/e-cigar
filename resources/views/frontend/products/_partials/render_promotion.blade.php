@@ -8,8 +8,7 @@
                 <label class="custom-control-label product-single-info_title-label product-single-info_check-label pointer" for="optionalCheckbox{{$promotion->id}}"></label>
             </div>
 
-
-                <input type="hidden" value="" class="variation_items optional_item">
+            <input type="hidden" value="" class="variation_items optional_item">
         @else
             <input type="hidden" value="" class="variation_items required_item">
         @endif

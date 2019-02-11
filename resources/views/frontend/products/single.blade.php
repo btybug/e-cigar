@@ -638,8 +638,6 @@
                 }
             })
 
-            get_price();
-
             $("body").on('change', '.select-variation-option', function () {
                 get_price();
                 get_subTotalPrice();
@@ -788,6 +786,7 @@
 
             function get_subTotalPrice() {
                 var variationId = $("#variation_uid").val();
+                console.log(variationId,445445454465)
                 if (variationId && variationId != '') {
                     var requiredItems = [];
                     var optionalItems = [];
@@ -795,7 +794,7 @@
                     var requiredItemsData = $(".required_item");
                     var optionalItemsData = $(".optional_item");
 
-
+                    console.log(requiredItemsData,445445454465)
                     optionalItemsData.each(function (i, e) {
                         if ($(e).parent().find('.optional_checkbox').is(':checked')) {
                             optionalItems.push($(e).val());
@@ -826,10 +825,11 @@
                 }
             }
 
-
-            var plist = $(".poptions-group");
-            for (var i = 0; i < plist.length; i++) {
-                get_promotion_price($(plist[i]).data('promotion'))
+            function call_extra_products(){
+                var plist = $(".poptions-group");
+                for (var i = 0; i < plist.length; i++) {
+                    get_promotion_price($(plist[i]).data('promotion'))
+                }
             }
 
             $("body").on('change', '.select-variation-poption', function () {
@@ -885,11 +885,18 @@
                 });
             }
 
-            setTimeout(
-                function() {
-                    get_subTotalPrice();
-                }, 300);
+            async function getP(){
+                await get_price();
+                await call_extra_products();
+                get_subTotalPrice();
+            }
 
+            getP();
+
+//            setTimeout(
+//                function() {
+//                    get_subTotalPrice();
+//                }, 500);
 
             $("body").on('click', '.product-card_like-icon', function () {
                 let url;

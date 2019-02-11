@@ -28,17 +28,17 @@
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-    <link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/global.css")}} rel="stylesheet" />
-    <link href={{asset("public/css/products.css?v=".rand(111,999))}} rel="stylesheet" />
-    <link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />
-    <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
-    <link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />
+    {{--<link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/global.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/products.css?v=".rand(111,999))}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />--}}
+    {{--<link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>--}}
+    {{--<link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />--}}
     {{--<link href="{{asset('public/css/custom.css')}}" rel="stylesheet" />--}}
-     *****packed in public/css/bundle.css***** --}}
-    <link rel="stylesheet" href="{{asset('public/css/bundle.css?v=".rand(111,999)')}}">
+     {{--*****packed in public/css/bundle.css***** --}}
+    <link rel="stylesheet" href="{{asset('public/css/bundle.css?v='.rand(111,999))}}">
     {{-- ********************************************* --}}
     {{-- <script src={{asset("public/js/jQuery3.3.1.js")}}></script> --}}
     {{-- <script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script> --}}
@@ -99,14 +99,14 @@
 
 
 {{-- ********************************************* --}}
-<script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>
-<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>
-<script src={{asset("public/js/hover-slider.js")}}></script>
-<script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>
-<script src={{asset("public/js/login.js")}}></script>
-<script src={{asset("public/js/register.js")}}></script>
+{{--<script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>--}}
+{{--<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>--}}
+{{--<script src={{asset("public/js/hover-slider.js")}}></script>--}}
+{{--<script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>--}}
+{{--<script src={{asset("public/js/login.js")}}></script>--}}
+{{--<script src={{asset("public/js/register.js")}}></script>--}}
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
-{{-- <script src={{asset("public/js/bundle/bundle.js")}}></script> --}}
+ <script src={{asset("public/js/bundle/bundle.js")}}></script>
 
 @yield('js')
 
