@@ -618,9 +618,9 @@
             $(".lightbox-product").lightbox();
             $('body').on('change', '.products_custom_check input', function () {
                 if ($(this).is(':checked')) {
-                    $(this).closest('.product-single-info_title').next().removeClass('products_closed')
+                    $(this).closest('.product-single-info_row').find('.extra-product').removeClass('products_closed')
                 } else {
-                    $(this).closest('.product-single-info_title').next().addClass('products_closed')
+                    $(this).closest('.product-single-info_row').find('.extra-product').addClass('products_closed')
                 }
 
             })

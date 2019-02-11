@@ -3,9 +3,9 @@
         {{ $promotion->name }}
         @if(! $promotion->pivot->type)
             <div class="custom-control custom-checkbox products_custom_check">
-                {!! Form::checkbox('',1,null,['class' => 'optional_checkbox custom-control-input product-single-info_title-check','id' => 'optionalCheckbox']) !!}
+                {!! Form::checkbox('',1,null,['class' => 'optional_checkbox custom-control-input product-single-info_title-check','id' => "optionalCheckbox$promotion->id"]) !!}
 
-                <label class="custom-control-label product-single-info_title-label product-single-info_check-label pointer" for="optionalCheckbox"></label>
+                <label class="custom-control-label product-single-info_title-label product-single-info_check-label pointer" for="optionalCheckbox{{$promotion->id}}"></label>
             </div>
 
 
@@ -14,7 +14,7 @@
             <input type="hidden" value="" class="variation_items required_item">
         @endif
     </h3>
-    <div class="d-flex flex-wrap align-items-center {{ (! $promotion->pivot->type) ? 'products_closed' :'' }}">
+    <div class="d-flex flex-wrap align-items-center extra-product {{ (! $promotion->pivot->type) ? 'products_closed' :'' }}">
         @if($promotion->type == 'variation_product')
             <div class="col-sm-10 pl-0">
                 @foreach($promotion->type_attrs as $promotionAttr)
