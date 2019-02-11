@@ -13,8 +13,66 @@
 @section('content')
 
     <!-- Small boxes (Stat box) -->
-    <button id="auth-button" >Authorize</button>
-    <textarea cols="80" rows="20" id="query-output"></textarea>
+    <aside class="Header-auth" id="header-auth">
+        <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User"
+             ga-event-label="auth" ga-event-action="signin">
+        </div>
+    </aside>
+    <div class="col-md-12">
+
+        <div class="Dashboard Dashboard--full">
+            <header class="Dashboard-header">
+                <div class="Titles">
+                    <h1 class="Titles-main" id="view-name">Kaliony (All Web Site Data)</h1>
+                    <div class="Titles-sub">Comparing sessions from
+                        <b id="from-dates">last week</b>
+                        to <b id="to-dates">this week</b>
+                    </div>
+                </div>
+                <div id="view-selector-container">
+                </div>
+            </header>
+
+            <ul class="FlexGrid">
+                <li class="FlexGrid-item">
+                    <div id="data-chart-1-container">
+                    </div>
+                    <div id="date-range-selector-1-container">
+                    </div>
+
+                </li>
+                <li class="FlexGrid-item">
+                    <div id="data-chart-2-container">
+                    </div>
+                    <div id="date-range-selector-2-container"></div>
+                </li>
+                <li class="FlexGrid-item">
+                    <div id="data-chart-3-container">
+                    </div>
+                    <div id="date-range-selector-3-container"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="Dashboard Dashboard--full">
+
+            <ul class="FlexGrid">
+                <li class="FlexGrid-item">
+                    <div id="data-chart-4-container">
+                    </div>
+                    <div id="date-range-selector-4-container"></div>
+                </li>
+            </ul>
+        </div>
+        {{--<div class="col-md-10" id="embed-api-auth-container"></div>--}}
+
+        {{--<div class="col-md-10" id="view-selector-container"></div>--}}
+        {{--<div  class="col-md-10" id="data-chart-1-container"></div>--}}
+        {{--<div class="col-md-10" id="date-range-selector-1-container"></div>--}}
+        {{--<div  class="col-md-10" id="data-chart-2-container"></div>--}}
+        {{--<div class="col-md-10" id="date-range-selector-2-container"></div>--}}
+    </div>
+
+
     <div class="row">
     @include('admin.widgets.new_orders')
     <!-- ./col -->
@@ -419,6 +477,7 @@
     <!-- jvectormap -->
     {!! Html::style("public/admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
     {!! Html::style("public/admin_assets/css/dashboard.css") !!}
+    {!! Html::style("/public/js/google/index.css") !!}
 @stop
 @section('js')
     <!-- jvectormap -->
@@ -426,141 +485,244 @@
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
     {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js")!!}
     <script>
-
-        // Replace with your client ID from the developer console.
-        var CLIENT_ID = '373182395032-ooc47rqfk82u8ltlh8sniui4a45skjad.apps.googleusercontent.com';
-
-        // Set authorized scope.
-        var SCOPES = ['https://www.googleapis.com/auth/analytics.readonly'];
-
-        function authorize(event) {
-            // Handles the authorization flow.
-            // `immediate` should be false when invoked from the button click.
-            console.log(event)
-            var useImmdiate = event ? false : true;
-            var authData = {
-            client_id: CLIENT_ID,
-            scope: SCOPES,
-            immediate: useImmdiate
+        (function (w, d, s, g, js, fs) {
+            g = w.gapi || (w.gapi = {});
+            g.analytics = {
+                q: [], ready: function (f) {
+                    this.q.push(f);
+                }
             };
-
-            gapi.auth.authorize(authData, function(response) {
-                var authButton = document.getElementById('auth-button');
-                if (response.error) {
-                    authButton.hidden = false;
-                } else {
-                    authButton.hidden = true;
-                    queryAccounts();
+            js = d.createElement(s);
+            fs = d.getElementsByTagName(s)[0];
+            js.src = 'https://apis.google.com/js/platform.js';
+            fs.parentNode.insertBefore(js, fs);
+            js.onload = function () {
+                g.load('analytics');
+            };
+        }(window, document, 'script'));
+    </script>
+    <!-- Include the ViewSelector2 component script. -->
+    <script src="/public/js/google/view-selector2.js"></script>
+    <!-- Include the DateRangeSelector component script. -->
+    <script src="/public/js/google/date-range-selector.js"></script>
+    {{-- {!! Html::script("https://apis.google.com/js/client.js?onload=authorize")!!} --}}
+    <script>
+        gapi.analytics.ready(function () {
+            console.log(gapi);
+            /**
+             * Authorize the user immediately if the user has already granted access.
+             * If no access has been created, render an authorize button inside the
+             * element with the ID "embed-api-auth-container".
+             */
+            gapi.analytics.auth.authorize({
+                container: 'embed-api-auth-container',
+                serverAuth: {
+                    access_token: "{!! Gmail::getFreshToken() !!}"
                 }
             });
-        }
+            {{--gapi.auth.authorize({--}}
+                {{--client_id: "{!! env('GOOGLE_CLIENT_ID') !!}",--}}
+                {{--access_token: "{!! Gmail::getFreshToken() !!}",--}}
+                {{--scope:"{!! Gmail::getScopes()[0] !!}"--}}
+            {{--});--}}
+            /**
+             * Store a set of common DataChart config options since they're shared by
+             * both of the charts we're about to make.
+             */
+            var commonConfig = {
+                query: {
+                    metrics: 'ga:sessions',
+                    dimensions: 'ga:date'
+                },
+                chart: {
+                    type: 'LINE',
+                    options: {
+                        width: '100%'
+                    }
+                }
+            };
 
-        function queryAccounts() {
-        // Load the Google Analytics client library.
-        gapi.client.load('analytics', 'v3').then(function() {
 
-            // Get a list of all Google Analytics accounts for this user
-            gapi.client.analytics.management.accounts.list().then(handleAccounts);
+            /**
+             * Query params representing the first chart's date range.
+             */
+            var dateRange1 = {
+                'start-date': '14daysAgo',
+                'end-date': 'today',
+                'metrics': 'ga:visitors'
+            };
+
+
+            /**
+             * Query params representing the second chart's date range.
+             */
+            var dateRange2 = {
+                'start-date': '7daysAgo',
+                'end-date': 'today'
+            };
+            var dateRange3 = {
+                'ids': 'ga:ranges', // <-- Replace with the ids value for your view.
+                'start-date': '30daysAgo',
+                'end-date': 'yesterday',
+                'metrics': 'ga:pageviews',
+                'dimensions': 'ga:pagePathLevel1',
+                'sort': '-ga:pageviews',
+                'filters': 'ga:pagePathLevel1!=/',
+                'max-results': '7',
+            };
+            var dateRange4 = {
+                'ids': 'ga:189659790', // <-- Replace with the ids value for your view.
+                'start-date': '30daysAgo',
+                'end-date': 'today',
+                'metrics': 'ga:sessions,ga:users',
+                'dimensions': 'ga:date'
+            };
+
+
+            /**
+             * Create a new ViewSelector2 instance to be rendered inside of an
+             * element with the id "view-selector-container".
+             */
+            var viewSelector = new gapi.analytics.ext.ViewSelector2({
+                container: 'view-selector-container',
+            }).execute();
+
+
+            /**
+             * Create a new DateRangeSelector instance to be rendered inside of an
+             * element with the id "date-range-selector-1-container", set its date range
+             * and then render it to the page.
+             */
+            var dateRangeSelector1 = new gapi.analytics.ext.DateRangeSelector({
+                container: 'date-range-selector-1-container'
+            })
+                .set(dateRange1)
+                .execute();
+
+            /**
+             * Create a new DateRangeSelector instance to be rendered inside of an
+             * element with the id "date-range-selector-2-container", set its date range
+             * and then render it to the page.
+             */
+            var dateRangeSelector2 = new gapi.analytics.ext.DateRangeSelector({
+                container: 'date-range-selector-2-container'
+            })
+                .set(dateRange2)
+                .execute();
+            var dateRangeSelector3 = new gapi.analytics.ext.DateRangeSelector({
+                container: 'date-range-selector-3-container'
+            })
+                .set(dateRange3)
+                .execute();
+            var dateRangeSelector4 = new gapi.analytics.ext.DateRangeSelector({
+                container: 'date-range-selector-4-container'
+            })
+                .set(dateRange4)
+                .execute();
+
+
+            /**
+             * Create a new DataChart instance with the given query parameters
+             * and Google chart options. It will be rendered inside an element
+             * with the id "data-chart-1-container".
+             */
+            var dataChart1 = new gapi.analytics.googleCharts.DataChart(commonConfig)
+                .set({query: dateRange1})
+                .set({chart: {container: 'data-chart-1-container'}});
+
+
+            /**
+             * Create a new DataChart instance with the given query parameters
+             * and Google chart options. It will be rendered inside an element
+             * with the id "data-chart-2-container".
+             */
+            var dataChart2 = new gapi.analytics.googleCharts.DataChart(commonConfig)
+                .set({query: dateRange2})
+                .set({chart: {container: 'data-chart-2-container'}});
+
+            var dataChart3 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({
+                chart: {
+                    'container': 'data-chart-3-container',
+                    'type': 'PIE',
+                    'options': {
+                        'width': '100%',
+                        'pieHole': '4/9'
+                    }
+                }
+            }).set({query: dateRange3});
+
+            var dataChart4 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({
+                chart: {
+                    'container': 'data-chart-4-container',
+                    'type': 'LINE',
+                    'options': {
+                        'width': '100%'
+                    }
+                }
+            }).set({query: dateRange4})
+
+
+            /**
+             * Register a handler to run whenever the user changes the view.
+             * The handler will update both dataCharts as well as updating the title
+             * of the dashboard.
+             */
+            viewSelector.on('viewChange', function (data) {
+                dataChart1.set({query: {ids: data.ids}}).execute();
+                dataChart2.set({query: {ids: data.ids}}).execute();
+                dataChart3.set({query: {ids: data.ids}}).execute();
+                dataChart4.set({query: {ids: data.ids}}).execute();
+                var title = document.getElementById('view-name');
+                title.innerHTML = data.property.name + ' (' + data.view.name + ')';
+            });
+
+
+            /**
+             * Register a handler to run whenever the user changes the date range from
+             * the first datepicker. The handler will update the first dataChart
+             * instance as well as change the dashboard subtitle to reflect the range.
+             */
+            dateRangeSelector1.on('change', function (data) {
+                dataChart1.set({query: data}).execute();
+
+                // Update the "from" dates text.
+                var datefield = document.getElementById('from-dates');
+                datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+            });
+
+
+            /**
+             * Register a handler to run whenever the user changes the date range from
+             * the second datepicker. The handler will update the second dataChart
+             * instance as well as change the dashboard subtitle to reflect the range.
+             */
+            dateRangeSelector2.on('change', function (data) {
+                dataChart2.set({query: data}).execute();
+
+                // Update the "to" dates text.
+                var datefield = document.getElementById('to-dates');
+                datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+            });
+            dateRangeSelector3.on('change', function (data) {
+                dataChart3.set({query: data}).execute();
+
+                // Update the "to" dates text.
+                var datefield = document.getElementById('to-dates');
+                datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+            });
+            dateRangeSelector4.on('change', function (data) {
+                dataChart4.set({query: data}).execute();
+
+                // Update the "to" dates text.
+                var datefield = document.getElementById('to-dates');
+                datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
+            });
         });
-        }
 
-        function handleAccounts(response) {
-        // Handles the response from the accounts list method.
-        if (response.result.items && response.result.items.length) {
-            // Get the first Google Analytics account.
-            var firstAccountId = response.result.items[0].id;
-
-            // Query for properties.
-            queryProperties(firstAccountId);
-        } else {
-            console.log('No accounts found for this user.');
-        }
-        }
-
-        function queryProperties(accountId) {
-        // Get a list of all the properties for the account.
-        gapi.client.analytics.management.webproperties.list(
-            {'accountId': accountId})
-            .then(handleProperties)
-            .then(null, function(err) {
-            // Log any errors.
-            console.log(err);
-        });
-        }
-
-        function handleProperties(response) {
-        // Handles the response from the webproperties list method.
-        if (response.result.items && response.result.items.length) {
-
-            // Get the first Google Analytics account
-            var firstAccountId = response.result.items[0].accountId;
-
-            // Get the first property ID
-            var firstPropertyId = response.result.items[0].id;
-
-            // Query for Views (Profiles).
-            queryProfiles(firstAccountId, firstPropertyId);
-        } else {
-            console.log('No properties found for this user.');
-        }
-        }
-
-        function queryProfiles(accountId, propertyId) {
-        // Get a list of all Views (Profiles) for the first property
-        // of the first Account.
-        gapi.client.analytics.management.profiles.list({
-            'accountId': accountId,
-            'webPropertyId': propertyId
-        })
-        .then(handleProfiles)
-        .then(null, function(err) {
-            // Log any errors.
-            console.log(err);
-        });
-        }
-
-        function handleProfiles(response) {
-        // Handles the response from the profiles list method.
-        if (response.result.items && response.result.items.length) {
-            // Get the first View (Profile) ID.
-            var firstProfileId = response.result.items[0].id;
-
-            // Query the Core Reporting API.
-            queryCoreReportingApi(firstProfileId);
-        } else {
-            console.log('No views (profiles) found for this user.');
-        }
-        }
-
-        function queryCoreReportingApi(profileId) {
-        // Query the Core Reporting API for the number sessions for
-        // the past seven days.
-        gapi.client.analytics.data.ga.get({
-            'ids': 'ga:' + profileId,
-            'start-date': '7daysAgo',
-            'end-date': 'today',
-            'metrics': 'ga:sessions'
-        })
-        .then(function(response) {
-            var formattedJson = JSON.stringify(response.result, null, 2);
-            document.getElementById('query-output').value = formattedJson;
-            console.log(formattedJson)
-        })
-        .then(null, function(err) {
-            // Log any errors.
-            console.log(err);
-        });
-        }
-
-        // Add an event listener to the 'auth-button'.
-        // authorize()
-        document.getElementById('auth-button').addEventListener('click', authorize);
     </script>
-    {{-- {!! Html::script("https://apis.google.com/js/client.js?onload=authorize")!!} --}}
     <script>
         $('body').on('click', '.open_dashboard_widget', function () {
             $('.dashboard_modal_add_widget').toggleClass('active')
         })
     </script>
 @stop
-<script src="https://apis.google.com/js/client.js?onload=authorize"></script>

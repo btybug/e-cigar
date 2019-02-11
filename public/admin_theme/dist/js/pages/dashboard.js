@@ -65,7 +65,6 @@ $(function () {
     //   RU: 3000, // Russia
     //   AM: 30000 // Russia
     // };
-    console.log(visitorsData);
     // World map by jvectormap
     $('#world-map').vectorMap({
         map: 'world_mill_en',
