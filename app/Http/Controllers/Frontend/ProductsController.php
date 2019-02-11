@@ -96,7 +96,8 @@ class ProductsController extends Controller
                 $price = $variation->price;
 
                 if ($request->promotion) {
-                    $promotionPrice = $stock->promotion_prices()->where('variation_id', $variation->id)->first();
+                    $main = Stock::find($request->stock_id);
+                    $promotionPrice = ($main) ?$main->promotion_prices()->where('variation_id', $variation->id)->first():null;
                     $price = ($promotionPrice) ? $promotionPrice->price : $price;
                 } elseif(count($stock->active_sales)) {
                     $promotionPrice = $stock->active_sales()->where('variation_id', $variation->id)->first();
@@ -135,7 +136,7 @@ class ProductsController extends Controller
                 foreach ($optionalItems as $opv){
                     $optpVariation = StockVariation::find($opv);
                     if($optpVariation){
-                        $promotionPrice = $optpVariation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
+                        $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
                         $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
                         $price+=$reqPrice;
                     }
@@ -146,7 +147,7 @@ class ProductsController extends Controller
                 foreach ($requiredItems as $opv){
                     $optpVariation = StockVariation::find($opv);
                     if($optpVariation){
-                        $promotionPrice = $optpVariation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
+                        $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
                         $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
                         $price+=$reqPrice;
                     }

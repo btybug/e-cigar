@@ -173,15 +173,13 @@ class StockService
         }
     }
 
-    public function savePromotionPrices (array $data = [])
+    public function savePromotionPrices ($promotion,array $data = [])
     {
         if (count($data)) {
             $deletableArray = [];
             foreach ($data as $promotion_id => $jsonData) {
                 $newData = json_decode($jsonData, true);
-                $promotion = Stock::find($promotion_id);
                 if ($promotion && $newData && count($newData)) {
-
                     foreach ($newData as $variation_id => $price) {
                         $promotionPrice = $promotion->promotion_prices()->where('variation_id', $variation_id)->first();
                         if ($promotionPrice) {
@@ -191,10 +189,10 @@ class StockService
                         }
                         $deletableArray[] = $promotionPrice->id;
                     }
-
-                    $promotion->promotion_prices()->whereNotIn('id', $deletableArray)->delete();
                 }
             }
+
+            $promotion->promotion_prices()->whereNotIn('id', $deletableArray)->delete();
         }
     }
 

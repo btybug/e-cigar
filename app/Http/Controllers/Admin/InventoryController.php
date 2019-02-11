@@ -61,7 +61,7 @@ class InventoryController extends Controller
     public function getStockEdit ($id)
     {
         $model = Stock::findOrFail($id);
-
+//        dd($model->promotion_prices);
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
@@ -112,7 +112,7 @@ class InventoryController extends Controller
         }
 
         $stock->stickers()->sync($request->get('stickers'));
-        $this->stockService->savePromotionPrices($request->get('promotion_prices', []));
+        $this->stockService->savePromotionPrices($stock,$request->get('promotion_prices', []));
 
         $this->createOrUpdateSeo($request, $stock->id);
 
@@ -256,12 +256,13 @@ class InventoryController extends Controller
 
     public function getPromotionVariations (Request $request)
     {
+        $stock = Stock::find($request->stock_id);
         $model = Stock::findOrFail($request->id);
         $type = $request->type;
         $price = json_decode($request->price,true);
 //        dd($price);
 
-        $html = \View("admin.inventory._partials.extra_item", compact(['model','type','price']))->render();
+        $html = \View("admin.inventory._partials.extra_item", compact(['model','type','price','stock']))->render();
 //        dd($html);
 //        dd(\Response::json(['error' => false, 'html' => $html]));
         return \Response::json(['error' => false, 'html' => $html]);

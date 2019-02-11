@@ -41,7 +41,7 @@
             </div>
 
             <!-- /.col -->
-            {!! Form::hidden('id',null) !!}
+            {!! Form::hidden('id',null,['id' => "stockID"]) !!}
             <div class="col-md-12">
                 <div class="tab-content tabs_content">
                     <div id="basic" class="tab-pane fade in active basic-details-tab ">
@@ -786,7 +786,7 @@
                                             <ul class="get-all-extra-tab">
                                                 @if($model)
                                                     @foreach($model->promotions as $promotion)
-                                                        <li style="display: flex" data-id="{{ $promotion->id }}" class="promotion-elm"><a
+                                                        <li style="display: flex" data-stock-id="{{ $model->id }}" data-id="{{ $promotion->id }}" class="promotion-elm"><a
                                                                     href="#">{{ $promotion->name }}</a>
                                                             <div class="buttons">
                                                                 <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
@@ -1137,12 +1137,13 @@
                 if(e.target != this) return false;
 
                 var id = $(this).data('id');
+                var stock_id = $(this).data('stock-id');
                 var type = $(this).find('.promotion_type').val();
                 var price = $(this).find('.promotion_price').val();
                 console.log(type);
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
-                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {id: id,type : type, price: price}, function (res) {
+                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {stock_id:stock_id,id: id,type : type, price: price}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                     }
@@ -1303,8 +1304,9 @@
             $("body").on("click", ".add-promotion", function () {
                 let id = $(this).data("id");
                 let name = $(this).data("name");
+                let stockID = $("#stockID").val();
                 $(".get-all-extra-tab")
-                    .append(`<li style="display: flex" data-id="${id}" class="promotion-elm"><a
+                    .append(`<li style="display: flex" data-id="${id}" data-stock-id="${stockID}" class="promotion-elm"><a
                                 href="#">${name}</a>
                                 <div class="buttons">
                                 <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>

@@ -846,7 +846,7 @@
 
             function get_promotion_price(pid) {
                 let options = {};
-
+                var uid = $("#vpid").val();
                 $.map($("[data-promotion='" + pid + "'] input:radio:checked"), function (elem, idx) {
                     options[$(elem).data('name')] = $(elem).val();
                 });
@@ -862,7 +862,7 @@
                     url: "/products/get-price",
                     cache: false,
                     datatype: "json",
-                    data: {options: options, uid: pid, promotion: true},
+                    data: {options: options, uid: pid, promotion: true,stock_id : uid},
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },

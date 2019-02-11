@@ -3,7 +3,7 @@
         @if($model->type == 'simple_product')
             @php
                 $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
-                $promotionPrice = $model->promotion_prices()->where('variation_id',$single_variation->id)->first();
+                $promotionPrice = ($stock) ? $stock->promotion_prices()->where('variation_id',$single_variation->id)->first() : null;
             @endphp
 
             <div class="row mb-4">
@@ -98,7 +98,7 @@
                         </td>
                         <td>
                             @php
-                                $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
+                                $promotionPrice = ($stock) ? $stock->promotion_prices()->where('variation_id',$variation->id)->first() : null;
                             @endphp
                             {!! Form::text("extra_product[$variation->id][price]",
                             (isset($price[$variation->id]) && $price[$variation->id]) ? $price[$variation->id] :
@@ -122,7 +122,7 @@
                 <div class="col-md-4">
                     @php
                         $variation = ($model && count($model->variations)) ? $model->variations->first() : null;
-                        $promotionPrice = $model->promotion_prices()->where('variation_id',$variation->id)->first();
+                        $promotionPrice = ($stock) ? $stock->promotion_prices()->where('variation_id',$variation->id)->first() : null;
                     @endphp
 
                     <div class="row">
