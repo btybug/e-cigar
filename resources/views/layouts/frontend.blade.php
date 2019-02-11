@@ -9,6 +9,18 @@
     <meta name="google-recaptcha-key" content="{!! env('GOOGLE_RECAPTCHA_KEY') !!}">
     @yield('meta')
     <title>Document</title>
+
+
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={!! env('GOOGLE_ANALYTICS_TRACKING_ID') !!}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', '{!! env('GOOGLE_ANALYTICS_TRACKING_ID') !!}');
+    </script>
+    <!-- End Google Analytics -->
     <link rel="shortcut icon" href="{!! url('/public/img/favicon.png') !!}">
     <link rel="shortcut icon" href="{!! url('/public/img/favicon.ico') !!}">
 
