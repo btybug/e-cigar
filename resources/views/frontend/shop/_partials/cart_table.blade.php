@@ -50,7 +50,7 @@
                                                                 @endif
                                                             </span>
                                                         </p>
-                                                        <span class="font-15 font-main-bold">${{ $main->price }}</span>
+                                                        <span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}</span>
                                                     </li>
                                                     <li class="shp-cart-product_row shp-cart-product_extra font-main-bold font-15 text-uppercase">
                                                         Extra
@@ -82,10 +82,10 @@
                                                                 </p>
                                                                 <span class="font-15 font-main-bold">
                                                                    @php
-                                                                       $promotionPrice = ($variationReq) ? $variationReq->stock->promotion_prices()
+                                                                       $promotionPrice = ($variationReq) ? $stock->promotion_prices()
                                                                        ->where('variation_id',$variationReq->id)->first() : null;
                                                                    @endphp
-                                                                    {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationReq) ? "$" . $variationReq->price : 0) !!}
+                                                                    {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($variationReq) ? convert_price($variationReq->price,$currency) : convert_price(0,$currency)) !!}
                                                                 </span>
                                                             </li>
                                                         @endforeach
@@ -115,10 +115,10 @@
                                                                 </p>
                                                                 <span class="font-15 font-main-bold">
                                                                     @php
-                                                                        $promotionPrice = ($variationOpt) ? $variationOpt->stock->promotion_prices()
+                                                                        $promotionPrice = ($variationOpt) ? $stock->promotion_prices()
                                                                         ->where('variation_id',$variationOpt->id)->first() : null;
                                                                     @endphp
-                                                                    {!! ($promotionPrice) ? "$" . $promotionPrice->price : (($variationOpt) ? "$" . $variationOpt->price : 0) !!}
+                                                                    {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($variationOpt) ? convert_price($variationOpt->price,$currency) : convert_price(0,$currency)) !!}
                                                                 </span>
                                                                 <span class="shp-cart-product_close pointer position-absolute remove-from-cart" data-uid="{{ $variationOpt->id }}">
                                                                     <svg viewBox="0 0 8 8" width="8px" height="8px">
@@ -180,7 +180,7 @@
 
                                     <td width="180" class="shp-cart-table_price-td">
                                         <span class="d-flex font-main-bold font-28 card--inner-product_price position-relative">
-                                            <span class="position-relative">${{ \App\Services\CartService::getPriceSum($main->id) }}
+                                            <span class="position-relative">{{ convert_price(\App\Services\CartService::getPriceSum($main->id),$currency) }}
                                                 {{--<!--old price-->--}}
                                                     {{--<span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>--}}
                                             </span>
@@ -209,31 +209,31 @@
                                 <div class="name">
                                     Sub Total
                                 </div>
-                                <div class="price font-main-bold">${!! \Cart::getSubTotal() !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\Cart::getSubTotal(),$currency) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Tax
                                 </div>
-                                <div class="price font-main-bold">$0</div>
+                                <div class="price font-main-bold">{!! convert_price(0,$currency) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
                                 </div>
-                                <div class="price font-main-bold">${!! ($shipping) ? $shipping->getValue():0 !!}</div>
+                                <div class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency) : convert_price(0,$currency) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Discount (Coupon)
                                 </div>
-                                <div class="price font-main-bold">$0</div>
+                                <div class="price font-main-bold">{{ convert_price(0,$currency) }}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Total
                                 </div>
-                                <div class="price font-main-bold">${!! \Cart::getTotal() !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\Cart::getTotal(),$currency) !!}</div>
                             </div>
                             <div class="coupon-code font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">

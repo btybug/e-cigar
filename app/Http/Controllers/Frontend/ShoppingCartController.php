@@ -141,7 +141,6 @@ class ShoppingCartController extends Controller
     public function postAddToCart(Request $request)
     {
         $variation = StockVariation::find($request->uid);
-//        dd($variation);
         if($variation){
             if(\Auth::check()){
                 $user = \Auth::user();

@@ -175,29 +175,39 @@
                     <div class="name">
                         Sub Total
                     </div>
-                    <div class="price font-main-bold">${!! \Cart::getSubTotal() !!}</div>
+                    <div class="price font-main-bold">{!! convert_price(\Cart::getSubTotal(),$currency) !!}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Tax
                     </div>
-                    <div class="price font-main-bold">$0</div>
+                    <div class="price font-main-bold">{!! convert_price(0,$currency) !!}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
                     </div>
-                    <div class="price font-main-bold">${!! ($shipping) ? $shipping->getValue():0 !!}</div>
+                    <div class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency) : convert_price(0,$currency) !!}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Discount (Coupon)
                     </div>
-                    <div class="price font-main-bold">$0</div>
+                    <div class="price font-main-bold">{{ convert_price(0,$currency) }}</div>
+                </div>
+                <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="name">
+                        Total
+                    </div>
+                    <div class="price font-main-bold">{!! convert_price(\Cart::getTotal(),$currency) !!}</div>
                 </div>
                 <div class="coupon-code font-17 d-flex flex-wrap justify-content-between align-items-center">
-                    <span class="font-22 text-quatr-clr">Total</span>
-                    <span class="font-22 text-quatr-clr font-bold">${!! \Cart::getTotal() !!}</span>
+                    <div class="name">
+                        Coupon code
+                    </div>
+                    <div class="code">
+                        <input type="text" class="form-control" name="coupon_code"  id="coupon_code">
+                    </div>
                 </div>
                 <div class="checkout-btn text-center">
                     <button class="btn btn-primary text-uppercase font-15 go-to-payment">

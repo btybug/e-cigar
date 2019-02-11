@@ -888,15 +888,14 @@
             async function getP(){
                 await get_price();
                 await call_extra_products();
-                get_subTotalPrice();
             }
 
             getP();
 
-//            setTimeout(
-//                function() {
-//                    get_subTotalPrice();
-//                }, 500);
+            setTimeout(
+                function() {
+                    get_subTotalPrice();
+                }, 500);
 
             $("body").on('click', '.product-card_like-icon', function () {
                 let url;
