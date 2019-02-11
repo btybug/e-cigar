@@ -640,12 +640,12 @@
 
             $("body").on('change', '.select-variation-option', function () {
                 get_price();
-                get_subTotalPrice();
+                call_subtotal();
             });
 
             $("body").on('change', '.select-variation-radio-option', function () {
                 get_price();
-                get_subTotalPrice();
+                call_subtotal();
             });
 
 
@@ -835,13 +835,13 @@
             $("body").on('change', '.select-variation-poption', function () {
                 var pid = $(this).closest('.poptions-group').data('promotion');
                 get_promotion_price(pid);
-                get_subTotalPrice();
+                call_subtotal();
             });
 
             $("body").on('change', '.select-variation-radio-poption', function () {
                 var pid = $(this).closest('.poptions-group').data('promotion');
                 get_promotion_price(pid);
-                get_subTotalPrice();
+                call_subtotal();
             });
 
             function get_promotion_price(pid) {
@@ -892,10 +892,14 @@
 
             getP();
 
-            setTimeout(
-                function() {
-                    get_subTotalPrice();
-                }, 500);
+            function call_subtotal(time = 300) {
+                setTimeout(
+                    function() {
+                        get_subTotalPrice();
+                    }, time);
+            }
+
+            call_subtotal(500);
 
             $("body").on('click', '.product-card_like-icon', function () {
                 let url;
