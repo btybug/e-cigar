@@ -496,17 +496,21 @@
     {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
     <script>
         gapi.analytics.ready(function() {
-
+console.log(gapi);
             /**
              * Authorize the user immediately if the user has already granted access.
              * If no access has been created, render an authorize button inside the
              * element with the ID "embed-api-auth-container".
              */
             gapi.auth.setToken({
-                container: 'embed-api-auth-container',
                 access_token:  "{!!Gmail::getFreshToken()!!}",
             });
-
+            gapi.analytics.auth.authorize({
+                container: 'embed-api-auth-container',
+                clientid: '373182395032-oniiqqhp4mf57q10h51ca544neicps17.apps.googleusercontent.com'
+            });
+//            gapi.auth.setToken(null);
+//            gapi.auth.signOut();
 
             var commonConfig = {
                 query: {
