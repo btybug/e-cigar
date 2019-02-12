@@ -12,25 +12,22 @@
 @stop
 @section('content')
 
-    <!-- Small boxes (Stat box) -->
     <aside class="Header-auth" id="header-auth">
-        <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User"
-             ga-event-label="auth" ga-event-action="signin">
+        <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
         </div>
     </aside>
     <div class="col-md-12">
-        <div id="embed-api-auth-container"></div>
+
         <div class="Dashboard Dashboard--full">
             <header class="Dashboard-header">
                 <div class="Titles">
-                    <h1 class="Titles-main" id="view-name">Kaliony (All Web Site Data)</h1>
+                    <h1 class="Titles-main" id="view-name">{!! env('SITE_NAME') !!} (All Web Site Data)</h1>
                     <div class="Titles-sub">Comparing sessions from
                         <b id="from-dates">last week</b>
                         to <b id="to-dates">this week</b>
                     </div>
                 </div>
-                <div id="view-selector-container">
-                </div>
+                <div id="view-selector-container"></div>
             </header>
 
             <ul class="FlexGrid">
@@ -63,14 +60,7 @@
                 </li>
             </ul>
         </div>
-        {{--<div class="col-md-10" id="embed-api-auth-container"></div>--}}
-
-        {{--<div class="col-md-10" id="view-selector-container"></div>--}}
-        {{--<div  class="col-md-10" id="data-chart-1-container"></div>--}}
-        {{--<div class="col-md-10" id="date-range-selector-1-container"></div>--}}
-        {{--<div  class="col-md-10" id="data-chart-2-container"></div>--}}
-        {{--<div class="col-md-10" id="date-range-selector-2-container"></div>--}}
-    </div>
+        </div>
 
 
     <div class="row">
@@ -477,67 +467,47 @@
     <!-- jvectormap -->
     {!! Html::style("public/admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
     {!! Html::style("public/admin_assets/css/dashboard.css") !!}
-    {!! Html::style("/public/js/google/index.css") !!}
+    {!! HTML::style('/public/js/google/analytic/index.css') !!}
 @stop
 @section('js')
     <!-- jvectormap -->
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
     {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js")!!}
-    <script>
-        (function (w, d, s, g, js, fs) {
-            g = w.gapi || (w.gapi = {});
-            g.analytics = {
-                q: [], ready: function (f) {
-                    this.q.push(f);
-                }
-            };
-            js = d.createElement(s);
-            fs = d.getElementsByTagName(s)[0];
-            js.src = 'https://apis.google.com/js/platform.js';
-            fs.parentNode.insertBefore(js, fs);
-            js.onload = function () {
-                g.load('analytics');
-            };
-        }(window, document, 'script'));
-    </script>
+
     <!-- Include the ViewSelector2 component script. -->
-    <script src="/public/js/google/view-selector2.js"></script>
-    <!-- Include the DateRangeSelector component script. -->
-    <script src="/public/js/google/date-range-selector.js"></script>
-    {{-- {!! Html::script("https://apis.google.com/js/client.js?onload=authorize")!!} --}}
+
+
+
     <script>
-        gapi.analytics.ready(function () {
-            console.log(gapi);
+        $('body').on('click', '.open_dashboard_widget', function () {
+            $('.dashboard_modal_add_widget').toggleClass('active')
+        })
+        </script>
+    <script>
+        (function(w,d,s,g,js,fs){
+            g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+            js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+            js.src='https://apis.google.com/js/platform.js';
+            fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+        }(window,document,'script'));
+    </script>
+    {!! HTML::script('/public/js/google/analytic/view-selector2.js') !!}
+    {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
+    <script>
+        gapi.analytics.ready(function() {
+
             /**
              * Authorize the user immediately if the user has already granted access.
              * If no access has been created, render an authorize button inside the
              * element with the ID "embed-api-auth-container".
              */
-
-            gapi.analytics.auth.authorize({
+            gapi.auth.setToken({
                 container: 'embed-api-auth-container',
-                clientid: '{!! env('GOOGLE_CLIENT_ID') !!}',
-                serverAuth: {
-                    access_token: "{!! Gmail::getFreshToken() !!}"
-                }
+                access_token:  "{!!Gmail::getFreshToken()!!}",
             });
-//            gapi.analytics.auth.signOut();
-            {{--gapi.analytics.auth.authorize({--}}
-                {{--container: 'embed-api-auth-container',--}}
-                {{--serverAuth: {--}}
-                    {{--access_token: "{!! Gmail::getFreshToken() !!}"--}}
-                {{--}--}}
-            {{--});--}}
-            {{--gapi.auth.authorize({--}}
-                {{--client_id: "{!! env('GOOGLE_CLIENT_ID') !!}",--}}
-                {{--access_token: "{!! Gmail::getFreshToken() !!}",--}}
-                {{--scope:"{!! Gmail::getScopes()[0] !!}"--}}
-            {{--});--}}
-            /**
-             * Store a set of common DataChart config options since they're shared by
-             * both of the charts we're about to make.
-             */
+
+
             var commonConfig = {
                 query: {
                     metrics: 'ga:sessions',
@@ -580,7 +550,7 @@
                 'max-results': '7',
             };
             var dateRange4 = {
-                'ids': 'ga:189659790', // <-- Replace with the ids value for your view.
+                'ids': 'ga:{!! env('ANALYTICS_VIEW') !!}', // <-- Replace with the ids value for your view.
                 'start-date': '30daysAgo',
                 'end-date': 'today',
                 'metrics': 'ga:sessions,ga:users',
@@ -649,26 +619,21 @@
                 .set({query: dateRange2})
                 .set({chart: {container: 'data-chart-2-container'}});
 
-            var dataChart3 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({
-                chart: {
-                    'container': 'data-chart-3-container',
-                    'type': 'PIE',
-                    'options': {
-                        'width': '100%',
-                        'pieHole': '4/9'
-                    }
-                }
-            }).set({query: dateRange3});
+            var dataChart3 = new gapi.analytics.googleCharts.DataChart(commonConfig).set( {chart: {
+                'container': 'data-chart-3-container',
+                'type': 'PIE',
+                'options': {
+                    'width': '100%',
+                    'pieHole': '4/9'
+                }}}).set({query: dateRange3});
 
-            var dataChart4 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({
-                chart: {
-                    'container': 'data-chart-4-container',
-                    'type': 'LINE',
-                    'options': {
-                        'width': '100%'
-                    }
+            var dataChart4 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({chart: {
+                'container': 'data-chart-4-container',
+                'type': 'LINE',
+                'options': {
+                    'width': '100%'
                 }
-            }).set({query: dateRange4})
+            }}).set({query: dateRange4})
 
 
             /**
@@ -676,7 +641,7 @@
              * The handler will update both dataCharts as well as updating the title
              * of the dashboard.
              */
-            viewSelector.on('viewChange', function (data) {
+            viewSelector.on('viewChange', function(data) {
                 dataChart1.set({query: {ids: data.ids}}).execute();
                 dataChart2.set({query: {ids: data.ids}}).execute();
                 dataChart3.set({query: {ids: data.ids}}).execute();
@@ -691,7 +656,7 @@
              * the first datepicker. The handler will update the first dataChart
              * instance as well as change the dashboard subtitle to reflect the range.
              */
-            dateRangeSelector1.on('change', function (data) {
+            dateRangeSelector1.on('change', function(data) {
                 dataChart1.set({query: data}).execute();
 
                 // Update the "from" dates text.
@@ -705,35 +670,28 @@
              * the second datepicker. The handler will update the second dataChart
              * instance as well as change the dashboard subtitle to reflect the range.
              */
-            dateRangeSelector2.on('change', function (data) {
+            dateRangeSelector2.on('change', function(data) {
                 dataChart2.set({query: data}).execute();
 
                 // Update the "to" dates text.
                 var datefield = document.getElementById('to-dates');
                 datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
             });
-            dateRangeSelector3.on('change', function (data) {
+            dateRangeSelector3.on('change', function(data) {
                 dataChart3.set({query: data}).execute();
 
                 // Update the "to" dates text.
                 var datefield = document.getElementById('to-dates');
                 datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
             });
-            dateRangeSelector4.on('change', function (data) {
+            dateRangeSelector4.on('change', function(data) {
                 dataChart4.set({query: data}).execute();
 
                 // Update the "to" dates text.
                 var datefield = document.getElementById('to-dates');
                 datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
             });
-            console.log( gapi.analytics.auth.signOut());
-            console.log( gapi.analytics.auth.isAuthorized());
         });
 
-    </script>
-    <script>
-        $('body').on('click', '.open_dashboard_widget', function () {
-            $('.dashboard_modal_add_widget').toggleClass('active')
-        })
     </script>
 @stop
