@@ -3050,17 +3050,27 @@ $(document).ready(function () {
             }).then(function () {
                 var data = $(_this2).serialize();
 
+                var firstNameEl = $('#firstName');
+                var lastNameEl = $('#lastName');
+                var emailEl = $('#e-mail');
+                var phoneEl = $('#phoneNumber');
+                var passwordEl = $('#password');
+
                 var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
                     var change = function change(fieldElementChange, fieldElementNameChange) {
-                        fieldElementChange.removeClass('transitionHorizonal');
+                        fieldElementChange.removeClass('transition-horizontal input-error');
                         $(fieldElementNameChange + '~p').remove();
                     };
                     change(fieldElement, fieldElementName);
+
                     var pTag = fieldElement.next().prop("tagName") !== 'p';
 
                     if (errorObject && message && pTag) {
                         fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
-                        fieldElement.addClass('transitionHorizonal');
+                        fieldElement.addClass('transition-horizontal input-error');
+                        setTimeout(function () {
+                            fieldElement.removeClass('transition-horizontal');
+                        }, 500);
                     }
                     fieldElement.on('keypress', function () {
                         return change(fieldElement, fieldElementName);
@@ -3069,7 +3079,13 @@ $(document).ready(function () {
                         return change(fieldElement, fieldElementName);
                     });
                 };
-
+                // const validation = () => {
+                //     !firstNameEl.val() && errorHandler(firstNameEl, true, 'The name field is required.', '#firstName');
+                //     firstNameEl.val().length === 1 && errorHandler(firstNameEl, true, 'The name must be at least 2 characters.', '#firstName');
+                //     !lastNameEl.val() && errorHandler(lastNameEl, true, 'The name field is required.', '#lastName');
+                //     lastNameEl.val().length === 1 && errorHandler(lastNameEl, true, 'The name must be at least 2 characters.', '#lastName');
+                // }
+                // validation() &&
                 $.ajax({
                     type: "post",
                     url: "/register",
@@ -3085,11 +3101,6 @@ $(document).ready(function () {
                         }
                     },
                     error: function error(_error2) {
-                        var firstNameEl = $('#firstName');
-                        var lastNameEl = $('#lastName');
-                        var emailEl = $('#e-mail');
-                        var phoneEl = $('#phoneNumber');
-                        var passwordEl = $('#password');
                         console.log($('form')[0]);
                         errorHandler(firstNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.name, '#firstName');
                         errorHandler(lastNameEl, _error2.responseJSON.errors, _error2.responseJSON.errors.last_name, '#lastName');
@@ -3118,14 +3129,19 @@ $(document).ready(function () {
 
                 var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
                     var change = function change(fieldElementChange, fieldElementNameChange) {
-                        fieldElementChange.removeClass('transitionHorizonal');
+                        fieldElementChange.removeClass('transition-horizontal input-error');
                         $(fieldElementNameChange + '~p').remove();
                     };
                     change(fieldElement, fieldElementName);
+
                     var pTag = fieldElement.next().prop("tagName") !== 'p';
+
                     if (errorObject && message && pTag) {
                         fieldElement.parent().append('<p style="color: red; font-size: 12px; margin-top: 2px;">' + message + '</p>');
-                        fieldElement.addClass('transitionHorizonal');
+                        fieldElement.addClass('transition-horizontal input-error');
+                        setTimeout(function () {
+                            fieldElement.removeClass('transition-horizontal');
+                        }, 500);
                     }
                     fieldElement.on('keypress', function () {
                         change(fieldElement, fieldElementName);
