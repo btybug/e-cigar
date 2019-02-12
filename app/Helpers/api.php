@@ -54,6 +54,19 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
     return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId']));
 }
 
+function get_site_logo()
+{
+    $settings = new \App\Models\Settings();
+    $logo = $settings->getData('admin_general_settings', 'siteLogo');
+    return ($logo) ? $logo->val : '';
+}
+
+function get_site_name()
+{
+    $settings = new \App\Models\Settings();
+    $name = $settings->getData('admin_general_settings', 'site_name');
+    return ($name) ? $name->val : '';
+}
 
 function BBgetDateFormat($date, $format = null)
 {

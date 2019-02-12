@@ -113,6 +113,7 @@ class SettingsController extends Controller
     public function getGeneral(Settings $settings, Countries $countries)
     {
         $model = $settings->getEditableData('admin_general_settings');
+        dd($model);
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
         return $this->view('general', compact('model', 'countries'));
     }
