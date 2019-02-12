@@ -390,8 +390,9 @@
                                     <div class="form-group">
                                         <label for="timeFormat">Time Format</label>
                                         {!! Form::select('time_format',[
-                                      'dd hh:mm'=>'dd hh:mm',
-                                      'dd hh:mm:ss.s'=>'dd hh:mm:ss.s',
+                                      '12hrs'=>'12hrs',
+                                      '24hrs'=>'24hrs',
+                                      'seconds'=>'Seconds',
                                       ],null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>

@@ -79,6 +79,17 @@ function BBgetDateFormat($date, $format = null)
         return date($format, $date);
     }
 
+    $model = new \App\Models\Settings();
+    $settings = $model->getData('admin_general_settings', 'date_format');
+
+    if ($settings) {
+        if (strpos($settings->val, '%') !== false) {
+            return (strftime($settings->val, $date)) ? strftime($settings->val, $date) : date('m/d/Y', $date);
+        } else {
+            return date($settings->val, $date);
+        }
+    }
+
     return date('m/d/Y', $date);
 }
 
@@ -89,6 +100,19 @@ function BBgetDateFormat($date, $format = null)
 function BBgetTimeFormat($time)
 {
     if (!$time) null;
+
+    $model = new \App\Models\Settings();
+    $settings = $model->getData('admin_general_settings', 'date_format');
+
+    if ($settings) {
+        if ($settings->val == 'seconds') {
+            return date("H:i:s", strtotime($time));
+        }
+        if ($settings->val == '12hrs') {
+            // 24-hour time to 12-hour time
+            return date("g:i a", strtotime($time));
+        }
+    }
 
     return date("H:i:s", strtotime($time));
 }
