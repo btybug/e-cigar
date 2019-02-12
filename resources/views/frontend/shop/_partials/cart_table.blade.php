@@ -54,7 +54,8 @@
                                                                 @endif
                                                             </span>
                                                         </p>
-                                                        <span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}</span>
+                                                        <span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}
+                                                        </span>
                                                     </li>
                                                     <li class="shp-cart-product_row shp-cart-product_extra font-main-bold font-15 text-uppercase">
                                                         Extra
@@ -92,7 +93,6 @@
                                                                         ->where('variation_id',$variationOpt->id)->first() : null;
                                                                     @endphp
                                                                     {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($variationOpt) ? convert_price($variationOpt->price,$currency) : convert_price(0,$currency)) !!}
-                                                                    {{--x {{ $vid->quantity }}--}}
                                                                 </span>
                                                                 @if($type == 'optional')
                                                                     <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
