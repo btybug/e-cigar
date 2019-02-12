@@ -84,6 +84,7 @@ class GoogleController extends Controller
                     'refresh_token'=>$refreshToken,
                     'expires_in'=>$tokenExpires,
                     'token_created'=>$tokenCreated,
+                    'created' => time(),
                     'email'=> $ga->getProfiles()['username'],
 
                 ];

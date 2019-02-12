@@ -511,11 +511,11 @@
              * If no access has been created, render an authorize button inside the
              * element with the ID "embed-api-auth-container".
              */
-            {{--gapi.analytics.auth.authorize({--}}
-                {{--serverAuth: {--}}
-                    {{--access_token:'{!! \App\Models\GoogleSettings::refreshToken() !!}'--}}
-                {{--}--}}
-            {{--});--}}
+//            gapi.analytics.auth.authorize({
+//                serverAuth: {
+//                    access_token:'ya29.GluuBn8n-XNRJimEWv1Wlarl3Q2Fj7hnJotqnrXeKSVkFXA_hgB3TVHou_ltLAGrGreCvlr1fwujXfs-TVJUWb0GP1_lRcqV-3rqV6zK1Lt7ndwfmkjOWJLlquuE'
+//                }
+//            });
   gapi.analytics.auth.authorize({
                 container: 'embed-api-auth-container',
                 clientid: '{!! env('GOOGLE_CLIENT_ID') !!}'

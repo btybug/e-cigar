@@ -98,7 +98,12 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">GMAIL API</div>
                                 <div class="panel-body">
-                                    <div class="pull-right"><a class="btn btn-info" href="{!!  route('analytics_login') !!}">Login Other User</a></div>
+                                    <div class="pull-right">
+                                        <a class="btn btn-info" href="{!!  route('analytics_login') !!}">Login @if(LaravelGmail::check()) Other User @endif</a>
+                                        @if(LaravelGmail::check())
+                                        <a class="btn btn-danger" href="{!!  route('google_log_out') !!}">Logout</a>
+                                        @endif
+                                    </div>
                                     <h1>{{ LaravelGmail::user() }}</h1>
                                         {!! Form::open(['class'=>'form-horizontal','url'=>route('post_admin_gmail_settings')]) !!}
                                         <fieldset>
