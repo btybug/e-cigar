@@ -98,7 +98,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">GMAIL API</div>
                                 <div class="panel-body">
-
+                                    <div class="pull-right"><a class="btn btn-info" href="{!!  route('analytics_login') !!}">Login Other User</a></div>
                                     <h1>{{ LaravelGmail::user() }}</h1>
                                         {!! Form::open(['class'=>'form-horizontal','url'=>route('post_admin_gmail_settings')]) !!}
                                         <fieldset>
@@ -136,7 +136,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="singlebutton"></label>
                                                 <div class="col-md-4">
-                                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Connect</button>
+                                                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Save</button>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -175,7 +175,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="singlebutton"></label>
                                                 <div class="col-md-4">
-                                                    <button  type="submit" name="singlebutton" class="btn btn-primary">Connect</button>
+                                                    <button  type="submit" name="singlebutton" class="btn btn-primary">Save</button>
                                                 </div>
                                             </div>
                                         </fieldset>

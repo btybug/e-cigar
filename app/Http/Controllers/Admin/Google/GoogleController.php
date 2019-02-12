@@ -68,14 +68,14 @@ class GoogleController extends Controller
     public function getAnalyticCallBack(Request $request)
     {
         if (!(\Session::has('oauth_access_token')) && $request->get('code')){
-            $setting = \Config::get('services.google');
             $ga = new GoogleAnalyticsAPI();
             $ga->auth->setClientId(env('GOOGLE_CLIENT_ID','client_id'));
             $ga->auth->setClientSecret(env('GOOGLE_CLIENT_SECRET','client_secret'));
             $ga->auth->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
             $auth = $ga->auth->getAccessToken($request->get('code'));
+
             if ($auth['http_code'] == 200) {
-                $accessToken = $auth['access_token'];
+                $ga->accessToken=$accessToken = $auth['access_token'];
                 $refreshToken = $auth['refresh_token'];
                 $tokenExpires = $auth['expires_in'];
                 $tokenCreated = time();
@@ -83,15 +83,13 @@ class GoogleController extends Controller
                     'access_token'=>$accessToken,
                     'refresh_token'=>$refreshToken,
                     'expires_in'=>$tokenExpires,
-                    'token_created'=>$tokenCreated
+                    'token_created'=>$tokenCreated,
+                    'email'=> $ga->getProfiles()['username'],
+
                 ];
-                $client=@json_decode(  File::get(storage_path('/app/gmail/tokens/gmail-json.json')),true);
-                if(!$client and empty($client)){
+                $client=@json_decode(File::get(storage_path('/app/gmail/tokens/gmail-json.json')),true);
                     File::put(storage_path('/app/gmail/tokens/gmail-json.json'),json_encode($data,true));
                     \Session::put('oauth_access_token', $accessToken);
-                }else{
-                    \Session::put('oauth_access_token', $client['access_token']);
-                }
                 // For simplicity of the example we only store the accessToken
                 // If it expires use the refreshToken to get a fresh one
 //            $_SESSION['oauth_access_token'] = $accessToken;
