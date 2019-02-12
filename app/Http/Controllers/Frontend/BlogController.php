@@ -28,10 +28,14 @@ class BlogController extends Controller
         $post = Posts::active()->where('url',$post_url)->first();
         if(! $post) abort(404);
 
-//        $posts = Posts::leftJoin('')
-//        dd($post->categories);
+        $relatedPosts = Posts::leftJoin('post_categories','posts.id','post_categories.post_id')
+            ->where('posts.status',true)
+            ->where('posts.id','!=',$post->id)
+            ->whereIn('post_categories.categories_post_id',$post->categories()->pluck('id')->all())
+            ->orderBy('posts.created_at',"asc")->take(6)->get();
+
         $comments = $post->comments()->main()->get();
-        return $this->view('single_post',compact('post','comments'));
+        return $this->view('single_post',compact('post','comments','relatedPosts'));
     }
 
     public function addComment(Request $request)

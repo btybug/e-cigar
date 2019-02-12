@@ -1,5 +1,4 @@
 @extends('layouts.frontend')
-
 @section('meta')
     {!! meta($post) !!}
     <meta property="og:url" content="{!! route('blog_post',$post->url) !!}">
@@ -31,7 +30,7 @@
                                     <h1 class="font-sec-reg font-36 text-main-clr mb-0 lh-1">{!! $post->title !!}</h1>
                                 </div>
                                 <div class="cat-time text-right">
-                                    <div class="font-13 text-light-clr">{!! BBgetDateFormat(@$post->created_at) !!}</div>
+                                    <div class="font-13 text-light-clr">{!! BBgetDateFormat($post->created_at) !!}</div>
                                 </div>
                             </div>
                             <div class="admin-tags d-flex flex-wrap justify-content-between align-items-center">
@@ -48,12 +47,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($post->tags)
+
+                                @if($post && $post->tags)
+                                    <?php
+                                    $tags = json_decode($post->tags, true);
+                                    ?>
                                     <div class="tags mb-1">
                                         <ul class="list-inline m-0 p-0">
-                                            <li class="list-inline-item"><a href="#"
-                                                                            class="text-light-clr">{{ $post->tags }}</a>
-                                            </li>
+                                            @foreach($tags as $tag)
+                                                <li class="list-inline-item"><a href="javascript:void(0)"
+                                                    class="text-light-clr">{{ $tag }}</a>
+                                                </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 @endif
@@ -100,348 +105,63 @@
                     <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr mb-4">RELATED POSTS</h5>
                     <div class="related-sliders">
                         <div class="realated-slider">
-                            <div>
-                                <div class="display-grid">
-                                    <a href="#" class="d-block">
-                        <span class="news-card main-transition position-relative">
-                            <span class="news-card_view d-block position-relative">
-                                <!--news main image-->
-                                    <img class="card-img-top" src="/public/img/temp/news-1.jpg" alt="">
-                                <!--share icon-->
-                                <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
-                                <svg
-                                        viewBox="0 0 20 21"
-                                        width="20px" height="21px">
-<path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
-      d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
-</svg>
-                            </span>
+                            @foreach($relatedPosts as $relatedPost)
+                                <div>
+                                    <div class="display-grid">
+                                        <a href="{!! post_url($relatedPost) !!}" class="d-block">
+                                            <span class="news-card main-transition position-relative">
+                                                <span class="news-card_view d-block position-relative">
+                                                    <!--news main image-->
+                                                    <img class="card-img-top" src="{{ $relatedPost->image }}" alt="">
+                                                    <!--share icon-->
+                                                    <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
+                                                        <svg viewBox="0 0 20 21" width="20px" height="21px">
+                                                            <path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
+                                                                  d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
+                                                        </svg>
+                                                    </span>
+                                                </span>
+                                                <span class="news-card_body">
+                                                    <span class="news-card_body-text d-block">
+                                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">
+                                                            {{ str_limit($relatedPost->title,30) }}
+                                                        </span>
+                                                        <span class="card-text d-block font-main-light font-15 text-light-clr">
+                                                            {{ str_limit($relatedPost->short_description,30) }}
+                                                        </span>
+                                                    </span>
+                                                    <span class="news-card_footer d-flex align-items-center">
+                                                        <span class="d-inline-block font-12 font-main-light text-light-clr">{{ time_ago($relatedPost->created_at) }}</span>
+                                                        <span class="ml-auto">
+                                                            <span class="news-card_views d-inline-flex align-items-center position-relative">
+                                                                <svg
+                                                                        viewBox="0 0 16 11"
+                                                                        width="16px" height="11px">
+                    <path fill-rule="evenodd" fill="rgb(188, 188, 188)"
+                          d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
+                    </svg>
+                                                                <span class="d-inline-block text-main-clr ml-2">123</span>
+                                                                <!--views tooltip-->
+                                                                <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
+                                                            </span>
+                                                            <span class="d-inline-flex align-items-center">
+                                                                <svg
+                                                                        viewBox="0 0 15 12"
+                                                                        width="15px" height="12px">
+                    <path fill-rule="evenodd" fill="rgb(188, 188, 188)"
+                          d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
+                    </svg>
+                                                                <span class="d-inline-block text-main-clr ml-2">10</span>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                </span>
 
-                            </span>
-                            <span class="news-card_body">
-                                <span class="news-card_body-text d-block">
-                                    <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
-                                    <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                        Hello dribbble community . We started
-                                        our new design team .
-                                    </span>
-                                </span>
-                                <span class="news-card_footer d-flex align-items-center">
-                                    <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
-                                    <span class="ml-auto">
-                                        <span class="news-card_views d-inline-flex align-items-center position-relative">
-                                            <svg
-                                                    viewBox="0 0 16 11"
-                                                    width="16px" height="11px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">123</span>
-                                            <!--views tooltip-->
-                                            <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
-                                        </span>
-                                        <span class="d-inline-flex align-items-center">
-                                            <svg
-                                                    viewBox="0 0 15 12"
-                                                    width="15px" height="12px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">10</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                        </span>
-                                    </a>
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="display-grid">
-                                    <a href="#" class="d-block">
-                        <span class="news-card main-transition position-relative">
-                            <span class="news-card_view d-block position-relative">
-                                <!--news main image-->
-                                    <img class="card-img-top" src="/public/img/temp/news-1.jpg" alt="">
-                                <!--share icon-->
-                                <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
-                                <svg
-                                        viewBox="0 0 20 21"
-                                        width="20px" height="21px">
-<path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
-      d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
-</svg>
-                            </span>
-
-                            </span>
-                            <span class="news-card_body">
-                                <span class="news-card_body-text d-block">
-                                    <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
-                                    <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                        Hello dribbble community . We started
-                                        our new design team .
-                                    </span>
-                                </span>
-                                <span class="news-card_footer d-flex align-items-center">
-                                    <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
-                                    <span class="ml-auto">
-                                        <span class="news-card_views d-inline-flex align-items-center position-relative">
-                                            <svg
-                                                    viewBox="0 0 16 11"
-                                                    width="16px" height="11px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">123</span>
-                                            <!--views tooltip-->
-                                            <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
-                                        </span>
-                                        <span class="d-inline-flex align-items-center">
-                                            <svg
-                                                    viewBox="0 0 15 12"
-                                                    width="15px" height="12px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">10</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="display-grid">
-                                    <a href="#" class="d-block">
-                        <span class="news-card main-transition position-relative">
-                            <span class="news-card_view d-block position-relative">
-                                <!--news main image-->
-                                    <img class="card-img-top" src="/public/img/temp/news-1.jpg" alt="">
-                                <!--share icon-->
-                                <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
-                                <svg
-                                        viewBox="0 0 20 21"
-                                        width="20px" height="21px">
-<path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
-      d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
-</svg>
-                            </span>
-
-                            </span>
-                            <span class="news-card_body">
-                                <span class="news-card_body-text d-block">
-                                    <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
-                                    <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                        Hello dribbble community . We started
-                                        our new design team .
-                                    </span>
-                                </span>
-                                <span class="news-card_footer d-flex align-items-center">
-                                    <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
-                                    <span class="ml-auto">
-                                        <span class="news-card_views d-inline-flex align-items-center position-relative">
-                                            <svg
-                                                    viewBox="0 0 16 11"
-                                                    width="16px" height="11px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">123</span>
-                                            <!--views tooltip-->
-                                            <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
-                                        </span>
-                                        <span class="d-inline-flex align-items-center">
-                                            <svg
-                                                    viewBox="0 0 15 12"
-                                                    width="15px" height="12px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">10</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="display-grid">
-                                    <a href="#" class="d-block">
-                        <span class="news-card main-transition position-relative">
-                            <span class="news-card_view d-block position-relative">
-                                <!--news main image-->
-                                    <img class="card-img-top" src="/public/img/temp/news-1.jpg" alt="">
-                                <!--share icon-->
-                                <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
-                                <svg
-                                        viewBox="0 0 20 21"
-                                        width="20px" height="21px">
-<path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
-      d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
-</svg>
-                            </span>
-
-                            </span>
-                            <span class="news-card_body">
-                                <span class="news-card_body-text d-block">
-                                    <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
-                                    <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                        Hello dribbble community . We started
-                                        our new design team .
-                                    </span>
-                                </span>
-                                <span class="news-card_footer d-flex align-items-center">
-                                    <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
-                                    <span class="ml-auto">
-                                        <span class="news-card_views d-inline-flex align-items-center position-relative">
-                                            <svg
-                                                    viewBox="0 0 16 11"
-                                                    width="16px" height="11px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">123</span>
-                                            <!--views tooltip-->
-                                            <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
-                                        </span>
-                                        <span class="d-inline-flex align-items-center">
-                                            <svg
-                                                    viewBox="0 0 15 12"
-                                                    width="15px" height="12px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">10</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="display-grid">
-                                    <a href="#" class="d-block">
-                        <span class="news-card main-transition position-relative">
-                            <span class="news-card_view d-block position-relative">
-                                <!--news main image-->
-                                    <img class="card-img-top" src="/public/img/temp/news-1.jpg" alt="">
-                                <!--share icon-->
-                                <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
-                                <svg
-                                        viewBox="0 0 20 21"
-                                        width="20px" height="21px">
-<path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
-      d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
-</svg>
-                            </span>
-
-                            </span>
-                            <span class="news-card_body">
-                                <span class="news-card_body-text d-block">
-                                    <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
-                                    <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                        Hello dribbble community . We started
-                                        our new design team .
-                                    </span>
-                                </span>
-                                <span class="news-card_footer d-flex align-items-center">
-                                    <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
-                                    <span class="ml-auto">
-                                        <span class="news-card_views d-inline-flex align-items-center position-relative">
-                                            <svg
-                                                    viewBox="0 0 16 11"
-                                                    width="16px" height="11px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">123</span>
-                                            <!--views tooltip-->
-                                            <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
-                                        </span>
-                                        <span class="d-inline-flex align-items-center">
-                                            <svg
-                                                    viewBox="0 0 15 12"
-                                                    width="15px" height="12px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">10</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="display-grid">
-                                    <a href="#" class="d-block">
-                        <span class="news-card main-transition position-relative">
-                            <span class="news-card_view d-block position-relative">
-                                <!--news main image-->
-                                    <img class="card-img-top" src="/public/img/temp/news-1.jpg" alt="">
-                                <!--share icon-->
-                                <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
-                                <svg
-                                        viewBox="0 0 20 21"
-                                        width="20px" height="21px">
-<path fill-rule="evenodd" opacity="0.6" fill="rgb(255, 255, 255)"
-      d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
-</svg>
-                            </span>
-
-                            </span>
-                            <span class="news-card_body">
-                                <span class="news-card_body-text d-block">
-                                    <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">Help make Life better!</span>
-                                    <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                        Hello dribbble community . We started
-                                        our new design team .
-                                    </span>
-                                </span>
-                                <span class="news-card_footer d-flex align-items-center">
-                                    <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
-                                    <span class="ml-auto">
-                                        <span class="news-card_views d-inline-flex align-items-center position-relative">
-                                            <svg
-                                                    viewBox="0 0 16 11"
-                                                    width="16px" height="11px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M8.000,-0.003 C4.364,-0.003 1.235,2.270 0.000,5.497 C1.235,8.725 4.364,10.998 8.000,10.998 C11.636,10.998 14.760,8.725 15.999,5.497 C14.760,2.270 11.636,-0.003 8.000,-0.003 L8.000,-0.003 ZM8.000,9.165 C5.962,9.165 4.364,7.549 4.364,5.497 C4.364,3.446 5.962,1.830 8.000,1.830 C10.034,1.830 11.636,3.446 11.636,5.497 C11.636,7.549 10.034,9.165 8.000,9.165 L8.000,9.165 ZM8.000,3.299 C6.764,3.299 5.816,4.252 5.816,5.497 C5.816,6.743 6.764,7.696 8.000,7.696 C9.235,7.696 10.180,6.743 10.180,5.497 C10.180,4.252 9.235,3.299 8.000,3.299 L8.000,3.299 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">123</span>
-                                            <!--views tooltip-->
-                                            <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
-                                        </span>
-                                        <span class="d-inline-flex align-items-center">
-                                            <svg
-                                                    viewBox="0 0 15 12"
-                                                    width="15px" height="12px">
-<path fill-rule="evenodd" fill="rgb(188, 188, 188)"
-      d="M15.002,5.832 L8.767,-0.002 L8.767,3.343 C4.351,3.391 -0.003,7.181 -0.003,12.001 C2.109,9.975 4.607,8.146 8.767,8.295 L8.767,11.665 L15.002,5.832 Z"/>
-</svg>
-                                            <span class="d-inline-block text-main-clr ml-2">10</span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </span>
-
-                        </span>
-                                    </a>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                     <!--RELATED PRODUCTS-->
@@ -454,11 +174,14 @@
                                         <div class="display-grid">
                                             <div class="w-100">
                                                 <div class="product-card position-relative">
-                                                    <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}" class="main--link">
+                                                    <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}"
+                                                       class="main--link">
                                                         <div class="product-card_view position-relative">
                                                             <!--product main image-->
                                                             <div>
-                                                                <img class="card-img-top" src="{{ (media_image_tmb($product->image)) }}" alt="">
+                                                                <img class="card-img-top"
+                                                                     src="{{ (media_image_tmb($product->image)) }}"
+                                                                     alt="">
                                                             </div>
                                                             <!--like icon-->
                                                             <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute {{ (! $product->is_favorite)?:'active' }}"
@@ -481,13 +204,16 @@
                                                             <!--product image thumbs-->
                                                             <div class="d-flex product-card-thumbs flex-wrap">
                                                                 <div class="product-card_thumb-img-holder pointer active_slider">
-                                                                    <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}">
+                                                                    <img src="{{ (media_image_tmb($product->image)) }}"
+                                                                         alt="{{ $product->name }}">
                                                                 </div>
                                                                 @if($product->variations)
                                                                     @foreach($product->variations as $variation)
                                                                         @if($variation->image)
                                                                             <div class="product-card_thumb-img-holder pointer">
-                                                                                <img class="" src="{{ (media_image_tmb($variation->image)) }}" alt="{{ $variation->name }}">
+                                                                                <img class=""
+                                                                                     src="{{ (media_image_tmb($variation->image)) }}"
+                                                                                     alt="{{ $variation->name }}">
                                                                             </div>
                                                                         @endif
                                                                     @endforeach
