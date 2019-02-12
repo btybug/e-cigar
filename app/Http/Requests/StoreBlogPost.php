@@ -23,12 +23,13 @@ class StoreBlogPost extends FormRequest
      */
     public function rules()
     {
+        $locale = app()->getLocale();
         return [
             'url' => 'required|unique:posts,id,'.$this->id,
             "translatable"    => "required|array|min:1",
-            "translatable.*.title"  => "required|string|min:3",
-            "translatable.*.short_description"  => "required|string|min:3",
-            "translatable.*.long_description"  => "required|string|min:3",
+            "translatable.$locale.title"  => "required|string|min:3",
+            "translatable.$locale.short_description"  => "required|string|min:3",
+            "translatable.$locale.long_description"  => "required|string|min:3",
         ];
     }
 
