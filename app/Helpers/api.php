@@ -117,6 +117,18 @@ function BBgetTimeFormat($time)
     return date("H:i:s", strtotime($time));
 }
 
+function get_site_social_icons()
+{
+    $model = new \App\Models\Settings();
+    $settings = $model->getData('admin_general_settings', 'social_media');
+
+    if ($settings && $settings->val) {
+        return json_decode($settings->val,true);
+    }
+
+    return null;
+}
+
 function userCan($permission)
 {
     if (!Auth::check()) return false;
