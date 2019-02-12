@@ -130,6 +130,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/staff/new', 'Admin\UserController@newStaff')->name('admin_staff_new');
     Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
+    Route::get('/edit-staff/{id}', 'Admin\UserController@editStaff')->name('admin_staff_edit');
     Route::post('/address-book-form', 'Admin\UserController@postAddressBookForm')->name('admin_users_address_book_form');
     Route::post('/save-address-book', 'Admin\UserController@postAddressBookSave')->name('admin_users_address_book_save');
     Route::post('/address', 'Admin\UserController@postAddress')->name('admin_users_address');
