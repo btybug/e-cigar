@@ -31,8 +31,9 @@
                             <div class="select-wall">
                                 {!! Form::select('per-page',[
                                     '' => "Select",
-                                    '15' =>'15 per page',
                                     '5' =>'5 per page',
+                                    '10' =>'10 per page',
+                                    '15' =>'15 per page',
                                     '30' =>'30 per page'
                                 ], null,[
                                     'class' =>'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
@@ -88,7 +89,7 @@
                                         </span>
                                     </span>
                                     <span class="news-card_footer d-flex align-items-center">
-                                        <span class="d-inline-block font-12 font-main-light text-light-clr">15&nbsp;&nbsp;minutes ago</span>
+                                        <span class="d-inline-block font-12 font-main-light text-light-clr">{!! time_ago($post->created_at) !!}</span>
                                         <span class="ml-auto">
                                             <span class="news-card_views d-inline-flex align-items-center position-relative">
                                                 <svg viewBox="0 0 16 11" width="16px" height="11px">

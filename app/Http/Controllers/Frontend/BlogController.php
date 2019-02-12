@@ -28,6 +28,8 @@ class BlogController extends Controller
         $post = Posts::active()->where('url',$post_url)->first();
         if(! $post) abort(404);
 
+//        $posts = Posts::leftJoin('')
+//        dd($post->categories);
         $comments = $post->comments()->main()->get();
         return $this->view('single_post',compact('post','comments'));
     }
