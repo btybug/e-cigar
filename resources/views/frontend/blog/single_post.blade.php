@@ -256,21 +256,12 @@
                     </svg>
                                                         </span>
                                                                     </div>
-                                                                @if($product->new_price)
+
                                                                     <!--Price-->
-                                                                        <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
-                                                             {{ convert_price($product->new_price,$currency) }}
-                                                             <!--old price-->
-                                                                 <span class="product-card_old-price font-sec-reg font-18 text-gray-clr lh-1 position-absolute">
-                                                                 {{ convert_price($product->price,$currency) }}
+                                                            <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
+                                                                {{ convert_price(@$product->variations->first()->price,$currency)}}
                                                             </span>
-                                                        </span>
-                                                                @else
-                                                                    <!--Price-->
-                                                                        <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
-                                                           {{ convert_price($product->price,$currency) }}
-                                                        </span>
-                                                                    @endif
+
                                                                 </div>
                                                             </div>
                                                             <!--btn-->

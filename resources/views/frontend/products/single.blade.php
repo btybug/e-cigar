@@ -366,7 +366,7 @@
                                                                         </span>
                                                                        </div>
                                                                        <!--Price-->
-                                                                       <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">${{$related_product->variations->first()->price}}</span>
+                                                                       <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">{{ convert_price($related_product->variations->first()->price,$currency)}}</span>
                                                                    </div>
                                                                </div>
                                                                <!--btn-->
