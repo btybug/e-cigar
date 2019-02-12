@@ -1,4 +1,4 @@
-<ul class="profile-sidebar-menu list-unstyled mb-0 w-100">
+<ul class="profile-sidebar-menu list-unstyled mb-0 w-100 main-scrollbar">
     <li class="profile-sidebar-menu_item active">
         <a href="{!! route('my_account') !!}"
            class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
