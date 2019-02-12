@@ -447,14 +447,9 @@ Route::group(['prefix' => 'gmail'], function () {
     Route::get('/', 'Admin\GmailController@index')->name('admin_gmail');
     Route::get('/settings', 'Admin\GmailController@settings')->name('admin_gmail_settings');
     Route::post('/settings', 'Admin\GmailController@postSettings')->name('post_admin_gmail_settings');
-    Route::get('/oauth/gmail', function (){
-        return LaravelGmail::redirect();
-    })->name('admin_gmail_login');
 
-    Route::get('/oauth/callback', function (){
-        LaravelGmail::makeToken();
-        return redirect()->route('admin_settings_connections');
-    });
+    Route::get('analytics-login','Admin\Google\GoogleController@getAuthorization')->name('analytics_login');
+    Route::get('/oauth/callback','Admin\Google\GoogleController@getAnalyticCallBack');
 
     Route::get('/oauth/gmail/logout', function (){
         LaravelGmail::logout(); //It returns exception if fails

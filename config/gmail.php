@@ -34,6 +34,7 @@ return [
 	'redirect_url'  => env( 'GOOGLE_REDIRECT_URI', '/' ),
 
 	'scopes' => [
+	    'https://www.googleapis.com/auth/spreadsheets',
 		'all',
 	],
 

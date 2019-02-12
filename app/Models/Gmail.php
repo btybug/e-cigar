@@ -29,7 +29,7 @@ class Gmail extends \LaravelGmail
 
   public static function getFreshToken()
   {
-    return isset(static::refreshToken()['access_token'])?:null;
+    return isset(self::refreshToken()['access_token'])?static::refreshToken()['access_token']:null;
   }
 
     public static function isAccessTokenExpired()

@@ -12,9 +12,12 @@
 @stop
 @section('content')
 
-  
-    <div class="col-md-12">
 
+    <div class="col-md-12">
+        <aside class="Header-auth" id="header-auth">
+            <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
+            </div>
+        </aside>
         <div class="Dashboard Dashboard--full">
             <header class="Dashboard-header">
                 <div class="Titles">
@@ -508,10 +511,15 @@
              * If no access has been created, render an authorize button inside the
              * element with the ID "embed-api-auth-container".
              */
-            gapi.analytics.auth.authorize({
-                serverAuth: JSON.parse('{!! json_encode(Gmail::refreshToken()) !!}')
+            {{--gapi.analytics.auth.authorize({--}}
+                {{--serverAuth: {--}}
+                    {{--access_token:'{!! \App\Models\GoogleSettings::refreshToken() !!}'--}}
+                {{--}--}}
+            {{--});--}}
+  gapi.analytics.auth.authorize({
+                container: 'embed-api-auth-container',
+                clientid: '{!! env('GOOGLE_CLIENT_ID') !!}'
             });
-
             var commonConfig = {
                 query: {
                     metrics: 'ga:sessions',
