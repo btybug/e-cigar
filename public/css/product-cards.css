@@ -777,8 +777,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     z-index:10000;
     transition: all .5s;
     height: calc(100% - 50px); /*minus header-top heighr*/
-
-
 }
 
 .hidden-sidebar.show {
@@ -808,6 +806,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .hidden-sidebar .profile-sidebar-menu {
     border-top: 10px solid #353535;
     margin-bottom: 30px;
+    overflow-y: auto;
 }
 
 .profile-sidebar-menu_item {
