@@ -510,16 +510,11 @@
 @stop
 
 @section("js")
-    {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
-    <!-- jQuery UI 1.11.4 -->
-    {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
-    {!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
     <script src="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>
 
     {!! Html::script('public/js/custom/comments.js') !!}
     <script>
         $(document).ready(function () {
-
 
             $('.blog-products-slider').owlCarousel({
                 nav: true,
@@ -528,7 +523,7 @@
                 autoplay: true,
                 loop: true,
                 autoplayTimeout: 3000
-            })
+            });
 
             $('.blog-posts-slider').owlCarousel({
                 nav: false,
@@ -538,7 +533,7 @@
                 autoplayTimeout: 5000,
                 loop: true,
                 margin: 10
-            })
+            });
 
             $('body').on('click', '.cancel-comment', function (event) {
                 $(this).parents('form:first')[0].reset();
@@ -575,7 +570,6 @@
                     }
                 });
             });
-
 
             $('body').on('click', '.reply', function (e) {
                 e.preventDefault();
