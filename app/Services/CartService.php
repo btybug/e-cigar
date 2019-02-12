@@ -75,6 +75,42 @@ class CartService
         }
     }
 
+    public function update($id,$qty,$condition,$value,$user_id = null)
+    {
+        $list = $this->getCartItems($user_id);
+        $data = (isset($list[$id])) ? $list[$id] : [] ;
+
+        if(count($data)){
+            foreach ($data as $datum){
+                if($condition == 'inner'){
+                    if($user_id){
+                        Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($datum->id, array(
+                            'quantity' => array(
+                                'relative' => false,
+                                'value' => $value
+                            )));
+                    }else{
+                        Cart::update($datum->id, array(
+                            'quantity' => array(
+                                'relative' => false,
+                                'value' => $value
+                            )));
+                    }
+                }else{
+                    if($user_id){
+                        Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($datum->id, array(
+                            'quantity' => $qty
+                        ));
+                    }else{
+                        Cart::update($datum->id, array(
+                            'quantity' => $qty
+                        ));
+                    }
+                }
+            }
+        }
+    }
+
     public function saveOrderItems($items,$order)
     {
         foreach ($items as $variation_id => $item) {
@@ -97,32 +133,32 @@ class CartService
                 'options' => $options
             ]);
 
-            if($main->attributes->requiredItems && count($main->attributes->requiredItems)){
-                foreach($main->attributes->requiredItems as $vid){
-                    $reqV = StockVariation::find($vid);
-                    $voptions = [];
-                    foreach ($reqV->options as $option) {
-                        $voptions[$option->attr->name] = $option->option->name;
-                    }
-
-                    $promotionPrice = ($reqV) ? $reqV->stock->promotion_prices()
-                        ->where('variation_id',$reqV->id)->first() : null;
-                    $price = ($promotionPrice) ? $promotionPrice->price : (($reqV) ? $reqV->price : 0);
-                    OrderItem::create([
-                        'order_id' => $order->id,
-                        'name' => $reqV->name,
-                        'sku' => $reqV->variation_id,
-                        'variation_id' => $vid,
-                        'price' => $price,
-                        'qty' => 1,
-                        'amount' => $price,
-                        'image' => $reqV->stock->image,
-                        'options' => $voptions,
-                        'type' => 'required',
-                        'parent_id' => $mainOrder->id
-                    ]);
-                }
-            }
+//            if($main->attributes->requiredItems && count($main->attributes->requiredItems)){
+//                foreach($main->attributes->requiredItems as $vid){
+//                    $reqV = StockVariation::find($vid);
+//                    $voptions = [];
+//                    foreach ($reqV->options as $option) {
+//                        $voptions[$option->attr->name] = $option->option->name;
+//                    }
+//
+//                    $promotionPrice = ($reqV) ? $reqV->stock->promotion_prices()
+//                        ->where('variation_id',$reqV->id)->first() : null;
+//                    $price = ($promotionPrice) ? $promotionPrice->price : (($reqV) ? $reqV->price : 0);
+//                    OrderItem::create([
+//                        'order_id' => $order->id,
+//                        'name' => $reqV->name,
+//                        'sku' => $reqV->variation_id,
+//                        'variation_id' => $vid,
+//                        'price' => $price,
+//                        'qty' => 1,
+//                        'amount' => $price,
+//                        'image' => $reqV->stock->image,
+//                        'options' => $voptions,
+//                        'type' => 'required',
+//                        'parent_id' => $mainOrder->id
+//                    ]);
+//                }
+//            }
 
             if(count($item)){
                 foreach($item as $vid){
@@ -144,7 +180,7 @@ class CartService
                         'image' => $variationOpt->stock->image,
                         'options' => $options,
                         'parent_id' => $mainOrder->id,
-                        'type' => 'optional'
+                        'type' => $vid->attributes->type
                     ]);
                 }
             }

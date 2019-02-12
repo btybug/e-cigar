@@ -222,24 +222,11 @@ class ShoppingCartController extends Controller
     {
         $qty = ($request->condition) ? 1 : -1;
 
-//        dd($request->all());
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
         if(\Auth::check()){
-            if($request->condition == 'inner'){
-                Cart::update($request->uid, array(
-                    'quantity' => array(
-                        'relative' => false,
-                        'value' => $request->value
-                    )));
-            }else{
-                $i = Cart::update($request->uid, array(
-                    'quantity' => $qty
-                ));
-            }
-
-
+            $this->cartService->update($request->uid,$qty,$request->condition,$request->value);
 
             $default_shipping = \Auth::user()->addresses()->where('type','default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
@@ -264,21 +251,11 @@ class ShoppingCartController extends Controller
             }
 
         }else{
-            if($request->condition == 'inner'){
-                Cart::update($request->uid, array(
-                    'quantity' => array(
-                        'relative' => false,
-                        'value' => $request->value
-                    )));
-            }else{
-                $i = Cart::update($request->uid, array(
-                    'quantity' => $qty
-                ));
-            }
+            $this->cartService->update($request->uid,$qty,$request->condition,$request->value);
         }
 
         $items = $this->cartService->getCartItems();
-//        dd($items);
+
         $html = $this->view('_partials.cart_table',compact(['items','default_shipping','shipping','geoZone']))->render();
         $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 
