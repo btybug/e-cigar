@@ -518,10 +518,11 @@
             gapi.analytics.auth.authorize({
                 container: 'embed-api-auth-container',
                 clientid: '{!! env('GOOGLE_CLIENT_ID') !!}',
-                {{--serverAuth: {--}}
-                    {{--access_token: "{!! Gmail::getFreshToken() !!}"--}}
-                {{--}--}}
+                serverAuth: {
+                    access_token: "{!! Gmail::getFreshToken() !!}"
+                }
             });
+//            gapi.analytics.auth.signOut();
             {{--gapi.analytics.auth.authorize({--}}
                 {{--container: 'embed-api-auth-container',--}}
                 {{--serverAuth: {--}}
@@ -725,6 +726,8 @@
                 var datefield = document.getElementById('to-dates');
                 datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
             });
+            console.log( gapi.analytics.auth.signOut());
+            console.log( gapi.analytics.auth.isAuthorized());
         });
 
     </script>
