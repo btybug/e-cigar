@@ -147,7 +147,20 @@ class ShoppingCartController extends Controller
                 $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
                 $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
                 Cart::add($variation->id, $variation->id, $price, 1,
-                    ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
+                    ['variation' => $variation]);
+
+                $requiredItems = $request->get('requiredItems');
+                if ($requiredItems && count($requiredItems)) {
+                    foreach ($requiredItems as $opv) {
+                        $reqVariation = StockVariation::find($opv);
+                        if ($reqVariation) {
+                            $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $reqVariation->id)->first();
+                            $reqPrice = ($promotionPrice) ? $promotionPrice->price : $reqVariation->price;
+                            Cart::add($variation->id.'.'.$reqVariation->id, $variation->id, $reqPrice, 1,
+                                ['variation' => $reqVariation,'type' => 'required']);
+                        }
+                    }
+                }
 
                 $optionalItems = $request->get('optionalItems');
                 if ($optionalItems && count($optionalItems)) {
@@ -156,8 +169,8 @@ class ShoppingCartController extends Controller
                         if ($optpVariation) {
                             $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
                             $reqPrice = ($promotionPrice) ? $promotionPrice->price : $optpVariation->price;
-                            Cart::add($optpVariation->id, $variation->id, $reqPrice, 1,
-                                ['variation' => $optpVariation]);
+                            Cart::add($variation->id.'.'.$optpVariation->id, $variation->id, $reqPrice, 1,
+                                ['variation' => $optpVariation,'type' => 'optional']);
                         }
                     }
                 }

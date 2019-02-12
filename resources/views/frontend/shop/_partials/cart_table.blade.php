@@ -54,7 +54,7 @@
                                                                 @endif
                                                             </span>
                                                         </p>
-                                                        <span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}</span>
+                                                        <span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }} x {{ $main->quantity }}</span>
                                                     </li>
                                                     <li class="shp-cart-product_row shp-cart-product_extra font-main-bold font-15 text-uppercase">
                                                         Extra
@@ -62,38 +62,6 @@
                                                     @php
                                                         $countMessage = true;
                                                     @endphp
-                                                    @if($main->attributes->requiredItems && count($main->attributes->requiredItems))
-                                                        @php
-                                                            $countMessage = false;
-                                                        @endphp
-                                                        @foreach($main->attributes->requiredItems as $vid)
-                                                            @php
-                                                                $variationReq = \App\Services\CartService::getVariation($vid)
-                                                            @endphp
-                                                            <li class="shp-cart-product_row d-flex justify-content-between position-relative">
-                                                                <p class="mb-0">
-                                                                    <span>{{ $variationReq->stock->name }}: </span>
-                                                                    <span class="font-main-bold">
-                                                                        @if($variationReq->stock->type == 'variation_product')
-                                                                            @foreach($variationReq->options as $voption)
-                                                                                @if($voption->attribute_sticker)
-                                                                                    {{ $voption->attribute_sticker->sticker->name }}
-                                                                                    {{ ($loop->last)?'':',' }}
-                                                                                @endif
-                                                                            @endforeach
-                                                                        @endif
-                                                                    </span>
-                                                                </p>
-                                                                <span class="font-15 font-main-bold">
-                                                                   @php
-                                                                       $promotionPrice = ($variationReq) ? $stock->promotion_prices()
-                                                                       ->where('variation_id',$variationReq->id)->first() : null;
-                                                                   @endphp
-                                                                    {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($variationReq) ? convert_price($variationReq->price,$currency) : convert_price(0,$currency)) !!}
-                                                                </span>
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
 
                                                     @if(count($item))
                                                         @php
@@ -101,7 +69,8 @@
                                                         @endphp
                                                         @foreach($item as $vid)
                                                             @php
-                                                                $variationOpt = $vid->attributes->variation
+                                                                $variationOpt = $vid->attributes->variation;
+                                                                $type = $vid->attributes->type;
                                                             @endphp
                                                             <li class="shp-cart-product_row d-flex justify-content-between position-relative">
                                                                 <p class="mb-0">
@@ -123,7 +92,9 @@
                                                                         ->where('variation_id',$variationOpt->id)->first() : null;
                                                                     @endphp
                                                                     {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($variationOpt) ? convert_price($variationOpt->price,$currency) : convert_price(0,$currency)) !!}
+                                                                    x {{ $vid->quantity }}
                                                                 </span>
+                                                                @if($type == 'optional')
                                                                 <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
                                                                       data-uid="{{ $variationOpt->id }}">
                                                                     <svg viewBox="0 0 8 8" width="8px" height="8px">
@@ -132,6 +103,7 @@
                                                                               d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
                                                                     </svg>
                                                                 </span>
+                                                                @endif
                                                             </li>
                                                         @endforeach
                                                     @endif
