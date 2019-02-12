@@ -34,13 +34,10 @@
              */
 
 
-            gapi.auth.setToken({
+            gapi.analytics.auth.setToken({
                 access_token:  "{!!Gmail::getFreshToken()!!}",
             });
-            gapi.analytics.auth.authorize({
-                container: 'embed-api-auth-container',
-                clientid: '373182395032-oniiqqhp4mf57q10h51ca544neicps17.apps.googleusercontent.com'
-            });
+
 
 
             /**
