@@ -12,10 +12,7 @@
 @stop
 @section('content')
 
-    <aside class="Header-auth" id="header-auth">
-        <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
-        </div>
-    </aside>
+  
     <div class="col-md-12">
 
         <div class="Dashboard Dashboard--full">
@@ -60,7 +57,7 @@
                 </li>
             </ul>
         </div>
-        </div>
+    </div>
 
 
     <div class="row">
@@ -483,34 +480,37 @@
         $('body').on('click', '.open_dashboard_widget', function () {
             $('.dashboard_modal_add_widget').toggleClass('active')
         })
-        </script>
+    </script>
     <script>
-        (function(w,d,s,g,js,fs){
-            g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
-            js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
-            js.src='https://apis.google.com/js/platform.js';
-            fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
-        }(window,document,'script'));
+        (function (w, d, s, g, js, fs) {
+            g = w.gapi || (w.gapi = {});
+            g.analytics = {
+                q: [], ready: function (f) {
+                    this.q.push(f);
+                }
+            };
+            js = d.createElement(s);
+            fs = d.getElementsByTagName(s)[0];
+            js.src = 'https://apis.google.com/js/platform.js';
+            fs.parentNode.insertBefore(js, fs);
+            js.onload = function () {
+                g.load('analytics');
+            };
+        }(window, document, 'script'));
     </script>
     {!! HTML::script('/public/js/google/analytic/view-selector2.js') !!}
     {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
     <script>
-        gapi.analytics.ready(function() {
-console.log(gapi);
+        gapi.analytics.ready(function () {
+            console.log(gapi);
             /**
              * Authorize the user immediately if the user has already granted access.
              * If no access has been created, render an authorize button inside the
              * element with the ID "embed-api-auth-container".
              */
-            gapi.auth.setToken({
-                access_token:  "{!!Gmail::getFreshToken()!!}",
-            });
             gapi.analytics.auth.authorize({
-                container: 'embed-api-auth-container',
-                clientid: '373182395032-oniiqqhp4mf57q10h51ca544neicps17.apps.googleusercontent.com'
+                serverAuth: JSON.parse('{!! json_encode(Gmail::refreshToken()) !!}')
             });
-//            gapi.auth.setToken(null);
-//            gapi.auth.signOut();
 
             var commonConfig = {
                 query: {
@@ -623,21 +623,26 @@ console.log(gapi);
                 .set({query: dateRange2})
                 .set({chart: {container: 'data-chart-2-container'}});
 
-            var dataChart3 = new gapi.analytics.googleCharts.DataChart(commonConfig).set( {chart: {
-                'container': 'data-chart-3-container',
-                'type': 'PIE',
-                'options': {
-                    'width': '100%',
-                    'pieHole': '4/9'
-                }}}).set({query: dateRange3});
-
-            var dataChart4 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({chart: {
-                'container': 'data-chart-4-container',
-                'type': 'LINE',
-                'options': {
-                    'width': '100%'
+            var dataChart3 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({
+                chart: {
+                    'container': 'data-chart-3-container',
+                    'type': 'PIE',
+                    'options': {
+                        'width': '100%',
+                        'pieHole': '4/9'
+                    }
                 }
-            }}).set({query: dateRange4})
+            }).set({query: dateRange3});
+
+            var dataChart4 = new gapi.analytics.googleCharts.DataChart(commonConfig).set({
+                chart: {
+                    'container': 'data-chart-4-container',
+                    'type': 'LINE',
+                    'options': {
+                        'width': '100%'
+                    }
+                }
+            }).set({query: dateRange4})
 
 
             /**
@@ -645,7 +650,7 @@ console.log(gapi);
              * The handler will update both dataCharts as well as updating the title
              * of the dashboard.
              */
-            viewSelector.on('viewChange', function(data) {
+            viewSelector.on('viewChange', function (data) {
                 dataChart1.set({query: {ids: data.ids}}).execute();
                 dataChart2.set({query: {ids: data.ids}}).execute();
                 dataChart3.set({query: {ids: data.ids}}).execute();
@@ -660,7 +665,7 @@ console.log(gapi);
              * the first datepicker. The handler will update the first dataChart
              * instance as well as change the dashboard subtitle to reflect the range.
              */
-            dateRangeSelector1.on('change', function(data) {
+            dateRangeSelector1.on('change', function (data) {
                 dataChart1.set({query: data}).execute();
 
                 // Update the "from" dates text.
@@ -674,21 +679,21 @@ console.log(gapi);
              * the second datepicker. The handler will update the second dataChart
              * instance as well as change the dashboard subtitle to reflect the range.
              */
-            dateRangeSelector2.on('change', function(data) {
+            dateRangeSelector2.on('change', function (data) {
                 dataChart2.set({query: data}).execute();
 
                 // Update the "to" dates text.
                 var datefield = document.getElementById('to-dates');
                 datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
             });
-            dateRangeSelector3.on('change', function(data) {
+            dateRangeSelector3.on('change', function (data) {
                 dataChart3.set({query: data}).execute();
 
                 // Update the "to" dates text.
                 var datefield = document.getElementById('to-dates');
                 datefield.innerHTML = data['start-date'] + '&mdash;' + data['end-date'];
             });
-            dateRangeSelector4.on('change', function(data) {
+            dateRangeSelector4.on('change', function (data) {
                 dataChart4.set({query: data}).execute();
 
                 // Update the "to" dates text.
