@@ -17,4 +17,14 @@ class SiteLanguages extends Model
     public $timestamps = false;
 
     protected $guarded = ['id'];
+
+    public function getTranslations(){
+
+        if(! \File::exists("resources/lang/$this->code.json")){
+            \File::put("resources/lang/$this->code.json",json_encode([]));
+        }
+
+        $data = json_decode( \File::get("resources/lang/$this->code.json"),true);
+        return $data;
+    }
 }

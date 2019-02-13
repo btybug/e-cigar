@@ -90,6 +90,8 @@ Route::group(['prefix' => 'settings'], function () {
     });
     Route::group(['prefix' => 'languages'], function () {
         Route::get('/', 'Admin\SettingsController@getLanguages')->name('admin_settings_languages');
+        Route::get('/manager', 'Admin\SettingsController@getLanguageManager')->name('admin_settings_language_manager');
+        Route::post('/manager', 'Admin\SettingsController@postLanguageManager')->name('admin_settings_language_manager_post');
 
         Route::post('/', 'Admin\SettingsController@setLanguageDefault')->name('admin_settings_set_language_default');
 

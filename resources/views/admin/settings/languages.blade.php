@@ -5,6 +5,7 @@
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <h3 class="mt-0 pull-left">Listing All Languages </h3>
+                <a href="{{ route('admin_settings_language_manager') }}" class="mt-0 pull-left">Language Manager </a>
                 <div class="box-tools pull-right">
                     <a href="{!! route('admin_settings_languages_new') !!}" type="button" class="btn btn-primary">Add</a>
                 </div>

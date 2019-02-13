@@ -78,6 +78,27 @@ class SettingsController extends Controller
         return redirect()->route('admin_settings_languages');
     }
 
+    public function getLanguageManager()
+    {
+        $languages = SiteLanguages::all();
+        $keys = $languages->where('default',true)->first()->getTranslations();
+
+        return $this->view('language_manager', compact(['languages','keys']));
+    }
+
+    public function postLanguageManager(Request $request)
+    {
+        $key = $request->name;
+        $code = $request->pk;
+        $value = $request->value;
+
+        $data = json_decode( \File::get("resources/lang/$code.json"),true);
+        $data[$key] = $value;
+        \File::put("resources/lang/$code.json",json_encode($data));
+
+        return \Response::json(['error' => false]);
+    }
+
     public function getMailTemplates()
     {
         return $this->view('mail_templates');
