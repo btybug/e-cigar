@@ -3,62 +3,57 @@
 
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-md-3">
-            <!-- Password input-->
-            <div class="form-group row">
-                <label class="col-md-2" for="passwordinput">Title</label>
-                <div class="col-md-10">
-                    {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <!-- Password input-->
-            <div class="form-group row">
-                <label class="col-md-2" for="passwordinput">Type</label>
-                <div class="col-md-10">
-                    {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="m-0">Create Role</h2>
         </div>
-        <div class="panel-body">
-            <div class="col-md-4">
-
-                <form action="">
-                    <!-- Password input-->
-                    <div class="form-group row">
-                        <label class="col-md-2" for="passwordinput">Description</label>
-                        <div class="col-md-10">
-                            {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-                    <!-- Button -->
-                    <div class="form-group row">
-                        <div class="col-sm-12 text-right">
-                            <button id="singlebutton" class="btn btn-info save-role">Save</button>
-                        </div>
-                    </div>
-
-                </form>
+        <form action="">
+            <!-- Button -->
+            <div class="form-group row">
+                <div class="col-sm-12 text-right pull-right">
+                    <button id="singlebutton" class="btn btn-info save-role">Save</button>
+                </div>
             </div>
-            <div class="col-md-8">
-                <div class="col-md-12">
-                    <div class="panel panel-default">
-                        <h3 class="panel-heading m-0">Pages</h3>
-                        <div class="panel-body">
-                            @include('admin.roles._partials.tree')
+            <div class="panel-body">
+
+                <div class="col-md-4">
+                    <div class="row">
+                        <!-- Password input-->
+                        <div class="form-group row">
+                            <label class="col-md-2" for="passwordinput">Title</label>
+                            <div class="col-md-10">
+                                {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                            </div>
+                        </div>
+                        <!-- Password input-->
+                        <div class="form-group row">
+                            <label class="col-md-2" for="passwordinput">Type</label>
+                            <div class="col-md-10">
+                                {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2" for="passwordinput">Description</label>
+                            <div class="col-md-10">
+                                {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="col-md-8">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <h3 class="panel-heading m-0">Pages</h3>
+                            <div class="panel-body">
+                                @include('admin.roles._partials.tree')
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+        </form>
 
     </div>
 
@@ -69,11 +64,12 @@
     <link rel="stylesheet" href="http://laraframe.codemen.org/common/vendors/iCheck/flat/_all.css">
 
     <style>
-        .panel-create-role .panel-heading{
+        .panel-create-role .panel-heading {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
+
         .no-padding {
             padding: 0px;
         }

@@ -8,30 +8,29 @@
 
 return [
     'user' => [
-        [
+        'staff' => [
             'name' => 'staff',
             'routes' => ['admin_staff'],
             'description' => 'Able to see all staff',
             'children' => [
-                [
+                'create' => [
                     'name' => 'Create staff member',
                     'routes' => ['admin_staff_new', 'admin_staff_new_post'],
                     'description' => 'Able to Create new member in staff',
                 ],
-                [
+                'edit' => [
                     'name' => 'Edit staff member details',
                     'routes' => ['admin_staff_edit'],
                     'description' => 'Edit staff member details',
                 ]
             ]
         ],
-        [
+        'customers' => [
             'name' => 'Customers',
             'routes' => ['admin_customers'],
             'description' => 'Able to see all staff',
             'children' => [
-
-                [
+                'edit' => [
                     'name' => 'Edit Customer  details',
                     'routes' => ['admin_users_edit'],
                     'description' => 'Edit Customer details',
@@ -40,46 +39,22 @@ return [
         ],
     ],
     'blog' => [
-        [
+        'posts' => [
             'name' => 'Posts',
             'routes' => ['admin_blog'],
             'description' => 'Able to see blog page',
             'children' => [
-                [
-                    [
-                        'name' => 'View All Post Comments Page',
-                        'routes' => ['show_comments', 'admin_new_post'],
-                        'description' => 'Able to see all comments',
-                    ],
-                    [
-                        'name' => 'Edit Post Comment',
-                        'routes' => ['approve_comments', 'unapprove_comments', 'edit_comment', 'edit_comment_post'],
-                        'description' => 'Approve or cancel pending Comment ',
-                    ],
-                    [
-                        'name' => 'Replay Post comment',
-                        'routes' => ['reply_comment', 'reply_comment_post'],
-                        'description' => 'Delete or edit comment',
-                    ],
-                ],
-            ],
-
-        ],[
-            'name' => 'Comments',
-            'routes' => ['show_comments'],
-            'description' => 'Able to see all comments',
-            'children' => [
-                [
+                'create' => [
                     'name' => 'Create Post',
                     'routes' => ['admin_blog_create', 'admin_new_post'],
                     'description' => 'Able to Create post',
                 ],
-                [
+                'edit' => [
                     'name' => 'Edit Post',
                     'routes' => ['admin_post_edit'],
                     'description' => 'Edit any post',
                 ],
-                [
+                'delete' => [
                     'name' => 'Delete Post',
                     'routes' => ['admin_post_delete'],
                     'description' => 'Able to Delete post',
@@ -87,34 +62,47 @@ return [
             ],
 
         ],
+        'comments' => [
+            'name' => 'Comments',
+            'routes' => ['show_comments'],
+            'description' => 'Able to see all comments',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit Post Comment',
+                    'routes' => ['approve_comments', 'unapprove_comments', 'edit_comment', 'reply_comment', 'reply_comment_post', 'edit_comment_post'],
+                    'description' => 'Approve or cancel pending Comment ',
+                ],
+                'delete' => [
+                    'name' => 'Delete Post comment',
+                    'routes' => ['delete_comments'],
+                    'description' => 'Delete or edit comment',
+                ],
+            ],
+
+        ],
     ],
     'inventory' => [
-        [
+        'inventory' => [
             'name' => 'Inventory',
-            'routes' => ['admin_items'],
+            'routes' => ['admin_items', 'admin_items_purchase'],
             'description' => 'Able inventory',
             'children' =>
                 [
-                    [
+                    'create' => [
                         'name' => 'Create inventory item',
                         'routes' => ['admin_items_new', 'post_admin_items_new'],
                         'description' => 'Able to Create post',
-                    ],
-                    [
-                        'name' => 'View inventory item purchases',
-                        'routes' => ['admin_items_purchase'],
-                        'description' => 'View orders related to items',
                     ]
                 ],
         ],
     ],
     'store' => [
-        [
+        'store' => [
             'name' => 'Stock ',
             'routes' => ['admin_stock'],
             'description' => 'Able to see all stock',
             'children' => [
-                [
+                'create' => [
                     'name' => 'Create inventory item',
                     'routes' => [
                         'admin_stock_save',
@@ -138,7 +126,8 @@ return [
                         'admin_stock_extra_option_save',
                     ],
                     'description' => 'Able to Create post',
-                ], [
+                ],
+                'edit' => [
                     'name' => 'Edit inventory item',
                     'routes' =>
                         [
@@ -163,20 +152,16 @@ return [
                             'admin_stock_extra_option_save',
                         ],
                     'description' => 'Able to Create post',
-                ], [
-                    'name' => 'Edit inventory item',
-                    'routes' => ['admin_stock_save', 'admin_stock_edit'],
-                    'description' => 'Able to Create post',
                 ],
             ],
         ],
-        [
+        'attributes' => [
             'name' => 'Attributes',
             'routes' => ['admin_store_attributes'],
             'description' => 'Able to see  Attributes',
             'children' => [
 
-                [
+                'create' => [
                     'name' => 'Create  Attribute',
                     'routes' => [
                         'admin_store_attributes_new',
@@ -192,7 +177,7 @@ return [
                     ],
                     'description' => 'Able to Create Attribute',
                 ],
-                [
+                'edit' => [
                     'name' => 'View inventory item purchases',
                     'routes' => [
                         'admin_store_attributes_edit',

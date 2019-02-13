@@ -23,16 +23,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($permission as $item )
-                    <tr>
+                    @foreach($permission as $sub=>$item )
+                        <tr>
 
-                        <td>{!! $item['name'] !!}</td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                        @endforeach
+                            <td>{!! $item['name'] !!}</td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'routes' !!}" type="checkbox"></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.edit.routes' !!}" type="checkbox"></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.create.routes' !!}" type="checkbox"></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.delete.routes' !!} " type="checkbox"></td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
