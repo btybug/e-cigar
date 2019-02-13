@@ -167,14 +167,14 @@ class Items extends Model
 
     public function getUrlAttribute()
     {
-        return $this->folder->url() . '/' . $this->original_name;
+        return $this->storage->url() . '/' . $this->original_name;
     }
     public function getRelativeUrlAttribute()
     {
-        return str_replace('http://'.$_SERVER['SERVER_NAME'],'',$this->folder->url()) . '/' . $this->original_name;
+        return str_replace('http://'.$_SERVER['SERVER_NAME'],'',$this->storage->url()) . '/' . $this->original_name;
     }
 
-    public function folder()
+    public function storage()
     {
         return $this->belongsTo('App\Models\Media\Folders', 'folder_id');
     }
