@@ -8,7 +8,7 @@
         <h2 class="m-0">Create Role</h2>
     </div>
         <div class="panel-body">
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <form action="">
                 <!-- Password input-->
@@ -42,29 +42,16 @@
 
             </form>
         </div>
-            <div class="col-md-6">
+        <div class="col-md-8">
                 <div class="col-md-6">
                     <div class="panel panel-default">
                         <h3 class="panel-heading m-0">Pages</h3>
                         <div class="panel-body">
-                            <div id="treeview_json"></div>
-                            <div class="clearfix"></div>
+                            @include('admin.roles._partials.tree')
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <h3 class="panel-heading m-0">Forms</h3>
-                        <div class="panel-body">
-                            <div id="treeview_json2"></div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-
-
     </div>
 
 
@@ -75,99 +62,68 @@
 @section("css")
     <link rel="stylesheet" href="http://laraframe.codemen.org/backend/assets/css/admin_lte.css">
     <link rel="stylesheet" href="http://laraframe.codemen.org/common/vendors/iCheck/flat/_all.css">
+
+    <style>
+        .no-padding{
+            padding:0px;
+        }
+        .glyphicon-icon-rpad .glyphicon,.glyphicon-icon-rpad .glyphicon.m8,.fa-icon-rpad .fa,.fa-icon-rpad .fa.m8{ padding-right:8px; }
+        .glyphicon-icon-lpad .glyphicon,.glyphicon-icon-lpad .glyphicon.m8,.fa-icon-lpad .fa,.fa-icon-lpad .fa.m8{ padding-left:8px; }
+        .glyphicon-icon-rpad .glyphicon.m5,.fa-icon-rpad .fa.m5{ padding-right:5px; }
+        .glyphicon-icon-lpad .glyphicon.m5,.fa-icon-lpad .fa.m5{ padding-left:5px; }
+        .glyphicon-icon-rpad .glyphicon.m12,.fa-icon-rpad .fa.m12{ padding-right:12px; }
+        .glyphicon-icon-lpad .glyphicon.m12,.fa-icon-lpad .fa.m12{ padding-left:12px; }
+        .glyphicon-icon-rpad .glyphicon.m15,.fa-icon-rpad .fa.m15{ padding-right:15px; }
+        .glyphicon-icon-lpad .glyphicon.m15,.fa-icon-lpad .fa.m15{ padding-left:15px; }
+
+
+
+        ul.nav-menu-list-style .nav-header .menu-collapsible-icon{position:absolute; right:3px; top:16px; font-size:9px; }
+
+
+
+        ul.nav-menu-list-style{
+            margin:0;
+        }
+        ul.nav-menu-list-style .nav-header{
+            border-top:1px solid #FFFFFF;
+            border-bottom:1px solid #e8e8e8;
+            display:block;
+            margin:0;
+            line-height:42px;
+            padding:0 8px;
+            font-weight:600;
+        }
+        ul.nav-menu-list-style> li{
+            position:relative; }
+        ul.nav-menu-list-style> li a{
+            border-top:1px solid #FFFFFF;
+            border-bottom:1px solid #e8e8e8;
+            padding:0 10px;
+            line-height:32px;
+        }
+        ul.nav-menu-list-style> li:first-child a{
+        }
+
+
+        ul.nav-menu-list-style{list-style:none; padding:0px; margin:0px;}
+        ul.nav-menu-list-style li .badge,ul.nav-menu-list-style li .pull-right,ul.nav-menu-list-style li span.badge,ul.nav-menu-list-style li label.badge{float:right; margin-top:7px;}
+        ul.bullets{list-style:inside disc}
+        ul.numerics{list-style:inside decimal}
+        .ul.kas-icon-aero{}
+        ul.kas-icon-aero li a:before{font-family: 'Glyphicons Halflings'; font-size:9px; content: "\e258"; padding-right:8px; }
+
+
+    </style>
 @stop
 
 
 @section('js')
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
-        var tree =[{!! getModuleRoutes('GET','admin')->toJson(1) !!}]
-        let html = (data) =>   `<div class="checkbox checkbox-success checkbox-compact row">
-                        <div class="col-lg-3 col-md-12" style="margin-bottom: 20px;"><div class="icheckbox_flat-green checked" aria-checked="true" aria-disabled="false" style="position: relative;"><input class="sub-module flat-red task module_action_application_managements module_action_application_managements_admin_settings" id="${data.url}" data-id="admin_settings" name="task" type="checkbox" value="1" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                        <label class="disable-text-select" for="${data.url}">${data.text}</label></div>
-                    </div>` 
-        let html2 = (data2) => `<div class="col-lg-9 col-md-12" style="margin-bottom:20px; border-bottom:1px solid #3c8dbc; padding-bottom: 10px">
-                    <div class="row dc-clear">
-                        ${data2}
-                        
-                    </div>
-                    </div>`
-        let html3 = (data) => `<div class="col-lg-3 col-md-3 col-sm-6" style="margin-bottom: 20px;">
-                            <div class="checkbox checkbox-success checkbox-inline checkbox-compact">
-                                <div class="icheckbox_flat-green" aria-checked="false" aria-disabled="false" style="position: relative;"><input class="route-item flat-red module_action_user_managements task_action_users" id="${data.text}" name="roles[user_managements][users][]" type="checkbox" value="${data.text}" style="position: absolute; opacity: 0;"><ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins></div>
-                                <label class="disable-text-select" for="${data.text}">${data.text}</label>
-                            </div>
-                        </div>`
-        function MakeChekbox(aaa) {
-            let treeNodes = Object.values(tree[0].nodes)
-            treeNodes.forEach(item => {
-                let item2 = $(html(item))
-                if (item.nodes) {
-                    let temp =  ""
-                    Object.values(item.nodes).forEach(elm => {
-                        temp += html3(elm)
-                    })
-                    item2.append(html2(temp))
-                }
-                $("#treeview_json").append(item2)
-            })
-        }
-        MakeChekbox()
-         var tree2 =[{!! getModuleRoutes('POST','admin',[])->toJson(1) !!}]
-         $('#treeview_json').treeview({
-             data: tree,
-             showCheckbox: true,
-             onNodeChecked: function(event, node) {
-                 if(typeof node.parentId !== "undefined") {
-                     checkParent(node.parentId, "#treeview_json")
-                 }},
-             onNodeUnchecked: function (event, node) {
-                 unCheckChildren(node.nodeId, "#treeview_json")
-             }
-         });
-         $('#treeview_json2').treeview({
-             data: tree2,
-             showCheckbox: true,
-             onNodeChecked: function(event, node) {
-                 if(typeof node.parentId !== "undefined") {
-                     checkParent(node.parentId, "#treeview_json2")
-                 }
-             },
-             onNodeUnchecked: function (event, node) {
-                 unCheckChildren(node.nodeId, "#treeview_json2")
-             }
-         });
-         function checkParent(id, selecetor) {
-             let parrentId = id;
-             $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
-            if(parrentId){
-                 let parent = $('#treeview_json').treeview('getNode', parrentId);
-                let pId = parent.parentId
-                 checkParent(pId)
-            }
-
-         }
-        function unCheckChildren(id, selecetor){
-             let currentNode = $('#treeview_json').treeview('getNode', id);
-             $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
-             if (currentNode.nodes){
-                Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId))
-            }
-
-
-        }
-        $("form").on("submit", function (e) {
-            e.preventDefault()
-            let formData = $("form").serializeArray();
-            let treeData = $('#treeview_json').data('treeview').getChecked();
-            let treeData2 = $('#treeview_json2').data('treeview').getChecked();
-            treeData= $.merge(treeData,treeData2)
-            AjaxCall("{!! route('post_admin_create_role') !!}", {formData, treeData}, function(res) {
-                if(!res.error){
-                   window.location.href='{!! route('admin_role_membership') !!}'
-                };
-            });
+        $('.tree-toggle').click(function () {	$(this).parent().children('ul.tree').toggle(200);
+        });
+        $(function(){
+            $('.tree-toggle').parent().children('ul.tree').toggle(200);
         })
-
     </script>
 @stop

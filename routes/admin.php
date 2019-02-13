@@ -128,9 +128,10 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_customers');
     Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
     Route::get('/staff/new', 'Admin\UserController@newStaff')->name('admin_staff_new');
-    Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new');
+    Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new_post');
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
     Route::get('/edit-staff/{id}', 'Admin\UserController@editStaff')->name('admin_staff_edit');
+
     Route::post('/address-book-form', 'Admin\UserController@postAddressBookForm')->name('admin_users_address_book_form');
     Route::post('/save-address-book', 'Admin\UserController@postAddressBookSave')->name('admin_users_address_book_save');
     Route::post('/address', 'Admin\UserController@postAddress')->name('admin_users_address');
@@ -313,8 +314,10 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/options-show-form', 'Admin\AttributesController@postAttributesOptionsForm')->name('admin_store_attributes_options_form');
         Route::post('/options-delete', 'Admin\AttributesController@postAttributesOptionDelete')->name('admin_store_attributes_option_delete');
         Route::post('/options/{id}/save', 'Admin\AttributesController@postAttributesOptions')->name('admin_store_attributes_options');
+
         Route::get('/edit/{id}', 'Admin\AttributesController@getAttributesEdit')->name('admin_store_attributes_edit');
         Route::post('/edit/{id}', 'Admin\AttributesController@postAttributesEdit')->name('admin_store_attributes_post_edit');
+
         Route::post('/get-options-by-id', 'Admin\AttributesController@getOptions')->name('admin_store_attributes_options_by_id');
         Route::post('/get-options-by-id/{id}', 'Admin\AttributesController@getOptionsAutocomplate')->name('admin_store_attributes_options_by_id_autocomplate');
         Route::post('/get-attribute', 'Admin\AttributesController@getAttributeByID')->name('admin_store_attributes_by_id');
