@@ -48,7 +48,7 @@
                 </form>
             </div>
             <div class="col-md-8">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="panel panel-default">
                         <h3 class="panel-heading m-0">Pages</h3>
                         <div class="panel-body">
@@ -61,46 +61,7 @@
 
 
     </div>
-    <div class="panel panel-default panel-create-role">
-        <div class="panel-heading">
-            <div class="user">Users</div>
-            <div>
-                <input id="has-access" type="checkbox">
-                <label for="has-access">Has access</label>
-            </div>
-        </div>
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>View</th>
-                        <th>Edit</th>
-                        <th>Create</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Users page 1</td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    <tr>
-                        <td>Users page 1</td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+
 @stop
 
 @section("css")

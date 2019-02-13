@@ -1,29 +1,41 @@
 @php
     $permissions=config('permissions');
 @endphp
+@foreach($permissions as $key=>$permission)
+    <div class="panel panel-default panel-create-role">
+        <div class="panel-heading">
+            <div class="user">{!! $key !!}</div>
+            <div>
+                <input id="has-access" type="checkbox">
+                <label for="has-access">Has access</label>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>View</th>
+                        <th>Edit</th>
+                        <th>Create</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($permission as $item )
+                    <tr>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="well no-padding">
-                <div>
-                    <ul class="nav nav-list nav-menu-list-style">
-                        @foreach($permissions as $permission)
-                            <li>
-                                <div class="nav-menu-wrap tree-toggle nav-header">
-                                    <input type="checkbox">
-                                    <label class="">{!! $permission['name'] !!}</label>
-                                </div>
-                                <ul class="nav nav-list tree">
-                                    @foreach($permission['children'] as $child)
-                                        <li><input type="checkbox"><a href="#">{!! $child['name'] !!}</a></li>
-                                    @endforeach
-                                </ul>
-                            </li>
+                        <td>{!! $item['name'] !!}</td>
+                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox"></td>
+                    </tr>
                         @endforeach
-                    </ul>
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
+@endforeach
