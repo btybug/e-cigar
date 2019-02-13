@@ -103,24 +103,58 @@ function App() {
         </a>
     </div>`;
         },
+//         makeTreeFolder: function(data) {
+//             return `<li  bb-media-type="tree-folder" bb-media-click="get_folder_items" data-trre-id="${
+//                 data.id
+//             }" data-id="${
+//                 data.id
+//             }" style="display: flex; justify-content: space-between; cursor: pointer;">
+// <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
+//                   <div style="margin-right: 5px">
+//                   <span data-id="${
+//                       data.id
+//                   }" >${data.title}</span>
+//                   </div></div>
+//                   <!--<div>-->
+//                     <!--<button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>-->
+//                     <!--<button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>-->
+//                     <!--<button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>-->
+//                   <!--</div>-->
+//                 </li>`;
+//         },
+
         makeTreeFolder: function(data) {
-            return `<li  bb-media-type="tree-folder" bb-media-click="get_folder_items" data-trre-id="${
-                data.id
-            }" data-id="${
-                data.id
-            }" style="display: flex; justify-content: space-between; cursor: pointer;">
+            console.log(data)
+            $('document').ready(
+                function() {
+                    $("#folder-list").fancytree({
+                        extensions: ["edit", "filter"],
+                        source: data,
+                        selectMode: 1
+
+                    });
+                    const tree = fancytree.getTree('#tree');
+
+                    return `<li  bb-media-type="tree-folder" bb-media-click="get_folder_items" data-trre-id="${
+                        data.id
+                        }" data-id="${
+                        data.id
+                        }" style="display: flex; justify-content: space-between; cursor: pointer;">
 <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
                   <div style="margin-right: 5px">
                   <span data-id="${
-                      data.id
-                  }" >${data.title}</span>
+                        data.id
+                        }" >${data.title}</span>
                   </div></div>
-                  <div>
-                    <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
-                    <button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>
-                  </div>
+                  <!--<div>-->
+                    <!--<button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>-->
+                    <!--<button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>-->
+                    <!--<button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>-->
+                  <!--</div>-->
                 </li>`;
+                }
+            )
+
         },
         makeBreadCrumbsItem(item) {
             return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
@@ -473,7 +507,7 @@ function App() {
                 ".bread-crumbs-list-item"
             );
             let singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
-            breadCrumbsListItems.forEach((item, index) => {
+            breadCrumbsListItems && breadCrumbsListItems.forEach((item, index) => {
                 if (check) {
                     item.remove();
                     return;
@@ -572,26 +606,36 @@ function App() {
                         ".folder-list"
                     );
                     treeFolderContainer.innerHTML = "";
-
-                    res.data.childs.forEach((folder, index) => {
-                        let html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
+                console.log(res);
+                    res.data.children.filter((item) => item.name).forEach((folder, index) => {
+                        var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
                             folder
                         )}</div>`;
-                        mainContainer.innerHTML += html;
-                        if (tree) {
-                            treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
-                                folder
-                            );
-                        } else {
-                            cb(self.htmlMaker.makeTreeFolder(folder));
-                        }
-                    });
-                    res.data.items.forEach((image, index) => {
+                    mainContainer.innerHTML += html;
+                    // if (tree) {
+                    //     treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
+                    //         res.data.children
+                    //     );
+                    // } else {
+                    //     cb(self.htmlMaker.makeTreeFolder(folder));
+                    // }
+                });
+                    res.data.children.filter((item) => item.original_name).forEach((image, index) => {
                         let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
                             image
                         )}</div>`;
-                        mainContainer.innerHTML += html;
-                    });
+                    mainContainer.innerHTML += html;
+                    // if (tree) {
+                    //     treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
+                    //         res.data.children
+                    //     );
+                    // }
+                });
+                    if (tree) {
+                        treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
+                            res.data.children
+                        );
+                    }
                     globalFolderId = res.settings.id;
                     self.helpers.makeBreadCrumbs(res.settings.id);
                     self.helpers.makeDnD();
@@ -691,6 +735,7 @@ function App() {
             );
         },
         remove_folder(elm, e) {
+            console.log('elm', elm);
             e.stopPropagation();
             e.preventDefault();
             let id = elm.closest(".file").getAttribute("data-id");

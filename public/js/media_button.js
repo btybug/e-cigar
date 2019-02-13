@@ -70,58 +70,58 @@
 //     var settingbuttonclass = null;
 //     var deletebuttonclass = null;
 
-//     var getfolderli = function(datajosn) {
-//         if (!datajosn) return false;
-//         var htmlli = $('<li data-treefolder="' + datajosn.id + '"></li>');
-//         var dragdiv = $("<div></div>");
-//         var htmla = $(
-//             '<a href="' +
-//                 datajosn.path +
-//                 '" data-dropnewitem="' +
-//                 datajosn.name +
-//                 '" data-media="getitem"><i class="fa fa-folder"></i> ' +
-//                 datajosn.name +
-//                 "</a>"
-//         );
-//         var editfolder = $(
-//             '<button class="btn btn-default btn-xs pull-right ' +
-//                 editbuttonclass +
-//                 '" type="button" data-name="' +
-//                 datajosn.name +
-//                 '" data-mediaedit="' +
-//                 datajosn.id +
-//                 '" data-media="editfolder"><i class="fa fa-pencil" aria-hidden="true"></i></button>'
-//         );
-//         var setingfolder = $(
-//             '<button class="btn btn-default btn-xs pull-right m-r-5 ' +
-//                 settingbuttonclass +
-//                 '" type="button" data-name="' +
-//                 datajosn.name +
-//                 '" data-mediaedit="' +
-//                 datajosn.id +
-//                 '" data-media="settingfolder"><i class="fa fa-cog" aria-hidden="true"></i></button>'
-//         );
-//         var deletefolder = $(
-//             '<button class="btn btn-default btn-xs pull-right m-r-5 ' +
-//                 deletebuttonclass +
-//                 '" type="button" data-name="' +
-//                 datajosn.name +
-//                 '" data-mediaedit="' +
-//                 datajosn.id +
-//                 '" data-media="deletefolder"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
-//         );
-
-//         dragdiv.append(editfolder);
-//         dragdiv.append(setingfolder);
-//         dragdiv.append(deletefolder);
-//         $.each(datajosn, function(key, val) {
-//             htmla.attr("data-" + key, val);
-//         });
-
-//         dragdiv.append(htmla);
-//         htmlli.append(dragdiv);
-//         return htmlli;
-//     };
+    // var getfolderli = function(datajosn) {
+    //     if (!datajosn) return false;
+    //     var htmlli = $('<li data-treefolder="' + datajosn.id + '"></li>');
+    //     var dragdiv = $("<div></div>");
+    //     var htmla = $(
+    //         '<a href="' +
+    //             datajosn.path +
+    //             '" data-dropnewitem="' +
+    //             datajosn.name +
+    //             '" data-media="getitem"><i class="fa fa-folder"></i> ' +
+    //             datajosn.name +
+    //             "</a>"
+    //     );
+    //     var editfolder = $(
+    //         '<button class="btn btn-default btn-xs pull-right ' +
+    //             editbuttonclass +
+    //             '" type="button" data-name="' +
+    //             datajosn.name +
+    //             '" data-mediaedit="' +
+    //             datajosn.id +
+    //             '" data-media="editfolder"><i class="fa fa-pencil" aria-hidden="true"></i></button>'
+    //     );
+    //     var setingfolder = $(
+    //         '<button class="btn btn-default btn-xs pull-right m-r-5 ' +
+    //             settingbuttonclass +
+    //             '" type="button" data-name="' +
+    //             datajosn.name +
+    //             '" data-mediaedit="' +
+    //             datajosn.id +
+    //             '" data-media="settingfolder"><i class="fa fa-cog" aria-hidden="true"></i></button>'
+    //     );
+    //     var deletefolder = $(
+    //         '<button class="btn btn-default btn-xs pull-right m-r-5 ' +
+    //             deletebuttonclass +
+    //             '" type="button" data-name="' +
+    //             datajosn.name +
+    //             '" data-mediaedit="' +
+    //             datajosn.id +
+    //             '" data-media="deletefolder"><i class="fa fa-trash-o" aria-hidden="true"></i></button>'
+    //     );
+    //
+    //     dragdiv.append(editfolder);
+    //     dragdiv.append(setingfolder);
+    //     dragdiv.append(deletefolder);
+    //     $.each(datajosn, function(key, val) {
+    //         htmla.attr("data-" + key, val);
+    //     });
+    //
+    //     dragdiv.append(htmla);
+    //     htmlli.append(dragdiv);
+    //     return htmlli;
+    // };
 //     var img_extensions = { jpg: true, jpeg: true, png: true, gif: true };
 //     var getitmeimage = function(datajosn) {
 //         var html = $('[data-template="itemthumb"]').html();

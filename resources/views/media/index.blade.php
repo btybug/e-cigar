@@ -39,7 +39,7 @@
                                     //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                                     // })
                                 </script>
-                                <ul class="folder-list" style="padding: 0;" data-media="folder">
+                                <ul class="folder-list" id="folder-list" style="padding: 0;" data-media="folder">
 
                                 </ul>
                                 {{--<h5 class="tag-title">Tags</h5>--}}
@@ -253,6 +253,7 @@
     {{--{!! Html::script("public/js/media_button.js") !!}--}}
     {!! Html::script("public/js/media_button_new.js?v=".rand(999,99999)) !!}
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
+
 
     <script>
         $("body").on("click", ".fileinput-remove", function(){

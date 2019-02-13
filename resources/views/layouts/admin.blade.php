@@ -37,6 +37,7 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
+
     <!--Media Button Stiles-->
 
     @if(is_enabled_media_modal())
@@ -59,6 +60,7 @@
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
+    <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-win8/ui.fancytree.min.css" rel="stylesheet">
     @yield('css') 
 
     @stack('style')
@@ -134,6 +136,7 @@
 <!-- jQuery UI 1.11.4 -->
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script src="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/jquery.fancytree-all-deps.min.js"></script>
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
