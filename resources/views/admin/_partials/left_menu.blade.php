@@ -129,6 +129,7 @@
                     @ok('admin_blog_contact_us')
                     <li><a href="{{route('admin_blog_contact_us')}}"><i class="fa fa-circle-o"></i>Contact us</a></li>
                     @endok
+                    <li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> Tickets</a></li>
                 </ul>
             </li>
             @endok
@@ -146,20 +147,6 @@
                     @ok('admin_seo_bulk')
                     <li><a href="{{route('admin_seo_bulk')}}"><i class="fa fa-circle-o"></i> Bulk</a></li>
                     @endok
-                </ul>
-            </li>
-            @endok
-            @ok('admin_tickets')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-ticket"></i>
-                    <span>Tickets</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> list</a></li>
                 </ul>
             </li>
             @endok

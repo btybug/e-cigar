@@ -204,6 +204,20 @@ Route::group(['prefix' => 'blog'], function () {
         Route::get('/view/{id}', 'Admin\ContactUsController@getView')->name('admin_blog_contact_us_view');
         Route::post('/replay/{id}', 'Admin\ContactUsController@postReplay')->name('admin_post_blog_contact_us_replay');
     });
+
+    Route::group(['prefix' => '/tickets'], function () {
+        Route::get('/', 'Admin\TicketsController@index')->name('admin_tickets');
+        Route::get('/new', 'Admin\TicketsController@getNew')->name('admin_tickets_new');
+        Route::get('/edit/{id}', 'Admin\TicketsController@getEdit')->name('admin_tickets_edit');
+        Route::post('/edit/{id}', 'Admin\TicketsController@postEdit')->name('admin_tickets_edit_post');
+        Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
+        Route::post('/reply', 'Admin\TicketsController@reply')->name('admin_tickets_reply');
+        Route::get('/settings', 'Admin\TicketsController@getSettings')->name('admin_tickets_settings');
+        Route::post('/settings', 'Admin\TicketsController@postSettings')->name('admin_tickets_settings_save');
+        Route::get('/close/{id}', 'Admin\TicketsController@getClose')->name('admin_tickets_close');
+
+    });
+
 //    Route::group(['prefix' => 'comments'], function () {
 //        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
 //        Route::get('/settings', 'Admin\PostController@getCommentSettings')->name('admin_blog_comments_settings');
@@ -330,19 +344,6 @@ Route::group(['prefix' => 'inventory'], function () {
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
-
-Route::group(['prefix' => '/tickets'], function () {
-    Route::get('/', 'Admin\TicketsController@index')->name('admin_tickets');
-    Route::get('/new', 'Admin\TicketsController@getNew')->name('admin_tickets_new');
-    Route::get('/edit/{id}', 'Admin\TicketsController@getEdit')->name('admin_tickets_edit');
-    Route::post('/edit/{id}', 'Admin\TicketsController@postEdit')->name('admin_tickets_edit_post');
-    Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
-    Route::post('/reply', 'Admin\TicketsController@reply')->name('admin_tickets_reply');
-    Route::get('/settings', 'Admin\TicketsController@getSettings')->name('admin_tickets_settings');
-    Route::post('/settings', 'Admin\TicketsController@postSettings')->name('admin_tickets_settings_save');
-    Route::get('/close/{id}', 'Admin\TicketsController@getClose')->name('admin_tickets_close');
-
-});
 
 Route::group(['prefix' => '/tools'], function () {
     Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
