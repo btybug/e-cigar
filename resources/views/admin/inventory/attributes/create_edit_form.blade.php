@@ -333,7 +333,7 @@
         $("body").on("click", ".attr-option", function () {
             var id = $(this).data('item-id');
             var parentId = $(this).data('parent-id');
-            AjaxCall("/admin/inventory/attributes/options-show-form", {id: id, parentId: parentId}, function (res) {
+            AjaxCall("/admin/tools/attributes/options-show-form", {id: id, parentId: parentId}, function (res) {
                 if (!res.error) {
                     $(".options-form").html(res.html);
                     $('.icon-picker').iconpicker();
@@ -343,7 +343,7 @@
 
         $("body").on("click", ".delete-option", function () {
             var id = $(this).data('item-id');
-            AjaxCall("/admin/inventory/attributes/options-delete", {id: id}, function (res) {
+            AjaxCall("/admin/tools/attributes/options-delete", {id: id}, function (res) {
                 if (!res.error) {
                     $(".options-form").html('');
                     $("body").find('.attr-option').each(function () {

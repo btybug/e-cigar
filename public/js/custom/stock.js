@@ -116,7 +116,7 @@ $("body").on("change", "#stock", function() {
                             ".attributes-item-input-" + $(ele).data("attr-id"),
                         name: "name",
                         url:
-                            "/admin/inventory/attributes/get-options-by-id/" +
+                            "/admin/tools/attributes/get-options-by-id/" +
                             $(ele).data("attr-id"),
                         title: "Attributes",
                         inputValues: "#tags-names",
@@ -135,7 +135,7 @@ $("body").on("click", ".get-all-attributes-tab-event", function() {
         .each(function() {
             arr.push($(this).attr("data-id"));
         });
-    AjaxCall("/admin/inventory/attributes/get-all", { arr }, function(res) {
+    AjaxCall("/admin/tools/attributes/get-all", { arr }, function(res) {
         if (!res.error) {
             $("#attributesModal .modal-body .all-list").empty();
             res.data.forEach(item => {
@@ -156,13 +156,13 @@ $(document).on("beforeItemRemove", "input", function(event) {});
 
 $("body").on("click", ".add-attribute-event", function() {
     let id = $(this).data("id");
-    AjaxCall("/admin/inventory/attributes/get-attribute", { id: id }, function(
+    AjaxCall("/admin/tools/attributes/get-attribute", { id: id }, function(
         res
     ) {
         if (!res.error) {
             let id = res.data.id;
             AjaxCall(
-                "/admin/inventory/attributes/get-options-by-id",
+                "/admin/tools/attributes/get-options-by-id",
                 { id },
                 function(res2) {
                     if (!res2.error) {
@@ -207,7 +207,7 @@ $("body").on("click", ".add-attribute-event", function() {
                         makeSearchItem({
                             input: `.attributes-item-input-${id}`,
                             name: "name",
-                            url: `/admin/inventory/attributes/get-options-by-id/${id}`,
+                            url: `/admin/tools/attributes/get-options-by-id/${id}`,
                             title: "Attributes",
                             inputValues: "#tags-names",
                             containerForAppend: ".coupon-tags-list"
@@ -240,7 +240,7 @@ $("body").on("click", ".get-all-attributes", function() {
         .each(function() {
             arr.push($(this).attr("data-id"));
         });
-    AjaxCall("/admin/inventory/attributes/get-all", { arr }, function(res) {
+    AjaxCall("/admin/tools/attributes/get-all", { arr }, function(res) {
         if (!res.error) {
             $("#attributesModal .modal-body .all-list").empty();
             res.data.forEach(item => {
@@ -261,7 +261,7 @@ $("body").on("click", ".get-all-attributes", function() {
 
 $("body").on("click", ".add-attribute", function() {
     let id = $(this).data("id");
-    AjaxCall("/admin/inventory/attributes/get-attribute", { id: id }, function(
+    AjaxCall("/admin/tools/attributes/get-attribute", { id: id }, function(
         res
     ) {
         if (!res.error) {
@@ -280,7 +280,7 @@ $("body").on("click", ".add-attribute", function() {
 
 $("body").on("click", ".option-elm-attributes", function() {
     let id = $(this).attr("data-id");
-    AjaxCall("/admin/inventory/attributes/get-options-by-id", { id }, function(
+    AjaxCall("/admin/tools/attributes/get-options-by-id", { id }, function(
         res
     ) {
         if (!res.error) {
@@ -298,7 +298,7 @@ $("body").on("click", ".option-elm-attributes", function() {
 $("body").on("click", ".option-elm-variations", function() {
     let id = $(this).attr("data-id");
     AjaxCall(
-        "/admin/inventory/attributes/get-variations-table",
+        "/admin/tools/attributes/get-variations-table",
         { id },
         function(res) {
             if (!res.error) {

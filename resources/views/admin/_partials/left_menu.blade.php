@@ -98,9 +98,6 @@
                     @ok('admin_stock')
                     <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok
-                    @ok('admin_store_attributes')
-                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
-                    @endok
                     @ok('admin_orders')
                     <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
@@ -171,6 +168,9 @@
                     @endok
                     @ok('admin_stock_statuses')
                     <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
+                    @endok
+                    @ok('admin_store_attributes')
+                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                     @endok
                     @ok('admin_tools_stickers')
                     <li><a href="{{route('admin_tools_stickers')}}"><i class="fa fa-circle-o"></i> Stickers</a></li>
