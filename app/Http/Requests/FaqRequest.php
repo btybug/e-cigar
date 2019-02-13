@@ -25,8 +25,8 @@ class FaqRequest extends FormRequest
     {
         return [
             "translatable"    => "required|array|min:1",
-            "translatable.*.question"  => "required|string|min:3",
-            "translatable.*.answer"  => "required|string|min:3"
+            "translatable.gb.question"  => "required|string|min:3",
+            "translatable.gb.answer"  => "required|string|min:3"
         ];
     }
 
@@ -35,8 +35,8 @@ class FaqRequest extends FormRequest
     public function messages()
     {
         return [
-            'translatable.*.title.required'  => 'Question is required',
-            'translatable.*.short_description.required'  => 'Answer is required'
+            'translatable.gb.title.required'  => 'Question is required',
+            'translatable.gb.short_description.required'  => 'Answer is required'
         ];
     }
 }

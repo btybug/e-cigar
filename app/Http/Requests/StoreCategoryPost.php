@@ -26,8 +26,8 @@ class StoreCategoryPost extends FormRequest
         return [
             'icon' => 'required|string|min:5',
             "translatable"    => "required|array|min:1",
-            "translatable.*.name"  => "required|string|min:3",
-            "translatable.*.description"  => "required|string|min:3"
+            "translatable.gb.name"  => "required|string|min:3",
+            "translatable.gb.description"  => "required|string|min:3"
         ];
     }
 
@@ -35,8 +35,8 @@ class StoreCategoryPost extends FormRequest
     {
         return [
             'icon.required' => 'A Icon is required',
-            'translatable.*.name.required'  => 'A name is required',
-            'translatable.*.description.required'  => 'A description is required',
+            'translatable.gb.name.required'  => 'A name is required',
+            'translatable.gb.description.required'  => 'A description is required',
         ];
     }
 }

@@ -25,7 +25,7 @@ class ItemsRequest extends FormRequest
     {
         return [
             "translatable"    => "required|array|min:1",
-            "translatable.*.name"  => "required|string|min:3",
+            "translatable.gb.name"  => "required|string|min:3",
             "sku"  => "required|numeric|digits:13|unique:items,sku",
             "image"  => "required",
         ];
@@ -36,8 +36,8 @@ class ItemsRequest extends FormRequest
     public function messages()
     {
         return [
-            'translatable.*.title.required'  => 'Question is required',
-            'translatable.*.short_description.required'  => 'Answer is required'
+            'translatable.gb.title.required'  => 'Question is required',
+            'translatable.gb.short_description.required'  => 'Answer is required'
         ];
     }
 }

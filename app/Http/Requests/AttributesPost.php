@@ -25,7 +25,7 @@ class AttributesPost extends FormRequest
     {
         return [
             'icon' => 'required',
-            "translatable.*.name"  => "required",
+            "translatable.gb.name"  => "required",
         ];
     }
 

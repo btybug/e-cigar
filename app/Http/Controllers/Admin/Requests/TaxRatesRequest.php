@@ -28,7 +28,7 @@ class TaxRatesRequest extends FormRequest
     public function rules()
     {
         return [
-            'translatable.*.name' => 'required',
+            'translatable.bg.name' => 'required',
             'amount' => 'required'
         ];
     }

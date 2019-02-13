@@ -26,9 +26,9 @@ class ProductsRequest extends FormRequest
         return [
             'slug' => 'required|unique:stocks,id,'.$this->id,
             "translatable"    => "required|array|min:1",
-            "translatable.*.name"  => "required|string|min:3",
-            "translatable.*.short_description"  => "required|string|min:3",
-            "translatable.*.long_description"  => "required|string|min:3"
+            "translatable.gb.name"  => "required|string|min:3",
+            "translatable.gb.short_description"  => "required|string|min:3",
+            "translatable.gb.long_description"  => "required|string|min:3"
         ];
     }
 
@@ -38,9 +38,9 @@ class ProductsRequest extends FormRequest
     {
         return [
             'slug.required' => 'A Slug is required',
-            'translatable.*.name.required'  => 'A Name is required',
-            'translatable.*.short_description.required'  => 'A short description is required',
-            'translatable.*.long_description.required'  => 'A long description is required',
+            'translatable.gb.name.required'  => 'A Name is required',
+            'translatable.gb.short_description.required'  => 'A short description is required',
+            'translatable.gb.long_description.required'  => 'A long description is required',
         ];
     }
 }

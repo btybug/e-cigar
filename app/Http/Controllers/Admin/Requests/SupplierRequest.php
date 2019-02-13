@@ -38,8 +38,8 @@ class SupplierRequest extends FormRequest
     public function messages()
     {
         return [
-            'translatable.*.title.required'  => 'Question is required',
-            'translatable.*.short_description.required'  => 'Answer is required'
+            'translatable.gb.title.required'  => 'Question is required',
+            'translatable.gb.short_description.required'  => 'Answer is required'
         ];
     }
 }

@@ -30,11 +30,11 @@ class MailTemplatesRequest extends FormRequest
         return [
             'from' => 'required|email',
             'is_active' => 'required|in:0,1',
-            'translatable.*.subject' => 'required',
-            'translatable.*.content' => 'required',
+            'translatable.gb.subject' => 'required',
+            'translatable.gb.content' => 'required',
             'admin.from' => 'required|email',
-            'admin.translatable.*.subject' => 'required',
-            'admin.translatable.*.content' => 'required',
+            'admin.translatable.gb.subject' => 'required',
+            'admin.translatable.gb.content' => 'required',
         ];
     }
 }

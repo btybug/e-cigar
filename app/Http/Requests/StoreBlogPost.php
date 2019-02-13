@@ -27,9 +27,9 @@ class StoreBlogPost extends FormRequest
         return [
             'url' => 'required|unique:posts,id,'.$this->id,
             "translatable"    => "required|array|min:1",
-            "translatable.$locale.title"  => "required|string|min:3",
-            "translatable.$locale.short_description"  => "required|string|min:3",
-            "translatable.$locale.long_description"  => "required|string|min:3",
+            "translatable.gb.title"  => "required|string|min:3",
+            "translatable.gb.short_description"  => "required|string|min:3",
+            "translatable.gb.long_description"  => "required|string|min:3",
         ];
     }
 
@@ -39,9 +39,9 @@ class StoreBlogPost extends FormRequest
     {
         return [
             'url.required' => 'A URL is required',
-            'translatable.*.title.required'  => 'A title is required',
-            'translatable.*.short_description.required'  => 'A short description is required',
-            'translatable.*.long_description.required'  => 'A long description is required',
+            'translatable.gb.title.required'  => 'A title is required',
+            'translatable.gb.short_description.required'  => 'A short description is required',
+            'translatable.gb.long_description.required'  => 'A long description is required',
         ];
     }
 }
