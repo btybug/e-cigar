@@ -225,16 +225,16 @@ function App() {
                 </div>
                 <div class="popupDetail col-md-4 p-0">
                     <div class="row p-t-10 p-b-10">
-                        <div class="col-xs-4 col-md-4">
+                        <div class="col-xs-4 col-md-4 col-md-offset-4">
                             <button class="btn btn-default btn-block active" type="button" data-tabaction="details">Details</button>
-                        </div>
-                        <div class="col-xs-4 col-md-4">
-                            <button class="btn btn-default btn-block" type="button" data-tabaction="seo">SEO</button>
-                        </div>
-                        <div class="col-xs-4 col-md-4">
-                            <button class="btn btn-default btn-block" type="button">Option 3</button>
-                        </div>
-                    </div>
+                        </div>`+
+                        // <div class="col-xs-4 col-md-4">
+                        //     <button class="btn btn-default btn-block" type="button" data-tabaction="seo">SEO</button>
+                        // </div>
+                        // <div class="col-xs-4 col-md-4">
+                        //     <button class="btn btn-default btn-block" type="button">Option 3</button>
+                        // </div>
+                    `</div>
                     <div class="row rowsection collapse in" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="fa fa-bars text-primary"></i> ${
@@ -287,17 +287,67 @@ function App() {
                                         <td><span data-slideshow="updated_at">${
                                             data.updated_at
                                         }</span></td>
+                                    </tr>` +
+                // <tr>
+                //     <th>Version</th>
+                //     <td>
+                //         <div class=" col-xs-3 p-l-0">
+                //             <select class="form-control"  data-slideshow="version"></select>
+                //         </div>
+                //         <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="makeasDefault">Make as Default</button>
+                //     </td>
+                // </tr>
+                                `</table>
+                            </div>
+                            <div class="table-responsive">
+                            <form>
+                                <table class="table tableborder0">
+
+                                    <tr>
+                                        
+                                        <td>
+                                            <input type="text" data-slideshow="alt_tags" class="form-control hide" value="" >
+                                            <div class="altTagsdata"></div>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th width="23%">Keywords</th>
+                                        <td>
+                                            <input type="text" data-slideshow="keywords" name="seo_keywords" class="form-control" value="${data.seo_keywords}">
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <th width="23%">Caption</th>
+                                        <td>
+                                            <input type="text" data-slideshow="caption" name="seo_caption" class="form-control" value="${data.seo_caption}" />
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <th>Version</th>
+                                        <th width="23%">Description</th>
+                                        <td><textarea name="seo_description" data-slideshow="description" class="form-control">${data.seo_description}</textarea>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th width="23%">Alt Text</th>
                                         <td>
-                                            <div class=" col-xs-3 p-l-0">
-                                                <select class="form-control"  data-slideshow="version"></select>
-                                            </div>
-                                            <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="makeasDefault">Make as Default</button>
+                                            <input type="text" data-slideshow="alt_text" class="form-control" name="seo_alt" value="${data.seo_alt}">
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <th></th>
+                                        <td>
+
+                                            <button type="button" class="btn btn-default p-l-5 p-r-5" bb-media-click="save_seo" data-action="saveSeo">Save Detail</button>
                                         </td>
                                     </tr>
                                 </table>
+                                <input type="hidden" name='item_id'  value="${data.id}">
+                                </form>
                             </div>
                         </div>
                     </div>
