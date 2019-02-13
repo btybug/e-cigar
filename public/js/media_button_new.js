@@ -129,7 +129,12 @@ function App() {
                 function() {
                     $("#folder-list").fancytree({
                         extensions: ["edit", "filter"],
-                        source: data,
+                        source: [{"title": "Node 1", "key": "1"},
+                            {"title": "Folder 2", "key": "2", "folder": true, "children": [
+                                {"title": "Node 2.1", "key": "3"},
+                                {"title": "Node 2.2", "key": "4"}
+                            ]}
+                        ],
                         selectMode: 1
 
                     });
@@ -264,7 +269,7 @@ function App() {
                                     <tr>
                                         <th>Location</th>
                                         <td><i class="fa fa-folder"></i> <span data-slideshow="location">${
-                                            data.folder.title
+                                            data.storage.title
                                         }</span></td>
                                     </tr>
                                     <tr>
@@ -774,13 +779,15 @@ function App() {
             );
             inputElement.value = '';
         },
-        open_full_modal(elm, e) {5
+        open_full_modal(elm, e) {
             e.stopPropagation();
             e.preventDefault();
             let id = e.target.closest(".file").getAttribute("data-id");
+            console.log(id)
             let countId = e.target
                 .closest(".file-box")
                 .getAttribute("data-image");
+            console.log(countId);
             self.requests.getImageDetails({ item_id: id }, res => {
                 document.body.innerHTML += self.htmlMaker.fullInfoModal(
                     res,
