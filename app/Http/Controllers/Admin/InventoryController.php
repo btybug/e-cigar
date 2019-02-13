@@ -31,18 +31,18 @@ class InventoryController extends Controller
     private $stockService;
     private $settings;
 
-    public function __construct (StockService $stockService, Settings $settings)
+    public function __construct(StockService $stockService, Settings $settings)
     {
         $this->stockService = $stockService;
         $this->settings = $settings;
     }
 
-    public function stock ()
+    public function stock()
     {
         return $this->view('stock');
     }
 
-    public function stockNew ()
+    public function stockNew()
     {
         $model = null;
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
@@ -58,7 +58,7 @@ class InventoryController extends Controller
         return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'data', 'stockItems']));
     }
 
-    public function getStockEdit ($id)
+    public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
 //        dd($model->promotion_prices);
@@ -76,10 +76,10 @@ class InventoryController extends Controller
         return $this->view('stock_new', compact(['model', 'data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
-    public function postStock (ProductsRequest $request)
+    public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'options', 'promotions','specifications',
-            'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices','promotion_type',
+        $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
+            'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
 //        dd($request->get('promotions'),array_values($request->get('promotions')));
@@ -105,14 +105,14 @@ class InventoryController extends Controller
 
         $stock->promotions()->detach();
 
-        if($request->promotions && count($request->promotions)){
-            foreach ($request->promotions as $promotion){
-                $stock->promotions()->attach($promotion['id'],['type' => $promotion['type']]);
+        if ($request->promotions && count($request->promotions)) {
+            foreach ($request->promotions as $promotion) {
+                $stock->promotions()->attach($promotion['id'], ['type' => $promotion['type']]);
             }
         }
 
         $stock->stickers()->sync($request->get('stickers'));
-        $this->stockService->savePromotionPrices($stock,$request->get('promotion_prices', []));
+        $this->stockService->savePromotionPrices($stock, $request->get('promotion_prices', []));
 
         $this->createOrUpdateSeo($request, $stock->id);
 
@@ -120,27 +120,27 @@ class InventoryController extends Controller
         return redirect()->route('admin_stock');
     }
 
-    public function getPromotionEdit ($id,Request $request)
+    public function getPromotionEdit($id, Request $request)
     {
         $model = Stock::findOrFail($id);
-        $type = $request->get('type','all');
+        $type = $request->get('type', 'all');
         $now = strtotime(today()->toDateString());
 
-        if($type == 'all'){
+        if ($type == 'all') {
             $sales = $model->sales()->groupBy('slug')->get();
-        }else if($type == 'archived'){
-            $sales = $model->sales()->where('canceled',true)->groupBy('slug')->get();
-        }else if($type == 'coming'){
-            $sales = $model->sales()->where('canceled',false)->where('start_date','>',$now)->groupBy('slug')->get();
-        }else if($type == 'current'){
-            $sales = $model->sales()->where('canceled',false)->where('start_date','<=',$now)->where('end_date','>=',$now)->groupBy('slug')->get();
+        } else if ($type == 'archived') {
+            $sales = $model->sales()->where('canceled', true)->groupBy('slug')->get();
+        } else if ($type == 'coming') {
+            $sales = $model->sales()->where('canceled', false)->where('start_date', '>', $now)->groupBy('slug')->get();
+        } else if ($type == 'current') {
+            $sales = $model->sales()->where('canceled', false)->where('start_date', '<=', $now)->where('end_date', '>=', $now)->groupBy('slug')->get();
         }
 
-        return $this->view('stock_promotions', compact(['model','sales','type']));
+        return $this->view('stock_promotions', compact(['model', 'sales', 'type']));
 
     }
 
-    private function createOrUpdateSeo ($request, $stock_id)
+    private function createOrUpdateSeo($request, $stock_id)
     {
         $types = $request->only(['fb', 'general', 'twitter', 'robot']);
         foreach ($types as $type => $data) {
@@ -156,7 +156,7 @@ class InventoryController extends Controller
         }
     }
 
-    public function linkAll ($data)
+    public function linkAll($data)
     {
         $results = [];
         if ($data && count($data)) {
@@ -183,7 +183,7 @@ class InventoryController extends Controller
         return $results;
     }
 
-    public function variationForm (Request $request)
+    public function variationForm(Request $request)
     {
         $data = $request->get('data');
         $model = null;
@@ -192,7 +192,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getStocks (Request $request)
+    public function getStocks(Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
         $attr = Stock::whereNotIn('id', $request->get('arr', []))->get();
@@ -200,7 +200,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'data' => $attr]);
     }
 
-    public function addVariation (Request $request)
+    public function addVariation(Request $request)
     {
         $item = $request->except('_token');
         $stockItems = Items::all()->pluck('sku', 'sku')->all();
@@ -209,7 +209,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function addPackageVariation (Request $request)
+    public function addPackageVariation(Request $request)
     {
         $stockItems = Items::all()->pluck('sku', 'sku')->all();
         $package_variation = null;
@@ -218,7 +218,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function editVariation (Request $request)
+    public function editVariation(Request $request)
     {
         $data = $request->get('data');
         $model = $request->get('model');
@@ -228,7 +228,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getOptionById (Request $request)
+    public function getOptionById(Request $request)
     {
         $selected = Attributes::find($request->id);
         $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
@@ -237,7 +237,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getSpecification (Request $request)
+    public function getSpecification(Request $request)
     {
         $selected = Attributes::find($request->id);
         $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
@@ -246,7 +246,7 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function addExtraOption (Request $request)
+    public function addExtraOption(Request $request)
     {
         $option = $request->except('_token');
         $html = \View("admin.inventory._partials.extra_item", compact(['option']))->render();
@@ -254,21 +254,21 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function getPromotionVariations (Request $request)
+    public function getPromotionVariations(Request $request)
     {
         $stock = Stock::find($request->stock_id);
         $model = Stock::findOrFail($request->id);
         $type = $request->type;
-        $price = json_decode($request->price,true);
+        $price = json_decode($request->price, true);
 //        dd($price);
 
-        $html = \View("admin.inventory._partials.extra_item", compact(['model','type','price','stock']))->render();
+        $html = \View("admin.inventory._partials.extra_item", compact(['model', 'type', 'price', 'stock']))->render();
 //        dd($html);
 //        dd(\Response::json(['error' => false, 'html' => $html]));
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function postRenderVariationNewOptions (Request $request)
+    public function postRenderVariationNewOptions(Request $request)
     {
         $attributesJson = $request->get('attributesJson');
         $objData = $request->get('objData');
@@ -278,56 +278,56 @@ class InventoryController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
-    public function saveExtraOptions (Request $request)
+    public function saveExtraOptions(Request $request)
     {
         return \Response::json(['error' => false, 'data' => json_encode($request->data, true)]);
     }
 
-    public function getById (Request $request)
+    public function getById(Request $request)
     {
         $model = Stock::findOrFail($request->id);
 
         return \Response::json(['error' => false, 'data' => $model]);
     }
 
-    public function getVariationsById (Request $request)
+    public function getVariationsById(Request $request)
     {
         $model = Stock::find($request->id);
 
-        if(! $model) return \Response::json(['error' => true, 'message' => 'Not found']);
+        if (!$model) return \Response::json(['error' => true, 'message' => 'Not found']);
 
         return \Response::json(['error' => false, 'data' => $model->variations]);
     }
 
-    public function getPromotion (Request $request)
+    public function getPromotion(Request $request)
     {
         $model = Stock::findOrFail($request->stock_id);
-        $promotion = ($request->get('slug')) ? StockSales::where('slug',$request->get('slug'))->first() : null;
-        $html = \View("admin.inventory._partials.promotion_item", compact(['model','promotion']))->render();
+        $promotion = ($request->get('slug')) ? StockSales::where('slug', $request->get('slug'))->first() : null;
+        $html = \View("admin.inventory._partials.promotion_item", compact(['model', 'promotion']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function savePromotion(Request $request)
     {
-        $data = $request->except('extra_product','stock_id');
+        $data = $request->except('extra_product', 'stock_id');
         $stock = Stock::findOrFail($request->stock_id);
 
-        $sale = $stock->sales()->where('canceled',false)->where('start_date','<=',strtotime($data['start_date']))->where('end_date','>=',strtotime($data['start_date']))
-            ->orWhere(function ($query) use($data){
-                $query->where('canceled',false)->where('start_date','<=',strtotime($data['end_date']))->where('end_date','>=',strtotime($data['end_date']));
+        $sale = $stock->sales()->where('canceled', false)->where('start_date', '<=', strtotime($data['start_date']))->where('end_date', '>=', strtotime($data['start_date']))
+            ->orWhere(function ($query) use ($data) {
+                $query->where('canceled', false)->where('start_date', '<=', strtotime($data['end_date']))->where('end_date', '>=', strtotime($data['end_date']));
             })
             ->first();
-        
-        if($sale) return \Response::json(['error' => true,'message' => 'Please select another dates for promotion, we have active promotion with these dates...']);
 
-        if($request->get('extra_product') && count($request->get('extra_product'))){
-            foreach ($request->get('extra_product') as $key => $item){
-                $sale = $stock->sales()->where('variation_id',$key)->where('slug',$data['slug'])->first();
+        if ($sale) return \Response::json(['error' => true, 'message' => 'Please select another dates for promotion, we have active promotion with these dates...']);
+
+        if ($request->get('extra_product') && count($request->get('extra_product'))) {
+            foreach ($request->get('extra_product') as $key => $item) {
+                $sale = $stock->sales()->where('variation_id', $key)->where('slug', $data['slug'])->first();
                 $data['variation_id'] = $key;
                 $data['price'] = $item['price'];
-                if($sale){
+                if ($sale) {
                     $sale->update($data);
-                }else{
+                } else {
                     $stock->sales()->create($data);
                 }
             }
@@ -339,7 +339,7 @@ class InventoryController extends Controller
     public function cancelSale(Request $request)
     {
         $stock = Stock::findOrFail($request->stock_id);
-        $stock->sales()->where('slug',$request->slug)->update(['canceled'=>true]);
+        $stock->sales()->where('slug', $request->slug)->update(['canceled' => true]);
 
         return \Response::json(['error' => false]);
     }
