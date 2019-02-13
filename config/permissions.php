@@ -5,10 +5,11 @@
  * Date: 2/13/2019
  * Time: 10:34 AM
  */
+
 return [
     'user' => [
         [
-            'name' => 'View all staff',
+            'name' => 'staff',
             'routes' => ['admin_staff'],
             'description' => 'Able to see all staff',
             'children' => [
@@ -25,7 +26,7 @@ return [
             ]
         ],
         [
-            'name' => 'View all Customers',
+            'name' => 'Customers',
             'routes' => ['admin_customers'],
             'description' => 'Able to see all staff',
             'children' => [
@@ -40,9 +41,33 @@ return [
     ],
     'blog' => [
         [
-            'name' => 'View All Posts',
+            'name' => 'Posts',
             'routes' => ['admin_blog'],
             'description' => 'Able to see blog page',
+            'children' => [
+                [
+                    [
+                        'name' => 'View All Post Comments Page',
+                        'routes' => ['show_comments', 'admin_new_post'],
+                        'description' => 'Able to see all comments',
+                    ],
+                    [
+                        'name' => 'Edit Post Comment',
+                        'routes' => ['approve_comments', 'unapprove_comments', 'edit_comment', 'edit_comment_post'],
+                        'description' => 'Approve or cancel pending Comment ',
+                    ],
+                    [
+                        'name' => 'Replay Post comment',
+                        'routes' => ['reply_comment', 'reply_comment_post'],
+                        'description' => 'Delete or edit comment',
+                    ],
+                ],
+            ],
+
+        ],[
+            'name' => 'Comments',
+            'routes' => ['show_comments'],
+            'description' => 'Able to see all comments',
             'children' => [
                 [
                     'name' => 'Create Post',
@@ -60,28 +85,12 @@ return [
                     'description' => 'Able to Delete post',
                 ],
             ],
-            [
-                [
-                    'name' => 'View All Post Comments Page',
-                    'routes' => ['show_comments', 'admin_new_post'],
-                    'description' => 'Able to see all comments',
-                ],
-                [
-                    'name' => 'Edit Post Comment',
-                    'routes' => ['approve_comments', 'unapprove_comments', 'edit_comment', 'edit_comment_post'],
-                    'description' => 'Approve or cancel pending Comment ',
-                ],
-                [
-                    'name' => 'Replay Post comment',
-                    'routes' => ['reply_comment', 'reply_comment_post'],
-                    'description' => 'Delete or edit comment',
-                ],
-            ],
+
         ],
     ],
     'inventory' => [
         [
-            'name' => 'View inventory',
+            'name' => 'Inventory',
             'routes' => ['admin_items'],
             'description' => 'Able inventory',
             'children' =>
@@ -101,7 +110,7 @@ return [
     ],
     'store' => [
         [
-            'name' => 'View stock ',
+            'name' => 'Stock ',
             'routes' => ['admin_stock'],
             'description' => 'Able to see all stock',
             'children' => [
@@ -162,7 +171,7 @@ return [
             ],
         ],
         [
-            'name' => 'View all Attributes',
+            'name' => 'Attributes',
             'routes' => ['admin_store_attributes'],
             'description' => 'Able to see  Attributes',
             'children' => [
