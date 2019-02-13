@@ -245,13 +245,15 @@
 
 @stop
 @section("js")
-{!!  Html::script('public/js/bootstrap-fileinput/js/fileinput.min.js') !!}
+    {!! Html::script('public/js/bootstrap-fileinput/js/fileinput.min.js') !!}
     {!! Html::script("public/js/nestedSortable/jquery.mjs.nestedSortable.js") !!}
     {!! Html::script("public/admin_theme/media/js/lightbox.js") !!}
     {!! Html::script("public/js/bootstrap-select/js/bootstrap-select.min.js") !!}
     {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
     {{--{!! Html::script("public/js/media_button.js") !!}--}}
     {!! Html::script("public/js/media_button_new.js?v=".rand(999,99999)) !!}
+    {{--{!! Html::script("public/js/bundle/media.js",['type' => 'module']) !!}--}}
+
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 
 

@@ -131,12 +131,13 @@
     </div>
 </script>
 <!-- ./wrapper -->
-<!-- jQuery 3 -->
+{{--<!-- jQuery 3 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
-<!-- jQuery UI 1.11.4 -->
+{{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script src="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/jquery.fancytree-all-deps.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/jquery.fancytree-all.min.js"></script>
+
 <script>
     $.widget.bridge('uibutton', $.ui.button);
 </script>
