@@ -1,4 +1,3 @@
-console.log();
 const shortAjax = function(URL, obj = {}, cb) {
     fetch(URL, {
         method: "post",
@@ -138,34 +137,11 @@ function App() {
                         activate: function(event, data){
                             // A node is about to be selected: prevent this, for folder-nodes:
                             if( data.node.isFolder() ){
-                                console.log('nade',data.node);
                                 get_folder_items_tree(data.node.data.id);
                             }
                         }
                     });
-//                     return `<li  bb-media-type="tree-folder" bb-media-click="get_folder_items" data-trre-id="${
-//                         data.id
-//                         }" data-id="${
-//                         data.id
-//                         }" style="display: flex; justify-content: space-between; cursor: pointer;">
-// <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
-//                   <div style="margin-right: 5px">
-//                   <span data-id="${
-//                         data.id
-//                         }" >${data.title}</span>
-//                   </div></div>
-//                   <!--<div>-->
-//                     <!--<button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>-->
-//                     <!--<button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>-->
-//                     <!--<button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>-->
-//                   <!--</div>-->
-//                 </li>`;
-
-                    this.tree = $("#folder-list").fancytree("getTree")
-
-                    console.log(this.tree);
                 });
-
         },
         makeBreadCrumbsItem(item) {
             return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
@@ -629,7 +605,6 @@ function App() {
                 let parrentId = e.target
                     .closest(".file")
                     .getAttribute("data-id");
-                console.log(nodeId, parrentId)
                 self.requests.transferImage(
                     {
                         item_id: Number(nodeId),
@@ -664,7 +639,6 @@ function App() {
                         res.settings
                     );
                     mainContainer.innerHTML = "";
-                    console.log(res);
                     res.data.children.forEach((folder, index) => {
                         var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
                             folder
@@ -677,8 +651,6 @@ function App() {
                         )}</div>`;
                         mainContainer.innerHTML += html;
                     });
-                    console.log('childrenArray', res.data.children, 'tree', tree)
-
                     if (tree) {
                         self.htmlMaker.makeTreeFolder(
                             res.data.children
@@ -694,16 +666,17 @@ function App() {
         removeTreeFolder(obj = {}, cb) {
             shortAjax("/api/api-media/get-remove-folder", obj, res => {
                 if (!res.error) {
-                cb();
-                self.requests.drawingItems();
-            }
-        });
-        }, saveSeo(obj = {}, cb) {
+                    cb();
+                    self.requests.drawingItems();
+                }
+            });
+        },
+        saveSeo(obj = {}, cb) {
             normAjax("/api/api-media/save-seo", obj, res => {
                 if (!res.error) {
-                cb();
-            }
-        });
+                    cb();
+                }
+            });
         },
         editImageName(obj = {}, cb) {
             shortAjax("/api/api-media/rename-item", obj, res => {
@@ -776,25 +749,24 @@ function App() {
             self.requests.removeTreeFolder(
                 {
                     folder_id: Number(id),
-                    trash: 0,
+                    trash: 1,
                     access_token: "string"
                 },
                 () => elm.closest("li").remove()
         );
         },
         remove_folder(elm, e) {
-            console.log('elm', elm);
             e.stopPropagation();
             e.preventDefault();
             let id = elm.closest(".file").getAttribute("data-id");
             self.requests.removeTreeFolder(
                 {
                     folder_id: Number(id),
-                    trash: 0,
+                    trash: 1,
                     access_token: "string"
                 },
                 () => elm.closest(".folder-container").remove()
-        );
+            );
         },
         get_folder_items(elm, e) {
             let id = elm.closest("[data-id]").getAttribute("data-id");
@@ -837,11 +809,9 @@ function App() {
             e.stopPropagation();
             e.preventDefault();
             let id = e.target.closest(".file").getAttribute("data-id");
-            console.log(id)
             let countId = e.target
                 .closest(".file-box")
                 .getAttribute("data-image");
-            console.log(countId);
             self.requests.getImageDetails({ item_id: id }, res => {
                 document.body.innerHTML += self.htmlMaker.fullInfoModal(
                 res,
