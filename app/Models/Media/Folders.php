@@ -36,7 +36,7 @@ class Folders extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text'];
+    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text','folder'];
 
     public function getChildrenCountAttribute()
     {
@@ -46,6 +46,10 @@ class Folders extends Model
     public function getTextAttribute()
     {
         return $this->name;
+    }
+    public function getFolderAttribute()
+    {
+        return true;
     }
 
     public function getItemsCountAttribute()
@@ -155,12 +159,7 @@ class Folders extends Model
     {
         $result = $this->toArray();
         $result['children'] = array_merge($this->children->toArray(),$this->itemsTmp());
-        $result['folder']=true;
         $result['url'] = $this->url();
-        if ($files) {
-            $result['items'] = $this->itemsTmp();
-        }
-
         return $result;
     }
 
