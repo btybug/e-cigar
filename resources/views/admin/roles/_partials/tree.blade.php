@@ -9,10 +9,14 @@
                 <div>
                     <ul class="nav nav-list nav-menu-list-style">
                         @foreach($permissions as $permission)
-                            <li><input type="checkbox"><label class="tree-toggle nav-header">{!! $permission['name'] !!}</label>
+                            <li>
+                                <div class="nav-menu-wrap tree-toggle nav-header">
+                                    <input type="checkbox">
+                                    <label class="">{!! $permission['name'] !!}</label>
+                                </div>
                                 <ul class="nav nav-list tree">
                                     @foreach($permission['children'] as $child)
-                                        <li><a href="#">{!! $child['name'] !!}</a><input type="checkbox"></li>
+                                        <li><input type="checkbox"><a href="#">{!! $child['name'] !!}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
