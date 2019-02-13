@@ -143,7 +143,7 @@ class Folders extends Model
 
     public function children()
     {
-        return $this->hasMany('App\Models\Media\Folders', 'parent_id');
+        return $this->hasMany('App\Models\Media\Folders', 'parent_id')->with('children');
     }
 
 //Api functions
