@@ -40,7 +40,7 @@ class Folders extends Model
 
     public function getChildrenCountAttribute()
     {
-        return $this->childs()->count();
+        return $this->children()->count();
     }
 
     public function getTextAttribute()
@@ -132,7 +132,7 @@ class Folders extends Model
 
     }
 
-    public function childs()
+    public function children()
     {
         return $this->hasMany('App\Models\Media\Folders', 'parent_id');
     }
@@ -154,7 +154,8 @@ class Folders extends Model
     public function getChilds($files)
     {
         $result = $this->toArray();
-        $result['childs'] = $this->childs->toArray();
+        $result['children'] = array_merge($this->children->toArray(),$this->itemsTmp());
+        $result['folder']=true;
         $result['url'] = $this->url();
         if ($files) {
             $result['items'] = $this->itemsTmp();
@@ -183,7 +184,7 @@ class Folders extends Model
     public function getChildren($files)
     {
         $result = $this->toArray();
-        $result['children'] = $this->childs->toArray();
+        $result['children'] = $this->children->toArray();
         $result['url'] = $this->url();
         if ($files) {
             $result['items'] = $this->items->toArray();
