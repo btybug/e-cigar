@@ -36,12 +36,17 @@ class Folders extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text','folder'];
+    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text','folder','url'];
 
     public function getChildrenCountAttribute()
     {
         return $this->children()->count();
     }
+    public function getUrlAttribute()
+    {
+        return $this->url();
+    }
+
 
     public function getTextAttribute()
     {
@@ -160,12 +165,16 @@ class Folders extends Model
         $result = $this->toArray();
         $result['children'] = array_merge($this->children->toArray(),$this->itemsTmp());
         $result['url'] = $this->url();
+        if ($files) {
+            $result['items'] = $this->itemsTmp();
+        }
+
         return $result;
     }
 
     public function itemsTmp()
     {
-        $childs = $this->items->toArray();
+        $childs = $this->items;
         foreach ($childs as $key=>$child){
             if($this->ifIsImage($child['original_name'])){
                 $childs[$key]['tmp']=media_image_tmb($child['original_name']);

@@ -21,15 +21,15 @@ class MediaApiController extends Controller
         }
 
         if (isset($data['folder_id'])) {
-            $folder = Folders::find($data['folder_id']);
+            $folder = Folders::with('children','items')->find($data['folder_id']);
         } elseif (isset($data['slug'])) {
-            $folder = Folders::where('name', $data['slug'])->first();
+            $folder = Folders::where('name', $data['slug'])->with('children','items')->first();
         }
 
         if (!$folder) {
             return \Response::json(['error' => true, 'message' => [0 => 'undefined folder!!!']]);
         }
-        return \Response::json(['error' => false, 'data' => $folder->getChilds($request->get('files')), 'settings' => $folder->settings]);
+        return \Response::json(['error' => false, 'data' => $folder->toArray(), 'settings' => $folder->settings]);
     }
 
     public function getFolderChildrenJsTree(Request $request)
