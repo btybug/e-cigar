@@ -3,6 +3,26 @@
 
 @stop
 @section('content')
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Password input-->
+            <div class="form-group row">
+                <label class="col-md-2" for="passwordinput">Title</label>
+                <div class="col-md-10">
+                    {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <!-- Password input-->
+            <div class="form-group row">
+                <label class="col-md-2" for="passwordinput">Type</label>
+                <div class="col-md-10">
+                    {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="m-0">Create Role</h2>
@@ -11,21 +31,6 @@
             <div class="col-md-4">
 
                 <form action="">
-                    <!-- Password input-->
-                    <div class="form-group row">
-                        <label class="col-md-2" for="passwordinput">Title</label>
-                        <div class="col-md-10">
-                            {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-                    <!-- Password input-->
-                    <div class="form-group row">
-                        <label class="col-md-2" for="passwordinput">Type</label>
-                        <div class="col-md-10">
-                            {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-
                     <!-- Password input-->
                     <div class="form-group row">
                         <label class="col-md-2" for="passwordinput">Description</label>
