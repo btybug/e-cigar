@@ -49,7 +49,7 @@
         </aside>
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
-                <h2 class="pull-left m-0 lh-1">PIE CHART</h2>
+                <h2 class="pull-left m-0 lh-1">Most visited pages</h2>
                 <div class="pull-right">
                     <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
                         <i class="fa fa-calendar"></i>
