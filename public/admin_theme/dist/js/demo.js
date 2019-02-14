@@ -236,7 +236,6 @@ $(function () {
     + '</div>'
   )
   var $skinsList = $('<ul />', { 'class': 'list-unstyled clearfix' })
-
   // Dark sidebar skins
   var $skinBlue =
         $('<li />', { style: 'float:left; width: 33.33333%; padding: 5px;' })
@@ -335,15 +334,16 @@ $(function () {
             + '<div><span style="display:block; width: 20%; float: left; height: 20px; background: #f9fafc"></span><span style="display:block; width: 80%; float: left; height: 20px; background: #f4f5f7"></span></div>'
             + '</a>'
             + '<p class="text-center no-margin" style="font-size: 12px">Yellow Light</p>')
-  $skinsList.append($skinYellowLight)
 
-  $demoSettings.append('<h4 class="control-sidebar-heading">Skins</h4>')
-  $demoSettings.append($skinsList)
-
+  // $demoSettings.append('<h4 class="control-sidebar-heading">Skins</h4>')
+  // $demoSettings.append($skinsList)
+    $skinsList.append($skinYellowLight)
   $tabPane.append($demoSettings)
   $('#control-sidebar-home-tab').after($tabPane)
 
   setup()
 
   $('[data-toggle="tooltip"]').tooltip()
+    $('#userDropdownSkins').append('<h4 class="control-sidebar-heading">Skins</h4>')
+    $('#userDropdownSkins').append($skinsList)
 })

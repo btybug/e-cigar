@@ -136,7 +136,11 @@
 {{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script src="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/jquery.fancytree-all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.edit.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.filter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.dnd5.js"></script>
+
 
 <script>
     $.widget.bridge('uibutton', $.ui.button);
