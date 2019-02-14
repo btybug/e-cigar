@@ -133,13 +133,10 @@ function App() {
               extensions: ["edit", "filter", "glyph"],
               source: data,
               selectMode: 1,
-              icon: false,
+              // icon: false,
               // glyph: {
-              //   // The preset defines defaults for all supported icon types.
-              //   // It also defines a common class name that is prepended (in this case 'fa ')
               //   preset: "awesome4",
               //   map: {
-              //     // Override distinct default icons here
               //     folder: "fa-folder",
               //     folderOpen: "fa-folder-open"
               //   }
@@ -558,16 +555,12 @@ function App() {
           item.remove();
           return;
         }
-        if (item == singleItem
-    )
-      {
+        if (item == singleItem) {
         item.classList.add("disabled");
         item.classList.remove("active");
         // item.removeAttribute("data-id");
         check = true;
-      }
-    else
-      {
+      } else {
         item.classList.add("active");
         item.classList.remove("disabled");
       }
