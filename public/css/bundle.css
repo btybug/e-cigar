@@ -12757,6 +12757,90 @@ tr.notification-is_read {
     animation-duration: 500ms;
 }
 /*registration and login error end*/
+.releted__products-panel .option-elm-attributes .wrap-item{
+    position: relative;
+}
+
+.releted__products-panel .option-elm-attributes .wrap-item img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.releted__products-panel .option-elm-attributes .wrap-item .buttons{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.releted__products-panel .option-elm-attributes .wrap-item .name{
+    text-align: center;
+    display: block;
+    background-color: #eee;
+    padding: 8px;
+    text-transform: uppercase;
+    color: #000;
+}
+.releted__products-panel .get-all-attributes-tab{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.releted-products-add-modal .all-list{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.releted-products-add-modal .option-elm-modal>div{
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    box-shadow: 0 0 4px #888;
+    margin-bottom: 7px;
+    flex: auto;
+}
+.releted-products-add-modal .option-elm-modal a:first-of-type{
+    padding: 0 6px;
+    color: #000;
+    text-transform: uppercase;
+}
+.releted-products-add-modal .option-elm-modal .add-attribute-event{
+    margin-left: auto;
+}
+@media (min-width: 768px){
+    .releted-products-add-modal .option-elm-modal {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+.releted-products-add-modal .option-elm-modal{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*Montserrat*/
 @font-face {
@@ -14607,16 +14691,30 @@ header .search-icon-mobile {
 .news-inner-wrapper .news-share li a {
     border: 1px solid #d7d7d7;
     padding: 15px;
-    color: #353535;
+    color: #fff;
+    font-size: 18px;
 }
 
 .news-inner-wrapper .news-share li a:hover {
-    color: #5184e5;
+    color: #ffffff;
 }
-
+.news-inner-wrapper .news-share .instagram-bg{
+    background-color: #e4405f;
+}
+.news-inner-wrapper .news-share .facebook-bg{
+    background-color: #3b5999;
+}
+.news-inner-wrapper .news-share .twitter-bg{
+    background-color: #55acee;
+}
+.news-inner-wrapper .news-share .plus-bg{
+    background-color: #5184e5;
+}
 .news-inner-wrapper .tabs-wrap .nav-link {
     color: #bdc1c9;
 }
+
+
 
 .news-inner-wrapper .tabs-wrap .nav-link.active, .news-inner-wrapper .tabs-wrap .nav-link:hover {
     color: #5184e5;
