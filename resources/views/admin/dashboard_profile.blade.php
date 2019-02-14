@@ -63,13 +63,6 @@
                         {!! Form::hidden('id') !!}
 
                         <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 control-label">Avatar</label>
-
-                            <div class="col-sm-10">
-                                {!! Form::file('avatar',['class'=>'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group row">
                             <label for="inputName" class="col-sm-2 control-label">First Name</label>
 
                             <div class="col-sm-10">
