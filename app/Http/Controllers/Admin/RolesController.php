@@ -25,7 +25,7 @@ class RolesController extends Controller
 
     public function edit(Request $request)
     {
-        $role = Roles::where('id',$request->id)->with('permissions')->first();
+        $role = Roles::where('id', $request->id)->with('permissions')->first();
         return $this->view('edit', compact('role'));
     }
 
@@ -39,8 +39,8 @@ class RolesController extends Controller
     {
 
         $data = $request->except('_token', 'has_access', 'permission');
-        $permissions = $this->getPermissions($request->get('permission',[]), 'backend')->pluck('id');
-        $has_access = $this->getPermissions($request->get('has_access',[]), 'has_access')->pluck('id');
+        $permissions = $this->getPermissions($request->get('permission', collect([])), 'backend')->pluck('id')->toArray();
+        $has_access = $this->getPermissions($request->get('has_access', collect([])), 'has_access')->pluck('id')->toArray();
         $validator = \Validator::make($data, [
             'title' => 'required|unique:roles,title',
             'description' => 'required',
@@ -49,42 +49,51 @@ class RolesController extends Controller
         $data['slug'] = str_replace(' ', '_', strtolower($data['title']));
         if ($validator->fails()) return redirect()->back();
         $role = Roles::create($data);
-        $role->permissions()->sync($permissions, true);
-        $role->permissions()->sync($has_access, true);
+        $role->permissions()->sync($permissions);
         return redirect()->route('admin_role_membership');
 
     }
 
-    protected function getPermissions($permissions, $type)
-    {
-        $result = [];
-        foreach ($permissions as $key => $value) {
-            if (Permissions::where('slug', $value)->where('type', $type)->exists()) {
-                $result[] = Permissions::where('slug', $value)->where('type', $type)->first();
-            } else {
-                $result[] = Permissions::created(['slug' => $value, 'type' => $type]);
-            }
-        }
-        return collect($result);
-    }
 
     public function postEdit(Request $request)
     {
         $data = $request->except('_token', 'has_access', 'permission');
-        $permissions = $this->getPermissions($request->get('permission',[]), 'backend')->pluck('id');
-        $has_access = $this->getPermissions($request->get('has_access',[]), 'has_access')->pluck('id');
+        $permissions = $this->getPermissions($request->get('permission', collect([])), 'backend')->pluck('id')->toArray();
+        $has_access = $this->getPermissions($request->get('has_access', collect([])), 'has_access')->pluck('id')->toArray();
         $validator = \Validator::make($data, [
-            'title' => 'required|unique:roles,title,'.$data['id'],
+            'title' => 'required|unique:roles,title,' . $data['id'],
             'description' => 'required',
             'type' => 'required|in:backend,frontend',
-            'id'=>'required|exists:roles'
+            'id' => 'required|exists:roles'
         ]);
         if ($validator->fails()) return redirect()->withErrors($validator);
         $data['slug'] = str_replace(' ', '_', strtolower($data['title']));
 
         $role = Roles::find($data['id']);
-        $role->permissions()->sync($permissions, false);
-        $role->permissions()->sync($has_access, false);
-        return redirect()->route('admin_role_membership');
+        $permissions = array_merge($permissions, $has_access);
+        $role->permissions()->sync($permissions);
+        return redirect()->back();
+    }
+
+    protected function getPermissions($permissions, $type, $result = [])
+    {
+        foreach ($permissions as $key => $value) {
+            if (Permissions::where('slug', $value)->where('type', $type)->exists()) {
+                $result[] = Permissions::where('slug', $value)->where('type', $type)->first();
+            } else {
+                $result[] = Permissions::create(['slug' => $value, 'type' => $type]);
+            }
+        }
+        return collect($result);
+    }
+
+    public function sync($role, $permissions)
+    {
+        foreach ($permissions as $permission) {
+            if (!$role->permissions()->where('id', $permission)->exicts()) {
+                $role->permissions()->attach($permission);
+            }
+        }
+        $role->permissions()->wherePivotNotIn('permission_id', $permission)->detach();
     }
 }
