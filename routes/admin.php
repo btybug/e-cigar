@@ -7,6 +7,8 @@
  */
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+Route::get('/profile', 'Admin\AdminController@getProfile')->name('admin_dashboard_profile');
+
 Route::post('/quick-email', 'Admin\AdminController@quickEmail')->name('admin_quick_email');
 Route::get('/test', 'Admin\AdminController@test')->name('admin_dashboard_test');
 Route::get('/menu-manager', function () {

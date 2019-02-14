@@ -31,8 +31,8 @@
             </div>
 
             <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item"><a href="#tabDashboard" class="nav-link active" data-toggle="tab">Dashboard</a></li>
-                <li class="nav-item"><a href="#tabProfile" class="nav-link" data-toggle="tab">Profile</a></li>
+                <li class="nav-item"><a href="{{ route('admin_dashboard') }}" class="nav-link active" >Dashboard</a></li>
+                <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}" class="nav-link ">Profile</a></li>
             </ul>
 
         </div>
