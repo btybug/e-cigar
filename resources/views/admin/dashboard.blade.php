@@ -41,6 +41,25 @@
             <button class="btn btn-info open_dashboard_widget">Add new Widget</button>
 
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h2 class="pull-left m-0 lh-1">Title</h2>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                    <span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                        <button type="button" class="btn btn-for-widget btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-1" >
+                            <i class="fa fa-minus"></i></button>
+                    </span>
+
+                </div>
+            </div>
+            <div id="collapseWidget-1" class="panel-body collapse" aria-expanded="true">
+                content
+            </div>
+        </div>
     </div>
 
     <div class="col-md-12">
@@ -500,6 +519,8 @@
     {!! HTML::style('/public/js/google/analytic/index.css') !!}
 @stop
 @section('js')
+
+
     <!-- jvectormap -->
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
@@ -512,6 +533,11 @@
     <script>
         $('body').on('click', '.open_dashboard_widget', function () {
             $('.dashboard_modal_add_widget').toggleClass('active')
+        })
+
+        {{--widget btn--}}
+        $('.btn-for-widget').on('click', function () {
+            $(this).find($('i').toggleClass('fa-plus fa-minus'));
         })
     </script>
     <script>
