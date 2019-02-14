@@ -5,57 +5,71 @@
 @section('content')
     <div class="row">
     {!! Form::open() !!}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2 class="m-0">Create Role</h2>
-        </div>
 
-    <!-- Button -->
-        <div class="form-group row">
-            <div class="col-sm-12 text-right pull-right">
-                <button id="singlebutton" class="btn btn-info save-role">Save</button>
-            </div>
-        </div>
-        <div class="panel-body">
-
-            <div class="col-md-4">
-                <div class="row">
-                    <!-- Password input-->
-                    <div class="form-group row">
-                        <label class="col-md-2" for="passwordinput">Title</label>
-                        <div class="col-md-10">
-                            {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-                    <!-- Password input-->
-                    <div class="form-group row">
-                        <label class="col-md-2" for="passwordinput">Type</label>
-                        <div class="col-md-10">
-                            {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2" for="passwordinput">Description</label>
-                        <div class="col-md-10">
-                            {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <div class="col-md-12">
         <div class="col-md-12">
             <div class="panel panel-default">
-                <h3 class="panel-heading m-0">Pages</h3>
+                <div class="panel-heading">
+                    <h2 class="m-0">Create Role</h2>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group row">
+                    <div class="col-sm-12 text-right pull-right">
+                        <button id="singlebutton" class="btn btn-info save-role">Save</button>
+                    </div>
+                </div>
                 <div class="panel-body">
-                    @include('admin.roles._partials.tree')
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <!-- Password input-->
+                            <div class="form-group row">
+                                <label class="col-md-2" for="passwordinput">Title</label>
+                                <div class="col-md-10">
+                                    {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <!-- Password input-->
+                            <div class="form-group row">
+                                <label class="col-md-2" for="passwordinput">Type</label>
+                                <div class="col-md-10">
+                                    {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-2" for="passwordinput">Description</label>
+                                <div class="col-md-10">
+                                    {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="panel panel-default">
+
+               <div class="panel-heading">
+                   <ul class="nav nav-tabs">
+                       <li class="active"><a data-toggle="tab" href="#tabPages">Pages</a></li>
+                       <li><a data-toggle="tab" href="#tabWidgets">Widgets</a></li>
+                   </ul>
+               </div>
+                <div class="panel-body">
+                    <div class="tab-content tabs_content">
+                            <div id="tabPages" class="tab-pane tab_info fade in active">
+                                <div class="panel-body">
+                                    @include('admin.roles._partials.tree')
+                                </div>
+                            </div>
+                            <div id="tabWidgets" class="tab-pane tab_info fade in active">
+                            </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {!! Form::close() !!}
     </div>
 @stop
