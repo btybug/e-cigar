@@ -35,7 +35,7 @@
 
                 <div class="profile-header-info">
                     <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
-                    <p class="m-b-10">Web Developer</p>
+                    <p class="m-b-10">{{ Auth::user()->role->title }}</p>
                 </div>
 
             </div>
@@ -148,23 +148,6 @@
             font-size: 12px;
         }
 
-        .dropzone > input[type=file] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 2;
-            height: 100% /* IE HACK*/;
-        }
-        .dropzone .cropWrapper {
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-        }
 
         .dashboard-pages .person-img .dropzone:after {
             content: "\f382";

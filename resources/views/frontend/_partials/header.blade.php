@@ -19,7 +19,7 @@
                         <div id="ptofileBtn"
                              class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer">
                             <div class="user-img">
-                                <img src="{!! url('/public/img/user.png') !!}" alt="user">
+                                <img src="{!! user_avatar() !!}" alt="user">
                             </div>
                             <span class="user-name font-15 text-sec-clr font-main-bold">
                                 Hi {{ Auth::user()->name }}
@@ -187,7 +187,7 @@
     <!--Hidden Sidebars-->
     <div id="profileSidebar" class="hidden-sidebar profile-sidebar d-flex flex-column align-items-center">
         <div class="profile-sidebar_avatar-holder">
-            <img src="@if(Auth::user()->avatar) {!! Auth::user()->avatar !!} @else /public/images/{!!Auth::user()->gender!!}.png  @endif"
+            <img src="{{ user_avatar() }}"
                  alt="">
         </div>
         @include('frontend.my_account._partials.left_bar')

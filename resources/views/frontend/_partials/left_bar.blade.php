@@ -1,7 +1,7 @@
 <div id="profileSidebar" class="profile-aside profile-page-profile-aside d-flex flex-column">
     <div class="profile-aside-dtls">
         <div class="profile-aside-img-holder">
-            <img src="@if(Auth::user()->avatar) {!! Auth::user()->avatar !!} @else /public/images/{!!Auth::user()->gender!!}.png  @endif" alt="">
+            <img src="{{ user_avatar() }}" alt="">
         </div>
         <h2 class="profile-aside-username text-white text-center">Admin</h2>
     </div>
