@@ -252,14 +252,14 @@
                                                         </thead>
 
                                                         <tbody class="v-options-list">
-                                                        @include("admin.inventory._partials.variation_option_item")
+                                                        @include('admin.inventory._partials.specifications')
                                                         </tbody>
 
                                                         <tfoot>
                                                         <tr class="add-new-ship-filed-container">
                                                             <td colspan="4" class="text-right">
                                                                 <button type="button" class="btn btn-primary"><i
-                                                                            class="fa fa-plus-circle add-new-v-option"></i>
+                                                                            class="fa fa-plus-circle add-specification"></i>
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -313,6 +313,17 @@
                     }
                 });
             });
+
+            $("body").on('click', '.add-specification', function () {
+                let $this = $(this);
+                AjaxCall("/admin/inventory/stock/get-specifications", {id: null}, function (res) {
+                    if (!res.error) {
+                        $this.closest("table").find(".v-options-list").append(res.html);
+                        $(".tag-input-v").select2({ width: '100%' });
+                    }
+                });
+            });
+            
             $("body").on('click', '.get-all-extra-tab-event', function () {
                 AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
