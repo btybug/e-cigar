@@ -822,13 +822,13 @@ var elem = data.map((el) => {
             let inputElement = document.querySelector(".new-folder-input");
             let name = inputElement.value;
             var x = $("#folder-list").fancytree("getTree");
-            console.log(globalFolderId);
-            console.log(x)
-            x.getNodeByKey(globalFolderId.toString()).addChildren({
-                folder: true,
-                title: name,
-                text: name
-            })
+            // console.log(globalFolderId);
+            // console.log(x)
+            // x.getNodeByKey(globalFolderId.toString()).addChildren({
+            //     folder: true,
+            //     title: name,
+            //     text: name
+            // })
             self.requests.addNewFolder(
                 {
                     folder_id: globalFolderId,
@@ -838,7 +838,6 @@ var elem = data.map((el) => {
                 false
             );
             inputElement.value = '';
-
         },
         open_full_modal(elm, e) {
             e.stopPropagation();

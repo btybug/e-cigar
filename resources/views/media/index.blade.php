@@ -13,18 +13,20 @@
                                 {{--<a href="#" class="file-control">Documents</a>--}}
                                 {{--<a href="#" class="file-control">Audio</a>--}}
                                 {{--<a href="#" class="file-control">Images</a>--}}
-                                <div class="hr-line-dashed"></div>
-                                <button class="btn btn-info btn-block upload-file_button {!! $settings['uploadbutton']??null !!}">
-                                    Upload Files
-                                </button>
-                                <div class="hr-line-dashed">
+                                {{--<div class="hr-line-dashed"></div>--}}
+                                {{--<button class="btn btn-info btn-block upload-file_button {!! $settings['uploadbutton']??null !!}">--}}
+                                    {{--Upload Files--}}
+                                {{--</button>--}}
+                                {{--<div class="hr-line-dashed">--}}
 
 
-                                </div>
+                                {{--</div>--}}
 
                                 <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"
-                                       role="button" href="#createFolder"><i class="fa fa-plus" aria-hidden="true"></i></a>Folders
-                                    <span data-media="selected"><a href="#" bb-media-click="folder_level_up">back Fodler</a></span></h5>
+                                       role="button" href="#createFolder">
+                                        <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                    <button bb-media-click="get_folder_items" data-id="1">Folders</button>
+                                    <span data-media="selected"></span></h5>
                                 <div class="collapse" id="createFolder">
                                     <div class="input-group">
                                         <input type="text" class="form-control new-folder-input" data-mediafield="addfolder"
