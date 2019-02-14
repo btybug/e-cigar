@@ -70,18 +70,21 @@
                     @ok('admin_items')
                     <li><a href="{{route('admin_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
                     @endok
-                    {{--@ok('admin_store_purchase')--}}
-                    {{--<li><a href="{{route('admin_store_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>--}}
-                    {{--@endok--}}
-                    {{--@ok('admin_suppliers')--}}
-                    {{--<li><a href="{{route('admin_suppliers')}}"><i class="fa fa-circle-o"></i>Suppliers</a></li>--}}
-                    {{--@endok--}}
-                    {{--@ok('admin_sale_channels')--}}
-                    {{--<li><a href="{{route('admin_sale_channels')}}"><i class="fa fa-circle-o"></i>Sale Channels</a></li>--}}
-                    {{--@endok--}}
-                    {{--@ok('admin_other')--}}
-                    {{--<li><a href="{{route('admin_inventory_other')}}"><i class="fa fa-circle-o"></i>Other</a></li>--}}
-                    {{--@endok--}}
+                    @ok('admin_warehouses')
+                    <li><a href="{{route('admin_warehouses')}}"><i class="fa fa-circle-o"></i>Warehouses</a></li>
+                    @endok
+                    @ok('admin_store_purchase')
+                    <li><a href="{{route('admin_store_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>
+                    @endok
+                    @ok('admin_suppliers')
+                    <li><a href="{{route('admin_suppliers')}}"><i class="fa fa-circle-o"></i>Suppliers</a></li>
+                    @endok
+                    @ok('admin_sale_channels')
+                    <li><a href="{{route('admin_sale_channels')}}"><i class="fa fa-circle-o"></i>Sale Channels</a></li>
+                    @endok
+                    @ok('admin_other')
+                    <li><a href="{{route('admin_inventory_other')}}"><i class="fa fa-circle-o"></i>Other</a></li>
+                    @endok
                 </ul>
             </li>
             @endok

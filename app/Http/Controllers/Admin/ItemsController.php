@@ -93,26 +93,53 @@ class ItemsController extends Controller
         return $this->view('suppliers.index');
     }
 
-    public function getSaleChannels()
-    {
-        return $this->view('sale_channels.index');
-    }
-
     public function getSuppliersNew()
     {
         $model = null;
-        return $this->view('suppliers.new',compact('model'));
+        return $this->view('suppliers.new', compact('model'));
     }
+
     public function getSuppliersEdit($id)
     {
-        $model=Suppliers::findOrFail($id);
-        return $this->view('suppliers.new',compact('model'));
+        $model = Suppliers::findOrFail($id);
+        return $this->view('suppliers.new', compact('model'));
     }
 
     public function postSuppliers(SupplierRequest $request)
     {
-        $data=$request->except('_token');
-        Suppliers::updateOrCreate(['id'=>$request->get('id')],$data);
+        $data = $request->except('_token');
+        Suppliers::updateOrCreate(['id' => $request->get('id')], $data);
         return redirect()->route('admin_suppliers');
+    }
+
+    public function getList(Request $request)
+    {
+        $attr = Suppliers::whereNotIn('id', $request->get('arr', []))->get();
+
+        return \Response::json(['error' => false, 'data' => $attr]);
+    }
+
+    public function syncSupplier(Request $request)
+    {
+        $item = Items::find($request->get('item_id'));
+        if ($item) {
+            $item->suppliers()->attach($request->id);
+
+            return \Response::json(['error' => false]);
+        }
+
+        return \Response::json(['error' => true, 'message' => 'message']);
+    }
+
+    public function deleteSupplier(Request $request)
+    {
+        $item = Items::find($request->get('item_id'));
+        if ($item) {
+            $item->suppliers()->detach($request->id);
+
+            return \Response::json(['error' => false]);
+        }
+
+        return \Response::json(['error' => true, 'message' => 'message']);
     }
 }

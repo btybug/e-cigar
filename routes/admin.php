@@ -274,20 +274,42 @@ Route::group(['prefix' => 'orders'], function () {
 });
 
 Route::group(['prefix' => 'inventory'], function () {
+    Route::group(['prefix' => 'warehouses'], function () {
+        Route::get('/','Admin\WarehouseController@index')->name('admin_warehouses');
+        Route::get('/new','Admin\WarehouseController@getNew')->name('admin_warehouses_new');
+        Route::post('/new','Admin\WarehouseController@postNew')->name('admin_warehouses_new_post');
+    });
 
     Route::group(['prefix' => 'suppliers'], function () {
-        Route::get('/', 'Admin\ItemsController@getSuppliers')->name('admin_suppliers');
-        Route::get('/new', 'Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
-        Route::get('/edit/{id}', 'Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
-        Route::post('/new', 'Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
+        Route::get('/','Admin\ItemsController@getSuppliers')->name('admin_suppliers');
+        Route::get('/new','Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
+        Route::get('/edit/{id}','Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
+        Route::post('/new','Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
+        Route::post('/select-suppliers','Admin\ItemsController@getList')->name('post_admin_suppliers_list');
+        Route::post('/sync-suppliers','Admin\ItemsController@syncSupplier')->name('post_admin_suppliers_sync');
+        Route::post('/delete-item-suppliers','Admin\ItemsController@deleteSupplier')->name('post_admin_suppliers_item_delete');
     });
+
     Route::group(['prefix' => 'sale-channels'], function () {
-        Route::get('/', 'Admin\ItemsController@getSaleChannels')->name('admin_sale_channels');
+        Route::get('/','Admin\SaleChannelsController@getSaleChannels')->name('admin_sale_channels');
+        Route::get('/settings/{id}','Admin\SaleChannelsController@getSaleChannelSettings')->name('admin_sale_channel_settings');
+        Route::post('/settings/{id}','Admin\SaleChannelsController@postSaleChannelSettings')->name('post_admin_sale_channel_settings');
+
+        Route::post('/create-channel','Admin\SaleChannelsController@postSaleChannels')->name('admin_sale_create_channels');
+
+//        Route::post('/select-channels','Admin\ItemsController@getChannelsList')->name('post_admin_channels_list');
+//        Route::post('/sync-channels','Admfvin\ItemsController@syncChannels')->name('post_admin_channels_sync');
+//        Route::post('/delete-item-channels','Admin\ItemsController@deleteChannel')->name('post_admin_channels_item_delete');
+
+        Route::get('/create','Admin\SaleChannelsController@getCreateChannel')->name('admin_sale_channels_create');
+        Route::get('/customers/{channel_user_id}','Admin\SaleChannelsController@getCustomers')->name('admin_sale_channel_customers');
+
     });
+
     Route::group(['prefix' => 'other'], function () {
-        Route::get('/', 'Admin\OtherController@getIndex')->name('admin_inventory_other');
-        Route::get('/manage/{id?}', 'Admin\OtherController@getNew')->name('admin_inventory_others_new');
-        Route::post('/new', 'Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
+        Route::get('/','Admin\OtherController@getIndex')->name('admin_inventory_other');
+        Route::get('/manage/{id?}','Admin\OtherController@getNew')->name('admin_inventory_others_new');
+        Route::post('/new','Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
     });
 
     Route::group(['prefix' => 'items'], function () {

@@ -12,7 +12,12 @@
                     <label class="col-md-2 control-label" for="input-code">
                         <span data-toggle="tooltip" title="" data-original-title="">Item</span></label>
                     <div class="col-md-10">
-                        {!! Form::select('item_id',$items,null,[ 'class'=> 'form-control select-sku']) !!}
+                        @if($model)
+                            <div class="form-control">{{ $model->item->sku }}</div>
+                            {!! Form::hidden('item_id',null) !!}
+                        @else
+                            {!! Form::select('item_id',$items,null,[ 'class'=> 'form-control select-sku tag-input-v']) !!}
+                        @endif
                     </div>
                 </div>
                 <div class="form-group row">
@@ -58,7 +63,7 @@
             </div>
             @if($model)
                 <div class="col-md-12">
-                    <h3>Order History</h3>
+                    <h3>Edit history (Log)</h3>
                     <div class="col-xs-12">
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -81,13 +86,21 @@
     </div>
 @stop
 
-@section('js')
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+@stop
 
+@section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script>
+        $(".tag-input-v").select2({ width: '100%' });
+    </script>
 @if($model)
     <script>
         $(function () {
             $('#stocks-table').DataTable({
-                ajax: "{!! route('datatable_all_others',$model->item_id) !!}",
+                ajax: "{!! route('datatable_all_others',$model->id) !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
