@@ -71,4 +71,24 @@ class UserService
 
         return $token;
     }
+
+    public function avatarUpload($data)
+    {
+        $user=\Auth::user();
+        $uniqId = md5($user->id.$user->username);
+        try{
+            $image=\Image::make($data['data']);
+            $imgName="$uniqId.jpg";
+            if(! \File::isDirectory(public_path("images".DS."users"))){
+                \File::makeDirectory(public_path("images".DS."users"));
+            }
+            $image->save(public_path("images".DS."users".DS.$imgName));
+            $user->avatar=$imgName;
+            $user->save();
+        }catch (\Exception $exception){
+            return ['error'=>true];
+        }
+        return ['error'=>false,'status'=>'success','url'=>url('images/users',$imgName)];
+
+    }
 }

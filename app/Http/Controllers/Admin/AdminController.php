@@ -10,9 +10,11 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
+use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
 use App\Services\ManagerApiRequest;
+use App\Services\UserService;
 use App\Services\Widgets;
 use App\User;
 use PragmaRX\Countries\Package\Countries;
@@ -65,12 +67,18 @@ class AdminController extends Controller
         return view('admin.dashboard_profile',compact('user', 'countries'));
     }
 
+    public function postProfileImageUpload(UserAvaratRequest $request,UserService $userService)
+    {
+        $result=$userService->avatarUpload($request->except('_token'));
+        return response()->json($result);
+    }
+
     public function postProfile(AdminProfileRequest $request)
     {
         $data = $request->except(['_token','avatar']);
         $user = \Auth::user();
         $user->update($data);
-        
+
         return redirect()->back()->with('message','Your profile updated');
     }
 

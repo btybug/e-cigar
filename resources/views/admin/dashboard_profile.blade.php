@@ -18,9 +18,19 @@
 
             <div class="profile-header-content">
 
-                <div class="profile-header-img">
-                    <img src="{!!url('public/admin_theme/dist/img/user2-160x160.jpg')!!}" class="user-image"
-                         alt="User Image">
+                <div class="profile-header-img" style="width: 200px;height: 230px;">
+                    <div class="person-img position-relative">
+                        {!! Form::open() !!}
+                        <div class="position-relative">
+                            <div class="dropzone"
+                                 data-image="{!! user_avatar() !!}"
+                                 data-width="200" data-height="200" data-originalsize="false"
+                                 data-url="{!! route('user_profile_image_upload') !!}">
+                                <input type="file" name="thumb" style="position: absolute;"/>
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
 
                 <div class="profile-header-info">
@@ -119,17 +129,93 @@
 
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    {!! Html::style('public/css/demo.html5imageupload.css') !!}
+
     <style>
         .errors {
             color: red;
         }
+        .dropzone img.preview {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            font-family: 'object-fit: contain;';
+        }
+
+        .dropzone .tools {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 999;
+            display: inline-block;
+        }
+
+        .dropzone.smalltools .tools .btn {
+            padding: 1px 4px;
+            font-size: 12px;
+        }
+
+        .dropzone > input[type=file] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
+            height: 100% /* IE HACK*/;
+        }
+        .dropzone .cropWrapper {
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+        }
+
+        .dashboard-pages .person-img .dropzone:after {
+            content: "\f382";
+            font-weight: 900;
+            top: 50%;
+            transform: translateY(-50%);
+            bottom: unset;
+            font-size: 28px;
+            color: #0eacc9;
+        }
     </style>
 @stop
 @section('js')
+    {!! Html::script('public/js/html5imageupload.js') !!}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
         $(function () {
+
+            $('#retrievingfilename').html5imageupload({
+                onAfterProcessImage: function () {
+                    $('#filename').val($(this.element).data('name'));
+                },
+                onAfterCancel: function () {
+                    $('#filename').val('');
+                }
+
+            });
+
+            $('#save').html5imageupload({
+                onSave: function (data) {
+                },
+
+            });
+
+            $('.dropzone').html5imageupload({
+                data: {_token: $('meta[name="csrf-token"]').attr('content')},
+                onSave: function () {
+                }
+            });
+
+            $("#myModal").on('shown.bs.modal', function () {
+                $('#modaldialog').html5imageupload();
+            });
         });
 
     </script>

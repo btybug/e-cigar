@@ -1037,3 +1037,24 @@ function media_image_tmb($path){
  return (File::exists(base_path($image))) ? url($image) : no_image();
 
 }
+
+function user_avatar($id = null)
+{
+    if ($id) {
+        $userRepo = new \App\User();
+        $user = $userRepo->find($id);
+        if ($user) {
+            if ($user->avatar) {
+                return "/public/images/users/" . $user->avatar;
+            }
+        }
+    } else {
+        if (Auth::check()) {
+            if (Auth::user()->avatar) {
+                return "/public/images/users/" . Auth::user()->avatar;
+            }
+        }
+    }
+
+    return '/public/images/other.png';
+}
