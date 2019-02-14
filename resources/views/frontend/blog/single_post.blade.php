@@ -301,18 +301,18 @@
                                     {!! Form::open(['route' => 'comment_create_post']) !!}
                                     {!! Form::hidden('post_id',$post->id) !!}
                                     @if(! Auth::check())
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <input name="guest_name" type="text"
-                                                       placeholder="Username">
-                                                <span class="error-box invalid-feedback guest_name"></span>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <input name="guest_email" type="email"
-                                                       placeholder="Email">
-                                                <span class="error-box invalid-feedback guest_email"></span>
-                                            </div>
-                                        </div>
+                                        {{--<div class="row">--}}
+                                            {{--<div class="col-sm-6">--}}
+                                                {{--<input name="guest_name" type="text"--}}
+                                                       {{--placeholder="Username">--}}
+                                                {{--<span class="error-box invalid-feedback guest_name"></span>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="col-sm-6">--}}
+                                                {{--<input name="guest_email" type="email"--}}
+                                                       {{--placeholder="Email">--}}
+                                                {{--<span class="error-box invalid-feedback guest_email"></span>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
                                     @endif
 
                                     <textarea name="comment" id="" rows="0"
