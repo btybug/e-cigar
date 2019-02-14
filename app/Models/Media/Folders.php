@@ -317,7 +317,7 @@ class Folders extends Model
             $folder->parent_id = $data['parent_id'];
             $folder->prefix = $count;
             $folder->save();
-            return \Response::json(['error' => false, 'data' => $folder->getChilds(true)]);
+            return \Response::json(['error' => false, 'data' => $folder]);
         }
     }
 
