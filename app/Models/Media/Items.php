@@ -117,10 +117,9 @@ class Items extends Model
     {
         $item = self::find($item_id);
         $folder = Folders::find($folder_id);
-
         if ($item) {
             if ($folder && \File::isDirectory($folder->path())) {
-                $oldFolder = $item->folder;
+                $oldFolder = $item->storage;
                 if(\File::exists($oldFolder->url($item->original_name, false))){
                     if (\File::copy($oldFolder->url($item->original_name, false), $folder->path() . DS . $item->original_name))
                         $item->folder_id = $folder_id;
