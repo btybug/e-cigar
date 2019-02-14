@@ -198,7 +198,7 @@
                                                     <div class="row">
                                                         <div class="col-sm-12 clearfix">
                                                             <h3 class="pull-left m-0">All Suppliers</h3>
-                                                            <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
+                                                            <button type="button" class="btn btn-info pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,7 +221,7 @@
                                                     <div class="row">
                                                         <div class="col-sm-12 clearfix">
                                                             <h3 class="pull-left m-0">Sale Chanels</h3>
-                                                            <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add sale chanel</button>
+                                                            <button type="button" class="btn btn-info pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add sale chanel</button>
                                                         </div>
                                                     </div>
                                                 </div>
