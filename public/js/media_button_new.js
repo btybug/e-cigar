@@ -688,7 +688,7 @@ function App() {
             shortAjax("/api/api-media/get-remove-folder", obj, res => {
                 if (!res.error) {
                     self.requests.drawingItems();
-                    cb(res);
+                    cb();
                 }
             });
         },
@@ -724,7 +724,7 @@ function App() {
             shortAjax("/api/api-media/get-create-folder-child", obj, res => {
                 if (!res.error) {
                     self.requests.drawingItems();
-                    cb()
+                    cb(res.data.id)
                 }
             });
         },
@@ -771,23 +771,32 @@ function App() {
             e.preventDefault();
             self.requests.saveSeo($(elm).closest('form').serializeArray());
         },
-        remove_tree_folder(elm, e) {
-            e.stopPropagation();
-            e.preventDefault();
-            let id = elm.closest("li").getAttribute("data-id");
-            self.requests.removeTreeFolder(
-                {
-                    folder_id: Number(id),
-                    trash: 1,
-                    access_token: "string"
-                },
-                () => elm.closest("li").remove()
-        );
-        },
+        // remove_tree_folder(elm, e) {
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     let id = elm.closest("li").getAttribute("data-id");
+        //     self.requests.removeTreeFolder(
+        //         {
+        //             folder_id: Number(id),
+        //             trash: 1,
+        //             access_token: "string"
+        //         },
+        //         () => elm.closest("li").remove()
+        //     );
+        // },
         remove_folder(elm, e) {
             e.stopPropagation();
             e.preventDefault();
             let id = elm.closest(".file").getAttribute("data-id");
+
+            const removeTree = function() {
+                var x = $("#folder-list").fancytree("getTree");
+                var folder;
+                console.log()
+                folder = x.getNodeByKey(''+id);
+                console.log(folder)
+                folder.remove()
+            };
 
             self.requests.removeTreeFolder(
                 {
@@ -795,12 +804,9 @@ function App() {
                     trash: 1,
                     access_token: "string"
                 },
-                (res) => {
+                () => {
                     elm.closest(".folder-container").remove();
-                    var x = $("#folder-list").fancytree("getTree");
-                    var folder;
-                    console.log(res)
-                    // folder = x.getNodeByKey(''+id);
+                    removeTree()
                 }
             );
         },
@@ -839,11 +845,12 @@ function App() {
             } else {
                 folder = x.getRootNode();
             }
-            const createTree = function() {
+            const createTree = function(key) {
                 folder.addChildren({
                     folder: true,
                     title: name,
                     text: name,
+                    key: key
                 })
             };
             self.requests.addNewFolder(
@@ -867,8 +874,8 @@ function App() {
                 document.body.innerHTML += self.htmlMaker.fullInfoModal(
                 res,
                 Number(countId)
-            );
-        });
+                );
+            });
         },
         select_item(elm, e) {
 
