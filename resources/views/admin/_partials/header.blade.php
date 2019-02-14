@@ -258,7 +258,7 @@
                             </div>
                         </li>
                         <li id="userDropdownSkins">
-
+                            {{--here comes skins dynamicly--}}
                         </li>
                     </ul>
                 </li>

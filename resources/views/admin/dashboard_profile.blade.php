@@ -10,108 +10,113 @@
     </ol>
 @stop
 @section('content')
-    <div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12">
 
-        <div class="profile-header">
+            <div class="profile-header">
 
-            <div class="profile-header-cover"></div>
+                <div class="profile-header-cover"></div>
 
-            <div class="profile-header-content">
+                <div class="profile-header-content">
 
-                <div class="profile-header-img" style="width: 200px;height: 230px;">
-                    <div class="person-img position-relative">
-                        {!! Form::open() !!}
-                        <div class="position-relative">
-                            <div class="dropzone"
-                                 data-image="{!! user_avatar() !!}"
-                                 data-width="200" data-height="200" data-originalsize="false"
-                                 data-url="{!! route('user_profile_image_upload') !!}">
-                                <input type="file" name="thumb" style="position: absolute;"/>
+                    <div class="profile-header-img" style="width: 120px;height: 120px;">
+                        <div class="person-img position-relative">
+                            {!! Form::open() !!}
+                            <div class="position-relative">
+                                <div class="dropzone"
+                                     data-image="{!! user_avatar() !!}"
+                                     data-width="120" data-height="120" data-originalsize="false"
+                                     data-url="{!! route('user_profile_image_upload') !!}">
+                                    <input type="file" name="thumb" style="position: absolute;"/>
+                                </div>
                             </div>
+                            {!! Form::close() !!}
                         </div>
-                        {!! Form::close() !!}
                     </div>
+
+                    <div class="profile-header-info">
+                        <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
+                        <p class="m-b-10">{{ Auth::user()->role->title }}</p>
+                    </div>
+
                 </div>
 
-                <div class="profile-header-info">
-                    <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
-                    <p class="m-b-10">{{ Auth::user()->role->title }}</p>
-                </div>
+                <ul class="profile-header-tab nav nav-tabs">
+                    <li class="nav-item"><a href="{{ route('admin_dashboard') }}" class="nav-link">Dashboard</a></li>
+                    <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}"
+                                            class="nav-link active">Profile</a></li>
+                </ul>
 
             </div>
-
-            <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item"><a href="{{ route('admin_dashboard') }}" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}"
-                                        class="nav-link active">Profile</a></li>
-            </ul>
 
         </div>
-
     </div>
 
+
     <div class="row">
-        <div class="tab-content">
-            <div id="users_profile" class="tab-pane fade in active">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="m-0">Profile</h3>
-                    </div>
-                    <div class="panel-body">
-                        <!-- The timeline -->
-                        {!! Form::model($user,['multiple'=>true]) !!}
-                        {!! Form::hidden('id') !!}
+        <div class="col-xs-12">
+            <div class="tab-content">
+                <div id="users_profile" class="tab-pane fade in active">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="m-0">Profile</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!-- The timeline -->
+                            {!! Form::model($user,['multiple'=>true]) !!}
+                            {!! Form::hidden('id') !!}
 
-                        <div class="form-group row">
-                            <label for="inputName" class="col-sm-2 control-label">First Name</label>
+                            <div class="form-group row">
+                                <label for="inputName" class="col-sm-2 control-label">First Name</label>
 
-                            <div class="col-sm-10">
-                                {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                <div class="col-sm-10">
+                                    {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputEmail" class="col-sm-2 control-label">Last Name</label>
-                            <div class="col-sm-10">
-                                {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                            <div class="form-group row">
+                                <label for="inputEmail" class="col-sm-2 control-label">Last Name</label>
+                                <div class="col-sm-10">
+                                    {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-2 control-label">E-mail </label>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 control-label">E-mail </label>
 
-                            <div class="col-sm-10">
-                                {!! Form::text('email',null,['class'=>'form-control']) !!}
+                                <div class="col-sm-10">
+                                    {!! Form::text('email',null,['class'=>'form-control']) !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputExperience" class="col-sm-2 control-label">Phone</label>
-                            <div class="col-sm-10">
-                                {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                            <div class="form-group row">
+                                <label for="inputExperience" class="col-sm-2 control-label">Phone</label>
+                                <div class="col-sm-10">
+                                    {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputSkills" class="col-sm-2 control-label">Country</label>
-                            <div class="col-sm-10">
-                                {!! Form::select('country',$countries,null,['class'=>'form-control']) !!}
+                            <div class="form-group row">
+                                <label for="inputSkills" class="col-sm-2 control-label">Country</label>
+                                <div class="col-sm-10">
+                                    {!! Form::select('country',$countries,null,['class'=>'form-control']) !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputExperience" class="col-sm-2 control-label">Gender</label>
-                            <div class="col-sm-10">
-                                {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
+                            <div class="form-group row">
+                                <label for="inputExperience" class="col-sm-2 control-label">Gender</label>
+                                <div class="col-sm-10">
+                                    {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
 
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="form-group row">
-                            <div class="col-sm-offset-2 col-sm-10 text-right">
-                                <button type="submit" class="btn btn-success">Update</button>
+                            <div class="form-group row">
+                                <div class="col-sm-offset-2 col-sm-10 text-right">
+                                    <button type="submit" class="btn btn-success">Update</button>
+                                </div>
                             </div>
+                            {!! Form::close() !!}
                         </div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
+                <!-- /.tab-pane -->
             </div>
-            <!-- /.tab-pane -->
         </div>
     </div>
 

@@ -822,14 +822,9 @@ textarea {
 }
 .profile-header-img {
     float: left;
-    width: 120px;
-    height: 120px;
     overflow: hidden;
     position: relative;
     z-index: 10;
-    margin: 0 0 -20px 0;
-    padding: 3px;
-    border-radius: 4px;
     background: #fff;
 }
 .profile-header-img img {
