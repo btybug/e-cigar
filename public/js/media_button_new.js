@@ -83,7 +83,6 @@ function App() {
         },
         makeImage: function(data) {
             // data.relativeUrl  is image
-            console.log(data)
             return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
@@ -130,14 +129,14 @@ function App() {
 
             $('document').ready(
                 function() {
-var elem = data.map((el) => {
-    return {key: el.id, ...el};
-})
+                    var elem = data.map((el) => {
+                        return {key: el.id, ...el};
+                    })
                     $("#folder-list").fancytree({
                         extensions: ["edit", "filter"],
                         source: elem,
                         selectMode: 1,
-                        generateIds: false, // Generate id attributes like <span id='fancytree-id-KEY'>
+                        generateIds: true, // Generate id attributes like <span id='fancytree-id-KEY'>
                         idPrefix: "ft_",
                         activate: function(event, data){
                             // A node is about to be selected: prevent this, for folder-nodes:
@@ -688,8 +687,8 @@ var elem = data.map((el) => {
         removeTreeFolder(obj = {}, cb) {
             shortAjax("/api/api-media/get-remove-folder", obj, res => {
                 if (!res.error) {
-                    cb();
                     self.requests.drawingItems();
+                    cb(res);
                 }
             });
         },
@@ -725,6 +724,7 @@ var elem = data.map((el) => {
             shortAjax("/api/api-media/get-create-folder-child", obj, res => {
                 if (!res.error) {
                     self.requests.drawingItems();
+                    cb()
                 }
             });
         },
@@ -788,13 +788,20 @@ var elem = data.map((el) => {
             e.stopPropagation();
             e.preventDefault();
             let id = elm.closest(".file").getAttribute("data-id");
+
             self.requests.removeTreeFolder(
                 {
                     folder_id: Number(id),
                     trash: 1,
                     access_token: "string"
                 },
-                () => elm.closest(".folder-container").remove()
+                (res) => {
+                    elm.closest(".folder-container").remove();
+                    var x = $("#folder-list").fancytree("getTree");
+                    var folder;
+                    console.log(res)
+                    // folder = x.getNodeByKey(''+id);
+                }
             );
         },
         get_folder_items(elm, e) {
@@ -824,22 +831,28 @@ var elem = data.map((el) => {
         add_new_folder(elm, e) {
             let inputElement = document.querySelector(".new-folder-input");
             let name = inputElement.value;
+            console.log(globalFolderId);
             var x = $("#folder-list").fancytree("getTree");
-
-            // console.log(globalFolderId);
-            // console.log(x)
-            // x.getNodeByKey(globalFolderId.toString()).addChildren({
-            //     folder: true,
-            //     title: name,
-            //     text: name
-            // })
+            var folder;
+            if(globalFolderId !== 1) {
+                folder = x.getNodeByKey(''+globalFolderId);
+            } else {
+                folder = x.getRootNode();
+            }
+            const createTree = function() {
+                folder.addChildren({
+                    folder: true,
+                    title: name,
+                    text: name,
+                })
+            };
             self.requests.addNewFolder(
                 {
                     folder_id: globalFolderId,
                     folder_name: name,
                     access_token: "string"
                 },
-                false
+                createTree
             );
             inputElement.value = '';
         },
