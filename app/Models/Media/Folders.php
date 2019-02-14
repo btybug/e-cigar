@@ -36,7 +36,7 @@ class Folders extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text','folder','url'];
+    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text','folder','url','key'];
 
     public function getChildrenCountAttribute()
     {
@@ -45,6 +45,10 @@ class Folders extends Model
     public function getUrlAttribute()
     {
         return $this->url();
+    }
+    public function getKeyAttribute()
+    {
+        return $this->id;
     }
 
 

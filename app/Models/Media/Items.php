@@ -36,9 +36,13 @@ class Items extends Model
      *
      * @var array
      */
-    protected $appends = array('type', 'url','relativeUrl');
+    protected $appends = array('type', 'url','relativeUrl','key');
     protected $dates = ['created_at', 'updated_at'];
 
+    public function getKeyAttribute()
+    {
+        return $this->id;
+    }
     public static function migrate()
     {
         \Schema::create('drive_items', function (Blueprint $table) {
