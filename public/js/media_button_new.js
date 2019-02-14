@@ -83,12 +83,13 @@ function App() {
         },
         makeImage: function(data) {
             // data.relativeUrl  is image
+            console.log(data)
             return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
 
             <div class="icon">
-                <img width="180px" data-lightbox="image" src="${data.tmp}">
+                <img width="180px" data-lightbox="image" src="/public/media/tmp/${data.original_name}">
                 <i class="fa fa-file"></i>
             </div>
             <div class="file-name">
