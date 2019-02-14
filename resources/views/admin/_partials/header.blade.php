@@ -249,13 +249,16 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat">testProfile</a>
                             </div>
                             <div class="pull-right">
                                 {!! Form::open(['url'=>route('logout')]) !!}
                                 <button type="submit" class="btn btn-default btn-flat">Sign out</button>
                                 {!! Form::close() !!}
                             </div>
+                        </li>
+                        <li id="userDropdownSkins">
+
                         </li>
                     </ul>
                 </li>
