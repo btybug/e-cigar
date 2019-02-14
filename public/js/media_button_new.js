@@ -1,50 +1,50 @@
-const shortAjax = function(URL, obj = {}, cb) {
-    fetch(URL, {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-Token": $('input[name="_token"]').val()
-        },
-        method: "post",
-        credentials: "same-origin",
-        body: JSON.stringify(obj)
-    })
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(json) {
-            return cb(json);
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+const shortAjax = function (URL, obj = {}, cb) {
+  fetch(URL, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+      "X-CSRF-Token": $('input[name="_token"]').val()
+    },
+    method: "post",
+    credentials: "same-origin",
+    body: JSON.stringify(obj)
+  })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (json) {
+        return cb(json);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 };
 
-const normAjax = function(URL, obj = {}, cb) {
-    $.ajax({
-        type: "post",
-        url: URL,
-        cache: false,
-        datatype: "json",
-        data: obj,
-        headers: {
-            "X-CSRF-TOKEN": $('input[name="_token"]').val()
-        },
-        success: function(data) {
-            if (success) {
-                cb(data);
-            }
-            return data;
-        },
-        error: function(errorThrown) {
-            if (error) {
-                error(errorThrown);
-            }
-            return errorThrown;
-        }
-    });
+const normAjax = function (URL, obj = {}, cb) {
+  $.ajax({
+    type: "post",
+    url: URL,
+    cache: false,
+    datatype: "json",
+    data: obj,
+    headers: {
+      "X-CSRF-TOKEN": $('input[name="_token"]').val()
+    },
+    success: function (data) {
+      if (success) {
+        cb(data);
+      }
+      return data;
+    },
+    error: function (errorThrown) {
+      if (error) {
+        error(errorThrown);
+      }
+      return errorThrown;
+    }
+  });
 };
 /*
  Helpers
@@ -55,14 +55,14 @@ const normAjax = function(URL, obj = {}, cb) {
  */
 
 function App() {
-    var self = this;
-    var globalFolderId = 1;
-    this.htmlMaker = {
-        makeFolder: function(data) {
-            return `<div draggable="true"  data-id="${data.id}"  class="file ">
+  var self = this;
+  var globalFolderId = 1;
+  this.htmlMaker = {
+    makeFolder: function (data) {
+      return `<div draggable="true"  data-id="${data.id}"  class="file ">
             <a href="#"  data-id="${
-                data.id
-                }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
+          data.id
+          }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
                 <span class="corner"></span>
 
                 <div class="icon">
@@ -80,10 +80,10 @@ function App() {
                 </div>
             </a>
         </div>`;
-        },
-        makeImage: function(data) {
-            // data.relativeUrl  is image
-            return `<div draggable="true" data-id="${data.id}" class="file">
+    },
+    makeImage: function (data) {
+      // data.relativeUrl  is image
+      return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
 
@@ -103,7 +103,7 @@ function App() {
           </div>
         </a>
     </div>`;
-        },
+    },
 //         makeTreeFolder: function(data) {
 //             return `<li  bb-media-type="tree-folder" bb-media-click="get_folder_items" data-trre-id="${
 //                 data.id
@@ -123,56 +123,44 @@ function App() {
 //                   <!--</div>-->
 //                 </li>`;
 //         },
-        tree: null,
-        makeTreeFolder: function(data) {
-            const get_folder_items_tree = self.events.get_folder_items_tree;
+    tree: null,
+    makeTreeFolder: function (data) {
+      const get_folder_items_tree = self.events.get_folder_items_tree;
 
-            $('document').ready(
-                function() {
-                    var elem = data.map((el) => {
-                        return {key: el.id, ...el};
-                    })
-                    $("#folder-list").fancytree({
-                        extensions: ["edit", "filter"],
-                        source: elem,
-                        selectMode: 1,
-                        generateIds: true, // Generate id attributes like <span id='fancytree-id-KEY'>
-                        idPrefix: "ft_",
-                        activate: function(event, data){
-                            // A node is about to be selected: prevent this, for folder-nodes:
-                            if( data.node.isFolder() ){
-                                get_folder_items_tree(data.node.data.id);
-                            }
-                        }
-                    });
-
-                    var tree = $("#folder-list").fancytree("getTree");
-                    console.log(elem, tree, tree.getRootNode())
-
-
-
-                    // Sort children of active node:
-
-                    // Expand all tree nodes
-                    // tree.visit(function(node){
-                    //     node.setExpanded(true);
-                    // });
-                    // // Append a new child node
-                    // activeNode.appendChildren({
-                    //     title: "Document using a custom icon",
-                    //     folder: true
-                    // });
-                });
-        },
-        makeBreadCrumbsItem(item) {
-            return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
-                item.id
-                }" data-id="${item.id}" bb-media-click="get_folder_items" >
+      $('document').ready(
+          function () {
+            $("#folder-list").fancytree({
+              extensions: ["edit", "filter", "glyph"],
+              source: data,
+              selectMode: 1,
+              icon: false,
+              // glyph: {
+              //   // The preset defines defaults for all supported icon types.
+              //   // It also defines a common class name that is prepended (in this case 'fa ')
+              //   preset: "awesome4",
+              //   map: {
+              //     // Override distinct default icons here
+              //     folder: "fa-folder",
+              //     folderOpen: "fa-folder-open"
+              //   }
+              // },
+              activate: function (event, data) {
+                if (data.node.isFolder()) {
+                  get_folder_items_tree(data.node.data.id);
+                }
+              }
+            });
+          });
+    },
+    makeBreadCrumbsItem(item) {
+      return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
+          item.id
+          }" data-id="${item.id}" bb-media-click="get_folder_items" >
             <a>${item.slug}</a>
             </li>`;
-        },
-        editNameModal(id, name) {
-            return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+    },
+    editNameModal(id, name) {
+      return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->
@@ -192,9 +180,9 @@ function App() {
 
     </div>
   </div>`;
-        },
-        fullInfoModal(data, countId) {
-            return `<div class="adminmodal modal fade in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
+    },
+    fullInfoModal(data, countId) {
+      return `<div class="adminmodal modal fade in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-8 p-0">
                     <div class="modal-header" style="overflow: visible;">
@@ -207,17 +195,17 @@ function App() {
                     <img src="${data.url}" data-slideshow="typeext" style="width:100%">
                     <div style="display: flex; justify-content: space-between;">
                     <button href="#" type="button" role="button" ${
-                    countId === 0 ? "disabled" : ""
-                    } data-id="${countId - 1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
+              countId === 0 ? "disabled" : ""
+              } data-id="${countId - 1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
 
                     <span data-slideshow="title">${data.real_name}</span>
                     <button class="popuparrow go-next-image" href="#" type="button" role="button" ${
-                    countId ===
-                    document.querySelectorAll(".image-container").length - 1
-                        ? "disabled"
-                        : ""
-                    } data-id="${countId +
-                1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button>
+              countId ===
+              document.querySelectorAll(".image-container").length - 1
+                  ? "disabled"
+                  : ""
+              } data-id="${countId +
+          1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button>
                     </div>
                     </div>
                     <div class="modal-footer col-md-8">
@@ -230,25 +218,25 @@ function App() {
                     <div class="row p-t-10 p-b-10">
                         <div class="col-xs-4 col-md-4 col-md-offset-4">
                             <button class="btn btn-default btn-block active" type="button" data-tabaction="details">Details</button>
-                        </div>`+
-                // <div class="col-xs-4 col-md-4">
-                //     <button class="btn btn-default btn-block" type="button" data-tabaction="seo">SEO</button>
-                // </div>
-                // <div class="col-xs-4 col-md-4">
-                //     <button class="btn btn-default btn-block" type="button">Option 3</button>
-                // </div>
-                `</div>
+                        </div>` +
+          // <div class="col-xs-4 col-md-4">
+          //     <button class="btn btn-default btn-block" type="button" data-tabaction="seo">SEO</button>
+          // </div>
+          // <div class="col-xs-4 col-md-4">
+          //     <button class="btn btn-default btn-block" type="button">Option 3</button>
+          // </div>
+          `</div>
                     <div class="row rowsection collapse in" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
                             <h4><i class="fa fa-bars text-primary"></i> ${
-                    data.real_name
-                    } <div class="btn-group">
+              data.real_name
+              } <div class="btn-group">
                             <button type="button" style="background-color: black;" class="btn btn-action-popup dropdown-toggle" title="Rename" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="iconaction iconRenameGrey"></i></button>
                             <div class="dropdown-menu form-inline row width-sm p-l-0 p-r-0" aria-labelledby="dLabel">
                                 <div class="form-group col-sm-7 p-l-5">
                                     <input name="rename_img" id="rename_img" type="text" class="form-control" placeholder="File name will be come here" value="${
-                    data.real_name
-                    }"  data-slideshow="renameval">
+              data.real_name
+              }"  data-slideshow="renameval">
                                 </div>
                                 <div class="form-group col-sm-5 p-r-5">
                                     <button class="btn btn-success btn-block" data-slideshow="save">Save</button>
@@ -260,20 +248,20 @@ function App() {
                                     <tr>
                                         <th width="30%">Type</th>
                                         <td><img src="" data-slideshow="typeext"> <span data-slideshow="ext">${
-                    data.extension
-                    }</span></td>
+              data.extension
+              }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Size</th>
                                         <td><span data-slideshow="size">${
-                    data.size
-                    } </span></td>
+              data.size
+              } </span></td>
                                     </tr>
                                     <tr>
                                         <th>Location</th>
                                         <td><i class="fa fa-folder"></i> <span data-slideshow="location">${
-                    data.storage.title
-                    }</span></td>
+              data.storage.title
+              }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Uploaded By</th>
@@ -282,25 +270,25 @@ function App() {
                                     <tr>
                                         <th>Created</th>
                                         <td><span data-slideshow="created_at">${
-                    data.created_at
-                    }</span></td>
+              data.created_at
+              }</span></td>
                                     </tr>
                                     <tr>
                                         <th>Opened</th>
                                         <td><span data-slideshow="updated_at">${
-                    data.updated_at
-                    }</span></td>
+              data.updated_at
+              }</span></td>
                                     </tr>` +
-                // <tr>
-                //     <th>Version</th>
-                //     <td>
-                //         <div class=" col-xs-3 p-l-0">
-                //             <select class="form-control"  data-slideshow="version"></select>
-                //         </div>
-                //         <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="makeasDefault">Make as Default</button>
-                //     </td>
-                // </tr>
-                `</table>
+          // <tr>
+          //     <th>Version</th>
+          //     <td>
+          //         <div class=" col-xs-3 p-l-0">
+          //             <select class="form-control"  data-slideshow="version"></select>
+          //         </div>
+          //         <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="makeasDefault">Make as Default</button>
+          //     </td>
+          // </tr>
+          `</table>
                             </div>
                             <div class="table-responsive">
                             <form>
@@ -556,441 +544,477 @@ function App() {
                 </div>
             </div>
         </div>`;
+    }
+  };
+  this.helpers = {
+    makeBreadCrumbs(id) {
+      let check = false;
+      let breadCrumbsListItems = document.querySelectorAll(
+          ".bread-crumbs-list-item"
+      );
+      let singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
+      breadCrumbsListItems.forEach((item, index) => {
+        if (check) {
+          item.remove();
+          return;
         }
-    };
-    this.helpers = {
-        makeBreadCrumbs(id) {
-            let check = false;
-            let breadCrumbsListItems = document.querySelectorAll(
-                ".bread-crumbs-list-item"
-            );
-            let singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
-            breadCrumbsListItems.forEach((item, index) => {
-                if (check) {
-                    item.remove();
-                    return;
-                }
-                if (item == singleItem) {
-                item.classList.add("disabled");
-                item.classList.remove("active");
-                // item.removeAttribute("data-id");
-                check = true;
-            } else {
-                item.classList.add("active");
-                item.classList.remove("disabled");
-            }
-        });
-        },
-        showUploaderContainer() {
-            document
-                .querySelector(".uploader-container")
-                .classList.toggle("d-none");
-            return false;
-        },
-        makeDnD() {
-            document
-                .querySelectorAll(
-                    `[data-type="main-container"] [draggable="true"]`
-                )
-                .forEach(elm => {
-                elm.addEventListener("dragstart", function(e) {
-                let crt = this.cloneNode(true);
-                crt.className += " start";
-                crt.style.position = "absolute";
-                crt.style.top = "-10000px";
-                crt.style.right = "-10000px";
-                document.body.appendChild(crt);
-                let id = this.getAttribute("data-id");
-                e.dataTransfer.setDragImage(crt, 0, 0);
-                // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-                e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
-                // setTimeout(() => (this.className = "invisible"), 0);
-            });
-        });
+        if (item == singleItem
+    )
+      {
+        item.classList.add("disabled");
+        item.classList.remove("active");
+        // item.removeAttribute("data-id");
+        check = true;
+      }
+    else
+      {
+        item.classList.add("active");
+        item.classList.remove("disabled");
+      }
+    })
+      ;
+    },
+    showUploaderContainer() {
+      document
+          .querySelector(".uploader-container")
+          .classList.toggle("d-none");
+      return false;
+    },
+    makeDnD() {
+      document
+          .querySelectorAll(
+              `[data-type="main-container"] [draggable="true"]`
+          )
+          .forEach(elm => {
+        elm.addEventListener("dragstart", function (e) {
+        let crt = this.cloneNode(true);
+        crt.className += " start";
+        crt.style.position = "absolute";
+        crt.style.top = "-10000px";
+        crt.style.right = "-10000px";
+        document.body.appendChild(crt);
+        let id = this.getAttribute("data-id");
+        e.dataTransfer.setDragImage(crt, 0, 0);
+        // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
+        e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+        // setTimeout(() => (this.className = "invisible"), 0);
+      });
+    })
+      ;
 
-            document.querySelectorAll(".folder-container").forEach(folder => {
-                folder.addEventListener("dragover", function(e) {
-                if (e.preventDefault) e.preventDefault(); // allows us to drop
-                e.dataTransfer.dropEffect = "copy";
-                this.classList.add("over");
-                return false;
-            });
-            folder.addEventListener("dragleave", function(e) {
-                if (e.preventDefault) e.preventDefault(); // allows us to drop
-                this.classList.remove("over");
-                return false;
-            });
-            folder.addEventListener("drop", function(e) {
-                this.classList.remove("over");
-                let nodeId = e.dataTransfer.getData("node_id");
-                let parrentId = e.target
-                    .closest(".file")
-                    .getAttribute("data-id");
-                self.requests.transferImage(
-                    {
-                        item_id: Number(nodeId),
-                        folder_id: Number(parrentId),
-                        access_token: "string"
-                    },
-                    false
-                );
-            });
-        });
-        }
-    };
-    this.requests = {
-        drawingItems(
-            obj = {
-                folder_id: globalFolderId,
-                files: true,
-                access_token: "string"
+      document.querySelectorAll(".folder-container").forEach(folder => {
+        folder.addEventListener("dragover", function (e) {
+        if (e.preventDefault) e.preventDefault(); // allows us to drop
+        e.dataTransfer.dropEffect = "copy";
+        this.classList.add("over");
+        return false;
+      });
+      folder.addEventListener("dragleave", function (e) {
+        if (e.preventDefault) e.preventDefault(); // allows us to drop
+        this.classList.remove("over");
+        return false;
+      });
+      folder.addEventListener("drop", function (e) {
+        this.classList.remove("over");
+        let nodeId = e.dataTransfer.getData("node_id");
+        let parrentId = e.target
+            .closest(".file")
+            .getAttribute("data-id");
+        self.requests.transferImage(
+            {
+              item_id: Number(nodeId),
+              folder_id: Number(parrentId),
+              access_token: "string"
             },
-            tree = false,
-            cb
-        ) {
-            shortAjax("/api/api-media/get-folder-childs", obj, res => {
-                if (!res.error) {
-                    let mainContainer = document.querySelector(
-                        `[data-type="main-container"]`
-                    );
-                    let breadCrumbsList = document.querySelector(
-                        ".bread-crumbs-list"
-                    );
-                    breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(
-                        res.settings
-                    );
-                    mainContainer.innerHTML = "";
-                    res.data.children.forEach((folder, index) => {
-                        var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
-                            folder
-                        )}</div>`;
-                        mainContainer.innerHTML += html;
-                    });
-                    res.data.items.forEach((image, index) => {
-                        let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
-                            image
-                        )}</div>`;
-                        mainContainer.innerHTML += html;
-                    });
-                    if (tree) {
-                        self.htmlMaker.makeTreeFolder(
-                            res.data.children
-                        );
-                    }
-                    globalFolderId = res.settings.id;
-                    self.helpers.makeBreadCrumbs(res.settings.id);
-                    self.helpers.makeDnD();
-                    cb ? cb() : null;
-                }
-            });
-        },
-        removeTreeFolder(obj = {}, cb) {
-            shortAjax("/api/api-media/get-remove-folder", obj, res => {
-                if (!res.error) {
-                    self.requests.drawingItems();
-                    cb();
-                }
-            });
-        },
-        saveSeo(obj = {}, cb) {
-            normAjax("/api/api-media/save-seo", obj, res => {
-                if (!res.error) {
-                    cb();
-                }
-            });
-        },
-        editImageName(obj = {}, cb) {
-            shortAjax("/api/api-media/rename-item", obj, res => {
-                if (!res.error) {
-                cb(res);
-            }
+            false
+        );
+      });
+    })
+      ;
+    }
+  };
+  this.requests = {
+    drawingItems(obj = {
+                   folder_id: globalFolderId,
+                   files: true,
+                   access_token: "string"
+                 },
+                 tree = false,
+                 cb) {
+      shortAjax("/api/api-media/get-folder-childs", obj, res => {
+        console.log(res)
+      if (!res.error) {
+        let mainContainer = document.querySelector(
+            `[data-type="main-container"]`
+        );
+        let breadCrumbsList = document.querySelector(
+            ".bread-crumbs-list"
+        );
+        breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(
+            res.settings
+        );
+        mainContainer.innerHTML = "";
+        res.data.children.forEach((folder, index) => {
+          var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
+              folder
+          )}</div>`;
+        mainContainer.innerHTML += html;
+      })
+        ;
+        res.data.items.forEach((image, index) => {
+          let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
+              image
+          )}</div>`;
+        mainContainer.innerHTML += html;
+      })
+        ;
+        if (tree) {
+          self.htmlMaker.makeTreeFolder(
+              res.data.children
+          );
+        }
+        globalFolderId = res.settings.id;
+        self.helpers.makeBreadCrumbs(res.settings.id);
+        self.helpers.makeDnD();
+        cb ? cb() : null;
+      }
+    })
+      ;
+    },
+    removeTreeFolder(obj = {}, cb) {
+      shortAjax("/api/api-media/get-remove-folder", obj, res => {
+        if (
+      !res.error
+    )
+      {
+        self.requests.drawingItems();
+        cb();
+      }
+    })
+      ;
+    },
+    saveSeo(obj = {}, cb) {
+      normAjax("/api/api-media/save-seo", obj, res => {
+        if (
+      !res.error
+    )
+      {
+        cb();
+      }
+    })
+      ;
+    },
+    editImageName(obj = {}, cb) {
+      shortAjax("/api/api-media/rename-item", obj, res => {
+        if (
+      !res.error
+    )
+      {
+        cb(res);
+      }
+    })
+      ;
+    },
+    transferImage(obj = {}, cb) {
+      shortAjax("/api/api-media/transfer-item", obj, res => {
+        if (
+      !res.error
+    )
+      {
+        self.requests.drawingItems();
+      }
+    })
+      ;
+    },
+    removeImage(obj = {}, cb) {
+      shortAjax("/api/api-media/get-remove-item", obj, res => {
+        if (
+      !res.error
+    )
+      {
+        self.requests.drawingItems();
+      }
+    })
+      ;
+    },
+    addNewFolder(obj = {}, cb) {
+      shortAjax("/api/api-media/get-create-folder-child", obj, res => {
+        if (
+      !res.error
+    )
+      {
+        self.requests.drawingItems();
+        cb()
+      }
+    })
+      ;
+    },
+    getImageDetails(obj = {}, cb) {
+      shortAjax("/api/api-media/get-item-details", obj, function (res) {
+        if (!res.error) {
+          cb(res.data);
+        }
+      });
+    }
+  };
+
+  this.getInitailData = function () {
+    this.requests.drawingItems(undefined, true);
+  };
+  this.init = function () {
+    $("#uploader")
+        .fileinput({
+          uploadAsync: false,
+          maxFileCount: 5,
+          showUpload: false,
+          showUploadedThumbs: false,
+          uploadExtraData: function () {
+            return {
+              _token: $("meta[name='csrf-token']").attr("content"),
+              folder_id: globalFolderId
+            };
+          }
+        })
+        .on("filebatchselected", function (event, files) {
+          $("#uploader").fileinput("upload");
+        })
+        .on("filebatchuploadsuccess", function (event, files) {
+          self.requests.drawingItems(undefined, true);
+          self.helpers.showUploaderContainer();
+          $("#uploader").fileinput("clear");
         });
-        },
-        transferImage(obj = {}, cb) {
-            shortAjax("/api/api-media/transfer-item", obj, res => {
-                if (!res.error) {
-                    self.requests.drawingItems();
-                }
-            });
-        },
-        removeImage(obj = {}, cb) {
-            shortAjax("/api/api-media/get-remove-item", obj, res => {
-                if (!res.error) {
-                    self.requests.drawingItems();
-                }
-            });
-        },
-        addNewFolder(obj = {}, cb) {
-            shortAjax("/api/api-media/get-create-folder-child", obj, res => {
-                if (!res.error) {
-                    self.requests.drawingItems();
-                    cb(res.data.id)
-                }
-            });
-        },
-        getImageDetails(obj = {}, cb) {
-            shortAjax("/api/api-media/get-item-details", obj, function(res) {
-                if (!res.error) {
-                    cb(res.data);
-                }
-            });
-        }
-    };
+    this.getInitailData();
+  };
+  this.events = {
 
-    this.getInitailData = function() {
-        this.requests.drawingItems(undefined, true);
-    };
-    this.init = function() {
-        $("#uploader")
-            .fileinput({
-                uploadAsync: false,
-                maxFileCount: 5,
-                showUpload: false,
-                showUploadedThumbs: false,
-                uploadExtraData: function() {
-                    return {
-                        _token: $("meta[name='csrf-token']").attr("content"),
-                        folder_id: globalFolderId
-                    };
-                }
-            })
-            .on("filebatchselected", function(event, files) {
-                $("#uploader").fileinput("upload");
-            })
-            .on("filebatchuploadsuccess", function(event, files) {
-                self.requests.drawingItems(undefined, true);
-                self.helpers.showUploaderContainer();
-                $("#uploader").fileinput("clear");
-            });
-        this.getInitailData();
-    };
-    this.events = {
+    save_seo(elm, e) {
+      e.stopPropagation();
+      e.preventDefault();
+      self.requests.saveSeo($(elm).closest('form').serializeArray());
+    },
+    // remove_tree_folder(elm, e) {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     let id = elm.closest("li").getAttribute("data-id");
+    //     self.requests.removeTreeFolder(
+    //         {
+    //             folder_id: Number(id),
+    //             trash: 1,
+    //             access_token: "string"
+    //         },
+    //         () => elm.closest("li").remove()
+    //     );
+    // },
+    remove_folder(elm, e) {
+      e.stopPropagation();
+      e.preventDefault();
+      let id = elm.closest(".file").getAttribute("data-id");
 
-        save_seo(elm, e) {
-            e.stopPropagation();
-            e.preventDefault();
-            self.requests.saveSeo($(elm).closest('form').serializeArray());
-        },
-        // remove_tree_folder(elm, e) {
-        //     e.stopPropagation();
-        //     e.preventDefault();
-        //     let id = elm.closest("li").getAttribute("data-id");
-        //     self.requests.removeTreeFolder(
-        //         {
-        //             folder_id: Number(id),
-        //             trash: 1,
-        //             access_token: "string"
-        //         },
-        //         () => elm.closest("li").remove()
-        //     );
-        // },
-        remove_folder(elm, e) {
-            e.stopPropagation();
-            e.preventDefault();
-            let id = elm.closest(".file").getAttribute("data-id");
+      const removeTree = function () {
+        var x = $("#folder-list").fancytree("getTree");
+        var folder;
+        folder = x.getNodeByKey('' + id);
+        folder.remove()
+      };
 
-            const removeTree = function() {
-                var x = $("#folder-list").fancytree("getTree");
-                var folder;
-                console.log()
-                folder = x.getNodeByKey(''+id);
-                console.log(folder)
-                folder.remove()
-            };
+      self.requests.removeTreeFolder(
+          {
+            folder_id: Number(id),
+            trash: 1,
+            access_token: "string"
+          },
+          () => {
+        elm.closest(".folder-container").remove();
+      removeTree()
+    }
+    )
+      ;
+    },
+    get_folder_items(elm, e) {
+      let id = elm.closest("[data-id]").getAttribute("data-id");
+      if (id && !elm.classList.contains("disabled")) {
+        self.requests.drawingItems(
+            {
+              folder_id: Number(id),
+              files: true,
+              access_token: "string"
+            }
+        );
+      }
+    },
+    get_folder_items_tree(id, e) {
+      if (id) {
+        self.requests.drawingItems(
+            {
+              folder_id: Number(id),
+              files: true,
+              access_token: "string"
+            },
+            false
+        );
+      }
+    },
+    add_new_folder(elm, e) {
+      let inputElement = document.querySelector(".new-folder-input");
+      let name = inputElement.value;
+      console.log(globalFolderId);
+      var x = $("#folder-list").fancytree("getTree");
+      var folder;
+      if (globalFolderId !== 1) {
+        folder = x.getNodeByKey('' + globalFolderId);
+      } else {
+        folder = x.getRootNode();
+      }
+      const createTree = function () {
+        folder.addChildren({
+          folder: true,
+          title: name,
+          text: name
+        })
+      };
+      self.requests.addNewFolder(
+          {
+            folder_id: globalFolderId,
+            folder_name: name,
+            access_token: "string"
+          },
+          createTree
+      );
+      inputElement.value = '';
+    },
+    open_full_modal(elm, e) {
+      e.stopPropagation();
+      e.preventDefault();
+      let id = e.target.closest(".file").getAttribute("data-id");
+      let countId = e.target
+          .closest(".file-box")
+          .getAttribute("data-image");
+      self.requests.getImageDetails({item_id: id}, res => {
+        document.body.innerHTML += self.htmlMaker.fullInfoModal(
+          res,
+          Number(countId)
+      );
+    })
+      ;
+    },
+    select_item(elm, e) {
 
-            self.requests.removeTreeFolder(
-                {
-                    folder_id: Number(id),
-                    trash: 1,
-                    access_token: "string"
-                },
-                () => {
-                    elm.closest(".folder-container").remove();
-                    removeTree()
-                }
-            );
-        },
-        get_folder_items(elm, e) {
-            let id = elm.closest("[data-id]").getAttribute("data-id");
-            if (id && !elm.classList.contains("disabled")) {
-                self.requests.drawingItems(
-                    {
-                        folder_id: Number(id),
-                        files: true,
-                        access_token: "string"
-                    }
-                );
-            }
-        },
-        get_folder_items_tree(id, e) {
-            if (id) {
-                self.requests.drawingItems(
-                    {
-                        folder_id: Number(id),
-                        files: true,
-                        access_token: "string"
-                    },
-                    false
-                );
-            }
-        },
-        add_new_folder(elm, e) {
-            let inputElement = document.querySelector(".new-folder-input");
-            let name = inputElement.value;
-            console.log(globalFolderId);
-            var x = $("#folder-list").fancytree("getTree");
-            var folder;
-            if(globalFolderId !== 1) {
-                folder = x.getNodeByKey(''+globalFolderId);
-            } else {
-                folder = x.getRootNode();
-            }
-            const createTree = function(key) {
-                folder.addChildren({
-                    folder: true,
-                    title: name,
-                    text: name,
-                    key: key
-                })
-            };
-            self.requests.addNewFolder(
-                {
-                    folder_id: globalFolderId,
-                    folder_name: name,
-                    access_token: "string"
-                },
-                createTree
-            );
-            inputElement.value = '';
-        },
-        open_full_modal(elm, e) {
-            e.stopPropagation();
-            e.preventDefault();
-            let id = e.target.closest(".file").getAttribute("data-id");
-            let countId = e.target
-                .closest(".file-box")
-                .getAttribute("data-image");
-            self.requests.getImageDetails({ item_id: id }, res => {
-                document.body.innerHTML += self.htmlMaker.fullInfoModal(
-                res,
-                Number(countId)
-                );
-            });
-        },
-        select_item(elm, e) {
+      let id = e.target.closest(".file").getAttribute("data-id");
+      if (e.type === "dblclick") {
+        e.target.closest(".file-box").classList.remove("active");
+        let countId = e.target
+            .closest(".file-box")
+            .getAttribute("data-image");
+        self.requests.getImageDetails({item_id: id}, res => {
+          var html = self.htmlMaker.fullInfoModal(
+              res,
+              Number(countId)
+          );
 
-            let id = e.target.closest(".file").getAttribute("data-id");
-            if (e.type === "dblclick") {
-                e.target.closest(".file-box").classList.remove("active");
-                let countId = e.target
-                    .closest(".file-box")
-                    .getAttribute("data-image");
-                self.requests.getImageDetails({ item_id: id }, res => {
-                    var html=self.htmlMaker.fullInfoModal(
-                        res,
-                        Number(countId)
-                    );
-
-                    return $('body').append(html);
-                });
-            } else if (e.type === "click") {
-                e.target.closest(".file-box").classList.toggle("active");
+        return $('body').append(html);
+      })
+        ;
+      } else if (e.type === "click") {
+        e.target.closest(".file-box").classList.toggle("active");
+      }
+    },
+    modal_load_image(elm, e) {
+      if (!e.target.closest("button").disabled) {
+        console.log(123)
+        let id = e.target.closest("button").getAttribute("data-id");
+        let imageId = document
+            .querySelector(`[data-image="${id}"] [data-id]`)
+            .getAttribute("data-id");
+        self.requests.getImageDetails({item_id: imageId}, res => {
+          document.querySelectorAll(".adminmodal ").forEach(item => item.remove()
+      )
+        ;
+        document.body.innerHTML += self.htmlMaker.fullInfoModal(
+            res,
+            Number(id)
+        );
+      })
+        ;
+      }
+    },
+    remove_image(elm, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      let id = e.target.closest(".file").getAttribute("data-id");
+      self.requests.removeImage(
+          {
+            item_id: Number(id),
+            trash: true,
+            access_token: "string"
+          }
+      );
+    },
+    edit_image(elm, e) {
+      e.preventDefault();
+      e.stopPropagation();
+      let id = e.target.closest(".file").getAttribute("data-id");
+      let name = e.target
+          .closest(".file")
+          .querySelector(".file-name")
+          .textContent.trim();
+      document.body.innerHTML += self.htmlMaker.editNameModal(id, name);
+    },
+    save_edited_title(elm, e) {
+      let itemId = e.target.getAttribute("data-id");
+      let name = document.querySelector(".edit-title-input").value;
+      self.requests.editImageName(
+          {
+            item_id: Number(itemId),
+            item_name: name,
+            access_token: "string"
+          },
+          false
+      );
+    },
+    show_uploader(elm, e) {
+      self.helpers.showUploaderContainer();
+    },
+    close_full_modal(elm, e) {
+      e.target.closest(".modal").remove();
+    },
+    folder_level_up(elm, e) {
+      let allActiveBreadCrumbs = document.querySelectorAll(
+          ".bread-crumbs-list-item.active"
+      );
+      if (allActiveBreadCrumbs.length) {
+        let oneLevelUpID = allActiveBreadCrumbs[
+        allActiveBreadCrumbs.length - 1
+            ].getAttribute("data-id");
+        self.requests.drawingItems(
+            {
+              folder_id: Number(oneLevelUpID),
+              files: true,
+              access_token: "string"
             }
-        },
-        modal_load_image(elm, e) {
-            if (!e.target.closest("button").disabled) {
-                console.log(123)
-                let id = e.target.closest("button").getAttribute("data-id");
-                let imageId = document
-                    .querySelector(`[data-image="${id}"] [data-id]`)
-                    .getAttribute("data-id");
-                self.requests.getImageDetails({ item_id: imageId }, res => {
-                    document.querySelectorAll(".adminmodal ").forEach(item => item.remove());
-                document.body.innerHTML += self.htmlMaker.fullInfoModal(
-                    res,
-                    Number(id)
-                );
-            });
-            }
-        },
-        remove_image(elm, e) {
-            e.preventDefault();
-            e.stopPropagation();
-            let id = e.target.closest(".file").getAttribute("data-id");
-            self.requests.removeImage(
-                {
-                    item_id: Number(id),
-                    trash: true,
-                    access_token: "string"
-                }
-            );
-        },
-        edit_image(elm, e) {
-            e.preventDefault();
-            e.stopPropagation();
-            let id = e.target.closest(".file").getAttribute("data-id");
-            let name = e.target
-                .closest(".file")
-                .querySelector(".file-name")
-                .textContent.trim();
-            document.body.innerHTML += self.htmlMaker.editNameModal(id, name);
-        },
-        save_edited_title(elm, e) {
-            let itemId = e.target.getAttribute("data-id");
-            let name = document.querySelector(".edit-title-input").value;
-            self.requests.editImageName(
-                {
-                    item_id: Number(itemId),
-                    item_name: name,
-                    access_token: "string"
-                },
-                false
-            );
-        },
-        show_uploader(elm, e) {
-            self.helpers.showUploaderContainer();
-        },
-        close_full_modal(elm, e) {
-            e.target.closest(".modal").remove();
-        },
-        folder_level_up(elm, e) {
-            let allActiveBreadCrumbs = document.querySelectorAll(
-                ".bread-crumbs-list-item.active"
-            );
-            if (allActiveBreadCrumbs.length) {
-                let oneLevelUpID = allActiveBreadCrumbs[
-                allActiveBreadCrumbs.length - 1
-                    ].getAttribute("data-id");
-                self.requests.drawingItems(
-                    {
-                        folder_id: Number(oneLevelUpID),
-                        files: true,
-                        access_token: "string"
-                    }
-                );
-            }
-        },
-        close_name_modal(elm, e) {
-            e.target.closest(".custom_modal_edit").remove();
-        }
-    };
+        );
+      }
+    },
+    close_name_modal(elm, e) {
+      e.target.closest(".custom_modal_edit").remove();
+    }
+  };
 }
 const app = new App();
 app.init();
 
-$("body").on("click dblclick", `[bb-media-click]`, function(e) {
-    let attr = $(this).attr("bb-media-click");
-    app.events[attr](this, e);
+$("body").on("click dblclick", `[bb-media-click]`, function (e) {
+  let attr = $(this).attr("bb-media-click");
+  app.events[attr](this, e);
 });
 
-$("body").on("click", `[data-tabaction]`, function(e) {
-    let id = $(this).attr("data-tabaction");
-    $("body")
-        .find(`[data-tabcontent]`)
-        .removeClass("in");
-    $("body")
-        .find(`[data-tabcontent="${id}"]`)
-        .addClass("in");
+$("body").on("click", `[data-tabaction]`, function (e) {
+  let id = $(this).attr("data-tabaction");
+  $("body")
+      .find(`[data-tabcontent]`)
+      .removeClass("in");
+  $("body")
+      .find(`[data-tabcontent="${id}"]`)
+      .addClass("in");
 });
 
 // $("body").on("keydown");
@@ -1017,5 +1041,5 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 // });
 
 $('.new-folder-input').on('keypress', function (ev) {
-    ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
+  ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
 })

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{!! env('SITE_NAME','ADMIN') !!}</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <title>{!! env('SITE_NAME','ADMIN') !!}</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
 {!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}
 <!-- Font Awesome -->
 {!! Html::style("public/admin_theme/bower_components/font-awesome/css/font-awesome.min.css") !!}
@@ -28,42 +28,44 @@
 <!-- Daterange picker -->
 {!! Html::style("public/admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.css") !!}
 <!-- bootstrap wysihtml5 - text editor -->
-    {!! Html::style("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
+  {!! Html::style("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
 
 
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
-    <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
+  <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
+  <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <!--Media Button Stiles-->
 
-    @if(is_enabled_media_modal())
-        {!! Html::style('public/admin_theme/media/css/styles.css') !!}
-        {!! Html::style('public/admin_theme/media/css/style.css') !!}
-        {!! Html::style('public/admin_theme/media/css/lightbox.css') !!}
-        {!! Html::style('public/admin_theme/fileinput/css/fileinput.min.css') !!}
-        {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
-    @endif
+  <!--Media Button Stiles-->
+
+  @if(is_enabled_media_modal())
+    {!! Html::style('public/admin_theme/media/css/styles.css') !!}
+    {!! Html::style('public/admin_theme/media/css/style.css') !!}
+    {!! Html::style('public/admin_theme/media/css/lightbox.css') !!}
+    {!! Html::style('public/admin_theme/fileinput/css/fileinput.min.css') !!}
+    {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
+  @endif
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-    <![endif]-->
+  <![endif]-->
 
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!-- Google Font -->
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
-    <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-win8/ui.fancytree.min.css" rel="stylesheet">
-    @yield('css') 
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
+  <link href="//cdn.jsdelivr.net/npm/jquery.fancytree@2.27/dist/skin-win8/ui.fancytree.min.css" rel="stylesheet">
+  @yield('css')
 
-    @stack('style')
+  @stack('style')
 </head>
 <body class="hold-transition skin-blue">
 <div class="wrapper">
@@ -73,65 +75,65 @@
 @include('admin._partials.left_menu')
 
 <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+  <div class="content-wrapper">
 
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            @yield('content-header')
-        </section>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      @if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+      @endif
+      @yield('content-header')
+    </section>
 
-        <!-- Main content -->
-        <section class="content main-content">
+    <!-- Main content -->
+    <section class="content main-content">
 
 
-            @if(Session::has('alert'))
-                <div class="alert alert-messages alert-{!! Session::get('alert.class','success') !!} alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon {!! getAlertIconByClass(Session::get('alert.class')) !!}"></i> Alert!</h4>
-                    {!! Session::get('alert.message') !!}
-                </div>
-                {!! Session::forget('alert') !!}
-            @endif
+      @if(Session::has('alert'))
+        <div class="alert alert-messages alert-{!! Session::get('alert.class','success') !!} alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <h4><i class="icon {!! getAlertIconByClass(Session::get('alert.class')) !!}"></i> Alert!</h4>
+          {!! Session::get('alert.message') !!}
+        </div>
+        {!! Session::forget('alert') !!}
+      @endif
 
-            @yield('content')
-        </section>
+      @yield('content')
+    </section>
 
-        <!-- /.content -->
-    </div>
+    <!-- /.content -->
+  </div>
 @if(is_enabled_media_modal())
-    @include('media.modal')
+  @include('media.modal')
 @endif
 <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> beta
-        </div>
-        <strong>Copyright &copy; 2017-{{ date('Y') }} <a href="http://hook.am">HooK LLC</a>.</strong> All rights
-        reserved.
-    </footer>
+  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> beta
+    </div>
+    <strong>Copyright &copy; 2017-{{ date('Y') }} <a href="http://hook.am">HooK LLC</a>.</strong> All rights
+    reserved.
+  </footer>
 
-    <!-- Control Sidebar -->
+  <!-- Control Sidebar -->
 @include('admin._partials.right_sidebar')
 <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
 </div>
 <script type="template" id="alert-message-box">
-    <div class="alert alert-messages alert-{className} alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="icon {icon}"></i> Alert!</h4>
-        {message}
-    </div>
+  <div class="alert alert-messages alert-{className} alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <h4><i class="icon {icon}"></i> Alert!</h4>
+    {message}
+  </div>
 </script>
 <!-- ./wrapper -->
 {{--<!-- jQuery 3 -->--}}
@@ -141,9 +143,8 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
 
-
 <script>
-    $.widget.bridge('uibutton', $.ui.button);
+  $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
 {!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
@@ -186,44 +187,44 @@
 
 <!--Media Button JS-->
 @if(is_enabled_media_modal())
-    <style>
+  <style>
     .close {
-        opacity: 1;
+      opacity: 1;
     }
-    </style>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
-    <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
-    <script src="{!! url('public/admin_theme/media/js/jstree.min.js') !!}"></script>
-    <script src="{!! url('public/admin_theme/media/js/custom.js?v='.rand(111,999)) !!}"></script>
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
+  <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
+  <script src="{!! url('public/admin_theme/media/js/jstree.min.js') !!}"></script>
+  <script src="{!! url('public/admin_theme/media/js/custom.js?v='.rand(111,999)) !!}"></script>
 
 @endif
 <script>
-    window.AjaxCall = function postSendAjax(url, data, success, error) {
-        $.ajax({
-            type: "post",
-            url: url,
-            cache: false,
-            datatype: "json",
-            data: data,
-            headers: {
-                "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-            },
-            success: function(data) {
-                if (success) {
-                    success(data);
-                }
-                return data;
-            },
-            error: function(errorThrown) {
-                if (error) {
-                    error(errorThrown);
-                }
-                return errorThrown;
-            }
-        });
-    };
+  window.AjaxCall = function postSendAjax(url, data, success, error) {
+    $.ajax({
+      type: "post",
+      url: url,
+      cache: false,
+      datatype: "json",
+      data: data,
+      headers: {
+        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+      },
+      success: function (data) {
+        if (success) {
+          success(data);
+        }
+        return data;
+      },
+      error: function (errorThrown) {
+        if (error) {
+          error(errorThrown);
+        }
+        return errorThrown;
+      }
+    });
+  };
 </script>
 
 
