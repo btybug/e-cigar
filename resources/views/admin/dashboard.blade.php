@@ -19,12 +19,12 @@
             <div class="profile-header-content">
 
                 <div class="profile-header-img">
-                    <img src="{!!url('public/admin_theme/dist/img/user2-160x160.jpg')!!}" class="user-image" alt="User Image">
+                    <img src="{!! user_avatar() !!}" class="user-image" alt="User Image">
                 </div>
 
                 <div class="profile-header-info">
                     <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
-                    <p class="m-b-10">Web Developer</p>
+                    <p class="m-b-10">{{ Auth::user()->role->title }}</p>
                     {{--<a href="#" class="btn btn-xs btn-info">Edit Profile</a>--}}
                 </div>
 
