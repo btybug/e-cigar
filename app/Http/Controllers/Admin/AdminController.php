@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Roles;
 use App\Services\ManagerApiRequest;
@@ -62,6 +63,15 @@ class AdminController extends Controller
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
 
         return view('admin.dashboard_profile',compact('user', 'countries'));
+    }
+
+    public function postProfile(AdminProfileRequest $request)
+    {
+        $data = $request->except(['_token','avatar']);
+        $user = \Auth::user();
+        $user->update($data);
+        
+        return redirect()->back()->with('message','Your profile updated');
     }
 
     public function test(ManagerApiRequest $request)
