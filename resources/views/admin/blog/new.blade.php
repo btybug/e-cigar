@@ -93,11 +93,12 @@
                                                 <ul class="get-all-attributes-tab row">
                                                     @if(isset($post) && count($post->stocks))
                                                         @foreach($post->stocks as $stock)
-                                                            <li style="display: flex" data-id="{{ $stock->id }}"
-                                                                class="option-elm-attributes">
+                                                            <li data-id="{{ $stock->id }}"
+                                                                class="option-elm-attributes col-md-3">
+                                                                <div class="wrap-item">
                                                                 <a href="#">
                                                                     <span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
-                                                                    <span>{!! $stock->name !!}</span>
+                                                                    <span class="name">{!! $stock->name !!}</span>
                                                                 </a>
                                                                 <div class="buttons">
                                                                     <a href="javascript:void(0)"
@@ -105,7 +106,7 @@
                                                                         <i class="fa fa-trash"></i></a>
                                                                 </div>
                                                                 <input type="hidden" name="stocks[]" value="{{ $stock->id }}">
-                                                            </li>
+                                                                </div></li>
                                                         @endforeach
                                                     @endif
                                                 </ul>
