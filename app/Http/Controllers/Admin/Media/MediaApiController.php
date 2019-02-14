@@ -145,7 +145,7 @@ class MediaApiController extends Controller
             return \Response::json(['error' => true, 'message' => $validator->messages()]);
         }
 
-        return \Response::json(['error' => false, 'data' => Folders::removeFolder($data)]);
+        return \Response::json(['error' => false, 'data' => ['removed'=>Folders::removeFolder($data),'id'=>$data['folder_id']]]);
     }
 
     public function getMediaUploaders()
