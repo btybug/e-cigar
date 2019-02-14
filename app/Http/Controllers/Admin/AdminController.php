@@ -60,18 +60,8 @@ class AdminController extends Controller
     {
         $user = \Auth::user();
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        $roles = Roles::where('type', 'frontend')->pluck('title', 'id')->toArray();
-        $billing_address = $user->addresses()->where('type', 'billing_address')->first();
-        $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
-        $address = $user->addresses()->where(function ($query){
-            $query->where('type','address_book')->orWhere('type','default_shipping');
-        })->pluck('first_line_address', 'id');
-        $countriesShipping = [null => 'Select Country'] + $this->geoZones
-                ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
-                ->select('zone_countries.*', 'zone_countries.name as country')
-                ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        return view('admin.dashboard_profile',compact('user', 'countries', 'roles','billing_address','default_shipping','address','countriesShipping'));
+        return view('admin.dashboard_profile',compact('user', 'countries'));
     }
 
     public function test(ManagerApiRequest $request)
