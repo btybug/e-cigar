@@ -39,27 +39,7 @@
 
         <div class="text-right mb-20">
             <button class="btn btn-info open_dashboard_widget">Add new Widget</button>
-
         </div>
-
-        {{--<div class="panel panel-default">--}}
-            {{--<div class="panel-heading clearfix">--}}
-                {{--<h2 class="pull-left m-0 lh-1">Title</h2>--}}
-                {{--<div class="pull-right">--}}
-                    {{--<button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">--}}
-                        {{--<i class="fa fa-calendar"></i>--}}
-                    {{--</button>--}}
-                    {{--<span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">--}}
-                        {{--<button type="button" class="btn btn-for-widget btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-1" >--}}
-                            {{--<i class="fa fa-minus"></i></button>--}}
-                    {{--</span>--}}
-
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div id="collapseWidget-1" class="panel-body collapse" aria-expanded="true">--}}
-                {{--content--}}
-            {{--</div>--}}
-        {{--</div>--}}
     </div>
 
     <div class="col-md-12">
@@ -67,6 +47,32 @@
             <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
             </div>
         </aside>
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h2 class="pull-left m-0 lh-1">PIE CHART</h2>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                    <span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                        <button type="button" class="btn btn-for-widget btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-pie" >
+                            <i class="fa fa-minus"></i></button>
+                    </span>
+
+                </div>
+            </div>
+            <div id="collapseWidget-pie" class="panel-body collapse in" aria-expanded="true">
+                <div class="Dashboard Dashboard--full">
+                    <ul class="FlexGrid">
+                        <li class="FlexGrid-item">
+                            <div id="data-chart-3-container">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <h2 class="pull-left m-0 lh-1">Title</h2>
