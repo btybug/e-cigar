@@ -46,7 +46,7 @@
         </div>
 
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <h3 class="panel-heading m-0">Pages</h3>
