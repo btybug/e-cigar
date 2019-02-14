@@ -483,7 +483,7 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/plugins/formstone/carousel/carousel.css')}}">
     <link rel="stylesheet" href="{{asset('public/plugins/formstone/light.css')}}">
-    <link rel="stylesheet" href="{{asset('public/css/comments.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/comments.css?v='.rand(111,999))}}">
     <style>
 
         #gp-inner-container {
