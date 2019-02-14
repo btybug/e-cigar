@@ -69,7 +69,7 @@
                                 <li><button class="btn btn-info"><i class="fa fa-share"></i></button></li>
                                 <li><button class="btn btn-primary"><i class="fa fa-clone"></i></button></li>
                             </ul>
-                            <div class="upload-content">
+                            <div class="upload-content" style="width: 100%; margin-left: 20px;">
                             <div class="uploader-container d-none">
                                 <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
                             </div>
