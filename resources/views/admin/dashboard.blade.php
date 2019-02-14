@@ -42,6 +42,31 @@
 
         </div>
 
+        {{--<div class="panel panel-default">--}}
+            {{--<div class="panel-heading clearfix">--}}
+                {{--<h2 class="pull-left m-0 lh-1">Title</h2>--}}
+                {{--<div class="pull-right">--}}
+                    {{--<button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">--}}
+                        {{--<i class="fa fa-calendar"></i>--}}
+                    {{--</button>--}}
+                    {{--<span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">--}}
+                        {{--<button type="button" class="btn btn-for-widget btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-1" >--}}
+                            {{--<i class="fa fa-minus"></i></button>--}}
+                    {{--</span>--}}
+
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<div id="collapseWidget-1" class="panel-body collapse" aria-expanded="true">--}}
+                {{--content--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    </div>
+
+    <div class="col-md-12">
+        <aside class="Header-auth" id="header-auth">
+            <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
+            </div>
+        </aside>
         <div class="panel panel-default">
             <div class="panel-heading clearfix">
                 <h2 class="pull-left m-0 lh-1">Title</h2>
@@ -56,59 +81,52 @@
 
                 </div>
             </div>
-            <div id="collapseWidget-1" class="panel-body collapse" aria-expanded="true">
-                content
-            </div>
-        </div>
-    </div>
+            <div id="collapseWidget-1" class="panel-body collapse in" aria-expanded="true">
+                <div class="Dashboard Dashboard--full">
+                    <header class="Dashboard-header">
+                        <div class="Titles">
+                            <h1 class="Titles-main" id="view-name">{!! env('SITE_NAME') !!} (All Web Site Data)</h1>
+                            <div class="Titles-sub">Comparing sessions from
+                                <b id="from-dates">last week</b>
+                                to <b id="to-dates">this week</b>
+                            </div>
+                        </div>
+                        <div id="view-selector-container"></div>
+                    </header>
 
-    <div class="col-md-12">
-        <aside class="Header-auth" id="header-auth">
-            <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
-            </div>
-        </aside>
-        <div class="Dashboard Dashboard--full">
-            <header class="Dashboard-header">
-                <div class="Titles">
-                    <h1 class="Titles-main" id="view-name">{!! env('SITE_NAME') !!} (All Web Site Data)</h1>
-                    <div class="Titles-sub">Comparing sessions from
-                        <b id="from-dates">last week</b>
-                        to <b id="to-dates">this week</b>
-                    </div>
+                    <ul class="FlexGrid">
+                        <li class="FlexGrid-item">
+                            <div id="data-chart-1-container">
+                            </div>
+                            <div id="date-range-selector-1-container">
+                            </div>
+
+                        </li>
+                        <li class="FlexGrid-item">
+                            <div id="data-chart-2-container">
+                            </div>
+                            <div id="date-range-selector-2-container"></div>
+                        </li>
+                        <li class="FlexGrid-item">
+                            <div id="data-chart-3-container">
+                            </div>
+                            <div id="date-range-selector-3-container"></div>
+                        </li>
+                    </ul>
                 </div>
-                <div id="view-selector-container"></div>
-            </header>
+                <div class="Dashboard Dashboard--full">
 
-            <ul class="FlexGrid">
-                <li class="FlexGrid-item">
-                    <div id="data-chart-1-container">
-                    </div>
-                    <div id="date-range-selector-1-container">
-                    </div>
-
-                </li>
-                <li class="FlexGrid-item">
-                    <div id="data-chart-2-container">
-                    </div>
-                    <div id="date-range-selector-2-container"></div>
-                </li>
-                <li class="FlexGrid-item">
-                    <div id="data-chart-3-container">
-                    </div>
-                    <div id="date-range-selector-3-container"></div>
-                </li>
-            </ul>
+                    <ul class="FlexGrid">
+                        <li class="FlexGrid-item">
+                            <div id="data-chart-4-container">
+                            </div>
+                            <div id="date-range-selector-4-container"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="Dashboard Dashboard--full">
 
-            <ul class="FlexGrid">
-                <li class="FlexGrid-item">
-                    <div id="data-chart-4-container">
-                    </div>
-                    <div id="date-range-selector-4-container"></div>
-                </li>
-            </ul>
-        </div>
     </div>
 
 
