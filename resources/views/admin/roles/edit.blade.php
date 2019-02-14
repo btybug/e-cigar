@@ -3,157 +3,205 @@
 
 @stop
 @section('content')
+    <div class="row">
+    {!! Form::model($role) !!}
+    {!! Form::hidden('id') !!}
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="m-0">Create Role</h2>
         </div>
-        <div class="panel-body">
-            <div class="col-md-6">
-                {!! Form::model($role,['class'=>'']) !!}
-                {!! Form::hidden('id',$role->id) !!}
 
+    <!-- Button -->
+        <div class="form-group row">
+            <div class="col-sm-12 text-right pull-right">
+                <button id="singlebutton" class="btn btn-info save-role">Save</button>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="col-md-4">
+                <div class="row">
                     <!-- Password input-->
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="passwordinput">Title</label>
+                        <label class="col-md-2" for="passwordinput">Title</label>
                         <div class="col-md-10">
                             {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
                         </div>
                     </div>
                     <!-- Password input-->
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="passwordinput">Type</label>
+                        <label class="col-md-2" for="passwordinput">Type</label>
                         <div class="col-md-10">
                             {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
                         </div>
                     </div>
-
-                    <!-- Password input-->
                     <div class="form-group row">
-                        <label class="col-md-2 control-label" for="passwordinput">Description</label>
+                        <label class="col-md-2" for="passwordinput">Description</label>
                         <div class="col-md-10">
                             {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
-                        </div>
-                    </div>
-                    <!-- Button -->
-                    <div class="form-group row">
-                        <div class="col-sm-12 text-right">
-                            <button id="singlebutton" class="btn btn-info save-role">Save</button>
-                        </div>
-                    </div>
-                {!! Form::close() !!}
-
-            </div>
-            <div class="col-md-6">
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="m-0">Pages</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="treeview_json"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="m-0">Forms</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="treeview_json2"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
         </div>
+
+        </div>
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <h3 class="panel-heading m-0">Pages</h3>
+                <div class="panel-body">
+                    @include('admin.roles._partials.tree')
+                </div>
+            </div>
+        </div>
+    </div>
+        {!! Form::close() !!}
     </div>
 @stop
+
+@section("css")
+    <link rel="stylesheet" href="http://laraframe.codemen.org/backend/assets/css/admin_lte.css">
+    <link rel="stylesheet" href="http://laraframe.codemen.org/common/vendors/iCheck/flat/_all.css">
+
+    <style>
+        .panel-create-role .panel-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .no-padding {
+            padding: 0px;
+        }
+
+        .glyphicon-icon-rpad .glyphicon, .glyphicon-icon-rpad .glyphicon.m8, .fa-icon-rpad .fa, .fa-icon-rpad .fa.m8 {
+            padding-right: 8px;
+        }
+
+        .glyphicon-icon-lpad .glyphicon, .glyphicon-icon-lpad .glyphicon.m8, .fa-icon-lpad .fa, .fa-icon-lpad .fa.m8 {
+            padding-left: 8px;
+        }
+
+        .glyphicon-icon-rpad .glyphicon.m5, .fa-icon-rpad .fa.m5 {
+            padding-right: 5px;
+        }
+
+        .glyphicon-icon-lpad .glyphicon.m5, .fa-icon-lpad .fa.m5 {
+            padding-left: 5px;
+        }
+
+        .glyphicon-icon-rpad .glyphicon.m12, .fa-icon-rpad .fa.m12 {
+            padding-right: 12px;
+        }
+
+        .glyphicon-icon-lpad .glyphicon.m12, .fa-icon-lpad .fa.m12 {
+            padding-left: 12px;
+        }
+
+        .glyphicon-icon-rpad .glyphicon.m15, .fa-icon-rpad .fa.m15 {
+            padding-right: 15px;
+        }
+
+        .glyphicon-icon-lpad .glyphicon.m15, .fa-icon-lpad .fa.m15 {
+            padding-left: 15px;
+        }
+
+        ul.nav-menu-list-style .nav-header .menu-collapsible-icon {
+            position: absolute;
+            right: 3px;
+            top: 16px;
+            font-size: 9px;
+        }
+
+        ul.nav-menu-list-style {
+            margin: 0;
+        }
+
+        .nav-menu-wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu-wrap > label {
+            margin-left: 5px;
+        }
+
+        .nav-menu-wrap + ul > li {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu-wrap + ul {
+            margin-left: 25px;
+        }
+
+        ul.nav-menu-list-style .nav-header {
+            border-top: 1px solid #FFFFFF;
+            border-bottom: 1px solid #e8e8e8;
+            display: block;
+            margin: 0;
+            line-height: 42px;
+            padding: 0 8px;
+            font-weight: 600;
+        }
+
+        ul.nav-menu-list-style > li {
+            position: relative;
+        }
+
+        ul.nav-menu-list-style > li a {
+            border-top: 1px solid #FFFFFF;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 0 10px;
+            line-height: 32px;
+        }
+
+        ul.nav-menu-list-style > li:first-child a {
+        }
+
+        ul.nav-menu-list-style {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        ul.nav-menu-list-style li .badge, ul.nav-menu-list-style li .pull-right, ul.nav-menu-list-style li span.badge, ul.nav-menu-list-style li label.badge {
+            float: right;
+            margin-top: 7px;
+        }
+
+        ul.bullets {
+            list-style: inside disc
+        }
+
+        ul.numerics {
+            list-style: inside decimal
+        }
+
+        .ul.kas-icon-aero {
+        }
+
+        ul.kas-icon-aero li a:before {
+            font-family: 'Glyphicons Halflings';
+            font-size: 9px;
+            content: "\e258";
+            padding-right: 8px;
+        }
+
+
+    </style>
+@stop
+
+
 @section('js')
-    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script>
-        window.AjaxCall = function postSendAjax(url, data, success, error) {
-            $.ajax({
-                type: "post",
-                url: url,
-                cache: false,
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function(data) {
-                    if (success) {
-                        success(data);
-                    }
-                    return data;
-                },
-                error: function(errorThrown) {
-                    if (error) {
-                        error(errorThrown);
-                    }
-                    return errorThrown;
-                }
-            });
-        };
-        var tree =[{!! getModuleRoutes('GET','admin',$role->permissions->pluck('slug','slug'))->toJson(1) !!}]
-        var tree2 =[{!! getModuleRoutes('POST','admin',$role->permissions->pluck('slug','slug'))->toJson(1) !!}]
-        $('#treeview_json').treeview({
-            data: tree,
-            showCheckbox: true,
-            onNodeChecked: function(event, node) {
-                if(typeof node.parentId !== "undefined") {
-                    checkParent(node.parentId, "#treeview_json")
-                }
-            },
-            onNodeUnchecked: function (event, node) {
-                unCheckChildren(node.nodeId, "#treeview_json")
-            }
+        $('.tree-toggle').click(function () {
+            $(this).parent().children('ul.tree').toggle(200);
         });
-        $('#treeview_json2').treeview({
-            data: tree2,
-            showCheckbox: true,
-            onNodeChecked: function(event, node) {
-                if(typeof node.parentId !== "undefined") {
-                    checkParent(node.parentId, "#treeview_json2")
-                }
-            },
-            onNodeUnchecked: function (event, node) {
-                unCheckChildren(node.nodeId, "#treeview_json2")
-            }
-        });
-        function checkParent(id, selecetor) {
-            let parrentId = id;
-            $(selecetor).treeview('checkNode', [ parrentId, { silent: true } ]);
-            if(parrentId){
-                let parent = $('#treeview_json').treeview('getNode', parrentId);
-                let pId = parent.parentId
-                checkParent(pId)
-            }
-
-        }
-        function unCheckChildren(id, selecetor){
-            console.log($(selecetor))
-            let currentNode = $('#treeview_json').treeview('getNode', id);
-            $(selecetor).treeview('uncheckNode', [ id, { silent: true } ]);
-            if (currentNode.nodes){
-                Object.values(currentNode.nodes).forEach(item => unCheckChildren(item.nodeId, selecetor))
-            }
-
-
-        }
-        $("form").on("submit", function (e) {
-            e.preventDefault()
-            let formData = $("form").serializeArray();
-            let treeData = $('#treeview_json').data('treeview').getChecked();
-            let treeData2 = $('#treeview_json2').data('treeview').getChecked();
-            treeData= $.merge(treeData,treeData2)
-            AjaxCall("{!! route('post_admin_edit_role') !!}", {formData, treeData}, function(res) {
-                if(!res.error){
-                     window.location.href='{!! route('admin_role_membership') !!}'
-                };
-            });
+        $(function () {
+            $('.tree-toggle').parent().children('ul.tree').toggle(200);
         })
-
     </script>
 @stop

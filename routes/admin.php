@@ -154,7 +154,7 @@ Route::group(['prefix' => 'users'], function () {
         Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
         Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
         Route::get('/edit/{id}', 'Admin\RolesController@edit')->name('admin_edit_role');
-        Route::post('/edit', 'Admin\RolesController@postEdit')->name('post_admin_edit_role');
+        Route::post('/edit/{id}', 'Admin\RolesController@postEdit')->name('post_admin_edit_role');
     });
 
     Route::group(['prefix' => 'campaign'], function () {

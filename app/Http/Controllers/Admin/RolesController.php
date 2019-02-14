@@ -25,7 +25,7 @@ class RolesController extends Controller
 
     public function edit(Request $request)
     {
-        $role = Roles::find($request->id);
+        $role = Roles::where('id',$request->id)->with('permissions')->first();
         return $this->view('edit', compact('role'));
     }
 
@@ -37,68 +37,54 @@ class RolesController extends Controller
 
     public function postCreate(Request $request)
     {
-        $formData = $request->formData;
-        $treeData = $request->get('treeData', []);
-        $permissions = [];
-        $data = [];
-        foreach ($formData as $column) {
-            if ($column['name'] != '_token')
-                $data[$column['name']] = $column['value'];
-        }
+
+        $data = $request->except('_token', 'has_access', 'permission');
+        $permissions = $this->getPermissions($request->get('permission',[]), 'backend')->pluck('id');
+        $has_access = $this->getPermissions($request->get('has_access',[]), 'has_access')->pluck('id');
         $validator = \Validator::make($data, [
             'title' => 'required|unique:roles,title',
             'description' => 'required',
             'type' => 'required|in:backend,frontend'
         ]);
         $data['slug'] = str_replace(' ', '_', strtolower($data['title']));
-        if ($validator->fails()) return response()->json(['error' => true, 'message' => $validator->messages()]);
+        if ($validator->fails()) return redirect()->back();
         $role = Roles::create($data);
-        $dataPermissions = [];
-        foreach ($treeData as $permission) {
-            if (isset($permission['text'])) {
-                if (!Permissions::where('slug', $permission['text'])->exists()) {
-                    $permission = Permissions::create(['slug' => $permission['text'], 'type' => $data['type']]);
-                } else {
-                    $permission = Permissions::where('slug', $permission['text'])->first();
-                }
-                $dataPermissions[] = $permission->id;
+        $role->permissions()->sync($permissions, true);
+        $role->permissions()->sync($has_access, true);
+        return redirect()->route('admin_role_membership');
+
+    }
+
+    protected function getPermissions($permissions, $type)
+    {
+        $result = [];
+        foreach ($permissions as $key => $value) {
+            if (Permissions::where('slug', $value)->where('type', $type)->exists()) {
+                $result[] = Permissions::where('slug', $value)->where('type', $type)->first();
+            } else {
+                $result[] = Permissions::created(['slug' => $value, 'type' => $type]);
             }
         }
-        $role->permissions()->sync($dataPermissions);
-        return response()->json(['error' => false]);
+        return collect($result);
     }
 
     public function postEdit(Request $request)
     {
-        $formData = $request->formData;
-        $treeData = $request->get('treeData', []);
-        $permissions = [];
-        $data = [];
-        foreach ($formData as $column) {
-            if ($column['name'] != '_token')
-                $data[$column['name']] = $column['value'];
-        }
-        $role = Roles::find($data['id']);
+        $data = $request->except('_token', 'has_access', 'permission');
+        $permissions = $this->getPermissions($request->get('permission',[]), 'backend')->pluck('id');
+        $has_access = $this->getPermissions($request->get('has_access',[]), 'has_access')->pluck('id');
         $validator = \Validator::make($data, [
-            'title' => 'required|unique:roles,title,' . $role->id,
+            'title' => 'required|unique:roles,title,'.$data['id'],
             'description' => 'required',
-            'type' => 'required|in:backend,frontend'
+            'type' => 'required|in:backend,frontend',
+            'id'=>'required|exists:roles'
         ]);
+        if ($validator->fails()) return redirect()->withErrors($validator);
         $data['slug'] = str_replace(' ', '_', strtolower($data['title']));
-        if ($validator->fails()) return response()->json(['error' => true, 'message' => $validator->messages()]);
-        $role->update($data);
-        $dataPermissions = [];
-        foreach ($treeData as $permission) {
-            if (isset($permission['text'])) {
-                if (!Permissions::where('slug', $permission['text'])->exists()) {
-                    $permission = Permissions::create(['slug' => $permission['text'], 'type' => $data['type']]);
-                } else {
-                    $permission = Permissions::where('slug', $permission['text'])->first();
-                }
-                $dataPermissions[] = $permission->id;
-            }
-        }
-        $role->permissions()->sync($dataPermissions);
-        return response()->json(['error' => false]);
+
+        $role = Roles::find($data['id']);
+        $role->permissions()->sync($permissions, false);
+        $role->permissions()->sync($has_access, false);
+        return redirect()->route('admin_role_membership');
     }
 }
