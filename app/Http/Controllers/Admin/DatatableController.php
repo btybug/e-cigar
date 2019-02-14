@@ -651,7 +651,7 @@ class DatatableController extends Controller
     public function getAllOthers($id=null)
     {
         if(!$id){
-            $array=collect(json_decode(json_encode(\DB::select('SELECT MAX(id) as id FROM others GROUP BY `group`'),true),true))->pluck('id');
+            $array=collect(json_decode(json_encode(\DB::select('SELECT MAX(id) as id FROM others GROUP BY `grouped`'),true),true))->pluck('id');
             return Datatables::of(
                 Others::whereIn('id',$array)
             )
@@ -668,9 +668,9 @@ class DatatableController extends Controller
                     return "<a class='badge btn-warning' href='".route('admin_inventory_others_new',$attr->id)."'><i class='fa fa-edit'></i></a>";
                 })->rawColumns(['actions'])->make(true);
         }else{
-
+            $other = Others::find($id);
             return Datatables::of(
-                Others::where('item_id',$id)
+                Others::where('grouped',$other->grouped)
             )
                 ->editColumn('item_id', function ($other) {
                     return $other->item->name;

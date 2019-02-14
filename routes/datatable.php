@@ -42,6 +42,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/store/get-items','Admin\DatatableController@getAllItems')->name('datatable_all_items');
     Route::get('/inventory/get-all-suppliers','Admin\DatatableController@getAllSuppliers')->name('datatable_all_suppliers');
     Route::get('/inventory/get-all-others/{id?}','Admin\DatatableController@getAllOthers')->name('datatable_all_others');
+    Route::get('/inventory/get-all-channels','Admin\DatatableController@getAllChannels')->name('datatable_all_channels');
 
     Route::get('/emails-notifications/get-all-custom-emails','Admin\DatatableController@getAllCustomEmails')->name('datatable_all_custom_emails');
     Route::get('/inventory/get-all-channel-customers/{id?}','Admin\DatatableController@getAllChannelCustomers')->name('datatable_all_channel_customers');
