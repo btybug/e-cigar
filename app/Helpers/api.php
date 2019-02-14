@@ -1059,8 +1059,10 @@ function user_avatar($id = null)
     return '/public/images/other.png';
 }
 
+
 function has_permission($role,$permission){
     if(!$role || !$permission)return false;
     $role_perms=$role->permissions->pluck('slug','slug');
     return isset($role_perms[$permission]);
+
 }
