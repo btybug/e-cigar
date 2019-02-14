@@ -317,9 +317,14 @@
                                             {{--</div>--}}
                                         {{--</div>--}}
                                     @endif
+                                    <div class="main-comment-wrap-img">
+                                        <div class="user-imges">
+                                            <img src="https://cetin.ro/poze/2016/10/frumoase-rusoaice-de-pe-instagram-14.jpg" alt="user">
+                                        </div>
+                                        <textarea name="comment" id="" rows="0"
+                                                  placeholder="Your comments"></textarea>
+                                    </div>
 
-                                    <textarea name="comment" id="" rows="0"
-                                              placeholder="Your comments"></textarea>
                                     <span class="error-box invalid-feedback comment"></span>
                                     <div class="d-flex button-comment-wrap justify-content-end">
 
