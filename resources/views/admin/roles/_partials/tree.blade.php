@@ -1,12 +1,13 @@
 @php
     $permissions=config('permissions');
+if(!isset($role))$role=null;
 @endphp
 @foreach($permissions as $key=>$permission)
     <div class="panel panel-default panel-create-role">
         <div class="panel-heading">
             <div class="user">{!! $key !!}</div>
             <div>
-                <input id="has-access" type="checkbox">
+                <input name="has_access[]" value="{!! $key !!}" @if(has_permission($role,$key))checked @endif type="checkbox">
                 <label for="has-access">Has access</label>
             </div>
         </div>
@@ -27,10 +28,10 @@
                         <tr>
 
                             <td>{!! $item['name'] !!}</td>
-                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'routes' !!}" type="checkbox"></td>
-                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.edit.routes' !!}" type="checkbox"></td>
-                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.create.routes' !!}" type="checkbox"></td>
-                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.delete.routes' !!} " type="checkbox"></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'routes'))checked @endif></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.edit.routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.children.edit.routes'))checked @endif></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.create.routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.children.create.routes'))checked @endif></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.delete.routes' !!} " type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.children.delete.routes'))checked @endif></td>
                         </tr>
                     @endforeach
                     </tbody>
