@@ -82,7 +82,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="panel panel-default mt-20">
+                                        <div class="panel panel-default mt-20 releted__products-panel">
                                             <div class="panel-heading d-flex justify-content-between align-items-center">
                                         <span>
                                             Related Products
@@ -90,12 +90,15 @@
                                                 <button type="button" class="btn btn-info select-products">Select</button>
                                             </div>
                                             <div class="panel-body product-body">
-                                                <ul class="get-all-attributes-tab">
+                                                <ul class="get-all-attributes-tab row">
                                                     @if(isset($post) && count($post->stocks))
                                                         @foreach($post->stocks as $stock)
                                                             <li style="display: flex" data-id="{{ $stock->id }}"
                                                                 class="option-elm-attributes">
-                                                                <a href="#">{!! $stock->name !!}</a>
+                                                                <a href="#">
+                                                                    <span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+                                                                    <span>{!! $stock->name !!}</span>
+                                                                </a>
                                                                 <div class="buttons">
                                                                     <a href="javascript:void(0)"
                                                                        class="remove-all-attributes btn btn-sm btn-danger">
@@ -448,13 +451,17 @@
                 let id = $(this).data("id");
                 let name = $(this).data("name");
                 $(".get-all-attributes-tab")
-                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
-                                href="#">${name}</a>
+                    .append(`<li  data-id="${id}" class="option-elm-attributes col-md-3"><div class="wrap-item"><a
+                                href="#">
+<span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+<span class="name">${name}</span>
+
+                                </a>
                                 <div class="buttons">
                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                                 <input type="hidden" name="stocks[]" value="${id}">
-                                </li>`);
+                                </div></li>`);
                 $(this)
                     .parent()
                     .remove();
