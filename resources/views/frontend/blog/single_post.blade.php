@@ -289,69 +289,129 @@
                     </div>
                     <!--Comments-->
                     <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr mb-4">Comments</h5>
-
-                    <div class="comments-wrapper">
-                        @if($post->comment_enabled)
-                            <div class="comment-list">
-                                <h2>Comments</h2>
-                                <div class="divider"></div>
-
-                                <div class="user-add-comment mt-md-5 my-4">
-                                    <div class="row">
-                                        <div class="col-sm-1">
-                                            <div class="user-img">
-                                                <img src="/public/images/male.png" alt="">
+<div class="row">
+    <div class="col-md-9">
+        <div class="comments-wrapper">
+            @if($post->comment_enabled)
+                <div class="comment-list comment-list-wrapper">
+                    <div class="user-add-comment">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="add-comment">
+                                    {!! Form::open(['route' => 'comment_create_post']) !!}
+                                    {!! Form::hidden('post_id',$post->id) !!}
+                                    @if(! Auth::check())
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <input name="guest_name" type="text"
+                                                       placeholder="Username">
+                                                <span class="error-box invalid-feedback guest_name"></span>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <input name="guest_email" type="email"
+                                                       placeholder="Email">
+                                                <span class="error-box invalid-feedback guest_email"></span>
                                             </div>
                                         </div>
-                                        <div class="col-sm-11">
-                                            <div class="add-comment">
-                                                {!! Form::open(['route' => 'comment_create_post']) !!}
-                                                {!! Form::hidden('post_id',$post->id) !!}
-                                                @if(! Auth::check())
-                                                    <div class="row">
-                                                        <div class="col-sm-6">
-                                                            <input name="guest_name" type="text"
-                                                                   placeholder="Username">
-                                                            <span class="error-box invalid-feedback guest_name"></span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <input name="guest_email" type="email"
-                                                                   placeholder="Email">
-                                                            <span class="error-box invalid-feedback guest_email"></span>
-                                                        </div>
-                                                    </div>
-                                                @endif
+                                    @endif
 
-                                                <textarea name="comment" id="" rows="0"
-                                                          placeholder="Your comments"></textarea>
-                                                <span class="error-box invalid-feedback comment"></span>
-                                                <div class="row mt-1">
-                                                    <div class="col-sm-6">
-                                                        <button type="button"
-                                                                class="btn btn-outline-warning btn-block cancel-comment">
-                                                            Cancel
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <button type="button"
-                                                                class="btn btn-outline-warning btn-block add-comment-btn">
-                                                            Add
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                {!! Form::close() !!}
-                                            </div>
+                                    <textarea name="comment" id="" rows="0"
+                                              placeholder="Your comments"></textarea>
+                                    <span class="error-box invalid-feedback comment"></span>
+                                    <div class="d-flex button-comment-wrap justify-content-end">
+
+                                        <div class="button-comment">
+                                            <button type="button"
+                                                    class="btn btn-block add-comment-btn">
+                                                <span class="post-title">Post a Comment</span>
+                                                <span class="icon">
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="22px" height="9px">
+<path fill-rule="evenodd"  opacity="0.8" fill="rgb(255, 255, 255)"
+      d="M0.002,5.617 L16.071,5.617 L16.071,9.000 L21.996,4.500 L16.071,0.000 L16.071,3.383 L0.002,3.383 L0.002,5.617 Z"/>
+</svg>
+                                                            </span>
+                                            </button>
                                         </div>
                                     </div>
+                                    {!! Form::close() !!}
                                 </div>
-                                <div class="comments-refresh">
-                                    @include('frontend.blog.single_post_comments')
-                                </div>
-                                <!-- First Comment -->
                             </div>
-                        @endif
+                        </div>
                     </div>
+                    <div class="comments-refresh">
+                        @include('frontend.blog.single_post_comments')
+                    </div>
+                    <!-- First Comment -->
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
 
+                    {{--<div class="comments-wrapper">--}}
+                        {{--@if($post->comment_enabled)--}}
+                            {{--<div class="comment-list">--}}
+                                {{--<h2>Comments</h2>--}}
+                                {{--<div class="divider"></div>--}}
+
+                                {{--<div class="user-add-comment mt-md-5 my-4">--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-sm-1">--}}
+                                            {{--<div class="user-img">--}}
+                                                {{--<img src="/public/images/male.png" alt="">--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-sm-11">--}}
+                                            {{--<div class="add-comment">--}}
+                                                {{--{!! Form::open(['route' => 'comment_create_post']) !!}--}}
+                                                {{--{!! Form::hidden('post_id',$post->id) !!}--}}
+                                                {{--@if(! Auth::check())--}}
+                                                    {{--<div class="row">--}}
+                                                        {{--<div class="col-sm-6">--}}
+                                                            {{--<input name="guest_name" type="text"--}}
+                                                                   {{--placeholder="Username">--}}
+                                                            {{--<span class="error-box invalid-feedback guest_name"></span>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="col-sm-6">--}}
+                                                            {{--<input name="guest_email" type="email"--}}
+                                                                   {{--placeholder="Email">--}}
+                                                            {{--<span class="error-box invalid-feedback guest_email"></span>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                {{--@endif--}}
+
+                                                {{--<textarea name="comment" id="" rows="0"--}}
+                                                          {{--placeholder="Your comments"></textarea>--}}
+                                                {{--<span class="error-box invalid-feedback comment"></span>--}}
+                                                {{--<div class="row mt-1">--}}
+                                                    {{--<div class="col-sm-6">--}}
+                                                        {{--<button type="button"--}}
+                                                                {{--class="btn btn-outline-warning btn-block cancel-comment">--}}
+                                                            {{--Cancel--}}
+                                                        {{--</button>--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="col-sm-6">--}}
+                                                        {{--<button type="button"--}}
+                                                                {{--class="btn btn-outline-warning btn-block add-comment-btn">--}}
+                                                            {{--Add--}}
+                                                        {{--</button>--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                                {{--{!! Form::close() !!}--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--<div class="comments-refresh">--}}
+                                    {{--@include('frontend.blog.single_post_comments')--}}
+                                {{--</div>--}}
+                                {{--<!-- First Comment -->--}}
+                            {{--</div>--}}
+                        {{--@endif--}}
+                    {{--</div>--}}
                 </div>
                 {{--end global block--}}
             </div>
@@ -415,6 +475,7 @@
     <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/plugins/formstone/carousel/carousel.css')}}">
     <link rel="stylesheet" href="{{asset('public/plugins/formstone/light.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/comments.css')}}">
     <style>
 
         #gp-inner-container {
@@ -575,9 +636,8 @@
                 e.preventDefault();
                 $(".user-add-comment-secondry").remove();
                 var parentID = $(this).data('id');
-                var data = '<div class="user-add-comment user-add-comment-secondry w-100 mt-md-5 my-4">\n' +
-                    '                                    <div class="row m-0">\n' +
-                    '                                        <div class="col-sm-12">\n' +
+                var data = '<div class="user-add-comment user-add-comment-secondry w-100">\n' +
+                    '                                        <div class="text-right">\n' +
                     '                                            <div class="add-comment">\n' +
                     '                                            {!! Form::open(["route" => "comment_create_post"]) !!}\n' +
                     '                            {!! Form::hidden("post_id",$post->id) !!}\n' +
@@ -586,27 +646,22 @@
                     '                        <textarea name="comment" id="" rows="0"\n' +
                     '                                  placeholder="Your comments"></textarea>\n' +
                     '                        <span class="error-box invalid-feedback comment"></span>\n' +
-                    '                        <div class="row mt-1">\n' +
-                    '                            <div class="col-sm-6">\n' +
+                    '                        <div class="button-repl">\n' +
                     '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-warning btn-block cancel-reply">\n' +
-                    '                                    Cancel\n' +
+                    '                                        class="btn btn-block add-comment-btn">\n' +
+                    '                                    REPLY\n' +
                     '                                </button>\n' +
-                    '                            </div>\n' +
-                    '                            <div class="col-sm-6">\n' +
-                    '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-warning btn-block add-comment-btn">\n' +
-                    '                                    Add\n' +
-                    '                                </button>\n' +
-                    '                            </div>\n' +
                     '                        </div>\n' +
                     '{!! Form::close() !!}\n' +
                     '                        </div>\n' +
                     '                    </div>\n' +
-                    '                </div>\n' +
                     '            </div>';
-                $(this).closest(".user-comment-img").append(data);
-                $(this).closest(".user-comment-img").addClass("user-commmet-add")
+                $(this).closest(".card.arrow.left").append(data);
+                $('.comments-refresh .user-comment-img').removeClass('user-commmet-add')
+                $(this).closest(".user-comment-img").addClass("user-commmet-add");
+                $('.comments-refresh .btn.reply').removeClass('d-none')
+                $(this).addClass('d-none');
+
 
             })
         });

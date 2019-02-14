@@ -466,7 +466,6 @@ function getUniqueCode($table, $column, $prefix = '')
     return $code;
 }
 
-
 function commentRender($comments, $i = 0, $parent = false)
 {
     if (count($comments)) {
@@ -477,35 +476,35 @@ function commentRender($comments, $i = 0, $parent = false)
         } else {
             echo '<div class="row user-comment-img">';
         }
-
-        echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
+        echo '<div class="d-flex wrap-wall w-100">';
+        echo '<div class="left-photo hidden-xsd-none d-sm-block">';
         echo '<figure class="thumbnail">';
-        echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
-        if ($comment->author) {
-            if ($comment->author->isAdministrator()) {
-                echo '<figcaption class="text-center">Admin</figcaption>';
-            } else {
-                echo '<figcaption class="text-center">' . $comment->author->username . '</figcaption>';
-            }
-        } else {
-            echo '<figcaption class="text-center">' . $comment->guest_name . '</figcaption>';
-        }
-
+        echo '<img class="img-fluid" src="/public/img/user.svg">';
         echo '</figure>';
         echo '</div>';
 
 
-        echo '<div class="col-lg-10 col-md-10">';
+        echo '<div class="right-comments">';
         echo '<div class="card arrow left mb-4">';
         echo '<div class="card-body">';
         echo '<header class="text-left">';
-        echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
-        echo '<time class="comment-date" datetime="' . $comment->created_at . '"><i class="fa fa-clock-o"></i> ' . time_ago($comment->created_at) . '</time>';
+        echo '<div class="comment-user">';
+        if ($comment->author) {
+            if ($comment->author->isAdministrator()) {
+                echo '<span class="text-center">Admin</span>';
+            } else {
+                echo '<span class="text-center">' . $comment->author->username . '</span>';
+            }
+        } else {
+            echo '<span class="text-center">' . $comment->guest_name . '</span>';
+        }
+        echo '</div>';
         echo '</header>';
         echo '<div class="comment-post">';
         echo '<p>' . $comment->comment . '</p>';
         echo '</div>';
-        echo '<p class="text-right"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
+        echo '</div>';
+        echo '<div class="text-right reply-wrapper"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a></div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -521,6 +520,61 @@ function commentRender($comments, $i = 0, $parent = false)
         }
     }
 }
+
+//function commentRender($comments, $i = 0, $parent = false)
+//{
+//    if (count($comments)) {
+//        $comment = $comments[$i];
+//        //render main content
+//        if ($parent) {
+//            echo '<div class="row user-comment-img sub pl-4 w-100 m-0">';
+//        } else {
+//            echo '<div class="row user-comment-img">';
+//        }
+//
+//        echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
+//        echo '<figure class="thumbnail">';
+//        echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
+//        if ($comment->author) {
+//            if ($comment->author->isAdministrator()) {
+//                echo '<figcaption class="text-center">Admin</figcaption>';
+//            } else {
+//                echo '<figcaption class="text-center">' . $comment->author->username . '</figcaption>';
+//            }
+//        } else {
+//            echo '<figcaption class="text-center">' . $comment->guest_name . '</figcaption>';
+//        }
+//
+//        echo '</figure>';
+//        echo '</div>';
+//
+//
+//        echo '<div class="col-lg-10 col-md-10">';
+//        echo '<div class="card arrow left mb-4">';
+//        echo '<div class="card-body">';
+//        echo '<header class="text-left">';
+//        echo '<div class="comment-user"><i class="fa fa-user"></i> That Guy</div>';
+//        echo '<time class="comment-date" datetime="' . $comment->created_at . '"><i class="fa fa-clock-o"></i> ' . time_ago($comment->created_at) . '</time>';
+//        echo '</header>';
+//        echo '<div class="comment-post">';
+//        echo '<p>' . $comment->comment . '</p>';
+//        echo '</div>';
+//        echo '<p class="text-right"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply"><i class="fa fa-reply"></i> reply</a></p>';
+//        echo '</div>';
+//        echo '</div>';
+//        echo '</div>';
+//
+//        if (count($comment->children)) {
+//            commentRender($comment->children, 0, true);
+//        }
+//
+//        echo '</div>';
+//        $i = $i + 1;
+//        if ($i != count($comments)) {
+//            commentRender($comments, $i, $parent);
+//        }
+//    }
+//}
 
 
 function replyRender($replies, $i = 0, $parent = false)
