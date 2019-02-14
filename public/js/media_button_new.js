@@ -136,6 +136,8 @@ var elem = data.map((el) => {
                         extensions: ["edit", "filter"],
                         source: elem,
                         selectMode: 1,
+                        generateIds: false, // Generate id attributes like <span id='fancytree-id-KEY'>
+                        idPrefix: "ft_",
                         activate: function(event, data){
                             // A node is about to be selected: prevent this, for folder-nodes:
                             if( data.node.isFolder() ){
@@ -822,6 +824,7 @@ var elem = data.map((el) => {
             let inputElement = document.querySelector(".new-folder-input");
             let name = inputElement.value;
             var x = $("#folder-list").fancytree("getTree");
+
             // console.log(globalFolderId);
             // console.log(x)
             // x.getNodeByKey(globalFolderId.toString()).addChildren({
