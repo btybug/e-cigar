@@ -252,7 +252,7 @@
     {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
     {{--{!! Html::script("public/js/media_button.js") !!}--}}
     {!! Html::script("public/js/media_button_new.js?v=".rand(999,99999)) !!}
-    {{--{!! Html::script("public/js/bundle/media.js",['type' => 'module']) !!}--}}
+{{--    {!! Html::script("public/js/bundle/media.js",['type' => 'module']) !!}--}}
 
     <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 

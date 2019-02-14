@@ -129,10 +129,12 @@ function App() {
 
             $('document').ready(
                 function() {
-
+var elem = data.map((el) => {
+    return {key: el.id, ...el};
+})
                     $("#folder-list").fancytree({
                         extensions: ["edit", "filter"],
-                        source: data,
+                        source: elem,
                         selectMode: 1,
                         activate: function(event, data){
                             // A node is about to be selected: prevent this, for folder-nodes:
@@ -141,6 +143,23 @@ function App() {
                             }
                         }
                     });
+
+                    var tree = $("#folder-list").fancytree("getTree");
+                    console.log(elem, tree, tree.getRootNode())
+
+
+
+                    // Sort children of active node:
+
+                    // Expand all tree nodes
+                    // tree.visit(function(node){
+                    //     node.setExpanded(true);
+                    // });
+                    // // Append a new child node
+                    // activeNode.appendChildren({
+                    //     title: "Document using a custom icon",
+                    //     folder: true
+                    // });
                 });
         },
         makeBreadCrumbsItem(item) {
@@ -624,7 +643,7 @@ function App() {
                 files: true,
                 access_token: "string"
             },
-            tree = true,
+            tree = false,
             cb
         ) {
             shortAjax("/api/api-media/get-folder-childs", obj, res => {
@@ -709,7 +728,7 @@ function App() {
     };
 
     this.getInitailData = function() {
-        this.requests.drawingItems();
+        this.requests.drawingItems(undefined, true);
     };
     this.init = function() {
         $("#uploader")
@@ -729,7 +748,7 @@ function App() {
                 $("#uploader").fileinput("upload");
             })
             .on("filebatchuploadsuccess", function(event, files) {
-                self.requests.drawingItems();
+                self.requests.drawingItems(undefined, true);
                 self.helpers.showUploaderContainer();
                 $("#uploader").fileinput("clear");
             });
@@ -795,15 +814,24 @@ function App() {
         add_new_folder(elm, e) {
             let inputElement = document.querySelector(".new-folder-input");
             let name = inputElement.value;
+            var x = $("#folder-list").fancytree("getTree");
+            console.log(globalFolderId);
+            console.log(x)
+            x.getNodeByKey(globalFolderId.toString()).addChildren({
+                folder: true,
+                title: name,
+                text: name
+            })
             self.requests.addNewFolder(
                 {
                     folder_id: globalFolderId,
                     folder_name: name,
                     access_token: "string"
                 },
-                true
+                false
             );
             inputElement.value = '';
+
         },
         open_full_modal(elm, e) {
             e.stopPropagation();
