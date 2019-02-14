@@ -1464,13 +1464,25 @@ header .search-icon-mobile {
 .news-inner-wrapper .news-share li a {
     border: 1px solid #d7d7d7;
     padding: 15px;
-    color: #353535;
+    color: #fff;
+    font-size: 18px;
 }
 
 .news-inner-wrapper .news-share li a:hover {
-    color: #5184e5;
+    color: #ffffff;
 }
-
+.news-inner-wrapper .news-share .instagram-bg{
+    background-color: #e4405f;
+}
+.news-inner-wrapper .news-share .facebook-bg{
+    background-color: #3b5999;
+}
+.news-inner-wrapper .news-share .twitter-bg{
+    background-color: #55acee;
+}
+.news-inner-wrapper .news-share .plus-bg{
+    background-color: #5184e5;
+}
 .news-inner-wrapper .tabs-wrap .nav-link {
     color: #bdc1c9;
 }

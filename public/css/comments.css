@@ -45,6 +45,7 @@
     -moz-border-radius: 50%;
     border-radius: 50%;
     overflow: hidden;
+    margin-bottom: 0;
 }
 .comment-list-wrapper .thumbnail img {
     width: auto;
@@ -65,6 +66,7 @@
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 0 !important;
 }
 
 .comment-list-wrapper .card-body {
@@ -134,8 +136,15 @@
 .comment-list-wrapper .user-comment-img {
     margin-top: 48px;
     display: flex;
+    margin-left: 0;
+    margin-right: 0;
 }
-
+.comment-list-wrapper .wrap-wall{
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 0 4px #ccc;
+    margin-top: 5px;
+}
 .comment-list-wrapper .user-comment-img.sub {
     position: relative;
     margin-left: 120px !important;
