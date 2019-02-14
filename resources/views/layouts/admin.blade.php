@@ -74,7 +74,7 @@
 
 <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-    @include('admin._partials.content_header')
+
         <!-- Content Header (Page header) -->
         <section class="content-header">
             @if ($errors->any())

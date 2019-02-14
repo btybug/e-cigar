@@ -794,6 +794,8 @@ textarea {
 .profile-header {
     position: relative;
     overflow: hidden;
+    margin-bottom: 30px;
+    margin-top: 20px;
 }
 .profile-header .profile-header-cover {
     background-size: cover;
