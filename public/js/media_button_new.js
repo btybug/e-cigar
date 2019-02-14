@@ -711,6 +711,13 @@ var elem = data.map((el) => {
                 }
             });
         },
+        removeImage(obj = {}, cb) {
+            shortAjax("/api/api-media/get-remove-item", obj, res => {
+                if (!res.error) {
+                    self.requests.drawingItems();
+                }
+            });
+        },
         addNewFolder(obj = {}, cb) {
             shortAjax("/api/api-media/get-create-folder-child", obj, res => {
                 if (!res.error) {
@@ -861,8 +868,8 @@ var elem = data.map((el) => {
                         Number(countId)
                     );
 
-                return $('body').append(html);
-            });
+                    return $('body').append(html);
+                });
             } else if (e.type === "click") {
                 e.target.closest(".file-box").classList.toggle("active");
             }
@@ -887,13 +894,12 @@ var elem = data.map((el) => {
             e.preventDefault();
             e.stopPropagation();
             let id = e.target.closest(".file").getAttribute("data-id");
-            self.requests.transferImage(
+            self.requests.removeImage(
                 {
                     item_id: Number(id),
-                    folder_id: 2,
+                    trash: true,
                     access_token: "string"
-                },
-                false
+                }
             );
         },
         edit_image(elm, e) {
