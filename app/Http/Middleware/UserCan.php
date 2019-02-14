@@ -16,8 +16,8 @@ class UserCan
     public function handle($request, Closure $next)
     {
         $role=\Auth::user()->role;
-        if($role->slug!='superadmin' && !$role->hasAccess(\Request::route()->getName())){
-            abort('404','Access Denied');
+        if($role->slug!='superadmin' && $role=='admin_dashboard' &&!$role->hasAccess(\Request::route()->getName())){
+            abort('401','Access Denied');
         }
         return $next($request);
     }

@@ -32,7 +32,12 @@ class Roles extends Model
 
     public function hasAccess($route)
     {
-        return $this->permissions()->where('slug',$route)->exists();
+        $permissions=$this->permissions()->pluck('slug');
+        foreach ($permissions as $permission){
+            $config=config('permissions.'.$permission,[]);
+            if(in_array($route,$config))return true;
+        }
+       return false;
     }
 
     public function users()

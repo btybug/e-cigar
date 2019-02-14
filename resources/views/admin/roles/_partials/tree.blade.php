@@ -28,7 +28,7 @@ if(!isset($role))$role=null;
                         <tr>
 
                             <td>{!! $item['name'] !!}</td>
-                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'routes'))checked @endif></td>
+                            <td><input name="permission[]" value="{!! $key.'.'.$sub.'.routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.routes'))checked @endif></td>
                             <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.edit.routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.children.edit.routes'))checked @endif></td>
                             <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.create.routes' !!}" type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.children.create.routes'))checked @endif></td>
                             <td><input name="permission[]" value="{!! $key.'.'.$sub.'.children.delete.routes' !!} " type="checkbox" @if(has_permission($role,$key.'.'.$sub.'.children.delete.routes'))checked @endif></td>
