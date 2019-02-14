@@ -25,8 +25,11 @@ mix.babel([
                 'public/js/login.js',
                 'public/js/adult.js'
             ], 'public/js/bundle/bundle.js')
+    // .babel([
+    //     'public/js/media_button_new.js'
+    // ], 'public/js/bundle/media.js')
     .babel([
-        'public/plugins/formstone/core.js',
+        'public/js/bootstrap-fileinput/js/fileinput.min.js',
         'public/plugins/formstone/mediaquery.js',
         'public/plugins/formstone/touch.js',
         'public/plugins/formstone/carousel/carousel.js',
