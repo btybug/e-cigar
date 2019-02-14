@@ -1337,8 +1337,30 @@ tr.notification-is_read {
     padding: 0;
 }
 
-
-
+.releted-products-add-modal .all-list{
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+.releted-products-add-modal .option-elm-modal{
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    margin-right: 15px;
+    box-shadow: 0 0 4px #888;
+    margin-bottom: 7px;
+    flex: auto;
+}
+.releted-products-add-modal .option-elm-modal a:first-of-type{
+    padding: 0 6px;
+    color: #000;
+    text-transform: uppercase;
+}
+.releted-products-add-modal .option-elm-modal .add-attribute-event{
+    margin-left: auto;
+}
 
 
 

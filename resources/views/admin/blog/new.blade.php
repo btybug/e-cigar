@@ -87,7 +87,7 @@
                                         <span>
                                             Related Products
                                         </span>
-                                                <button type="button" class="btn btn-info select-products">Select</button>
+                                                <button type="button" class="btn btn-info select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
                                             </div>
                                             <div class="panel-body product-body">
                                                 <ul class="get-all-attributes-tab row">
@@ -385,8 +385,8 @@
 
     </div>
 
-    <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
+    <div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -394,15 +394,13 @@
                     <h4 class="modal-title">Select products</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="all-list">
-                        <ul>
+                    <ul class="all-list">
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                </div>
+                {{--<div class="modal-footer">--}}
+                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>--}}
+                {{--</div>--}}
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
