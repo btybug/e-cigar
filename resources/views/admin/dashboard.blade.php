@@ -106,9 +106,10 @@
                     @endif
                 @endforeach
             </div>
+            <button class="btn btn-warning close-widget-modal">CLOSE</button>
         </div>
 
-        <button class="btn btn-warning close-widget-modal">CLOSE</button>
+
     </div>
 @stop
 @section('css')
