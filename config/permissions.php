@@ -560,13 +560,13 @@ return [
         ],
         'stickers' =>
             [
-            'name' => 'Statuses',
-            'routes' => ['admin_tools_stickers','admin_tools_stickers_manage','admin_tools_stickers_manage_form','admin_tools_stickers_all_post'],
-            'description' => 'Able to see/edit stickers',
-            'children' => [
-            ],
+                'name' => 'Statuses',
+                'routes' => ['admin_tools_stickers', 'admin_tools_stickers_manage', 'admin_tools_stickers_manage_form', 'admin_tools_stickers_all_post'],
+                'description' => 'Able to see/edit stickers',
+                'children' => [
+                ],
 
-        ],
+            ],
 
     ],
     'emails_notifications' => [
@@ -759,6 +759,48 @@ return [
             ],
             'description' => 'Able to see Events',
             'children' => [],
+
+        ],
+
+    ],
+    'manage_api' => [
+        'manage_api' => [
+            'name' => 'Manage Api',
+            'routes' => [
+                'admin_manage_api'
+            ],
+            'description' => 'Able to see media',
+            'children' => [
+                'edit' => [
+                    'name' => 'Create Post',
+                    'routes' => [
+                        'post_admin_manage_api',
+                        'post_admin_manage_api_settings',
+                    ],
+                    'description' => '',
+                ],
+            ],
+
+        ],
+        'products' => [
+            'name' => 'Products Api',
+            'routes' => [
+                'admin_manage_api_all_products','admin_manage_api_products'
+            ],
+            'description' => 'Able to see media',
+            'children' => [
+            ],
+
+        ],
+        'items' => [
+            'name' => 'items Api',
+            'routes' => [
+                'admin_manage_api_items',
+                'admin_manage_api_all_items'
+            ],
+            'description' => 'Able to see media',
+            'children' => [
+            ],
 
         ],
 

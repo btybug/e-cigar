@@ -56,6 +56,7 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::get('/payment-gateways/cash', 'Admin\SettingsController@getStorePaymentsGatewaysCash')->name('admin_payment_gateways_cash');
         Route::post('/payment-gateways/cash', 'Admin\SettingsController@postStorePaymentsGatewaysCash')->name('post_admin_payment_gateways_cash');
+
         Route::group(['prefix' => 'shipping'], function () {
             Route::get('/', 'Admin\SettingsController@getGeoZones')->name('admin_settings_shipping');
             Route::get('/new/{id?}', 'Admin\SettingsController@geoZoneForm')->name('admin_settings_geo_zones_new');
@@ -63,6 +64,13 @@ Route::group(['prefix' => 'settings'], function () {
             Route::post('/search-payment-options', 'Admin\SettingsController@searchPaymentOptions')->name('admin_settings_search-payment-options');
             Route::post('/search-find-region', 'Admin\SettingsController@findRegion')->name('admin_settings_search-find-region');
             Route::post('/find-region', 'Admin\SettingsController@findRegion')->name('admin_store_shipping_zone_region_find');
+        });
+        Route::group(['prefix' => 'general'], function () {
+            Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
+            Route::post('/', 'Admin\SettingsController@postStore')->name('post_admin_settings_store');
+            Route::post('/currency-data', 'Admin\SettingsController@currencyData')->name('post_admin_settings_store_currency_data');
+            Route::post('/currency-get-live', 'Admin\SettingsController@currencyGetLive')->name('post_admin_settings_store_currency_get_live');
+
         });
         Route::group(['prefix' => 'tax-rates'], function () {
             Route::get('/', 'Admin\SettingsController@getTaxRates')->name('admin_settings_tax_rates');
@@ -80,13 +88,7 @@ Route::group(['prefix' => 'settings'], function () {
             Route::post('/enable', 'Admin\SettingsController@postCouriersEnable')->name('post_admin_couriers_enable');
         });
         Route::get('/delivery-cost', 'Admin\SettingsController@getDeliveryCost')->name('admin_settings_delivery');
-        Route::group(['prefix' => 'general'], function () {
-            Route::get('/', 'Admin\SettingsController@getStore')->name('admin_settings_store');
-            Route::post('/', 'Admin\SettingsController@postStore')->name('post_admin_settings_store');
-            Route::post('/currency-data', 'Admin\SettingsController@currencyData')->name('post_admin_settings_store_currency_data');
-            Route::post('/currency-get-live', 'Admin\SettingsController@currencyGetLive')->name('post_admin_settings_store_currency_get_live');
 
-        });
         Route::group(['prefix' => 'gifts'], function () {
             Route::get('/', 'Admin\SettingsController@getGifts')->name('admin_settings_store_gifts');
             Route::get('/create-or-update/{id?}', 'Admin\SettingsController@getGiftsManage')->name('admin_settings_store_gifts_manage');
@@ -428,12 +430,15 @@ Route::group(['prefix' => 'media'], function () {
     Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
 });
 Route::group(['prefix' => 'seo'], function () {
+
     Route::get('/', 'Admin\SeoController@getPosts')->name('admin_seo');
     Route::post('/', 'Admin\SeoController@postPosts')->name('post_admin_seo');
+
     Route::get('/stocks', 'Admin\SeoController@getStocks')->name('admin_seo_stocks');
     Route::post('/stocks', 'Admin\SeoController@postStocks')->name('stocks_admin_seo_stocks');
     Route::get('/pages', 'Admin\SeoController@getPages')->name('admin_seo_pages');
     Route::post('/pages', 'Admin\SeoController@postPages')->name('post_admin_seo_pages');
+
     Route::get('/bulk', 'Admin\SeoController@getBulk')->name('admin_seo_bulk');
 
     Route::get('/bulk/edit-post-seo/{id}', 'Admin\SeoController@getBulkEditPost')->name('admin_seo_bulk_edit_post');
