@@ -57,7 +57,7 @@
                     </aside>
                     <div class="panel panel-default">
                         <div class="box-header panel-heading clearfix">
-                            <h2 class="pull-left m-0 lh-1">Most visited pages</h2>
+                            <h3 class="pull-left m-0 lh-1">Most visited pages</h3>
                             <div class="pull-right">
                                 <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
                                     <i class="fa fa-calendar"></i>
@@ -90,7 +90,7 @@
                 <div class="box box-info">
                     <div class="panel panel-default">
                         <div class="box-header panel-heading clearfix">
-                            <h2 class="pull-left m-0 lh-1">Title</h2>
+                            <h3 class="pull-left m-0 lh-1">Title</h3>
                             <div class="pull-right">
                                 <button type="button" class="btn btn-info btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
                                     <i class="fa fa-calendar"></i>
