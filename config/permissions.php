@@ -7,6 +7,24 @@
  */
 
 return [
+    'media' => [
+        'media' => [
+            'name' => 'Media',
+            'routes' => [
+                'admin_media'
+            ],
+            'description' => 'Able to see media',
+            'children' => [
+                'edit' => [
+                    'name' => 'Create Post',
+                    'routes' => ['admin_media_settinds', 'post_admin_media_settings'],
+                    'description' => '',
+                ],
+            ],
+
+        ],
+
+    ],
     'user' => [
         'staff' => [
             'name' => 'staff',
