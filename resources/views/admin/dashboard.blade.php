@@ -10,129 +10,147 @@
     </ol>
 @stop
 @section('content')
-    <div class="col-xs-12">
+    <div class="row">
+        <div class="col-xs-12">
 
-        <div class="profile-header">
+            <div class="profile-header">
 
-            <div class="profile-header-cover"></div>
+                <div class="profile-header-cover"></div>
 
-            <div class="profile-header-content">
+                <div class="profile-header-content">
 
-                <div class="profile-header-img">
-                    <img src="{!! user_avatar() !!}" class="user-image" alt="User Image">
+                    <div class="profile-header-img">
+                        <img src="{!! user_avatar() !!}" class="user-image" alt="User Image">
+                    </div>
+
+                    <div class="profile-header-info">
+                        <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
+                        <p class="m-b-10">{{ Auth::user()->role->title }}</p>
+                        {{--<a href="#" class="btn btn-xs btn-info">Edit Profile</a>--}}
+                    </div>
+
                 </div>
 
-                <div class="profile-header-info">
-                    <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
-                    <p class="m-b-10">{{ Auth::user()->role->title }}</p>
-                    {{--<a href="#" class="btn btn-xs btn-info">Edit Profile</a>--}}
-                </div>
+                <ul class="profile-header-tab nav nav-tabs">
+                    <li class="nav-item"><a href="{{ route('admin_dashboard') }}" class="nav-link active" >Dashboard</a></li>
+                    <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}" class="nav-link ">Profile</a></li>
+                </ul>
 
             </div>
 
-            <ul class="profile-header-tab nav nav-tabs">
-                <li class="nav-item"><a href="{{ route('admin_dashboard') }}" class="nav-link active" >Dashboard</a></li>
-                <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}" class="nav-link ">Profile</a></li>
-            </ul>
-
+            <div class="text-right mb-20">
+                <button class="btn btn-info open_dashboard_widget">Add new Widget</button>
+            </div>
         </div>
 
-        <div class="text-right mb-20">
-            <button class="btn btn-info open_dashboard_widget">Add new Widget</button>
-        </div>
     </div>
 
-    <div class="col-md-12">
-        <aside class="Header-auth" id="header-auth">
-            <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
-            </div>
-        </aside>
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h2 class="pull-left m-0 lh-1">Most visited pages</h2>
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
-                        <i class="fa fa-calendar"></i>
-                    </button>
-                    <span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+    <div class="connectedSortable">
+        <!-- sortable item -->
+        <!-- analytics -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <aside class="Header-auth" id="header-auth">
+                        <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
+                        </div>
+                    </aside>
+                    <div class="panel panel-default">
+                        <div class="box-header panel-heading clearfix">
+                            <h2 class="pull-left m-0 lh-1">Most visited pages</h2>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                                <span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
                         <button type="button" class="btn btn-for-widget btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-pie" >
                             <i class="fa fa-minus"></i></button>
                     </span>
 
-                </div>
-            </div>
-            <div id="collapseWidget-pie" class="panel-body collapse in" aria-expanded="true">
-                <div class="Dashboard Dashboard--full">
-                    <ul class="FlexGrid">
-                        <li class="FlexGrid-item">
-                            <div id="data-chart-3-container">
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                        <div id="collapseWidget-pie" class="panel-body collapse in" aria-expanded="true">
+                            <div class="Dashboard Dashboard--full">
+                                <ul class="FlexGrid">
+                                    <li class="FlexGrid-item">
+                                        <div id="data-chart-3-container">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h2 class="pull-left m-0 lh-1">Title</h2>
-                <div class="pull-right">
-                    <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
-                        <i class="fa fa-calendar"></i>
-                    </button>
-                    <span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
-                        <button type="button" class="btn btn-for-widget btn-primary btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-1" >
+        <!-- sortable item -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-info">
+                    <div class="panel panel-default">
+                        <div class="box-header panel-heading clearfix">
+                            <h2 class="pull-left m-0 lh-1">Title</h2>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-info btn-sm daterange pull-right" data-toggle="tooltip" title="" data-original-title="Date range">
+                                    <i class="fa fa-calendar"></i>
+                                </button>
+                                <span class="d-inline-block mr-10" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                        <button type="button" class="btn btn-for-widget btn-info btn-sm pull-right" data-toggle="collapse" data-target="#collapseWidget-2" >
                             <i class="fa fa-minus"></i></button>
                     </span>
 
-                </div>
-            </div>
-            <div id="collapseWidget-1" class="panel-body collapse in" aria-expanded="true">
-                <div class="Dashboard Dashboard--full">
-                    <header class="Dashboard-header">
-                        <div class="Titles">
-                            <h1 class="Titles-main" id="view-name">{!! env('SITE_NAME') !!} (All Web Site Data)</h1>
-                            <div class="Titles-sub">Comparing sessions from
-                                <b id="from-dates">last week</b>
-                                to <b id="to-dates">this week</b>
                             </div>
                         </div>
-                        <div id="view-selector-container"></div>
-                    </header>
+                        <div id="collapseWidget-2" class="panel-body collapse in" aria-expanded="true">
+                            <div class="Dashboard Dashboard--full">
+                                <header class="Dashboard-header">
+                                    <div class="Titles">
+                                        <h1 class="Titles-main" id="view-name">{!! env('SITE_NAME') !!} (All Web Site Data)</h1>
+                                        <div class="Titles-sub">Comparing sessions from
+                                            <b id="from-dates">last week</b>
+                                            to <b id="to-dates">this week</b>
+                                        </div>
+                                    </div>
+                                    <div id="view-selector-container"></div>
+                                </header>
 
-                    <ul class="FlexGrid">
-                        <li class="FlexGrid-item">
-                            <div id="data-chart-1-container">
-                            </div>
-                            <div id="date-range-selector-1-container">
-                            </div>
+                                <ul class="FlexGrid">
+                                    <li class="FlexGrid-item">
+                                        <div id="data-chart-1-container">
+                                        </div>
+                                        <div id="date-range-selector-1-container">
+                                        </div>
 
-                        </li>
-                        <li class="FlexGrid-item">
-                            <div id="data-chart-2-container">
+                                    </li>
+                                    <li class="FlexGrid-item">
+                                        <div id="data-chart-2-container">
+                                        </div>
+                                        <div id="date-range-selector-2-container"></div>
+                                    </li>
+                                    <li class="FlexGrid-item">
+                                        <div id="data-chart-3-container">
+                                        </div>
+                                        <div id="date-range-selector-3-container"></div>
+                                    </li>
+                                </ul>
                             </div>
-                            <div id="date-range-selector-2-container"></div>
-                        </li>
-                        <li class="FlexGrid-item">
-                            <div id="data-chart-3-container">
+                            <div class="Dashboard Dashboard--full">
+
+                                <ul class="FlexGrid">
+                                    <li class="FlexGrid-item">
+                                        <div id="data-chart-4-container">
+                                        </div>
+                                        <div id="date-range-selector-4-container"></div>
+                                    </li>
+                                </ul>
                             </div>
-                            <div id="date-range-selector-3-container"></div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="Dashboard Dashboard--full">
 
-                    <ul class="FlexGrid">
-                        <li class="FlexGrid-item">
-                            <div id="data-chart-4-container">
-                            </div>
-                            <div id="date-range-selector-4-container"></div>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
-
     </div>
 
 
@@ -561,7 +579,7 @@
 
         {{--widget btn--}}
         $('.btn-for-widget').on('click', function () {
-            $(this).find($('i').toggleClass('fa-plus fa-minus'));
+            $(this).find('i').toggleClass('fa-plus fa-minus');
         })
     </script>
     <script>

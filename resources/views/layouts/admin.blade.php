@@ -121,7 +121,7 @@
   </footer>
 
   <!-- Control Sidebar -->
-@include('admin._partials.right_sidebar')
+{{--@include('admin._partials.right_sidebar')--}}
 <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
