@@ -1314,6 +1314,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background: #e8e7ed;
 }
 
+.table-ntfs td,
+.table-ntfs th {
+    white-space: nowrap;
+}
+
 .profile-status-wrap {
     padding: 15px;
 }

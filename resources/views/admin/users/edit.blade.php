@@ -21,14 +21,18 @@
                     <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
                 </div>
-                {{--<div class="dropdown pull-right">--}}
-                    {{--<button class="btn btn-primary"><i class="fa fa-plus mr-10"></i>Create new</button>--}}
-                    {{--<ul class="dropdown-menu">--}}
-                        {{--<li>--}}
-                            {{--<a href=""></a>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
+                <div class="dropdown pull-right">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i>Create new</button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{!! route('admin_staff_new') !!}">Staff</a>
+                            <a href="#">Customer</a>
+                            <a href="#">Product</a>
+                            <a href="#">Item</a>
+                            <a href="#">Post</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
         </div>

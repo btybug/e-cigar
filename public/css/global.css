@@ -291,9 +291,21 @@ textarea {
     overflow-y: auto;
 }
 
-.main-scrollbar::-webkit-scrollbar {  width: 5px;}
-.main-scrollbar::-webkit-scrollbar-track {  background: #ebeef4; }
-.main-scrollbar::-webkit-scrollbar-thumb {  background: #9cbcf9; }
+.main-scrollbar::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    height: 3px;
+    width: 5px;
+}
+
+.main-scrollbar::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+    background: #ebeef4;
+}
+
+.main-scrollbar::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #9cbcf9;
+}
 
 body::-webkit-scrollbar {  width: 5px;}
 body::-webkit-scrollbar-track {  background: #ebeef4; }

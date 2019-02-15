@@ -13218,9 +13218,21 @@ textarea {
     overflow-y: auto;
 }
 
-.main-scrollbar::-webkit-scrollbar {  width: 5px;}
-.main-scrollbar::-webkit-scrollbar-track {  background: #ebeef4; }
-.main-scrollbar::-webkit-scrollbar-thumb {  background: #9cbcf9; }
+.main-scrollbar::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    height: 3px;
+    width: 5px;
+}
+
+.main-scrollbar::-webkit-scrollbar-track,
+.table-responsive::-webkit-scrollbar-track {
+    background: #ebeef4;
+}
+
+.main-scrollbar::-webkit-scrollbar-thumb,
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #9cbcf9;
+}
 
 body::-webkit-scrollbar {  width: 5px;}
 body::-webkit-scrollbar-track {  background: #ebeef4; }
@@ -17274,6 +17286,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background: #e8e7ed;
 }
 
+.table-ntfs td,
+.table-ntfs th {
+    white-space: nowrap;
+}
+
 .profile-status-wrap {
     padding: 15px;
 }
@@ -19007,6 +19024,8 @@ a:hover {
     height: 300px;
     object-fit: cover;
 }
+
+
 /*responsive*/
 @media (max-width: 1680px) {
     .header-navbar-nav .nav-item {
@@ -19173,10 +19192,7 @@ a:hover {
     }
 }
 
-/*hovers*/
-@media (min-width: 768px) {
 
-}
 
 
 
