@@ -3,6 +3,7 @@
         {!! Form::model($model,['url'=>route('admin_tools_stickers_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
         @if(count(get_languages()))
+            <div class="head-space-between">
             <ul class="nav nav-tabs">
                 @foreach(get_languages() as $language)
                     <li class="@if($loop->first) active @endif"><a data-toggle="tab"
@@ -11,6 +12,8 @@
                         </a></li>
                 @endforeach
             </ul>
+                {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+            </div>
         @endif
         <div class="tab-content">
             @if(count(get_languages()))
@@ -60,7 +63,7 @@
             </div>
         </div>
         <div class="form-group">
-            {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+
         </div>
 
         {!! Form::close() !!}
