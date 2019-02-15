@@ -136,9 +136,9 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <a href="#" class="btn btn-warning pull-right">Create Email</a>
-        </div>
+        {{--<div class="form-group">--}}
+            {{--<a href="#" class="btn btn-warning pull-right">Create Email</a>--}}
+        {{--</div>--}}
 
         {!! Form::close() !!}
 
