@@ -112,13 +112,14 @@
   @include('media.modal')
 @endif
 <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> beta
-    </div>
-    <strong>Copyright &copy; 2017-{{ date('Y') }} <a href="http://hook.am">HooK LLC</a>.</strong> All rights
-    reserved.
-  </footer>
+
+  {{--<footer class="main-footer">--}}
+    {{--<div class="pull-right hidden-xs">--}}
+      {{--<b>Version</b> beta--}}
+    {{--</div>--}}
+    {{--<strong>Copyright &copy; 2017-{{ date('Y') }} <a href="http://hook.am">HooK LLC</a>.</strong> All rights--}}
+    {{--reserved.--}}
+  {{--</footer>--}}
 
   <!-- Control Sidebar -->
 {{--@include('admin._partials.right_sidebar')--}}
