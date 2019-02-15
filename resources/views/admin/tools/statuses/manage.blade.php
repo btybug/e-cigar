@@ -8,7 +8,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                     <div class="head-space-between">
-                        <h2>Order Status</h2>
+                        <h2>{!! ucfirst(str_replace("_"," ",$type)) !!} Status</h2>
                         <div class="form-group row bord-top">
                             {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
                             <input name="type" type="hidden" value="{!! $type !!}">
