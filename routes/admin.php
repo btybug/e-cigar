@@ -143,6 +143,9 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
     Route::get('/edit-staff/{id}', 'Admin\UserController@editStaff')->name('admin_staff_edit');
 
+    Route::post('/delete', 'Admin\UserController@delete')->name('admin_users_delete');
+    Route::post('/delete-staff', 'Admin\UserController@deleteStaff')->name('admin_staff_delete');
+
     Route::post('/address-book-form', 'Admin\UserController@postAddressBookForm')->name('admin_users_address_book_form');
     Route::post('/save-address-book', 'Admin\UserController@postAddressBookSave')->name('admin_users_address_book_save');
     Route::post('/address', 'Admin\UserController@postAddress')->name('admin_users_address');

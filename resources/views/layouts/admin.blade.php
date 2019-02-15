@@ -111,6 +111,8 @@
 @if(is_enabled_media_modal())
   @include('media.modal')
 @endif
+
+@include('_partials.delete_modal')
 <!-- /.content-wrapper -->
 
   {{--<footer class="main-footer">--}}
@@ -226,6 +228,42 @@
       }
     });
   };
+
+  let openDeleteModal = function ($_this) {
+      $('#item_modal_delete_button').attr('data-slug', $_this.data('key')).attr('data-url', $_this.data('href'));
+      if($_this.data('type')){
+          $('#delete_item_label').html('Delete ' + $_this.data('type'));
+      }
+      $('#delete_item').modal('show');
+  };
+
+  $('body').on('click', '.delete-button', function () {
+      openDeleteModal($(this));
+  });
+
+  $('body').on('click', '#item_modal_delete_button', function () {
+      var item = $(this);
+      $.ajax({
+          url: item.data('url'),
+          type: 'POST',
+          dataType: 'JSON',
+          headers: {
+              'X-CSRF-TOKEN': $("input[name='_token']").val()
+          },
+          data: {
+              slug: item.data('slug')
+          }
+      }).done(function (data) {
+          if (data.success) {
+              if (typeof data.url != 'undefined') {
+                  window.location.href = data.url;
+              }
+              location.reload();
+          }
+      }).fail(function (data) {
+          alert('Could not delete item. Please try again.');
+      });
+  });
 </script>
 
 

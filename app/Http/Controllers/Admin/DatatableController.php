@@ -54,7 +54,8 @@ class DatatableController extends Controller
             ->whereNull('role_id')
             ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
-                return '<div class="users-table--td-btn"><a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
+                return '<div class="users-table--td-btn"><a href="javascript:void(0)" data-href="'.route("admin_users_delete").'" 
+                class="delete-button btn btn-danger" data-key="' . $user->id . '">Delete</a>
                     <a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
                     <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info"><i class="fa fa-eye"></i>Activity</a></div>
                     ';
