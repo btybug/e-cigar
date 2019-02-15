@@ -433,7 +433,7 @@ return [
 
     ],
     'tools' => [
-        'Tools' => [
+        'tools' => [
             'name' => 'Tools',
             'routes' => ['admin_tools'],
             'description' => 'Able to see blog page',
@@ -487,7 +487,7 @@ return [
             'description' => 'Able to statuses',
             'children' => [
                 'edit' => [
-                    'name' => 'Edit category',
+                    'name' => 'Edit Status',
                     'routes' => ['admin_stock_statuses_manage', 'post_admin_stock_statuses_manage', 'post_admin_stock_statuses_manage_form'],
                     'description' => 'Able to Edit status',
                 ],
@@ -539,49 +539,82 @@ return [
                     'description' => 'View orders related to items',
                 ]
             ],
-        ]
+        ],
+        'stickers' =>
+            [
+            'name' => 'Statuses',
+            'routes' => ['admin_tools_stickers','admin_tools_stickers_manage','admin_tools_stickers_manage_form','admin_tools_stickers_all_post'],
+            'description' => 'Able to see/edit stickers',
+            'children' => [
+            ],
+
+        ],
+
+    ],
+    'emails_notifications' => [
+        'emails' => [
+            'name' => 'Email Templates',
+            'routes' => ['admin_emails_notifications_emails'],
+            'description' => 'Able to see blog page',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit Email Template',
+                    'routes' => ['admin_mail_create_templates', 'post_admin_mail_create_templates'],
+                    'description' => 'Able to Edit status',
+                ],
+            ],
+
+        ],
+        'newsletters' => [
+            'name' => 'Newsletters',
+            'routes' => ['admin_emails_newsletters'],
+            'description' => 'Able to see blog page',
+            'children' => [
+                'delete' => [
+                    'name' => 'Delete newsletters',
+                    'routes' => ['admin_emails_newsletter_delete'],
+                    'description' => 'Delete newsletters',
+                ],
+            ],
+
+        ],
+        'notification' => [
+            'name' => 'Notification',
+            'routes' => ['admin_emails_notifications_send_email'],
+            'description' => 'Notification',
+            'children' => [
+                'create' => [
+                    'name' => 'Create notification',
+                    'routes' => [
+                        'create_admin_emails_notifications_send_email',
+                        'post_create_admin_emails_notifications_send_email',
+                        'post_create_send_admin_emails_notifications_send_email',
+                        'post_create_send_admin_check_category',
+                        'view_admin_emails_notifications_send_email',
+                        'admin_emails_notifications_send_now',
+                    ],
+                    'description' => 'Delete notification',
+                ],
+                'edit' => [
+                    'name' => 'Edit notification',
+                    'routes' => [
+                        'edit_admin_emails_notifications_send_email',
+                        'post_create_admin_emails_notifications_send_email',
+                        'post_create_send_admin_emails_notifications_send_email',
+                        'post_create_send_admin_check_category',
+                        'view_admin_emails_notifications_send_email',
+                        'admin_emails_notifications_send_now',
+                    ],
+                    'description' => 'Delete notification',
+                ],
+                'delete' => [
+                    'name' => 'Delete notification',
+                    'routes' => [],
+                    'description' => 'Delete notification',
+                ],
+            ],
+
+        ],
 
     ],
 ];
-
-//'attributes' => [
-//    'name' => 'Attributes',
-//    'routes' => ['admin_store_attributes'],
-//    'description' => 'Able to see  Attributes',
-//    'children' => [
-//
-//        'create' => [
-//            'name' => 'Create  Attribute',
-//            'routes' => [
-//                'admin_store_attributes_new',
-//                'admin_store_attributes_options_form',
-//                'admin_store_attributes_option_delete',
-//                'admin_store_attributes_options',
-//                'admin_store_attributes_options_by_id',
-//                'admin_store_attributes_options_by_id_autocomplate',
-//                'admin_store_attributes_by_id',
-//                'admin_store_attributes_all_post',
-//                'admin_store_attributes_delete',
-//                'admin_store_attributes_variations_table',
-//            ],
-//            'description' => 'Able to Create Attribute',
-//        ],
-//        'edit' => [
-//            'name' => 'View inventory item purchases',
-//            'routes' => [
-//                'admin_store_attributes_edit',
-//                'admin_store_attributes_post_edit',
-//                'admin_store_attributes_options_form',
-//                'admin_store_attributes_option_delete',
-//                'admin_store_attributes_options',
-//                'admin_store_attributes_options_by_id',
-//                'admin_store_attributes_options_by_id_autocomplate',
-//                'admin_store_attributes_by_id',
-//                'admin_store_attributes_all_post',
-//                'admin_store_attributes_delete',
-//                'admin_store_attributes_variations_table',
-//            ],
-//            'description' => 'View orders related to items',
-//        ]
-//    ],
-//]
