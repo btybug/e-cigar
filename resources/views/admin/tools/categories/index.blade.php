@@ -34,6 +34,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
+        $('body').on('click','.del-save--btn .btn-submit-form',function () {
+           $('.category-form-place .updated-form').submit()
+        })
         $("#select-stickers").select2();
         $("body").on('click','.add-category',function () {
             AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: null}, function (res) {
@@ -114,6 +117,10 @@
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <style>
+        .del-save--btn{
+            display: flex;
+            justify-content: space-between;
+        }
         #font-show-area {
             font-size: 50px;
             margin-top: 15px;
@@ -140,6 +147,9 @@
         }
         #tree1 ul.jqtree-tree .jqtree-toggler{
             color: #3c8dbc;
+        }
+        .category-form-place .mt-10{
+            margin-top: 10px;
         }
     </style>
 @stop

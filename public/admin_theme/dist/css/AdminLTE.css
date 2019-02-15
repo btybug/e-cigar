@@ -3232,6 +3232,9 @@ table.text-center th {
   font-size: 14px;
 }
 .treeview-menu > li > a > .fa,
+.treeview-menu > li > a > .fab,
+.treeview-menu > li > a > .fas,
+.treeview-menu > li > a > .far,
 .treeview-menu > li > a > .glyphicon,
 .treeview-menu > li > a > .ion {
   width: 20px;

@@ -1,13 +1,18 @@
-@if($model)
-    {!! Form::model($model,['url' => route('admin_store_categories_delete',$type)]) !!}
-    {!! Form::hidden('id',null) !!}
+<div class="del-save--btn">
+    @if($model)
+        {!! Form::model($model,['url' => route('admin_store_categories_delete',$type)]) !!}
+        {!! Form::hidden('id',null) !!}
+        <div class="form-group">
+            {!! Form::submit('delete',['class' => 'btn btn-danger']) !!}
+        </div>
+    @endif
+    {!! Form::close() !!}
     <div class="form-group">
-        {!! Form::submit('delete',['class' => 'btn btn-danger']) !!}
+        {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
     </div>
-@endif
-{!! Form::close() !!}
+</div>
 
-{!! Form::model($model,['url' => route('admin_store_categories_new_or_update',$type)]) !!}
+{!! Form::model($model,['url' => route('admin_store_categories_new_or_update',$type),'class' => 'updated-form']) !!}
 {!! Form::hidden('id',null) !!}
 {!! Form::hidden('type',$type) !!}
 
@@ -25,53 +30,68 @@
     @if(count(get_languages()))
         @foreach(get_languages() as $language)
             <div id="{{ strtolower($language->code) }}" class="tab-pane fade  @if($loop->first) in active @endif">
-                <div class="form-group">
-                    <label>Category Name</label>
-                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>true]) !!}
+                <div class="form-group row mt-10">
+                    <label class="col-md-2 col-xs-12">Category Name</label>
+                    <div class="col-md-10">
+                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>true]) !!}
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control','required'=>true]) !!}
+                <div class="form-group row">
+                    <label class="col-md-2 col-xs-12">Description</label>
+                    <div class="col-md-10 col-xs-12">
+                        {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control','required'=>true]) !!}
+                    </div>
                 </div>
             </div>
         @endforeach
     @endif
 </div>
-<div class="form-group">
-    <label>Slug</label>
-    {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Slug</label>
+    <div class="col-md-10 col-xs-12">
+        {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
+    </div>
 </div>
-<div class="form-group">
-    <label>Custom classes</label>
-    {!! Form::text('classes',null,['class'=>'form-control']) !!}
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Custom classes</label>
+    <div class="col-md-10 col-xs-12">
+        {!! Form::text('classes',null,['class'=>'form-control']) !!}
+    </div>
 </div>
-<div class="form-group">
-    <label>Parent</label>
-    {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Parent</label>
+    <div class="col-md-10 col-xs-12">
+        {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
+    </div>
 </div>
-<div class="form-group">
-    <label>Select stickers</label>
-    {!! Form::select('stickers[]',$stickers,null,['class'=>'form-control','id' => 'select-stickers','multiple' => true]) !!}
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Select stickers</label>
+    <div class="col-md-10 col-xs-12">
+        {!! Form::select('stickers[]',$stickers,null,['class'=>'form-control','id' => 'select-stickers','multiple' => true]) !!}
+    </div>
 </div>
-<div class="form-group">
-    <div class="row">
-        <div class="col-md-10">
-            <label>Icon</label>
-            {!! Form::text('icon',null,['class'=>'form-control icon-picker','required'=>true]) !!}
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Icon</label>
+        <div class="col-md-10 col-xs-12">
+            <div class="row">
+                <div class="col-md-10 col-xs-12">
+                    {!! Form::text('icon',null,['class'=>'form-control icon-picker','required'=>true]) !!}
+                </div>
+                <div class="col-md-2 col-xs-12">
+                    <i id="font-show-area"></i>
+                </div>
+            </div>
         </div>
-        <div class="col-md-2">
-            <i id="font-show-area"></i>
-        </div>
+</div>
+
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Image</label>
+    <div class="col-md-10 col-xs-12">
+        {!! media_button('image',$model) !!}
     </div>
 </div>
 
-<div class="form-group">
-    <label>Image</label>
-    {!! media_button('image',$model) !!}
-</div>
-<div class="form-group">
-    {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-</div>
 {!! Form::close() !!}
 
 @if(is_enabled_media_modal())
