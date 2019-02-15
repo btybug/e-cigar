@@ -14,6 +14,7 @@ Route::post('/profile-image', 'Admin\AdminController@postProfileImageUpload')->n
 Route::post('/quick-email', 'Admin\AdminController@quickEmail')->name('admin_quick_email');
 Route::get('/test', 'Admin\AdminController@test')->name('admin_dashboard_test');
 Route::post('/dashboard-save', 'Admin\AdminController@saveDashboardWidgets')->name('admin_dashboard_save_widgets');
+Route::post('/dashboard-delete', 'Admin\AdminController@deleteDashboardWidget')->name('admin_dashboard_delete_widgets');
 
 Route::get('/menu-manager', function () {
     return view('admin.menu_manager');

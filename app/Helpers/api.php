@@ -1127,11 +1127,12 @@ function render_widgets($placeholder){
     $html = '';
     foreach ($widgets as $widget){
         if(has_permission(Auth::user()->role,$widget->widget)){
-            $html.= ' <div id="'.$widget->widget.'">
-                    <div class="box-header" style="background-color: red;">
-                      '.$widget->widget.'
-                    </div>
-                </div>';
+            $html.= ' <div id="'.$widget->widget.'" style="position: relative">
+                <a class="delete-widget btn btn-warning" style="position: absolute;right:0;top:0;z-index: 99;">DELETE</a>
+                <div class="box-header" style="background-color: red;">
+                  '.$widget->widget.'
+                </div>
+            </div>';
         }
 
     }

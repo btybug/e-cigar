@@ -42,10 +42,31 @@ $(function () {
             }
             // $("#sortable-9").text (productOrder+ ' -- ' + section);
         }
-        // remove: function(i,el) {
-        //     console.info(el,'remove')
-        // }
     });
+
+    $("body").on('click','.delete-widget',function () {
+        let $_this = $(this);
+        var section = $(this).closest('.connectedSortable').data('placement');
+        var key = $(this).parent().attr('id');
+        
+        $.ajax({
+            url: "/admin/dashboard-delete",
+            type: 'POST',
+            data: {placeholder : section, key: key},
+            headers: {
+                "X-CSRF-TOKEN": $("input[name='_token']").val()
+            },
+            success: function (data) {
+                if (!data.error) {
+                    $_this.parent().remove();
+                }
+            },
+            error: function (data) {
+
+            }
+        });
+    });
+
     $('.connectedSortable .box-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
 
     // jQuery UI sortable for the todo list

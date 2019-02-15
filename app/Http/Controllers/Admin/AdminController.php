@@ -66,6 +66,17 @@ class AdminController extends Controller
         return \Response::json(['error' => false]);
     }
 
+    public function deleteDashboardWidget(Request $request)
+    {
+        $widgetInPlacholder = \Auth::user()->widgets()->where('placeholder',$request->placeholder)->where('widget',$request->key)->first();
+        if($widgetInPlacholder){
+            $widgetInPlacholder->delete();
+            return \Response::json(['error' => false]);
+
+        }
+        return \Response::json(['error' => true]);
+    }
+
     public function getProfile(Request $request,Countries $countries)
     {
         $user = \Auth::user();
