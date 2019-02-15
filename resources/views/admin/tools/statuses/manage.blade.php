@@ -7,11 +7,20 @@
     <div class="col-md-12 inventory_attributes">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h2>Status</h2>
+                    <div class="head-space-between">
+                        <h2>Order Status</h2>
+                        <div class="form-group row bord-top">
+                            {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
+                            <input name="type" type="hidden" value="{!! $type !!}">
+                            {{--<div class="col-md-8">--}}
+                                {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
+                            {{--</div>--}}
+                            <div class="col-md-4 text-right">
+                                    <button class="btn btn-primary add-new-order"  type="submit"><span class="icon-plus"><i class="fa fa-plus"></i></span>Add New</button>
+                            </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
             </div>
             <div class="panel-body">
                 <div class="col-md-3 attributes-container">
@@ -36,17 +45,17 @@
                            </div>
                        @endforeach
                    </div>
-                    <div class="form-group row bord-top">
-                        {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
-                              <input name="type" type="hidden" value="{!! $type !!}">
-                            <div class="col-md-8">
-                                <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
-                            </div>
-                            <div class="col-md-4 text-right">
-                                <button class="btn btn-primary add-new-order"  type="submit">Add </button>
-                            </div>
-                        </form>
-                    </div>
+                    {{--<div class="form-group row bord-top">--}}
+                        {{--{!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}--}}
+                              {{--<input name="type" type="hidden" value="{!! $type !!}">--}}
+                            {{--<div class="col-md-8">--}}
+                                {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
+                            {{--</div>--}}
+                            {{--<div class="col-md-4 text-right">--}}
+                                {{--<button class="btn btn-primary add-new-order"  type="submit">Add </button>--}}
+                            {{--</div>--}}
+                        {{--</form>--}}
+                    {{--</div>--}}
                 </div>
 
                 @include('admin.tools.statuses._patrials.status_form')
@@ -56,7 +65,7 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,888))}}">
 @stop
 
 @section("js")

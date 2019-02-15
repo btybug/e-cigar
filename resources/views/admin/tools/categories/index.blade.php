@@ -3,44 +3,52 @@
 
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="button-area text-right mb-20">
-                <a class="btn btn-primary add-category" href="javascript:void(0)">Add new</a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div id="tree1"></div>
-        </div>
-        <div class="col-md-8">
-            <div class="content-area category-form-place">
-                {{--@include('admin.store.categories.create_or_update')--}}
-                <h4 class="text-center dddd">New Category</h4>
-            </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading head-space-between">
+                <h2>Stocks Category</h2>
+                <div class="button-area text-right">
+                    <a class="btn btn-primary add-category" href="javascript:void(0)">Add new</a>
                 </div>
-            @endif
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div id="tree1"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="content-area category-form-place">
+                            {{--@include('admin.store.categories.create_or_update')--}}
+                            <h4 class="text-center dddd">New Category</h4>
+                        </div>
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 @stop
 @section('js')
     <script src="https://mbraak.github.io/jqTree/tree.jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
-        $('body').on('click','.del-save--btn .btn-submit-form',function () {
-           $('.category-form-place .updated-form').submit()
+        $('body').on('click', '.del-save--btn .btn-submit-form', function () {
+            $('.category-form-place .updated-form').submit()
         })
         $("#select-stickers").select2();
-        $("body").on('click','.add-category',function () {
+        $("body").on('click', '.add-category', function () {
             AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: null}, function (res) {
-                if(! res.error){
+                if (!res.error) {
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
                     $("#select-stickers").select2();
@@ -101,7 +109,7 @@
 
         $("#tree1").bind("tree.click", function (e) {
             AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: e.node.id}, function (res) {
-                if(! res.error){
+                if (!res.error) {
                     $(".category-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
                     $("#select-stickers").select2();
@@ -117,41 +125,57 @@
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <style>
-        .del-save--btn{
+        .head-space-between{
+            display: flex;
+            justify-content: space-between;
+        }
+        .head-space-between h2{
+            margin: 0;
+        }
+        .del-save--btn {
             display: flex;
             justify-content: flex-end;
         }
-        .del-save--btn .m-r-5{
+
+        .del-save--btn .m-r-5 {
             margin-right: 5px;
         }
+
         #font-show-area {
             font-size: 50px;
             margin-top: 15px;
         }
-        .category-form-place{
+
+        .category-form-place {
             padding: 15px;
             background-color: white;
             box-shadow: 0 0 4px #ccc;
         }
-        #tree1{
+
+        #tree1 {
             background-color: #ffffff;
             border: 1px solid #ccc;
             box-shadow: 0 0 4px #ccc;
         }
-        #tree1 ul.jqtree-tree li.jqtree-selected > .jqtree-element{
+
+        #tree1 ul.jqtree-tree li.jqtree-selected > .jqtree-element {
             padding: 10px 5px;
         }
-        #tree1 ul.jqtree-tree .jqtree-element{
+
+        #tree1 ul.jqtree-tree .jqtree-element {
             padding: 10px 5px;
             border-bottom: 1px solid #ccc;
         }
+
         #tree1 ul.jqtree-tree .jqtree-title {
             outline: none;
         }
-        #tree1 ul.jqtree-tree .jqtree-toggler{
+
+        #tree1 ul.jqtree-tree .jqtree-toggler {
             color: #3c8dbc;
         }
-        .category-form-place .mt-10{
+
+        .category-form-place .mt-10 {
             margin-top: 10px;
         }
     </style>

@@ -1380,10 +1380,21 @@ tr.notification-is_read {
     display: flex;
     justify-content: space-between;
 }
-
-
-
-
+.head-space-between{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.head-space-between h2{
+    margin: 0;
+}
+.head-space-between .bord-top{
+    padding: 0;
+    border: none;
+}
+.head-space-between .icon-plus{
+    margin-right: 5px;
+}
 
 
 
