@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Dashboard;
 use App\Models\Roles;
 use App\Services\ManagerApiRequest;
 use App\Services\UserService;
@@ -33,30 +34,36 @@ class AdminController extends Controller
     }
     public function getDashboard()
     {
-//        $emails=\LaravelGmail::message()->all();
-//        $messages = \LaravelGmail::message()->unread()->preload()->all();
-//        foreach ( $messages as $message ) {
-//            $body = $message->getHtmlBody();
-//            $subject = $message->getSubject();
-//            echo $subject.'<br>'.$body.'<hr>';
-//        }
-//        die;
-        //1688496308af6e9c
-//        dd($emails[0]->getId());
-//        dd(\LaravelGmail::message()->get('16884bacc2ccc24d'));
-//        \DB::table('users')->insert([
-//            'name' => 'Manager',
-//            'username' => 'supermanager',
-//            'email' => 'manager@gmail.com',
-//            'password' => bcrypt('manager'),
-//            'last_name'=>'Adminyan',
-//            'phone'=>'041522323',
-//            'country'=>'Yerevan',
-//            'status'=>1,
-//            'gender'=>'male',
-//            'role_id'=>2
-//        ]);
-        return view('admin.dashboard');
+        $widgets = \Auth::user()->widgets()->pluck('widget')->all();
+
+        return view('admin.dashboard',compact(['widgets']));
+    }
+
+    public function saveDashboardWidgets(Request $request)
+    {
+        $placeholderItems = Dashboard::where('placeholder',$request->placeholder)->where('user_id',\Auth::id())->get();
+        $widgets = ($request->get('widgets'))? explode(',',$request->get('widgets')) : [];
+
+        if(count($widgets)){
+            foreach ($widgets as $position => $widget){
+                $widgetInPlacholder = Dashboard::where('placeholder',$request->placeholder)->where('user_id',\Auth::id())->where('widget',$widget)->first();
+                if($widgetInPlacholder){
+                    $widgetInPlacholder->update([
+                        'position' => $position
+                    ]);
+                }else{
+                    Dashboard::where('user_id',\Auth::id())->where('widget',$widget)->delete();
+                    Dashboard::create([
+                       'user_id' => \Auth::id(),
+                       'placeholder' => $request->placeholder,
+                       'position' => $position,
+                       'widget' => $widget
+                    ]);
+                }
+            }
+        }
+
+        return \Response::json(['error' => false]);
     }
 
     public function getProfile(Request $request,Countries $countries)

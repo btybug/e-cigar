@@ -1116,7 +1116,25 @@ function user_avatar($id = null)
 
 function has_permission($role,$permission){
     if(!$role || !$permission)return false;
+    if($role->slug == 'superadmin') return true;
     $role_perms=$role->permissions->pluck('slug','slug');
     return isset($role_perms[$permission]);
 
+}
+
+function render_widgets($placeholder){
+    $widgets = \App\Models\Dashboard::where('placeholder',$placeholder)->where('user_id',Auth::id())->orderBy('position')->get();
+    $html = '';
+    foreach ($widgets as $widget){
+        if(has_permission(Auth::user()->role,$widget->widget)){
+            $html.= ' <div id="'.$widget->widget.'">
+                    <div class="box-header" style="background-color: red;">
+                      '.$widget->widget.'
+                    </div>
+                </div>';
+        }
+
+    }
+
+    return $html;
 }
