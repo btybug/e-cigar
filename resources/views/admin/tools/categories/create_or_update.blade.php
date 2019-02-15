@@ -2,7 +2,7 @@
     @if($model)
         {!! Form::model($model,['url' => route('admin_store_categories_delete',$type)]) !!}
         {!! Form::hidden('id',null) !!}
-        <div class="form-group">
+        <div class="form-group m-r-5">
             {!! Form::submit('delete',['class' => 'btn btn-danger']) !!}
         </div>
     @endif

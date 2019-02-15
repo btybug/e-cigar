@@ -119,7 +119,10 @@
     <style>
         .del-save--btn{
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+        }
+        .del-save--btn .m-r-5{
+            margin-right: 5px;
         }
         #font-show-area {
             font-size: 50px;
