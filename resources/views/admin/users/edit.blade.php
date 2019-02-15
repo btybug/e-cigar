@@ -21,6 +21,14 @@
                     <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
                 </div>
+                {{--<div class="dropdown pull-right">--}}
+                    {{--<button class="btn btn-primary"><i class="fa fa-plus mr-10"></i>Create new</button>--}}
+                    {{--<ul class="dropdown-menu">--}}
+                        {{--<li>--}}
+                            {{--<a href=""></a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</div>--}}
             </div>
 
         </div>
@@ -91,9 +99,6 @@
                         <div class="tab-content users-log-wrapper_tab-content">
                             <div id="users_account" class="tab-pane fade in active">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Account</h3>
-                                    </div>
                                     <div class="panel-body">
                                         <!-- The timeline -->
                                         {!! Form::model($user,['class'=>'']) !!}
@@ -206,9 +211,6 @@
                             </div>
                             <div id="users_messages" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Messages</h3>
-                                    </div>
                                     <div class="panel-body">
                                         <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                                             <thead>
@@ -233,9 +235,6 @@
                             </div>
                             <div id="users_favourites" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Favourites</h3>
-                                    </div>
                                     <div class="panel-body">
 
                                     </div>
@@ -243,9 +242,6 @@
                             </div>
                             <div id="users_orders" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                        <div class="panel-heading">
-                                            <h3 class="m-0">{!! __('Orders') !!}</h3>
-                                        </div>
                                     <div class="panel-body">
                                         <table id="orders-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                                             <thead>
@@ -271,9 +267,6 @@
                             </div>
                             <div id="users_address" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Address</h3>
-                                    </div>
                                     <div class="panel-body">
                                         <div class="col-md-12">
                                             <ul class="nav nav-pills nav-fill" role="tablist">
@@ -421,9 +414,6 @@
                             </div>
                             <div id="users_tickets" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Tickets</h3>
-                                    </div>
                                     <div class="panel-body">
 
                                     </div>
@@ -431,9 +421,6 @@
                             </div>
                             <div id="users_referrals" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Referrals</h3>
-                                    </div>
                                     <div class="panel-body">
 
                                     </div>
@@ -441,9 +428,6 @@
                             </div>
                             <div id="users_offer" class="tab-pane fade">
                                 <div class="panel panel-default mb-0">
-                                    <div class="panel-heading">
-                                        <h3 class="m-0">Special Offer</h3>
-                                    </div>
                                     <div class="panel-body">
 
                                     </div>
