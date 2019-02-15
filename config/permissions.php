@@ -265,7 +265,7 @@ return [
         ],
         'transactions' => [
             'name' => 'Transactions',
-            'routes' => ['admin_store_transactions','admin_store_transactions_view'],
+            'routes' => ['admin_store_transactions', 'admin_store_transactions_view'],
             'description' => 'Able to see  Orders',
             'children' => [],
         ],
@@ -348,6 +348,199 @@ return [
             ],
 
         ],
+        'faq' => [
+            'name' => 'faq',
+            'routes' => ['admin_faq'],
+            'description' => 'Able to see all FAQ',
+            'children' => [
+                'create' => [
+                    'name' => 'Create FAQ',
+                    'routes' => ['admin_faq_create', 'admin_faq_new'],
+                    'description' => 'Create FAQ',
+                ],
+                'delete' => [
+                    'name' => 'Delete FAQ',
+                    'routes' => ['admin_faq_delete'],
+                    'description' => 'Delete FAQ',
+                ],
+                'edit' => [
+                    'name' => 'Edit FAQ',
+                    'routes' => ['admin_faq_edit', 'admin_faq_new'],
+                    'description' => 'Edit FAQ',
+                ],
+            ],
+
+        ],
+        'contact_us' => [
+            'name' => 'Contact us',
+            'routes' => ['admin_blog_contact_us'],
+            'description' => 'Able to communicate with guests',
+            'children' => [
+                'edit' => [
+                    'name' => 'Contact us',
+                    'routes' => ['admin_blog_contact_us_view', 'admin_post_blog_contact_us_replay'],
+                    'description' => 'Able to communicate with guests',
+                ],
+            ],
+
+        ],
+        'tickets' => [
+            'name' => 'Tickets',
+            'routes' => ['admin_tickets'],
+            'description' => 'Able to see Tickets',
+            'children' => [
+                'create' => [
+                    'name' => 'Create Ticket',
+                    'routes' => ['admin_tickets_new', 'admin_tickets_new_save', 'admin_tickets_settings_save', 'admin_tickets_settings'],
+                    'description' => 'Able to communicate with guests',
+                ],
+                'edit' => [
+                    'name' => 'Edit Ticket',
+                    'routes' => ['admin_tickets_edit', 'admin_tickets_edit_post', 'admin_tickets_reply', 'admin_tickets_close', 'admin_tickets_settings_save', 'admin_tickets_settings'],
+                    'description' => 'Able to edit Ticket',
+                ],
+            ],
+
+        ],
+    ],
+    'seo' => [
+        'general' => [
+            'name' => 'General',
+            'routes' => ['admin_seo', 'admin_seo_stocks', 'admin_seo_pages'],
+            'description' => 'Able to see blog page',
+            'children' => [
+                'edit' => [
+                    'name' => 'Create Post',
+                    'routes' => ['post_admin_seo', 'stocks_admin_seo_stocks', 'post_admin_seo_pages'],
+                    'description' => 'Able to Create SEO',
+                ],
+            ],
+
+        ],
+        'bulk' => [
+            'name' => 'Bulk',
+            'routes' => ['admin_seo_bulk', 'admin_seo_bulk_products'],
+            'description' => 'Able to see bulk',
+            'children' => [
+                'edit' => [
+                    'name' => 'Create Post',
+                    'routes' => ['admin_seo_bulk_edit_post', 'post_admin_seo_bulk_edit_post', 'admin_seo_bulk_edit_stock', 'post_admin_seo_bulk_edit_stock'],
+                    'description' => 'Able to Create SEO',
+                ],
+            ],
+
+        ],
+
+    ],
+    'tools' => [
+        'Tools' => [
+            'name' => 'Tools',
+            'routes' => ['admin_tools'],
+            'description' => 'Able to see blog page',
+            'children' => [],
+
+        ],
+        'categories' => [
+            'name' => 'Categories',
+            'routes' => ['admin_categories_list', 'admin_store_categories'],
+            'description' => 'Able to categories',
+            'children' => [
+                'create' => [
+                    'name' => 'Create category',
+                    'routes' => ['admin_store_categories_form', 'admin_store_categories_update_parent', 'admin_store_categories_new_or_update'],
+                    'description' => 'Able to Create SEO',
+                ],
+                'edit' => [
+                    'name' => 'Edit category',
+                    'routes' => ['admin_store_categories_form', 'admin_store_categories_update_parent', 'admin_store_categories_new_or_update'],
+                    'description' => 'Able to Edit category',
+                ],
+                'delete' => [
+                    'name' => 'Delete category',
+                    'routes' => ['admin_store_categories_delete'],
+                    'description' => 'Able category',
+                ],
+            ],
+
+        ],
+        'tags' => [
+            'name' => 'Tags',
+            'routes' => ['admin_stock_tags'],
+            'description' => 'Able to see tag',
+            'children' => [
+                'create' => [
+                    'name' => 'Create tag',
+                    'routes' => ['admin_stock_tags_save', 'admin_stock_tags_save'],
+                    'description' => 'Able to Create Tag',
+                ],
+                'delete' => [
+                    'name' => 'Delete tag',
+                    'routes' => ['admin_stock_tags_delete'],
+                    'description' => 'Able tag',
+                ],
+            ],
+
+        ],
+        'statuses' => [
+            'name' => 'Statuses',
+            'routes' => ['admin_stock_statuses'],
+            'description' => 'Able to statuses',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit category',
+                    'routes' => ['admin_stock_statuses_manage', 'post_admin_stock_statuses_manage', 'post_admin_stock_statuses_manage_form'],
+                    'description' => 'Able to Edit status',
+                ],
+                'delete' => [
+                    'name' => 'Delete status',
+                    'routes' => ['post_admin_stock_statuses_delete'],
+                    'description' => 'Able status',
+                ],
+            ],
+
+        ],
+        'attributes' => [
+            'name' => 'Attributes',
+            'routes' => ['admin_store_attributes'],
+            'description' => 'Able to see  Attributes',
+            'children' => [
+
+                'create' => [
+                    'name' => 'Create  Attribute',
+                    'routes' => [
+                        'admin_store_attributes_new',
+                        'admin_store_attributes_options_form',
+                        'admin_store_attributes_option_delete',
+                        'admin_store_attributes_options',
+                        'admin_store_attributes_options_by_id',
+                        'admin_store_attributes_options_by_id_autocomplate',
+                        'admin_store_attributes_by_id',
+                        'admin_store_attributes_all_post',
+                        'admin_store_attributes_delete',
+                        'admin_store_attributes_variations_table',
+                    ],
+                    'description' => 'Able to Create Attribute',
+                ],
+                'edit' => [
+                    'name' => 'View inventory item purchases',
+                    'routes' => [
+                        'admin_store_attributes_edit',
+                        'admin_store_attributes_post_edit',
+                        'admin_store_attributes_options_form',
+                        'admin_store_attributes_option_delete',
+                        'admin_store_attributes_options',
+                        'admin_store_attributes_options_by_id',
+                        'admin_store_attributes_options_by_id_autocomplate',
+                        'admin_store_attributes_by_id',
+                        'admin_store_attributes_all_post',
+                        'admin_store_attributes_delete',
+                        'admin_store_attributes_variations_table',
+                    ],
+                    'description' => 'View orders related to items',
+                ]
+            ],
+        ]
+
     ],
 ];
 
