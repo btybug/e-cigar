@@ -4,19 +4,12 @@
 @stop
 @section('content')
     <div class="panel panel-default users-log-wrapper">
-        <div class="panel-heading clearfix">
-            <h2 class="m-0 pull-left"> Admin Profile </h2>
-            <ol class="breadcrumb pull-right mb-0">
-                <li><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i>
-                        Dashboard</a></li>
-                <li class="active">Admin Profile</li>
-            </ol>
-        </div>
+        <h2 class="panel-heading m-0"> Admin Account </h2>
 
         <div class="panel-body">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <!-- Profile Image -->
                     <div class="box box-primary mar-0">
                         <div class="box-body box-profile">
@@ -47,34 +40,43 @@
                     <!-- /.box -->
                     <ul class=" nav nav-pills nav-stacked admin-profile-left">
                         <li class="active">
-                            <a href="#users_profile" data-toggle="tab">Profile</a>
+                            <a href="#users_account" data-toggle="tab">Account</a>
                         </li>
                         <li>
-                            <a href="#users_logs" data-toggle="tab">Logs</a>
+                            <a href="#users_messages" data-toggle="tab">Messages</a>
                         </li>
                         <li>
                             <a href="#users_favourites" data-toggle="tab">Favourites</a>
                         </li>
                         <li>
-                            <a href="#orders" data-toggle="tab">Orders</a>
+                            <a href="#users_orders" data-toggle="tab">Orders</a>
                         </li>
                         <li>
-                            <a href="#addresses" data-toggle="tab">Addresses</a>
+                            <a href="#users_address" data-toggle="tab">Address</a>
+                        </li>
+                        <li>
+                            <a href="#users_tickets" data-toggle="tab">Tickets</a>
+                        </li>
+                        <li>
+                            <a href="#users_referrals" data-toggle="tab">Referrals</a>
+                        </li>
+                        <li>
+                            <a href="#users_offer" data-toggle="tab">Special Offer</a>
                         </li>
                     </ul>
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-9">
+                <div class="col-md-10">
                         {{--<ul class="nav nav-tabs">--}}
                         {{--<li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>--}}
                         {{--<li><a href="#passwordDiv" data-toggle="tab">Password</a></li>--}}
                         {{--</ul>--}}
                         <div class="tab-content">
-                            <div id="users_profile" class="tab-pane fade in active">
+                            <div id="users_account" class="tab-pane fade in active">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="m-0">Profile</h3>
+                                        <h3 class="m-0">Account</h3>
                                     </div>
                                     <div class="panel-body">
                                         <!-- The timeline -->
@@ -192,10 +194,10 @@
                                 </div>
 
                             </div>
-                            <div id="users_logs" class="tab-pane fade">
+                            <div id="users_messages" class="tab-pane fade">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="m-0">Logs</h3>
+                                        <h3 class="m-0">Messages</h3>
                                     </div>
                                     <div class="panel-body">
                                         <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
@@ -229,7 +231,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="orders" class="tab-pane fade">
+                            <div id="users_orders" class="tab-pane fade">
                                 <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h3 class="m-0">{!! __('Orders') !!}</h3>
@@ -257,10 +259,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="addresses" class="tab-pane fade">
+                            <div id="users_address" class="tab-pane fade">
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h3 class="m-0">Addresses</h3>
+                                        <h3 class="m-0">Address</h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="col-md-12">
@@ -404,6 +406,36 @@
                                             </div>
 
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="users_tickets" class="tab-pane fade">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="m-0">Tickets</h3>
+                                    </div>
+                                    <div class="panel-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="users_referrals" class="tab-pane fade">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="m-0">Referrals</h3>
+                                    </div>
+                                    <div class="panel-body">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="users_offer" class="tab-pane fade">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="m-0">Special Offer</h3>
+                                    </div>
+                                    <div class="panel-body">
+
                                     </div>
                                 </div>
                             </div>

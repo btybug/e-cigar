@@ -929,5 +929,14 @@ textarea {
     padding-top: 8px;
 }
 
+/*admin users*/
+.users-log-wrapper {
+    min-height: 770px;
+}
+
+.profile-user-img {
+    min-height: 100px;
+}
+
 
 

@@ -1243,6 +1243,8 @@ a:hover {
     height: 300px;
     object-fit: cover;
 }
+
+
 /*responsive*/
 @media (max-width: 1680px) {
     .header-navbar-nav .nav-item {
@@ -1409,9 +1411,6 @@ a:hover {
     }
 }
 
-/*hovers*/
-@media (min-width: 768px) {
 
-}
 
 
