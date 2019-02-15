@@ -123,7 +123,7 @@
     <!-- jvectormap -->
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
     {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
-    {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js")!!}
+    {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js?v=".rand(111,999))!!}
 
     <!-- Include the ViewSelector2 component script. -->
 
