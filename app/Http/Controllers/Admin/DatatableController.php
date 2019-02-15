@@ -71,7 +71,8 @@ class DatatableController extends Controller
         return Datatables::of(User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type', 'backend')->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
-                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $user->id . '">Delete</a>
+                return '<a href="javascript:void(0)" data-href="'.route("admin_staff_delete").'" 
+                class="delete-button btn btn-danger" data-key="' . $user->id . '">Delete</a>
                     <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
                     <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info"><i class="fa fa-eye"></i>Activity</a>
                     ';
