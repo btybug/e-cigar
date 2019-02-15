@@ -5,7 +5,7 @@
 @section('content')
     <div class="panel panel-default users-log-wrapper">
         <div class="panel-heading">
-            <div class="d-flex clearfix">
+            <div class="clearfix">
                <div class="d-flex pull-left">
                    <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
                    <div class="d-inline-block ml-10">
@@ -166,12 +166,6 @@
                                             </div>
                                         </div>
                                         {!! Form::close() !!}
-                                        <div class="form-group text-right">
-                                            {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                                            {!! Form::hidden('email',$user->email) !!}
-                                            <button type="submit" class="btn btn-warning">Send reset password email</button>
-                                            {!! Form::close() !!}
-                                        </div>
 
 
                                         @if($user->verification_type && $user->verification_image)

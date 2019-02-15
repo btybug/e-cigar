@@ -562,6 +562,7 @@ textarea {
     max-height: 600px;
     overflow-y: auto;
 }
+
 .treeview-menu > li > a > .fab,
 .treeview-menu > li > a > .fas,
 .treeview-menu > li > a > .far{
