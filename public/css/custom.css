@@ -1398,7 +1398,9 @@ tr.notification-is_read {
 .head-space-between .icon-plus{
     margin-right: 5px;
 }
-
+.head-space-between ul{
+    margin-bottom: 0 !important;
+}
 
 
 
