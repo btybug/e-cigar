@@ -126,45 +126,31 @@ function App() {
     tree: null,
     makeTreeFolder: function (data) {
       const get_folder_items_tree = self.events.get_folder_items_tree;
-
       $('document').ready(
           function () {
             $("#folder-list").fancytree({
               extensions: ["edit", "dnd5" ],
               source: data,
+              debugLevel: 0,
               selectMode: 4,
               dnd5: {
-                // Available options with their default:
                 draggable: true,
                 autoExpandMS: 1500,
-                preventRecursiveMoves: true, // Prevent dropping nodes on own descendants
+                preventRecursiveMoves: true,
                 preventVoidMoves: true,
                 dragStart: function(node, data) {
-
                   return true;
                 },
-                // // dragDrag: function(node, data) {
-                // //
-                // // },
                 dragEnd: function(node, data) {
-
                 },
                 dragEnter: function(node, data) {
-
                   return true;
                 },
                 dragOver: function(node, data) {
-
                 },
-                // // dragExpand: function(node, data) {
-                // //
-                // // },
                 dragLeave: function(node, data) {
-
                 },
                 dragDrop: function(node, data) {
-                  console.log(node.key);
-                  console.log(data.otherNodeData.key);
                   self.requests.transferFolder(
                     {
                       folder_id: Number(data.otherNodeData.key),
