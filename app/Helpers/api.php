@@ -1110,7 +1110,7 @@ function user_avatar($id = null)
         }
     }
 
-    return '/public/images/other.png';
+    return '/public/img/user.svg';
 }
 
 
