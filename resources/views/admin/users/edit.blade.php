@@ -13,9 +13,9 @@
                     <!-- Profile Image -->
                     <div class="box box-primary mar-0">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle"
-                                 src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"
-                                 alt="Václav profile picture">
+                            <img class="profile-user-img img-responsive"
+                                 src="{!!user_avatar()!!}"
+                                 alt="avatar">
                                 {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
                             <h3 class="profile-username text-center">{!! $user->name.' '.$user->last_name !!}</h3>
 
