@@ -139,6 +139,7 @@
 {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
 {{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
+{!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
 
