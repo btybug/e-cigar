@@ -123,6 +123,7 @@ function App() {
 //                 </li>`;
 //         },
     tree: null,
+    dragElementOfTree: null,
     makeTreeFolder: function (data) {
       const get_folder_items_tree = self.events.get_folder_items_tree;
       $('document').ready(
@@ -150,16 +151,14 @@ function App() {
                 autoExpandMS: 1500,
                 preventRecursiveMoves: true,
                 preventVoidMoves: true,
+                preventNonNodes: false,
                 dragStart: function (node, data) {
+                  self.htmlMaker.dragElementOfTree = node.key;
                   return true;
                 },
                 dragEnd: function (node, data) {
                 },
                 dragEnter: function (node, data) {
-                  // if(node.folder == false) {
-                  //   return false;
-                  // }
-                  // return 'over';
                   return true;
                 },
                 dragOver: function (node, data) {
@@ -186,6 +185,36 @@ function App() {
                     ;
                   }
                   ;
+                  if( !data.otherNode ){
+                    // transfer(data.node.key)
+                    if($('.start').last()[0].classList.contains('file') && $('.start').last()[0].dataset) {
+                      if (data.hitMode == 'after' || data.hitMode == 'before') {
+                        if (node.getLevel() == 1) {
+                          self.requests.transferFolder(
+                              {
+                                folder_id: Number($('.start').last()[0].dataset.id),
+                                parent_id: Number(1),
+                                access_token: "string"
+                              },
+                              () => {
+                            const x = $("#folder-list").fancytree("getTree");
+                          let folder;
+                          folder = x.getNodeByKey('' + $('.start').last()[0].dataset.id);
+                          folder.moveTo(x.getNodeByKey('' + data.node.parent.key));
+                        }
+                        )
+                        } else {
+                          transfer($('.start').last()[0].dataset.id, data.node.parent.key);
+                        }
+                      } else {
+                        transfer($('.start').last()[0].dataset.id, data.node.key)
+                      }
+                    }
+
+                    // transfer($('.start').last()[0].dataset.id, data.node.key)
+
+                    return;
+                  }
 
                   if (data.hitMode == 'after' || data.hitMode == 'before') {
                     if (node.getLevel() == 1) {
@@ -208,6 +237,7 @@ function App() {
                   } else {
                     transfer(data.otherNodeData.key, node.key)
                   }
+                  self.htmlMaker.dragElementOfTree = null;
                 }
               },
               activate: function (event, data) {
@@ -679,11 +709,12 @@ function App() {
         });
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
-          let nodeId = e.dataTransfer.getData("node_id");
+          console.log(self.htmlMaker.dragElementOfTree);
+          let nodeId = self.htmlMaker.dragElementOfTree || e.dataTransfer.getData("node_id");
           let parrentId = e.target
               .closest(".file")
               .getAttribute("data-id");
-          if($(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
+          if(self.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
             self.requests.transferFolder(
               {
                 folder_id: Number(nodeId),
@@ -707,6 +738,7 @@ function App() {
               }
             );
           }
+          self.htmlMaker.dragElementOfTree = null;
         });
       });
     }
