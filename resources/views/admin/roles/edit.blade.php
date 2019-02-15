@@ -47,16 +47,26 @@
         </div>
 
         </div>
-    <div class="col-md-12">
         <div class="col-md-12">
-            <div class="panel panel-default">
-                <h3 class="panel-heading m-0">Pages</h3>
-                <div class="panel-body">
-                    @include('admin.roles._partials.tree')
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <h3 class="panel-heading m-0">Widgets</h3>
+                    <div class="panel-body">
+                        @include('admin.roles._partials.widgets')
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-12">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <h3 class="panel-heading m-0">Pages</h3>
+                    <div class="panel-body">
+                        @include('admin.roles._partials.tree')
+                    </div>
+                </div>
+            </div>
+        </div>
         {!! Form::close() !!}
     </div>
 @stop
