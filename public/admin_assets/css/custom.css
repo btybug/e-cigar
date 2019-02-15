@@ -925,5 +925,9 @@ textarea {
     max-width: 100%;
 }
 
+.main-header-auth {
+    padding-top: 8px;
+}
+
 
 

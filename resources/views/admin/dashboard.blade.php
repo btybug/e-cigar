@@ -38,23 +38,30 @@
 
             </div>
 
-            <div class="text-right mb-20">
-                <button class="btn btn-info open_dashboard_widget">Add new Widget</button>
+            <div class="clearfix">
+                <aside class="Header-auth main-header-auth pull-left" id="header-auth">
+                    <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
+                    </div>
+                </aside>
+                <button class="btn btn-primary open_dashboard_widget pull-right">Add new Widget</button>
             </div>
         </div>
 
     </div>
 
+    <aside class="Header-auth" id="header-auth">
+        <h3 class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
+        </h3>
+    </aside>
+
     <div class="connectedSortable">
+
         <!-- sortable item -->
         <!-- analytics -->
         <div class="row">
             <div class="col-md-12">
                 <div class="box box-primary">
-                    <aside class="Header-auth" id="header-auth">
-                        <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User" ga-event-label="auth" ga-event-action="signin">
-                        </div>
-                    </aside>
+
                     <div class="panel panel-default">
                         <div class="box-header panel-heading clearfix">
                             <h3 class="pull-left m-0 lh-1">Most visited pages</h3>
