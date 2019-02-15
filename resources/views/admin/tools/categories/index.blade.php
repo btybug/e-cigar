@@ -6,9 +6,9 @@
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading head-space-between">
-                <h2>Stocks Category</h2>
+                <h2>{!! ucfirst(str_replace("_"," ",$type)) !!} Category</h2>
                 <div class="button-area text-right">
-                    <a class="btn btn-primary add-category" href="javascript:void(0)">Add new</a>
+                    <a class="btn btn-primary add-category" href="javascript:void(0)"><span class="icon-plus"><i class="fa fa-plus"></i></span>Add new</a>
                 </div>
             </div>
             <div class="panel-body">
@@ -132,6 +132,10 @@
         .head-space-between h2{
             margin: 0;
         }
+        .head-space-between .icon-plus{
+            margin-right: 5px;
+        }
+
         .del-save--btn {
             display: flex;
             justify-content: flex-end;

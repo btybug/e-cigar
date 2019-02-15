@@ -1380,6 +1380,9 @@ tr.notification-is_read {
     display: flex;
     justify-content: space-between;
 }
+.tools-stikers--header .mr-5{
+    margin-right: 5px;
+}
 .head-space-between{
     display: flex;
     flex-wrap: wrap;

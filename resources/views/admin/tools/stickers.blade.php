@@ -12,11 +12,11 @@
                         <div class="tools-stikers--header">
                             <h2>Stickers</h2>
                             {!! Form::open(['url'=>route('admin_tools_stickers_manage')]) !!}
-                            <div class="col-md-8">
-                                <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
-                            </div>
+                            {{--<div class="col-md-8">--}}
+                                {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
+                            {{--</div>--}}
                             <div class="col-md-4 text-right">
-                                <button class="btn btn-primary add-new-order"  type="submit">Add </button>
+                                <button class="btn btn-primary add-new-order"  type="submit"><span class="icon-plus mr-5"><i class="fa fa-plus"></i></span>Add New</button>
                             </div>
                             {!! Form::close() !!}
                         </div>
