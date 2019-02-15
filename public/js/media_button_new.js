@@ -130,9 +130,24 @@ function App() {
       $('document').ready(
           function () {
             $("#folder-list").fancytree({
-              extensions: ["edit", "filter", "glyph"],
+              extensions: ["edit", "dnd5" ],
               source: data,
               selectMode: 1,
+              dnd5: {
+                // Available options with their default:
+                autoExpandMS: 1500,      // Expand nodes after n milliseconds of hovering.
+                dropMarkerOffsetX: -24,  // absolute position offset for .fancytree-drop-marker
+                                         // relatively to ..fancytree-title (icon/img near a node accepting drop)
+                dropMarkerInsertOffsetX: -16, // additional offset for drop-marker with hitMode = "before"/"after"
+                multiSource: false,		        // true: Drag multiple (i.e. selected) nodes.
+                preventForeignNodes: false,   // Prevent dropping nodes from different Fancytrees
+                preventNonNodes: false,       // Prevent dropping items other than Fancytree nodes
+                preventRecursiveMoves: true,  // Prevent dropping nodes on own descendants
+                preventVoidMoves: true,       // Prevent dropping nodes 'before self', etc.
+                scroll: true,                 // Enable auto-scrolling while dragging
+                scrollSensitivity: 20,        // Active top/bottom margin in pixel
+                scrollSpeed: 5,
+              },
               // icon: false,
               // glyph: {
               //   preset: "awesome4",
@@ -146,6 +161,10 @@ function App() {
                   get_folder_items_tree(data.node.data.id);
                 }
               }
+            });
+            $('ul.fancytree-container').css({
+              border: 'none',
+              outline: 'none'
             });
           });
     },
