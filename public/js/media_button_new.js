@@ -82,7 +82,6 @@ function App() {
         </div>`;
     },
     makeImage: function (data) {
-      // data.relativeUrl  is image
       return `<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
@@ -128,43 +127,87 @@ function App() {
       const get_folder_items_tree = self.events.get_folder_items_tree;
       $('document').ready(
           function () {
+            const data_root = {
+              folder: true,
+              key: 1,
+              name: 'Drive',
+              title: 'Drive',
+              childrenCount: 0,
+              id: 1,
+              itemsCount: 0,
+              prefix: null,
+              text: "1",
+              url: "http://e-cigar.loc/public/media/drive",
+              children: data
+            };
             $("#folder-list").fancytree({
               extensions: ["edit", "dnd5" ],
               source: data,
+              focusOnClick: true,
               debugLevel: 0,
               selectMode: 4,
               dnd5: {
-                draggable: true,
                 autoExpandMS: 1500,
                 preventRecursiveMoves: true,
                 preventVoidMoves: true,
-                dragStart: function(node, data) {
+                dragStart: function (node, data) {
                   return true;
                 },
-                dragEnd: function(node, data) {
+                dragEnd: function (node, data) {
                 },
-                dragEnter: function(node, data) {
+                dragEnter: function (node, data) {
+                  // if(node.folder == false) {
+                  //   return false;
+                  // }
+                  // return 'over';
                   return true;
                 },
-                dragOver: function(node, data) {
+                dragOver: function (node, data) {
                 },
-                dragLeave: function(node, data) {
+                dragLeave: function (node, data) {
                 },
-                dragDrop: function(node, data) {
-                  self.requests.transferFolder(
-                    {
-                      folder_id: Number(data.otherNodeData.key),
-                      parent_id: Number(node.key),
-                      access_token: "string"
-                    },
-                    () => {
+                dragDrop: function (node, data) {
+
+                  const transfer = (f, p) =>
+                  {
+                    self.requests.transferFolder(
+                        {
+                          folder_id: Number(f),
+                          parent_id: Number(p),
+                          access_token: "string"
+                        },
+                        () => {
                       const x = $("#folder-list").fancytree("getTree");
-                      var folder;
-                      folder = x.getNodeByKey('' + data.otherNodeData.key);
-                      folder.moveTo(x.getNodeByKey('' + node.key));
-                      $(".start").remove();
-                    }
+                    let folder;
+                    folder = x.getNodeByKey('' + f);
+                    folder.moveTo(x.getNodeByKey('' + p));
+                  }
                   )
+                    ;
+                  }
+                  ;
+
+                  if (data.hitMode == 'after' || data.hitMode == 'before') {
+                    if (node.getLevel() == 1) {
+                      self.requests.transferFolder(
+                          {
+                            folder_id: Number(data.otherNodeData.key),
+                            parent_id: Number(1),
+                            access_token: "string"
+                          },
+                          () => {
+                        const x = $("#folder-list").fancytree("getTree");
+                      let folder;
+                      folder = x.getNodeByKey('' + data.otherNodeData.key);
+                      folder.moveTo(x.getNodeByKey('' + data.node.parent.key));
+                    }
+                    )
+                    } else {
+                      transfer(data.otherNodeData.key, data.node.parent.key);
+                    }
+                  } else {
+                    transfer(data.otherNodeData.key, node.key)
+                  }
                 }
               },
               activate: function (event, data) {
@@ -173,6 +216,7 @@ function App() {
                 }
               }
             });
+
             $('ul.fancytree-container').css({
               border: 'none',
               outline: 'none'
@@ -692,15 +736,13 @@ function App() {
               folder
           )}</div>`;
         mainContainer.innerHTML += html;
-      })
-        ;
+      });
         res.data.items.forEach((image, index) => {
           let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
               image
           )}</div>`;
         mainContainer.innerHTML += html;
-      })
-        ;
+      });
         if (tree) {
           self.htmlMaker.makeTreeFolder(
               res.data.children
@@ -715,24 +757,18 @@ function App() {
     },
     removeTreeFolder(obj = {}, cb) {
       shortAjax("/api/api-media/get-remove-folder", obj, res => {
-        if (
-      !res.error
-    )
-      {
-        self.requests.drawingItems();
-        cb();
-      }
-    });
+        if (!res.error) {
+          self.requests.drawingItems();
+          cb();
+        }
+      });
     },
     saveSeo(obj = {}, cb) {
       normAjax("/api/api-media/save-seo", obj, res => {
-        if (
-      !res.error
-    )
-      {
-        cb();
-      }
-    });
+        if (!res.error) {
+          cb();
+        }
+      });
     },
     editImageName(obj = {}, cb) {
       shortAjax("/api/api-media/rename-item", obj, res => {
@@ -901,7 +937,6 @@ function App() {
           text: name,
           key: res.data.key
         })
-        console.log(res)
       };
       self.requests.addNewFolder(
           {
