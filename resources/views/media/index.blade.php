@@ -8,6 +8,7 @@
           <div class="ibox scrollbar_custom float-e-margins over-auto">
             <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
               <div class="file-manager">
+
                 {{--<h5>Show:</h5>--}}
                 {{--<a href="#" class="file-control active">Ale</a>--}}
                 {{--<a href="#" class="file-control">Documents</a>--}}
@@ -282,13 +283,13 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.glyph.js"></script>
 
   <script>
-    $("body").on("click", ".fileinput-remove", function () {
-      retryDrawing();
-      $("body").find(".show-uploder").removeClass("in");
-    })
-    $("body").on("click", ".upload-file_button", function () {
-      $(".uploader_button").click();
-      $(".btn.btn-file>input[type='file']").click();
-    });
+    $('document').ready(
+        function() {
+          $('body').on('click', '.file-drop-zone-title', function() {
+            console.log('hi');
+            $(".btn.btn-file>input[type='file']").click();
+          })
+        }
+    )
   </script>
 @stop
