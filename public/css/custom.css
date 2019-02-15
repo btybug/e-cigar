@@ -1376,7 +1376,10 @@ tr.notification-is_read {
     padding-left: 15px;
 }
 
-
+.tools-stikers--header{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 

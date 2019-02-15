@@ -9,7 +9,17 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2>Stickers</h2>
+                        <div class="tools-stikers--header">
+                            <h2>Stickers</h2>
+                            {!! Form::open(['url'=>route('admin_tools_stickers_manage')]) !!}
+                            <div class="col-md-8">
+                                <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <button class="btn btn-primary add-new-order"  type="submit">Add </button>
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -36,14 +46,14 @@
                             </div>
                         @endforeach
                         <div class="form-group row bord-top">
-                            {!! Form::open(['url'=>route('admin_tools_stickers_manage')]) !!}
-                                <div class="col-md-8">
-                                    <input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">
-                                </div>
-                                <div class="col-md-4 text-right">
-                                    <button class="btn btn-primary add-new-order"  type="submit">Add </button>
-                                </div>
-                            {!! Form::close() !!}
+                            {{--{!! Form::open(['url'=>route('admin_tools_stickers_manage')]) !!}--}}
+                                {{--<div class="col-md-8">--}}
+                                    {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-4 text-right">--}}
+                                    {{--<button class="btn btn-primary add-new-order"  type="submit">Add </button>--}}
+                                {{--</div>--}}
+                            {{--{!! Form::close() !!}--}}
                         </div>
                     </div>
 
