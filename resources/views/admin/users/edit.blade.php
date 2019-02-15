@@ -4,22 +4,35 @@
 @stop
 @section('content')
     <div class="panel panel-default users-log-wrapper">
-        <h2 class="panel-heading m-0"> Admin Account </h2>
+        <div class="panel-heading">
+            <div class="d-flex clearfix">
+               <div class="d-flex pull-left">
+                   <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
+                   <div class="d-inline-block ml-10">
+                       {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
+                       <h3 class="profile-username mt-0 mb-5">{!! $user->name.' '.$user->last_name !!}</h3>
+
+                       <p class="text-muted mb-0">{!! ($user->role)?$user->role->title:'User' !!}</p>
+                   </div>
+               </div>
+                <div class="form-group mb-0 pull-right">
+                    {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
+                    {!! Form::hidden('email',$user->email) !!}
+                    <button type="submit" class="btn btn-warning">Send reset password email</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+        </div>
 
         <div class="panel-body">
 
-            <div class="row">
+            <div class="row d-flex">
                 <div class="col-md-2">
                     <!-- Profile Image -->
-                    <div class="box box-primary mar-0">
+                    <div class="box box-primary m-0 users-log-wrapper_col">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive"
-                                 src="{!!user_avatar()!!}"
-                                 alt="avatar">
-                                {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
-                            <h3 class="profile-username text-center">{!! $user->name.' '.$user->last_name !!}</h3>
 
-                            <p class="text-muted text-center">{!! ($user->role)?$user->role->title:'User' !!}</p>
 
                             <!-- <ul class="list-group list-group-unbordered">
                                <li class="list-group-item">
@@ -34,36 +47,39 @@
                              </ul>
 
                              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
+
                         </div>
+
+
                         <!-- /.box-body -->
+                        <ul class=" nav nav-pills nav-stacked admin-profile-left">
+                            <li class="active">
+                                <a href="#users_account" data-toggle="tab">Account</a>
+                            </li>
+                            <li>
+                                <a href="#users_messages" data-toggle="tab">Messages</a>
+                            </li>
+                            <li>
+                                <a href="#users_favourites" data-toggle="tab">Favourites</a>
+                            </li>
+                            <li>
+                                <a href="#users_orders" data-toggle="tab">Orders</a>
+                            </li>
+                            <li>
+                                <a href="#users_address" data-toggle="tab">Address</a>
+                            </li>
+                            <li>
+                                <a href="#users_tickets" data-toggle="tab">Tickets</a>
+                            </li>
+                            <li>
+                                <a href="#users_referrals" data-toggle="tab">Referrals</a>
+                            </li>
+                            <li>
+                                <a href="#users_offer" data-toggle="tab">Special Offer</a>
+                            </li>
+                        </ul>
+
                     </div>
-                    <!-- /.box -->
-                    <ul class=" nav nav-pills nav-stacked admin-profile-left">
-                        <li class="active">
-                            <a href="#users_account" data-toggle="tab">Account</a>
-                        </li>
-                        <li>
-                            <a href="#users_messages" data-toggle="tab">Messages</a>
-                        </li>
-                        <li>
-                            <a href="#users_favourites" data-toggle="tab">Favourites</a>
-                        </li>
-                        <li>
-                            <a href="#users_orders" data-toggle="tab">Orders</a>
-                        </li>
-                        <li>
-                            <a href="#users_address" data-toggle="tab">Address</a>
-                        </li>
-                        <li>
-                            <a href="#users_tickets" data-toggle="tab">Tickets</a>
-                        </li>
-                        <li>
-                            <a href="#users_referrals" data-toggle="tab">Referrals</a>
-                        </li>
-                        <li>
-                            <a href="#users_offer" data-toggle="tab">Special Offer</a>
-                        </li>
-                    </ul>
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
@@ -72,9 +88,9 @@
                         {{--<li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>--}}
                         {{--<li><a href="#passwordDiv" data-toggle="tab">Password</a></li>--}}
                         {{--</ul>--}}
-                        <div class="tab-content">
+                        <div class="tab-content users-log-wrapper_tab-content">
                             <div id="users_account" class="tab-pane fade in active">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Account</h3>
                                     </div>
@@ -195,7 +211,7 @@
 
                             </div>
                             <div id="users_messages" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Messages</h3>
                                     </div>
@@ -222,7 +238,7 @@
                                 </div>
                             </div>
                             <div id="users_favourites" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Favourites</h3>
                                     </div>
@@ -232,7 +248,7 @@
                                 </div>
                             </div>
                             <div id="users_orders" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                         <div class="panel-heading">
                                             <h3 class="m-0">{!! __('Orders') !!}</h3>
                                         </div>
@@ -260,7 +276,7 @@
                                 </div>
                             </div>
                             <div id="users_address" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Address</h3>
                                     </div>
@@ -410,7 +426,7 @@
                                 </div>
                             </div>
                             <div id="users_tickets" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Tickets</h3>
                                     </div>
@@ -420,7 +436,7 @@
                                 </div>
                             </div>
                             <div id="users_referrals" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Referrals</h3>
                                     </div>
@@ -430,7 +446,7 @@
                                 </div>
                             </div>
                             <div id="users_offer" class="tab-pane fade">
-                                <div class="panel panel-default">
+                                <div class="panel panel-default mb-0">
                                     <div class="panel-heading">
                                         <h3 class="m-0">Special Offer</h3>
                                     </div>

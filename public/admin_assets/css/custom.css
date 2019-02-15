@@ -475,6 +475,10 @@ textarea {
     width: 100%;
 }
 
+.h-100 {
+    height: 100%;
+}
+
 .mb-20 {
     margin-bottom: 20px;
 }
@@ -485,6 +489,10 @@ textarea {
 
 .mb-0 {
     margin-bottom: 0;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
 }
 
 .mt-0 {
@@ -498,6 +506,11 @@ textarea {
 .mr-10 {
     margin-right: 10px;
 }
+
+.ml-10 {
+    margin-left: 10px;
+}
+
 
 .mb-25 {
     margin-bottom: 25px;
@@ -548,6 +561,11 @@ textarea {
 .treeview .list-group {
     max-height: 600px;
     overflow-y: auto;
+}
+.treeview-menu > li > a > .fab,
+.treeview-menu > li > a > .fas,
+.treeview-menu > li > a > .far{
+    width: 20px;
 }
 /*End admin roles page*/
 
@@ -931,11 +949,18 @@ textarea {
 
 /*admin users*/
 .users-log-wrapper {
+    background: transparent;
+}
+
+.users-log-wrapper_col,
+.users-log-wrapper_tab-content > .tab-pane > .panel {
     min-height: 770px;
 }
 
 .profile-user-img {
-    min-height: 100px;
+    width: 50px;
+    min-height: 50px;
+    margin: 0;
 }
 
 
