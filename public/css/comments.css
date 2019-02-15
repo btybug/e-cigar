@@ -17,8 +17,14 @@
 .comment-list-wrapper .button-comment .btn {
     background-color: #5184e5;
     padding: 15px 22px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     border-radius: 0;
     font-size: 17px;
@@ -38,8 +44,14 @@
     width: 50px;
     height: 50px;
     background: #ebeef4;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -62,9 +74,17 @@
 
 .comment-list-wrapper .card.arrow.left {
     border: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     margin-bottom: 0 !important;
 }
@@ -99,6 +119,8 @@
 
 .comment-list-wrapper .user-commmet-add .card.arrow.left {
     flex-direction: column;
+    -webkit-box-align: baseline;
+    -ms-flex-align: baseline;
     align-items: baseline;
 }
 
@@ -114,6 +136,8 @@
 }
 
 .comment-list-wrapper .user-commmet-add .add-comment > form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 
@@ -135,6 +159,8 @@
 
 .comment-list-wrapper .user-comment-img {
     margin-top: 48px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     margin-left: 0;
     margin-right: 0;
@@ -144,20 +170,21 @@
     padding: 10px;
     box-shadow: 0 0 4px #ccc;
     margin-top: 5px;
+    position: relative;
 }
 .comment-list-wrapper .user-comment-img.sub {
     position: relative;
-    margin-left: 120px !important;
+    padding-left: 120px !important;
 }
 
-.comment-list-wrapper .user-comment-img.sub:before {
+.comment-list-wrapper .user-comment-img.sub .wrap-wall:before {
     content: "";
     background-image: url(/public/img/arrow-reply.svg);
     background-repeat: no-repeat;
     width: 18px;
     position: absolute;
-    left: 0;
-    top: 13px;
+    left: -28px;
+    top: 22px;
     height: 18px;
 }
 
@@ -177,8 +204,11 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    font-family: "object-fit: cover;";
 }
 .comment-list-wrapper .main-comment-wrap-img{
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
 }
 .comment-list-wrapper .user-comment-img.sub .card-body{
@@ -188,4 +218,53 @@
     background-color: #35353505;
     padding: 50px 20px;
     box-shadow: 0 0 6px #353535;
+}
+/*responsive*/
+@media (max-width: 1199px) {
+    .comment-list-wrapper .user-comment-img.sub{
+        padding-left: 60px !important;
+    }
+    .comment-list-wrapper .card-body{
+        margin-right: 20px;
+    }
+}
+@media (max-width: 991px) {
+    .comment-list-wrapper .user-comment-img.sub{
+        padding-left: 26px !important;
+    }
+    .comment-list-wrapper .user-commmet-add .button-repl .btn{
+        padding: 13px 15px;
+    }
+    .comment-list-wrapper .button-comment{
+        max-width: 250px;
+    }
+    .comment-list-wrapper .user-comment-img{
+        margin-top: 25px;
+    }
+    .comment-list-wrapper .user-add-comment-secondry{
+        margin-top: 15px;
+    }
+}
+@media (max-width: 575px) {
+    .comment-list-wrapper .left-photo{
+        padding-left: 0;
+    }
+    .comment-list-wrapper .right-comments{
+        padding: 0 0 0 15px;
+    }
+    .comment-list-wrapper .user-comment-img.sub .wrap-wall:before{
+        left: -19px;
+    }
+    .comment-list-wrapper .user-comment-img.sub{
+        padding-left: 16px !important;
+    }
+    .comment-list-wrapper .card.arrow.left{
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .comment-list-wrapper .card-body{
+        max-width: 100%;
+        flex: auto;
+        margin-right: 0;
+    }
 }
