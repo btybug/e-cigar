@@ -125,6 +125,7 @@ function App() {
     tree: null,
     dragElementOfTree: null,
     makeTreeFolder: function (data) {
+      console.log('data', data)
       const get_folder_items_tree = self.events.get_folder_items_tree;
       $('document').ready(
           function () {
@@ -185,7 +186,7 @@ function App() {
                     ;
                   }
                   ;
-                  if( !data.otherNode ){
+                  if( !data.otherNode ) {
                     // transfer(data.node.key)
                     if($('.start').last()[0].classList.contains('file') && $('.start').last()[0].dataset) {
                       if (data.hitMode == 'after' || data.hitMode == 'before') {
@@ -254,10 +255,11 @@ function App() {
           });
     },
     makeBreadCrumbsItem(item) {
+      console.log(item)
       return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
           item.id
           }" data-id="${item.id}" bb-media-click="get_folder_items" >
-            <a>${item.slug}</a>
+            <a>${item.name}</a>
             </li>`;
     },
     editNameModal(id, name) {
@@ -648,11 +650,17 @@ function App() {
     }
   };
   this.helpers = {
-    makeBreadCrumbs(id) {
+    makeBreadCrumbs(id, res) {
       let check = false;
+      console.log('breadcrumbs', res);
       let breadCrumbsListItems = document.querySelectorAll(
           ".bread-crumbs-list-item"
       );
+      // $('document').ready(function() {
+      //   const tree = `f${$("#folder-list").fancytree("getTree").getOption('name')}`
+      //   console.log('tree', tree);
+      // })
+
       let singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
       breadCrumbsListItems.forEach((item, index) => {
         if (check) {
@@ -660,16 +668,15 @@ function App() {
           return;
         }
         if (item == singleItem) {
-        item.classList.add("disabled");
-        item.classList.remove("active");
-        // item.removeAttribute("data-id");
-        check = true;
-      } else {
-        item.classList.add("active");
-        item.classList.remove("disabled");
-      }
-    })
-      ;
+          item.classList.add("disabled");
+          item.classList.remove("active");
+          // item.removeAttribute("data-id");
+          check = true;
+        } else {
+          item.classList.add("active");
+          item.classList.remove("disabled");
+        }
+    });
     },
     showUploaderContainer() {
       document
@@ -759,9 +766,8 @@ function App() {
         let breadCrumbsList = document.querySelector(
             ".bread-crumbs-list"
         );
-        breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(
-            res.settings
-        );
+        console.log(breadCrumbsList)
+        breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(res.data);
         mainContainer.innerHTML = "";
         res.data.children.forEach((folder, index) => {
           var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
@@ -781,7 +787,8 @@ function App() {
           );
         }
         globalFolderId = res.settings.id;
-        self.helpers.makeBreadCrumbs(res.settings.id);
+        console.log(res);
+        self.helpers.makeBreadCrumbs(res.settings.id, res);
         self.helpers.makeDnD();
         cb ? cb() : null;
       }
