@@ -812,7 +812,6 @@ textarea {
 /*page new header*/
 .profile-header {
     position: relative;
-    overflow: hidden;
     margin-bottom: 30px;
     margin-top: 20px;
 }

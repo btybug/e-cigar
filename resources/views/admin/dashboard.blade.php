@@ -27,6 +27,7 @@
                         <h4 class="m-t-10 m-b-5">{{ Auth::user()->name }}</h4>
                         <p class="m-b-10">{{ Auth::user()->role->title }}</p>
                         {{--<a href="#" class="btn btn-xs btn-info">Edit Profile</a>--}}
+
                     </div>
 
                 </div>
@@ -35,6 +36,18 @@
                     <li class="nav-item"><a href="{{ route('admin_dashboard') }}" class="nav-link active">Dashboard</a>
                     </li>
                     <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}" class="nav-link ">Profile</a>
+                    </li>
+                    <li class="dropdown pull-right">
+                        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i>Create new</button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{!! route('admin_staff_new') !!}">Staff</a>
+                                <a href="#">Customer</a>
+                                <a href="{!! route('admin_stock_new') !!}">Product</a>
+                                <a href="http://e-cigar.com/admin/tools/attributes/new">Item</a>
+                                <a href="{!! route('admin_blog_create') !!}">Post</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 
