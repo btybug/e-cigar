@@ -617,4 +617,132 @@ return [
         ],
 
     ],
+    'settings' => [
+        'general' => [
+            'name' => 'Email Templates',
+            'routes' => [
+                'admin_settings_general',
+                'admin_settings_accounts',
+                'admin_settings_regions',
+                'post_admin_settings_regions',
+                'admin_settings_footer',
+                'admin_settings_tc',
+                'admin_settings_about_us',
+            ],
+            'description' => 'Able to see blog page',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit Email Template',
+                    'routes' => [
+                        'post_admin_settings_save_general',
+                        'post_admin_settings_accounts',
+                        'post_admin_settings_footer',
+                        'post_admin_settings_tc',
+                        'post_admin_settings_about_us',
+                    ],
+                    'description' => 'Able to Edit status',
+                ],
+            ],
+
+        ],
+        'connections' => [
+            'name' => 'connections',
+            'routes' => [
+                'admin_settings_connections',
+            ],
+            'description' => 'Able to see blog page',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit Email Template',
+                    'routes' => [
+                        'post_admin_settings_connections',
+                    ],
+                    'description' => 'Able edit connections',
+                ],
+            ],
+
+        ],
+        'languages' => [
+            'name' => 'Languages',
+            'routes' => [
+                'admin_settings_languages',
+            ],
+            'description' => 'Able to see Languages',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit Language',
+                    'routes' => [
+                        'admin_settings_language_manager',
+                        'admin_settings_language_manager_post',
+                        'admin_settings_set_language_default',
+                        'admin_settings_languages_edit',
+                        'post_admin_settings_get_languages',
+                    ],
+                    'description' => 'Able edit Languages',
+                ], 'create' => [
+                    'name' => 'Edit Language',
+                    'routes' => [
+                        'admin_settings_languages_new',
+                        'admin_settings_languages_new_post',
+                    ],
+                    'description' => 'Able edit Languages',
+                ],
+            ],
+
+        ],
+        'store' => [
+            'name' => 'Shipping',
+            'routes' => [
+                'admin_settings_store',
+                'admin_settings_shipping',
+                'admin_settings_couriers',
+                'admin_settings_store_gifts',
+                'admin_settings_tax_rates',
+                'admin_settings_payment_gateways',
+
+
+            ],
+            'description' => 'Able to see Languages',
+            'children' => [
+                'edit' => [
+                    'name' => 'Edit Language',
+                    'routes' => [
+                        'post_admin_settings_store',
+                        'post_admin_settings_store_currency_data',
+                        'admin_settings_search-find-region',
+                        'admin_settings_geo_zones_new',
+                        'admin_store_shipping_zone_region_find',
+                        'admin_settings_search-payment-options',
+                        'admin_settings_geo_zone_save',
+                        'admin_settings_courier_edit',
+                        'admin_settings_courier_save',
+                        'post_admin_couriers_enable',
+                        'admin_settings_store_gifts_manage',
+                        'post_admin_settings_store_gifts_manage',
+                        'admin_settings_delivery',
+                        'get_admin_settings_tax_create_or_update',
+                        'post_admin_settings_tax_create_or_update',
+                        'post_admin_payment_gateways_enable',
+                        'admin_payment_gateways_stripe',
+                        'post_admin_payment_gateways_stripe',
+                        'admin_payment_gateways_cash',
+                        'post_admin_payment_gateways_cash',
+
+                    ],
+                    'description' => 'Able edit Languages',
+                ],
+            ],
+
+        ],
+        'events' => [
+            'name' => 'Events',
+            'routes' => [
+                'admin_settings_events',
+            ],
+            'description' => 'Able to see Events',
+            'children' => [],
+
+        ],
+
+    ],
 ];
