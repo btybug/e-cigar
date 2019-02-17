@@ -1,3 +1,4 @@
+//********shortAjax********start
 const shortAjax = function (URL, obj = {}, cb) {
   fetch(URL, {
     method: "post",
@@ -21,7 +22,9 @@ const shortAjax = function (URL, obj = {}, cb) {
         console.log(error);
       });
 };
+//********shortAjax********end
 
+//********normAjax********start
 const normAjax = function (URL, obj = {}, cb) {
   $.ajax({
     type: "post",
@@ -46,6 +49,8 @@ const normAjax = function (URL, obj = {}, cb) {
     }
   });
 };
+//********normAjax********end
+
 /*
  Helpers
  **TYPES**
@@ -54,12 +59,34 @@ const normAjax = function (URL, obj = {}, cb) {
  bb-media-click="fodler" || Get current folder item if bb-media-type="folder"
  */
 
-function App() {
-  var self = this;
-  var globalFolderId = 1;
+//********App********start
+//App includes all methods for media page
+const App = function() {
+  let globalFolderId = 1;
+
+  //********App -> htmlMaker********start
+  //htmlMaker includes all methods to create html markup
+
   this.htmlMaker = {
-    makeFolder: function (data) {
-      return `<div draggable="true"  data-id="${data.id}"  class="file ">
+    tree: null,
+    dragElementOfTree: null,
+    transfer: (f, p, root) => {
+      this.requests.transferFolder(
+        {
+          folder_id: Number(f),
+          parent_id: root === 1 ? Number(1) : Number(p),
+          access_token: "string"
+        },
+        () => {
+        const x = $("#folder-list").fancytree("getTree");
+        const folder = x.getNodeByKey('' + f);
+        folder.moveTo(x.getNodeByKey('' + p));
+      });
+    },
+
+    //********App -> htmlMaker -> makeFolder********start
+    makeFolder: (data) => {
+      return (`<div draggable="true"  data-id="${data.id}"  class="file ">
             <a href="#"  data-id="${
           data.id
           }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
@@ -79,10 +106,13 @@ function App() {
                   <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
                 </div>
             </a>
-        </div>`;
+        </div>`);
     },
-    makeImage: function (data) {
-      return `<div draggable="true" data-id="${data.id}" class="file">
+    //********App -> htmlMaker -> makeFolder********end
+
+    //********App -> htmlMaker -> makeImage********start
+    makeImage: (data) => {
+      return (`<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
 
@@ -101,190 +131,119 @@ function App() {
               <button bb-media-click="edit_image" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
           </div>
         </a>
-    </div>`;
+    </div>`);
     },
-//         makeTreeFolder: function(data) {
-//             return `<li  bb-media-type="tree-folder" bb-media-click="get_folder_items" data-trre-id="${
-//                 data.id
-//             }" data-id="${
-//                 data.id
-//             }" style="display: flex; justify-content: space-between; cursor: pointer;">
-// <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
-//                   <div style="margin-right: 5px">
-//                   <span data-id="${
-//                       data.id
-//                   }" >${data.title}</span>
-//                   </div></div>
-//                   <!--<div>-->
-//                     <!--<button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>-->
-//                     <!--<button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>-->
-//                     <!--<button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>-->
-//                   <!--</div>-->
-//                 </li>`;
-//         },
-    tree: null,
-    dragElementOfTree: null,
-    makeTreeFolder: function (data) {
-      console.log('data', data)
-      const get_folder_items_tree = self.events.get_folder_items_tree;
-      $('document').ready(
-          function () {
-            const data_root = {
-              folder: true,
-              key: 1,
-              name: 'Drive',
-              title: 'Drive',
-              childrenCount: 0,
-              id: 1,
-              itemsCount: 0,
-              prefix: null,
-              text: "1",
-              url: "http://e-cigar.loc/public/media/drive",
-              children: data
-            };
-            $("#folder-list").fancytree({
-              extensions: ["edit", "dnd5" ],
-              source: data,
-              focusOnClick: true,
-              debugLevel: 0,
-              selectMode: 4,
-              dnd5: {
-                autoExpandMS: 1500,
-                preventRecursiveMoves: true,
-                preventVoidMoves: true,
-                preventNonNodes: false,
-                dragStart: function (node, data) {
-                  self.htmlMaker.dragElementOfTree = node.key;
-                  return true;
-                },
-                dragEnd: function (node, data) {
-                },
-                dragEnter: function (node, data) {
-                  return true;
-                },
-                dragOver: function (node, data) {
-                },
-                dragLeave: function (node, data) {
-                },
-                dragDrop: function (node, data) {
+    //********App -> htmlMaker -> makeImage********end
 
-                  const transfer = (f, p) =>
-                  {
-                    self.requests.transferFolder(
-                        {
-                          folder_id: Number(f),
-                          parent_id: Number(p),
-                          access_token: "string"
-                        },
-                        () => {
-                      const x = $("#folder-list").fancytree("getTree");
-                    let folder;
-                    folder = x.getNodeByKey('' + f);
-                    folder.moveTo(x.getNodeByKey('' + p));
-                  }
-                  )
-                    ;
-                  }
-                  ;
-                  if( !data.otherNode ) {
-                    // transfer(data.node.key)
-                    if($('.start').last()[0].classList.contains('file') && $('.start').last()[0].dataset) {
-                      if (data.hitMode == 'after' || data.hitMode == 'before') {
-                        if (node.getLevel() == 1) {
-                          self.requests.transferFolder(
-                              {
-                                folder_id: Number($('.start').last()[0].dataset.id),
-                                parent_id: Number(1),
-                                access_token: "string"
-                              },
-                              () => {
-                            const x = $("#folder-list").fancytree("getTree");
-                          let folder;
-                          folder = x.getNodeByKey('' + $('.start').last()[0].dataset.id);
-                          folder.moveTo(x.getNodeByKey('' + data.node.parent.key));
-                        }
-                        )
-                        } else {
-                          transfer($('.start').last()[0].dataset.id, data.node.parent.key);
-                        }
-                      } else {
-                        transfer($('.start').last()[0].dataset.id, data.node.key)
-                      }
-                    }
+    //********App -> htmlMaker -> makeTreeFolder********start
+    makeTreeFolder: (data) => {
 
-                    // transfer($('.start').last()[0].dataset.id, data.node.key)
+      $('document').ready(() => {
 
-                    return;
-                  }
+        //********fancytree********start
+        $("#folder-list").fancytree({
+          extensions: ["edit", "dnd5" ],
+          source: data,
+          focusOnClick: true,
+          debugLevel: 0,
+          selectMode: 4,
+          //********dnd5********start
+          dnd5: {
+            autoExpandMS: 1500,
+            preventRecursiveMoves: true,
+            preventVoidMoves: true,
+            preventNonNodes: false,
+            dragStart: (node, data) => {
+              this.htmlMaker.dragElementOfTree = node.key;
+              return true;
+            },
+            dragEnd: (node, data) => { },
+            dragEnter: (node, data) => {
+              return true;
+            },
+            dragOver: (node, data) => { },
+            dragLeave: (node, data) => { },
+            //********dragDrop********start
+            dragDrop: (node, data) => {
+              const transfer = this.htmlMaker.transfer;
 
+              if( !data.otherNode ) {
+                if($('.start').last()[0].classList.contains('file') && $('.start').last()[0].dataset) {
                   if (data.hitMode == 'after' || data.hitMode == 'before') {
                     if (node.getLevel() == 1) {
-                      self.requests.transferFolder(
-                          {
-                            folder_id: Number(data.otherNodeData.key),
-                            parent_id: Number(1),
-                            access_token: "string"
-                          },
-                          () => {
-                        const x = $("#folder-list").fancytree("getTree");
-                      let folder;
-                      folder = x.getNodeByKey('' + data.otherNodeData.key);
-                      folder.moveTo(x.getNodeByKey('' + data.node.parent.key));
-                    }
-                    )
-                    } else {
-                      transfer(data.otherNodeData.key, data.node.parent.key);
-                    }
-                  } else {
-                    transfer(data.otherNodeData.key, node.key)
-                  }
-                  self.htmlMaker.dragElementOfTree = null;
+                      transfer($('.start').last()[0].dataset.id, data.node.parent.key, 1);
+                    } else { transfer($('.start').last()[0].dataset.id, data.node.parent.key); }
+                  } else { transfer($('.start').last()[0].dataset.id, data.node.key); }
                 }
-              },
-              activate: function (event, data) {
-                if (data.node.isFolder()) {
-                  get_folder_items_tree(data.node.data.id);
-                }
+                return;
               }
-            });
 
-            $('ul.fancytree-container').css({
-              border: 'none',
-              outline: 'none'
-            });
-          });
-    },
-    makeBreadCrumbsItem(item) {
-      console.log(item)
-      return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
-          item.id
-          }" data-id="${item.id}" bb-media-click="get_folder_items" >
-            <a>${item.name}</a>
-            </li>`;
-    },
-    editNameModal(id, name) {
-      return `<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
-    <div class="modal-dialog">
+              if (data.hitMode == 'after' || data.hitMode == 'before') {
+                if (node.getLevel() == 1) {
+                  transfer(data.otherNodeData.key, data.node.parent.key, 1);
+                } else {
+                  transfer(data.otherNodeData.key, data.node.parent.key);
+                }
+              } else {
+                transfer(data.otherNodeData.key, node.key);
+              }
+              this.htmlMaker.dragElementOfTree = null;
+            }
+            //********dragDrop********end
+          },
+          //********dnd5********end
+          activate: (event, data) => {
+            if (data.node.isFolder()) {
+              this.events.get_folder_items_tree(data.node.data.id);
+            }
+          }
+        });
+        //********fancytree********end
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
-          <h4 class="modal-title">Change title</h4>
-        </div>
-        <div class="modal-body">
-              <input class="form-control edit-title-input" value="${name}">
-        </div>
-        <div class="modal-footer">
-         <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                <button type="button" data-id=${id} bb-media-click="close_name_modal" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
-        </div>
-      </div>
-
-    </div>
-  </div>`;
+        $('ul.fancytree-container').css({
+          border: 'none',
+          outline: 'none'
+        });
+      });
     },
-    fullInfoModal(data, countId) {
+    //********App -> htmlMaker -> makeTreeFolder********end
+
+    //********App -> htmlMaker -> makeBreadCrumbsItem********start
+    makeBreadCrumbsItem: (item) => {
+      return (`<li class="bread-crumbs-list-item disabled" data-crumbs-id="${item.id}" 
+                   data-id="${item.id}" bb-media-click="get_folder_items" >
+                 <a>${item.name}</a>
+               </li>`);
+    },
+    //********App -> htmlMaker -> makeBreadCrumbsItem********end
+
+    //********App -> htmlMaker -> editNameModal********start
+    editNameModal: (id, name) => {
+      return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+                <div class="modal-dialog">
+            
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
+                      <h4 class="modal-title">Change title</h4>
+                    </div>
+                    <div class="modal-body">
+                          <input class="form-control edit-title-input" value="${name}">
+                    </div>
+                    <div class="modal-footer">
+                     <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                            <button type="button" data-id=${id} bb-media-click="close_name_modal" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
+                    </div>
+                  </div>
+            
+                </div>
+              </div>`);
+    },
+    //********App -> htmlMaker -> editNameModal********end
+
+    //********App -> htmlMaker -> fullInfoModal********start
+    fullInfoModal: (data, countId) => {
       return `<div class="adminmodal modal fade in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-8 p-0">
@@ -648,20 +607,21 @@ function App() {
             </div>
         </div>`;
     }
+    //********App -> htmlMaker -> fullInfoModal********end
   };
+  //********App -> htmlMaker********end
+
+  //********App -> helpers********start
   this.helpers = {
-    makeBreadCrumbs(id, res) {
+
+    //********App -> helpers -> makeBreadCrumbs********start
+    makeBreadCrumbs: (id, res) => {
       let check = false;
-      console.log('breadcrumbs', res);
-      let breadCrumbsListItems = document.querySelectorAll(
+      const breadCrumbsListItems = document.querySelectorAll(
           ".bread-crumbs-list-item"
       );
-      // $('document').ready(function() {
-      //   const tree = `f${$("#folder-list").fancytree("getTree").getOption('name')}`
-      //   console.log('tree', tree);
-      // })
 
-      let singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
+      const singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
       breadCrumbsListItems.forEach((item, index) => {
         if (check) {
           item.remove();
@@ -670,21 +630,27 @@ function App() {
         if (item == singleItem) {
           item.classList.add("disabled");
           item.classList.remove("active");
-          // item.removeAttribute("data-id");
           check = true;
         } else {
           item.classList.add("active");
           item.classList.remove("disabled");
         }
-    });
+      });
     },
-    showUploaderContainer() {
+    //********App -> helpers -> makeBreadCrumbs********end
+
+    //********App -> helpers -> showUploaderContainer********start
+    showUploaderContainer: () => {
       document
           .querySelector(".uploader-container")
           .classList.toggle("d-none");
       return false;
     },
-    makeDnD() {
+    //********App -> helpers -> showUploaderContainer********end
+
+    //********App -> helpers -> makeDnD********start
+    makeDnD: () => {
+      const self = this;
       document
         .querySelectorAll(`[data-type="main-container"] [draggable="true"]`)
         .forEach(elm => {
@@ -716,7 +682,6 @@ function App() {
         });
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
-          console.log(self.htmlMaker.dragElementOfTree);
           let nodeId = self.htmlMaker.dragElementOfTree || e.dataTransfer.getData("node_id");
           let parrentId = e.target
               .closest(".file")
@@ -749,221 +714,246 @@ function App() {
         });
       });
     }
+    //********App -> helpers -> makeDnD********end
   };
+  //********App -> helpers********end
+
+  //********App -> requests********start
   this.requests = {
-    drawingItems(obj = {
-                   folder_id: globalFolderId,
-                   files: true,
-                   access_token: "string"
-                 },
-                 tree = false,
-                 cb) {
+
+    //********App -> requests -> drawingItems********start
+    drawingItems: (obj = {
+                     folder_id: globalFolderId,
+                     files: true,
+                     access_token: "string"
+                   },
+                   tree = false,
+                   cb) => {
       shortAjax("/api/api-media/get-folder-childs", obj, res => {
-      if (!res.error) {
-        let mainContainer = document.querySelector(
-            `[data-type="main-container"]`
-        );
-        let breadCrumbsList = document.querySelector(
-            ".bread-crumbs-list"
-        );
-        console.log(breadCrumbsList)
-        breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(res.data);
-        mainContainer.innerHTML = "";
-        res.data.children.forEach((folder, index) => {
-          var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeFolder(
-              folder
-          )}</div>`;
-        mainContainer.innerHTML += html;
-      });
-        res.data.items.forEach((image, index) => {
-          let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${self.htmlMaker.makeImage(
-              image
-          )}</div>`;
-        mainContainer.innerHTML += html;
-      });
-        if (tree) {
-          self.htmlMaker.makeTreeFolder(
-              res.data.children
+        if (!res.error) {
+          const mainContainer = document.querySelector(
+              `[data-type="main-container"]`
           );
+          const breadCrumbsList = document.querySelector(
+              ".bread-crumbs-list"
+          );
+          breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(res.data);
+          mainContainer.innerHTML = "";
+          res.data.children.forEach((folder, index) => {
+            var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
+                folder
+            )}</div>`;
+            mainContainer.innerHTML += html;
+          });
+          res.data.items.forEach((image, index) => {
+            let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
+                image
+            )}</div>`;
+            mainContainer.innerHTML += html;
+          });
+          if (tree) {
+            this.htmlMaker.makeTreeFolder(res.data.children);
+          }
+          globalFolderId = res.settings.id;
+          this.helpers.makeBreadCrumbs(res.settings.id, res);
+          this.helpers.makeDnD();
+          cb ? cb() : null;
         }
-        globalFolderId = res.settings.id;
-        console.log(res);
-        self.helpers.makeBreadCrumbs(res.settings.id, res);
-        self.helpers.makeDnD();
-        cb ? cb() : null;
-      }
-    });
+      });
     },
-    removeTreeFolder(obj = {}, cb) {
+    //********App -> requests -> drawingItems********end
+
+    //********App -> requests -> removeTreeFolder********start
+    removeTreeFolder: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-remove-folder", obj, res => {
         if (!res.error) {
-          self.requests.drawingItems();
+          this.requests.drawingItems();
           cb();
         }
       });
     },
-    saveSeo(obj = {}, cb) {
+    //********App -> requests -> removeTreeFolder********end
+
+    //********App -> requests -> saveSeo********start
+    saveSeo: (obj = {}, cb) => {
       normAjax("/api/api-media/save-seo", obj, res => {
         if (!res.error) {
           cb();
         }
       });
     },
-    editImageName(obj = {}, cb) {
+    //********App -> requests -> saveSeo********end
+
+  //********App -> requests -> editImageName********start
+    editImageName: (obj = {}, cb) => {
       shortAjax("/api/api-media/rename-item", obj, res => {
         if (!res.error) {
           cb(res);
         }
       });
     },
-    transferImage(obj = {}, cb) {
+  //********App -> requests -> editImageName********end
+
+  //********App -> requests -> transferImage********start
+    transferImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/transfer-item", obj, res => {
         if (!res.error) {
-          self.requests.drawingItems();
+          this.requests.drawingItems();
         }
       });
     },
-    transferFolder(obj = {}, cb) {
+  //********App -> requests -> transferImage********end
+
+  //********App -> requests -> transferFolder********start
+    transferFolder: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-sort-folder", obj, res => {
         if (!res.error) {
-          self.requests.drawingItems();
+          this.requests.drawingItems();
           cb()
         }
       });
     },
-    removeImage(obj = {}, cb) {
+  //********App -> requests -> transferFolder********end
+
+  //********App -> requests -> removeImage********start
+    removeImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-remove-item", obj, res => {
-        if (
-      !res.error
-    )
-      {
-        self.requests.drawingItems();
-      }
-    })
-      ;
+        if (!res.error) {
+          this.requests.drawingItems();
+        }
+      });
     },
-    addNewFolder(obj = {}, cb) {
+  //********App -> requests -> removeImage********end
+
+  //********App -> requests -> addNewFolder********start
+    addNewFolder: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-create-folder-child", obj, res => {
-        if (
-      !res.error
-    )
-      {
-        self.requests.drawingItems();
-        cb(res)
-      }
-    })
-      ;
+        if (!res.error) {
+          this.requests.drawingItems();
+          cb(res)
+        }
+      });
     },
-    getImageDetails(obj = {}, cb) {
-      shortAjax("/api/api-media/get-item-details", obj, function (res) {
+  //********App -> requests -> addNewFolder********end
+
+  //********App -> requests -> getImageDetails********start
+    getImageDetails: (obj = {}, cb) => {
+      shortAjax("/api/api-media/get-item-details", obj, res => {
         if (!res.error) {
           cb(res.data);
         }
       });
     }
-  };
+  //********App -> requests -> getImageDetails********end
 
-  this.getInitailData = function () {
+  };
+  //********App -> requests********end
+
+  //********App -> getInitailData********start
+  this.getInitailData = () => {
     this.requests.drawingItems(undefined, true);
   };
-  this.init = function () {
-    $("#uploader")
-        .fileinput({
-          uploadAsync: false,
-          maxFileCount: 5,
-          showUpload: false,
-          showUploadedThumbs: false,
-          uploadExtraData: function () {
-            return {
-              _token: $("meta[name='csrf-token']").attr("content"),
-              folder_id: globalFolderId
-            };
-          }
-        })
-        .on("filebatchselected", function (event, files) {
-          $("#uploader").fileinput("upload");
-        })
-        .on("filebatchuploadsuccess", function (event, files) {
-          self.requests.drawingItems(undefined, true);
-          self.helpers.showUploaderContainer();
-          $("#uploader").fileinput("clear");
-        });
+  //********App -> getInitailData********end
+
+  //********App -> init********start
+  this.init = () => {
+    $("#uploader").fileinput({
+      uploadAsync: false,
+      maxFileCount: 5,
+      showUpload: false,
+      showUploadedThumbs: false,
+      uploadExtraData: () => {
+        return {
+          _token: $("meta[name='csrf-token']").attr("content"),
+          folder_id: globalFolderId
+        };
+      }
+    })
+    .on("filebatchselected", (event, files) => {
+      $("#uploader").fileinput("upload");
+    })
+    .on("filebatchuploadsuccess", (event, files) => {
+      this.requests.drawingItems(undefined, true);
+      this.helpers.showUploaderContainer();
+      $("#uploader").fileinput("clear");
+    });
     this.getInitailData();
   };
+  //********App -> init********end
+
+  //********App -> events********start
   this.events = {
 
-    save_seo(elm, e) {
+    //********App -> events -> save_seo********start
+    save_seo: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      self.requests.saveSeo($(elm).closest('form').serializeArray());
+      this.requests.saveSeo($(elm).closest('form').serializeArray());
     },
-    // remove_tree_folder(elm, e) {
-    //     e.stopPropagation();
-    //     e.preventDefault();
-    //     let id = elm.closest("li").getAttribute("data-id");
-    //     self.requests.removeTreeFolder(
-    //         {
-    //             folder_id: Number(id),
-    //             trash: 1,
-    //             access_token: "string"
-    //         },
-    //         () => elm.closest("li").remove()
-    //     );
-    // },
-    remove_folder(elm, e) {
+    //********App -> events -> save_seo********end
+
+    //********App -> events -> remove_folder********start
+    remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      let id = elm.closest(".file").getAttribute("data-id");
+      const id = elm.closest(".file").getAttribute("data-id");
 
       const removeTree = function () {
-        var x = $("#folder-list").fancytree("getTree");
-        var folder;
-        folder = x.getNodeByKey('' + id);
+        const x = $("#folder-list").fancytree("getTree");
+        const folder = x.getNodeByKey('' + id);
         folder.remove()
       };
 
-      self.requests.removeTreeFolder(
+      this.requests.removeTreeFolder(
+        {
+          folder_id: Number(id),
+          trash: 1,
+          access_token: "string"
+        },
+        () => {
+          elm.closest(".folder-container").remove();
+          removeTree()
+        }
+      );
+    },
+    //********App -> events -> remove_folder********end
+
+    //********App -> events -> get_folder_items********start
+    get_folder_items: (elm, e) => {
+      const id = elm.closest("[data-id]").getAttribute("data-id");
+      if (id && !elm.classList.contains("disabled")) {
+        this.requests.drawingItems(
           {
             folder_id: Number(id),
-            trash: 1,
+            files: true,
+            access_token: "string"
+          }
+        );
+      }
+    },
+    //********App -> events -> get_folder_items********end
+
+    //********App -> events -> get_folder_items_tree********start
+    get_folder_items_tree: (id, e) => {
+      if (id) {
+        this.requests.drawingItems(
+          {
+            folder_id: Number(id),
+            files: true,
             access_token: "string"
           },
-          () => {
-        elm.closest(".folder-container").remove();
-      removeTree()
-    }
-    )
-      ;
-    },
-    get_folder_items(elm, e) {
-      let id = elm.closest("[data-id]").getAttribute("data-id");
-      if (id && !elm.classList.contains("disabled")) {
-        self.requests.drawingItems(
-            {
-              folder_id: Number(id),
-              files: true,
-              access_token: "string"
-            }
+          false
         );
       }
     },
-    get_folder_items_tree(id, e) {
-      if (id) {
-        self.requests.drawingItems(
-            {
-              folder_id: Number(id),
-              files: true,
-              access_token: "string"
-            },
-            false
-        );
-      }
-    },
-    add_new_folder(elm, e) {
-      let inputElement = document.querySelector(".new-folder-input");
-      let name = inputElement.value;
-      var x = $("#folder-list").fancytree("getTree");
-      var folder;
+    //********App -> events -> get_folder_items_tree********end
+
+    //********App -> events -> add_new_folder********start
+    add_new_folder: (elm, e) => {
+      const inputElement = document.querySelector(".new-folder-input");
+      const name = inputElement.value;
+      const x = $("#folder-list").fancytree("getTree");
+      let folder;
       if (globalFolderId !== 1) {
         folder = x.getNodeByKey('' + globalFolderId);
       } else {
@@ -977,142 +967,172 @@ function App() {
           key: res.data.key
         })
       };
-      self.requests.addNewFolder(
-          {
-            folder_id: globalFolderId,
-            folder_name: name,
-            access_token: "string"
-          },
-          createTree
+      this.requests.addNewFolder(
+        {
+          folder_id: globalFolderId,
+          folder_name: name,
+          access_token: "string"
+        },
+        createTree
       );
       inputElement.value = '';
     },
-    open_full_modal(elm, e) {
+    //********App -> events -> add_new_folder********end
+
+    //********App -> events -> open_full_modal********start
+    open_full_modal: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      let id = e.target.closest(".file").getAttribute("data-id");
-      let countId = e.target
+      const id = e.target.closest(".file").getAttribute("data-id");
+      const countId = e.target
           .closest(".file-box")
           .getAttribute("data-image");
-      self.requests.getImageDetails({item_id: id}, res => {
-        document.body.innerHTML += self.htmlMaker.fullInfoModal(
+      this.requests.getImageDetails({item_id: id}, res => {
+        document.body.innerHTML += this.htmlMaker.fullInfoModal(
           res,
           Number(countId)
-      );
-    })
-      ;
+        );
+      });
     },
-    select_item(elm, e) {
+    //********App -> events -> open_full_modal********end
 
-      let id = e.target.closest(".file").getAttribute("data-id");
+    //********App -> events -> select_item********start
+    select_item: (elm, e) => {
+      const id = e.target.closest(".file").getAttribute("data-id");
       if (e.type === "dblclick") {
         e.target.closest(".file-box").classList.remove("active");
-        let countId = e.target
+        const countId = e.target
             .closest(".file-box")
             .getAttribute("data-image");
-        self.requests.getImageDetails({item_id: id}, res => {
-          var html = self.htmlMaker.fullInfoModal(
-              res,
-              Number(countId)
+        this.requests.getImageDetails({item_id: id}, res => {
+          var html = this.htmlMaker.fullInfoModal(
+            res,
+            Number(countId)
           );
-
-        return $('body').append(html);
-      })
-        ;
+          return $('body').append(html);
+        });
       } else if (e.type === "click") {
         e.target.closest(".file-box").classList.toggle("active");
       }
     },
-    modal_load_image(elm, e) {
+    //********App -> events -> select_item********end
+
+    //********App -> events -> modal_load_image********start
+    modal_load_image: (elm, e) => {
       if (!e.target.closest("button").disabled) {
-        let id = e.target.closest("button").getAttribute("data-id");
-        let imageId = document
+        const id = e.target.closest("button").getAttribute("data-id");
+        const imageId = document
             .querySelector(`[data-image="${id}"] [data-id]`)
             .getAttribute("data-id");
-        self.requests.getImageDetails({item_id: imageId}, res => {
-          document.querySelectorAll(".adminmodal ").forEach(item => item.remove()
-      )
-        ;
-        document.body.innerHTML += self.htmlMaker.fullInfoModal(
+        this.requests.getImageDetails({item_id: imageId}, res => {
+          document.querySelectorAll(".adminmodal ").forEach(item => item.remove());
+          document.body.innerHTML += this.htmlMaker.fullInfoModal(
             res,
             Number(id)
-        );
-      })
-        ;
+          );
+        });
       }
     },
-    remove_image(elm, e) {
+    //********App -> events -> modal_load_image********end
+
+    //********App -> events -> remove_image********start
+    remove_image: (elm, e) => {
       e.preventDefault();
       e.stopPropagation();
-      let id = e.target.closest(".file").getAttribute("data-id");
-      self.requests.removeImage(
-          {
-            item_id: Number(id),
-            trash: true,
-            access_token: "string"
-          }
+      const id = e.target.closest(".file").getAttribute("data-id");
+      this.requests.removeImage(
+        {
+          item_id: Number(id),
+          trash: true,
+          access_token: "string"
+        }
       );
     },
-    edit_image(elm, e) {
+    //********App -> events -> remove_image********end
+
+    //********App -> events -> edit_image********start
+    edit_image: (elm, e) => {
       e.preventDefault();
       e.stopPropagation();
-      let id = e.target.closest(".file").getAttribute("data-id");
-      let name = e.target
+      const id = e.target.closest(".file").getAttribute("data-id");
+      const name = e.target
           .closest(".file")
           .querySelector(".file-name")
           .textContent.trim();
-      document.body.innerHTML += self.htmlMaker.editNameModal(id, name);
+      document.body.innerHTML += this.htmlMaker.editNameModal(id, name);
     },
-    save_edited_title(elm, e) {
-      let itemId = e.target.getAttribute("data-id");
-      let name = document.querySelector(".edit-title-input").value;
-      self.requests.editImageName(
-          {
-            item_id: Number(itemId),
-            item_name: name,
-            access_token: "string"
-          },
-          false
+    //********App -> events -> edit_image********end
+
+    //********App -> events -> save_edited_title********start
+    save_edited_title: (elm, e) => {
+      const itemId = e.target.getAttribute("data-id");
+      const name = document.querySelector(".edit-title-input").value;
+      this.requests.editImageName(
+        {
+          item_id: Number(itemId),
+          item_name: name,
+          access_token: "string"
+        },
+        false
       );
     },
-    show_uploader(elm, e) {
-      self.helpers.showUploaderContainer();
+    //********App -> events -> save_edited_title********end
+
+    //********App -> events -> show_uploader********start
+    show_uploader: (elm, e) => {
+      this.helpers.showUploaderContainer();
     },
-    close_full_modal(elm, e) {
+    //********App -> events -> show_uploader********end
+
+    //********App -> events -> close_full_modal********start
+    close_full_modal: (elm, e) => {
       e.target.closest(".modal").remove();
     },
-    folder_level_up(elm, e) {
-      let allActiveBreadCrumbs = document.querySelectorAll(
+    //********App -> events -> close_full_modal********end
+
+    //********App -> events -> folder_level_up********start
+    folder_level_up: (elm, e) => {
+      const allActiveBreadCrumbs = document.querySelectorAll(
           ".bread-crumbs-list-item.active"
       );
       if (allActiveBreadCrumbs.length) {
-        let oneLevelUpID = allActiveBreadCrumbs[
-        allActiveBreadCrumbs.length - 1
+        const oneLevelUpID = allActiveBreadCrumbs[
+          allActiveBreadCrumbs.length - 1
             ].getAttribute("data-id");
-        self.requests.drawingItems(
-            {
-              folder_id: Number(oneLevelUpID),
-              files: true,
-              access_token: "string"
-            }
+        this.requests.drawingItems(
+          {
+            folder_id: Number(oneLevelUpID),
+            files: true,
+            access_token: "string"
+          }
         );
       }
     },
-    close_name_modal(elm, e) {
+    //********App -> events -> folder_level_up********end
+
+    //********App -> events -> close_name_modal********start
+    close_name_modal: (elm, e) => {
       e.target.closest(".custom_modal_edit").remove();
     }
+    //********App -> events -> close_name_modal********end
   };
+  //********App -> events********end
+
 }
+//********App********end
+
+
+
 const app = new App();
 app.init();
 
 $("body").on("click dblclick", `[bb-media-click]`, function (e) {
-  let attr = $(this).attr("bb-media-click");
+  const attr = $(this).attr("bb-media-click");
   app.events[attr](this, e);
 });
 
 $("body").on("click", `[data-tabaction]`, function (e) {
-  let id = $(this).attr("data-tabaction");
+  const id = $(this).attr("data-tabaction");
   $("body")
       .find(`[data-tabcontent]`)
       .removeClass("in");
@@ -1120,29 +1140,6 @@ $("body").on("click", `[data-tabaction]`, function (e) {
       .find(`[data-tabcontent="${id}"]`)
       .addClass("in");
 });
-
-// $("body").on("keydown");
-
-// document.addEventListener("keydown", function(e) {
-//     e.preventDefault();
-//     if (document.querySelector("#imageload")) {
-//         if (e.which === 39) {
-//             let elm = document.querySelector(".go-next-image");
-//             if (!elm.disabled) {
-//                 elm.click();
-//             }
-//         } else if (e.which === 37) {
-//             let elm = document.querySelector(".go-prev-image");
-//             if (!elm.disabled) {
-//                 elm.click();
-//             }
-//         } else if (e.which === 27) {
-//             document
-//                 .querySelectorAll(".adminmodal ")
-//                 .forEach(item => item.remove());
-//         }
-//     }
-// });
 
 $('.new-folder-input').on('keypress', function (ev) {
   ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
