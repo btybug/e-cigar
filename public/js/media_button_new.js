@@ -70,6 +70,7 @@ const App = function() {
   this.htmlMaker = {
     tree: null,
     dragElementOfTree: null,
+    currentId: null,
     transfer: (f, p, root) => {
       this.requests.transferFolder(
         {
@@ -81,6 +82,7 @@ const App = function() {
         const x = $("#folder-list").fancytree("getTree");
         const folder = x.getNodeByKey('' + f);
         folder.moveTo(x.getNodeByKey('' + p));
+        this.htmlMaker.currentId = null;
       });
     },
 
@@ -168,12 +170,12 @@ const App = function() {
               const transfer = this.htmlMaker.transfer;
 
               if( !data.otherNode ) {
-                if($('.start').last()[0].classList.contains('file') && $('.start').last()[0].dataset) {
+                if(this.htmlMaker.currentId) {
                   if (data.hitMode == 'after' || data.hitMode == 'before') {
                     if (node.getLevel() == 1) {
-                      transfer($('.start').last()[0].dataset.id, data.node.parent.key, 1);
-                    } else { transfer($('.start').last()[0].dataset.id, data.node.parent.key); }
-                  } else { transfer($('.start').last()[0].dataset.id, data.node.key); }
+                      transfer(this.htmlMaker.currentId, data.node.parent.key, 1);
+                    } else { transfer(this.htmlMaker.currentId, data.node.parent.key); }
+                  } else { transfer(this.htmlMaker.currentId, data.node.key); }
                 }
                 return;
               }
@@ -655,17 +657,19 @@ const App = function() {
         .querySelectorAll(`[data-type="main-container"] [draggable="true"]`)
         .forEach(elm => {
           elm.addEventListener("dragstart", function (e) {
-            let crt = this.cloneNode(true);
+            const crt = this.cloneNode(true);
             crt.className += " start";
             crt.style.position = "absolute";
             crt.style.top = "-10000px";
             crt.style.right = "-10000px";
             document.body.appendChild(crt);
-            let id = this.getAttribute("data-id");
+            const id = this.getAttribute("data-id");
             e.dataTransfer.setDragImage(crt, 0, 0);
             // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
             e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
             // setTimeout(() => (this.className = "invisible"), 0);
+        console.log(id)
+            self.htmlMaker.currentId = id
           });
         });
       document.querySelectorAll(".folder-container").forEach(folder => {
@@ -682,6 +686,7 @@ const App = function() {
         });
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
+          console.log(self.htmlMaker.dragElementOfTree)
           let nodeId = self.htmlMaker.dragElementOfTree || e.dataTransfer.getData("node_id");
           let parrentId = e.target
               .closest(".file")
@@ -711,6 +716,7 @@ const App = function() {
             );
           }
           self.htmlMaker.dragElementOfTree = null;
+          self.htmlMaker.currentId = null;
         });
       });
     }
@@ -1120,8 +1126,6 @@ const App = function() {
 
 }
 //********App********end
-
-
 
 const app = new App();
 app.init();
