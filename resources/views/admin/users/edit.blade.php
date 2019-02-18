@@ -15,11 +15,35 @@
                        <p class="text-muted mb-0">{!! ($user->role)?$user->role->title:'User' !!}</p>
                    </div>
                </div>
-                <div class="form-group mb-0 pull-right">
+
+                <div class="form-group pull-right">
+
                     {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
                     {!! Form::hidden('email',$user->email) !!}
                     <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
+                </div>
+
+                <div class="pull-right mr-10">
+                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#msgModal">Send message</button>
+                    <div id="msgModal" class="modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Send message</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    @include('admin.widgets.quick_email')
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
 
             </div>
