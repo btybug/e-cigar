@@ -846,6 +846,7 @@ textarea {
     background: #fff;
     height: 120px;
     width: 120px;
+    text-align: center;
 }
 
 .profile-header-img .dropzone:after{
