@@ -12824,12 +12824,32 @@ tr.notification-is_read {
     padding-left: 15px;
 }
 
-
-
-
-
-
-
+.tools-stikers--header{
+    display: flex;
+    justify-content: space-between;
+}
+.tools-stikers--header .mr-5{
+    margin-right: 5px;
+}
+.head-space-between{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.head-space-between h2{
+    margin: 0;
+}
+.head-space-between .bord-top{
+    padding: 0;
+    border: none;
+}
+.head-space-between .icon-plus{
+    margin-right: 5px;
+}
+.head-space-between ul{
+    margin-bottom: 0 !important;
+    flex: auto;
+}
 
 
 

@@ -49,17 +49,7 @@ $(function () {
 
 });
 
-function heightBlock(mainDiv, element) {
-    let countElement = 0;
-    $(element).each(function () {
-        countElement += $(this).outerHeight();
-    });
-    if ($(mainDiv).outerHeight() < countElement) {
-        $(mainDiv).css('display', 'block')
-    } else {
-        $(mainDiv).css('display', 'flex')
-    }
-}
+
 
 
 ////new
@@ -182,7 +172,7 @@ function heightBlock(mainDiv, element) {
 
     })
 
-    // cookies
+    // cookies: change content top styles 
     changeHeaderWhenIsCookie();
 
 
@@ -246,22 +236,44 @@ function openSidebar(btn, sidebar) {
 }
 
 function changeHeaderWhenIsCookie() {
-    if ($('.js-cookie-consent.cookie-consent').length) {
-
+    if ($('.js-cookie-consent.cookie-consent').css('display') !== 'none') {
         var cookieHeight = $('.js-cookie-consent.cookie-consent').height();
-        $('.main-header .header-top').css('top', cookieHeight);
-        var headerPaddingTop = parseInt($('.main-header').css('padding-top'));
 
+        $('.main-header .header-top').css('top', cookieHeight);
+
+        var headerPaddingTop = parseInt($('.main-header').css('padding-top'));
         var headerPaddingTopNew = headerPaddingTop + cookieHeight + 'px';
 
         $('.main-header').css('padding-top', headerPaddingTopNew);
 
         var headerHeight = $('.header-top').height();
+        var accountSelectPaddingTop = headerHeight + cookieHeight;
 
-        var accountSelectPT = headerHeight + cookieHeight;
+        $('.my-account--selects').css('top', accountSelectPaddingTop);
 
-        $('.my-account--selects').css('top', accountSelectPT)
+        $('.js-cookie-consent-agree').on('click', function () {
+            var resetHeaderPaddingTop =  headerPaddingTop + 'px';
+            $('.main-header').css('padding-top', resetHeaderPaddingTop);
+            $('.main-header .header-top').css('top', 0);
+
+            $('.my-account--selects').css('top', headerHeight);
+
+        })
 
 
     }
 }
+
+function heightBlock(mainDiv, element) {
+    let countElement = 0;
+    $(element).each(function () {
+        countElement += $(this).outerHeight();
+    });
+    if ($(mainDiv).outerHeight() < countElement) {
+        $(mainDiv).css('display', 'block')
+    } else {
+        $(mainDiv).css('display', 'flex')
+    }
+}
+
+
