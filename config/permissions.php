@@ -113,14 +113,14 @@ return [
                 [
                     'create' => [
                         'name' => 'Create inventory item',
-                        'routes' => ['admin_items_new', 'post_admin_items_new'],
+                        'routes' => ['admin_items_new', 'post_admin_items_new','datatable_all_items','admin_items_purchase','datatable_item_purchases'],
                         'description' => 'Able to Create post',
                     ]
                 ],
         ],
         'warehouses' => [
             'name' => 'Warehouses',
-            'routes' => ['admin_warehouses'],
+            'routes' => ['admin_warehouses','datatable_all_others'],
             'description' => 'Able inventory',
             'children' =>
                 [
@@ -133,29 +133,29 @@ return [
         ],
         'purchase' => [
             'name' => 'Purchase',
-            'routes' => ['admin_store_purchase'],
+            'routes' => ['admin_inventory_purchase','datatable_all_purchases'],
             'description' => 'Able inventory',
             'children' => [
                 'create' => [
                     'name' => 'Create Purchase',
-                    'routes' => ['admin_store_purchase_new', 'admin_store_purchase_get_stock_by_sku', 'admin_store_purchase_save'],
+                    'routes' => ['admin_inventory_purchase_new', 'admin_inventory_purchase_get_stock_by_sku', 'admin_inventory_purchase_save'],
                     'description' => 'Able to Create Warehouses',
                 ],
                 'edit' => [
                     'name' => 'Edit Purchase',
-                    'routes' => ['admin_store_purchase_edit', 'admin_store_purchase_get_stock_by_sku', 'admin_store_purchase_save'],
+                    'routes' => ['admin_inventory_purchase_edit', 'admin_inventory_purchase_get_stock_by_sku', 'admin_inventory_purchase_save'],
                     'description' => 'Able to Create Warehouses',
                 ],
                 'delete' => [
                     'name' => 'Delete Purchase',
-                    'routes' => ['admin_store_purchase_delete'],
+                    'routes' => ['admin_inventory_purchase_delete'],
                     'description' => 'Able to Create Warehouses',
                 ]
             ],
         ],
         'suppliers' => [
             'name' => 'Suppliers',
-            'routes' => ['admin_suppliers'],
+            'routes' => ['admin_suppliers','datatable_all_suppliers'],
             'description' => 'Able inventory',
             'children' => [
                 'create' => [

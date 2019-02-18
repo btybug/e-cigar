@@ -73,14 +73,14 @@
                     @ok('admin_warehouses')
                     <li><a href="{{route('admin_warehouses')}}"><i class="far fa-circle"></i>Warehouses</a></li>
                     @endok
-                    @ok('admin_store_purchase')
-                    <li><a href="{{route('admin_store_purchase')}}"><i class="far fa-circle"></i> Purchase</a></li>
+                    @ok('admin_inventory_purchase')
+                    <li><a href="{{route('admin_inventory_purchase')}}"><i class="far fa-circle"></i> Purchase</a></li>
                     @endok
                     @ok('admin_suppliers')
                     <li><a href="{{route('admin_suppliers')}}"><i class="far fa-circle"></i>Suppliers</a></li>
                     @endok
 
-                    @ok('admin_other')
+                    @ok('admin_inventory_other')
                     <li><a href="{{route('admin_inventory_other')}}"><i class="far fa-circle"></i>Other</a></li>
                     @endok
                 </ul>

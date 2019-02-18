@@ -10,7 +10,7 @@
         <div class="panel-body">
 
             <div class="col-md-8">
-                {!! Form::model($model,['url' => route('admin_store_purchase_save'),'id' => 'form-coupon','class' => '']) !!}
+                {!! Form::model($model,['url' => route('admin_inventory_purchase_save'),'id' => 'form-coupon','class' => '']) !!}
                 {!! Form::hidden('id') !!}
                 <div class="form-group row required">
                     <label class="col-sm-2 control-label" for="input-code">
@@ -97,7 +97,7 @@
             var sku = $(".select-sku").val();
             $.ajax({
                 type: "post",
-                url: "{!! route('admin_store_purchase_get_stock_by_sku') !!}",
+                url: "{!! route('admin_inventory_purchase_get_stock_by_sku') !!}",
                 cache: false,
                 datatype: "json",
                 data: {sku: sku},

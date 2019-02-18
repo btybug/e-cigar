@@ -21,7 +21,7 @@ class CreateOthersTable extends Migration
             $table->integer('qty');
             $table->string('reason');
             $table->text('notes')->nullable();
-            $table->string('group');
+            $table->string('grouped');
             $table->timestamps();
             $table->foreign('item_id')->references('id')->on('items')->onDelete('restrict');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');

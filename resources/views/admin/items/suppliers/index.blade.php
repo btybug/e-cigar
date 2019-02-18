@@ -3,7 +3,7 @@
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
             <h2 class="m-0 pull-left">Suppliers</h2>
-            <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_suppliers_new') !!}">Add new</a></div>
+            @ok('admin_suppliers_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_suppliers_new') !!}">Add new</a></div>@endok
         </div>
         <div class="panel-body">
             <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">

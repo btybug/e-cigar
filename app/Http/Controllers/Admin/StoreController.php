@@ -189,7 +189,7 @@ class StoreController extends Controller
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
         Purchase::updateOrCreate($request->only('id'), $data);
-        return redirect()->route('admin_store_purchase');
+        return redirect()->route('admin_inventory_purchase');
     }
 
     public function EditPurchase($id)

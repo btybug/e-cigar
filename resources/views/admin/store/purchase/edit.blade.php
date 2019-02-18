@@ -5,7 +5,7 @@
 @section('content')
     <div class="coupons_new_page">
         <div>
-            <a href="{!! route('admin_store_purchase') !!}" class="btn btn-warning pull-right">Back</a>
+            <a href="{!! route('admin_inventory_purchase') !!}" class="btn btn-warning pull-right">Back</a>
         </div>
         <h3>SKU : {{ $sku }}</h3>
         <div class="pull-right">
@@ -63,7 +63,7 @@
             var sku = $(".select-sku").val();
             $.ajax({
                 type: "post",
-                url: "{!! route('admin_store_purchase_get_stock_by_sku') !!}",
+                url: "{!! route('admin_inventory_purchase_get_stock_by_sku') !!}",
                 cache: false,
                 datatype: "json",
                 data: {sku: sku},

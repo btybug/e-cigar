@@ -194,14 +194,7 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/', 'Admin\StoreController@getSettings')->name('admin_store_settings');
     });
 
-    Route::group(['prefix' => 'purchase'], function () {
-        Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_store_purchase');
-        Route::get('/new', 'Admin\StoreController@getPurchaseNew')->name('admin_store_purchase_new');
-        Route::post('/new-or-update', 'Admin\StoreController@postSaveOrUpdate')->name('admin_store_purchase_save');
-        Route::get('/delete/{id}', 'Admin\StoreController@DeletePurchase')->name('admin_store_purchase_delete');
-        Route::get('/edit/{id}', 'Admin\StoreController@EditPurchase')->name('admin_store_purchase_edit');
-        Route::post('/get-stock-by-sku', 'Admin\StoreController@getStockBySku')->name('admin_store_purchase_get_stock_by_sku');
-    });
+
 });
 
 
@@ -292,7 +285,14 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/new','Admin\WarehouseController@getNew')->name('admin_warehouses_new');
         Route::post('/new','Admin\WarehouseController@postNew')->name('admin_warehouses_new_post');
     });
-
+    Route::group(['prefix' => 'purchase'], function () {
+        Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_inventory_purchase');
+        Route::get('/new', 'Admin\StoreController@getPurchaseNew')->name('admin_inventory_purchase_new');
+        Route::post('/new-or-update', 'Admin\StoreController@postSaveOrUpdate')->name('admin_inventory_purchase_save');
+        Route::get('/delete/{id}', 'Admin\StoreController@DeletePurchase')->name('admin_inventory_purchase_delete');
+        Route::get('/edit/{id}', 'Admin\StoreController@EditPurchase')->name('admin_inventory_purchase_edit');
+        Route::post('/get-stock-by-sku', 'Admin\StoreController@getStockBySku')->name('admin_inventory_purchase_get_stock_by_sku');
+    });
     Route::group(['prefix' => 'suppliers'], function () {
         Route::get('/','Admin\ItemsController@getSuppliers')->name('admin_suppliers');
         Route::get('/new','Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
