@@ -320,30 +320,30 @@ Route::group(['prefix' => 'inventory'], function () {
 });
 
 Route::group(['prefix' => 'stock'], function () {
-    Route::get('/', 'Admin\InventoryController@stock')->name('admin_stock');
-    Route::get('/new', 'Admin\InventoryController@stockNew')->name('admin_stock_new');
-    Route::get('/edit/{id}', 'Admin\InventoryController@getStockEdit')->name('admin_stock_edit');
-    Route::get('/promotions/{id}', 'Admin\InventoryController@getPromotionEdit')->name('admin_stock_promotion_edit');
-    Route::post('/get-promotion', 'Admin\InventoryController@getPromotion')->name('admin_stock_get_promotion');
-    Route::post('/promotion-save', 'Admin\InventoryController@savePromotion')->name('admin_stock_sales_save');
-    Route::post('/cancel-promotion', 'Admin\InventoryController@cancelSale')->name('admin_stock_cancel_delete');
+    Route::get('/', 'Admin\StockController@stock')->name('admin_stock');
+    Route::get('/new', 'Admin\StockController@stockNew')->name('admin_stock_new');
+    Route::get('/edit/{id}', 'Admin\StockController@getStockEdit')->name('admin_stock_edit');
+    Route::get('/promotions/{id}', 'Admin\StockController@getPromotionEdit')->name('admin_stock_promotion_edit');
+    Route::post('/get-promotion', 'Admin\StockController@getPromotion')->name('admin_stock_get_promotion');
+    Route::post('/promotion-save', 'Admin\StockController@savePromotion')->name('admin_stock_sales_save');
+    Route::post('/cancel-promotion', 'Admin\StockController@cancelSale')->name('admin_stock_cancel_delete');
 
-    Route::post('/save-stock', 'Admin\InventoryController@postStock')->name('admin_stock_save');
-    Route::post('/link-all', 'Admin\InventoryController@linkAll')->name('admin_stock_link_all');
-    Route::post('/variation-form', 'Admin\InventoryController@variationForm')->name('admin_stock_variation_form');
-    Route::post('/add-variation', 'Admin\InventoryController@addVariation')->name('admin_stock_variation_add');
-    Route::post('/add-package-variation', 'Admin\InventoryController@addPackageVariation')->name('admin_stock_package_variation_add');
-    Route::post('/edit-variation', 'Admin\InventoryController@editVariation')->name('admin_stock_variation_add');
-    Route::post('/get-option-by-id', 'Admin\InventoryController@getOptionById')->name('admin_stock_variation_get_option');
-    Route::post('/get-specifications', 'Admin\InventoryController@getSpecification')->name('admin_stock_variation_get_specification');
-    Route::post('/render-variation-new-options', 'Admin\InventoryController@postRenderVariationNewOptions')->name('admin_stock_variation_render_new_option');
-    Route::post('/get-by-id', 'Admin\InventoryController@getById')->name('admin_stock_get_by_id');
-    Route::post('/get-variations-by-id', 'Admin\InventoryController@getVariationsById')->name('admin_stock_get_variations_by_id');
+    Route::post('/save-stock', 'Admin\StockController@postStock')->name('admin_stock_save');
+    Route::post('/link-all', 'Admin\StockController@linkAll')->name('admin_stock_link_all');
+    Route::post('/variation-form', 'Admin\StockController@variationForm')->name('admin_stock_variation_form');
+    Route::post('/add-variation', 'Admin\StockController@addVariation')->name('admin_stock_variation_add');
+    Route::post('/add-package-variation', 'Admin\StockController@addPackageVariation')->name('admin_stock_package_variation_add');
+    Route::post('/edit-variation', 'Admin\StockController@editVariation')->name('admin_stock_variation_add');
+    Route::post('/get-option-by-id', 'Admin\StockController@getOptionById')->name('admin_stock_variation_get_option');
+    Route::post('/get-specifications', 'Admin\StockController@getSpecification')->name('admin_stock_variation_get_specification');
+    Route::post('/render-variation-new-options', 'Admin\StockController@postRenderVariationNewOptions')->name('admin_stock_variation_render_new_option');
+    Route::post('/get-by-id', 'Admin\StockController@getById')->name('admin_stock_get_by_id');
+    Route::post('/get-variations-by-id', 'Admin\StockController@getVariationsById')->name('admin_stock_get_variations_by_id');
 
     //extra
-    Route::post('/add-extra-option', 'Admin\InventoryController@addExtraOption')->name('admin_stock_extra_option');
-    Route::post('/get-extra-option-variations', 'Admin\InventoryController@getPromotionVariations')->name('admin_stock_extra_option_variations');
-    Route::post('/save-extra-option', 'Admin\InventoryController@saveExtraOptions')->name('admin_stock_extra_option_save');
+    Route::post('/add-extra-option', 'Admin\StockController@addExtraOption')->name('admin_stock_extra_option');
+    Route::post('/get-extra-option-variations', 'Admin\StockController@getPromotionVariations')->name('admin_stock_extra_option_variations');
+    Route::post('/save-extra-option', 'Admin\StockController@saveExtraOptions')->name('admin_stock_extra_option_save');
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
@@ -457,7 +457,7 @@ Route::group(['prefix' => 'seo'], function () {
 
 Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');
 Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');
-Route::post('/get-stocks', 'Admin\InventoryController@getStocks')->name('admin_inventary_get_stocks');
+Route::post('/get-stocks', 'Admin\StockController@getStocks')->name('admin_inventary_get_stocks');
 Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 
 

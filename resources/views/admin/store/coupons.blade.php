@@ -18,9 +18,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading clearfix">
                     <h2 class="pull-left m-0">Active Coupons</h2>
+                    @ok('admin_store_coupons_new')
                     <div class="pull-right">
                         <a class="btn btn-primary" href="{!! route('admin_store_coupons_new') !!}">Add new</a>
                     </div>
+                    @endok
                 </div>
                 <div class="panel-body">
                     <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">

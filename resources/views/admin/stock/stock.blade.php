@@ -5,8 +5,8 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading clearfix">
-            <h2 class="pull-left m-0">Inventory</h2>
-            <div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
+            <h2 class="pull-left m-0">Stock</h2>
+            @ok('admin_stock_new')<div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
         </div>
         <div class="panel-body">
             <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">

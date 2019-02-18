@@ -196,7 +196,7 @@ return [
     'store' => [
         'stock' => [
             'name' => 'Stock',
-            'routes' => ['admin_stock'],
+            'routes' => ['admin_stock','datatable_all_stocks'],
             'description' => 'Able to see stock',
             'children' =>
                 [
@@ -248,16 +248,15 @@ return [
         ],
         'orders' => [
             'name' => 'Orders',
-            'routes' => ['admin_orders'],
+            'routes' => ['admin_orders','datatable_all_orders'],
             'description' => 'Able to see  Orders',
-            'children' => [
-
+            'children' =>
+                [
                 'create' => [
                     'name' => 'Create  Order',
                     'routes' => [
                         'admin_orders_new',
                         'orders_add_note',
-                        'admin_orders_settings_save',
                         'orders_get_product',
                         'admin_orders_collecting',
                         'admin_orders_get_user',
@@ -278,6 +277,7 @@ return [
                         'admin_orders_manage',
                         'orders_add_note',
                         'admin_orders_settings_save',
+                        'admin_orders_settings',
                         'orders_get_product',
                         'admin_orders_collecting',
                         'admin_orders_get_user',
@@ -296,13 +296,13 @@ return [
         ],
         'transactions' => [
             'name' => 'Transactions',
-            'routes' => ['admin_store_transactions', 'admin_store_transactions_view'],
+            'routes' => ['admin_store_transactions', 'admin_store_transactions_view','datatable_all_transactions'],
             'description' => 'Able to see  Orders',
             'children' => [],
         ],
-        'Coupons' => [
-            'name' => 'Orders',
-            'routes' => ['admin_store_coupons'],
+        'coupons' => [
+            'name' => 'Coupons',
+            'routes' => ['admin_store_coupons','datatable_all_coupons'],
             'description' => 'Able to see coupons',
             'children' => [
 
@@ -340,7 +340,7 @@ return [
     'blog' => [
         'posts' => [
             'name' => 'Posts',
-            'routes' => ['admin_blog'],
+            'routes' => ['admin_blog','datatable_all_posts'],
             'description' => 'Able to see blog page',
             'children' => [
                 'create' => [
@@ -363,7 +363,7 @@ return [
         ],
         'comments' => [
             'name' => 'Comments',
-            'routes' => ['show_comments'],
+            'routes' => ['show_comments','datatable_all_post_comments'],
             'description' => 'Able to see all comments',
             'children' => [
                 'edit' => [

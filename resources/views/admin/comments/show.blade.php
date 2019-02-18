@@ -54,7 +54,7 @@
 
     </script>
 
-    @include('_partials.deleteModal')
+    @include('_partials.delete_modal')
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
