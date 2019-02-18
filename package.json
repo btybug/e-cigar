@@ -1,5 +1,14 @@
 {
     "private": true,
+    "eslintConfig": {
+        "parserOptions": {
+            "ecmaVersion": 6,
+            "sourceType": "module"
+        },
+        "rules": {
+            "semi": "error"
+        }
+    },
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -17,6 +26,7 @@
         "bootstrap": "^4.0.0",
         "cross-env": "^5.2.0",
         "css-loader": "^2.1.0",
+        "eslint": "^5.14.0",
         "jquery": "^3.3.1",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.5",

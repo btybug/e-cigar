@@ -149,6 +149,11 @@ const App = function() {
           focusOnClick: true,
           debugLevel: 0,
           selectMode: 4,
+          postProcess: function(event, data) {
+            // assuming the Ajax response contains a list of child nodes:
+            console.log('post', data);
+            // data.response[0].title += " - hello from postProcess";
+          },
           //********dnd5********start
           dnd5: {
             autoExpandMS: 1500,
@@ -618,11 +623,15 @@ const App = function() {
 
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, res) => {
+      // $('document').ready(() => {
+      //   const x = $("#folder-list").fancytree("getTree");
+      //   console.log(x);
+      // });
+
       let check = false;
       const breadCrumbsListItems = document.querySelectorAll(
           ".bread-crumbs-list-item"
       );
-
       const singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
       breadCrumbsListItems.forEach((item, index) => {
         if (check) {
