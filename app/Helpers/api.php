@@ -1125,12 +1125,14 @@ function has_permission($role,$permission){
 function render_widgets($placeholder){
     $widgets = \App\Models\Dashboard::where('placeholder',$placeholder)->where('user_id',Auth::id())->orderBy('position')->get();
     $html = '';
+    $permissions = config('widgets');
     foreach ($widgets as $widget){
-        if(has_permission(Auth::user()->role,$widget->widget)){
+        if(has_permission(Auth::user()->role,$widget->widget) && isset($permissions[$widget->widget])){
+            $content = view($permissions[$widget->widget]['view'])->render();
             $html.= ' <div id="'.$widget->widget.'" style="position: relative">
                 <a class="delete-widget btn btn-warning" style="position: absolute;right:0;top:0;z-index: 99;">DELETE</a>
-                <div class="box-header" style="background-color: red;">
-                  '.$widget->widget.'
+                <div class="ui-sortable-handle">
+                  '.$content.'
                 </div>
             </div>';
         }

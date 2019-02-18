@@ -111,11 +111,14 @@
             <div class="connectedSortable">
                 @foreach($permissions as $key => $item)
                     @if(! in_array($key,$widgets))
-                <div id="{{ $key }}">
-                    <div class="box-header" style="background-color: red;">
-                       {!! $item['name'] !!}
-                    </div>
-                </div>
+                        <div id="{{ $key }}">
+                            <div class="box-header" style="background-color: red;">
+                               {!! $item['name'] !!}
+                            </div>
+                            <div class="widget-html hide">
+                                @include($item['view'])
+                            </div>
+                        </div>
                     @endif
                 @endforeach
             </div>
