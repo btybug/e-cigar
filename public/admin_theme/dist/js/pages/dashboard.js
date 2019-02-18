@@ -17,7 +17,14 @@ $(function () {
         forcePlaceholderSize: true,
         zIndex: 999999,
         receive: function(i,el) {
-            console.info(el,45456465465)
+            if(el.sender.parent().attr('class') == 'modal_add_widget'){
+                let render = el.item.find('.ui-sortable-handle');
+
+                el.item.html('<div class="ui-sortable-handle"></div><img src="http://placehold.it/400x300"></div>');
+                alert("reneder html")
+            }
+
+            console.log(el.item.attr('id'))
         },
         update: function(event, ui) {
             var section = $(this).data('placement');
@@ -41,7 +48,8 @@ $(function () {
                 });
             }
             // $("#sortable-9").text (productOrder+ ' -- ' + section);
-        }
+        },
+
     });
 
     $("body").on('click','.delete-widget',function () {
