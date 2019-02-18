@@ -144,18 +144,27 @@
 
 
     <script>
-        $('body').on('click', '.open_dashboard_widget', function () {
-            $('.dashboard_modal_add_widget').toggleClass('active')
-        })
+        {{--open new widget sidebar--}}
+        $('.open_dashboard_widget').on('click', function () {
+            $('.dashboard_modal_add_widget').toggleClass('active');
+        });
 
-        $('body').on('click', '.close-widget-modal', function () {
-            $('.dashboard_modal_add_widget').toggleClass('active')
-        })
+        $('body').on('click', function (e) {
+            if (e.target !==  $('.open_dashboard_widget')[0] &&
+                $('.dashboard_modal_add_widget').hasClass('active') &&
+                e.target !== $('.modal_add_widget')[0]) {
+                $('.dashboard_modal_add_widget').removeClass('active');
+            }
+        });
 
-        {{--widget btn--}}
+        $('.close-widget-modal').on('click', function () {
+            $('.dashboard_modal_add_widget').addClass('active');
+        });
+
+        {{--inner widget btn--}}
         $('.btn-for-widget').on('click', function () {
             $(this).find('i').toggleClass('fa-plus fa-minus');
-        })
+        });
     </script>
     <script>
         (function (w, d, s, g, js, fs) {
