@@ -37,6 +37,11 @@ class InventoryController extends Controller
         $this->settings = $settings;
     }
 
+    public function inventory()
+    {
+        
+    }
+
     public function stock()
     {
         return $this->view('stock');

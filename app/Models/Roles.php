@@ -32,6 +32,7 @@ class Roles extends Model
 
     public function hasAccess($route)
     {
+        if ($route=='admin_dashboard') return true;
         $permissions=$this->permissions()->pluck('slug');
         foreach ($permissions as $permission){
             $config=config('permissions.'.$permission,[]);

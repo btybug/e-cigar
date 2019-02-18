@@ -57,7 +57,7 @@
                 </ul>
             </li>
             @endok
-            @ok('admin_store')
+            @ok('admin_inventory')
             <li class="treeview">
                 <a href="#">
                     <i class="fab fa-dropbox"></i>
@@ -86,7 +86,7 @@
                 </ul>
             </li>
             @endok
-            @ok('admin_store')
+            @ok('admin_stock')
             <li class="treeview">
                 <a href="#">
                     <i class="fab fa-dropbox"></i>

@@ -38,7 +38,7 @@ return [
                 ],
                 'edit' => [
                     'name' => 'Edit staff member details',
-                    'routes' => ['admin_staff_edit'],
+                    'routes' => ['admin_staff_edit','datatable_user_activity'],
                     'description' => 'Edit staff member details',
                 ]
             ]
@@ -50,7 +50,7 @@ return [
             'children' => [
                 'edit' => [
                     'name' => 'Edit Customer  details',
-                    'routes' => ['admin_users_edit'],
+                    'routes' => ['admin_users_edit','datatable_user_orders'],
                     'description' => 'Edit Customer details',
                 ],
             ]
@@ -94,8 +94,21 @@ return [
     'inventory' => [
         'inventory' => [
             'name' => 'Inventory',
-            'routes' => ['admin_items'],
+            'routes' => ['admin_inventory'],
             'description' => 'Able inventory',
+            'children' =>
+                [
+                    'create' => [
+                        'name' => 'Create inventory item',
+                        'routes' => ['admin_items_new', 'post_admin_items_new'],
+                        'description' => 'Able to Create post',
+                    ]
+                ],
+        ],
+        'items' => [
+            'name' => 'Items ',
+            'routes' => ['admin_items'],
+            'description' => 'Able inventory items',
             'children' =>
                 [
                     'create' => [
