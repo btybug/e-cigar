@@ -90,7 +90,10 @@
 
                 <div class="bread-crumbs d-flex" style="justify-content: space-between;">
                   <ul class="bread-crumbs-list breadcrumb" style="margin: 0">
-
+                    <li class="bread-crumbs-list-item active" data-crumbs-id="1"
+                        data-id="1" bb-media-click="get_folder_items" >
+                      <a>Drive</a>
+                    </li>
                   </ul>
                   <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up"
                                                                                                  aria-hidden="true"></i>

@@ -71,6 +71,7 @@ const App = function() {
     tree: null,
     dragElementOfTree: null,
     currentId: null,
+    currentSelectedFolder: null,
     transfer: (f, p, root) => {
       this.requests.transferFolder(
         {
@@ -149,11 +150,6 @@ const App = function() {
           focusOnClick: true,
           debugLevel: 0,
           selectMode: 4,
-          postProcess: function(event, data) {
-            // assuming the Ajax response contains a list of child nodes:
-            console.log('post', data);
-            // data.response[0].title += " - hello from postProcess";
-          },
           //********dnd5********start
           dnd5: {
             autoExpandMS: 1500,
@@ -201,8 +197,9 @@ const App = function() {
           //********dnd5********end
           activate: (event, data) => {
             if (data.node.isFolder()) {
-              this.events.get_folder_items_tree(data.node.data.id);
+              this.events.get_folder_items_tree(data.node.key);
             }
+            console.log(data);
           }
         });
         //********fancytree********end
@@ -216,10 +213,10 @@ const App = function() {
     //********App -> htmlMaker -> makeTreeFolder********end
 
     //********App -> htmlMaker -> makeBreadCrumbsItem********start
-    makeBreadCrumbsItem: (item) => {
-      return (`<li class="bread-crumbs-list-item disabled" data-crumbs-id="${item.id}" 
-                   data-id="${item.id}" bb-media-click="get_folder_items" >
-                 <a>${item.name}</a>
+    makeBreadCrumbsItem: (key, name, state) => {
+      return (`<li class="bread-crumbs-list-item ${state}" data-crumbs-id="${key}" 
+                   data-id="${key}" bb-media-click="get_folder_items" >
+                 <a>${name}</a>
                </li>`);
     },
     //********App -> htmlMaker -> makeBreadCrumbsItem********end
@@ -622,29 +619,55 @@ const App = function() {
 
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, res) => {
-      // $('document').ready(() => {
-      //   const x = $("#folder-list").fancytree("getTree");
-      //   console.log(x);
-      // });
+      const breadCrumbsList = document.querySelector(".bread-crumbs-list");
+      breadCrumbsList.innerHTML = `<li class="bread-crumbs-list-item active" data-crumbs-id="1"
+                                       data-id="1" bb-media-click="get_folder_items" >
+                                     <a>Drive</a>
+                                   </li>`;
+      $('document').ready(() => {
+        const tree = $("#folder-list").fancytree("getTree");
 
-      let check = false;
-      const breadCrumbsListItems = document.querySelectorAll(
-          ".bread-crumbs-list-item"
-      );
-      const singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
-      breadCrumbsListItems.forEach((item, index) => {
-        if (check) {
-          item.remove();
-          return;
-        }
-        if (item == singleItem) {
-          item.classList.add("disabled");
-          item.classList.remove("active");
-          check = true;
-        } else {
-          item.classList.add("active");
-          item.classList.remove("disabled");
-        }
+        const current = tree.getNodeByKey('' + id);
+        const parentsArray = current && (current.getKeyPath().trim()).split('/');
+        parentsArray && parentsArray.shift();
+        parentsArray && parentsArray
+            .map((id, index) => {
+              let el = tree.getNodeByKey('' + id);
+              index === parentsArray.length-1 ?
+                  breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'disabled') :
+                  breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'active');
+            });
+
+
+
+        // let check = false;
+        // const breadCrumbsListItems = document.querySelectorAll(
+        //     ".bread-crumbs-list-item"
+        // );
+        // console.log(breadCrumbsListItems);
+
+
+        // console.log(current && `key path - ${bcArray}, level - ${current.getLevel()}, is top level - ${current.isTopLevel()}`);
+
+        // const singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
+        // console.log(singleItem);
+
+
+        // breadCrumbsListItems.forEach((item, index) => {
+        //   if (check) {
+        //     item.remove();
+        //     return;
+        //   }
+        //   if (item == singleItem) {
+        //     item.classList.add("disabled");
+        //     item.classList.remove("active");
+        //     check = true;
+        //   } else {
+        //     item.classList.add("active");
+        //     item.classList.remove("disabled");
+        //   }
+        // });
+        // console.log(tree);
       });
     },
     //********App -> helpers -> makeBreadCrumbs********end
@@ -751,7 +774,7 @@ const App = function() {
           const breadCrumbsList = document.querySelector(
               ".bread-crumbs-list"
           );
-          breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(res.data);
+          // breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(res.data);
           mainContainer.innerHTML = "";
           res.data.children.forEach((folder, index) => {
             var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
@@ -823,7 +846,7 @@ const App = function() {
       shortAjax("/api/api-media/get-sort-folder", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
-          cb()
+          cb();
         }
       });
     },
@@ -915,7 +938,7 @@ const App = function() {
       const removeTree = function () {
         const x = $("#folder-list").fancytree("getTree");
         const folder = x.getNodeByKey('' + id);
-        folder.remove()
+        folder.remove();
       };
 
       this.requests.removeTreeFolder(
@@ -949,6 +972,7 @@ const App = function() {
 
     //********App -> events -> get_folder_items_tree********start
     get_folder_items_tree: (id, e) => {
+      console.log(id)
       if (id) {
         this.requests.drawingItems(
           {
