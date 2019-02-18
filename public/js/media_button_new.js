@@ -73,18 +73,30 @@ const App = function() {
     currentId: null,
     currentSelectedFolder: null,
     transfer: (f, p, root) => {
-      this.requests.transferFolder(
-        {
-          folder_id: Number(f),
-          parent_id: root === 1 ? Number(1) : Number(p),
-          access_token: "string"
-        },
-        () => {
-        const x = $("#folder-list").fancytree("getTree");
-        const folder = x.getNodeByKey('' + f);
-        folder.moveTo(x.getNodeByKey('' + p));
-        this.htmlMaker.currentId = null;
-      });
+      const x = $("#folder-list").fancytree("getTree");
+      const folder = x.getNodeByKey('' + f);
+      if(folder && folder.folder) {
+        this.requests.transferFolder(
+          {
+            folder_id: Number(f),
+            parent_id: root === 1 ? Number(1) : Number(p),
+            access_token: "string"
+          },
+          () => {
+            const folder = x.getNodeByKey('' + f);
+            folder.moveTo(x.getNodeByKey('' + p));
+            this.htmlMaker.currentId = null;
+        });
+      } else {
+        this.requests.transferImage(
+          {
+            item_id: Number(f),
+            folder_id: root === 1 ? Number(1) : Number(p),
+            access_token: "string"
+          }
+        );
+      }
+
     },
 
     //********App -> htmlMaker -> makeFolder********start
@@ -169,7 +181,6 @@ const App = function() {
             //********dragDrop********start
             dragDrop: (node, data) => {
               const transfer = this.htmlMaker.transfer;
-
               if( !data.otherNode ) {
                 if(this.htmlMaker.currentId) {
                   if (data.hitMode == 'after' || data.hitMode == 'before') {
@@ -199,7 +210,6 @@ const App = function() {
             if (data.node.isFolder()) {
               this.events.get_folder_items_tree(data.node.key);
             }
-            console.log(data);
           }
         });
         //********fancytree********end
@@ -637,37 +647,6 @@ const App = function() {
                   breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'disabled') :
                   breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'active');
             });
-
-
-
-        // let check = false;
-        // const breadCrumbsListItems = document.querySelectorAll(
-        //     ".bread-crumbs-list-item"
-        // );
-        // console.log(breadCrumbsListItems);
-
-
-        // console.log(current && `key path - ${bcArray}, level - ${current.getLevel()}, is top level - ${current.isTopLevel()}`);
-
-        // const singleItem = document.querySelector(`[data-crumbs-id="${id}"]`);
-        // console.log(singleItem);
-
-
-        // breadCrumbsListItems.forEach((item, index) => {
-        //   if (check) {
-        //     item.remove();
-        //     return;
-        //   }
-        //   if (item == singleItem) {
-        //     item.classList.add("disabled");
-        //     item.classList.remove("active");
-        //     check = true;
-        //   } else {
-        //     item.classList.add("active");
-        //     item.classList.remove("disabled");
-        //   }
-        // });
-        // console.log(tree);
       });
     },
     //********App -> helpers -> makeBreadCrumbs********end
@@ -699,8 +678,7 @@ const App = function() {
             // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
             e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
             // setTimeout(() => (this.className = "invisible"), 0);
-        console.log(id)
-            self.htmlMaker.currentId = id
+            self.htmlMaker.currentId = id;
           });
         });
       document.querySelectorAll(".folder-container").forEach(folder => {
@@ -717,7 +695,6 @@ const App = function() {
         });
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
-          console.log(self.htmlMaker.dragElementOfTree)
           let nodeId = self.htmlMaker.dragElementOfTree || e.dataTransfer.getData("node_id");
           let parrentId = e.target
               .closest(".file")
@@ -972,7 +949,6 @@ const App = function() {
 
     //********App -> events -> get_folder_items_tree********start
     get_folder_items_tree: (id, e) => {
-      console.log(id)
       if (id) {
         this.requests.drawingItems(
           {
