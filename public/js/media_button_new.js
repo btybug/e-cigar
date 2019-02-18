@@ -262,13 +262,15 @@ const App = function() {
                     <div class="modal-body text-center">
                     <div class="modal-title">
                     <img src="${data.url}" data-slideshow="typeext" style="width:100%">
-                    <div style="display: flex; justify-content: space-between;">
+                    </div>
+                    <div class="modal-footer col-md-8">
+<div style="display: flex; justify-content: space-between;">
                     <button href="#" type="button" role="button" ${
               countId === 0 ? "disabled" : ""
-              } data-id="${countId - 1}" class="popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
+              } data-id="${countId - 1}" class="btn btn-info popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
 
                     <span data-slideshow="title">${data.real_name}</span>
-                    <button class="popuparrow go-next-image" href="#" type="button" role="button" ${
+                    <button class="btn btn-info popuparrow go-next-image" href="#" type="button" role="button" ${
               countId ===
               document.querySelectorAll(".image-container").length - 1
                   ? "disabled"
@@ -276,9 +278,6 @@ const App = function() {
               } data-id="${countId +
           1}" bb-media-click="modal_load_image"  data-id=""><i class="fa fa-arrow-right"></i></button>
                     </div>
-                    </div>
-                    <div class="modal-footer col-md-8">
-
 
             </div>
                     </div>
