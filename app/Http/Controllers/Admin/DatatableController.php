@@ -536,9 +536,9 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($ticket) {
                 $settings = new Settings();
                 $status = $settings->getData('tickets', 'completed');
-                $actions = "<a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>";
+                $actions = userCan('admin_tickets_edit')?"<a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>":null;
                 if ($status && $status->val != $ticket->status_id) {
-                    $actions .= "<a class='badge btn-danger' href='" . route('admin_tickets_close', $ticket->id) . "'>Close</a>";
+                    $actions .=userCan('admin_tickets_close')? "<a class='badge btn-danger' href='" . route('admin_tickets_close', $ticket->id) . "'>Close</a>":null;
                 }
                 return $actions;
             })->rawColumns(['actions', 'priority_id', 'status_id', 'attachments'])
