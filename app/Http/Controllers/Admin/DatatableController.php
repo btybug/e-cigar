@@ -54,7 +54,7 @@ class DatatableController extends Controller
             ->whereNull('role_id')
             ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
-                return '<div class="users-table--td-btn"><a href="javascript:void(0)" data-href="'.route("admin_users_delete").'" 
+                return '<div class="users-table--td-btn"><a href="javascript:void(0)" data-href="' . route("admin_users_delete") . '" 
                 class="delete-button btn btn-danger" data-key="' . $user->id . '">Delete</a>
                     <a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
                     <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info"><i class="fa fa-eye"></i>Activity</a></div>
@@ -71,7 +71,7 @@ class DatatableController extends Controller
         return Datatables::of(User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type', 'backend')->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
-                return '<a href="javascript:void(0)" data-href="'.route("admin_staff_delete").'" 
+                return '<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '" 
                 class="delete-button btn btn-danger" data-key="' . $user->id . '">Delete</a>
                     <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
                     <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info"><i class="fa fa-eye"></i>Activity</a>
@@ -130,7 +130,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($attr) {
-                return '<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="'.route("admin_store_attributes_delete").'" data-key="' . $attr->id . '">Delete</a>
+                return '<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="' . route("admin_store_attributes_delete") . '" data-key="' . $attr->id . '">Delete</a>
                     <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>';
             })->rawColumns(['actions', 'image', 'icon', 'created_at'])
             ->make(true);
@@ -186,20 +186,21 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($post) {
-                return ((userCan('admin_post_delete'))?"<a class='delete-button badge btn-danger' data-key='" . $post->id . "' data-href='" . route("admin_post_delete") . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_post_edit')?"<a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>":null);
+                return ((userCan('admin_post_delete')) ? "<a class='delete-button badge btn-danger' data-key='" . $post->id . "' data-href='" . route("admin_post_delete") . "'><i class='fa fa-trash'></i></a>" : null) . (userCan('admin_post_edit') ? "<a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>" : null);
             })->rawColumns(['actions', 'url', 'short_description', 'created_at', 'status'])
             ->make(true);
     }
+
     public function getAllContactUs()
     {
-        return Datatables::of(ContactUs::whereNull('parent_id')->orderBy('updated_at','DESC'))
+        return Datatables::of(ContactUs::whereNull('parent_id')->orderBy('updated_at', 'DESC'))
             ->editColumn('is_readed', function ($message) {
-                return (!$message->is_readed || $message->children()->where('is_readed',0)->exists());
+                return (!$message->is_readed || $message->children()->where('is_readed', 0)->exists());
             })->addColumn('options', function ($message) {
-                return '<input type="checkbox" data-id="'.$message->id.'">';
+                return '<input type="checkbox" data-id="' . $message->id . '">';
             })->addColumn('action', function ($message) {
-                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>".(userCan('admin_blog_contact_us_view')?"<a class='badge btn-info' href='".route('admin_blog_contact_us_view',$message->id)."'><i class='fa fa-eye'></i></a>":null);
-            })->rawColumns(['action','options'])
+                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>" . (userCan('admin_blog_contact_us_view') ? "<a class='badge btn-info' href='" . route('admin_blog_contact_us_view', $message->id) . "'><i class='fa fa-eye'></i></a>" : null);
+            })->rawColumns(['action', 'options'])
             ->make(true);
     }
 
@@ -228,14 +229,14 @@ class DatatableController extends Controller
                 return '<span class="badge comment-count">' . count($comment->childrenAll) . '</span>';
             })
             ->addColumn('actions', function ($comment) {
-                $actions='';
-                if(userCan('edit_comment')){
+                $actions = '';
+                if (userCan('edit_comment')) {
                     $actions = ($comment->status) ? '<a href="' . route('unapprove_comments', $comment->id) . '" class="btn btn-info"> Block</a>' : '<a href="' . route('approve_comments', $comment->id) . '" class="btn btn-success">Approve</a>';
                     $actions .= '<a class="btn btn-primary" href="' . route('reply_comment', $comment->id) . '">Reply</a>';
                     $actions .= '<a class="btn btn-warning" href="' . route('edit_comment', $comment->id) . '"><i class="fa fa-edit"></i></a>';
                 }
 
-                userCan('delete_comments')?$actions .= '<a class="btn btn-danger delete-button" data-key="'.$comment->id.'" data-href="' . route('delete_comments') . '"><i class="fa fa-trash"></i></a>':null;
+                userCan('delete_comments') ? $actions .= '<a class="btn btn-danger delete-button" data-key="' . $comment->id . '" data-href="' . route('delete_comments') . '"><i class="fa fa-trash"></i></a>' : null;
                 return $actions;
             })->rawColumns(['actions', 'author', 'comment', 'replies', 'status'])
             ->make(true);
@@ -245,15 +246,15 @@ class DatatableController extends Controller
     {
         $now = strtotime(today()->toDateString());
 //        dd($isArchive);
-        if($isArchive == 'archive'){
-            $query = Coupons::where(function ($q) use ($now){
-               $q->where('status',false)->orWhere('end_date','<',$now);
+        if ($isArchive == 'archive') {
+            $query = Coupons::where(function ($q) use ($now) {
+                $q->where('status', false)->orWhere('end_date', '<', $now);
             });
-        }else{
-            $query = Coupons::where(function ($q) use ($now){
-                $q->where('start_date','<=',$now)->where('end_date','>=',$now)->where('status',true);
+        } else {
+            $query = Coupons::where(function ($q) use ($now) {
+                $q->where('start_date', '<=', $now)->where('end_date', '>=', $now)->where('status', true);
             })->orWhere(function ($q) use ($now) {
-                $q->where('start_date','>',$now)->where('status',true);
+                $q->where('start_date', '>', $now)->where('status', true);
             });
         }
 
@@ -261,7 +262,7 @@ class DatatableController extends Controller
             ->editColumn('type', function ($coupons) {
                 return ($coupons->type == 'p') ? "Percentage" : "Fixed Amount";
             })->editColumn('discount', function ($coupons) {
-                return ($coupons->type == 'p') ? "-".$coupons->discount."%" : "-".$coupons->discount;
+                return ($coupons->type == 'p') ? "-" . $coupons->discount . "%" : "-" . $coupons->discount;
             })
             ->editColumn('start_date', function ($coupons) {
                 return BBgetDateFormat($coupons->start_date);
@@ -272,7 +273,7 @@ class DatatableController extends Controller
                 return $coupons->availability;
             })
             ->addColumn('actions', function ($coupons) {
-                return (userCan('admin_store_coupons_edit'))?"<a class='badge btn-warning' href='" . route("admin_store_coupons_edit", $coupons->id) . "'><i class='fa fa-edit'></i></a>":null;
+                return (userCan('admin_store_coupons_edit')) ? "<a class='badge btn-warning' href='" . route("admin_store_coupons_edit", $coupons->id) . "'><i class='fa fa-edit'></i></a>" : null;
             })->rawColumns(['actions', 'name', 'end_date', 'start_date'])
             ->make(true);
     }
@@ -287,7 +288,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
             })
             ->addColumn('actions', function ($stock) {
-                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>".((userCan('admin_stock_edit'))?"<a class='badge btn-warning' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>":'').((userCan('admin_stock_promotion_edit'))?"<a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>":'');
+                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>" . ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '') . ((userCan('admin_stock_promotion_edit')) ? "<a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>" : '');
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }
@@ -392,14 +393,14 @@ class DatatableController extends Controller
             })->editColumn('status', function ($attr) {
                 $status = $attr->history()->whereNotNull('status_id')->latest()->first();
                 return ($status && $status->status) ?
-                    '<span class="badge" style="background-color: ' . $status->status->color  . '">' . $status->status->name . '</span>' : null;
+                    '<span class="badge" style="background-color: ' . $status->status->color . '">' . $status->status->name . '</span>' : null;
             })->editColumn('updated_at', function ($attr) {
                 return BBgetDateFormat($attr->updated_at);
             })->editColumn('user', function ($attr) {
                 return $attr->user->name . ' ' . $attr->user->last_name;
             })
             ->addColumn('actions', function ($post) {
-                return (userCan('admin_orders_manage'))?"<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>":'';
+                return (userCan('admin_orders_manage')) ? "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>" : '';
             })->rawColumns(['actions', 'status'])
             ->make(true);
     }
@@ -461,7 +462,7 @@ class DatatableController extends Controller
             })->addColumn('robots', function ($post) {
                 return "";
             })->addColumn('actions', function ($post) {
-                return userCan('admin_seo_bulk_edit_post')?"<a href='" . route('admin_seo_bulk_edit_post', $post->id) . "'>Edit</a>":null;
+                return userCan('admin_seo_bulk_edit_post') ? "<a href='" . route('admin_seo_bulk_edit_post', $post->id) . "'>Edit</a>" : null;
             })
             ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
             ->make(true);
@@ -508,7 +509,7 @@ class DatatableController extends Controller
             })->addColumn('robots', function ($stock) {
                 return "";
             })->addColumn('actions', function ($stock) {
-                return (userCan('admin_seo_bulk_edit_stock'))?"<a href='" . route('admin_seo_bulk_edit_stock', $stock->id) . "'>Edit</a>":null;
+                return (userCan('admin_seo_bulk_edit_stock')) ? "<a href='" . route('admin_seo_bulk_edit_stock', $stock->id) . "'>Edit</a>" : null;
             })
             ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
             ->make(true);
@@ -536,9 +537,9 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($ticket) {
                 $settings = new Settings();
                 $status = $settings->getData('tickets', 'completed');
-                $actions = userCan('admin_tickets_edit')?"<a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>":null;
+                $actions = userCan('admin_tickets_edit') ? "<a class='badge btn-warning' href='" . route('admin_tickets_edit', $ticket->id) . "'><i class='fa fa-edit'></i></a>" : null;
                 if ($status && $status->val != $ticket->status_id) {
-                    $actions .=userCan('admin_tickets_close')? "<a class='badge btn-danger' href='" . route('admin_tickets_close', $ticket->id) . "'>Close</a>":null;
+                    $actions .= userCan('admin_tickets_close') ? "<a class='badge btn-danger' href='" . route('admin_tickets_close', $ticket->id) . "'>Close</a>" : null;
                 }
                 return $actions;
             })->rawColumns(['actions', 'priority_id', 'status_id', 'attachments'])
@@ -562,7 +563,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->created_at);
             })
             ->addColumn('actions', function ($faq) {
-                return (userCan('admin_faq_delete')?"<a class='badge btn-danger delete-button' data-key='".$faq->id."' data-href='" . route("admin_faq_delete") . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_faq_edit')?"<a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>":null);
+                return (userCan('admin_faq_delete') ? "<a class='badge btn-danger delete-button' data-key='" . $faq->id . "' data-href='" . route("admin_faq_delete") . "'><i class='fa fa-trash'></i></a>" : null) . (userCan('admin_faq_edit') ? "<a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>" : null);
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
@@ -580,13 +581,14 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->purchase_date);
             })
             ->addColumn('actions', function ($faq) {
-                return (userCan('admin_inventory_purchase_edit'))?"<a class='badge btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>":'';
+                return (userCan('admin_inventory_purchase_edit')) ? "<a class='badge btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>" : '';
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
+
     public function getItemPurchases($item_id)
     {
-        return Datatables::of(Purchase::where('item_id',$item_id))
+        return Datatables::of(Purchase::where('item_id', $item_id))
             ->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
             })->editColumn('sku', function ($attr) {
@@ -636,9 +638,10 @@ class DatatableController extends Controller
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>
-            <a class='badge btn-info' href='".route('admin_items_purchase',$attr->id)."'><i class='fa fa-eye'></i></a>";
+            <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>";
             })->rawColumns(['actions'])->make(true);
     }
+
     public function getAllSuppliers()
     {
         return Datatables::of(Suppliers::query())
@@ -646,40 +649,41 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->created_at);
             })
             ->addColumn('actions', function ($attr) {
-                return (userCan('admin_suppliers_edit'))?"<a class='badge btn-warning' href='".route('admin_suppliers_edit',$attr->id)."'><i class='fa fa-edit'></i></a>":'';
+                return (userCan('admin_suppliers_edit')) ? "<a class='badge btn-warning' href='" . route('admin_suppliers_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>" : '';
             })->rawColumns(['actions'])->make(true);
     }
-    public function getAllOthers($id=null)
+
+    public function getAllOthers($id = null)
     {
-        if(!$id){
-            $array=collect(json_decode(json_encode(\DB::select('SELECT MAX(id) as id FROM others GROUP BY `grouped`'),true),true))->pluck('id');
+        if (!$id) {
+            $array = collect(json_decode(json_encode(\DB::select('SELECT MAX(id) as id FROM others GROUP BY `grouped`'), true), true))->pluck('id');
             return Datatables::of(
-                Others::whereIn('id',$array)
+                Others::whereIn('id', $array)
             )
                 ->editColumn('item_id', function ($other) {
                     return $other->item->name;
-                }) ->editColumn('user_id', function ($other) {
-                    return $other->user->name.' '.$other->user->last_name;
+                })->editColumn('user_id', function ($other) {
+                    return $other->user->name . ' ' . $other->user->last_name;
                 })->editColumn('created_at', function ($faq) {
                     return BBgetDateFormat($faq->created_at);
-                }) ->editColumn('updated_at', function ($faq) {
+                })->editColumn('updated_at', function ($faq) {
                     return BBgetDateFormat($faq->created_at);
                 })
                 ->addColumn('actions', function ($attr) {
-                    return "<a class='badge btn-warning' href='".route('admin_inventory_others_new',$attr->id)."'><i class='fa fa-edit'></i></a>";
+                    return "<a class='badge btn-warning' href='" . route('admin_inventory_others_new', $attr->id) . "'><i class='fa fa-edit'></i></a>";
                 })->rawColumns(['actions'])->make(true);
-        }else{
+        } else {
             $other = Others::find($id);
             return Datatables::of(
-                Others::where('grouped',$other->grouped)
+                Others::where('grouped', $other->grouped)
             )
                 ->editColumn('item_id', function ($other) {
                     return $other->item->name;
-                }) ->editColumn('user_id', function ($other) {
-                    return $other->user->name.' '.$other->user->last_name;
+                })->editColumn('user_id', function ($other) {
+                    return $other->user->name . ' ' . $other->user->last_name;
                 })->editColumn('created_at', function ($faq) {
                     return BBgetDateFormat($faq->created_at);
-                }) ->editColumn('updated_at', function ($faq) {
+                })->editColumn('updated_at', function ($faq) {
                     return BBgetDateFormat($faq->created_at);
                 })->make(true);
         }
@@ -689,17 +693,17 @@ class DatatableController extends Controller
     public function getAllCustomEmails()
     {
 
-        return DataTables::of(CustomEmails::query()->where("is_for_admin","=","0"))
+        return DataTables::of(CustomEmails::query()->where("is_for_admin", "=", "0"))
             ->editColumn('status', function ($message) {
-            return $message->status?'sent out':'in progress';
-        })->editColumn('category_id', function ($message) {
-            return ($message->category) ? $message->category->name : '';
-        })
+                return $message->status ? 'sent out' : 'in progress';
+            })->editColumn('category_id', function ($message) {
+                return ($message->category) ? $message->category->name : '';
+            })
             ->editColumn('created_at', function ($message) {
-            return BBgetDateFormat($message->created_at);
-        })->addColumn('actions',function ($message){
-             return (!$message->status?'<button class="btn btn-success send-now" data-id="'.$message->id.'">Send Now</button><a href="'.route('edit_admin_emails_notifications_send_email',$message->id).'" class="btn btn-danger"><i class="fa fa-edit"></i></a>':'<button class="btn btn-info copy-message" data-id="'.$message->id.'">Copy</button><a href="'.route('view_admin_emails_notifications_send_email',$message->id).'" class="btn btn-warning"><i class="fa fa-eye"></i></a>');
-        })->rawColumns(['actions'])->make(true);
+                return BBgetDateFormat($message->created_at);
+            })->addColumn('actions', function ($message) {
+                return (!$message->status ? '<button class="btn btn-success send-now" data-id="' . $message->id . '">Send Now</button><a href="' . route('edit_admin_emails_notifications_send_email', $message->id) . '" class="btn btn-danger"><i class="fa fa-edit"></i></a>' : '<button class="btn btn-info copy-message" data-id="' . $message->id . '">Copy</button><a href="' . route('view_admin_emails_notifications_send_email', $message->id) . '" class="btn btn-warning"><i class="fa fa-eye"></i></a>');
+            })->rawColumns(['actions'])->make(true);
     }
 
     public function getAllTransactions()
@@ -730,7 +734,7 @@ class DatatableController extends Controller
             })->editColumn('user_id', function ($attr) {
                 return ($attr->user) ? $attr->user->name . ' ' . $attr->user->last_name : 'Not member';
             })->editColumn('category_id', function ($attr) {
-                return ($attr->category) ? $attr->category->name  : '';
+                return ($attr->category) ? $attr->category->name : '';
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger delete-button' data-key='$post->id' data-href='" . route('admin_emails_newsletter_delete') . "'><i class='fa fa-trash-o'></i></a>";
@@ -744,14 +748,14 @@ class DatatableController extends Controller
             Campaign::query()
         )->editColumn('created_at', function ($faq) {
             return BBgetDateFormat($faq->created_at);
-        }) ->addColumn('actions', function ($attr) {
-            $html = '<a href="javascript:void(0)" data-href="'.route("admin_campaign_delete").'" 
+        })->addColumn('actions', function ($attr) {
+            $html = '<a href="javascript:void(0)" data-href="' . route("admin_campaign_delete") . '" 
                 class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
-            return $html.="<a class='badge btn-warning' href='".route('admin_campaign_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
+            return $html .= "<a class='badge btn-warning' href='" . route('admin_campaign_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
         })->rawColumns(['actions'])->make(true);
     }
 
-    public function getAllChannelCustomers($id=null)
+    public function getAllChannelCustomers($id = null)
     {
         return Datatables::of(
             User::query()
