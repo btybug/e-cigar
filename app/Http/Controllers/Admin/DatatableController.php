@@ -747,7 +747,9 @@ class DatatableController extends Controller
         )->editColumn('created_at', function ($faq) {
             return BBgetDateFormat($faq->created_at);
         }) ->addColumn('actions', function ($attr) {
-            return "<a class='badge btn-warning' href='".route('admin_campaign_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
+            $html = '<a href="javascript:void(0)" data-href="'.route("admin_campaign_delete").'" 
+                class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
+            return $html.="<a class='badge btn-warning' href='".route('admin_campaign_edit',$attr->id)."'><i class='fa fa-edit'></i></a>";
         })->rawColumns(['actions'])->make(true);
     }
 

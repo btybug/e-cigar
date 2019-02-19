@@ -58,4 +58,13 @@ class CampaignController extends Controller
 
         return route('admin_campaign');
     }
+
+    public function postDelete(Request $request)
+    {
+        $model = Campaign::findOrFail($request->slug);
+
+        $model->delete();
+
+        return \Response::json(['error' => false]);
+    }
 }

@@ -171,6 +171,7 @@ Route::group(['prefix' => 'users'], function () {
         Route::post('/create', 'Admin\CampaignController@postCreate')->name('admin_campaign_create_post');
         Route::get('/edit/{id}', 'Admin\CampaignController@edit')->name('admin_campaign_edit');
         Route::post('/edit/{id}', 'Admin\CampaignController@postEdit')->name('admin_campaign_edit_post');
+        Route::post('/delete', 'Admin\CampaignController@postDelete')->name('admin_campaign_delete');
     });
 });
 Route::group(['prefix' => 'store'], function () {
