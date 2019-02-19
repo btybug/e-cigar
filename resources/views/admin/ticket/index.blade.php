@@ -8,8 +8,8 @@
             <div class="panel-heading clearfix">
                 <h2 class="m-0 pull-left">Tickets</h2>
                 <div class="pull-right">
-                    <a class="btn btn-warning mr-10" href="{!! route('admin_tickets_settings') !!}">Settings</a>
-                    <a class="btn btn-primary" href="{!! route('admin_tickets_new') !!}">Add new</a>
+                   @ok('admin_tickets_settings') <a class="btn btn-warning mr-10" href="{!! route('admin_tickets_settings') !!}">Settings</a>@endok
+                    @ok('admin_tickets_new')<a class="btn btn-primary" href="{!! route('admin_tickets_new') !!}">Add new</a>@endok
                 </div>
             </div>
         </div>
