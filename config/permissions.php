@@ -450,7 +450,7 @@ return [
         ],
         'bulk' => [
             'name' => 'Bulk',
-            'routes' => ['admin_seo_bulk', 'admin_seo_bulk_products'],
+            'routes' => ['admin_seo_bulk', 'admin_seo_bulk_products','datatable_bulk_posts','datatable_bulk_stocks'],
             'description' => 'Able to see bulk',
             'children' => [
                 'edit' => [

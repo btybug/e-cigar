@@ -7,27 +7,33 @@
        <div class="panel-body">
            <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-               <li class="nav-item ">
+               @ok('admin_seo')
+               <li class="nav-item">
                    <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo') !!}" role="tab"
                       aria-controls="shipping" aria-selected="false">Posts</a>
                </li>
-
+               @endok
+               @ok('admin_seo_stocks')
                <li class="nav-item active">
                    <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_stocks') !!}" role="tab"
                       aria-controls="shipping" aria-selected="false">Stocks</a>
                </li>
-
+               @endok
+               @ok('admin_seo_pages')
                <li class="nav-item ">
                    <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_pages') !!}" role="tab"
                       aria-controls="shipping" aria-selected="false">Pages</a>
                </li>
+               @endok
            </ul>
            <div class="d-flex">
                <div class="container">
                    {!! Form::model($general) !!}
+                   @ok('stocks_admin_seo_stocks')
                    <div class="text-right mt-20">
                        <button type="submit" class="btn btn-info">Save</button>
                    </div>
+                   @endok
                    <div class="clearfix"></div>
                    <div class="seo-page-general">
                        <div class="panel panel-default mt-20">
