@@ -733,7 +733,7 @@ class DatatableController extends Controller
                 return ($attr->category) ? $attr->category->name  : '';
             })
             ->addColumn('actions', function ($post) {
-                return "<a class='badge btn-danger' href='" . route('admin_emails_newsletter_delete', $post->id) . "'><i class='fa fa-trash-o'></i></a>";
+                return "<a class='badge btn-danger delete-button' data-key='$post->id' data-href='" . route('admin_emails_newsletter_delete') . "'><i class='fa fa-trash-o'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }

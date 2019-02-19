@@ -224,13 +224,13 @@ class EmailsNotificationsController extends Controller
         return $this->view('newsletters', compact(''));
     }
 
-    public function postDeleteNewsletter($id)
+    public function postDeleteNewsletter(Request $request)
     {
-        $newsletter = Newsletter::findOrFail($id);
+        $newsletter = Newsletter::findOrFail($request->slug);
 
         $newsletter->delete();
 
-        return redirect()->back();
+        return response()->json(['error'=>false]);
     }
 
     public function postSendEmailCheckCategroy(Request $request)
