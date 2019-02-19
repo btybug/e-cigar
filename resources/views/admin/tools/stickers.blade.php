@@ -11,14 +11,14 @@
                     <div class="col-sm-12">
                         <div class="tools-stikers--header">
                             <h2>Stickers</h2>
-                            {!! Form::open(['url'=>route('admin_tools_stickers_manage')]) !!}
+                            {{--{!! Form::open(['url'=>route('admin_tools_stickers_manage')]) !!}--}}
                             {{--<div class="col-md-8">--}}
                                 {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
                             {{--</div>--}}
                             <div class="col-md-4 text-right">
                                 <button class="btn btn-primary add-new-order"  type="submit"><span class="icon-plus mr-5"><i class="fa fa-plus"></i></span>Add New</button>
                             </div>
-                            {!! Form::close() !!}
+                            {{--{!! Form::close() !!}--}}
                         </div>
                     </div>
                 </div>
@@ -80,6 +80,16 @@
             e.preventDefault()
             let id = $(this).attr("data-item-id")
             AjaxCall("{!! route('admin_tools_stickers_manage_form') !!}", {id}, function (res) {
+                if (!res.error) {
+                    $("body").find(".options-form").html(res.html)
+                    $('#colorselector_2').colorselector();
+                }
+            })
+        });
+
+        $("body").on("click", ".add-new-order", function(e) {
+            e.preventDefault()
+            AjaxCall("{!! route('admin_tools_stickers_new_form') !!}", {}, function (res) {
                 if (!res.error) {
                     $("body").find(".options-form").html(res.html)
                     $('#colorselector_2').colorselector();

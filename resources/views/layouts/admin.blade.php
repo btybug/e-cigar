@@ -254,7 +254,7 @@
               slug: item.data('slug')
           }
       }).done(function (data) {
-          if (data.success) {
+          if (! data.error) {
               if (typeof data.url != 'undefined') {
                   window.location.href = data.url;
               }

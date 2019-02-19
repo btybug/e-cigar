@@ -12,6 +12,10 @@
                         </a></li>
                 @endforeach
             </ul>
+                @if($model)
+                    <a href="javascript:void(0)" data-href="{{ route("admin_tools_stickers_delete") }}"
+                    class="delete-button btn btn-danger" data-key="{{ $model->id }}">Delete</a>
+                @endif
                 {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
             </div>
         @endif

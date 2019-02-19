@@ -43,9 +43,25 @@ class ToolsController extends Controller
         return \Response::json(['error'=>false,'html'=>$html]);
     }
 
+    public function postStickersNewForm(Request $request)
+    {
+        $path=$this->view.'.stickers_form';
+        $html=\View::make($path)->with(['model'=>null])->render();
+        return \Response::json(['error'=>false,'html'=>$html]);
+    }
+
     public function postAll (Request $request)
     {
         $attr = Stickers::whereNotIn('id', $request->get('arr',[]))->get();
         return \Response::json(['error' => false,'data' => $attr]);
+    }
+
+    public function postDelete(Request $request)
+    {
+        $model=Stickers::findOrFail($request->get('slug'));
+
+        $model->delete();
+
+        return \Response::json(['error'=> false,'url' => route('admin_tools_stickers')]);
     }
 }

@@ -402,7 +402,9 @@ Route::group(['prefix' => '/tools'], function () {
         Route::get('/', 'Admin\ToolsController@stickers')->name('admin_tools_stickers');
         Route::post('/manage/{id?}', 'Admin\ToolsController@postStickersManage')->name('admin_tools_stickers_manage');
         Route::post('get-manage-form', 'Admin\ToolsController@postStickersManageForm')->name('admin_tools_stickers_manage_form');
+        Route::post('get-new-form', 'Admin\ToolsController@postStickersNewForm')->name('admin_tools_stickers_new_form');
         Route::post('/get-all', 'Admin\ToolsController@postAll')->name('admin_tools_stickers_all_post');
+        Route::post('/delete', 'Admin\ToolsController@postDelete')->name('admin_tools_stickers_delete');
     });
 });
 
