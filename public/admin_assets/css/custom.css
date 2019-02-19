@@ -963,6 +963,16 @@ textarea {
     height: 60px;
     margin: 0;
 }
-
-
-
+.content-wrapper >.main-content{
+    overflow: auto;
+}
+.main-sidebar section.sidebar{
+    padding-bottom: 0;
+}
+body>.wrapper{
+    overflow-x: hidden;
+}
+.main-sidebar{
+    overflow: auto;
+    height: 100%;
+}
