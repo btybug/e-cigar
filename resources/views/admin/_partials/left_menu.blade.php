@@ -43,15 +43,15 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_customers')
-                    <li><a href="{{route('admin_staff')}}"><i class="far fa-circle"></i>Staff</a></li>
+                    <li><a href="{{route('admin_staff')}}"><i class="fa fa-circle-o"></i>Staff</a></li>
                     @endok
-                    <li><a href="{{route('admin_customers')}}"><i class="far fa-circle"></i>Customers</a></li>
+                    <li><a href="{{route('admin_customers')}}"><i class="fa fa-circle-o"></i>Customers</a></li>
                     @ok('admin_role_membership')
                     <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
                     </li>
                     @endok
                     @ok('admin_campaign')
-                    <li><a href="{{route('admin_campaign')}}"><i class="far fa-circle"></i>Campaign</a>
+                    <li><a href="{{route('admin_campaign')}}"><i class="fa fa-circle-o"></i>Campaign</a>
                     </li>
                     @endok
                 </ul>
@@ -60,7 +60,7 @@
             @ok('admin_inventory')
             <li class="treeview">
                 <a href="#">
-                    <i class="fab fa-dropbox"></i>
+                    <i class="fa fa-dropbox"></i>
                     <span>Inventory</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -68,20 +68,20 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_items')
-                    <li><a href="{{route('admin_items')}}"><i class="far fa-circle"></i>Items</a></li>
+                    <li><a href="{{route('admin_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
                     @endok
                     @ok('admin_warehouses')
-                    <li><a href="{{route('admin_warehouses')}}"><i class="far fa-circle"></i>Warehouses</a></li>
+                    <li><a href="{{route('admin_warehouses')}}"><i class="fa fa-circle-o"></i>Warehouses</a></li>
                     @endok
                     @ok('admin_inventory_purchase')
-                    <li><a href="{{route('admin_inventory_purchase')}}"><i class="far fa-circle"></i> Purchase</a></li>
+                    <li><a href="{{route('admin_inventory_purchase')}}"><i class="fa fa-circle-o"></i> Purchase</a></li>
                     @endok
                     @ok('admin_suppliers')
-                    <li><a href="{{route('admin_suppliers')}}"><i class="far fa-circle"></i>Suppliers</a></li>
+                    <li><a href="{{route('admin_suppliers')}}"><i class="fa fa-circle-o"></i>Suppliers</a></li>
                     @endok
 
                     @ok('admin_inventory_other')
-                    <li><a href="{{route('admin_inventory_other')}}"><i class="far fa-circle"></i>Other</a></li>
+                    <li><a href="{{route('admin_inventory_other')}}"><i class="fa fa-circle-o"></i>Other</a></li>
                     @endok
                 </ul>
             </li>
@@ -89,7 +89,7 @@
             @ok('admin_stock')
             <li class="treeview">
                 <a href="#">
-                    <i class="fab fa-dropbox"></i>
+                    <i class="fa fa-dropbox"></i>
                     <span>Store</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -97,16 +97,16 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_stock')
-                    <li><a href="{{route('admin_stock')}}"><i class="far fa-circle"></i>Products</a></li>
+                    <li><a href="{{route('admin_stock')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok
                     @ok('admin_orders')
-                    <li><a href="{{route('admin_orders')}}"><i class="far fa-circle"></i> All orders</a></li>
+                    <li><a href="{{route('admin_orders')}}"><i class="fa fa-circle-o"></i> All orders</a></li>
                     @endok
 
                     @ok('admin_store_transactions')
-                    <li><a href="{{route('admin_store_transactions')}}"><i class="far fa-circle"></i> Transactions</a></li>
+                    <li><a href="{{route('admin_store_transactions')}}"><i class="fa fa-circle-o"></i> Transactions</a></li>
                     @endok
-                    <li><a href="{{route('admin_store_coupons')}}"><i class="far fa-circle"></i> Coupons</a></li>
+                    <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
 
                 </ul>
             </li>
@@ -121,13 +121,13 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_blog')}}"><i class="far fa-circle"></i> Posts</a></li>
-                    <li><a href="{{route('show_comments')}}"><i class="far fa-circle"></i> Comments</a></li>
-                    <li><a href="{{route('admin_faq')}}"><i class="far fa-circle"></i> FAQ</a></li>
+                    <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
+                    <li><a href="{{route('show_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>
+                    <li><a href="{{route('admin_faq')}}"><i class="fa fa-circle-o"></i> FAQ</a></li>
                     @ok('admin_blog_contact_us')
-                    <li><a href="{{route('admin_blog_contact_us')}}"><i class="far fa-circle"></i>Contact us</a></li>
+                    <li><a href="{{route('admin_blog_contact_us')}}"><i class="fa fa-circle-o"></i>Contact us</a></li>
                     @endok
-                    <li><a href="{{route('admin_tickets')}}"><i class="far fa-circle"></i> Tickets</a></li>
+                    <li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> Tickets</a></li>
                 </ul>
             </li>
             @endok
@@ -141,9 +141,9 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_seo')}}"><i class="far fa-circle"></i> General</a></li>
+                    <li><a href="{{route('admin_seo')}}"><i class="fa fa-circle-o"></i> General</a></li>
                     @ok('admin_seo_bulk')
-                    <li><a href="{{route('admin_seo_bulk')}}"><i class="far fa-circle"></i> Bulk</a></li>
+                    <li><a href="{{route('admin_seo_bulk')}}"><i class="fa fa-circle-o"></i> Bulk</a></li>
                     @endok
                 </ul>
             </li>
@@ -159,19 +159,19 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_categories_list')
-                    <li><a href="{{route('admin_categories_list')}}"><i class="far fa-circle"></i> Categories</a></li>
+                    <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     @endok
                     @ok('admin_stock_tags')
-                    <li><a href="{{route('admin_stock_tags')}}"><i class="far fa-circle"></i> Tags</a></li>
+                    <li><a href="{{route('admin_stock_tags')}}"><i class="fa fa-circle-o"></i> Tags</a></li>
                     @endok
                     @ok('admin_stock_statuses')
-                    <li><a href="{{route('admin_stock_statuses')}}"><i class="far fa-circle"></i> Statuses</a></li>
+                    <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
                     @endok
                     @ok('admin_store_attributes')
-                    <li><a href="{{route('admin_store_attributes')}}"><i class="far fa-circle"></i> Attributes</a></li>
+                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                     @endok
                     @ok('admin_tools_stickers')
-                    <li><a href="{{route('admin_tools_stickers')}}"><i class="far fa-circle"></i> Stickers</a></li>
+                    <li><a href="{{route('admin_tools_stickers')}}"><i class="fa fa-circle-o"></i> Stickers</a></li>
                     @endok
                 </ul>
             </li>
@@ -188,14 +188,14 @@
                 <ul class="treeview-menu">
                     @ok('admin_emails_notifications_emails')
                     <li><a href="{{route('admin_emails_notifications_emails')}}"><i
-                                    class="far fa-circle"></i>Emails</a></li>
+                                    class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
                     @ok('admin_emails_newsletters')
                         <li><a href="{{route('admin_emails_newsletters')}}"><i
-                                    class="far fa-circle"></i>Newsletters</a></li>
+                                    class="fa fa-circle-o"></i>Newsletters</a></li>
                     @endok
                     @ok('admin_emails_notifications_send_email')
-                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="far fa-circle"></i>Notifications</a>
+                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Notifications</a>
                     </li>
                     @endok
 
@@ -212,17 +212,17 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_settings_languages')}}"><i class="far fa-circle"></i> Languages</a>
+                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a>
                     </li>
 
                     @ok('admin_settings_general')
-                    <li><a href="{{route('admin_settings_general')}}"><i class="far fa-circle"></i> General</a></li>
+                    <li><a href="{{route('admin_settings_general')}}"><i class="fa fa-circle-o"></i> General</a></li>
                     @endok
                     @ok('admin_settings_store')
-                    <li><a href="{{route('admin_settings_store')}}"><i class="far fa-circle"></i>Store</a></li>
+                    <li><a href="{{route('admin_settings_store')}}"><i class="fa fa-circle-o"></i>Store</a></li>
                     @endok
                     @ok('admin_settings_events')
-                    <li><a href="{{route('admin_settings_events')}}"><i class="far fa-circle"></i>Events</a></li>
+                    <li><a href="{{route('admin_settings_events')}}"><i class="fa fa-circle-o"></i>Events</a></li>
                     @endok
                 </ul>
             </li>
@@ -237,12 +237,12 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_manage_api')}}"><i class="far fa-circle"></i>Manage</a></li>
+                    <li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>
                     @ok('admin_manage_api_products')
-                    <li><a href="{{route('admin_manage_api_products')}}"><i class="far fa-circle"></i>Products</a></li>
+                    <li><a href="{{route('admin_manage_api_products')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok
                     @ok('admin_manage_api_items')
-                    <li><a href="{{route('admin_manage_api_items')}}"><i class="far fa-circle"></i>Items</a></li>
+                    <li><a href="{{route('admin_manage_api_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
                     @endok
                 </ul>
 
