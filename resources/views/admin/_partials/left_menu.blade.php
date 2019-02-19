@@ -27,7 +27,7 @@
             {{--<li class="header">MAIN NAVIGATION</li>--}}
 
             <li><a href="{{route('admin_dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-  
+
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
             @hasAccess('media')
             <li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>
@@ -111,8 +111,7 @@
                     @ok('admin_store_transactions')
                     <li><a href="{{route('admin_store_transactions')}}"><i class="fa fa-circle-o"></i> Transactions</a></li>
                     @endok
-                    <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>
-
+                   @ok('admin_store_coupons') <li><a href="{{route('admin_store_coupons')}}"><i class="fa fa-circle-o"></i> Coupons</a></li>@endok
                 </ul>
             </li>
             @endHasAccess
@@ -127,13 +126,13 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>
-                    <li><a href="{{route('show_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>
-                    <li><a href="{{route('admin_faq')}}"><i class="fa fa-circle-o"></i> FAQ</a></li>
+                    @ok('admin_blog')<li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>@endok
+                    @ok('show_comments')<li><a href="{{route('show_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>@endok
+                    @ok('admin_faq')<li><a href="{{route('admin_faq')}}"><i class="fa fa-circle-o"></i> FAQ</a></li>@endok
                     @ok('admin_blog_contact_us')
                     <li><a href="{{route('admin_blog_contact_us')}}"><i class="fa fa-circle-o"></i>Contact us</a></li>
                     @endok
-                    <li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> Tickets</a></li>
+                    @ok('admin_tickets')<li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> Tickets</a></li>@endok
                 </ul>
             </li>
             @endHasAccess
@@ -148,7 +147,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_seo')}}"><i class="fa fa-circle-o"></i> General</a></li>
+                    @ok('admin_seo')<li><a href="{{route('admin_seo')}}"><i class="fa fa-circle-o"></i> General</a></li>@endok
                     @ok('admin_seo_bulk')
                     <li><a href="{{route('admin_seo_bulk')}}"><i class="fa fa-circle-o"></i> Bulk</a></li>
                     @endok
@@ -222,9 +221,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a>
-                    </li>
-
+                    @ok('admin_settings_general') <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a></li>@endok
                     @ok('admin_settings_general')
                     <li><a href="{{route('admin_settings_general')}}"><i class="fa fa-circle-o"></i> General</a></li>
                     @endok
@@ -248,7 +245,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>
+                    @ok('admin_manage_api')<li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>@endok
                     @ok('admin_manage_api_products')
                     <li><a href="{{route('admin_manage_api_products')}}"><i class="fa fa-circle-o"></i>Products</a></li>
                     @endok
@@ -260,10 +257,10 @@
             </li>
             @endHasAccess
 
-            @hasAccess('manage_api')
+            @ok('import_index')
             <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Import</span></a></li>
-            @endHasAccess
+            @endok
         </ul>
     </section>
     <!-- /.sidebar -->
