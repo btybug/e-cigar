@@ -1,12 +1,9 @@
 <div class="del-save--btn">
     @if($model)
-        {!! Form::model($model,['url' => route('admin_store_categories_delete',$type)]) !!}
-        {!! Form::hidden('id',null) !!}
         <div class="form-group m-r-5">
-            {!! Form::submit('delete',['class' => 'btn btn-danger']) !!}
+            <a class="btn btn-delete delete-button" data-key="{{ $model->id }}" data-href="{{ route('admin_store_categories_delete',$type) }}">Delete</a>
         </div>
     @endif
-    {!! Form::close() !!}
     <div class="form-group">
         {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
     </div>

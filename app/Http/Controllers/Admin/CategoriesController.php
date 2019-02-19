@@ -77,12 +77,10 @@ class CategoriesController extends Controller
 
     public function postDeleteCategory (Request $request,$type)
     {
-        $model = Category::find($request->get('id'));
-        if($model){
-            $model->delete();
-        }
+        $model = Category::findOrFail($request->get('slug'));
+        $model->delete();
 
-        return redirect()->back();
+        return response()->json(['error' => false]);
     }
 
     public function getCategory(Request $request)
