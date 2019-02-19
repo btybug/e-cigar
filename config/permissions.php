@@ -381,7 +381,7 @@ return [
         ],
         'faq' => [
             'name' => 'faq',
-            'routes' => ['admin_faq'],
+            'routes' => ['admin_faq','datatable_all_faq'],
             'description' => 'Able to see all FAQ',
             'children' => [
                 'create' => [
@@ -404,12 +404,12 @@ return [
         ],
         'contact_us' => [
             'name' => 'Contact us',
-            'routes' => ['admin_blog_contact_us'],
+            'routes' => ['admin_blog_contact_us','datatable_all_contact_us'],
             'description' => 'Able to communicate with guests',
             'children' => [
                 'edit' => [
                     'name' => 'Contact us',
-                    'routes' => ['admin_blog_contact_us_view', 'admin_post_blog_contact_us_replay'],
+                    'routes' => ['admin_blog_contact_us_view','admin_gmail_settings','admin_post_blog_contact_us_replay'],
                     'description' => 'Able to communicate with guests',
                 ],
             ],
@@ -417,7 +417,7 @@ return [
         ],
         'tickets' => [
             'name' => 'Tickets',
-            'routes' => ['admin_tickets'],
+            'routes' => ['admin_tickets','datatable_tickets'],
             'description' => 'Able to see Tickets',
             'children' => [
                 'create' => [

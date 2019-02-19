@@ -4,9 +4,11 @@
 @stop
 @section('content')
     <div class="panel panel-default">
+        @ok('admin_gmail_settings')
         <div class="text-right">
             <a class="btn btn-warning mr-10 mt-10" href="{!! route('admin_gmail_settings') !!}">Settings</a>
         </div>
+        @endok
         @if(LaravelGmail::check())
         <div class="panel-body">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">

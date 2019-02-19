@@ -198,8 +198,7 @@ class DatatableController extends Controller
             })->addColumn('options', function ($message) {
                 return '<input type="checkbox" data-id="'.$message->id.'">';
             })->addColumn('action', function ($message) {
-                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-info' href='".route('admin_blog_contact_us_view',$message->id)."'><i class='fa fa-eye'></i></a>";
+                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>".(userCan('admin_blog_contact_us_view')?"<a class='badge btn-info' href='".route('admin_blog_contact_us_view',$message->id)."'><i class='fa fa-eye'></i></a>":null);
             })->rawColumns(['action','options'])
             ->make(true);
     }
@@ -563,8 +562,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->created_at);
             })
             ->addColumn('actions', function ($faq) {
-                return "<a class='badge btn-danger' href='" . route("admin_faq_delete", $faq->id) . "'><i class='fa fa-trash'></i></a>
-                    <a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
+                return (userCan('admin_faq_delete')?"<a class='badge btn-danger' href='" . route("admin_faq_delete", $faq->id) . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_faq_edit')?"<a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>":null);
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
