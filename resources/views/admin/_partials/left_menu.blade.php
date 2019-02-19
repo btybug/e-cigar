@@ -25,9 +25,9 @@
         <!-- /.search form -->
         <ul class="sidebar-menu" data-widget="tree">
             {{--<li class="header">MAIN NAVIGATION</li>--}}
-            @ok('admin_dashboard')
+
             <li><a href="{{route('admin_dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-            @endok
+  
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
             @hasAccess('media')
             <li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>
