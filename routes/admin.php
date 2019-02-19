@@ -413,7 +413,7 @@ Route::group(['prefix' => 'comments'], function () {
     Route::get('/', 'Admin\CommentsController@index')->name('show_comments');
     Route::get('/approve/{id}', 'Admin\CommentsController@approve')->name('approve_comments');
     Route::get('/unapprove/{id}', 'Admin\CommentsController@unapprove')->name('unapprove_comments');
-    Route::get('/delete/{id}', 'Admin\CommentsController@delete')->name('delete_comments');
+    Route::post('/delete', 'Admin\CommentsController@delete')->name('delete_comments');
     Route::get('/edit/{id}', 'Admin\CommentsController@edit')->name('edit_comment');
     Route::post('/edit/{id}', 'Admin\CommentsController@postEdit')->name('edit_comment_post');
     Route::get('/reply/{id}', 'Admin\CommentsController@reply')->name('reply_comment');

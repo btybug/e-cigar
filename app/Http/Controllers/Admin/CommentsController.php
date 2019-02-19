@@ -71,10 +71,10 @@ class CommentsController extends Controller
         return redirect()->route('show_comments')->with("message", "Comment Successfully replied");
     }
 
-    public function delete(Request $request, $id)
+    public function delete(Request $request)
     {
-        $comment = $this->comment->find($id);
-        if($comment) $comment->delete();
-        return redirect()->back();
+        $comment = $this->comment->findOrFail($request->slug);
+        $comment->delete();
+        return response()->json(['errpr' => false]);
     }
 }

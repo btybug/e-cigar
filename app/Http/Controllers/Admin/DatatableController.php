@@ -236,7 +236,7 @@ class DatatableController extends Controller
                     $actions .= '<a class="btn btn-warning" href="' . route('edit_comment', $comment->id) . '"><i class="fa fa-edit"></i></a>';
                 }
 
-                userCan('delete_comments')?$actions .= '<a class="btn btn-danger delete-button" href="' . route('delete_comments', $comment->id) . '"><i class="fa fa-trash"></i></a>':null;
+                userCan('delete_comments')?$actions .= '<a class="btn btn-danger delete-button" data-key="'.$comment->id.'" data-href="' . route('delete_comments') . '"><i class="fa fa-trash"></i></a>':null;
                 return $actions;
             })->rawColumns(['actions', 'author', 'comment', 'replies', 'status'])
             ->make(true);
