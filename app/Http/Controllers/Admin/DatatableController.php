@@ -562,7 +562,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->created_at);
             })
             ->addColumn('actions', function ($faq) {
-                return (userCan('admin_faq_delete')?"<a class='badge btn-danger' href='" . route("admin_faq_delete", $faq->id) . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_faq_edit')?"<a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>":null);
+                return (userCan('admin_faq_delete')?"<a class='badge btn-danger delete-button' data-key='".$faq->id."' data-href='" . route("admin_faq_delete") . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_faq_edit')?"<a class='badge btn-warning' href='" . route("admin_faq_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>":null);
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }

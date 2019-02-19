@@ -64,11 +64,11 @@ class FaqController extends Controller
         return redirect()->route('admin_faq');
     }
 
-    public function getDelete($id)
+    public function getDelete(Request $request)
     {
-        $faq = Faq::findOrFail($id);
+        $faq = Faq::findOrFail($request->slug);
         $faq->delete();
-        return redirect()->route('admin_faq');
+        return response()->json(['error' => false]);
     }
 
     public function edit($id)
