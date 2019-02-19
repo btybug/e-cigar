@@ -180,4 +180,20 @@ class UserController extends Controller
 
         abort(404);
     }
+
+    public function deleteStaff(Request $request)
+    {
+        $user = User::findOrFail($request->slug);
+        $user->delete();
+
+        return response()->json(['error' => false]);
+    }
+
+    public function delete(Request $request)
+    {
+        $user = User::findOrFail($request->slug);
+        $user->delete();
+
+        return response()->json(['error' => false]);
+    }
 }
