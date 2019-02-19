@@ -29,10 +29,11 @@
             <li><a href="{{route('admin_dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
             @endok
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
-            @ok('admin_media')
+            @hasAccess('media')
             <li><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span></a></li>
-            @endok
-            @ok('user')
+            @endHasAccess
+
+            @hasAccess('user')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-group"></i>
@@ -58,8 +59,9 @@
                     @endok
                 </ul>
             </li>
-            @endok
-            @ok('admin_inventory')
+            @endHasAccess
+
+            @hasAccess('inventory')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dropbox"></i>
@@ -87,8 +89,9 @@
                     @endok
                 </ul>
             </li>
-            @endok
-            @ok('admin_stock')
+            @endHasAccess
+
+            @hasAccess('store')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dropbox"></i>
@@ -112,8 +115,9 @@
 
                 </ul>
             </li>
-            @endok
-            @ok('admin_blog')
+            @endHasAccess
+
+            @hasAccess('blog')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt"></i>
@@ -132,8 +136,9 @@
                     <li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> Tickets</a></li>
                 </ul>
             </li>
-            @endok
-            @ok('admin_seo')
+            @endHasAccess
+
+            @hasAccess('seo')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt"></i>
@@ -149,8 +154,9 @@
                     @endok
                 </ul>
             </li>
-            @endok
-            @ok('admin_tools')
+            @endHasAccess
+
+            @hasAccess('tools')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-wrench"></i>
@@ -177,8 +183,9 @@
                     @endok
                 </ul>
             </li>
-            @endok
-            @ok('admin_emails_notifications_send_email')
+            @endHasAccess
+
+            @hasAccess('emails_notifications')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-newspaper-o"></i>
@@ -203,8 +210,9 @@
 
                 </ul>
             </li>
-            @endok
-            @ok('admin_settings_languages')
+            @endHasAccess
+
+            @hasAccess('settings')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-cog"></i>
@@ -228,8 +236,9 @@
                     @endok
                 </ul>
             </li>
-            @endok
-            @ok('admin_manage_api')
+            @endHasAccess
+
+            @hasAccess('manage_api')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-handshake-o"></i>
@@ -249,11 +258,12 @@
                 </ul>
 
             </li>
-            @endok
-            {{--@ok('admin_dashboard')--}}
+            @endHasAccess
+
+            @hasAccess('manage_api')
             <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Import</span></a></li>
-            {{--@endok--}}
+            @endHasAccess
         </ul>
     </section>
     <!-- /.sidebar -->

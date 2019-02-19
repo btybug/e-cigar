@@ -34,6 +34,14 @@ class AppServiceProvider extends ServiceProvider
         \Blade::directive('endok', function ($expression) {
             return '<?php endif; ?>';
         });
+
+        \Blade::directive('hasAccess', function ($expression) {
+            return "<?php if(hasAccess($expression)): ?>";
+        });
+
+        \Blade::directive('endHasAccess', function ($expression) {
+            return '<?php endif; ?>';
+        });
         \Blade::directive('convert', function ($money) {
             return "<?php echo number_format($money, 2); ?>";
         });

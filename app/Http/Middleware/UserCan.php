@@ -18,7 +18,7 @@ class UserCan
         $role = \Auth::user()->role;
         if ($role->slug != 'superadmin') {
             if ($role != 'admin_dashboard') {
-                if (!$role->hasAccess(\Request::route()->getName())) {
+                if (!$role->can(\Request::route()->getName())) {
                     abort('401', 'Access Denied');
                 }
             }

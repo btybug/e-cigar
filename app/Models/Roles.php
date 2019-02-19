@@ -30,7 +30,7 @@ class Roles extends Model
         return $this->belongsToMany(Permissions::class, 'role_permission', 'permission_id', 'role_id');
     }
 
-    public function hasAccess($route)
+    public function can($route)
     {
         if ($route=='admin_dashboard') return true;
         $permissions=$this->permissions()->pluck('slug');
@@ -39,6 +39,11 @@ class Roles extends Model
             if(in_array($route,$config))return true;
         }
        return false;
+    }
+
+    public function hasAccess($slug)
+    {
+        return $this->permissions()->where('type','has_access')->where('slug',$slug)->exists();
     }
 
     public function users()

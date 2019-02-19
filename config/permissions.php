@@ -834,4 +834,15 @@ return [
         ],
 
     ],
+    'import_index' => [
+        'import_index' => [
+            'name' => 'Import index',
+            'routes' => [
+
+            ],
+            'description' => 'Able to see media',
+            'children' => [],
+        ],
+
+    ],
 ];
