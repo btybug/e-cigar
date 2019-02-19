@@ -130,7 +130,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($attr) {
-                return '<a href="javascript:void(0)" class="btn btn-danger" data-id="' . $attr->id . '">Delete</a>
+                return '<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="'.route("admin_store_attributes_delete").'" data-key="' . $attr->id . '">Delete</a>
                     <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>';
             })->rawColumns(['actions', 'image', 'icon', 'created_at'])
             ->make(true);

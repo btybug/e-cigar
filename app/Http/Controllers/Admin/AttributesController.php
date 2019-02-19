@@ -138,4 +138,12 @@ class AttributesController extends Controller
 
         return \Response::json(['error' => true]);
     }
+
+    public function postAttributesDelete(Request $request)
+    {
+        $model = Attributes::findOrFail($request->slug);
+        $model->delete();
+
+        return response()->json(['error' => false]);
+    }
 }
