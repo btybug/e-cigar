@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 class AttributesController extends Controller
 {
 
-    protected $view = 'admin.inventory.attributes';
+    protected $view = 'admin.tools.attributes';
 
     public function getAttributes()
     {

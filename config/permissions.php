@@ -501,7 +501,7 @@ return [
             'children' => [
                 'create' => [
                     'name' => 'Create tag',
-                    'routes' => ['admin_stock_tags_save', 'admin_stock_tags_save'],
+                    'routes' => ['admin_stock_tags_save'],
                     'description' => 'Able to Create Tag',
                 ],
                 'delete' => [
@@ -532,7 +532,7 @@ return [
         ],
         'attributes' => [
             'name' => 'Attributes',
-            'routes' => ['admin_store_attributes'],
+            'routes' => ['admin_store_attributes','datatable_all_attributes'],
             'description' => 'Able to see  Attributes',
             'children' => [
 
@@ -574,9 +574,24 @@ return [
         'stickers' =>
             [
                 'name' => 'Statuses',
-                'routes' => ['admin_tools_stickers', 'admin_tools_stickers_manage', 'admin_tools_stickers_manage_form', 'admin_tools_stickers_all_post'],
+                'routes' => ['admin_tools_stickers','admin_tools_stickers_manage_form', 'admin_tools_stickers_all_post'],
                 'description' => 'Able to see/edit stickers',
                 'children' => [
+                    'create' => [
+                        'name' => 'Create  sticker',
+                        'routes' => [
+                            'admin_tools_stickers_new_form',
+                        ],
+                        'description' => 'Able to Create stickers',
+                    ],
+                    'edit' => [
+                        'name' => 'Edit  sticker',
+                        'routes' => [
+                            'admin_tools_stickers_manage_form',
+                            'admin_tools_stickers_manage',
+                        ],
+                        'description' => 'Able to Edit stickers',
+                    ],
                 ],
 
             ],
@@ -585,7 +600,7 @@ return [
     'emails_notifications' => [
         'emails' => [
             'name' => 'Email Templates',
-            'routes' => ['admin_emails_notifications_emails'],
+            'routes' => ['admin_emails_notifications_emails','datatable_all_emails'],
             'description' => 'Able to see blog page',
             'children' => [
                 'edit' => [
@@ -598,7 +613,7 @@ return [
         ],
         'newsletters' => [
             'name' => 'Newsletters',
-            'routes' => ['admin_emails_newsletters'],
+            'routes' => ['admin_emails_newsletters','datatable_all_newsletters'],
             'description' => 'Able to see blog page',
             'children' => [
                 'delete' => [
@@ -611,7 +626,7 @@ return [
         ],
         'notification' => [
             'name' => 'Notification',
-            'routes' => ['admin_emails_notifications_send_email'],
+            'routes' => ['admin_emails_notifications_send_email','datatable_all_custom_emails'],
             'description' => 'Notification',
             'children' => [
                 'create' => [
@@ -726,6 +741,7 @@ return [
             'routes' => [
                 'admin_settings_store',
                 'admin_settings_shipping',
+                'datatable_all_geo_zones',
                 'admin_settings_couriers',
                 'admin_settings_store_gifts',
                 'admin_settings_tax_rates',

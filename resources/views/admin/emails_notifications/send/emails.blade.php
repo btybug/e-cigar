@@ -7,10 +7,11 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h2 class="m-0 pull-left">Notification</h2>
+            @ok('create_admin_emails_notifications_send_email')
             <div class="text-right">
                 <a class="btn btn-primary" href="{!! route('create_admin_emails_notifications_send_email') !!}">Create notification</a>
             </div>
-
+            @endok
         </div>
         <div class="panel-body">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">

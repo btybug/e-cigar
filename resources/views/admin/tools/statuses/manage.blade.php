@@ -16,7 +16,7 @@
                                 {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
                             {{--</div>--}}
                             <div class="col-md-4 text-right">
-                                    <button class="btn btn-primary add-new-order"  type="submit"><span class="icon-plus"><i class="fa fa-plus"></i></span>Add New</button>
+                               <button class="btn btn-primary add-new-order"  type="submit"><span class="icon-plus"><i class="fa fa-plus"></i></span>Add New</button>
                             </div>
                             </form>
                         </div>

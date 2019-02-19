@@ -130,9 +130,13 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($attr) {
+
                 return '<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="' . route("admin_store_attributes_delete") . '" data-key="' . $attr->id . '">Delete</a>
                     <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>';
-            })->rawColumns(['actions', 'image', 'icon', 'created_at'])
+
+                return (userCan('admin_store_attributes_delete')?'<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="'.route("admin_store_attributes_delete").'" data-key="' . $attr->id . '">Delete</a>':null).(userCan('admin_store_attributes_edit')?'
+                    <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>':null);
+                    })->rawColumns(['actions', 'image', 'icon', 'created_at'])
             ->make(true);
     }
 
@@ -158,7 +162,7 @@ class DatatableController extends Controller
     {
         return Datatables::of(MailTemplates::where('is_for_admin', 0))
             ->addColumn('actions', function ($email) {
-                return '<a href="' . route('admin_mail_create_templates', $email->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>';
+                return userCan('admin_mail_create_templates')?'<a href="' . route('admin_mail_create_templates', $email->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>':null;
             })
             ->editColumn('is_active', function ($email) {
                 return ($email->is_active) ? 'Yes' : 'No';
@@ -700,10 +704,18 @@ class DatatableController extends Controller
                 return ($message->category) ? $message->category->name : '';
             })
             ->editColumn('created_at', function ($message) {
+
                 return BBgetDateFormat($message->created_at);
             })->addColumn('actions', function ($message) {
                 return (!$message->status ? '<button class="btn btn-success send-now" data-id="' . $message->id . '">Send Now</button><a href="' . route('edit_admin_emails_notifications_send_email', $message->id) . '" class="btn btn-danger"><i class="fa fa-edit"></i></a>' : '<button class="btn btn-info copy-message" data-id="' . $message->id . '">Copy</button><a href="' . route('view_admin_emails_notifications_send_email', $message->id) . '" class="btn btn-warning"><i class="fa fa-eye"></i></a>');
             })->rawColumns(['actions'])->make(true);
+
+            return BBgetDateFormat($message->created_at);
+        })->addColumn('actions',function ($message){
+             return userCan('edit_admin_emails_notifications_send_email')?(!$message->status?'<button class="btn btn-success send-now" data-id="'.$message->id.'">Send Now</button>
+<a href="'.route('edit_admin_emails_notifications_send_email',$message->id).'" class="btn btn-danger"><i class="fa fa-edit"></i></a>':'<button class="btn btn-info copy-message" data-id="'.$message->id.'">Copy</button><a href="'.route('view_admin_emails_notifications_send_email',$message->id).'" class="btn btn-warning"><i class="fa fa-eye"></i></a>'):null;
+        })->rawColumns(['actions'])->make(true);
+
     }
 
     public function getAllTransactions()
