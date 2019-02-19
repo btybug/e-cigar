@@ -12,15 +12,15 @@ const shortAjax = function (URL, obj = {}, cb) {
     credentials: "same-origin",
     body: JSON.stringify(obj)
   })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (json) {
-        return cb(json);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (json) {
+      return cb(json);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 };
 //********shortAjax********end
 
@@ -63,6 +63,7 @@ const normAjax = function (URL, obj = {}, cb) {
 //App includes all methods for media page
 const App = function() {
   let globalFolderId = 1;
+  let count = 0;
 
   //********App -> htmlMaker********start
   //htmlMaker includes all methods to create html markup
@@ -72,6 +73,7 @@ const App = function() {
     dragElementOfTree: null,
     currentId: null,
     currentSelectedFolder: null,
+    hoverFolder: null,
     transfer: (f, p, root) => {
       const x = $("#folder-list").fancytree("getTree");
       const folder = x.getNodeByKey('' + f);
@@ -96,12 +98,11 @@ const App = function() {
           }
         );
       }
-
     },
 
     //********App -> htmlMaker -> makeFolder********start
     makeFolder: (data) => {
-      return (`<div draggable="true"  data-id="${data.id}"  class="file ">
+      return (`<div draggable="true"  data-id="${data.id}"  class="file " style="position: relative">
             <a href="#"  data-id="${
           data.id
           }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
@@ -115,11 +116,11 @@ const App = function() {
                 <span class="file-title">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
-                <div class="file-actions">
-                  <button bb-media-click="remove_folder" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                  <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
-                  <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
-                </div>
+                <!--<div class="file-actions">-->
+                  <button bb-media-click="remove_folder" class="btn btn-sm btn-danger" style="position: absolute; right: 5px; top: 5px"><i class="fa fa-trash"></i></button>
+                  <!--<button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>-->
+                  <!--<button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>-->
+                <!--</div>-->
             </a>
         </div>`);
     },
@@ -152,9 +153,8 @@ const App = function() {
 
     //********App -> htmlMaker -> makeTreeFolder********start
     makeTreeFolder: (data) => {
-
+      const self = this;
       $('document').ready(() => {
-
         //********fancytree********start
         $("#folder-list").fancytree({
           extensions: ["edit", "dnd5" ],
@@ -206,10 +206,38 @@ const App = function() {
             //********dragDrop********end
           },
           //********dnd5********end
+          renderNode: function(event, data) {
+            const node = data.node;
+            const $spanTitle = $(node.span).find('span.fancytree-title');
+            const folder = $(node.span).find('span.fancytree-folder');
+            folder.css({
+              display: 'flex',
+              alignItems: 'center'
+            });
+            $spanTitle.after('<div style="float: right" class="d-none"><button type="button" bb-media-click="remove_folder" class="btn btn-sm btn-danger" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-trash" style="color:#ffffff"></i></button></div>');
+            setTimeout(function() {
+              $('span.fancytree-folder').css({
+                cursor: 'pointer',
+                height: '25px'
+              });
+            }, 20);
+          },
           activate: (event, data) => {
             if (data.node.isFolder()) {
-              this.events.get_folder_items_tree(data.node.key);
+              event.toElement.tagName.toLowerCase().trim() !== 'i' && event.toElement.tagName.toLowerCase().trim() !== 'button' && this.events.get_folder_items_tree(data.node.key);
             }
+          }
+        }).on("mouseenter mouseleave", "span.fancytree-folder", function(event){
+
+          const node = $.ui.fancytree.getNode(event);
+          if(event.type === 'mouseenter') {
+            console.log(++count, 'V')
+            self.htmlMaker.hoverFolder = node.key;
+            node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.remove('d-none');
+          } else if(event.type === 'mouseleave') {
+            console.log(count, 'A');
+            !node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.add('d-none');
+            self.htmlMaker.hoverFolder = null;
           }
         });
         //********fancytree********end
@@ -217,6 +245,10 @@ const App = function() {
         $('ul.fancytree-container').css({
           border: 'none',
           outline: 'none'
+        });
+        $('span.fancytree-folder').css({
+          cursor: 'pointer',
+          height: '25px'
         });
       });
     },
@@ -844,7 +876,7 @@ const App = function() {
       shortAjax("/api/api-media/get-create-folder-child", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
-          cb(res)
+          cb(res);
         }
       });
     },
@@ -910,14 +942,14 @@ const App = function() {
     remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      const id = elm.closest(".file").getAttribute("data-id");
-
+      console.log('this.htmlMaker.hoverFolder', this.htmlMaker.hoverFolder)
+      const id = this.htmlMaker.hoverFolder || elm.closest(".file").getAttribute("data-id");
+      console.log('id', id)
       const removeTree = function () {
         const x = $("#folder-list").fancytree("getTree");
         const folder = x.getNodeByKey('' + id);
         folder.remove();
       };
-
       this.requests.removeTreeFolder(
         {
           folder_id: Number(id),
@@ -925,8 +957,9 @@ const App = function() {
           access_token: "string"
         },
         () => {
-          elm.closest(".folder-container").remove();
-          removeTree()
+          this.htmlMaker.hoverFolder ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
+          removeTree();
+          this.htmlMaker.hoverFolder = null;
         }
       );
     },

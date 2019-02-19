@@ -289,9 +289,13 @@
     $('document').ready(
         function() {
           $('body').on('click', '.file-drop-zone-title', function() {
-            console.log('hi');
             $(".btn.btn-file>input[type='file']").click();
           })
+
+//          $('[role="treeitem"]').on('mouseenter', function() {
+//            console.log('hello');
+//            this.css('background-color', 'red')
+//          })
         }
     )
   </script>
