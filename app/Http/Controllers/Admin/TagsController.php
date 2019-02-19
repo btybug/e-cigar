@@ -46,13 +46,10 @@ class TagsController extends Controller
 
     public function postDelete(Request $request)
     {
-        $tag = Tags::find($request->id);
-        if($tag){
-            $tag->delete();
-            return \Response::json(['error' => false,'data' => Tags::all()]);
-        }
+        $tag = Tags::findOrFail($request->slug);
+        $tag->delete();
 
-        return \Response::json(['error' => true,'message' => 'Tag not found !!!']);
+        return response()->json(['error' => false,'callback' => true,'data' =>Tags::all() ]);
     }
 
 }

@@ -28,9 +28,9 @@ const makeHtml = data => {
                     <div class="single-tags-text">
                         <p>${data.name}</p>
                     </div>
-                    <div class="remove-tag label label-danger" data-id=${
+                    <div class="delete-button label label-danger" data-id=${
                         data.id
-                    }>
+                    } data-key=${data.id} data-href="/admin/tools/tags/delete" data-callback="makeAllHtml(data.data)">
                         <i class="fa fa-times"></i>
                     </div>
                 </div>`;
