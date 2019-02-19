@@ -1,7 +1,7 @@
 <div class="del-save--btn">
     @if($model)
         <div class="form-group m-r-5">
-            <a class="btn btn-delete delete-button" data-key="{{ $model->id }}" data-href="{{ route('admin_store_categories_delete',$type) }}">Delete</a>
+            <a class="btn btn-danger delete-button" data-key="{{ $model->id }}" data-href="{{ route('admin_store_categories_delete',$type) }}">Delete</a>
         </div>
     @endif
     <div class="form-group">
