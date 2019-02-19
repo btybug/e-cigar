@@ -186,7 +186,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($post) {
-                return ((userCan('admin_post_delete'))?"<a class='badge btn-danger' href='" . route("admin_post_delete", $post->id) . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_post_edit')?"<a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>":null);
+                return ((userCan('admin_post_delete'))?"<a class='delete-button badge btn-danger' data-key='" . $post->id . "' data-href='" . route("admin_post_delete") . "'><i class='fa fa-trash'></i></a>":null).(userCan('admin_post_edit')?"<a class='badge btn-warning' href='" . route("admin_post_edit", $post->id) . "'><i class='fa fa-edit'></i></a>":null);
             })->rawColumns(['actions', 'url', 'short_description', 'created_at', 'status'])
             ->make(true);
     }

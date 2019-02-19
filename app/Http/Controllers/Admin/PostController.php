@@ -65,11 +65,11 @@ class PostController extends Controller
         return redirect()->route('admin_blog');
     }
 
-    public function getDelete($id)
+    public function getDelete(Request $request)
     {
-        $post = Posts::findOrFail($id);
+        $post = Posts::findOrFail($request->slug);
         $post->delete();
-        return redirect()->route('admin_blog');
+        return response()->json(['error' => false]);
     }
 
     public function edit($id)

@@ -202,7 +202,7 @@ Route::group(['prefix' => 'store'], function () {
 Route::group(['prefix' => 'blog'], function () {
     Route::get('/', 'Admin\PostController@index')->name('admin_blog');
     Route::get('create', 'Admin\PostController@create')->name('admin_blog_create');
-    Route::get('delete/{id}', 'Admin\PostController@getDelete')->name('admin_post_delete');
+    Route::post('delete', 'Admin\PostController@getDelete')->name('admin_post_delete');
     Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
     Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
     Route::group(['prefix' => 'contact-us'], function () {
