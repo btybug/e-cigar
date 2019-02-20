@@ -121,10 +121,10 @@ const App = function() {
                     <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
                   </button>
                   <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_folder">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
                       <i class="fa fa-trash" style="color:#ffffff"></i>
                     </button>
-                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
                     <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
                   </span>
                 </span>
@@ -153,10 +153,10 @@ const App = function() {
                 <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
               </button>
               <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_image">
+                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
                   <i class="fa fa-trash" style="color:#ffffff"></i>
                 </button>
-                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
                 <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_image"><i class="fa fa-pencil"></i></button>
               </span>
             </span>
@@ -179,6 +179,7 @@ const App = function() {
           //********dnd5********start
           dnd5: {
             autoExpandMS: 1500,
+            dropMarkerOffsetX: -24,
             preventRecursiveMoves: true,
             preventVoidMoves: true,
             preventNonNodes: false,
@@ -193,10 +194,7 @@ const App = function() {
               document.body.appendChild(crt);
               const id = node.key;
               data.dataTransfer.setDragImage(crt, 0, 0);
-              // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-              data.dataTransfer.setData("node_id", id); // required otherwise doesn't work
-              // setTimeout(() => (this.className = "invisible"), 0);
-
+              data.dataTransfer.setData("node_id", id);
               return true;
             },
             dragEnd: (node, data) => { },
@@ -257,16 +255,22 @@ const App = function() {
                                 </span>
                               </span>`);
             setTimeout(function() {
-              $('span.fancytree-folder').css({
-                cursor: 'pointer',
-                height: '25px'
-              });
               $(data.node.li).addClass(`f_id_${data.node.key}`);
             }, 20);
           },
           activate: (event, data) => {
             if (data.node.isFolder()) {
-              event.toElement.tagName.toLowerCase().trim() !== 'i' && event.toElement.tagName.toLowerCase().trim() !== 'button' && this.events.get_folder_items_tree(data.node.key);
+              if(event.toElement.tagName.toLowerCase().trim() !== 'i' && event.toElement.tagName.toLowerCase().trim() !== 'button') {
+                this.events.get_folder_items_tree(data.node.key);
+              }
+            }
+          },
+          beforeActivate: function(event, data) {
+            console.log('beforeActivate', event, data);
+            // logEvent(event, data, "current state=" + data.node.isActive());
+            if(event.toElement.tagName.toLowerCase().trim() === 'i' || event.toElement.tagName.toLowerCase().trim() === 'button'){
+              console.log('dsdsdsd');
+              return false;
             }
           }
         }).on("mouseenter mouseleave", "span.fancytree-folder", function(event){
@@ -281,15 +285,6 @@ const App = function() {
           }
         });
         //********fancytree********end
-
-        $('ul.fancytree-container').css({
-          border: 'none',
-          outline: 'none'
-        });
-        $('span.fancytree-folder').css({
-          cursor: 'pointer',
-          height: '25px'
-        });
       });
     },
     //********App -> htmlMaker -> makeTreeFolder********end
@@ -785,7 +780,7 @@ const App = function() {
                 folder.moveTo(x.getNodeByKey('' + parrentId));
                 $(".start").remove();
               }
-            )
+            );
           } else {
             self.requests.transferImage(
               {
@@ -1028,8 +1023,7 @@ const App = function() {
             folder_id: Number(id),
             files: true,
             access_token: "string"
-          },
-          false
+          }
         );
       }
     },
