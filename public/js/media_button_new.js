@@ -189,13 +189,20 @@ const App = function() {
               return true;
             },
             dragEnd: (node, data) => { },
+            dragDrag: function(node, data) {
+              data.dataTransfer.dropEffect = "move";
+            },
             dragEnter: (node, data) => {
+              data.dataTransfer.dropEffect = "move";
               return true;
             },
-            dragOver: (node, data) => { },
+            dragOver: (node, data) => {
+              data.dataTransfer.dropEffect = "move";
+            },
             dragLeave: (node, data) => { },
             //********dragDrop********start
             dragDrop: (node, data) => {
+
               const transfer = this.htmlMaker.transfer;
               if( !data.otherNode ) {
                 if(this.htmlMaker.currentId) {
