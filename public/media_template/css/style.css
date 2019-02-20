@@ -484,6 +484,16 @@ a:focus {
   background-color: #3c8dbc;
   position: absolute;
 }
+.folderitems .file-box .icon img{
+  position: absolute;
+  left: 0;
+}
+.folderitems .file-box .file-name{
+  background-color: #000000b3;
+  display: flex;
+  z-index: 1;
+  color: #fff;
+}
 @media (max-width: 767px) {
   #page-wrapper{
     height: auto;

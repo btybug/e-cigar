@@ -818,13 +818,13 @@ const App = function() {
           // breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(res.data);
           mainContainer.innerHTML = "";
           res.data.children.forEach((folder, index) => {
-            var html = `<div class="file-box folder-container col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
+            var html = `<div class="file-box folder-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
                 folder
             )}</div>`;
             mainContainer.innerHTML += html;
           });
           res.data.items.forEach((image, index) => {
-            let html = `<div data-image="${index}" class="file-box image-container col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
+            let html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
                 image
             )}</div>`;
             mainContainer.innerHTML += html;
