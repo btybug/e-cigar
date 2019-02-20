@@ -24,12 +24,6 @@ Route::get('mail-crone', function () {
 return view('mail.contact_us');
 });
 
-//Knowledge base
-//Manuals
-//Ticket
-//Terms & conditions
-//Delivery
-//Whole sellers
 
 
 Auth::routes();
