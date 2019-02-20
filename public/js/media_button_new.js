@@ -183,21 +183,27 @@ const App = function() {
             preventVoidMoves: true,
             preventNonNodes: false,
             dragStart: (node, data) => {
-
               this.htmlMaker.dragElementOfTree = node.key;
-              data.dataTransfer.dropEffect = "move";
+              console.log(data);
+              const crt = document.getElementsByClassName(`f_id_${node.key}`)[0].cloneNode(true);
+              crt.className += " start drag-folder_cursor";
+              crt.style.position = "absolute";
+              crt.style.top = "-10000px";
+              crt.style.right = "-10000px";
+              document.body.appendChild(crt);
+              const id = node.key;
+              data.dataTransfer.setDragImage(crt, 0, 0);
+              // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
+              data.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+              // setTimeout(() => (this.className = "invisible"), 0);
+
               return true;
             },
             dragEnd: (node, data) => { },
-            dragDrag: function(node, data) {
-              data.dataTransfer.dropEffect = "move";
-            },
             dragEnter: (node, data) => {
-              data.dataTransfer.dropEffect = "move";
               return true;
             },
             dragOver: (node, data) => {
-              data.dataTransfer.dropEffect = "move";
             },
             dragLeave: (node, data) => { },
             //********dragDrop********start
@@ -230,6 +236,7 @@ const App = function() {
           },
           //********dnd5********end
           renderNode: function(event, data) {
+            console.log(event, data)
             const node = data.node;
             const $spanTitle = $(node.span).find('span.fancytree-title');
             const folder = $(node.span).find('span.fancytree-folder');
@@ -254,6 +261,7 @@ const App = function() {
                 cursor: 'pointer',
                 height: '25px'
               });
+              $(data.node.li).addClass(`f_id_${data.node.key}`);
             }, 20);
           },
           activate: (event, data) => {
