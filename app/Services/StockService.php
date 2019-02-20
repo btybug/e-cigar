@@ -18,7 +18,7 @@ use App\Models\StockVariationOption;
  */
 class StockService
 {
-    public function makeOptions ($stock, array $data = [])
+    public function makeOptions($stock, array $data = [])
     {
         $result = [];
 
@@ -30,7 +30,7 @@ class StockService
                 if ($parent && count($ids)) {
                     foreach ($ids as $id) {
                         if ($id) {
-                            $result[] = ['parent_id' => $parent->id,'sticker_id' =>$id,'attributes_id' => $parent_id];
+                            $result[] = ['parent_id' => $parent->id, 'sticker_id' => $id, 'attributes_id' => $parent_id];
                         }
                     }
                 }
@@ -40,21 +40,21 @@ class StockService
         return $result;
     }
 
-    public function makeTypeOptions ($stock, array $data = [])
+    public function makeTypeOptions($stock, array $data = [])
     {
         $result = [];
         $stock->type_attrs_all()->delete();
         if (count($data)) {
             foreach ($data as $datum) {
-                if(isset($datum['attributes_id']) && isset($datum['type']) && isset($datum['options'])){
+                if (isset($datum['attributes_id']) && isset($datum['type']) && isset($datum['options'])) {
                     $attr_id = $datum['attributes_id'];
                     $type = $datum['type'];
                     $ids = $datum['options'];
-                    $result[] = ['attributes_id' => $attr_id,'type' => $type,'sticker_id' => null];
+                    $result[] = ['attributes_id' => $attr_id, 'type' => $type, 'sticker_id' => null];
                     if (count($ids)) {
                         foreach ($ids as $id) {
                             if ($id) {
-                                $result[] = ['attributes_id' => $attr_id,'sticker_id' => $id];
+                                $result[] = ['attributes_id' => $attr_id, 'sticker_id' => $id];
                             }
                         }
                     }
@@ -66,21 +66,21 @@ class StockService
         return $result;
     }
 
-    public function saveSpecifications ($stock, array $data = [])
+    public function saveSpecifications($stock, array $data = [])
     {
         $result = [];
         $stock->stockAttrs()->delete();
         if (count($data)) {
             foreach ($data as $datum) {
-                if(isset($datum['attributes_id'])){
-                    $parent = ( new StockAttribute())->create([
+                if (isset($datum['attributes_id'])) {
+                    $parent = (new StockAttribute())->create([
                         'stock_id' => $stock->id,
                         'attributes_id' => $datum['attributes_id']
                     ]);
 
-                    if(isset($datum['options']) && count($datum['options'])){
-                        foreach ($datum['options'] as $sticker){
-                            ( new StockAttribute())->create([
+                    if (isset($datum['options']) && count($datum['options'])) {
+                        foreach ($datum['options'] as $sticker) {
+                            (new StockAttribute())->create([
                                 'stock_id' => $stock->id,
                                 'attributes_id' => $datum['attributes_id'],
                                 'sticker_id' => $sticker,
@@ -95,7 +95,7 @@ class StockService
         return true;
     }
 
-    public function makeProductOptions ($product, array $data = [])
+    public function makeProductOptions($product, array $data = [])
     {
         $result = [];
         if (count($data)) {
@@ -117,7 +117,7 @@ class StockService
         return $result;
     }
 
-    public function saveVariations ($stock, array $data = [])
+    public function saveVariations($stock, array $data = [])
     {
 //        $stock->variations()->delete();
 
@@ -139,8 +139,8 @@ class StockService
                 $variation->options()->delete();
                 if (isset($attributes) && count($attributes)) {
                     foreach ($attributes as $option) {
-                        $as = AttributeStickers::where('attributes_id',$option['attributes_id'])->where('sticker_id',$option['options_id'])->first();
-                        if($as){
+                        $as = AttributeStickers::where('attributes_id', $option['attributes_id'])->where('sticker_id', $option['options_id'])->first();
+                        if ($as) {
                             $variation->options()->create(['attribute_sticker_id' => $as->id]);
                         }
                     }
@@ -151,7 +151,7 @@ class StockService
         }
     }
 
-    public function savePackageVariation ($stock, array $data = [], $price)
+    public function savePackageVariation($stock, array $data = [], $price)
     {
         if (count($data)) {
             $deletableArray = [];
@@ -173,7 +173,7 @@ class StockService
         }
     }
 
-    public function savePromotionPrices ($promotion,array $data = [])
+    public function savePromotionPrices($promotion, array $data = [])
     {
         if (count($data)) {
             $deletableArray = [];
@@ -196,7 +196,7 @@ class StockService
         }
     }
 
-    public function saveSingleVariation ($stock, array $data = [])
+    public function saveSingleVariation($stock, array $data = [])
     {
         if (count($data)) {
             $data['stock_id'] = $stock->id;
@@ -211,7 +211,7 @@ class StockService
         }
     }
 
-    public function saveProductVariations ($product, array $data = [], array $options = [])
+    public function saveProductVariations($product, array $data = [], array $options = [])
     {
         $product->variations()->delete();
         if (count($data)) {

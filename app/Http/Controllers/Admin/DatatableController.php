@@ -131,9 +131,9 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($attr) {
 
-                return (userCan('admin_store_attributes_delete')?'<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="' . route("admin_store_attributes_delete") . '" data-key="' . $attr->id . '">Delete</a>':null).(userCan('admin_store_attributes_edit')?'
-                    <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>':null);
-                    })->rawColumns(['actions', 'image', 'icon', 'created_at'])
+                return (userCan('admin_store_attributes_delete') ? '<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="' . route("admin_store_attributes_delete") . '" data-key="' . $attr->id . '">Delete</a>' : null) . (userCan('admin_store_attributes_edit') ? '
+                    <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>' : null);
+            })->rawColumns(['actions', 'image', 'icon', 'created_at'])
             ->make(true);
     }
 
@@ -159,7 +159,7 @@ class DatatableController extends Controller
     {
         return Datatables::of(MailTemplates::where('is_for_admin', 0))
             ->addColumn('actions', function ($email) {
-                return userCan('admin_mail_create_templates')?'<a href="' . route('admin_mail_create_templates', $email->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>':null;
+                return userCan('admin_mail_create_templates') ? '<a href="' . route('admin_mail_create_templates', $email->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>' : null;
             })
             ->editColumn('is_active', function ($email) {
                 return ($email->is_active) ? 'Yes' : 'No';

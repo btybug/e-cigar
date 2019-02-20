@@ -123,7 +123,7 @@ function get_site_social_icons()
     $settings = $model->getData('admin_general_settings', 'social_media');
 
     if ($settings && $settings->val) {
-        return json_decode($settings->val,true);
+        return json_decode($settings->val, true);
     }
 
     return null;
@@ -1087,16 +1087,22 @@ function user_can_claim($user)
     }
     return false;
 }
-function checkImage($img){
+
+function checkImage($img)
+{
     return (File::exists(base_path($img))) ? $img : no_image();
 }
-function no_image(){
+
+function no_image()
+{
     return "/public/images/no_image.png";
 }
-function media_image_tmb($path){
- $e=explode('/',$path);
- $image='public/media/tmp/'.end($e);
- return (File::exists(base_path($image))) ? url($image) : no_image();
+
+function media_image_tmb($path)
+{
+    $e = explode('/', $path);
+    $image = 'public/media/tmp/' . end($e);
+    return (File::exists(base_path($image))) ? url($image) : no_image();
 
 }
 
@@ -1122,25 +1128,27 @@ function user_avatar($id = null)
 }
 
 
-function has_permission($role,$permission){
-    if(!$role || !$permission)return false;
-    if($role->slug == 'superadmin') return true;
-    $role_perms=$role->permissions->pluck('slug','slug');
+function has_permission($role, $permission)
+{
+    if (!$role || !$permission) return false;
+    if ($role->slug == 'superadmin') return true;
+    $role_perms = $role->permissions->pluck('slug', 'slug');
     return isset($role_perms[$permission]);
 
 }
 
-function render_widgets($placeholder){
-    $widgets = \App\Models\Dashboard::where('placeholder',$placeholder)->where('user_id',Auth::id())->orderBy('position')->get();
+function render_widgets($placeholder)
+{
+    $widgets = \App\Models\Dashboard::where('placeholder', $placeholder)->where('user_id', Auth::id())->orderBy('position')->get();
     $html = '';
     $permissions = config('widgets');
-    foreach ($widgets as $widget){
-        if(has_permission(Auth::user()->role,$widget->widget) && isset($permissions[$widget->widget])){
+    foreach ($widgets as $widget) {
+        if (has_permission(Auth::user()->role, $widget->widget) && isset($permissions[$widget->widget])) {
             $content = view($permissions[$widget->widget]['view'])->render();
-            $html.= ' <div id="'.$widget->widget.'" style="position: relative">
+            $html .= ' <div id="' . $widget->widget . '" style="position: relative">
                 <a class="delete-widget btn btn-warning" style="position: absolute;right:0;top:0;z-index: 99;">DELETE</a>
                 <div class="ui-sortable-handle">
-                  '.$content.'
+                  ' . $content . '
                 </div>
             </div>';
         }
