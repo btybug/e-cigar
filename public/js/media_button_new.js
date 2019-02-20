@@ -116,11 +116,18 @@ const App = function() {
                 <span class="file-title">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
-                <div class="file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-                  <button bb-media-click="remove_folder" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></button>
-                  <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
-                  <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
-                </div>
+                <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                  </button>
+                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_folder">
+                      <i class="fa fa-trash" style="color:#ffffff"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                  </span>
+                </span>
             </a>
         </div>`);
     },
@@ -141,11 +148,18 @@ const App = function() {
             <span class="file-title">${data.real_name}</span>
             </div>
             <!--<small>Added: ${data.updated_at}</small>-->
-            <div class="file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-              <button bb-media-click="remove_image" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-              <button class="btn btn-sm btn-primary"  bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
-              <button bb-media-click="edit_image" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
-          </div>
+            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+              </button>
+              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_image">
+                  <i class="fa fa-trash" style="color:#ffffff"></i>
+                </button>
+                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_image"><i class="fa fa-pencil"></i></button>
+              </span>
+            </span>
         </a>
     </div>`);
     },
@@ -169,7 +183,9 @@ const App = function() {
             preventVoidMoves: true,
             preventNonNodes: false,
             dragStart: (node, data) => {
+
               this.htmlMaker.dragElementOfTree = node.key;
+              data.dataTransfer.dropEffect = "move";
               return true;
             },
             dragEnd: (node, data) => { },
@@ -710,9 +726,9 @@ const App = function() {
           elm.addEventListener("dragstart", function (e) {
             const crt = this.cloneNode(true);
             crt.className += " start";
-            crt.style.position = "absolute";
-            crt.style.top = "-10000px";
-            crt.style.right = "-10000px";
+            // crt.style.position = "absolute";
+            // crt.style.top = "-10000px";
+            // crt.style.right = "-10000px";
             document.body.appendChild(crt);
             const id = this.getAttribute("data-id");
             e.dataTransfer.setDragImage(crt, 0, 0);
@@ -1048,6 +1064,12 @@ const App = function() {
           res,
           Number(countId)
         );
+        $("body").on("click dblclick", `[bb-media-click]`, function (e) {
+          if(!e.target.classList.contains('click-no')) {
+            const attr = $(this).attr("bb-media-click");
+            app.events[attr](this, e);
+          }
+        });
       });
     },
     //********App -> events -> open_full_modal********end
@@ -1181,8 +1203,10 @@ const app = new App();
 app.init();
 
 $("body").on("click dblclick", `[bb-media-click]`, function (e) {
-  const attr = $(this).attr("bb-media-click");
-  app.events[attr](this, e);
+  if(!e.target.classList.contains('click-no')) {
+    const attr = $(this).attr("bb-media-click");
+    app.events[attr](this, e);
+  }
 });
 
 $("body").on("click", `[data-tabaction]`, function (e) {
@@ -1203,6 +1227,6 @@ $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
   if(ev.type === 'mouseenter') {
     $(this).find('.file-actions').removeClass('d-none');
   } else if(ev.type === 'mouseleave') {
-    $(this).find('.file-actions').addClass('d-none');
+    $(this).find('.file-actions').addClass('d-none').removeClass('open');
   }
 });
