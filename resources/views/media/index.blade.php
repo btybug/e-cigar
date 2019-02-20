@@ -72,11 +72,11 @@
                 {{--<li><button class="btn btn-primary"><i class="fa fa-clone"></i></button></li>--}}
                 {{--</ul>--}}
                 <div class="upload-content" style="width: 100%;">
-                  <div class="uploader-container d-none">
+                  <div class="uploader-container mt15 d-none">
                     <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple name="item[]"
                            type="file" data-upload-url="{!! route('media_upload') !!}">
                   </div>
-                  <button type="button" class="btn btn-default mb-20 uploader_button" data-role="btnUploader"
+                  <button type="button" class="btn btn-primary mb-20 mt15 uploader_button" data-role="btnUploader"
                           bb-media-click="show_uploader">Uploader
                   </button>
                 </div>
