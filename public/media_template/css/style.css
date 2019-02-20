@@ -446,6 +446,9 @@ a:focus {
   /*min-height: 568px;*/
   position: relative !important;
 }
+.file-manager .folder-list{
+
+}
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;

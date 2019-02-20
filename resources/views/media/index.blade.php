@@ -43,9 +43,9 @@
                   //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                   // })
                 </script>
-                <ul class="folder-list" id="folder-list" style="padding: 0;" data-media="folder">
+                <div class="folder-list" id="folder-list" style="padding: 0;" data-media="folder">
 
-                </ul>
+                </div>
                 {{--<h5 class="tag-title">Tags</h5>--}}
                 {{--<ul class="tag-list" style="padding: 0">--}}
                 {{--<li><a href="">Family</a></li>--}}
