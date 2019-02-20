@@ -4,7 +4,7 @@
 
     <div class="wrapper wrapper-content h-100">
       <div class="row dis-flex">
-        <div class="col-lg-3">
+        <div class="col-lg-2 h-100">
           <div class="ibox scrollbar_custom float-e-margins over-auto">
             <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
               <div class="file-manager">
@@ -62,8 +62,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-9">
-          <div class="over-auto scrollbar_custom">
+        <div class="col-lg-10 h-100 right--media-col">
+          <div class="over-auto scrollbar_custom right--media-col-wrapper">
             <div class="row m-0">
               <div class="col-lg-12 m-b-10 text-right d-flex" style="justify-content: space-between;">
                 {{--<ul class="multiple-actions">--}}

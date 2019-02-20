@@ -430,7 +430,16 @@ a:focus {
   /*padding: 0 20px;*/
 }
 .wrapper-content {
-  padding: 20px 10px 40px;
+  /*padding: 20px 10px 40px;*/
+  padding: 0;
+  overflow: hidden;
+}
+.right--media-col{
+  padding-left: 0;
+}
+.right--media-col-wrapper{
+  background-color: #3c8dbc40;
+  border-left: 1px solid #fff;
 }
 #page-wrapper {
   padding: 0 15px;
