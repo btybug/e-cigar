@@ -210,7 +210,7 @@
     {{--@push("css")--}}
     {{--{!! Html::style("/resources/assets/js/animate/css/animate.css") !!}--}}
     {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
-    {!! Html::style("public/media_template/css/style.css?v='.rand(111,999))") !!}
+    {!! Html::style("public/media_template/css/style.css?v='.rand(111,888))") !!}
     {!! Html::style("public/admin_theme/media/css/lightbox.css") !!}
     {!! Html::style("public/js/bootstrap-select/css/bootstrap-select.min.css") !!}
     {!! Html::style("public/js/tag-it/css/jquery.tagit.css") !!}
