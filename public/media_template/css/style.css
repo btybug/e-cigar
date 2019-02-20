@@ -444,6 +444,14 @@ a:focus {
   background-color: #3c8dbc40;
   border-left: 1px solid #fff;
 }
+.right--media-col-wrapper .upload--head{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.right--media-col-wrapper .upload--head .btn:not(:last-of-type){
+  margin-right: 5px;
+}
 #page-wrapper {
   padding: 0 15px;
   /*min-height: 568px;*/
@@ -1486,7 +1494,7 @@ color: #ffffff;
 }
  .file .file-actions button{
   flex: auto;
-  border-radius: 0;
+  /*border-radius: 0;*/
 }
 
 .custom_modal_edit .modal-dialog{
