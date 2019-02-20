@@ -491,6 +491,24 @@ span.fancytree-icon{
   background-color: #3c8dbc;
   position: absolute;
 }
+ul.fancytree-container, span.fancytree-title{
+  border: none !important;
+  outline: none !important;
+  background-color: transparent!important;
+}
+.fancytree-active.fancytree-folder{
+  background-color: #3c8dbc;
+}
+.fancytree-active.fancytree-folder .fancytree-expander:after{
+  color: #ffffff;
+}
+.fancytree-active.fancytree-folder .fancytree-title{
+  color: #ffffff;
+}
+span.fancytree-folder{
+  cursor: pointer;
+  height: 25px;
+}
 .folderitems .file-box .icon img{
   position: absolute;
   left: 0;
