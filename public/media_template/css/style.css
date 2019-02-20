@@ -440,6 +440,18 @@ a:focus {
 .left--media-col{
   padding-right: 0;
 }
+.left--media-col .ibox{
+  display: flex;
+  flex-direction: column;
+}
+.left--media-col .ibox .trash-icon-btn{
+  margin-top: auto;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.left--media-col .ibox .trash-icon-btn .btn{
+  width:55%;
+}
 .right--media-col-wrapper{
   background-color: #3c8dbc40;
   border-left: 1px solid #fff;
@@ -460,7 +472,12 @@ a:focus {
 #folder-list> ul{
   padding: 0;
 }
-
+#fancytree-drop-marker{
+  /*width: 100px;*/
+  /*height: 25px;*/
+  /*border: 2px dotted red;*/
+  /*background: none;*/
+}
 span.fancytree-node{
   box-shadow: 2px 2px 2px 2px #ccc;
   display: flex;
