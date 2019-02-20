@@ -102,7 +102,7 @@ const App = function() {
 
     //********App -> htmlMaker -> makeFolder********start
     makeFolder: (data) => {
-      return (`<div draggable="true"  data-id="${data.id}"  class="file " style="position: relative">
+      return (`<div draggable="true"  data-id="${data.id}"  class="file" style="position: relative">
             <a href="#"  data-id="${
           data.id
           }" bb-media-type="folder" bb-media-click="get_folder_items" data-media="getitem">
@@ -141,7 +141,7 @@ const App = function() {
             <span class="file-title">${data.real_name}</span>
             </div>
             <!--<small>Added: ${data.updated_at}</small>-->
-            <div class="file-actions">
+            <div class="file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
               <button bb-media-click="remove_image" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
               <button class="btn btn-sm btn-primary"  bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
               <button bb-media-click="edit_image" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
@@ -1199,7 +1199,7 @@ $('.new-folder-input').on('keypress', function (ev) {
   ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click();
 });
 
-$('.folderitems').on('mouseenter mouseleave', 'div.file-box', function(ev) {
+$('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
   if(ev.type === 'mouseenter') {
     $(this).find('.file-actions').removeClass('d-none');
   } else if(ev.type === 'mouseleave') {
