@@ -449,11 +449,11 @@ a:focus {
   /*min-height: 568px;*/
   position: relative !important;
 }
-#folder-list.folder-list> ul{
+#folder-list> ul{
   padding: 0;
 }
 
-#folder-list span.fancytree-node{
+span.fancytree-node{
   box-shadow: 2px 2px 2px 2px #ccc;
   display: flex;
   align-items: center;
@@ -461,26 +461,26 @@ a:focus {
   height: 35px !important;
   margin-bottom: 5px;
 }
-#folder-list span.fancytree-expander{
+span.fancytree-expander{
   background: none;
   margin-left: 5px;
 }
-#folder-list .fancytree-has-children span.fancytree-expander:after{
+.fancytree-has-children span.fancytree-expander:after{
   content: "\f067";
   font-family: FontAwesome;
 }
-#folder-list .fancytree-has-children.fancytree-expanded span.fancytree-expander:after{
+.fancytree-has-children.fancytree-expanded span.fancytree-expander:after{
   content: "\f068";
   font-family: FontAwesome;
 }
-#folder-list span.fancytree-icon{
+span.fancytree-icon{
   display: none;
 }
-#folder-list .dropdown{
+.fancytree-folder .dropdown{
   margin-left: auto;
   margin-right: 5px;
 }
-#folder-list .fancytree-folder.fancytree-drag-source{
+.fancytree-folder.fancytree-drag-source{
   background-color: #3c8dbc;
   position: absolute;
 }
@@ -1453,7 +1453,7 @@ ul.notes li div {
   margin-right:5px;
 }
 .file .file-name .icon-file i{
-color: red;
+color: #ffffff;
 }
  .file .file-actions{
   margin-top: auto;
