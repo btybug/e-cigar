@@ -480,9 +480,20 @@ a:focus {
   margin-left: auto;
   margin-right: 5px;
 }
-.fancytree-folder.fancytree-drag-source{
+#folder-list .fancytree-folder.fancytree-drag-source{
   background-color: #3c8dbc;
   position: absolute;
+}
+@media (max-width: 767px) {
+  #page-wrapper{
+    height: auto;
+  }
+  #folder-list .left--media-col .ibox{
+    margin-bottom: 0;
+  }
+  #folder-list .right--media-col{
+    padding-left: 15px;
+  }
 }
 @media (min-width: 768px) {
   #page-wrapper {
