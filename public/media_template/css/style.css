@@ -437,6 +437,9 @@ a:focus {
 .right--media-col{
   padding-left: 0;
 }
+.left--media-col{
+  padding-right: 0;
+}
 .right--media-col-wrapper{
   background-color: #3c8dbc40;
   border-left: 1px solid #fff;
@@ -446,8 +449,40 @@ a:focus {
   /*min-height: 568px;*/
   position: relative !important;
 }
-.file-manager .folder-list{
+#folder-list.folder-list> ul{
+  padding: 0;
+}
 
+#folder-list span.fancytree-node{
+  box-shadow: 2px 2px 2px 2px #ccc;
+  display: flex;
+  align-items: center;
+  /*justify-content: space-between;*/
+  height: 35px !important;
+  margin-bottom: 5px;
+}
+#folder-list span.fancytree-expander{
+  background: none;
+  margin-left: 5px;
+}
+#folder-list .fancytree-has-children span.fancytree-expander:after{
+  content: "\f067";
+  font-family: FontAwesome;
+}
+#folder-list .fancytree-has-children.fancytree-expanded span.fancytree-expander:after{
+  content: "\f068";
+  font-family: FontAwesome;
+}
+#folder-list span.fancytree-icon{
+  display: none;
+}
+#folder-list .dropdown{
+  margin-left: auto;
+  margin-right: 5px;
+}
+.fancytree-folder.fancytree-drag-source{
+  background-color: #3c8dbc;
+  position: absolute;
 }
 @media (min-width: 768px) {
   #page-wrapper {

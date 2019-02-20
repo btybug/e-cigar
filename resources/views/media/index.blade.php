@@ -4,7 +4,7 @@
 
     <div class="wrapper wrapper-content h-100">
       <div class="row dis-flex">
-        <div class="col-lg-2 h-100">
+        <div class="col-lg-2 h-100 left--media-col">
           <div class="ibox scrollbar_custom float-e-margins over-auto">
             <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
               <div class="file-manager">
