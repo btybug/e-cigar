@@ -101,7 +101,7 @@
                 </div>
               </div>
               <div class="clearfix"></div>
-              <div class="row m-0 d-flex flex-wrap" style="position: relative;" data-media="folderitem"
+              <div class="row m-0 d-flex flex-wrap folderitems" style="position: relative;" data-media="folderitem"
                    data-type="main-container">
               </div>
 

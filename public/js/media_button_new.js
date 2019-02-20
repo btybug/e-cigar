@@ -116,11 +116,11 @@ const App = function() {
                 <span class="file-title">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
-                <!--<div class="file-actions">-->
-                  <button bb-media-click="remove_folder" class="btn btn-sm btn-danger" style="position: absolute; right: 5px; top: 5px"><i class="fa fa-trash"></i></button>
-                  <!--<button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>-->
-                  <!--<button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>-->
-                <!--</div>-->
+                <div class="file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+                  <button bb-media-click="remove_folder" class="btn btn-sm btn-danger" ><i class="fa fa-trash"></i></button>
+                  <button class="btn btn-sm btn-primary"><i class="fa fa-cog"></i></button>
+                  <button class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
+                </div>
             </a>
         </div>`);
     },
@@ -214,7 +214,19 @@ const App = function() {
               display: 'flex',
               alignItems: 'center'
             });
-            $spanTitle.after('<div style="float: right" class="d-none"><button type="button" bb-media-click="remove_folder" class="btn btn-sm btn-danger" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-trash" style="color:#ffffff"></i></button></div>');
+            $spanTitle.after(`<div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                  Dropdown
+                                  <span class="caret"></span>
+                                </button>
+                                <div  class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                  <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_folder">
+                                    <i class="fa fa-trash" style="color:#ffffff"></i>
+                                  </button>
+                                  <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-cog"></i></button>
+                                  <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                                </div>
+                              </div>`);
             setTimeout(function() {
               $('span.fancytree-folder').css({
                 cursor: 'pointer',
@@ -231,11 +243,9 @@ const App = function() {
 
           const node = $.ui.fancytree.getNode(event);
           if(event.type === 'mouseenter') {
-            console.log(++count, 'V')
             self.htmlMaker.hoverFolder = node.key;
             node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.remove('d-none');
           } else if(event.type === 'mouseleave') {
-            console.log(count, 'A');
             !node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.add('d-none');
             self.htmlMaker.hoverFolder = null;
           }
@@ -942,10 +952,10 @@ const App = function() {
     remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      console.log('this.htmlMaker.hoverFolder', this.htmlMaker.hoverFolder)
-      const id = this.htmlMaker.hoverFolder || elm.closest(".file").getAttribute("data-id");
-      console.log('id', id)
-      const removeTree = function () {
+      const id = this.htmlMaker.hoverFolder || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
+
+      if(!id) return;
+      const removeTree = function (id) {
         const x = $("#folder-list").fancytree("getTree");
         const folder = x.getNodeByKey('' + id);
         folder.remove();
@@ -957,8 +967,8 @@ const App = function() {
           access_token: "string"
         },
         () => {
-          this.htmlMaker.hoverFolder ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
-          removeTree();
+          this.htmlMaker.hoverFolder || !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
+          removeTree(id);
           this.htmlMaker.hoverFolder = null;
         }
       );
@@ -1165,7 +1175,7 @@ const App = function() {
   };
   //********App -> events********end
 
-}
+};
 //********App********end
 
 const app = new App();
@@ -1187,5 +1197,13 @@ $("body").on("click", `[data-tabaction]`, function (e) {
 });
 
 $('.new-folder-input').on('keypress', function (ev) {
-  ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
-})
+  ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click();
+});
+
+$('.folderitems').on('mouseenter mouseleave', 'div.file-box', function(ev) {
+  if(ev.type === 'mouseenter') {
+    $(this).find('.file-actions').removeClass('d-none');
+  } else if(ev.type === 'mouseleave') {
+    $(this).find('.file-actions').addClass('d-none');
+  }
+});
