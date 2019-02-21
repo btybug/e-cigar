@@ -148,8 +148,6 @@ class MediaItemsApiController extends Controller
     $oldItem = Items::find($request->item_id);
     if ($oldItem) {
       $filename = (str_contains($request->item_name, '.' . $oldItem->extention)) ? $request->item_name : $request->item_name . '.' . $oldItem->extension;
-      dd($filename);
-
       if (rename($oldItem->folder->path() . '/' . $oldItem->real_name,
           $oldItem->folder->path() . '/' . $filename)) {
         $oldItem->real_name = $filename;
