@@ -150,7 +150,7 @@ class MediaItemsApiController extends Controller
             $filename = (str_contains($request->item_name, '.' . $oldItem->extention)) ? $request->item_name : $request->item_name . '.' . $oldItem->extension;
             $oldItem->real_name = $filename;
             if ($oldItem->save()) {
-                return \Response::json(['error' => false, 'message' => 'File name has been changed successfully.']);
+                return \Response::json(['error' => false, 'message' => 'File name has been changed successfully.','name'=>$filename]);
             }
             return \Response::json(['error' => true, 'message' => 'Could not change file name.']);
         }
