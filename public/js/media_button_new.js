@@ -63,7 +63,7 @@ const normAjax = function (URL, obj = {}, cb) {
 //App includes all methods for media page
 const App = function() {
   let globalFolderId = 1;
-  let count = 0;
+  const selectedImage = [];
 
   //********App -> htmlMaker********start
   //htmlMaker includes all methods to create html markup
@@ -74,7 +74,9 @@ const App = function() {
     currentId: null,
     currentSelectedFolder: null,
     hoverFolder: null,
-    transfer: (f, p, root) => {
+    currentDragedId: null,
+    transfer: (f, p, root, dataTransfer) => {
+
       const x = $("#folder-list").fancytree("getTree");
       const folder = x.getNodeByKey('' + f);
       if(folder && folder.folder) {
@@ -90,13 +92,14 @@ const App = function() {
             this.htmlMaker.currentId = null;
         });
       } else {
-        this.requests.transferImage(
-          {
-            item_id: Number(f),
-            folder_id: root === 1 ? Number(1) : Number(p),
-            access_token: "string"
-          }
-        );
+            this.requests.transferImage(
+                {
+                  item_id: Number(f),
+                  folder_id: root === 1 ? Number(1) : Number(p),
+                  access_token: "string"
+                }
+            );
+
       }
     },
 
@@ -113,7 +116,7 @@ const App = function() {
                 </div>
                 <div class="file-name">
                 <span class="icon-file"><i class="fa fa-file-o" aria-hidden="true"></i></span>
-                <span class="file-title">${data.title}</span>
+                <span class="file-title click-no title-change"  contenteditable="true" style="width: 100%;">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
                 <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
@@ -146,7 +149,7 @@ const App = function() {
             </div>
             <div class="file-name">
             <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
-            <span class="file-title image-title-change" contenteditable="true">${data.real_name}</span>
+            <span class="file-title title-change" contenteditable="true" style="width: 100%;">${data.real_name}</span>
             </div>
             <!--<small>Added: ${data.updated_at}</small>-->
             <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
@@ -176,7 +179,7 @@ const App = function() {
           source: data,
           focusOnClick: true,
           debugLevel: 0,
-          selectMode: 4,
+          selectMode: 1,
           //********dnd5********start
           dnd5: {
             autoExpandMS: 1500,
@@ -184,8 +187,7 @@ const App = function() {
             preventVoidMoves: true,
             preventNonNodes: false,
             dragStart: (node, data) => {
-              this.htmlMaker.dragElementOfTree = node.key;
-              console.log(data);
+              // this.htmlMaker.dragElementOfTree = node.key;
               const crt = document.getElementsByClassName(`f_id_${node.key}`)[0].cloneNode(true);
               crt.className += " start drag-folder_cursor";
               crt.style.position = "absolute";
@@ -197,24 +199,47 @@ const App = function() {
               data.dataTransfer.setData("node_id", id);
               return true;
             },
-            dragEnd: (node, data) => { },
+            dragEnd: (node, data) => {
+              $('.start').remove()
+
+            },
             dragEnter: (node, data) => {
+              // console.log(data.node.key);
+              // data.node.li.style.paddingBottom = '50px';
+              // this.htmlMaker.currentDragedId = data.node.key;
+
+              // else if(data.hitMode == 'after') {
+              //   data.node.li.style.marginBottom = '50px';
+              // }
               return true;
             },
             dragOver: (node, data) => {
+              // console.log('over', data);
+              // if(data.hitMode == 'before' || data.hitMode == 'after') {
+              //
+              // }
             },
-            dragLeave: (node, data) => { },
+            dragLeave: (node, data) => {
+              // console.log(this.htmlMaker.currentDragedId);
+              // $(`.f_id_${this.htmlMaker.currentDragedId}`).css('padding', '0');
+              // console.log('leave', data)
+              // data.node.li.style.padding = '0';
+              // data.otherNode.li.style.margin = '0'
+            },
             //********dragDrop********start
             dragDrop: (node, data) => {
-
+              // const dataTransfer = data.dataTransfer.getData('node_id');
+              // console.log('data', data);
               const transfer = this.htmlMaker.transfer;
               if( !data.otherNode ) {
+                console.log(this.htmlMaker.currentId);
                 if(this.htmlMaker.currentId) {
+
                   if (data.hitMode == 'after' || data.hitMode == 'before') {
                     if (node.getLevel() == 1) {
                       transfer(this.htmlMaker.currentId, data.node.parent.key, 1);
-                    } else { transfer(this.htmlMaker.currentId, data.node.parent.key); }
-                  } else { transfer(this.htmlMaker.currentId, data.node.key); }
+                    } else { transfer(this.htmlMaker.currentId, data.node.parent.key, 0); }
+                  } else { transfer(this.htmlMaker.currentId, data.node.key, 0); }
                 }
                 return;
               }
@@ -223,10 +248,10 @@ const App = function() {
                 if (node.getLevel() == 1) {
                   transfer(data.otherNodeData.key, data.node.parent.key, 1);
                 } else {
-                  transfer(data.otherNodeData.key, data.node.parent.key);
+                  transfer(data.otherNodeData.key, data.node.parent.key, 0);
                 }
               } else {
-                transfer(data.otherNodeData.key, node.key);
+                transfer(data.otherNodeData.key, node.key, 0);
               }
               this.htmlMaker.dragElementOfTree = null;
             }
@@ -234,7 +259,6 @@ const App = function() {
           },
           //********dnd5********end
           renderNode: function(event, data) {
-            console.log(event, data)
             const node = data.node;
             const $spanTitle = $(node.span).find('span.fancytree-title');
             const folder = $(node.span).find('span.fancytree-folder');
@@ -734,18 +758,61 @@ const App = function() {
         .querySelectorAll(`[data-type="main-container"] [draggable="true"]`)
         .forEach(elm => {
           elm.addEventListener("dragstart", function (e) {
-            const crt = this.cloneNode(true);
-            crt.className += " start";
-            // crt.style.position = "absolute";
-            // crt.style.top = "-10000px";
-            // crt.style.right = "-10000px";
-            document.body.appendChild(crt);
-            const id = this.getAttribute("data-id");
-            e.dataTransfer.setDragImage(crt, 0, 0);
-            // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-            e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
-            // setTimeout(() => (this.className = "invisible"), 0);
-            self.htmlMaker.currentId = id;
+            console.log('dnd', selectedImage, e);
+            function findAncestor (el, cls) {
+              while ((el = el.parentElement) && !el.classList.contains(cls));
+              return el;
+            }
+            if(selectedImage.length !== 0 && findAncestor(e.target, 'image-container').classList.contains('active')) {
+              const selected = document.createElement('div');
+              selected.setAttribute('node_id', 1);
+              selected.style.display = 'flex';
+              selected.style.flexWrap = 'wrap';
+              selected.style.width = '320px';
+
+              selectedImage.map((id) => {
+                let cloneNode = document.querySelector(`[data-id="${id}"]`).cloneNode(true);
+                cloneNode.style.width = '80px';
+                cloneNode.style.marginRight = '10px';
+                cloneNode.style.marginBottom = '10px';
+                selected.appendChild(cloneNode);
+              });
+
+              selected.className += " start";
+              selected.style.position = "absolute";
+              selected.style.top = "-10000px";
+              selected.style.right = "-10000px";
+              // crt.style.width = width + 'px';
+              // crt.style.height= height + "px";
+              document.body.appendChild(selected);
+              const id = this.getAttribute("data-id");
+              e.dataTransfer.setDragImage(selected, 0, 0);
+              // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
+              e.dataTransfer.setData("node_id", JSON.stringify(selectedImage)); // required otherwise doesn't work
+              // setTimeout(() => (this.className = "invisible"), 0);
+              // self.htmlMaker.currentId = id;
+            } else if(!e.target.classList.contains('title-change')) {
+              const width = elm.clientWidth;
+              const height = elm.clientHeight;
+
+              const crt = this.cloneNode(true);
+              crt.className += " start";
+              crt.style.position = "absolute";
+              crt.style.top = "-10000px";
+              crt.style.right = "-10000px";
+              crt.style.width = width + 'px';
+              crt.style.height= height + "px";
+              document.body.appendChild(crt);
+              const id = this.getAttribute("data-id");
+              e.dataTransfer.setDragImage(crt, 0, 0);
+              // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
+              e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+              // setTimeout(() => (this.className = "invisible"), 0);
+              self.htmlMaker.currentId = id;
+            }
+          });
+          elm.addEventListener("dragend", function() {
+            $('.start').remove();
           });
         });
       document.querySelectorAll(".folder-container").forEach(folder => {
@@ -762,36 +829,50 @@ const App = function() {
         });
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
-          let nodeId = self.htmlMaker.dragElementOfTree || e.dataTransfer.getData("node_id");
+          let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id"));
+          console.log('nodeId', nodeId);
           let parrentId = e.target
               .closest(".file")
               .getAttribute("data-id");
-          if(self.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
-            self.requests.transferFolder(
-              {
-                folder_id: Number(nodeId),
-                parent_id: Number(parrentId),
-                access_token: "string"
-              },
-              () => {
-                const x = $("#folder-list").fancytree("getTree");
-                var folder;
-                folder = x.getNodeByKey('' + nodeId);
-                folder.moveTo(x.getNodeByKey('' + parrentId));
-                $(".start").remove();
-              }
-            );
+          console.log('parrentId',parrentId);
+          if(Array.isArray(nodeId)) {
+            nodeId.map((id)=> {
+                self.requests.transferImage(
+                  {
+                    item_id: Number(id),
+                    folder_id: Number(parrentId),
+                    access_token: "string"
+                  }
+                );
+            })
           } else {
-            self.requests.transferImage(
-              {
-                item_id: Number(nodeId),
-                folder_id: Number(parrentId),
-                access_token: "string"
-              }
-            );
+            if(self.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
+              self.requests.transferFolder(
+                {
+                  folder_id: Number(nodeId),
+                  parent_id: Number(parrentId),
+                  access_token: "string"
+                },
+                () => {
+                  const x = $("#folder-list").fancytree("getTree");
+                  var folder;
+                  folder = x.getNodeByKey('' + nodeId);
+                  folder.moveTo(x.getNodeByKey('' + parrentId));
+                }
+              );
+            } else {
+              self.requests.transferImage(
+                {
+                  item_id: Number(nodeId),
+                  folder_id: Number(parrentId),
+                  access_token: "string"
+                }
+              );
+            }
           }
           self.htmlMaker.dragElementOfTree = null;
           self.htmlMaker.currentId = null;
+          selectedImage.length = 0;
         });
       });
     }
@@ -875,6 +956,16 @@ const App = function() {
     },
   //********App -> requests -> editImageName********end
 
+  //********App -> requests -> editImageName********start
+  editFolderName: (obj = {}, cb) => {
+    shortAjax("/api/api-media/rename-folder", obj, res => {
+      if (!res.error) {
+        // cb(res);
+      }
+    });
+  },
+  //********App -> requests -> editImageName********end
+
   //********App -> requests -> transferImage********start
     transferImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/transfer-item", obj, res => {
@@ -901,6 +992,7 @@ const App = function() {
       shortAjax("/api/api-media/get-remove-item", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
+          selectedImage.length = 0;
         }
       });
     },
@@ -1100,6 +1192,13 @@ const App = function() {
         });
       } else if (e.type === "click") {
         e.target.closest(".file-box").classList.toggle("active");
+        if(selectedImage.includes(id)) {
+          const index = selectedImage.indexOf(id);
+          selectedImage.splice(index, 1);
+        } else {
+          selectedImage.push(id);
+        }
+        console.log(selectedImage)
       }
     },
     //********App -> events -> select_item********end
@@ -1134,6 +1233,19 @@ const App = function() {
           access_token: "string"
         }
       );
+    },
+    remove_image_items: (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      selectedImage.length !== 0 && selectedImage.map((id) => {
+        this.requests.removeImage(
+            {
+              item_id: Number(id),
+              trash: true,
+              access_token: "string"
+            }
+        );
+      });
     },
     //********App -> events -> remove_image********end
 
@@ -1241,3 +1353,32 @@ $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
     $(this).find('.file-actions').addClass('d-none').removeClass('open');
   }
 });
+
+$('body').on('blur', '[contenteditable]', function(ev) {
+  console.log(ev);
+  const itemId = ev.target.closest('div[data-id]').getAttribute('data-id');
+  const name = this.textContent;
+  console.log(name, itemId, this);
+  const imgOrFolder = $(this).closest('[bb-media-click="get_folder_items"]').length;
+  console.log(imgOrFolder);
+  if(imgOrFolder === 0) {
+    app.requests.editImageName(
+        {
+          item_id: Number(itemId),
+          item_name: name,
+          access_token: "string"
+        }
+    );
+  } else {
+    app.requests.editFolderName(
+        {
+          folder_id: Number(itemId),
+          folder_name: name,
+          access_token: "string"
+        },
+    );
+  }
+  // app.events.save_edited_title()
+});
+
+$('.delete_items').on('click', app.events.remove_image_items);

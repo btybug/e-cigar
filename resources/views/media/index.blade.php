@@ -76,7 +76,7 @@
                 {{--</ul>--}}
                 <div class="upload-content" style="width: 100%;">
                   <div class="upload--head  mb-20 mt15">
-                      <button class="btn btn-danger">Delete</button>
+                      <button class="btn btn-danger delete_items">Delete</button>
                       <button class="btn btn-info">Move</button>
                       <button class="btn btn-warning">Copy</button>
                       <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
@@ -271,12 +271,12 @@
       color: gray !important;
     }
 
-    .image-title-change {
+    .title-change {
       outline: none;
       cursor: text;
     }
 
-    .image-title-change:hover {
+    .title-change:hover {
       box-shadow: 0 0 2px white;
     }
 
