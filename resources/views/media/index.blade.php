@@ -60,6 +60,9 @@
                 <div class="clearfix"></div>
               </div>
             </div>
+            <div class="trash-icon-btn">
+              <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+            </div>
           </div>
         </div>
         <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 h-100 right--media-col">
