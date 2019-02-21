@@ -3,7 +3,7 @@
  * Copyright (c) 2016.
  * *
  *  * Created by PhpStorm.
- *  * User: Edo
+ *  * User: Sahak
  *  * Date: 10/3/2016
  *  * Time: 10:44 PM
  *
@@ -15,6 +15,10 @@ use File;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 
+/**
+ * Class Folders
+ * @package App\Models\Media
+ */
 class Folders extends Model
 {
     /**
@@ -36,61 +40,89 @@ class Folders extends Model
      */
     protected $dates = ['created_at', 'updated_at'];
 
-    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text','folder','url','key'];
+    /**
+     * @var array
+     */
+    protected $appends = ['title', 'childrenCount', 'itemsCount', 'text', 'folder', 'url', 'key'];
 
+    /**
+     * @return int
+     */
     public function getChildrenCountAttribute()
     {
         return $this->children()->count();
     }
+
+    /**
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
+     */
     public function getUrlAttribute()
     {
         return $this->url();
     }
+
+    /**
+     * @return mixed
+     */
     public function getKeyAttribute()
     {
         return $this->id;
     }
 
-
+    /**
+     * @return mixed
+     */
     public function getTextAttribute()
     {
         return $this->name;
     }
+
+    /**
+     * @return bool
+     */
     public function getFolderAttribute()
     {
         return true;
     }
 
+    /**
+     * @return int
+     */
     public function getItemsCountAttribute()
     {
         return $this->items()->count();
     }
 
-
+    /**
+     *
+     */
     public static function migrate()
     {
-        \Schema::create('drive_folders', function (Blueprint $table) {
+        return \Schema::create('drive_folders', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->string('name')->index('drive_folders_name');
             $table->string('prefix')->nullable();
             $table->integer('parent_id')->unsigned();
             $table->timestamps();
-
-
         });
-//        File::put(public_path('media/drive/.gitkeep'), '');
     }
 
+    /**
+     *
+     */
     public static function seed()
     {
 
-        self::create([
+        return self::create([
             'id' => 1,
             'name' => 'drive',
             'parent_id' => 0,
         ]);
     }
 
+    /**
+     * @return array
+     */
     public static function menu()
     {
         $folders = self::where('parent_id', 0)->get();
@@ -106,6 +138,10 @@ class Folders extends Model
         return $menun;
     }
 
+    /**
+     * @param $data
+     * @return bool
+     */
     public static function removeFolder($data)
     {
         $id = $data['folder_id'];
@@ -125,16 +161,22 @@ class Folders extends Model
         return false;
     }
 
+    /**
+     *
+     */
     protected static function boot()
     {
         parent::boot();
-        static::deleting(function ($tutorial) {
+       return static::deleting(function ($tutorial) {
             foreach ($tutorial->childs as $child) {
                 $child->delete();
             }
         });
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getTitleAttribute()
     {
         $title = $this->name;
@@ -152,6 +194,9 @@ class Folders extends Model
 
 //Api functions
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function parent()
     {
         return $this->belongsTo('App\Models\Media\Folders', 'parent_id');
@@ -167,7 +212,7 @@ class Folders extends Model
     public function getChilds($files)
     {
         $result = $this->toArray();
-        $result['children'] = array_merge($this->children->toArray(),$this->itemsTmp());
+        $result['children'] = array_merge($this->children->toArray(), $this->itemsTmp());
         $result['url'] = $this->url();
         if ($files) {
             $result['items'] = $this->itemsTmp();
@@ -179,9 +224,9 @@ class Folders extends Model
     public function itemsTmp()
     {
         $childs = $this->items;
-        foreach ($childs as $key=>$child){
-            if($this->ifIsImage($child['original_name'])){
-                $childs[$key]['tmp']=media_image_tmb($child['original_name']);
+        foreach ($childs as $key => $child) {
+            if ($this->ifIsImage($child['original_name'])) {
+                $childs[$key]['tmp'] = media_image_tmb($child['original_name']);
             }
         }
         return $childs;

@@ -36,13 +36,14 @@ class Items extends Model
      *
      * @var array
      */
-    protected $appends = array('type', 'url','relativeUrl','key');
+    protected $appends = array('type', 'url', 'relativeUrl', 'key');
     protected $dates = ['created_at', 'updated_at'];
 
     public function getKeyAttribute()
     {
         return $this->id;
     }
+
     public static function migrate()
     {
         \Schema::create('drive_items', function (Blueprint $table) {
@@ -75,7 +76,6 @@ class Items extends Model
             }
             return self::find($data['item_id'])->delete();
         }
-
     }
 
     public static function sort($data)
@@ -84,13 +84,13 @@ class Items extends Model
         if (is_array($data['item_id'])) {
             $items = self::whereIn('id', $data['item_id'])->get();
             foreach ($items as $item) {
-                self::transfer($item->id,$data['folder_id']);
+                self::transfer($item->id, $data['folder_id']);
 
             }
             return $items->toArray();
         }
-        $item= self::transfer($data['item_id'],$data['folder_id']);
-        if($item){
+        $item = self::transfer($data['item_id'], $data['folder_id']);
+        if ($item) {
             return $item->toArray();
         }
     }
@@ -124,15 +124,15 @@ class Items extends Model
         if ($item) {
             if ($folder && \File::isDirectory($folder->path())) {
                 $oldFolder = $item->storage;
-                if(\File::exists($oldFolder->url($item->original_name, false))){
+                if (\File::exists($oldFolder->url($item->original_name, false))) {
                     if (\File::copy($oldFolder->url($item->original_name, false), $folder->path() . DS . $item->original_name))
                         $item->folder_id = $folder_id;
                     if ($item->save()) {
                         unlink($oldFolder->url($item->original_name, false));
                         return $item;
                     }
-                }else{
-                  return  $item->delete();
+                } else {
+                    return $item->delete();
                 }
 
             }
@@ -165,16 +165,16 @@ class Items extends Model
             }
         }
         return $types;
-
     }
 
     public function getUrlAttribute()
     {
         return $this->storage->url() . '/' . $this->original_name;
     }
+
     public function getRelativeUrlAttribute()
     {
-        return str_replace('http://'.$_SERVER['SERVER_NAME'],'',$this->storage->url()) . '/' . $this->original_name;
+        return str_replace('http://' . $_SERVER['SERVER_NAME'], '', $this->storage->url()) . '/' . $this->original_name;
     }
 
     public function storage()

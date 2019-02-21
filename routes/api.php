@@ -26,7 +26,6 @@ Route::group([
     Route::post('/get-folder-info', 'Admin\Media\MediaApiController@getFolderInfo');
     Route::post('/get-sort-folder', 'Admin\Media\MediaApiController@getSortFolder');
     Route::post('/get-remove-folder', 'Admin\Media\MediaApiController@getRemoveFolder');
-    Route::post('/get-media-uploaders', 'Admin\Media\MediaApiController@getMediaUploaders');
     Route::post('/get-media-uploaders-settings', 'Admin\Media\MediaApiController@getUploaderSettings');
     Route::post('/get-media-uploader-rendered', 'Admin\Media\MediaApiController@getFolderUploader');
     Route::post('/download-folder', 'Admin\Media\MediaApiController@getDownload');

@@ -21,7 +21,6 @@ class MediaItemsApiController extends Controller
     if (isset($data['item_id']) and is_array($data['item_id'])) {
       $vdata = $data['item_id'];
       foreach ($data['item_id'] as $k => $v) {
-
         $rule[$k] = 'required|integer|exists:drive_items,id';
       }
     } else {
@@ -34,7 +33,6 @@ class MediaItemsApiController extends Controller
     }
     $result = Items::sort($data);
     return \Response::json(['error' => !(boolean)$result, 'data' => $result]);
-
   }
 
   public function getDeleteItems(Request $request)
@@ -216,7 +214,6 @@ class MediaItemsApiController extends Controller
     } else {
       $result = Items::transfer($data['item_id'], $data['folder_id']);
     }
-
     return \Response::json(['error' => false, "data" => $result]);
   }
 
@@ -233,8 +230,6 @@ class MediaItemsApiController extends Controller
       return \Response::json(['error' => false, 'data' => $item]);
     }
     return \Response::json(['error' => true, 'message' => 'Could not send data.']);
-
-
   }
 
   public function getSaveSeo(Request $request)

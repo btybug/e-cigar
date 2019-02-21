@@ -21,9 +21,9 @@ class MediaApiController extends Controller
         }
 
         if (isset($data['folder_id'])) {
-            $folder = Folders::with('children','items')->find($data['folder_id']);
+            $folder = Folders::with('children', 'items')->find($data['folder_id']);
         } elseif (isset($data['slug'])) {
-            $folder = Folders::where('name', $data['slug'])->with('children','items')->first();
+            $folder = Folders::where('name', $data['slug'])->with('children', 'items')->first();
         }
 
         if (!$folder) {
@@ -145,13 +145,7 @@ class MediaApiController extends Controller
             return \Response::json(['error' => true, 'message' => $validator->messages()]);
         }
 
-        return \Response::json(['error' => false, 'data' => ['removed'=>Folders::removeFolder($data),'id'=>$data['folder_id']]]);
-    }
-
-    public function getMediaUploaders()
-    {
-        //  $ui_elemements = CmsItemReader::getAllGearsByType('units')->where('place', 'backend')->where('type', 'media')->run();
-        return \Response::json(['error' => false, 'data' => []]);
+        return \Response::json(['error' => false, 'data' => ['removed' => Folders::removeFolder($data), 'id' => $data['folder_id']]]);
     }
 
     public function getUploaderSettings(Request $request)
