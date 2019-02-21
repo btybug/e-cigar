@@ -1162,7 +1162,7 @@ const App = function() {
           access_token: "string"
         },
         false,
-          this.events.close_name_modal
+        this.events.close_name_modal
       );
     },
     //********App -> events -> save_edited_title********end

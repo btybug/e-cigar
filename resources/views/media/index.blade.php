@@ -273,6 +273,10 @@
       cursor: text;
     }
 
+    .image-title-change:hover {
+      box-shadow: 0 0 2px white;
+    }
+
   </style>
   {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
 
@@ -300,7 +304,7 @@
         function() {
           $('body').on('click', '.file-drop-zone-title', function() {
             $(".btn.btn-file>input[type='file']").click();
-          })
+          });
 
 //          $('[role="treeitem"]').on('mouseenter', function() {
 //            console.log('hello');
