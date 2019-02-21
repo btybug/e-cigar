@@ -32,32 +32,33 @@ class AdminController extends Controller
     {
         $this->geoZones = $geoZones;
     }
+
     public function getDashboard()
     {
         $widgets = \Auth::user()->widgets()->pluck('widget')->all();
 
-        return view('admin.dashboard',compact(['widgets']));
+        return view('admin.dashboard', compact(['widgets']));
     }
 
     public function saveDashboardWidgets(Request $request)
     {
-        $placeholderItems = Dashboard::where('placeholder',$request->placeholder)->where('user_id',\Auth::id())->get();
-        $widgets = ($request->get('widgets'))? explode(',',$request->get('widgets')) : [];
+        $placeholderItems = Dashboard::where('placeholder', $request->placeholder)->where('user_id', \Auth::id())->get();
+        $widgets = ($request->get('widgets')) ? explode(',', $request->get('widgets')) : [];
 
-        if(count($widgets)){
-            foreach ($widgets as $position => $widget){
-                $widgetInPlacholder = Dashboard::where('placeholder',$request->placeholder)->where('user_id',\Auth::id())->where('widget',$widget)->first();
-                if($widgetInPlacholder){
+        if (count($widgets)) {
+            foreach ($widgets as $position => $widget) {
+                $widgetInPlacholder = Dashboard::where('placeholder', $request->placeholder)->where('user_id', \Auth::id())->where('widget', $widget)->first();
+                if ($widgetInPlacholder) {
                     $widgetInPlacholder->update([
                         'position' => $position
                     ]);
-                }else{
-                    Dashboard::where('user_id',\Auth::id())->where('widget',$widget)->delete();
+                } else {
+                    Dashboard::where('user_id', \Auth::id())->where('widget', $widget)->delete();
                     Dashboard::create([
-                       'user_id' => \Auth::id(),
-                       'placeholder' => $request->placeholder,
-                       'position' => $position,
-                       'widget' => $widget
+                        'user_id' => \Auth::id(),
+                        'placeholder' => $request->placeholder,
+                        'position' => $position,
+                        'widget' => $widget
                     ]);
                 }
             }
@@ -68,8 +69,8 @@ class AdminController extends Controller
 
     public function deleteDashboardWidget(Request $request)
     {
-        $widgetInPlacholder = \Auth::user()->widgets()->where('placeholder',$request->placeholder)->where('widget',$request->key)->first();
-        if($widgetInPlacholder){
+        $widgetInPlacholder = \Auth::user()->widgets()->where('placeholder', $request->placeholder)->where('widget', $request->key)->first();
+        if ($widgetInPlacholder) {
             $widgetInPlacholder->delete();
             return \Response::json(['error' => false]);
 
@@ -77,27 +78,27 @@ class AdminController extends Controller
         return \Response::json(['error' => true]);
     }
 
-    public function getProfile(Request $request,Countries $countries)
+    public function getProfile(Request $request, Countries $countries)
     {
         $user = \Auth::user();
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
 
-        return view('admin.dashboard_profile',compact('user', 'countries'));
+        return view('admin.dashboard_profile', compact('user', 'countries'));
     }
 
-    public function postProfileImageUpload(UserAvaratRequest $request,UserService $userService)
+    public function postProfileImageUpload(UserAvaratRequest $request, UserService $userService)
     {
-        $result=$userService->avatarUpload($request->except('_token'));
+        $result = $userService->avatarUpload($request->except('_token'));
         return response()->json($result);
     }
 
     public function postProfile(AdminProfileRequest $request)
     {
-        $data = $request->except(['_token','avatar']);
+        $data = $request->except(['_token', 'avatar']);
         $user = \Auth::user();
         $user->update($data);
 
-        return redirect()->back()->with('message','Your profile updated');
+        return redirect()->back()->with('message', 'Your profile updated');
     }
 
     public function test(ManagerApiRequest $request)
@@ -115,9 +116,9 @@ class AdminController extends Controller
         return view('');
     }
 
-    public function quickEmail(Request $request,Widgets $widgets)
+    public function quickEmail(Request $request, Widgets $widgets)
     {
         $widgets->quickEmailSend($request);
-        return ['error'=>false];
+        return ['error' => false];
     }
 }

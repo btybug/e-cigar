@@ -29,14 +29,14 @@ class AttributesController extends Controller
     public function getAttributesCreate()
     {
         $model = null;
-        return $this->view('create_edit_form',compact(['model']));
+        return $this->view('create_edit_form', compact(['model']));
     }
 
     public function postAttributesCreate(Request $request)
     {
-        $data = $request->except('_token','translatable','stickers');
+        $data = $request->except('_token', 'translatable', 'stickers');
         $data['user_id'] = \Auth::id();
-        $attr = Attributes::updateOrCreate($request->id,$data);
+        $attr = Attributes::updateOrCreate($request->id, $data);
         $attr->stickers()->sync($request->get('stickers'));
         return redirect()->route('admin_store_attributes');
     }
@@ -45,22 +45,22 @@ class AttributesController extends Controller
     {
         $model = Attributes::findOrFail($id);
         $optionModel = null;
-        return $this->view('create_edit_form',compact(['model','optionModel']));
+        return $this->view('create_edit_form', compact(['model', 'optionModel']));
     }
 
-    public function postAttributesEdit(Request $request,$id)
+    public function postAttributesEdit(Request $request, $id)
     {
-        $data = $request->except('_token','translatable','stickers');
+        $data = $request->except('_token', 'translatable', 'stickers');
         $data['user_id'] = \Auth::id();
-        $attr = Attributes::updateOrCreate($request->id,$data);
+        $attr = Attributes::updateOrCreate($request->id, $data);
         $attr->stickers()->sync($request->get('stickers'));
         return redirect()->route('admin_store_attributes');
     }
 
-    public function postAttributesOptions(Request $request,$id)
+    public function postAttributesOptions(Request $request, $id)
     {
         $model = Attributes::findOrFail($id);
-        $data = $request->except('_token','translatable');
+        $data = $request->except('_token', 'translatable');
         $data['user_id'] = \Auth::id();
         Attributes::updateOrCreate($request->id, $data);
         return redirect()->back();
@@ -71,15 +71,15 @@ class AttributesController extends Controller
         $model = Attributes::findOrFail($request->parentId);
         $optionModel = Attributes::find($request->id);
 
-        $html = \View("admin.inventory.attributes.options_form",compact(['optionModel','model']))->render();
-        return \Response::json(['error' => false,'html' => $html]);
+        $html = \View("admin.inventory.attributes.options_form", compact(['optionModel', 'model']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postAttributesOptionDelete(Request $request)
     {
         $model = Attributes::find($request->id);
 
-        if($model){
+        if ($model) {
             $model->delete();
             return \Response::json(['error' => false]);
         }
@@ -90,38 +90,38 @@ class AttributesController extends Controller
     public function getOptions(Request $request)
     {
         $attr = Attributes::find($request->id);
-        if($attr){
-            return \Response::json(['error' => false,'data' => $attr->children]);
+        if ($attr) {
+            return \Response::json(['error' => false, 'data' => $attr->children]);
         }
 
         return \Response::json(['error' => true]);
     }
 
 
-    public function getOptionsAutocomplate(Request $request,$id)
+    public function getOptionsAutocomplate(Request $request, $id)
     {
         $lang = \Lang::getLocale();
         $attr = Attributes::find($id);
 
-        $likes= $attr->children()->LeftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+        $likes = $attr->children()->LeftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
             ->select('attributes.*', 'attributes_translations.name')
             ->where('attributes_translations.name', 'like', '%' . $request->get('q') . '%')
-            ->where('attributes_translations.locale',$lang)
+            ->where('attributes_translations.locale', $lang)
             ->get();
         return ($attr) ? $likes : [];
     }
 
     public function postAllAttributes(Request $request)
     {
-        $attr = Attributes::whereNull('parent_id')->whereNotIn('id', $request->get('arr',[]))->get();
-        return \Response::json(['error' => false,'data' => $attr]);
+        $attr = Attributes::whereNull('parent_id')->whereNotIn('id', $request->get('arr', []))->get();
+        return \Response::json(['error' => false, 'data' => $attr]);
     }
 
     public function getAttributeByID(Request $request)
     {
         $attr = Attributes::find($request->id);
-        if($attr){
-            return \Response::json(['error' => false,'data' => $attr]);
+        if ($attr) {
+            return \Response::json(['error' => false, 'data' => $attr]);
         }
 
         return \Response::json(['error' => true]);
@@ -130,10 +130,10 @@ class AttributesController extends Controller
     public function getVariationsTable(Request $request)
     {
         $attr = Attributes::find($request->id);
-        if($attr){
-            $options = $attr->children()->get()->pluck('name','id');
-            $html = \View('admin.inventory.attributes.variations_table',compact(['options']))->render();
-            return \Response::json(['error' => false,'html' => $html]);
+        if ($attr) {
+            $options = $attr->children()->get()->pluck('name', 'id');
+            $html = \View('admin.inventory.attributes.variations_table', compact(['options']))->render();
+            return \Response::json(['error' => false, 'html' => $html]);
         }
 
         return \Response::json(['error' => true]);
