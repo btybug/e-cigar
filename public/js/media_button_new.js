@@ -135,6 +135,7 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
+      console.log(data);
       return (`<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
@@ -145,7 +146,7 @@ const App = function() {
             </div>
             <div class="file-name">
             <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
-            <span class="file-title">${data.real_name}</span>
+            <span class="file-title image-title-change" contenteditable="true">${data.real_name}</span>
             </div>
             <!--<small>Added: ${data.updated_at}</small>-->
             <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
@@ -179,7 +180,6 @@ const App = function() {
           //********dnd5********start
           dnd5: {
             autoExpandMS: 1500,
-            dropMarkerOffsetX: -24,
             preventRecursiveMoves: true,
             preventVoidMoves: true,
             preventNonNodes: false,
@@ -314,7 +314,7 @@ const App = function() {
                     </div>
                     <div class="modal-footer">
                      <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                            <button type="button" data-id=${id} bb-media-click="close_name_modal" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
+                            <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
                     </div>
                   </div>
             
@@ -1152,6 +1152,7 @@ const App = function() {
 
     //********App -> events -> save_edited_title********start
     save_edited_title: (elm, e) => {
+      console.log(elm, e);
       const itemId = e.target.getAttribute("data-id");
       const name = document.querySelector(".edit-title-input").value;
       this.requests.editImageName(
@@ -1160,7 +1161,8 @@ const App = function() {
           item_name: name,
           access_token: "string"
         },
-        false
+        false,
+          this.events.close_name_modal
       );
     },
     //********App -> events -> save_edited_title********end
