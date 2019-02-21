@@ -473,10 +473,28 @@ a:focus {
   padding: 0;
 }
 #fancytree-drop-marker{
-  /*width: 100px;*/
-  /*height: 25px;*/
-  /*border: 2px dotted red;*/
+  /*width: 150px !important;*/
+  /*width: 150px;*/
+  /*height: 35px;*/
+  /*border: 2px dotted #3c8dbc;*/
   /*background: none;*/
+}
+#fancytree-drop-marker{
+  background-image: none;
+  width:120px;
+  background-color: #3c8dbc;
+  height:2px;
+}
+#fancytree-drop-marker:before{
+  position: absolute;
+  content: "";
+  left: -10px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #3c8dbc;
+  top:50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
 }
 span.fancytree-node{
   box-shadow: 2px 2px 2px 2px #ccc;
