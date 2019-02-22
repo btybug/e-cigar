@@ -4,7 +4,7 @@
         <p class="font-13 text-gray-clr modal-text">  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
             Lorem Ipsum has been the industry's standard dummy.</p>
     </div>
-    <form  method="POST" action="{{ route('login') }}" class="register-form" id="login-form">
+    <form  method="POST" action="{{ route('login') }}" class="register-form" id="login-form-checkout">
         @csrf
 
         <div class="form-group mb-5">
