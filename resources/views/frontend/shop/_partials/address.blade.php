@@ -47,7 +47,7 @@
                         @else
                             NO Address
                         @endif
-                        <div class="d-flex flex-wrap change-new-btn mt-4">
+                        <div class="d-flex flex-wrap align-items-center change-new-btn mt-4">
                             <div class="mr-3">
                 <span data-toggle="modal" data-target="#changeAddressModal"
                       class="d-inline-flex align-items-center text-quatr-clr font-main-bold font-15 text-uppercase pointer">
