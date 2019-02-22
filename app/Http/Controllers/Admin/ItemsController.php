@@ -36,6 +36,7 @@ class ItemsController extends Controller
     public function postNew(ItemsRequest $request)
     {
         $data = $request->only('sku', 'image');
+        dd($request->all());
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
@@ -141,5 +142,12 @@ class ItemsController extends Controller
         }
 
         return \Response::json(['error' => true, 'message' => 'message']);
+    }
+
+    public function postSuppliersList(Request $request)
+    {
+        $attr = Suppliers::whereNotIn('id', $request->get('arr', []))->get();
+
+        return \Response::json(['error' => false, 'data' => $attr]);
     }
 }

@@ -198,20 +198,18 @@
                                                     <div class="row">
                                                         <div class="col-sm-12 clearfix">
                                                             <h3 class="pull-left m-0">All Suppliers</h3>
-                                                            <button type="button" class="btn btn-info pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
+                                                            <button type="button" class="btn btn-info pull-right select-suppliers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <div class="d-flex">
-                                                        <div class="inventory-attr-item">
-                                                            <h4 class="text">Supplier 1</h4>
-                                                            <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
-                                                        </div>
-                                                        <div class="inventory-attr-item">
-                                                            <h4 class="text">Supplier 2</h4>
-                                                            <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
-                                                        </div>
+                                                    <div class="d-flex suppliers-block">
+                                                        {{--<div class="inventory-attr-item" data-id="${id}">--}}
+                                                            {{--<h4 class="text">${name}</h4>--}}
+                                                            {{--<button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>--}}
+                                                            {{--<input type="hidden" name="suppliers[]" value="${id}" />--}}
+                                                        {{--</div>--}}
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -269,6 +267,24 @@
         </div>
     </div>
 
+    <div class="modal fade" id="suppliersModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Select Suppliers</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="all-list modal-stickers--list">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
@@ -281,6 +297,49 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $("body").on('click', '.select-suppliers', function () {
+                let arr = [];
+                $(".suppliers-block")
+                    .children()
+                    .each(function () {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/inventory/suppliers/get-list", {arr:arr}, function (res) {
+                    if (!res.error) {
+                        $("#suppliersModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-related-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                            $("#suppliersModal .modal-body .all-list").append(html);
+                        });
+                        $("#suppliersModal").modal();
+                    }
+                });
+            });
+
+            $("body").on("click", ".add-related-event", function () {
+                let id = $(this).data("id");
+                let name = $(this).data("name");
+                let html = ` <div class="inventory-attr-item" data-id="${id}">
+                            <h4 class="text">${name}</h4>
+                            <button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>
+                            <input type="hidden" name="suppliers[]" value="${id}" />
+                        </div>`;
+                $(".suppliers-block")
+                    .append(html);
+                $(this)
+                    .parent()
+                    .remove();
+            });
+
+            $("body").on("click", ".remove-suppliers", function() {
+                $(this)
+                    .closest(".inventory-attr-item")
+                    .remove();
+            });
+
             $("body").on('click', '.add-new-v-option', function () {
                 let $this = $(this);
                 AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {

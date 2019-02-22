@@ -302,6 +302,8 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/select-suppliers','Admin\ItemsController@getList')->name('post_admin_suppliers_list');
         Route::post('/sync-suppliers','Admin\ItemsController@syncSupplier')->name('post_admin_suppliers_sync');
         Route::post('/delete-item-suppliers','Admin\ItemsController@deleteSupplier')->name('post_admin_suppliers_item_delete');
+        Route::post('/get-list', 'Admin\ItemsController@postSuppliersList')->name('post_admin_suppliers_list');
+
     });
 
     Route::group(['prefix' => 'other'], function () {
