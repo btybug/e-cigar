@@ -68,12 +68,12 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3">Featured image</label>
-                                                <div class="col-sm-9">
-                                                    {!! media_button('image',$post) !!}
-                                                </div>
-                                            </div>
+                                            {{--<div class="form-group row">--}}
+                                                {{--<label class="col-sm-3">Featured image</label>--}}
+                                                {{--<div class="col-sm-9">--}}
+                                                    {{--{!! media_button('image',$post) !!}--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
                                             <div class="form-group row">
                                                 <label class="col-sm-3">Gallery images</label>
                                                 <div class="col-sm-9">
@@ -197,6 +197,16 @@
                                                 <div id="treeview_json"></div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <p class="pull-left mb-0">
+                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Featured image</b>
+                                    </p>
+                                    <div class="pull-right">
+                                        {!! media_button('image',$post) !!}
                                     </div>
                                 </div>
                             </div>
