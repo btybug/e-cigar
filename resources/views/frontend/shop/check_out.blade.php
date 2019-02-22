@@ -9,7 +9,8 @@
                         <li class="nav-item col-md-3">
                             <a class="item visited d-flex align-items-center justify-content-between"
                                href="javascript:void(0);">
-                                <span class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
+                                <span
+                                    class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          width="21px" height="21px">
@@ -33,7 +34,8 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between" href="javascript:void(0);">
+                            <a class="item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">Payment</span>
                                 <span class="icon">
                                     <svg width="21px" height="21px">
@@ -44,8 +46,10 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between" href="javascript:void(0);">
-                                <span class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
+                            <a class="item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0);">
+                                <span
+                                    class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                          width="21px" height="21px">
@@ -77,57 +81,58 @@
 
     </main>
 
-@if(Auth::check())
-    <div class="modal modal-checkout fade" id="newAddressModal" tabindex="-1" role="dialog"
-         aria-labelledby="newAddressModal" aria-hidden="true">
-        <div class="modal-dialog main-scrollbar" role="document">
-            <div class="modal-content">
-                <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-checkout_header text-center">
-                    <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">add a new address</h2>
-                    <p class="font-15 text-gray-clr modal-text"> Praesent sollicitudin lorem at orci tincidunt
-                        imperdiet.</p>
-                </div>
-                <div class="modal-body address-form">
+    @if(Auth::check())
+        <div class="modal modal-checkout fade" id="newAddressModal" tabindex="-1" role="dialog"
+             aria-labelledby="newAddressModal" aria-hidden="true">
+            <div class="modal-dialog main-scrollbar" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-checkout_header text-center">
+                        <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">add a new address</h2>
+                        <p class="font-15 text-gray-clr modal-text"> Praesent sollicitudin lorem at orci tincidunt
+                            imperdiet.</p>
+                    </div>
+                    <div class="modal-body address-form">
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!--modal change address-->
-    <div class="modal modal-checkout fade" id="changeAddressModal" tabindex="-1" role="dialog"
-         aria-labelledby="changeAddressModal">
-        <div class="modal-dialog main-scrollbar" role="document">
-            <div class="modal-content">
-                <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-checkout_header text-center">
-                    <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">Change address</h2>
-                    <p class="font-15 text-gray-clr modal-text"> Lorem ipsum dolor sit amet, consectetur
-                        adipisicing.</p>
-                </div>
-                <div>
-                    <form action="" class="checkout-form">
+        <!--modal change address-->
+        <div class="modal modal-checkout fade" id="changeAddressModal" tabindex="-1" role="dialog"
+             aria-labelledby="changeAddressModal">
+            <div class="modal-dialog main-scrollbar" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close main-transition" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="modal-checkout_header text-center">
+                        <h2 class="modal-checkout_title font-main-bold font-22 text-uppercase">Change address</h2>
+                        <p class="font-15 text-gray-clr modal-text"> Lorem ipsum dolor sit amet, consectetur
+                            adipisicing.</p>
+                    </div>
+                    <div>
+                        <form action="" class="checkout-form">
 
-                        <div class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between ">
-                            <label for="title" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3 pb-0">Enter
-                                Shipping address<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
-                            <div class="col-md-8">
-                                <div class="simple_select_wrapper">
-                                    {!! Form::select('address_book',$address->toArray(),$address_id,['class' => 'form-control select-address',"placeholder" => 'Select','tabindex' => '2']) !!}
+                            <div
+                                class="form-group d-flex flex-md-row flex-column align-items-md-center justify-content-between ">
+                                <label for="title" class="checkout-form_label text-gray-clr mb-0 pl-md-0 pl-3 pb-0">Enter
+                                    Shipping address<span class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
+                                <div class="col-md-8">
+                                    <div class="simple_select_wrapper">
+                                        {!! Form::select('address_book',$address->toArray(),$address_id,['class' => 'form-control select-address',"placeholder" => 'Select','tabindex' => '2']) !!}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
+                </div>
             </div>
         </div>
-    </div>
-@endif
+    @endif
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -301,6 +306,7 @@
                 }
             });
         });
+
         // Send Stripe Token to Server
         function stripeTokenHandler(token) {
             // Insert the token ID into the form so it gets submitted to the server
