@@ -48,7 +48,6 @@ class MediaItemsApiController extends Controller
         if (isset($data['item_id']) and is_array($data['item_id'])) {
             $vdata = $data['item_id'];
             foreach ($data['item_id'] as $k => $v) {
-
                 $rule[$k] = 'required|integer|exists:drive_items,id';
             }
         } else {
