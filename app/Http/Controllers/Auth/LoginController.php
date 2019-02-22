@@ -54,9 +54,14 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->isAdministrator()) {
-            $this->redirectTo = '/admin';
-        };
+        if($request->get('redirectPath')){
+            $this->redirectTo = $request->redirectPath;
+        }else{
+            if ($user->isAdministrator()) {
+                $this->redirectTo = '/admin';
+            }
+        }
+
         return response()->json(['success' => true, 'redirectPath' => $this->redirectPath()]);
     }
 

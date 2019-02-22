@@ -6,7 +6,7 @@
     </div>
     <form  method="POST" action="{{ route('login') }}" class="register-form" id="login-form-checkout">
         @csrf
-
+        <input type="hidden" name="redirectPath" value="/{!! Route::getFacadeRoot()->current()->uri() !!}">
         <div class="form-group mb-5">
             <label for="loginEmail" class="text-gray-clr register-form_label">E-Mail Address</label>
             <input id="loginEmail" type="email" class="form-control register-form_input-text register-form_input-text--login{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"value="{{ old('email') }}">
