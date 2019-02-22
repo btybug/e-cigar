@@ -8,7 +8,7 @@
                     <ul class="nav nav-pills">
                         <li class="nav-item col-md-3">
                             <a class="item visited d-flex align-items-center justify-content-between"
-                               href="order-shopping-cart.html">
+                               href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between" href="order-payment.html">
+                            <a class="item d-flex align-items-center justify-content-between" href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">Payment</span>
                                 <span class="icon">
                                     <svg width="21px" height="21px">
@@ -44,7 +44,7 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between" href="#">
+                            <a class="item d-flex align-items-center justify-content-between" href="javascript:void(0);">
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
                                 <span class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -77,7 +77,7 @@
 
     </main>
 
-
+@if(Auth::check())
     <div class="modal modal-checkout fade" id="newAddressModal" tabindex="-1" role="dialog"
          aria-labelledby="newAddressModal" aria-hidden="true">
         <div class="modal-dialog main-scrollbar" role="document">
@@ -96,8 +96,6 @@
             </div>
         </div>
     </div>
-
-
     <!--modal change address-->
     <div class="modal modal-checkout fade" id="changeAddressModal" tabindex="-1" role="dialog"
          aria-labelledby="changeAddressModal">
@@ -129,7 +127,7 @@
             </div>
         </div>
     </div>
-
+@endif
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
