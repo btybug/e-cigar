@@ -204,12 +204,15 @@
                                                 </div>
                                                 <div class="panel-body">
                                                     <div class="d-flex suppliers-block">
-                                                        {{--<div class="inventory-attr-item" data-id="${id}">--}}
-                                                            {{--<h4 class="text">${name}</h4>--}}
-                                                            {{--<button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>--}}
-                                                            {{--<input type="hidden" name="suppliers[]" value="${id}" />--}}
-                                                        {{--</div>--}}
-
+                                                        @if($model)
+                                                            @foreach($model->suppliers as $supplier)
+                                                                <div class="inventory-attr-item" data-id="{{ $supplier->id }}">
+                                                                    <h4 class="text">{{ $supplier->name }}</h4>
+                                                                    <button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>
+                                                                    <input type="hidden" name="suppliers[]" value="{{ $supplier->id }}" />
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>

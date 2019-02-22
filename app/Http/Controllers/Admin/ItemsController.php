@@ -36,12 +36,22 @@ class ItemsController extends Controller
     public function postNew(ItemsRequest $request)
     {
         $data = $request->only('sku', 'image');
-        dd($request->all());
+
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
+
+        $item->suppliers()->sync($request->get('suppliers'));
+
         return redirect()->route('admin_items');
+    }
+
+    public function getEdit($id)
+    {
+        $model = Items::findOrFail($id);
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        return $this->view('new', compact('model', 'allAttrs'));
     }
 
     private function saveImages(Request $request, $item)

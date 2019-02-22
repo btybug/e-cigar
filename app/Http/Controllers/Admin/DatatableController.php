@@ -638,7 +638,7 @@ class DatatableController extends Controller
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
-                return "<a class='badge btn-warning' href='#'><i class='fa fa-edit'></i></a>
+                return "<a class='badge btn-warning' href='".route('admin_items_edit',$attr->id)."'><i class='fa fa-edit'></i></a>
             <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>";
             })->rawColumns(['actions'])->make(true);
     }

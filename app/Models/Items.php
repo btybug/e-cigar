@@ -28,4 +28,9 @@ class Items extends Translatable
     {
         return $this->hasMany(ItemsMedia::class,'item_id');
     }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(Suppliers::class, 'item_suppliers', 'item_id', 'supplier_id');
+    }
 }
