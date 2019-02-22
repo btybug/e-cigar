@@ -15827,9 +15827,6 @@ td.shp-cart-table_price-td {
     color: white;
     opacity: 1;
 }
-.products-wrap .product--single{
-
-}
 .products-wrap .product--single .main--link{
     width: 100%;
     display: flex;
@@ -15853,8 +15850,8 @@ td.shp-cart-table_price-td {
 .products-wrap.display-grid .product--single .main--link{
     flex-direction: column;
 }
-#sortBySelects{
-    
+.payment--login{
+    box-shadow: 0 0 4px #ccc;
 }
 @media (max-width: 1700px) {
     .product-single-info-outer .select2.select2-container.select2-container--default,.product-single-info-outer .product-pack-select{

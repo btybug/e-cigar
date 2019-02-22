@@ -1,4 +1,4 @@
-<div class="modal_right d-flex flex-column justify-content-between h-100">
+<div class="modal_right d-flex flex-column justify-content-between h-100 p-3 payment--login">
     <div>
         <h2 class="text-uppercase text-main-clr font-20 modal-title">login</h2>
         <p class="font-13 text-gray-clr modal-text">  Lorem Ipsum is simply dummy text of the printing and typesetting industry.
@@ -25,11 +25,11 @@
                                     </span>
             @endif
         </div>
-        <div class="row pt-4 row--modal-bottom">
+        <div class="row pt-4 row--modal-bottom modal-accounts">
             <div class="col-md-6 d-flex align-items-center">
                 <div class="position-relative">
-                    <input class="form-check-input register-form_input-check" type="checkbox" value="" id="rememberCheck1" name="remember">
-                    <label class="form-check-label text-gray-clr register-form_label pointer" for="rememberCheck1">
+                    <input class="form-check-input register-form_input-check" type="checkbox" value="" id="rememberCheck2" name="remember">
+                    <label class="form-check-label text-gray-clr register-form_label pointer" for="rememberCheck2">
                         Remember Me
                         <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                             <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
