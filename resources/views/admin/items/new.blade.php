@@ -215,29 +215,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <div class="row">
-                                                        <div class="col-sm-12 clearfix">
-                                                            <h3 class="pull-left m-0">Sale Chanels</h3>
-                                                            <button type="button" class="btn btn-info pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add sale chanel</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel-body">
-                                                    <div class="d-flex">
-                                                        <div class="inventory-attr-item">
-                                                            <h4 class="text">Sale Chanel 1</h4>
-                                                            <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
-                                                        </div>
-                                                        <div class="inventory-attr-item">
-                                                            <h4 class="text">Sale Chanel 2</h4>
-                                                            <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                         <div id="specifications" class="tab-pane fade">
                                             <div class="panel panel-default">
