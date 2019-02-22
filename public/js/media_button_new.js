@@ -389,17 +389,19 @@ const App = function() {
     fullInfoModal: (data, countId) => {
       return `<div class="adminmodal modal fade in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
-                <div class="modal-content col-md-8 p-0">
+                <div class="modal-content col-md-9 p-0">
                     <div class="modal-header" style="overflow: visible;">
-                        <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>
-                        <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
-                        <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
-                    </div>
+                        <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>`
+
+                        // <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
+                        // <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
+
+        +`</div>
                     <div class="modal-body text-center">
                     <div class="modal-title">
                     <img src="${data.url}" data-slideshow="typeext" style="width:100%">
                     </div>
-                    <div class="modal-footer col-md-8">
+                    <div class="modal-footer col-md-9">
 <div style="display: flex; justify-content: space-between;">
                     <button href="#" type="button" role="button" ${
               countId === 0 ? "disabled" : ""
@@ -418,11 +420,11 @@ const App = function() {
             </div>
                     </div>
                 </div>
-                <div class="popupDetail col-md-4 p-0">
+                <div class="popupDetail col-md-3 p-0">
                     <div class="row p-t-10 p-b-10">
-                        <div class="col-xs-4 col-md-4 col-md-offset-4">
-                            <button class="btn btn-default btn-block active" type="button" data-tabaction="details">Details</button>
-                        </div>` +
+                        <div class="text-center">`+
+                            // <button class="btn btn-default btn-block active" type="button" data-tabaction="details">Details</button>
+          `<h4>${data.real_name}</h4></div>` +
           // <div class="col-xs-4 col-md-4">
           //     <button class="btn btn-default btn-block" type="button" data-tabaction="seo">SEO</button>
           // </div>
@@ -432,21 +434,7 @@ const App = function() {
           `</div>
                     <div class="row rowsection collapse in" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
-                            <h4><i class="fa fa-bars text-primary"></i> ${
-              data.real_name
-              } <div class="btn-group">
-                            <button type="button" style="background-color: black;" class="btn btn-action-popup dropdown-toggle" title="Rename" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="iconaction iconRenameGrey"></i></button>
-                            <div class="dropdown-menu form-inline row width-sm p-l-0 p-r-0" aria-labelledby="dLabel">
-                                <div class="form-group col-sm-7 p-l-5">
-                                    <input name="rename_img" id="rename_img" type="text" class="form-control" placeholder="File name will be come here" value="${
-              data.real_name
-              }"  data-slideshow="renameval">
-                                </div>
-                                <div class="form-group col-sm-5 p-r-5">
-                                    <button class="btn btn-success btn-block" data-slideshow="save">Save</button>
-                                </div>
-                            </div>
-                        </div> </h4>
+                            
                             <div class="table-responsive">
                                 <table class="table tableborder0">
                                     <tr>
