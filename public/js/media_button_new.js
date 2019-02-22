@@ -95,7 +95,6 @@ const App = function() {
         console.log('nodeId', nodeId, JSON.parse(dataTransfer.getData("node_id")));
         let parrentId = p;
         console.log('parrentId',parrentId);
-        debugger
         if(Array.isArray(nodeId)) {
           nodeId.map((id)=> {
             this.requests.transferImage(
