@@ -74,12 +74,24 @@
                                                     {{--{!! media_button('image',$post) !!}--}}
                                                 {{--</div>--}}
                                             {{--</div>--}}
-                                            <div class="form-group row">
-                                                <label class="col-sm-3">Gallery images</label>
-                                                <div class="col-sm-9">
-                                                    {!! media_button('gallery',$post,true) !!}
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading clearfix">
+                                                            <p class="pull-left">Gallery images</p>
+                                                            <div class="pull-right">
+                                                                {!! media_button('gallery',$post,true) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            {{--<div class="form-group row">--}}
+                                                {{--<label class="col-sm-3">Gallery images</label>--}}
+                                                {{--<div class="col-sm-9">--}}
+                                                    {{--{!! media_button('gallery',$post,true) !!}--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
                                         </div>
 
                                         <div class="panel panel-default mt-20 releted__products-panel">
