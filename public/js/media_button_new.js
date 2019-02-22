@@ -76,7 +76,6 @@ const App = function() {
     hoverFolder: null,
     currentDragedId: null,
     transfer: (f, p, root, dataTransfer) => {
-
       const x = $("#folder-list").fancytree("getTree");
       const folder = x.getNodeByKey('' + f);
       if(folder && folder.folder) {
@@ -92,14 +91,53 @@ const App = function() {
             this.htmlMaker.currentId = null;
         });
       } else {
+        let nodeId = (Array.isArray(JSON.parse(dataTransfer.getData("node_id"))) && JSON.parse(dataTransfer.getData("node_id")).length !== 0) && JSON.parse(dataTransfer.getData("node_id")) || f;
+        console.log('nodeId', nodeId, JSON.parse(dataTransfer.getData("node_id")));
+        let parrentId = p;
+        console.log('parrentId',parrentId);
+        debugger
+        if(Array.isArray(nodeId)) {
+          nodeId.map((id)=> {
             this.requests.transferImage(
                 {
-                  item_id: Number(f),
-                  folder_id: root === 1 ? Number(1) : Number(p),
+                  item_id: Number(id),
+                  folder_id: root === 1 ? Number(1) : Number(parrentId),
                   access_token: "string"
                 }
             );
+          });
+        } else {
+          if(this.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
+            this.requests.transferFolder(
+                {
+                  folder_id: Number(nodeId),
+                  parent_id: root === 1 ? Number(1) : Number(parrentId),
+                  access_token: "string"
+                },
+                () => {
+                  const x = $("#folder-list").fancytree("getTree");
+                  var folder;
+                  folder = x.getNodeByKey('' + nodeId);
+                  folder.moveTo(x.getNodeByKey('' + parrentId));
+                }
+            );
+          } else {
+            this.requests.transferImage(
+                {
+                  item_id: Number(nodeId),
+                  folder_id: root === 1 ? Number(1) : Number(parrentId),
+                  access_token: "string"
+                }
+            );
+          }
+        }
+        this.htmlMaker.dragElementOfTree = null;
+        this.htmlMaker.currentId = null;
+        selectedImage.length = 0;
 
+
+
+//image*************************************
       }
     },
 
@@ -233,27 +271,28 @@ const App = function() {
               const transfer = this.htmlMaker.transfer;
               if( !data.otherNode ) {
                 console.log(this.htmlMaker.currentId);
-                if(this.htmlMaker.currentId) {
+                if(this.htmlMaker.currentId || data.dataTransfer.getData('node_id').length !== 0) {
 
-                  if (data.hitMode == 'after' || data.hitMode == 'before') {
-                    if (node.getLevel() == 1) {
-                      transfer(this.htmlMaker.currentId, data.node.parent.key, 1);
-                    } else { transfer(this.htmlMaker.currentId, data.node.parent.key, 0); }
-                  } else { transfer(this.htmlMaker.currentId, data.node.key, 0); }
+                  if (data.hitMode === 'after' || data.hitMode === 'before') {
+                    if (node.getLevel() === 1) {
+                      transfer(this.htmlMaker.currentId, data.node.parent.key, 1, data.dataTransfer);
+                    } else { transfer(this.htmlMaker.currentId, data.node.parent.key, 0, data.dataTransfer); }
+                  } else { transfer(this.htmlMaker.currentId, data.node.key, 0, data.dataTransfer); }
                 }
                 return;
               }
 
-              if (data.hitMode == 'after' || data.hitMode == 'before') {
-                if (node.getLevel() == 1) {
-                  transfer(data.otherNodeData.key, data.node.parent.key, 1);
+              if (data.hitMode === 'after' || data.hitMode === 'before') {
+                if (node.getLevel() === 1) {
+                  transfer(data.otherNodeData.key, data.node.parent.key, 1, data.dataTransfer);
                 } else {
-                  transfer(data.otherNodeData.key, data.node.parent.key, 0);
+                  transfer(data.otherNodeData.key, data.node.parent.key, 0, data.dataTransfer);
                 }
               } else {
-                transfer(data.otherNodeData.key, node.key, 0);
+                transfer(data.otherNodeData.key, node.key, 0, data.dataTransfer);
               }
               this.htmlMaker.dragElementOfTree = null;
+              selectedImage.length = 0;
             }
             //********dragDrop********end
           },
@@ -919,6 +958,7 @@ const App = function() {
           globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
           this.helpers.makeDnD();
+          selectedImage.length = 0;
           cb ? cb() : null;
         }
       });
@@ -1375,7 +1415,7 @@ $('body').on('blur', '[contenteditable]', function(ev) {
           folder_id: Number(itemId),
           folder_name: name,
           access_token: "string"
-        },
+        }
     );
   }
   // app.events.save_edited_title()
