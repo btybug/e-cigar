@@ -91,30 +91,30 @@
                         fieldElement.on('change', function () { change(fieldElement, fieldElementName) });
                     };
 
-                    // $.ajax({
-                    //     type: "post",
-                    //     url: "/login",
-                    //     cache: false,
-                    //     datatype: "json",
-                    //     data: data,
-                    //     headers: {
-                    //         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    //     },
-                    //     success: function (data) {
-                    //         if (!data.error) {
-                    //             location.href = data.redirectPath
-                    //             console.log(data)
-                    //         } else {
-                    //             alert('error')
-                    //         }
-                    //     },
-                    //     error: function (error) {
-                    //         var emailEl = $('#loginEmail');
-                    //         var passwordEl = $('#loginPass');
-                    //         errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#loginEmail');
-                    //         errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#loginPass');
-                    //     }
-                    // });
+                    $.ajax({
+                        type: "post",
+                        url: "/login",
+                        cache: false,
+                        datatype: "json",
+                        data: data,
+                        headers: {
+                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        },
+                        success: function (data) {
+                            if (!data.error) {
+                                location.href = data.redirectPath
+                                console.log(data)
+                            } else {
+                                alert('error')
+                            }
+                        },
+                        error: function (error) {
+                            var emailEl = $('#loginEmail');
+                            var passwordEl = $('#loginPass');
+                            errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#loginEmail');
+                            errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#loginPass');
+                        }
+                    });
                 });
         });
     });
