@@ -133,10 +133,6 @@ const App = function() {
         this.htmlMaker.dragElementOfTree = null;
         this.htmlMaker.currentId = null;
         selectedImage.length = 0;
-
-
-
-//image*************************************
       }
     },
 
@@ -377,6 +373,28 @@ const App = function() {
                     <div class="modal-footer">
                      <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
                             <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
+                    </div>
+                  </div>
+            
+                </div>
+              </div>`);
+    },
+    remove_modal: (id, name, iorf) => {
+      return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+                <div class="modal-dialog">
+            
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
+                      <h4 class="modal-title">Remove images</h4>
+                    </div>
+                    <div class="modal-body">
+                          <p>Do You want to remove ${name}</p>
+                    </div>
+                    <div class="modal-footer">
+                     <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                            <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="${iorf === 'image' ? 'remove_image_req' : 'remove_folder_req'}">Remove</button>
                     </div>
                   </div>
             
@@ -753,7 +771,6 @@ const App = function() {
                                    </li>`;
       $('document').ready(() => {
         const tree = $("#folder-list").fancytree("getTree");
-
         const current = tree.getNodeByKey('' + id);
         const parentsArray = current && (current.getKeyPath().trim()).split('/');
         parentsArray && parentsArray.shift();
@@ -956,8 +973,8 @@ const App = function() {
     removeTreeFolder: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-remove-folder", obj, res => {
         if (!res.error) {
-          this.requests.drawingItems();
           cb();
+          this.requests.drawingItems(undefined, true);
         }
       });
     },
@@ -1018,8 +1035,8 @@ const App = function() {
     removeImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-remove-item", obj, res => {
         if (!res.error) {
-          this.requests.drawingItems();
-          selectedImage.length = 0;
+          this.requests.drawingItems(undefined, true);
+          cb();
         }
       });
     },
@@ -1092,14 +1109,28 @@ const App = function() {
     },
     //********App -> events -> save_seo********end
 
-    //********App -> events -> remove_folder********start
     remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
+      console.log('ererererer',elm);
       const id = this.htmlMaker.hoverFolder || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
+      const name = e.target
+          .closest(".file") ? e.target
+          .closest(".file")
+          .querySelector(".file-name")
+          .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
+      console.log('elm',elm, e);
+      document.body.innerHTML += this.htmlMaker.remove_modal(id, name);
+    },
 
+    //********App -> events -> remove_folder********start
+    remove_folder_req: (elm, e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const id = this.htmlMaker.hoverFolder || e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
       if(!id) return;
       const removeTree = function (id) {
+        debugger
         const x = $("#folder-list").fancytree("getTree");
         const folder = x.getNodeByKey('' + id);
         folder.remove();
@@ -1112,8 +1143,9 @@ const App = function() {
         },
         () => {
           this.htmlMaker.hoverFolder || !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
-          removeTree(id);
+          this.events.close_name_modal();
           this.htmlMaker.hoverFolder = null;
+
         }
       );
     },
@@ -1253,12 +1285,22 @@ const App = function() {
       e.preventDefault();
       e.stopPropagation();
       const id = e.target.closest(".file").getAttribute("data-id");
+      const name = e.target
+          .closest(".file")
+          .querySelector(".file-name")
+          .textContent.trim();
+      console.log('elm',elm, e);
+      document.body.innerHTML += this.htmlMaker.remove_modal(id, name, 'image');
+    },
+    remove_image_req: (elm, e) => {
+      const itemId = e.target.getAttribute("data-id");
       this.requests.removeImage(
         {
-          item_id: Number(id),
+          item_id: Number(itemId),
           trash: true,
           access_token: "string"
-        }
+        },
+        this.events.close_name_modal
       );
     },
     remove_image_items: (e) => {
@@ -1268,7 +1310,7 @@ const App = function() {
         this.requests.removeImage(
             {
               item_id: Number(id),
-              trash: true,
+              trash: false,
               access_token: "string"
             }
         );
@@ -1291,7 +1333,6 @@ const App = function() {
 
     //********App -> events -> save_edited_title********start
     save_edited_title: (elm, e) => {
-      console.log(elm, e);
       const itemId = e.target.getAttribute("data-id");
       const name = document.querySelector(".edit-title-input").value;
       this.requests.editImageName(
@@ -1300,7 +1341,6 @@ const App = function() {
           item_name: name,
           access_token: "string"
         },
-        false,
         this.events.close_name_modal
       );
     },
@@ -1340,7 +1380,15 @@ const App = function() {
 
     //********App -> events -> close_name_modal********start
     close_name_modal: (elm, e) => {
-      e.target.closest(".custom_modal_edit").remove();
+      console.log(e);
+      $(".custom_modal_edit").remove();
+      $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
+        if(ev.type === 'mouseenter') {
+          $(this).find('.file-actions').removeClass('d-none');
+        } else if(ev.type === 'mouseleave') {
+          $(this).find('.file-actions').addClass('d-none').removeClass('open');
+        }
+      });
     }
     //********App -> events -> close_name_modal********end
   };
