@@ -36,7 +36,7 @@
                             <div class="admin-tags d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="admin d-flex mb-1">
                                     <div class="admin-photo">
-                                        <img src="/public/img/profile.png" alt="admin" class="rounded-circle">
+                                        <img src=" {{ user_avatar($post->author->id) }}" alt="admin" class="rounded-circle">
                                     </div>
                                     <div class="admin-main ">
                                         <div class="admin-by font-main-bold font-15 text-tert-clr lh-1">
@@ -320,7 +320,7 @@
                                                         @endif
                                                         <div class="main-comment-wrap-img">
                                                             <div class="user-imges">
-                                                                <img src="https://cetin.ro/poze/2016/10/frumoase-rusoaice-de-pe-instagram-14.jpg"
+                                                                <img src="{{ user_avatar() }}"
                                                                      alt="user">
                                                             </div>
                                                             <textarea name="comment" id="" rows="0"
