@@ -56,5 +56,53 @@
                 @endforeach
             @endif
         </div>
+    @else
+        @if($model && is_array($model))
+            @if(isset($model[$name]))
+                @php
+                    $mi = $model[$name];
+                @endphp
+                @if($html)
+                    @php
+                        $html = str_replace('{img_path_for_media}',$mi,$html);
+                        $html = str_replace('{data_id}',$uniqId."_media_single_img",$html);
+                    @endphp
+                    {!! $html !!}
+                @else
+                    <img src="{{ $mi }}" class="img img-responsive" data-id="{!! $uniqId !!}" alt="{{ $mi }}"/>
+                @endif
+            @endif
+        @elseif($model && is_object($model))
+            @if(isset($model->$name))
+                @php
+                    $mi = $model->$name;
+                @endphp
+                @if($html)
+                    @php
+                        $html = str_replace('{img_path_for_media}',$mi,$html);
+                        $html = str_replace('{data_id}',$uniqId."_media_single_img",$html);
+                    @endphp
+                    {!! $html !!}
+                @else
+                    <img src="{{ $mi }}" class="img img-responsive" data-id="{!! $uniqId !!}" alt="{{ $mi }}"/>
+                @endif
+            @endif
+        @else
+            @if($model)
+                @php
+                    $mi = $model;
+                @endphp
+                @if($html)
+                    @php
+                        $html = str_replace('{img_path_for_media}',$mi,$html);
+                        $html = str_replace('{data_id}',$uniqId."_media_single_img",$html);
+
+                    @endphp
+                    {!! $html !!}
+                @else
+                    <img src="{{ $mi }}" class="img img-responsive" data-id="{!! $uniqId !!}" alt="{{ $mi }}"/>
+                @endif
+            @endif
+        @endif
     @endif
 </div>

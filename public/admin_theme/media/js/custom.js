@@ -780,7 +780,10 @@ function App() {
             } else {
                 let urlValue = document.querySelector(".file-realtive-url")
                     .value;
+                console.log(inputId);
                 document.querySelector(`.${inputId}`).value = urlValue;
+                document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                // document.querySelector(`.${inputId}`).value = urlValue;
             }
             document.querySelector(".file-realtive-url").value = "";
             self.helpers.hideAllActiveImages();

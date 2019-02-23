@@ -47,11 +47,11 @@ function enableMedia()
     $_MEDIA_BUTTON = true;
 }
 
-function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive')
+function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive',$html = null)
 {
     enableMedia();
     $uniqId = uniqid('media_');
-    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId']));
+    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId','html']));
 }
 
 function get_site_logo()

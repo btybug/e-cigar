@@ -218,7 +218,9 @@
                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Featured image</b>
                                     </p>
                                     <div class="pull-right">
-                                        {!! media_button('image',$post) !!}
+                                        {!! media_button('image',$post,false,'drive',
+                                            "<img src='{img_path_for_media}' class='img img-bordered {data_id}' width='250' />"
+                                        ) !!}
                                     </div>
                                 </div>
                             </div>
