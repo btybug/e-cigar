@@ -1413,7 +1413,7 @@ const App = function() {
     //********App -> events -> close_name_modal********start
     close_name_modal: (elm, e) => {
       console.log(e);
-      
+      this.requests.drawingItems(undefined, true)
       $(".custom_modal_edit").remove();
       $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
         if(ev.type === 'mouseenter') {
