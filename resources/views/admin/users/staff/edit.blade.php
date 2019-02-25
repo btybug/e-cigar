@@ -21,26 +21,13 @@
                     <div class="box box-primary mar-0">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle"
-                                 src="http://demo0.laravelcommerce.com/resources/views/admin/images/admin_profile/1539074891.42792796_2710973195795309_228747741981835264_n.png"
-                                 alt="Václav profile picture">
+                                 src="{{ user_avatar() }}"
+                                 alt="{!! $user->name.' '.$user->last_name !!}">
                                 {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
                             <h3 class="profile-username text-center">{!! $user->name.' '.$user->last_name !!}</h3>
 
                             <p class="text-muted text-center">{!! ($user->role)?$user->role->title:'User' !!}</p>
 
-                            <!-- <ul class="list-group list-group-unbordered">
-                               <li class="list-group-item">
-                                 <b>Followers</b> <a class="pull-right">1,322</a>
-                               </li>
-                               <li class="list-group-item">
-                                 <b>Following</b> <a class="pull-right">543</a>
-                               </li>
-                               <li class="list-group-item">
-                                 <b>Friends</b> <a class="pull-right">13,287</a>
-                               </li>
-                             </ul>
-
-                             <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
                         </div>
                         <!-- /.box-body -->
                     </div>

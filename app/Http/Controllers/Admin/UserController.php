@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
@@ -93,6 +94,15 @@ class UserController extends Controller
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
         return $this->view('staff.edit', compact('user', 'countries', 'roles','billing_address','default_shipping','address','countriesShipping'));
+    }
+
+    public function postEditStaff($id,AdminProfileRequest $request)
+    {
+        $user = User::findOrFail($id);
+
+        $user->update($request->except('_token'));
+
+        return redirect()->back()->with('message',"Profile Updated successfully");
     }
 
     public function postAddressBookForm(Request $request)
