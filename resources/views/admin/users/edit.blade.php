@@ -17,10 +17,9 @@
                </div>
 
                 <div class="form-group pull-right">
-
                     {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                    {!! Form::hidden('email',$user->email) !!}
-                    <button type="submit" class="btn btn-warning">Send reset password email</button>
+                        {!! Form::hidden('email',$user->email) !!}
+                        <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
                 </div>
 
@@ -57,25 +56,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary m-0 users-log-wrapper_col">
                         <div class="box-body box-profile">
-
-
-                            <!-- <ul class="list-group list-group-unbordered">
-                               <li class="list-group-item">
-                                 <b>Followers</b> <a class="pull-right">1,322</a>
-                               </li>
-                               <li class="list-group-item">
-                                 <b>Following</b> <a class="pull-right">543</a>
-                               </li>
-                               <li class="list-group-item">
-                                 <b>Friends</b> <a class="pull-right">13,287</a>
-                               </li>
-                             </ul>
-
-                             <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
-
                         </div>
-
-
                         <!-- /.box-body -->
                         <ul class=" nav nav-pills nav-stacked admin-profile-left">
                             <li class="active">
