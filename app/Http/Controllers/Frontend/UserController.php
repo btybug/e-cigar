@@ -450,8 +450,7 @@ class UserController extends Controller
 
     public function postEmailSettings(Request $request)
     {
-        $emailSettings = $request->get('email_settings');
-
+        $emailSettings = $request->get('email_settings',[]);
         if (count($emailSettings)) {
             foreach ($emailSettings as $category_id) {
                 $response = Newsletter::where('user_id', \Auth::id())->where('category_id', $category_id)->first();

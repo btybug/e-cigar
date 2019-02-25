@@ -1,2 +1,2 @@
 <label>Select Order Code</label>
-{!! Form::select('order_code',$user->orders->pluck('code','code'),null,['class'=>'form-control']) !!}
+{!! Form::select('order_id',$user->orders->pluck('code','id'),null,['class'=>'form-control']) !!}

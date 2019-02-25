@@ -56,4 +56,14 @@ class Ticket extends Model
     {
         return $this->morphMany(History::class, 'tickets', 'reference_table', 'reference_id');
     }
+
+    public function product()
+    {
+        return $this->hasOne(Stock::class,'id','product_id');
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Orders::class,'id','order_id');
+    }
 }
