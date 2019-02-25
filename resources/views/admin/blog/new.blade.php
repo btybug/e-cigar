@@ -213,9 +213,9 @@
                                     <p class="pull-left mb-0">
                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Featured image</b>
                                     </p>
-                                    <div class="pull-right">
+                                    <div class="pull-right text-right">
                                             {!! media_button('image',$post,false,'drive',
-                                           "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img {data_id}' width='250' /></div>"
+                                           "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img img-responsive {data_id}' width='250' /></div>"
                                        ) !!}
 
 

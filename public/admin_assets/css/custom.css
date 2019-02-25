@@ -533,8 +533,13 @@ textarea {
 }
 
 .bestbetter-modal-open input {
+    padding-right: 9px;
+    overflow: hidden;
     text-align: center;
     text-transform: capitalize;
+    text-overflow: ellipsis;
+    width: 120px;
+    white-space: nowrap;
 }
 
 .btn-primary-reset-back {
