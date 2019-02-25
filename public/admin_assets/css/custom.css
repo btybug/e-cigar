@@ -976,3 +976,11 @@ body>.wrapper{
     overflow: auto;
     height: 100%;
 }
+
+.edit-featured-img-outer {
+    box-shadow: 0 0 4px #ccc;
+    margin-top: 15px;
+    height: 250px;
+    width: 250px;
+}
+

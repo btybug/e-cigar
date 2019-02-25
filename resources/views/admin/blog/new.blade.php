@@ -74,18 +74,14 @@
                                                     {{--{!! media_button('image',$post) !!}--}}
                                                 {{--</div>--}}
                                             {{--</div>--}}
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading clearfix">
-                                                            <p class="pull-left">Gallery images</p>
-                                                            <div class="pull-right">
-                                                                {!! media_button('gallery',$post,true) !!}
-                                                            </div>
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading clearfix">
+                                                        <p class="pull-left">Gallery images</p>
+                                                        <div class="pull-right">
+                                                            {!! media_button('gallery',$post,true) !!}
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             {{--<div class="form-group row">--}}
                                                 {{--<label class="col-sm-3">Gallery images</label>--}}
                                                 {{--<div class="col-sm-9">--}}
@@ -218,9 +214,11 @@
                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Featured image</b>
                                     </p>
                                     <div class="pull-right">
-                                        {!! media_button('image',$post,false,'drive',
-                                            "<img src='{img_path_for_media}' class='img img-bordered {data_id}' width='250' />"
-                                        ) !!}
+                                            {!! media_button('image',$post,false,'drive',
+                                           "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img {data_id}' width='250' /></div>"
+                                       ) !!}
+
+
                                     </div>
                                 </div>
                             </div>

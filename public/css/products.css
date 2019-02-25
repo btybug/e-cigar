@@ -2587,6 +2587,7 @@ td.shp-cart-table_price-td {
 .products-wrap.display-grid .product--single .product-card_btn{
     top: 100% !important;
     height: max-content;
+
 }
 .products-wrap.display-grid .product--single .main--link{
     flex-direction: column;

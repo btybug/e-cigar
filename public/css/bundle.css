@@ -13040,9 +13040,11 @@ tr.notification-is_read {
 .font-main-reg {
     font-family: 'Roboto-Regular', sans-serif;
 }
+
 .font-main-bold {
     font-family: 'Roboto-Medium', sans-serif;
 }
+
 .font-sec-reg {
     font-family: 'Oswald-Regular', sans-serif;
 }
@@ -15846,6 +15848,7 @@ td.shp-cart-table_price-td {
 .products-wrap.display-grid .product--single .product-card_btn{
     top: 100% !important;
     height: max-content;
+
 }
 .products-wrap.display-grid .product--single .main--link{
     flex-direction: column;
