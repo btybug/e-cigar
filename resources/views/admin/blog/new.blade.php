@@ -215,7 +215,7 @@
                                     </p>
                                     <div class="pull-right text-right">
                                             {!! media_button('image',$post,false,'drive',
-                                           "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img img-responsive {data_id}' width='250' /></div>"
+                                           "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img img-responsive {data_id}' /></div>"
                                        ) !!}
 
 

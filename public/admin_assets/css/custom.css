@@ -985,7 +985,8 @@ body>.wrapper{
 .edit-featured-img-outer {
     box-shadow: 0 0 4px #ccc;
     margin-top: 15px;
-    height: 250px;
+    padding: 10px;
+    min-height: 30px;
     width: 250px;
 }
 
