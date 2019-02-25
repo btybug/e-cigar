@@ -5,7 +5,6 @@
  * Date: 31.12.2017
  * Time: 00:09
  */
-
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 Route::get('/profile', 'Admin\AdminController@getProfile')->name('admin_dashboard_profile');
 Route::post('/profile', 'Admin\AdminController@postProfile')->name('admin_dashboard_profile_post');
