@@ -22,8 +22,6 @@ class CreateCustomEmailsTable extends Migration
             $table->unsignedInteger('coupon_id')->nullable();
             $table->tinyInteger('is_for_admin')->default(0);
             $table->timestamps();
-
-            $table->foreign('parent_id')->references('id')->on('custom_emails')->onDelete('cascade');
         });
     }
 
