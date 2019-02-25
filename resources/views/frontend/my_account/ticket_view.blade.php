@@ -123,10 +123,12 @@
                                        <span class="badge" style="color: #e69900">{{ $ticket->status->name }}</span>
 
                                    </p>
-                                   <p>
-                                       <strong>Priority</strong>:
-                                       <span class="badge" style="color: #069900">{{ $ticket->priority->name }}</span>
-                                   </p>
+                                   @if($ticket->priority)
+                                       <p>
+                                           <strong>Priority</strong>:
+                                           <span class="badge" style="color: #069900">{{ $ticket->priority->name }}</span>
+                                       </p>
+                                   @endif
                                    <p>
                                        <strong>Responsible</strong>: {{ ($ticket->staff) ? $ticket->staff->name : 'not assigned yet' }}
                                    </p>
@@ -134,6 +136,17 @@
                                        <strong>Category</strong>:
                                        <span class="badge" style="color: #0014f4">{{ $ticket->category->name }}</span>
                                    </p>
+                                   @if($ticket->category && $ticket->category->slug == 'order')
+                                   <p>
+                                       <strong>Order Numebr</strong>:
+                                       <span class="badge" >{{ $ticket->order->order_number }}</span>
+                                   </p>
+                                   @elseif($ticket->category && $ticket->category->slug == 'product')
+                                       <p>
+                                           <strong>Product</strong>:
+                                           <span class="badge">{{ $ticket->product->name }}</span>
+                                       </p>
+                                   @endif
                                    <p><strong>Created</strong>: {!! time_ago($ticket->created_at) !!}</p>
                                    <p><strong>Last Update</strong>: {!! time_ago($ticket->updated_at) !!}</p>
                                </div>

@@ -191,7 +191,7 @@ class UserController extends Controller
 
     public function getTickets()
     {
-        $tickets = \Auth::user()->tickets()->paginate(10);
+        $tickets = \Auth::user()->tickets()->orderByDesc('created_at')->paginate(10);
         return $this->view('tickets', compact(['tickets']));
     }
 
