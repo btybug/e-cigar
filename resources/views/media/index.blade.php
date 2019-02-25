@@ -76,7 +76,7 @@
                 {{--</ul>--}}
                 <div class="upload-content" style="width: 100%;">
                   <div class="upload--head  mb-20 mt15">
-                      <button class="btn btn-danger delete_items">Delete</button>
+                      <button class="btn btn-danger delete_items" >Delete</button>
                       <button class="btn btn-info">Move</button>
                       <button class="btn btn-warning">Copy</button>
                       <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
@@ -86,6 +86,13 @@
                   <div class="uploader-container mt15  mb-20 d-none">
                     <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple name="item[]"
                            type="file" data-upload-url="{!! route('media_upload') !!}">
+                  </div>
+                  <div class="remover-container mb-20 mt15 d-none" >
+                    <div class="remover-container-zone">
+                      <div class="remover-container-content">
+                        Drag & drop files you want to delete...
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -197,7 +204,7 @@
 
     </div>
   </div>
-
+  <div id="modal_area"></div>
 
   {!! Form::hidden(null,'drive',['data-type'=>'folder']) !!}
 @stop

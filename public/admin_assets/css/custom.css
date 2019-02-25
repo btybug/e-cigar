@@ -982,6 +982,7 @@ body>.wrapper{
     height: 100%;
 }
 
+
 .edit-featured-img-outer {
     box-shadow: 0 0 4px #ccc;
     margin-top: 15px;
@@ -990,3 +991,38 @@ body>.wrapper{
     width: 250px;
 }
 
+
+div.remover-container {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+div.remover-container .remover-container-zone {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border: 1px dashed #aaa;
+    border-radius: 4px;
+    height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    margin: 12px 15px 12px 12px;
+    padding: 5px;
+}
+
+div.remover-container .remover-container-zone .remover-container-content {
+    color: #aaa;
+    font-size: 1.6em;
+    padding: 85px 10px;
+    cursor: default;
+    text-align: center;
+    width: 100%;
+}
+
+div.remover-container .remover-container-zone .file {
+    width: 195px;
+    height: 140px;
+}

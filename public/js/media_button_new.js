@@ -63,7 +63,7 @@ const normAjax = function (URL, obj = {}, cb) {
 //App includes all methods for media page
 const App = function() {
   let globalFolderId = 1;
-  const selectedImage = [];
+  this.selectedImage = [];
 
   //********App -> htmlMaker********start
   //htmlMaker includes all methods to create html markup
@@ -106,7 +106,7 @@ const App = function() {
             );
           });
         } else {
-          if(this.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
+          if(this.htmlMaker.dragElementOfTree || ($(`[data-id=${nodeId}]`)[0] && $(`[data-id=${nodeId}]`)[0].closest('.folder-container'))) {
             this.requests.transferFolder(
                 {
                   folder_id: Number(nodeId),
@@ -132,7 +132,7 @@ const App = function() {
         }
         this.htmlMaker.dragElementOfTree = null;
         this.htmlMaker.currentId = null;
-        selectedImage.length = 0;
+        this.selectedImage.length = 0;
       }
     },
 
@@ -171,7 +171,6 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
-      console.log(data);
       return (`<div draggable="true" data-id="${data.id}" class="file">
         <a  bb-media-click="select_item" >
             <span class="corner"></span>
@@ -287,7 +286,7 @@ const App = function() {
                 transfer(data.otherNodeData.key, node.key, 0, data.dataTransfer);
               }
               this.htmlMaker.dragElementOfTree = null;
-              selectedImage.length = 0;
+              this.selectedImage.length = 0;
             }
             //********dragDrop********end
           },
@@ -390,7 +389,7 @@ const App = function() {
                       <h4 class="modal-title">Remove images</h4>
                     </div>
                     <div class="modal-body">
-                          <p>Do You want to remove ${name}</p>
+                          <p>Do You want to remove ${iorf === 'image' ? (name.length === 0 ? 'selected images' : 'image') : 'folder'} ${name}?</p>
                     </div>
                     <div class="modal-footer">
                      <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
@@ -790,6 +789,14 @@ const App = function() {
       document
           .querySelector(".uploader-container")
           .classList.toggle("d-none");
+      $('.remover-container').addClass('d-none');
+      return false;
+    },
+    showRemoverContainer: () => {
+      debugger
+      document
+          .querySelector(".remover-container")
+          .classList.toggle("d-none");
       return false;
     },
     //********App -> helpers -> showUploaderContainer********end
@@ -801,19 +808,19 @@ const App = function() {
         .querySelectorAll(`[data-type="main-container"] [draggable="true"]`)
         .forEach(elm => {
           elm.addEventListener("dragstart", function (e) {
-            console.log('dnd', selectedImage, e);
+            console.log('dnd', self.selectedImage, e);
             function findAncestor (el, cls) {
               while ((el = el.parentElement) && !el.classList.contains(cls));
               return el;
-            }
-            if(selectedImage.length !== 0 && findAncestor(e.target, 'image-container').classList.contains('active')) {
+            };
+            if(self.selectedImage.length !== 0 && findAncestor(e.target, 'image-container').classList.contains('active')) {
               const selected = document.createElement('div');
               selected.setAttribute('node_id', 1);
               selected.style.display = 'flex';
               selected.style.flexWrap = 'wrap';
               selected.style.width = '320px';
 
-              selectedImage.map((id) => {
+              self.selectedImage.map((id) => {
                 let cloneNode = document.querySelector(`[data-id="${id}"]`).cloneNode(true);
                 cloneNode.style.width = '80px';
                 cloneNode.style.marginRight = '10px';
@@ -831,7 +838,7 @@ const App = function() {
               const id = this.getAttribute("data-id");
               e.dataTransfer.setDragImage(selected, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-              e.dataTransfer.setData("node_id", JSON.stringify(selectedImage)); // required otherwise doesn't work
+              e.dataTransfer.setData("node_id", JSON.stringify(self.selectedImage)); // required otherwise doesn't work
               // setTimeout(() => (this.className = "invisible"), 0);
               // self.htmlMaker.currentId = id;
             } else if(!e.target.classList.contains('title-change')) {
@@ -915,7 +922,7 @@ const App = function() {
           }
           self.htmlMaker.dragElementOfTree = null;
           self.htmlMaker.currentId = null;
-          selectedImage.length = 0;
+          self.selectedImage.length = 0;
         });
       });
     }
@@ -962,7 +969,7 @@ const App = function() {
           globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
           this.helpers.makeDnD();
-          selectedImage.length = 0;
+          this.selectedImage.length = 0;
           cb ? cb() : null;
         }
       });
@@ -990,7 +997,7 @@ const App = function() {
     },
     //********App -> requests -> saveSeo********end
 
-  //********App -> requests -> editImageName********start
+    //********App -> requests -> editImageName********start
     editImageName: (obj = {}, cb) => {
       shortAjax("/api/api-media/rename-item", obj, res => {
         if (!res.error) {
@@ -998,19 +1005,19 @@ const App = function() {
         }
       });
     },
-  //********App -> requests -> editImageName********end
+    //********App -> requests -> editImageName********end
 
-  //********App -> requests -> editImageName********start
-  editFolderName: (obj = {}, cb) => {
-    shortAjax("/api/api-media/rename-folder", obj, res => {
-      if (!res.error) {
-        // cb(res);
-      }
-    });
-  },
-  //********App -> requests -> editImageName********end
+    //********App -> requests -> editImageName********start
+    editFolderName: (obj = {}, cb) => {
+      shortAjax("/api/api-media/rename-folder", obj, res => {
+        if (!res.error) {
+          // cb(res);
+        }
+      });
+    },
+    //********App -> requests -> editImageName********end
 
-  //********App -> requests -> transferImage********start
+    //********App -> requests -> transferImage********start
     transferImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/transfer-item", obj, res => {
         if (!res.error) {
@@ -1018,9 +1025,9 @@ const App = function() {
         }
       });
     },
-  //********App -> requests -> transferImage********end
+    //********App -> requests -> transferImage********end
 
-  //********App -> requests -> transferFolder********start
+    //********App -> requests -> transferFolder********start
     transferFolder: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-sort-folder", obj, res => {
         if (!res.error) {
@@ -1029,9 +1036,9 @@ const App = function() {
         }
       });
     },
-  //********App -> requests -> transferFolder********end
+    //********App -> requests -> transferFolder********end
 
-  //********App -> requests -> removeImage********start
+    //********App -> requests -> removeImage********start
     removeImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-remove-item", obj, res => {
         if (!res.error) {
@@ -1040,28 +1047,28 @@ const App = function() {
         }
       });
     },
-  //********App -> requests -> removeImage********end
+    //********App -> requests -> removeImage********end
 
-  //********App -> requests -> addNewFolder********start
-    addNewFolder: (obj = {}, cb) => {
-      shortAjax("/api/api-media/get-create-folder-child", obj, res => {
-        if (!res.error) {
-          this.requests.drawingItems();
-          cb(res);
-        }
-      });
-    },
-  //********App -> requests -> addNewFolder********end
+    //********App -> requests -> addNewFolder********start
+      addNewFolder: (obj = {}, cb) => {
+        shortAjax("/api/api-media/get-create-folder-child", obj, res => {
+          if (!res.error) {
+            this.requests.drawingItems();
+            cb(res);
+          }
+        });
+      },
+    //********App -> requests -> addNewFolder********end
 
-  //********App -> requests -> getImageDetails********start
-    getImageDetails: (obj = {}, cb) => {
-      shortAjax("/api/api-media/get-item-details", obj, res => {
-        if (!res.error) {
-          cb(res.data);
-        }
-      });
-    }
-  //********App -> requests -> getImageDetails********end
+    //********App -> requests -> getImageDetails********start
+      getImageDetails: (obj = {}, cb) => {
+        shortAjax("/api/api-media/get-item-details", obj, res => {
+          if (!res.error) {
+            cb(res.data);
+          }
+        });
+      }
+    //********App -> requests -> getImageDetails********end
 
   };
   //********App -> requests********end
@@ -1076,9 +1083,11 @@ const App = function() {
   this.init = () => {
     $("#uploader").fileinput({
       uploadAsync: false,
-      maxFileCount: 5,
+      maxFileCount: 30,
       showUpload: false,
       showUploadedThumbs: false,
+      initialPreviewAsData: true,
+      // browseOnZoneClick: true,
       uploadExtraData: () => {
         return {
           _token: $("meta[name='csrf-token']").attr("content"),
@@ -1095,6 +1104,19 @@ const App = function() {
       $("#uploader").fileinput("clear");
     });
     this.getInitailData();
+
+    $("#remover").fileinput({
+      uploadAsync: false,
+      showUpload: false, // hide upload button
+      showRemove: false, // hide remove button
+      // overwriteInitial: false, // append files to initial preview
+      minFileCount: 1,
+      maxFileCount: 50,
+      showUploadedThumbs: false,
+      initialPreviewAsData: true,
+    }).on("filebatchselected", function(event, files) {
+      console.log('removerrrrrrrrrrrr');
+    });
   };
   //********App -> init********end
 
@@ -1120,7 +1142,7 @@ const App = function() {
           .querySelector(".file-name")
           .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
       console.log('elm',elm, e);
-      document.body.innerHTML += this.htmlMaker.remove_modal(id, name);
+      $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
     },
 
     //********App -> events -> remove_folder********start
@@ -1145,7 +1167,6 @@ const App = function() {
           this.htmlMaker.hoverFolder || !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
           this.events.close_name_modal();
           this.htmlMaker.hoverFolder = null;
-
         }
       );
     },
@@ -1197,7 +1218,7 @@ const App = function() {
           title: name,
           text: name,
           key: res.data.key
-        })
+        });
       };
       this.requests.addNewFolder(
         {
@@ -1220,10 +1241,10 @@ const App = function() {
           .closest(".file-box")
           .getAttribute("data-image");
       this.requests.getImageDetails({item_id: id}, res => {
-        document.body.innerHTML += this.htmlMaker.fullInfoModal(
-          res,
-          Number(countId)
-        );
+        $('#modal_area').html(this.htmlMaker.fullInfoModal(
+            res,
+            Number(countId)
+        ));
         $("body").on("click dblclick", `[bb-media-click]`, function (e) {
           if(!e.target.classList.contains('click-no')) {
             const attr = $(this).attr("bb-media-click");
@@ -1251,13 +1272,13 @@ const App = function() {
         });
       } else if (e.type === "click") {
         e.target.closest(".file-box").classList.toggle("active");
-        if(selectedImage.includes(id)) {
-          const index = selectedImage.indexOf(id);
-          selectedImage.splice(index, 1);
+        if(this.selectedImage.includes(id)) {
+          const index = this.selectedImage.indexOf(id);
+          this.selectedImage.splice(index, 1);
         } else {
-          selectedImage.push(id);
+          this.selectedImage.push(id);
         }
-        console.log(selectedImage)
+        console.log(this.selectedImage);
       }
     },
     //********App -> events -> select_item********end
@@ -1281,41 +1302,48 @@ const App = function() {
     //********App -> events -> modal_load_image********end
 
     //********App -> events -> remove_image********start
-    remove_image: (elm, e) => {
+    remove_image: (elm, e, elements) => {
       e.preventDefault();
       e.stopPropagation();
-      const id = e.target.closest(".file").getAttribute("data-id");
-      const name = e.target
+      console.log('elmelmelm', elements);
+      elements && (e = elements);
+      console.log(e)
+      const id = this.selectedImage.length === 0 || (e.target.closest(".file") && !this.selectedImage.includes(e.target.closest(".file").getAttribute("data-id"))) ? e.target.closest(".file").getAttribute("data-id") : this.selectedImage;
+      const name = this.selectedImage.length === 0  || (e.target.closest(".file") && !this.selectedImage.includes(e.target.closest(".file").getAttribute("data-id"))) ? e.target
           .closest(".file")
           .querySelector(".file-name")
-          .textContent.trim();
-      console.log('elm',elm, e);
-      document.body.innerHTML += this.htmlMaker.remove_modal(id, name, 'image');
+          .textContent.trim() : '';
+      console.log(id, name);
+      const modal = this.htmlMaker.remove_modal(id, name, 'image')
+      $('#modal_area').html(modal);
     },
+
     remove_image_req: (elm, e) => {
-      const itemId = e.target.getAttribute("data-id");
+      console.log('laralaralara', e.target);
+      const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
       this.requests.removeImage(
         {
-          item_id: Number(itemId),
+          item_id: this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? Number(itemId) : this.selectedImage,
           trash: true,
           access_token: "string"
         },
         this.events.close_name_modal
       );
     },
-    remove_image_items: (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      selectedImage.length !== 0 && selectedImage.map((id) => {
-        this.requests.removeImage(
-            {
-              item_id: Number(id),
-              trash: false,
-              access_token: "string"
-            }
-        );
-      });
-    },
+
+    // remove_image_items: (e) => {
+    //   e.preventDefault();
+    //   e.stopPropagation();
+    //   selectedImage.length !== 0 ? selectedImage.map((id) => {
+    //     this.requests.removeImage(
+    //         {
+    //           item_id: Number(id),
+    //           trash: false,
+    //           access_token: "string"
+    //         }
+    //     );
+    //   }) : this.events.show_remover();
+    // },
     //********App -> events -> remove_image********end
 
     //********App -> events -> edit_image********start
@@ -1335,6 +1363,7 @@ const App = function() {
     save_edited_title: (elm, e) => {
       const itemId = e.target.getAttribute("data-id");
       const name = document.querySelector(".edit-title-input").value;
+      console.log('............', itemId, name);
       this.requests.editImageName(
         {
           item_id: Number(itemId),
@@ -1349,6 +1378,9 @@ const App = function() {
     //********App -> events -> show_uploader********start
     show_uploader: (elm, e) => {
       this.helpers.showUploaderContainer();
+    },
+    show_remover: () => {
+      this.helpers.showRemoverContainer();
     },
     //********App -> events -> show_uploader********end
 
@@ -1381,6 +1413,7 @@ const App = function() {
     //********App -> events -> close_name_modal********start
     close_name_modal: (elm, e) => {
       console.log(e);
+      
       $(".custom_modal_edit").remove();
       $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
         if(ev.type === 'mouseenter') {
@@ -1389,6 +1422,8 @@ const App = function() {
           $(this).find('.file-actions').addClass('d-none').removeClass('open');
         }
       });
+      $('.remover-container-zone').removeClass('file-highlighted');
+
     }
     //********App -> events -> close_name_modal********end
   };
@@ -1399,6 +1434,15 @@ const App = function() {
 
 const app = new App();
 app.init();
+
+function isJson(str) {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return str;
+  }
+  return JSON.parse(str);
+}
 
 $("body").on("click dblclick", `[bb-media-click]`, function (e) {
   if(!e.target.classList.contains('click-no')) {
@@ -1456,4 +1500,42 @@ $('body').on('blur', '[contenteditable]', function(ev) {
   // app.events.save_edited_title()
 });
 
-$('.delete_items').on('click', app.events.remove_image_items);
+$('.delete_items').on('click', (ev) => {
+  console.log('dddd', ev, app.selectedImage);
+
+  const toggle = () => {
+    $('.remover-container').toggleClass('d-none');
+    $('.uploader-container').addClass('d-none');
+  };
+  app.selectedImage.length !== 0 ? app.events.remove_image(undefined, ev) : toggle();
+});
+
+const drop = (ev, cb) => {
+  ev.preventDefault();
+
+  const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
+  if(Array.isArray(data)) {
+    JSON.parse(ev.originalEvent.dataTransfer.getData('node_id')).map(el=>{
+      app.events.remove_image(undefined, ev, {target: document.querySelector(`[data-id="${el}"]`)});
+    });
+  } else {
+    console.log(ev);
+    app.events.remove_image(undefined, ev, {target: document.querySelector(`[data-id="${data}"]`)});
+  }
+  cb();
+};
+
+function removeHighlight() {
+  $('.remover-container-zone').removeClass('file-highlighted');
+}
+
+$('.remover-container-zone').on('dragover dragleave', (ev) => {
+  ev.preventDefault();
+  if(ev.type === 'dragover') {
+    $('.remover-container-zone').addClass('file-highlighted');
+  }else if(ev.type === 'dragleave') {
+    $('.remover-container-zone').removeClass('file-highlighted');
+  }
+});
+
+$('.remover-container-zone').on('drop', (ev) => drop(ev, removeHighlight));

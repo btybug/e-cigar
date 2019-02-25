@@ -161,7 +161,7 @@
         });
 
         $('.close-widget-modal').on('click', function () {
-            $('.dashboard_modal_add_widget').addClass('active');
+            $('.dashboard_modal_add_widget').removeClass('active');
         });
 
         {{--inner widget btn--}}
