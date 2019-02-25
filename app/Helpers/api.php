@@ -487,7 +487,7 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<div class="d-flex wrap-wall w-100">';
         echo '<div class="left-photo hidden-xsd-none d-sm-block">';
         echo '<figure class="thumbnail">';
-        echo '<img class="img-fluid" src="/public/img/user.svg">';
+        echo '<img class="img-fluid" src="'.user_avatar($comment->author->id).'">';
         echo '</figure>';
         echo '</div>';
 
@@ -592,7 +592,7 @@ function replyRender($replies, $i = 0, $parent = false)
 
         if ($reply->getTable() == 'history') {
             echo '<div class="admin_updated">
-<div class="image label label-default"><img src="/public/images/male.png" alt="img"></div>
+<div class="image label label-default"><img src="'.user_avatar($reply->user->id).'" alt="img"></div>
 <p class="font-18 text-gray-clr mb-0"><span class="label label-default">' . $reply->user->name . ' has ' . $reply->body . '</span></p>
 </div>';
         } else {
@@ -605,7 +605,7 @@ function replyRender($replies, $i = 0, $parent = false)
 
             echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
             echo '<figure class="thumbnail">';
-            echo '<img class="img-fluid" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png">';
+            echo '<img class="img-fluid" src="'.user_avatar($reply->author->id).'">';
             if ($reply->author) {
                 if ($reply->author->isAdministrator()) {
                     echo '<figcaption class="text-center">Admin</figcaption>';

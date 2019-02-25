@@ -13,7 +13,7 @@
                               <div class="col-md-3 col-xs-12">
                                   <div class="user-image-name">
                                       <div class="user-image">
-                                          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXrKQMyhxBra3SmOe6uPCmVHW_N3Xx2egM1P12VV3xC2fRrUXJ"
+                                          <img src="{{ user_avatar() }}"
                                                alt="user">
                                       </div>
                                       <div class="user-name">
@@ -65,7 +65,7 @@
                                       <div class="row">
                                           <div class="col-sm-1">
                                               <div class="user-img">
-                                                  <img src="/public/images/male.png" alt="">
+                                                  <img src="{{ user_avatar() }}" alt="">
                                               </div>
                                           </div>
                                           <div class="col-sm-11">
