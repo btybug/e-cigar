@@ -42,16 +42,25 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <div class="form-group">
-                                                        <label>Subject</label>
-                                                        {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                                                    <div class="status-wall wall">
+                                                        <div class="row form-group">
+                                                            {{Form::label('subject', 'Subject',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                                                            </div>
+                                                        </div>
                                                     </div>
+
                                                     <div class="form-group " id="category-related">
 
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label>Summary</label>
-                                                        {!! Form::textarea('summary',null,['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                    <div class="status-wall wall">
+                                                        <div class="row form-group">
+                                                            {{Form::label('summary', 'Summary',['class' => 'col-sm-3'])}}
+                                                            <div class="col-sm-9">
+                                                                {!! Form::textarea('summary',null,['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

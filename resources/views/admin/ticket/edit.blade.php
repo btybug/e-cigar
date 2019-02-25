@@ -158,15 +158,30 @@
                                      </div>
                                  </div>
                              </div>
-                             <div class="status-wall wall">
-                                 <div class="row form-group">
-                                     {{Form::label('priority_id', 'Priority',['class' => 'col-sm-3'])}}
-                                     <div class="col-sm-9">
-                                         {!! Form::select('priority_id',$priorities,null,
-                                                     ['class' => 'form-control','id'=> 'priority']) !!}
+                             <div class="form-group " id="category-related">
+
+
+                             @if($model->category && $model->category->slug == 'order')
+                                 <div class="status-wall wall">
+                                     <div class="row form-group">
+                                         {{Form::label('order_id', 'Order Number',['class' => 'col-sm-3'])}}
+                                         <div class="col-sm-9">
+                                             {!! Form::select('order_id',$model->author->orders->pluck('code','id'),null,['class'=>'form-control']) !!}
+                                         </div>
                                      </div>
                                  </div>
+                             @elseif($model->category && $model->category->slug == 'product')
+                                     <div class="status-wall wall">
+                                         <div class="row form-group">
+                                             {{Form::label('product_id', 'Product',['class' => 'col-sm-3'])}}
+                                             <div class="col-sm-9">
+                                                 {!! Form::select('product_id',\App\Models\Stock::all()->pluck('name','id'),null,['class'=>'form-control']) !!}
+                                             </div>
+                                         </div>
+                                     </div>
+                             @endif
                              </div>
+
                              <div class="status-wall wall">
                                  <div class="row form-group">
                                      {{Form::label('staff', 'Responsible staff',['class' => 'col-sm-3'])}}
@@ -191,6 +206,8 @@
 
 @stop
 @section('js')
+    <script src="/public/js/tiket.js"></script>
+
     <script>
         $(document).ready(function () {
             $('body').on('click', '.cancel-comment', function (event) {

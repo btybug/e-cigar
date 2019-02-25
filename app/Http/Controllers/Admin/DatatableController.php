@@ -522,9 +522,9 @@ class DatatableController extends Controller
             ->editColumn('user_id', function ($ticket) {
                 return $ticket->author->name;
             })->editColumn('status_id', function ($ticket) {
-                return "<span style='background: " . $ticket->status->color . "' class='badge'>" . $ticket->status->name . "</span>";
+                return "<span style='background: " . @$ticket->status->color ."' class='badge'>" . @$ticket->status->name . "</span>";
             })->editColumn('priority_id', function ($ticket) {
-                return "<span style='background: " . $ticket->priority->color . "' class='badge'>" . $ticket->priority->name . "</span>";
+                return "<span style='background: " . @$ticket->priority->color . "' class='badge'>" . @$ticket->priority->name . "</span>";
             })->editColumn('category_id', function ($ticket) {
                 return $ticket->category->name;
             })->editColumn('tags', function ($ticket) {
