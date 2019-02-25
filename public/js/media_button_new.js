@@ -232,7 +232,7 @@ const App = function() {
               return true;
             },
             dragEnd: (node, data) => {
-              $('.start').remove()
+              $('.start').remove();
 
             },
             dragEnter: (node, data) => {
@@ -793,7 +793,6 @@ const App = function() {
       return false;
     },
     showRemoverContainer: () => {
-      debugger
       document
           .querySelector(".remover-container")
           .classList.toggle("d-none");
@@ -894,7 +893,7 @@ const App = function() {
                     access_token: "string"
                   }
                 );
-            })
+            });
           } else {
             if(self.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
               self.requests.transferFolder(
@@ -1152,7 +1151,6 @@ const App = function() {
       const id = this.htmlMaker.hoverFolder || e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
       if(!id) return;
       const removeTree = function (id) {
-        debugger
         const x = $("#folder-list").fancytree("getTree");
         const folder = x.getNodeByKey('' + id);
         folder.remove();
@@ -1307,14 +1305,14 @@ const App = function() {
       e.stopPropagation();
       console.log('elmelmelm', elements);
       elements && (e = elements);
-      console.log(e)
+      console.log(e);
       const id = this.selectedImage.length === 0 || (e.target.closest(".file") && !this.selectedImage.includes(e.target.closest(".file").getAttribute("data-id"))) ? e.target.closest(".file").getAttribute("data-id") : this.selectedImage;
       const name = this.selectedImage.length === 0  || (e.target.closest(".file") && !this.selectedImage.includes(e.target.closest(".file").getAttribute("data-id"))) ? e.target
           .closest(".file")
           .querySelector(".file-name")
           .textContent.trim() : '';
       console.log(id, name);
-      const modal = this.htmlMaker.remove_modal(id, name, 'image')
+      const modal = this.htmlMaker.remove_modal(id, name, 'image');
       $('#modal_area').html(modal);
     },
 
@@ -1413,7 +1411,7 @@ const App = function() {
     //********App -> events -> close_name_modal********start
     close_name_modal: (elm, e) => {
       console.log(e);
-      this.requests.drawingItems(undefined, true)
+      this.requests.drawingItems(undefined, true);
       $(".custom_modal_edit").remove();
       $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
         if(ev.type === 'mouseenter') {
