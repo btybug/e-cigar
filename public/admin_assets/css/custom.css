@@ -730,7 +730,17 @@ textarea {
     justify-content: space-between;
     align-items: center;
 }
-
+/*admin settings lang start*/
+.setting_lang_panel_head{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.setting_lang_panel_head .nav-tabs{
+    flex: auto;
+}
+/*admin settings lang end*/
 /*voucher*/
 .voucher-card {
     border-radius: 10px;

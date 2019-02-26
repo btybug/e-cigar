@@ -3,11 +3,15 @@
     <section class="settings_lang">
 
         <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h3 class="mt-0 pull-left">Language Manager {{ __("home") }} {{ app()->getLocale() }}</h3>
-                <a href="{{ route('admin_settings_languages') }}" class="mt-0 pull-left">Listing All Languages </a>
-                <div class="box-tools pull-right">
-                </div>
+            <div class="panel-heading setting_lang_panel_head">
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a href="{{ route('admin_settings_languages') }}">Listing All Languages </a>
+                    </li>
+                    <li class="active">
+                        <a href="javascript:void(0);">Language Manager {{ __("home") }} {{ app()->getLocale() }}</a>
+                    </li>
+                </ul>
             </div>
                 <div class="panel-body">
                     <div class="row">

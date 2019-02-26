@@ -3,11 +3,17 @@
     <section class="settings_lang">
 
         <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-                <h3 class="mt-0 pull-left">Listing All Languages </h3>
-                @ok('admin_settings_language_manager')
-                <a href="{{ route('admin_settings_language_manager') }}" class="mt-0 pull-left">Language Manager </a>
-                @endok
+            <div class="panel-heading setting_lang_panel_head">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="javascript:void(0);">Listing All Languages</a>
+                    </li>
+                    <li>
+                        @ok('admin_settings_language_manager')
+                        <a href="{{ route('admin_settings_language_manager') }}">Language Manager </a>
+                        @endok
+                    </li>
+                </ul>
                 @ok('admin_settings_languages_new')
                 <div class="box-tools pull-right">
                     <a href="{!! route('admin_settings_languages_new') !!}" type="button"
