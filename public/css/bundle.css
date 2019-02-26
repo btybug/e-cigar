@@ -15560,12 +15560,6 @@ td.shp-cart-table_price-td {
     min-width: 150px;
 }
 
-.btn.btn-submit-cancel {
-    background: transparent;
-    border: 1px solid #c8c8d2;
-    color: #21213b;
-}
-
 .modal-checkout .close {
     position: absolute;
     top: 0;

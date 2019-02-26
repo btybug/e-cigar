@@ -169,11 +169,11 @@
                                                </div>
                                            </div>
                                            <div class="border py-3 px-4">
-                                               <div class="selected-form">
+                                               <div class="selected-form mb-3">
                                                    @include("frontend.my_account._partials.new_address",['address_book'=>$default_shipping,'default' => true])
                                                </div>
                                                {{--<button type="submit" class="btn btn-primary edit-address">Edit</button>--}}
-                                               <div class="text-right">
+                                               <div class="col-md-9 offset-md-3 text-right">
                                                    <button type="button" class="btn btn-transp edit-address rounded-0">Delete</button>
                                                </div>
                                            </div>
@@ -196,7 +196,7 @@
 
     <div class="modal fade" id="newAddressModal" tabindex="-1" role="dialog"
          aria-labelledby="newAddressModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Address Book</h5>

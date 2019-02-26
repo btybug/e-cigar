@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-xl-5 col-md-5 mb-md-0 mb-4">
                                     <!--profile status-->
-                                    <div class="profile-status-wrap text-centet">
+                                    <div class="profile-status-wrap text-centet mb-3">
                                         <h2 class="profile-status-wrap_title font-20 font-main-bold text-uppercase text-center mb-3">
                                             Status</h2>
                                         <p>Verified User</p>

@@ -67,7 +67,7 @@
                                             <td>
                                                 @if($order->history->first()['status']['name'])
                                                     <button type="button"
-                                                            class="btn order-table_btn order-table_btn--status text-sec-clr rounded-0" style="background: {!! $order->history->first()['status']['color'] !!}">
+                                                            class="btn order-table_btn order-table_btn--status text-sec-clr rounded-0"  style="background: {!! $order->history->first()['status']['color'] !!}">
                                                         {!! $order->history->first()->status->name !!}
                                                     </button>
                                                 @else
