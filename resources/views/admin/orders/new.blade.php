@@ -39,8 +39,8 @@
                             </div>
                             <div class="text-right add-product">
                                 <button class="btn btn-primary" data-toggle="modal" data-target=".add-product-modal"><i
-                                            class="fa fa-plus"></i><span
-                                            class="ml-5">Add Product</span></button>
+                                        class="fa fa-plus"></i><span
+                                        class="ml-5">Add Product</span></button>
                             </div>
                         </div>
                     </div>
@@ -205,6 +205,7 @@
             overflow-y: auto;
             overflow-x: hidden;
         }
+
         .panels-address .panel-heading {
             display: flex;
             justify-content: space-between;
@@ -620,7 +621,7 @@
         // Add an instance of the card Element into the `card-element` <div>
         card.mount('#card-element');
         // Handle real-time validation errors from the card Element.
-        card.addEventListener('change', function(event) {
+        card.addEventListener('change', function (event) {
             var displayError = document.getElementById('card-errors');
             if (event.error) {
                 displayError.textContent = event.error.message;
@@ -630,9 +631,9 @@
         });
         // Handle form submission
         var form = document.getElementById('payment-form');
-        form.addEventListener('submit', function(event) {
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
-            stripe.createToken(card).then(function(result) {
+            stripe.createToken(card).then(function (result) {
                 if (result.error) {
                     // Inform the user if there was an error
                     var errorElement = document.getElementById('card-errors');
@@ -642,6 +643,7 @@
                 }
             });
         });
+
         // Send Stripe Token to Server
         function stripeTokenHandler(token) {
             // Insert the token ID into the form so it gets submitted to the server
@@ -662,13 +664,16 @@
 
             var timeout = null;
 
-            $("body").on('keyup','#coupon_code',function () {
+            $("body").on('keyup', '#coupon_code', function () {
                 let value = $(this).val();
                 $("#coupon_require_error").addClass('hide');
                 clearTimeout(timeout);
                 timeout = setTimeout(function () {
                     console.log(value);
-                    AjaxCall("/admin/orders/apply-coupon", {code: value, user_id: $("#order_user").val()}, function (res) {
+                    AjaxCall("/admin/orders/apply-coupon", {
+                        code: value,
+                        user_id: $("#order_user").val()
+                    }, function (res) {
                         if (res.error) {
                             $("#coupon_require_error").text(res.message);
                             $("#coupon_require_error").removeClass('hide');
@@ -679,11 +684,14 @@
                 }, 500);
             });
 
-            $("body").on('keyup','#customer_notes',function () {
+            $("body").on('keyup', '#customer_notes', function () {
                 let value = $(this).val();
                 clearTimeout(timeout);
                 timeout = setTimeout(function () {
-                    AjaxCall("/admin/orders/order-new-customer-notes", {note: value, user_id: $("#order_user").val()}, function (res) {
+                    AjaxCall("/admin/orders/order-new-customer-notes", {
+                        note: value,
+                        user_id: $("#order_user").val()
+                    }, function (res) {
                         if (res.error) {
 
                         }
@@ -696,23 +704,23 @@
 //                console.log($(this).val());
 //            });
 
-            $("body").on('click','.pay-button',function () {
+            $("body").on('click', '.pay-button', function () {
                 let user = $("#order_user").val();
                 let product = $("#order_product_subtotal").val();
-                let method =  $("input[name='payment_method']:checked"). val();
-                console.log(user,product)
+                let method = $("input[name='payment_method']:checked").val();
+                console.log(user, product)
 
-                if(user == '' || user == undefined){
+                if (user == '' || user == undefined) {
                     alert('Please select User...')
                     return false;
                 }
 
-                if(product == 0 || product == undefined){
+                if (product == 0 || product == undefined) {
                     alert('Please select products...')
                     return false;
                 }
 
-                if(method =='cash'){
+                if (method == 'cash') {
                     AjaxCall(
                         "/admin/orders/cash-payment",
                         {},
@@ -725,7 +733,7 @@
                             alert('error');
                         }
                     );
-                }else if(method == 'stripe'){
+                } else if (method == 'stripe') {
                     $(".stripe-modal").modal();
                 }
             })
@@ -762,18 +770,18 @@
                     "/get-regions-by-country",
                     {country: value},
                     res => {
-                    let select = document.getElementById('regions');
-                select.innerText = null;
-                if (!res.error) {
-                    $.each(res.data, function (index, value) {
-                        var opt = document.createElement('option');
-                        opt.value = res.data[value];
-                        opt.innerHTML = res.data[value];
-                        select.appendChild(opt);
-                    })
+                        let select = document.getElementById('regions');
+                        select.innerText = null;
+                        if (!res.error) {
+                            $.each(res.data, function (index, value) {
+                                var opt = document.createElement('option');
+                                opt.value = res.data[value];
+                                opt.innerHTML = res.data[value];
+                                select.appendChild(opt);
+                            })
 
-                }
-            })
+                        }
+                    })
                 ;
             }
 
@@ -791,19 +799,19 @@
                     "/get-regions-by-geozone",
                     {country: value},
                     res => {
-                    let select = document.getElementById('geo_region');
-                select.innerText = null;
-                if (!res.error) {
-                    var opt = document.createElement('option');
-                    $.each(res.data, function (k, v) {
-                        var option = $(opt).clone();
-                        option.val(k);
-                        option.text(v);
-                        $(select).append(option);
-                    });
+                        let select = document.getElementById('geo_region');
+                        select.innerText = null;
+                        if (!res.error) {
+                            var opt = document.createElement('option');
+                            $.each(res.data, function (k, v) {
+                                var option = $(opt).clone();
+                                option.val(k);
+                                option.text(v);
+                                $(select).append(option);
+                            });
 
-                }
-            })
+                        }
+                    })
                 ;
             }
 
@@ -902,7 +910,12 @@
                         url: "/admin/orders/add-to-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems,user_id : userID},
+                        data: {
+                            uid: variationId,
+                            requiredItems: requiredItems,
+                            optionalItems: optionalItems,
+                            user_id: userID
+                        },
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -935,7 +948,7 @@
                         url: "/admin/orders/update-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: uid, condition: condition,user_id : userID},
+                        data: {uid: uid, condition: condition, user_id: userID},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -996,7 +1009,7 @@
                         url: "/admin/orders/remove-from-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: uid, user_id:userID},
+                        data: {uid: uid, user_id: userID},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
