@@ -84,7 +84,7 @@
                                                       </div>
                                                       <div class="col-sm-6 text-right">
                                                           <button type="button"
-                                                                  class="btn btn-outline-warning add-comment-btn">
+                                                                  class="btn btn-info add-comment-btn">
                                                               Submit
                                                           </button>
                                                       </div>
@@ -265,14 +265,13 @@
                     '                                  placeholder="Your reply"></textarea>\n' +
                     '                        <span class="error-box invalid-feedback comment"></span>\n' +
                     '                        <div class="row mt-1">\n' +
-                    '                            <div class="col-sm-6">\n' +
-                    '<button type="button" class="btn btn-outline-warning btn-block cancel-reply">Cancel </button>\n' +
-                    '                            </div>\n' +
-                    '                            <div class="col-sm-6 text-right">\n' +
+                    '                            <div class="col-sm-12">\n' +
                     '                                <button type="button"\n' +
-                    '                                        class="btn btn-outline-warning add-comment-btn">\n' +
+                    '                                        class="btn btn-info add-comment-btn pull-right">\n' +
                     '                                    Submit\n' +
                     '                                </button>\n' +
+                    '<button type="button" class="btn btn-danger cancel-reply pull-right mr-10">Cancel </button>\n' +
+
                     '                            </div>\n' +
                     '                        </div>\n' +
                     '{!! Form::close() !!}\n' +
