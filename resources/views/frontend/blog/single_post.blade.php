@@ -581,30 +581,30 @@
 @stop
 
 @section("js")
-    <script src="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>
+    {{--<script src="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>--}}
 
     {!! Html::script('public/js/custom/comments.js') !!}
     <script>
         $(document).ready(function () {
 
-            $('.blog-products-slider').owlCarousel({
-                nav: true,
-                items: 1,
-                dots: false,
-                autoplay: true,
-                loop: true,
-                autoplayTimeout: 3000
-            });
-
-            $('.blog-posts-slider').owlCarousel({
-                nav: false,
-                items: 3,
-                dots: true,
-                autoplay: true,
-                autoplayTimeout: 5000,
-                loop: true,
-                margin: 10
-            });
+//            $('.blog-products-slider').owlCarousel({
+//                nav: true,
+//                items: 1,
+//                dots: false,
+//                autoplay: true,
+//                loop: true,
+//                autoplayTimeout: 3000
+//            });
+//
+//            $('.blog-posts-slider').owlCarousel({
+//                nav: false,
+//                items: 3,
+//                dots: true,
+//                autoplay: true,
+//                autoplayTimeout: 5000,
+//                loop: true,
+//                margin: 10
+//            });
 
             $('body').on('click', '.cancel-comment', function (event) {
                 $(this).parents('form:first')[0].reset();

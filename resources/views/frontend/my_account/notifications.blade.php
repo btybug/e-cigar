@@ -45,20 +45,13 @@
 
             <div class="profile-inner-pg-right-cnt">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
-                    <div class="col-md-9 clearfix">
-                        <div class="col-md-6 float-left">
-                            <h3>Notifications</h3>
-                        </div>
-                        <div class="col-md-6 float-right">
-                            <div class="notification-actions-bar d-none">
-                                <a href="javascript:void(0)"
-                                   class="btn btn-danger delete-selected-notifications">Delete</a>
-                                <a href="javascript:void(0)" class="btn btn-info mark-us-unread">Mark us Unread</a>
-                                <a href="javascript:void(0)" class="btn btn-warning mark-us-read">Mark us Read</a>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-9">
+                        <div class="notification-actions-bar mb-3 d-none">
+                            <a href="javascript:void(0)"
+                               class="btn btn-transp delete-selected-notifications  text-uppercase rounded-0 mr-3">Delete</a>
+                            <a href="javascript:void(0)" class="btn btn-transp mark-us-unread rounded-0 mr-3">Mark us <span class="text-uppercase">Unread</span></a>
+                            <a href="javascript:void(0)" class="btn btn-transp mark-us-read rounded-0">Mark us <span class="text-uppercase">Read</span></a>
+                        </div>
                         <table class="table table-striped table-ntfs">
                             <thead>
                             <tr>
@@ -77,7 +70,6 @@
                         </table>
 
                     </div>
-                </div>
             </div>
             {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
         </div>
