@@ -68,9 +68,12 @@ ol.sortable {
   height: auto;
   color: #294656;
   background: transparent;
-  border: none;
+  /*border: none;*/
   margin: 0;
   text-transform: capitalize;
+}
+.ui-sortable-handle .dd-handle.ui-sortable-handle{
+  border: none;
 }
 .dd-handle.ui-sortable-handle:hover{
   color: #294656;
