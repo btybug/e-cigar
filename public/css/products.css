@@ -2185,6 +2185,12 @@ td.shp-cart-table_price-td {
     border: 1px solid #c8c8d2;
 }
 
+.profile-inner-pg-right-cnt .checkout-form_input-text,
+.profile-inner-pg-right-cnt .checkout-form_select + .select2-container .select2-selection--single,
+.profile-inner-pg-right-cnt .checkout-form .check-icon {
+    background: #fff;
+}
+
 .checkout-form_input-text:focus,
 .checkout-form_select + .select2-container .select2-selection--single:focus {
     background: transparent;

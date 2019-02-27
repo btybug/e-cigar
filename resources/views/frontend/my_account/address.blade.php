@@ -154,18 +154,16 @@
 
                                        <div>
 
-                                           <div class="form-group row mb-5">
-                                               <div class="col-md-5">
-                                                   <h5>
-                                                       <label for="selectAddress" class="control-label text-muted">Default Shipping Address</label>
-                                                   </h5>
-                                               </div>
-                                               <div class="col-md-7 d-flex">
-                                                   {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
-                                                   <button type="button"
-                                                           class="nav-link nav-link--new-address btn ntfs-btn address-book-new rounded-0">
-                                                       + Add New
-                                                   </button>
+                                           <div class="form-group mb-5">
+                                               <label for="selectAddress" class="control-label text-muted font-22">Default Shipping Address</label>
+                                               <div class="row">
+                                                   <div class="col-md-5 d-flex">
+                                                       {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
+                                                       <button type="button"
+                                                               class="nav-link nav-link--new-address btn ntfs-btn address-book-new rounded-0 ml-4">
+                                                           + Add New
+                                                       </button>
+                                                   </div>
                                                </div>
                                            </div>
                                            <div class="border py-3 px-4">

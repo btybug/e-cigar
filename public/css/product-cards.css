@@ -1772,8 +1772,12 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
 
     .profile-inner-pg-right-cnt_inner {
-        padding-left: 2px;
-        padding-right: 2px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .profile-inner-pg-right-cnt {
+        padding: 0;
     }
 
     .profile-sidebar {

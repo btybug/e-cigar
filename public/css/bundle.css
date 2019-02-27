@@ -12616,9 +12616,9 @@ a.text-dark:focus {
 }
 
 .comments_wall .btn.reply {
-  color: #111;
-  background-color: #F0CA4D;
-  border-color: #F0CA4D;
+  color: #fff;
+  background-color: #59596d;
+  border-color: #222d32;
 }
 
 .comments_wall .admin_updated {
@@ -15513,6 +15513,12 @@ td.shp-cart-table_price-td {
     border: 1px solid #c8c8d2;
 }
 
+.profile-inner-pg-right-cnt .checkout-form_input-text,
+.profile-inner-pg-right-cnt .checkout-form_select + .select2-container .select2-selection--single,
+.profile-inner-pg-right-cnt .checkout-form .check-icon {
+    background: #fff;
+}
+
 .checkout-form_input-text:focus,
 .checkout-form_select + .select2-container .select2-selection--single:focus {
     background: transparent;
@@ -17825,8 +17831,12 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
 
     .profile-inner-pg-right-cnt_inner {
-        padding-left: 2px;
-        padding-right: 2px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .profile-inner-pg-right-cnt {
+        padding: 0;
     }
 
     .profile-sidebar {
