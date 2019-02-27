@@ -73,8 +73,8 @@
                                     <div class="form-group">
                                         <div class="status-wall wall">
                                             <div class="row form-group">
-                                                {{Form::label('subject', 'Subject',['class' => 'col-md-2 col-sm-3'])}}
-                                                <div class="col-md-10 col-sm-9">
+                                                {{Form::label('subject', 'Subject',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
                                                     {!! Form::text('subject',null,['class'=>'form-control checkout-form_input-text']) !!}
                                                 </div>
                                             </div>
@@ -85,8 +85,8 @@
                                         </div>
                                         <div class="status-wall wall">
                                             <div class="row form-group">
-                                                {{Form::label('summary', 'Summary',['class' => 'col-md-2 col-sm-3'])}}
-                                                <div class="col-md-10 col-sm-9">
+                                                {{Form::label('summary', 'Summary',['class' => 'col-sm-3'])}}
+                                                <div class="col-sm-9">
                                                     {!! Form::textarea('summary',null,['class'=>'form-control checkout-form_input-text','cols'=>30,'rows'=>2]) !!}
                                                 </div>
                                             </div>
@@ -94,8 +94,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="form-group row">
-                                            <label class=" col-md-2 col-sm-3">Attachments</label>
-                                            <div class="col-md-10 col-sm-9">
+                                            <label class="col-sm-3">Attachments</label>
+                                            <div class="col-sm-9">
                                                 {!! Form::file('attachments[]',['multiple' => true]) !!}
                                             </div>
                                         </div>
