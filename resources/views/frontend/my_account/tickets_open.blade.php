@@ -40,11 +40,10 @@
 
             </div>
 
-            <div class="profile-inner-pg-right-cnt">
+            <div class="profile-inner-pg-right-cnt w-100">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
                     <div class="row">
                         <div class="col-lg-9">
-                            <div>
                                 @if (count($errors) > 0)
                                     <div class="alert alert-danger">
                                         <strong>Sorry!</strong> There were more problems with your equest.<br><br>
@@ -58,23 +57,6 @@
                                 {!! Form::model(null,['url' => route('my_account_tickets_new_post'), 'id' => 'ticket_form','files' => true]) !!}
                                 {!! Form::hidden('id',null) !!}
 
-
-                                {{--<div class="form-group row mb-5">--}}
-                                {{--<div class="col-md-5">--}}
-                                {{--<h5>--}}
-                                {{--<label for="selectAddress" class="control-label text-muted">Default Shipping Address</label>--}}
-                                {{--</h5>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-md-5 offset-md-2 d-flex">--}}
-                                {{--<select class="form-control edit-address" name="address_book"><option value="2" selected="selected">Oshakan Dprocakanneri 19</option><option value="3">56 lolol</option><option value="4">132 Berryhill Crescent</option></select>--}}
-                                {{--<button type="button" class="nav-link nav-link--new-address btn ntfs-btn address-book-new rounded-0 ml-4">--}}
-                                {{--+ Add New--}}
-                                {{--</button>--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
-
-
-
                                     <div class="form-group mb-5">
                                         {{Form::label('category_id', 'Category',['class' => 'text-muted font-22'])}}
 
@@ -86,7 +68,6 @@
                                         </div>
 
                                     </div>
-                                </div>
 
                                 <div class="border py-3 px-4">
                                     <div class="form-group">
@@ -128,8 +109,9 @@
 
                                 {!! Form::close() !!}
                             </div>
-                        </div>
                         <div class="col-lg-3"></div>
+                    </div>
+
                     </div>
                 </div>
             </div>
