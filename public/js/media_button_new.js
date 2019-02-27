@@ -75,66 +75,64 @@ const App = function() {
     currentSelectedFolder: null,
     hoverFolder: null,
     currentDragedId: null,
-    transfer: (f, p, root, dataTransfer) => {
-      const x = $("#folder-list").fancytree("getTree");
-      const folder = x.getNodeByKey('' + f);
-      if(folder && folder.folder) {
-        this.requests.transferFolder(
-          {
-            folder_id: Number(f),
-            parent_id: root === 1 ? Number(1) : Number(p),
-            access_token: "string"
-          },
-          () => {
-            const folder = x.getNodeByKey('' + f);
-            folder.moveTo(x.getNodeByKey('' + p));
-            this.htmlMaker.currentId = null;
-        });
-      } else {
-        let nodeId = (Array.isArray(JSON.parse(dataTransfer.getData("node_id"))) && JSON.parse(dataTransfer.getData("node_id")).length !== 0) && JSON.parse(dataTransfer.getData("node_id")) || f;
-        console.log('nodeId', nodeId, JSON.parse(dataTransfer.getData("node_id")));
-        let parrentId = p;
-        console.log('parrentId',parrentId);
-        if(Array.isArray(nodeId)) {
-          nodeId.map((id)=> {
-            this.requests.transferImage(
-                {
-                  item_id: Number(id),
-                  folder_id: root === 1 ? Number(1) : Number(parrentId),
-                  access_token: "string"
-                }
-            );
-          });
-        } else {
-          if(this.htmlMaker.dragElementOfTree || ($(`[data-id=${nodeId}]`)[0] && $(`[data-id=${nodeId}]`)[0].closest('.folder-container'))) {
-            this.requests.transferFolder(
-                {
-                  folder_id: Number(nodeId),
-                  parent_id: root === 1 ? Number(1) : Number(parrentId),
-                  access_token: "string"
-                },
-                () => {
-                  const x = $("#folder-list").fancytree("getTree");
-                  var folder;
-                  folder = x.getNodeByKey('' + nodeId);
-                  folder.moveTo(x.getNodeByKey('' + parrentId));
-                }
-            );
-          } else {
-            this.requests.transferImage(
-                {
-                  item_id: Number(nodeId),
-                  folder_id: root === 1 ? Number(1) : Number(parrentId),
-                  access_token: "string"
-                }
-            );
-          }
-        }
-        this.htmlMaker.dragElementOfTree = null;
-        this.htmlMaker.currentId = null;
-        this.selectedImage.length = 0;
-      }
-    },
+    // transfer: (f, p, root, dataTransfer) => {
+    //   const x = $("#folder-list").fancytree("getTree");
+    //   const folder = x.getNodeByKey('' + f);
+    //   if(folder && folder.folder) {
+    //     this.requests.transferFolder(
+    //       {
+    //         folder_id: Number(f),
+    //         parent_id: root === 1 ? Number(1) : Number(p),
+    //         access_token: "string"
+    //       },
+    //       () => {
+    //         const folder = x.getNodeByKey('' + f);
+    //         folder.moveTo(x.getNodeByKey('' + p));
+    //         this.htmlMaker.currentId = null;
+    //     });
+    //   } else {
+    //     let nodeId = (Array.isArray(JSON.parse(dataTransfer.getData("node_id"))) && JSON.parse(dataTransfer.getData("node_id")).length !== 0) && JSON.parse(dataTransfer.getData("node_id")) || f;
+    //     let parrentId = p;
+    //     if(Array.isArray(nodeId)) {
+    //       nodeId.map((id)=> {
+    //         this.requests.transferImage(
+    //             {
+    //               item_id: Number(id),
+    //               folder_id: root === 1 ? Number(1) : Number(parrentId),
+    //               access_token: "string"
+    //             }
+    //         );
+    //       });
+    //     } else {
+    //       if(this.htmlMaker.dragElementOfTree || ($(`[data-id=${nodeId}]`)[0] && $(`[data-id=${nodeId}]`)[0].closest('.folder-container'))) {
+    //         this.requests.transferFolder(
+    //             {
+    //               folder_id: Number(nodeId),
+    //               parent_id: root === 1 ? Number(1) : Number(parrentId),
+    //               access_token: "string"
+    //             },
+    //             () => {
+    //               const x = $("#folder-list").fancytree("getTree");
+    //               var folder;
+    //               folder = x.getNodeByKey('' + nodeId);
+    //               folder.moveTo(x.getNodeByKey('' + parrentId));
+    //             }
+    //         );
+    //       } else {
+    //         this.requests.transferImage(
+    //             {
+    //               item_id: Number(nodeId),
+    //               folder_id: root === 1 ? Number(1) : Number(parrentId),
+    //               access_token: "string"
+    //             }
+    //         );
+    //       }
+    //     }
+    //     this.htmlMaker.dragElementOfTree = null;
+    //     this.htmlMaker.currentId = null;
+    //     this.selectedImage.length = 0;
+    //   }
+    // },
 
     //********App -> htmlMaker -> makeFolder********start
     makeFolder: (data) => {
@@ -203,145 +201,220 @@ const App = function() {
 
     //********App -> htmlMaker -> makeTreeFolder********start
     makeTreeFolder: (data) => {
-      const self = this;
-      $('document').ready(() => {
-        //********fancytree********start
-        $("#folder-list").fancytree({
-          extensions: ["edit", "dnd5" ],
-          source: data,
-          focusOnClick: true,
-          debugLevel: 0,
-          selectMode: 1,
-          //********dnd5********start
-          dnd5: {
-            autoExpandMS: 1500,
-            preventRecursiveMoves: true,
-            preventVoidMoves: true,
-            preventNonNodes: false,
-            dragStart: (node, data) => {
-              // this.htmlMaker.dragElementOfTree = node.key;
-              const crt = document.getElementsByClassName(`f_id_${node.key}`)[0].cloneNode(true);
-              crt.className += " start drag-folder_cursor";
-              crt.style.position = "absolute";
-              crt.style.top = "-10000px";
-              crt.style.right = "-10000px";
-              document.body.appendChild(crt);
-              const id = node.key;
-              data.dataTransfer.setDragImage(crt, 0, 0);
-              data.dataTransfer.setData("node_id", id);
-              return true;
-            },
-            dragEnd: (node, data) => {
-              $('.start').remove();
+      function makeTree (data) {
+      //   console.log(data);
+        const getTreeData = (data) => {
+          return data.map((el) => {
+            // console.log('element', el);
+            const children = el.children.length === 0 ? null : getTreeData(el.children);
+            // console.log('children',getTreeData(el.children));
+            return {id: el.key, title: el.title, children: children, empty: el.children.length === 0};
+          });
+        };
+        const treeData = getTreeData(data)
 
-            },
-            dragEnter: (node, data) => {
-              // console.log(data.node.key);
-              // data.node.li.style.paddingBottom = '50px';
-              // this.htmlMaker.currentDragedId = data.node.key;
-
-              // else if(data.hitMode == 'after') {
-              //   data.node.li.style.marginBottom = '50px';
-              // }
-              return true;
-            },
-            dragOver: (node, data) => {
-              // console.log('over', data);
-              // if(data.hitMode == 'before' || data.hitMode == 'after') {
-              //
-              // }
-            },
-            dragLeave: (node, data) => {
-              // console.log(this.htmlMaker.currentDragedId);
-              // $(`.f_id_${this.htmlMaker.currentDragedId}`).css('padding', '0');
-              // console.log('leave', data)
-              // data.node.li.style.padding = '0';
-              // data.otherNode.li.style.margin = '0'
-            },
-            //********dragDrop********start
-            dragDrop: (node, data) => {
-              // const dataTransfer = data.dataTransfer.getData('node_id');
-              // console.log('data', data);
-              const transfer = this.htmlMaker.transfer;
-              if( !data.otherNode ) {
-                console.log(this.htmlMaker.currentId);
-                if(this.htmlMaker.currentId || data.dataTransfer.getData('node_id').length !== 0) {
-
-                  if (data.hitMode === 'after' || data.hitMode === 'before') {
-                    if (node.getLevel() === 1) {
-                      transfer(this.htmlMaker.currentId, data.node.parent.key, 1, data.dataTransfer);
-                    } else { transfer(this.htmlMaker.currentId, data.node.parent.key, 0, data.dataTransfer); }
-                  } else { transfer(this.htmlMaker.currentId, data.node.key, 0, data.dataTransfer); }
-                }
-                return;
-              }
-
-              if (data.hitMode === 'after' || data.hitMode === 'before') {
-                if (node.getLevel() === 1) {
-                  transfer(data.otherNodeData.key, data.node.parent.key, 1, data.dataTransfer);
-                } else {
-                  transfer(data.otherNodeData.key, data.node.parent.key, 0, data.dataTransfer);
-                }
-              } else {
-                transfer(data.otherNodeData.key, node.key, 0, data.dataTransfer);
-              }
-              this.htmlMaker.dragElementOfTree = null;
-              this.selectedImage.length = 0;
-            }
-            //********dragDrop********end
-          },
-          //********dnd5********end
-          renderNode: function(event, data) {
-            const node = data.node;
-            const $spanTitle = $(node.span).find('span.fancytree-title');
-            const folder = $(node.span).find('span.fancytree-folder');
-            folder.css({
-              display: 'flex',
-              alignItems: 'center'
-            });
-            $spanTitle.after(`<span class="dropdown d-none" style="float: right">
-                                <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                                  <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                                </button>
-                                <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                                  <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_folder">
-                                    <i class="fa fa-trash" style="color:#ffffff"></i>
-                                  </button>
-                                  <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-cog"></i></button>
-                                  <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
-                                </span>
-                              </span>`);
-            setTimeout(function() {
-              $(data.node.li).addClass(`f_id_${data.node.key}`);
-            }, 20);
-          },
-          activate: (event, data) => {
-            if (data.node.isFolder()) {
-              if(event.toElement.tagName.toLowerCase().trim() !== 'i' && event.toElement.tagName.toLowerCase().trim() !== 'button') {
-                this.events.get_folder_items_tree(data.node.key);
-              }
-            }
-          },
-          beforeActivate: function(event, data) {
-            console.log('beforeActivate', event, data);
-            // logEvent(event, data, "current state=" + data.node.isActive());
-            if(event.toElement.tagName.toLowerCase().trim() === 'i' || event.toElement.tagName.toLowerCase().trim() === 'button'){
-              console.log('dsdsdsd');
-              return false;
-            }
-          }
-        }).on("mouseenter mouseleave", "span.fancytree-folder", function(event){
-
-          const node = $.ui.fancytree.getNode(event);
-          if(event.type === 'mouseenter') {
-            self.htmlMaker.hoverFolder = node.key;
-            node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.remove('d-none');
-          } else if(event.type === 'mouseleave') {
-            !node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.add('d-none');
-            self.htmlMaker.hoverFolder = null;
-          }
+        return data.map((el)=>{
+          return el.children.length === 0 ? `<li class="dd-item" data-id=${el.key}><div class="dd-handle">${el.name}</div></li>` :
+              `<li class="dd-item" data-id=${el.key}>
+                <div>
+                  <div class="disclose" style="width: 30px; height: 30px; background-color: darkred"></div>
+                  <div class="dd-handle">${el.name}</div>
+                </div>
+                <ol class="dd-list">${makeTree(el.children).join(' ')}</ol>
+               </li>`;
         });
-        //********fancytree********end
+      }
+
+      $('#folder-list2').children().html(makeTree(data).join(' '));
+      const self = this;
+
+      $('document').ready(() => {
+        // ********fancytree********start
+        // $("#folder-list").fancytree({
+        //   extensions: ["edit", "dnd5" ],
+        //   source: data,
+        //   focusOnClick: true,
+        //   debugLevel: 0,
+        //   selectMode: 1,
+        //   //********dnd5********start
+        //   dnd5: {
+        //     autoExpandMS: 1500,
+        //     preventRecursiveMoves: true,
+        //     preventVoidMoves: true,
+        //     preventNonNodes: false,
+        //     dragStart: (node, data) => {
+        //       console.log(node, data);
+        //       // this.htmlMaker.dragElementOfTree = node.key;
+        //       const crt = document.getElementsByClassName(`f_id_${node.key}`)[0].cloneNode(true);
+        //       crt.className += " start drag-folder_cursor";
+        //       crt.style.position = "absolute";
+        //       crt.style.top = "-10000px";
+        //       crt.style.right = "-10000px";
+        //       document.body.appendChild(crt);
+        //       const id = node.key;
+        //       data.dataTransfer.setDragImage(crt, 0, 0);
+        //       data.dataTransfer.setData("node_id", id);
+        //       return true;
+        //     },
+        //     dragEnd: (node, data) => {
+        //       $('.start').remove();
+        //
+        //     },
+        //     dragEnter: (node, data) => {
+        //       // console.log(data.node.key);
+        //       // data.node.li.style.paddingBottom = '50px';
+        //       // this.htmlMaker.currentDragedId = data.node.key;
+        //
+        //       // else if(data.hitMode == 'after') {
+        //       //   data.node.li.style.marginBottom = '50px';
+        //       // }
+        //       return true;
+        //     },
+        //     dragOver: (node, data) => {
+        //       // console.log('over', data);
+        //       // if(data.hitMode == 'before' || data.hitMode == 'after') {
+        //       //
+        //       // }
+        //     },
+        //     dragLeave: (node, data) => {
+        //       // console.log(this.htmlMaker.currentDragedId);
+        //       // $(`.f_id_${this.htmlMaker.currentDragedId}`).css('padding', '0');
+        //       // console.log('leave', data)
+        //       // data.node.li.style.padding = '0';
+        //       // data.otherNode.li.style.margin = '0'
+        //     },
+        //     //********dragDrop********start
+        //     dragDrop: (node, data) => {
+        //       // const dataTransfer = data.dataTransfer.getData('node_id');
+        //       // console.log('data', data);
+        //       const transfer = this.htmlMaker.transfer;
+        //       if( !data.otherNode ) {
+        //         console.log(this.htmlMaker.currentId);
+        //         if(this.htmlMaker.currentId || data.dataTransfer.getData('node_id').length !== 0) {
+        //
+        //           if (data.hitMode === 'after' || data.hitMode === 'before') {
+        //             if (node.getLevel() === 1) {
+        //               transfer(this.htmlMaker.currentId, data.node.parent.key, 1, data.dataTransfer);
+        //             } else { transfer(this.htmlMaker.currentId, data.node.parent.key, 0, data.dataTransfer); }
+        //           } else { transfer(this.htmlMaker.currentId, data.node.key, 0, data.dataTransfer); }
+        //         }
+        //         return;
+        //       }
+        //
+        //       if (data.hitMode === 'after' || data.hitMode === 'before') {
+        //         if (node.getLevel() === 1) {
+        //           transfer(data.otherNodeData.key, data.node.parent.key, 1, data.dataTransfer);
+        //         } else {
+        //           transfer(data.otherNodeData.key, data.node.parent.key, 0, data.dataTransfer);
+        //         }
+        //       } else {
+        //         transfer(data.otherNodeData.key, node.key, 0, data.dataTransfer);
+        //       }
+        //       this.htmlMaker.dragElementOfTree = null;
+        //       this.selectedImage.length = 0;
+        //     }
+        //     //********dragDrop********end
+        //   },
+        //   //********dnd5********end
+        //   renderNode: function(event, data) {
+        //     const node = data.node;
+        //     const $spanTitle = $(node.span).find('span.fancytree-title');
+        //     const folder = $(node.span).find('span.fancytree-folder');
+        //     folder.css({
+        //       display: 'flex',
+        //       alignItems: 'center'
+        //     });
+        //     $spanTitle.after(`<span class="dropdown d-none" style="float: right">
+        //                         <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+        //                           <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+        //                         </button>
+        //                         <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+        //                           <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_folder">
+        //                             <i class="fa fa-trash" style="color:#ffffff"></i>
+        //                           </button>
+        //                           <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-cog"></i></button>
+        //                           <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+        //                         </span>
+        //                       </span>`);
+        //     setTimeout(function() {
+        //       $(data.node.li).addClass(`f_id_${data.node.key}`);
+        //     }, 20);
+        //   },
+        //   activate: (event, data) => {
+        //     if (data.node.isFolder()) {
+        //       if(event.toElement.tagName.toLowerCase().trim() !== 'i' && event.toElement.tagName.toLowerCase().trim() !== 'button') {
+        //         this.events.get_folder_items_tree(data.node.key);
+        //       }
+        //     }
+        //   },
+        //   beforeActivate: function(event, data) {
+        //     console.log('beforeActivate', event, data);
+        //     // logEvent(event, data, "current state=" + data.node.isActive());
+        //     if(event.toElement.tagName.toLowerCase().trim() === 'i' || event.toElement.tagName.toLowerCase().trim() === 'button'){
+        //       console.log('dsdsdsd');
+        //       return false;
+        //     }
+        //   }
+        // }).on("mouseenter mouseleave", "span.fancytree-folder", function(event){
+        //
+        //   const node = $.ui.fancytree.getNode(event);
+        //   if(event.type === 'mouseenter') {
+        //     self.htmlMaker.hoverFolder = node.key;
+        //     node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.remove('d-none');
+        //   } else if(event.type === 'mouseleave') {
+        //     !node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.add('d-none');
+        //     self.htmlMaker.hoverFolder = null;
+        //   }
+        // });
+        // ********fancytree********end
+        // $('#folder-list2').nestable({
+        //   'json': treeData,
+        //
+        //
+        //   callback: function(l,e){
+        //     console.log('list', l, 'element', e);
+        //     self.requests.drawingItems()
+        //   },
+        //   onDragStart: function(l,e){
+        //     // console.log('list', l, 'element', e);
+        //   },
+        //   beforeDragStop: function(l,e, p){
+        //     // console.log('list', l, 'element', e, 'place', p);
+        //   }
+        // });
+        $('#folder-list2>ol').nestedSortable({
+          disableNesting: 'no-nest',
+          forcePlaceholderSize: true,
+          handle: 'div',
+          helper: 'clone',
+          items: 'li',
+          opacity: .6,
+          placeholder: 'placeholder',
+          revert: 250,
+          tabSize: 25,
+          tolerance: 'pointer',
+          toleranceElement: '> div',
+          isTree: true,
+          startCollapsed: true,
+          update: function () {
+            const order = $('#folder-list2>ol').nestedSortable('serialize');
+            console.log(order);
+          }
+          // forcePlaceholderSize: true,
+          // handle: 'div',
+          // helper: 'clone',
+          // items: 'li',
+          // maxLevels: 3,
+          // opacity: .6,
+          // placeholder: 'placeholder',
+          // revert: 250,
+          // tabSize: 15,
+          // tolerance: 'pointer',
+          // toleranceElement: '> div'
+        });
+        $('.disclose').on('click', function() {
+          $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+        })
       });
     },
     //********App -> htmlMaker -> makeTreeFolder********end
@@ -768,19 +841,19 @@ const App = function() {
                                        data-id="1" bb-media-click="get_folder_items" >
                                      <a>Drive</a>
                                    </li>`;
-      $('document').ready(() => {
-        const tree = $("#folder-list").fancytree("getTree");
-        const current = tree.getNodeByKey('' + id);
-        const parentsArray = current && (current.getKeyPath().trim()).split('/');
-        parentsArray && parentsArray.shift();
-        parentsArray && parentsArray
-            .map((id, index) => {
-              let el = tree.getNodeByKey('' + id);
-              index === parentsArray.length-1 ?
-                  breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'disabled') :
-                  breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'active');
-            });
-      });
+      // $('document').ready(() => {
+      //   const tree = $("#folder-list").fancytree("getTree");
+      //   const current = tree.getNodeByKey('' + id);
+      //   const parentsArray = current && (current.getKeyPath().trim()).split('/');
+      //   parentsArray && parentsArray.shift();
+      //   parentsArray && parentsArray
+      //       .map((id, index) => {
+      //         let el = tree.getNodeByKey('' + id);
+      //         index === parentsArray.length-1 ?
+      //             breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'disabled') :
+      //             breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'active');
+      //       });
+      // });
     },
     //********App -> helpers -> makeBreadCrumbs********end
 
@@ -807,7 +880,7 @@ const App = function() {
         .querySelectorAll(`[data-type="main-container"] [draggable="true"]`)
         .forEach(elm => {
           elm.addEventListener("dragstart", function (e) {
-            console.log('dnd', self.selectedImage, e);
+            // console.log('dnd', self.selectedImage, e);
             function findAncestor (el, cls) {
               while ((el = el.parentElement) && !el.classList.contains(cls));
               return el;
@@ -879,11 +952,11 @@ const App = function() {
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
           let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id"));
-          console.log('nodeId', nodeId);
+          // console.log('nodeId', nodeId);
           let parrentId = e.target
               .closest(".file")
               .getAttribute("data-id");
-          console.log('parrentId',parrentId);
+          // console.log('parrentId',parrentId);
           if(Array.isArray(nodeId)) {
             nodeId.map((id)=> {
                 self.requests.transferImage(
@@ -902,12 +975,12 @@ const App = function() {
                   parent_id: Number(parrentId),
                   access_token: "string"
                 },
-                () => {
-                  const x = $("#folder-list").fancytree("getTree");
-                  var folder;
-                  folder = x.getNodeByKey('' + nodeId);
-                  folder.moveTo(x.getNodeByKey('' + parrentId));
-                }
+                // () => {
+                //   const x = $("#folder-list").fancytree("getTree");
+                //   var folder;
+                //   folder = x.getNodeByKey('' + nodeId);
+                //   folder.moveTo(x.getNodeByKey('' + parrentId));
+                // }
               );
             } else {
               self.requests.transferImage(
@@ -1114,7 +1187,7 @@ const App = function() {
       showUploadedThumbs: false,
       initialPreviewAsData: true,
     }).on("filebatchselected", function(event, files) {
-      console.log('removerrrrrrrrrrrr');
+
     });
   };
   //********App -> init********end
@@ -1133,53 +1206,54 @@ const App = function() {
     remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      console.log('ererererer',elm);
       const id = this.htmlMaker.hoverFolder || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
-      const name = e.target
-          .closest(".file") ? e.target
-          .closest(".file")
-          .querySelector(".file-name")
-          .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
-      console.log('elm',elm, e);
-      $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
+      // const name = e.target
+      //     .closest(".file") ? e.target
+      //     .closest(".file")
+      //     .querySelector(".file-name")
+      //     .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
+      // $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
     },
 
     //********App -> events -> remove_folder********start
-    remove_folder_req: (elm, e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      const id = this.htmlMaker.hoverFolder || e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
-      if(!id) return;
-      const removeTree = function (id) {
-        const x = $("#folder-list").fancytree("getTree");
-        const folder = x.getNodeByKey('' + id);
-        folder.remove();
-      };
-      this.requests.removeTreeFolder(
-        {
-          folder_id: Number(id),
-          trash: 1,
-          access_token: "string"
-        },
-        () => {
-          this.htmlMaker.hoverFolder || !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
-          this.events.close_name_modal();
-          this.htmlMaker.hoverFolder = null;
-        }
-      );
-    },
+    // remove_folder_req: (elm, e) => {
+    //   e.stopPropagation();
+    //   e.preventDefault();
+    //   const id = this.htmlMaker.hoverFolder || e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
+    //   if(!id) return;
+    //   const removeTree = function (id) {
+    //     const x = $("#folder-list").fancytree("getTree");
+    //     const folder = x.getNodeByKey('' + id);
+    //     folder.remove();
+    //   };
+    //   this.requests.removeTreeFolder(
+    //     {
+    //       folder_id: Number(id),
+    //       trash: 1,
+    //       access_token: "string"
+    //     },
+    //     () => {
+    //       this.htmlMaker.hoverFolder || !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
+    //       this.events.close_name_modal();
+    //       this.htmlMaker.hoverFolder = null;
+    //     }
+    //   );
+    // },
     //********App -> events -> remove_folder********end
 
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const id = elm.closest("[data-id]").getAttribute("data-id");
+
       if (id && !elm.classList.contains("disabled")) {
         this.requests.drawingItems(
           {
             folder_id: Number(id),
             files: true,
             access_token: "string"
-          }
+          },
+            false,
+            () => this.htmlMaker.currentId = id
         );
       }
     },
@@ -1201,22 +1275,19 @@ const App = function() {
 
     //********App -> events -> add_new_folder********start
     add_new_folder: (elm, e) => {
+      const self = this
       const inputElement = document.querySelector(".new-folder-input");
       const name = inputElement.value;
-      const x = $("#folder-list").fancytree("getTree");
-      let folder;
-      if (globalFolderId !== 1) {
-        folder = x.getNodeByKey('' + globalFolderId);
-      } else {
-        folder = x.getRootNode();
-      }
-      const createTree = function (res) {
-        folder.addChildren({
-          folder: true,
-          title: name,
-          text: name,
-          key: res.data.key
-        });
+      // const x = $("#folder-list").fancytree("getTree");
+      // let folder;
+      // if (globalFolderId !== 1) {
+      //   folder = x.getNodeByKey('' + globalFolderId);
+      // } else {
+      //   folder = x.getRootNode();
+      // }
+      const createTree = (res) => {
+        console.log(this.htmlMaker.currentId);
+        $("#folder-list2").nestable('add', {"id": res.data.key, 'title': res.data.title, 'parent_id': !self.htmlMaker.currentId ? '': self.htmlMaker.currentId });
       };
       this.requests.addNewFolder(
         {
@@ -1276,7 +1347,6 @@ const App = function() {
         } else {
           this.selectedImage.push(id);
         }
-        console.log(this.selectedImage);
       }
     },
     //********App -> events -> select_item********end
@@ -1303,21 +1373,17 @@ const App = function() {
     remove_image: (elm, e, elements) => {
       e.preventDefault();
       e.stopPropagation();
-      console.log('elmelmelm', elements);
       elements && (e = elements);
-      console.log(e);
       const id = this.selectedImage.length === 0 || (e.target.closest(".file") && !this.selectedImage.includes(e.target.closest(".file").getAttribute("data-id"))) ? e.target.closest(".file").getAttribute("data-id") : this.selectedImage;
       const name = this.selectedImage.length === 0  || (e.target.closest(".file") && !this.selectedImage.includes(e.target.closest(".file").getAttribute("data-id"))) ? e.target
           .closest(".file")
           .querySelector(".file-name")
           .textContent.trim() : '';
-      console.log(id, name);
       const modal = this.htmlMaker.remove_modal(id, name, 'image');
       $('#modal_area').html(modal);
     },
 
     remove_image_req: (elm, e) => {
-      console.log('laralaralara', e.target);
       const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
       this.requests.removeImage(
         {
@@ -1361,7 +1427,6 @@ const App = function() {
     save_edited_title: (elm, e) => {
       const itemId = e.target.getAttribute("data-id");
       const name = document.querySelector(".edit-title-input").value;
-      console.log('............', itemId, name);
       this.requests.editImageName(
         {
           item_id: Number(itemId),
@@ -1410,7 +1475,6 @@ const App = function() {
 
     //********App -> events -> close_name_modal********start
     close_name_modal: (elm, e) => {
-      console.log(e);
       this.requests.drawingItems(undefined, true);
       $(".custom_modal_edit").remove();
       $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
@@ -1472,12 +1536,9 @@ $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
 });
 
 $('body').on('blur', '[contenteditable]', function(ev) {
-  console.log(ev);
   const itemId = ev.target.closest('div[data-id]').getAttribute('data-id');
   const name = this.textContent;
-  console.log(name, itemId, this);
   const imgOrFolder = $(this).closest('[bb-media-click="get_folder_items"]').length;
-  console.log(imgOrFolder);
   if(imgOrFolder === 0) {
     app.requests.editImageName(
         {
@@ -1499,7 +1560,6 @@ $('body').on('blur', '[contenteditable]', function(ev) {
 });
 
 $('.delete_items').on('click', (ev) => {
-  console.log('dddd', ev, app.selectedImage);
 
   const toggle = () => {
     $('.remover-container').toggleClass('d-none');
@@ -1517,7 +1577,6 @@ const drop = (ev, cb) => {
       app.events.remove_image(undefined, ev, {target: document.querySelector(`[data-id="${el}"]`)});
     });
   } else {
-    console.log(ev);
     app.events.remove_image(undefined, ev, {target: document.querySelector(`[data-id="${data}"]`)});
   }
   cb();

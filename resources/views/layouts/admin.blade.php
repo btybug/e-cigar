@@ -32,12 +32,11 @@
 
 
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/media-tree.css')}}">
   <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.csscustom.css?v='.rand(111,999))}}">
   <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
-
-
 
   <!--Media Button Stiles-->
 
@@ -47,6 +46,7 @@
     {!! Html::style('public/admin_theme/media/css/lightbox.css') !!}
     {!! Html::style('public/admin_theme/fileinput/css/fileinput.min.css') !!}
     {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
+{{--    {!! Html::style("public/css/jquery.nestable.min.css") !!}--}}
   @endif
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,7 +61,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/skin-lion/ui.fancytree.min.css">
+  {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/skin-lion/ui.fancytree.min.css">--}}
   @yield('css')
 
   @stack('style')
@@ -142,6 +142,8 @@
 {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
 {{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+<script src="http://dev.bootydev.co.uk/resources/assets/js/nestedSortable/jquery.mjs.nestedSortable.js"></script>
 {!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 

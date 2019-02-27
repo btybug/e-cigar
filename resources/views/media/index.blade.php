@@ -43,8 +43,10 @@
                   //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                   // })
                 </script>
-                <div class="folder-list" id="folder-list" style="padding: 0;" data-media="folder">
+                <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
+                  <ol class="dd-list sortable" id="fff">
 
+                  </ol>
                 </div>
                 {{--<h5 class="tag-title">Tags</h5>--}}
                 {{--<ul class="tag-list" style="padding: 0">--}}
@@ -305,9 +307,11 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.ui-deps.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.edit.js"></script>
-  {{--<script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.filter.js"></script>--}}
+  <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.filter.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.dnd5.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.glyph.js"></script>
+  {!! Html::script("public/plugins/tree/jquery.nestable.min.js") !!}
+  {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js"></script>--}}
 
   <script>
     $('document').ready(
