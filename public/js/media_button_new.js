@@ -217,7 +217,7 @@ const App = function() {
           return el.children.length === 0 ? `<li class="dd-item" data-id=${el.key}><div class="dd-handle">${el.name}</div></li>` :
               `<li class="dd-item" data-id=${el.key}>
                 <div>
-                  <div class="disclose" style="width: 30px; height: 30px; background-color: darkred"></div>
+                  <div class="disclose"><span></span></div>
                   <div class="dd-handle">${el.name}</div>
                 </div>
                 <ol class="dd-list">${makeTree(el.children).join(' ')}</ol>
@@ -391,7 +391,7 @@ const App = function() {
           opacity: .6,
           placeholder: 'placeholder',
           revert: 250,
-          tabSize: 25,
+          tabSize: 15,
           tolerance: 'pointer',
           toleranceElement: '> div',
           isTree: true,

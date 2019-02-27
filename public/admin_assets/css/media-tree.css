@@ -47,13 +47,18 @@ ol.sortable {
 }
 
 .sortable li.mjs-nestedSortable-branch>div>.disclose {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .sortable li.mjs-nestedSortable-collapsed>div>.disclose>span:before {
-  content: '+ ';
+  content: "\f067";
+  font-family: FontAwesome;
 }
 
 .sortable li.mjs-nestedSortable-expanded>div>.disclose>span:before {
-  content: '- ';
+  content: "\f068";
+  font-family: FontAwesome;
 }
