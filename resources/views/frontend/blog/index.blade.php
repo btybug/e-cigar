@@ -67,7 +67,6 @@
             <div class="container main-max-width">
                 <div class="row justify-content-md-start justify-content-center">
                     @foreach($posts as $post)
-
                         <a href="{!! post_url($post) !!}" class="news-wrap_col">
                             <span class="news-card main-transition position-relative">
                                 <span class="news-card_view d-block position-relative">
@@ -83,9 +82,9 @@
                                 </span>
                                 <span class="news-card_body">
                                     <span class="news-card_body-text d-block">
-                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover">{!! $post->title !!}</span>
-                                        <span class="card-text d-block font-main-light font-15 text-light-clr">
-                                            {!! $post->short_description !!}
+                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover" title="{{ $post->title }}">{!! str_limit($post->title,30) !!}</span>
+                                        <span class="card-text d-block font-main-light font-15 text-light-clr" title="{{ $post->short_description }}">
+                                            {!! str_limit($post->short_description,60) !!}
                                         </span>
                                     </span>
                                     <span class="news-card_footer d-flex align-items-center">
@@ -113,19 +112,9 @@
                         </a>
 
 
-                    {{--                        <strong>{!! BBgetDateFormat($post->created_at,'d') !!}</strong>{!! BBgetDateFormat($post->created_at,'M') !!}--}}
-
+                    {{--<strong>{!! BBgetDateFormat($post->created_at,'d') !!}</strong>{!! BBgetDateFormat($post->created_at,'M') !!}--}}
                     @endforeach
-
-
-
-
-
                     <!-- The END -->
-
-
-
-
                 </div>
             </div>
         </div>
@@ -166,16 +155,23 @@
 @section("js")
 
 <script>
-    $("body").on("click", ".change-view-blog", function (e) {
-        e.preventDefault()
-        $(".change-view-blog").removeClass("active")
-        $(this).addClass("active")
-        if($(this).attr("id") === "list_news"){
-            $(".blogs").addClass("blogs-list")
-        }else {
-            $(".blogs").removeClass("blogs-list")
-        }
-    })
+    // $("body").on("click", ".change-view-blog", function (e) {
+    //     e.preventDefault()
+    //     $(".change-view-blog").removeClass("active")
+    //     $(this).addClass("active")
+    //     if($(this).attr("id") === "list_news"){
+    //         localStorage.setItem('testObject',"list_news");
+    //         $(".blogs").addClass("blogs-list")
+    //     }else {
+    //         localStorage.setItem('testObject',"cube");
+    //         $(".blogs").removeClass("blogs-list")
+    //     }
+    // })
+
+    // localStorage.setItem('testObject', JSON.stringify(testObject));
+
+    // Retrieve the object from storage
+    // var retrievedObject = localStorage.getItem('testObject');
 
     $(document).ready(function(){
         $("body").on('change','.select-filter',function () {
