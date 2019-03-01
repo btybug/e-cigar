@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="google-recaptcha-key" content="{!! env('GOOGLE_RECAPTCHA_KEY') !!}">
+    <meta name="google-site-verification" content="bL1v6h4GP0iNIf9ZppzmsC5oHymM-Ne6I1SrO9jop1I" />
   @yield('meta')
   <title>Document</title>
 
