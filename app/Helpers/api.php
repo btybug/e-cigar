@@ -512,7 +512,10 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<p>' . $comment->comment . '</p>';
         echo '</div>';
         echo '</div>';
-        echo '<div class="text-right reply-wrapper"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a></div>';
+        if(Auth::check()){
+            echo '<div class="text-right reply-wrapper"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a></div>';
+        }
+
         echo '</div>';
         echo '</div>';
         echo '</div>';
