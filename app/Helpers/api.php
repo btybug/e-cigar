@@ -999,11 +999,14 @@ function site_default_currency()
     return (new \App\Models\SiteCurrencies())->where('is_default', true)->first();
 }
 
-function convert_price($price, $currency, $number_format = true, $withoutSymbol = false)
+function convert_price($price, $currency, $number_format = true, $withoutSymbol = false,$round_thousand = false)
 {
     $default = site_default_currency();
     if ($default) {
         if ($default->code == $currency) {
+            if($round_thousand){
+                $price = round ($price, -3);
+            }
             if ($number_format) {
                 $price = number_format($price);
             }
@@ -1012,6 +1015,9 @@ function convert_price($price, $currency, $number_format = true, $withoutSymbol 
             $changed = (new \App\Models\SiteCurrencies())->where('code', $currency)->first();
             if ($changed) {
                 $price = $price * $changed->rate;
+                if($round_thousand){
+                    $price = round ($price, -3);
+                }
                 if ($number_format) {
                     $price = number_format($price);
                 }

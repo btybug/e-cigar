@@ -385,7 +385,7 @@
             $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: '{{ convert_price(500,$currency,false,true) }}',
+                max: '{{ convert_price(1000,$currency,false,true,true) }}',
                 values: rangeArray,
                 slide: function (event, ui) {
                     $("#amount").val(ui.values[0] + " - " + ui.values[1]);
