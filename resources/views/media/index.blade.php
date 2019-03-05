@@ -43,6 +43,7 @@
                   //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                   // })
                 </script>
+                <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1">ROOT</div>
                 <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
                   <ol class="dd-list sortable" id="fff">
 
@@ -61,11 +62,16 @@
                 {{--</ul>--}}
                 <div class="clearfix"></div>
               </div>
+
             </div>
+
+
+
             <div class="trash-icon-btn">
               <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
             </div>
           </div>
+
         </div>
         <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 h-100 right--media-col">
           <div class="over-auto scrollbar_custom right--media-col-wrapper">
@@ -127,6 +133,7 @@
           </div>
 
         </div>
+
       </div>
     </div>
 

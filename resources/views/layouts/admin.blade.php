@@ -143,8 +143,9 @@
 {{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
-<script src="http://dev.bootydev.co.uk/resources/assets/js/nestedSortable/jquery.mjs.nestedSortable.js"></script>
+{{--<script src="http://dev.bootydev.co.uk/resources/assets/js/nestedSortable/jquery.mjs.nestedSortable.js"></script>--}}
 {!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
+{!! Html::script("public/plugins/tree/jquery.mjs.nestedSortable.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 
 

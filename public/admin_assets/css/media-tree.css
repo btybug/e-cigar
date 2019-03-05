@@ -64,7 +64,7 @@ ol.sortable {
   content: "\f068";
   font-family: FontAwesome;
 }
-.dd-handle.ui-sortable-handle{
+.dd-handle.ui-sortable-handle, .dd-handle.oooo{
   height: auto;
   color: #294656;
   background: transparent;
@@ -72,18 +72,18 @@ ol.sortable {
   margin: 0;
   text-transform: capitalize;
 }
-.ui-sortable-handle .dd-handle.ui-sortable-handle{
+.ui-sortable-handle .dd-handle.ui-sortable-handle, .oooo .dd-handle.oooo{
   border: none;
 }
 .dd-handle.ui-sortable-handle:hover{
   color: #294656;
   background: transparent;
 }
-.ui-sortable-handle:hover{
+.ui-sortable-handle:hover, .oooo:hover{
   color: #fff;
-  background: #4389c5;
+  background: #4389c5 !important;
 }
-.ui-sortable-handle:hover .dd-handle{
+.ui-sortable-handle:hover .dd-handle, .oooo:hover  .dd-handle{
   color: #ffffff;
 }
 .placeholder{

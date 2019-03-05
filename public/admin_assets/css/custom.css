@@ -1036,3 +1036,7 @@ div.remover-container .remover-container-zone .file {
     width: 195px;
     height: 140px;
 }
+
+.dd-handle {
+    font-size: 18px;
+}

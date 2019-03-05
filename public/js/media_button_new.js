@@ -16,6 +16,7 @@ const shortAjax = function (URL, obj = {}, cb) {
       return response.json();
     })
     .then(function (json) {
+      console.log('json', json);
       return cb(json);
     })
     .catch(function (error) {
@@ -73,8 +74,8 @@ const App = function() {
     dragElementOfTree: null,
     currentId: null,
     currentSelectedFolder: null,
-    hoverFolder: null,
     currentDragedId: null,
+    currentParentOfDrag: null,
     // transfer: (f, p, root, dataTransfer) => {
     //   const x = $("#folder-list").fancytree("getTree");
     //   const folder = x.getNodeByKey('' + f);
@@ -199,189 +200,80 @@ const App = function() {
     },
     //********App -> htmlMaker -> makeImage********end
 
+    makeTreeLeaf: (id, name) => {
+      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} id="item_${id}">
+                  <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
+                </li>`);
+    },
+
+    makeTreeBranch: (id, name, children, makeTree) => {
+      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-id=${id} id="item_${id}"">
+                <div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+                  <div class="disclose oooo"><span class="closer"></span></div>
+                  <div class="dd-handle oooo">${name}</div>
+                </div>
+                <ol class="dd-list">${makeTree(children).join(' ')}</ol>
+               </li>`);
+    },
+
+    makeTreeBranchInsteadLeaf: (id, branchName, leafName) => {
+      return (`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+                 <div class="disclose oooo"><span class="closer"></span></div>
+                 <div class="dd-handle oooo">${branchName}</div>
+               </div>
+               <ol class="dd-list">
+                 <li class="dd-item mjs-nestedSortable-leaf" data-id=${id} id="item_${id}" >
+                   <div class="dd-handle oooo" bb-media-click="get_folder_items"  draggable="true">${leafName}</div>
+                 </li>
+               </ol>`);
+    },
+
+    treeMove: (nodeId, parrentId) => {
+      if($(`li[data-id="${parrentId}"]>ol`).length !== 0) {
+        $(`li[data-id="${parrentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+      } else {
+        const ol = $('<ol></ol>');
+        ol.addClass('dd-list');
+        $(`li[data-id="${parrentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
+        $(`li[data-id="${parrentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+                 <div class="disclose oooo"><span class="closer"></span></div>
+                 <div class="dd-handle oooo">${$(`li[data-id="${parrentId}"]`).text().trim().split(' ')[0].trim()}</div>
+               </div>`)
+        $(`li[data-id="${parrentId}"]`).append(ol);
+        $(`li[data-id="${parrentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+      }
+      if($(`li[data-id="${this.dragElement}"]>ol`).children().length === 0) {
+        $(`li[data-id="${this.dragElement}"]`).replaceWith(this.htmlMaker.makeTreeLeaf(this.dragElement, $(`li[data-id="${this.dragElement}"]`).text().trim().split(' ')[0].trim()));
+      }
+      // this.children[0].style.backgroundColor = 'white';
+      // this.children[0].style.color = '#294656';
+      document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
+        $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+      }});
+    },
+
+
     //********App -> htmlMaker -> makeTreeFolder********start
     makeTreeFolder: (data) => {
+      const self = this;
+      const {makeTreeLeaf, makeTreeBranch, makeTreeBranchInsteadLeaf} = this.htmlMaker;
+      let {currentParentOfDrag} = this.htmlMaker;
+      const {transferFolder} = this.requests;
       function makeTree (data) {
-      //   console.log(data);
         const getTreeData = (data) => {
           return data.map((el) => {
-            // console.log('element', el);
             const children = el.children.length === 0 ? null : getTreeData(el.children);
-            // console.log('children',getTreeData(el.children));
-            return {id: el.key, title: el.title, children: children, empty: el.children.length === 0};
+            return {id: el.key, title: el.title, children: children};
           });
         };
-        const treeData = getTreeData(data)
-
-        return data.map((el)=>{
-          return el.children.length === 0 ? `<li class="dd-item" data-id=${el.key}><div class="dd-handle">${el.name}</div></li>` :
-              `<li class="dd-item" data-id=${el.key}>
-                <div>
-                  <div class="disclose"><span></span></div>
-                  <div class="dd-handle">${el.name}</div>
-                </div>
-                <ol class="dd-list">${makeTree(el.children).join(' ')}</ol>
-               </li>`;
+        return data && data.map((el)=>{
+          return !el.children || el.children.length === 0 ? makeTreeLeaf(el.key, el.name) : makeTreeBranch(el.key, el.name, el.children, makeTree);
         });
-      }
+      };
 
       $('#folder-list2').children().html(makeTree(data).join(' '));
-      const self = this;
 
       $('document').ready(() => {
-        // ********fancytree********start
-        // $("#folder-list").fancytree({
-        //   extensions: ["edit", "dnd5" ],
-        //   source: data,
-        //   focusOnClick: true,
-        //   debugLevel: 0,
-        //   selectMode: 1,
-        //   //********dnd5********start
-        //   dnd5: {
-        //     autoExpandMS: 1500,
-        //     preventRecursiveMoves: true,
-        //     preventVoidMoves: true,
-        //     preventNonNodes: false,
-        //     dragStart: (node, data) => {
-        //       console.log(node, data);
-        //       // this.htmlMaker.dragElementOfTree = node.key;
-        //       const crt = document.getElementsByClassName(`f_id_${node.key}`)[0].cloneNode(true);
-        //       crt.className += " start drag-folder_cursor";
-        //       crt.style.position = "absolute";
-        //       crt.style.top = "-10000px";
-        //       crt.style.right = "-10000px";
-        //       document.body.appendChild(crt);
-        //       const id = node.key;
-        //       data.dataTransfer.setDragImage(crt, 0, 0);
-        //       data.dataTransfer.setData("node_id", id);
-        //       return true;
-        //     },
-        //     dragEnd: (node, data) => {
-        //       $('.start').remove();
-        //
-        //     },
-        //     dragEnter: (node, data) => {
-        //       // console.log(data.node.key);
-        //       // data.node.li.style.paddingBottom = '50px';
-        //       // this.htmlMaker.currentDragedId = data.node.key;
-        //
-        //       // else if(data.hitMode == 'after') {
-        //       //   data.node.li.style.marginBottom = '50px';
-        //       // }
-        //       return true;
-        //     },
-        //     dragOver: (node, data) => {
-        //       // console.log('over', data);
-        //       // if(data.hitMode == 'before' || data.hitMode == 'after') {
-        //       //
-        //       // }
-        //     },
-        //     dragLeave: (node, data) => {
-        //       // console.log(this.htmlMaker.currentDragedId);
-        //       // $(`.f_id_${this.htmlMaker.currentDragedId}`).css('padding', '0');
-        //       // console.log('leave', data)
-        //       // data.node.li.style.padding = '0';
-        //       // data.otherNode.li.style.margin = '0'
-        //     },
-        //     //********dragDrop********start
-        //     dragDrop: (node, data) => {
-        //       // const dataTransfer = data.dataTransfer.getData('node_id');
-        //       // console.log('data', data);
-        //       const transfer = this.htmlMaker.transfer;
-        //       if( !data.otherNode ) {
-        //         console.log(this.htmlMaker.currentId);
-        //         if(this.htmlMaker.currentId || data.dataTransfer.getData('node_id').length !== 0) {
-        //
-        //           if (data.hitMode === 'after' || data.hitMode === 'before') {
-        //             if (node.getLevel() === 1) {
-        //               transfer(this.htmlMaker.currentId, data.node.parent.key, 1, data.dataTransfer);
-        //             } else { transfer(this.htmlMaker.currentId, data.node.parent.key, 0, data.dataTransfer); }
-        //           } else { transfer(this.htmlMaker.currentId, data.node.key, 0, data.dataTransfer); }
-        //         }
-        //         return;
-        //       }
-        //
-        //       if (data.hitMode === 'after' || data.hitMode === 'before') {
-        //         if (node.getLevel() === 1) {
-        //           transfer(data.otherNodeData.key, data.node.parent.key, 1, data.dataTransfer);
-        //         } else {
-        //           transfer(data.otherNodeData.key, data.node.parent.key, 0, data.dataTransfer);
-        //         }
-        //       } else {
-        //         transfer(data.otherNodeData.key, node.key, 0, data.dataTransfer);
-        //       }
-        //       this.htmlMaker.dragElementOfTree = null;
-        //       this.selectedImage.length = 0;
-        //     }
-        //     //********dragDrop********end
-        //   },
-        //   //********dnd5********end
-        //   renderNode: function(event, data) {
-        //     const node = data.node;
-        //     const $spanTitle = $(node.span).find('span.fancytree-title');
-        //     const folder = $(node.span).find('span.fancytree-folder');
-        //     folder.css({
-        //       display: 'flex',
-        //       alignItems: 'center'
-        //     });
-        //     $spanTitle.after(`<span class="dropdown d-none" style="float: right">
-        //                         <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-        //                           <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-        //                         </button>
-        //                         <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-        //                           <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="remove_folder">
-        //                             <i class="fa fa-trash" style="color:#ffffff"></i>
-        //                           </button>
-        //                           <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-cog"></i></button>
-        //                           <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
-        //                         </span>
-        //                       </span>`);
-        //     setTimeout(function() {
-        //       $(data.node.li).addClass(`f_id_${data.node.key}`);
-        //     }, 20);
-        //   },
-        //   activate: (event, data) => {
-        //     if (data.node.isFolder()) {
-        //       if(event.toElement.tagName.toLowerCase().trim() !== 'i' && event.toElement.tagName.toLowerCase().trim() !== 'button') {
-        //         this.events.get_folder_items_tree(data.node.key);
-        //       }
-        //     }
-        //   },
-        //   beforeActivate: function(event, data) {
-        //     console.log('beforeActivate', event, data);
-        //     // logEvent(event, data, "current state=" + data.node.isActive());
-        //     if(event.toElement.tagName.toLowerCase().trim() === 'i' || event.toElement.tagName.toLowerCase().trim() === 'button'){
-        //       console.log('dsdsdsd');
-        //       return false;
-        //     }
-        //   }
-        // }).on("mouseenter mouseleave", "span.fancytree-folder", function(event){
-        //
-        //   const node = $.ui.fancytree.getNode(event);
-        //   if(event.type === 'mouseenter') {
-        //     self.htmlMaker.hoverFolder = node.key;
-        //     node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.remove('d-none');
-        //   } else if(event.type === 'mouseleave') {
-        //     !node.li.firstChild.lastChild.classList.contains('d-none') && node.li.firstChild.lastChild.classList.add('d-none');
-        //     self.htmlMaker.hoverFolder = null;
-        //   }
-        // });
-        // ********fancytree********end
-        // $('#folder-list2').nestable({
-        //   'json': treeData,
-        //
-        //
-        //   callback: function(l,e){
-        //     console.log('list', l, 'element', e);
-        //     self.requests.drawingItems()
-        //   },
-        //   onDragStart: function(l,e){
-        //     // console.log('list', l, 'element', e);
-        //   },
-        //   beforeDragStop: function(l,e, p){
-        //     // console.log('list', l, 'element', e, 'place', p);
-        //   }
-        // });
         $('#folder-list2>ol').nestedSortable({
           disableNesting: 'no-nest',
           forcePlaceholderSize: true,
@@ -390,32 +282,180 @@ const App = function() {
           items: 'li',
           opacity: .6,
           placeholder: 'placeholder',
-          revert: 250,
           tabSize: 15,
           tolerance: 'pointer',
           toleranceElement: '> div',
           isTree: true,
           startCollapsed: true,
-          update: function () {
-            const order = $('#folder-list2>ol').nestedSortable('serialize');
-            console.log(order);
+          update: function (ev, data) {
+
+            const id = $(ev.originalEvent.target).closest('li').attr('data-id');
+            const treeArray = $(this).nestedSortable('toArray');
+            const parent_id = treeArray.filter((el) => el.id === id)[0].parent_id;
+            let parentId = null;
+            $(this).nestedSortable('toArray').map((el)=>{
+              (el.id && Number(el.id)) === Number(id) && (parentId = el.parent_id);
+            });
+
+            const getData = (treeData) => {
+              return treeData && treeData.map((el) => {
+                return {key: el.id, name: $(`li[data-id="${el.id}"]`).text().trim().split(' ')[0].trim(), children: el.children && getData(el.children)};
+              });
+            };
+
+            const findParent = (treeData, p_id) => {
+              var parent;
+              !Array.isArray(findParent.children) && (findParent.children = []);
+              parent = treeData && treeData.find((el) => {
+                    el.children && findParent.children.push(...el.children);
+                return Number(el.id) === Number(p_id);
+              });
+
+              if(parent) {
+                return parent;
+              } else {
+                const p = findParent(findParent.children, p_id);
+                if(p) {
+                  return p;
+                }
+              }
+            };
+
+            const parentTransformToLeaf = () => {
+              $(currentParentOfDrag.find('ol')[0]).children().length === 0 &&
+                $(currentParentOfDrag[0]).replaceWith(makeTreeLeaf(currentParentOfDrag.attr('data-id'), currentParentOfDrag.text().trim()));
+            };
+            const dataOfBranch = parentId && getData([findParent($(this).nestedSortable('toHierarchy'), parentId)]);
+            const leafTransformToParent = (data) => {
+              // if($(`li[data-id="${parent_id}"]`).find('ol').length === 0){
+                // debugger;
+              $(`li[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
+                // debugger;
+              // }
+            };
+
+            parentId === null && (function () {
+              transferFolder(
+                  {
+                    folder_id: Number(id),
+                    parent_id: Number(1),
+                    access_token: "string"
+                  }
+              );
+              return true;
+            })();
+            transferFolder(
+                {
+                  folder_id: Number(id),
+                  parent_id: Number(parentId),
+                  access_token: "string"
+                }
+            );
+            parentTransformToLeaf();
+            parentId && leafTransformToParent(dataOfBranch);
+
+            findParent.children = [];
+            document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
+              $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+            }});
+          },
+          change: function(ev, data) {
+
+          },
+          sort: function (ev, data) {
+
+          },
+          revert: function() {
+
+          },
+          relocate: function() {
+
+          },
+          start: function (ev, data) {
+            currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
+          },
+          stop: function(ev, data) {
+            $('#page-wrapper .over-auto').css('overflow', 'auto');
+          },
+          out: function(ev, data) {
+            $('#page-wrapper .over-auto').css('overflow', 'unset');
+          },
+          over: function () {
+            $('#page-wrapper .over-auto').css('overflow', 'auto');
           }
-          // forcePlaceholderSize: true,
-          // handle: 'div',
-          // helper: 'clone',
-          // items: 'li',
-          // maxLevels: 3,
-          // opacity: .6,
-          // placeholder: 'placeholder',
-          // revert: 250,
-          // tabSize: 15,
-          // tolerance: 'pointer',
-          // toleranceElement: '> div'
         });
-        $('.disclose').on('click', function() {
-          $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
-        })
+
+        document.querySelectorAll(".dd-item").forEach(folder => {
+          // folder.setAttribute('draggable',"true")
+          folder.addEventListener("dragover", function (e) {
+            if (e.preventDefault) e.preventDefault(); // allows us to drop
+            e.stopPropagation();
+            e.dataTransfer.dropEffect = "copy";
+            this.classList.add("over");
+            // this.children[0].style.backgroundColor = '#4389c5';
+            return false;
+          });
+          folder.addEventListener("dragleave", function (e) {
+            if (e.preventDefault) e.preventDefault(); // allows us to drop
+            e.stopPropagation();
+
+            // this.children[0].style.backgroundColor = 'white';
+            // this.children[0].style.color = '#294656';
+            this.classList.remove("over");
+            return false;
+          });
+          folder.addEventListener("drop", function (e) {
+            e.stopPropagation();
+            this.classList.remove("over");
+            let nodeId = JSON.parse(e.dataTransfer.getData("node_id"));
+
+            let parrentId = e.target
+                .closest(".file") ? e.target
+                .closest(".file")
+                .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
+            if(Array.isArray(nodeId)) {
+              nodeId.map((id)=> {
+                console.log('*************************');
+                self.requests.transferImage(
+                    {
+                      item_id: Number(id),
+                      folder_id: Number(parrentId),
+                      access_token: "string"
+                    }
+                );
+              });
+            } else {
+              if($('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
+                self.requests.transferFolder(
+                    {
+                      folder_id: Number(nodeId),
+                      parent_id: Number(parrentId),
+                      access_token: "string"
+                    },
+                    () => {
+                      self.htmlMaker.treeMove(nodeId, parrentId);
+                    }
+                );
+              } else {
+                console.log('nodeId = ',nodeId,', ', 'parrentId = ', parrentId);
+                self.requests.transferImage(
+                    {
+                      item_id: Number(nodeId),
+                      folder_id: Number(parrentId),
+                      access_token: "string"
+                    }
+                );
+              }
+            }
+            // self.htmlMaker.dragElementOfTree = null;
+            // self.htmlMaker.currentId = null;
+            // self.selectedImage.length = 0;
+          });
+        });
       });
+      document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
+        $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+      }});
     },
     //********App -> htmlMaker -> makeTreeFolder********end
 
@@ -880,7 +920,6 @@ const App = function() {
         .querySelectorAll(`[data-type="main-container"] [draggable="true"]`)
         .forEach(elm => {
           elm.addEventListener("dragstart", function (e) {
-            // console.log('dnd', self.selectedImage, e);
             function findAncestor (el, cls) {
               while ((el = el.parentElement) && !el.classList.contains(cls));
               return el;
@@ -929,6 +968,7 @@ const App = function() {
               e.dataTransfer.setDragImage(crt, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
               e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+              self.dragElement = $(`li[data-id="${id}"]`).closest('li').parent().closest('li').length !== 0 ? $(`li[data-id="${id}"]`).closest('li').parent().closest('li').attr('data-id') : 1;
               // setTimeout(() => (this.className = "invisible"), 0);
               self.htmlMaker.currentId = id;
             }
@@ -952,11 +992,9 @@ const App = function() {
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
           let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id"));
-          // console.log('nodeId', nodeId);
           let parrentId = e.target
               .closest(".file")
               .getAttribute("data-id");
-          // console.log('parrentId',parrentId);
           if(Array.isArray(nodeId)) {
             nodeId.map((id)=> {
                 self.requests.transferImage(
@@ -968,21 +1006,19 @@ const App = function() {
                 );
             });
           } else {
-            if(self.htmlMaker.dragElementOfTree || $(`[data-id=${nodeId}]`)[0].closest('.folder-container')) {
+            if(self.htmlMaker.dragElementOfTree || $('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
               self.requests.transferFolder(
                 {
                   folder_id: Number(nodeId),
                   parent_id: Number(parrentId),
                   access_token: "string"
                 },
-                // () => {
-                //   const x = $("#folder-list").fancytree("getTree");
-                //   var folder;
-                //   folder = x.getNodeByKey('' + nodeId);
-                //   folder.moveTo(x.getNodeByKey('' + parrentId));
-                // }
+                  () => {
+                    self.htmlMaker.treeMove(nodeId, parrentId);
+                  }
               );
             } else {
+              console.log('--------------------');
               self.requests.transferImage(
                 {
                   item_id: Number(nodeId),
@@ -997,6 +1033,10 @@ const App = function() {
           self.selectedImage.length = 0;
         });
       });
+
+
+
+
     }
     //********App -> helpers -> makeDnD********end
   };
@@ -1053,7 +1093,7 @@ const App = function() {
       shortAjax("/api/api-media/get-remove-folder", obj, res => {
         if (!res.error) {
           cb();
-          this.requests.drawingItems(undefined, true);
+          // this.requests.drawingItems(undefined, true);
         }
       });
     },
@@ -1090,7 +1130,7 @@ const App = function() {
     //********App -> requests -> editImageName********end
 
     //********App -> requests -> transferImage********start
-    transferImage: (obj = {}, cb) => {
+    transferImage: (obj = JSON.stringify({}), cb) => {
       shortAjax("/api/api-media/transfer-item", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
@@ -1104,7 +1144,7 @@ const App = function() {
       shortAjax("/api/api-media/get-sort-folder", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
-          cb();
+          cb && cb();
         }
       });
     },
@@ -1114,7 +1154,7 @@ const App = function() {
     removeImage: (obj = {}, cb) => {
       shortAjax("/api/api-media/get-remove-item", obj, res => {
         if (!res.error) {
-          this.requests.drawingItems(undefined, true);
+          this.requests.drawingItems();
           cb();
         }
       });
@@ -1155,7 +1195,7 @@ const App = function() {
   this.init = () => {
     $("#uploader").fileinput({
       uploadAsync: false,
-      maxFileCount: 30,
+      maxFileCount: 10,
       showUpload: false,
       showUploadedThumbs: false,
       initialPreviewAsData: true,
@@ -1206,56 +1246,71 @@ const App = function() {
     remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      const id = this.htmlMaker.hoverFolder || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
-      // const name = e.target
-      //     .closest(".file") ? e.target
-      //     .closest(".file")
-      //     .querySelector(".file-name")
-      //     .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
-      // $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
+      const id = (elm.closest(".file") && elm.closest(".file").getAttribute("data-id")),
+            name = e.target
+              .closest(".file") ? e.target
+              .closest(".file")
+              .querySelector(".file-name")
+              .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
+      $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
     },
 
     //********App -> events -> remove_folder********start
-    // remove_folder_req: (elm, e) => {
-    //   e.stopPropagation();
-    //   e.preventDefault();
-    //   const id = this.htmlMaker.hoverFolder || e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
-    //   if(!id) return;
-    //   const removeTree = function (id) {
-    //     const x = $("#folder-list").fancytree("getTree");
-    //     const folder = x.getNodeByKey('' + id);
-    //     folder.remove();
-    //   };
-    //   this.requests.removeTreeFolder(
-    //     {
-    //       folder_id: Number(id),
-    //       trash: 1,
-    //       access_token: "string"
-    //     },
-    //     () => {
-    //       this.htmlMaker.hoverFolder || !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
-    //       this.events.close_name_modal();
-    //       this.htmlMaker.hoverFolder = null;
-    //     }
-    //   );
-    // },
+    remove_folder_req: (elm, e) => {
+      e.stopPropagation();
+      e.preventDefault();
+
+      const id = e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
+      if(!id) return;
+      const tree = $('#folder-list2>ol'),
+            leaf = tree.find(`[data-id="${id}"]`),
+            {makeTreeLeaf} = this.htmlMaker,
+            {close_name_modal} = this.events,
+            {removeTreeFolder} = this.requests;
+
+      removeTreeFolder(
+        {
+          folder_id: Number(id),
+          trash: 1,
+          access_token: "string"
+        },
+        () => {
+          !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
+          close_name_modal();
+          if(globalFolderId === 1) {
+            tree.children(`[data-id="${id}"]`).remove();
+            return true;
+          }
+          const ol = leaf.closest('ol');
+          const li = leaf.closest('li');
+          const key = ol.closest('li').attr('data-id');
+          const name = ol.closest('li').children('div')[0].innerText;
+
+          li.remove();
+          ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
+        }
+      );
+    },
     //********App -> events -> remove_folder********end
 
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
-      const id = elm.closest("[data-id]").getAttribute("data-id");
-
-      if (id && !elm.classList.contains("disabled")) {
-        this.requests.drawingItems(
-          {
-            folder_id: Number(id),
-            files: true,
-            access_token: "string"
-          },
-            false,
-            () => this.htmlMaker.currentId = id
-        );
-      }
+      const self = this;
+      !$(e.target).hasClass('closer') && (function(){
+        const id = elm.closest("[data-id]").getAttribute("data-id");
+        globalFolderId = id;
+        if (id && !elm.classList.contains("disabled")) {
+          self.requests.drawingItems(
+              {
+                folder_id: Number(id),
+                files: true,
+                access_token: "string"
+              },
+              false,
+              () => self.htmlMaker.currentId = id
+          );
+        }
+      })();
     },
     //********App -> events -> get_folder_items********end
 
@@ -1275,27 +1330,41 @@ const App = function() {
 
     //********App -> events -> add_new_folder********start
     add_new_folder: (elm, e) => {
-      const self = this
-      const inputElement = document.querySelector(".new-folder-input");
-      const name = inputElement.value;
-      // const x = $("#folder-list").fancytree("getTree");
-      // let folder;
-      // if (globalFolderId !== 1) {
-      //   folder = x.getNodeByKey('' + globalFolderId);
-      // } else {
-      //   folder = x.getRootNode();
-      // }
-      const createTree = (res) => {
-        console.log(this.htmlMaker.currentId);
-        $("#folder-list2").nestable('add', {"id": res.data.key, 'title': res.data.title, 'parent_id': !self.htmlMaker.currentId ? '': self.htmlMaker.currentId });
-      };
+
+      const {makeTreeLeaf, makeTreeBranchInsteadLeaf} = this.htmlMaker,
+            inputElement = document.querySelector(".new-folder-input"),
+            name = inputElement.value,
+            tree = $('#folder-list2>ol'),
+            leaf = tree.find(`[data-id="${globalFolderId}"]`),
+            createTree = (res) => {
+              if(globalFolderId === 1) {
+                tree.append(makeTreeLeaf(res.data.key, name));
+
+                return true;
+              }
+              const text = leaf.children()[0].innerText;
+              leaf.find('ol').length === 0 && leaf.children()[0].parentNode.removeChild(leaf.children()[0])
+
+              leaf.find('ol').length === 0 ?
+                  leaf.removeClass('mjs-nestedSortable-leaf')
+                      .addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded')
+                      .append(makeTreeBranchInsteadLeaf(res.data.key, text, name))
+                  : $(leaf.find('ol')[0]).append(makeTreeLeaf(res.data.key, name))
+              document.
+              querySelectorAll('.disclose')
+                  .forEach((el)=>{el.onclick = function() {
+                    $(this).closest('li')
+                        .toggleClass('mjs-nestedSortable-collapsed')
+                        .toggleClass('mjs-nestedSortable-expanded');
+                  };});
+            };
       this.requests.addNewFolder(
-        {
-          folder_id: globalFolderId,
-          folder_name: name,
-          access_token: "string"
-        },
-        createTree
+          {
+            folder_id: globalFolderId,
+            folder_name: name,
+            access_token: "string"
+          },
+          createTree
       );
       inputElement.value = '';
     },
@@ -1475,7 +1544,7 @@ const App = function() {
 
     //********App -> events -> close_name_modal********start
     close_name_modal: (elm, e) => {
-      this.requests.drawingItems(undefined, true);
+      // this.requests.drawingItems(undefined, true);
       $(".custom_modal_edit").remove();
       $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
         if(ev.type === 'mouseenter') {
