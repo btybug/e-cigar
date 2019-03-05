@@ -93,13 +93,13 @@ const App = function() {
     //     });
     //   } else {
     //     let nodeId = (Array.isArray(JSON.parse(dataTransfer.getData("node_id"))) && JSON.parse(dataTransfer.getData("node_id")).length !== 0) && JSON.parse(dataTransfer.getData("node_id")) || f;
-    //     let parrentId = p;
+    //     let parentId = p;
     //     if(Array.isArray(nodeId)) {
     //       nodeId.map((id)=> {
     //         this.requests.transferImage(
     //             {
     //               item_id: Number(id),
-    //               folder_id: root === 1 ? Number(1) : Number(parrentId),
+    //               folder_id: root === 1 ? Number(1) : Number(parentId),
     //               access_token: "string"
     //             }
     //         );
@@ -109,21 +109,21 @@ const App = function() {
     //         this.requests.transferFolder(
     //             {
     //               folder_id: Number(nodeId),
-    //               parent_id: root === 1 ? Number(1) : Number(parrentId),
+    //               parent_id: root === 1 ? Number(1) : Number(parentId),
     //               access_token: "string"
     //             },
     //             () => {
     //               const x = $("#folder-list").fancytree("getTree");
     //               var folder;
     //               folder = x.getNodeByKey('' + nodeId);
-    //               folder.moveTo(x.getNodeByKey('' + parrentId));
+    //               folder.moveTo(x.getNodeByKey('' + parentId));
     //             }
     //         );
     //       } else {
     //         this.requests.transferImage(
     //             {
     //               item_id: Number(nodeId),
-    //               folder_id: root === 1 ? Number(1) : Number(parrentId),
+    //               folder_id: root === 1 ? Number(1) : Number(parentId),
     //               access_token: "string"
     //             }
     //         );
@@ -228,19 +228,25 @@ const App = function() {
                </ol>`);
     },
 
-    treeMove: (nodeId, parrentId) => {
-      if($(`li[data-id="${parrentId}"]>ol`).length !== 0) {
-        $(`li[data-id="${parrentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+    treeMove: (nodeId, parentId) => {
+      console.log('parenttt',parentId);
+
+      if(Number(parentId) === 1) {
+        $('#folder-list2>ol').append($(`li[data-id="${nodeId}"]`));
       } else {
-        const ol = $('<ol></ol>');
-        ol.addClass('dd-list');
-        $(`li[data-id="${parrentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
-        $(`li[data-id="${parrentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+        if($(`li[data-id="${parentId}"]>ol`).length !== 0) {
+          $(`li[data-id="${parentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+        } else {
+          const ol = $('<ol></ol>');
+          ol.addClass('dd-list');
+          $(`li[data-id="${parentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
+          $(`li[data-id="${parentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
                  <div class="disclose oooo"><span class="closer"></span></div>
-                 <div class="dd-handle oooo">${$(`li[data-id="${parrentId}"]`).text().trim().split(' ')[0].trim()}</div>
+                 <div class="dd-handle oooo">${$(`li[data-id="${parentId}"]`).text().trim().split(' ')[0].trim()}</div>
                </div>`)
-        $(`li[data-id="${parrentId}"]`).append(ol);
-        $(`li[data-id="${parrentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+          $(`li[data-id="${parentId}"]`).append(ol);
+          $(`li[data-id="${parentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+        }
       }
       if($(`li[data-id="${this.dragElement}"]>ol`).children().length === 0) {
         $(`li[data-id="${this.dragElement}"]`).replaceWith(this.htmlMaker.makeTreeLeaf(this.dragElement, $(`li[data-id="${this.dragElement}"]`).text().trim().split(' ')[0].trim()));
@@ -342,7 +348,7 @@ const App = function() {
                     access_token: "string"
                   }
               );
-              return true;
+              // return true;
             })();
             transferFolder(
                 {
@@ -409,7 +415,7 @@ const App = function() {
             this.classList.remove("over");
             let nodeId = JSON.parse(e.dataTransfer.getData("node_id"));
 
-            let parrentId = e.target
+            let parentId = e.target
                 .closest(".file") ? e.target
                 .closest(".file")
                 .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
@@ -419,7 +425,7 @@ const App = function() {
                 self.requests.transferImage(
                     {
                       item_id: Number(id),
-                      folder_id: Number(parrentId),
+                      folder_id: Number(parentId),
                       access_token: "string"
                     }
                 );
@@ -429,19 +435,19 @@ const App = function() {
                 self.requests.transferFolder(
                     {
                       folder_id: Number(nodeId),
-                      parent_id: Number(parrentId),
+                      parent_id: Number(parentId),
                       access_token: "string"
                     },
                     () => {
-                      self.htmlMaker.treeMove(nodeId, parrentId);
+                      self.htmlMaker.treeMove(nodeId, parentId);
                     }
                 );
               } else {
-                console.log('nodeId = ',nodeId,', ', 'parrentId = ', parrentId);
+                console.log('nodeId = ',nodeId,', ', 'parentId = ', parentId);
                 self.requests.transferImage(
                     {
                       item_id: Number(nodeId),
-                      folder_id: Number(parrentId),
+                      folder_id: Number(parentId),
                       access_token: "string"
                     }
                 );
@@ -576,8 +582,8 @@ const App = function() {
                                     <tr>
                                         <th>Size</th>
                                         <td><span data-slideshow="size">${
-              data.size
-              } </span></td>
+              (Number(data.size)/1024).toFixed(2)
+              } KB</span></td>
                                     </tr>
                                     <tr>
                                         <th>Location</th>
@@ -992,7 +998,7 @@ const App = function() {
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
           let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id"));
-          let parrentId = e.target
+          let parentId = e.target
               .closest(".file")
               .getAttribute("data-id");
           if(Array.isArray(nodeId)) {
@@ -1000,7 +1006,7 @@ const App = function() {
                 self.requests.transferImage(
                   {
                     item_id: Number(id),
-                    folder_id: Number(parrentId),
+                    folder_id: Number(parentId),
                     access_token: "string"
                   }
                 );
@@ -1010,11 +1016,11 @@ const App = function() {
               self.requests.transferFolder(
                 {
                   folder_id: Number(nodeId),
-                  parent_id: Number(parrentId),
+                  parent_id: Number(parentId),
                   access_token: "string"
                 },
                   () => {
-                    self.htmlMaker.treeMove(nodeId, parrentId);
+                    self.htmlMaker.treeMove(nodeId, parentId);
                   }
               );
             } else {
@@ -1022,7 +1028,7 @@ const App = function() {
               self.requests.transferImage(
                 {
                   item_id: Number(nodeId),
-                  folder_id: Number(parrentId),
+                  folder_id: Number(parentId),
                   access_token: "string"
                 }
               );
