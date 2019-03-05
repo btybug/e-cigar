@@ -43,7 +43,7 @@
                   //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                   // })
                 </script>
-                <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1">ROOT</div>
+                <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -50px">DRIVE</div>
                 <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
                   <ol class="dd-list sortable" id="fff">
 
@@ -86,7 +86,7 @@
                   <div class="upload--head  mb-20 mt15">
                       <button class="btn btn-danger delete_items" >Delete</button>
                       <button class="btn btn-info">Move</button>
-                      <button class="btn btn-warning">Copy</button>
+                      <button class="btn btn-warning copy-button">Copy</button>
                       <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
                               bb-media-click="show_uploader">Uploader
                       </button>

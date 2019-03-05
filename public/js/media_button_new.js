@@ -232,24 +232,24 @@ const App = function() {
       console.log('parenttt',parentId);
 
       if(Number(parentId) === 1) {
-        $('#folder-list2>ol').append($(`li[data-id="${nodeId}"]`));
+        $('#folder-list2>ol').append($(`li.dd-item[data-id="${nodeId}"]`));
       } else {
-        if($(`li[data-id="${parentId}"]>ol`).length !== 0) {
-          $(`li[data-id="${parentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+        if($(`li.dd-item[data-id="${parentId}"]>ol`).length !== 0) {
+          $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
         } else {
           const ol = $('<ol></ol>');
           ol.addClass('dd-list');
-          $(`li[data-id="${parentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
-          $(`li[data-id="${parentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+          $(`li.dd-item[data-id="${parentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
+          $(`li.dd-item[data-id="${parentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
                  <div class="disclose oooo"><span class="closer"></span></div>
-                 <div class="dd-handle oooo">${$(`li[data-id="${parentId}"]`).text().trim().split(' ')[0].trim()}</div>
+                 <div class="dd-handle oooo">${$(`li.dd-item[data-id="${parentId}"]`).text().trim().split(' ')[0].trim()}</div>
                </div>`)
-          $(`li[data-id="${parentId}"]`).append(ol);
-          $(`li[data-id="${parentId}"]>ol`).append($(`li[data-id="${nodeId}"]`));
+          $(`li.dd-item[data-id="${parentId}"]`).append(ol);
+          $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
         }
       }
-      if($(`li[data-id="${this.dragElement}"]>ol`).children().length === 0) {
-        $(`li[data-id="${this.dragElement}"]`).replaceWith(this.htmlMaker.makeTreeLeaf(this.dragElement, $(`li[data-id="${this.dragElement}"]`).text().trim().split(' ')[0].trim()));
+      if($(`li.dd-item[data-id="${this.dragElement}"]>ol`).children().length === 0) {
+        $(`li.dd-item[data-id="${this.dragElement}"]`).replaceWith(this.htmlMaker.makeTreeLeaf(this.dragElement, $(`li.dd-item[data-id="${this.dragElement}"]`).text().trim().split(' ')[0].trim()));
       }
       // this.children[0].style.backgroundColor = 'white';
       // this.children[0].style.color = '#294656';
@@ -305,7 +305,7 @@ const App = function() {
 
             const getData = (treeData) => {
               return treeData && treeData.map((el) => {
-                return {key: el.id, name: $(`li[data-id="${el.id}"]`).text().trim().split(' ')[0].trim(), children: el.children && getData(el.children)};
+                return {key: el.id, name: $(`li.dd-item[data-id="${el.id}"]`).text().trim().split(' ')[0].trim(), children: el.children && getData(el.children)};
               });
             };
 
@@ -335,7 +335,7 @@ const App = function() {
             const leafTransformToParent = (data) => {
               // if($(`li[data-id="${parent_id}"]`).find('ol').length === 0){
                 // debugger;
-              $(`li[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
+              $(`li.dd-item[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li.dd-item[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
                 // debugger;
               // }
             };
@@ -467,8 +467,8 @@ const App = function() {
 
     //********App -> htmlMaker -> makeBreadCrumbsItem********start
     makeBreadCrumbsItem: (key, name, state) => {
-      return (`<li class="bread-crumbs-list-item ${state}" data-crumbs-id="${key}" 
-                   data-id="${key}" bb-media-click="get_folder_items" >
+      return (`<li class="bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
+                    bb-media-click="get_folder_items" >
                  <a>${name}</a>
                </li>`);
     },
@@ -885,8 +885,8 @@ const App = function() {
       const self = this;
       console.log(res, 'ressssssssss***********')
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      breadCrumbsList.innerHTML = `<li class="bread-crumbs-list-item active" data-crumbs-id="1"
-                                       data-id="1" bb-media-click="get_folder_items" >
+      breadCrumbsList.innerHTML = `<li class="bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
+                                        bb-media-click="get_folder_items" >
                                      <a>Drive</a>
                                    </li>`;
       $('document').ready(() => {
@@ -994,7 +994,7 @@ var count = 0;
               e.dataTransfer.setDragImage(crt, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
               e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
-              self.dragElement = $(`li[data-id="${id}"]`).closest('li').parent().closest('li').length !== 0 ? $(`li[data-id="${id}"]`).closest('li').parent().closest('li').attr('data-id') : 1;
+              self.dragElement = $(`li.dd-item[data-id="${id}"]`).closest('li').parent().closest('li').length !== 0 ? $(`li.dd-item[data-id="${id}"]`).closest('li').parent().closest('li').attr('data-id') : 1;
               // setTimeout(() => (this.className = "invisible"), 0);
               self.htmlMaker.currentId = id;
             }
@@ -1205,7 +1205,16 @@ var count = 0;
             cb(res.data);
           }
         });
+      },
+
+      copyImages: (obj = {}, cb) => {
+        shortAjax("/api/api-media/copy-item", {item_id: obj}, res => {
+          if (!res.error) {
+            typeof cb === "function" && cb(res.data);
+          }
+        });
       }
+
     //********App -> requests -> getImageDetails********end
 
   };
@@ -1490,6 +1499,11 @@ var count = 0;
       );
     },
 
+    copy_images: (elm, e) => {
+      console.log(elm, e, 'copy_images');
+      this.requests.copyImages(elm, this.requests.drawingItems);
+    },
+
     // remove_image_items: (e) => {
     //   e.preventDefault();
     //   e.stopPropagation();
@@ -1694,3 +1708,7 @@ $('.remover-container-zone').on('dragover dragleave', (ev) => {
 });
 
 $('.remover-container-zone').on('drop', (ev) => drop(ev, removeHighlight));
+
+$('body').on('click', '.copy-button', (ev) => {
+  app.selectedImage.length !== 0 && app.events.copy_images(app.selectedImage, ev);
+});
