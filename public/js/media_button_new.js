@@ -201,13 +201,13 @@ const App = function() {
     //********App -> htmlMaker -> makeImage********end
 
     makeTreeLeaf: (id, name) => {
-      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} id="item_${id}">
+      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}">
                   <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
                 </li>`);
     },
 
     makeTreeBranch: (id, name, children, makeTree) => {
-      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-id=${id} id="item_${id}"">
+      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}"">
                 <div class="oooo" bb-media-click="get_folder_items"  draggable="true">
                   <div class="disclose oooo"><span class="closer"></span></div>
                   <div class="dd-handle oooo">${name}</div>
@@ -222,7 +222,7 @@ const App = function() {
                  <div class="dd-handle oooo">${branchName}</div>
                </div>
                <ol class="dd-list">
-                 <li class="dd-item mjs-nestedSortable-leaf" data-id=${id} id="item_${id}" >
+                 <li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${leafName}" id="item_${id}" >
                    <div class="dd-handle oooo" bb-media-click="get_folder_items"  draggable="true">${leafName}</div>
                  </li>
                </ol>`);
@@ -381,13 +381,13 @@ const App = function() {
             currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
           },
           stop: function(ev, data) {
-            $('#page-wrapper .over-auto').css('overflow', 'auto');
+            // $('#page-wrapper .over-auto').css('overflow', 'auto');
           },
           out: function(ev, data) {
-            $('#page-wrapper .over-auto').css('overflow', 'unset');
+            // $('#page-wrapper .over-auto').css('overflow', 'unset');
           },
           over: function () {
-            $('#page-wrapper .over-auto').css('overflow', 'auto');
+            // $('#page-wrapper .over-auto').css('overflow', 'auto');
           }
         });
 
@@ -497,6 +497,7 @@ const App = function() {
                 </div>
               </div>`);
     },
+
     remove_modal: (id, name, iorf) => {
       return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog">
@@ -511,8 +512,8 @@ const App = function() {
                           <p>Do You want to remove ${iorf === 'image' ? (name.length === 0 ? 'selected images' : 'image') : 'folder'} ${name}?</p>
                     </div>
                     <div class="modal-footer">
-                     <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                            <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="${iorf === 'image' ? 'remove_image_req' : 'remove_folder_req'}">Remove</button>
+                     <button bb-media-click="close_name_modal" type="button" class="btn btn-primary btn-save" data-dismiss="modal">Close</button>
+                            <button type="button" data-id=${id} class="btn btn-secondary btn-close" bb-media-click="${iorf === 'image' ? 'remove_image_req' : 'remove_folder_req'}">Remove</button>
                     </div>
                   </div>
             
@@ -879,27 +880,46 @@ const App = function() {
 
   //********App -> helpers********start
   this.helpers = {
-
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, res) => {
+      const self = this;
+      console.log(res, 'ressssssssss***********')
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
       breadCrumbsList.innerHTML = `<li class="bread-crumbs-list-item active" data-crumbs-id="1"
                                        data-id="1" bb-media-click="get_folder_items" >
                                      <a>Drive</a>
                                    </li>`;
-      // $('document').ready(() => {
-      //   const tree = $("#folder-list").fancytree("getTree");
-      //   const current = tree.getNodeByKey('' + id);
-      //   const parentsArray = current && (current.getKeyPath().trim()).split('/');
-      //   parentsArray && parentsArray.shift();
-      //   parentsArray && parentsArray
-      //       .map((id, index) => {
-      //         let el = tree.getNodeByKey('' + id);
-      //         index === parentsArray.length-1 ?
-      //             breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'disabled') :
-      //             breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(id, el.title, 'active');
-      //       });
-      // });
+      $('document').ready(() => {
+var count = 0;
+        const getTreeData = (data, id) => {
+
+          const element = data.find((el) => {
+            return Number(el.id) === Number(id);
+          });
+
+          !Array.isArray(getTreeData.breadCrumbsData) && (getTreeData.breadCrumbsData = []);
+          element && getTreeData.breadCrumbsData.unshift({id: element.id, name: element.name});
+          element && (Number(element.parent_id) !== 1) && getTreeData(data, element.parent_id);
+          count++;
+        };
+
+
+        const treeData = $('#folder-list2>ol').nestedSortable('toArray');
+        treeData.shift();
+        treeData[0].parent_id = "1";
+        getTreeData(treeData, id);
+
+
+        console.log(count)
+        console.log(treeData, getTreeData.breadCrumbsData, id);
+
+        getTreeData.breadCrumbsData.length > 0 && getTreeData.breadCrumbsData
+            .map((el, index) => {
+              index === getTreeData.breadCrumbsData.length-1 ?
+                  breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'disabled') :
+                  breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'active');
+            });
+      });
     },
     //********App -> helpers -> makeBreadCrumbs********end
 
@@ -1119,7 +1139,7 @@ const App = function() {
     editImageName: (obj = {}, cb) => {
       shortAjax("/api/api-media/rename-item", obj, res => {
         if (!res.error) {
-          cb(res);
+          (typeof cb) === "function" && cb(res);
         }
       });
     },
@@ -1508,7 +1528,10 @@ const App = function() {
           item_name: name,
           access_token: "string"
         },
-        this.events.close_name_modal
+        () => {
+          $(`.file[data-id="${itemId}"]`).find('.file-title').html(name)
+          this.events.close_name_modal();
+        }
       );
     },
     //********App -> events -> save_edited_title********end
