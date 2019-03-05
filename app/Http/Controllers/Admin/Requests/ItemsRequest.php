@@ -27,6 +27,7 @@ class ItemsRequest extends FormRequest
             "translatable"    => "required|array|min:1",
             "translatable.gb.name"  => "required|string|min:3",
             "sku"  => "required",
+            "barcode"  => "required",
             "image"  => "required",
         ];
     }

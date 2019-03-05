@@ -89,6 +89,15 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
+                                                    <label for="barcode" class="control-label col-sm-4">Barcode</label>
+                                                    <div class="col-sm-8">
+                                                        {!! Form::text('barcode', null,
+                                                        ['class' => 'form-control','id' => 'barcode']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
                                                     <label for="product_id" class="control-label col-sm-4">Product
                                                         SKU</label>
                                                     <div class="col-sm-8">
