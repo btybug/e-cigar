@@ -12,7 +12,7 @@
                 </ul>
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active media-new-tab basic-details-tab">
-                        {!! Form::model($model,['class'=>'form-horizontal']) !!}
+                        {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
                         <div class="row">
                             <label for="feature_image" class="control-label col-sm-4"></label>
                             <div class="col-sm-8 text-right pt-25 mb-25">
