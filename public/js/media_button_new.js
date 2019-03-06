@@ -873,8 +873,31 @@ const App = function() {
                 </div>
             </div>
         </div>`;
-    }
+    },
     //********App -> htmlMaker -> fullInfoModal********end
+
+    copy_modal: (id) => {
+      return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+                <div class="modal-dialog">
+            
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
+                      <h4 class="modal-title">Copy images</h4>
+                    </div>
+                    <div class="modal-body">
+                          <p>Do You want to copy selected images?</p>
+                    </div>
+                    <div class="modal-footer">
+                     <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                            <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="copy_images_req">Copy</button>
+                    </div>
+                  </div>
+            
+                </div>
+              </div>`);
+    }
   };
   //********App -> htmlMaker********end
 
@@ -1437,10 +1460,10 @@ var count = 0;
             .closest(".file-box")
             .getAttribute("data-image");
         this.requests.getImageDetails({item_id: id}, res => {
-          var html = this.htmlMaker.fullInfoModal(
-            res,
-            Number(countId)
-          );
+          $('#modal_area').html(this.htmlMaker.fullInfoModal(
+              res,
+              Number(countId)
+          ));
           return $('body').append(html);
         });
       } else if (e.type === "click") {
@@ -1464,10 +1487,10 @@ var count = 0;
             .getAttribute("data-id");
         this.requests.getImageDetails({item_id: imageId}, res => {
           document.querySelectorAll(".adminmodal ").forEach(item => item.remove());
-          document.body.innerHTML += this.htmlMaker.fullInfoModal(
-            res,
-            Number(id)
-          );
+          $('#modal_area').html(this.htmlMaker.fullInfoModal(
+              res,
+              Number(id)
+          ));
         });
       }
     },
@@ -1500,8 +1523,14 @@ var count = 0;
     },
 
     copy_images: (elm, e) => {
-      console.log(elm, e, 'copy_images');
-      this.requests.copyImages(elm, this.requests.drawingItems);
+      this.selectedImage.length > 0 &&  $('#modal_area').html(this.htmlMaker.copy_modal(this.selectedImage));
+    },
+
+    copy_images_req: (elm, ev) => {
+      this.requests.copyImages(this.selectedImage, ()=> {
+          this.requests.drawingItems();
+          this.events.close_name_modal();
+      });
     },
 
     // remove_image_items: (e) => {
@@ -1528,7 +1557,7 @@ var count = 0;
           .closest(".file")
           .querySelector(".file-name")
           .textContent.trim();
-      document.body.innerHTML += this.htmlMaker.editNameModal(id, name);
+      $('#modal_area').html(this.htmlMaker.editNameModal(id, name));
     },
     //********App -> events -> edit_image********end
 
@@ -1597,7 +1626,6 @@ var count = 0;
         }
       });
       $('.remover-container-zone').removeClass('file-highlighted');
-
     }
     //********App -> events -> close_name_modal********end
   };

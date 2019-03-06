@@ -86,7 +86,7 @@
                   <div class="upload--head  mb-20 mt15">
                       <button class="btn btn-danger delete_items" >Delete</button>
                       <button class="btn btn-info">Move</button>
-                      <button class="btn btn-warning copy-button">Copy</button>
+                      <button class="btn btn-warning copy-button" bb-media-click="copy_images">Copy</button>
                       <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
                               bb-media-click="show_uploader">Uploader
                       </button>
