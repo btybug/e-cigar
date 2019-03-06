@@ -347,7 +347,7 @@
             $(document).click(function (e) {
                 const containerBlock = $(".top-filters .arrow-wrap .nav-item--has-dropdown_dropdown");
                 let arrowLink = $('.top-filters .arrow-wrap .arrow-filters');
-                if (arrowLink.has(e.target).length === 0 && containerBlock.has(e.target).length === 0) {
+                if (arrowLink.has(e.target).length === 0 && containerBlock.has(e.target).length === 0 && !$(e.target).hasClass('select2-selection__choice__remove')) {
                     if (containerBlock.hasClass('open')) {
                         containerBlock.removeClass('open');
                         $('.top-filters .main-filters').addClass('closed-mobile');

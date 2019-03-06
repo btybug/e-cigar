@@ -2758,11 +2758,15 @@ $('body').on('click', '.display-icon', function (e) {
     $('.display-icon').removeClass('active');
     $(this).addClass('active');
     if ($(this).attr('id') === 'dispGrid') {
+        localStorage.setItem('display-grid', "grid");
         $('.change-display-wrap').addClass('display-grid');
     } else {
+        localStorage.setItem('display-grid', "list");
         $('.change-display-wrap').removeClass('display-grid');
     }
 });
+
+localStorage.getItem('display-grid') == "list" && $('#displVertBtn').click();
 
 // scroll top button
 $('#scrollTopBtn').on('click', function () {
