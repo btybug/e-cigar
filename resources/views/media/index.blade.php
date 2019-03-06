@@ -26,7 +26,7 @@
                 <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"
                        role="button" href="#createFolder">
                     <i class="fa fa-plus" aria-hidden="true"></i></a>
-                  <a bb-media-click="get_folder_items" data-id="1">FOLDERS</a>
+                  <p>ADD FOLDERS</p>
                   <span data-media="selected"></span></h5>
                 <div class="collapse" id="createFolder">
                   <div class="input-group">

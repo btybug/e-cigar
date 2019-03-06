@@ -16,7 +16,6 @@ const shortAjax = function (URL, obj = {}, cb) {
       return response.json();
     })
     .then(function (json) {
-      console.log('json', json);
       return cb(json);
     })
     .catch(function (error) {
@@ -56,7 +55,7 @@ const normAjax = function (URL, obj = {}, cb) {
  Helpers
  **TYPES**
  data-type="main-container" || Main container,  for applying all content
- **EVNTS**
+ **EVENTS**
  bb-media-click="fodler" || Get current folder item if bb-media-type="folder"
  */
 
@@ -76,64 +75,6 @@ const App = function() {
     currentSelectedFolder: null,
     currentDragedId: null,
     currentParentOfDrag: null,
-    // transfer: (f, p, root, dataTransfer) => {
-    //   const x = $("#folder-list").fancytree("getTree");
-    //   const folder = x.getNodeByKey('' + f);
-    //   if(folder && folder.folder) {
-    //     this.requests.transferFolder(
-    //       {
-    //         folder_id: Number(f),
-    //         parent_id: root === 1 ? Number(1) : Number(p),
-    //         access_token: "string"
-    //       },
-    //       () => {
-    //         const folder = x.getNodeByKey('' + f);
-    //         folder.moveTo(x.getNodeByKey('' + p));
-    //         this.htmlMaker.currentId = null;
-    //     });
-    //   } else {
-    //     let nodeId = (Array.isArray(JSON.parse(dataTransfer.getData("node_id"))) && JSON.parse(dataTransfer.getData("node_id")).length !== 0) && JSON.parse(dataTransfer.getData("node_id")) || f;
-    //     let parentId = p;
-    //     if(Array.isArray(nodeId)) {
-    //       nodeId.map((id)=> {
-    //         this.requests.transferImage(
-    //             {
-    //               item_id: Number(id),
-    //               folder_id: root === 1 ? Number(1) : Number(parentId),
-    //               access_token: "string"
-    //             }
-    //         );
-    //       });
-    //     } else {
-    //       if(this.htmlMaker.dragElementOfTree || ($(`[data-id=${nodeId}]`)[0] && $(`[data-id=${nodeId}]`)[0].closest('.folder-container'))) {
-    //         this.requests.transferFolder(
-    //             {
-    //               folder_id: Number(nodeId),
-    //               parent_id: root === 1 ? Number(1) : Number(parentId),
-    //               access_token: "string"
-    //             },
-    //             () => {
-    //               const x = $("#folder-list").fancytree("getTree");
-    //               var folder;
-    //               folder = x.getNodeByKey('' + nodeId);
-    //               folder.moveTo(x.getNodeByKey('' + parentId));
-    //             }
-    //         );
-    //       } else {
-    //         this.requests.transferImage(
-    //             {
-    //               item_id: Number(nodeId),
-    //               folder_id: root === 1 ? Number(1) : Number(parentId),
-    //               access_token: "string"
-    //             }
-    //         );
-    //       }
-    //     }
-    //     this.htmlMaker.dragElementOfTree = null;
-    //     this.htmlMaker.currentId = null;
-    //     this.selectedImage.length = 0;
-    //   }
-    // },
 
     //********App -> htmlMaker -> makeFolder********start
     makeFolder: (data) => {
@@ -208,7 +149,7 @@ const App = function() {
 
     makeTreeBranch: (id, name, children, makeTree) => {
       return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}"">
-                <div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+                <div class="oooo" bb-media-click="get_folder_items" draggable="true">
                   <div class="disclose oooo"><span class="closer"></span></div>
                   <div class="dd-handle oooo">${name}</div>
                 </div>
@@ -229,8 +170,6 @@ const App = function() {
     },
 
     treeMove: (nodeId, parentId) => {
-      console.log('parenttt',parentId);
-
       if(Number(parentId) === 1) {
         $('#folder-list2>ol').append($(`li.dd-item[data-id="${nodeId}"]`));
       } else {
@@ -251,8 +190,9 @@ const App = function() {
       if($(`li.dd-item[data-id="${this.dragElement}"]>ol`).children().length === 0) {
         $(`li.dd-item[data-id="${this.dragElement}"]`).replaceWith(this.htmlMaker.makeTreeLeaf(this.dragElement, $(`li.dd-item[data-id="${this.dragElement}"]`).text().trim().split(' ')[0].trim()));
       }
-      // this.children[0].style.backgroundColor = 'white';
-      // this.children[0].style.color = '#294656';
+
+      this.events.dndForTree();
+
       document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
         $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
       }});
@@ -262,8 +202,9 @@ const App = function() {
     //********App -> htmlMaker -> makeTreeFolder********start
     makeTreeFolder: (data) => {
       const self = this;
-      const {makeTreeLeaf, makeTreeBranch, makeTreeBranchInsteadLeaf} = this.htmlMaker;
+      const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
       let {currentParentOfDrag} = this.htmlMaker;
+      const {dndForTree} = this.events;
       const {transferFolder} = this.requests;
       function makeTree (data) {
         const getTreeData = (data) => {
@@ -333,11 +274,7 @@ const App = function() {
             };
             const dataOfBranch = parentId && getData([findParent($(this).nestedSortable('toHierarchy'), parentId)]);
             const leafTransformToParent = (data) => {
-              // if($(`li[data-id="${parent_id}"]`).find('ol').length === 0){
-                // debugger;
               $(`li.dd-item[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li.dd-item[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
-                // debugger;
-              // }
             };
 
             parentId === null && (function () {
@@ -348,7 +285,6 @@ const App = function() {
                     access_token: "string"
                   }
               );
-              // return true;
             })();
             transferFolder(
                 {
@@ -357,6 +293,9 @@ const App = function() {
                   access_token: "string"
                 }
             );
+
+            dndForTree();
+
             parentTransformToLeaf();
             parentId && leafTransformToParent(dataOfBranch);
 
@@ -366,16 +305,13 @@ const App = function() {
             }});
           },
           change: function(ev, data) {
-
           },
           sort: function (ev, data) {
-
           },
           revert: function() {
-
           },
           relocate: function() {
-
+            dndForTree();
           },
           start: function (ev, data) {
             currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
@@ -391,74 +327,10 @@ const App = function() {
           }
         });
 
-        document.querySelectorAll(".dd-item").forEach(folder => {
-          // folder.setAttribute('draggable',"true")
-          folder.addEventListener("dragover", function (e) {
-            if (e.preventDefault) e.preventDefault(); // allows us to drop
-            e.stopPropagation();
-            e.dataTransfer.dropEffect = "copy";
-            this.classList.add("over");
-            // this.children[0].style.backgroundColor = '#4389c5';
-            return false;
-          });
-          folder.addEventListener("dragleave", function (e) {
-            if (e.preventDefault) e.preventDefault(); // allows us to drop
-            e.stopPropagation();
-
-            // this.children[0].style.backgroundColor = 'white';
-            // this.children[0].style.color = '#294656';
-            this.classList.remove("over");
-            return false;
-          });
-          folder.addEventListener("drop", function (e) {
-            e.stopPropagation();
-            this.classList.remove("over");
-            let nodeId = JSON.parse(e.dataTransfer.getData("node_id"));
-
-            let parentId = e.target
-                .closest(".file") ? e.target
-                .closest(".file")
-                .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
-            if(Array.isArray(nodeId)) {
-              nodeId.map((id)=> {
-                console.log('*************************');
-                self.requests.transferImage(
-                    {
-                      item_id: Number(id),
-                      folder_id: Number(parentId),
-                      access_token: "string"
-                    }
-                );
-              });
-            } else {
-              if($('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
-                self.requests.transferFolder(
-                    {
-                      folder_id: Number(nodeId),
-                      parent_id: Number(parentId),
-                      access_token: "string"
-                    },
-                    () => {
-                      self.htmlMaker.treeMove(nodeId, parentId);
-                    }
-                );
-              } else {
-                console.log('nodeId = ',nodeId,', ', 'parentId = ', parentId);
-                self.requests.transferImage(
-                    {
-                      item_id: Number(nodeId),
-                      folder_id: Number(parentId),
-                      access_token: "string"
-                    }
-                );
-              }
-            }
-            // self.htmlMaker.dragElementOfTree = null;
-            // self.htmlMaker.currentId = null;
-            // self.selectedImage.length = 0;
-          });
-        });
       });
+
+      dndForTree();
+
       document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
         $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
       }});
@@ -906,7 +778,6 @@ const App = function() {
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, res) => {
       const self = this;
-      console.log(res, 'ressssssssss***********')
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
       breadCrumbsList.innerHTML = `<li class="bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
                                         bb-media-click="get_folder_items" >
@@ -929,12 +800,8 @@ var count = 0;
 
         const treeData = $('#folder-list2>ol').nestedSortable('toArray');
         treeData.shift();
-        treeData[0].parent_id = "1";
+        treeData[0] && (treeData[0].parent_id = "1");
         getTreeData(treeData, id);
-
-
-        console.log(count)
-        console.log(treeData, getTreeData.breadCrumbsData, id);
 
         getTreeData.breadCrumbsData.length > 0 && getTreeData.breadCrumbsData
             .map((el, index) => {
@@ -992,8 +859,7 @@ var count = 0;
               selected.style.position = "absolute";
               selected.style.top = "-10000px";
               selected.style.right = "-10000px";
-              // crt.style.width = width + 'px';
-              // crt.style.height= height + "px";
+
               document.body.appendChild(selected);
               const id = this.getAttribute("data-id");
               e.dataTransfer.setDragImage(selected, 0, 0);
@@ -1026,6 +892,7 @@ var count = 0;
             $('.start').remove();
           });
         });
+
       document.querySelectorAll(".folder-container").forEach(folder => {
         folder.addEventListener("dragover", function (e) {
           if (e.preventDefault) e.preventDefault(); // allows us to drop
@@ -1067,7 +934,6 @@ var count = 0;
                   }
               );
             } else {
-              console.log('--------------------');
               self.requests.transferImage(
                 {
                   item_id: Number(nodeId),
@@ -1082,10 +948,6 @@ var count = 0;
           self.selectedImage.length = 0;
         });
       });
-
-
-
-
     }
     //********App -> helpers -> makeDnD********end
   };
@@ -1107,10 +969,6 @@ var count = 0;
           const mainContainer = document.querySelector(
               `[data-type="main-container"]`
           );
-          const breadCrumbsList = document.querySelector(
-              ".bread-crumbs-list"
-          );
-          // breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(res.data);
           mainContainer.innerHTML = "";
           res.data.children.forEach((folder, index) => {
             var html = `<div class="file-box folder-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
@@ -1269,7 +1127,7 @@ var count = 0;
       $("#uploader").fileinput("upload");
     })
     .on("filebatchuploadsuccess", (event, files) => {
-      this.requests.drawingItems(undefined, true);
+      this.requests.drawingItems();
       this.helpers.showUploaderContainer();
       $("#uploader").fileinput("clear");
     });
@@ -1626,8 +1484,79 @@ var count = 0;
         }
       });
       $('.remover-container-zone').removeClass('file-highlighted');
-    }
+    },
     //********App -> events -> close_name_modal********end
+
+    dndForTree: () => {
+      const self = this;
+
+      document.querySelectorAll(".dd-item").forEach(folder => {
+        // folder.setAttribute('draggable',"true")
+        folder.addEventListener("dragover", function (e) {
+          if (e.preventDefault) e.preventDefault(); // allows us to drop
+          e.stopPropagation();
+          e.dataTransfer.dropEffect = "copy";
+          this.classList.add("over");
+          // this.children[0].style.backgroundColor = '#4389c5';
+          return false;
+        });
+        folder.addEventListener("dragleave", function (e) {
+          if (e.preventDefault) e.preventDefault(); // allows us to drop
+          e.stopPropagation();
+
+          // this.children[0].style.backgroundColor = 'white';
+          // this.children[0].style.color = '#294656';
+          this.classList.remove("over");
+          return false;
+        });
+        folder.addEventListener("drop", function (e) {
+          e.stopPropagation();
+          this.classList.remove("over");
+          let nodeId = JSON.parse(e.dataTransfer.getData("node_id"));
+
+          let parentId = e.target
+              .closest(".file") ? e.target
+              .closest(".file")
+              .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
+          if(Array.isArray(nodeId)) {
+            nodeId.map((id)=> {
+              self.requests.transferImage(
+                  {
+                    item_id: Number(id),
+                    folder_id: Number(parentId),
+                    access_token: "string"
+                  }
+              );
+            });
+          } else {
+            if($('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
+              self.requests.transferFolder(
+                  {
+                    folder_id: Number(nodeId),
+                    parent_id: Number(parentId),
+                    access_token: "string"
+                  },
+                  () => {
+                    self.htmlMaker.treeMove(nodeId, parentId);
+                  }
+              );
+            } else {
+              self.requests.transferImage(
+                  {
+                    item_id: Number(nodeId),
+                    folder_id: Number(parentId),
+                    access_token: "string"
+                  }
+              );
+            }
+          }
+          self.htmlMaker.dragElementOfTree = null;
+          self.htmlMaker.currentId = null;
+          self.selectedImage.length = 0;
+        });
+      });
+    }
+
   };
   //********App -> events********end
 
