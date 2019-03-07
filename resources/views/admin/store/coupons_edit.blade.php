@@ -240,7 +240,7 @@
 
         $("body").on('change', '.product-select', function () {
             $(".variations-box").html('');
-            AjaxCall("/admin/inventory/stock/get-variations-by-id", {id: $(this).val()}, function (res) {
+            AjaxCall("/admin/stock/get-variations-by-id", {id: $(this).val()}, function (res) {
                 if (!res.error) {
                     if (res.data.length) {
                         for (let i in res.data) {
