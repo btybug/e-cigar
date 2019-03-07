@@ -73,8 +73,10 @@
     <div id="sortable-9">
 
     </div>
-    <div class="connectedSortable" data-placement="top">
-        {!! render_widgets('top') !!}
+    <div class="row">
+        <div class="col-xs-12 connectedSortable" data-placement="top">
+            {!! render_widgets('top') !!}
+        </div>
     </div>
     <div class="row">
         <div class="col-md-3  connectedSortable" data-placement="small_left">

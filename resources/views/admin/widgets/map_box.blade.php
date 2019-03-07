@@ -2,7 +2,7 @@
 
 
 <div class="box box-solid bg-light-blue-gradient">
-    <div class="box-header">
+    <div>
         <!-- tools box -->
         <div class="pull-right box-tools">
             <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"

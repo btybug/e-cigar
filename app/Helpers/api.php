@@ -1154,11 +1154,16 @@ function render_widgets($placeholder)
     foreach ($widgets as $widget) {
         if (has_permission(Auth::user()->role, $widget->widget) && isset($permissions[$widget->widget])) {
             $content = view($permissions[$widget->widget]['view'])->render();
-            $html .= ' <div id="' . $widget->widget . '" style="position: relative">
-                <a class="delete-widget btn btn-warning" style="position: absolute;right:0;top:0;z-index: 99;">DELETE</a>
-                <div class="ui-sortable-handle">
+            $html .= '
+      
+            <div id="' . $widget->widget . '" style="position: relative" class="box--wall">
+                      <div class="panel panel-default">
+  <div class="panel-heading box-header"><a class="delete-widget btn btn-danger btn-sm pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+  <div class="panel-body"><div class="ui-sortable-handle">
                   ' . $content . '
-                </div>
+                </div></div>
+</div>
+                
             </div>';
         }
 

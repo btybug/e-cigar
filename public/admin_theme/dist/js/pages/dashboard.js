@@ -17,18 +17,28 @@ $('document').ready(function() {
     forcePlaceholderSize: true,
     zIndex: 999999,
     receive: function(i,el) {
-      if(el.sender.parent().attr('class') == 'modal_add_widget'){
+      console.log('----------------------------------')
+        if(el.sender.parent().attr('class') == 'modal_add_widget'){
         let render = el.item.find('.widget-html');
-        el.item.html('<div class="ui-sortable-handle">'+render.html()+'</div>');
+        // el.item.html('<div class="ui-sortable-handle">'+render.html()+'</div>');
+        el.item.html(` <div id="${el.item.attr('id')}" style="position: relative" class="box--wall">
+                      <div class="panel panel-default">
+  <div class="panel-heading box-header"><a class="delete-widget btn btn-danger btn-sm pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+  <div class="panel-body"><div class="ui-sortable-handle">
+                  ${render.html()}
+                </div></div>
+</div>
+                
+            </div>`);
       }
 
-      console.log('-------------------------------');
       console.log(el.item.attr('id'));
     },
     update: function(event, ui) {
       var section = $(this).data('placement');
       var productOrder = $(this).sortable('toArray').toString();
-      if(section != undefined && $(this).sortable('toArray').length > 0){
+
+        if(section != undefined && $(this).sortable('toArray').length > 0){
         $.ajax({
           url: "/admin/dashboard-save",
           type: 'POST',
@@ -48,13 +58,17 @@ $('document').ready(function() {
       }
       // $("#sortable-9").text (productOrder+ ' -- ' + section);
     },
+      beforeStop: function(ev, ui) {
+          console.log($(ui.placeholder).parent(), 'placeholder');
 
+          $(ui.placeholder).parent().children().length>2 && $(ui.placeholder).parent().sortable( "cancel")
+      }
   });
   $(".connectedSortable").disableSelection();
   $("body").on('click','.delete-widget',function () {
     let $_this = $(this);
     var section = $(this).closest('.connectedSortable').data('placement');
-    var key = $(this).parent().attr('id');
+    var key = $(this).closest('.box--wall').attr('id');
 
     $.ajax({
       url: "/admin/dashboard-delete",
@@ -65,7 +79,7 @@ $('document').ready(function() {
       },
       success: function (data) {
         if (!data.error) {
-          $_this.parent().remove();
+          $_this.closest('.box--wall').remove();
         }
       },
       error: function (data) {

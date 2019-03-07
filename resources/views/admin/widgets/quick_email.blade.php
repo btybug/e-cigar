@@ -1,14 +1,14 @@
 <div class="box box-primary">
-    <div class="box-header">
+    <div >
         <i class="fa fa-envelope"></i>
 
         <h3 class="box-title">Quick Email</h3>
         <!-- tools box -->
-        <div class="pull-right box-tools">
-            <button type="button" class="btn btn-primary btn-sm" data-widget="remove" data-toggle="tooltip"
-                    title="Remove">
-                <i class="fa fa-times"></i></button>
-        </div>
+        {{--<div class="pull-right box-tools">--}}
+            {{--<button type="button" class="btn btn-primary btn-sm" data-widget="remove" data-toggle="tooltip"--}}
+                    {{--title="Remove">--}}
+                {{--<i class="fa fa-times"></i></button>--}}
+        {{--</div>--}}
         <!-- /. tools -->
     </div>
     <div class="box-body">
