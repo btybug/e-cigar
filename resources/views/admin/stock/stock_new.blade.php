@@ -983,7 +983,7 @@
 
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
-                    "/admin/inventory/stock/add-package-variation",
+                    "/admin/stock/add-package-variation",
                     {},
                     function (res) {
                         if (!res.error) {
@@ -1026,7 +1026,7 @@
                     });
                     var variation = $(e).data('variation');
                     AjaxCall(
-                        "/admin/inventory/stock/render-variation-new-options",
+                        "/admin/stock/render-variation-new-options",
                         {variation : variation, objData : objData, attributesJson: attributesJson},
                         function (res) {
                             if (!res.error) {
@@ -1075,7 +1075,7 @@
                         addAttributeToJSONNew($(this))
                     });
                 AjaxCall(
-                    "/admin/inventory/stock/add-variation",
+                    "/admin/stock/add-variation",
                     {options: attributesJson},
                     function (res) {
                         if (!res.error) {
@@ -1125,7 +1125,7 @@
                     })
                 }
 
-                AjaxCall("/admin/inventory/stock/save-extra-option", {data: promotionPrices}, function (res) {
+                AjaxCall("/admin/stock/save-extra-option", {data: promotionPrices}, function (res) {
                     if (!res.error) {
                         $(".get-all-extra-tab").find('.promotion-elm').find(`.promotion_price[data-id='${promotionID}']`).val(res.data);
                         $(".get-all-extra-tab").find('.promotion-elm').find(`.promotion_type[data-id='${promotionID}']`).val(promotionType);
@@ -1143,7 +1143,7 @@
                 console.log(type);
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
-                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {stock_id:stock_id,id: id,type : type, price: price}, function (res) {
+                AjaxCall("/admin/stock/get-extra-option-variations", {stock_id:stock_id,id: id,type : type, price: price}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                     }
@@ -1154,7 +1154,7 @@
                 var data = $(this).find('.extra-item-data').val();
                 var options = JSON.parse(data)
                 console.log(data, options);
-                AjaxCall("/admin/inventory/stock/get-extra-option-variations", {options: options.test_options}, function (res) {
+                AjaxCall("/admin/stock/get-extra-option-variations", {options: options.test_options}, function (res) {
                     if (!res.error) {
 
                     }
@@ -1163,7 +1163,7 @@
 
 
             $("body").on('click', '.get-all-extra-tab-event', function () {
-                AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
+                AjaxCall("/admin/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
                         $("#v-option-form")[0].reset();
                         $("#v-option-form .v-options-list").html(res.html);
@@ -1175,7 +1175,7 @@
 
             $("body").on('click', '.save-v-option', function () {
                 var data = $("#v-option-form").serialize();
-                AjaxCall("/admin/inventory/stock/add-extra-option", data, function (res) {
+                AjaxCall("/admin/stock/add-extra-option", data, function (res) {
                     if (!res.error) {
                         $(".get-all-extra-tab").append(res.html);
                         $("#myExtraTabModal").modal('hide');
@@ -1201,7 +1201,7 @@
 
             $("body").on('click', '.add-new-v-option', function () {
                 let $this = $(this);
-                AjaxCall("/admin/inventory/stock/get-option-by-id", {id: null}, function (res) {
+                AjaxCall("/admin/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({ width: '100%' });
@@ -1212,7 +1212,7 @@
 
             $("body").on('click', '.add-specification', function () {
                 let $this = $(this);
-                AjaxCall("/admin/inventory/stock/get-specifications", {id: null}, function (res) {
+                AjaxCall("/admin/stock/get-specifications", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({ width: '100%' });
@@ -1225,7 +1225,7 @@
                 var value = $(this).val();
                 let vID = $(this).data('uid');
                 if (value != '') {
-                    AjaxCall("/admin/inventory/stock/get-option-by-id", {id: value}, function (res) {
+                    AjaxCall("/admin/stock/get-option-by-id", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-attribute[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
                             $(".tag-input-v").select2({ width: '100%' });
@@ -1239,7 +1239,7 @@
                 var value = $(this).val();
                 let vID = $(this).data('uid');
                 if (value != '') {
-                    AjaxCall("/admin/inventory/stock/get-specifications", {id: value}, function (res) {
+                    AjaxCall("/admin/stock/get-specifications", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-specification[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
                             $(".tag-input-v").select2({ width: '100%' });
