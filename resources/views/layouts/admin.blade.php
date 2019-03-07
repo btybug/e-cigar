@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/media-tree.css')}}">
   <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.csscustom.css?v='.rand(111,999))}}">
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
   <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
   <!--Media Button Stiles-->
@@ -142,7 +142,7 @@
 {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
 {{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>--}}
 {{--<script src="http://dev.bootydev.co.uk/resources/assets/js/nestedSortable/jquery.mjs.nestedSortable.js"></script>--}}
 {!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
 {!! Html::script("public/plugins/tree/jquery.mjs.nestedSortable.js")!!}

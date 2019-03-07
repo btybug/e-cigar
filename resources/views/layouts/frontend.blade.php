@@ -47,6 +47,7 @@
   {{-- <script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script> --}}
   {{-- *****packed in public/plugins/jquery.js***** --}}
   <script src={{asset("public/js/bundle/jquery.js")}}></script>
+
   {{--<script src={{asset("public/plugins/fancytree.js",['type' => 'module'])}}></script>--}}
 
 <!--[if lt IE 9]>-->

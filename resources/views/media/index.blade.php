@@ -20,7 +20,6 @@
                 {{--</button>--}}
                 {{--<div class="hr-line-dashed">--}}
 
-
                 {{--</div>--}}
 
                 <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"

@@ -48,6 +48,4 @@ mix.babel([
         'public/css/product-cards.css',
         'public/css/main.css',
         'public/css/flag-icon.css'
-    ], 'public/css/bundle.css')
-
-
+    ], 'public/css/bundle.css');

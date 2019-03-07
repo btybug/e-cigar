@@ -102,13 +102,14 @@
         </section>
         <!-- right col -->
     </div>
+
     <!-- /.row (main row) -->
     <div class="dashboard_modal_add_widget">
         @php
             $permissions=config('widgets');
         @endphp
         <div class="modal_add_widget">
-            <div class="connectedSortable">
+            <div class="connectedSortable" id="connectedSortable">
                 @foreach($permissions as $key => $item)
                     @if(! in_array($key,$widgets))
                         <div id="{{ $key }}">
@@ -143,8 +144,6 @@
     {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js?v=".rand(111,999))!!}
 
     <!-- Include the ViewSelector2 component script. -->
-
-
 
     <script>
         {{--open new widget sidebar--}}

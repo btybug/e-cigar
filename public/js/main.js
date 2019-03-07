@@ -99,7 +99,6 @@ $(function () {
             } else {
                 $('body').addClass('show-filter')
             }
-
         }
     );
 // filter show
@@ -115,7 +114,7 @@ $(function () {
         $(this).closest('.top-filters').find('.main-filters').toggleClass('closed-mobile');
         $(this).closest('.arrow-wrap').find('.nav-item--has-dropdown_dropdown').toggleClass('open');
 
-        $(this).closest('body').toggleClass('show-filter')
+        $(this).closest('body').toggleClass('show-filter');
     })
 
     // range
