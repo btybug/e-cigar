@@ -85,7 +85,7 @@ $('document').ready(function() {
           console.log(el, 'element');
           $('.modal_add_widget>#connectedSortable')
               .append(`<div id="${key}">
-                         <div class="box-header ui-sortable-handle" style="background-color: red; cursor: move;">
+                         <div class="box-header ui-sortable-handle">
                             ${name}
                          </div>
                          <div class="widget-html hide">
