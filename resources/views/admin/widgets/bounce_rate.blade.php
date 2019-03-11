@@ -1,5 +1,5 @@
     <!-- small box -->
-    <div class="small-box bg-green">
+    <div class="small-box bg-green widget-view" data-title="Bounce Rate">
         <div class="inner">
             <h3>53<sup style="font-size: 20px">%</sup></h3>
 

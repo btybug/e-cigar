@@ -1,7 +1,7 @@
 @inject('widget','App\Services\Widgets')
 
 
-<div class="box box-solid bg-light-blue-gradient">
+<div class="box box-solid bg-light-blue-gradient widget-view" data-title="Map Box">
     <div>
         <!-- tools box -->
         <div class="pull-right box-tools">

@@ -20,8 +20,9 @@ $('document').ready(function() {
       console.log('----------------------------------')
         if(el.sender.parent().attr('class') == 'modal_add_widget'){
         let render = el.item.find('.widget-html');
+        console.log(i, el.item)
         // el.item.html('<div class="ui-sortable-handle">'+render.html()+'</div>');
-        el.item.html(` <div id="${el.item.attr('id')}" style="position: relative" class="box--wall">
+        el.item.html(` <div id="${el.item.attr('id')}" style="position: relative" class="box--wall" data-title="${el.item.attr('data-title') || 'name'}">
                       <div class="panel panel-default">
   <div class="panel-heading box-header"><a class="delete-widget btn btn-danger btn-sm pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
   <div class="panel-body"><div class="ui-sortable-handle">
@@ -61,7 +62,7 @@ $('document').ready(function() {
       beforeStop: function(ev, ui) {
           console.log($(ui.placeholder).parent(), 'placeholder');
 
-          $(ui.placeholder).parent().children().length>2 && $(ui.placeholder).parent().sortable( "cancel")
+          $(ui.placeholder).parent().children().length>2 && $(ui.placeholder).parent().sortable( "cancel");
       }
   });
   $(".connectedSortable").disableSelection();
@@ -69,6 +70,8 @@ $('document').ready(function() {
     let $_this = $(this);
     var section = $(this).closest('.connectedSortable').data('placement');
     var key = $(this).closest('.box--wall').attr('id');
+    var name = $(this).closest('.box--wall').find('.widget-view').attr('data-title');
+    var el = $(this).closest('.box--wall').find('.widget-view')
 
     $.ajax({
       url: "/admin/dashboard-delete",
@@ -79,6 +82,16 @@ $('document').ready(function() {
       },
       success: function (data) {
         if (!data.error) {
+          console.log(el, 'element');
+          $('.modal_add_widget>#connectedSortable')
+              .append(`<div id="${key}">
+                         <div class="box-header ui-sortable-handle" style="background-color: red; cursor: move;">
+                            ${name}
+                         </div>
+                         <div class="widget-html hide">
+                           ${el[0].outerHTML}
+                         </div>
+                       </div>`)
           $_this.closest('.box--wall').remove();
         }
       },
@@ -298,7 +311,6 @@ $('document').ready(function() {
         }
       })
 
-    })
-    ;
-  })
+    });
+  });
 });

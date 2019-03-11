@@ -1,7 +1,7 @@
 @inject('widget','App\Services\Widgets')
 
     <!-- small box -->
-    <div class="small-box bg-aqua">
+    <div class="small-box bg-aqua widget-view" data-title="New Orders">
         <div class="inner">
             <h3>{!! $widget->newOrders() !!}</h3>
 

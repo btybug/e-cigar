@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row widget-view" data-title="Most Visited Pages">
     <div class="col-md-12">
         <div class="box box-primary">
             <aside class="Header-auth" id="header-auth">

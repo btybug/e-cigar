@@ -1,4 +1,4 @@
-<div class="box box-primary">
+<div class="box box-primary widget-view" data-title="Quick Email">
     <div >
         <i class="fa fa-envelope"></i>
 
