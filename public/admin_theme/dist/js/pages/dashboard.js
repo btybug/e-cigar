@@ -59,11 +59,11 @@ $('document').ready(function() {
       }
       // $("#sortable-9").text (productOrder+ ' -- ' + section);
     },
-      beforeStop: function(ev, ui) {
-          console.log($(ui.placeholder).parent(), 'placeholder');
-
-          $(ui.placeholder).parent().children().length>2 && $(ui.placeholder).parent().sortable( "cancel");
-      }
+      // beforeStop: function(ev, ui) {
+      //     console.log($(ui.placeholder).parent(), 'placeholder');
+      //
+      //     $(ui.placeholder).parent().children().length>2 && $(ui.placeholder).parent().sortable( "cancel");
+      // }
   });
   $(".connectedSortable").disableSelection();
   $("body").on('click','.delete-widget',function () {
