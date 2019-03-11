@@ -2,8 +2,8 @@
     position: fixed;
     top: 50px;
     bottom: 0;
-    width: 445px;
-    right: -445px;
+    width: 330px;
+    right: -330px;
     z-index: 1020;
     background: #303030;
     color: #ffffff;
@@ -20,4 +20,13 @@ right: 0;
     bottom: 0;
     overflow: auto;
     margin: 0;
+}
+.dashboard_modal_add_widget .box-header{
+    background-color: #3c8dbc;
+    cursor: move;
+    color: #fff;
+    border-top: 1px solid #fff;
+}
+.dashboard_modal_add_widget .close-widget-modal{
+    border-radius: 0;
 }

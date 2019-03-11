@@ -111,11 +111,12 @@
             $permissions=config('widgets');
         @endphp
         <div class="modal_add_widget">
+            <button class="btn btn-danger btn-block close-widget-modal">CLOSE</button>
             <div class="connectedSortable" id="connectedSortable">
                 @foreach($permissions as $key => $item)
                     @if(! in_array($key,$widgets))
                         <div id="{{ $key }}">
-                            <div class="box-header" style="background-color: red;">
+                            <div class="box-header">
                                {!! $item['name'] !!}
                             </div>
                             <div class="widget-html hide">
@@ -125,7 +126,7 @@
                     @endif
                 @endforeach
             </div>
-            <button class="btn btn-warning close-widget-modal">CLOSE</button>
+
         </div>
 
 
