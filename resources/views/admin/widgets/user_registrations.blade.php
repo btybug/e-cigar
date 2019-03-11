@@ -13,7 +13,7 @@
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             console.log(document.querySelector('.main-content [data-id="New Registered Users"]'), 'log------------')
-            document.querySelectorAll('.main-content [data-id="New Registered Users"]') && alert('New Registered Users')
+//            document.querySelectorAll('.main-content [data-id="New Registered Users"]') && alert('New Registered Users')
             console.log(gapi);
           })
         </script>

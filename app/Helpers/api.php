@@ -1157,8 +1157,21 @@ function render_widgets($placeholder)
             $html .= '
       
             <div id="' . $widget->widget . '" style="position: relative" class="box--wall">
-                      <div class="panel panel-default">
-  <div class="panel-heading box-header"><a class="delete-widget btn btn-danger btn-sm pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+                      <div class="panel panel-default dashboard--panel">
+  <div class="panel-heading box-header">
+  <h4 class="panel-title">' . $widget->widget. '</h4>
+  <div class="panel-heading-btn">
+  <a class="max--widget btn btn-max">
+  <i class="fa fa-expand" aria-hidden="true"></i>
+  </a>
+  <a class="min--widget btn btn-minus">
+  <i class="fa fa-minus" aria-hidden="true"></i>
+  </a>
+  <a class="delete-widget btn btn-del">
+  <i class="fa fa-times" aria-hidden="true"></i>
+  </a>
+  </div>
+    </div>
   <div class="panel-body"><div class="ui-sortable-handle">
                   ' . $content . '
                 </div></div>

@@ -34,3 +34,64 @@ right: 0;
     height: calc(100% - 34px);
     overflow: auto;
 }
+.dashboard--panel .panel-heading{
+    display: flex;
+    justify-content: space-between;
+    background-color: #242a30;
+    color: #ffffff;
+}
+.dashboard--panel .panel-heading .panel-heading-btn a{
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 8px;
+}
+.dashboard--panel .panel-heading .panel-heading-btn a:not(:last-of-type){
+    margin-right: 5px;
+}
+.dashboard--panel .panel-heading .panel-heading-btn{
+    display: flex;
+}
+.dashboard--panel .panel-heading .panel-heading-btn a.btn-del{
+    color: #fff;
+    background: #ff5b57;
+    border-color: #ff5b57;
+}
+.dashboard--panel .panel-heading .panel-heading-btn a.btn-minus{
+
+    background: #f59c1a;
+    border-color: #f59c1a;
+}
+.dashboard--panel .panel-heading .panel-heading-btn a.btn-max{
+    color: #2e353c;
+    background: #f2f3f4;
+    border-color: #f2f3f4;
+}
+.dashboard--panel .panel-heading:after,.dashboard--panel .panel-heading:before{
+    display: none;
+}
+.dashboard--panel .panel-heading{
+    background-color: #242a30 !important;
+}
+
+.dashboard--panel.fixed-widget {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    margin: 0;
+}
+body.overhidden{
+    overflow: hidden;
+}
+.dashboard--panel.fixed-widget .panel-body{
+    overflow: auto;
+    height: calc(100% - 38px);
+}

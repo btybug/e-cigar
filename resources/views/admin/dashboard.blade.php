@@ -149,6 +149,15 @@
     <!-- Include the ViewSelector2 component script. -->
 
     <script>
+        $('body').on('click', '.min--widget',function () {
+            $(this).closest('.dashboard--panel').find('.panel-body').slideToggle('hide')
+            $(this).find('i').toggleClass('fa-minus fa-plus')
+        });
+        $('body').on('click', '.max--widget', function() {
+            $(this).closest('.dashboard--panel').toggleClass('fixed-widget');
+            $(this).find('i').toggleClass('fa-expand fa-compress')
+            $(this).closest('body').toggleClass('overhidden')
+        });
         {{--open new widget sidebar--}}
         $('.open_dashboard_widget').on('click', function () {
             $('.dashboard_modal_add_widget').toggleClass('active');

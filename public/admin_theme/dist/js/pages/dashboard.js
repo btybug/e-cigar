@@ -17,14 +17,25 @@ $('document').ready(function() {
     forcePlaceholderSize: true,
     zIndex: 999999,
     receive: function(i,el) {
-      console.log('----------------------------------')
         if(el.sender.parent().attr('class') == 'modal_add_widget'){
         let render = el.item.find('.widget-html');
-        console.log(i, el.item)
-        // el.item.html('<div class="ui-sortable-handle">'+render.html()+'</div>');
+            // el.item.html('<div class="ui-sortable-handle">'+render.html()+'</div>');
         el.item.html(` <div id="${el.item.attr('id')}" style="position: relative" class="box--wall" data-title="${el.item.attr('data-title') || 'name'}">
-                      <div class="panel panel-default">
-  <div class="panel-heading box-header"><a class="delete-widget btn btn-danger btn-sm pull-right"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+                      <div class="panel panel-default dashboard--panel">
+                        <div class="panel-heading box-header">
+  <h4 class="panel-title">${render.find('.widget-view').attr('data-title')}</h4>
+  <div class="panel-heading-btn">
+  <a class="max--widget btn btn-max">
+  <i class="fa fa-expand" aria-hidden="true"></i>
+  </a>
+  <a class="min--widget btn btn-minus">
+  <i class="fa fa-minus" aria-hidden="true"></i>
+  </a>
+  <a class="delete-widget btn btn-del">
+  <i class="fa fa-times" aria-hidden="true"></i>
+  </a>
+  </div>
+    </div>
   <div class="panel-body"><div class="ui-sortable-handle">
                   ${render.html()}
                 </div></div>
@@ -33,7 +44,6 @@ $('document').ready(function() {
             </div>`);
       }
 
-      console.log(el.item.attr('id'));
     },
     update: function(event, ui) {
       var section = $(this).data('placement');
@@ -82,7 +92,6 @@ $('document').ready(function() {
       },
       success: function (data) {
         if (!data.error) {
-          console.log(el, 'element');
           $('.modal_add_widget>#connectedSortable')
               .append(`<div id="${key}">
                          <div class="box-header ui-sortable-handle">
