@@ -16,6 +16,7 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Stock;
+use App\Models\StockSeo;
 use App\Services\StockService;
 use Illuminate\Http\Request;
 
@@ -176,6 +177,22 @@ class StockController extends Controller
         }
 
         return \Response::json(['error' => false]);
+    }
+
+    private function createOrUpdateSeo($request, $stock_id)
+    {
+        $types = $request->only(['fb', 'general', 'twitter', 'robot']);
+        foreach ($types as $type => $data) {
+            foreach ($data as $name => $value) {
+                $seo = StockSeo::firstOrNew(['stock_id' => $stock_id, 'name' => $name, 'type' => $type]);
+                if ($value) {
+                    $seo->content = $value;
+                    $seo->save();
+                } else {
+                    $seo->delete();
+                }
+            }
+        }
     }
 
     public function cancelSale(Request $request)
