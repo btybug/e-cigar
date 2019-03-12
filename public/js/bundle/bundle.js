@@ -3048,7 +3048,17 @@ $(document).ready(function () {
     });
 });
 
+var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
+
+function onRecaptchaLoadCallback() {
+    var clientId = grecaptcha.render('inline-badge', {
+        'sitekey': GOOGLE_RECAPTCHA_KEY,
+        'badge': 'bottomleft',
+        'size': 'invisible'
+    });
+}
 (function () {
+
     $('#register-form-1').on('submit', function (ev) {
         var _this2 = this;
 
@@ -3056,6 +3066,7 @@ $(document).ready(function () {
 
         var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(function () {
+            grecaptcha.render({ badge: 'bottomleft' });
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
                 $('.g-recaptcha-response').val(token);
             }).then(function () {
@@ -3133,6 +3144,7 @@ $(document).ready(function () {
 
         var GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(function () {
+            grecaptcha.render({ badge: 'bottomleft' });
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name' }).then(function (token) {
                 $('.g-recaptcha-response').val(token);
             }).then(function () {

@@ -63,7 +63,8 @@
 
 
   @if(!Auth::check())
-    <script src='https://www.google.com/recaptcha/api.js?render={!! env('GOOGLE_RECAPTCHA_KEY') !!}'></script>
+
+        <script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=onRecaptchaLoadCallback"></script>
   @endif
   @yield('css')
 
@@ -71,6 +72,8 @@
 <body @if(\Request::route()->getName() == 'product_single')class="single-product-page" @endif>
 @include('cookieConsent::index')
 @include('frontend._partials.header')
+<div id="inline-badge" style="z-index: 999999999999"></div>
+
 @if(Session::has('alert'))
   <div class="alert alert-messages alert-{!! Session::get('alert.class','success') !!} alert-dismissible">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
