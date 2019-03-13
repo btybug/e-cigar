@@ -64,7 +64,7 @@
 
   @if(!Auth::check())
 
-        <script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=onRecaptchaLoadCallback"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=explicit&onload=onRecaptchaLoadCallback" ></script>
   @endif
   @yield('css')
 
@@ -117,7 +117,7 @@
 {{--<script src={{asset("public/js/login.js")}}></script>--}}
 {{--<script src={{asset("public/js/register.js")}}></script>--}}
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
-<script src={{asset("public/js/bundle/bundle.js?v=",rand(999,9999))}}></script>
+<script src={{asset("public/js/bundle/bundle.js?")}}></script>
 
 @yield('js')
 @stack('javascript')
