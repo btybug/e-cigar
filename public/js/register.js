@@ -1,6 +1,6 @@
 
 const GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
-
+console.log();
 function onRecaptchaLoadCallback() {
     var clientId = grecaptcha.render('inline-badge', {
         'sitekey': GOOGLE_RECAPTCHA_KEY,
@@ -15,9 +15,8 @@ function onRecaptchaLoadCallback() {
     $('#register-form-1').on('submit', function(ev) {
 		ev.preventDefault();
 
-        const GOOGLE_RECAPTCHA_KEY = $('meta[name="google-recaptcha-key"]').attr("content");
         grecaptcha.ready(() => {
-            grecaptcha.render({badge:'bottomleft'});
+
             grecaptcha.execute(GOOGLE_RECAPTCHA_KEY, { action: 'action_name'})
                 .then((token) => {
                     $('.g-recaptcha-response').val(token);
