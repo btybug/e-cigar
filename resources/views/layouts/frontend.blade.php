@@ -117,7 +117,7 @@
 {{--<script src={{asset("public/js/login.js")}}></script>--}}
 {{--<script src={{asset("public/js/register.js")}}></script>--}}
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
-<script src={{asset("public/js/bundle/bundle.js")}}></script>
+<script src={{asset("public/js/bundle/bundle.js?v=",rand(999,9999))}}></script>
 
 @yield('js')
 @stack('javascript')
