@@ -8,7 +8,9 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-{!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}
+{{--{!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
+<!-- Bootstrap 4.3.1 -->
+{!! Html::style("public/admin_theme/bower_components/bootstrap-4/css/bootstrap.min.css") !!}
 <!-- Font Awesome -->
 {!! Html::style("public/admin_theme/bower_components/font-awesome/css/font-awesome.min.css") !!}
 <!-- Ionicons -->
@@ -61,6 +63,7 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
+  <link rel="stylesheet" href="{{asset('public/admin_assets/css/newstyle.css?v='.rand(111,999))}}">
   {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/skin-lion/ui.fancytree.min.css">--}}
   @yield('css')
 
@@ -153,7 +156,9 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-{!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
+{{--{!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}--}}
+<!-- Bootstrap 4.3.1 -->
+{!! Html::script("public/admin_theme/bower_components/bootstrap-4/js/bootstrap.bundle.min.js")!!}
 <!-- Morris.js charts -->
 {!! Html::script("public/admin_theme/bower_components/raphael/raphael.min.js")!!}
 {!! Html::script("public/admin_theme/bower_components/morris.js/morris.min.js")!!}

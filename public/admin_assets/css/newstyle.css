@@ -1,0 +1,12 @@
+.main-header .sidebar-toggle{
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+.main-header .navbar{
+    padding: 0;
+}
+.main-header nav .navbar-custom-menu{
+
+}
