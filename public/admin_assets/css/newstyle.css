@@ -1,3 +1,6 @@
+body{
+    font-size: 14px;
+}
 .main-header .sidebar-toggle{
     align-self: stretch;
     display: flex;
@@ -7,6 +10,11 @@
 .main-header .navbar{
     padding: 0;
 }
-.main-header nav .navbar-custom-menu{
-
+.profile-header .profile-header-tab > li.dropdown{
+    margin-left: auto;
+}
+.profile-header .profile-header-tab{
+    position: absolute;
+    left: 0;
+    right: 0;
 }

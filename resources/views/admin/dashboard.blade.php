@@ -11,7 +11,7 @@
 @stop
 @section('content')
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-sm-12">
 
             <div class="profile-header">
 
@@ -37,23 +37,21 @@
                     </li>
                     <li class="nav-item"><a href="{{ route('admin_dashboard_profile') }}" class="nav-link ">Profile</a>
                     </li>
-                    <li class="dropdown pull-right">
+                    <li class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i>Create new</button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{!! route('admin_staff_new') !!}">Staff</a>
-                                <a href="#">Customer</a>
-                                <a href="{!! route('admin_stock_new') !!}">Product</a>
-                                <a href="http://e-cigar.com/admin/tools/attributes/new">Item</a>
-                                <a href="{!! route('admin_blog_create') !!}">Post</a>
-                            </li>
-                        </ul>
+                        <div class="dropdown-menu dropdown-menu-right">
+                                <a href="{!! route('admin_staff_new') !!}" class="dropdown-item">Staff</a>
+                                <a href="#" class="dropdown-item">Customer</a>
+                                <a href="{!! route('admin_stock_new') !!}" class="dropdown-item">Product</a>
+                                <a href="http://e-cigar.com/admin/tools/attributes/new" class="dropdown-item">Item</a>
+                                <a href="{!! route('admin_blog_create') !!}" class="dropdown-item">Post</a>
+                        </div>
                     </li>
                 </ul>
 
             </div>
 
-            <div class="clearfix">
+            <div class="clearfix mt-5">
                 <aside class="Header-auth main-header-auth pull-left" id="header-auth">
                     <div class="Header-embedApi" id="embed-api-auth-container" ga-on="click" ga-event-category="User"
                          ga-event-label="auth" ga-event-action="signin">
@@ -74,7 +72,7 @@
 
     </div>
     <div class="row">
-        <div class="col-xs-12 connectedSortable" data-placement="top">
+        <div class="col-sm-12 connectedSortable" data-placement="top">
             {!! render_widgets('top') !!}
         </div>
     </div>
