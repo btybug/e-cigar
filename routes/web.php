@@ -38,6 +38,7 @@ Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment
 
 Route::group(['prefix' => 'products'], function () {
     Route::post('/get-price', 'Frontend\ProductsController@getPrice')->name('product_get_price');
+    Route::post('/get-package-type-limit', 'Frontend\ProductsController@getPackageTypeLimit')->name('product_get_package_type_limit');
     Route::post('/get-subtotal-price', 'Frontend\ProductsController@getSubtotalPrice')->name('product_get_subtotal_price');
     Route::post('/get-product-variations', 'Frontend\ProductsController@getVariations')->name('product_get_variations');
     Route::post('/add-to-favorites', 'Frontend\ProductsController@attachFavorite')->name('product_add_to_favorites');

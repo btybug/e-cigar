@@ -124,6 +124,13 @@ class ProductsController extends Controller
         return \Response::json(['message' => 'See available options', 'error' => true]);
     }
 
+    public function getPackageTypeLimit(Request $request)
+    {
+        $variation = StockVariation::findOrFail($request->id);
+        return response()->json(['error' => false,'limit' => $variation->count_limit]);
+
+    }
+
     public function getSubtotalPrice(Request $request)
     {
         $variation = StockVariation::find($request->uid);

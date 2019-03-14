@@ -559,6 +559,61 @@
     <script>
         $(document).ready(function () {
 //          ----start  video carousel----
+//             function Init () {
+//                 var checkbox = document.getElement("myCheckbox");
+//                 if (checkbox.addEventListener) {
+//                     checkbox.addEventListener ("CheckboxStateChange", OnChangeCheckbox, false);
+//                 }
+//             }
+//
+//             function OnChangeCheckbox (event) {
+//                 var checkbox = event.target;
+//                 if (checkbox.checked) {
+//                     alert ("The check box is checked.");
+//                 }
+//                 else {
+//                     alert ("The check box is not checked.");
+//                 }
+//             }
+
+            $("body").on('change','.package_checkbox',function (e) {
+                e.preventDefault();
+                let _this = $(this).parent().find('.package_checkbox');
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('product_get_package_type_limit') }}",
+                    cache: false,
+                    datatype: "json",
+                    data: {id: _this.val()},
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            let limit = data.limit;
+                            let count =0;
+                            $(".package_checkbox").each(function (i, e) {
+                                console.log($(e));
+                                if ($(e).is(':checked')) {
+                                    console.log('checked',i);
+                                    count++;
+                                }
+                            });
+
+                            if(count > limit){
+                                console.log(count, 'a');
+                                _this.trigger('click');
+                                // _this.removeAttr('checked')
+                                // return false;
+                                setTimeout(function() {_this.removeAttr('checked')}, 1000);
+                            }
+
+                            console.log(limit,count);
+                        }
+                    }
+                });
+            });
 
             $(".video--carousel").carousel({
                 pagination: false,
