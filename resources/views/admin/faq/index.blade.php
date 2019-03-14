@@ -3,12 +3,12 @@
 
 @stop
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading clearfix">
             <h2 class="m-0 pull-left">Faq</h2>
            @ok('admin_faq_create') <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_faq_create') !!}">Add new</a></div>@endok
         </div>
-        <div class="panel-body">
+        <div class="card-body panel-body">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>

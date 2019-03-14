@@ -25,3 +25,20 @@ body{
     display: flex;
     align-items: center;
 }
+.badge >i{
+    color: #ffffff;
+}
+.comment--body table tbody tr td:last-of-type a{
+    margin-bottom: 2px;
+    width: 100%;
+}
+.comment--body table tbody tr td:last-of-type a>i{
+  color: #ffffff;
+}
+.comment--body .badge.comment-count{
+    background-color: black;
+    color: #fff;
+}
+#posts-table .badge{
+    color: #ffffff;
+}

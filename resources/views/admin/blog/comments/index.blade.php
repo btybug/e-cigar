@@ -3,13 +3,13 @@
 
 @stop
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading clearfix">
            <h2 class="m-0 pull-left">Comments</h2>
             <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_blog_comments_settings') !!}">Settings</a></div>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body panel-body">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>

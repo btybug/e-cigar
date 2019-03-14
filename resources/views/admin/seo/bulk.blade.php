@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading">
             <h2 class="m-0">SEO</h2>
         </div>
-         <div class="panel-body">
+         <div class="card-body panel-body">
              <ul class="nav nav-tabs" id="myTab" role="tablist">
-                 <li class="nav-item active">
-                     <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
+                 <li class="nav-item">
+                     <a class="nav-link active" id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
                         aria-controls="shipping" aria-selected="false">Posts</a>
                  </li>
                  <li class="nav-item ">
@@ -16,14 +16,14 @@
                  </li>
              </ul>
              <div class="pt-25">
-                 <div class="panel panel-default">
+                 <div class="card panel panel-default">
 
-                     <div class="panel-heading clearfix">
+                     <div class="card-header panel-heading clearfix">
                          <div class="pull-left">
                              <h3 class="m-0">{!! __('orders') !!}</h3>
                          </div>
                      </div>
-                     <div class="panel-body">
+                     <div class="card-body panel-body">
                          <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                              <thead>
                              <tr>
