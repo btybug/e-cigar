@@ -400,9 +400,9 @@
                                     <div class="form-group">
                                         <label for="dateFormat">Date Format</label>
                                         {!! Form::select('date_format',[
-                                        'MM/DD/YY'=>'MM/DD/YY',
-                                        'DD/MM/YY'=>'DD/MM/YY',
-                                        'YY/MM/DD'=>'YY/MM/DD',
+                                        'M/D/Y'=>'MM/DD/YY',
+                                        'D/M/Y'=>'DD/MM/YY',
+                                        'Y/M/D'=>'YY/MM/DD',
                                         ],null,['class'=>'form-control']) !!}
                                     </div>
                                     <div class="form-group">
