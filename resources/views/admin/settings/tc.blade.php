@@ -4,7 +4,7 @@
 @stop
 @section('content')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row flex-column">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 @ok('admin_settings_general')
                 <li class="nav-item ">
@@ -25,8 +25,8 @@
                 </li>
                 @endok
                 @ok('admin_settings_tc')
-                <li class="nav-item active">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tc') !!}" role="tab"
+                <li class="nav-item">
+                    <a class="nav-link active" id="general-tab" href="{!! route('admin_settings_tc') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">T&C</a>
                 </li>
                 @endok
@@ -37,7 +37,7 @@
                 </li>
                 @endok
                 @ok('admin_settings_about_us')
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link " id="general-tab" href="{!! route('admin_settings_about_us') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">About us</a>
                 </li>
@@ -47,19 +47,19 @@
                 {!! Form::model($model,['class'=>'form-horizontal']) !!}
                 {!! Form::hidden('type','tc') !!}
                 {!! Form::hidden('id',null) !!}
-                <div class="pull-right">
-                    <button class="btn btn-success">Save</button>
+                <div class="text-right mb-20 mt20">
+                    <button class="btn btn-info">Save</button>
                 </div>
                 <div class="clearfix"></div>
                 <div class="tab-content tab-content-store-settings">
-                    <div class="tab-pane fade active in" id="tab1"
+                    <div class="tab-pane fade active in show" id="tab1"
                          aria-labelledby="tab1-tab">
-                        <div class="row">
+                        <div class="row ">
                             <div class="col-md-12">
                                 @if(count(get_languages()))
                                     <ul class="nav nav-tabs">
                                         @foreach(get_languages() as $language)
-                                            <li class="@if($loop->first) active @endif"><a
+                                            <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
                                                         data-toggle="tab"
                                                         href="#{{ strtolower($language->code) }}">
                                                     <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
@@ -71,9 +71,9 @@
                                     @if(count(get_languages()))
                                         @foreach(get_languages() as $language)
                                             <div id="{{ strtolower($language->code) }}"
-                                                 class="tab-pane fade  @if($loop->first) in active @endif">
-                                                <div class="form-group">
-                                                    <label class="col-sm-2 control-label"><span
+                                                 class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                <div class="form-group row">
+                                                    <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                 data-toggle="tooltip"
                                                                 title=""
                                                                 data-original-title="Description">Description</span></label>
