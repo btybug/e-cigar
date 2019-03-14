@@ -73,3 +73,15 @@ label {
     margin-bottom: 0;
     height: auto;
 }
+.payment_gateways_tab .list_paymant .item .chek-title .title{
+    margin-bottom: 0;
+}
+.payment_gateways_tab .list_paymant .item .chek-title{
+    align-items: center;
+}
+.bread-crumbs .bread-crumbs-list{
+    margin-bottom: 0;
+}
+.bread-crumbs .bread-crumbs-list li.active a{
+color: #00c0ef !important;
+}

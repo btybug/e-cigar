@@ -1,15 +1,16 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="col-md-6">
-        {!! Form::model($model,['class'=>'form-horizontal']) !!}
+    <div class="row">
+        <div class="col-md-6">
+            {!! Form::model($model,['class'=>'form-horizontal']) !!}
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Export User </legend>
+                <legend class="border-bottom">Export User </legend>
 
                 <!-- Multiple Checkboxes -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="checkboxes">Columns</label>
+                <div class="form-group row">
+                    <label class="col-md-4 control-label text-right" for="checkboxes">Columns</label>
                     <div class="col-md-4">
                         <div class="checkbox">
                             <label for="name">
@@ -70,7 +71,7 @@
                     </div>
                 </div>
                 <!-- Button -->
-                <div class="form-group">
+                <div class="form-group row">
                     <label class="col-md-4 control-label" for="singlebutton"></label>
                     <div class="col-md-4">
                         <button id="singlebutton"  class="btn btn-primary">Save</button>
@@ -78,7 +79,8 @@
                 </div>
 
             </fieldset>
-        {!! Form::close() !!}
+            {!! Form::close() !!}
 
+        </div>
     </div>
 @stop

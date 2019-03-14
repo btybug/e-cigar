@@ -339,7 +339,7 @@ const App = function() {
 
     //********App -> htmlMaker -> makeBreadCrumbsItem********start
     makeBreadCrumbsItem: (key, name, state) => {
-      return (`<li class="bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
+      return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
                     bb-media-click="get_folder_items" >
                  <a>${name}</a>
                </li>`);
@@ -348,14 +348,14 @@ const App = function() {
 
     //********App -> htmlMaker -> editNameModal********start
     editNameModal: (id, name) => {
-      return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+      return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog">
             
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                       <h4 class="modal-title">Change title</h4>
+                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                     </div>
                     <div class="modal-body">
                           <input class="form-control edit-title-input" value="${name}">
@@ -371,14 +371,14 @@ const App = function() {
     },
 
     remove_modal: (id, name, iorf) => {
-      return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
-                <div class="modal-dialog">
+      return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
+                <div class="modal-dialog" role="document">
             
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                       <h4 class="modal-title">Remove images</h4>
+                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                     </div>
                     <div class="modal-body">
                           <p>Do You want to remove ${iorf === 'image' ? (name.length === 0 ? 'selected images' : 'image') : 'folder'} ${name}?</p>
@@ -396,7 +396,7 @@ const App = function() {
 
     //********App -> htmlMaker -> fullInfoModal********start
     fullInfoModal: (data, countId) => {
-      return `<div class="adminmodal modal fade in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
+      return `<div class="adminmodal modal fade show d-block in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-9 p-0">
                     <div class="modal-header" style="overflow: visible;">
@@ -749,14 +749,14 @@ const App = function() {
     //********App -> htmlMaker -> fullInfoModal********end
 
     copy_modal: (id) => {
-      return (`<div class="modal fade show custom_modal_edit" id="myModal" role="dialog">
+      return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog">
             
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                       <h4 class="modal-title">Copy images</h4>
+                      <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                     </div>
                     <div class="modal-body">
                           <p>Do You want to copy selected images?</p>
@@ -779,7 +779,7 @@ const App = function() {
     makeBreadCrumbs: (id, res) => {
       const self = this;
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      breadCrumbsList.innerHTML = `<li class="bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
+      breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
                                         bb-media-click="get_folder_items" >
                                      <a>Drive</a>
                                    </li>`;

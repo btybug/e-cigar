@@ -108,22 +108,28 @@
               <div class="col-lg-12 m-b-15"></div>
             </div>
             <div class="row m-0 {!! $settings['rightcontainer']??null !!} media_right_content">
-              <div class="col-xs-12 mb-20">
+              <div class="col-sm-12 mb-20">
 
-                <div class="bread-crumbs d-flex" style="justify-content: space-between;">
-                  <ul class="bread-crumbs-list breadcrumb" style="margin: 0">
-                    <li class="bread-crumbs-list-item active" data-crumbs-id="1"
-                        data-id="1" bb-media-click="get_folder_items" >
-                      <a>Drive</a>
-                    </li>
-                  </ul>
+                <div class="bread-crumbs d-flex " style="justify-content: space-between;">
+                  <nav aria-label="breadcrumb">
+                    <ol class="bread-crumbs-list breadcrumb">
+                      <li class="breadcrumb-item bread-crumbs-list-item active" data-crumbs-id="1"
+                          data-id="1" bb-media-click="get_folder_items"><a href="javascript:void(0);">Drive</a></li>
+                    </ol>
+                  </nav>
+                  {{--<ul class="bread-crumbs-list breadcrumb" style="margin: 0">--}}
+                    {{--<li class="bread-crumbs-list-item active" data-crumbs-id="1"--}}
+                        {{--data-id="1" bb-media-click="get_folder_items" >--}}
+                      {{--<a>Drive</a>--}}
+                    {{--</li>--}}
+                  {{--</ul>--}}
                   <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up"
                                                                                                  aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
               <div class="clearfix"></div>
-              <div class="row m-0 d-flex flex-wrap folderitems" style="position: relative;" data-media="folderitem"
+              <div class="row m-0 d-flex flex-wrap folderitems w-100" style="position: relative;" data-media="folderitem"
                    data-type="main-container">
               </div>
 
