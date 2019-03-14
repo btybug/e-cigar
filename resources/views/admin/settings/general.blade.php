@@ -403,9 +403,9 @@
                                         'd M Y'=>'1 July 2019',
                                         'M-D-y'=>'May-09-78',
                                         'm/d/y'=>'12/22/78',
-                                        'd/M/Y'=>'d/M/Y',
-                                        'D/M/Y'=>'D/M/Y',
-                                        'Y/M/D'=>'Y/M/D',
+                                        'd/M/Y'=>'31/DEC/2018',
+                                        'D/M/Y'=>'02/MAY/2016',
+                                        'Y/M/D'=>'2013/FEB/27',
                                         ],null,['class'=>'form-control']) !!}
                                     </div>
                                     <div class="form-group">
