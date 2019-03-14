@@ -14,6 +14,9 @@
         {!! Form::hidden("package_variation[$uniqueID][qty]",($package_variation) ? $package_variation->qty : null) !!}
     </td>
     <td>
+        {!! media_button("package_variation[$uniqueID][image]",($package_variation) ? $package_variation->image : null ) !!}
+    </td>
+    <td>
         <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-trash"></i></button>
     </td>
 </tr>

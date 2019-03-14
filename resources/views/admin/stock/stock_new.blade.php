@@ -510,11 +510,15 @@
                                             <div class="col-md-12">
                                                 <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
                                                     <div class="col-md-12">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
                                                             Price : {!! Form::text("package_variation_price",
                                                                 ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
                                                         </div>
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-4">
+                                                            Count Limit: {!! Form::number("package_variation_count_limit",
+                                                                ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
+                                                        </div>
+                                                        <div class="col-md-4">
                                                             <button class="btn btn-primary pull-right add-package-item"
                                                                     type="button">
                                                                 <i class="fa fa-plus"></i> Add new
@@ -528,6 +532,7 @@
                                                             <th>Name</th>
                                                             <th>SKU</th>
                                                             <th>Qty</th>
+                                                            <th>Image</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                         </thead>

@@ -75,7 +75,7 @@ class StockController extends Controller
     public function postStock(ProductsRequest $request)
     {
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
-            'variations', 'variation_single', 'package_variation_price', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
+            'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit' ,'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
 //        dd($request->get('promotions'),array_values($request->get('promotions')));
@@ -86,7 +86,7 @@ class StockController extends Controller
         } elseif ($data['type'] == 'simple_product') {
             $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
         } elseif ($data['type'] == 'package_product') {
-            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []), $request->get('package_variation_price'));
+            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []), $request->get('package_variation_price'),$request->get('package_variation_count_limit'));
         }
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));

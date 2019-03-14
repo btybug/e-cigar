@@ -1,12 +1,11 @@
-@foreach($model->variations as $variation)
-<div class="d-flex align-items-center product-single-info_colors-outer">
-    <label class="product-single-info_label text-uppercase mb-0 col-sm-2 pl-0 mr-0">{!! $variation->name !!}</label>
-    <div class="col-sm-10 px-sm-3 px-0">
-        <div class="product-single-colors">
-            <div class="d-flex flex-wrap">
-
-            </div>
-        </div>
-    </div>
+<div class="col-md-12">
+   <h3>Select {{ $model->variations->first()->count_limit }} items</h3>
 </div>
+@foreach($model->variations as $variation)
+    <div class="col-md-3">
+        <img src="{{ (media_image_tmb($variation->image)) }}" class="img img-responsive" width="100"/>
+        <input type="checkbox" id="pv{{ $variation->id }}" class="custom-control-input"
+               name="package_v[{{ $model->id }}][]"  value="{{ $variation->id }}" >
+        <label class="product-single-info_radio-label custom-control-label font-15 text-gray-clr pointer" for="pv{{ $variation->id }}">{{ $variation->name }}</label>
+    </div>
 @endforeach

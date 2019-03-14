@@ -14,7 +14,7 @@ class StockVariation extends Model
 {
     protected $table = 'stock_variations';
 
-    protected $fillable = ['stock_id','variation_id','image','qty','name','price'];
+    protected $fillable = ['stock_id','variation_id','image','qty','name','price','count_limit'];
 
     protected $dates = ['created_at','updated_at'];
 

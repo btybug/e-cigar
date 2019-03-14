@@ -151,7 +151,7 @@ class StockService
         }
     }
 
-    public function savePackageVariation($stock, array $data = [], $price)
+    public function savePackageVariation($stock, array $data = [], $price,$count_limit)
     {
         if (count($data)) {
             $deletableArray = [];
@@ -159,6 +159,7 @@ class StockService
                 $newData = $data;
                 $newData['stock_id'] = $stock->id;
                 $newData['price'] = $price;
+                $newData['count_limit'] = $count_limit;
 
                 if (isset($newData['id'])) {
                     $variation = StockVariation::find($newData['id']);

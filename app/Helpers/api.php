@@ -1111,7 +1111,7 @@ function media_image_tmb($path)
 {
     $e = explode('/', $path);
     $image = 'public/media/tmp/' . end($e);
-    return (File::exists(base_path($image))) ? url($image) : no_image();
+    return (File::exists(base_path($image)) && !File::isDirectory(base_path($image))) ? url($image) : no_image();
 
 }
 
