@@ -1,12 +1,12 @@
 <div class="options-form">
-    <div class="col-md-8 col-md-offset-1">
+
         {!! Form::model($model,['url'=>route('admin_tools_stickers_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
         @if(count(get_languages()))
             <div class="head-space-between">
             <ul class="nav nav-tabs">
                 @foreach(get_languages() as $language)
-                    <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                    <li class="nav-item @if($loop->first) active @endif"><a class="nav-link " data-toggle="tab"
                                                                    href="#{{ strtolower($language->code) }}">
                             <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                         </a></li>
@@ -72,5 +72,4 @@
 
         {!! Form::close() !!}
 
-    </div>
 </div>

@@ -4,8 +4,8 @@
 @stop
 @section('content')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading">
             <h2 class="m-0 pull-left">Notification</h2>
             @ok('create_admin_emails_notifications_send_email')
             <div class="text-right">
@@ -13,7 +13,7 @@
             </div>
             @endok
         </div>
-        <div class="panel-body">
+        <div class="card-body panel-body notification--body">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
