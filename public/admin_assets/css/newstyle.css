@@ -18,3 +18,10 @@ body{
     left: 0;
     right: 0;
 }
+.users-table--td-btn{
+    align-items: center;
+}
+.users-table--td-btn a {
+    display: flex;
+    align-items: center;
+}
