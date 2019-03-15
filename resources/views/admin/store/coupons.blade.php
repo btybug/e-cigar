@@ -3,9 +3,9 @@
 
 @stop
 @section('content')
-    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-        <li class="nav-item active">
-            <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One"
+    <ul class="nav nav-tabs card-header-tabs m-0" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="One"
                aria-selected="true">Active</a>
         </li>
         <li class="nav-item">
@@ -14,9 +14,9 @@
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade p-3 active in" id="one" role="tabpanel" aria-labelledby="one-tab">
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
+        <div class="tab-pane fade active in show" id="one" role="tabpanel" aria-labelledby="one-tab">
+            <div class="card panel panel-default">
+                <div class="card-header panel-heading clearfix">
                     <h2 class="pull-left m-0">Active Coupons</h2>
                     @ok('admin_store_coupons_new')
                     <div class="pull-right">
@@ -24,7 +24,7 @@
                     </div>
                     @endok
                 </div>
-                <div class="panel-body">
+                <div class="card-body panel-body">
                     <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>
@@ -46,12 +46,12 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade p-3" id="two" role="tabpanel" aria-labelledby="two-tab">
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
+        <div class="tab-pane fade " id="two" role="tabpanel" aria-labelledby="two-tab">
+            <div class="card panel panel-default">
+                <div class="card-header panel-heading clearfix">
                     <h2 class="pull-left m-0">Inactive Coupons</h2>
                 </div>
-                <div class="panel-body">
+                <div class="card-body panel-body">
                     <table id="archive-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>

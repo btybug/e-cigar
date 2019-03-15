@@ -3,14 +3,15 @@
 
 @stop
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading clearfix">
+
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading clearfix">
             <h2 class="m-0 pull-left">Orders</h2>
             <div class="pull-right">
 
             </div>
         </div>
-        <div class="panel-body">
+        <div class="card-body panel-body">
             <div class="row order-main-cnt">
                 <div class="col-md-8">
                     <div class="order-main-cnt_left-col">

@@ -87,4 +87,5 @@ color: #00c0ef !important;
 }
 .adminmodal .modal-dialog{
     max-width: 100%;
+    pointer-events: inherit;
 }
