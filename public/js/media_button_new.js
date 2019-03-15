@@ -410,8 +410,9 @@ const App = function() {
                     <div class="modal-title">
                     <img src="${data.url}" data-slideshow="typeext" style="width:100%">
                     </div>
-                    <div class="modal-footer col-md-9">
-<div style="display: flex; justify-content: space-between;">
+                    </div>
+                       <div class="modal-footer col-md-9">
+<div style="display: flex; justify-content: space-between;width:100%">
                     <button href="#" type="button" role="button" ${
               countId === 0 ? "disabled" : ""
               } data-id="${countId - 1}" class="btn btn-info popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
@@ -427,10 +428,9 @@ const App = function() {
                     </div>
 
             </div>
-                    </div>
                 </div>
                 <div class="popupDetail col-md-3 p-0">
-                    <div class="row p-t-10 p-b-10">
+                    <div class="row p-t-10 p-b-10 justify-content-center">
                         <div class="text-center">`+
                             // <button class="btn btn-default btn-block active" type="button" data-tabaction="details">Details</button>
           `<h4>${data.real_name}</h4></div>` +
@@ -441,7 +441,7 @@ const App = function() {
           //     <button class="btn btn-default btn-block" type="button">Option 3</button>
           // </div>
           `</div>
-                    <div class="row rowsection collapse in" data-tabcontent="details">
+                    <div class="row rowsection collapse in show" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
                             
                             <div class="table-responsive">
