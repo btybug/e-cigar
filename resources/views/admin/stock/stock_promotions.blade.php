@@ -20,14 +20,11 @@
     </section>
     {!! Form::close() !!}
     <section class="content stock-page">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="container-fluid p-25">
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="basic-left basic-wall">
-                                <div class="panel panel-default panel--promotions">
-                                    <div class="panel-heading ">
+                                <div class="card panel panel-default panel--promotions">
+                                    <div class="card-header panel-heading ">
                                         <div>
                                             Promotions
                                         </div>
@@ -44,7 +41,7 @@
 
                                         </div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body panel-body">
                                         <ul class="get-all-extra-tab">
                                             @foreach($sales as $sale)
                                                 <li style="display: flex" data-slug="{{ $sale->slug }}" class="promotion-elm"><a
@@ -53,7 +50,7 @@
                                                        @if($sale->canceled)
                                                             <a href="javascript:void(0)" class="btn btn-sm btn-archive">Archive</a>
                                                         @else
-                                                            <a href="javascript:void(0)" class="btn btn-sm btn-{{ $sale->availability }}">{{ $sale->availability }}</a>
+                                                            <a href="javascript:void(0)" class="btn btn-sm text-white btn-{{ $sale->availability }}">{{ $sale->availability }}</a>
                                                         @endif
                                                     </div>
                                                 </li>
@@ -80,9 +77,6 @@
                         </div>
 
                     </div>
-                </div>
-            </div>
-        </div>
         <!-- /.col -->
     </section>
 

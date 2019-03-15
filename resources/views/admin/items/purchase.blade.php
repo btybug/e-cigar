@@ -18,16 +18,20 @@
     </section>
     <div class="content main-content">
         <ul class="nav nav-tabs admin-profile-left">
-            <li class="active"><a data-toggle="tab" href="#purchases">Purchases</a></li>
-            <li><a data-toggle="tab" href="#sales">Sales</a></li>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#purchases">Purchases</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sales">Sales</a></li>
         </ul>
         <div class="tab-content">
-            <div id="purchases" class="tabe-pane fade in active media-new-tab basic-details-tab">
-                <div class="col-md-3 pull-right">
-                    <div class="col-md-6">Total Quantity:</div>
-                    <div class="col-md-6">{!! $item->purchase->sum('qty') !!}</div>
+            <div id="purchases" class="tabe-pane fade in active show media-new-tab basic-details-tab">
+                <div class="row justify-content-end mt-2">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">Total Quantity:</div>
+                            <div class="col-md-6">{!! $item->purchase->sum('qty') !!}</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-12">
+                <div>
                     <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                         <thead>
                         <tr>

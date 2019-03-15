@@ -95,3 +95,6 @@ color: #00c0ef !important;
 .table--store-settings .select2-container--default .select2-selection--multiple .select2-selection__rendered li{
     color: #000000;
 }
+.flex--none{
+    flex: none;
+}

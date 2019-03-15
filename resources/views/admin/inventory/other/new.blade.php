@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="coupons_new_page panel panel-default">
-        <div class="panel-heading">
+    <div class="coupons_new_page card panel panel-default">
+        <div class="card-header panel-heading">
             <h3 class="m-0">Others Form</h3>
         </div>
-        <div class="panel-body">
+        <div class="card-body panel-body">
             <div class="col-md-8">
                 {!! Form::model($model,['url' => route('post_admin_inventory_others_new'),'id' => 'form-coupon','class' => '']) !!}
                 {!! Form::hidden('id') !!}

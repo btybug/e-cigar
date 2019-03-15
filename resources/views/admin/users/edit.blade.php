@@ -3,14 +3,14 @@
 
 @stop
 @section('content')
-    <div class="panel panel-default users-log-wrapper">
-        <div class="panel-heading">
+    <div class="card panel panel-default users-log-wrapper">
+        <div class="card-header panel-heading">
             <div class="clearfix">
                 <div class="d-flex pull-left">
                     <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
                     <div class="d-inline-block ml-10">
                         {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
-                        <h3 class="profile-username mt-0 mb-5">{!! $user->name.' '.$user->last_name !!}</h3>
+                        <h3 class="profile-username mt-0 mb-1">{!! $user->name.' '.$user->last_name !!}</h3>
 
                         <p class="text-muted mb-0">{!! ($user->role)?$user->role->title:'User' !!}</p>
                     </div>
@@ -28,7 +28,7 @@
                         message
                     </button>
                     <div id="msgModal" class="modal" tabindex="-1" role="dialog">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h3 class="modal-title">Send message</h3>
@@ -51,7 +51,7 @@
 
         </div>
 
-        <div class="panel-body">
+        <div class="card-body panel-body">
 
             <div class="row d-flex">
                 <div class="col-md-2">
@@ -60,30 +60,30 @@
                         <div class="box-body box-profile">
                         </div>
                         <!-- /.box-body -->
-                        <ul class=" nav nav-pills nav-stacked admin-profile-left">
-                            <li class="active">
-                                <a href="#users_account" data-toggle="tab">Account</a>
+                        <ul class=" nav nav-pills flex-column nav-stacked admin-profile-left">
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0 active" href="#users_account" data-toggle="tab">Account</a>
                             </li>
-                            <li>
-                                <a href="#users_messages" data-toggle="tab">Messages</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_messages" data-toggle="tab">Messages</a>
                             </li>
-                            <li>
-                                <a href="#users_favourites" data-toggle="tab">Favourites</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_favourites" data-toggle="tab">Favourites</a>
                             </li>
-                            <li>
-                                <a href="#users_orders" data-toggle="tab">Orders</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_orders" data-toggle="tab">Orders</a>
                             </li>
-                            <li>
-                                <a href="#users_address" data-toggle="tab">Address</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_address" data-toggle="tab">Address</a>
                             </li>
-                            <li>
-                                <a href="#users_tickets" data-toggle="tab">Tickets</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_tickets" data-toggle="tab">Tickets</a>
                             </li>
-                            <li>
-                                <a href="#users_referrals" data-toggle="tab">Referrals</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_referrals" data-toggle="tab">Referrals</a>
                             </li>
-                            <li>
-                                <a href="#users_offer" data-toggle="tab">Special Offer</a>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_offer" data-toggle="tab">Special Offer</a>
                             </li>
                         </ul>
 
@@ -97,9 +97,9 @@
                     {{--<li><a href="#passwordDiv" data-toggle="tab">Password</a></li>--}}
                     {{--</ul>--}}
                     <div class="tab-content users-log-wrapper_tab-content">
-                        <div id="users_account" class="tab-pane fade in active">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                        <div id="users_account" class="tab-pane fade in active show">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
                                     <!-- The timeline -->
                                     {!! Form::model($user,['class'=>'']) !!}
                                     {!! Form::hidden('id') !!}
@@ -166,7 +166,7 @@
 
 
                                     <div class="form-group row">
-                                        <div class="col-sm-offset-2 col-sm-10 text-right">
+                                        <div class="col-sm-12 text-right">
                                             <button type="submit" class="btn btn-success">Update</button>
                                         </div>
                                     </div>
@@ -217,8 +217,8 @@
 
                         </div>
                         <div id="users_messages" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
                                     <table id="users-table" class="table table-style table-bordered" cellspacing="0"
                                            width="100%">
                                         <thead>
@@ -242,15 +242,15 @@
                             </div>
                         </div>
                         <div id="users_favourites" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
 
                                 </div>
                             </div>
                         </div>
                         <div id="users_orders" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
                                     <table id="orders-table" class="table table-style table-bordered" cellspacing="0"
                                            width="100%">
                                         <thead>
@@ -275,11 +275,11 @@
                             </div>
                         </div>
                         <div id="users_address" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
                                     <div class="col-md-12">
                                         <ul class="nav nav-pills nav-fill" role="tablist">
-                                            <li>
+                                            <li class="mr-1">
                                                 <a class="btn btn-info nav-link nav-link--new-address active"
                                                    id="billingAddress-tab"
                                                    data-toggle="tab" href="#billingAddress" role="tab"
@@ -302,7 +302,7 @@
                                                 {!! Form::hidden('user_id',$user->id) !!}
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">Name</label>
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Name</label>
                                                         <div class="col-sm-8">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
@@ -317,7 +317,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">Company
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Company
                                                             name</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('company',null,['class'=>'form-control']) !!}
@@ -326,7 +326,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">1st Line
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">1st Line
                                                             address</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
@@ -335,7 +335,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">2nd line
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">2nd line
                                                             address</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
@@ -344,7 +344,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">Country</label>
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Country</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
                                                         </div>
@@ -352,7 +352,7 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">Regions</label>
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Regions</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('region',null,['class'=>'form-control']) !!}
                                                         </div>
@@ -360,7 +360,7 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">City</label>
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">City</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('city',null,['class'=>'form-control']) !!}
                                                         </div>
@@ -368,7 +368,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4">Post
+                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Post
                                                             Code</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('post_code',null,['class'=>'form-control']) !!}
@@ -378,19 +378,19 @@
                                                 {!! Form::hidden('type','billing_address') !!}
                                                 {!! Form::hidden('id') !!}
                                                 <div class="form-group row">
-                                                    <div class="col-sm-offset-4 col-sm-8">
+                                                    <div class="offset-sm-4 col-sm-8">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </div>
                                                 {!! Form::close() !!}
                                             </div>
-                                            <div class="tab-pane fade p-4" id="addressBook" role="tabpanel"
+                                            <div class="tab-pane fade" id="addressBook" role="tabpanel"
                                                  aria-labelledby="addressBook-tab">
-                                                <div class="panel panel-default">
+                                                <div class="card panel panel-default">
 
-                                                    <div class="panel-body">
+                                                    <div class="card-body panel-body">
                                                         <div>
-                                                            <div class="p-5">
+                                                            <div>
 
                                                                 <div class="form-group row mb-5">
                                                                     <div class="col-md-5">
@@ -403,12 +403,12 @@
                                                                     <div class="col-md-7 d-flex">
                                                                         {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
                                                                         <button type="button"
-                                                                                class="nav-link nav-link--new-address btn btn-info address-book-new">
+                                                                                class="nav-link nav-link--new-address btn btn-info btn-sm address-book-new flex--none">
                                                                             + Add New
                                                                         </button>
                                                                     </div>
                                                                 </div>
-                                                                <div class="border py-3 px-4">
+                                                                <div>
                                                                     <div class="selected-form">
                                                                         @include("frontend.my_account._partials.new_address",['address_book'=>$default_shipping,'default' => true])
                                                                     </div>
@@ -432,22 +432,22 @@
                             </div>
                         </div>
                         <div id="users_tickets" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
 
                                 </div>
                             </div>
                         </div>
                         <div id="users_referrals" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
 
                                 </div>
                             </div>
                         </div>
                         <div id="users_offer" class="tab-pane fade">
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-body">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
 
                                 </div>
                             </div>

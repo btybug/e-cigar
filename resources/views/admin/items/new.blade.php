@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('content')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading">
             <h2 class="m-0">Add new item</h2>
         </div>
-        <div class="panel-body">
+        <div class="card-body panel-body">
             <div class="content main-content">
                 <ul class="nav nav-tabs admin-profile-left">
-                    <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div id="info" class="tab-pane fade in active media-new-tab basic-details-tab">
+                    <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
                         {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
                         {!! Form::hidden('id',null) !!}
                         <div class="row">
@@ -25,14 +25,14 @@
                                 <div class="basic-left basic-wall h-100">
                                     <div class="all-list">
                                         <ul class="nav nav-tabs media-list">
-                                            <li class="active"><a data-toggle="tab" href="#basics">Basics</a></li>
-                                            <li><a data-toggle="tab" href="#videos">Videos</a>
-                                            <li><a data-toggle="tab" href="#images">Images</a>
-                                            <li><a data-toggle="tab" href="#logistic">Logistic</a></li>
-                                            <li><a data-toggle="tab" href="#downloads">Downloads</a></li>
-                                            <li><a data-toggle="tab" href="#settings">Settings</a></li>
-                                            <li><a data-toggle="tab" href="#management">Management</a></li>
-                                            <li><a data-toggle="tab" href="#specifications">Specifications</a></li>
+                                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basics">Basics</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#videos">Videos</a>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#images">Images</a>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#logistic">Logistic</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#downloads">Downloads</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -40,11 +40,11 @@
                             <div class="col-md-9">
                                 <div class="basic-center basic-wall">
                                     <div class="tab-content media-list-tab-content">
-                                        <div id="basics" class="tab-pane fade in active">
+                                        <div id="basics" class="tab-pane fade in active show">
                                             @if(count(get_languages()))
                                                 <ul class="nav nav-tabs">
                                                     @foreach(get_languages() as $language)
-                                                        <li class="@if($loop->first) active @endif"><a
+                                                        <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
                                                                     data-toggle="tab"
                                                                     href="#{{ strtolower($language->code) }}">
                                                                 <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
@@ -56,9 +56,9 @@
                                                 @if(count(get_languages()))
                                                     @foreach(get_languages() as $language)
                                                         <div id="{{ strtolower($language->code) }}"
-                                                             class="tab-pane fade  @if($loop->first) in active @endif">
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label"><span
+                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                             data-toggle="tooltip"
                                                                             title=""
                                                                             data-original-title="Attribute Name Title">Product Name</span></label>
@@ -66,8 +66,8 @@
                                                                     {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label"><span
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                             data-toggle="tooltip"
                                                                             title=""
                                                                             data-original-title="Short Description">Short Description</span></label>
@@ -75,8 +75,8 @@
                                                                     {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label"><span
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                             data-toggle="tooltip"
                                                                             title=""
                                                                             data-original-title="Short Description">Long Description</span></label>
@@ -90,7 +90,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <label for="barcode" class="control-label col-sm-4">Barcode</label>
+                                                    <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Barcode</label>
                                                     <div class="col-sm-8">
                                                         {!! Form::text('barcode', null,
                                                         ['class' => 'form-control','id' => 'barcode']) !!}
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <label for="product_id" class="control-label col-sm-4">Product
+                                                    <label for="product_id" class="control-label col-sm-4 col-form-label text-right">Product
                                                         SKU</label>
                                                     <div class="col-sm-8">
                                                         {!! Form::text('sku', null,
@@ -110,7 +110,7 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="feature_image"
-                                                           class="control-label col-sm-4">Feature image</label>
+                                                           class="control-label col-sm-4 col-form-label text-right">Feature image</label>
                                                     <div class="col-sm-8">
                                                         {!! media_button('image',$model) !!}
                                                     </div>
@@ -157,8 +157,8 @@
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     <fieldset>
-                                                        <legend>Packaging Size</legend>
-                                                        <div class="form-group">
+                                                        <legend class="border-bottom">Packaging Size</legend>
+                                                        <div class="form-group row">
                                                             <label for="packaging_length"
                                                                    class=" col-sm-2">Length</label>
                                                             <div class="col-sm-10">
@@ -167,7 +167,7 @@
                                                                        id="packaging_length" type="text">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group row">
                                                             <label for="packaging_width"
                                                                    class="col-sm-2">Width</label>
                                                             <div class="col-sm-10">
@@ -176,7 +176,7 @@
                                                                        id="packaging_width" type="text">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group row">
                                                             <label for="packaging_height"
                                                                    class="col-sm-2">Height</label>
                                                             <div class="col-sm-10">
@@ -185,7 +185,7 @@
                                                                        id="packaging_height" type="text">
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
+                                                        <div class="form-group row">
                                                             <label for="packaging_weight"
                                                                    class="col-sm-2">Weight</label>
                                                             <div class="col-sm-10">
@@ -203,8 +203,8 @@
                                         </div>
                                         <div id="settings" class="tab-pane fade"></div>
                                         <div id="management" class="tab-pane fade">
-                                            <div class="panel panel-default">
-                                                <div class="panel-heading">
+                                            <div class="card panel panel-default">
+                                                <div class="card-header panel-heading">
                                                     <div class="row">
                                                         <div class="col-sm-12 clearfix">
                                                             <h3 class="pull-left m-0">All Suppliers</h3>
@@ -212,7 +212,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="panel-body">
+                                                <div class="card-body panel-body">
                                                     <div class="d-flex suppliers-block">
                                                         @if($model)
                                                             @foreach($model->suppliers as $supplier)
@@ -284,8 +284,8 @@
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Select Suppliers</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <ul class="all-list modal-stickers--list">

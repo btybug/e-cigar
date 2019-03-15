@@ -289,7 +289,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
             })
             ->addColumn('actions', function ($stock) {
-                return "<a class='badge btn-danger' href='#'><i class='fa fa-trash'></i></a>" . ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '') . ((userCan('admin_stock_promotion_edit')) ? "<a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>" : '');
+                return "<a class='badge btn-danger mr-1' href='#'><i class='fa fa-trash'></i></a>" . ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '') . ((userCan('admin_stock_promotion_edit')) ? "<a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>" : '');
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }

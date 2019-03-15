@@ -965,7 +965,7 @@ textarea {
 
 /*admin users*/
 .users-log-wrapper {
-    background: transparent;
+    /*background: transparent;*/
 }
 
 .users-log-wrapper_col,

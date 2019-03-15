@@ -140,8 +140,8 @@
     {!! Form::hidden('type','address_book') !!}
     {!! Form::hidden('id') !!}
     <div class="col-md-9 d-flex flex-sm-row flex-column-reverse justify-content-sm-end">
-        <button type="button" class="btn btn-transp text-uppercase btn-submit btn-submit-cancel font-15 mr-sm-3 rounded-0">Cancel</button>
-        <button type="button" class="btn ntfs-btn save-address-book rounded-0">Submit</button>
+        <button type="button" class="btn btn-danger btn-transp text-uppercase btn-submit btn-submit-cancel font-15 mr-sm-3 rounded-0">Cancel</button>
+        <button type="button" class="btn btn-info ntfs-btn save-address-book rounded-0">Submit</button>
     </div>
 </div>
 

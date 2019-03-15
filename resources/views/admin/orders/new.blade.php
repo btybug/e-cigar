@@ -23,9 +23,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="panel panel-default customer-notes">
-                                        <div class="panel-heading">Customer Notes</div>
-                                        <div class="panel-body">
+                                    <div class="card panel panel-default customer-notes">
+                                        <div class="card-header panel-heading">Customer Notes</div>
+                                        <div class="card-body panel-body">
                                             <div class="form-group">
                                         <textarea name="" id="customer_notes" cols="30" rows="10" class="form-control"
                                                   placeholder="Notes"></textarea>
@@ -39,9 +39,9 @@
 
                             </div>
                             <div class="text-right add-product">
-                                <button class="btn btn-primary" data-toggle="modal" data-target=".add-product-modal"><i
+                                <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-product-modal"><i
                                         class="fa fa-plus"></i><span
-                                        class="ml-5">Add Product</span></button>
+                                        class="ml-1">Add Product</span></button>
                             </div>
                         </div>
                     </div>
@@ -78,15 +78,15 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Modal Header</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
-                                    <label class="col-md-4">Select channel</label>
+                                    <label class="col-md-4 col-form-label">Select channel</label>
                                     <div class="col-md-8">
                                         <select name="" id="" class="form-control">
                                             <option value="">All</option>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <label class="col-md-4">Find User</label>
+                                    <label class="col-md-4 col-form-label">Find User</label>
                                     <div class="col-md-8">
                                         {!! Form::select('user_id',$users,null,['class' => 'form-control tag-input-v select-user','placeholder' => 'Search']) !!}
                                     </div>
@@ -121,11 +121,11 @@
         </div>
     </div>
     <div class="modal fade  add-product-modal" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-lg mw-100" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-header rounded-0">
                     <h4 class="modal-title">Modal Big</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-3">
@@ -154,7 +154,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -526,9 +526,9 @@
         }
 
         .content-wrapper {
-            min-height: 100% !important;
-            height: calc(100vh - 101px);
-            overflow: hidden;
+            /*min-height: 100% !important;*/
+            /*height: calc(100vh - 101px);*/
+            /*overflow: hidden;*/
         }
 
         body > .wrapper {
