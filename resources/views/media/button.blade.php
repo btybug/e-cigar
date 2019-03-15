@@ -69,7 +69,7 @@
                     @endphp
                     {!! $html !!}
                 @else
-                    <img src="{{ $mi }}" class="img img-responsive" data-id="{!! $uniqId !!}" alt="{{ $mi }}"/>
+                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"/>
                 @endif
             @endif
         @elseif($model && is_object($model))
@@ -84,7 +84,7 @@
                     @endphp
                     {!! $html !!}
                 @else
-                    <img src="{{ $mi }}" class="img img-responsive" data-id="{!! $uniqId !!}" alt="{{ $mi }}"/>
+                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"/>
                 @endif
             @endif
         @else
@@ -100,7 +100,7 @@
                     @endphp
                     {!! $html !!}
                 @else
-                    <img src="{{ $mi }}" class="img img-responsive" data-id="{!! $uniqId !!}" alt="{{ $mi }}"/>
+                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"/>
                 @endif
             @endif
         @endif
