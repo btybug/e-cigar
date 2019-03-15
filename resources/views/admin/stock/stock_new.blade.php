@@ -6,7 +6,7 @@
     {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
 
     <section class="content-top">
-        <div class="row m-0">
+        <div class="row">
             <div class="col-md-4">
                 <input type="text" placeholder="Product Name" class="form-control" value="{{ @$model->name }}" readonly>
             </div>
@@ -27,16 +27,17 @@
         </ol>
     </section>
 
-    <section class="content stock-page">
+    <section class="content stock-page mt-0 mt-4 p-0">
 
         <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs admin-profile-left">
-                    <li class="active"><a data-toggle="tab" href="#basic">Basic Details</a></li>
-                    <li><a data-toggle="tab" href="#technical">Technical</a></li>
-                    <li><a data-toggle="tab" href="#variations">Variations</a></li>
-                    <li><a data-toggle="tab" href="#extra">Extra</a></li>
-                    <li><a data-toggle="tab" href="#seo">Seo</a></li>
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic Details</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Variations</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                 </ul>
             </div>
 
@@ -44,7 +45,7 @@
             {!! Form::hidden('id',null,['id' => "stockID"]) !!}
             <div class="col-md-12">
                 <div class="tab-content tabs_content">
-                    <div id="basic" class="tab-pane fade in active basic-details-tab ">
+                    <div id="basic" class="tab-pane fade in active show basic-details-tab ">
                         <div class="container-fluid p-25">
                             <div class="row">
                                 <div class="col-md-12">
@@ -54,7 +55,8 @@
                                                 @if(count(get_languages()))
                                                     <ul class="nav nav-tabs">
                                                         @foreach(get_languages() as $language)
-                                                            <li class="@if($loop->first) active @endif"><a
+                                                            <li class="nav-item"><a
+                                                                        class="nav-link @if($loop->first) active @endif"
                                                                         data-toggle="tab"
                                                                         href="#{{ strtolower($language->code) }}">
                                                                     <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
@@ -66,9 +68,9 @@
                                                     @if(count(get_languages()))
                                                         @foreach(get_languages() as $language)
                                                             <div id="{{ strtolower($language->code) }}"
-                                                                 class="tab-pane fade  @if($loop->first) in active @endif">
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label"><span
+                                                                 class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                                 data-toggle="tooltip"
                                                                                 title=""
                                                                                 data-original-title="Attribute Name Title">Product Name</span></label>
@@ -76,8 +78,8 @@
                                                                         {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                     </div>
                                                                 </div>
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label"><span
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                                 data-toggle="tooltip"
                                                                                 title=""
                                                                                 data-original-title="Short Description">Short Description</span></label>
@@ -91,7 +93,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="product_id" class="control-label col-sm-4">Product
+                                                        <label for="product_id"
+                                                               class="control-label col-sm-4 control-label col-form-label text-right">Product
                                                             Slug (for url)</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('slug', null,
@@ -114,7 +117,8 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="feature_image"
-                                                               class="control-label col-sm-4">Feature image</label>
+                                                               class="control-label col-sm-4 control-label col-form-label text-right">Feature
+                                                            image</label>
                                                         <div class="col-sm-8">
                                                             {!! media_button('image',$model) !!}
                                                         </div>
@@ -123,7 +127,8 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="faq_tab"
-                                                               class="control-label col-sm-4">Faq Tab</label>
+                                                               class="control-label col-sm-4 control-label text-right">Faq
+                                                            Tab</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::checkbox('faq_tab', true,null,
                                                              ['class' => '','id' => 'faq_tab']) !!}
@@ -133,7 +138,8 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="reviews_tab"
-                                                               class="control-label col-sm-4">Reviews Tab</label>
+                                                               class="control-label col-sm-4 control-label  text-right">Reviews
+                                                            Tab</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::checkbox('reviews_tab', true,null,
                                                              ['class' => '','id' => 'reviews_tab']) !!}
@@ -147,7 +153,7 @@
 
                                                     </div>
                                                     <div class="col-md-7">
-                                                        <div class="form-group">
+                                                        <div class="form-group row">
                                                             <label class="col-sm-2 control-label">Status</label>
                                                             <div class="col-sm-10">
                                                                 {!! Form::select('status',[
@@ -165,7 +171,7 @@
                                                     </div>
                                                     <div class="col-md-7">
                                                         <div class="form-group">
-                                                            <label class="col-sm-2 control-label">Categories</label>
+                                                            <label class="col-sm-2 control-label pl-sm-0">Categories</label>
                                                             {!! Form::hidden('categories',(isset($checkedCategories))
                                                             ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
                                                             <div id="treeview_json"></div>
@@ -190,13 +196,22 @@
                                     <div class="basic-left basic-wall h-100">
                                         <div class="all-list">
                                             <ul class="nav nav-tabs media-list">
-                                                <li class="active"><a data-toggle="tab" href="#long_desc">Long Description</a></li>
-                                                <li><a data-toggle="tab" href="#mediastickers">Stickers</a></li>
-                                                <li><a data-toggle="tab" href="#mediaspecifications">Specifications</a></li>
-                                                <li><a data-toggle="tab" href="#mediavideos">Videos</a>
-                                                <li><a data-toggle="tab" href="#mediaotherimage">Images</a></li>
-                                                <li><a data-toggle="tab" href="#mediarelatedproducts">Related Products</a></li>
-                                                <li><a data-toggle="tab" href="#wiitb">What's in the box</a></li>
+                                                <li class="nav-item"><a class="nav-link active" data-toggle="tab"
+                                                                        href="#long_desc">Long Description</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#mediastickers">Stickers</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#mediaspecifications">Specifications</a>
+                                                </li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#mediavideos">Videos</a>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#mediaotherimage">Images</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#mediarelatedproducts">Related
+                                                        Products</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                        href="#wiitb">What's in the box</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -219,7 +234,8 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="media-videos-preview mt-20" style="display: flex;flex-wrap: wrap">
+                                                    <div class="media-videos-preview mt-20"
+                                                         style="display: flex;flex-wrap: wrap">
                                                         @if(isset($model->videos) && $model->videos && count($model->videos))
                                                             @foreach($model->videos as $video)
                                                                 <div class="video-single-item" style="display: flex">
@@ -242,7 +258,7 @@
                                             <div id="mediastickers" class="tab-pane fade ">
                                                 <div class="panel-heading d-flex justify-content-between align-items-center">
                                                     <h4>
-                                                       Stickers
+                                                        Stickers
                                                     </h4>
                                                     <button type="button" class="btn btn-info select-stickers">Select
                                                     </button>
@@ -253,7 +269,8 @@
                                                             @foreach($model->stickers as $sticker)
                                                                 <li style="display: flex" data-id="{{ $sticker->id }}"
                                                                     class="option-elm-attributes">
-                                                                    <a href="#" class="stick--link">{!! $sticker->name !!}</a>
+                                                                    <a href="#"
+                                                                       class="stick--link">{!! $sticker->name !!}</a>
                                                                     <div class="buttons">
                                                                         <a href="javascript:void(0)"
                                                                            class="remove-all-attributes btn btn-sm btn-danger">
@@ -282,7 +299,8 @@
                                                                 <li style="display: flex"
                                                                     data-id="{{ $related_product->id }}"
                                                                     class="option-elm-attributes">
-                                                                    <a href="#" class="stick--link">{!! $related_product->name !!}</a>
+                                                                    <a href="#"
+                                                                       class="stick--link">{!! $related_product->name !!}</a>
                                                                     <div class="buttons">
                                                                         <a href="javascript:void(0)"
                                                                            class="remove-all-attributes btn btn-sm btn-danger">
@@ -297,33 +315,35 @@
                                                 </div>
                                             </div>
                                             <div id="mediaspecifications" class="tab-pane fade ">
-                                                <table class="table table-responsive table--store-settings">
-                                                    <thead>
-                                                    <tr class="bg-my-light-pink">
-                                                        <th>Attributes</th>
-                                                        <th></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
+                                                <div class="table-responsive">
+                                                    <table class="table table--store-settings">
+                                                        <thead>
+                                                        <tr class="bg-my-light-pink">
+                                                            <th>Attributes</th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                        </thead>
 
-                                                    <tbody class="v-options-list">
+                                                        <tbody class="v-options-list">
                                                         @if($model && $model->stockAttrs)
                                                             @foreach($model->stockAttrs as $selected)
                                                                 @include('admin.inventory._partials.specifications')
                                                             @endforeach
                                                         @endif
-                                                    </tbody>
+                                                        </tbody>
 
-                                                    <tfoot>
-                                                    <tr class="add-new-ship-filed-container">
-                                                        <td colspan="4" class="text-right">
-                                                            <button type="button" class="btn btn-primary"><i
-                                                                        class="fa fa-plus-circle add-specification"></i>
-                                                            </button>
-                                                        </td>
-                                                    </tr>
-                                                    </tfoot>
-                                                </table>
+                                                        <tfoot>
+                                                        <tr class="add-new-ship-filed-container">
+                                                            <td colspan="4" class="text-right">
+                                                                <button type="button" class="btn btn-primary"><i
+                                                                            class="fa fa-plus-circle add-specification"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
                                             </div>
                                             <div id="wiitb" class="tab-pane fade ">
                                                 <div class="basic-center basic-wall">
@@ -332,7 +352,8 @@
                                                             @if(count(get_languages()))
                                                                 <ul class="nav nav-tabs">
                                                                     @foreach(get_languages() as $language)
-                                                                        <li class="@if($loop->first) active @endif"><a
+                                                                        <li class="nav-item"><a
+                                                                                    class="nav-link @if($loop->first) active @endif"
                                                                                     data-toggle="tab"
                                                                                     href="#{{ strtolower($language->code) }}">
                                                                                 <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
@@ -344,9 +365,9 @@
                                                                 @if(count(get_languages()))
                                                                     @foreach(get_languages() as $language)
                                                                         <div id="{{ strtolower($language->code) }}"
-                                                                             class="tab-pane fade  @if($loop->first) in active @endif">
-                                                                            <div class="form-group">
-                                                                                <label class="col-sm-2 control-label"><span
+                                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                                             data-toggle="tooltip"
                                                                                             title=""
                                                                                             data-original-title="what_is_content">Content</span></label>
@@ -362,7 +383,7 @@
                                                             <div class="form-group">
                                                                 <div class="row">
                                                                     <label for="feature_image"
-                                                                           class="control-label col-sm-4">Image</label>
+                                                                           class="control-label col-sm-4 col-form-label text-right">Image</label>
                                                                     <div class="col-sm-8">
                                                                         {!! media_button('what_is_image',$model) !!}
                                                                     </div>
@@ -372,14 +393,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div id="long_desc" class="tab-pane fade in active">
+                                            <div id="long_desc" class="tab-pane fade in active show">
                                                 <div class="basic-center basic-wall">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             @if(count(get_languages()))
                                                                 <ul class="nav nav-tabs">
                                                                     @foreach(get_languages() as $language)
-                                                                        <li class="@if($loop->first) active @endif"><a
+                                                                        <li class="nav-item"><a
+                                                                                    class="nav-link @if($loop->first) active @endif"
                                                                                     data-toggle="tab"
                                                                                     href="#{{ strtolower($language->code) }}">
                                                                                 <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
@@ -391,9 +413,9 @@
                                                                 @if(count(get_languages()))
                                                                     @foreach(get_languages() as $language)
                                                                         <div id="{{ strtolower($language->code) }}"
-                                                                             class="tab-pane fade  @if($loop->first) in active @endif">
-                                                                            <div class="form-group">
-                                                                                <label class="col-sm-2 control-label"><span
+                                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                            <div class="form-group row">
+                                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
                                                                                             data-toggle="tooltip"
                                                                                             title=""
                                                                                             data-original-title="Short Description">Long Description</span></label>
@@ -431,35 +453,36 @@
                                     </div>
                                 </div>
                                 <div class="table-product-variotion product-wall row {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
+                                    <div class="table-responsive">
+                                        <table class="table table--store-settings">
+                                            <thead>
+                                            <tr class="bg-my-light-pink">
+                                                <th>Attributes</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
 
-                                    <table class="table table-responsive table--store-settings">
-                                        <thead>
-                                        <tr class="bg-my-light-pink">
-                                            <th>Attributes</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
+                                            <tbody class="v-options-list get-all-attributes-tab">
+                                            @if($model)
+                                                @foreach($model->type_attrs as $typeAttr)
+                                                    @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
+                                                @endforeach
+                                            @endif
+                                            </tbody>
 
-                                        <tbody class="v-options-list get-all-attributes-tab">
-                                        @if($model)
-                                            @foreach($model->type_attrs as $typeAttr)
-                                                @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
-                                            @endforeach
-                                        @endif
-                                        </tbody>
-
-                                        <tfoot>
-                                        <tr class="add-new-ship-filed-container">
-                                            <td colspan="4" class="text-right">
-                                                <button type="button" class="btn btn-primary"><i
-                                                            class="fa fa-plus-circle add-new-v-option"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
-                                    </table>
+                                            <tfoot>
+                                            <tr class="add-new-ship-filed-container">
+                                                <td colspan="4" class="text-right">
+                                                    <button type="button" class="btn btn-primary"><i
+                                                                class="fa fa-plus-circle add-new-v-option"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
 
                                 </div>
 
@@ -510,22 +533,24 @@
                                             <div class="col-md-12">
                                                 <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
                                                     <div class="col-md-12">
-                                                        <div class="col-md-4">
-                                                            Price : {!! Form::text("package_variation_price",
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                Price : {!! Form::text("package_variation_price",
                                                                 ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            Count Limit: {!! Form::number("package_variation_count_limit",
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                Count Limit: {!! Form::number("package_variation_count_limit",
                                                                 ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <button class="btn btn-primary pull-right add-package-item"
-                                                                    type="button">
-                                                                <i class="fa fa-plus"></i> Add new
-                                                            </button>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <button class="btn btn-primary pull-right add-package-item"
+                                                                        type="button">
+                                                                    <i class="fa fa-plus"></i> Add new
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <table class="table table-style table-bordered" cellspacing="0"
+                                                    <table class="table table-style table-bordered mt-2" cellspacing="0"
                                                            width="100%">
                                                         <thead>
                                                         <tr>
@@ -567,6 +592,7 @@
                                                         <th>Qty</th>
                                                         <th>Price</th>
                                                         <th>Actions</th>
+                                                        <th></th>
                                                     </tr>
                                                     </thead>
                                                     <tbody class="all-list-attrs">
@@ -590,9 +616,9 @@
                                 <div class="col-md-12">
                                     <div class="basic-center basic-wall">
 
-                                        <div class="panel panel-default mt-20">
-                                            <div class="panel-heading">FB</div>
-                                            <div class="panel-body">
+                                        <div class="card panel panel-default mt-20">
+                                            <div class="card-header panel-heading">FB</div>
+                                            <div class="card-body panel-body">
                                                 <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook
@@ -623,9 +649,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="panel panel-default mt-20">
-                                            <div class="panel-heading">Twitter</div>
-                                            <div class="panel-body">
+                                        <div class="card panel panel-default mt-20">
+                                            <div class="card-header panel-heading">Twitter</div>
+                                            <div class="card-body panel-body">
                                                 <div class="form-group p-0-15">
                                                     <div class="row">
                                                         <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter
@@ -791,14 +817,25 @@
                                             <ul class="get-all-extra-tab">
                                                 @if($model)
                                                     @foreach($model->promotions as $promotion)
-                                                        <li style="display: flex" data-stock-id="{{ $model->id }}" data-id="{{ $promotion->id }}" class="promotion-elm"><a
+                                                        <li style="display: flex" data-stock-id="{{ $model->id }}"
+                                                            data-id="{{ $promotion->id }}" class="promotion-elm"><a
                                                                     href="#">{{ $promotion->name }}</a>
                                                             <div class="buttons">
-                                                                <a href="javascript:void(0)" class="remove-promotion btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                                <a href="javascript:void(0)"
+                                                                   class="remove-promotion btn btn-sm btn-danger"><i
+                                                                            class="fa fa-trash"></i></a>
                                                             </div>
-                                                            <input type="hidden" name="promotions[{{ $promotion->id }}][id]" value="{{ $promotion->id }}">
-                                                            <input type="hidden" class="promotion_price" data-id="{{ $promotion->id }}" name="promotion_prices[{{ $promotion->id }}]" value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
-                                                            <input type="hidden" class="promotion_type" data-id="{{ $promotion->id }}" name="promotions[{{ $promotion->id }}][type]" value="{{ $promotion->pivot->type }}">
+                                                            <input type="hidden"
+                                                                   name="promotions[{{ $promotion->id }}][id]"
+                                                                   value="{{ $promotion->id }}">
+                                                            <input type="hidden" class="promotion_price"
+                                                                   data-id="{{ $promotion->id }}"
+                                                                   name="promotion_prices[{{ $promotion->id }}]"
+                                                                   value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
+                                                            <input type="hidden" class="promotion_type"
+                                                                   data-id="{{ $promotion->id }}"
+                                                                   name="promotions[{{ $promotion->id }}][type]"
+                                                                   value="{{ $promotion->pivot->type }}">
                                                         </li>
                                                     @endforeach
                                                 @endif
@@ -855,7 +892,7 @@
         </div>
     </div>
     <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -874,11 +911,12 @@
     </div>
 
     <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Select Products</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <ul class="all-list modal-stickers--list">
@@ -893,12 +931,12 @@
     </div><!-- /.modal -->
 
     <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Select Stickers</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Select Stickers</h4>
                 </div>
                 <div class="modal-body">
                     <ul class="all-list modal-stickers--list">
@@ -916,9 +954,9 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Variation form</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Variation form</h4>
                 </div>
                 <div class="modal-body variation-box">
 
@@ -942,29 +980,33 @@
             font-style: italic;
         }
 
-        .get-all-extra-tab .promotion-elm{
+        .get-all-extra-tab .promotion-elm {
             box-shadow: 0 0 4px #ccc;
             margin-bottom: 10px;
             align-items: center;
-            cursor:pointer;
+            cursor: pointer;
             -webkit-transition: 0.5s ease;
             -moz-transition: 0.5s ease;
             -ms-transition: 0.5s ease;
             -o-transition: 0.5s ease;
             transition: 0.5s ease;
         }
-        .get-all-extra-tab .promotion-elm.active,.get-all-extra-tab .promotion-elm:hover{
+
+        .get-all-extra-tab .promotion-elm.active, .get-all-extra-tab .promotion-elm:hover {
             background-color: #3eb3d7;
         }
-        .get-all-extra-tab .promotion-elm.active>a,.get-all-extra-tab .promotion-elm:hover>a{
+
+        .get-all-extra-tab .promotion-elm.active > a, .get-all-extra-tab .promotion-elm:hover > a {
             color: #ffffff;
         }
-        .get-all-extra-tab .promotion-elm>a{
-            padding-left:5px;
+
+        .get-all-extra-tab .promotion-elm > a {
+            padding-left: 5px;
             font-size: 16px;
             color: #000000;
         }
-        .get-all-extra-tab .buttons{
+
+        .get-all-extra-tab .buttons {
             margin-left: auto;
         }
 
@@ -981,10 +1023,10 @@
     <script>
 
         $(document).ready(function () {
-            $(".tag-input-v").select2({ width: '100%' });
-            setTimeout(function() {
+            $(".tag-input-v").select2({width: '100%'});
+            setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
-            },5);
+            }, 5);
 
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
@@ -1006,7 +1048,7 @@
                 let id = $_this.find('.select-attribute').val();
                 let inputOptions = $_this.find(`.input-items-value`);
                 let inputOptionsValue = inputOptions.val();
-                if(inputOptionsValue.length){
+                if (inputOptionsValue.length) {
                     attributesJson[id] = inputOptionsValue;
                 }
             }
@@ -1020,19 +1062,19 @@
                         addAttributeToJSONNew($(this))
                     });
 
-                list.each(function (i,e) {
+                list.each(function (i, e) {
                     var box = $(e).find('.variation-options-place');
                     var options = box.find('select');
                     box.empty();
                     var objData = {};
-                    options.each(function (i,e) {
+                    options.each(function (i, e) {
                         var attrId = $(e).data("attribute_id");
                         objData[attrId] = $(e).val();
                     });
                     var variation = $(e).data('variation');
                     AjaxCall(
                         "/admin/stock/render-variation-new-options",
-                        {variation : variation, objData : objData, attributesJson: attributesJson},
+                        {variation: variation, objData: objData, attributesJson: attributesJson},
                         function (res) {
                             if (!res.error) {
                                 box.append(res.html)
@@ -1044,7 +1086,9 @@
             }
 
 
-            $("body").on("change",".tag-input-v", function (e) { changeVariationOptions() });
+            $("body").on("change", ".tag-input-v", function (e) {
+                changeVariationOptions()
+            });
 
             $('body').on('change', '#variation-product-select', function () {
                 var value = $(this).val();
@@ -1118,13 +1162,13 @@
                 var promotionType = $(this).closest('.extra-item-data').find('.promotion-type').val();
                 var promotionPrices = {};
 
-                if(type == 'normal'){
-                    list.each(function (i,e) {
+                if (type == 'normal') {
+                    list.each(function (i, e) {
                         var variation = $(e).data('variation');
                         promotionPrices[variation] = $(this).val();
                     })
-                }else{
-                    list.each(function (i,e) {
+                } else {
+                    list.each(function (i, e) {
                         var variation = $(e).data('variation');
                         promotionPrices[variation] = $(".extra-price").val();
                     })
@@ -1139,7 +1183,7 @@
             })
 
             $("body").on('click', '.promotion-elm', function (e) {
-                if(e.target != this) return false;
+                if (e.target != this) return false;
 
                 var id = $(this).data('id');
                 var stock_id = $(this).data('stock-id');
@@ -1148,7 +1192,12 @@
                 console.log(type);
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
-                AjaxCall("/admin/stock/get-extra-option-variations", {stock_id:stock_id,id: id,type : type, price: price}, function (res) {
+                AjaxCall("/admin/stock/get-extra-option-variations", {
+                    stock_id: stock_id,
+                    id: id,
+                    type: type,
+                    price: price
+                }, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                     }
@@ -1201,7 +1250,7 @@
             $("body").on('click', '.remove-promotion', function () {
                 var id = $(this).closest('li').data('id')
                 $(this).closest('li').remove();
-                $(".extra-variations").find("[data-promotion-v='"+id+"']").remove();
+                $(".extra-variations").find("[data-promotion-v='" + id + "']").remove();
             });
 
             $("body").on('click', '.add-new-v-option', function () {
@@ -1209,7 +1258,7 @@
                 AjaxCall("/admin/stock/get-option-by-id", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
-                        $(".tag-input-v").select2({ width: '100%' });
+                        $(".tag-input-v").select2({width: '100%'});
                     }
                 });
             });
@@ -1220,7 +1269,7 @@
                 AjaxCall("/admin/stock/get-specifications", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
-                        $(".tag-input-v").select2({ width: '100%' });
+                        $(".tag-input-v").select2({width: '100%'});
                     }
                 });
             });
@@ -1233,7 +1282,7 @@
                     AjaxCall("/admin/stock/get-option-by-id", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-attribute[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
-                            $(".tag-input-v").select2({ width: '100%' });
+                            $(".tag-input-v").select2({width: '100%'});
                             changeVariationOptions();
                         }
                     });
@@ -1247,7 +1296,7 @@
                     AjaxCall("/admin/stock/get-specifications", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-specification[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
-                            $(".tag-input-v").select2({ width: '100%' });
+                            $(".tag-input-v").select2({width: '100%'});
                             changeVariationOptions();
                         }
                     });
@@ -1262,7 +1311,7 @@
                     .each(function () {
                         arr.push($(this).attr("data-id"));
                     });
-                AjaxCall("/admin/get-stocks", {arr:arr, promotion: 0}, function (res) {
+                AjaxCall("/admin/get-stocks", {arr: arr, promotion: 0}, function (res) {
                     if (!res.error) {
                         $("#productsModal .modal-body .all-list").empty();
                         res.data.forEach(item => {
@@ -1284,7 +1333,7 @@
                     .each(function () {
                         arr.push($(this).attr("data-id"));
                     });
-                AjaxCall("/admin/get-stocks", {arr:arr, promotion: 1}, function (res) {
+                AjaxCall("/admin/get-stocks", {arr: arr, promotion: 1}, function (res) {
                     if (!res.error) {
                         $("#productsModal .modal-body .all-list").empty();
                         res.data.forEach(item => {
@@ -1292,13 +1341,12 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-promotion" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    });
+                            $("#productsModal .modal-body .all-list").append(html);
+                        });
                         $("#productsModal").modal();
                     }
                 });
             });
-
 
 
             $("body").on("click", ".select-promotion", function () {

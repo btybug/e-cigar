@@ -89,3 +89,9 @@ color: #00c0ef !important;
     max-width: 100%;
     pointer-events: inherit;
 }
+.modal-stickers--list > li{
+    color: #ffffff;
+}
+.table--store-settings .select2-container--default .select2-selection--multiple .select2-selection__rendered li{
+    color: #000000;
+}

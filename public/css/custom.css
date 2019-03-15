@@ -697,7 +697,7 @@
   border: none;
 }
 
-.media-list li.active a {
+.media-list li a.active {
   background-color: #000 !important;
   color: white !important;
 }
