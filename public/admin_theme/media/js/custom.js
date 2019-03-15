@@ -580,7 +580,7 @@ function App() {
                         )}</div></div>`;
                         mainContainer.innerHTML += html;
                     });
-                    res.data.childs.forEach((folder, index) => {
+                    res.data.children.forEach((folder, index) => {
                         let html = `<div class="col-md-3 col-sm-6 col-xs-12"><div class="file-box folder-container">${self.htmlMaker.makeFolder(
                             folder
                         )}</div></div>`;
@@ -774,13 +774,13 @@ function App() {
             }
         },
         open_images(elm, e) {
-            console.log(multiple);
+            console.log('-----------------------------');
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
                 let urlValue = document.querySelector(".file-realtive-url")
                     .value;
-                console.log(inputId);
+                console.log(inputId, urlValue);
                 document.querySelector(`.${inputId}`).value = urlValue;
                 document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
                 // document.querySelector(`.${inputId}`).value = urlValue;

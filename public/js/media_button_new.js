@@ -75,6 +75,7 @@ const App = function() {
     currentSelectedFolder: null,
     currentDragedId: null,
     currentParentOfDrag: null,
+    currentDragTreeElementId: null,
 
     //********App -> htmlMaker -> makeFolder********start
     makeFolder: (data) => {
@@ -144,6 +145,18 @@ const App = function() {
     makeTreeLeaf: (id, name) => {
       return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}">
                   <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
+                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                  </button>
+                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+                      <i class="fa fa-trash" style="color:#ffffff"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                  </span>
+                </span>
                 </li>`);
     },
 
@@ -152,6 +165,18 @@ const App = function() {
                 <div class="oooo" bb-media-click="get_folder_items" draggable="true">
                   <div class="disclose oooo"><span class="closer"></span></div>
                   <div class="dd-handle oooo">${name}</div>
+                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                  </button>
+                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+                      <i class="fa fa-trash" style="color:#ffffff"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                  </span>
+                </span>
                 </div>
                 <ol class="dd-list">${makeTree(children).join(' ')}</ol>
                </li>`);
@@ -182,6 +207,18 @@ const App = function() {
           $(`li.dd-item[data-id="${parentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
                  <div class="disclose oooo"><span class="closer"></span></div>
                  <div class="dd-handle oooo">${$(`li.dd-item[data-id="${parentId}"]`).text().trim().split(' ')[0].trim()}</div>
+                 <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                  </button>
+                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+                      <i class="fa fa-trash" style="color:#ffffff"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                  </span>
+                </span>
                </div>`)
           $(`li.dd-item[data-id="${parentId}"]`).append(ol);
           $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
@@ -203,7 +240,7 @@ const App = function() {
     makeTreeFolder: (data) => {
       const self = this;
       const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
-      let {currentParentOfDrag} = this.htmlMaker;
+      let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
       const {dndForTree} = this.events;
       const {transferFolder} = this.requests;
       function makeTree (data) {
@@ -236,7 +273,7 @@ const App = function() {
           startCollapsed: true,
           update: function (ev, data) {
 
-            const id = $(ev.originalEvent.target).closest('li').attr('data-id');
+            const id = $(ev.originalEvent.target).closest('li').attr('data-id') || currentDragTreeElementId;
             const treeArray = $(this).nestedSortable('toArray');
             const parent_id = treeArray.filter((el) => el.id === id)[0].parent_id;
             let parentId = null;
@@ -278,6 +315,7 @@ const App = function() {
             };
 
             parentId === null && (function () {
+              console.log(id, 'id');
               transferFolder(
                   {
                     folder_id: Number(id),
@@ -315,6 +353,7 @@ const App = function() {
           },
           start: function (ev, data) {
             currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
+            currentDragTreeElementId = $(ev.originalEvent.target).closest('li').attr('data-id');
           },
           stop: function(ev, data) {
             // $('#page-wrapper .over-auto').css('overflow', 'auto');
@@ -1162,12 +1201,12 @@ var count = 0;
     remove_folder: (elm, e) => {
       e.stopPropagation();
       e.preventDefault();
-      const id = (elm.closest(".file") && elm.closest(".file").getAttribute("data-id")),
+      const id = (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id")),
             name = e.target
               .closest(".file") ? e.target
               .closest(".file")
               .querySelector(".file-name")
-              .textContent.trim() : elm.closest('.fancytree-folder').querySelector('.fancytree-title').innerText;
+              .textContent.trim() : elm.closest('.dd-item').querySelector('.dd-handle').innerText;
       $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
     },
 
@@ -1176,8 +1215,9 @@ var count = 0;
       e.stopPropagation();
       e.preventDefault();
 
-      const id = e.target.getAttribute("data-id") || (elm.closest(".file") && elm.closest(".file").getAttribute("data-id"));
+      const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
       if(!id) return;
+      console.log('----------------id', id)
       const tree = $('#folder-list2>ol'),
             leaf = tree.find(`[data-id="${id}"]`),
             {makeTreeLeaf} = this.htmlMaker,
@@ -1191,19 +1231,31 @@ var count = 0;
           access_token: "string"
         },
         () => {
+          console.log('globalFolderId', globalFolderId)
           !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
           close_name_modal();
-          if(globalFolderId === 1) {
-            tree.children(`[data-id="${id}"]`).remove();
-            return true;
-          }
+
           const ol = leaf.closest('ol');
           const li = leaf.closest('li');
           const key = ol.closest('li').attr('data-id');
-          const name = ol.closest('li').children('div')[0].innerText;
+          const name = ol.closest('li').children('div')[0] ? ol.closest('li').children('div')[0].innerText : null;
+          console.log('leaf :', leaf, 'ol: ', ol, 'li: ', li, 'key: ', key, 'name: ', name);
 
           li.remove();
-          ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
+          name && ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
+
+          if(globalFolderId === 1) {
+            tree.find(`[data-id="${id}"]`).remove();
+
+          }
+          // const ol = leaf.closest('ol');
+          // const li = leaf.closest('li');
+          // const key = ol.closest('li').attr('data-id');
+          // const name = ol.closest('li').children('div')[0].innerText;
+          // console.log('leaf :', leaf, 'ol: ', ol, 'li: ', li, 'key: ', key, 'name: ', name);
+          //
+          // li.remove();
+          // ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
         }
       );
     },
@@ -1518,6 +1570,7 @@ var count = 0;
               .closest(".file") ? e.target
               .closest(".file")
               .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
+          console.log(nodeId, parentId);
           if(Array.isArray(nodeId)) {
             nodeId.map((id)=> {
               self.requests.transferImage(
@@ -1596,11 +1649,11 @@ $('.new-folder-input').on('keypress', function (ev) {
   ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click();
 });
 
-$('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
-  if(ev.type === 'mouseenter') {
-    $(this).find('.file-actions').removeClass('d-none');
-  } else if(ev.type === 'mouseleave') {
-    $(this).find('.file-actions').addClass('d-none').removeClass('open');
+$('.folderitems, .dd-list').on('mouseover mouseout', 'div.file, li.dd-item', function(ev) {
+  if(ev.type === 'mouseover') {
+    $($(ev.target).closest("[data-id]").find('.file-actions')[0]).removeClass('d-none');
+  } else if(ev.type === 'mouseout') {
+    $($(ev.target).closest("[data-id]").find('.file-actions')[0]).addClass('d-none').removeClass('open');
   }
 });
 

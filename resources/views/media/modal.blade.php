@@ -59,7 +59,7 @@
 
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer" style="pointer-events: initial;">
         <input type="text" class="pull-left file-realtive-url" placeholder="upload file name" style="display: none">
         <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up"
                                                                                        aria-hidden="true"></i></button>
