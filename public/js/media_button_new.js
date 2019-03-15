@@ -1067,7 +1067,8 @@ var count = 0;
 
     //********App -> requests -> editImageName********start
     editFolderName: (obj = {}, cb) => {
-      shortAjax("/api/api-media/rename-folder", obj, res => {
+      console.log(obj);
+      shortAjax("/api/api-media/get-edit-folder", obj, res => {
         if (!res.error) {
           // cb(res);
         }
