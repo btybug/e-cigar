@@ -112,7 +112,7 @@
                     <img src="{!! url('/public/img/vapors-logo.png') !!}" alt="logo">
                 </a>
                 <div class="d-flex align-self-center cat-search">
-                    @if(\Request::route()->getName() != 'categories_front')
+                    @if(\Request::route() && \Request::route()->getName() != 'categories_front')
                         <div class="category-select">
                             @php
                                 $categories = \App\Models\Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
@@ -151,7 +151,7 @@
 </svg>
                     </span>
                     <div class="d-inline-block simple_select_wrapper currency--wrap">
-                        {!! Form::select('currency',site_currencies(),$currency,[
+                        {!! Form::select('currency',site_currencies(),@$currency,[
                            'class' =>'select-2 currency--select-2 main-select',
                            'id' => 'change-currency'
                        ]) !!}

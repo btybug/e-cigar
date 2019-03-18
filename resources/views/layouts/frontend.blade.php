@@ -69,7 +69,7 @@
   @yield('css')
 
 </head>
-<body @if(\Request::route()->getName() == 'product_single')class="single-product-page" @endif>
+<body @if(\Request::route() && \Request::route()->getName() == 'product_single')class="single-product-page" @endif>
 @include('cookieConsent::index')
 @include('frontend._partials.header')
 <div id="inline-badge" style="z-index: 999999999999"></div>
