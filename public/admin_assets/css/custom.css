@@ -1055,7 +1055,8 @@ div.remover-container .remover-container-zone .file {
     -ms-user-select: none !important;
 }
 
-.fileinput-remove {
+.fileinput-remove,
+.remover-remove {
     cursor: pointer;
 }
 

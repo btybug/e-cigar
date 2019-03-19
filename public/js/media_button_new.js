@@ -1849,3 +1849,9 @@ $('.remover-container-zone').on('drop', (ev) => drop(ev, removeHighlight));
 $('body').on('click', '.copy-button', (ev) => {
   app.selectedImage.length !== 0 && app.events.copy_images(app.selectedImage, ev);
 });
+
+document
+    .querySelector('.remover-container .remover-remove')
+    .onclick = function() {
+      $('.remover-container').toggleClass('d-none');
+    };

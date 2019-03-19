@@ -95,6 +95,7 @@
                            type="file" data-upload-url="{!! route('media_upload') !!}">
                   </div>
                   <div class="remover-container mb-20 mt15 d-none" >
+                    <div class="close remover-remove">×</div>
                     <div class="remover-container-zone">
                       <div class="remover-container-content">
                         <p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>
