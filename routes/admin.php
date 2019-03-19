@@ -319,6 +319,9 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
     });
+    Route::group(['prefix' => 'barcode'], function () {
+        Route::get('/', 'Admin\BarcogesController@getIndex')->name('admin_inventory_barcodes');
+    });
 
 
 });
