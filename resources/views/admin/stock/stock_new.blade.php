@@ -538,10 +538,17 @@
                                                                 How Many items user can select : {!! Form::number("package_variation_count_limit",
                                                                 ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-2">
                                                                 Display as: {!! Form::select('package_variation_display_as',['menu' => 'Menu','list' => 'List'],null,['class' => 'form-control']) !!}
                                                             </div>
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-2">
+                                                                Price per: {!! Form::select('package_variation_price_per',['product' => 'Product','item' => 'Item'],null,['class' => 'form-control price_per']) !!}
+                                                            </div>
+                                                            <div class="col-md-2 product_price">
+                                                                Price : {!! Form::text("package_variation_price",
+                                                                ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
+                                                            </div>
+                                                            <div class="col-md-2">
                                                                 <button class="btn btn-primary pull-right add-package-item"
                                                                         type="button">
                                                                     <i class="fa fa-plus"></i> Add new
@@ -557,6 +564,7 @@
                                                             <th>SKU</th>
                                                             <th>Qty</th>
                                                             <th>Image</th>
+                                                            <th class="package_price hide">Price</th>
                                                             <th>Actions</th>
                                                         </tr>
                                                         </thead>
@@ -1034,10 +1042,26 @@
                     function (res) {
                         if (!res.error) {
                             $('.package-variation-box').append(res.html)
+                            package_product_price($(".price_per").val());
                         }
                     }
                 );
             })
+
+            $("body").on('change', '.price_per', function () {
+                let value = $(this).val();
+                package_product_price(value);
+            })
+
+            function package_product_price(type){
+                if(type == 'product'){
+                    $("body").find('.package_price').removeClass('show').addClass('hide');
+                    $("body").find('.product_price').removeClass('hide').addClass('show');
+                }else{
+                    $("body").find('.product_price').removeClass('show').addClass('hide');
+                    $("body").find('.package_price').removeClass('hide').addClass('show');
+                }
+            }
 
             $("body").on('click', '.submit-form', function () {
                 $(".stock-form").submit();

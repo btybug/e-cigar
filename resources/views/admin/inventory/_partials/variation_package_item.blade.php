@@ -16,6 +16,9 @@
     <td>
         {!! media_button("package_variation[$uniqueID][image]",($package_variation) ? $package_variation->image : null ) !!}
     </td>
+    <td class="package_price hide">
+        {!! Form::number("package_variation[$uniqueID][price]",($package_variation) ? $package_variation->price : null,['class' => 'form-control']) !!}
+    </td>
     <td>
         <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-trash"></i></button>
     </td>
