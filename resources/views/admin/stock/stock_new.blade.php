@@ -535,12 +535,11 @@
                                                     <div class="col-md-12">
                                                         <div class="row">
                                                             <div class="col-md-4">
-                                                                Price : {!! Form::text("package_variation_price",
-                                                                ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
+                                                                How Many items user can select : {!! Form::number("package_variation_count_limit",
+                                                                ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
                                                             </div>
                                                             <div class="col-md-4">
-                                                                Count Limit: {!! Form::number("package_variation_count_limit",
-                                                                ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
+                                                                Display as: {!! Form::select('package_variation_display_as',['menu' => 'Menu','list' => 'List'],null,['class' => 'form-control']) !!}
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <button class="btn btn-primary pull-right add-package-item"
