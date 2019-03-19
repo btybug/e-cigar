@@ -11,6 +11,7 @@
                 <tr>
                     <th>#</th>
                     <th>Code</th>
+                    <th>Related Item</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -29,6 +30,7 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'code', name: 'code'},
+                    {data: 'item', name: 'item'},
                     {data: 'actions', name: 'actions'}
                 ],
                 order: [ [0, 'desc'] ]
