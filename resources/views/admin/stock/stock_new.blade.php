@@ -539,7 +539,8 @@
                                                                 ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
                                                             </div>
                                                             <div class="col-md-2">
-                                                                Display as: {!! Form::select('package_variation_display_as',['menu' => 'Menu','list' => 'List'],null,['class' => 'form-control']) !!}
+                                                                Display as: {!! Form::select('package_variation_display_as',
+                                                                ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],null,['class' => 'form-control']) !!}
                                                             </div>
                                                             <div class="col-md-2">
                                                                 Price per: {!! Form::select('package_variation_price_per',['product' => 'Product','item' => 'Item'],null,['class' => 'form-control price_per']) !!}
