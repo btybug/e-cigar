@@ -1085,8 +1085,8 @@ div.remover-container .remover-container-zone .file {
     }
 }
 
-.bestbetter-modal .media_modal_right_content .img{
-    display: flex;
+.bestbetter-modal .media_modal_right_content .img.active{
+    display: flex!important;
     align-items: center;
     justify-content: center;
     height: 100%;

@@ -12,7 +12,7 @@
         <div class="modal-body">
           <div class="content ">
             <div class="left">
-              <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -50px; cursor: pointer">DRIVE</div>
+              <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white;  margin-bottom: -50px; cursor: pointer">DRIVE</div>
               <div class="folder-list" id="jstree_html" class="demo" data-media="folder" data-menudata>
                 <ol class="dd-list sortable" id="fff">
 
