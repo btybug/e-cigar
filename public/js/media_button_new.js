@@ -143,7 +143,7 @@ const App = function() {
     //********App -> htmlMaker -> makeImage********end
 
     makeTreeLeaf: (id, name) => {
-      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}">
+      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder">
                   <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
                   <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
                   <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
@@ -161,7 +161,7 @@ const App = function() {
     },
 
     makeTreeBranch: (id, name, children, makeTree) => {
-      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}"">
+      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}" bb-media-type="folder">
                 <div class="oooo" bb-media-click="get_folder_items" draggable="true">
                   <div class="disclose oooo"><span class="closer"></span></div>
                   <div class="dd-handle oooo">${name}</div>
@@ -237,7 +237,7 @@ const App = function() {
 
 
     //********App -> htmlMaker -> makeTreeFolder********start
-    makeTreeFolder: (data) => {
+    makeTreeFolder: (data, el) => {
       const self = this;
       const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
       let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
@@ -258,7 +258,7 @@ const App = function() {
       $('#folder-list2').children().html(makeTree(data).join(' '));
 
       $('document').ready(() => {
-        $('#folder-list2>ol').nestedSortable({
+        $(el).nestedSortable({
           disableNesting: 'no-nest',
           forcePlaceholderSize: true,
           handle: 'div',
@@ -902,7 +902,7 @@ var count = 0;
               const id = this.getAttribute("data-id");
               e.dataTransfer.setDragImage(selected, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-              e.dataTransfer.setData("node_id", JSON.stringify(self.selectedImage)); // required otherwise doesn't work
+              e.dataTransfer.setData("node_id", JSON.stringify({data: self.selectedImage, item: 'image'})); // required otherwise doesn't work
               // setTimeout(() => (this.className = "invisible"), 0);
               // self.htmlMaker.currentId = id;
             } else if(!e.target.classList.contains('title-change')) {
@@ -920,7 +920,7 @@ var count = 0;
               const id = this.getAttribute("data-id");
               e.dataTransfer.setDragImage(crt, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
-              e.dataTransfer.setData("node_id", id); // required otherwise doesn't work
+              e.dataTransfer.setData("node_id", JSON.stringify({data: id, item: $(e.target).closest('[bb-media-type]').attr('bb-media-type')})); // required otherwise doesn't work
               self.dragElement = $(`li.dd-item[data-id="${id}"]`).closest('li').parent().closest('li').length !== 0 ? $(`li.dd-item[data-id="${id}"]`).closest('li').parent().closest('li').attr('data-id') : 1;
               // setTimeout(() => (this.className = "invisible"), 0);
               self.htmlMaker.currentId = id;
@@ -945,7 +945,8 @@ var count = 0;
         });
         folder.addEventListener("drop", function (e) {
           this.classList.remove("over");
-          let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id"));
+          console.log(JSON.parse(e.dataTransfer.getData("node_id")))
+          let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id")).data;
           let parentId = e.target
               .closest(".file")
               .getAttribute("data-id");
@@ -1021,7 +1022,7 @@ var count = 0;
             mainContainer.innerHTML += html;
           });
           if (tree) {
-            this.htmlMaker.makeTreeFolder(res.data.children);
+            this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2>ol');
           }
           globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
@@ -1578,7 +1579,7 @@ var count = 0;
         folder.addEventListener("drop", function (e) {
           e.stopPropagation();
           this.classList.remove("over");
-          let nodeId = JSON.parse(e.dataTransfer.getData("node_id"));
+          let nodeId = JSON.parse(e.dataTransfer.getData("node_id")).data;
 
           let parentId = e.target
               .closest(".file") ? e.target
@@ -1757,10 +1758,10 @@ const removeList = () => {
 };
 
 const removeImageDrop = (ev, data) => {
-  const imgTag = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('img');
-  imgTag.attr('draggable', 'false')
-  const name = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('.file-title').text().trim();
-  const div = `<div class="folderitems col-xl-2 col-sm-6" draggable="false">
+    const imgTag = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('img');
+    imgTag.attr('draggable', 'false');
+    const name = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('.file-title').text().trim();
+    const div = `<div class="folderitems col-xl-2 col-sm-6" draggable="false">
                   <div class="file-box image-container">
                       <div draggable="false" data-id="${data}" class="file file-remove" >
                           <a  bb-media-type="image">
@@ -1781,33 +1782,40 @@ const removeImageDrop = (ev, data) => {
                       </div>
                   </div>
                 </div>`;
-  $(ev.target).closest('div').find('p.remove_title').remove();
-  $('.remover-container-content .images_container').prepend(div);
-  $('.remover-container-content').find('.remove-checked-item').length === 0
-  && $('.remove-button_container').append(`
+    $(ev.target).closest('div').find('p.remove_title').remove();
+    $('.remover-container-content .images_container').prepend(div);
+    $('.remover-container-content').find('.remove-checked-item').length === 0
+    && $('.remove-button_container').append(`
         <div>
           <button class="remove-checked-item btn btn-danger" onclick="removeImages()">Delete</button>
           <button class="remove-in-list btn btn-danger" onclick="removeList()">List Remove</button>
           <input type="checkbox" onchange="checkedAll(this)" checked class="checkbox-all">
         </div>`);
-  $(`.media_right_content .folderitems .image-container [data-id="${data}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
-  app.selectedImage.length = 0;
+    $(`.media_right_content .folderitems .image-container [data-id="${data}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
+    app.selectedImage.length = 0;
 };
 
 const drop = (ev, cb) => {
   ev.preventDefault();
 
   const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
-  if(Array.isArray(data)) {
-    JSON.parse(ev.originalEvent.dataTransfer.getData('node_id')).map(el=>{
-      if($('.remover-container-content').find(`[data-id="${el}"]`).length === 0) {
-        removeImageDrop(ev, el);
+  const flag = data.item;
+  if(flag === 'image') {
+    console.log(data)
+    console.log($(ev))
+    if(Array.isArray(data.data)) {
+      data.data.map(el=>{
+        if($('.remover-container-content').find(`[data-id="${el}"]`).length === 0) {
+          removeImageDrop(ev, el);
+        }
+      });
+    } else {
+      if($('.remover-container-content').find(`[data-id="${data.data}"]`).length === 0) {
+        removeImageDrop(ev, data.data);
       }
-    });
-  } else {
-    if($('.remover-container-content').find(`[data-id="${data}"]`).length === 0) {
-      removeImageDrop(ev, data);
     }
+  } else if(flag === 'folder') {
+    alert('You may not add folders in DnD area!');
   }
   cb();
 };
@@ -1826,6 +1834,7 @@ $('.remover-container-zone').on('dragover dragleave', (ev) => {
 });
 
 $('.remover-container-zone').on('drop', (ev) => drop(ev, removeHighlight));
+
 
 $('body').on('click', '.copy-button', (ev) => {
   app.selectedImage.length !== 0 && app.events.copy_images(app.selectedImage, ev);
