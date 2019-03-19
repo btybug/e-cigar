@@ -316,3 +316,55 @@ color: #00c0ef !important;
 .order-summary-outer .shipping-payment .payment_method_paypal img{
     max-width: 100%;
 }
+/*modal media*/
+.bestbetter-modal .modal{
+    padding: 0 !important;
+}
+.bestbetter-modal .modal-dialog{
+    max-width: 100% !important;
+    width: 100%!important;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.bestbetter-modal .modal-header{
+    border-radius: 0;
+    box-shadow: none;
+    background: #0f0c29;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.bestbetter-modal .modal-header .close{
+    font-size: 30px;
+    align-self: center;
+}
+.bestbetter-modal .modal-content{
+    flex: 1;
+}
+.bestbetter-modal .content{
+    height:100%;
+    min-height: 100%;
+}
+.bestbetter-modal .content .left{
+    min-height: 100%;
+    height: 50px;
+}
+.bestbetter-modal .media_modal_right_content{
+    min-height: 100%;
+    height: 50px;
+}
+.bestbetter-modal .media_modal_right_content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+.bestbetter-modal .media_modal_right_content::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+}
+
+.bestbetter-modal .media_modal_right_content::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
