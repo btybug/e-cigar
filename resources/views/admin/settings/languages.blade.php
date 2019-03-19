@@ -10,13 +10,13 @@
                     </li>
                     <li class="nav-item">
                         @ok('admin_settings_language_manager')
-                        <a class="nav-link" href="{{ route('admin_settings_language_manager') }}">Language Manager </a>
+                        <a class="nav-link text-white" href="{{ route('admin_settings_language_manager') }}">Language Manager </a>
                         @endok
                     </li>
                 </ul>
                 @ok('admin_settings_languages_new')
                 <div class="box-tools pull-right">
-                    <a href="{!! route('admin_settings_languages_new') !!}" type="button"
+                    <a href="{!! route('admin_settings_languages_new') !!}"
                        class="btn btn-primary">Add</a>
                 </div>
                 @endok

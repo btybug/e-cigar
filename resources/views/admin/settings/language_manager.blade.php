@@ -6,7 +6,7 @@
             <div class="card-header panel-heading setting_lang_panel_head">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin_settings_languages') }}">Listing All Languages </a>
+                        <a class="nav-link text-white" href="{{ route('admin_settings_languages') }}">Listing All Languages </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="javascript:void(0);">Language Manager {{ __("home") }} {{ app()->getLocale() }}</a>
