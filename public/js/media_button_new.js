@@ -90,7 +90,7 @@ const App = function() {
                 </div>
                 <div class="file-name">
                 <span class="icon-file"><i class="fa fa-file-o" aria-hidden="true"></i></span>
-                <span class="file-title click-no title-change"  contenteditable="true" style="width: 100%;">${data.title}</span>
+                <span class="file-title click-no title-change"  contenteditable="true">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
                 <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
@@ -122,7 +122,7 @@ const App = function() {
             </div>
             <div class="file-name">
             <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
-            <span class="file-title title-change" contenteditable="true" style="width: 100%;">${data.real_name}</span>
+            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
             </div>
             <!--<small>Added: ${data.updated_at}</small>-->
             <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
@@ -154,7 +154,7 @@ const App = function() {
                       <i class="fa fa-trash" style="color:#ffffff"></i>
                     </button>
                     <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
                   </span>
                 </span>
                 </li>`);
@@ -174,7 +174,7 @@ const App = function() {
                       <i class="fa fa-trash" style="color:#ffffff"></i>
                     </button>
                     <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
                   </span>
                 </span>
                 </div>
@@ -216,7 +216,7 @@ const App = function() {
                       <i class="fa fa-trash" style="color:#ffffff"></i>
                     </button>
                     <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
                   </span>
                 </span>
                </div>`)
@@ -315,7 +315,6 @@ const App = function() {
             };
 
             parentId === null && (function () {
-              console.log(id, 'id');
               transferFolder(
                   {
                     folder_id: Number(id),
@@ -1067,7 +1066,6 @@ var count = 0;
 
     //********App -> requests -> editImageName********start
     editFolderName: (obj = {}, cb) => {
-      console.log(obj);
       shortAjax("/api/api-media/rename-folder", obj, res => {
         if (!res.error) {
           // cb(res);
@@ -1218,7 +1216,6 @@ var count = 0;
 
       const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
       if(!id) return;
-      console.log('----------------id', id)
       const tree = $('#folder-list2>ol'),
             leaf = tree.find(`[data-id="${id}"]`),
             {makeTreeLeaf} = this.htmlMaker,
@@ -1232,7 +1229,6 @@ var count = 0;
           access_token: "string"
         },
         () => {
-          console.log('globalFolderId', globalFolderId)
           !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
           close_name_modal();
 
@@ -1240,7 +1236,6 @@ var count = 0;
           const li = leaf.closest('li');
           const key = ol.closest('li').attr('data-id');
           const name = ol.closest('li').children('div')[0] ? ol.closest('li').children('div')[0].innerText : null;
-          console.log('leaf :', leaf, 'ol: ', ol, 'li: ', li, 'key: ', key, 'name: ', name);
 
           li.remove();
           name && ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
@@ -1464,19 +1459,19 @@ var count = 0;
       e.preventDefault();
       e.stopPropagation();
 
-      const id = e.target.closest(".file").getAttribute("data-id");
+      const id = e.target.closest(".file") ? e.target.closest(".file").getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
       const name = e.target
+          .closest(".file") ? e.target
           .closest(".file")
           .querySelector(".file-name")
-          .textContent.trim();
-      const flag = $(e.target.closest(".file")).find('[bb-media-type]').attr('bb-media-type');
+          .textContent.trim() : $(e.target).closest(".dd-item").find('[bb-media-click="get_folder_items"]').text().trim();
+      const flag = $(e.target.closest(".file")).find('[bb-media-type]').attr('bb-media-type') || (e.target.closest(".dd-item") && 'folder');
       $('#modal_area').html(this.htmlMaker.editNameModal(id, name, flag));
     },
     //********App -> events -> edit_item********end
 
     //********App -> events -> save_edited_title********start
     save_edited_title: (elm, e) => {
-      console.log(elm, e)
       const itemId = e.target.getAttribute("data-id");
       const name = document.querySelector(".edit-title-input").value;
       const flag = e.target.getAttribute("flag");
@@ -1493,7 +1488,6 @@ var count = 0;
             }
         );
       } else if(flag === "folder") {
-        console.log(Number(itemId), name)
         this.requests.editFolderName(
             {
               folder_id: Number(itemId),
@@ -1590,7 +1584,6 @@ var count = 0;
               .closest(".file") ? e.target
               .closest(".file")
               .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
-          console.log(nodeId, parentId);
           if(Array.isArray(nodeId)) {
             nodeId.map((id)=> {
               self.requests.transferImage(
@@ -1690,7 +1683,6 @@ $('body').on('blur', '[contenteditable]', function(ev) {
         }
     );
   } else {
-    console.log('edit folder')
     app.requests.editFolderName(
         {
           folder_id: Number(itemId),
@@ -1739,7 +1731,6 @@ const removeImages = () => {
       },
       () => {
         uncheckedImagesArray.map((imageId) => {
-          console.log('imageId', imageId)
           $(`.media_right_content .folderitems .image-container [data-id="${imageId}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
           app.selectedImage.length = 0;
         });
@@ -1767,8 +1758,9 @@ const removeList = () => {
 
 const removeImageDrop = (ev, data) => {
   const imgTag = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('img');
+  imgTag.attr('draggable', 'false')
   const name = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('.file-title').text().trim();
-  const div = `<div class="folderitems col-xl-2 col-sm-6">
+  const div = `<div class="folderitems col-xl-2 col-sm-6" draggable="false">
                   <div class="file-box image-container">
                       <div draggable="false" data-id="${data}" class="file file-remove" >
                           <a  bb-media-type="image">
