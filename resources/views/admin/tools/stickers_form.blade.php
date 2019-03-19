@@ -6,7 +6,7 @@
             <div class="head-space-between">
             <ul class="nav nav-tabs">
                 @foreach(get_languages() as $language)
-                    <li class="nav-item @if($loop->first) active @endif"><a class="nav-link " data-toggle="tab"
+                    <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab"
                                                                    href="#{{ strtolower($language->code) }}">
                             <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                         </a></li>
@@ -23,7 +23,7 @@
             @if(count(get_languages()))
                 @foreach(get_languages() as $language)
                     <div id="{{ strtolower($language->code) }}"
-                         class="tab-pane fade  @if($loop->first) in active @endif">
+                         class="tab-pane fade  @if($loop->first) in active show @endif">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-10">

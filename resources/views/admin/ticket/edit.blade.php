@@ -3,9 +3,9 @@
 @stop
 @section('content')
     <section class="tickets-edit-page">
-       <div class="panel panel-default">
-           <h2 class="panel-heading mt-0">Edit ticket</h2>
-          <div class="panel-body">
+       <div class="card panel panel-default">
+           <h2 class="card-header panel-heading mt-0">Edit ticket</h2>
+          <div class="card-body panel-body">
               <div class="row">
                   <div class="col-md-7 ">
                       <div class="subject-wall">
@@ -104,14 +104,14 @@
                   <div class="col-md-5 ">
                       {!! Form::model($model,['url' => route('admin_tickets_edit_post',$model->id), 'id' => 'ticket_form','files' => true]) !!}
                       {!! Form::hidden('id',null) !!}
-                      <div class="panel panel-default">
-                          <div class="panel-heading">
+                      <div class="card panel panel-default">
+                          <div class="card-header panel-heading">
                               <div class="text-right">
                                   {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                               </div>
                           </div>
 
-                         <div class="panel-body">
+                         <div class="card-body panel-body">
                              <div class="status-wall wall">
                                  <div class="row form-group">
                                      {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}

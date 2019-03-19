@@ -7,9 +7,9 @@
     <div class="stock-page">
         {!! Form::model($model,['url' => route('admin_tickets_new_save'), 'id' => 'ticket_form','files' => true]) !!}
         {!! Form::hidden('id',null) !!}
-       <div class="panel panel-default">
+       <div class="card panel panel-default">
 
-           <div class="panel-heading clearfix">
+           <div class="card-header panel-heading clearfix">
                <h2 class="mt-0 pull-left">New ticket</h2>
 
                <div class="pull-right btn-save">
@@ -17,7 +17,7 @@
                </div>
            </div>
 
-           <div class="panel-body">
+           <div class="card-body panel-body">
 
                <div class="row sortable-panels">
                    <div class="col-md-7 ">
@@ -247,12 +247,7 @@
 
 
     </script>
-    <script>
-        $(function () {
-            $(".sortable-panels").sortable();
-            $(".sortable-panels").disableSelection();
-        });
-    </script>
+
     <script src="/public/admin_theme/blog_new.js"></script>
 
 @stop

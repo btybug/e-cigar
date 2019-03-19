@@ -8,7 +8,7 @@
            <h2 class="m-0 pull-left">{!! __('Orders') !!}</h2>
             <div class="pull-right">
                 @ok('admin_orders_settings')<a class="btn btn-warning pull-right" href="{!! route('admin_orders_settings') !!}">Settings</a>@endok
-                @ok('admin_orders_new')<a class="btn btn-info pull-right mr-1" href="{!! route('admin_orders_new') !!}">New Order</a>@endok
+                @ok('admin_orders_new')<a class="btn btn-primary pull-right mr-1" href="{!! route('admin_orders_new') !!}">New Order</a>@endok
             </div>
         </div>
         <div class="card-body panel-body">

@@ -5,9 +5,9 @@
 @section('content')
     {!! Form::model($model,['class'=>'']) !!}
     <div class="inventory_attributes container-fluid">
-        <div class="row">
-            <div class="panel panel-default mb-0">
-                <div class="panel-heading clearfix">
+        <div class="row flex-column">
+            <div class="card panel panel-default mb-3">
+                <div class="card-header panel-heading clearfix">
                     <h2 class="m-0 pull-left">Add / Edit Attribute</h2>
                     <div class="button-save pull-right">
                         {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
@@ -25,14 +25,14 @@
                     </div>
                 @endif
 
-                <div class="panel-body basic-details-tab">
+                <div class="card-body panel-body basic-details-tab">
                        <div class="row">
                            <div class="col-md-8">
                                <div class="basic-wall">
                                    @if(count(get_languages()))
                                        <ul class="nav nav-tabs">
                                            @foreach(get_languages() as $language)
-                                               <li class="@if($loop->first) active @endif"><a data-toggle="tab"
+                                               <li class="nav-item "><a class="nav-link @if($loop->first) active @endif" data-toggle="tab"
                                                                                               href="#{{ strtolower($language->code) }}">
                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                                                    </a></li>
@@ -43,7 +43,7 @@
                                        @if(count(get_languages()))
                                            @foreach(get_languages() as $language)
                                                <div id="{{ strtolower($language->code) }}"
-                                                    class="tab-pane fade  @if($loop->first) in active @endif">
+                                                    class="tab-pane fade  @if($loop->first) in active show @endif">
                                                    <div class="form-group row">
                                                        <label class="col-md-2 control-label"><span data-toggle="tooltip"
                                                                                                    title=""
@@ -100,8 +100,8 @@
                                                NO {!! Form::radio('filter',0,null) !!}
                                            </div>
                                        </div>
-                                       <div class="panel panel-default panel-display-as">
-                                           <div class="panel-heading">
+                                       <div class="card panel panel-default panel-display-as">
+                                           <div class="card-header panel-heading">
                                                <div class="row">
                                                    <div class="col-sm-7 pl-0">
                                                        Display as
@@ -120,7 +120,7 @@
                                                </div>
                                            </div>
 
-                                           <div class="panel-body">
+                                           <div class="card-body panel-body">
                                                <div class="right-main-content">
                                                    <div class="display-as-wall d-none" data-displayas="radio">
                                                        @if($model && count($model->children))
@@ -214,15 +214,15 @@
 
 
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading clearfix">
+            <div class="card panel panel-default">
+                <div class="card-header panel-heading clearfix">
                     {{--<h2>Options {{ $model->name }} </h2>--}}
                     <h2 class="m-0 pull-left">Attributes</h2>
                     <div class="pull-right">
                         <button type="button" class="btn btn-primary pull-right select-stickers"><i class="fa fa-plus fa-sm mr-10"></i>Add attribute</button>
                     </div>
                 </div>
-                <div class="panel-body">
+                <div class="card-body panel-body">
                     <div class="d-flex get-all-stickers-tab">
                         @if(isset($model) && count($model->stickers))
                             @foreach($model->stickers as $sticker)
@@ -243,22 +243,20 @@
 
 
     <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">Select Stickers</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Select Stickers</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="all-list">
-                        <ul>
+                    <ul class="all-list modal-stickers--list">
 
-                        </ul>
-                    </div>
+                    </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

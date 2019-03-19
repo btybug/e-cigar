@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-6">
             @if(! $promotion)
-                <button type="button" class="btn btn-primary save-extra-variations pull-right " data-type="normal">
+                <button type="button" class="btn btn-info save-extra-variations pull-right " data-type="normal">
                     Save
                 </button>
             @endif

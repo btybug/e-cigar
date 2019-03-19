@@ -4,14 +4,14 @@
 @stop
 @section('content')
     <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading head-space-between">
+        <div class="card panel panel-default">
+            <div class="card-header panel-heading head-space-between">
                 <h2>{!! ucfirst(str_replace("_"," ",$type)) !!} Category</h2>
                 <div class="button-area text-right">
                     <a class="btn btn-primary add-category" href="javascript:void(0)"><span class="icon-plus"><i class="fa fa-plus"></i></span>Add new</a>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="card-body panel-body">
                 <div class="row">
                     <div class="col-md-4">
                         <div id="tree1"></div>
