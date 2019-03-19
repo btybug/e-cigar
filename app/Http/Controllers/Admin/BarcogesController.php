@@ -32,7 +32,7 @@ class BarcogesController extends Controller
     }
     public function getBarcodeView($id)
     {
-        $barcode=Barcodes::find($id);
+        $barcode=Barcodes::findOrfail($id);
         return $this->view('view',compact('barcode'));
     }
 

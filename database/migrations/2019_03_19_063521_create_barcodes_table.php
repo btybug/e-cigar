@@ -18,6 +18,9 @@ class CreateBarcodesTable extends Migration
             $table->string('code')->unique();
             $table->timestamps();
         });
+        Schema::table('items', function (Blueprint $table) {
+            $table->foreign('barcode_id')->references('id')->on('barcodes');
+        });
     }
 
     /**
