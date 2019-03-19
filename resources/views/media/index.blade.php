@@ -157,13 +157,12 @@
   <!-- Modal -->
   <div id="foldersetting" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
-
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Settings <span data-settingmodal="settingtitel"></span></h4>
+      </div>
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Settings <span data-settingmodal="settingtitel"></span></h4>
-        </div>
         <div class="modal-body">
           <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#bbsettingfoler">Folder Settings</a>

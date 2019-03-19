@@ -32,6 +32,10 @@ ol.sortable {
   /*endColorstr='#ededed', GradientType=0);*/
 }
 
+#jstree_html .sortable li>div {
+  cursor: pointer;
+}
+
 .sortable li.mjs-nestedSortable-branch div {
   /*background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #f0ece9 100%);*/
   /*background: -webkit-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #f0ece9 100%);*/

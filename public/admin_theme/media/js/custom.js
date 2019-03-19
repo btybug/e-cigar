@@ -74,24 +74,88 @@ function App() {
         </a>
     </div>`;
         },
-        makeTreeFolder: function(data) {
-            return `<li  bb-media-type="tree-folder" data-trre-id="${
-                data.id
-            }" data-id="${
-                data.id
-            }" style="display: flex; justify-content: space-between;">
-<div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
-                  <div style="margin-right: 5px">
-                  <span data-id="${
-                      data.id
-                  }" bb-media-click="get_folder_items">${data.title}</span>
-                  </div></div>
-                  <div>
-                    <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
-                    <button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>
-                  </div>
-                </li>`;
+//         makeTreeFolder: function(data) {
+//             return `<li  bb-media-type="tree-folder" data-trre-id="${
+//                 data.id
+//             }" data-id="${
+//                 data.id
+//             }" style="display: flex; justify-content: space-between;">
+// <div style="display: flex;"><div><i tree-type="close" class="fa fa-folder"></i></div>
+//                   <div style="margin-right: 5px">
+//                   <span data-id="${
+//                       data.id
+//                   }" bb-media-click="get_folder_items">${data.title}</span>
+//                   </div></div>
+//                   <div>
+//                     <button bb-media-click="remove_tree_folder" class="btn btn-xs btn-danger text-white"><i class="fa fa-trash"></i></button>
+//                     <button class="btn btn-xs btn-primary text-white"><i class="fa fa-cog"></i></button>
+//                     <button class="btn btn-xs btn-warning text-white"><i class="fa fa-pencil"></i></button>
+//                   </div>
+//                 </li>`;
+//         },
+
+        makeTreeBranch: (id, name, children, makeTree) => {
+            return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}" bb-media-type="folder" draggable="false" style="    user-drag: none !important;
+    user-select: none !important;">
+                <div class="oooo" bb-media-click="get_folder_items" data-id=${id}>
+                  <div class="disclose oooo"><span class="closer"></span></div>
+                  <div class="dd-handle oooo">${name}</div>
+                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                  </button>
+                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+                      <i class="fa fa-trash" style="color:#ffffff"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+                  </span>
+                </span>
+                </div>
+                <ol class="dd-list">${makeTree(children).join(' ')}</ol>
+               </li>`);
+        },
+
+        makeTreeLeaf: (id, name) => {
+            return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder" draggable="false" style="    user-drag: none !important;
+    user-select: none !important;">
+                  <div class="dd-handle oooo" bb-media-click="get_folder_items" data-id=${id}>${name}</div>
+                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                  </button>
+                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+                      <i class="fa fa-trash" style="color:#ffffff"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+                  </span>
+                </span>
+                </li>`);
+        },
+
+        makeTreeFolder: (data, el) => {
+            const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
+
+            function makeTree (data) {
+                const getTreeData = (data) => {
+                    return data.map((el) => {
+                        const children = el.children.length === 0 ? null : getTreeData(el.children);
+                        return {id: el.key, title: el.title, children: children};
+                    });
+                };
+                return data && data.map((el)=>{
+                    return !el.children || el.children.length === 0 ? makeTreeLeaf(el.key, el.name) : makeTreeBranch(el.key, el.name, el.children, makeTree);
+                });
+            };
+
+            $(el).children().html(makeTree(data).join(' '));
+
+            document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
+                $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+            }});
         },
         makeBreadCrumbsItem(item) {
             return ` <li class="bread-crumbs-list-item disabled" data-crumbs-id="${
@@ -548,6 +612,7 @@ function App() {
         }
     };
     this.requests = {
+        self: this,
         drawingItems(
             obj = {
                 folder_id: globalFolderId,
@@ -585,13 +650,11 @@ function App() {
                             folder
                         )}</div></div>`;
                         mainContainer.innerHTML += html;
-                        // if (tree) {
-                        //     treeFolderContainer.innerHTML += self.htmlMaker.makeTreeFolder(
-                        //         folder
-                        //     );
-                        // } else {
-                        //     cb(self.htmlMaker.makeTreeFolder(folder));
-                        // }
+                        if (tree) {
+                            self.htmlMaker.makeTreeFolder(res.data.children, '#jstree_html');
+                        } else {
+                            // cb(self.htmlMaker.makeTreeFolder(folder));
+                        }
                     });
 
                     globalFolderId = res.settings.id;
@@ -696,16 +759,23 @@ function App() {
             );
         },
         get_folder_items(elm, e) {
-            let id = elm[0].getAttribute("data-id");
-            prevFolder.push(globalFolderId);
-            self.requests.drawingItems(
-                {
-                    folder_id: Number(id),
-                    files: true,
-                    access_token: "string"
-                },
-                true
-            );
+
+            !$(e.target).hasClass('closer') && (function(){
+                let id = elm[0].getAttribute("data-id");
+                prevFolder.push(globalFolderId);
+                self.requests.drawingItems(
+                    {
+                        folder_id: Number(id),
+                        files: false,
+                        access_token: "string"
+                    },
+                    false
+                );
+            })();
+
+
+
+
         },
         add_new_folder(elm, e) {
             let name = document.querySelector(".new-folder-input").value;
@@ -846,12 +916,16 @@ function App() {
         },
         open_uploader(elm, e) {
             document
-                .querySelector(".uploader-container")
-                .classList.remove("d-none");
+                .querySelector(".media-modal-content-upload")
+                .classList.toggle("d-none");
+
+            // document
+            //     .querySelector(".media-modal-content-upload")
+            //     .classList.add("d-block");
 
             document
-                .querySelector(".media-modal-content-upload")
-                .classList.add("d-block");
+                .querySelector(".fileinput-remove").onclick = self.events.open_uploader;
+
         },
         folder_level_up(elm, e) {
             if (prevFolder.length) {
@@ -865,7 +939,7 @@ function App() {
                         files: true,
                         access_token: "string"
                     },
-                    true,
+                    false,
                     res => {
                         prevFolder.pop();
                     }
@@ -924,9 +998,11 @@ $("body").on("click", ".remove-thumb-img", function(e) {
         .remove();
 });
 
+
+
 // $("#jstree_html")
 //     .on("changed.jstree", function(e, data) {
-//         console.log(data);
+//         console.log(data, 'first dTA');
 //         var i,
 //             j,
 //             r = [];
@@ -945,22 +1021,32 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 //                 type: "POST",
 //                 url: url.jsTree,
 //                 dataType: "json", // needed only if you do not supply JSON headers
-//                 data: { folder_id: 1 },
+//                 data: function(node) {
+//                     console.log(node, 'node')
+//                     return {
+//                         folder_id: 1
+//                     };
+//                 },
 //                 headers: {
 //                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
 //                 },
 //                 success: function(data) {
-//                     $(".media-modal-main-content").empty();
-//                     listFolders(data.children);
-//                     listFiles(data.items);
+//
+//                     $('jstree-node').toArray().map((el) => {
+//                         console.log(el)
+//                     })
+//                     // $(".media-modal-main-content").empty();
+//                     // listFolders(data.children);
+//                     // listFiles(data.items);
 //                 }
 //             }
 //         }
 //     });
 // var getfolder = function(data) {
+//     console.log(data.data, 'data')
 //     lists(data.data);
 // };
-
+// //
 // function listFolders(data) {
 //     $.each(data, function(k, v) {
 //         var folder = $("#media-modal-folder").html();
@@ -974,7 +1060,7 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 //         return `<div draggable="true" data-id="${data.id}" class="file">
 //     <a  bb-media-click="select_item" >
 //         <span class="corner"></span>
-
+//
 //         <div class="icon">
 //             <img width="180px" data-lightbox="image" src="${data.url}">
 //             <i class="fa fa-file"></i>
@@ -982,7 +1068,7 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 //         <div class="file-name">
 //             ${data.real_name}
 //             <br>
-
+//
 //         </div>
 //         <small>Added: ${data.updated_at}</small>
 //         <div class="file-actions">
@@ -999,25 +1085,23 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 //         // folder = folder.replace(/{data-item-id}/g, v.id);
 //         // folder = folder.replace("{relative_path}", v.relativeUrl);
 //         // folder = folder.replace(/{url}/g, v.url);
-
+//
 //         $(".media-modal-main-content").append(makeImage(v));
 //     });
 // }
-
+//
 // function lists(data) {
-//     $(".media-modal-main-content").empty();
-//     listFolders(data.childs);
-//     listFiles(data.items);
+//     console.log('lists')
 // }
-
+//
 // $(".upload-btn").click(function() {
 //     $(".media-modal-content-upload").css("display", "block");
 //     $(".media-modal-main-content").css("display", "none");
 // });
-
+//
 // $("body").on("click", ".item-for-upload", function(e) {
 //     let tempStr = "";
-
+//
 //     globalArr = [];
 //     e.preventDefault();
 //     if (multiple) {
@@ -1030,7 +1114,7 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 //             .closest(".img")
 //             .addClass("active");
 //     }
-
+//
 //     $(".img.active").each(function() {
 //         let value = $(this)
 //             .find(".item-for-upload")
@@ -1047,7 +1131,7 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 // };
 // $("body").on("click", ".open-btn", function(e) {
 //     e.preventDefault();
-
+//
 //     if (multiple) {
 //         let realInput = $(`.${id}`);
 //         let name = realInput.attr("data-name");
@@ -1066,10 +1150,10 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 //     } else {
 //         $(`.${id}`).val(globalArr[0]);
 //     }
-
+//
 //     $("#myModal").modal("hide");
 // });
-
+//
 // // $("body").on("click", ".remove-item-for-media", function() {
 // //     let id = $(this).attr("data-item-id");
 // //     postSendAjax(

@@ -1054,3 +1054,7 @@ div.remover-container .remover-container-zone .file {
     -webkit-user-select: none !important;
     -ms-user-select: none !important;
 }
+
+.fileinput-remove {
+    cursor: pointer;
+}

@@ -243,6 +243,8 @@ const App = function() {
       let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
       const {dndForTree} = this.events;
       const {transferFolder} = this.requests;
+      console.log(data, 'hariva');
+
       function makeTree (data) {
         const getTreeData = (data) => {
           return data.map((el) => {
@@ -255,10 +257,10 @@ const App = function() {
         });
       };
 
-      $('#folder-list2').children().html(makeTree(data).join(' '));
+      $(el).children().html(makeTree(data).join(' '));
 
       $('document').ready(() => {
-        $(el).nestedSortable({
+        $(el + '>ol').nestedSortable({
           disableNesting: 'no-nest',
           forcePlaceholderSize: true,
           handle: 'div',
@@ -853,10 +855,14 @@ var count = 0;
 
     //********App -> helpers -> showUploaderContainer********start
     showUploaderContainer: () => {
+      // const self = this;
       document
           .querySelector(".uploader-container")
           .classList.toggle("d-none");
       $('.remover-container').addClass('d-none');
+
+      document
+          .querySelector(".fileinput-remove").onclick = this.helpers.showUploaderContainer;
       return false;
     },
     showRemoverContainer: () => {
@@ -1022,7 +1028,7 @@ var count = 0;
             mainContainer.innerHTML += html;
           });
           if (tree) {
-            this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2>ol');
+            this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
           globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
