@@ -490,10 +490,11 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="basic-center basic-wall">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="sipmle-product-wall product-wall {{ ($model && $model->type =='simple_product') ? '' : 'hide' }}">
+                                    <div class="sipmle-product-wall product-wall {{ ($model && $model->type =='simple_product') ? '' : 'hide' }}">
+                                        <div class="basic-center basic-wall">
+                                            <div class="row">
+                                                <div class="col-md-12">
+
                                                     @php
                                                         $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
                                                     @endphp
@@ -529,91 +530,56 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
+                                    </div>
+                                    <div class="row variation-product-wall {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
+                                        <div class="basic-center basic-wall">
+                                            <div class="row">
+                                                <div class="col-md-12">
                                                     <div class="col-md-12">
-                                                        <div class="row">
-                                                            <div class="col-md-4">
-                                                                How Many items user can select : {!! Form::number("package_variation_count_limit",
-                                                                ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                Display as: {!! Form::select('package_variation_display_as',
-                                                                ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                Price per: {!! Form::select('package_variation_price_per',['product' => 'Product','item' => 'Item'],null,['class' => 'form-control price_per']) !!}
-                                                            </div>
-                                                            <div class="col-md-2 product_price">
-                                                                Price : {!! Form::text("package_variation_price",
-                                                                ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <button class="btn btn-primary pull-right add-package-item"
-                                                                        type="button">
-                                                                    <i class="fa fa-plus"></i> Add new
-                                                                </button>
-                                                            </div>
-                                                        </div>
+                                                        <button type="button"
+                                                                class="btn btn-primary pull-right add-variation-row"><i
+                                                                class="fa fa-plus-circle add-new-v-option"></i>
+                                                        </button>
                                                     </div>
-                                                    <table class="table table-style table-bordered mt-2" cellspacing="0"
-                                                           width="100%">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>SKU</th>
-                                                            <th>Qty</th>
-                                                            <th>Image</th>
-                                                            <th class="package_price hide">Price</th>
-                                                            <th>Actions</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody class="package-variation-box">
-                                                        @if($model && count($model->variations))
-                                                            @foreach($model->variations as $package_variation)
-                                                                @include('admin.inventory._partials.variation_package_item')
-                                                            @endforeach
-                                                        @endif
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="col-md-12">
+
+                                                        <table id="variations-table"
+                                                               class="table table-style table-bordered"
+                                                               cellspacing="0" width="100%">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>Name</th>
+                                                                <th>Attributes</th>
+                                                                <th>SKU</th>
+                                                                <th>Qty</th>
+                                                                <th>Price</th>
+                                                                <th>Actions</th>
+                                                                <th></th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody class="all-list-attrs">
+                                                            @if($model && count($model->variations))
+                                                                @foreach($model->variations()->with('options')->get() as $variation)
+                                                                    @include('admin.inventory._partials.variation_item',['item' => $variation])
+                                                                @endforeach
+                                                            @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row variation-product-wall {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
-                                            <div class="col-md-12">
-                                                <button type="button"
-                                                        class="btn btn-primary pull-right add-variation-row"><i
-                                                            class="fa fa-plus-circle add-new-v-option"></i>
-                                                </button>
-                                            </div>
+                                    </div>
 
-                                            <div class="col-md-12">
-
-                                                <table id="variations-table" class="table table-style table-bordered"
-                                                       cellspacing="0" width="100%">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Name</th>
-                                                        <th>Attributes</th>
-                                                        <th>SKU</th>
-                                                        <th>Qty</th>
-                                                        <th>Price</th>
-                                                        <th>Actions</th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody class="all-list-attrs">
-                                                    @if($model && count($model->variations))
-                                                        @foreach($model->variations()->with('options')->get() as $variation)
-                                                            @include('admin.inventory._partials.variation_item',['item' => $variation])
-                                                        @endforeach
-                                                    @endif
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                    <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
+                                        <div class="package-box">
+                                            @include('admin.stock._partials.package_item')
+                                        </div>
+                                        <div class="text-center m-4">
+                                            <a class="btn btn-info text-white duplicate-package-options"><i class="fa fa-plus"></i> Add new option</a>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -983,6 +949,9 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
+        .package-box > div:not(:first-child){
+            margin-top: 20px;
+        }
         .errors {
             color: red;
             font-style: italic;
@@ -1035,6 +1004,18 @@
             setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             }, 5);
+
+            $("body").on('click', '.duplicate-package-options', function () {
+                AjaxCall(
+                    "/admin/stock/duplicate-package-options",
+                    {},
+                    function (res) {
+                        if (!res.error) {
+                            $('.package-box').append(res.html);
+                        }
+                    }
+                );
+            });
 
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(

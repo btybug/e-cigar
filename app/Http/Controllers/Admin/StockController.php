@@ -44,7 +44,7 @@ class StockController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        $stockItems = Items::all()->pluck('sku', 'sku')->all();
+        $stockItems = Items::all()->pluck('name', 'id')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
@@ -62,7 +62,7 @@ class StockController extends Controller
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        $stockItems = Items::all()->pluck('sku', 'sku')->all();
+        $stockItems = Items::all()->pluck('name', 'id')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
@@ -250,9 +250,19 @@ class StockController extends Controller
 
     public function addPackageVariation(Request $request)
     {
-        $stockItems = Items::all()->pluck('sku', 'sku')->all();
+        $stockItems = Items::all()->pluck('name', 'id')->all();
         $package_variation = null;
         $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation', 'stockItems']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function duplicatePackageOptions(Request $request)
+    {
+        $stockItems = Items::all()->pluck('name', 'id')->all();
+        $package_variation = null;
+        $model = null;
+        $html = \View('admin.stock._partials.package_item', compact(['model','package_variation', 'stockItems']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
