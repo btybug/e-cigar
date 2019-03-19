@@ -7,9 +7,11 @@
                 <div class="col-md-8">
                     <h2 class="m-0">Add new item</h2>
                 </div>
-                <div class="col-md-4">
-                    {!! Form::select('type',['simple' => 'Simple','bundle' => 'Bundle'],null,['class' => 'form-control','id' => 'selectItemType']) !!}
-                </div>
+
+            <div class="col-md-4 d-flex">
+                {!! Form::select('type',['simple' => 'Simple','bundle' => 'Bundle'],null,['class' => 'form-control','id' => 'selectItemType']) !!}
+                <button class="btn btn-info ml-4" type="submit">Save</button>
+            </div>
         </div>
         <div class="card-body panel-body">
             <div class="content main-content">
@@ -21,12 +23,7 @@
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
 
                         {!! Form::hidden('id',null) !!}
-                        <div class="row">
-                            <label for="feature_image" class="control-label col-sm-4"></label>
-                            <div class="col-sm-8 text-right pt-25 mb-25">
-                                <button class="btn btn-info" type="submit">Save</button>
-                            </div>
-                        </div>
+
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="basic-left basic-wall h-100">
