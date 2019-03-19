@@ -752,8 +752,8 @@ class DatatableController extends Controller
         )
             ->addColumn('actions', function ($code) {
                 return "
-<a class='badge btn-danger delete-button' data-key='' data-href=''><i class='fa fa-trash-o'></i></a>
-<a class='badge btn-info' href='".route('admin_inventory_barcode_view',$code->id)."'><i class='fa fa-eye'></i></a>
+<a class='badge btn-danger delete-button' data-key='$code->id' data-href='" . route('admin_inventory_barcode_delete') . "'><i class='fa fa-trash-o'></i></a>
+<a class='badge btn-info' href='".route('admin_inventory_barcode_delete',$code->id)."'><i class='fa fa-eye'></i></a>
 ";
             })->rawColumns(['actions'])
             ->make(true);
