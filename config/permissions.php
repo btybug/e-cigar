@@ -192,6 +192,14 @@ return [
                 ]
             ],
         ],
+        'barcodes' => [
+            'name' => 'Barcodes',
+            'routes' => ['admin_inventory_barcodes'],
+            'description' => 'Able to see Barcodes',
+            'children' => [
+
+            ],
+        ],
     ],
     'store' => [
         'stock' => [
