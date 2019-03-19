@@ -44,5 +44,10 @@ class BarcogesController extends Controller
         return redirect()->route('admin_inventory_barcodes');
     }
 
+    public function deteleBarcode($id)
+    {
+        return Barcodes::findOrFail($id)->delete();
+    }
+
 
 }
