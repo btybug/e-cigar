@@ -1,4 +1,4 @@
-<div class="basic-center basic-wall">
+<div class="basic-center basic-wall" data-id="{{ uniqid() }}">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -20,6 +20,7 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    <button type="button" class="btn btn-danger delete-package-option"><i class="fa fa-trash"></i></button>
                     <button class="btn btn-primary pull-right add-package-item"
                             type="button">
                         <i class="fa fa-plus"></i> Add new
