@@ -16,11 +16,18 @@ use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Items;
 use App\Models\Suppliers;
+use App\Services\BarcodesService;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
     protected $view = 'admin.items';
+    private $barcodeService;
+
+    public function __construct(BarcodesService $barcodesService)
+    {
+        $this->barcodeService = $barcodesService;
+    }
 
     public function index()
     {
@@ -30,7 +37,8 @@ class ItemsController extends Controller
     public function getNew()
     {
         $model = null;
-        $barcodes = Barcodes::pluck('code','id')->all();
+        $barcodes = $this->barcodeService->getUnsedCodes();
+
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         return $this->view('new', compact('model', 'allAttrs','barcodes'));
     }
@@ -52,7 +60,7 @@ class ItemsController extends Controller
     public function getEdit($id)
     {
         $model = Items::findOrFail($id);
-        $barcodes = Barcodes::pluck('code','id')->all();
+        $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         return $this->view('new', compact('model', 'allAttrs','barcodes'));
