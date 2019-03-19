@@ -323,6 +323,7 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'barcode'], function () {
         Route::get('/', 'Admin\BarcogesController@getIndex')->name('admin_inventory_barcodes');
         Route::get('/new', 'Admin\BarcogesController@getNew')->name('admin_inventory_barcodes_new');
+        Route::post('/new', 'Admin\BarcogesController@postNew')->name('post_admin_inventory_barcodes_new');
     });
 
 

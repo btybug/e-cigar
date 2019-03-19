@@ -47,6 +47,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/emails-notifications/get-all-custom-emails','Admin\DatatableController@getAllCustomEmails')->name('datatable_all_custom_emails');
     Route::get('/inventory/get-all-channel-customers/{id?}','Admin\DatatableController@getAllChannelCustomers')->name('datatable_all_channel_customers');
     Route::get('/settings/get-all-transactions','Admin\DatatableController@getAllTransactions')->name('datatable_all_transactions');
+    Route::get('/inventory/get-all-barcodes','Admin\DatatableController@getAllBarcodes')->name('datatable_all_barcodes');
 });
 
 

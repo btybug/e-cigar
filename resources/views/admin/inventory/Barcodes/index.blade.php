@@ -18,3 +18,22 @@
         </div>
     </div>
 @stop
+@section('js')
+    <script>
+        $(function () {
+            $('#stocks-table').DataTable({
+                ajax: "{!! route('datatable_all_barcodes') !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'code', name: 'code'},
+                    {data: 'actions', name: 'actions'}
+                ],
+                order: [ [0, 'desc'] ]
+            });
+        });
+
+    </script>
+    @stop

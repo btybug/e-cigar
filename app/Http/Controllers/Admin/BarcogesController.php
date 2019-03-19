@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Barcodes;
+use Illuminate\Http\Request;
 
 
 class BarcogesController extends Controller
@@ -27,6 +29,14 @@ class BarcogesController extends Controller
     public function getNew()
     {
         return $this->view('new');
+    }
+
+    public function postNew(Request $request)
+    {
+        $v=\Validator::make($request->all(),['code'=>'required|unique:barcodes,code']);
+        if($v->fails()) return redirect()->back()->withErrors($v);
+        Barcodes::create(['code'=>$request->get('code')]);
+        return redirect()->route('admin_inventory_barcodes');
     }
 
 

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <form>
+    {!! Form::open() !!}
         <div class="form-group row">
             <div class="col-md-8">
                 <div class="row">
@@ -13,9 +13,9 @@
                                         <i class="fa fa-code"></i>
                                     </div>
                                 </div>
-                                <input id="text" name="text" type="text" class="form-control">
+                                <input id="text" name="code" type="text" class="form-control">
                             </div>
-                            <button name="submit" type="submit" class="btn btn-primary">Generate</button>
+                            <button  type="button" id="generate-code" class="btn btn-primary">Generate</button>
                         </div>
 
                     </div>
@@ -27,5 +27,26 @@
                 <button name="submit" type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
-    </form>
+ {!! Form::close() !!}
 @stop
+@section('js')
+    <script>
+        $(function () {
+            $('#generate-code').on('click',function () {
+                $('input[name=code]').val(makeid(100))
+            })
+            function makeid(length) {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for (var i = 0; i < length; i++)
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }
+        });
+
+
+
+    </script>
+    @stop

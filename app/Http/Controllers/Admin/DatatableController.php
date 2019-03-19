@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Attributes;
+use App\Models\Barcodes;
 use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\Comment;
@@ -740,6 +741,17 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($post) {
                 return "<a class='badge btn-danger delete-button' data-key='$post->id' data-href='" . route('admin_emails_newsletter_delete') . "'><i class='fa fa-trash-o'></i></a>";
+            })->rawColumns(['actions'])
+            ->make(true);
+    }
+
+    public function getAllBarcodes()
+    {
+        return Datatables::of(
+            Barcodes::query()
+        )
+            ->addColumn('actions', function ($code) {
+                return "<a class='badge btn-danger delete-button' data-key='' data-href=''><i class='fa fa-trash-o'></i></a>";
             })->rawColumns(['actions'])
             ->make(true);
     }
