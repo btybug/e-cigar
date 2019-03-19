@@ -97,7 +97,17 @@
                   <div class="remover-container mb-20 mt15 d-none" >
                     <div class="remover-container-zone">
                       <div class="remover-container-content">
-                        Drag & drop files you want to delete...
+                        <p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>
+                        <div class="row">
+                          <div class="col-10">
+                            <div class="row images_container">
+
+                            </div>
+                          </div>
+                          <div class="col-2 row remove-button_container">
+
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

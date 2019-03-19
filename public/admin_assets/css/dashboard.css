@@ -77,6 +77,7 @@ right: 0;
 }
 .dashboard--panel .panel-heading{
     background-color: #242a30 !important;
+    align-items: center;
 }
 
 .dashboard--panel.fixed-widget {
@@ -91,7 +92,30 @@ right: 0;
 body.overhidden{
     overflow: hidden;
 }
+.dashboard--panel{
+    margin-bottom: 15px;
+}
 .dashboard--panel.fixed-widget .panel-body{
     overflow: auto;
     height: calc(100% - 38px);
+}
+
+.dashboard--panel .btn-max, .dashboard--panel .btn-minus, .dashboard--panel .btn-del {
+    cursor: pointer;
+}
+
+.dashboard--panel.fixed-widget .panel-heading {
+    cursor: default !important;
+}
+.dashboard--panel.fixed-widget .card-body{
+    padding: 15px;
+}
+.dashboard--panel .panel-heading .panel-title{
+    margin: 0;
+}
+.dashboard--panel .card-body{
+    padding: 5px;
+}
+.dashboard--panel .widget-view{
+    margin-bottom: 0;
 }

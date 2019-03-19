@@ -102,7 +102,7 @@ const App = function() {
                       <i class="fa fa-trash" style="color:#ffffff"></i>
                     </button>
                     <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0"><i class="fa fa-pencil"></i></button>
+                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
                   </span>
                 </span>
             </a>
@@ -112,8 +112,8 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
-      return (`<div draggable="true" data-id="${data.id}" class="file">
-        <a  bb-media-click="select_item" >
+      return (`<div draggable="true" data-id="${data.id}" class="file" >
+        <a  bb-media-click="select_item" bb-media-type="image">
             <span class="corner"></span>
 
             <div class="icon">
@@ -134,7 +134,7 @@ const App = function() {
                   <i class="fa fa-trash" style="color:#ffffff"></i>
                 </button>
                 <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
-                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_image"><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
               </span>
             </span>
         </a>
@@ -386,7 +386,7 @@ const App = function() {
     //********App -> htmlMaker -> makeBreadCrumbsItem********end
 
     //********App -> htmlMaker -> editNameModal********start
-    editNameModal: (id, name) => {
+    editNameModal: (id, name, flag) => {
       return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog">
             
@@ -401,7 +401,7 @@ const App = function() {
                     </div>
                     <div class="modal-footer">
                      <button bb-media-click="close_name_modal" type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
-                            <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
+                            <button type="button" data-id="${id}" flag="${flag}" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
                     </div>
                   </div>
             
@@ -887,7 +887,7 @@ var count = 0;
               selected.style.width = '320px';
 
               self.selectedImage.map((id) => {
-                let cloneNode = document.querySelector(`[data-id="${id}"]`).cloneNode(true);
+                let cloneNode = document.querySelector(`.image-container [data-id="${id}"]`).cloneNode(true);
                 cloneNode.style.width = '80px';
                 cloneNode.style.marginRight = '10px';
                 cloneNode.style.marginBottom = '10px';
@@ -1068,7 +1068,7 @@ var count = 0;
     //********App -> requests -> editImageName********start
     editFolderName: (obj = {}, cb) => {
       console.log(obj);
-      shortAjax("/api/api-media/get-edit-folder", obj, res => {
+      shortAjax("/api/api-media/rename-folder", obj, res => {
         if (!res.error) {
           // cb(res);
         }
@@ -1098,10 +1098,10 @@ var count = 0;
     //********App -> requests -> transferFolder********end
 
     //********App -> requests -> removeImage********start
-    removeImage: (obj = {}, cb) => {
+    removeImage: (obj = {}, cb, cb2) => {
       shortAjax("/api/api-media/get-remove-item", obj, res => {
         if (!res.error) {
-          this.requests.drawingItems();
+          this.requests.drawingItems(undefined,undefined,cb2);
           cb();
         }
       });
@@ -1459,34 +1459,53 @@ var count = 0;
     // },
     //********App -> events -> remove_image********end
 
-    //********App -> events -> edit_image********start
-    edit_image: (elm, e) => {
+    //********App -> events -> edit_item********start
+    edit_item: (elm, e) => {
       e.preventDefault();
       e.stopPropagation();
+
       const id = e.target.closest(".file").getAttribute("data-id");
       const name = e.target
           .closest(".file")
           .querySelector(".file-name")
           .textContent.trim();
-      $('#modal_area').html(this.htmlMaker.editNameModal(id, name));
+      const flag = $(e.target.closest(".file")).find('[bb-media-type]').attr('bb-media-type');
+      $('#modal_area').html(this.htmlMaker.editNameModal(id, name, flag));
     },
-    //********App -> events -> edit_image********end
+    //********App -> events -> edit_item********end
 
     //********App -> events -> save_edited_title********start
     save_edited_title: (elm, e) => {
+      console.log(elm, e)
       const itemId = e.target.getAttribute("data-id");
       const name = document.querySelector(".edit-title-input").value;
-      this.requests.editImageName(
-        {
-          item_id: Number(itemId),
-          item_name: name,
-          access_token: "string"
-        },
-        () => {
-          $(`.file[data-id="${itemId}"]`).find('.file-title').html(name)
-          this.events.close_name_modal();
-        }
-      );
+      const flag = e.target.getAttribute("flag");
+      if(flag === "image") {
+        this.requests.editImageName(
+            {
+              item_id: Number(itemId),
+              item_name: name,
+              access_token: "string"
+            },
+            () => {
+              $(`.file[data-id="${itemId}"]`).find('.file-title').html(name);
+              this.events.close_name_modal();
+            }
+        );
+      } else if(flag === "folder") {
+        console.log(Number(itemId), name)
+        this.requests.editFolderName(
+            {
+              folder_id: Number(itemId),
+              folder_name: name,
+              access_token: "string"
+            },
+            () => {
+              $(`.file[data-id="${itemId}"]`).find('.file-title').html(name);
+              this.events.close_name_modal();
+            }
+        );
+      }
     },
     //********App -> events -> save_edited_title********end
 
@@ -1671,6 +1690,7 @@ $('body').on('blur', '[contenteditable]', function(ev) {
         }
     );
   } else {
+    console.log('edit folder')
     app.requests.editFolderName(
         {
           folder_id: Number(itemId),
@@ -1691,16 +1711,111 @@ $('.delete_items').on('click', (ev) => {
   app.selectedImage.length !== 0 ? app.events.remove_image(undefined, ev) : toggle();
 });
 
+const removeCheckedImage = (el) => {
+  const id = $(el.closest('[data-id]')).attr('data-id');
+  $(el).closest('.folderitems').remove();
+  $(`.media_right_content .folderitems [data-id="${id}"]`).closest('.file-box').removeClass('checked-for-remove');
+  $('.images_container').children().length === 0
+  && $('.remove-button_container').empty() && $('.remover-container-content').append('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
+};
+
+const removeImages = () => {
+  const checkedImagesArray = [];
+  const uncheckedImagesArray = [];
+  $.each($('.check-image'), (index, image) => {
+    $(image).prop("checked") ? checkedImagesArray.push($(image).closest('[data-id]').attr('data-id')) : uncheckedImagesArray.push($(image).closest('[data-id]').attr('data-id'));
+  });
+  app.requests.removeImage(
+      {
+        item_id: checkedImagesArray,
+        trash: true,
+        access_token: "string"
+      }, () => {
+        checkedImagesArray.map((imageId) => {
+          $('.remover-container-content').find(`[data-id="${imageId}"]`).closest('.folderitems').remove();
+        });
+        $('.remover-container-content').find('.folderitems').length === 0
+        && $('.remove-button_container').empty() && $('.remover-container-content').append('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
+      },
+      () => {
+        uncheckedImagesArray.map((imageId) => {
+          console.log('imageId', imageId)
+          $(`.media_right_content .folderitems .image-container [data-id="${imageId}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
+          app.selectedImage.length = 0;
+        });
+      }
+  );
+};
+
+const checkImage = (checkedImage) => {
+  !$(checkedImage).prop("checked") && $('.checkbox-all').prop('checked', false);
+  if($(checkedImage).prop("checked")) {
+    $('.images_container input[type="checkbox"]').toArray().every((el) => $(el).prop('checked') === true) && $('.checkbox-all').prop('checked', true);
+  }
+};
+
+const checkedAll = (checkboxAll) => {
+  $(checkboxAll).prop("checked") ? $.each($('.images_container input[type="checkbox"]'), (index, el) => {$(el).prop('checked', true);}) : $.each($('.images_container input[type="checkbox"]'), (index, el) => {$(el).prop('checked', false);});
+};
+
+const removeList = () => {
+  $('.remove-button_container').empty();
+  $('.images_container').empty();
+  $('.remover-container-content').prepend('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
+  $('.checked-for-remove').removeClass('checked-for-remove');
+};
+
+const removeImageDrop = (ev, data) => {
+  const imgTag = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('img');
+  const name = $(document.querySelector(`.image-container [data-id="${data}"]`)).find('.file-title').text().trim();
+  const div = `<div class="folderitems col-xl-2 col-sm-6">
+                  <div class="file-box image-container">
+                      <div draggable="false" data-id="${data}" class="file file-remove" >
+                          <a  bb-media-type="image">
+                              <span class="corner"></span>
+                              <div class="icon position-relative">
+                                  ${imgTag[0].outerHTML}
+                                  <i class="fa fa-file"></i>
+                                  <span class="position-absolute btn btn-danger btn-sm rounded-0" style="right:0;top: 0; line-height: 0" onclick="removeCheckedImage(this)">
+                                    <i class="fa fa-times" style="font-size: 12px;"></i>
+                                  </span>
+                              </div>
+                              <div class="file-name">
+                                <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                                <span class="file-title" style="width: 100%; font-size: 20px">${name}</span>
+                                <span><input type="checkbox" class="check-image" checked onchange="checkImage(this)"></span>
+                              </div>
+                          </a>
+                      </div>
+                  </div>
+                </div>`;
+  $(ev.target).closest('div').find('p.remove_title').remove();
+  $('.remover-container-content .images_container').prepend(div);
+  $('.remover-container-content').find('.remove-checked-item').length === 0
+  && $('.remove-button_container').append(`
+        <div>
+          <button class="remove-checked-item btn btn-danger" onclick="removeImages()">Delete</button>
+          <button class="remove-in-list btn btn-danger" onclick="removeList()">List Remove</button>
+          <input type="checkbox" onchange="checkedAll(this)" checked class="checkbox-all">
+        </div>`);
+  $(`.media_right_content .folderitems .image-container [data-id="${data}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
+  app.selectedImage.length = 0;
+};
+
 const drop = (ev, cb) => {
   ev.preventDefault();
 
   const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
   if(Array.isArray(data)) {
     JSON.parse(ev.originalEvent.dataTransfer.getData('node_id')).map(el=>{
-      app.events.remove_image(undefined, ev, {target: document.querySelector(`[data-id="${el}"]`)});
+      if($('.remover-container-content').find(`[data-id="${el}"]`).length === 0) {
+        removeImageDrop(ev, el);
+      }
     });
   } else {
-    app.events.remove_image(undefined, ev, {target: document.querySelector(`[data-id="${data}"]`)});
+    if($('.remover-container-content').find(`[data-id="${data}"]`).length === 0) {
+      removeImageDrop(ev, data);
+    }
   }
   cb();
 };

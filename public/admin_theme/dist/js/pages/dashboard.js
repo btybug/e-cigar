@@ -21,8 +21,8 @@ $('document').ready(function() {
         let render = el.item.find('.widget-html');
             // el.item.html('<div class="ui-sortable-handle">'+render.html()+'</div>');
         el.item.html(` <div id="${el.item.attr('id')}" style="position: relative" class="box--wall" data-title="${el.item.attr('data-title') || 'name'}">
-                      <div class="panel panel-default dashboard--panel">
-                        <div class="panel-heading box-header">
+                      <div class="card panel panel-default dashboard--panel">
+                        <div class="card-header panel-heading box-header">
   <h4 class="panel-title">${render.find('.widget-view').attr('data-title')}</h4>
   <div class="panel-heading-btn">
   <a class="max--widget btn btn-max">
@@ -36,7 +36,7 @@ $('document').ready(function() {
   </a>
   </div>
     </div>
-  <div class="panel-body"><div class="ui-sortable-handle">
+  <div class="card-body panel-body"><div class="ui-sortable-handle">
                   ${render.html()}
                 </div></div>
 </div>
@@ -82,7 +82,9 @@ $('document').ready(function() {
     var key = $(this).closest('.box--wall').attr('id');
     var name = $(this).closest('.box--wall').find('.widget-view').attr('data-title');
     var el = $(this).closest('.box--wall').find('.widget-view')
-
+    if($('.dashboard--panel').hasClass('fixed-widget')) {
+      $(".connectedSortable").sortable('enable');
+    };
     $.ajax({
       url: "/admin/dashboard-delete",
       type: 'POST',
@@ -321,5 +323,41 @@ $('document').ready(function() {
       })
 
     });
+  });
+
+  $('body').on('click', '.min--widget',function () {
+    $(this).closest('.dashboard--panel').find('.panel-body').slideToggle('hide');
+    $(this).find('i').toggleClass('fa-minus fa-plus');
+  });
+  $('body').on('click', '.max--widget', function() {
+    $(this).closest('.dashboard--panel').toggleClass('fixed-widget');
+    $(this).find('i').toggleClass('fa-expand fa-compress');
+    $(this).closest('body').toggleClass('overhidden');
+    if($('.dashboard--panel').hasClass('fixed-widget')) {
+      $(".connectedSortable").sortable('disable');
+    } else {
+      $(".connectedSortable").sortable('enable');
+    }
+  });
+  // {{--open new widget sidebar--}}
+  $('.open_dashboard_widget').on('click', function () {
+    $('.dashboard_modal_add_widget').toggleClass('active');
+  });
+
+  $('body').on('click', function (e) {
+    if (e.target !==  $('.open_dashboard_widget')[0] &&
+        $('.dashboard_modal_add_widget').hasClass('active') &&
+        e.target !== $('.modal_add_widget')[0]) {
+      $('.dashboard_modal_add_widget').removeClass('active');
+    }
+  });
+
+  $('.close-widget-modal').on('click', function () {
+    $('.dashboard_modal_add_widget').removeClass('active');
+  });
+
+  // {{--inner widget btn--}}
+  $('.btn-for-widget').on('click', function () {
+    $(this).find('i').toggleClass('fa-plus fa-minus');
   });
 });

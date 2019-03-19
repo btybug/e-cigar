@@ -1157,8 +1157,8 @@ function render_widgets($placeholder)
             $html .= '
       
             <div id="' . $widget->widget . '" style="position: relative" class="box--wall">
-                      <div class="panel panel-default dashboard--panel">
-  <div class="panel-heading box-header">
+                      <div class="card panel panel-default dashboard--panel">
+  <div class="card-header panel-heading box-header">
   <h4 class="panel-title">' . $widget->widget. '</h4>
   <div class="panel-heading-btn">
   <a class="max--widget btn btn-max">
@@ -1172,7 +1172,7 @@ function render_widgets($placeholder)
   </a>
   </div>
     </div>
-  <div class="panel-body"><div class="ui-sortable-handle">
+  <div class="card-body panel-body"><div class="ui-sortable-handle">
                   ' . $content . '
                 </div></div>
 </div>
