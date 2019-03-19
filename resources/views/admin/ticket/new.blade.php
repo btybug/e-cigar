@@ -13,7 +13,7 @@
                <h2 class="mt-0 pull-left">New ticket</h2>
 
                <div class="pull-right btn-save">
-                   {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                   {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                </div>
            </div>
 

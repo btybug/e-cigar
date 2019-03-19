@@ -107,7 +107,7 @@
                       <div class="card panel panel-default">
                           <div class="card-header panel-heading">
                               <div class="text-right">
-                                  {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                                  {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                               </div>
                           </div>
 

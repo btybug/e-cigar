@@ -11,7 +11,7 @@
                 <h2 class="m-0 pull-left">Settings</h2>
                 <div class="text-right btn-save pull-right">
                     <a href="{!! route('admin_tickets') !!}" class="btn btn-action btn-default">Back</a>
-                    {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                    {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                 </div>
             </div>
 
