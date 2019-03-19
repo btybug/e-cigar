@@ -2,17 +2,24 @@
 @section('content')
 
     <div class="card panel panel-default">
-        <div class="card-header panel-heading">
-            <h2 class="m-0">Add new item</h2>
+        {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
+        <div class="card-header panel-heading d-flex">
+                <div class="col-md-8">
+                    <h2 class="m-0">Add new item</h2>
+                </div>
+                <div class="col-md-4">
+                    {!! Form::select('type',['simple' => 'Simple','bundle' => 'Bundle'],null,['class' => 'form-control','id' => 'selectItemType']) !!}
+                </div>
         </div>
         <div class="card-body panel-body">
             <div class="content main-content">
                 <ul class="nav nav-tabs admin-profile-left">
-                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
+                    <li class="nav-item" data-tab="info"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
+                    <li class="nav-item hide" data-tab="package"><a class="nav-link" data-toggle="tab" href="#package">Package</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
-                        {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
+
                         {!! Form::hidden('id',null) !!}
                         <div class="row">
                             <label for="feature_image" class="control-label col-sm-4"></label>
@@ -262,23 +269,60 @@
                             </div>
 
                         </div>
-
-                        {!! Form::close() !!}
+                    </div>
+                    <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab hide">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    Price : {!! Form::text("price",null,['class' => 'form-control']) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    Count Limit: {!! Form::number("limit",null,['class' => 'form-control']) !!}
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-primary pull-right add-package-item"
+                                            type="button">
+                                        <i class="fa fa-plus"></i> Add new
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-style table-bordered mt-2" cellspacing="0"
+                               width="100%">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>SKU</th>
+                                <th>Qty</th>
+                                <th>Image</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody class="package-variation-box">
+                                @if($model && count($model->variations))
+                                    @foreach($model->variations as $package_variation)
+                                        @include('admin.inventory._partials.variation_package_item')
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-            <script type="template" id="add-more-video">
-                <div class="input-group " style="display: flex">
-                    <input type="text" class="form-control video-url-link"
-                           placeholder="Video Url" name="video" aria-label="Video Url"
-                           aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-danger remove-vido" type="button"><i class="fa fa-trash"></i></button>
-                    </div>
-                </div>
-            </script>
         </div>
+        {!! Form::close() !!}
     </div>
+
+    <script type="template" id="add-more-video">
+        <div class="input-group " style="display: flex">
+            <input type="text" class="form-control video-url-link"
+                   placeholder="Video Url" name="video" aria-label="Video Url"
+                   aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-danger remove-vido" type="button"><i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    </script>
 
     <div class="modal fade" id="suppliersModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
@@ -310,6 +354,29 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $("body").on('click', '.add-package-item', function () {
+                AjaxCall(
+                    "/admin/stock/add-package-variation",
+                    {},
+                    function (res) {
+                        if (!res.error) {
+                            $('.package-variation-box').append(res.html)
+                        }
+                    }
+                );
+            })
+            
+            $("body").on('change', '#selectItemType', function () {
+                let value = $(this).val();
+                if(value =='bundle'){
+                    $("body").find('[data-tab="package"]').removeClass('hide');
+                }else{
+                    $("body").find('[data-tab="package"]').addClass('hide');
+
+                    $("body").find('[data-tab="info"]').trigger('click');
+                }
+            });
+
             $("body").on('click', '.select-suppliers', function () {
                 let arr = [];
                 $(".suppliers-block")
