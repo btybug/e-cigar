@@ -298,3 +298,21 @@ color: #00c0ef !important;
 #addressBook .modal-accounts .form-check-label{
     margin-left: 20px;
 }
+.stickers--all--lists{
+    margin-top: 10px;
+}
+.stickers--all--lists .option-elm-attributes>a{
+    background: #3c8dbc;
+    color: #fff;
+    padding: 5px 10px;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+}
+.order-summary-outer .shipping-payment .payment_methods.methods{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.order-summary-outer .shipping-payment .payment_method_paypal img{
+    max-width: 100%;
+}

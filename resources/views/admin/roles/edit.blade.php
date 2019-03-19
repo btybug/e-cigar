@@ -12,8 +12,8 @@
             </div>
 
             <!-- Button -->
-            <div class="form-group row">
-                <div class="col-sm-12 text-right pull-right">
+            <div class="form-group">
+                <div class="text-right m-2">
                     <button id="singlebutton" class="btn btn-info save-role">Save</button>
                 </div>
             </div>
