@@ -751,7 +751,10 @@ class DatatableController extends Controller
             Barcodes::query()
         )
             ->addColumn('actions', function ($code) {
-                return "<a class='badge btn-danger delete-button' data-key='' data-href=''><i class='fa fa-trash-o'></i></a>";
+                return "
+<a class='badge btn-danger delete-button' data-key='' data-href=''><i class='fa fa-trash-o'></i></a>
+<a class='badge btn-info' href='".route('admin_inventory_barcode_view',$code->id)."'><i class='fa fa-eye'></i></a>
+";
             })->rawColumns(['actions'])
             ->make(true);
     }
