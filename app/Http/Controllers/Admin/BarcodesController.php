@@ -14,7 +14,7 @@ use App\Models\Barcodes;
 use Illuminate\Http\Request;
 
 
-class BarcogesController extends Controller
+class BarcodesController extends Controller
 {
     protected $view = 'admin.inventory.Barcodes';
 
