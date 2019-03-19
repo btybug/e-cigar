@@ -95,10 +95,20 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Barcode</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::select('barcode_id', $barcodes,null,
-                                                        ['class' => 'form-control','id' => 'barcode']) !!}
-                                                    </div>
+                                                    @if(! count($barcodes))
+                                                        <div class="col-sm-6">
+                                                            {!! Form::select('barcode_id', $barcodes,null,
+                                                            ['class' => 'form-control','id' => 'barcode']) !!}
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
+                                                        </div>
+                                                    @else
+                                                        <div class="col-sm-8">
+                                                            {!! Form::select('barcode_id', $barcodes,null,
+                                                            ['class' => 'form-control','id' => 'barcode']) !!}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="form-group">
