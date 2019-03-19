@@ -368,3 +368,6 @@ color: #00c0ef !important;
 .bestbetter-modal .media_modal_right_content::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
+.bestbetter-modal .modal_img_container .file-box .file .icon{
+    height: 140px;
+}
