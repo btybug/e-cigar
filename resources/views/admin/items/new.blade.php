@@ -96,11 +96,7 @@
                                                 <div class="row">
                                                     <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Barcode</label>
                                                     @if(! count($barcodes))
-                                                        <div class="col-sm-6">
-                                                            {!! Form::select('barcode_id', $barcodes,null,
-                                                            ['class' => 'form-control','id' => 'barcode']) !!}
-                                                        </div>
-                                                        <div class="col-sm-2">
+                                                        <div class="col-sm-8">
                                                             <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
                                                         </div>
                                                     @else
