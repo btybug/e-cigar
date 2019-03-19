@@ -446,7 +446,7 @@
                                         <label class="col-md-1">Product Type</label>
                                         <div class="col-md-3">
                                             {!! Form::select('type',['' => 'Select','simple_product'=>'Single Product',
-                                            'variation_product' => 'Variation Product','package_product' => 'Package product'
+                                            'variation_product' => 'Variation Product','package_product' => 'Multiple items'
                                             ],null,
                                             ['id'=>'variation-product-select','class' => 'form-control']) !!}
                                         </div>
