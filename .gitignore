@@ -15,5 +15,5 @@ yarn-error.log
 .env
 .phpunit.result.cache
 _ide_helper.php
-.phpstorm.meta.php	Missing
+.phpstorm.meta.php
 
