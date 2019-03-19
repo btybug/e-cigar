@@ -39,19 +39,7 @@
                     </ul>
                 </div> -->
                 <div class="img">
-                  <a href="#">
-                    <img src="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" alt="">
-                  </a>
-                  <ul class="list-unstyled list-inline text-center icons">
-                    <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
-                    <li class="text-center">
-                      <a href="http://www.apicius.es/wp-content/uploads/2012/07/IMG-20120714-009211.jpg" target="_blank"
-                         data-lightbox="folder-set" data-title="Images title">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                      </a>
-                    </li>
-                    <li class="text-center"><a href="#"><i class="fa fa-remove" aria-hidden="true"></i></a></li>
-                  </ul>
+                  <div class="lds-dual-ring"></div>
                 </div>
               </div>
             </div>
