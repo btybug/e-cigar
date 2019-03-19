@@ -270,3 +270,25 @@ color: #00c0ef !important;
     background: -webkit-linear-gradient(to right, #514A9D, #24C6DC)!important;  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #514A9D, #24C6DC) !important;/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+.card .card-header .breadcrumb .breadcrumb-item a{
+    color: #ffffff;
+}
+.card .card-header .breadcrumb .breadcrumb-item.active{
+    color: #ffffffc7;
+}
+.card .card-header .breadcrumb .breadcrumb-item:before{
+    color: #ffffff;
+}
+/*tabs style*/
+.tabs-colors .nav-link{
+    background-color: #4a5b64!important;
+    color: #fff;
+    border-radius: 0;
+    border-bottom: 1px solid #fff;
+    margin: 0;
+    border-left: none;
+}
+.tabs-colors .nav-link.active, .tabs-colors .nav-link:hover{
+    background-color: #323a4e!important;
+    color: #ffffff;
+}

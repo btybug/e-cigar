@@ -32,7 +32,7 @@
                         <!-- /.box-body -->
                     </div>
                     <!-- /.box -->
-                    <ul class=" nav nav-pills flex-column nav-stacked admin-profile-left">
+                    <ul class=" nav nav-pills flex-column nav-stacked admin-profile-left tabs-colors">
                         <li class="nav-item">
                             <a class="nav-link active" href="#users_profile" data-toggle="tab">Profile</a>
                         </li>
