@@ -96,7 +96,7 @@
                                                 <div class="row">
                                                     <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Barcode</label>
                                                     <div class="col-sm-8">
-                                                        {!! Form::text('barcode', null,
+                                                        {!! Form::select('barcode', $barcodes,null,
                                                         ['class' => 'form-control','id' => 'barcode']) !!}
                                                     </div>
                                                 </div>

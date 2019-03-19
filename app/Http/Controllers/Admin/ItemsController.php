@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Requests\SupplierRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Models\Attributes;
+use App\Models\Barcodes;
 use App\Models\Items;
 use App\Models\Suppliers;
 use Illuminate\Http\Request;
@@ -29,8 +30,9 @@ class ItemsController extends Controller
     public function getNew()
     {
         $model = null;
+        $barcodes = Barcodes::pluck('code','id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes'));
     }
 
     public function postNew(ItemsRequest $request)
