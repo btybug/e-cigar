@@ -11,13 +11,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
+use App\Services\BarcodesService;
 use Illuminate\Http\Request;
 
 
 class BarcodesController extends Controller
 {
     protected $view = 'admin.inventory.Barcodes';
-
 
 
 
