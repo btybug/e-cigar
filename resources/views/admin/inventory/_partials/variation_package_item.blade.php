@@ -20,6 +20,6 @@
         {!! Form::number("package_variation[$uniqueID][price]",($package_variation) ? $package_variation->price : null,['class' => 'form-control']) !!}
     </td>
     <td>
-        <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-trash"></i></button>
+        <button type="button" class="btn btn-danger delete-v-option delete-v-option_button"><i class="fa fa-trash"></i></button>
     </td>
 </tr>

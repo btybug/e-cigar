@@ -336,7 +336,7 @@
                                                         <tfoot>
                                                         <tr class="add-new-ship-filed-container">
                                                             <td colspan="4" class="text-right">
-                                                                <button type="button" class="btn btn-primary"><i
+                                                                <button type="button" class="btn btn-primary add-specification_button"><i
                                                                             class="fa fa-plus-circle add-specification"></i>
                                                                 </button>
                                                             </td>
@@ -1243,7 +1243,7 @@
                 });
             });
 
-            $("body").on('click', '.delete-v-option', function () {
+            $("body").on('click', '.delete-v-option_button', function () {
                 $(this).closest('tr').remove();
                 changeVariationOptions();
             });
@@ -1269,7 +1269,7 @@
             });
 
 
-            $("body").on('click', '.add-specification', function () {
+            $("body").on('click', '.add-specification_button', function () {
                 let $this = $(this);
                 AjaxCall("/admin/stock/get-specifications", {id: null}, function (res) {
                     if (!res.error) {

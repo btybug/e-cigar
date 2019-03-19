@@ -256,7 +256,7 @@
                                                         <tfoot>
                                                         <tr class="add-new-ship-filed-container">
                                                             <td colspan="4" class="text-right">
-                                                                <button type="button" class="btn btn-primary"><i
+                                                                <button type="button" class="btn btn-primary add-specification_button"><i
                                                                             class="fa fa-plus-circle add-specification"></i>
                                                                 </button>
                                                             </td>
@@ -346,7 +346,7 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
-            $("body").on('click', '.delete-v-option', function () {
+            $("body").on('click', '.delete-v-option_button', function () {
                 $(this).closest('tr').remove();
             });
 
