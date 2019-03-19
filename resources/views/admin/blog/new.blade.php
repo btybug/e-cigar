@@ -97,7 +97,7 @@
                                         <span>
                                             Related Products
                                         </span>
-                                                <button type="button" class="btn btn-info select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
+                                                <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
                                             </div>
                                             <div class="card-body panel-body product-body">
                                                 <ul class="get-all-attributes-tab row">
@@ -215,13 +215,11 @@
                                     <p class="pull-left mb-0">
                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Featured image</b>
                                     </p>
-                                    <div class="pull-right text-right">
-                                            {!! media_button('image',$post,false,'drive',
+                                </div>
+                                <div class="card-body">
+                                    {!! media_button('image',$post,false,'drive',
                                            "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img img-responsive {data_id}' /></div>"
                                        ) !!}
-
-
-                                    </div>
                                 </div>
                             </div>
                         </div>

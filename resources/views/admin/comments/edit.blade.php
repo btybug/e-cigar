@@ -9,8 +9,8 @@
         <div class="card-header panel-heading clearfix">
             <h2 class="m-0 pull-left">Edit Comment</h2>
             <div class="pull-right">
-                <a href="{{route('show_comments')}}" class="btn btn-default mr-10">{!! trans('admin.cancel') !!}</a>
-                {{ Form::submit(trans('admin.save'), ['class' => 'btn btn-info pull-right']) }}
+                <a href="{{route('show_comments')}}" class="btn btn-danger mr-10">{!! trans('admin.cancel') !!}</a>
+                {{ Form::submit(trans('admin.save'), ['class' => 'btn btn-primary pull-right']) }}
             </div>
         </div>
         <div class="card-body panel-body">

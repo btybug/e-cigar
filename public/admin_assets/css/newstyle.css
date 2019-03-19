@@ -371,3 +371,12 @@ color: #00c0ef !important;
 .bestbetter-modal .modal_img_container .file-box .file .icon{
     height: 140px;
 }
+.iconpicker-popover.fade{
+    opacity: 1;
+}
+.bestbetter-modal .edit-featured-img-outer img{
+width: 100%;
+}
+#productsModal .option-elm-modal .add-attribute-event{
+color: #ffffff;
+}

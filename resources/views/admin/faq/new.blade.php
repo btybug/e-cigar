@@ -70,7 +70,7 @@
                                         <span>
                                             Related Products
                                         </span>
-                                                <button type="button" class="btn btn-info select-products">Select</button>
+                                                <button type="button" class="btn btn-primary select-products">Select</button>
                                             </div>
                                             <div class="card-body panel-body product-body">
                                                 <ul class="get-all-attributes-tab stickers--all--lists">
@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
