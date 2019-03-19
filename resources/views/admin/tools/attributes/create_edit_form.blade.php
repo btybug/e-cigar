@@ -10,7 +10,7 @@
                 <div class="card-header panel-heading clearfix">
                     <h2 class="m-0 pull-left">Add / Edit Attribute</h2>
                     <div class="button-save pull-right">
-                        {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+                        {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                         <a class="btn btn-default"
                            href="{!! route('admin_store_attributes') !!}">Back</a>
                     </div>

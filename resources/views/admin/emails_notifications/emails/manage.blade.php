@@ -10,7 +10,7 @@
             <div class="pull-right">
                 <div class="text-right btn-save">
                     <button type="submit" class="btn btn-success btn-view">View Template</button>
-                    <button type="submit" class="btn btn-info">Save</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
