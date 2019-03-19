@@ -1792,10 +1792,10 @@ const removeImageDrop = (ev, data) => {
     $('.remover-container-content .images_container').prepend(div);
     $('.remover-container-content').find('.remove-checked-item').length === 0
     && $('.remove-button_container').append(`
-        <div>
+        <div class="d-flex flex-column">
           <button class="remove-checked-item btn btn-danger" onclick="removeImages()">Delete</button>
-          <button class="remove-in-list btn btn-danger" onclick="removeList()">List Remove</button>
-          <input type="checkbox" onchange="checkedAll(this)" checked class="checkbox-all">
+          <button class="remove-in-list btn btn-info my-2" onclick="removeList()">List Remove</button>
+          <input type="checkbox" onchange="checkedAll(this)" checked class="checkbox-all align-self-center">
         </div>`);
     $(`.media_right_content .folderitems .image-container [data-id="${data}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
     app.selectedImage.length = 0;
@@ -1805,18 +1805,22 @@ const drop = (ev, cb) => {
   ev.preventDefault();
 
   const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
-  const flag = data.item;
+  const flag = data.item || 'image';
+  console.log(data)
   if(flag === 'image') {
-    console.log(data)
-    console.log($(ev))
+    // console.log(data.data)
     if(Array.isArray(data.data)) {
       data.data.map(el=>{
+        console.log($('.remover-container-content').find(`[data-id="${el}"]`), 'hellllllllllll')
         if($('.remover-container-content').find(`[data-id="${el}"]`).length === 0) {
+
           removeImageDrop(ev, el);
         }
       });
     } else {
+      console.log($('.remover-container-content').find(`[data-id="${data.data}"]`), 'lehhhhhhhhhhhhhh')
       if($('.remover-container-content').find(`[data-id="${data.data}"]`).length === 0) {
+
         removeImageDrop(ev, data.data);
       }
     }

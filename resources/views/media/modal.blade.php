@@ -29,6 +29,9 @@
                   <!-- <button type="button" class="btn btn-default mb-20" data-role="btnUploader" bb-media-click="show_uploader">Uploader</button> -->
                 </div>
               </div>
+              <div class="img">
+                <div class="lds-dual-ring"></div>
+              </div>
               <div class="row main-content media-modal-main-content modal_img_container" data-type="main-container">
                 <!-- <div class="icon">
                     <i class="fa fa-folder" aria-hidden="true"></i>
@@ -38,9 +41,6 @@
                         <li class="text-center"><a href="#"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                     </ul>
                 </div> -->
-                <div class="img">
-                  <div class="lds-dual-ring"></div>
-                </div>
               </div>
             </div>
 

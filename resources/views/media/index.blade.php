@@ -104,7 +104,7 @@
 
                             </div>
                           </div>
-                          <div class="col-2 row remove-button_container">
+                          <div class="col-2 remove-button_container">
 
                           </div>
                         </div>

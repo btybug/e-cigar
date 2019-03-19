@@ -643,12 +643,18 @@ function App() {
                         let html = `<div class="col-md-3 col-sm-6 col-xs-12"><div data-image="${index}" class="file-box image-container">${self.htmlMaker.makeImage(
                             image
                         )}</div></div>`;
+                        document
+                            .querySelector('div.img') && document
+                            .querySelector('div.img').remove()
                         mainContainer.innerHTML += html;
                     });
                     res.data.children.forEach((folder, index) => {
                         let html = `<div class="col-md-3 col-sm-6 col-xs-12"><div class="file-box folder-container">${self.htmlMaker.makeFolder(
                             folder
                         )}</div></div>`;
+                        document
+                            .querySelector('div.img') && document
+                            .querySelector('div.img').remove()
                         mainContainer.innerHTML += html;
                         if (tree) {
                             self.htmlMaker.makeTreeFolder(res.data.children, '#jstree_html');
@@ -975,7 +981,7 @@ $("body").on("click", ".bestbetter-modal-open button", function() {
     let value = $(this).attr("data-multiple");
     inputId = $(this).attr("id");
     multiple = JSON.parse(value);
-    $(".img").removeClass("active");
+    // $(".img").removeClass("active");
 });
 
 $("body").on("click", ".remove-thumb-img", function(e) {
