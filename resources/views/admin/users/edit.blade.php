@@ -400,7 +400,7 @@
                                                                                 your address</label>
                                                                         </h5>
                                                                     </div>
-                                                                    <div class="col-md-7 d-flex">
+                                                                    <div class="col-md-7 row flex-nowrap">
                                                                         {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control edit-address']) !!}
                                                                         <button type="button"
                                                                                 class="nav-link nav-link--new-address btn btn-info btn-sm address-book-new flex--none">
@@ -587,7 +587,7 @@
                 )
                 ;
             });
-
+            $("#geo_country_book").select2();
             $("body").on('change', '.edit-address', function () {
                 var id = $(this).val();
                 var user_id = $("#userID").val()

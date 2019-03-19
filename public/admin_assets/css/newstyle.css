@@ -292,3 +292,9 @@ color: #00c0ef !important;
     background-color: #323a4e!important;
     color: #ffffff;
 }
+#addressBook .modal-accounts .register-form_input-check{
+    margin-left: 0;
+}
+#addressBook .modal-accounts .form-check-label{
+    margin-left: 20px;
+}
