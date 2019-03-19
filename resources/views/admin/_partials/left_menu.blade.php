@@ -87,6 +87,9 @@
                     @ok('admin_inventory_other')
                     <li><a href="{{route('admin_inventory_other')}}"><i class="fa fa-circle-o"></i>Other</a></li>
                     @endok
+                    @ok('admin_inventory_barcodes')
+                    <li><a href="{{route('admin_inventory_barcodes')}}"><i class="fa fa-circle-o"></i>Barcodes</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess
