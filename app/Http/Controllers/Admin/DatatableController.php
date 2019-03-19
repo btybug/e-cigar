@@ -750,7 +750,7 @@ class DatatableController extends Controller
         return Datatables::of(
             Barcodes::query()
         )
-            ->editColumn('item', function ($barcode) {
+            ->addColumn('item', function ($barcode) {
                 return ($barcode->item) ? "<a href='".route("admin_items_edit",$barcode->item->id)."' >" .$barcode->item->name. "</a>" : "not connected";
             })
             ->addColumn('actions', function ($code) {
