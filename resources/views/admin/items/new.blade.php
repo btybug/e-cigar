@@ -272,38 +272,27 @@
                     </div>
                     <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab hide">
                         <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    Price : {!! Form::text("price",null,['class' => 'form-control']) !!}
-                                </div>
-                                <div class="col-md-4">
-                                    Count Limit: {!! Form::number("limit",null,['class' => 'form-control']) !!}
-                                </div>
-                                <div class="col-md-4">
-                                    <button class="btn btn-primary pull-right add-package-item"
-                                            type="button">
-                                        <i class="fa fa-plus"></i> Add new
-                                    </button>
-                                </div>
-                            </div>
+                                <button class="btn btn-primary pull-right add-package-item"
+                                        type="button">
+                                    <i class="fa fa-plus"></i> Add new
+                                </button>
                         </div>
                         <table class="table table-style table-bordered mt-2" cellspacing="0"
                                width="100%">
                             <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>SKU</th>
+                                <th>Items</th>
                                 <th>Qty</th>
-                                <th>Image</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody class="package-variation-box">
-                                @if($model && count($model->variations))
-                                    @foreach($model->variations as $package_variation)
-                                        @include('admin.inventory._partials.variation_package_item')
-                                    @endforeach
-                                @endif
+                                {{--@if($model && count($model->variations))--}}
+                                    {{--@foreach($model->variations as $package_variation)--}}
+                                        {{--@include('admin.items._partials.package_item')--}}
+                                    {{--@endforeach--}}
+                                {{--@endif--}}
                             </tbody>
                         </table>
                     </div>
@@ -356,7 +345,7 @@
         $(function () {
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
-                    "/admin/stock/add-package-variation",
+                    "/admin/inventory/items/add-package",
                     {},
                     function (res) {
                         if (!res.error) {
@@ -365,7 +354,7 @@
                     }
                 );
             })
-            
+
             $("body").on('change', '#selectItemType', function () {
                 let value = $(this).val();
                 if(value =='bundle'){

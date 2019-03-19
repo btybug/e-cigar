@@ -160,4 +160,13 @@ class ItemsController extends Controller
 
         return \Response::json(['error' => false, 'data' => $attr]);
     }
+
+    public function addPackage(Request $request)
+    {
+        $stockItems = Items::all()->pluck('name', 'id')->all();
+        $package_variation = null;
+        $html = \View('admin.items._partials.package_item', compact(['package_variation', 'stockItems']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }

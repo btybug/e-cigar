@@ -318,6 +318,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
+        Route::post('/add-package', 'Admin\ItemsController@addPackage')->name('admin_items_package_add');
     });
     Route::group(['prefix' => 'barcode'], function () {
         Route::get('/', 'Admin\BarcogesController@getIndex')->name('admin_inventory_barcodes');
