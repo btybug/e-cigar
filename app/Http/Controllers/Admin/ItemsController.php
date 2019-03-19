@@ -37,7 +37,7 @@ class ItemsController extends Controller
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image');
+        $data = $request->only('sku', 'image','barcode_id','type');
 
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
@@ -52,8 +52,10 @@ class ItemsController extends Controller
     public function getEdit($id)
     {
         $model = Items::findOrFail($id);
+        $barcodes = Barcodes::pluck('code','id')->all();
+
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes'));
     }
 
     private function saveImages(Request $request, $item)

@@ -15,8 +15,9 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('sku');
-            $table->string('barcode');
+            $table->string('sku')->nullable();
+            $table->unsignedInteger('barcode_id')->unique();
+            $table->string('type',50);
             $table->integer('quantity')->default(0);
             $table->text('image');
 

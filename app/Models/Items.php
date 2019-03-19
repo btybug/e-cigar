@@ -24,6 +24,11 @@ class Items extends Translatable
         return $this->hasMany(Purchase::class,'item_id');
     }
 
+    public function barcode()
+    {
+        return $this->belongsTo(Barcodes::class,'barcode_id');
+    }
+
     public function media()
     {
         return $this->hasMany(ItemsMedia::class,'item_id');

@@ -11,7 +11,8 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
-                    <th>SKU</th>
+                    <th>Type</th>
+                    <th>Sku</th>
                     <th>Quantity</th>
                     <th>Image</th>
                     <th>Description</th>
@@ -34,6 +35,7 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},
+                    {data: 'type', name: 'type'},
                     {data: 'sku', name: 'sku'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'image', name: 'image'},
