@@ -151,25 +151,34 @@ class StockService
         }
     }
 
-    public function savePackageVariation($stock, array $data = [], $price,$count_limit)
+    public function savePackageVariation($stock, array $data = [])
     {
         if (count($data)) {
             $deletableArray = [];
-            foreach ($data as $variation_id => $data) {
-                $newData = $data;
-                $newData['stock_id'] = $stock->id;
-                $newData['price'] = $price;
-                $newData['count_limit'] = $count_limit;
-
-                if (isset($newData['id'])) {
-                    $variation = StockVariation::find($newData['id']);
-                    $variation->update($newData);
-                } else {
-                    $variation = StockVariation::create($newData);
+            foreach ($data as $variation_id => $datum) {
+                $newData = [];
+                $newData['count_limit'] = $datum['count_limit'];
+                $newData['display_as'] = $datum['display_as'];
+                $newData['price_per'] = $datum['price_per'];
+                $newData['common_price'] = ($datum['common_price'])??0;
+                if(isset($datum['variations']) && count($datum['variations'])){
+                    foreach ($datum['variations'] as $item) {
+                        $newData['price'] = ($datum['price_per'] == 'product') ? $datum['common_price'] : $item['price'];
+                        $newData['item_id'] = $item['item_id'];
+                        $newData['qty'] = $item['qty'];
+                        $newData['image'] = $item['image'];
+                        $newData['name'] = $item['name'];
+                        $newData['variation_id'] = $variation_id;
+                        if (isset($item['id'])) {
+                            $variation = StockVariation::find($item['id']);
+                            $variation->update($newData);
+                        } else {
+                            $variation = $stock->variations()->create($newData);
+                        }
+                        $deletableArray[] = $variation->id;
+                    }
                 }
-                $deletableArray[] = $variation->id;
             }
-
             $stock->variations()->whereNotIn('id', $deletableArray)->delete();
         }
     }

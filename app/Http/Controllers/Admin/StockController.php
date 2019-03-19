@@ -74,6 +74,7 @@ class StockController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
+        dd('not finished');
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit' ,'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
@@ -86,7 +87,7 @@ class StockController extends Controller
         } elseif ($data['type'] == 'simple_product') {
             $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
         } elseif ($data['type'] == 'package_product') {
-            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []), $request->get('package_variation_price'),$request->get('package_variation_count_limit'));
+            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []));
         }
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
@@ -250,9 +251,10 @@ class StockController extends Controller
 
     public function addPackageVariation(Request $request)
     {
+        $main_unique = $request->get('main_unique');
         $stockItems = Items::all()->pluck('name', 'id')->all();
         $package_variation = null;
-        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation', 'stockItems']))->render();
+        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation', 'stockItems','main_unique']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

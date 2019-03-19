@@ -1,21 +1,25 @@
-<div class="basic-center basic-wall" data-id="{{ uniqid() }}">
+@php
+$isModelExists = ($model && count($model->variations)) ? true : false;
+$main_unique = ($isModelExists) ? $model->variations->first()->variation_id :uniqid();
+@endphp
+<div class="basic-center basic-wall" data-id="{{ $main_unique }}">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-2">
-                    How Many items user can select : {!! Form::number("package_variation_count_limit",
-                                                                ($model && count($model->variations)) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
+                    How Many items user can select : {!! Form::number("package_variation[$main_unique][count_limit]",
+                                ($isModelExists) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    Display as: {!! Form::select('package_variation_display_as',
+                    Display as: {!! Form::select("package_variation[$main_unique][display_as]",
                                                                 ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    Price per: {!! Form::select('package_variation_price_per',['product' => 'Product','item' => 'Item'],null,['class' => 'form-control price_per']) !!}
+                    Price per: {!! Form::select("package_variation[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],null,['class' => 'form-control price_per']) !!}
                 </div>
                 <div class="col-md-2">
                     <div class="product_price">
-                        Price : {!! Form::text("package_variation_price",
+                        Price : {!! Form::text("package_variation[$main_unique][common_price]",
                                                                 ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
                     </div>
                 </div>

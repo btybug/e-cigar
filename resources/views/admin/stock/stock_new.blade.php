@@ -572,6 +572,7 @@
 
                                     <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
                                         <div class="package-box">
+                                            {!! dd($model->variations()->groupBy('variation_id')->get()) !!}
                                             @include('admin.stock._partials.package_item')
                                         </div>
                                         <div class="text-center m-4">
@@ -1024,7 +1025,7 @@
                 let data_id = $(this).closest('.basic-center').data('id');
                 AjaxCall(
                     "/admin/stock/add-package-variation",
-                    {},
+                    {main_unique: data_id},
                     function (res) {
                         if (!res.error) {
                             $("body").find('[data-id="'+data_id+'"]').find('.package-variation-box').append(res.html)
