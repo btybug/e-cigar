@@ -17,7 +17,7 @@
             <div class="content main-content">
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="nav-item" data-tab="info"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
-                    <li class="nav-item hide" data-tab="package"><a class="nav-link" data-toggle="tab" href="#package">Package</a></li>
+                    <li class="nav-item @if($model == null || $model->type != 'bundle') hide @endif" data-tab="package"><a class="nav-link" data-toggle="tab" href="#package">Package</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
@@ -273,7 +273,7 @@
 
                         </div>
                     </div>
-                    <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab hide">
+                    <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab @if($model == null || $model->type != 'bundle') hide @endif">
                         <div class="col-md-12">
                                 <button class="btn btn-primary pull-right add-package-item"
                                         type="button">
@@ -291,11 +291,11 @@
                             </tr>
                             </thead>
                             <tbody class="package-variation-box">
-                                {{--@if($model && count($model->variations))--}}
-                                    {{--@foreach($model->variations as $package_variation)--}}
-                                        {{--@include('admin.items._partials.package_item')--}}
-                                    {{--@endforeach--}}
-                                {{--@endif--}}
+                                @if($model && count($model->packages))
+                                    @foreach($model->packages as $package)
+                                        @include('admin.items._partials.package_item')
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -346,6 +346,10 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $("body").on('click', '.delete-v-option', function () {
+                $(this).closest('tr').remove();
+            });
+
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
                     "/admin/inventory/items/add-package",

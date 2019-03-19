@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Items;
+use App\Models\ItemsPackages;
 use App\Models\Suppliers;
 use App\Services\BarcodesService;
 use Illuminate\Http\Request;
@@ -51,6 +52,7 @@ class ItemsController extends Controller
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
+        $this->savePackages($item,$request->get('packages'));
 
         $item->suppliers()->sync($request->get('suppliers'));
 
@@ -61,9 +63,30 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($id);
         $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
-
+        $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes','items'));
+    }
+
+    private function savePackages($item, array $data = [])
+    {
+        $deletableArray = [];
+        if (count($data)) {
+            foreach ($data as $datum) {
+                $existing = $item->packages()->where('id',$datum['id'])->first();
+
+                if ($existing) {
+                    $package = ItemsPackages::find($datum['id']);
+                    $package->update($datum);
+                    $deletableArray[] = $package->id;
+                } else {
+                    $package = $item->packages()->create($datum);
+                    $deletableArray[] = $package->id;
+                }
+            }
+        }
+
+        $item->packages()->whereNotIn('id', $deletableArray)->delete();
     }
 
     private function saveImages(Request $request, $item)
@@ -175,9 +198,9 @@ class ItemsController extends Controller
 
     public function addPackage(Request $request)
     {
-        $stockItems = Items::all()->pluck('name', 'id')->all();
-        $package_variation = null;
-        $html = \View('admin.items._partials.package_item', compact(['package_variation', 'stockItems']))->render();
+        $items = Items::all()->pluck('name', 'id')->all();
+        $package = null;
+        $html = \View('admin.items._partials.package_item', compact(['package', 'items']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
