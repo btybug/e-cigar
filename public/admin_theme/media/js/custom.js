@@ -645,7 +645,10 @@ function App() {
                         )}</div></div>`;
                         document
                             .querySelector('div.img') && document
-                            .querySelector('div.img').remove()
+                            .querySelector('div.img').remove();
+                        document
+                            .querySelector('p.no_content') && document
+                            .querySelector('p.no_content').remove();
                         mainContainer.innerHTML += html;
                     });
                     res.data.children.forEach((folder, index) => {
@@ -654,7 +657,10 @@ function App() {
                         )}</div></div>`;
                         document
                             .querySelector('div.img') && document
-                            .querySelector('div.img').remove()
+                            .querySelector('div.img').remove();
+                        document
+                            .querySelector('p.no_content') && document
+                            .querySelector('p.no_content').remove();
                         mainContainer.innerHTML += html;
                         if (tree) {
                             self.htmlMaker.makeTreeFolder(res.data.children, '#jstree_html');
@@ -662,6 +668,13 @@ function App() {
                             // cb(self.htmlMaker.makeTreeFolder(folder));
                         }
                     });
+
+                    if(res.data.items.length === 0 && res.data.children.length === 0) {
+                        document
+                            .querySelector('div.img') && document
+                            .querySelector('div.img').remove();
+                        mainContainer.innerHTML += `<p class="no_content">No content</p>`;
+                    }
 
                     globalFolderId = res.settings.id;
 
@@ -850,7 +863,6 @@ function App() {
             }
         },
         open_images(elm, e) {
-            console.log('-----------------------------');
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
