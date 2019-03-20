@@ -408,7 +408,43 @@
                         }
                     }
                 );
-            })
+            });
+            function changeVariationOptions() {
+                var list = $(".list-attrs-single-item");
+                attributesJson = {};
+                $(".get-all-attributes-tab")
+                    .children()
+                    .each(function () {
+                        addAttributeToJSONNew($(this))
+                    });
+
+                list.each(function (i, e) {
+                    var box = $(e).find('.variation-options-place');
+                    var options = box.find('select');
+                    box.empty();
+                    var objData = {};
+                    options.each(function (i, e) {
+                        var attrId = $(e).data("attribute_id");
+                        objData[attrId] = $(e).val();
+                    });
+                    var variation = $(e).data('variation');
+                    AjaxCall(
+                        "/admin/stock/render-variation-new-options",
+                        {variation: variation, objData: objData, attributesJson: attributesJson},
+                        function (res) {
+                            if (!res.error) {
+                                box.append(res.html)
+                            }
+                        }
+                    );
+
+                })
+            }
+
+
+            $("body").on("change", ".tag-input-v", function (e) {
+                changeVariationOptions()
+            });
 
             $("body").on('change', '#selectItemType', function () {
                 let value = $(this).val();
@@ -482,6 +518,19 @@
                         $(".tag-input-v").select2({ width: '100%' });
                     }
                 });
+            });
+            $("body").on('change', '.select-specification', function () {
+                var value = $(this).val();
+                let vID = $(this).data('uid');
+                if (value != '') {
+                    AjaxCall("/admin/stock/get-specifications", {id: value}, function (res) {
+                        if (!res.error) {
+                            $(".select-specification[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
+                            $(".tag-input-v").select2({width: '100%'});
+                            changeVariationOptions();
+                        }
+                    });
+                }
             });
             
             $("body").on('click', '.get-all-extra-tab-event', function () {
