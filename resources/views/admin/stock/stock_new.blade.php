@@ -441,7 +441,11 @@
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
                             <div class="col-md-12 v-box">
-                                @include("admin.stock._partials.variation")
+                                @if($model && isset($variations))
+                                    @foreach($variations as $v)
+                                        @include("admin.stock._partials.variation")
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="text-center m-4">
                                 <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add new option</a>
@@ -937,6 +941,8 @@
             $("body").on('click', '.submit-form', function () {
                 $(".stock-form").submit();
             })
+
+
 
             function addAttributeToJSONNew($_this) {
                 let id = $_this.find('.select-attribute').val();

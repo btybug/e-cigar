@@ -16,7 +16,7 @@
     <td>
         {!! media_button("variations[$main_unique][variations][$uniqueID][image]",($package_variation) ? $package_variation->image : null ) !!}
     </td>
-    <td class="package_price hide">
+    <td class="package_price @if($main && $main->price_per == 'product') hide @endif">
         {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,['class' => 'form-control']) !!}
     </td>
     <td>

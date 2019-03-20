@@ -57,7 +57,8 @@ class StockController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-//        dd($model->promotion_prices);
+        $variations = collect($model->variations)->groupBy('variation_id');
+
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
@@ -69,7 +70,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model','variations','data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock(ProductsRequest $request)
@@ -256,7 +257,8 @@ class StockController extends Controller
         $main_unique = $request->get('main_unique');
         $stockItems = Items::all()->pluck('name', 'id')->all();
         $package_variation = null;
-        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation', 'stockItems','main_unique']))->render();
+        $main = null;
+        $html = \View('admin.inventory._partials.variation_package_item', compact(['package_variation', 'stockItems','main_unique','main']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

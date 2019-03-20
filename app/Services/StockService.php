@@ -188,6 +188,7 @@ class StockService
 
                     if (isset($datum['id'])) {
                         $variation = StockVariation::find($datum['id']);
+                        unset($datum['variations']);
                         $variation->update($datum);
                     } else {
                         $variation = $stock->variations()->create($datum);

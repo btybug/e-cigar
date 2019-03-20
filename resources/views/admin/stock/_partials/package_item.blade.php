@@ -1,27 +1,25 @@
-
 <div class="basic-center basic-wall" data-id="{{ $main_unique }}">
     <div class="row">
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-2">
                     How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",
-                                ($isModelExists) ? $model->variations->first()->count_limit : null,['class' => 'form-control']) !!}
+                                ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
                     Display as: {!! Form::select("variations[$main_unique][display_as]",
-                                                                ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],null,['class' => 'form-control']) !!}
+                            ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    Price per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],null,['class' => 'form-control price_per']) !!}
+                    Price per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
                 </div>
                 <div class="col-md-2">
-                    <div class="product_price">
+                    <div class="product_price @if($main && $main->price_per == 'item') hide @endif">
                         Price : {!! Form::text("variations[$main_unique][common_price]",
-                                                                ($model && count($model->variations)) ? $model->variations->first()->price : null,['class' => 'form-control']) !!}
+                                                                ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
                     </div>
                 </div>
                 <div class="col-md-4">
-
                     <button class="btn btn-primary pull-right add-package-item"
                             type="button">
                         <i class="fa fa-plus"></i> Add new
@@ -37,13 +35,13 @@
                 <th>Item</th>
                 <th>Qty</th>
                 <th>Image</th>
-                <th class="package_price hide">Price</th>
+                <th class="package_price @if($main && $main->price_per == 'product') hide @endif">Price</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody class="package-variation-box">
-            @if($model && count($model->variations))
-                @foreach($model->variations as $package_variation)
+            @if($main && count($v))
+                @foreach($v as $package_variation)
                     @include('admin.inventory._partials.variation_package_item')
                 @endforeach
             @endif
