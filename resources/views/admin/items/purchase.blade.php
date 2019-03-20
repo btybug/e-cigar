@@ -51,7 +51,7 @@
                     <div class="col-md-3">
                         <div class="row">
                             <div class="col-md-6">Total Quantity:</div>
-                            <div class="col-md-6">{!! $item->purchase->sum('qty') !!}</div>
+                            <div class="col-md-6">{!! $item->others->sum('qty') !!}</div>
                         </div>
                     </div>
                 </div>

@@ -35,19 +35,14 @@ class OtherController extends Controller
     {
         $data = $request->only(['item_id', 'qty', 'reason', 'notes']);
         $id = $request->get('id');
-        $qty = $data['qty'];
         $data['grouped']=uniqid();
         if ($id) {
             $other = Others::findOrFail($id);
-            $qty = $data['qty'] - $other->qty;
             $data['grouped']=$other->grouped;
         }
-        $item = Items::findOrFail($data['item_id']);
-        $item->quantity = $item->quantity - $qty;
         $data['parent_id']=$id;
         $data['user_id']=\Auth::id();
         Others::create($data);
-        $item->save();
         return redirect()->route('admin_inventory_other');
     }
 
