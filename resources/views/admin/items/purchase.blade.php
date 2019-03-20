@@ -15,12 +15,12 @@
     </section>
     <div class="content main-content">
         <ul class="nav nav-tabs admin-profile-left">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#purchases">Purchases</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sales">Sales</a></li>
-            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#others">Others</a></li>
+            <li class="nav-item"><a class="nav-link active" id="nav-purchases-tab" data-toggle="tab" href="#purchases"  role="tab" aria-controls="nav-purchases" aria-selected="true">Purchases</a></li>
+            <li class="nav-item"><a class="nav-link" id="nav-sales-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="nav-sales" aria-selected="false">Sales</a></li>
+            <li class="nav-item"><a class="nav-link" id="nav-others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="nav-others" aria-selected="false">Others</a></li>
         </ul>
         <div class="tab-content">
-            <div id="purchases" class="tabe-pane fade in active show media-new-tab basic-details-tab">
+            <div id="purchases" role="tabpanel" aria-labelledby="nav-purchases-tab" class="tabe-pane fade show active media-new-tab basic-details-tab">
                 <div class="row justify-content-end mt-2">
                     <div class="col-md-3">
                         <div class="row">
@@ -45,8 +45,8 @@
                     </table>
                 </div>
             </div>
-            <div id="sales" class="tabe-pane fade"></div>
-            <div id="others" class="tabe-pane fade   media-new-tab basic-details-tab">
+            <div id="sales" class="tabe-pane fade" role="tabpanel" aria-labelledby="nav-sales-tab"></div>
+            <div id="others" class="tabe-pane fade media-new-tab basic-details-tab" role="tabpanel" aria-labelledby="nav-others-tab">
                 <div class="row justify-content-end mt-2">
                     <div class="col-md-3">
                         <div class="row">
@@ -75,7 +75,14 @@
     </div>
 @stop
 @section('css')
-
+    <style>
+        .tab-content .tab-pane{
+            display: none;
+        }
+        .tab-content .tab-pane.active{
+            display: block;
+        }
+    </style>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 
 @stop
