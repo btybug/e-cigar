@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
+                                {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                             </div>
                         </div>
                     </div>

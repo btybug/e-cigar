@@ -104,7 +104,7 @@
                                             <label class="col-md-4 control-label col-form-label text-right"
                                                    for="singlebutton"></label>
                                             <div class="col-md-4">
-                                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">
+                                                <button id="singlebutton" name="singlebutton" class="btn btn-info">
                                                     Save
                                                 </button>
                                             </div>
@@ -119,8 +119,8 @@
                             <div class="card panel panel-default mb-3">
                                 <div class=" card-header panel-heading">GMAIL API</div>
                                 <div class="card-body panel-body">
-                                    <div class="pull-right">
-                                        <a class="btn btn-info"
+                                    <div class="text-right">
+                                        <a class="btn btn-success"
                                            href="{!!  route('analytics_login') !!}">Login @if(LaravelGmail::check())
                                                 Other User @endif</a>
                                         @if(LaravelGmail::check())
@@ -169,7 +169,7 @@
                                             <label class="col-md-4 control-label col-form-label text-right"
                                                    for="singlebutton"></label>
                                             <div class="col-md-4">
-                                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">
+                                                <button id="singlebutton" name="singlebutton" class="btn btn-info">
                                                     Save
                                                 </button>
                                             </div>
@@ -184,7 +184,7 @@
                                 <div class="card-header panel-heading">MANAGE SITE API</div>
                                 <div class="card-body panel-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-12">
                                             {!! Form::model($manage_api_settings,['class'=>'form-horizontal','url'=>route('post_admin_manage_api_settings')]) !!}
                                             <fieldset>
                                                 <!-- Form Name -->
@@ -194,7 +194,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-4 control-label col-form-label text-right"
                                                            for="textinput">Client ID</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         {!! Form::text('client_id',null,['class'=>'form-control input-md']) !!}
                                                     </div>
                                                 </div>
@@ -203,7 +203,7 @@
                                                 <div class="form-group row">
                                                     <label class="col-md-4 control-label col-form-label text-right"
                                                            for="textinput">Secret</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         {!! Form::text('client_secret',null,['class'=>'form-control input-md']) !!}
                                                     </div>
                                                 </div>
@@ -214,7 +214,7 @@
                                                            for="singlebutton"></label>
                                                     <div class="col-md-4">
                                                         <button type="submit" name="singlebutton"
-                                                                class="btn btn-primary">Save
+                                                                class="btn btn-info">Save
                                                         </button>
                                                     </div>
                                                 </div>

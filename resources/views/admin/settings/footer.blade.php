@@ -74,7 +74,7 @@
                                                         <div class="card-header panel-heading">Panel Header
                                                             <div>
                                                                 <button type="button"
-                                                                        class="btn btn-success add-section"
+                                                                        class="btn btn-primary add-section"
                                                                         data-lang="{!!strtolower($language->code)!!}"
                                                                         data-block="0"><i
                                                                             class="fa fa-plus"></i></button>
@@ -131,7 +131,7 @@
                                                             <div class="card-header panel-heading">Panel Header
                                                                 <div>
                                                                     <button type="button"
-                                                                            class="btn btn-success add-section"
+                                                                            class="btn btn-primary add-section"
                                                                             data-lang="{!!strtolower($language->code)!!}"
                                                                             data-block="{!! $key !!}"><i
                                                                                 class="fa fa-plus"></i></button>
@@ -177,7 +177,7 @@
                                                                                         <div class="col-md-4">
                                                                                             @if($loop->first)
                                                                                                 <button type="button"
-                                                                                                        class="btn btn-success add-link"
+                                                                                                        class="btn btn-primary add-link"
                                                                                                         data-lang="{!!strtolower($language->code)!!}"
                                                                                                         data-block="{!! $key !!}"><i
                                                                                                             class="fa fa-plus"></i>
