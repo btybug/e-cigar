@@ -16,7 +16,10 @@ class CreateStockVariationsTable extends Migration
         Schema::create('stock_variations', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('stock_id');
-            $table->string('item_id');
+            $table->unsignedInteger('item_id');
+            $table->string('variation_id');
+            $table->string('type');
+            $table->tinyInteger('is_required')->default(0);
             $table->string('name');
             $table->text('image')->nullable();
             $table->unsignedInteger('qty')->default(0);

@@ -887,6 +887,10 @@
                 $(this).closest('.stock-page').remove();
             });
 
+            $("body").on('click', '.delete-package-option', function () {
+                $(this).closest('tr').remove();
+            });
+
             $("body").on('click', '.duplicate-package-options', function () {
                 AjaxCall(
                     "/admin/stock/duplicate-package-options",
@@ -901,14 +905,14 @@
 
             $("body").on('click', '.add-package-item', function () {
                 let $_this = $(this);
-                let data_id = $(this).closest('.basic-center').data('id');
+                let data_id = $(this).closest('.stock-page').attr('data-unqiue');
                 AjaxCall(
                     "/admin/stock/add-package-variation",
                     {main_unique: data_id},
                     function (res) {
                         if (!res.error) {
-                            $("body").find('[data-id="'+data_id+'"]').find('.package-variation-box').append(res.html)
-                            package_product_price(data_id,$_this.closest('.basic-center').find(".price_per").val());
+                            $("body").find('[data-unqiue="'+data_id+'"]').find('.package-variation-box').append(res.html)
+                            package_product_price(data_id,$_this.closest('.stock-page').find(".price_per").val());
                         }
                     }
                 );
@@ -916,17 +920,17 @@
 
             $("body").on('change', '.price_per', function () {
                 let value = $(this).val();
-                let data_id = $(this).closest('.basic-center').data('id');
+                let data_id = $(this).closest('.stock-page').data('unqiue');
                 package_product_price(data_id,value);
             })
 
             function package_product_price(data_id,type){
                 if(type == 'product'){
-                    $("body").find('[data-id="'+data_id+'"]').find('.package_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-id="'+data_id+'"]').find('.product_price').removeClass('hide').addClass('show');
+                    $("body").find('[data-unqiue="'+data_id+'"]').find('.package_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="'+data_id+'"]').find('.product_price').removeClass('hide').addClass('show');
                 }else{
-                    $("body").find('[data-id="'+data_id+'"]').find('.product_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-id="'+data_id+'"]').find('.package_price').removeClass('hide').addClass('show');
+                    $("body").find('[data-unqiue="'+data_id+'"]').find('.product_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="'+data_id+'"]').find('.package_price').removeClass('hide').addClass('show');
                 }
             }
 

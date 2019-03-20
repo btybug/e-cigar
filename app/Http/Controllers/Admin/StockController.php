@@ -74,7 +74,7 @@ class StockController extends Controller
 
     public function postStock(ProductsRequest $request)
     {
-        dd('not finished');
+//        dd($request->get('variations', []));
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit' ,'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
@@ -82,13 +82,15 @@ class StockController extends Controller
 //        dd($request->get('promotions'),array_values($request->get('promotions')));
         $stock = Stock::updateOrCreate($request->id, $data);
 
-        if ($data['type'] == 'variation_product') {
-            $this->stockService->saveVariations($stock, $request->get('variations', []));
-        } elseif ($data['type'] == 'simple_product') {
-            $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
-        } elseif ($data['type'] == 'package_product') {
-            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []));
-        }
+//        if ($data['type'] == 'variation_product') {
+//            $this->stockService->saveVariations($stock, $request->get('variations', []));
+//        } elseif ($data['type'] == 'simple_product') {
+//            $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
+//        } elseif ($data['type'] == 'package_product') {
+//            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []));
+//        }
+
+        $this->stockService->savePackageVariation($stock, $request->get('variations', []));
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->specifications()->sync($request->get('specifications'));

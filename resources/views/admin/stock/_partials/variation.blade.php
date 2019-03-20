@@ -1,15 +1,19 @@
-<div class="card panel panel-default stock-page">
+@php
+    $isModelExists = ($model && count($model->variations)) ? true : false;
+    $main_unique = ($isModelExists) ? $model->variations->first()->variation_id :uniqid();
+@endphp
+<div class="card panel panel-default stock-page" data-unqiue="{{ $main_unique }}">
     <div class="card-header panel-heading clearfix d-flex">
         <div class="col-md-6 d-flex">
             <label class="col-md-3">Product Type</label>
             <div class="col-md-3">
-                {!! Form::select('type',['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items'
+                {!! Form::select("variations[$main_unique][type]",['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items'
                 ],null,
                 ['class' => 'form-control variation-product-select']) !!}
             </div>
         </div>
         <div class="col-md-6 d-flex">
-            {!! Form::select('',['required' => 'Required','optional' => 'Optional'],null,['class' => 'form-control']) !!}
+            {!! Form::select("variations[$main_unique][is_required]",[0 => 'Optional',1 => 'Required'],null,['class' => 'form-control']) !!}
             <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-trash"></i></button>
         </div>
     </div>

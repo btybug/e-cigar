@@ -18,18 +18,18 @@
                 <tbody>
                 <tr>
                     <td>
-                        {!! Form::text("variation_single[name]",($single_variation) ? $single_variation->name : null,['class' => 'form-control']) !!}
-                        {!! Form::hidden("variation_single[id]",($single_variation) ? $single_variation->id : null) !!}
+                        {!! Form::text("variations[$main_unique][name]",($single_variation) ? $single_variation->name : null,['class' => 'form-control']) !!}
+                        {!! Form::hidden("variations[$main_unique][id]",($single_variation) ? $single_variation->id : null) !!}
                     </td>
                     <td>
-                        {!! Form::select("variation_single[variation_id]",$stockItems,($single_variation) ? $single_variation->variation_id : null,['class' => 'form-control']) !!}
+                        {!! Form::select("variations[$main_unique][item_id]",$stockItems,($single_variation) ? $single_variation->item_id : null,['class' => 'form-control']) !!}
                     </td>
                     <td>
                         {!! (isset($item['qty'])) ? $item['qty'] : 0 !!}
-                        {!! Form::hidden("variation_single[qty]",($single_variation) ? $single_variation->qty : null) !!}
+                        {!! Form::hidden("variations[$main_unique][qty]",($single_variation) ? $single_variation->qty : null) !!}
                     </td>
                     <td class="w-5">
-                        {!! Form::text("variation_single[price]",($single_variation) ? $single_variation->price : null,['class' => 'form-control']) !!}
+                        {!! Form::text("variations[$main_unique][price]",($single_variation) ? $single_variation->price : null,['class' => 'form-control']) !!}
                     </td>
                 </tr>
                 </tbody>
