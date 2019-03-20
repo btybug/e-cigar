@@ -13,6 +13,7 @@
                     <th>Name</th>
                     <th>Type</th>
                     <th>Sku</th>
+                    <th>Barcode</th>
                     <th>Quantity</th>
                     <th>Image</th>
                     <th>Description</th>
@@ -37,6 +38,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'type', name: 'type'},
                     {data: 'sku', name: 'sku'},
+                    {data: 'barcode', name: 'barcode'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'image', name: 'image'},
                     {data: 'short_description', name: 'short_description'},
