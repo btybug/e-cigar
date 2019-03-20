@@ -33,7 +33,7 @@
     <script>
         $(function () {
             $('#generate-code').on('click',function () {
-                $('input[name=code]').val(makeid(100))
+                $('input[name=code]').val(makeid(15))
             })
             function makeid(length) {
                 var text = "";

@@ -38,7 +38,7 @@
                     {data: 'name', name: 'name'},
                     {data: 'type', name: 'type'},
                     {data: 'sku', name: 'sku'},
-                    {data: 'barcode', name: 'barcode'},
+                    {data: 'barcode_id', name: 'barcode_id'},
                     {data: 'quantity', name: 'quantity'},
                     {data: 'image', name: 'image'},
                     {data: 'short_description', name: 'short_description'},
