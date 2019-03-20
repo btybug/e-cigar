@@ -20,6 +20,7 @@
         <ul class="nav nav-tabs admin-profile-left">
             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#purchases">Purchases</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#sales">Sales</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#others">Others</a></li>
         </ul>
         <div class="tab-content">
             <div id="purchases" class="tabe-pane fade in active show media-new-tab basic-details-tab">
@@ -48,6 +49,7 @@
                 </div>
             </div>
             <div id="sales" class="tabe-pane fade"></div>
+            <div id="others" class="tabe-pane fade"></div>
         </div>
     </div>
 
