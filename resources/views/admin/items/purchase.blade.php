@@ -9,7 +9,7 @@
                 <input type="text" placeholder="SKU" class="form-control" value="{{ $item->sku }}" readonly>
             </div>
             <div class="col-md-3">
-                <input type="text" placeholder="Quantity" class="form-control" value="{{ $item->quantity }}" readonly>
+                <input type="text" placeholder="Quantity" class="form-control" value="{{ $item->purchase->sum('qty')-$item->others->sum('qty') }}" readonly>
             </div>
         </div>
     </section>
