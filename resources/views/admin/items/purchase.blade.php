@@ -11,9 +11,6 @@
             <div class="col-md-3">
                 <input type="text" placeholder="Quantity" class="form-control" value="{{ $item->quantity }}" readonly>
             </div>
-            <div class="col-md-3">
-                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
-            </div>
         </div>
     </section>
     <div class="content main-content">
