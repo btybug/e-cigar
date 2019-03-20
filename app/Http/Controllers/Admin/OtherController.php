@@ -36,11 +36,11 @@ class OtherController extends Controller
         $data = $request->only(['item_id', 'qty', 'reason', 'notes']);
         $id = $request->get('id');
         $qty = $data['qty'];
-        $data['group']=uniqid();
+        $data['grouped']=uniqid();
         if ($id) {
             $other = Others::findOrFail($id);
             $qty = $data['qty'] - $other->qty;
-            $data['group']=$other->group;
+            $data['grouped']=$other->group;
         }
         $item = Items::findOrFail($data['item_id']);
         $item->quantity = $item->quantity - $qty;
