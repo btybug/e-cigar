@@ -46,11 +46,33 @@
                 </div>
             </div>
             <div id="sales" class="tabe-pane fade"></div>
-            <div id="others" class="tabe-pane fade"></div>
+            <div id="others" class="tabe-pane fade   media-new-tab basic-details-tab">
+                <div class="row justify-content-end mt-2">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">Total Quantity:</div>
+                            <div class="col-md-6">{!! $item->purchase->sum('qty') !!}</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <table id="categories-table-others" class="table table-style table-bordered" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>SKU</th>
+                            <th>Owner</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                            <th>Purchase Date</th>
+                            <th>Entry Date</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
-
 @stop
 @section('css')
 
@@ -65,6 +87,21 @@
         $(function () {
             $('#categories-table').DataTable({
                 ajax:  "{!! route('datatable_item_purchases',$item->id) !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                columns: [
+                    {data: 'id',name: 'id'},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'user_id',name: 'user_id'},
+                    {data: 'qty', name: 'qty'},
+                    {data: 'price', name: 'price'},
+                    {data: 'purchase_date', name: 'purchase_date'},
+                    {data: 'created_at', name: 'created_at'}
+                ]
+            });
+            $('#categories-table-others').DataTable({
+                ajax:  "{!! route('datatable_item_others',$item->id) !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,

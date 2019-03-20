@@ -605,6 +605,23 @@ class DatatableController extends Controller
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
+    public function getItemOthers($item_id)
+    {
+        return Datatables::of(Others::where('item_id', $item_id))
+            ->editColumn('user_id', function ($faq) {
+                return $faq->user->name;
+            })->editColumn('sku', function ($attr) {
+                return $attr->item->sku;
+            })->editColumn('created_at', function ($faq) {
+                return BBgetDateFormat($faq->created_at);
+            })->editColumn('purchase_date', function ($faq) {
+                return BBgetDateFormat($faq->purchase_date);
+            })
+            ->addColumn('actions', function ($faq) {
+                return "<a class='badge btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
+            ->make(true);
+    }
 
     public function getUserOrders($user_id)
     {

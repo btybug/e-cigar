@@ -38,6 +38,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/faq/get-all','Admin\DatatableController@getFaq')->name('datatable_all_faq');
     Route::get('/store/get-purchases','Admin\DatatableController@getPurchases')->name('datatable_all_purchases');
     Route::get('/items/purchases/{item_id}','Admin\DatatableController@getItemPurchases')->name('datatable_item_purchases');
+    Route::get('/items/others/{item_id}','Admin\DatatableController@getItemOthers')->name('datatable_item_others');
 
     Route::get('/store/get-items','Admin\DatatableController@getAllItems')->name('datatable_all_items');
     Route::get('/inventory/get-all-suppliers','Admin\DatatableController@getAllSuppliers')->name('datatable_all_suppliers');
