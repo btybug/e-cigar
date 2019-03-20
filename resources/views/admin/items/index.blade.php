@@ -15,7 +15,6 @@
                     <th>Sku</th>
                     <th>Barcode</th>
                     <th>Quantity</th>
-                    <th>Image</th>
                     <th>Description</th>
                     <th>Created At</th>
                     <th>Actions</th>
@@ -40,7 +39,6 @@
                     {data: 'sku', name: 'sku'},
                     {data: 'barcode_id', name: 'barcode_id'},
                     {data: 'quantity', name: 'quantity'},
-                    {data: 'image', name: 'image'},
                     {data: 'short_description', name: 'short_description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
