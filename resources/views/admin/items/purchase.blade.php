@@ -63,7 +63,7 @@
                             <th>SKU</th>
                             <th>Owner</th>
                             <th>Qty</th>
-                            <th>Price</th>
+                            <th>Reason</th>
                             <th>Purchase Date</th>
                             <th>Entry Date</th>
                         </tr>
@@ -110,7 +110,7 @@
                     {data: 'sku', name: 'sku'},
                     {data: 'user_id',name: 'user_id'},
                     {data: 'qty', name: 'qty'},
-                    {data: 'price', name: 'price'},
+                    {data: 'reason', name: 'reason'},
                     {data: 'purchase_date', name: 'purchase_date'},
                     {data: 'created_at', name: 'created_at'}
                 ]
