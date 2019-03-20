@@ -17,6 +17,7 @@
                 <thead>
                 <tr>
                     <th>#</th>
+                    <th>Name</th>
                     <th>SKU</th>
                     <th>Owner</th>
                     <th>Qty</th>
@@ -40,6 +41,7 @@
             "bPaginate": true,
             columns: [
                 {data: 'id',name: 'id'},
+                {data: 'name', name: 'name'},
                 {data: 'sku', name: 'sku'},
                 {data: 'user_id',name: 'user_id'},
                 {data: 'qty', name: 'qty'},

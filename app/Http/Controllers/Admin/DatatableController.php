@@ -575,7 +575,9 @@ class DatatableController extends Controller
         return Datatables::of(Purchase::query())
             ->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
-            })->editColumn('sku', function ($attr) {
+            })->addColumn('name', function ($attr) {
+                return $attr->item->name;
+            })->addColumn('sku', function ($attr) {
                 return $attr->item->sku;
             })->editColumn('created_at', function ($faq) {
                 return BBgetDateFormat($faq->created_at);
