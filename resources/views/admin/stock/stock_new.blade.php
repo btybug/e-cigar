@@ -4,712 +4,719 @@
 @stop
 @section('content')
     {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
-
-    <section class="content-top">
-        <div class="row">
-            <div class="col-md-4">
-                <input type="text" placeholder="Product Name" class="form-control" value="{{ @$model->name }}" readonly>
-            </div>
-            <div class="col-md-4">
-                <input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>
-            </div>
-            <div class="col-md-4">
-                {!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}
+    <div class="card">
+        <div class="card-header clearfix">
+            <h2 class="m-0 pull-left">Product</h2>
+            <div class="pull-right">
+                {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
             </div>
         </div>
-    </section>
-    <section class="content-header">
-        {{--<h1> Admin Profile </h1>--}}
-        <ol class="breadcrumb">
-            <li><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i>
-                    Dashboard</a></li>
-            <li class="active">Admin Profile</li>
-        </ol>
-    </section>
+        <div class="card-body">
+            <section class="content stock-page mt-0 p-0">
 
-    <section class="content stock-page mt-0 mt-4 p-0">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs admin-profile-left">
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic Details</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Variations</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
+                        </ul>
+                    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="nav nav-tabs admin-profile-left">
-                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic Details</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Variations</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
-                </ul>
-            </div>
 
-            <!-- /.col -->
-            {!! Form::hidden('id',null,['id' => "stockID"]) !!}
-            <div class="col-md-12">
-                <div class="tab-content tabs_content">
-                    <div id="basic" class="tab-pane fade in active show basic-details-tab ">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="basic-center basic-wall">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                @if(count(get_languages()))
-                                                    <ul class="nav nav-tabs">
-                                                        @foreach(get_languages() as $language)
-                                                            <li class="nav-item"><a
-                                                                        class="nav-link @if($loop->first) active @endif"
-                                                                        data-toggle="tab"
-                                                                        href="#{{ strtolower($language->code) }}">
-                                                                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                                </a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                @endif
-                                                <div class="tab-content mt-20">
-                                                    @if(count(get_languages()))
-                                                        @foreach(get_languages() as $language)
-                                                            <div id="{{ strtolower($language->code) }}"
-                                                                 class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                data-toggle="tooltip"
-                                                                                title=""
-                                                                                data-original-title="Attribute Name Title">Product Name</span></label>
-                                                                    <div class="col-sm-10">
-                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                data-toggle="tooltip"
-                                                                                title=""
-                                                                                data-original-title="Short Description">Short Description</span></label>
-                                                                    <div class="col-sm-10">
-                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="product_id"
-                                                               class="control-label col-sm-4 control-label col-form-label text-right">Product
-                                                            Slug (for url)</label>
-                                                        <div class="col-sm-8">
-                                                            {!! Form::text('slug', null,
-                                                            ['class' => 'form-control']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                {{--<div class="form-group">--}}
-                                                {{--<div class="row">--}}
-                                                {{--<label for="sku"--}}
-                                                {{--class="control-label col-sm-4">Barcode</label>--}}
-                                                {{--<div class="col-sm-8">--}}
-                                                {{--@if($model && $model->sku)--}}
-                                                {{--{!! \DNS1D::getBarcodeSVG($model->sku, "C39") !!}--}}
-                                                {{--<img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />--}}
-                                                {{--@endif--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--</div>--}}
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="feature_image"
-                                                               class="control-label col-sm-4 control-label col-form-label text-right">Feature
-                                                            image</label>
-                                                        <div class="col-sm-8">
-                                                            {!! media_button('image',$model) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="faq_tab"
-                                                               class="control-label col-sm-4 control-label text-right">Faq
-                                                            Tab</label>
-                                                        <div class="col-sm-8">
-                                                            {!! Form::checkbox('faq_tab', true,null,
-                                                             ['class' => '','id' => 'faq_tab']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="reviews_tab"
-                                                               class="control-label col-sm-4 control-label  text-right">Reviews
-                                                            Tab</label>
-                                                        <div class="col-sm-8">
-                                                            {!! Form::checkbox('reviews_tab', true,null,
-                                                             ['class' => '','id' => 'reviews_tab']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                    {!! Form::hidden('id',null,['id' => "stockID"]) !!}
+                    <div class="col-md-12">
+                        <div class="tab-content tabs_content">
+                            <div id="basic" class="tab-pane fade in active show basic-details-tab ">
+                                <div class="container-fluid p-25">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="basic-center basic-wall">
                                                 <div class="row">
-                                                    <div class="col-md-5">
-
-                                                    </div>
-                                                    <div class="col-md-7">
-                                                        <div class="form-group row">
-                                                            <label class="col-sm-2 control-label">Status</label>
-                                                            <div class="col-sm-10">
-                                                                {!! Form::select('status',[
-                                                                    '0' => 'Draft',
-                                                                    '1' => 'Published',
-                                                                ],null,['class' => 'form-control']) !!}
-                                                            </div>
+                                                    <div class="col-md-6">
+                                                        @if(count(get_languages()))
+                                                            <ul class="nav nav-tabs">
+                                                                @foreach(get_languages() as $language)
+                                                                    <li class="nav-item"><a
+                                                                                class="nav-link @if($loop->first) active @endif"
+                                                                                data-toggle="tab"
+                                                                                href="#{{ strtolower($language->code) }}">
+                                                                            <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                        </a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                        <div class="tab-content mt-20">
+                                                            @if(count(get_languages()))
+                                                                @foreach(get_languages() as $language)
+                                                                    <div id="{{ strtolower($language->code) }}"
+                                                                         class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                        data-toggle="tooltip"
+                                                                                        title=""
+                                                                                        data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                            <div class="col-sm-10">
+                                                                                {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                        data-toggle="tooltip"
+                                                                                        title=""
+                                                                                        data-original-title="Short Description">Short Description</span></label>
+                                                                            <div class="col-sm-10">
+                                                                                {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endif
                                                         </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5">
-
-                                                    </div>
-                                                    <div class="col-md-7">
                                                         <div class="form-group">
-                                                            <label class="col-sm-2 control-label pl-sm-0">Categories</label>
-                                                            {!! Form::hidden('categories',(isset($checkedCategories))
-                                                            ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                            <div id="treeview_json"></div>
+                                                            <div class="row">
+                                                                <label for="product_id"
+                                                                       class="control-label col-sm-4 control-label col-form-label text-right">Product
+                                                                    Slug (for url)</label>
+                                                                <div class="col-sm-8">
+                                                                    {!! Form::text('slug', null,
+                                                                    ['class' => 'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{--<div class="form-group">--}}
+                                                        {{--<div class="row">--}}
+                                                        {{--<label for="sku"--}}
+                                                        {{--class="control-label col-sm-4">Barcode</label>--}}
+                                                        {{--<div class="col-sm-8">--}}
+                                                        {{--@if($model && $model->sku)--}}
+                                                        {{--{!! \DNS1D::getBarcodeSVG($model->sku, "C39") !!}--}}
+                                                        {{--<img src="data:image/png;base64,{{ \DNS1D::getBarcodePNG($model->barcode, "C39") }}" alt="barcode"   />--}}
+                                                        {{--@endif--}}
+                                                        {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        {{--</div>--}}
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="feature_image"
+                                                                       class="control-label col-sm-4 control-label col-form-label text-right">Feature
+                                                                    image</label>
+                                                                <div class="col-sm-8">
+                                                                    {!! media_button('image',$model) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="faq_tab"
+                                                                       class="control-label col-sm-4 control-label text-right">Faq
+                                                                    Tab</label>
+                                                                <div class="col-sm-8">
+                                                                    {!! Form::checkbox('faq_tab', true,null,
+                                                                     ['class' => '','id' => 'faq_tab']) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="row">
+                                                                <label for="reviews_tab"
+                                                                       class="control-label col-sm-4 control-label  text-right">Reviews
+                                                                    Tab</label>
+                                                                <div class="col-sm-8">
+                                                                    {!! Form::checkbox('reviews_tab', true,null,
+                                                                     ['class' => '','id' => 'reviews_tab']) !!}
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-md-6">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
 
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 control-label">Status</label>
+                                                                    <div class="col-sm-10">
+                                                                        {!! Form::select('status',[
+                                                                            '0' => 'Draft',
+                                                                            '1' => 'Published',
+                                                                        ],null,['class' => 'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label pl-sm-0">Categories</label>
+                                                                    {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                    ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                    <div id="treeview_json"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
                                                 </div>
-
 
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div id="technical" class="tab-pane basic-details-tab media-new-tab fade ">
-                        <div class="container-fluid p-25">
-                            <div class="row d-flex">
-                                <div class="col-md-3">
-                                    <div class="basic-left basic-wall h-100">
-                                        <div class="all-list">
-                                            <ul class="nav nav-tabs media-list">
-                                                <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                                        href="#long_desc">Long Description</a></li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                        href="#mediastickers">Stickers</a></li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                        href="#mediaspecifications">Specifications</a>
-                                                </li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                        href="#mediavideos">Videos</a>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                        href="#mediaotherimage">Images</a></li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                        href="#mediarelatedproducts">Related
-                                                        Products</a></li>
-                                                <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                        href="#wiitb">What's in the box</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="basic-center basic-wall scrollbar_media_tab h-100">
-                                        <div class="tab-content">
-                                            <div id="mediaotherimage" class="tab-pane fade ">
-                                                {!! media_button('other_images',$model,true) !!}
+                            <div id="technical" class="tab-pane basic-details-tab media-new-tab fade ">
+                                <div class="container-fluid p-25">
+                                    <div class="row d-flex">
+                                        <div class="col-md-3">
+                                            <div class="basic-left basic-wall h-100">
+                                                <div class="all-list">
+                                                    <ul class="nav nav-tabs media-list">
+                                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab"
+                                                                                href="#long_desc">Long Description</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#mediastickers">Stickers</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#mediaspecifications">Specifications</a>
+                                                        </li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#mediavideos">Videos</a>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#mediaotherimage">Images</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#mediarelatedproducts">Related
+                                                                Products</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#wiitb">What's in the box</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                            <div id="mediavideos" class="tab-pane fade">
-                                                <div class="media-videos">
-                                                    <div class="input-group " style="display: flex">
-                                                        <input type="text" class="form-control video-url-link"
-                                                               placeholder="Video Url" aria-label="Video Url"
-                                                               aria-describedby="basic-addon2">
-                                                        <div class="input-group-append">
-                                                            <button class="btn btn-primary add-video-url"
-                                                                    type="button">Add Link
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="basic-center basic-wall scrollbar_media_tab h-100">
+                                                <div class="tab-content">
+                                                    <div id="mediaotherimage" class="tab-pane fade ">
+                                                        {!! media_button('other_images',$model,true) !!}
+                                                    </div>
+                                                    <div id="mediavideos" class="tab-pane fade">
+                                                        <div class="media-videos">
+                                                            <div class="input-group " style="display: flex">
+                                                                <input type="text" class="form-control video-url-link"
+                                                                       placeholder="Video Url" aria-label="Video Url"
+                                                                       aria-describedby="basic-addon2">
+                                                                <div class="input-group-append">
+                                                                    <button class="btn btn-primary add-video-url"
+                                                                            type="button">Add Link
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="media-videos-preview mt-20"
+                                                                 style="display: flex;flex-wrap: wrap">
+                                                                @if(isset($model->videos) && $model->videos && count($model->videos))
+                                                                    @foreach($model->videos as $video)
+                                                                        <div class="video-single-item" style="display: flex">
+                                                                            <iframe width="200" height="200"
+                                                                                    src="https://www.youtube.com/embed/{{ $video }}">
+                                                                            </iframe>
+                                                                            <div>
+                                                                                <button class="btn btn-danger remove-video-single-item btn-sm">
+                                                                                    <i class="fa fa-trash"></i></button>
+                                                                            </div>
+                                                                            <input type="hidden" name="videos[]"
+                                                                                   value="{{ $video }}"></div>
+                                                                    @endforeach
+                                                                @endif
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div id="mediastickers" class="tab-pane fade ">
+                                                        <div class="panel-heading d-flex justify-content-between align-items-center">
+                                                            <h4>
+                                                                Stickers
+                                                            </h4>
+                                                            <button type="button" class="btn btn-info select-stickers">Select
                                                             </button>
                                                         </div>
+                                                        <div class="panel-body product-body">
+                                                            <ul class="get-all-stickers-tab stickers--all--lists">
+                                                                @if(isset($model) && count($model->stickers))
+                                                                    @foreach($model->stickers as $sticker)
+                                                                        <li style="display: flex" data-id="{{ $sticker->id }}"
+                                                                            class="option-elm-attributes">
+                                                                            <a href="#"
+                                                                               class="stick--link">{!! $sticker->name !!}</a>
+                                                                            <div class="buttons">
+                                                                                <a href="javascript:void(0)"
+                                                                                   class="remove-all-attributes btn btn-sm btn-danger">
+                                                                                    <i class="fa fa-trash"></i></a>
+                                                                            </div>
+                                                                            <input type="hidden" name="stickers[]"
+                                                                                   value="{{ $sticker->id }}">
+                                                                        </li>
+                                                                    @endforeach
+                                                                @endif
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="media-videos-preview mt-20"
-                                                         style="display: flex;flex-wrap: wrap">
-                                                        @if(isset($model->videos) && $model->videos && count($model->videos))
-                                                            @foreach($model->videos as $video)
-                                                                <div class="video-single-item" style="display: flex">
-                                                                    <iframe width="200" height="200"
-                                                                            src="https://www.youtube.com/embed/{{ $video }}">
-                                                                    </iframe>
-                                                                    <div>
-                                                                        <button class="btn btn-danger remove-video-single-item btn-sm">
-                                                                            <i class="fa fa-trash"></i></button>
+                                                    <div id="mediarelatedproducts" class="tab-pane fade ">
+                                                        <div class="panel-heading d-flex justify-content-between align-items-center">
+                                                            <h4>
+                                                                Related Products
+                                                            </h4>
+                                                            <button type="button" class="btn btn-info select-products">Select
+                                                            </button>
+                                                        </div>
+                                                        <div class="panel-body product-body">
+                                                            <ul class="get-all-products-tab stickers--all--lists">
+                                                                @if(isset($model) && count($model->related_products))
+                                                                    @foreach($model->related_products as $related_product)
+                                                                        <li style="display: flex"
+                                                                            data-id="{{ $related_product->id }}"
+                                                                            class="option-elm-attributes">
+                                                                            <a href="#"
+                                                                               class="stick--link">{!! $related_product->name !!}</a>
+                                                                            <div class="buttons">
+                                                                                <a href="javascript:void(0)"
+                                                                                   class="remove-all-attributes btn btn-sm btn-danger">
+                                                                                    <i class="fa fa-trash"></i></a>
+                                                                            </div>
+                                                                            <input type="hidden" name="related_products[]"
+                                                                                   value="{{ $related_product->id }}">
+                                                                        </li>
+                                                                    @endforeach
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div id="mediaspecifications" class="tab-pane fade ">
+                                                        <div class="table-responsive">
+                                                            <table class="table table--store-settings">
+                                                                <thead>
+                                                                <tr class="bg-my-light-pink">
+                                                                    <th>Attributes</th>
+                                                                    <th></th>
+                                                                    <th></th>
+                                                                </tr>
+                                                                </thead>
+
+                                                                <tbody class="v-options-list">
+                                                                @if($model && $model->stockAttrs)
+                                                                    @foreach($model->stockAttrs as $selected)
+                                                                        @include('admin.inventory._partials.specifications')
+                                                                    @endforeach
+                                                                @endif
+                                                                </tbody>
+
+                                                                <tfoot>
+                                                                <tr class="add-new-ship-filed-container">
+                                                                    <td colspan="4" class="text-right">
+                                                                        <button type="button"
+                                                                                class="btn btn-primary add-specification_button">
+                                                                            <i
+                                                                                    class="fa fa-plus-circle add-specification"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div id="wiitb" class="tab-pane fade ">
+                                                        <div class="basic-center basic-wall">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    @if(count(get_languages()))
+                                                                        <ul class="nav nav-tabs">
+                                                                            @foreach(get_languages() as $language)
+                                                                                <li class="nav-item"><a
+                                                                                            class="nav-link @if($loop->first) active @endif"
+                                                                                            data-toggle="tab"
+                                                                                            href="#{{ strtolower($language->code) }}">
+                                                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                                    </a></li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    @endif
+                                                                    <div class="tab-content">
+                                                                        @if(count(get_languages()))
+                                                                            @foreach(get_languages() as $language)
+                                                                                <div id="{{ strtolower($language->code) }}"
+                                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                                    data-toggle="tooltip"
+                                                                                                    title=""
+                                                                                                    data-original-title="what_is_content">Content</span></label>
+                                                                                        <div class="col-sm-10">
+                                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][what_is_content]',get_translated($model,strtolower($language->code),'what_is_content'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        @endif
                                                                     </div>
-                                                                    <input type="hidden" name="videos[]"
-                                                                           value="{{ $video }}"></div>
-                                                            @endforeach
-                                                        @endif
 
+                                                                    <div class="form-group">
+                                                                        <div class="row">
+                                                                            <label for="feature_image"
+                                                                                   class="control-label col-sm-4 col-form-label text-right">Image</label>
+                                                                            <div class="col-sm-8">
+                                                                                {!! media_button('what_is_image',$model) !!}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="long_desc" class="tab-pane fade in active show">
+                                                        <div class="basic-center basic-wall">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    @if(count(get_languages()))
+                                                                        <ul class="nav nav-tabs">
+                                                                            @foreach(get_languages() as $language)
+                                                                                <li class="nav-item"><a
+                                                                                            class="nav-link @if($loop->first) active @endif"
+                                                                                            data-toggle="tab"
+                                                                                            href="#{{ strtolower($language->code) }}">
+                                                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                                    </a></li>
+                                                                            @endforeach
+                                                                        </ul>
+                                                                    @endif
+                                                                    <div class="tab-content">
+                                                                        @if(count(get_languages()))
+                                                                            @foreach(get_languages() as $language)
+                                                                                <div id="{{ strtolower($language->code) }}"
+                                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                                    <div class="form-group row">
+                                                                                        <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                                    data-toggle="tooltip"
+                                                                                                    title=""
+                                                                                                    data-original-title="Short Description">Long Description</span></label>
+                                                                                        <div class="col-sm-10">
+                                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
+                                <div class="container-fluid p-25">
+                                    <div class="col-md-12 v-box">
+                                        @if($model && isset($variations))
+                                            @foreach($variations as $v)
+                                                @include("admin.stock._partials.variation")
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="text-center m-4">
+                                        <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add
+                                            new option</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
+                                <div class="container-fluid p-25">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="basic-center basic-wall">
+
+                                                <div class="card panel panel-default mt-20">
+                                                    <div class="card-header panel-heading">FB</div>
+                                                    <div class="card-body panel-body">
+                                                        <div class="form-group p-0-15">
+                                                            <div class="row">
+                                                                <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook
+                                                                    Title</label>
+                                                                <div class="col-md-5 col-xs-12">
+                                                                    {!! Form::text('fb[og:title]',($model)?$model->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$model)]) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group p-0-15">
+                                                            <div class="row">
+                                                                <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook
+                                                                    Description</label>
+                                                                <div class="col-md-5 col-xs-12">
+                                                                    {!! Form::text('fb[og:description]',($model)?$model->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$model)]) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group p-0-15">
+                                                            <div class="row">
+                                                                <label class="col-md-2 col-xs-12">Facebook Image</label>
+                                                                <div class="col-md-5 col-xs-12">
+                                                                    {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$model)]) !!}
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            <div id="mediastickers" class="tab-pane fade ">
-                                                <div class="panel-heading d-flex justify-content-between align-items-center">
-                                                    <h4>
-                                                        Stickers
-                                                    </h4>
-                                                    <button type="button" class="btn btn-info select-stickers">Select
-                                                    </button>
+                                                <div class="card panel panel-default mt-20">
+                                                    <div class="card-header panel-heading">Twitter</div>
+                                                    <div class="card-body panel-body">
+                                                        <div class="form-group p-0-15">
+                                                            <div class="row">
+                                                                <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter
+                                                                    Title</label>
+                                                                <div class="col-md-5 col-xs-12">
+                                                                    {!! Form::text('twitter[og:title]',($model)?$model->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group p-0-15">
+                                                            <div class="row">
+                                                                <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter
+                                                                    Description</label>
+                                                                <div class="col-md-5 col-xs-12">
+                                                                    {!! Form::text('twitter[og:description]',($model)?$model->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group p-0-15">
+                                                            <div class="row">
+                                                                <label class="col-md-2 col-xs-12">Twitter Image</label>
+                                                                <div class="col-md-5 col-xs-12">
+                                                                    {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$model)]) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="panel-body product-body">
-                                                    <ul class="get-all-stickers-tab stickers--all--lists">
-                                                        @if(isset($model) && count($model->stickers))
-                                                            @foreach($model->stickers as $sticker)
-                                                                <li style="display: flex" data-id="{{ $sticker->id }}"
-                                                                    class="option-elm-attributes">
-                                                                    <a href="#"
-                                                                       class="stick--link">{!! $sticker->name !!}</a>
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="seo-general-content">
+                                                            <table class="form-table">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <label for="seo_focuskw">Focus Keyword:</label>
+                                                                        <img src="/public/images/question-mark.png"
+                                                                             alt="question">
+                                                                    </th>
+                                                                    <td>
+                                                                        {!! Form::text('general[og:keywords]',($model)?$model->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$model)]) !!}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <label for="seo_title">SEO Title:</label>
+                                                                        <img src="/public/images/question-mark.png"
+                                                                             alt="question">
+                                                                    </th>
+                                                                    <td>
+                                                                        {!! Form::text('general[og:title]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$model)]) !!}
+                                                                        <br>
+                                                                        <div>
+                                                                            <p><span class="wrong">Warning:</span>
+                                                                                Title display in Google is limited to a fixed
+                                                                                width, yours is too long.
+                                                                            </p>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <label for="seo_metadesc">Meta description:</label>
+                                                                        <img src="/public/images/question-mark.png"
+                                                                             alt="question">
+                                                                    </th>
+                                                                    <td>
+                                                                        {!! Form::textarea('general[og:description]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$model)]) !!}
+                                                                        <div>The <code>meta</code> description will be limited
+                                                                            to 156 chars, 156 chars left.
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="seo-advanced">
+                                                            <table class="form-table">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <label for="seo_meta-robots-noindex">Meta Robots
+                                                                            Index:</label>
+                                                                    </th>
+                                                                    <td>
+                                                                        {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($model)?$model->getSeoField('robots','robot'):null,['class'=>'']) !!}
+
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">Meta Robots Follow</th>
+                                                                    <td>
+                                                                        <input type="radio" checked="checked"
+                                                                               id="seo_meta-robots-nofollow_0"
+                                                                               value="0">
+                                                                        <label for="seo_meta-robots-nofollow_0">Follow</label>
+                                                                        <input type="radio" id="seo_meta-robots-nofollow_1"
+                                                                               value="1">
+                                                                        <label for="seo_meta-robots-nofollow_1">Nofollow</label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <label for="seo_meta-robots-adv">Meta Robots
+                                                                            Advanced:</label>
+                                                                    </th>
+                                                                    <td>
+                                                                        <select multiple="multiple" size="7"
+                                                                                style="height: 144px;"
+                                                                                id="seo_meta-robots-adv"
+                                                                                class="">
+                                                                            <option selected="selected" value="-">Site-wide
+                                                                                default: None
+                                                                            </option>
+                                                                            <option value="none">None</option>
+                                                                            <option value="noodp">NO ODP</option>
+                                                                            <option value="noydir">NO YDIR</option>
+                                                                            <option value="noimageindex">No Image Index</option>
+                                                                            <option value="noarchive">No Archive</option>
+                                                                            <option value="nosnippet">No Snippet</option>
+                                                                        </select>
+                                                                        <div>Advanced <code>meta</code> robots settings for this
+                                                                            page.
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <label for="seo_canonical">Canonical URL:</label>
+                                                                    </th>
+                                                                    <td>
+                                                                        <input type="text" id="seo_canonical" value=""
+                                                                               class="form-control"><br>
+                                                                        <div>The canonical URL that this page should point to,
+                                                                            leave empty to default to
+                                                                            permalink. <a target="_blank"
+                                                                                          href="#">Cross
+                                                                                domain canonical</a> supported too.
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
+                                <div class="container-fluid p-25">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <div class="basic-left basic-wall">
+                                                <div class="all-list-extra">
+                                                    <ul class="get-all-extra-tab">
+                                                        @if($model)
+                                                            @foreach($model->promotions as $promotion)
+                                                                <li style="display: flex" data-stock-id="{{ $model->id }}"
+                                                                    data-id="{{ $promotion->id }}" class="promotion-elm"><a
+                                                                            href="#">{{ $promotion->name }}</a>
                                                                     <div class="buttons">
                                                                         <a href="javascript:void(0)"
-                                                                           class="remove-all-attributes btn btn-sm btn-danger">
-                                                                            <i class="fa fa-trash"></i></a>
+                                                                           class="remove-promotion btn btn-sm btn-danger"><i
+                                                                                    class="fa fa-trash"></i></a>
                                                                     </div>
-                                                                    <input type="hidden" name="stickers[]"
-                                                                           value="{{ $sticker->id }}">
+                                                                    <input type="hidden"
+                                                                           name="promotions[{{ $promotion->id }}][id]"
+                                                                           value="{{ $promotion->id }}">
+                                                                    <input type="hidden" class="promotion_price"
+                                                                           data-id="{{ $promotion->id }}"
+                                                                           name="promotion_prices[{{ $promotion->id }}]"
+                                                                           value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
+                                                                    <input type="hidden" class="promotion_type"
+                                                                           data-id="{{ $promotion->id }}"
+                                                                           name="promotions[{{ $promotion->id }}][type]"
+                                                                           value="{{ $promotion->pivot->type }}">
                                                                 </li>
                                                             @endforeach
                                                         @endif
                                                     </ul>
                                                 </div>
-                                            </div>
-                                            <div id="mediarelatedproducts" class="tab-pane fade ">
-                                                <div class="panel-heading d-flex justify-content-between align-items-center">
-                                                    <h4>
-                                                        Related Products
-                                                    </h4>
-                                                    <button type="button" class="btn btn-info select-products">Select
-                                                    </button>
-                                                </div>
-                                                <div class="panel-body product-body">
-                                                    <ul class="get-all-products-tab stickers--all--lists">
-                                                        @if(isset($model) && count($model->related_products))
-                                                            @foreach($model->related_products as $related_product)
-                                                                <li style="display: flex"
-                                                                    data-id="{{ $related_product->id }}"
-                                                                    class="option-elm-attributes">
-                                                                    <a href="#"
-                                                                       class="stick--link">{!! $related_product->name !!}</a>
-                                                                    <div class="buttons">
-                                                                        <a href="javascript:void(0)"
-                                                                           class="remove-all-attributes btn btn-sm btn-danger">
-                                                                            <i class="fa fa-trash"></i></a>
-                                                                    </div>
-                                                                    <input type="hidden" name="related_products[]"
-                                                                           value="{{ $related_product->id }}">
-                                                                </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div id="mediaspecifications" class="tab-pane fade ">
-                                                <div class="table-responsive">
-                                                    <table class="table table--store-settings">
-                                                        <thead>
-                                                        <tr class="bg-my-light-pink">
-                                                            <th>Attributes</th>
-                                                            <th></th>
-                                                            <th></th>
-                                                        </tr>
-                                                        </thead>
-
-                                                        <tbody class="v-options-list">
-                                                        @if($model && $model->stockAttrs)
-                                                            @foreach($model->stockAttrs as $selected)
-                                                                @include('admin.inventory._partials.specifications')
-                                                            @endforeach
-                                                        @endif
-                                                        </tbody>
-
-                                                        <tfoot>
-                                                        <tr class="add-new-ship-filed-container">
-                                                            <td colspan="4" class="text-right">
-                                                                <button type="button" class="btn btn-primary add-specification_button"><i
-                                                                            class="fa fa-plus-circle add-specification"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        </tfoot>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div id="wiitb" class="tab-pane fade ">
-                                                <div class="basic-center basic-wall">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            @if(count(get_languages()))
-                                                                <ul class="nav nav-tabs">
-                                                                    @foreach(get_languages() as $language)
-                                                                        <li class="nav-item"><a
-                                                                                    class="nav-link @if($loop->first) active @endif"
-                                                                                    data-toggle="tab"
-                                                                                    href="#{{ strtolower($language->code) }}">
-                                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                                            </a></li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            @endif
-                                                            <div class="tab-content">
-                                                                @if(count(get_languages()))
-                                                                    @foreach(get_languages() as $language)
-                                                                        <div id="{{ strtolower($language->code) }}"
-                                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                                            <div class="form-group row">
-                                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                            data-toggle="tooltip"
-                                                                                            title=""
-                                                                                            data-original-title="what_is_content">Content</span></label>
-                                                                                <div class="col-sm-10">
-                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][what_is_content]',get_translated($model,strtolower($language->code),'what_is_content'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endforeach
-                                                                @endif
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="feature_image"
-                                                                           class="control-label col-sm-4 col-form-label text-right">Image</label>
-                                                                    <div class="col-sm-8">
-                                                                        {!! media_button('what_is_image',$model) !!}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="long_desc" class="tab-pane fade in active show">
-                                                <div class="basic-center basic-wall">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            @if(count(get_languages()))
-                                                                <ul class="nav nav-tabs">
-                                                                    @foreach(get_languages() as $language)
-                                                                        <li class="nav-item"><a
-                                                                                    class="nav-link @if($loop->first) active @endif"
-                                                                                    data-toggle="tab"
-                                                                                    href="#{{ strtolower($language->code) }}">
-                                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                                            </a></li>
-                                                                    @endforeach
-                                                                </ul>
-                                                            @endif
-                                                            <div class="tab-content">
-                                                                @if(count(get_languages()))
-                                                                    @foreach(get_languages() as $language)
-                                                                        <div id="{{ strtolower($language->code) }}"
-                                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                                            <div class="form-group row">
-                                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                            data-toggle="tooltip"
-                                                                                            title=""
-                                                                                            data-original-title="Short Description">Long Description</span></label>
-                                                                                <div class="col-sm-10">
-                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    @endforeach
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="button-add text-center">
+                                                    <a href="javascript:void(0)"
+                                                       class="btn btn-primary btn-block select-promotions"><i
+                                                                class="fa fa-plus mr-10"></i>Add promotion</a>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                        <div class="col-sm-9">
+                                            <div class="basic-center basic-wall">
+                                                <div class="row">
+                                                    <div class="col-md-12 extra-variations">
 
-                        </div>
-                    </div>
-                    <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
-                        <div class="container-fluid p-25">
-                            <div class="col-md-12 v-box">
-                                @if($model && isset($variations))
-                                    @foreach($variations as $v)
-                                        @include("admin.stock._partials.variation")
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="text-center m-4">
-                                <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add new option</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="basic-center basic-wall">
-
-                                        <div class="card panel panel-default mt-20">
-                                            <div class="card-header panel-heading">FB</div>
-                                            <div class="card-body panel-body">
-                                                <div class="form-group p-0-15">
-                                                    <div class="row">
-                                                        <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook
-                                                            Title</label>
-                                                        <div class="col-md-5 col-xs-12">
-                                                            {!! Form::text('fb[og:title]',($model)?$model->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$model)]) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group p-0-15">
-                                                    <div class="row">
-                                                        <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook
-                                                            Description</label>
-                                                        <div class="col-md-5 col-xs-12">
-                                                            {!! Form::text('fb[og:description]',($model)?$model->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$model)]) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group p-0-15">
-                                                    <div class="row">
-                                                        <label class="col-md-2 col-xs-12">Facebook Image</label>
-                                                        <div class="col-md-5 col-xs-12">
-                                                            {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$model)]) !!}
-
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="card panel panel-default mt-20">
-                                            <div class="card-header panel-heading">Twitter</div>
-                                            <div class="card-body panel-body">
-                                                <div class="form-group p-0-15">
-                                                    <div class="row">
-                                                        <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter
-                                                            Title</label>
-                                                        <div class="col-md-5 col-xs-12">
-                                                            {!! Form::text('twitter[og:title]',($model)?$model->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group p-0-15">
-                                                    <div class="row">
-                                                        <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter
-                                                            Description</label>
-                                                        <div class="col-md-5 col-xs-12">
-                                                            {!! Form::text('twitter[og:description]',($model)?$model->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group p-0-15">
-                                                    <div class="row">
-                                                        <label class="col-md-2 col-xs-12">Twitter Image</label>
-                                                        <div class="col-md-5 col-xs-12">
-                                                            {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$model)]) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="seo-general-content">
-                                                    <table class="form-table">
-                                                        <tbody>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <label for="seo_focuskw">Focus Keyword:</label>
-                                                                <img src="/public/images/question-mark.png"
-                                                                     alt="question">
-                                                            </th>
-                                                            <td>
-                                                                {!! Form::text('general[og:keywords]',($model)?$model->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$model)]) !!}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <label for="seo_title">SEO Title:</label>
-                                                                <img src="/public/images/question-mark.png"
-                                                                     alt="question">
-                                                            </th>
-                                                            <td>
-                                                                {!! Form::text('general[og:title]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$model)]) !!}
-                                                                <br>
-                                                                <div>
-                                                                    <p><span class="wrong">Warning:</span>
-                                                                        Title display in Google is limited to a fixed
-                                                                        width, yours is too long.
-                                                                    </p>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <label for="seo_metadesc">Meta description:</label>
-                                                                <img src="/public/images/question-mark.png"
-                                                                     alt="question">
-                                                            </th>
-                                                            <td>
-                                                                {!! Form::textarea('general[og:description]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$model)]) !!}
-                                                                <div>The <code>meta</code> description will be limited
-                                                                    to 156 chars, 156 chars left.
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div class="seo-advanced">
-                                                    <table class="form-table">
-                                                        <tbody>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <label for="seo_meta-robots-noindex">Meta Robots
-                                                                    Index:</label>
-                                                            </th>
-                                                            <td>
-                                                                {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($model)?$model->getSeoField('robots','robot'):null,['class'=>'']) !!}
-
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Meta Robots Follow</th>
-                                                            <td>
-                                                                <input type="radio" checked="checked"
-                                                                       id="seo_meta-robots-nofollow_0"
-                                                                       value="0">
-                                                                <label for="seo_meta-robots-nofollow_0">Follow</label>
-                                                                <input type="radio" id="seo_meta-robots-nofollow_1"
-                                                                       value="1">
-                                                                <label for="seo_meta-robots-nofollow_1">Nofollow</label>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <label for="seo_meta-robots-adv">Meta Robots
-                                                                    Advanced:</label>
-                                                            </th>
-                                                            <td>
-                                                                <select multiple="multiple" size="7"
-                                                                        style="height: 144px;"
-                                                                        id="seo_meta-robots-adv"
-                                                                        class="">
-                                                                    <option selected="selected" value="-">Site-wide
-                                                                        default: None
-                                                                    </option>
-                                                                    <option value="none">None</option>
-                                                                    <option value="noodp">NO ODP</option>
-                                                                    <option value="noydir">NO YDIR</option>
-                                                                    <option value="noimageindex">No Image Index</option>
-                                                                    <option value="noarchive">No Archive</option>
-                                                                    <option value="nosnippet">No Snippet</option>
-                                                                </select>
-                                                                <div>Advanced <code>meta</code> robots settings for this
-                                                                    page.
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <label for="seo_canonical">Canonical URL:</label>
-                                                            </th>
-                                                            <td>
-                                                                <input type="text" id="seo_canonical" value=""
-                                                                       class="form-control"><br>
-                                                                <div>The canonical URL that this page should point to,
-                                                                    leave empty to default to
-                                                                    permalink. <a target="_blank"
-                                                                                  href="#">Cross
-                                                                        domain canonical</a> supported too.
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
-                        <div class="container-fluid p-25">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <div class="basic-left basic-wall">
-                                        <div class="all-list-extra">
-                                            <ul class="get-all-extra-tab">
-                                                @if($model)
-                                                    @foreach($model->promotions as $promotion)
-                                                        <li style="display: flex" data-stock-id="{{ $model->id }}"
-                                                            data-id="{{ $promotion->id }}" class="promotion-elm"><a
-                                                                    href="#">{{ $promotion->name }}</a>
-                                                            <div class="buttons">
-                                                                <a href="javascript:void(0)"
-                                                                   class="remove-promotion btn btn-sm btn-danger"><i
-                                                                            class="fa fa-trash"></i></a>
-                                                            </div>
-                                                            <input type="hidden"
-                                                                   name="promotions[{{ $promotion->id }}][id]"
-                                                                   value="{{ $promotion->id }}">
-                                                            <input type="hidden" class="promotion_price"
-                                                                   data-id="{{ $promotion->id }}"
-                                                                   name="promotion_prices[{{ $promotion->id }}]"
-                                                                   value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
-                                                            <input type="hidden" class="promotion_type"
-                                                                   data-id="{{ $promotion->id }}"
-                                                                   name="promotions[{{ $promotion->id }}][type]"
-                                                                   value="{{ $promotion->pivot->type }}">
-                                                        </li>
-                                                    @endforeach
-                                                @endif
-                                            </ul>
-                                        </div>
-                                        <div class="button-add text-center">
-                                            <a href="javascript:void(0)"
-                                               class="btn btn-primary btn-block select-promotions"><i
-                                                        class="fa fa-plus mr-10"></i>Add promotion</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9">
-                                    <div class="basic-center basic-wall">
-                                        <div class="row">
-                                            <div class="col-md-12 extra-variations">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
                     </div>
+
                 </div>
 
-            </div>
-            {!! Form::close() !!}
+            </section>
         </div>
-        <!-- /.col -->
-    </section>
+    </div>
+    {!! Form::close() !!}
+    {{--<section class="content-top">--}}
+        {{--<div class="row">--}}
+            {{--<div class="col-md-4">--}}
+                {{--<input type="text" placeholder="Product Name" class="form-control" value="{{ @$model->name }}" readonly>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-4">--}}
+                {{--<input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>--}}
+            {{--</div>--}}
+            {{--<div class="col-md-4">--}}
+                {{--{!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section>--}}
+
+
+
     <!-- Modal -->
     <div id="myExtraTabModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -816,12 +823,14 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
-        .package-box > div:not(:first-child){
+        .package-box > div:not(:first-child) {
             margin-top: 20px;
         }
-        .v-box > div:not(:first-child){
+
+        .v-box > div:not(:first-child) {
             margin-top: 20px;
         }
+
         .errors {
             color: red;
             font-style: italic;
@@ -915,8 +924,8 @@
                     {main_unique: data_id},
                     function (res) {
                         if (!res.error) {
-                            $("body").find('[data-unqiue="'+data_id+'"]').find('.package-variation-box').append(res.html)
-                            package_product_price(data_id,$_this.closest('.stock-page').find(".price_per").val());
+                            $("body").find('[data-unqiue="' + data_id + '"]').find('.package-variation-box').append(res.html)
+                            package_product_price(data_id, $_this.closest('.stock-page').find(".price_per").val());
                         }
                     }
                 );
@@ -925,23 +934,22 @@
             $("body").on('change', '.price_per', function () {
                 let value = $(this).val();
                 let data_id = $(this).closest('.stock-page').data('unqiue');
-                package_product_price(data_id,value);
+                package_product_price(data_id, value);
             })
 
-            function package_product_price(data_id,type){
-                if(type == 'product'){
-                    $("body").find('[data-unqiue="'+data_id+'"]').find('.package_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="'+data_id+'"]').find('.product_price').removeClass('hide').addClass('show');
-                }else{
-                    $("body").find('[data-unqiue="'+data_id+'"]').find('.product_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="'+data_id+'"]').find('.package_price').removeClass('hide').addClass('show');
+            function package_product_price(data_id, type) {
+                if (type == 'product') {
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
+                } else {
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
                 }
             }
 
             $("body").on('click', '.submit-form', function () {
                 $(".stock-form").submit();
             })
-
 
 
             function addAttributeToJSONNew($_this) {
