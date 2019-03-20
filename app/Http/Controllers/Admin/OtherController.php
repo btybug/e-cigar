@@ -40,7 +40,7 @@ class OtherController extends Controller
         if ($id) {
             $other = Others::findOrFail($id);
             $qty = $data['qty'] - $other->qty;
-            $data['grouped']=$other->group;
+            $data['grouped']=$other->grouped;
         }
         $item = Items::findOrFail($data['item_id']);
         $item->quantity = $item->quantity - $qty;
