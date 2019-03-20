@@ -24,7 +24,7 @@ $main_unique = ($isModelExists) ? $model->variations->first()->variation_id :uni
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-danger delete-package-option"><i class="fa fa-trash"></i></button>
+
                     <button class="btn btn-primary pull-right add-package-item"
                             type="button">
                         <i class="fa fa-plus"></i> Add new

@@ -440,147 +440,11 @@
                     </div>
                     <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                         <div class="container-fluid p-25">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label class="col-md-1">Product Type</label>
-                                        <div class="col-md-3">
-                                            {!! Form::select('type',['' => 'Select','simple_product'=>'Single Product',
-                                            'variation_product' => 'Variation Product','package_product' => 'Multiple items'
-                                            ],null,
-                                            ['id'=>'variation-product-select','class' => 'form-control']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="table-product-variotion product-wall row {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
-                                    <div class="table-responsive">
-                                        <table class="table table--store-settings">
-                                            <thead>
-                                            <tr class="bg-my-light-pink">
-                                                <th>Attributes</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tr>
-                                            </thead>
-
-                                            <tbody class="v-options-list get-all-attributes-tab">
-                                            @if($model)
-                                                @foreach($model->type_attrs as $typeAttr)
-                                                    @include("admin.inventory._partials.variation_option_item",['selected' => $typeAttr,'noAjax' => true])
-                                                @endforeach
-                                            @endif
-                                            </tbody>
-
-                                            <tfoot>
-                                            <tr class="add-new-ship-filed-container">
-                                                <td colspan="4" class="text-right">
-                                                    <button type="button" class="btn btn-primary"><i
-                                                                class="fa fa-plus-circle add-new-v-option"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-
-                                </div>
+                            <div class="col-md-12 v-box">
+                                @include("admin.stock._partials.variation")
                             </div>
-
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="sipmle-product-wall product-wall {{ ($model && $model->type =='simple_product') ? '' : 'hide' }}">
-                                        <div class="basic-center basic-wall">
-                                            <div class="row">
-                                                <div class="col-md-12">
-
-                                                    @php
-                                                        $single_variation = ($model && $model->variations) ? $model->variations->first() : null;
-                                                    @endphp
-                                                    <table class="table table-style table-bordered" cellspacing="0"
-                                                           width="100%">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>Name</th>
-                                                            <th>SKU</th>
-                                                            <th>Qty</th>
-                                                            <th>Price</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                {!! Form::text("variation_single[name]",($single_variation) ? $single_variation->name : null,['class' => 'form-control']) !!}
-                                                                {!! Form::hidden("variation_single[id]",($single_variation) ? $single_variation->id : null) !!}
-                                                            </td>
-                                                            <td>
-                                                                {!! Form::select("variation_single[variation_id]",$stockItems,($single_variation) ? $single_variation->variation_id : null,['class' => 'form-control']) !!}
-                                                            </td>
-                                                            <td>
-                                                                {!! (isset($item['qty'])) ? $item['qty'] : 0 !!}
-                                                                {!! Form::hidden("variation_single[qty]",($single_variation) ? $single_variation->qty : null) !!}
-                                                            </td>
-                                                            <td class="w-5">
-                                                                {!! Form::text("variation_single[price]",($single_variation) ? $single_variation->price : null,['class' => 'form-control']) !!}
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row variation-product-wall {{ ($model && $model->type =='variation_product') ? '' : 'hide' }}">
-                                        <div class="basic-center basic-wall">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="col-md-12">
-                                                        <button type="button"
-                                                                class="btn btn-primary pull-right add-variation-row"><i
-                                                                class="fa fa-plus-circle add-new-v-option"></i>
-                                                        </button>
-                                                    </div>
-                                                    <div class="col-md-12">
-
-                                                        <table id="variations-table"
-                                                               class="table table-style table-bordered"
-                                                               cellspacing="0" width="100%">
-                                                            <thead>
-                                                            <tr>
-                                                                <th>Name</th>
-                                                                <th>Attributes</th>
-                                                                <th>SKU</th>
-                                                                <th>Qty</th>
-                                                                <th>Price</th>
-                                                                <th>Actions</th>
-                                                                <th></th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody class="all-list-attrs">
-                                                            @if($model && count($model->variations))
-                                                                @foreach($model->variations()->with('options')->get() as $variation)
-                                                                    @include('admin.inventory._partials.variation_item',['item' => $variation])
-                                                                @endforeach
-                                                            @endif
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
-                                        <div class="package-box">
-                                            {{--{!! dd($model->variations()->groupBy('variation_id')->get()) !!}--}}
-                                            @include('admin.stock._partials.package_item')
-                                        </div>
-                                        <div class="text-center m-4">
-                                            <a class="btn btn-info text-white duplicate-package-options"><i class="fa fa-plus"></i> Add new option</a>
-                                        </div>
-                                    </div>
-
-                                </div>
+                            <div class="text-center m-4">
+                                <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add new option</a>
                             </div>
                         </div>
                     </div>
@@ -835,7 +699,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
             </div>
@@ -952,6 +815,9 @@
         .package-box > div:not(:first-child){
             margin-top: 20px;
         }
+        .v-box > div:not(:first-child){
+            margin-top: 20px;
+        }
         .errors {
             color: red;
             font-style: italic;
@@ -1005,8 +871,20 @@
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             }, 5);
 
-            $("body").on('click', '.delete-package-option', function () {
-                $(this).closest('.basic-center').remove();
+            $("body").on('click', '.duplicate-v-options', function () {
+                AjaxCall(
+                    "/admin/stock/duplicate-v-options",
+                    {},
+                    function (res) {
+                        if (!res.error) {
+                            $('.v-box').append(res.html);
+                        }
+                    }
+                );
+            });
+
+            $("body").on('click', '.delete-v-option', function () {
+                $(this).closest('.stock-page').remove();
             });
 
             $("body").on('click', '.duplicate-package-options', function () {

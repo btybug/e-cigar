@@ -269,6 +269,16 @@ class StockController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function duplicateVOptions(Request $request)
+    {
+        $stockItems = Items::all()->pluck('name', 'id')->all();
+        $package_variation = null;
+        $model = null;
+        $html = \View('admin.stock._partials.variation', compact(['model','package_variation', 'stockItems']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function editVariation(Request $request)
     {
         $data = $request->get('data');
