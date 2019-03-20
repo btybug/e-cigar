@@ -211,7 +211,19 @@
                                         <div id="downloads" class="tab-pane fade">
                                             {!! media_button('downloads',$model,true) !!}
                                         </div>
-                                        <div id="settings" class="tab-pane fade"></div>
+                                        <div id="settings" class="tab-pane fade">
+                                            @if($model == null || $model->type != 'bundle')
+                                                <div class="form-group row">
+                                                    <label for="packaging_weight"
+                                                           class="col-sm-2">Alert</label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control"
+                                                               name="alert"
+                                                               id="packaging_weight" type="text">
+                                                    </div>
+                                                </div>
+                                                @endif
+                                        </div>
                                         <div id="management" class="tab-pane fade">
                                             <div class="card panel panel-default">
                                                 <div class="card-header panel-heading">
