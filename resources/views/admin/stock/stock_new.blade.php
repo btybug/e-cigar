@@ -572,7 +572,7 @@
 
                                     <div class="packge-product-wall product-wall {{ ($model && $model->type =='package_product') ? '' : 'hide' }}">
                                         <div class="package-box">
-                                            {!! dd($model->variations()->groupBy('variation_id')->get()) !!}
+                                            {{--{!! dd($model->variations()->groupBy('variation_id')->get()) !!}--}}
                                             @include('admin.stock._partials.package_item')
                                         </div>
                                         <div class="text-center m-4">
