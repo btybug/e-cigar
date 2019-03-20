@@ -252,7 +252,7 @@
                                         <div id="specifications" class="tab-pane fade">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" id="v-option-form">
-                                                    <table class="table table-responsive table--store-settings">
+                                                    <table class="table table--store-settings">
                                                         <thead>
                                                         <tr class="bg-my-light-pink">
                                                             <th>Attributes</th>
@@ -262,14 +262,18 @@
                                                         </thead>
 
                                                         <tbody class="v-options-list">
-                                                        @include('admin.inventory._partials.specifications')
+                                                        @if($model && $model->stockAttrs)
+                                                            @foreach($model->stockAttrs as $selected)
+                                                                @include('admin.inventory._partials.specifications')
+                                                            @endforeach
+                                                        @endif
                                                         </tbody>
 
                                                         <tfoot>
                                                         <tr class="add-new-ship-filed-container">
                                                             <td colspan="4" class="text-right">
                                                                 <button type="button" class="btn btn-primary add-specification_button"><i
-                                                                            class="fa fa-plus-circle add-specification"></i>
+                                                                        class="fa fa-plus-circle add-specification"></i>
                                                                 </button>
                                                             </td>
                                                         </tr>
@@ -279,6 +283,36 @@
                                             </div>
 
                                         </div>
+                                        {{--<div id="specifications" class="tab-pane fade">--}}
+                                            {{--<div class="panel panel-default">--}}
+                                                {{--<div class="panel-body" id="v-option-form">--}}
+                                                    {{--<table class="table table-responsive table--store-settings">--}}
+                                                        {{--<thead>--}}
+                                                        {{--<tr class="bg-my-light-pink">--}}
+                                                            {{--<th>Attributes</th>--}}
+                                                            {{--<th></th>--}}
+                                                            {{--<th></th>--}}
+                                                        {{--</tr>--}}
+                                                        {{--</thead>--}}
+
+                                                        {{--<tbody class="v-options-list">--}}
+                                                        {{--@include('admin.inventory._partials.specifications')--}}
+                                                        {{--</tbody>--}}
+
+                                                        {{--<tfoot>--}}
+                                                        {{--<tr class="add-new-ship-filed-container">--}}
+                                                            {{--<td colspan="4" class="text-right">--}}
+                                                                {{--<button type="button" class="btn btn-primary add-specification_button"><i--}}
+                                                                            {{--class="fa fa-plus-circle add-specification"></i>--}}
+                                                                {{--</button>--}}
+                                                            {{--</td>--}}
+                                                        {{--</tr>--}}
+                                                        {{--</tfoot>--}}
+                                                    {{--</table>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+
+                                        {{--</div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -348,12 +382,14 @@
     </div><!-- /.modal -->
 @stop
 @section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
@@ -438,9 +474,9 @@
                 });
             });
 
-            $("body").on('click', '.add-specification', function () {
+            $("body").on('click', '.add-specification_button', function () {
                 let $this = $(this);
-                AjaxCall("/admin/inventory/stock/get-specifications", {id: null}, function (res) {
+                AjaxCall("/admin/stock/get-specifications", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({ width: '100%' });
