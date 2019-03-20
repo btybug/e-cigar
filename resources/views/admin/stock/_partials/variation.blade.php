@@ -36,17 +36,3 @@
 </div>
 
 
-{{--<div class="col-sm-12">--}}
-    {{--<div class="form-group">--}}
-        {{--<div class="row">--}}
-            {{--<label class="col-md-1">Product Type</label>--}}
-            {{--<div class="col-md-3">--}}
-                {{--{!! Form::select('type',['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items'--}}
-                {{--],null,--}}
-                {{--['id'=>'variation-product-select','class' => 'form-control']) !!}--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
-
-
