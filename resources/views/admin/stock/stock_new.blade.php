@@ -900,6 +900,7 @@
             });
 
             $("body").on('click', '.add-package-item', function () {
+                let $_this = $(this);
                 let data_id = $(this).closest('.basic-center').data('id');
                 AjaxCall(
                     "/admin/stock/add-package-variation",
@@ -907,7 +908,7 @@
                     function (res) {
                         if (!res.error) {
                             $("body").find('[data-id="'+data_id+'"]').find('.package-variation-box').append(res.html)
-                            package_product_price(data_id,$(".price_per").val());
+                            package_product_price(data_id,$_this.closest('.basic-center').find(".price_per").val());
                         }
                     }
                 );
@@ -979,29 +980,30 @@
                 changeVariationOptions()
             });
 
-            $('body').on('change', '#variation-product-select', function () {
+            $('body').on('change', '.variation-product-select', function () {
                 var value = $(this).val();
+                var parent = $(this).closest('.stock-page');
                 if (value == 'variation_product') {
-                    $('.sipmle-product-wall').addClass('hide');
-                    $('.packge-product-wall').addClass('hide');
-                    $('.variation-product-wall').removeClass('hide');
-                    $('.table-product-variotion').removeClass('hide');
+                    // $('.sipmle-product-wall').addClass('hide');
+                    // $('.packge-product-wall').addClass('hide');
+                    // $('.variation-product-wall').removeClass('hide');
+                    // $('.table-product-variotion').removeClass('hide');
                 } else if (value == 'simple_product') {
-                    $('.sipmle-product-wall').removeClass('hide');
-                    $('.variation-product-wall').addClass('hide');
-                    $('.table-product-variotion').addClass('hide');
-                    $('.packge-product-wall').addClass('hide');
+                    parent.find('.sipmle-product-wall').removeClass('hide');
+                    parent.find('.variation-product-wall').addClass('hide');
+                    parent.find('.table-product-variotion').addClass('hide');
+                    parent.find('.packge-product-wall').addClass('hide');
 
                 } else if (value == 'package_product') {
-                    $('.packge-product-wall').removeClass('hide');
-                    $('.sipmle-product-wall').addClass('hide');
-                    $('.variation-product-wall').addClass('hide');
-                    $('.table-product-variotion').addClass('hide');
+                    parent.find('.packge-product-wall').removeClass('hide');
+                    parent.find('.sipmle-product-wall').addClass('hide');
+                    parent.find('.variation-product-wall').addClass('hide');
+                    parent.find('.table-product-variotion').addClass('hide');
                 } else {
-                    $('.packge-product-wall').addClass('hide');
-                    $('.sipmle-product-wall').addClass('hide');
-                    $('.variation-product-wall').addClass('hide');
-                    $('.table-product-variotion').addClass('hide');
+                    parent.find('.packge-product-wall').addClass('hide');
+                    parent.find('.sipmle-product-wall').addClass('hide');
+                    parent.find('.variation-product-wall').addClass('hide');
+                    parent.find('.table-product-variotion').addClass('hide');
                 }
             });
 

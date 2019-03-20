@@ -5,7 +5,7 @@
             <div class="col-md-3">
                 {!! Form::select('type',['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items'
                 ],null,
-                ['id'=>'variation-product-select','class' => 'form-control']) !!}
+                ['class' => 'form-control variation-product-select']) !!}
             </div>
         </div>
         <div class="col-md-6 d-flex">
