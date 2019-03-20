@@ -168,7 +168,7 @@ class StoreController extends Controller
     public function getPurchaseNew()
     {
         $model = null;
-        $items = Items::all()->pluck('name', 'id');
+        $items = Items::where('type','simple')->get()->pluck('name', 'id');
         $suppliers = Suppliers::all()->pluck('name', 'id');
 
         return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
@@ -177,15 +177,6 @@ class StoreController extends Controller
     public function postSaveOrUpdate(PurchaseRequest $request)
     {
         $data = $request->except('_token');
-        $id=$request->get('id');
-        $qty=$data['qty'];
-        if($id){
-           $purchase =Purchase::findOrFail($id);
-           $qty=$data['qty']-$purchase->qty;
-        }
-        $item=Items::findOrFail($data['item_id']);
-        $item->quantity=$item->quantity+$qty;
-        $item->save();
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
         Purchase::updateOrCreate($request->only('id'), $data);
@@ -195,7 +186,7 @@ class StoreController extends Controller
     public function EditPurchase($id)
     {
         $model = Purchase::findOrFail($id);
-        $items = Items::all()->pluck('name', 'id');
+        $items = Items::where('type','simple')->get()->pluck('name', 'id');
         $suppliers = Suppliers::all()->pluck('name', 'id');
         return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
     }

@@ -653,6 +653,8 @@ class DatatableController extends Controller
                 return $attr->name;
             })->editColumn('short_description', function ($attr) {
                 return $attr->short_description;
+            })->addColumn('quantity', function ($attr) {
+                return $attr->purchase()->sum('qty')-$attr->others()->sum('qty');
             })->editColumn('barcode_id', function ($attr) {
                 return ($attr->barcode)?$attr->barcode->code:'no barcode';
             })->editColumn('long_description', function ($attr) {
