@@ -52,14 +52,15 @@ $(function () {
 
 
 
-////new
+//new
 
     $('.currency--select-2').select2({
             minimumResultsForSearch: Infinity,
            dropdownCssClass: "currency-dropdown"
     });
     $('.select-2--no-search').select2({
-        minimumResultsForSearch: Infinity
+        minimumResultsForSearch: Infinity,
+        maximumSelectionLength: 1
     });
     $('.select_with-tag').select2();
 

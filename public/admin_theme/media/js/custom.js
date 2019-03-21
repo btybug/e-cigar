@@ -651,7 +651,7 @@ function App() {
                             .querySelector('p.no_content').remove();
                         mainContainer.innerHTML += html;
                     });
-                    res.data.children.forEach((folder, index) => {
+                    res.data.children.forEach((folder, index) => {product-single-info_row
                         let html = `<div class="col-md-3 col-sm-6 col-xs-12"><div class="file-box folder-container">${self.htmlMaker.makeFolder(
                             folder
                         )}</div></div>`;
