@@ -117,6 +117,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="feature_image"
@@ -126,6 +127,15 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Default price</label>
+
+                                                        <div class="col-sm-8">
+                                                            {!! Form::number('default_price', 0,['class' => 'form-control','step'=>0.1,'min'=>0]) !!}
+                                                        </div>
+                                                    </div>
+                                                </div>
 
 
                                         </div>
@@ -283,36 +293,7 @@
                                             </div>
 
                                         </div>
-                                        {{--<div id="specifications" class="tab-pane fade">--}}
-                                            {{--<div class="panel panel-default">--}}
-                                                {{--<div class="panel-body" id="v-option-form">--}}
-                                                    {{--<table class="table table-responsive table--store-settings">--}}
-                                                        {{--<thead>--}}
-                                                        {{--<tr class="bg-my-light-pink">--}}
-                                                            {{--<th>Attributes</th>--}}
-                                                            {{--<th></th>--}}
-                                                            {{--<th></th>--}}
-                                                        {{--</tr>--}}
-                                                        {{--</thead>--}}
 
-                                                        {{--<tbody class="v-options-list">--}}
-                                                        {{--@include('admin.inventory._partials.specifications')--}}
-                                                        {{--</tbody>--}}
-
-                                                        {{--<tfoot>--}}
-                                                        {{--<tr class="add-new-ship-filed-container">--}}
-                                                            {{--<td colspan="4" class="text-right">--}}
-                                                                {{--<button type="button" class="btn btn-primary add-specification_button"><i--}}
-                                                                            {{--class="fa fa-plus-circle add-specification"></i>--}}
-                                                                {{--</button>--}}
-                                                            {{--</td>--}}
-                                                        {{--</tr>--}}
-                                                        {{--</tfoot>--}}
-                                                    {{--</table>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-
-                                        {{--</div>--}}
                                     </div>
                                 </div>
                             </div>

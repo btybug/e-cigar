@@ -18,9 +18,11 @@ class CreateItemsTable extends Migration
             $table->string('sku')->nullable();
             $table->unsignedInteger('barcode_id')->unique();
             $table->string('type',50);
+            $table->string('alert',191)->nullable();
             $table->integer('quantity')->default(0);
             $table->text('image');
 
+            $table->double('default_price')->nullable();
             $table->decimal('length')->nullable();
             $table->decimal('width')->nullable();
             $table->decimal('height')->nullable();
