@@ -8,7 +8,6 @@ const shortAjax = function (URL, obj = {}, cb) {
       "X-Requested-With": "XMLHttpRequest",
       "X-CSRF-Token": $('input[name="_token"]').val()
     },
-    method: "post",
     credentials: "same-origin",
     body: JSON.stringify(obj)
   })

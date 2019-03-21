@@ -9,9 +9,12 @@
             <h4>Select {{ $vSettings->count_limit }} items</h4>
         @endif
     </div>
-
+    @php
+      $id = (($vSettings->count_limit > 1) ? "multi_v_select_$vSettings->id" : "single_v_select_$vSettings->id");
+      $class = (($vSettings->count_limit > 1) ? "multi_v_select" : "");
+    @endphp
     {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
-    ['class' => 'select-variation-option select-2 select-2--no-search main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
+    ['id' => $id,'class' => $class.' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
     'multiple' => (($vSettings->count_limit > 1) ? true : false),'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
 </div>
 <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">

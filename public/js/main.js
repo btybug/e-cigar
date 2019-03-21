@@ -58,10 +58,7 @@ $(function () {
             minimumResultsForSearch: Infinity,
            dropdownCssClass: "currency-dropdown"
     });
-    $('.select-2--no-search').select2({
-        minimumResultsForSearch: Infinity,
-        maximumSelectionLength: 1
-    });
+
     $('.select_with-tag').select2();
 
     $('#accounts--selects').select2({
@@ -69,8 +66,51 @@ $(function () {
         minimumResultsForSearch: Infinity
     });
 
+$('.select-2--no-search').select2({
+    minimumResultsForSearch: Infinity,
+    maximumSelectionLength: 1
+});
 
 
+
+
+$(document).ready(function() {
+    $("#loading").fadeOut(function() {
+        $(this).remove(); // Optional if it's going to only be used once.
+    });
+    $( "#singleProductPageCnt" ).fadeIn(function() {
+        $(this).removeClass('d-none').addClass('d-flex')
+        var msd = $(".multi_v_select");
+
+        msd.each(function (i,e){
+            let id = $(e).attr('data-id');
+
+            fetch("/products/get-package-type-limit", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({id: id})
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (json) {
+                    $(`#multi_v_select_${id}`).select2({
+                        minimumResultsForSearch: Infinity,
+                        maximumSelectionLength: json.limit
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+    })
+});
 // my account select start
     $('#accounts--selects').on('select2:select', function (e) {
         var locUrl = e.params.data.id;
@@ -177,7 +217,7 @@ $(function () {
 
     })
 
-    // cookies: change content top styles 
+    // cookies: change content top styles
     changeHeaderWhenIsCookie();
 
 
