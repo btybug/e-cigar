@@ -841,8 +841,7 @@
                             parent.find('.v-name').val(res.data.name);
                             parent.find('.modal-input-path').val(res.data.image);
                             parent.find('.img').attr('src',res.data.image).attr('alt',res.data.image);
-                            
-                            // parent.find('.v-price').val(res.data.price);
+                            parent.find('.v-price').val(res.data.price);
                         }
                     }
                 );
