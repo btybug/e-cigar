@@ -117,7 +117,7 @@ class StockController extends Controller
         $this->createOrUpdateSeo($request, $stock->id);
 
         //-------------------//
-        return redirect()->route('admin_stock');
+        return redirect()->back();
     }
 
     public function getPromotionEdit($id, Request $request)
