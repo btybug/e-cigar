@@ -348,6 +348,8 @@ Route::group(['prefix' => 'stock'], function () {
     Route::post('/duplicate-package-options', 'Admin\StockController@duplicatePackageOptions')->name('admin_stock_package_section_duplicate');
     Route::post('/duplicate-v-options', 'Admin\StockController@duplicateVOptions')->name('admin_stock_variations_section_duplicate');
     Route::post('/add-package-variation', 'Admin\StockController@addPackageVariation')->name('admin_stock_package_variation_add');
+    Route::post('/select-items', 'Admin\StockController@postSelectItems')->name('admin_stock_package_variation_items');
+
     Route::post('/edit-variation', 'Admin\StockController@editVariation')->name('admin_stock_variation_add');
     Route::post('/get-option-by-id', 'Admin\StockController@getOptionById')->name('admin_stock_variation_get_option');
     Route::post('/get-specifications', 'Admin\StockController@getSpecification')->name('admin_stock_variation_get_specification');

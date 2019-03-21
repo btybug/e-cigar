@@ -762,6 +762,27 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Items</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="all-list modal-stickers--list">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -830,6 +851,48 @@
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             }, 5);
 
+            $("body").on('click', '.select-items', function () {
+                let parent = $(this).closest('.stock-page');
+                console.log(parent.attr("data-unqiue"))
+                let existings = [];
+                parent.find('.v-item-change')
+                    .each(function (i,e) {
+                        existings.push($(e).val());
+                    });
+
+                AjaxCall("{{ route('admin_stock_package_variation_items') }}", {items:existings}, function (res) {
+                    if (!res.error) {
+                        $("#itemsModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-package-item" data-section="${parent.attr("data-unqiue")}" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                            $("#itemsModal .modal-body .all-list").append(html);
+                        });
+                        $("#itemsModal").modal();
+                    }
+                });
+            });
+
+            $("body").on('click', '.add-package-item', function () {
+                let current = $(this);
+                let data_id = current.attr('data-section');
+                let $_this = $('body').find('[data-unqiue="'+data_id+'"]');
+
+                AjaxCall(
+                    "/admin/stock/add-package-variation",
+                    {main_unique: data_id,item_id: $(this).attr('data-id')},
+                    function (res) {
+                        if (!res.error) {
+                            $_this.find('.package-variation-box').append(res.html)
+                            package_product_price(data_id, $_this.find(".price_per").val());
+                            current.closest('li').remove();
+                        }
+                    }
+                );
+            });
+
             $("body").on('change', '.v-item-change', function () {
                 let parent = $(this).closest('tr');
                 var value = $(this).val();
@@ -879,20 +942,7 @@
                 );
             });
 
-            $("body").on('click', '.add-package-item', function () {
-                let $_this = $(this);
-                let data_id = $(this).closest('.stock-page').attr('data-unqiue');
-                AjaxCall(
-                    "/admin/stock/add-package-variation",
-                    {main_unique: data_id},
-                    function (res) {
-                        if (!res.error) {
-                            $("body").find('[data-unqiue="' + data_id + '"]').find('.package-variation-box').append(res.html)
-                            package_product_price(data_id, $_this.closest('.stock-page').find(".price_per").val());
-                        }
-                    }
-                );
-            })
+
 
             $("body").on('change', '.price_per', function () {
                 let value = $(this).val();

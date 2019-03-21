@@ -20,10 +20,11 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-primary pull-right add-package-item"
+                    <button class="btn btn-primary pull-right select-items"
                             type="button">
                         <i class="fa fa-plus"></i> Add new
                     </button>
+                    {{--add-package-item--}}
                 </div>
             </div>
         </div>
