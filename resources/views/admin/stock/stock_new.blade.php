@@ -21,7 +21,6 @@
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Variations</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
                     </div>
@@ -638,59 +637,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
-                                <div class="container-fluid p-25">
-                                    <div class="row">
-                                        <div class="col-sm-3">
-                                            <div class="basic-left basic-wall">
-                                                <div class="all-list-extra">
-                                                    <ul class="get-all-extra-tab">
-                                                        @if($model)
-                                                            @foreach($model->promotions as $promotion)
-                                                                <li style="display: flex" data-stock-id="{{ $model->id }}"
-                                                                    data-id="{{ $promotion->id }}" class="promotion-elm"><a
-                                                                            href="#">{{ $promotion->name }}</a>
-                                                                    <div class="buttons">
-                                                                        <a href="javascript:void(0)"
-                                                                           class="remove-promotion btn btn-sm btn-danger"><i
-                                                                                    class="fa fa-trash"></i></a>
-                                                                    </div>
-                                                                    <input type="hidden"
-                                                                           name="promotions[{{ $promotion->id }}][id]"
-                                                                           value="{{ $promotion->id }}">
-                                                                    <input type="hidden" class="promotion_price"
-                                                                           data-id="{{ $promotion->id }}"
-                                                                           name="promotion_prices[{{ $promotion->id }}]"
-                                                                           value="{{ $promotion->promotion_prices->pluck('price','variation_id')->toJson() }}">
-                                                                    <input type="hidden" class="promotion_type"
-                                                                           data-id="{{ $promotion->id }}"
-                                                                           name="promotions[{{ $promotion->id }}][type]"
-                                                                           value="{{ $promotion->pivot->type }}">
-                                                                </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                                <div class="button-add text-center">
-                                                    <a href="javascript:void(0)"
-                                                       class="btn btn-primary btn-block select-promotions"><i
-                                                                class="fa fa-plus mr-10"></i>Add promotion</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-9">
-                                            <div class="basic-center basic-wall">
-                                                <div class="row">
-                                                    <div class="col-md-12 extra-variations">
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>
@@ -883,6 +829,24 @@
             setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             }, 5);
+
+            $("body").on('change', '.v-item-change', function () {
+                let parent = $(this).closest('tr');
+                var value = $(this).val();
+                AjaxCall(
+                    "/admin/stock/get-item-by-id",
+                    {id:value},
+                    function (res) {
+                        if (!res.error) {
+                            parent.find('.v-name').val(res.data.name);
+                            parent.find('.modal-input-path').val(res.data.image);
+                            parent.find('.img').attr('src',res.data.image).attr('alt',res.data.image);
+                            
+                            // parent.find('.v-price').val(res.data.price);
+                        }
+                    }
+                );
+            });
 
             $("body").on('click', '.duplicate-v-options', function () {
                 AjaxCall(

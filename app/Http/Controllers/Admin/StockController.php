@@ -357,4 +357,11 @@ class StockController extends Controller
 
         return \Response::json(['error' => false, 'data' => $attr]);
     }
+
+    public function postItemByID(Request $request)
+    {
+        $item = Items::findOrFail($request->id);
+
+        return \Response::json(['error' => false, 'data' => $item]);
+    }
 }

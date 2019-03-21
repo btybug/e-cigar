@@ -31,8 +31,8 @@
                width="100%">
             <thead>
             <tr>
-                <th>Name</th>
                 <th>Item</th>
+                <th>Name</th>
                 <th>Qty</th>
                 <th>Image</th>
                 <th class="package_price @if($main && $main->price_per == 'product') hide @endif">Price</th>
