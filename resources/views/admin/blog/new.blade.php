@@ -445,27 +445,27 @@
     <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
         $(function () {
-            $("body").on('click', '.select-products', function () {
-                let arr = [];
-                $(".get-all-attributes-tab")
-                    .children()
-                    .each(function () {
-                        arr.push($(this).attr("data-id"));
-                    });
-                AjaxCall("/admin/get-stocks", {arr}, function (res) {
-                    if (!res.error) {
-                        $("#productsModal .modal-body .all-list").empty();
-                        res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
+                $("body").on('click', '.select-products', function () {
+                    let arr = [];
+                    $(".get-all-attributes-tab")
+                        .children()
+                        .each(function () {
+                            arr.push($(this).attr("data-id"));
+                        });
+                    AjaxCall("/admin/get-stocks", {arr}, function (res) {
+                        if (!res.error) {
+                            $("#productsModal .modal-body .all-list").empty();
+                            res.data.forEach(item => {
+                                let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></div></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
+                                $("#productsModal .modal-body .all-list").append(html);
+                            });
+                            $("#productsModal").modal();
+                        }
                     });
-                        $("#productsModal").modal();
-                    }
                 });
-            });
 
 
             $("body").on("click", ".add-attribute-event", function () {

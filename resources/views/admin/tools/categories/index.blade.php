@@ -35,7 +35,25 @@
             </div>
         </div>
     </div>
+    <div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select products</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="all-list">
 
+                    </ul>
+                </div>
+                {{--<div class="modal-footer">--}}
+                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>--}}
+                {{--</div>--}}
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @section('js')
     <script src="https://mbraak.github.io/jqTree/tree.jquery.js"></script>
@@ -54,6 +72,47 @@
                     $("#select-stickers").select2();
                 }
             });
+        });
+
+        $("body").on('click', '.select-products', function () {
+            let arr = [];
+            // $(".get-all-attributes-tab")
+            //     .children()
+            //     .each(function () {
+            //         arr.push($(this).attr("data-id"));
+            //     });
+            AjaxCall("/admin/get-stocks", {arr}, function (res) {
+                if (!res.error) {
+                    $("#productsModal .modal-body .all-list").empty();
+                    res.data.forEach(item => {
+                        let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></div></li>`;
+                        $("#productsModal .modal-body .all-list").append(html);
+                    });
+                    $("#productsModal").modal();
+                }
+            });
+        });
+        $("body").on("click", ".add-attribute-event", function () {
+            let id = $(this).data("id");
+            let name = $(this).data("name");
+            $(".get-all-attributes-tab")
+                .append(`<li  data-id="${id}" class="option-elm-attributes col-md-3"><div class="wrap-item"><a
+                                href="#">
+<span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+<span class="name">${name}</span>
+
+                                </a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="stocks[]" value="${id}">
+                                </div></li>`);
+            $(this)
+                .parent()
+                .remove();
         });
 
         $('.icon-picker').iconpicker();

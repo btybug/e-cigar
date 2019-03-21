@@ -174,6 +174,7 @@
                     @ok('admin_stock_tags')
                     <li><a href="{{route('admin_stock_tags')}}"><i class="fa fa-circle-o"></i> Tags</a></li>
                     @endok
+                    <li><a href="{{route('admin_store_categories','filter')}}"><i class="fa fa-circle-o"></i>Filters</a></li>
                     @ok('admin_stock_statuses')
                     <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
                     @endok

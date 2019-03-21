@@ -36,16 +36,19 @@
                     </div>
 
                 </div>
+                @if($type!='filter')
                 <div class="form-group row">
                     <label class="col-md-2 col-xs-12">Description</label>
                     <div class="col-md-10 col-xs-12">
                         {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control','required'=>true]) !!}
                     </div>
                 </div>
+                    @endif
             </div>
         @endforeach
     @endif
 </div>
+@if($type!='filter')
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Slug</label>
     <div class="col-md-10 col-xs-12">
@@ -90,7 +93,21 @@
         {!! media_button('image',$model) !!}
     </div>
 </div>
+@else
+    <div class="card panel panel-default mt-20 releted__products-panel">
+        <div class="card-header panel-heading d-flex justify-content-between align-items-center">
+                                        <span>
+                                            Related Products
+                                        </span>
+            <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
+        </div>
+        <div class="card-body panel-body product-body">
+            <ul class="get-all-attributes-tab row">
 
+            </ul>
+        </div>
+    </div>
+    @endif
 {!! Form::close() !!}
 
 @if(is_enabled_media_modal())
