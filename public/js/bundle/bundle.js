@@ -2689,15 +2689,13 @@ $(function () {
     });
 });
 
-////new
+//new
 
 $('.currency--select-2').select2({
     minimumResultsForSearch: Infinity,
     dropdownCssClass: "currency-dropdown"
 });
-$('.select-2--no-search').select2({
-    minimumResultsForSearch: Infinity
-});
+
 $('.select_with-tag').select2();
 
 $('#accounts--selects').select2({
@@ -2705,6 +2703,45 @@ $('#accounts--selects').select2({
     minimumResultsForSearch: Infinity
 });
 
+$('.select-2--no-search').select2({
+    minimumResultsForSearch: Infinity,
+    maximumSelectionLength: 1
+});
+
+$(document).ready(function () {
+    $("#loading").fadeOut(function () {
+        $(this).remove(); // Optional if it's going to only be used once.
+    });
+    $("#singleProductPageCnt").fadeIn(function () {
+        $(this).removeClass('d-none').addClass('d-flex');
+        var msd = $(".multi_v_select");
+
+        msd.each(function (i, e) {
+            var id = $(e).attr('data-id');
+
+            fetch("/products/get-package-type-limit", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({ id: id })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (json) {
+                $("#multi_v_select_" + id).select2({
+                    minimumResultsForSearch: Infinity,
+                    maximumSelectionLength: json.limit
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        });
+    });
+});
 // my account select start
 $('#accounts--selects').on('select2:select', function (e) {
     var locUrl = e.params.data.id;
@@ -2803,7 +2840,7 @@ $('body').on('click', '.range-steps_count', function () {
     // }
 });
 
-// cookies: change content top styles 
+// cookies: change content top styles
 changeHeaderWhenIsCookie();
 
 // display filter for mobile
