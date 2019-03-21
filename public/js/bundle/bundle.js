@@ -2708,38 +2708,40 @@ $('.select-2--no-search').select2({
     maximumSelectionLength: 1
 });
 
-$(document).ready(function () {
-    $("#loading").fadeOut(function () {
-        $(this).remove(); // Optional if it's going to only be used once.
-    });
-    $("#singleProductPageCnt").fadeIn(function () {
-        $(this).removeClass('d-none').addClass('d-flex');
-        var msd = $(".multi_v_select");
+//
+// $(document).ready(function() {
+//     $("#loading").fadeOut(function() {
+//         $(this).remove(); // Optional if it's going to only be used once.
+//     });
+//     $( "#singleProductPageCnt" ).fadeIn(function() {
+//
+//     })
+// });
+$(this).removeClass('d-none').addClass('d-flex');
+var msd = $(".multi_v_select");
 
-        msd.each(function (i, e) {
-            var id = $(e).attr('data-id');
+msd.each(function (i, e) {
+    var id = $(e).attr('data-id');
 
-            fetch("/products/get-package-type-limit", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": $('input[name="_token"]').val()
-                },
-                credentials: "same-origin",
-                body: JSON.stringify({ id: id })
-            }).then(function (response) {
-                return response.json();
-            }).then(function (json) {
-                $("#multi_v_select_" + id).select2({
-                    minimumResultsForSearch: Infinity,
-                    maximumSelectionLength: json.limit
-                });
-            }).catch(function (error) {
-                console.log(error);
-            });
+    fetch("/products/get-package-type-limit", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRF-Token": $('input[name="_token"]').val()
+        },
+        credentials: "same-origin",
+        body: JSON.stringify({ id: id })
+    }).then(function (response) {
+        return response.json();
+    }).then(function (json) {
+        $("#multi_v_select_" + id).select2({
+            minimumResultsForSearch: Infinity,
+            maximumSelectionLength: json.limit
         });
+    }).catch(function (error) {
+        console.log(error);
     });
 });
 // my account select start

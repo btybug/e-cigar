@@ -47,9 +47,9 @@
            </div>
 
        </div>
-       <div id="loading" class="d-flex justify-content-center align-items-center my-5"><div class="lds-dual-ring"></div></div>
+       <div id="loading" class="d-none justify-content-center align-items-center my-5"><div class="lds-dual-ring"></div></div>
        <!--main-content-->
-       <div id="singleProductPageCnt" class="single-product-page-cnt d-none flex-column ">
+       <div id="singleProductPageCnt" class="single-product-page-cnt d-flex flex-column ">
            <main class="position-relative">
                <!--breadcrump-->
                <div class="main-content container main-max-width main-content-wrapper">
