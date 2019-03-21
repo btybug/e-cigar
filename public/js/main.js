@@ -85,6 +85,8 @@ $('.select-2--no-search').select2({
 $(this).removeClass('d-none').addClass('d-flex')
 var msd = $(".multi_v_select");
 
+
+
 msd.each(function (i,e){
     let id = $(e).attr('data-id');
 
