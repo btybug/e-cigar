@@ -106,7 +106,7 @@
             });
         };
 
-        var data = {!! json_encode(\App\Models\Filters::recursiveItems($categories),true) !!};
+        var data = {!! json_encode(\App\Models\Category::recursiveItems($categories),true) !!};
 
         $("#tree1").tree({
             data: data,

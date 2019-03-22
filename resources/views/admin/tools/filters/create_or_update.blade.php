@@ -11,7 +11,7 @@
     @endok
 </div>
 
-{!! Form::model($model,['class' => 'updated-form']) !!}
+{!! Form::model($model,['url'=>route('post_admin_tools_filters'),'class' => 'updated-form']) !!}
 {!! Form::hidden('id',null) !!}
 @if(count(get_languages()))
     <ul class="nav nav-tabs">

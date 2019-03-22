@@ -41,12 +41,11 @@ class FiltersController extends Controller
 
 
 
-    public function postCreateOrUpdateCategory(StoreCategoryPost $request,$type)
+    public function postCreateOrUpdateCategory(Request $request)
     {
-        $data = $request->except('_token','translatable','stickers');
-        $data['user_id'] = \Auth::id();
-        $category = Category::updateOrCreate($request->id, $data);
-        $category->stickers()->sync($request->get('stickers'));
+        $data = $request->except('_token','translatable');
+        $filter = Filters::updateOrCreate($request->id, $data);
+//        $category->stickers()->sync($request->get('stickers'));
         return redirect()->back();
     }
 

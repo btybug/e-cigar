@@ -18,7 +18,7 @@
                         <div id="tree1"></div>
                     </div>
                     <div class="col-md-8">
-                        <div class="content-area category-form-place">
+                        <div class="content-area filter-form-place">
                             {{--@include('admin.store.categories.create_or_update')--}}
                             <h4 class="text-center dddd">New Filter</h4>
                         </div>
@@ -59,17 +59,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
-        var data = {!! json_encode(\App\Models\Category::recursiveItems($filters),true) !!};
+        var data = {!! json_encode(\App\Models\Filters::recursiveItems($filters),true) !!};
         $("#tree1").tree({
             data: data,
             autoOpen: true,
             saveState: true,
         });
-
+        $('body').on('click', '.del-save--btn .btn-submit-form', function () {
+            $('.filter-form-place .updated-form').submit()
+        });
         $("body").on('click', '.add-filter', function () {
             AjaxCall("{!! route('admin_tools_filters_form') !!}", {id: null}, function (res) {
                 if (!res.error) {
-                    $(".category-form-place").html(res.html);
+                    $(".filter-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
                     $("#select-stickers").select2();
                 }
@@ -145,7 +147,7 @@
             margin-top: 15px;
         }
 
-        .category-form-place {
+        .filter-form-place {
             padding: 15px;
             background-color: white;
             box-shadow: 0 0 4px #ccc;
@@ -174,7 +176,7 @@
             color: #3c8dbc;
         }
 
-        .category-form-place .mt-10 {
+        .filter-form-place .mt-10 {
             margin-top: 10px;
         }
     </style>
