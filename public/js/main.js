@@ -78,9 +78,8 @@ $(document).ready(function() {
     $( "#singleProductPageCnt" ).fadeIn(function() {
 
         var msd = $(".multi_v_select");
-
+        $( "#singleProductPageCnt" ).removeClass('d-none').addClass('d-flex');
         msd.each(function (i,e){
-            $( "#singleProductPageCnt" ).removeClass('d-none').addClass('d-flex');
             let id = $(e).attr('data-id');
 
             fetch("/products/get-package-type-limit", {
