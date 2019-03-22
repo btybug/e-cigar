@@ -368,6 +368,13 @@ Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
 
 Route::group(['prefix' => '/tools'], function () {
     Route::get('/', 'Admin\ToolsController@index')->name('admin_tools');
+    Route::group(['prefix' => 'filters'], function () {
+        Route::get('/', 'Admin\FiltersController@index')->name('admin_tools_filters');
+        Route::post('/update-parent', 'Admin\FiltersController@postCategoryUpdateParent')->name('admin_store_filters_update_parent');
+        Route::post('/get-form', 'Admin\FiltersController@postFilterForm')->name('admin_tools_filters_form');
+        Route::post('/get-items', 'Admin\FiltersController@getItems')->name('admin_tools_filters_get_items');
+
+    });
     Route::group(['prefix' => 'categories'], function () {
         Route::get('/', 'Admin\CategoriesController@list')->name('admin_categories_list');
 

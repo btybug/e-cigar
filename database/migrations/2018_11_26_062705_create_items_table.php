@@ -29,6 +29,11 @@ class CreateItemsTable extends Migration
             $table->decimal('weight')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('stock_variations', function (Blueprint $table) {
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+        });
+
     }
 
     /**

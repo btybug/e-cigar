@@ -74,46 +74,7 @@
             });
         });
 
-        $("body").on('click', '.select-products', function () {
-            let arr = [];
-            // $(".get-all-attributes-tab")
-            //     .children()
-            //     .each(function () {
-            //         arr.push($(this).attr("data-id"));
-            //     });
-            AjaxCall("/admin/get-stocks", {arr}, function (res) {
-                if (!res.error) {
-                    $("#productsModal .modal-body .all-list").empty();
-                    res.data.forEach(item => {
-                        let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
-                                                href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></div></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    });
-                    $("#productsModal").modal();
-                }
-            });
-        });
-        $("body").on("click", ".add-attribute-event", function () {
-            let id = $(this).data("id");
-            let name = $(this).data("name");
-            $(".get-all-attributes-tab")
-                .append(`<li  data-id="${id}" class="option-elm-attributes col-md-3"><div class="wrap-item"><a
-                                href="#">
-<span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
-<span class="name">${name}</span>
 
-                                </a>
-                                <div class="buttons">
-                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                </div>
-                                <input type="hidden" name="stocks[]" value="${id}">
-                                </div></li>`);
-            $(this)
-                .parent()
-                .remove();
-        });
 
         $('.icon-picker').iconpicker();
         $("body").on("click", ".iconpicker-item", function () {
@@ -145,7 +106,7 @@
             });
         };
 
-        var data = {!! json_encode(\App\Models\Category::recursiveItems($categories),true) !!};
+        var data = {!! json_encode(\App\Models\Filters::recursiveItems($categories),true) !!};
 
         $("#tree1").tree({
             data: data,
@@ -159,8 +120,7 @@
             onDragStop: function (e, node) {
                 let id = e.id
                 let parentId = e.parent.id
-                // var tree_json = $("#tree1").tree("toJson");
-                AjaxCall("/admin/tools/categories/update-parent/{{ $type }}", {id, parentId}, function (res) {
+                AjaxCall("/admin/tools/filters/update-parent", {id, parentId}, function (res) {
                     $(".category-form-place").html('');
                 });
             }

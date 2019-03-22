@@ -8,7 +8,8 @@
             <div class="card-header panel-heading head-space-between">
                 <h2> Filters</h2>
                 <div class="button-area text-right">
-                    <a class="btn btn-primary add-category" href="javascript:void(0)"><span class="icon-plus"><i class="fa fa-plus"></i></span>Add new</a>
+                    <a class="btn btn-primary add-filter" href="javascript:void(0)"><span class="icon-plus"><i
+                                class="fa fa-plus"></i></span>Add new</a>
                 </div>
             </div>
             <div class="card-body panel-body">
@@ -19,7 +20,7 @@
                     <div class="col-md-8">
                         <div class="content-area category-form-place">
                             {{--@include('admin.store.categories.create_or_update')--}}
-                            <h4 class="text-center dddd">New Category</h4>
+                            <h4 class="text-center dddd">New Filter</h4>
                         </div>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -58,39 +59,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
-        $(function () {
-            $("body").on('click', '.select-products', function () {
-                let arr = [];
-                $(".get-all-attributes-tab")
-                    .children()
-                    .each(function () {
-                        arr.push($(this).attr("data-id"));
-                    });
-                AjaxCall("/admin/get-stocks", {arr}, function (res) {
-                    if (!res.error) {
-                        $("#productsModal .modal-body .all-list").empty();
-                        res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
+        var data = {!! json_encode(\App\Models\Category::recursiveItems($filters),true) !!};
+        $("#tree1").tree({
+            data: data,
+            autoOpen: true,
+            saveState: true,
+        });
+
+        $("body").on('click', '.add-filter', function () {
+            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id: null}, function (res) {
+                if (!res.error) {
+                    $(".category-form-place").html(res.html);
+                    $('.icon-picker').iconpicker();
+                    $("#select-stickers").select2();
+                }
+            });
+        });
+        $("body").on('click', '.select-products', function () {
+            let arr = [];
+            AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {arr}, function (res) {
+                if (!res.error) {
+                    $("#productsModal .modal-body .all-list").empty();
+                    res.data.forEach(item => {
+                        let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></div></li>`;
-                            $("#productsModal .modal-body .all-list").append(html);
-                        });
-                        $("#productsModal").modal();
-                    }
-                });
+                        $("#productsModal .modal-body .all-list").append(html);
+                    });
+                    $("#productsModal").modal();
+                }
             });
+        });
+        $("body").on("click", ".add-attribute-event", function () {
+            let id = $(this).data("id");
+            let name = $(this).data("name");
+            $(".get-all-attributes-tab")
+                .append(`<li  data-id="${id}" class="option-elm-attributes col-md-3"><div class="wrap-item"><a
+                                href="#">
+<span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+<span class="name">${name}</span>
 
-            $("body").on('click', '.add-category', function () {
-                AjaxCall("/admin/tools/filter/get-form/{{ $type }}", {id: null}, function (res) {
-                    if (!res.error) {
-                        $(".category-form-place").html(res.html);
-                        $('.icon-picker').iconpicker();
-                        $("#select-stickers").select2();
-                    }
-                });
-            });
-            });
+                                </a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="stocks[]" value="${id}">
+                                </div></li>`);
+            $(this)
+                .parent()
+                .remove();
+        });
     </script>
 @stop
 @section("css")
@@ -99,14 +118,16 @@
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <style>
-        .head-space-between{
+        .head-space-between {
             display: flex;
             justify-content: space-between;
         }
-        .head-space-between h2{
+
+        .head-space-between h2 {
             margin: 0;
         }
-        .head-space-between .icon-plus{
+
+        .head-space-between .icon-plus {
             margin-right: 5px;
         }
 

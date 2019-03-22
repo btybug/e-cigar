@@ -11,6 +11,26 @@
 |
 */
 Route::get('/', function () {
+    // Get all tickets
+
+//    dd(\Zendesk::tickets()->findAll());
+//
+//// Create a new ticket
+//    \Zendesk::tickets()->create([
+//        'subject' => 'Subject',
+//        'comment' => [
+//            'body' => 'Ticket content.'
+//        ],
+//        'priority' => 'normal'
+//    ]);
+//
+//// Update multiple tickets
+//    \Zendesk::ticket([123, 456])->update([
+//        'status' => 'urgent'
+//    ]);
+//
+//// Delete a ticket
+//    \Zendesk::ticket(123)->delete();
     return view('welcome');
 })->name('home');
 

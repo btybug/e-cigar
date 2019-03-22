@@ -31,7 +31,7 @@ class CreateStockVariationsTable extends Migration
             $table->timestamps();
 
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+
         });
     }
 
