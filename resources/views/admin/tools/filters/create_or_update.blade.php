@@ -4,11 +4,7 @@
             <a class="btn btn-danger delete-button text-white" data-key="{{ $model->id }}" data-href="#">Delete</a>
         </div>
     @endif
-        @ok('admin_store_categories_form')
-    <div class="form-group">
-        {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
-    </div>
-    @endok
+
 </div>
 
 {!! Form::model($model,['url'=>route('post_admin_tools_filters'),'class' => 'updated-form']) !!}
