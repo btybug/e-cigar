@@ -99,15 +99,39 @@ $(document).ready(function() {
                 .then(function (json) {
                     $(`#multi_v_select_${id}`).select2({
                         minimumResultsForSearch: Infinity,
-                        maximumSelectionLength: Number(json.limit),
+                        maximumSelectionLength: Number(json.limit)
                     });
                     $(`#multi_v_select_${id}`).on('select2:select', function (e) {
-                        console.log(e);
-                        $(this).closest('.product-single-info_row').append(`<div data-input-id="${e.params.data.id}" class="row"><p>${e.params.data.text}</p><input type="number" name="${e.params.data.text}" step="1"></div>`);
+                        const _this = this;
+                        fetch("/products/get-variation-menu-raw", {
+                            method: "post",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Accept: "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                "X-CSRF-Token": $('input[name="_token"]').val()
+                            },
+                            credentials: "same-origin",
+                            body: JSON.stringify({id: e.params.data.id})
+                        })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (json) {
+                                $(_this).closest('.product-single-info_row').append(json.html);
+                                console.log(json);
+                                $('.delete-menu-item').on('click', function() {
+                                   console.log($(this).closest('div').text().trim())
+                                   $(`.select2-selection__choice[title="${$(this).closest('div').text().trim()}"] .select2-selection__choice__remove`).click();
+                                    $(this).closest('.menu-item-selected').remove();
+                                });
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
                     });
                     $(`#multi_v_select_${id}`).on('select2:unselect', function (e) {
-                        console.log(e);
-                        $(this).closest('.product-single-info_row').find(`[data-input-id="${e.params.data.id}"]`).remove();
+                        $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
                     });
                 })
                 .catch(function (error) {
