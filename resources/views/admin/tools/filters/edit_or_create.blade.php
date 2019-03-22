@@ -12,11 +12,6 @@
                     </div>
 
                 </div>
-                <div class="button-area text-right">
-                    <div class="form-group">
-                        {!! Form::submit('Save',['class' => 'btn btn-primary btn-submit-form']) !!}
-                    </div>
-                </div>
             </div>
             <div class="card-body panel-body">
                 <div class="row">
