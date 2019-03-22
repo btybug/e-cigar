@@ -19,6 +19,14 @@ class Items extends Translatable
     public $translationModel = ItemTranslations::class;
     public $translatedAttributes = ['name', 'short_description', 'long_description'];
 
+    const ACTIVE = 1;
+    const DRAFT = 1;
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::ACTIVE);
+    }
+
     public function purchase()
     {
         return $this->hasMany(Purchase::class,'item_id');

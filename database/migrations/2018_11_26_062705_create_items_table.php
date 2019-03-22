@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration
             $table->text('image');
 
             $table->double('default_price')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->decimal('length')->nullable();
             $table->decimal('width')->nullable();
             $table->decimal('height')->nullable();

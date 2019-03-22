@@ -117,6 +117,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                <div class="form-group">
+                                                <div class="row">
+                                                    <label for="status" class="control-label col-sm-4 col-form-label text-right">
+                                                        Status</label>
+                                                    <div class="col-sm-8">
+                                                        {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
+                                                        ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <div class="row">
