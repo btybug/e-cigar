@@ -124,7 +124,6 @@
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            console.log(e);
             AjaxCall("{!! route('admin_tools_filters_form') !!}", {id:e.node.parent_id,child_id: e.node.id}, function (res) {
                 if (!res.error) {
                     $(".filter-form-place").html(res.html);
@@ -135,8 +134,8 @@
             });
         });
         $("body").on('click', '.select-products', function () {
-            let arr = {!! ($filter->items->pluck('id')->toJson()) !!};
-            AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {arr}, function (res) {
+
+            AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {id:$(this).attr('data-id')}, function (res) {
                 if (!res.error) {
                     $("#productsModal .modal-body .all-list").empty();
                     res.data.forEach(item => {

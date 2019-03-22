@@ -49,7 +49,7 @@
                                         <span>
                                             Related Items
                                         </span>
-            <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Items</button>
+            <button type="button" class="btn btn-primary select-products" data-id="{!! $child_id !!}"><i class="fa fa-plus fa-sm mr-10"></i>Add Items</button>
         </div>
         <div class="card-body panel-body product-body">
             <ul class="get-all-attributes-tab row">
