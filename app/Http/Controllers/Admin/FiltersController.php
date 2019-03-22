@@ -41,6 +41,11 @@ class FiltersController extends Controller
         $model->delete();
         return response()->json(['error' => false]);
     }
+    public function postDetachItem(Request $request,$id)
+    {
+        $model = Filters::findOrFail($id);
+        return response()->json(['error' => !$model->items()->detach($request->get('slug'))]);
+    }
     public function postFilterForm (Request $request)
     {
         $id = $request->get('id',0);

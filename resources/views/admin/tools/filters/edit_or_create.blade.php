@@ -122,6 +122,14 @@
                 }
             });
         });
+        $("body").on('click', '.detach-item', function () {
+            let _this=$(this);
+            AjaxCall($(this).data('href'), {slug: $(this).data('key')}, function (res) {
+                if (!res.error) {
+                $(_this).closest('li').remove()
+                }
+            });
+        });
 
         $("#tree1").bind("tree.click", function (e) {
             AjaxCall("{!! route('admin_tools_filters_form') !!}", {id:e.node.parent_id,child_id: e.node.id}, function (res) {
