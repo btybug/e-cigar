@@ -72,7 +72,6 @@ $('.select-2--no-search').select2({
 });
 
 $(document).ready(function() {
-
     $("#loading").fadeOut("slow",function() {
         $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
         $( "#singleProductPageCnt" ).removeClass('d-none').addClass('d-flex');
@@ -80,7 +79,7 @@ $(document).ready(function() {
     $( "#singleProductPageCnt" ).fadeIn(function() {
 
         var msd = $(".multi_v_select");
-        msd.each(function (i,e){
+        msd && msd.each(function (i,e){
             let id = $(e).attr('data-id');
 
             fetch("/products/get-package-type-limit", {
