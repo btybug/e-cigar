@@ -171,6 +171,7 @@
     </script>
 @stop
 @section("css")
+    <link rel="stylesheet" href="/public/css/custom.css">
     <link rel="stylesheet" href="https://mbraak.github.io/jqTree/jqtree.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
