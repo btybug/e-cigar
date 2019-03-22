@@ -473,6 +473,58 @@ label {
 .setting_lang_panel_head .nav-item:hover .nav-link {
     color: #000000 !important;
 }
-#working-hours .btn,.table--holidays .btn{
+
+#working-hours .btn, .table--holidays .btn {
     padding: 0.55rem 1.14rem;
+}
+
+/*items modal*/
+#itemsModal.modal {
+    padding: 0 !important;
+}
+
+#itemsModal .modal-dialog {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0;
+    height: 100%;
+}
+#itemsModal .modal-header,#itemsModal .modal-footer{
+    flex: none;
+}
+#itemsModal .modal-header {
+    border-radius: 0;
+    box-shadow: none;
+    background: #0f0c29; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #ffffff;
+}
+
+#itemsModal .modal-header .close {
+    font-size: 30px;
+    align-self: center;
+    color: #ffffff;
+}
+
+#itemsModal .modal-content {
+    height: 100%;
+}
+
+#itemsModal .modal-body {
+    overflow: auto;
+}
+
+#itemsModal .modal-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+#itemsModal .modal-body::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+}
+
+#itemsModal .modal-body::-webkit-scrollbar-thumb {
+    background-color: #000000;
 }
