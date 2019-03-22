@@ -380,7 +380,11 @@ class StockController extends Controller
 
     public function postSearchItems(Request $request)
     {
-        $items = Items::whereNotIn('id', $request->get('items', []))->get();
+        $items = Items::leftJoin('item_specifications','items.id','item_specifications.item_id')
+            ->whereNotIn('items.id', $request->get('items', []))
+            ->whereIn('item_specifications.sticker_id',$request->get('stickers',[]))
+            ->select('items.*')->get();
+//        $items = Items::whereNotIn('id', $request->get('items', []))->get();
 
         $html = \view("admin.stock._partials.items_render",compact(['items']))->render();
 
