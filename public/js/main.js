@@ -39,13 +39,13 @@ $(function () {
         if ($(this).is(":checked")) {
             $(this).parent().addClass('active');
             $(this).parent().prevAll().addClass('active');
-            $(this).parent().addClass('line-none')
+            $(this).parent().addClass('line-none');
         }
     });
     // search for mobile
     $('body').on('click', '.header-bottom .search-mobile-icon', function () {
-        $(this).closest('.header-bottom').find('.cat-search').addClass('opened-full')
-    })
+        $(this).closest('.header-bottom').find('.cat-search').addClass('opened-full');
+    });
 
 });
 
@@ -75,9 +75,32 @@ $(document).ready(function() {
     $("#loading").fadeOut("slow",function() {
         $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
         $( "#singleProductPageCnt" ).removeClass('d-none').addClass('d-flex');
+        $(".video--carousel").carousel({
+            pagination: false,
+            controls: false,
+        });
+
+        $(".video--carousel-thumb").carousel({
+            controls: false,
+            pagination: false,
+//                show: 4,
+            matchWidth:false
+        });
+        $('.video-carousel-wrap iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
+
+        $('.video-carousel-wrap .video-item-thumb').on('itemClick.carousel', function() {
+//                console.log($(".youtube-iframe"),'---')
+            $('body .youtube-iframe').each(function(index){
+                $(".youtube-iframe")[index].contentWindow.postMessage(
+                    '{"event":"command","func":"' + "stopVideo" + '","args":""}',
+                    "*"
+                );
+                return true;
+            });
+
+        });
     });
     $( "#singleProductPageCnt" ).fadeIn(function() {
-
         var msd = $(".multi_v_select");
         msd && msd.each(function (i,e){
             let id = $(e).attr('data-id');
@@ -95,16 +118,50 @@ $(document).ready(function() {
             })
                 .then(function (response) {
                     return response.json();
-                    
+
                 })
                 .then(function (json) {
+                    const limit = Number(json.limit);
                     $(`#multi_v_select_${id}`).select2({
                         minimumResultsForSearch: Infinity,
                         maximumSelectionLength: Number(json.limit)
                     });
+                    // product-single-info_row
+
+                    var qty;
+                    let prev_qty;
+                    function limitCount(_this) {
+                        console.log(_this, 'tssssssss');
+                        qty = 0;
+                        $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').each(function() {
+                            qty += Number($(this).val());
+                            prev_qty+= $(this).data('val');
+                        });
+                        $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').each(function() {
+                            console.log(this, 'tso')
+                            console.log(limit, qty, Number($(this).val()));
+                            if(Number(qty) > Number(limit) && this === _this) {
+                                const val = Number($(_this).val());
+                                $(_this).val(val - 1);
+                                qty = 0;
+                            }
+                            $(this).attr('max', Number(limit) - Number(qty) + Number($(this).val()));
+                            $(`#multi_v_select_${id}`).select2({maximumSelectionLength: Number(limit) - qty + $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').length});
+                        });
+                        console.log('id***************', id);
+                    };
+                    $(`#multi_v_select_${id}`).closest('.product-single-info_row').on('change', 'input[name="qty"]', function(ev) {
+                        const _this = this;
+                       limitCount(_this);
+                    });
+
+
                     $(`#multi_v_select_${id}`).on('select2:select', function (e) {
                         const _this = this;
                         const current_item_id = $(e.params.data.element).attr('data-select2-id');
+                        limitCount();
+                        qty = 0;
+
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
                             headers: {
@@ -121,10 +178,13 @@ $(document).ready(function() {
                             })
                             .then(function (json) {
                                 $(_this).closest('.product-single-info_row').append(json.html);
-                                console.log(json);
+                                const counter = $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]');
+
+
                                 $('.delete-menu-item').on('click', function() {
-                                   console.log($(this).closest('div').text().trim())
-                                   $(`.select2-selection__choice[title="${$(this).closest('div').text().trim()}"] .select2-selection__choice__remove`).click();
+                                    const s_id = $(this).attr('data-el-id');
+                                    $(`.select2-selection__choice[data-select2-id="${s_id}"] .select2-selection__choice__remove`).click();
+                                    $(`#multi_v_select_${id} option[data-select2-id="${s_id}"]`);
                                     $(this).closest('.menu-item-selected').remove();
                                 });
                             })
@@ -132,6 +192,7 @@ $(document).ready(function() {
                                 console.log(error);
                             });
                     });
+
                     $(`#multi_v_select_${id}`).on('select2:unselect', function (e) {
                         $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
                     });
