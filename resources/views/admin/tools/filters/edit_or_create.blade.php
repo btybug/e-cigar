@@ -125,7 +125,7 @@
                                 <div class="buttons">
                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
-                                <input type="hidden" name="stocks[]" value="${id}">
+                                <input type="hidden" name="items[]" value="${id}">
                                 </div></li>`);
             $(this)
                 .parent()
