@@ -766,14 +766,6 @@
     <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Select Items</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="items-box d-flex flex-column">
-
-                </div>
 
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -859,11 +851,29 @@
                     });
                 AjaxCall("{{ route('admin_stock_package_variation_items') }}", {items:existings,uniqueId:parent.attr('data-unqiue') }, function (res) {
                     if (!res.error) {
-                        $("#itemsModal .items-box").html(res.html);
+                        $("#itemsModal .modal-content").html(res.html);
+                        $("#itemsModal #searchStickers").select2();
                         $("#itemsModal").modal();
                     }
                 });
             });
+
+            $("body").on("change","#itemsModal #searchStickers",function () {
+                let stickers = $(this).val();
+                let data_id = $(this).attr('data-section-id');
+
+                let $_this = $('body').find('[data-unqiue="'+data_id+'"]');
+                let existings = [];
+                $_this.find('.v-item-change')
+                    .each(function (i,e) {
+                        existings.push($(e).val());
+                    });
+                AjaxCall("{{ route('admin_stock_search_items') }}", {items:existings,stickers:stickers }, function (res) {
+                    if (!res.error) {
+                        $("#itemsModal .modal-stickers--list").html(res.html);
+                    }
+                });
+            })
 
             $('body').on('click','#itemsModal .option-elm-modal',function () {
                 $(this).toggleClass('active')

@@ -15,6 +15,7 @@ use App\Models\Attributes;
 use App\Models\Category;
 use App\Models\Items;
 use App\Models\Settings;
+use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockSeo;
 use App\Services\StockService;
@@ -51,7 +52,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'data', 'stockItems']));
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems']));
     }
 
     public function getStockEdit($id)
@@ -70,7 +71,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model','variations','data', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model','variations','checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
     }
 
     public function postStock(ProductsRequest $request)
@@ -370,7 +371,18 @@ class StockController extends Controller
     {
         $items = Items::whereNotIn('id', $request->get('items', []))->get();
         $uniqueId = $request->get('uniqueId');
-        $html = \view("admin.stock._partials.select_items",compact(['items','uniqueId']))->render();
+        $stickers = array_filter(Stickers::all()->pluck('name', 'id')->all());
+
+        $html = \view("admin.stock._partials.select_items",compact(['items','uniqueId','stickers']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function postSearchItems(Request $request)
+    {
+        $items = Items::whereNotIn('id', $request->get('items', []))->get();
+
+        $html = \view("admin.stock._partials.items_render",compact(['items']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
