@@ -42,7 +42,27 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 ">
+                <div class="card panel panel-default mt-20 releted__products-panel">
+                    <div class="card-header panel-heading d-flex justify-content-between align-items-center">
+                                        <span>
+                                            Parent Filters
+                                        </span>
+                    </div>
+                    <div class="card-body panel-body product-body">
+                        <div class="form-group row mt-10">
+                            <label class="col-md-2 col-xs-12"></label>
+                            <div class="col-md-10">
+                                {!! Form::select('parent_id',\App\Models\Filters::whereNull('parent_id')->get()->pluck('name','id')->toArray(),null,['class'=>'form-control','required'=>true]) !!}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
 
     <div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">
@@ -97,7 +117,7 @@
             });
         });
         $("body").on('click', '.select-products', function () {
-            let arr = [];
+            let arr = {!! ($filter->items->pluck('id')->toJson()) !!};
             AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {arr}, function (res) {
                 if (!res.error) {
                     $("#productsModal .modal-body .all-list").empty();

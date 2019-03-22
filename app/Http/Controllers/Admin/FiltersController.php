@@ -24,7 +24,7 @@ class FiltersController extends Controller
     }
     public function getCreateOrEdit($id=null)
     {
-        $filter=Filters::findOrFail($id);
+        $filter=Filters::findOrFail(2);
         return $this->view('edit_or_create',compact('filter'));
     }
 
