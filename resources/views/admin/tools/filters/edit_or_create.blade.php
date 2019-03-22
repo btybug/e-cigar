@@ -6,10 +6,16 @@
     <div class="col-md-12">
         <div class="card panel panel-default">
             <div class="card-header panel-heading head-space-between">
-                <h2> Filters</h2>
+                <div class="form-group row mt-10">
+                    <div class="col-md-10">
+                        {!! Form::text('title',null,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
+                    </div>
+
+                </div>
                 <div class="button-area text-right">
-                    <a class="btn btn-primary add-filter" href="javascript:void(0)"><span class="icon-plus"><i
-                                class="fa fa-plus"></i></span>Add new</a>
+                    <div class="form-group">
+                        {!! Form::submit('Save',['class' => 'btn btn-primary btn-submit-form']) !!}
+                    </div>
                 </div>
             </div>
             <div class="card-body panel-body">
@@ -19,7 +25,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="content-area filter-form-place">
-                            {{--@include('admin.store.categories.create_or_update')--}}
+                            @include('admin.tools.filters.create_or_update',['model'=>null])
                             <h4 class="text-center dddd">New Filter</h4>
                         </div>
                         @if ($errors->any())
@@ -59,12 +65,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
-        var data = {!! json_encode(\App\Models\Filters::recursiveItems($filters),true) !!};
-        $("#tree1").tree({
-            data: data,
-            autoOpen: true,
-            saveState: true,
-        });
+        {{--var data = {!! json_encode(\App\Models\Filters::recursiveItems($filters),true) !!};--}}
+        {{--$("#tree1").tree({--}}
+            {{--data: data,--}}
+            {{--autoOpen: true,--}}
+            {{--saveState: true,--}}
+        {{--});--}}
         $('body').on('click', '.del-save--btn .btn-submit-form', function () {
             $('.filter-form-place .updated-form').submit()
         });
