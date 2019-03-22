@@ -19,6 +19,9 @@
                 </div>
             </div>
             <div class="card-body panel-body">
+                <div>
+                    <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div id="tree1"></div>
