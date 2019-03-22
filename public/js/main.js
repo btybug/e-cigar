@@ -72,7 +72,9 @@ $('.select-2--no-search').select2({
 });
 
 $(document).ready(function() {
+    alert('new')
     $("#loading").fadeOut("slow",function() {
+
         $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
         $( "#singleProductPageCnt" ).removeClass('d-none').addClass('d-flex');
     });
