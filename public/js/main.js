@@ -103,6 +103,7 @@ $(document).ready(function() {
                     });
                     $(`#multi_v_select_${id}`).on('select2:select', function (e) {
                         const _this = this;
+                        const current_item_id = $(e.params.data.element).attr('data-select2-id');
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
                             headers: {
@@ -112,7 +113,7 @@ $(document).ready(function() {
                                 "X-CSRF-Token": $('input[name="_token"]').val()
                             },
                             credentials: "same-origin",
-                            body: JSON.stringify({id: e.params.data.id})
+                            body: JSON.stringify({id: e.params.data.id, selectElementId: current_item_id})
                         })
                             .then(function (response) {
                                 return response.json();
