@@ -777,7 +777,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Add</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -864,10 +864,19 @@
                     if (!res.error) {
                         $("#itemsModal .modal-body .all-list").empty();
                         res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
-                                                href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-package-item" data-section="${parent.attr("data-unqiue")}" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></li>`;
+                            let html = `<li data-id="${item.id}" class="col-lg-2 col-md-3 col-sm-6 option-elm-modal">
+<div class="single-item">
+<div class="img-item">
+<img src="http://www.hypnosource.fr/wp-content/uploads/2017/06/hypnise-cecile-argy.jpg" class="img-fluid" alt="img">
+</div>
+<div class="name-item">
+<span>${item.name}</span>
+</div>
+</div>
+`+
+//`<a class="btn btn-primary add-package-item" data-section="${parent.attr("data-unqiue")}" data-name="${item.name}" data-id="${item.id}">ADD
+//</a>`
+`</li>`;
                             $("#itemsModal .modal-body .all-list").append(html);
                         });
                         $("#itemsModal").modal();

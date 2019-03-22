@@ -528,3 +528,19 @@ label {
 #itemsModal .modal-body::-webkit-scrollbar-thumb {
     background-color: #000000;
 }
+#itemsModal .single-item .img-item img{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+#itemsModal .single-item .name-item{
+    background-color: #000000;
+    color: #ffffff;
+    padding: 8px 10px;
+    border-top: 1px solid #ffffff;
+}
+#itemsModal .single-item {
+    box-shadow: 0 0 4px #777;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
