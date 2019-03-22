@@ -6,7 +6,7 @@
         </div>
         <div class="col-sm-3 ">
             <label class="d-flex mb-0"><span class="text-bold mr-2 align-self-center">Qty:</span>
-                {!! Form::number('qty',1,['class' => 'form-control w-50','data-id' => $variation->id,'min' => 1]) !!}
+                {!! Form::number('qty',1,['class' => 'form-control','data-id' => $variation->id,'min' => 1,'style' => 'width:80px;']) !!}
             </label>
         </div>
         <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
