@@ -53,7 +53,24 @@
         </div>
         <div class="card-body panel-body product-body">
             <ul class="get-all-attributes-tab row">
-
+                @if(isset($child) && count($child->items))
+                    @foreach($child->items as $items)
+                        <li data-id="{{ $items->id }}"
+                            class="option-elm-attributes col-md-3">
+                            <div class="wrap-item">
+                                <a href="#">
+                                    <span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+                                    <span class="name">{!! $items->name !!}</span>
+                                </a>
+                                <div class="buttons">
+                                    <a href="javascript:void(0)"
+                                       class="remove-all-attributes btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="stocks[]" value="{{ $items->id }}">
+                            </div></li>
+                    @endforeach
+                @endif
             </ul>
         </div>
     </div>
