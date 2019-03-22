@@ -1,7 +1,7 @@
 <div class="col-sm-12 pl-0 m-l-5 menu-item-selected" data-id="{{ $variation->id }}">
     <div class="d-flex flex-wrap align-items-center">
         <div class="col-sm-7">
-            <a href="javascript:void(0)" class="btn btn-sm delete-menu-item cl-red"><i class="fa fa-times"></i></a>
+            <a href="javascript:void(0)" data-el-id="{{ $selectElementId }}" class="btn btn-sm delete-menu-item cl-red"><i class="fa fa-times"></i></a>
             {{ $variation->name }}
         </div>
         <div class="col-sm-3 ">

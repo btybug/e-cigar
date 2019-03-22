@@ -183,7 +183,8 @@ class ProductsController extends Controller
     {
         $variation = StockVariation::findOrFail($request->id);
 
-        $html = \view("frontend.products._partials.multi_menu_variation",compact(['variation']))->render();
+        $selectElementId = $request->get('selectElementId');
+        $html = \view("frontend.products._partials.multi_menu_variation",compact(['variation','selectElementId']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
