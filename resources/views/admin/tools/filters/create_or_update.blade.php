@@ -1,14 +1,15 @@
 <div class="del-save--btn">
-    @if($model)
+    @if($parent)
         <div class="form-group m-r-5">
-            <a class="btn btn-danger delete-button text-white" data-key="{{ $model->id }}" data-href="#">Delete</a>
+            <a class="btn btn-danger delete-button text-white" data-key="{{ $parent->id }}" data-href="#">Delete</a>
         </div>
     @endif
 
 </div>
 
-{!! Form::model($model,['url'=>route('post_admin_tools_filters'),'class' => 'updated-form']) !!}
+{!! Form::model($parent,['url'=>route('post_admin_tools_filters_add_child',$parent->id),'class' => 'updated-form']) !!}
 {!! Form::hidden('id',null) !!}
+{!! Form::hidden('child_id',($child)?$child->id:null) !!}
 @if(count(get_languages()))
     <ul class="nav nav-tabs">
     @foreach(get_languages() as $language)
@@ -26,7 +27,7 @@
                 <div class="form-group row mt-10">
                     <label class="col-md-2 col-xs-12">Filter Name</label>
                     <div class="col-md-10">
-                        {!! Form::text('translatable['.strtolower($language->code).'][name]',null,['class'=>'form-control','required'=>true]) !!}
+                        {!! Form::text('translatable['.strtolower($language->code).'][name]',($child)?get_translated($child,strtolower($language->code),'name'):null,['class'=>'form-control','required'=>true]) !!}
                     </div>
 
                 </div>
@@ -37,7 +38,7 @@
 <div class="form-group row mt-10">
     <label class="col-md-2 col-xs-12">Parent</label>
     <div class="col-md-10">
-        {!! Form::select('parent_id',[$model->id=>'Current Filter']+$model->children->pluck('id','name')->toArray(),$model->id,['class'=>'form-control','required'=>true]) !!}
+        {!! Form::select('parent_id',[$parent->id=>'Current Filter']+$parent->children()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray(),$parent->id,['class'=>'form-control','required'=>true]) !!}
     </div>
 
 </div>

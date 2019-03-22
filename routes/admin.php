@@ -373,7 +373,8 @@ Route::group(['prefix' => '/tools'], function () {
         Route::get('/', 'Admin\FiltersController@index')->name('admin_tools_filters');
         Route::get('/create-or-edit/{id?}', 'Admin\FiltersController@getCreateOrEdit')->name('admin_tools_filters_manage');
         Route::post('/', 'Admin\FiltersController@postCreateOrUpdateCategory')->name('post_admin_tools_filters');
-        Route::post('/update-parent', 'Admin\FiltersController@postCategoryUpdateParent')->name('admin_store_filters_update_parent');
+        Route::post('/add-child/{id}', 'Admin\FiltersController@postCategoryUpdateChild')->name('post_admin_tools_filters_add_child');
+        Route::post('/update-parent', 'Admin\FiltersController@postCategoryUpdateChild')->name('admin_store_filters_update_parent');
         Route::post('/get-form', 'Admin\FiltersController@postFilterForm')->name('admin_tools_filters_form');
         Route::post('/get-items', 'Admin\FiltersController@getItems')->name('admin_tools_filters_get_items');
 

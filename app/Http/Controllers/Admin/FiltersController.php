@@ -38,8 +38,10 @@ class FiltersController extends Controller
     public function postFilterForm (Request $request)
     {
         $id = $request->get('id',0);
-        $model = Filters::find($id);
-        $html = $this->view("create_or_update",compact(['model']))->render();
+        $child_id= $request->get('child_id');
+        $parent = Filters::find($id);
+        $child = $parent->children()->find($child_id);
+        $html = $this->view("create_or_update",compact(['parent','child','child_id']))->render();
         return \Response::json(['error' => false,'html' => $html]);
     }
 
@@ -49,6 +51,13 @@ class FiltersController extends Controller
     {
         $data = $request->except('_token','translatable');
         $filter = Filters::updateOrCreate($request->id, $data);
+//        $category->stickers()->sync($request->get('stickers'));
+        return redirect()->back();
+    }
+    public function postCategoryUpdateChild(Request $request,$id)
+    {
+        $data = $request->except('_token','translatable','child_id','id');
+        $filter = Filters::updateOrCreate($request->child_id, $data);
 //        $category->stickers()->sync($request->get('stickers'));
         return redirect()->back();
     }

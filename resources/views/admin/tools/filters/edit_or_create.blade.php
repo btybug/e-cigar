@@ -73,7 +73,7 @@
             autoOpen: true,
             saveState: true,
         });
-        $('body').on('click', '.del-save--btn .btn-submit-form', function () {
+        $('body').on('click', '.btn-submit-form', function () {
             $('.filter-form-place .updated-form').submit()
         });
         $("body").on('click', '.add-filter', function () {
@@ -87,7 +87,7 @@
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id: e.node.id}, function (res) {
+            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id:"{!! $filter->id !!}",child_id: e.node.id}, function (res) {
                 if (!res.error) {
                     $(".filter-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
