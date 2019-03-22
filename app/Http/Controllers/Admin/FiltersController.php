@@ -20,8 +20,12 @@ class FiltersController extends Controller
 
     public function index()
     {
-        $filters=Filters::all();
         return $this->view('index',compact('filters'));
+    }
+    public function getCreateOrEdit($id=null)
+    {
+        $filters=Filters::all();
+        return $this->view('edit_or_create',compact('filters'));
     }
 
     public function getItems(Request $request)

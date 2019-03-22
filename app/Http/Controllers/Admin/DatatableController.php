@@ -12,6 +12,7 @@ use App\Models\ContactUs;
 use App\Models\Coupons;
 use App\Models\Emails;
 use App\Models\Faq;
+use App\Models\Filters;
 use App\Models\GeoZones;
 use App\Models\Items;
 use App\Models\LogActivities;
@@ -803,5 +804,18 @@ class DatatableController extends Controller
         return Datatables::of(
             User::query()
         )->make(true);
+    }
+
+    public function getAllFilters()
+    {
+        return Datatables::of(
+            Filters::query()
+        )->editColumn('created_at', function ($faq) {
+            return BBgetDateFormat($faq->created_at);
+        })->addColumn('actions', function ($attr) {
+            $html = '<a href="javascript:void(0)" data-href="#" 
+                class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
+            return $html .= "<a class='badge btn-warning' href='" . route('admin_tools_filters_manage', $attr->id) . "'><i class='fa fa-edit'></i></a>";
+        })->rawColumns(['actions'])->make(true);
     }
 }
