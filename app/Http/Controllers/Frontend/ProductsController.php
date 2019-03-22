@@ -178,4 +178,13 @@ class ProductsController extends Controller
 
         return \Response::json(['error' => false,'html' => $html]);
     }
+
+    public function getVariationMenuRaw(Request $request)
+    {
+        $variation = StockVariation::findOrFail($request->id);
+
+        $html = \view("frontend.products._partials.multi_menu_variation",compact(['variation']))->render();
+
+        return \Response::json(['error' => false,'html' => $html]);
+    }
 }
