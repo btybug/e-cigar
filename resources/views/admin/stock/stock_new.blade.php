@@ -771,14 +771,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
-                <div class="modal-body">
-                    <ul class="all-list modal-stickers--list">
+                <div class="items-box d-flex flex-column">
 
-                    </ul>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Add</button>
-                </div>
+
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -790,6 +786,9 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
+        #itemsModal .items-box{
+            flex:1;
+        }
         .package-box > div:not(:first-child) {
             margin-top: 20px;
         }
@@ -846,61 +845,50 @@
     <script>
 
         $(document).ready(function () {
-            $('body').on('click','#itemsModal .option-elm-modal',function () {
-                $(this).toggleClass('active')
-            })
-
-            $(".tag-input-v").select2({width: '100%'});
+           $(".tag-input-v").select2({width: '100%'});
             setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             }, 5);
 
             $("body").on('click', '.select-items', function () {
                 let parent = $(this).closest('.stock-page');
-                console.log(parent.attr("data-unqiue"))
                 let existings = [];
                 parent.find('.v-item-change')
                     .each(function (i,e) {
                         existings.push($(e).val());
                     });
-
-                AjaxCall("{{ route('admin_stock_package_variation_items') }}", {items:existings}, function (res) {
+                AjaxCall("{{ route('admin_stock_package_variation_items') }}", {items:existings,uniqueId:parent.attr('data-unqiue') }, function (res) {
                     if (!res.error) {
-                        $("#itemsModal .modal-body .all-list").empty();
-                        res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="col-lg-2 col-md-3 col-sm-6 option-elm-modal">
-<div class="single-item ">
-<div class="img-item">
-<img src="http://www.hypnosource.fr/wp-content/uploads/2017/06/hypnise-cecile-argy.jpg" class="img-fluid" alt="img">
-</div>
-<div class="name-item">
-<span>${item.name}</span>
-</div>
-</div>
-`+
-//`<a class="btn btn-primary add-package-item" data-section="${parent.attr("data-unqiue")}" data-name="${item.name}" data-id="${item.id}">ADD
-//</a>`
-`</li>`;
-                            $("#itemsModal .modal-body .all-list").append(html);
-                        });
+                        $("#itemsModal .items-box").html(res.html);
                         $("#itemsModal").modal();
                     }
                 });
             });
 
-            $("body").on('click', '.add-package-item', function () {
+            $('body').on('click','#itemsModal .option-elm-modal',function () {
+                $(this).toggleClass('active')
+            })
+
+            $("body").on('click', '.add-package-items', function () {
                 let current = $(this);
-                let data_id = current.attr('data-section');
+                let data_id = current.attr('data-section-id');
                 let $_this = $('body').find('[data-unqiue="'+data_id+'"]');
+                let existings = [];
+                $(".items-box").find('.option-elm-modal')
+                    .each(function (i,e) {
+                        if($(e).hasClass('active')){
+                            existings.push($(e).attr('data-id'));
+                        }
+                    });
 
                 AjaxCall(
                     "/admin/stock/add-package-variation",
-                    {main_unique: data_id,item_id: $(this).attr('data-id')},
+                    {main_unique: data_id,items: existings},
                     function (res) {
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
                             package_product_price(data_id, $_this.find(".price_per").val());
-                            current.closest('li').remove();
+                            $("#itemsModal").modal("hide");
                         }
                     }
                 );

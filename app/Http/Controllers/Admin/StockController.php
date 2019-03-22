@@ -254,13 +254,12 @@ class StockController extends Controller
 
     public function addPackageVariation(Request $request)
     {
-        $item = Items::findOrFail($request->item_id);
-
+        $items = Items::whereIn('id',$request->items)->get();
         $main_unique = $request->get('main_unique');
         $stockItems = Items::all()->pluck('name', 'id')->all();
         $package_variation = null;
         $main = null;
-        $html = \View('admin.items._partials.variation_package_item', compact(['package_variation', 'stockItems','main_unique','main','item']))->render();
+        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems','main_unique','main','items']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -370,7 +369,9 @@ class StockController extends Controller
     public function postSelectItems(Request $request)
     {
         $items = Items::whereNotIn('id', $request->get('items', []))->get();
+        $uniqueId = $request->get('uniqueId');
+        $html = \view("admin.stock._partials.select_items",compact(['items','uniqueId']))->render();
 
-        return \Response::json(['error' => false, 'data' => $items]);
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 }
