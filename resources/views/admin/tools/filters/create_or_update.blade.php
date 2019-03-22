@@ -1,10 +1,12 @@
 <div class="del-save--btn">
     @if($parent)
         <div class="form-group m-r-5">
-            <a class="btn btn-danger delete-button text-white" data-key="{{ $parent->id }}" data-href="#">Delete</a>
+            <a class="btn btn-danger delete-button text-white" data-key="{{ $child_id }}" data-href="{!! route('post_admin_tools_filters_delete') !!}">Delete</a>
         </div>
     @endif
-
+        <div class="form-group">
+            {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
+        </div>
 </div>
 
 {!! Form::model($parent,['url'=>route('post_admin_tools_filters_add_child',$parent->id),'class' => 'updated-form']) !!}
@@ -45,9 +47,9 @@
     <div class="card panel panel-default mt-20 releted__products-panel">
         <div class="card-header panel-heading d-flex justify-content-between align-items-center">
                                         <span>
-                                            Related Products
+                                            Related Items
                                         </span>
-            <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
+            <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Items</button>
         </div>
         <div class="card-body panel-body product-body">
             <ul class="get-all-attributes-tab row">

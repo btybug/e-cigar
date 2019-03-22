@@ -34,6 +34,13 @@ class FiltersController extends Controller
         $attr = Items::whereNotIn('id',$filter->items->pluck('id')->toArray())->get();
         return \Response::json(['error' => false, 'data' => $attr]);
     }
+
+    public function postDelete(Request $request)
+    {
+        $model = Filters::findOrFail($request->get('slug'));
+        $model->delete();
+        return response()->json(['error' => false]);
+    }
     public function postFilterForm (Request $request)
     {
         $id = $request->get('id',0);
@@ -59,23 +66,5 @@ class FiltersController extends Controller
         $filter = Filters::updateOrCreate($request->child_id, $data);
         $filter->items()->sync($request->get('items'));
         return redirect()->back();
-    }
-
-    public function postDeleteCategory (Request $request,$type)
-    {
-        $model = Category::findOrFail($request->get('slug'));
-        $model->delete();
-
-        return response()->json(['error' => false]);
-    }
-
-    public function getCategory(Request $request)
-    {
-        $lang = Lang::getLocale();
-        return Category::LeftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->select('categories.*', 'categories_translations.name')
-            ->where('categories_translations.name', 'like', '%' . $request->get('q') . '%')
-            ->where('categories_translations.locale',$lang)
-            ->get();
     }
 }

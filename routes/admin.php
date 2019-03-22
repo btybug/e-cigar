@@ -377,6 +377,7 @@ Route::group(['prefix' => '/tools'], function () {
         Route::post('/update-parent', 'Admin\FiltersController@postCategoryUpdateChild')->name('admin_store_filters_update_parent');
         Route::post('/get-form', 'Admin\FiltersController@postFilterForm')->name('admin_tools_filters_form');
         Route::post('/get-items', 'Admin\FiltersController@getItems')->name('admin_tools_filters_get_items');
+        Route::post('/delete', 'Admin\FiltersController@postDelete')->name('post_admin_tools_filters_delete');
 
     });
     Route::group(['prefix' => 'categories'], function () {

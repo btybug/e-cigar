@@ -14,7 +14,7 @@
                 </div>
                 <div class="button-area text-right">
                     <div class="form-group">
-                        {!! Form::submit('Save',['class' => 'btn btn-primary btn-submit-form']) !!}
+                        {!! Form::button('View Result',['class' => 'btn btn-primary']) !!}
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Select products</h4>
+                    <h4 class="modal-title">Select Items</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
@@ -107,7 +107,8 @@
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id:"{!! $filter->id !!}",child_id: e.node.id}, function (res) {
+            console.log(e);
+            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id:e.node.parent_id,child_id: e.node.id}, function (res) {
                 if (!res.error) {
                     $(".filter-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
