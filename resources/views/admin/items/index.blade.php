@@ -1,9 +1,19 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
+        <div class="card-header panel-heading d-flex justify-content-between">
             <h2 class="m-0 pull-left">Items</h2>
-           @ok('admin_items_new') <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_items_new') !!}">Add new</a></div>@endok
+           @ok('admin_items_new')
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAddItemButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add new
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAddItemButton">
+                    <a class="dropdown-item" href="{!! route('admin_items_new') !!}">Simple Item</a>
+                    <a class="dropdown-item" href="#">Bundle Item</a>
+                </div>
+            </div>
+            @endok
         </div>
         <div class="card-body panel-body">
             <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
