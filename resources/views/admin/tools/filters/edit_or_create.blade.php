@@ -14,7 +14,7 @@
                 </div>
                 <div class="button-area text-right">
                     <div class="form-group">
-                        {!! Form::button('View Result',['class' => 'btn btn-primary']) !!}
+                        {!! Form::button('View Result',['class' => 'btn btn-primary','data-toggle'=>"modal",'data-target'=>"#view-result"]) !!}
                     </div>
                 </div>
             </div>
@@ -42,25 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 ">
-                <div class="card panel panel-default mt-20 releted__products-panel">
-                    <div class="card-header panel-heading d-flex justify-content-between align-items-center">
-                                        <span>
-                                            Parent Filters
-                                        </span>
-                    </div>
-                    <div class="card-body panel-body product-body">
-                        <div class="form-group row mt-10">
-                            <label class="col-md-2 col-xs-12"></label>
-                            <div class="col-md-10">
-                                {!! Form::select('parent_id',\App\Models\Filters::whereNull('parent_id')->get()->pluck('name','id')->toArray(),null,['class'=>'form-control','required'=>true]) !!}
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
 
     </div>
@@ -77,6 +59,41 @@
                     <ul class="all-list">
 
                     </ul>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade releted-products-add-modal" id="view-result" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">View Result</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <div class="card panel panel-default mt-20 releted__products-panel">
+                                <div class="card-header panel-heading d-flex justify-content-between align-items-center">
+                                        <span>
+                                            Parent Filters
+                                        </span>
+                                </div>
+                                <div class="card-body panel-body product-body">
+                                    <div class="form-group row mt-10">
+                                        <label class="col-md-2 col-xs-12"></label>
+                                        <div class="col-md-10">
+                                            {!! Form::select('parent_id',[null=>'Select Parent']+\App\Models\Filters::whereNull('parent_id')->get()->pluck('name','id')->toArray(),null,['class'=>'form-control','required'=>true]) !!}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -218,6 +235,9 @@
 
         .filter-form-place .mt-10 {
             margin-top: 10px;
+        }
+        #view-result .modal-lg{
+            max-width: 80%;
         }
     </style>
 @stop
