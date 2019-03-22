@@ -28,6 +28,11 @@ class Filters extends Translatable
         return $this->belongsToMany(Items::class, 'filter_items', 'filter_id', 'item_id');
     }
 
+    public function children()
+    {
+        return $this->hasMany(Filters::class,'parent_id');
+    }
+
     public static function recursiveItems($iems, $i = 0, $data = [], $selected = [])
     {
         if (count($iems)) {
@@ -36,13 +41,17 @@ class Filters extends Translatable
                 'id' => $item->id,
                 'name' => $item->name,
                 'text' => $item->name,
-                'parent_id' => null,
+                'parent_id' => $item->parent_id,
                 "state"=> false,
                 'children' => []
             ];
 
             if(count($selected) && in_array($item->id,$selected)){
                 $data[$i]['state'] = ['selected' => true];
+            }
+
+            if (count($item->children)) {
+                $data[$i]['children'] = self::recursiveItems($item->children, 0, $data[$i]['children'],$selected);
             }
 
             $i = $i + 1;

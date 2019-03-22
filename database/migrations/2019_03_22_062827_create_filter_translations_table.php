@@ -16,11 +16,11 @@ class CreateFilterTranslationsTable extends Migration
         Schema::create('filters_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('filter_id')->unsigned();
+            $table->integer('filters_id')->unsigned();
             $table->string('locale')->index();
 
-            $table->unique(['filter_id','locale']);
-            $table->foreign('filter_id')->references('id')->on('filters')->onDelete('cascade');
+            $table->unique(['filters_id','locale']);
+            $table->foreign('filters_id')->references('id')->on('filters')->onDelete('cascade');
         });
     }
 
