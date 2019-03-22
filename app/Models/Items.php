@@ -48,4 +48,14 @@ class Items extends Translatable
     {
         return $this->hasMany(Others::class,'item_id');
     }
+
+    public function specificationsPivot()
+    {
+        return $this->belongsToMany(Attributes::class, 'item_specifications', 'item_id', 'attributes_id');
+    }
+
+    public function specifications()
+    {
+        return $this->hasMany(ItemSpecification::class, 'item_id');
+    }
 }

@@ -18,16 +18,22 @@ use App\Models\Items;
 use App\Models\ItemsPackages;
 use App\Models\Suppliers;
 use App\Services\BarcodesService;
+use App\Services\ItemService;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
 {
     protected $view = 'admin.items';
     private $barcodeService;
+    private $itemService;
 
-    public function __construct(BarcodesService $barcodesService)
+    public function __construct(
+        BarcodesService $barcodesService,
+        ItemService $itemService
+    )
     {
         $this->barcodeService = $barcodesService;
+        $this->itemService = $itemService;
     }
 
     public function index()
@@ -52,10 +58,12 @@ class ItemsController extends Controller
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
-        $this->savePackages($item,$request->get('packages'));
+        $this->savePackages($item,$request->get('packages',[]));
 
         $item->suppliers()->sync($request->get('suppliers'));
-
+        $item->specificationsPivot()->sync($request->get('specifications',[]));
+        $this->itemService->makeOptions($item, $request->get('options', []));
+        
         return redirect()->route('admin_items');
     }
 
@@ -201,6 +209,15 @@ class ItemsController extends Controller
         $items = Items::all()->pluck('name', 'id')->all();
         $package = null;
         $html = \View('admin.items._partials.package_item', compact(['package', 'items']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function getSpecification(Request $request)
+    {
+        $selected = Attributes::find($request->id);
+        $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
+        $html = \View("admin.items._partials.specifications", compact(['selected', 'allAttrs']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

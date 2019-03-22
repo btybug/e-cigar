@@ -272,9 +272,9 @@
                                                         </thead>
 
                                                         <tbody class="v-options-list">
-                                                        @if($model && $model->stockAttrs)
-                                                            @foreach($model->stockAttrs as $selected)
-                                                                @include('admin.inventory._partials.specifications')
+                                                        @if($model && $model->specifications)
+                                                            @foreach($model->specifications()->whereNull('parent_id')->get() as $selected)
+                                                                @include('admin.items._partials.specifications')
                                                             @endforeach
                                                         @endif
                                                         </tbody>
@@ -390,6 +390,7 @@
                     }
                 );
             });
+
             function changeVariationOptions() {
                 var list = $(".list-attrs-single-item");
                 attributesJson = {};
@@ -421,7 +422,7 @@
 
                 })
             }
-
+            $(".tag-input-v").select2({ width: '100%' });
 
             $("body").on("change", ".tag-input-v", function (e) {
                 changeVariationOptions()
@@ -493,22 +494,22 @@
 
             $("body").on('click', '.add-specification_button', function () {
                 let $this = $(this);
-                AjaxCall("/admin/stock/get-specifications", {id: null}, function (res) {
+                AjaxCall("/admin/inventory/items/get-specifications", {id: null}, function (res) {
                     if (!res.error) {
                         $this.closest("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({ width: '100%' });
                     }
                 });
             });
+
             $("body").on('change', '.select-specification', function () {
                 var value = $(this).val();
                 let vID = $(this).data('uid');
                 if (value != '') {
-                    AjaxCall("/admin/stock/get-specifications", {id: value}, function (res) {
+                    AjaxCall("/admin/inventory/items/get-specifications", {id: value}, function (res) {
                         if (!res.error) {
                             $(".select-specification[data-uid=" + vID + "]").closest('.v-options-list-item').replaceWith(res.html);
                             $(".tag-input-v").select2({width: '100%'});
-                            changeVariationOptions();
                         }
                     });
                 }

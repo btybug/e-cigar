@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStockAttributesTable extends Migration
+class CreateItemSpecificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateStockAttributesTable extends Migration
      */
     public function up()
     {
-        Schema::create('stock_attributes', function (Blueprint $table) {
+        Schema::create('item_specifications', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('stock_id');
+            $table->unsignedInteger('item_id');
             $table->unsignedInteger('attributes_id');
             $table->unsignedInteger('sticker_id')->nullable();
             $table->unsignedInteger('parent_id')->nullable();
-            $table->string('type')->nullable();
             $table->timestamps();
 
-            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('attributes_id')->references('id')->on('attributes')->onDelete('cascade');
         });
     }
@@ -34,6 +33,6 @@ class CreateStockAttributesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock_attributes');
+        Schema::dropIfExists('item_specifications');
     }
 }
