@@ -8,7 +8,7 @@
         <div class="row flex-column">
             <div class="card panel panel-default mb-3">
                 <div class="card-header panel-heading clearfix">
-                    <h2 class="m-0 pull-left">Add / Edit Attribute</h2>
+                    <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "Add Attribute" }}</h2>
                     <div class="button-save pull-right">
                         {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                         <a class="btn btn-default"

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card panel panel-default">
     <div class="card-header panel-heading">
-        <h2 class="m-0">Create campaign</h2>
+        <h2 class="m-0">{{ ($model) ? $model->title : "Create campaign" }}</h2>
     </div>
         <div class="card-body panel-body">
         <div class="col-md-12">

@@ -5,7 +5,7 @@
         {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
         <div class="card-header panel-heading d-flex">
                 <div class="col-md-8">
-                    <h2 class="m-0">Add new item</h2>
+                    <h2 class="m-0">{{ ($model) ? $model->name : "Add new item" }}</h2>
                 </div>
 
             <div class="col-md-4 d-flex">

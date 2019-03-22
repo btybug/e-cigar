@@ -3,7 +3,7 @@
 @section('content')
     <div class="card panel panel-default">
         <div class="card-header panel-heading">
-            <h2 class="m-0">Add / Edit Post</h2>
+            <h2 class="m-0">{{ ($post) ? $post->title : "Add Post" }}</h2>
         </div>
         <div class="card-body panel-body">
             <ul class="nav nav-tabs">

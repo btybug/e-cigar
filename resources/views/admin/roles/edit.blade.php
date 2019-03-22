@@ -8,7 +8,7 @@
         {!! Form::hidden('id') !!}
         <div class="card panel panel-default mb-3">
             <div class="card-header panel-heading">
-                <h2 class="m-0">Create Role</h2>
+                <h2 class="m-0">{{  $role->title  }}</h2>
             </div>
 
             <!-- Button -->

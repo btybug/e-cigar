@@ -4,7 +4,7 @@
 @section('content')
     <section class="tickets-edit-page">
        <div class="card panel panel-default">
-           <h2 class="card-header panel-heading mt-0">Edit ticket</h2>
+           <h2 class="card-header panel-heading mt-0">{{ ($model) ? $model->subject : "Add ticket" }}</h2>
           <div class="card-body panel-body">
               <div class="row">
                   <div class="col-md-7 ">

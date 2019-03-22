@@ -3,7 +3,7 @@
     {!! Form::model($post) !!}
 <div class="card panel panel-default">
     <div class="card-header panel-heading clearfix">
-        <h2 class="m-0 pull-left">SEO Edit Post</h2>
+        <h2 class="m-0 pull-left">{{ ($post) ? $post->title : "SEO Post" }}</h2>
         <div class="pull-right btn-save">
             <button type="submit" class="btn btn-primary">Save</button>
         </div>

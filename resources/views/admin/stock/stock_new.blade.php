@@ -6,7 +6,7 @@
     {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
     <div class="card">
         <div class="card-header clearfix">
-            <h2 class="m-0 pull-left">Product</h2>
+            <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "New Product" }}</h2>
             <div class="pull-right">
                 {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
             </div>

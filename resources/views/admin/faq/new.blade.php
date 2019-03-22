@@ -4,7 +4,7 @@
 @section('content')
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
-            <h2 class="m-0 pull-left">Add / Edit Question</h2>
+            <h2 class="m-0 pull-left">{{ ($model) ? $model->question : "Add Question" }}</h2>
         </div>
         <div class="card-body panel-body">
             <ul class="nav nav-tabs w-100">

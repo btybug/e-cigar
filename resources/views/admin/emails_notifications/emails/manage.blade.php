@@ -4,7 +4,7 @@
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
             <div class="pull-left">
-                <h3>{!! $model->title !!}</h3>
+                <h3>Email</h3>
                 {!! Form::model($model) !!}
             </div>
             <div class="pull-right">

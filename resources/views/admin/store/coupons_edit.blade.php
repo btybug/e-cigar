@@ -10,7 +10,7 @@
 
                     <div class="card-header panel-heading">
                         <div class="left-head">
-                            <h2 class="m-0 pull-left">View Coupon</h2>
+                            <h2 class="m-0 pull-left">{{ ($coupons) ? $coupons->name : "Add Coupon" }}</h2>
 
                         </div>
                         <div class="right-head d-flex">
