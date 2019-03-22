@@ -95,6 +95,7 @@ $(document).ready(function() {
             })
                 .then(function (response) {
                     return response.json();
+                    
                 })
                 .then(function (json) {
                     $(`#multi_v_select_${id}`).select2({
