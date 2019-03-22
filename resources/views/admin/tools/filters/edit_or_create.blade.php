@@ -20,7 +20,7 @@
             </div>
             <div class="card-body panel-body">
                 <div>
-                    <button type="button" class="btn btn-primary select-products"><i class="fa fa-plus fa-sm mr-10"></i>Add Product</button>
+                    <button type="button" class="btn btn-primary add-filter"><i class="fa fa-plus fa-sm mr-10"></i>Add New</button>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -28,7 +28,6 @@
                     </div>
                     <div class="col-md-8">
                         <div class="content-area filter-form-place">
-                            @include('admin.tools.filters.create_or_update',['model'=>null])
                             <h4 class="text-center dddd">New Filter</h4>
                         </div>
                         @if ($errors->any())
@@ -68,12 +67,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
-        {{--var data = {!! json_encode(\App\Models\Filters::recursiveItems($filters),true) !!};--}}
-        {{--$("#tree1").tree({--}}
-            {{--data: data,--}}
-            {{--autoOpen: true,--}}
-            {{--saveState: true,--}}
-        {{--});--}}
+        var data = {!! json_encode(\App\Models\Filters::recursiveItems($filter->children),true) !!};
+        $("#tree1").tree({
+            data: data,
+            autoOpen: true,
+            saveState: true,
+        });
         $('body').on('click', '.del-save--btn .btn-submit-form', function () {
             $('.filter-form-place .updated-form').submit()
         });
