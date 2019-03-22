@@ -24,15 +24,14 @@ class FiltersController extends Controller
     }
     public function getCreateOrEdit($id=null)
     {
-        $filter=Filters::findOrFail(2);
+        $filter=Filters::findOrFail($id);
         return $this->view('edit_or_create',compact('filter'));
     }
 
     public function getItems(Request $request)
     {
-        $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Items::whereNotIn('id', $request->get('arr', []))->get();
-
+        $filter=Filters::find($request->get('id'));
+        $attr = Items::whereNotIn('id',$filter->items->pluck('id')->toArray())->get();
         return \Response::json(['error' => false, 'data' => $attr]);
     }
     public function postFilterForm (Request $request)
