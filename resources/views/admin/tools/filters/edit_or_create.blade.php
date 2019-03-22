@@ -77,7 +77,7 @@
             $('.filter-form-place .updated-form').submit()
         });
         $("body").on('click', '.add-filter', function () {
-            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id: null}, function (res) {
+            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id: "{!! $filter->id !!}"}, function (res) {
                 if (!res.error) {
                     $(".filter-form-place").html(res.html);
                     $('.icon-picker').iconpicker();

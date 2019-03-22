@@ -26,7 +26,7 @@
                 <div class="form-group row mt-10">
                     <label class="col-md-2 col-xs-12">Filter Name</label>
                     <div class="col-md-10">
-                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>true]) !!}
+                        {!! Form::text('translatable['.strtolower($language->code).'][name]',null,['class'=>'form-control','required'=>true]) !!}
                     </div>
 
                 </div>
@@ -34,7 +34,13 @@
         @endforeach
     @endif
 </div>
+<div class="form-group row mt-10">
+    <label class="col-md-2 col-xs-12">Parent</label>
+    <div class="col-md-10">
+        {!! Form::select('parent_id',[$model->id=>'Current Filter']+$model->children->pluck('id','name')->toArray(),$model->id,['class'=>'form-control','required'=>true]) !!}
+    </div>
 
+</div>
     <div class="card panel panel-default mt-20 releted__products-panel">
         <div class="card-header panel-heading d-flex justify-content-between align-items-center">
                                         <span>
