@@ -47,6 +47,7 @@
            </div>
 
        </div>
+
        <div id="loading" class="d-flex justify-content-center align-items-center my-5"><div class="lds-dual-ring"></div></div>
        <!--main-content-->
        <div id="singleProductPageCnt" class="single-product-page-cnt d-none flex-column ">
@@ -265,7 +266,7 @@
                                                            <div class="video--carousel">
                                                                @if($vape->videos && count($vape->videos))
                                                                    @foreach($vape->videos as $video)
-                                                                       <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/{{ $video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                                                                       <div class="video-item"><iframe width="100%" height="415" src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
                                                                    @endforeach
                                                                @endif
 
@@ -557,7 +558,9 @@
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
+
         $(document).ready(function () {
+
 //          ----start  video carousel----
 //             function Init () {
 //                 var checkbox = document.getElement("myCheckbox");
@@ -615,17 +618,6 @@
                 });
             });
 
-            $(".video--carousel").carousel({
-                pagination: false,
-                controls: false,
-            });
-
-            $(".video--carousel-thumb").carousel({
-                controls: false,
-                pagination: false,
-//                show: 4,
-                matchWidth:false
-            });
 
 
 //          ----end  video carousel----
