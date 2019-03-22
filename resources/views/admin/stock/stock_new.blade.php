@@ -846,6 +846,10 @@
     <script>
 
         $(document).ready(function () {
+            $('body').on('click','#itemsModal .option-elm-modal',function () {
+                $(this).toggleClass('active')
+            })
+
             $(".tag-input-v").select2({width: '100%'});
             setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
@@ -865,7 +869,7 @@
                         $("#itemsModal .modal-body .all-list").empty();
                         res.data.forEach(item => {
                             let html = `<li data-id="${item.id}" class="col-lg-2 col-md-3 col-sm-6 option-elm-modal">
-<div class="single-item">
+<div class="single-item ">
 <div class="img-item">
 <img src="http://www.hypnosource.fr/wp-content/uploads/2017/06/hypnise-cecile-argy.jpg" class="img-fluid" alt="img">
 </div>
