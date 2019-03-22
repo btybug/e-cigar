@@ -56,9 +56,9 @@ class FiltersController extends Controller
     }
     public function postCategoryUpdateChild(Request $request,$id)
     {
-        $data = $request->except('_token','translatable','child_id','id');
+        $data = $request->except('_token','translatable','child_id','id','items');
         $filter = Filters::updateOrCreate($request->child_id, $data);
-//        $category->stickers()->sync($request->get('stickers'));
+        $filter->items()->sync($request->get('items'));
         return redirect()->back();
     }
 
