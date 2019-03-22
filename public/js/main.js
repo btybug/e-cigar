@@ -71,48 +71,43 @@ $('.select-2--no-search').select2({
     maximumSelectionLength: 1
 });
 
+$(document).ready(function() {
+    $("#loading").fadeOut("slow",function() {
+        $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
+    });
+    $( "#singleProductPageCnt" ).fadeIn(function() {
 
+        var msd = $(".multi_v_select");
 
-//
-// $(document).ready(function() {
-//     $("#loading").fadeOut(function() {
-//         $(this).remove(); // Optional if it's going to only be used once.
-//     });
-//     $( "#singleProductPageCnt" ).fadeIn(function() {
-//
-//     })
-// });
-$(this).removeClass('d-none').addClass('d-flex')
-var msd = $(".multi_v_select");
+        msd.each(function (i,e){
+            $( "#singleProductPageCnt" ).removeClass('d-none').addClass('d-flex');
+            let id = $(e).attr('data-id');
 
-
-
-msd.each(function (i,e){
-    let id = $(e).attr('data-id');
-
-    fetch("/products/get-package-type-limit", {
-        method: "post",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "X-Requested-With": "XMLHttpRequest",
-            "X-CSRF-Token": $('input[name="_token"]').val()
-        },
-        credentials: "same-origin",
-        body: JSON.stringify({id: id})
-    })
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (json) {
-            $(`#multi_v_select_${id}`).select2({
-                minimumResultsForSearch: Infinity,
-                maximumSelectionLength: json.limit
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
+            fetch("/products/get-package-type-limit", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({id: id})
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (json) {
+                    $(`#multi_v_select_${id}`).select2({
+                        minimumResultsForSearch: Infinity,
+                        maximumSelectionLength: Number(json.limit)
+                    });
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         });
+    });
 });
 // my account select start
     $('#accounts--selects').on('select2:select', function (e) {
@@ -123,25 +118,25 @@ msd.each(function (i,e){
 
     // header search for mobile
     $('body').on('click', '.search-icon-mobile .icon', function () {
-        $(this).closest('.header-bottom').find('.cat-search').toggleClass('closed')
+        $(this).closest('.header-bottom').find('.cat-search').toggleClass('closed');
     });
 
 
     $('.nav-item.nav-item--has-dropdown').hover(
         function () {
-            let darkBg = $(this).closest('body').find('.dark-bg_body')
+            let darkBg = $(this).closest('body').find('.dark-bg_body');
             if ($('body').hasClass('show-filter')) {
-                $('body').removeClass('show-filter')
+                $('body').removeClass('show-filter');
             } else {
-                darkBg.addClass('show')
+                darkBg.addClass('show');
             }
 
         }, function () {
-            let darkBg = $(this).closest('body').find('.dark-bg_body')
+            let darkBg = $(this).closest('body').find('.dark-bg_body');
             if (!$('.top-filters .nav-item--has-dropdown_dropdown').hasClass('open')) {
-                darkBg.removeClass('show')
+                darkBg.removeClass('show');
             } else {
-                $('body').addClass('show-filter')
+                $('body').addClass('show-filter');
             }
         }
     );
