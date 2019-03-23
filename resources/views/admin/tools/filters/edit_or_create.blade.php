@@ -141,7 +141,7 @@
             AjaxCall("{!! route('admin_tools_filters_next') !!}", data, function (res) {
                 if (!res.error) {
                     switch (res.type) {
-                        case 'filter':$('.filter-children-selects').html(res.html);break;
+                        case 'filter':$('.filter-children-items').empty();$('.filter-children-selects').html(res.html);break;
                         case 'items':$('.filter-children-items').html(res.html);break;
                     }
                 }
