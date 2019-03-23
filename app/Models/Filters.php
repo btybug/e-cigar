@@ -42,6 +42,7 @@ class Filters extends Translatable
                 'name' => $item->name,
                 'text' => $item->name,
                 'parent_id' => $item->parent_id,
+                'category_id' => $item->category_id,
                 "state"=> false,
                 'children' => []
             ];
@@ -61,5 +62,10 @@ class Filters extends Translatable
 
             return $data;
         }
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'category_id');
     }
 }

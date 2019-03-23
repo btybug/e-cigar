@@ -809,7 +809,7 @@ class DatatableController extends Controller
     public function getAllFilters()
     {
         return Datatables::of(
-            Filters::where('parent_id',null)
+            Category::where('type','filter')
         )->editColumn('created_at', function ($faq) {
             return BBgetDateFormat($faq->created_at);
         })->addColumn('actions', function ($attr) {

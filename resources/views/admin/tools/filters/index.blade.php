@@ -31,7 +31,7 @@
                         aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                {!! Form::open(['url'=>route('post_admin_tools_filters'),'class' => 'updated-form']) !!}
+                {!! Form::open(['url'=>route('admin_store_filters_new_category'),'class' => 'updated-form']) !!}
                 @if(count(get_languages()))
                     <ul class="nav nav-tabs">
                         @foreach(get_languages() as $language)

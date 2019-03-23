@@ -8,9 +8,14 @@
             {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
         </div>
 </div>
-
-{!! Form::model($parent,['url'=>route('post_admin_tools_filters_add_child',$parent->id),'class' => 'updated-form']) !!}
+@php
+    $parents=(!$category)?$parent->children()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray():$category->filters()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray();
+@endphp
+{!! Form::model($parent,['url'=>route('post_admin_tools_filters_add_child',(($parent)?$parent->id:$category->id)),'class' => 'updated-form']) !!}
 {!! Form::hidden('id',null) !!}
+@if($category)
+{!! Form::hidden('category_id',$category->id) !!}
+@endif
 {!! Form::hidden('child_id',($child)?$child->id:null) !!}
 @if(count(get_languages()))
     <ul class="nav nav-tabs">
@@ -39,8 +44,9 @@
 </div>
 <div class="form-group row mt-10">
     <label class="col-md-2 col-xs-12">Parent</label>
+
     <div class="col-md-10">
-        {!! Form::select('parent_id',[$parent->id=>'Current Filter']+$parent->children()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray(),$parent->id,['class'=>'form-control','required'=>true]) !!}
+        {!! Form::select('parent_id',[(($parent)?$parent->id:null)=>'Current Filter']+$parents,(($parent)?$parent->id:null),['class'=>'form-control','required'=>true]) !!}
     </div>
 
 </div>

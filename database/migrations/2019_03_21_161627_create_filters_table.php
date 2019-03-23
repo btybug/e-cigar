@@ -16,9 +16,11 @@ class CreateFiltersTable extends Migration
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('parent_id')->nullable();
+            $table->unsignedInteger('category_id')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('filters')->onDelete('cascade');
+            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

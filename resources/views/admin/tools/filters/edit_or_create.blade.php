@@ -20,7 +20,9 @@
             </div>
             <div class="card-body panel-body">
                 <div>
-                    <button type="button" class="btn btn-primary add-filter"><i class="fa fa-plus fa-sm mr-10"></i>Add New</button>
+                    <button type="button" class="btn btn-primary add-filter"><i class="fa fa-plus fa-sm mr-10"></i>Add
+                        New
+                    </button>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -75,20 +77,32 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card panel panel-default mt-20 releted__products-panel">
-                                <div class="card-header panel-heading d-flex justify-content-between align-items-center">
+                                <div
+                                    class="card-header panel-heading d-flex justify-content-between align-items-center">
                                         <span>
                                             Parent Filters
                                         </span>
                                 </div>
+                                {!! Form::open(['id'=>'filter-form']) !!}
                                 <div class="card-body panel-body product-body">
                                     <div class="form-group row mt-10">
                                         <label class="col-md-2 col-xs-12"></label>
                                         <div class="col-md-10">
-                                            {!! Form::select('parent_id',[null=>'Select Parent']+\App\Models\Filters::whereNull('parent_id')->get()->pluck('name','id')->toArray(),null,['class'=>'form-control','required'=>true]) !!}
+                                            {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
                                         </div>
 
                                     </div>
+                                    <div class="filter-children-selects">
+
+                                    </div>
                                 </div>
+                                {!! Form::close() !!}
+                                <div class="card-body panel-body product-body">
+                                    <ul class="get-all-attributes-tab row filter-children-items">
+
+                                    </ul>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -104,7 +118,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
-        var data = {!! json_encode(\App\Models\Filters::recursiveItems($filter->children),true) !!};
+        var data = {!! json_encode(\App\Models\Filters::recursiveItems($category->filters),true) !!};
         $("#tree1").tree({
             data: data,
             autoOpen: true,
@@ -114,7 +128,7 @@
             $('.filter-form-place .updated-form').submit()
         });
         $("body").on('click', '.add-filter', function () {
-            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id: "{!! $filter->id !!}"}, function (res) {
+            AjaxCall("{!! route('admin_tools_filters_form') !!}", {category_id: "{!! $category->id !!}"}, function (res) {
                 if (!res.error) {
                     $(".filter-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
@@ -122,17 +136,33 @@
                 }
             });
         });
+        $("body").on('change', '.filter-select', function () {
+            let data = $('form#filter-form').serialize();
+            AjaxCall("{!! route('admin_tools_filters_next') !!}", data, function (res) {
+                if (!res.error) {
+                    switch (res.type) {
+                        case 'filter':$('.filter-children-selects').html(res.html);break;
+                        case 'items':$('.filter-children-items').html(res.html);break;
+                    }
+                }
+            });
+        });
         $("body").on('click', '.detach-item', function () {
-            let _this=$(this);
+            let _this = $(this);
             AjaxCall($(this).data('href'), {slug: $(this).data('key')}, function (res) {
                 if (!res.error) {
-                $(_this).closest('li').remove()
+                    $(_this).closest('li').remove()
                 }
             });
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            AjaxCall("{!! route('admin_tools_filters_form') !!}", {id:e.node.parent_id,child_id: e.node.id}, function (res) {
+            console.log(e.node);
+            AjaxCall("{!! route('admin_tools_filters_form') !!}", {
+                id: e.node.parent_id,
+                child_id: e.node.id,
+                category_id: e.node.category_id
+            }, function (res) {
                 if (!res.error) {
                     $(".filter-form-place").html(res.html);
                     $('.icon-picker').iconpicker();
@@ -143,7 +173,7 @@
         });
         $("body").on('click', '.select-products', function () {
 
-            AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {id:$(this).attr('data-id')}, function (res) {
+            AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {id: $(this).attr('data-id')}, function (res) {
                 if (!res.error) {
                     $("#productsModal .modal-body .all-list").empty();
                     res.data.forEach(item => {
@@ -244,7 +274,8 @@
         .filter-form-place .mt-10 {
             margin-top: 10px;
         }
-        #view-result .modal-lg{
+
+        #view-result .modal-lg {
             max-width: 80%;
         }
     </style>

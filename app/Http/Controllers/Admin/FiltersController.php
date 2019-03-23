@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Filters;
 use App\Models\Items;
 use Illuminate\Http\Request;
@@ -20,12 +21,13 @@ class FiltersController extends Controller
 
     public function index()
     {
+
         return $this->view('index',compact('filters'));
     }
     public function getCreateOrEdit($id=null)
     {
-        $filter=Filters::findOrFail($id);
-        return $this->view('edit_or_create',compact('filter'));
+        $category=Category::findOrFail($id);
+        return $this->view('edit_or_create',compact('category'));
     }
 
     public function getItems(Request $request)
@@ -49,11 +51,31 @@ class FiltersController extends Controller
     public function postFilterForm (Request $request)
     {
         $id = $request->get('id',0);
+        $category_id = $request->get('category_id');
         $child_id= $request->get('child_id');
+        $category=Category::find($category_id);
         $parent = Filters::find($id);
-        $child = $parent->children()->find($child_id);
-        $html = $this->view("create_or_update",compact(['parent','child','child_id']))->render();
+        $child = (!$category)?$parent->children()->find($child_id):$category->filters()->find($child_id);
+        $html = $this->view("create_or_update",compact(['parent','child','child_id','category']))->render();
         return \Response::json(['error' => false,'html' => $html]);
+    }
+    public function postGetNext (Request $request)
+    {
+//        $parent=Filters::findOrFail($request->get('parent'));
+        $children=$request->get('filters',[]);
+        $filters=collect([]);
+        foreach($children as $id){
+            $filters->push(Filters::find($id));
+        }
+        if(!$filters->last()->children()->exists()){
+            $items=$filters->last()->items;
+            $html =$this->view("items",compact(['items']))->render();
+            return \Response::json(['error' => false,'html' => $html,'type'=>'items']);
+        };
+
+        $filters=Filters::whereIn('id',$children)->get();
+        $html =$this->view("filters",compact(['children','filters']))->render();
+        return \Response::json(['error' => false,'html' => $html,'type'=>'filter']);
     }
 
 
@@ -61,13 +83,24 @@ class FiltersController extends Controller
     public function postCreateOrUpdateCategory(Request $request)
     {
         $data = $request->except('_token','translatable');
+
         $filter = Filters::updateOrCreate($request->id, $data);
-//        $category->stickers()->sync($request->get('stickers'));
+        return redirect()->back();
+    }
+
+    public function postCreateParentCategory(Request $request)
+    {
+        $data = $request->except('_token','translatable');
+        $data['user_id']=\Auth::id();
+        $data['type']='filter';
+
+        Category::updateOrCreate($request->id, $data);
         return redirect()->back();
     }
     public function postCategoryUpdateChild(Request $request,$id)
     {
         $data = $request->except('_token','translatable','child_id','id','items');
+        $data['category_id']=(!$data['parent_id'])?$data['category_id']:null;
         $filter = Filters::updateOrCreate($request->child_id, $data);
         $filter->items()->sync($request->get('items'));
         return redirect()->back();

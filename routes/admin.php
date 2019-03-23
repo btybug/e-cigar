@@ -377,7 +377,9 @@ Route::group(['prefix' => '/tools'], function () {
         Route::post('/', 'Admin\FiltersController@postCreateOrUpdateCategory')->name('post_admin_tools_filters');
         Route::post('/add-child/{id}', 'Admin\FiltersController@postCategoryUpdateChild')->name('post_admin_tools_filters_add_child');
         Route::post('/update-parent', 'Admin\FiltersController@postCategoryUpdateChild')->name('admin_store_filters_update_parent');
+        Route::post('/new-category', 'Admin\FiltersController@postCreateParentCategory')->name('admin_store_filters_new_category');
         Route::post('/get-form', 'Admin\FiltersController@postFilterForm')->name('admin_tools_filters_form');
+        Route::post('/get-next', 'Admin\FiltersController@postGetNext')->name('admin_tools_filters_next');
         Route::post('/get-items', 'Admin\FiltersController@getItems')->name('admin_tools_filters_get_items');
         Route::post('/delete', 'Admin\FiltersController@postDelete')->name('post_admin_tools_filters_delete');
         Route::post('/detach/{id}', 'Admin\FiltersController@postDetachItem')->name('post_admin_tools_filters_detach_item');
