@@ -8,8 +8,8 @@
                     <h2 class="m-0">{{ ($model) ? $model->name : "Add new item" }}</h2>
                 </div>
 
-            <div class="col-md-4 d-flex">
-                <button class="btn btn-info ml-4" type="submit">Save</button>
+            <div class="col-md-4">
+                <button class="btn btn-info ml-4 float-right" type="submit">Save</button>
             </div>
         </div>
         <div class="card-body panel-body">
