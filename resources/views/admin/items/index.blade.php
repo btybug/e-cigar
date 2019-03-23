@@ -10,7 +10,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAddItemButton">
                     <a class="dropdown-item" href="{!! route('admin_items_new') !!}">Simple Item</a>
-                    <a class="dropdown-item" href="#">Bundle Item</a>
+                    <a class="dropdown-item" href="{!! route('admin_items_new_bundle') !!}">Bundle Item</a>
                 </div>
             </div>
             @endok

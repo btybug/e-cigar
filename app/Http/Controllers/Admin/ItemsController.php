@@ -44,10 +44,21 @@ class ItemsController extends Controller
     public function getNew()
     {
         $model = null;
+        $bundle = false;
         $barcodes = $this->barcodeService->getUnsedCodes();
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes','bundle'));
+    }
+
+    public function getNewBundle()
+    {
+        $model = null;
+        $bundle = true;
+        $barcodes = $this->barcodeService->getUnsedCodes();
+
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        return $this->view('new', compact('model', 'allAttrs','barcodes','bundle'));
     }
 
     public function postNew(ItemsRequest $request)
@@ -70,10 +81,11 @@ class ItemsController extends Controller
     public function getEdit($id)
     {
         $model = Items::findOrFail($id);
+        $bundle = ($model->type != 'bundle')? false:true;
         $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes','items'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle'));
     }
 
     private function savePackages($item, array $data = [])

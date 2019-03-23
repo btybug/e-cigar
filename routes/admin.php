@@ -315,6 +315,7 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'items'], function () {
         Route::get('/', 'Admin\ItemsController@index')->name('admin_items');
         Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
+        Route::get('/new-bundle', 'Admin\ItemsController@getNewBundle')->name('admin_items_new_bundle');
         Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');

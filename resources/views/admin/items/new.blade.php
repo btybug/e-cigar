@@ -9,7 +9,6 @@
                 </div>
 
             <div class="col-md-4 d-flex">
-                {!! Form::select('type',['simple' => 'Simple','bundle' => 'Bundle'],null,['class' => 'form-control','id' => 'selectItemType']) !!}
                 <button class="btn btn-info ml-4" type="submit">Save</button>
             </div>
         </div>
@@ -17,7 +16,10 @@
             <div class="content main-content">
                 <ul class="nav nav-tabs admin-profile-left">
                     <li class="nav-item" data-tab="info"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
-                    <li class="nav-item @if($model == null || $model->type != 'bundle') hide @endif" data-tab="package"><a class="nav-link" data-toggle="tab" href="#package">Package</a></li>
+
+                    <li class="nav-item @if(! $bundle) hide @endif" data-tab="package">
+                        <a class="nav-link" data-toggle="tab" href="#package">Package</a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
@@ -310,7 +312,8 @@
 
                         </div>
                     </div>
-                    <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab @if($model == null || $model->type != 'bundle') hide @endif">
+                    <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab
+                    @if(!$bundle) hide @endif">
                         <div class="col-md-12">
                                 <button class="btn btn-primary pull-right add-package-item"
                                         type="button">
