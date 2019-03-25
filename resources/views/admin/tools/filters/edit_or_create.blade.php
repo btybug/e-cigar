@@ -48,23 +48,40 @@
         </div>
 
     </div>
-
-    <div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="itemsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Select Items</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="all-list">
 
-                    </ul>
-                </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+    <div class="items-box d-flex flex-column">
+        <div class="modal-body">
+            <ul class="all-list modal-stickers--list">
+                {{--@include("admin.stock._partials.items_render")--}}
+            </ul>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary add-package-items" data-section-id="">Add</button>
+        </div>
+    </div>
+    {{--<div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">--}}
+    {{--<div class="modal-dialog modal-lg" role="document">--}}
+    {{--<div class="modal-content">--}}
+    {{--<div class="modal-header">--}}
+    {{--<h4 class="modal-title">Select Items</h4>--}}
+    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span--}}
+    {{--aria-hidden="true">&times;</span></button>--}}
+    {{--</div>--}}
+    {{--<div class="modal-body">--}}
+    {{--<ul class="all-list">--}}
+
+    {{--</ul>--}}
+    {{--</div>--}}
+    {{--</div><!-- /.modal-content -->--}}
+    {{--</div><!-- /.modal-dialog -->--}}
+    {{--</div><!-- /.modal -->--}}
     <div class="modal fade releted-products-add-modal" id="view-result" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -127,6 +144,47 @@
         $('body').on('click', '.btn-submit-form', function () {
             $('.filter-form-place .updated-form').submit()
         });
+        $("body").on('click', '.select-products', function () {
+            let parent = $('.get-all-attributes-tab').find('li');
+            let existings = [];
+            parent.each(function (i, e) {
+                existings.push($(e).data('id'));
+            });
+            AjaxCall("{{ route('admin_stock_package_variation_items') }}", {
+                items: existings,
+                uniqueId: parent.attr('data-unqiue')
+            }, function (res) {
+                if (!res.error) {
+                    $("#itemsModal .modal-content").html(res.html);
+                    $("#itemsModal #searchStickers").select2();
+                    $("#itemsModal").modal();
+                }
+            });
+        });
+
+        $("body").on("change", "#itemsModal #searchStickers", function () {
+            let stickers = $(this).val();
+            let data_id = $(this).attr('data-section-id');
+
+            let $_this = $('body').find('[data-unqiue="' + data_id + '"]');
+            let existings = [];
+            $_this.find('.v-item-change')
+                .each(function (i, e) {
+                    existings.push($(e).val());
+                });
+            AjaxCall("{{ route('admin_stock_search_items') }}", {items: existings, stickers: stickers}, function (res) {
+                if (!res.error) {
+                    $("#itemsModal .modal-stickers--list").html(res.html);
+                }
+            });
+        });
+
+
+        $('body').on('click', '#itemsModal .option-elm-modal', function () {
+            $(this).toggleClass('active')
+        });
+
+
         $("body").on('click', '.add-filter', function () {
             AjaxCall("{!! route('admin_tools_filters_form') !!}", {category_id: "{!! $category->id !!}"}, function (res) {
                 if (!res.error) {
@@ -143,7 +201,8 @@
                     switch (res.type) {
                         case 'filter':
                             $('.filter-children-items').empty();
-                            $('.filter-children-selects').html(res.html);break;
+                            $('.filter-children-selects').html(res.html);
+                            break;
                         case 'items':
                             $('.filter-children-selects').html(res.html);
                             $('.filter-children-items').html(res.items_html);
@@ -176,29 +235,20 @@
                 }
             });
         });
-        $("body").on('click', '.select-products', function () {
 
-            AjaxCall("{!! route('admin_tools_filters_get_items') !!}", {id: $(this).attr('data-id')}, function (res) {
-                if (!res.error) {
-                    $("#productsModal .modal-body .all-list").empty();
-                    res.data.forEach(item => {
-                        let html = `<li data-id="${item.id}" class="option-elm-modal"><div><a
-                                                href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></div></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    });
-                    $("#productsModal").modal();
-                }
-            });
-        });
-        $("body").on("click", ".add-attribute-event", function () {
-            let id = $(this).data("id");
-            let name = $(this).data("name");
-            $(".get-all-attributes-tab")
-                .append(`<li  data-id="${id}" class="option-elm-attributes col-md-3"><div class="wrap-item"><a
+
+        $("body").on("click", ".add-package-items", function () {
+            console.log(1);
+            $("#itemsModal").modal('hide');
+            let items = $('#itemsModal').find('.all-list li.active');
+            $.each(items, function (k, v) {
+                let id = $(v).data("id");
+                let name = $(v).data("name");
+                let img = $(v).find('img').attr('src');
+                $(".get-all-attributes-tab")
+                    .append(`<li  data-id="${id}" class="option-elm-attributes col-md-3"><div class="wrap-item"><a
                                 href="#">
-<span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+<span><img src="${img}" alt=""></span>
 <span class="name">${name}</span>
 
                                 </a>
@@ -207,9 +257,12 @@
                                 </div>
                                 <input type="hidden" name="items[]" value="${id}">
                                 </div></li>`);
-            $(this)
-                .parent()
-                .remove();
+                $(this)
+                    .parent()
+                    .remove();
+            });
+
+
         });
     </script>
 @stop
@@ -220,6 +273,10 @@
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <style>
+        #itemsModal .items-box {
+            flex: 1;
+        }
+
         .head-space-between {
             display: flex;
             justify-content: space-between;
