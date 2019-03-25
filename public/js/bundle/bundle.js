@@ -2829,6 +2829,11 @@ $(document).ready(function () {
                             var s_id = $(this).attr('data-el-id');
                             $(".select2-selection__choice[data-select2-id=\"" + s_id + "\"] .select2-selection__choice__remove").click();
                             $("#multi_v_select_" + id + " option[data-select2-id=\"" + s_id + "\"]");
+                            var deleted = $(this).closest('.menu-item-selected').attr('data-id');
+                            var values = $("#multi_v_select_" + id).val().filter(function (value) {
+                                return value !== deleted;
+                            });
+                            $("#multi_v_select_" + id).val(values).trigger('change.select2');
                             $(this).closest('.menu-item-selected').remove();
                         });
                     }).catch(function (error) {

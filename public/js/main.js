@@ -144,7 +144,7 @@ $(document).ready(function() {
                                                 //********************//
 
                     $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function() {
-                        return false
+                        return false;
                     })
                     $(`#multi_v_select_${id}`).closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
                         ev.preventDefault();
@@ -203,6 +203,9 @@ $(document).ready(function() {
                                     const s_id = $(this).attr('data-el-id');
                                     $(`.select2-selection__choice[data-select2-id="${s_id}"] .select2-selection__choice__remove`).click();
                                     $(`#multi_v_select_${id} option[data-select2-id="${s_id}"]`);
+                                    const deleted = $(this).closest('.menu-item-selected').attr('data-id');
+                                    const values = $(`#multi_v_select_${id}`).val().filter((value) => value !== deleted)
+                                    $(`#multi_v_select_${id}`).val(values).trigger('change.select2');
                                     $(this).closest('.menu-item-selected').remove();
                                 });
                             })
