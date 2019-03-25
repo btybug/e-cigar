@@ -16082,7 +16082,14 @@ td.shp-cart-table_price-td {
     }
 }
 
-
+.product-counts-wrapper .product-count-minus{
+    left: 10px;
+    bottom: 0;
+}
+.product-counts-wrapper .product-count-plus{
+    right: 10px;
+    bottom: 0;
+}
 body {
     display: flex;
     flex-direction: column;
