@@ -83,20 +83,13 @@
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row justify-content-center">
-                        <div class="col-md-8">
-                            <div class="card panel panel-default mt-20 releted__products-panel">
-                                <div
-                                    class="card-header panel-heading d-flex justify-content-between align-items-center">
-                                        <span>
-                                            Parent Filters
-                                        </span>
-                                </div>
+                    <div class="row releted__products-panel">
+                        <div class="col-md-2">
+                            <div class="">
                                 {!! Form::open(['id'=>'filter-form']) !!}
-                                <div class="card-body panel-body product-body">
-                                    <div class="form-group row mt-10">
-                                        <label class="col-md-2 col-xs-12"></label>
-                                        <div class="col-md-10">
+                                <div class="product-body">
+                                    <div class="form-group">
+                                        <div>
                                             {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
                                         </div>
 
@@ -106,12 +99,15 @@
                                     </div>
                                 </div>
                                 {!! Form::close() !!}
-                                <div class="card-body panel-body product-body">
-                                    <ul class="get-all-attributes-tab row filter-children-items">
 
-                                    </ul>
-                                </div>
 
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <div class="product-body">
+                                <ul class="get-all-attributes-tab row filter-children-items">
+
+                                </ul>
                             </div>
                         </div>
                     </div>
