@@ -548,3 +548,32 @@ label {
     border: 1px solid #000000;
     box-shadow: 0px 0 4px 3px #f39c12;
 }
+.list-items--wrapper{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.list-items--wrapper .single-item{
+    box-shadow: 0 1px 4px 1px #000;
+    margin-bottom: 10px;
+
+}
+.list-items--wrapper .single-item .img-item img{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.list-items--wrapper .single-item .name-item{
+    background-color: #e2e2e2;
+    color: #000000;
+    padding: 8px 10px;
+    border-top: 1px solid #ffffff;
+}
+.list-items--wrapper .single-item {
+    box-shadow: 0 0 4px #777;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.right-content-view--results{
+
+}
