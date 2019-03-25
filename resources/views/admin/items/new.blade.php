@@ -576,28 +576,39 @@
         $(document).ready(function () {
             function render_categories_tree() {
                 $("#treeview_json").jstree({
-                    "checkbox": {
-                        "three_state": false,
-                        "cascade": 'undetermined',
-                        "keep_selected_style": false
+                    checkbox: {
+                        three_state: false,
+                        whole_node : false,
+                        tie_selection : false,
+                        cascade: 'undetermined',
+                        keep_selected_style: false
                     },
                     plugins: ["wholerow", "checkbox", "types"],
                     core: {
                         themes: {
                             responsive: !1
                         },
-                        data: {!! json_encode($data) !!}
+                        data: {!! json_encode($data) !!},
+                        check_callback: false
                     },
                     types: {
-                        "default": {
+                        default: {
                             icon: "fa fa-folder text-primary fa-lg"
                         },
                         file: {
                             icon: "fa fa-file text-success fa-lg"
                         }
                     }
+                }).on("check_node.jstree uncheck_node.jstree", function(e, data) {
+                    AjaxCall("/admin/inventory/items/get-specifications-by-category", {ids: data.selected}, function (res) {
+                        if (!res.error) {
+                            $("#specifications").find('.v-options-list').html(res.html);
+                            $(".tag-input-v").select2({width: '100%'});
+                        }
+                    });
                 })
             }
+
             $('#treeview_json').on("changed.jstree", function (e, data) {
                 if (data.node) {
                     var selectedNode = $('#treeview_json').jstree(true).get_selected(true)

@@ -240,4 +240,22 @@ class ItemsController extends Controller
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function getSpecificationByCategory(Request $request)
+    {
+        $selecteds = Attributes::leftJoin('attribute_categories','attributes.id','attribute_categories.attribute_id')
+            ->whereIn('attribute_categories.categories_id',$request->get('ids',[]))
+            ->select('attributes.*')
+            ->groupBy('attributes.id')
+            ->get();
+        
+        $html = '';
+        if(count($selecteds)){
+            $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
+            $html = \View("admin.items._partials.specification_group", compact(['selecteds', 'allAttrs']))->render();
+        }
+
+
+        return \Response::json(['error' => false, 'html' => $html,'data' => $selecteds]);
+    }
 }
