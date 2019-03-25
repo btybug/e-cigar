@@ -17,6 +17,7 @@ class CreateFilterItemsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('filter_id');
             $table->unsignedInteger('item_id');
+            $table->text('image')->nullable();
 
             $table->unique(['filter_id','item_id']);
             $table->foreign('filter_id')->references('id')->on('filters')->onDelete('cascade');

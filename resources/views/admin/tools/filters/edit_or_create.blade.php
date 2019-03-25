@@ -6,20 +6,16 @@
     <div class="col-md-12">
         <div class="card panel panel-default">
             <div class="card-header panel-heading head-space-between">
+                {!! Form::model($category,['url'=>route('post_admin_tools_filters_edit_category',$category->id)]) !!}
                 <div class="form-group row mt-10">
-                    <div class="col-md-10">
-                        {!! Form::text('title',null,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
-                    </div>
-
-                </div>
-                <div class="form-group row mt-10">
-                    <label class="col-md-6 col-xs-12">First child label</label>
-
+                    <label class="col-md-6 col-xs-12">Main child label</label>
                     <div class="col-md-6">
-                        {!! Form::text('first_child_label',null,['class'=>'form-control']) !!}
+                        {!! Form::text('translatable['.strtolower(app()->getLocale()).'][name]',$category->name,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
                     </div>
 
                 </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {!! Form::close() !!}
                 <div class="button-area text-right">
                     <div class="form-group">
                         {!! Form::button('View Result',['class' => 'btn btn-primary','data-toggle'=>"modal",'data-target'=>"#view-result"]) !!}
@@ -63,17 +59,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    <div class="items-box d-flex flex-column">
-        <div class="modal-body">
-            <ul class="all-list modal-stickers--list">
-                {{--@include("admin.stock._partials.items_render")--}}
-            </ul>
-        </div>
-
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary add-package-items" data-section-id="">Add</button>
-        </div>
-    </div>
     <div class="modal fade releted-products-add-modal" id="view-result" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

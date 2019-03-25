@@ -17,7 +17,7 @@ class Filters extends Translatable
 
     public $translationModel = FiltersTranslation::class;
 
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['name','first_child_label'];
 
     protected $appends = ['path'];
     /**

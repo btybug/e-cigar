@@ -16,6 +16,7 @@ class CreateFilterTranslationsTable extends Migration
         Schema::create('filters_translations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('first_child_label')->nullable();
             $table->integer('filters_id')->unsigned();
             $table->string('locale')->index();
 

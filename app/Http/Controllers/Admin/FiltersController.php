@@ -52,6 +52,12 @@ class FiltersController extends Controller
         return response()->json(['error' => !$model->items()->detach($request->get('slug'))]);
     }
 
+    public function postEditCategory(Request $request,$id)
+    {
+        Category::updateOrCreate($id,[]);
+        return redirect()->back();
+    }
+
     public function postFilterForm(Request $request)
     {
         $id = $request->get('id', 0);

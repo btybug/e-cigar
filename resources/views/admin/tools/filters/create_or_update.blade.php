@@ -42,6 +42,14 @@
                     </div>
 
                 </div>
+                <div class="form-group row mt-10">
+                    <label class="col-md-2 col-xs-12">First child label</label>
+
+                    <div class="col-md-10">
+                        {!! Form::text('translatable['.strtolower($language->code).'][first_child_label]',($child)?get_translated($child,strtolower($language->code),'first_child_label'):null,['class'=>'form-control']) !!}
+                    </div>
+
+                </div>
             </div>
         @endforeach
     @endif
@@ -54,14 +62,7 @@
     </div>
 
 </div>
-<div class="form-group row mt-10">
-    <label class="col-md-2 col-xs-12">First child label</label>
 
-    <div class="col-md-10">
-        {!! Form::text('first_child_label',null,['class'=>'form-control']) !!}
-    </div>
-
-</div>
 <div class="form-group">
     <div class="row">
         <label for="feature_image"

@@ -384,6 +384,7 @@ Route::group(['prefix' => '/tools'], function () {
         Route::post('/get-items', 'Admin\FiltersController@getItems')->name('admin_tools_filters_get_items');
         Route::post('/delete', 'Admin\FiltersController@postDelete')->name('post_admin_tools_filters_delete');
         Route::post('/detach/{id}', 'Admin\FiltersController@postDetachItem')->name('post_admin_tools_filters_detach_item');
+        Route::post('/edit-category/{id}', 'Admin\FiltersController@postEditCategory')->name('post_admin_tools_filters_edit_category');
 
     });
     Route::group(['prefix' => 'categories'], function () {

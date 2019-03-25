@@ -8,5 +8,5 @@ class FiltersTranslation extends Model
 {
     protected $table = 'filters_translations';
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','first_child_label'];
 }
