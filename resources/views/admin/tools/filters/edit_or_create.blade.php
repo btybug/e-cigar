@@ -13,7 +13,8 @@
                             {!! Form::text('translatable['.strtolower(app()->getLocale()).'][name]',$category->name,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control">
+                            {!! Form::text('translatable['.strtolower(app()->getLocale()).'][description]',$category->description,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
+
                         </div>
 
                     </div>
@@ -75,6 +76,7 @@
                         <div class="col-md-3">
                             <div class="">
                                 {!! Form::open(['id'=>'filter-form']) !!}
+                                <legend>{!! $category->description !!}</legend>
                                 <div class="product-body">
                                     <div class="form-group row">
                                         <label class="col-md-2 col-xs-12">{!! $category->name !!}</label>
