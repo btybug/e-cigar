@@ -73,8 +73,9 @@
                             <div class="">
                                 {!! Form::open(['id'=>'filter-form']) !!}
                                 <div class="product-body">
-                                    <div class="form-group">
-                                        <div>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-xs-12"></label>
+                                        <div  class="col-md-10">
                                             {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
                                         </div>
 
