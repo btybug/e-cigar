@@ -72,6 +72,26 @@
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <div class="d-flex flex-wrap justify-content-center mb-2">
+                        <div class="col-sm-3">
+                            <select name="" id="" class="form-control">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="" id="" class="form-control">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="" id="" class="form-control">
+                                <option value="">1</option>
+                                <option value="">2</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="row releted__products-panel">
                         <div class="col-md-3">
                             <div class="">
@@ -96,20 +116,6 @@
                         </div>
                         <div class="col-md-9">
                             <div class="right-content-view--results">
-                                <div class="d-flex flex-wrap mb-2">
-                                    <div class="col-sm-3">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <ul class="d-flex flex-wrap list-items--wrapper">
                                     <li class="col-md-3 col-sm-6 ">
                                         <div class="single-item">
