@@ -48,8 +48,9 @@ class AttributesController extends Controller
         $model = Attributes::findOrFail($id);
         $optionModel = null;
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories, 0, [], []);
 
-        return $this->view('create_edit_form', compact(['model', 'optionModel','categories']));
+        return $this->view('create_edit_form', compact(['model', 'optionModel','categories','data']));
     }
 
     public function postAttributesEdit(Request $request, $id)

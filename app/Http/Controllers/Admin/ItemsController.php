@@ -88,8 +88,9 @@ class ItemsController extends Controller
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories, 0, [], []);
 
-        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories','data'));
     }
 
     private function savePackages($item, array $data = [])
