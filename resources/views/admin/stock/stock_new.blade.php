@@ -310,11 +310,11 @@
                                                                 </thead>
 
                                                                 <tbody class="v-options-list">
-                                                                @if($model && $model->stockAttrs)
-                                                                    @foreach($model->stockAttrs as $selected)
-                                                                        @include('admin.inventory._partials.specifications')
-                                                                    @endforeach
-                                                                @endif
+                                                                {{--@if($model && $model->stockAttrs)--}}
+                                                                    {{--@foreach($model->stockAttrs as $selected)--}}
+                                                                        {{--@include('admin.inventory._partials.specifications')--}}
+                                                                    {{--@endforeach--}}
+                                                                {{--@endif--}}
                                                                 </tbody>
 
                                                                 <tfoot>
