@@ -1,28 +1,32 @@
+
 <div class="del-save--btn">
     @if($parent)
         <div class="form-group m-r-5">
-            <a class="btn btn-danger delete-button text-white" data-key="{{ $child_id }}" data-href="{!! route('post_admin_tools_filters_delete') !!}">Delete</a>
+            <a class="btn btn-danger delete-button text-white" data-key="{{ $child_id }}"
+               data-href="{!! route('post_admin_tools_filters_delete') !!}">Delete</a>
         </div>
     @endif
-        <div class="form-group">
-            {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
-        </div>
+    <div class="form-group">
+        {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
+    </div>
 </div>
 @php
     $parents=(!$category)?$parent->children()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray():$category->filters()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray();
 @endphp
-{!! Form::model($parent,['url'=>route('post_admin_tools_filters_add_child',(($parent)?$parent->id:$category->id)),'class' => 'updated-form']) !!}
+{!! Form::model($child,['url'=>route('post_admin_tools_filters_add_child',(($parent)?$parent->id:$category->id)),'class' => 'updated-form']) !!}
 {!! Form::hidden('id',null) !!}
 @if($category)
-{!! Form::hidden('category_id',$category->id) !!}
+    {!! Form::hidden('category_id',$category->id) !!}
 @endif
 {!! Form::hidden('child_id',($child)?$child->id:null) !!}
 @if(count(get_languages()))
     <ul class="nav nav-tabs">
-    @foreach(get_languages() as $language)
-            <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#{{ strtolower($language->code) }}">
-                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}</a></li>
-    @endforeach
+        @foreach(get_languages() as $language)
+            <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab"
+                                    href="#{{ strtolower($language->code) }}">
+                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                </a></li>
+        @endforeach
     </ul>
 @endif
 
@@ -50,12 +54,16 @@
     </div>
 
 </div>
+
+@if(!$child ||  !$child->children()->exists())
     <div class="card panel panel-default mt-20 releted__products-panel">
         <div class="card-header panel-heading d-flex justify-content-between align-items-center">
                                         <span>
                                             Related Items
                                         </span>
-            <button type="button" class="btn btn-primary select-products" data-id="{!! $child_id !!}"><i class="fa fa-plus fa-sm mr-10"></i>Add Items</button>
+            <button type="button" class="btn btn-primary select-products" data-id="{!! $child_id !!}"><i
+                    class="fa fa-plus fa-sm mr-10"></i>Add Items
+            </button>
         </div>
         <div class="card-body panel-body product-body">
             <ul class="get-all-attributes-tab row">
@@ -70,15 +78,19 @@
                                 </a>
                                 <div class="buttons">
                                     <a href="javascript:void(0)"
-                                       class="remove-all-attributes btn btn-sm btn-danger detach-item" data-key="{{ $items->id }}" data-href="{!! route('post_admin_tools_filters_detach_item',$child_id) !!}">
+                                       class="remove-all-attributes btn btn-sm btn-danger detach-item"
+                                       data-key="{{ $items->id }}"
+                                       data-href="{!! route('post_admin_tools_filters_detach_item',$child_id) !!}">
                                         <i class="fa fa-trash"></i></a>
                                 </div>
                                 <input type="hidden" name="items[]" value="{{ $items->id }}">
-                            </div></li>
+                            </div>
+                        </li>
                     @endforeach
                 @endif
             </ul>
         </div>
     </div>
+@endif
 {!! Form::close() !!}
 
