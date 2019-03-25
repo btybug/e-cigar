@@ -12,6 +12,14 @@
                     </div>
 
                 </div>
+                <div class="form-group row mt-10">
+                    <label class="col-md-6 col-xs-12">First child label</label>
+
+                    <div class="col-md-6">
+                        {!! Form::text('first_child_label',null,['class'=>'form-control']) !!}
+                    </div>
+
+                </div>
                 <div class="button-area text-right">
                     <div class="form-group">
                         {!! Form::button('View Result',['class' => 'btn btn-primary','data-toggle'=>"modal",'data-target'=>"#view-result"]) !!}
@@ -66,22 +74,6 @@
             <button type="button" class="btn btn-primary add-package-items" data-section-id="">Add</button>
         </div>
     </div>
-    {{--<div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">--}}
-    {{--<div class="modal-dialog modal-lg" role="document">--}}
-    {{--<div class="modal-content">--}}
-    {{--<div class="modal-header">--}}
-    {{--<h4 class="modal-title">Select Items</h4>--}}
-    {{--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span--}}
-    {{--aria-hidden="true">&times;</span></button>--}}
-    {{--</div>--}}
-    {{--<div class="modal-body">--}}
-    {{--<ul class="all-list">--}}
-
-    {{--</ul>--}}
-    {{--</div>--}}
-    {{--</div><!-- /.modal-content -->--}}
-    {{--</div><!-- /.modal-dialog -->--}}
-    {{--</div><!-- /.modal -->--}}
     <div class="modal fade releted-products-add-modal" id="view-result" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

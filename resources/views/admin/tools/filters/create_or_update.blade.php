@@ -11,7 +11,7 @@
     </div>
 </div>
 @php
-    $parents=(!$category)?$parent->children()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray():$category->filters()->where('id','!=',$child_id)->get()->pluck('name','id')->toArray();
+    $parents=\App\Models\Filters::fullBrodcrumpsLists($child_id)->toArray();
 @endphp
 {!! Form::model($child,['url'=>route('post_admin_tools_filters_add_child',(($parent)?$parent->id:$category->id)),'class' => 'updated-form']) !!}
 {!! Form::hidden('id',null) !!}
@@ -54,7 +54,23 @@
     </div>
 
 </div>
+<div class="form-group row mt-10">
+    <label class="col-md-2 col-xs-12">First child label</label>
 
+    <div class="col-md-10">
+        {!! Form::text('first_child_label',null,['class'=>'form-control']) !!}
+    </div>
+
+</div>
+<div class="form-group">
+    <div class="row">
+        <label for="feature_image"
+               class="control-label col-sm-4">image</label>
+        <div class="col-sm-8">
+            {!! media_button('image') !!}
+        </div>
+    </div>
+</div>
 @if(!$child ||  !$child->children()->exists())
     <div class="card panel panel-default mt-20 releted__products-panel">
         <div class="card-header panel-heading d-flex justify-content-between align-items-center">

@@ -18,10 +18,23 @@ class Filters extends Translatable
     public $translationModel = FiltersTranslation::class;
 
     public $translatedAttributes = ['name'];
+
+    protected $appends = ['path'];
     /**
      * @var array
      */
     protected $guarded = ['id'];
+
+    public function getPathAttribute()
+    {
+       $parents=$this->parents();
+       $name='';
+       foreach ($parents as $parent){
+           $name.=$parent['name'].'->';
+       }
+       $name.=$this->name;
+       return $name;
+    }
 
     public function items()
     {
@@ -71,23 +84,30 @@ class Filters extends Translatable
 
     public function parents()
     {
-        $result=[];
-        $parents = \DB::select('SELECT T2.* FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM filters WHERE id = _id) AS parent_id, @l := @l AS lvl FROM (SELECT @r := ' . $this->id . ', @l := 0) vars, filters m WHERE @r <> 0) T1 JOIN filters T2 ON T1._id = T2.id WHERE T1._id !=' . $this->id . ' ORDER BY T1.lvl DESC;');
-        foreach ($parents as $parent){
-            $parent= json_decode(json_encode($parent), True);
-            $result[]=$parent;
-        } ;
+        $result = [];
+        $parents = \DB::select('SELECT T2.*,filters_translations.name FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM filters WHERE id = _id) AS parent_id, @l := @l AS lvl FROM (SELECT @r := ' . $this->id . ', @l := 0) vars, filters m WHERE @r <> 0) T1  LEFT JOIN filters_translations ON T1._id = filters_translations.filters_id JOIN filters T2 ON T1._id = T2.id  WHERE T1._id !=' . $this->id . ' AND filters_translations.locale="'.app()->getLocale().'"  ORDER BY T1.lvl DESC;');
+        foreach ($parents as $parent) {
+            $parent = json_decode(json_encode($parent), True);
+            $result[] = $parent;
+        };
         return collect($result);
     }
 
     public function getParentItems()
     {
-        return \DB::table('filter_items')->whereIn('filter_id',$this->parents()->pluck('id'))->get()->pluck('item_id');
+        return \DB::table('filter_items')->whereIn('filter_id', $this->parents()->pluck('id'))->get()->pluck('item_id');
     }
 
     public function syncChild()
     {
-        return \DB::table('filter_items')->whereIn('filter_id',$this->parents()->pluck('id'))->delete();
+        return \DB::table('filter_items')->whereIn('filter_id', $this->parents()->pluck('id'))->delete();
+
+    }
+
+    public static function fullBrodcrumpsLists($except)
+    {
+        $_this = new self();
+        return $_this->where('id','!=',$except)->get()->pluck('path','id');
 
     }
 }

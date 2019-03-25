@@ -28,6 +28,7 @@ class FiltersController extends Controller
     public function getCreateOrEdit($id = null)
     {
         $category = Category::findOrFail($id);
+        enableMedia();
         return $this->view('edit_or_create', compact('category'));
     }
 
@@ -121,7 +122,7 @@ class FiltersController extends Controller
         $data['category_id'] = (!$data['parent_id']) ? $data['category_id'] : null;
         $filter = Filters::updateOrCreate($request->child_id, $data);
         if(!$filter->children()->exists()){
-            $items=array_merge($filter->getParentItems()->toArray(),$request->get('items'));
+            $items=array_merge($filter->getParentItems()->toArray(),$request->get('items',[]));
             $filter->items()->sync($items);
             $filter->syncChild();
         }
