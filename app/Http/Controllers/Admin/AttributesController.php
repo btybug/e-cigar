@@ -52,7 +52,7 @@ class AttributesController extends Controller
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 
-        return $this->view('create_edit_form', compact(['model', 'optionModel','categories','data']));
+        return $this->view('create_edit_form', compact(['model', 'optionModel','categories','data','checkedCategories']));
     }
 
     public function postAttributesEdit(Request $request, $id)

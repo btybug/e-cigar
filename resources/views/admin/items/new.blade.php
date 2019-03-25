@@ -148,25 +148,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <div class="form-group">
-                                                                <label class="col-sm-2 control-label pl-sm-0">Categories</label>
-                                                                {!! Form::hidden('categories',(isset($checkedCategories))
-                                                                ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                                <div id="treeview_json"></div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-
-
-
                                         </div>
                                         <div id="videos" class="tab-pane fade">
                                             <div class="media-videos">
@@ -291,6 +272,23 @@
                                         <div id="specifications" class="tab-pane fade">
                                             <div class="panel panel-default">
                                                 <div class="panel-body" id="v-option-form">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-2 control-label pl-sm-0">Categories</label>
+                                                                    {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                    ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                    <div id="treeview_json"></div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    
                                                     <table class="table table--store-settings">
                                                         <thead>
                                                         <tr class="bg-my-light-pink">
@@ -576,40 +574,32 @@
         $(document).ready(function () {
             function render_categories_tree() {
                 $("#treeview_json").jstree({
-                    checkbox: {
-                        three_state: false,
-                        whole_node : false,
-                        tie_selection : false,
-                        cascade: 'undetermined',
-                        keep_selected_style: false
+                    "checkbox": {
+                        "three_state": false,
+                        "cascade": 'undetermined',
+                        "keep_selected_style": false
                     },
                     plugins: ["wholerow", "checkbox", "types"],
                     core: {
                         themes: {
                             responsive: !1
                         },
-                        data: {!! json_encode($data) !!},
-                        check_callback: false
+                        data: {!! json_encode($data) !!}
                     },
                     types: {
-                        default: {
+                        "default": {
                             icon: "fa fa-folder text-primary fa-lg"
                         },
                         file: {
                             icon: "fa fa-file text-success fa-lg"
                         }
                     }
-                }).on("check_node.jstree uncheck_node.jstree", function(e, data) {
-                    AjaxCall("/admin/inventory/items/get-specifications-by-category", {ids: data.selected}, function (res) {
-                        if (!res.error) {
-                            $("#specifications").find('.v-options-list').html(res.html);
-                            $(".tag-input-v").select2({width: '100%'});
-                        }
-                    });
                 })
+
             }
 
             $('#treeview_json').on("changed.jstree", function (e, data) {
+
                 if (data.node) {
                     var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
                     var dataArr = [];
@@ -632,6 +622,13 @@
                     }
 
                     $("#categories_tree").val(JSON.stringify(uniqueNames));
+
+                    AjaxCall("/admin/inventory/items/get-specifications-by-category", {ids: data.selected}, function (res) {
+                        if (!res.error) {
+                            $("#specifications").find('.v-options-list').html(res.html);
+                            $(".tag-input-v").select2({width: '100%'});
+                        }
+                    });
                 }
             });
             render_categories_tree()

@@ -24,7 +24,7 @@
                 $type_options = (isset($selected) && $selected) ? $selected->children->pluck('sticker_id')->all() : [];
                 $type_optionArray = (isset($selected) && $selected) ? $selected->attr->stickers->pluck('name','id')->all() : [];
             }else{
-                $type_options = (isset($selected) && $selected) ? $selected->stickers->pluck('id')->all() : [];
+                $type_options = [];
                 $type_optionArray = (isset($selected) && $selected) ? $selected->stickers->pluck('name','id')->all() : [];
             }
         @endphp

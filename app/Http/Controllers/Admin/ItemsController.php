@@ -66,7 +66,6 @@ class ItemsController extends Controller
     public function postNew(ItemsRequest $request)
     {
         $data = $request->only('sku', 'image','barcode_id','type','status');
-
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
@@ -92,7 +91,7 @@ class ItemsController extends Controller
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 
-        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories','data'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories','data','checkedCategories'));
     }
 
     private function savePackages($item, array $data = [])
@@ -248,7 +247,7 @@ class ItemsController extends Controller
             ->select('attributes.*')
             ->groupBy('attributes.id')
             ->get();
-        
+
         $html = '';
         if(count($selecteds)){
             $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();

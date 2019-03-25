@@ -33,7 +33,6 @@
                      $type_options = (isset($selected) && $selected) ? $selected->stickers->pluck('id')->all() : [];
                      $type_optionArray = (isset($selected) && $selected) ? $selected->stickers->pluck('name','id')->all() : [];
                 }
-
             }
 
         @endphp
