@@ -124,7 +124,10 @@ $(document).ready(function() {
                     const limit = Number(json.limit);
                     $(`#multi_v_select_${id}`).select2({
                         minimumResultsForSearch: Infinity,
-                        maximumSelectionLength: Number(json.limit)
+                        maximumSelectionLength: Number(json.limit),
+                        formatSelectionTooBig: function () {
+                            return 'You already selected options';
+                        }
                     });
 
                     let qty = 0;

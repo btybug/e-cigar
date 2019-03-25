@@ -2754,7 +2754,10 @@ $(document).ready(function () {
                 var limit = Number(json.limit);
                 $("#multi_v_select_" + id).select2({
                     minimumResultsForSearch: Infinity,
-                    maximumSelectionLength: Number(json.limit)
+                    maximumSelectionLength: Number(json.limit),
+                    formatSelectionTooBig: function formatSelectionTooBig() {
+                        return 'You already selected options';
+                    }
                 });
 
                 var qty = 0;
