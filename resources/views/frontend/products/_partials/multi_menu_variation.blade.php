@@ -4,7 +4,7 @@
             <a href="javascript:void(0)" data-el-id="{{ $selectElementId }}" class="btn btn-sm delete-menu-item cl-red"><i class="fa fa-times"></i></a>
             {{ $variation->name }}
         </div>
-        <div class="col-sm-3 ">
+        <div class="col-sm-3">
             <div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
                 <!--minus qty-->
                 <span class="d-flex align-items-center h-100 pointer position-absolute product-count-minus">

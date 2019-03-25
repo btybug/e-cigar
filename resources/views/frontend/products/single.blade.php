@@ -483,6 +483,82 @@
            </main>
        </div>
    </div>
+   <div class="modal fade" id="popUpModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <div class="col-sm-12 d-flex align-items-center">
+                       <div class="col-sm-4">
+                           <h4 class="modal-title text-white">Select Items</h4>
+                       </div>
+                       <div class="col-sm-6 d-flex align-items-center">
+                           <label for="select_items" class="text-white">
+                               Search
+                           </label>
+                           <select name="filt" id="select_items" class="select-2 main-select main-select-2arrows select2-hidden-accessible" style="width: 100%" multiple>
+                               <option value="150">Number 150</option>
+                               <option value="151">Number 151</option>
+                               <option value="152">Number 152</option>
+                               <option value="153">Number 153</option>
+                           </select>
+
+                       </div>
+                       <div class="col-sm-2">
+                           <button type="button" class="close b_close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                       </div>
+                   </div>
+               </div>
+               <div class="modal-body">
+                   <ul class="row">
+                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
+                           <div class="single-item">
+                               <div class="img-item">
+                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
+                               </div>
+                               <div class="name-item">
+                                   <span>Item</span>
+                               </div>
+                           </div>
+                       </li>
+                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
+                           <div class="single-item">
+                               <div class="img-item">
+                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
+                               </div>
+                               <div class="name-item">
+                                   <span>Item</span>
+                               </div>
+                           </div>
+                       </li>
+                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
+                           <div class="single-item">
+                               <div class="img-item">
+                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
+                               </div>
+                               <div class="name-item">
+                                   <span>Item</span>
+                               </div>
+                           </div>
+                       </li>
+                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
+                           <div class="single-item">
+                               <div class="img-item">
+                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
+                               </div>
+                               <div class="name-item">
+                                   <span>Item</span>
+                               </div>
+                           </div>
+                       </li>
+                   </ul>
+               </div>
+               <div class="modal-footer bord-top">
+                   <button type="button" class="btn btn-danger b_close" data-dismiss="modal">Close</button>
+                   <button type="button" class="btn btn-primary b_save">Save changes</button>
+               </div>
+           </div>
+       </div>
+   </div>
 @stop
 
 @section('css')
@@ -579,44 +655,48 @@
 //                 }
 //             }
 
-            $("body").on('change','.package_checkbox',function (e) {
-                e.preventDefault();
-                let _this = $(this).parent().find('.package_checkbox');
 
                 $.ajax({
                     type: "post",
                     url: "{{ route('product_get_package_type_limit') }}",
                     cache: false,
                     datatype: "json",
-                    data: {id: _this.val()},
+                    data: {id: 103},
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
                     success: function (data) {
                         if (!data.error) {
                             let limit = data.limit;
-                            let count =0;
-                            $(".package_checkbox").each(function (i, e) {
-                                console.log($(e));
-                                if ($(e).is(':checked')) {
-                                    console.log('checked',i);
-                                    count++;
+
+                            let count;
+
+
+
+
+                            $("body").on('click','.package_checkbox_label',function (event) {
+                                event.preventDefault();
+                                event.stopPropagation();
+
+                                count = 0;
+                                $(".package_checkbox").each(function (i, e) {
+                                    if ($(e).is(':checked')) {
+                                        count++;
+                                        console.log('checked',e, i);
+                                    }
+                                });
+                                console.log(count, limit);
+                                if(count === limit && !$($(this).closest('div').find('.package_checkbox')[0]).is(':checked')) {
+                                    count = 0;
+                                    return false;
                                 }
+                                $(this).closest('div').find('.package_checkbox')[0].click()
+
                             });
-
-                            if(count > limit){
-                                console.log(count, 'a');
-                                _this.trigger('click');
-                                // _this.removeAttr('checked')
-                                // return false;
-                                setTimeout(function() {_this.removeAttr('checked')}, 1000);
-                            }
-
-                            console.log(limit,count);
                         }
                     }
                 });
-            });
+
 
 
 
@@ -987,6 +1067,26 @@
                 shares: ["email", "twitter", "facebook", "googleplus", "linkedin", "pinterest", "stumbleupon", "whatsapp"]
             });
 
+            $("#select_items").select2();
+
+            $('#popUpModal').on('click', '.b_close', function() {
+                $(".single-item-wrapper").removeClass('active')
+            });
+
+            $('#popUpModal').on('click', '.b_save', function() {
+
+            });
+
+            const item_limit = 2;
+
+            $(".single-item-wrapper").on('click', ".single-item", function(ev) {
+                console.log(ev.target, 'ev.target')
+                if(item_limit !== $(".single-item-wrapper.active").length && !$(this).closest(".single-item-wrapper").hasClass('active')) {
+                    $(this).closest(".single-item-wrapper").addClass('active');
+                } else if($(this).closest(".single-item-wrapper").hasClass('active')) {
+                    $(this).closest(".single-item-wrapper").removeClass('active');
+                }
+            });
         });
     </script>
 @stop

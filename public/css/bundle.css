@@ -16090,6 +16090,77 @@ td.shp-cart-table_price-td {
     right: 10px;
     bottom: 0;
 }
+/*items modal*/
+#popUpModal.modal {
+    padding: 0 !important;
+}
+
+#popUpModal .modal-dialog {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0;
+    height: 100%;
+}
+#popUpModal .modal-header,#popUpModal .modal-footer{
+    flex: none;
+}
+#popUpModal .modal-header {
+    border-radius: 0;
+    box-shadow: none;
+    background: #0f0c29; / fallback for old browsers /
+background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29); / Chrome 10-25, Safari 5.1-6 /
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29); / W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ /
+color: #ffffff;
+}
+
+#popUpModal .modal-header .close {
+    font-size: 30px;
+    align-self: center;
+    color: #ffffff;
+    opacity: 1;
+}
+
+#popUpModal .modal-content {
+    height: 100%;
+}
+
+#popUpModal .modal-body {
+    overflow: auto;
+}
+
+#popUpModal .modal-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+#popUpModal .modal-body::-webkit-scrollbar {
+    width: 6px;
+    background-color: #f5f5f5;
+}
+
+#popUpModal .modal-body::-webkit-scrollbar-thumb {
+    background-color: #000000;
+}
+#popUpModal .single-item .img-item img{
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+#popUpModal .single-item .name-item{
+    background-color: #000000;
+    color: #ffffff;
+    padding: 8px 10px;
+    border-top: 1px solid #ffffff;
+}
+#popUpModal .single-item {
+    box-shadow: 0 0 4px #777;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+#popUpModal .single-item-wrapper.active .single-item{
+    border: 1px solid #000000;
+    box-shadow: 0px 0 4px 3px #f39c12;
+}
 body {
     display: flex;
     flex-direction: column;
