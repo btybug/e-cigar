@@ -29,7 +29,9 @@ class AttributesController extends Controller
     public function getAttributesCreate()
     {
         $model = null;
-        return $this->view('create_edit_form', compact(['model']));
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+
+        return $this->view('create_edit_form', compact(['model','categories']));
     }
 
     public function postAttributesCreate(Request $request)
@@ -45,7 +47,9 @@ class AttributesController extends Controller
     {
         $model = Attributes::findOrFail($id);
         $optionModel = null;
-        return $this->view('create_edit_form', compact(['model', 'optionModel']));
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+
+        return $this->view('create_edit_form', compact(['model', 'optionModel','categories']));
     }
 
     public function postAttributesEdit(Request $request, $id)
