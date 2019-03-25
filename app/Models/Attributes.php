@@ -43,6 +43,12 @@ class Attributes extends Translatable
         return $this->belongsToMany(Stickers::class, 'attributes_stickers', 'attributes_id','sticker_id');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'attribute_categories', 'attribute_id', 'categories_id')
+            ->where('categories.type', 'stocks');
+    }
+
     public static function recursiveItems($iems, $i = 0, $data = [])
     {
         if (count($iems)) {

@@ -28,7 +28,7 @@ class ItemsRequest extends FormRequest
             "translatable.gb.name"  => "required|string|min:3",
             "barcode_id"  => "required|unique:barcodes,code,".$this->id,
             "image"  => "required",
-            "type"  => "required|in:simple,bundle",
+//            "type"  => "required|in:simple,bundle",
         ];
     }
 

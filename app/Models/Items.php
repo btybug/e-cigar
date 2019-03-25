@@ -66,4 +66,10 @@ class Items extends Translatable
     {
         return $this->hasMany(ItemSpecification::class, 'item_id');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'item_categories', 'item_id', 'categories_id')
+            ->where('categories.type', 'stocks');
+    }
 }

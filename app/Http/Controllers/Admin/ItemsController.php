@@ -76,7 +76,8 @@ class ItemsController extends Controller
         $item->suppliers()->sync($request->get('suppliers'));
         $item->specificationsPivot()->sync($request->get('specifications',[]));
         $this->itemService->makeOptions($item, $request->get('options', []));
-        
+        $item->categories()->sync(json_decode($request->get('categories', [])));
+
         return redirect()->route('admin_items');
     }
 
@@ -88,7 +89,8 @@ class ItemsController extends Controller
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-        $data = Category::recursiveItems($categories, 0, [], []);
+        $checkedCategories = $model->categories()->pluck('id')->all();
+        $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 
         return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories','data'));
     }
