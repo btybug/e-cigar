@@ -6,27 +6,30 @@
     <div class="col-md-12">
         <div class="card panel panel-default">
             <div class="card-header panel-heading head-space-between">
-                {!! Form::model($category,['url'=>route('post_admin_tools_filters_edit_category',$category->id)]) !!}
-                <div class="form-group row mt-10">
-                    <label class="col-md-6 col-xs-12">Main child label</label>
-                    <div class="col-md-6">
-                        {!! Form::text('translatable['.strtolower(app()->getLocale()).'][name]',$category->name,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
-                    </div>
+                {!! Form::model($category,['url'=>route('post_admin_tools_filters_edit_category',$category->id),'class'=>'w-100']) !!}
+                <div class="d-flex flex-wrap justify-content-between">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! Form::text('translatable['.strtolower(app()->getLocale()).'][name]',$category->name,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control">
+                        </div>
 
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                {!! Form::close() !!}
-                <div class="button-area text-right">
-                    <div class="form-group">
-                        {!! Form::button('View Result',['class' => 'btn btn-primary','data-toggle'=>"modal",'data-target'=>"#view-result"]) !!}
+                    </div>
+                    <div class="button-area text-right">
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
+
+                {!! Form::close() !!}
             </div>
             <div class="card-body panel-body">
-                <div>
+                <div class="d-flex flex-wrap justify-content-between mb-1">
                     <button type="button" class="btn btn-primary add-filter"><i class="fa fa-plus fa-sm mr-10"></i>Add
                         New
                     </button>
+                    {!! Form::button('View Result',['class' => 'btn btn-primary','data-toggle'=>"modal",'data-target'=>"#view-result"]) !!}
                 </div>
                 <div class="row">
                     <div class="col-md-4">
