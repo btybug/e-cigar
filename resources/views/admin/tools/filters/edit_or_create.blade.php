@@ -72,48 +72,20 @@
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                        {!! Form::open(['id'=>'filter-form']) !!}
                     <div class="d-flex flex-wrap justify-content-center mb-2">
+
                         <div class="col-sm-3">
-                            <select name="" id="" class="form-control">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                            </select>
+                            <label class="col-md-2 col-xs-12">{!! $category->name !!}</label>
+                            {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
                         </div>
-                        <div class="col-sm-3">
-                            <select name="" id="" class="form-control">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                            </select>
+                        <div class="filter-children-selects">
+
                         </div>
-                        <div class="col-sm-3">
-                            <select name="" id="" class="form-control">
-                                <option value="">1</option>
-                                <option value="">2</option>
-                            </select>
-                        </div>
+
                     </div>
+                        {!! Form::close() !!}
                     <div class="row releted__products-panel">
-                        <div class="col-md-3">
-                            <div class="">
-                                {!! Form::open(['id'=>'filter-form']) !!}
-                                <legend>{!! $category->description !!}</legend>
-                                <div class="product-body">
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-xs-12">{!! $category->name !!}</label>
-                                        <div class="col-md-10">
-                                            {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
-                                        </div>
-
-                                    </div>
-                                    <div class="filter-children-selects">
-
-                                    </div>
-                                </div>
-                                {!! Form::close() !!}
-
-
-                            </div>
-                        </div>
                         <div class="col-md-9">
                             <div class="right-content-view--results">
                                 <ul class="d-flex flex-wrap list-items--wrapper">
