@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row releted__products-panel">
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="">
                                 {!! Form::open(['id'=>'filter-form']) !!}
                                 <div class="product-body">
@@ -92,7 +92,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-9">
                             <div class="product-body">
                                 <ul class="get-all-attributes-tab row filter-children-items">
 
