@@ -46,9 +46,10 @@ class ItemsController extends Controller
         $model = null;
         $bundle = false;
         $barcodes = $this->barcodeService->getUnsedCodes();
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes','bundle'));
+        return $this->view('new', compact('model', 'allAttrs','barcodes','bundle','categories'));
     }
 
     public function getNewBundle()
@@ -85,7 +86,9 @@ class ItemsController extends Controller
         $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle'));
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+
+        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories'));
     }
 
     private function savePackages($item, array $data = [])
