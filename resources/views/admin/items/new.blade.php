@@ -148,6 +148,23 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-2 control-label pl-sm-0">Categories</label>
+                                                                {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                <div id="treeview_json"></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
 
 
                                         </div>
@@ -378,13 +395,16 @@
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
@@ -551,5 +571,59 @@
             });
         })
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            function render_categories_tree() {
+                $("#treeview_json").jstree({
+                    "checkbox": {
+                        "three_state": false,
+                        "cascade": 'undetermined',
+                        "keep_selected_style": false
+                    },
+                    plugins: ["wholerow", "checkbox", "types"],
+                    core: {
+                        themes: {
+                            responsive: !1
+                        },
+                        data: {!! json_encode($data) !!}
+                    },
+                    types: {
+                        "default": {
+                            icon: "fa fa-folder text-primary fa-lg"
+                        },
+                        file: {
+                            icon: "fa fa-file text-success fa-lg"
+                        }
+                    }
+                })
+            }
+            $('#treeview_json').on("changed.jstree", function (e, data) {
+                if (data.node) {
+                    var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
+                    var dataArr = [];
+                    for (var i = 0, j = selectedNode.length; i < j; i++) {
+                        dataArr.push(selectedNode[i].id);
+                        dataArr.push(selectedNode[i].parent);
+                    }
+
+                    var uniqueNames = [];
+
+                    if (dataArr.length > 0) {
+                        $.each(dataArr, function (i, el) {
+                            if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                        });
+                    }
+
+                    var index = uniqueNames.indexOf("#");
+                    if (index > -1) {
+                        uniqueNames.splice(index, 1);
+                    }
+
+                    $("#categories_tree").val(JSON.stringify(uniqueNames));
+                }
+            });
+            render_categories_tree()
+        })
     </script>
 @stop

@@ -90,7 +90,7 @@
                            </div>
 
                            <div class="col-md-4">
-                               <div class="basic-wall">
+                               <div class="basic-wall mb-3">
                                    <div class="right_col">
                                        <div class="form-group row">
                                            <label class="col-md-2 control-label" for="input-total">
@@ -207,6 +207,14 @@
                                    </div>
 
                                </div>
+                               <div class="basic-wall">
+                                   <div class="form-group">
+                                       <label class="col-sm-2 control-label pl-sm-0">Categories</label>
+                                       {!! Form::hidden('categories',(isset($checkedCategories))
+                                       ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                       <div id="treeview_json"></div>
+                                   </div>
+                               </div>
                            </div>
                        </div>
 
@@ -264,6 +272,9 @@
 @stop
 @section('js')
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
         $('.filter--display input:radio[name="filter"]').change(function() {
             var filter = $(this).filter(':checked').val();
@@ -355,10 +366,65 @@
         });
 
     </script>
+    <script>
+        $(document).ready(function () {
+            function render_categories_tree() {
+                $("#treeview_json").jstree({
+                    "checkbox": {
+                        "three_state": false,
+                        "cascade": 'undetermined',
+                        "keep_selected_style": false
+                    },
+                    plugins: ["wholerow", "checkbox", "types"],
+                    core: {
+                        themes: {
+                            responsive: !1
+                        },
+                        data: {!! json_encode($data) !!}
+                    },
+                    types: {
+                        "default": {
+                            icon: "fa fa-folder text-primary fa-lg"
+                        },
+                        file: {
+                            icon: "fa fa-file text-success fa-lg"
+                        }
+                    }
+                })
+            }
+            $('#treeview_json').on("changed.jstree", function (e, data) {
+                if (data.node) {
+                    var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
+                    var dataArr = [];
+                    for (var i = 0, j = selectedNode.length; i < j; i++) {
+                        dataArr.push(selectedNode[i].id);
+                        dataArr.push(selectedNode[i].parent);
+                    }
+
+                    var uniqueNames = [];
+
+                    if (dataArr.length > 0) {
+                        $.each(dataArr, function (i, el) {
+                            if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                        });
+                    }
+
+                    var index = uniqueNames.indexOf("#");
+                    if (index > -1) {
+                        uniqueNames.splice(index, 1);
+                    }
+
+                    $("#categories_tree").val(JSON.stringify(uniqueNames));
+                }
+            });
+            render_categories_tree()
+        })
+    </script>
 @stop
 @section("css")
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <style>
         #font-show-area {
