@@ -126,41 +126,61 @@ $(document).ready(function() {
                         minimumResultsForSearch: Infinity,
                         maximumSelectionLength: Number(json.limit)
                     });
-                    // product-single-info_row
 
-                    var qty;
-                    let prev_qty;
-                    function limitCount(_this) {
-                        console.log(_this, 'tssssssss');
+                    let qty = 0;
+
+                    const new_qty = function() {
                         qty = 0;
-                        $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').each(function() {
+                        console.log(id, 'id')
+                        $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('.product-qty').each(function() {
                             qty += Number($(this).val());
-                            prev_qty+= $(this).data('val');
                         });
-                        $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').each(function() {
-                            console.log(this, 'tso')
-                            console.log(limit, qty, Number($(this).val()));
-                            if(Number(qty) > Number(limit) && this === _this) {
-                                const val = Number($(_this).val());
-                                $(_this).val(val - 1);
-                                qty = 0;
-                            }
-                            $(this).attr('max', Number(limit) - Number(qty) + Number($(this).val()));
-                            $(`#multi_v_select_${id}`).select2({maximumSelectionLength: Number(limit) - qty + $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').length});
-                        });
-                        console.log('id***************', id);
+                        console.log(qty, 'qty');
                     };
-                    $(`#multi_v_select_${id}`).closest('.product-single-info_row').on('change', 'input[name="qty"]', function(ev) {
-                        const _this = this;
-                       limitCount(_this);
+
+
+                                                //********************//
+                                                //*******minus-*******//
+                                                //********************//
+
+                    $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function() {
+                        return false
+                    })
+                    $(`#multi_v_select_${id}`).closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0])
+                        Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
+
+                        new_qty();
+
+                        $(`#multi_v_select_${id}`).select2({maximumSelectionLength: Number(limit) - Number(qty) + $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').length});
                     });
 
+                                                //********************//
+                                                //*******+plus+*******//
+                                                //********************//
+
+                    $(`#multi_v_select_${id}`).closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                        new_qty();
+                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+                        console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this' );
+                        Number(input.val()) < Number(limit) - Number(qty) +
+                            Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
+                        new_qty();
+                        $(`#multi_v_select_${id}`).select2({maximumSelectionLength: Number(limit) - Number(qty) + $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]').length});
+                    });
+
+                                                //******************//
+                                                //**select2:select**//
+                                                //******************//
 
                     $(`#multi_v_select_${id}`).on('select2:select', function (e) {
                         const _this = this;
                         const current_item_id = $(e.params.data.element).attr('data-select2-id');
-                        limitCount();
-                        qty = 0;
+                        new_qty();
 
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
@@ -178,8 +198,6 @@ $(document).ready(function() {
                             })
                             .then(function (json) {
                                 $(_this).closest('.product-single-info_row').append(json.html);
-                                const counter = $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('input[name="qty"]');
-
 
                                 $('.delete-menu-item').on('click', function() {
                                     const s_id = $(this).attr('data-el-id');
@@ -193,7 +211,12 @@ $(document).ready(function() {
                             });
                     });
 
+                                                //********************//
+                                                //**select2:unselect**//
+                                                //********************//
+
                     $(`#multi_v_select_${id}`).on('select2:unselect', function (e) {
+                        new_qty();
                         $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
                     });
                 })
