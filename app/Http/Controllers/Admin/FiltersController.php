@@ -120,7 +120,13 @@ class FiltersController extends Controller
         $data = $request->except('_token', 'translatable', 'child_id', 'id', 'items');
         $data['category_id'] = (!$data['parent_id']) ? $data['category_id'] : null;
         $filter = Filters::updateOrCreate($request->child_id, $data);
-        $filter->items()->sync($request->get('items'));
+        if(!$filter->children()->exists()){
+            $items=array_merge($filter->getParentItems()->toArray(),$request->get('items'));
+            $filter->items()->sync($items);
+            $filter->syncChild();
+        }
         return redirect()->back();
     }
+
+
 }

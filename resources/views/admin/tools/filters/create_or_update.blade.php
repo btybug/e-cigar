@@ -73,7 +73,7 @@
                                        class="remove-all-attributes btn btn-sm btn-danger detach-item" data-key="{{ $items->id }}" data-href="{!! route('post_admin_tools_filters_detach_item',$child_id) !!}">
                                         <i class="fa fa-trash"></i></a>
                                 </div>
-                                <input type="hidden" name="stocks[]" value="{{ $items->id }}">
+                                <input type="hidden" name="items[]" value="{{ $items->id }}">
                             </div></li>
                     @endforeach
                 @endif

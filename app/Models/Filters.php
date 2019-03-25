@@ -30,7 +30,7 @@ class Filters extends Translatable
 
     public function children()
     {
-        return $this->hasMany(Filters::class,'parent_id');
+        return $this->hasMany(Filters::class, 'parent_id');
     }
 
     public static function recursiveItems($iems, $i = 0, $data = [], $selected = [])
@@ -43,21 +43,21 @@ class Filters extends Translatable
                 'text' => $item->name,
                 'parent_id' => $item->parent_id,
                 'category_id' => $item->category_id,
-                "state"=> false,
+                "state" => false,
                 'children' => []
             ];
 
-            if(count($selected) && in_array($item->id,$selected)){
+            if (count($selected) && in_array($item->id, $selected)) {
                 $data[$i]['state'] = ['selected' => true];
             }
 
             if (count($item->children)) {
-                $data[$i]['children'] = self::recursiveItems($item->children, 0, $data[$i]['children'],$selected);
+                $data[$i]['children'] = self::recursiveItems($item->children, 0, $data[$i]['children'], $selected);
             }
 
             $i = $i + 1;
             if ($i != count($iems)) {
-                $data = self::recursiveItems($iems, $i, $data,$selected);
+                $data = self::recursiveItems($iems, $i, $data, $selected);
             }
 
             return $data;
@@ -66,6 +66,28 @@ class Filters extends Translatable
 
     public function category()
     {
-        return $this->belongsTo(Category::class,'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function parents()
+    {
+        $result=[];
+        $parents = \DB::select('SELECT T2.* FROM (SELECT @r AS _id,(SELECT @r := parent_id FROM filters WHERE id = _id) AS parent_id, @l := @l AS lvl FROM (SELECT @r := ' . $this->id . ', @l := 0) vars, filters m WHERE @r <> 0) T1 JOIN filters T2 ON T1._id = T2.id WHERE T1._id !=' . $this->id . ' ORDER BY T1.lvl DESC;');
+        foreach ($parents as $parent){
+            $parent= json_decode(json_encode($parent), True);
+            $result[]=$parent;
+        } ;
+        return collect($result);
+    }
+
+    public function getParentItems()
+    {
+        return \DB::table('filter_items')->whereIn('filter_id',$this->parents()->pluck('id'))->get()->pluck('item_id');
+    }
+
+    public function syncChild()
+    {
+        return \DB::table('filter_items')->whereIn('filter_id',$this->parents()->pluck('id'))->delete();
+
     }
 }

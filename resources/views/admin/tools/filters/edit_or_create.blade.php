@@ -261,8 +261,6 @@
                     .parent()
                     .remove();
             });
-
-
         });
     </script>
 @stop
