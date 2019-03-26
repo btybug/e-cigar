@@ -1041,27 +1041,34 @@
             $('body').on('change', '.variation-product-select', function () {
                 var value = $(this).val();
                 var parent = $(this).closest('.stock-page');
-                if (value == 'variation_product') {
-                    // $('.sipmle-product-wall').addClass('hide');
-                    // $('.packge-product-wall').addClass('hide');
-                    // $('.variation-product-wall').removeClass('hide');
-                    // $('.table-product-variotion').removeClass('hide');
+                if (value == 'filter') {
+                    parent.find('.filters-product-wall').removeClass('hide');
+                    parent.find('.sipmle-product-wall').addClass('hide');
+                    parent.find('.variation-product-wall').addClass('hide');
+                    parent.find('.table-product-variotion').addClass('hide');
+                    parent.find('.packge-product-wall').addClass('hide');
                 } else if (value == 'simple_product') {
                     parent.find('.sipmle-product-wall').removeClass('hide');
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
                     parent.find('.packge-product-wall').addClass('hide');
+                    parent.find('.filters-product-wall').addClass('hide');
+
 
                 } else if (value == 'package_product') {
                     parent.find('.packge-product-wall').removeClass('hide');
                     parent.find('.sipmle-product-wall').addClass('hide');
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
+                    parent.find('.filters-product-wall').addClass('hide');
+
                 } else {
                     parent.find('.packge-product-wall').addClass('hide');
                     parent.find('.sipmle-product-wall').addClass('hide');
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
+                    parent.find('.filters-product-wall').addClass('hide');
+
                 }
             });
 

@@ -8,7 +8,7 @@
         <div class="col-md-6 d-flex">
             <label class="col-md-3">Product Type</label>
             <div class="col-md-3">
-                {!! Form::select("variations[$main_unique][type]",['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items'
+                {!! Form::select("variations[$main_unique][type]",['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items','filter' => 'Filters'
                 ],($main) ? $main->type : null,
                 ['class' => 'form-control variation-product-select']) !!}
             </div>
@@ -28,6 +28,12 @@
                 <div class="packge-product-wall product-wall {{ ($main && $main->type =='package_product') ? '' : 'hide' }}">
                     <div class="package-box">
                         @include('admin.stock._partials.package_item')
+                    </div>
+                </div>
+
+                <div class="filters-product-wall product-wall {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
+                    <div class="package-box">
+                        @include('admin.stock._partials.filter_item')
                     </div>
                 </div>
             </div>
