@@ -72,107 +72,90 @@
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    {{--<div class="d-flex flex-wrap justify-content-center mb-2">--}}
-                        {{--<div class="col-sm-3">--}}
-                            {{--<select name="" id="" class="form-control">--}}
-                                {{--<option value="">1</option>--}}
-                                {{--<option value="">2</option>--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-sm-3">--}}
-                            {{--<select name="" id="" class="form-control">--}}
-                                {{--<option value="">1</option>--}}
-                                {{--<option value="">2</option>--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-sm-3">--}}
-                            {{--<select name="" id="" class="form-control">--}}
-                                {{--<option value="">1</option>--}}
-                                {{--<option value="">2</option>--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                    {!! Form::open(['id'=>'filter-form']) !!}
+                    <legend>{!! $category->description !!}</legend>
+                    <div class="d-flex flex-wrap justify-content-center mb-2">
+                        <div class="col-sm-3">
+                            <div class="form-group row">
+                                <label class="col-md-2 col-xs-12">{!! $category->name !!}</label>
+                                <div class="col-md-10">
+                                    {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="filter-children-selects row">
+
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
                     <div class="row releted__products-panel">
                         <div class="col-md-3">
                             <div class="">
-                                {!! Form::open(['id'=>'filter-form']) !!}
-                                <legend>{!! $category->description !!}</legend>
-                                <div class="product-body">
-                                    <div class="form-group row">
-                                        <label class="col-md-2 col-xs-12">{!! $category->name !!}</label>
-                                        <div class="col-md-10">
-                                            {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
-                                        </div>
-
-                                    </div>
-                                    <div class="filter-children-selects">
-
-                                    </div>
-                                </div>
-                                {!! Form::close() !!}
-
 
                             </div>
                         </div>
                         <div class="col-md-9">
                             {{--<div class="right-content-view--results">--}}
-                                {{--<ul class="d-flex flex-wrap list-items--wrapper">--}}
-                                    {{--<li class="col-md-3 col-sm-6 ">--}}
-                                        {{--<div class="single-item">--}}
-                                            {{--<div class="img-item">--}}
-                                                {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                                                     {{--alt="vape">--}}
-                                            {{--</div>--}}
-                                            {{--<div class="name-item">--}}
-                                                {{--<span>Item</span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-3 col-sm-6 ">--}}
-                                        {{--<div class="single-item">--}}
-                                            {{--<div class="img-item">--}}
-                                                {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                                                     {{--alt="vape">--}}
-                                            {{--</div>--}}
-                                            {{--<div class="name-item">--}}
-                                                {{--<span>Item</span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-3 col-sm-6 ">--}}
-                                        {{--<div class="single-item">--}}
-                                            {{--<div class="img-item">--}}
-                                                {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                                                     {{--alt="vape">--}}
-                                            {{--</div>--}}
-                                            {{--<div class="name-item">--}}
-                                                {{--<span>Item</span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-3 col-sm-6 ">--}}
-                                        {{--<div class="single-item">--}}
-                                            {{--<div class="img-item">--}}
-                                                {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                                                     {{--alt="vape">--}}
-                                            {{--</div>--}}
-                                            {{--<div class="name-item">--}}
-                                                {{--<span>Item</span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-3 col-sm-6 ">--}}
-                                        {{--<div class="single-item">--}}
-                                            {{--<div class="img-item">--}}
-                                                {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                                                     {{--alt="vape">--}}
-                                            {{--</div>--}}
-                                            {{--<div class="name-item">--}}
-                                                {{--<span>Item</span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
+                            {{--<ul class="d-flex flex-wrap list-items--wrapper">--}}
+                            {{--<li class="col-md-3 col-sm-6 ">--}}
+                            {{--<div class="single-item">--}}
+                            {{--<div class="img-item">--}}
+                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
+                            {{--alt="vape">--}}
+                            {{--</div>--}}
+                            {{--<div class="name-item">--}}
+                            {{--<span>Item</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</li>--}}
+                            {{--<li class="col-md-3 col-sm-6 ">--}}
+                            {{--<div class="single-item">--}}
+                            {{--<div class="img-item">--}}
+                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
+                            {{--alt="vape">--}}
+                            {{--</div>--}}
+                            {{--<div class="name-item">--}}
+                            {{--<span>Item</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</li>--}}
+                            {{--<li class="col-md-3 col-sm-6 ">--}}
+                            {{--<div class="single-item">--}}
+                            {{--<div class="img-item">--}}
+                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
+                            {{--alt="vape">--}}
+                            {{--</div>--}}
+                            {{--<div class="name-item">--}}
+                            {{--<span>Item</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</li>--}}
+                            {{--<li class="col-md-3 col-sm-6 ">--}}
+                            {{--<div class="single-item">--}}
+                            {{--<div class="img-item">--}}
+                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
+                            {{--alt="vape">--}}
+                            {{--</div>--}}
+                            {{--<div class="name-item">--}}
+                            {{--<span>Item</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</li>--}}
+                            {{--<li class="col-md-3 col-sm-6 ">--}}
+                            {{--<div class="single-item">--}}
+                            {{--<div class="img-item">--}}
+                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
+                            {{--alt="vape">--}}
+                            {{--</div>--}}
+                            {{--<div class="name-item">--}}
+                            {{--<span>Item</span>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</li>--}}
+                            {{--</ul>--}}
                             {{--</div>--}}
                             <div class="product-body">
                                 <ul class="get-all-attributes-tab row filter-children-items">
