@@ -2754,13 +2754,10 @@ $(document).ready(function () {
                 return response.json();
             }).then(function (json) {
                 var limit = Number(json.limit);
-
-                $("#multi_v_select_" + id).select2({
+                var group = $("#multi_v_select_" + id);
+                group.select2({
                     minimumResultsForSearch: Infinity,
-                    maximumSelectionLength: Number(json.limit),
-                    formatSelectionTooBig: function formatSelectionTooBig() {
-                        return 'You already selected options';
-                    }
+                    maximumSelectionLength: Number(json.limit)
                 });
 
                 var qty = 0;
@@ -2768,7 +2765,7 @@ $(document).ready(function () {
                 var new_qty = function new_qty() {
                     qty = 0;
                     console.log(id, 'id');
-                    $("#multi_v_select_" + id).closest('.product-single-info_row').find('.product-qty').each(function () {
+                    group.closest('.product-single-info_row').find('.product-qty').each(function () {
                         qty += Number($(this).val());
                     });
                     console.log(qty, 'qty');
@@ -2781,22 +2778,21 @@ $(document).ready(function () {
                 $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
                     return false;
                 });
-                $("#multi_v_select_" + id).closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
+
+                group.closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-
                     new_qty();
-
-                    $("#multi_v_select_" + id).select2({ maximumSelectionLength: Number(limit) - Number(qty) + $("#multi_v_select_" + id).closest('.product-single-info_row').find('input[name="qty"]').length });
+                    group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
                 });
 
                 //********************//
                 //*******+plus+*******//
                 //********************//
 
-                $("#multi_v_select_" + id).closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
+                group.closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
                     new_qty();
@@ -2804,14 +2800,14 @@ $(document).ready(function () {
                     console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this');
                     Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                     new_qty();
-                    $("#multi_v_select_" + id).select2({ maximumSelectionLength: Number(limit) - Number(qty) + $("#multi_v_select_" + id).closest('.product-single-info_row').find('input[name="qty"]').length });
+                    group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
                 });
 
                 //******************//
                 //**select2:select**//
                 //******************//
 
-                $("#multi_v_select_" + id).on('select2:select', function (e) {
+                group.on('select2:select', function (e) {
                     var _this = this;
                     var current_item_id = $(e.params.data.element).attr('data-select2-id');
                     new_qty();
@@ -2833,14 +2829,16 @@ $(document).ready(function () {
 
                         $('.delete-menu-item').on('click', function () {
                             var s_id = $(this).attr('data-el-id');
-                            $(".select2-selection__choice[data-select2-id=\"" + s_id + "\"] .select2-selection__choice__remove").click();
+                            $(".select2-selection__choice[data-select2-id=\"" + s_id + "\"].select2-selection__choice__remove").click();
                             $("#multi_v_select_" + id + " option[data-select2-id=\"" + s_id + "\"]");
                             var deleted = $(this).closest('.menu-item-selected').attr('data-id');
-                            var values = $("#multi_v_select_" + id).val().filter(function (value) {
+                            var values = group.val().filter(function (value) {
                                 return value !== deleted;
                             });
-                            $("#multi_v_select_" + id).val(values).trigger('change.select2');
+                            group.val(values).trigger('change.select2');
                             $(this).closest('.menu-item-selected').remove();
+                            new_qty();
+                            group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
                         });
                     }).catch(function (error) {
                         console.log(error);
@@ -2854,6 +2852,7 @@ $(document).ready(function () {
                 $("#multi_v_select_" + id).on('select2:unselect', function (e) {
                     new_qty();
                     $(this).closest('.product-single-info_row').find(".menu-item-selected[data-id=\"" + e.params.data.id + "\"]").remove();
+                    console.log('qty: ', qty, 'limit: ', limit);
                 });
             }).catch(function (error) {
                 console.log(error);

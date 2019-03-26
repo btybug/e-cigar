@@ -757,9 +757,9 @@
                     }
                 });
                 item_validation === $('.limit').length && (all_validation = true)
-                console.log('validation', all_validation)
-return
-                if (variationId && variationId != '') {
+
+
+                if (all_validation) {
 //                    console.log(requiredItems)
 //                    return false;
                     console.log(variationId);
