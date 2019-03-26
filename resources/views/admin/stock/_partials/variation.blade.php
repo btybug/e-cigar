@@ -14,8 +14,8 @@
               ],($main) ? $main->type : null,
               ['class' => 'form-control variation-product-select']) !!}
                    </div>
-                   <div class="col-md-6 filter-option hide">
-                       {!! Form::select("variations[$main_unique][filter_category_id]",['' => 'Select Filter']+$filters,($main) ? $main->type : null,
+                   <div class="col-md-6 filter-option {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
+                       {!! Form::select("variations[$main_unique][filter_category_id]",['' => 'Select Filter']+$filters,($main) ? $main->filter_category_id : null,
                        ['class' => 'form-control filter-select']) !!}
                    </div>
                </div>

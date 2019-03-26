@@ -861,9 +861,9 @@
             $("body").on("change",".filter-select",function () {
                 let parent = $(this).closest('.stock-page');
                 let value = $(this).val();
-                AjaxCall("{{ route('admin_stock_filter_items') }}", {id:value}, function (res) {
+                AjaxCall("{{ route('admin_stock_filter_items') }}", {id:value,uniqueId:parent.attr('data-unqiue')}, function (res) {
                     if (!res.error) {
-                        // $("#itemsModal .modal-stickers--list").html(res.html);
+                        parent.find(".filter-variation-box").html(res.html);
                     }
                 });
             });

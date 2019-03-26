@@ -399,8 +399,18 @@ class StockController extends Controller
 
     public function postFilterItems(Request $request)
     {
-        $category = Category::findOrFail($request->id);
+        $category = Filters::with(['children','items'])->whereNotNull('category_id')->where('category_id',$request->get('id',0))->get();
+//        var_dump($category);exit;
+        $x = Filters::getRecursiveItems($category,0);
+        $items = collect($x)->unique('id');
 
-        var_dump($category);exit;
+        $main_unique = $request->get('uniqueId');
+        $stockItems = Items::active()->get()->pluck('name', 'id')->all();
+        $main = null;
+        $package_variation = null;
+
+        $html = \view("admin.items._partials.variation_package_item",compact(['items','main_unique','stockItems','main','package_variation']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 }

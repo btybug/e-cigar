@@ -28,6 +28,7 @@ class CreateStockVariationsTable extends Migration
             $table->unsignedInteger('common_price')->default(0);
             $table->string('display_as')->nullable();
             $table->string('price_per')->nullable();
+            $table->unsignedInteger('filter_category_id');
             $table->timestamps();
 
             $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');

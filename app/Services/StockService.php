@@ -156,13 +156,14 @@ class StockService
         if (count($data)) {
             $deletableArray = [];
             foreach ($data as $variation_id => $datum) {
-                if($datum['type'] == 'package_product'){
+                if($datum['type'] == 'package_product' || $datum['type'] == 'filter'){
                     $newData = [];
                     $newData['count_limit'] = $datum['count_limit'];
                     $newData['type'] = $datum['type'];
                     $newData['is_required'] = $datum['is_required'];
                     $newData['display_as'] = $datum['display_as'];
                     $newData['price_per'] = $datum['price_per'];
+                    $newData['filter_category_id'] = $datum['filter_category_id'];
                     $newData['common_price'] = ($datum['common_price'])??0;
                     if(isset($datum['variations']) && count($datum['variations'])){
                         foreach ($datum['variations'] as $item) {

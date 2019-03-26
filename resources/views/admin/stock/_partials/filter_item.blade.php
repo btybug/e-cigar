@@ -5,6 +5,9 @@
                 <div class="col-md-2">
                     How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",
                                 ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
+
+                    {!! Form::hidden("variations[$main_unique][display_as]",
+                        'popup') !!}
                 </div>
                 <div class="col-md-2">
                     Price per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}

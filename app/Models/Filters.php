@@ -43,7 +43,7 @@ class Filters extends Translatable
 
     public function children()
     {
-        return $this->hasMany(Filters::class, 'parent_id');
+        return $this->hasMany(Filters::class, 'parent_id')->with(['items','children']);
     }
 
     public static function recursiveItems($iems, $i = 0, $data = [], $selected = [])
@@ -110,4 +110,32 @@ class Filters extends Translatable
         return $_this->where('id','!=',$except)->get()->pluck('path','id');
 
     }
+
+    public static function getRecursiveItems($items, $i = 0, $data = [])
+    {
+        if (count($items)) {
+            $item = $items[$i];
+
+            if(count($item->items)){
+                foreach ($item->items as $v){
+                    $data[] = $v;
+                }
+
+            }
+
+
+            if (count($item->children)) {
+                $data = self::getRecursiveItems($item->children, 0, $data);
+            }
+
+            $i = $i + 1;
+
+            if ($i != count($items)) {
+                $data = self::getRecursiveItems($items, $i, $data);
+            }
+
+            return $data;
+        }
+    }
+
 }
