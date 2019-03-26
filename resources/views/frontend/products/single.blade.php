@@ -736,8 +736,8 @@
 
             $("body").on('click', '.btn-add-to-cart', function () {
                 var variationId = $(this).data("id");
-
                 let all_validation = false;
+                console.log($('.product-qty-select').val())
                 let item_validation = 0;
                 $('.limit').each(function(index, gr) {
                     const $group = $(gr);
@@ -758,19 +758,42 @@
                 });
                 item_validation === $('.limit').length && (all_validation = true)
 
+                $('.product-qty').toArray().map(function(el) {
+                    return {
+                        id: $(el).attr('data-id'),
+                        qty: $(el).val()
+                    }
+                });
 
                 if (all_validation) {
-//                    console.log(requiredItems)
-//                    return false;
-                    console.log(variationId);
+//
+                    const product_id = $('#vpid').val();
+                    const product_qty = $('.product-qty-select').val();
+                    const variations = $('[data-group-id]').toArray().map(function(el) {
+                        const group_id = $(el).attr('data-group-id');
+                        const products = $(`[data-group-id="${group_id}"]`).closest('.product-single-info_row').find('.product-qty').toArray().map(function(num) {
+                            return {
+                                id: $(num).attr('data-id'),
+                                qty: $(num).val()
+                            }
+                        });
+                        return {
+                            group_id,
+                            products
+                        }
+                    });
+                    const product_data = {
+                        product_id,
+                        product_qty,
+                        variations
+                    };
+                    console.log(product_data)
                     $.ajax({
                         type: "post",
                         url: "/add-to-cart",
                         cache: false,
                         datatype: "json",
-                        data: {
-                            uid: variationId
-                        },
+                        data: JSON.stringify(product_data),
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
