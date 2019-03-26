@@ -16,6 +16,7 @@ class CreateFiltersTable extends Migration
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('parent_id')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedInteger('category_id')->nullable();
             $table->timestamps();
 
