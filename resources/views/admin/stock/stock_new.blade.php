@@ -858,6 +858,22 @@
                 });
             });
 
+            $("body").on("change",".display-change",function () {
+                let parent = $(this).closest('.stock-page');
+                let value = $(this).val();
+                if(value == 'filter'){
+                    parent.find('.filter-box').removeClass('hide').addClass('show');
+                    parent.find('.price_per').val('item').attr('disabled','disabled');
+                    parent.find('.select-items').attr('disabled','disabled');
+                    package_product_price(parent.attr('data-unqiue'), 'item');
+                }else{
+                    parent.find('.filter-box').removeClass('show').addClass('hide');
+                    parent.find('.price_per').attr('disabled',false);
+                    parent.find('.select-items').attr('disabled',false);
+                }
+
+            });
+
             $("body").on("change","#itemsModal #searchStickers",function () {
                 let stickers = $(this).val();
                 let data_id = $(this).attr('data-section-id');

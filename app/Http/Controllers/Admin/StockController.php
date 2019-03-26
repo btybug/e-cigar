@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Attributes;
 use App\Models\Category;
+use App\Models\Filters;
 use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Stickers;
@@ -46,13 +47,14 @@ class StockController extends Controller
         $data = Category::recursiveItems($categories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
+        $filters = Filters::all()->pluck('name', 'id')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems']));
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems','filters']));
     }
 
     public function getStockEdit($id)
@@ -65,13 +67,14 @@ class StockController extends Controller
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
+        $filters = Filters::all()->pluck('name', 'id')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model','variations','checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data']));
+        return $this->view('stock_new', compact(['model','variations','checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data','filters']));
     }
 
     public function postStock(ProductsRequest $request)
@@ -280,7 +283,9 @@ class StockController extends Controller
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $package_variation = null;
         $model = null;
-        $html = \View('admin.stock._partials.variation', compact(['model','package_variation', 'stockItems']))->render();
+        $filters = Filters::all()->pluck('name', 'id')->all();
+
+        $html = \View('admin.stock._partials.variation', compact(['model','package_variation', 'stockItems','filters']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

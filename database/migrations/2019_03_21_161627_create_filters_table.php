@@ -20,7 +20,7 @@ class CreateFiltersTable extends Migration
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('filters')->onDelete('cascade');
-            $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

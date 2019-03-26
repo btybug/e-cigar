@@ -7,8 +7,14 @@
                                 ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    Display as: {!! Form::select("variations[$main_unique][display_as]",
-                            ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control']) !!}
+                    <div class="mb-2">
+                        Display as: {!! Form::select("variations[$main_unique][display_as]",
+                        ['menu' => 'Menu','list' => 'List','popup' => "Pop up",'filter' => 'Filter'],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
+                    </div>
+                    <div class="filter-box hide">
+                        {!! Form::select("variations[$main_unique][filter_id]",
+                        $filters,($main) ? $main->display_as : null,['class' => 'form-control']) !!}
+                    </div>
                 </div>
                 <div class="col-md-2">
                     Price per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}

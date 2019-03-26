@@ -14,7 +14,6 @@ class CreateFilterItemsTable extends Migration
     public function up()
     {
         Schema::create('filter_items', function (Blueprint $table) {
-            $table->increments('id');
             $table->unsignedInteger('filter_id');
             $table->unsignedInteger('item_id');
             $table->text('image')->nullable();
