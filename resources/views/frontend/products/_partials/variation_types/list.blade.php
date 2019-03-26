@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }}" data-limit="{{ $vSettings->count_limit }}">
+<div class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap" data-limit="{{ $vSettings->count_limit }}">
     @foreach($variation as $item)
         <div class="d-flex flex-wrap mb-2">
             <div class="col-sm-10 align-self-center">
