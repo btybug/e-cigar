@@ -655,47 +655,26 @@
 //                 }
 //             }
 
+            $("body").on('click','.package_checkbox_label',function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                let limit = $(qaq);
 
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('product_get_package_type_limit') }}",
-                    cache: false,
-                    datatype: "json",
-                    data: {id: 103},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            let limit = data.limit;
-
-                            let count;
-
-
-
-
-                            $("body").on('click','.package_checkbox_label',function (event) {
-                                event.preventDefault();
-                                event.stopPropagation();
-
-                                count = 0;
-                                $(".package_checkbox").each(function (i, e) {
-                                    if ($(e).is(':checked')) {
-                                        count++;
-                                        console.log('checked',e, i);
-                                    }
-                                });
-                                console.log(count, limit);
-                                if(count === limit && !$($(this).closest('div').find('.package_checkbox')[0]).is(':checked')) {
-                                    count = 0;
-                                    return false;
-                                }
-                                $(this).closest('div').find('.package_checkbox')[0].click()
-
-                            });
-                        }
+                count = 0;
+                $(".package_checkbox").each(function (i, e) {
+                    if ($(e).is(':checked')) {
+                        count++;
+                        console.log('checked',e, i);
                     }
                 });
+                console.log(count, limit);
+                if(count === limit && !$($(this).closest('div').find('.package_checkbox')[0]).is(':checked')) {
+                    count = 0;
+                    return false;
+                }
+                $(this).closest('div').find('.package_checkbox')[0].click()
+
+            });
 
 
 
