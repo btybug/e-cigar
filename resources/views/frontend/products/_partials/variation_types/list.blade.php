@@ -23,7 +23,7 @@
                     {{ $item->name }}
                   </label>
                 </div>
-                <div style="max-width: 150px" class="list-qty" data-id="{{ $vSettings->id }}">
+                <div style="max-width: 150px" class="list-qty">
 
                 </div>
               </div>

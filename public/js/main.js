@@ -122,6 +122,7 @@ $(document).ready(function() {
                 })
                 .then(function (json) {
                     const limit = Number(json.limit);
+
                     $(`#multi_v_select_${id}`).select2({
                         minimumResultsForSearch: Infinity,
                         maximumSelectionLength: Number(json.limit),
