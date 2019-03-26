@@ -1047,13 +1047,16 @@
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
                     parent.find('.packge-product-wall').addClass('hide');
+
+                    parent.find('.filter-option').removeClass('hide').addClass('show');
+                    parent.find('.filter-variation-box').empty();
                 } else if (value == 'simple_product') {
                     parent.find('.sipmle-product-wall').removeClass('hide');
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
                     parent.find('.packge-product-wall').addClass('hide');
                     parent.find('.filters-product-wall').addClass('hide');
-
+                    parent.find('.filter-option').removeClass('show').addClass('hide');
 
                 } else if (value == 'package_product') {
                     parent.find('.packge-product-wall').removeClass('hide');
@@ -1061,6 +1064,7 @@
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
                     parent.find('.filters-product-wall').addClass('hide');
+                    parent.find('.filter-option').removeClass('show').addClass('hide');
 
                 } else {
                     parent.find('.packge-product-wall').addClass('hide');
@@ -1068,6 +1072,7 @@
                     parent.find('.variation-product-wall').addClass('hide');
                     parent.find('.table-product-variotion').addClass('hide');
                     parent.find('.filters-product-wall').addClass('hide');
+                    parent.find('.filter-option').removeClass('show').addClass('hide');
 
                 }
             });

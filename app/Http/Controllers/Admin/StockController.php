@@ -47,7 +47,7 @@ class StockController extends Controller
         $data = Category::recursiveItems($categories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
-        $filters = Filters::all()->pluck('name', 'id')->all();
+        $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
@@ -67,7 +67,7 @@ class StockController extends Controller
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
-        $filters = Filters::all()->pluck('name', 'id')->all();
+        $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
@@ -283,7 +283,7 @@ class StockController extends Controller
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $package_variation = null;
         $model = null;
-        $filters = Filters::all()->pluck('name', 'id')->all();
+        $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
         $html = \View('admin.stock._partials.variation', compact(['model','package_variation', 'stockItems','filters']))->render();
 

@@ -7,10 +7,6 @@
                                 ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-2">
-                    Display as: {!! Form::select("variations[$main_unique][display_as]",
-                        ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
-                </div>
-                <div class="col-md-2">
                     Price per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
                 </div>
                 <div class="col-md-2">
@@ -19,7 +15,7 @@
                                                                 ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <button class="btn btn-primary pull-right select-items"
                             type="button">
                         <i class="fa fa-plus"></i> Add new
@@ -40,7 +36,7 @@
                 <th>Actions</th>
             </tr>
             </thead>
-            <tbody class="package-variation-box">
+            <tbody class="filter-variation-box">
             @if($main && count($v))
                 @foreach($v as $package_variation)
                     @include('admin.inventory._partials.variation_package_item')

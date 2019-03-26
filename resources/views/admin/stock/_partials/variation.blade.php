@@ -7,10 +7,18 @@
     <div class="card-header panel-heading clearfix d-flex">
         <div class="col-md-6 d-flex">
             <label class="col-md-3">Product Type</label>
-            <div class="col-md-3">
-                {!! Form::select("variations[$main_unique][type]",['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items','filter' => 'Filters'
-                ],($main) ? $main->type : null,
-                ['class' => 'form-control variation-product-select']) !!}
+            <div class="col-md-6">
+               <div class="row">
+                   <div class="col-md-6">
+                       {!! Form::select("variations[$main_unique][type]",['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items','filter' => 'Filters'
+              ],($main) ? $main->type : null,
+              ['class' => 'form-control variation-product-select']) !!}
+                   </div>
+                   <div class="col-md-6 filter-option hide">
+                       {!! Form::select("variations[$main_unique][filter_category_id]",['' => 'Select Filter']+$filters,($main) ? $main->type : null,
+                       ['class' => 'form-control filter-select']) !!}
+                   </div>
+               </div>
             </div>
         </div>
         <div class="col-md-6 d-flex">
