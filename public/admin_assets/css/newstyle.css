@@ -574,6 +574,6 @@ label {
     border: 1px solid #fff;
     cursor: pointer;
 }
-.right-content-view--results{
-
+#view-result .product-body{
+    min-height: 250px;
 }
