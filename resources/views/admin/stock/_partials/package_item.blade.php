@@ -11,7 +11,7 @@
                         Display as: {!! Form::select("variations[$main_unique][display_as]",
                         ['menu' => 'Menu','list' => 'List','popup' => "Pop up",'filter' => 'Filter'],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
-                    <div class="filter-box hide">
+                    <div class="filter-box @if($main && $main->display_as != 'filter') hide @endif">
                         {!! Form::select("variations[$main_unique][filter_id]",
                         $filters,($main) ? $main->display_as : null,['class' => 'form-control']) !!}
                     </div>
@@ -20,7 +20,7 @@
                     Price per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
                 </div>
                 <div class="col-md-2">
-                    <div class="product_price @if($main && $main->price_per == 'item') hide @endif">
+                    <div class="product_price @if(($main && $main->price_per == 'item') || ($main && $main->display_as == 'filter')) hide @endif">
                         Price : {!! Form::text("variations[$main_unique][common_price]",
                                                                 ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
                     </div>
