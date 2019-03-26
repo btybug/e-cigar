@@ -68,7 +68,7 @@
         <label for="feature_image"
                class="control-label col-sm-4">image</label>
         <div class="col-sm-8">
-            {!! media_button('image') !!}
+            {!! media_button('image',(($child)?$child:null)) !!}
         </div>
     </div>
 </div>
