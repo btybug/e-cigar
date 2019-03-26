@@ -261,7 +261,6 @@
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            console.log(e.node);
             AjaxCall("{!! route('admin_tools_filters_form') !!}", {
                 id: e.node.parent_id,
                 child_id: e.node.id,
@@ -278,7 +277,6 @@
 
 
         $("body").on("click", ".add-package-items", function () {
-            console.log(1);
             $("#itemsModal").modal('hide');
             let items = $('#itemsModal').find('.all-list li.active');
             $.each(items, function (k, v) {

@@ -3,7 +3,7 @@
         class="option-elm-attributes col-md-3">
         <div class="wrap-item">
             <a href="#">
-                <span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
+                <span><img src="{!! url($items->image) !!}" alt=""></span>
                 <span class="name">{!! $items->name !!}</span>
             </a>
             <input type="hidden" name="stocks[]" value="{{ $items->id }}">
