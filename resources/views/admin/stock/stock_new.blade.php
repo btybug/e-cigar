@@ -858,20 +858,14 @@
                 });
             });
 
-            $("body").on("change",".display-change",function () {
+            $("body").on("change",".filter-select",function () {
                 let parent = $(this).closest('.stock-page');
                 let value = $(this).val();
-                if(value == 'filter'){
-                    parent.find('.filter-box').removeClass('hide').addClass('show');
-                    parent.find('.price_per').val('item').attr('disabled','disabled');
-                    parent.find('.select-items').attr('disabled','disabled');
-                    package_product_price(parent.attr('data-unqiue'), 'item');
-                }else{
-                    parent.find('.filter-box').removeClass('show').addClass('hide');
-                    parent.find('.price_per').attr('disabled',false);
-                    parent.find('.select-items').attr('disabled',false);
-                }
-
+                AjaxCall("{{ route('admin_stock_filter_items') }}", {id:value}, function (res) {
+                    if (!res.error) {
+                        // $("#itemsModal .modal-stickers--list").html(res.html);
+                    }
+                });
             });
 
             $("body").on("change","#itemsModal #searchStickers",function () {

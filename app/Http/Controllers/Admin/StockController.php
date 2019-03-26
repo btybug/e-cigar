@@ -396,4 +396,11 @@ class StockController extends Controller
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function postFilterItems(Request $request)
+    {
+        $category = Category::findOrFail($request->id);
+
+        var_dump($category);exit;
+    }
 }
