@@ -159,7 +159,7 @@
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-secondary">Back</button>
                                 <span>Sone text</span>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Next</button>
+                                <button type="button" class="btn btn-secondary">Next</button>
                             </div>
                         </div>
                     </div>
