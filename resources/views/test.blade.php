@@ -60,6 +60,70 @@
                         </li>
                     </ul>
                 </div>
+                <div class="contents-wrapper">
+                    <div class="content-wrap">
+                        <ul class="row">
+                            <li class="col-md-3">
+                                <div class="item-content">
+                                    <div class="item-photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                    </div>
+                                    <div class="item-title">
+                                        <span>Title</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="item-content">
+                                    <div class="item-photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                    </div>
+                                    <div class="item-title">
+                                        <span>Title</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="item-content">
+                                    <div class="item-photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                    </div>
+                                    <div class="item-title">
+                                        <span>Title</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="item-content">
+                                    <div class="item-photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                    </div>
+                                    <div class="item-title">
+                                        <span>Title</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="item-content">
+                                    <div class="item-photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                    </div>
+                                    <div class="item-title">
+                                        <span>Title</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <div class="back-item">
+                            <a href="#" class="btn btn-secondary">Back</a>
+                        </div>
+                        <div class="next-item">
+                            <a href="#" class="btn btn-secondary">Next</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
