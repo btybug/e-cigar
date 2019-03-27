@@ -2757,12 +2757,12 @@ $(document).ready(function () {
                 var group = $("#multi_v_select_" + id);
                 group.select2({
                     minimumResultsForSearch: Infinity,
-                    maximumSelectionLength: Number(json.limit),
-                    language: {
-                        noResults: function noResults(params) {
-                            return "That's a miss.";
-                        }
-                    }
+                    maximumSelectionLength: Number(json.limit)
+                    // language: {
+                    //     noResults: function (params) {
+                    //         return "That's a miss.";
+                    //     }
+                    // }
                 });
 
                 var qty = 0;
@@ -2855,11 +2855,22 @@ $(document).ready(function () {
                 //********************//
 
                 $("#multi_v_select_" + id).on('select2:unselect', function (e) {
-                    new_qty();
-                    group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
 
+                    new_qty();
+                    console.log('eeee', e);
                     $(this).closest('.product-single-info_row').find(".menu-item-selected[data-id=\"" + e.params.data.id + "\"]").remove();
+
+                    // group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
                 });
+                // $(`#multi_v_select_${id}`).on('select2:unselect', function (e) {
+                //     new_qty();
+                //     console.log('hhhhhhhhhhhh', Number(limit), Number(qty), group.closest('.product-single-info_row').find('input[name="qty"]').length);
+                //     group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                // });
+                // $('select2-selection__choice__remove').on('mouseup', function() {
+                //     new_qty();
+                //     group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                // });
             }).catch(function (error) {
                 console.log(error);
             });

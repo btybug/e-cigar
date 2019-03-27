@@ -793,7 +793,7 @@
                         url: "/add-to-cart",
                         cache: false,
                         datatype: "json",
-                        data: JSON.stringify(product_data),
+                        data: product_data,
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
