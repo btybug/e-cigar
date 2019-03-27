@@ -193,6 +193,7 @@
                                         </div>
                                         <div class="next-item">
                                             <button class="btn btn-secondary next-btn">Next</button>
+                                            <button class="btn btn-primary add-items-btn d-none"><i class="fa fa-plus"></i><span class="ml-1">Add selected items</span></button>
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +225,7 @@
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
 
-            !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none');
+            !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none').next().removeClass('d-none');
             $('.back-btn').removeClass('d-none');
         });
         $('body').on('click', '.shopping-cart_wrapper .back-btn', function (e) {
@@ -237,6 +238,7 @@
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
 
+            $('.add-items-btn').addClass('d-none')
             !$('.content-wrap').first().hasClass('d-none') && $('.back-btn').addClass('d-none');
             $('.next-btn').removeClass('d-none');
         });
