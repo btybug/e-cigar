@@ -156,7 +156,6 @@ class StockService
         if (count($data)) {
             $deletableArray = [];
             foreach ($data as $variation_id => $datum) {
-                dd($datum);
                 if($datum['type'] == 'package_product' || $datum['type'] == 'filter'){
                     $newData = [];
                     $newData['count_limit'] = $datum['count_limit'];
