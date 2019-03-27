@@ -108,6 +108,10 @@
 
 
                 </div>
+                <div class="modal-footer">
+
+
+                </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
@@ -188,6 +192,9 @@
                         case 'items':
                             $('.filter-children-selects').html(res.html);
                             $('.filter-children-items').html(res.items_html);
+                            $('#view-result .modal-footer').html('<div class="d-flex flex-wrap justify-content-between mb-1">\n' +
+                                '<button type="button" class="btn btn-primary"><i class="fa fa-plus fa-sm mr-10"></i>Add</button>\n' +
+                                '</div>');
                             break;
                     }
                 }

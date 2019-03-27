@@ -9,3 +9,4 @@
             <input type="hidden" name="stocks[]" value="{{ $items->id }}">
         </div></li>
 @endforeach
+
