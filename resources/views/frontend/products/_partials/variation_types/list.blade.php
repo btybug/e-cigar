@@ -2,16 +2,16 @@
     @if(! $vSettings->is_required)
         {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
         <label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer " for="opt{{ $vSettings->id }}">
-            <h4>Select {{ $vSettings->count_limit }} items</h4>
+            <h4>Select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} items</h4>
         </label>
     @else
-        <h4>Select {{ $vSettings->count_limit }} items</h4>
+        <h4>Select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} items</h4>
     @endif
 
 </div>
 
 
-<div class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}">
+<div class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}" data-min-limit="{{ $vSettings->min_count_limit }}">
     @foreach($variation as $item)
         <div class="d-flex flex-wrap mb-2" data-price="{{ $item->price }}">
             <div class="col-sm-10 align-self-center">

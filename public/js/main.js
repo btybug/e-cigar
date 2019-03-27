@@ -336,6 +336,8 @@ $(document).ready(function() {
                 } else if ($(input).is(':checked')) {
                     $(this).closest('div').find('.package_checkbox')[0].click();
                     qty_input.empty();
+                    const price = $(this).closest('[data-price]').attr('data-price');
+                    $(this).closest('[data-price]').find('.price-placee').html(`$${price}`);
                 } else {
                     qty_input.children().length === 0 && $(qty_input[0]).append(`<div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
                     <span class="d-flex align-items-center h-100 pointer position-absolute product-count-minus">

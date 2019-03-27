@@ -8,9 +8,9 @@ $variations = collect($model->variations)->groupBy('variation_id');
             $vSettings = $variation->first();
         @endphp
         <div class="product-single-info_row options-group">
-            <div class="d-flex flex-wrap align-items-center" data-group-id="{{ $vSettings->variation_id }}">
+            <div class="d-flex flex-wrap align-items-center single_product" data-group-id="{{ $vSettings->variation_id }}">
                 @if($vSettings->type == 'simple_product')
-                    <div class="col-sm-10 pl-0 d-flex">
+                    <div class="col-sm-10 pl-0 d-flex" data-price="{{ $vSettings->price }}" data-id="{{ $vSettings->id }}">
                         @if(! $vSettings->is_required)
                             {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
                             <label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer " for="opt{{ $vSettings->id }}">
