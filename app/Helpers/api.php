@@ -74,8 +74,8 @@ function filter_button($category, $text = 'Filter')
     enableFilter();
     global $_FILTER_HTML;
     $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
-    $_FILTER_HTML = View::make('filters.filter_modal',compact('category'))->render();
-    return view('filters.button', compact('category', 'text'));
+    $_FILTER_HTML = ($category)?View::make('filters.filter_modal',compact('category'))->render():'';
+    return ($category)?view('filters.button', compact('category', 'text')):null;
 }
 function filter_modal_html(){
     global $_FILTER_HTML;
