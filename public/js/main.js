@@ -182,7 +182,7 @@ $(document).ready(function() {
                         const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                             return accumulator + a;
                         }) : 0;
-                        const $total = $('.total_price');
+                        const $total = $('.price-place-summary');
                         $total.html(`$${total_price}`);
                     });
 
@@ -212,7 +212,7 @@ $(document).ready(function() {
                         const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                             return accumulator + a;
                         }) : 0;
-                        const $total = $('.total_price');
+                        const $total = $('.price-place-summary');
                         $total.html(`$${total_price}`);
                     });
 
@@ -261,7 +261,7 @@ $(document).ready(function() {
                                     const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                                         return accumulator + a;
                                     }) : 0;
-                                    const $total = $('.total_price');
+                                    const $total = $('.price-place-summary');
                                     $total.html(`$${price}`);
                                 });
 
@@ -273,7 +273,7 @@ $(document).ready(function() {
                                 const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                                     return accumulator + a;
                                 }) : 0;
-                                const $total = $('.total_price');
+                                const $total = $('.price-place-summary');
                                 $total.html(`$${price}`);
                             })
                             .catch(function (error) {
@@ -300,7 +300,7 @@ $(document).ready(function() {
                         const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                             return accumulator + a;
                         }) : 0;
-                        const $total = $('.total_price');
+                        const $total = $('.price-place-summary');
                         $total.html(`$${price}`);
                     });
                 })
@@ -362,7 +362,7 @@ $(document).ready(function() {
                 const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                     return accumulator + a;
                 }) : 0;
-                const $total = $('.total_price');
+                const $total = $('.price-place-summary');
                 $total.html(`$${price}`);
             });
 
@@ -388,7 +388,7 @@ $(document).ready(function() {
                 const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                     return accumulator + a;
                 }) : 0;
-                const $total = $('.total_price');
+                const $total = $('.price-place-summary');
                 $total.html(`$${total_price}`);
             });
 
@@ -414,7 +414,7 @@ $(document).ready(function() {
                 const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                     return accumulator + a;
                 }) : 0;
-                const $total = $('.total_price');
+                const $total = $('.price-place-summary');
                 $total.html(`$${total_price}`);
             });
         });
