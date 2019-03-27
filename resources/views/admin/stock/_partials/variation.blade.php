@@ -22,7 +22,8 @@
             </div>
         </div>
         <div class="col-md-6 d-flex">
-            {!! Form::select("variations[$main_unique][is_required]",[0 => 'Optional',1 => 'Required'],($main) ? $main->is_required : null,['class' => 'form-control']) !!}
+            {!! Form::text("variations[$main_unique][title]",($main) ? $main->title : null,['class' => 'form-control mr-1','placeholder' => 'Enter title ...']) !!}
+            {!! Form::select("variations[$main_unique][is_required]",[0 => 'Optional',1 => 'Required'],($main) ? $main->is_required : null,['class' => 'form-control mr-1']) !!}
             <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-trash"></i></button>
         </div>
     </div>

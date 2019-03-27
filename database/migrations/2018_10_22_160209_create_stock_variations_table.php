@@ -19,12 +19,14 @@ class CreateStockVariationsTable extends Migration
             $table->unsignedInteger('item_id');
             $table->string('variation_id');
             $table->string('type');
+            $table->string('title')->nullable();
             $table->tinyInteger('is_required')->default(0);
             $table->string('name');
             $table->text('image')->nullable();
             $table->unsignedInteger('qty')->default(0);
             $table->float('price')->default(0);
             $table->unsignedInteger('count_limit')->default(0);
+            $table->unsignedInteger('min_count_limit')->default(0);
             $table->unsignedInteger('common_price')->default(0);
             $table->string('display_as')->nullable();
             $table->string('price_per')->nullable();

@@ -3,6 +3,10 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-2">
+                    Min Limit : {!! Form::number("variations[$main_unique][min_count_limit]",
+                                ($main) ? $main->min_count_limit : null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-2">
                     How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",
                                 ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
 
@@ -18,7 +22,7 @@
                                                                 ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
 
                 </div>
             </div>
