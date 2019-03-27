@@ -124,10 +124,67 @@
                         </ul>
                     </div>
                     <div class="content-wrap payment-wrapper d-none">
-payement
+                        payement
                     </div>
                     <div class="content-wrap confirm-wrapper d-none">
-                        confirm
+                        <ul class="row">
+                            <li class="col-md-3">
+                                <div class="wrap-item position-relative">
+                                    <a href="#" class="item-link">
+                                        <span class="item-img">
+                                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="item">
+                                        </span>
+                                        <span class="name">items</span>
+                                    </a>
+                                    <div class="buttons">
+                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="wrap-item position-relative">
+                                    <a href="#" class="item-link">
+                                        <span class="item-img">
+                                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="item">
+                                        </span>
+                                        <span class="name">items</span>
+                                    </a>
+                                    <div class="buttons">
+                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="wrap-item position-relative">
+                                    <a href="#" class="item-link">
+                                        <span class="item-img">
+                                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="item">
+                                        </span>
+                                        <span class="name">items</span>
+                                    </a>
+                                    <div class="buttons">
+                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="col-md-3">
+                                <div class="wrap-item position-relative">
+                                    <a href="#" class="item-link">
+                                        <span class="item-img">
+                                            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="item">
+                                        </span>
+                                        <span class="name">items</span>
+                                    </a>
+                                    <div class="buttons">
+                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
+                                            <i class="fa fa-trash"></i></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between">
                         <div class="back-item">
@@ -144,10 +201,15 @@ payement
 @stop
 @section('js')
     <script>
-        $('body').on('click','.shopping-cart_wrapper .item-content',function () {
+        $('body').on('click', '.shopping-cart_wrapper .item-content', function () {
+            $('.shopping-cart_wrapper .item-content').removeClass('active');
+            $(this).addClass('active');
+
+        });
+        $('body').on('click', '.shopping-cart_wrapper .content-wrap.confirm-wrapper .wrap-item', function () {
             $(this).toggleClass('active');
         });
-        $('body').on('click','.shopping-cart_wrapper .next-btn',function (e) {
+        $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
             e.preventDefault();
 
             $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
@@ -157,10 +219,10 @@ payement
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
 
-            !$('.confirm-wrapper').hasClass('d-none') && $('.next-btn').prop('disabled',true);
-            $('.back-btn').prop('disabled',false)
+            !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none');
+            $('.back-btn').removeClass('d-none');
         });
-        $('body').on('click','.shopping-cart_wrapper .back-btn',function (e) {
+        $('body').on('click', '.shopping-cart_wrapper .back-btn', function (e) {
             e.preventDefault();
 
             $($('.shopping-cart-head').find('.active')[0]).removeClass('visited');
@@ -170,8 +232,8 @@ payement
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
             $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
 
-            !$('.shoping-card').hasClass('d-none') && $('.back-btn').prop('disabled',true);
-            $('.next-btn').prop('disabled',false)
+            !$('.content-wrap').first().hasClass('d-none') && $('.back-btn').addClass('d-none');
+            $('.next-btn').removeClass('d-none');
         });
     </script>
 @stop
