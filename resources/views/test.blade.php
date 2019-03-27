@@ -153,10 +153,6 @@
                                         </span>
                                                         <span class="name">items</span>
                                                     </a>
-                                                    <div class="buttons">
-                                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
-                                                            <i class="fa fa-trash"></i></a>
-                                                    </div>
                                                 </div>
                                             </li>
                                             <li class="col-md-3">
@@ -167,10 +163,6 @@
                                         </span>
                                                         <span class="name">items</span>
                                                     </a>
-                                                    <div class="buttons">
-                                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
-                                                            <i class="fa fa-trash"></i></a>
-                                                    </div>
                                                 </div>
                                             </li>
                                             <li class="col-md-3">
@@ -181,10 +173,6 @@
                                         </span>
                                                         <span class="name">items</span>
                                                     </a>
-                                                    <div class="buttons">
-                                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
-                                                            <i class="fa fa-trash"></i></a>
-                                                    </div>
                                                 </div>
                                             </li>
                                             <li class="col-md-3">
@@ -195,15 +183,11 @@
                                         </span>
                                                         <span class="name">items</span>
                                                     </a>
-                                                    <div class="buttons">
-                                                        <a href="javascript:void(0)" class="remove-item btn btn-sm btn-danger">
-                                                            <i class="fa fa-trash"></i></a>
-                                                    </div>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="d-flex flex-wrap justify-content-between">
+                                    <div class="d-flex flex-wrap justify-content-between border-top pt-2">
                                         <div class="back-item">
                                             <button class="btn btn-secondary back-btn">Back</button>
                                         </div>
@@ -215,10 +199,6 @@
                             </div>
                         </div>
                     </main>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
