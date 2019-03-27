@@ -77,7 +77,7 @@ class FiltersController extends Controller
         foreach ($children as $key => $id) {
             if ($id) {
                 if ($key > 0) {
-                    $f = $filters[$key - 1]->children()->find($id);
+                    $f = (isset($filters[$key - 1]))?$filters[$key - 1]->children()->find($id):null;
                 } else {
                     $f = Filters::find($id);
                 }
@@ -95,6 +95,7 @@ class FiltersController extends Controller
             $items = $filters->last()->items()->skip(0)->take(10)->get();
             $type = 'items';
             $items_html = $this->view("items", compact(['items']))->render();
+            isset($filters[$key]);
             unset($filters[$key]);
         };
 
