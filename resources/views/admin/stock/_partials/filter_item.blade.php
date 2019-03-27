@@ -37,7 +37,7 @@
                     <th>Name</th>
                     <th>Qty</th>
                     <th>Image</th>
-                    <th class="package_price @if($main && $main->price_per == 'product') hide @endif">Price</th>
+                    <th class="package_price @if(! $main || ($main && $main->price_per == 'product')) hide @endif">Price</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
