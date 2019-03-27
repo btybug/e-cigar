@@ -787,7 +787,7 @@
                         product_qty,
                         variations
                     };
-                    console.log(product_data)
+                    console.log(product_data);
                     $.ajax({
                         type: "post",
                         url: "/add-to-cart",
@@ -812,8 +812,6 @@
                     alert('Select available variation');
                 }
             });
-
-
 
             $("body").on('click', '.optional_checkbox', function () {
                 get_subTotalPrice();

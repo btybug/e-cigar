@@ -130,7 +130,12 @@ $(document).ready(function() {
                     const group = $(`#multi_v_select_${id}`);
                     group.select2({
                         minimumResultsForSearch: Infinity,
-                        maximumSelectionLength: Number(json.limit)
+                        maximumSelectionLength: Number(json.limit),
+                        language: {
+                            noResults: function (params) {
+                                return "That's a miss.";
+                            }
+                        }
                     });
 
                     let qty = 0;
@@ -227,8 +232,9 @@ $(document).ready(function() {
 
                     $(`#multi_v_select_${id}`).on('select2:unselect', function (e) {
                         new_qty();
+                        group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+
                         $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
-                        console.log('qty: ', qty, 'limit: ', limit);
                     });
                 })
                 .catch(function (error) {
