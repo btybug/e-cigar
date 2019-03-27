@@ -86,6 +86,11 @@ $(document).ready(function() {
 //                show: 4,
             matchWidth:false
         });
+        $(".product-card-thumbs--single").carousel({
+            controls: true,
+            pagination: false,
+            matchWidth:false
+        });
         $('.video-carousel-wrap iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
 
         $('.video-carousel-wrap .video-item-thumb').on('itemClick.carousel', function() {
