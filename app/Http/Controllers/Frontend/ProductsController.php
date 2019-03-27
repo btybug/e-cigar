@@ -13,6 +13,7 @@ use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\StockVariationOption;
 use App\ProductSearch\ProductSearch;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 use View;
 use Illuminate\Http\Request;
 
@@ -54,6 +55,8 @@ class ProductsController extends Controller
 
     public function getSingle ($type, $slug)
     {
+//        $x = Cart::getContent();
+//        dd($x);
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
         if (! $vape) abort(404);
 

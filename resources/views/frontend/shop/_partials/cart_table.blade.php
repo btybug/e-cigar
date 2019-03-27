@@ -17,15 +17,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if(count($items))
-                            @foreach($items as $key => $item)
+                        @if(! \Cart::isEmpty())
+                            @foreach(\Cart::getContent() as $key => $item)
                                 @php
-                                    $main = $item[$key];
-                                    unset($item[$key]);
-                                    $stock = $main->attributes->variation->stock;
+                                    $stock = $item->attributes->product;
                                 @endphp
                                 <tr>
-
                                     <td colspan="2" class="p-0">
                                         <div class="shp-cart-product d-flex flex-md-row flex-column">
                                             <div class="shp-cart-product_left d-flex flex-md-column justify-content-between mb-md-0 mb-3">
@@ -33,7 +30,7 @@
                                                     <img src="{{ checkImage(media_image_tmb($stock->image)) }}"
                                                          alt=" {!! $stock->name !!}">
                                                 </div>
-                                                <span data-uid="{{ $main->id }}"
+                                                <span data-uid="{{ $key }}"
                                                       class="shp-cart-product_remove font-13 pointer remove-from-cart">Remove</span>
                                             </div>
                                             <div class="shp-cart-product_right">
@@ -41,76 +38,72 @@
                                                     {!! $stock->name !!}
                                                 </h2>
                                                 <ul class="list-unstyled mb-0">
-                                                    <li class="shp-cart-product_row shp-cart-product_prd-1 d-flex justify-content-between">
-                                                        <p class="mb-0"><span>{{ $main->attributes->variation->name }}
-                                                                :</span>
-                                                            <span class="font-main-bold">
-                                                                @if($stock->type == 'variation_product')
-                                                                    @foreach($main->attributes->variation->options as $voption)
-                                                                        @if($voption->attribute_sticker)
-                                                                            {{ $voption->attribute_sticker->sticker->name }}
-                                                                        @endif
-                                                                    @endforeach
-                                                                @endif
-                                                            </span>
-                                                        </p>
-                                                        <span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}
-                                                        </span>
-                                                    </li>
-                                                    <li class="shp-cart-product_row shp-cart-product_extra font-main-bold font-15 text-uppercase">
-                                                        Extra
-                                                    </li>
-                                                    @php
-                                                        $countMessage = true;
-                                                    @endphp
-
-                                                    @if(count($item))
-                                                        @php
-                                                            $countMessage = false;
-                                                        @endphp
-                                                        @foreach($item as $vid)
-                                                            @php
-                                                                $variationOpt = $vid->attributes->variation;
-                                                                $type = $vid->attributes->type;
-                                                            @endphp
-                                                            <li class="shp-cart-product_row d-flex justify-content-between position-relative">
-                                                                <p class="mb-0">
-                                                                    <span>{{ $variationOpt->stock->name }}</span>
-                                                                    <span class="font-main-bold">
-                                                                        @if($variationOpt->stock->type == 'variation_product')
-                                                                            @foreach($variationOpt->options as $voption)
-                                                                                @if($voption->attribute_sticker)
-                                                                                    {{ $voption->attribute_sticker->sticker->name }}
-                                                                                    {{ ($loop->last)?'':',' }}
+                                                    @foreach($item->attributes->variations as $option)
+                                                        <li class="shp-cart-product_row d-flex justify-content-between position-relative">
+                                                            <p class="mb-0">
+                                                                <span>Option {{ $loop->iteration }}: </span>
+                                                                <span class="font-main-bold">
+                                                                    @if($option['group']->type == 'package_product' || $option['group']->type == 'filter')
+                                                                        @if(count($option['options']))
+                                                                            @foreach($option['options'] as $voption)
+                                                                                <p>
+                                                                                <span class="font-15 font-main-bold">
+                                                                                    {{ $voption->name }}
+                                                                                </span>
+                                                                                @if($option['group']->price_per =='item')
+                                                                                    <span class="font-15 font-main-bold text-right">
+                                                                                      @php
+                                                                                          $promotionPrice = $stock->promotion_prices()
+                                                                                          ->where('variation_id',$voption->id)->first();
+                                                                                      @endphp
+                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption->price,$currency) !!}
+                                                                                    </span>
                                                                                 @endif
+                                                                                </p>
                                                                             @endforeach
                                                                         @endif
-                                                                    </span>
-                                                                </p>
-                                                                <span class="font-15 font-main-bold">
-                                                                    @php
-                                                                        $promotionPrice = ($variationOpt) ? $stock->promotion_prices()
-                                                                        ->where('variation_id',$variationOpt->id)->first() : null;
-                                                                    @endphp
-                                                                    {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($variationOpt) ? convert_price($variationOpt->price,$currency) : convert_price(0,$currency)) !!}
+                                                                    @endif
                                                                 </span>
-                                                                @if($type == 'optional')
-                                                                    <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
-                                                                          data-uid="{{ $vid->id }}">
+                                                            </p>
+                                                            @if($option['group']->price_per =='product')
+                                                                <span class="font-15 font-main-bold">
+                                                                        @php
+                                                                            $promotionPrice = ($option['group']) ? $stock->promotion_prices()
+                                                                            ->where('variation_id',$option['group']->id)->first() : null;
+                                                                        @endphp
+                                                                    {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($option['group']) ? convert_price($option['group']->price,$currency) : convert_price(0,$currency)) !!}
+                                                                </span>
+                                                            @endif
+                                                            @if(! $option['group']->is_required)
+                                                                <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
+                                                                      data-uid="{{ $option['group']->variation_id }}">
                                                                         <svg viewBox="0 0 8 8" width="8px" height="8px">
                                                                             <path fill-rule="evenodd"
                                                                                   fill="rgb(171, 168, 182)"
                                                                                   d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
-                                                                        </svg>
-                                                                    </span>
-                                                                @endif
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
+                                                                    </svg>
+                                                                </span>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
 
-                                                    @if($countMessage)
-                                                        <li>No Extra items</li>
-                                                    @endif
+                                                    {{--<li class="shp-cart-product_row shp-cart-product_prd-1 d-flex justify-content-between">--}}
+                                                        {{--<p class="mb-0"><span>--}}
+                                                                {{--{{ $main->attributes->variation->name }}--}}
+                                                                {{--:</span>--}}
+                                                            {{--<span class="font-main-bold">--}}
+                                                                {{--@if($stock->type == 'variation_product')--}}
+                                                                    {{--@foreach($main->attributes->variation->options as $voption)--}}
+                                                                        {{--@if($voption->attribute_sticker)--}}
+                                                                            {{--{{ $voption->attribute_sticker->sticker->name }}--}}
+                                                                        {{--@endif--}}
+                                                                    {{--@endforeach--}}
+                                                                {{--@endif--}}
+                                                            {{--</span>--}}
+                                                        {{--</p>--}}
+                                                        {{--<span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}--}}
+                                                        {{--</span>--}}
+                                                    {{--</li>--}}
                                                 </ul>
                                             </div>
                                         </div>
@@ -122,7 +115,7 @@
                                                  style="margin-right: 0;">
                                                 <!--minus qty-->
                                                 <span data-type="minus" data-condition="{{ false }}"
-                                                      data-uid="{{ $main->id }}"
+                                                      data-uid="{{ $key }}"
                                                       class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count qtycount">
                                                     <svg viewBox="0 0 20 3" width="20px" height="3px">
                                                         <path fill-rule="evenodd" fill="rgb(214, 217, 225)"
@@ -131,12 +124,12 @@
                                                 </span>
 
 
-                                                <input data-uid="{{ $main->id }}"
+                                                <input data-uid="{{ $key }}"
                                                        class="qtycount field-input w-100 h-100 font-23 text-center border-0 product-qty-select"
-                                                       min="number" name="" type="number" value="{{ $main->quantity }}">
+                                                       min="number" name="" type="number" value="{{ $stock->quantity }}">
                                                 <!--plus qty-->
                                                 <span data-type="plus" data-condition="{{ true }}"
-                                                      data-uid="{{ $main->id }}" data-uid="{{ $main->id }}"
+                                                      data-uid="{{ $key }}"
                                                       class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count qtycount">
                                                     <svg viewBox="0 0 20 20" width="20px" height="20px">
                                                         <path fill-rule="evenodd" fill="rgb(211, 214, 223)"
@@ -150,7 +143,7 @@
 
                                     <td width="180" class="shp-cart-table_price-td">
                                         <span class="d-flex font-main-bold font-28 card--inner-product_price position-relative">
-                                            <span class="position-relative">{{ convert_price(\App\Services\CartService::getPriceSum($main->id),$currency) }}
+                                            <span class="position-relative">{{ convert_price(\App\Services\CartService::getPriceSum($stock->id),$currency) }}
                                                 {{--<!--old price-->--}}
                                                 {{--<span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>--}}
                                             </span>

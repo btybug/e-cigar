@@ -13,6 +13,7 @@ use App\Models\StockVariationOption;
 use App\Models\ZoneCountries;
 use App\Services\CartService;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use Illuminate\Support\Facades\Auth;
 use PragmaRX\Countries\Package\Countries;
 use View;
 use Illuminate\Http\Request;
@@ -140,41 +141,40 @@ class ShoppingCartController extends Controller
 
     public function postAddToCart(Request $request)
     {
-        $variation = StockVariation::find($request->uid);
-        if ($variation) {
-            if (\Auth::check()) {
+        $product = Stock::find($request->product_id);
+        if ($product) {
+            $cart_id = uniqid();
+            $promotionPrice = null;//$variation->stock->active_sales()->where('variation_id', $variation->id)->first();
+//            $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
+
+            $variations = [];
+            $vData = $request->get('variations');
+            if ($vData && count($vData)) {
+                foreach ($vData as $item) {
+                    $data = [];
+                    $group = $product->variations()->where('variation_id',$item['group_id'])->first();
+                    if($group){
+                        $data['group'] = $group;
+                        $data['options'] = [];
+                        if (isset($item['products']) && count($item['products'])) {
+                            foreach ($item['products'] as $p){
+                                $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
+                                if($option){
+                                    $data['options'][] = $option;
+                                }
+                            }
+                        }
+                    }
+                    if(count($data)){
+                        $variations[] = $data;
+                    }
+                }
+            }
+
+            Cart::add($cart_id, $product->id, 0, $request->product_qty,['variations' => $variations,'product' => $product]);
+
+            if(Auth::check()){
                 $user = \Auth::user();
-                $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
-                $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
-                Cart::add($variation->id, $variation->id, $price, 1,
-                    ['variation' => $variation]);
-
-                $requiredItems = $request->get('requiredItems');
-                if ($requiredItems && count($requiredItems)) {
-                    foreach ($requiredItems as $opv) {
-                        $reqVariation = StockVariation::find($opv);
-                        if ($reqVariation) {
-                            $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $reqVariation->id)->first();
-                            $reqPrice = ($promotionPrice) ? $promotionPrice->price : $reqVariation->price;
-                            Cart::add($variation->id.'.'.$reqVariation->id, $variation->id, $reqPrice, 1,
-                                ['variation' => $reqVariation,'type' => 'required']);
-                        }
-                    }
-                }
-
-                $optionalItems = $request->get('optionalItems');
-                if ($optionalItems && count($optionalItems)) {
-                    foreach ($optionalItems as $opv) {
-                        $optpVariation = StockVariation::find($opv);
-                        if ($optpVariation) {
-                            $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
-                            $reqPrice = ($promotionPrice) ? $promotionPrice->price : $optpVariation->price;
-                            Cart::add($variation->id.'.'.$optpVariation->id, $variation->id, $reqPrice, 1,
-                                ['variation' => $optpVariation,'type' => 'optional']);
-                        }
-                    }
-                }
-
                 $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
                 $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
                 $geoZone = ($zone) ? $zone->geoZone : null;
@@ -193,19 +193,6 @@ class ShoppingCartController extends Controller
                             'attributes' => $shippingDefaultOption
                         ));
                         Cart::condition($condition2);
-                    }
-                }
-            } else {
-                Cart::add($variation->id, $variation->id, $variation->price, 1, ['variation' => $variation]);
-
-                $optionalItems = $request->get('optionalItems');
-                if ($optionalItems && count($optionalItems)) {
-                    foreach ($optionalItems as $opv) {
-                        $optpVariation = StockVariation::find($opv);
-                        if ($optpVariation) {
-                            Cart::add($optpVariation->id, $variation->id, $optpVariation->price, 1,
-                                ['variation' => $optpVariation]);
-                        }
                     }
                 }
             }

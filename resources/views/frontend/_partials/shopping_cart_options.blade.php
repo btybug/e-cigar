@@ -4,7 +4,7 @@
 @else
     @foreach(\Cart::getContent() as $item)
         @php
-            $stock = $item->attributes->variation->stock
+            $stock = $item->attributes->product;
         @endphp
     <!--Repeating cart item-->
     <div class="cart-sidebar_item text-sec-clr w-100 position-relative">
@@ -20,11 +20,11 @@
                 <h3 class="font-20 font-sec-bold">{!! $stock->name !!}</h3>
                 <div class="font-main-light text-sec-clr">
                     @if($stock->type == 'variation_product')
-                        @foreach($item->attributes->variation->options as $voption)
-                            @if($voption->attribute_sticker)
-                            <span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>
-                            @endif
-                        @endforeach
+                        {{--@foreach($item->attributes->variation->options as $voption)--}}
+                            {{--@if($voption->attribute_sticker)--}}
+                            {{--<span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>--}}
+                            {{--@endif--}}
+                        {{--@endforeach--}}
                     @endif
                 </div>
             </div>
