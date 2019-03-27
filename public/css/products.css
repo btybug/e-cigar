@@ -2870,3 +2870,6 @@ outline: none;
 .product-card-thumbs--single  .fs-carousel-control.fs-carousel-control_previous{
     left: 0 !important;
 }
+.product-card-thumbs--single .fs-carousel-viewport{
+    width: 100%;
+}
