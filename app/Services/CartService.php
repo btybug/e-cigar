@@ -14,6 +14,8 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 class CartService
 {
     public static $cartItems = [];
+    public $variations = [];
+    public $price = 0;
 
     public function getCartItems($id = null){
         $cartCollection = ($id) ? Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent() : Cart::getContent();
@@ -185,5 +187,48 @@ class CartService
                 }
             }
         }
+    }
+
+    public function validateProduct($product,$vdata)
+    {
+        $error = false;
+        if ($vdata && count($vdata)) {
+            foreach ($vdata as $item) {
+                $data = [];
+                $group = $product->variations()->where('variation_id',$item['group_id'])->first();
+                if($group){
+                    $data['group'] = $group;
+                    $data['options'] = [];
+                    $product_limit = 0;
+                    if (isset($item['products']) && count($item['products'])) {
+                        foreach ($item['products'] as $p){
+                            $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
+                            if($option){
+                                $product_limit += $p['qty'];
+                                $this->price += $p['qty'] * $option->price;
+                                $data['options'][] = $option;
+                            }else{
+                                $error = true;
+                            }
+                        }
+                        if($group->min_count_limit > $product_limit || $group->count_limit < $product_limit){
+                            $error = true;
+                        }
+                    }else{
+                        $this->price += $group->price;
+                    }
+                }else{
+                    $error = true;
+                }
+
+                if(count($data)){
+                    $this->variations[] = $data;
+                }
+            }
+        }else{
+            $error = true;
+        }
+
+        return $error;
     }
 }
