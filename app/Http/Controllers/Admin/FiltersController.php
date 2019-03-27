@@ -52,9 +52,9 @@ class FiltersController extends Controller
         return response()->json(['error' => !$model->items()->detach($request->get('slug'))]);
     }
 
-    public function postEditCategory(Request $request,$id)
+    public function postEditCategory(Request $request, $id)
     {
-        Category::updateOrCreate($id,[]);
+        Category::updateOrCreate($id, []);
         return redirect()->back();
     }
 
@@ -77,7 +77,7 @@ class FiltersController extends Controller
         foreach ($children as $key => $id) {
             if ($id) {
                 if ($key > 0) {
-                    $f = (isset($filters[$key - 1]))?$filters[$key - 1]->children()->find($id):null;
+                    $f = (isset($filters[$key - 1])) ? $filters[$key - 1]->children()->find($id) : null;
                 } else {
                     $f = Filters::find($id);
                 }
@@ -117,9 +117,38 @@ class FiltersController extends Controller
         $data = $request->except('_token', 'translatable');
         $data['user_id'] = \Auth::id();
         $data['type'] = 'filter';
-
+        if (!$request->id) {
+            $data['slug'] = $this->slugify($request->get('translatable')['gb']['name']);
+        }
         Category::updateOrCreate($request->id, $data);
         return redirect()->back();
+    }
+
+    protected function slugify($text)
+    {
+        // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, '-');
+
+        // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'n-a';
+        }
+
+        return $text;
     }
 
     public function postCategoryUpdateChild(Request $request, $id)
@@ -127,8 +156,8 @@ class FiltersController extends Controller
         $data = $request->except('_token', 'translatable', 'child_id', 'id', 'items');
         $data['category_id'] = (!$data['parent_id']) ? $data['category_id'] : null;
         $filter = Filters::updateOrCreate($request->child_id, $data);
-        if(!$filter->children()->exists()){
-            $items=array_merge($filter->getParentItems()->toArray(),$request->get('items',[]));
+        if (!$filter->children()->exists()) {
+            $items = array_merge($filter->getParentItems()->toArray(), $request->get('items', []));
             $filter->items()->sync($items);
             $filter->syncChild();
         }

@@ -6,6 +6,8 @@
  * Time: 10:39
  */
 $_MEDIA_BUTTON = false;
+$_FILTER_BUTTON = false;
+$_FILTER_HTML = '';
 global $_MODEL_BOOTED;
 function getAlertIconByClass($class = 'success')
 {
@@ -41,17 +43,43 @@ function is_enabled_media_modal()
 
 }
 
+function is_enabled_filter_modal()
+{
+    global $_FILTER_BUTTON;
+    return $_FILTER_BUTTON;
+
+}
+
 function enableMedia()
 {
     global $_MEDIA_BUTTON;
     $_MEDIA_BUTTON = true;
 }
 
-function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive',$html = null)
+function enableFilter()
+{
+    global $_FILTER_BUTTON;
+    $_FILTER_BUTTON = true;
+}
+
+function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null)
 {
     enableMedia();
     $uniqId = uniqid('media_');
-    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId','html']));
+    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html']));
+}
+
+function filter_button($category, $text = 'Filter')
+{
+    enableFilter();
+    global $_FILTER_HTML;
+    $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
+    $_FILTER_HTML = View::make('filters.filter_modal',compact('category'))->render();
+    return view('filters.button', compact('category', 'text'));
+}
+function filter_modal_html(){
+    global $_FILTER_HTML;
+    return $_FILTER_HTML;
 }
 
 function get_site_logo()
@@ -487,7 +515,7 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<div class="d-flex wrap-wall w-100">';
         echo '<div class="left-photo hidden-xsd-none d-sm-block">';
         echo '<figure class="thumbnail">';
-        echo '<img class="img-fluid" src="'.user_avatar($comment->author->id).'">';
+        echo '<img class="img-fluid" src="' . user_avatar($comment->author->id) . '">';
         echo '</figure>';
         echo '</div>';
 
@@ -512,7 +540,7 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<p>' . $comment->comment . '</p>';
         echo '</div>';
         echo '</div>';
-        if(Auth::check()){
+        if (Auth::check()) {
             echo '<div class="text-right reply-wrapper"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a></div>';
         }
 
@@ -595,7 +623,7 @@ function replyRender($replies, $i = 0, $parent = false)
 
         if ($reply->getTable() == 'history') {
             echo '<div class="admin_updated">
-<div class="image label label-default"><img src="'.user_avatar($reply->user->id).'" alt="img"></div>
+<div class="image label label-default"><img src="' . user_avatar($reply->user->id) . '" alt="img"></div>
 <p class="font-18 text-gray-clr mb-0"><span class="label label-default">' . $reply->user->name . ' has ' . $reply->body . '</span></p>
 </div>';
         } else {
@@ -608,7 +636,7 @@ function replyRender($replies, $i = 0, $parent = false)
 
             echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
             echo '<figure class="thumbnail">';
-            echo '<img class="img-fluid" src="'.user_avatar($reply->author->id).'">';
+            echo '<img class="img-fluid" src="' . user_avatar($reply->author->id) . '">';
             if ($reply->author) {
                 if ($reply->author->isAdministrator()) {
                     echo '<figcaption class="text-center">Admin</figcaption>';
@@ -999,13 +1027,13 @@ function site_default_currency()
     return (new \App\Models\SiteCurrencies())->where('is_default', true)->first();
 }
 
-function convert_price($price, $currency, $number_format = true, $withoutSymbol = false,$round_thousand = false)
+function convert_price($price, $currency, $number_format = true, $withoutSymbol = false, $round_thousand = false)
 {
     $default = site_default_currency();
     if ($default) {
         if ($default->code == $currency) {
-            if($round_thousand){
-                $price = round ($price, -3);
+            if ($round_thousand) {
+                $price = round($price, -3);
             }
             if ($number_format) {
                 $price = number_format($price);
@@ -1015,8 +1043,8 @@ function convert_price($price, $currency, $number_format = true, $withoutSymbol 
             $changed = (new \App\Models\SiteCurrencies())->where('code', $currency)->first();
             if ($changed) {
                 $price = $price * $changed->rate;
-                if($round_thousand){
-                    $price = round ($price, -3);
+                if ($round_thousand) {
+                    $price = round($price, -3);
                 }
                 if ($number_format) {
                     $price = number_format($price);
@@ -1159,7 +1187,7 @@ function render_widgets($placeholder)
             <div id="' . $widget->widget . '" style="position: relative" class="box--wall">
                       <div class="card panel panel-default dashboard--panel">
   <div class="card-header panel-heading box-header">
-  <h4 class="panel-title">' . $widget->widget. '</h4>
+  <h4 class="panel-title">' . $widget->widget . '</h4>
   <div class="panel-heading-btn">
   <a class="max--widget btn btn-max">
   <i class="fa fa-expand" aria-hidden="true"></i>

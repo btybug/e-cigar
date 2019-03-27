@@ -39,9 +39,12 @@
                                     <div class="info p-0 m-0 slider-logo w-100">
                                         <img src="/public/img/header-logo.png" class="header-logo-img" alt="">
                                         <img src="/public/img/header-logo-text.png" class="header-logo-text-img" alt="">
+                                        {!! filter_button('select-e-juice','FILTER') !!}
                                     </div>
+
                                     <img src="/public/img/temp/homepage-bg.jpg" alt="">
                                 </div>
+
                                 <div>
                                     <div class="info">
                                         <span class="title">
