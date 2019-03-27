@@ -101,9 +101,11 @@ class AdminController extends Controller
         return redirect()->back()->with('message', 'Your profile updated');
     }
 
-    public function test(ManagerApiRequest $request)
+    public function test()
     {
-        dd($request->exportOrder(8));
+        return view('test');
+        //ManagerApiRequest $request
+       // dd($request->exportOrder(8));
     }
 
     public function getPassport()

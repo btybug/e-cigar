@@ -72,7 +72,6 @@ class FiltersController extends Controller
 
     public function postGetNext(Request $request)
     {
-//        $parent=Filters::findOrFail($request->get('parent'));
         $children = $request->get('filters', []);
         $filters = collect([]);
         foreach ($children as $key => $id) {
@@ -93,7 +92,7 @@ class FiltersController extends Controller
         $type = 'filter';
         $items_html = '';
         if (!$filters->last()->children()->exists()) {
-            $items = $filters->last()->items;
+            $items = $filters->last()->items()->skip(0)->take(10)->get();
             $type = 'items';
             $items_html = $this->view("items", compact(['items']))->render();
             unset($filters[$key]);
