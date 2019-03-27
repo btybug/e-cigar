@@ -173,6 +173,17 @@ $(document).ready(function() {
 
                         const price = $(this).closest('[data-price]').attr('data-price');
                         $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+
+                        const prices_array = $('.product-qty').toArray().map(function(el) {
+                            const price = $(el).closest('[data-price]').attr('data-price');
+                            const count = $(el).val();
+                            return price * count;
+                        });
+                        const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                            return accumulator + a;
+                        }) : 0;
+                        const $total = $('.total_price');
+                        $total.html(`$${total_price}`);
                     });
 
                                                 //********************//
@@ -192,6 +203,17 @@ $(document).ready(function() {
 
                         const price = $(this).closest('[data-price]').attr('data-price');
                         $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+
+                        const prices_array = $('.product-qty').toArray().map(function(el) {
+                            const price = $(el).closest('[data-price]').attr('data-price');
+                            const count = $(el).val();
+                            return price * count;
+                        });
+                        const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                            return accumulator + a;
+                        }) : 0;
+                        const $total = $('.total_price');
+                        $total.html(`$${total_price}`);
                     });
 
                                                 //******************//
@@ -230,7 +252,29 @@ $(document).ready(function() {
                                     $(this).closest('.menu-item-selected').remove();
                                     new_qty();
                                     group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+
+                                    const prices_array = $('.product-qty').toArray().map(function(el) {
+                                        const price = $(el).closest('[data-price]').attr('data-price');
+                                        const count = $(el).val();
+                                        return price * count;
+                                    });
+                                    const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                                        return accumulator + a;
+                                    }) : 0;
+                                    const $total = $('.total_price');
+                                    $total.html(`$${price}`);
                                 });
+
+                                const prices_array = $('.product-qty').toArray().map(function(el) {
+                                    const price = $(el).closest('[data-price]').attr('data-price');
+                                    const count = $(el).val();
+                                    return price * count;
+                                });
+                                const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                                    return accumulator + a;
+                                }) : 0;
+                                const $total = $('.total_price');
+                                $total.html(`$${price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -247,6 +291,17 @@ $(document).ready(function() {
                             new_qty();
                             group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
                         }, 0);
+
+                        const prices_array = $('.product-qty').toArray().map(function(el) {
+                            const price = $(el).closest('[data-price]').attr('data-price');
+                            const count = $(el).val();
+                            return price * count;
+                        });
+                        const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                            return accumulator + a;
+                        }) : 0;
+                        const $total = $('.total_price');
+                        $total.html(`$${price}`);
                     });
                 })
                 .catch(function (error) {
@@ -298,6 +353,17 @@ $(document).ready(function() {
                     $(this).closest('div').find('.package_checkbox')[0].click();
                 }
 
+
+                const prices_array = $('.product-qty').toArray().map(function(el) {
+                    const price = $(el).closest('[data-price]').attr('data-price');
+                    const count = $(el).val();
+                    return price * count;
+                });
+                const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                    return accumulator + a;
+                }) : 0;
+                const $total = $('.total_price');
+                $total.html(`$${price}`);
             });
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
@@ -313,6 +379,17 @@ $(document).ready(function() {
 
                 const price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+
+                const prices_array = $('.product-qty').toArray().map(function(el) {
+                    const price = $(el).closest('[data-price]').attr('data-price');
+                    const count = $(el).val();
+                    return price * count;
+                });
+                const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                    return accumulator + a;
+                }) : 0;
+                const $total = $('.total_price');
+                $total.html(`$${total_price}`);
             });
 
 
@@ -328,6 +405,17 @@ $(document).ready(function() {
 
                 const price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+
+                const prices_array = $('.product-qty').toArray().map(function(el) {
+                    const price = $(el).closest('[data-price]').attr('data-price');
+                    const count = $(el).val();
+                    return price * count;
+                });
+                const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                    return accumulator + a;
+                }) : 0;
+                const $total = $('.total_price');
+                $total.html(`$${total_price}`);
             });
         });
     });

@@ -28,6 +28,7 @@
                             </svg>
                         </span>
                        </div>
+                       <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto total_price">$0</span>
                        <a href="#"
                           class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
                            <span class="product-card_btn-text">add to cart</span>
