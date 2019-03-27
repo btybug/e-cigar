@@ -29,21 +29,15 @@
     </div>
     <div class="card-body panel-body">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="sipmle-product-wall product-wall {{ ($main && $main->type =='simple_product') ? '' : 'hide' }}">
-                    @include('admin.stock._partials.simple_item')
-                </div>
-
-                <div class="packge-product-wall product-wall {{ ($main && $main->type =='package_product') ? '' : 'hide' }}">
-                    <div class="package-box">
+            <div class="col-sm-12 type-place">
+                <div class="product-wall">
+                    @if($main && $main->type =='simple_product')
+                        @include('admin.stock._partials.simple_item')
+                    @elseif($main && $main->type =='package_product')
                         @include('admin.stock._partials.package_item')
-                    </div>
-                </div>
-
-                <div class="filters-product-wall product-wall {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
-                    <div class="package-box">
+                    @elseif($main && $main->type =='filter')
                         @include('admin.stock._partials.filter_item')
-                    </div>
+                    @endif
                 </div>
             </div>
         </div>

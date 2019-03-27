@@ -1033,42 +1033,24 @@
             });
 
             $('body').on('change', '.variation-product-select', function () {
-                var value = $(this).val();
-                var parent = $(this).closest('.stock-page');
-                if (value == 'filter') {
-                    parent.find('.filters-product-wall').removeClass('hide');
-                    parent.find('.sipmle-product-wall').addClass('hide');
-                    parent.find('.variation-product-wall').addClass('hide');
-                    parent.find('.table-product-variotion').addClass('hide');
-                    parent.find('.packge-product-wall').addClass('hide');
+                let value = $(this).val();
+                let parent = $(this).closest('.stock-page');
+                AjaxCall(
+                    "/admin/stock/variation-option-view",
+                    {type: value,uniqueId:parent.attr('data-unqiue')},
+                    function (res) {
+                        if (!res.error) {
+                            if (value == 'filter') {
+                                parent.find('.filter-option').removeClass('hide').addClass('show');
+                                parent.find('.filter-variation-box').empty();
+                            } else {
+                                parent.find('.filter-option').removeClass('show').addClass('hide');
+                            }
 
-                    parent.find('.filter-option').removeClass('hide').addClass('show');
-                    parent.find('.filter-variation-box').empty();
-                } else if (value == 'simple_product') {
-                    parent.find('.sipmle-product-wall').removeClass('hide');
-                    parent.find('.variation-product-wall').addClass('hide');
-                    parent.find('.table-product-variotion').addClass('hide');
-                    parent.find('.packge-product-wall').addClass('hide');
-                    parent.find('.filters-product-wall').addClass('hide');
-                    parent.find('.filter-option').removeClass('show').addClass('hide');
-
-                } else if (value == 'package_product') {
-                    parent.find('.packge-product-wall').removeClass('hide');
-                    parent.find('.sipmle-product-wall').addClass('hide');
-                    parent.find('.variation-product-wall').addClass('hide');
-                    parent.find('.table-product-variotion').addClass('hide');
-                    parent.find('.filters-product-wall').addClass('hide');
-                    parent.find('.filter-option').removeClass('show').addClass('hide');
-
-                } else {
-                    parent.find('.packge-product-wall').addClass('hide');
-                    parent.find('.sipmle-product-wall').addClass('hide');
-                    parent.find('.variation-product-wall').addClass('hide');
-                    parent.find('.table-product-variotion').addClass('hide');
-                    parent.find('.filters-product-wall').addClass('hide');
-                    parent.find('.filter-option').removeClass('show').addClass('hide');
-
-                }
+                            parent.find('.type-place').html(res.html)
+                        }
+                    }
+                );
             });
 
             $('body').on('click', '.add-variation-row', function () {

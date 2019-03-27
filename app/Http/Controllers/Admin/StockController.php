@@ -413,4 +413,22 @@ class StockController extends Controller
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function postVariationOptionsView(Request $request)
+    {
+        $stockItems = Items::active()->get()->pluck('name', 'id')->all();
+        $main_unique = $request->get('uniqueId');
+        $main = null;
+        $html = '';
+        if($request->type == 'simple_product'){
+            $html = \view("admin.stock._partials.simple_item",compact(['stockItems','main_unique','main']))->render();
+        }elseif($request->type == 'package_product'){
+            $html = \view("admin.stock._partials.package_item",compact(['stockItems','main_unique','main']))->render();
+        }elseif($request->type =='filter'){
+            $html = \view("admin.stock._partials.filter_item",compact(['stockItems','main_unique','main']))->render();
+        }
+
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }
