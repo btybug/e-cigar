@@ -54,7 +54,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems','filters']));
+        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
     }
 
     public function getStockEdit($id)
@@ -74,14 +74,14 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model','variations','checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data','filters']));
+        return $this->view('stock_new', compact(['model', 'variations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
     public function postStock(ProductsRequest $request)
     {
 //        dd($request->get('variations', []));
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
-            'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit' ,'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
+            'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
 //        dd($request->get('promotions'),array_values($request->get('promotions')));
@@ -258,12 +258,12 @@ class StockController extends Controller
 
     public function addPackageVariation(Request $request)
     {
-        $items = Items::active()->whereIn('id',$request->items)->get();
+        $items = Items::active()->whereIn('id', $request->items)->get();
         $main_unique = $request->get('main_unique');
         $stockItems = Items::all()->pluck('name', 'id')->all();
         $package_variation = null;
         $main = null;
-        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems','main_unique','main','items']))->render();
+        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems', 'main_unique', 'main', 'items']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -273,7 +273,7 @@ class StockController extends Controller
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $package_variation = null;
         $model = null;
-        $html = \View('admin.stock._partials.package_item', compact(['model','package_variation', 'stockItems']))->render();
+        $html = \View('admin.stock._partials.package_item', compact(['model', 'package_variation', 'stockItems']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -285,7 +285,7 @@ class StockController extends Controller
         $model = null;
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
-        $html = \View('admin.stock._partials.variation', compact(['model','package_variation', 'stockItems','filters']))->render();
+        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -374,34 +374,34 @@ class StockController extends Controller
 
     public function postSelectItems(Request $request)
     {
-        $items = Items::whereNotIn('id', $request->get('items', []))->where('status',Items::ACTIVE)->get();
+        $items = Items::whereNotIn('id', $request->get('items', []))->where('status', Items::ACTIVE)->get();
         $uniqueId = $request->get('uniqueId');
         $stickers = array_filter(Stickers::all()->pluck('name', 'id')->all());
 
-        $html = \view("admin.stock._partials.select_items",compact(['items','uniqueId','stickers']))->render();
+        $html = \view("admin.stock._partials.select_items", compact(['items', 'uniqueId', 'stickers']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postSearchItems(Request $request)
     {
-        $items = Items::leftJoin('item_specifications','items.id','item_specifications.item_id')
+        $items = Items::leftJoin('item_specifications', 'items.id', 'item_specifications.item_id')
             ->whereNotIn('items.id', $request->get('items', []))
-            ->whereIn('item_specifications.sticker_id',$request->get('stickers',[]))
-            ->where('status',Items::ACTIVE)
+            ->whereIn('item_specifications.sticker_id', $request->get('stickers', []))
+            ->where('status', Items::ACTIVE)
             ->select('items.*')->get();
 //        $items = Items::whereNotIn('id', $request->get('items', []))->get();
 
-        $html = \view("admin.stock._partials.items_render",compact(['items']))->render();
+        $html = \view("admin.stock._partials.items_render", compact(['items']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postFilterItems(Request $request)
     {
-        $category = Filters::with(['children','items'])->whereNotNull('category_id')->where('category_id',$request->get('id',0))->get();
+        $category = Filters::with(['children', 'items'])->whereNotNull('category_id')->where('category_id', $request->get('id', 0))->get();
 //        var_dump($category);exit;
-        $x = Filters::getRecursiveItems($category,0);
+        $x = Filters::getRecursiveItems($category, 0);
         $items = collect($x)->unique('id');
 
         $main_unique = $request->get('uniqueId');
@@ -409,7 +409,7 @@ class StockController extends Controller
         $main = null;
         $package_variation = null;
 
-        $html = \view("admin.items._partials.variation_package_item",compact(['items','main_unique','stockItems','main','package_variation']))->render();
+        $html = \view("admin.items._partials.variation_package_item", compact(['items', 'main_unique', 'stockItems', 'main', 'package_variation']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -420,12 +420,12 @@ class StockController extends Controller
         $main_unique = $request->get('uniqueId');
         $main = null;
         $html = '';
-        if($request->type == 'simple_product'){
-            $html = \view("admin.stock._partials.simple_item",compact(['stockItems','main_unique','main']))->render();
-        }elseif($request->type == 'package_product'){
-            $html = \view("admin.stock._partials.package_item",compact(['stockItems','main_unique','main']))->render();
-        }elseif($request->type =='filter'){
-            $html = \view("admin.stock._partials.filter_item",compact(['stockItems','main_unique','main']))->render();
+        if ($request->type == 'simple_product') {
+            $html = \view("admin.stock._partials.simple_item", compact(['stockItems', 'main_unique', 'main']))->render();
+        } elseif ($request->type == 'package_product') {
+            $html = \view("admin.stock._partials.package_item", compact(['stockItems', 'main_unique', 'main']))->render();
+        } elseif ($request->type == 'filter') {
+            $html = \view("admin.stock._partials.filter_item", compact(['stockItems', 'main_unique', 'main']))->render();
         }
 
 
