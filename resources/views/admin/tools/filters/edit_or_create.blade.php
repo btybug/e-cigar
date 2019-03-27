@@ -92,75 +92,17 @@
                     {!! Form::close() !!}
                     <div class="releted__products-panel">
                         <div>
-                            {{--<div class="right-content-view--results">--}}
-                            {{--<ul class="d-flex flex-wrap list-items--wrapper">--}}
-                            {{--<li class="col-md-3 col-sm-6 ">--}}
-                            {{--<div class="single-item">--}}
-                            {{--<div class="img-item">--}}
-                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                            {{--alt="vape">--}}
-                            {{--</div>--}}
-                            {{--<div class="name-item">--}}
-                            {{--<span>Item</span>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--<li class="col-md-3 col-sm-6 ">--}}
-                            {{--<div class="single-item">--}}
-                            {{--<div class="img-item">--}}
-                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                            {{--alt="vape">--}}
-                            {{--</div>--}}
-                            {{--<div class="name-item">--}}
-                            {{--<span>Item</span>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--<li class="col-md-3 col-sm-6 ">--}}
-                            {{--<div class="single-item">--}}
-                            {{--<div class="img-item">--}}
-                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                            {{--alt="vape">--}}
-                            {{--</div>--}}
-                            {{--<div class="name-item">--}}
-                            {{--<span>Item</span>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--<li class="col-md-3 col-sm-6 ">--}}
-                            {{--<div class="single-item">--}}
-                            {{--<div class="img-item">--}}
-                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                            {{--alt="vape">--}}
-                            {{--</div>--}}
-                            {{--<div class="name-item">--}}
-                            {{--<span>Item</span>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--<li class="col-md-3 col-sm-6 ">--}}
-                            {{--<div class="single-item">--}}
-                            {{--<div class="img-item">--}}
-                            {{--<img src="https://www.cigarette-electronique-pas-cher.net/wp-content/uploads/2018/07/vape-3423486_960_720.jpg"--}}
-                            {{--alt="vape">--}}
-                            {{--</div>--}}
-                            {{--<div class="name-item">--}}
-                            {{--<span>Item</span>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</li>--}}
-                            {{--</ul>--}}
-                            {{--</div>--}}
+
                             <div class="product-body">
                                 <ul class="get-all-attributes-tab row filter-children-items">
 
                                 </ul>
                             </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-secondary">Back</button>
-                                <span>Sone text</span>
-                                <button type="button" class="btn btn-secondary">Next</button>
-                            </div>
+                            {{--<div class="modal-footer justify-content-between">--}}
+                                {{--<button type="button" class="btn btn-secondary">Back</button>--}}
+                                {{--<span>Sone text</span>--}}
+                                {{--<button type="button" class="btn btn-secondary">Next</button>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
 
