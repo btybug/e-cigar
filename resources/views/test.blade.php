@@ -61,12 +61,16 @@
                     </ul>
                 </div>
                 <div class="contents-wrapper">
-                    <div class="content-wrap">
+                    <div class="content-wrap shoping-card d-none">
+                        shoping-card
+                    </div>
+                    <div class="content-wrap check-out">
                         <ul class="row">
                             <li class="col-md-3">
                                 <div class="item-content">
                                     <div class="item-photo">
-                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
+                                             alt="photo">
                                     </div>
                                     <div class="item-title">
                                         <span>Title</span>
@@ -76,7 +80,8 @@
                             <li class="col-md-3">
                                 <div class="item-content">
                                     <div class="item-photo">
-                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
+                                             alt="photo">
                                     </div>
                                     <div class="item-title">
                                         <span>Title</span>
@@ -86,7 +91,8 @@
                             <li class="col-md-3">
                                 <div class="item-content">
                                     <div class="item-photo">
-                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
+                                             alt="photo">
                                     </div>
                                     <div class="item-title">
                                         <span>Title</span>
@@ -96,7 +102,8 @@
                             <li class="col-md-3">
                                 <div class="item-content">
                                     <div class="item-photo">
-                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
+                                             alt="photo">
                                     </div>
                                     <div class="item-title">
                                         <span>Title</span>
@@ -106,7 +113,8 @@
                             <li class="col-md-3">
                                 <div class="item-content">
                                     <div class="item-photo">
-                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg" alt="photo">
+                                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
+                                             alt="photo">
                                     </div>
                                     <div class="item-title">
                                         <span>Title</span>
@@ -115,12 +123,18 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="content-wrap payment-wrapper d-none">
+payement
+                    </div>
+                    <div class="content-wrap confirm-wrapper d-none">
+                        confirm
+                    </div>
                     <div class="d-flex flex-wrap justify-content-between">
                         <div class="back-item">
-                            <a href="#" class="btn btn-secondary">Back</a>
+                            <button class="btn btn-secondary back-btn">Back</button>
                         </div>
                         <div class="next-item">
-                            <a href="#" class="btn btn-secondary">Next</a>
+                            <button class="btn btn-secondary next-btn">Next</button>
                         </div>
                     </div>
                 </div>
@@ -129,4 +143,35 @@
     </main>
 @stop
 @section('js')
+    <script>
+        $('body').on('click','.shopping-cart_wrapper .item-content',function () {
+            $(this).toggleClass('active');
+        });
+        $('body').on('click','.shopping-cart_wrapper .next-btn',function (e) {
+            e.preventDefault();
+
+            $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
+            $($($('.shopping-cart-head').find('.active')[0]).closest('li').next().find('.item')[0]).addClass('active');
+            $($('.shopping-cart-head').find('.active')[0]).removeClass('active');
+
+            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
+            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
+
+            !$('.confirm-wrapper').hasClass('d-none') && $('.next-btn').prop('disabled',true);
+            $('.back-btn').prop('disabled',false)
+        });
+        $('body').on('click','.shopping-cart_wrapper .back-btn',function (e) {
+            e.preventDefault();
+
+            $($('.shopping-cart-head').find('.active')[0]).removeClass('visited');
+            $($($('.shopping-cart-head').find('.active')[0]).closest('li').prev().find('.item')[0]).addClass('active');
+            $($('.shopping-cart-head').find('.active')[1]).removeClass('active');
+
+            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
+            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
+
+            !$('.shoping-card').hasClass('d-none') && $('.back-btn').prop('disabled',true);
+            $('.next-btn').prop('disabled',false)
+        });
+    </script>
 @stop

@@ -1034,11 +1034,15 @@ td.shp-cart-table_price-td {
     border-top: 1px solid #ccc;
     font-weight: bold;
 }
-.shopping-cart_wrapper .content-wrap .item-content{
-
-}
 .shopping-cart_wrapper .content-wrap .item-content img{
     height: 100%;
     width: 100%;
     object-fit: cover;
+}
+.shopping-cart_wrapper .content-wrap .item-content.active{
+    border: 1px solid #000000;
+    box-shadow: 0px 0 4px 3px #f39c12;
+}
+.shopping-cart_wrapper .content-wrap{
+    min-height: 408px;
 }
