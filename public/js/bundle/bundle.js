@@ -2796,6 +2796,9 @@ $(document).ready(function () {
                     Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                     new_qty();
                     group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
+
+                    var price = $(this).closest('[data-price]').attr('data-price');
+                    $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
                 });
 
                 //********************//
@@ -2811,6 +2814,9 @@ $(document).ready(function () {
                     Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                     new_qty();
                     group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
+
+                    var price = $(this).closest('[data-price]').attr('data-price');
+                    $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
                 });
 
                 //******************//
@@ -2914,6 +2920,9 @@ $(document).ready(function () {
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                 new_qty();
+
+                var price = $(this).closest('[data-price]').attr('data-price');
+                $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
             });
 
             $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
@@ -2923,6 +2932,9 @@ $(document).ready(function () {
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                 new_qty();
+
+                var price = $(this).closest('[data-price]').attr('data-price');
+                $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
             });
         });
     });

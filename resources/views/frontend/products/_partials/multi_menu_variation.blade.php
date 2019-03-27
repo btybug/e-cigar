@@ -24,7 +24,7 @@
         <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
             @if($variation->price_per =='item')
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
-              {{ convert_price($variation->price,$currency) }}<sub class="text-muted" style="opacity: 0.5">/item</sub>
+              {{ convert_price($variation->price,$currency) }}
             </span>
             @endif
         </div>

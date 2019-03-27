@@ -13,7 +13,7 @@
 
 <div class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}">
     @foreach($variation as $item)
-        <div class="d-flex flex-wrap mb-2">
+        <div class="d-flex flex-wrap mb-2" data-price="{{ $item->price }}">
             <div class="col-sm-10 align-self-center">
               <div class="row justify-content-between product-list-item">
                 <div class="align-self-center checkbox-wrap">

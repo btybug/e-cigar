@@ -170,6 +170,9 @@ $(document).ready(function() {
                         Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                         new_qty();
                         group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+
+                        const price = $(this).closest('[data-price]').attr('data-price');
+                        $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
                     });
 
                                                 //********************//
@@ -186,6 +189,9 @@ $(document).ready(function() {
                             Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                         new_qty();
                         group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+
+                        const price = $(this).closest('[data-price]').attr('data-price');
+                        $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
                     });
 
                                                 //******************//
@@ -304,6 +310,9 @@ $(document).ready(function() {
                 const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                 new_qty();
+
+                const price = $(this).closest('[data-price]').attr('data-price');
+                $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
             });
 
 
@@ -316,6 +325,9 @@ $(document).ready(function() {
                 Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())
                 && input.val(Number(input.val()) + 1);
                 new_qty();
+
+                const price = $(this).closest('[data-price]').attr('data-price');
+                $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
             });
         });
     });
