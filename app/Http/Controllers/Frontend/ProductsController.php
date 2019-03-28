@@ -196,7 +196,7 @@ class ProductsController extends Controller
     {
         $variations = StockVariation::whereIn('id',$request->get('ids',[]));
         $selectElementId = null;
-        $html = \view("frontend.products._partials.render_variations",compact(['variation','selectElementId']))->render();
+        $html = \view("frontend.products._partials.render_variations",compact(['variations','selectElementId']))->render();
 
         return \Response::json(['error' => false,'html' => $html]);
     }
