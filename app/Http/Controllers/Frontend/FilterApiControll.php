@@ -45,7 +45,7 @@ class FilterApiControll extends Controller
             unset($filters[$key]);
         };
 
-        $html = $this->view("filters", compact(['children', 'filters']))->render();
+        $html = $this->view("filters", compact([ 'filters']))->render();
         $wizard = $this->view("wizard", compact(['children', 'filters']))->render();
         return \Response::json(['error' => false, 'filters' => $html, 'wizard'=>$wizard,'items_html' => $items_html, 'type' => $type]);
     }
