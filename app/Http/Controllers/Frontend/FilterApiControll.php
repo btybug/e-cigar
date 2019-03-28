@@ -10,11 +10,12 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class FilterApiControll extends Controller
 {
     protected $view='filters';
-    public function postGetNext(\Request $request)
+    public function postGetNext(Request $request)
     {
         $children = $request->get('filters', []);
         $filters = collect([]);
