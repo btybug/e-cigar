@@ -93,7 +93,7 @@
                 filter.push($(actv).closest('[data-id]').attr('data-id'))
             });
             console.log(filter)
-            $.ajax({
+            $(active).find('.active').length === 0 ? alert('select item') : $.ajax({
                 type: "post",
                 url: "/filters",
                 cache: false,
