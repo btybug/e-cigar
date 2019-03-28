@@ -38,7 +38,7 @@ class FilterApiControll extends Controller
         $type = 'filter';
         $items_html = '';
         if (!$filters->last()->children()->exists()) {
-            $items = $filters->last()->items()->skip(0)->take(10)->get();
+            $items = $filters->last()->items;
             $type = 'items';
             $items_html = $this->view("items", compact(['items']))->render();
             isset($filters[$key]);
