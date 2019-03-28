@@ -191,4 +191,28 @@ class ProductsController extends Controller
 
         return \Response::json(['error' => false,'html' => $html]);
     }
+
+    public function postSelectItems(Request $request)
+    {
+        $items = StockVariation::where('variation_id',$request->group)->get();
+        $stickers = [];
+
+        $html = \view("frontend.products._partials.select_popup_items", compact(['items', 'stickers']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function postSearchItems(Request $request)
+    {
+        $items = Items::leftJoin('item_specifications', 'items.id', 'item_specifications.item_id')
+            ->whereNotIn('items.id', $request->get('items', []))
+            ->whereIn('item_specifications.sticker_id', $request->get('stickers', []))
+            ->where('status', Items::ACTIVE)
+            ->select('items.*')->get();
+//        $items = Items::whereNotIn('id', $request->get('items', []))->get();
+
+        $html = \view("admin.stock._partials.items_render", compact(['items']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }

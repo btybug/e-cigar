@@ -64,6 +64,8 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/get-variation-menu-raw', 'Frontend\ProductsController@getVariationMenuRaw')->name('product_get_variation_menu_raw');
     Route::post('/add-to-favorites', 'Frontend\ProductsController@attachFavorite')->name('product_add_to_favorites');
     Route::post('/remove-from-favorites', 'Frontend\ProductsController@detachFavorite')->name('product_remove_from_favorites');
+    Route::post('/select-items', 'Frontend\ProductsController@postSelectItems')->name('product_variation_items');
+    Route::post('/search-items', 'Frontend\ProductsController@postSearchItems')->name('product_search_items');
     Route::get('/{type?}', 'Frontend\ProductsController@index')->name('categories_front');
     Route::group(['prefix' => '{type}'], function () {
         Route::get('/{slug}', 'Frontend\ProductsController@getSingle')->name('product_single');

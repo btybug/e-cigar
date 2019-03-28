@@ -13,7 +13,7 @@
         $id = (($vSettings->count_limit > 1) ? "multi_v_select_$vSettings->id" : "single_v_select_$vSettings->id");
         $class = (($vSettings->count_limit > 1) ? "multi_v_select" : "");
     @endphp
-    <button type="button" class="btn btn-primary rounded-0" data-toggle="modal" data-target="#popUpModal">
+    <button type="button" class="btn btn-primary rounded-0 popup-select" data-group="{{ $vSettings->variation_id }}" >
         Select {{ $vSettings->count_limit }} items
     </button>
 </div>

@@ -294,6 +294,7 @@
                                                {{--Start--}}
 
                                                @foreach($vape->related_products as $related_product)
+                                                   @if(count($related_product->variations))
                                                    <div class="col-md-3 products-wrap_col">
                                                        <div class="product-card position-relative">
                                                            <div class="product-card_view position-relative">
@@ -386,6 +387,7 @@
                                                            </div>
                                                        </div>
                                                    </div>
+                                                   @endif
                                                @endforeach
                                                {{--the end--}}
                                            </div>
@@ -486,76 +488,7 @@
    <div class="modal fade" id="popUpModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel" aria-hidden="true">
        <div class="modal-dialog" role="document">
            <div class="modal-content">
-               <div class="modal-header">
-                   <div class="col-sm-12 d-flex align-items-center">
-                       <div class="col-sm-4">
-                           <h4 class="modal-title text-white">Select Items</h4>
-                       </div>
-                       <div class="col-sm-6 d-flex align-items-center">
-                           <label for="select_items" class="text-white">
-                               Search
-                           </label>
-                           <select name="filt" id="select_items" class="select-2 main-select main-select-2arrows select2-hidden-accessible" style="width: 100%" multiple>
-                               <option value="150">Number 150</option>
-                               <option value="151">Number 151</option>
-                               <option value="152">Number 152</option>
-                               <option value="153">Number 153</option>
-                           </select>
 
-                       </div>
-                       <div class="col-sm-2">
-                           <button type="button" class="close b_close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                       </div>
-                   </div>
-               </div>
-               <div class="modal-body">
-                   <ul class="row">
-                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
-                           <div class="single-item">
-                               <div class="img-item">
-                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
-                               </div>
-                               <div class="name-item">
-                                   <span>Item</span>
-                               </div>
-                           </div>
-                       </li>
-                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
-                           <div class="single-item">
-                               <div class="img-item">
-                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
-                               </div>
-                               <div class="name-item">
-                                   <span>Item</span>
-                               </div>
-                           </div>
-                       </li>
-                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
-                           <div class="single-item">
-                               <div class="img-item">
-                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
-                               </div>
-                               <div class="name-item">
-                                   <span>Item</span>
-                               </div>
-                           </div>
-                       </li>
-                       <li class="col-lg-2 col-md-3 col-sm-6 mb-2 single-item-wrapper">
-                           <div class="single-item">
-                               <div class="img-item">
-                                   <img src="/public/images/no_image.png" class="img-fluid" alt="img">
-                               </div>
-                               <div class="name-item">
-                                   <span>Item</span>
-                               </div>
-                           </div>
-                       </li>
-                   </ul>
-               </div>
-               <div class="modal-footer bord-top">
-                   <button type="button" class="btn btn-danger b_close" data-dismiss="modal">Close</button>
-                   <button type="button" class="btn btn-primary b_save">Save changes</button>
-               </div>
            </div>
        </div>
    </div>
@@ -1079,6 +1012,29 @@
             });
 
             $("#select_items").select2();
+
+            $("body").on('click','.popup-select',function () {
+                let group = $(this).attr('data-group');
+                $.ajax({
+                    type: "post",
+                    url: "/products/select-items",
+                    cache: false,
+                    data: {
+                        group: group
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $("#popUpModal .modal-content").html(data.html);
+                            $("#popUpModal").modal();
+                        } else {
+                            alert("error");
+                        }
+                    }
+                })
+            });
 
             $('#popUpModal').on('click', '.b_close', function() {
                 $(".single-item-wrapper").removeClass('active')
