@@ -169,7 +169,7 @@ $(document).ready(function() {
 
                     const new_qty = function() {
                         qty = 0;
-                        console.log(id, 'id');
+                        console.log(id, 'package_productid');
                         group.closest('.product-single-info_row').find('.product-qty').each(function() {
                             qty += Number($(this).val());
                         });
@@ -439,7 +439,145 @@ $(document).ready(function() {
                 }) : 0;
                 const $total = $('.price-place-summary');
                 $total.html(`$${single_product_price + total_price}`);
+                console.log('pppp');
+
             });
+        });
+        let dg = null;
+        $('body').on('click', '.popup-select', function() {
+            dg = $(this).attr('data-group');
+        });
+        $('body').on('click', '.single-item-wrapper .single-item', function() {
+            $(this).closest('.single-item-wrapper').toggleClass('active');
+        });
+        $('body').on('click', '.modal-footer .b_save', function() {
+            const items_array = [];
+            $('.modal-body').find('.single-item-wrapper').each(function() {
+                $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
+            });
+            console.log(items_array)
+            fetch("/products/get-variation-menu-raws", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({ids: items_array})
+            })
+                .then(function (response) {
+                    return response.json();
+
+                })
+                .then(function (json) {
+                    // console.log(json.html);
+                    let prices = 0;
+                    const limit = $($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.limit')[0]).attr('data-limit');
+                    let qty = 0;
+
+                    const new_qty = function() {
+                        qty = 0;
+                        $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty').each(function() {
+                            qty += Number($(this).val());
+                        });
+                        console.log(qty, 'qty');
+                    };
+
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').append(json.html);
+                    $('#popUpModal').modal('hide');
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]').each(function(){
+                        prices += Number($(this).attr('data-price'));
+                    });
+console.log($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]'), prices)
+                    const $total = $('.price-place-summary');
+                    $total.html(`$${Number($total.text().trim().slice(1)) + prices}`);
+                    console.log('dg', dg);
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click', '.delete-menu-item', function() {
+                        $total.html(`$${Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price'))}`);
+
+                        $(this).closest('.menu-item-selected').remove();
+
+                        // const prices_array = $('.product-qty').toArray().map(function(el) {
+                        //     const price = $(el).closest('[data-price]').attr('data-price');
+                        //     const count = $(el).val();
+                        //     return price * count;
+                        // });
+                        // const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                        //     return accumulator + a;
+                        // }) : 0;
+                        // const $total = $('.price-place-summary');
+                        // $total.html(`$${single_product_price + price}`);
+                    });
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+                        if(Number(input.val()) > 1) {
+                            input.val(Number(input.val()) - 1);
+                            const price = Number($(this).closest('[data-price]').attr('data-price'));
+                            $(this).closest('[data-price]').find('.price-placee').html(`$${price * Number(input.val())}`);
+
+                            const $total = $('.price-place-summary');
+                            $total.html(`$${Number($total.text().trim().slice(1)) - price}`);
+                        }
+
+                        // group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                        //
+
+
+
+                        // const prices_array = $('.product-qty').toArray().map(function(el) {
+                        //     const price = $(el).closest('[data-price]').attr('data-price');
+                        //     const count = $(el).val();
+                        //     return price * count;
+                        // });
+                        // const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                        //     return accumulator + a;
+                        // }) : 0;
+                        // const $total = $('.price-place-summary');
+                        // $total.html(`$${single_product_price + total_price}`);
+                    });
+
+                    //********************//
+                    //*******+plus+*******//
+                    //********************//
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                        new_qty();
+                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+                        console.log(Number(input.val()), Number(limit), Number(qty), Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
+                        if(Number(input.val()) < Number(limit) - Number(qty) +
+                        Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())) {
+                            input.val(Number(input.val()) + 1);
+                            new_qty();
+                            const price = Number($(this).closest('[data-price]').attr('data-price'));
+                            $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+
+
+                            const $total = $('.price-place-summary');
+                            $total.html(`$${Number($total.text().trim().slice(1)) + price}`);
+                        };
+
+
+
+                        // const prices_array = $('.product-qty').toArray().map(function(el) {
+                        //     const price = $(el).closest('[data-price]').attr('data-price');
+                        //     const count = $(el).val();
+                        //     return price * count;
+                        // });
+                        // const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                        //     return accumulator + a;
+                        // }) : 0;
+                        // const $total = $('.price-place-summary');
+                        // $total.html(`$${single_product_price + total_price}`);
+                    });
+                });
         });
     });
 });
