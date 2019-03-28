@@ -33,7 +33,7 @@
                             </div>
                             <div class="contents-wrapper">
                                 <div class="content-wrap shoping-card">
-                                    <ul class="row">
+                                    <ul class="row content">
                                         @foreach($category->filters as $filter)
                                             <li class="col-md-3" data-id="{!! $filter->id !!}">
                                                 <div class="item-content">
@@ -49,61 +49,7 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                                <div class="content-wrap payment-wrapper d-none">
-                                    payement
-                                </div>
-                                <div class="content-wrap confirm-wrapper d-none">
-                                    <ul class="row">
-                                        <li class="col-md-3">
-                                            <div class="wrap-item position-relative">
-                                                <a href="#" class="item-link">
-                                        <span class="item-img">
-                                            <img
-                                                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
-                                                alt="item">
-                                        </span>
-                                                    <span class="name">items</span>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="col-md-3">
-                                            <div class="wrap-item position-relative">
-                                                <a href="#" class="item-link">
-                                        <span class="item-img">
-                                            <img
-                                                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
-                                                alt="item">
-                                        </span>
-                                                    <span class="name">items</span>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="col-md-3">
-                                            <div class="wrap-item position-relative">
-                                                <a href="#" class="item-link">
-                                        <span class="item-img">
-                                            <img
-                                                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
-                                                alt="item">
-                                        </span>
-                                                    <span class="name">items</span>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li class="col-md-3">
-                                            <div class="wrap-item position-relative">
-                                                <a href="#" class="item-link">
-                                        <span class="item-img">
-                                            <img
-                                                src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/intermediary/f/c0481d96-83b9-423e-a234-42a226980db3/d9xw3a0-a23207d9-a507-4fef-a3ca-4c5c1bf47d64.jpg/v1/fill/w_359,h_250,q_70,strp/vape_girl_by_asiamckinley_ann_d9xw3a0-250t.jpg"
-                                                alt="item">
-                                        </span>
-                                                    <span class="name">items</span>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+
                                 <div class="d-flex flex-wrap justify-content-between border-top pt-2">
                                     <div class="back-item">
                                         <button class="btn btn-secondary back-btn">Back</button>
@@ -159,7 +105,13 @@
                 },
                 success: function (data) {
                     if (!data.error) {
-                        console.log(data)
+                        console.log(data.wizard);
+                        $('.nav-pills').append(data.wizard);
+                        if(data.type === "filter") {
+                            $('.contents-wrapper .content').html(data.filters);
+                        } else if(data.type === "items") {
+                            $('.contents-wrapper .content').html(data.items_html);
+                        }
                     } else {
                         alert("error");
                     }
