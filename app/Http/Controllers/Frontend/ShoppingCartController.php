@@ -44,7 +44,7 @@ class ShoppingCartController extends Controller
 
     public function getCart()
     {
-        $items = $this->cartService->getCartItems();
+        $items = Cart::getContent();
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
@@ -185,14 +185,25 @@ class ShoppingCartController extends Controller
 
     public function postUpdateQty(Request $request)
     {
-        $qty = ($request->condition) ? 1 : -1;
 
+        $qty = ($request->condition) ? 1 : -1;
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
-        if (\Auth::check()) {
-            $this->cartService->update($request->uid, $qty, $request->condition, $request->value);
+        if($request->condition == 'inner'){
+            Cart::update($request->uid, array(
+                'quantity' => array(
+                    'relative' => false,
+                    'value' => $request->value
+                )));
+        }else{
+            Cart::update($request->uid, array(
+                'quantity' => $qty
+            ));
+        }
 
+
+        if (\Auth::check()) {
             $default_shipping = \Auth::user()->addresses()->where('type', 'default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
@@ -215,8 +226,6 @@ class ShoppingCartController extends Controller
                 }
             }
 
-        } else {
-            $this->cartService->update($request->uid, $qty, $request->condition, $request->value);
         }
 
         $items = $this->cartService->getCartItems();
@@ -260,7 +269,7 @@ class ShoppingCartController extends Controller
             $this->cartService->remove($request->uid);
         }
 
-        $items = $this->cartService->getCartItems();
+        $items = Cart::getContent();
         $html = $this->view('_partials.cart_table', compact(['items', 'default_shipping', 'shipping', 'geoZone']))->render();
         $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 

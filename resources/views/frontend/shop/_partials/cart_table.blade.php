@@ -126,7 +126,7 @@
 
                                                 <input data-uid="{{ $key }}"
                                                        class="qtycount field-input w-100 h-100 font-23 text-center border-0 product-qty-select"
-                                                       min="number" name="" type="number" value="{{ $stock->quantity }}">
+                                                       min="number" name="" type="number" value="{{ $item->quantity }}">
                                                 <!--plus qty-->
                                                 <span data-type="plus" data-condition="{{ true }}"
                                                       data-uid="{{ $key }}"
