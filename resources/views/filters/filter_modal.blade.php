@@ -133,31 +133,60 @@
         $('body').on('click', '.shopping-cart_wrapper .content-wrap.confirm-wrapper .wrap-item', function () {
             $(this).toggleClass('active');
         });
+
+        const filter = [];
+
+
         $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
             e.preventDefault();
-
-            $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
-            $($($('.shopping-cart-head').find('.active')[0]).closest('li').next().find('.item')[0]).addClass('active');
-            $($('.shopping-cart-head').find('.active')[0]).removeClass('active');
-
-            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
-            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
-
-            !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none');
-            $('.back-btn').removeClass('d-none');
+            let active = $('.content-wrap').toArray().find(function(contentWrap) {
+                return !$(contentWrap).hasClass('d-none')
+            });
+            console.log(active)
+            $(active).find('.active').toArray().map(function(actv) {
+                filter.push($(actv).closest('[data-id]').attr('data-id'))
+            });
+            console.log(filter)
+            $.ajax({
+                type: "post",
+                url: "/filters",
+                cache: false,
+                data: {
+                    filters: filter
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        console.log(data)
+                    } else {
+                        alert("error");
+                    }
+                }
+            })
+            // $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
+            // $($($('.shopping-cart-head').find('.active')[0]).closest('li').next().find('.item')[0]).addClass('active');
+            // $($('.shopping-cart-head').find('.active')[0]).removeClass('active');
+            //
+            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
+            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
+            //
+            // !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none');
+            // $('.back-btn').removeClass('d-none');
         });
         $('body').on('click', '.shopping-cart_wrapper .back-btn', function (e) {
             e.preventDefault();
 
-            $($('.shopping-cart-head').find('.active')[0]).removeClass('visited');
-            $($($('.shopping-cart-head').find('.active')[0]).closest('li').prev().find('.item')[0]).addClass('active');
-            $($('.shopping-cart-head').find('.active')[1]).removeClass('active');
-
-            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
-            $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
-
-            !$('.content-wrap').first().hasClass('d-none') && $('.back-btn').addClass('d-none');
-            $('.next-btn').removeClass('d-none');
+            // $($('.shopping-cart-head').find('.active')[0]).removeClass('visited');
+            // $($($('.shopping-cart-head').find('.active')[0]).closest('li').prev().find('.item')[0]).addClass('active');
+            // $($('.shopping-cart-head').find('.active')[1]).removeClass('active');
+            //
+            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
+            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
+            //
+            // !$('.content-wrap').first().hasClass('d-none') && $('.back-btn').addClass('d-none');
+            // $('.next-btn').removeClass('d-none');
         });
     </script>
 @endpush
