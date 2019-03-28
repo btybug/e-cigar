@@ -726,11 +726,16 @@
                             products
                         }
                     });
+
+                    const filtered_variations = variations.filter((variation) => {
+                        return variation.products.length > 0;
+                    });
                     const product_data = {
                         product_id,
                         product_qty,
-                        variations
+                        variations: filtered_variations
                     };
+
                     console.log(product_data);
                     $.ajax({
                         type: "post",

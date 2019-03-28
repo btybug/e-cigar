@@ -2740,6 +2740,28 @@ $(document).ready(function () {
     });
 
     $("#singleProductPageCnt").fadeIn(function () {
+        //--------------------------------single_product
+        var single_product_price = 0;
+        $('.simple_product').each(function (index, product) {
+            if ($(product).find('input.custom-control-input').length === 0) {
+                single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
+            } else {
+                $($(product).find('input.custom-control-input')[0]).is(':checked') && (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
+                $($(product).find('input.custom-control-input')[0]).on('change', function () {
+                    var $total = $('.price-place-summary');
+                    if ($(this).is(':checked')) {
+                        single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
+                        $total.html("$" + (Number($total.text().trim().slice(1)) + Number($($(product).find('[data-price]')[0]).attr('data-price'))));
+                    } else {
+                        single_product_price -= Number($($(product).find('[data-price]')[0]).attr('data-price'));
+                        $total.html("$" + (Number($total.text().trim().slice(1)) - Number($($(product).find('[data-price]')[0]).attr('data-price'))));
+                    }
+                });
+            }
+            // const price =
+        });
+        var $total = $('.price-place-summary');
+        $total.html("$" + single_product_price);
         var msd = $(".multi_v_select");
         //--------------------------------select
         msd && msd.each(function (i, e) {
@@ -2809,7 +2831,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + total_price);
+                    $total.html("$" + (single_product_price + total_price));
                 });
 
                 //********************//
@@ -2838,7 +2860,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + total_price);
+                    $total.html("$" + (single_product_price + total_price));
                 });
 
                 //******************//
@@ -2887,7 +2909,7 @@ $(document).ready(function () {
                                 return accumulator + a;
                             }) : 0;
                             var $total = $('.price-place-summary');
-                            $total.html("$" + price);
+                            $total.html("$" + (single_product_price + price));
                         });
 
                         var prices_array = $('.product-qty').toArray().map(function (el) {
@@ -2899,7 +2921,7 @@ $(document).ready(function () {
                             return accumulator + a;
                         }) : 0;
                         var $total = $('.price-place-summary');
-                        $total.html("$" + price);
+                        $total.html("$" + (single_product_price + price));
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -2925,7 +2947,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + price);
+                    $total.html("$" + (single_product_price + price));
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -2975,7 +2997,7 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + price);
+                $total.html("$" + (single_product_price + price));
             });
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
@@ -3001,7 +3023,7 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + total_price);
+                $total.html("$" + (single_product_price + total_price));
             });
 
             $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
@@ -3024,7 +3046,7 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + total_price);
+                $total.html("$" + (single_product_price + total_price));
             });
         });
     });

@@ -8,7 +8,7 @@ $variations = collect($model->variations)->groupBy('variation_id');
             $vSettings = $variation->first();
         @endphp
         <div class="product-single-info_row options-group">
-            <div class="d-flex flex-wrap align-items-center single_product" data-group-id="{{ $vSettings->variation_id }}">
+            <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
                 @if($vSettings->type == 'simple_product')
                     <div class="col-sm-10 pl-0 d-flex" data-price="{{ $vSettings->price }}" data-id="{{ $vSettings->id }}">
                         @if(! $vSettings->is_required)
