@@ -2891,3 +2891,6 @@ outline: none;
 .selected-item_popup-wrapper .continue-shp-wrapp_qty{
     height: 45px;
 }
+.body-over-hidden{
+    overflow: hidden;
+}

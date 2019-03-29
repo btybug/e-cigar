@@ -3398,6 +3398,7 @@ function openSidebar(btn, sidebar) {
     btn.on('click', function (e) {
 
         e.stopPropagation();
+        $('body').addClass('body-over-hidden');
         $(this).toggleClass('active');
 
         if ($('.hidden-sidebar').removeClass('show')) {
@@ -3415,6 +3416,7 @@ function openSidebar(btn, sidebar) {
         }
         if (!$(e.target).closest(sidebar).length) {
             sidebar.removeClass('show');
+            $('body').removeClass('body-over-hidden');
             $('.dark-bg_body').removeClass('show');
         }
     });
