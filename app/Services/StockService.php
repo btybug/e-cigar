@@ -158,8 +158,8 @@ class StockService
             foreach ($data as $variation_id => $datum) {
                 if($datum['type'] == 'package_product' || $datum['type'] == 'filter'){
                     $newData = [];
-                    $newData['count_limit'] = $datum['count_limit'];
-                    $newData['min_count_limit'] = $datum['min_count_limit'];
+                    $newData['count_limit'] = ($datum['count_limit']) ?? 0;
+                    $newData['min_count_limit'] = ($datum['min_count_limit'])??0;
                     $newData['title'] = $datum['title'];
                     $newData['type'] = $datum['type'];
                     $newData['is_required'] = $datum['is_required'];
