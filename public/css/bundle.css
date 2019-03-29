@@ -16221,6 +16221,17 @@ outline: none;
 .body-over-hidden{
     overflow: hidden;
 }
+.popup-modal-footer{
+    padding: 5px 15px;
+}
+.popup-modal-footer .selected-items_popup{
+    height: 71px;
+    margin-left: 142px;
+    align-items: center;
+}
+.popup-modal-footer .selected-item_popup{
+    margin-bottom: 5px;
+}
 body {
     display: flex;
     flex-direction: column;

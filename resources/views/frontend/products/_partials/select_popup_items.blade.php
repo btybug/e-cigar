@@ -1,11 +1,7 @@
 <div class="modal-header">
   <div class="col-sm-12 d-flex align-items-center">
     <div class="col-sm-4">
-        @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
-            <h4 class="modal-title text-white">{{ $vSettings->title }} (you can select one option)</h4>
-        @else
-            <h4 class="modal-title text-white">{{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)</h4>
-        @endif
+      <h4 class="modal-title text-white title_popup"></h4>
     </div>
     <div class="col-sm-6 d-flex align-items-center">
       <label for="select_items" class="text-white">
@@ -25,12 +21,13 @@
   <ul class="row">
     @include("frontend.products._partials.select_popup_item_render")
   </ul>
-  <div class="row selected-items_popup mt-auto">
+
+</div>
+<div class="modal-footer bord-top d-flex justify-content-between popup-modal-footer">
+  <div class="row selected-items_popup w-100 main-scrollbar">
 
   </div>
-</div>
-<div class="modal-footer bord-top">
-  <button type="button" class="btn btn-primary b_save" data-section-id="">Add selected options</button>
+  <button type="button" class="btn btn-primary b_save ml-2" data-section-id="">Add selected options</button>
 </div>
 
 
