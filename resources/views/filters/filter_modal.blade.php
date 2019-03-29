@@ -83,7 +83,7 @@
 const first_category_id=$('[name="first_category_id"]').val()
 
 
-        const filter = [];
+        const filter = [first_category_id];
         console.log(filter);
 
         $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
