@@ -41,7 +41,7 @@ class FilterApiControll extends Controller
         }
         $type = 'filter';
         $items_html = '';
-        if (!$filters->last()->children()->exists()) {
+        if ($filters->count() && !$filters->last()->children()->exists()) {
             $items = $filters->last()->items;
             $type = 'items';
             $items_html = $this->view("items", compact(['items']))->render();

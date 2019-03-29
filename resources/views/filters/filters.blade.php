@@ -1,4 +1,4 @@
-@if($filters->count())
+@if(!$filters->count())
     @foreach($category->filters as $key=>$filter)
         <li class="col-md-3" data-id="{!! $filter->id !!}">
             <div class="item-content">
@@ -11,7 +11,7 @@
             </div>
         </li>
     @endforeach
-    @endif
+    @else
 
 @foreach($filters->last()->children as $key=>$filter)
             <li class="col-md-3" data-id="{!! $filter->id !!}">
@@ -25,3 +25,4 @@
                 </div>
             </li>
 @endforeach
+@endif
