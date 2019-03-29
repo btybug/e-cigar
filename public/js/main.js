@@ -443,19 +443,116 @@ $(document).ready(function() {
 
             });
         });
+
+        //--------------------------------List end
         let dg = null;
-        $('body').on('click', '.popup-select', function() {
+        let popup_limit = 0;
+        $("body").on('click','.popup-select',function () {
             dg = $(this).attr('data-group');
+            let group = $(this).attr('data-group');
+            popup_limit = $(this).closest('.limit').attr('data-limit');
+            const selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function(item) {
+                console.log($(item).attr('data-id'));
+                return $(item).attr('data-id');
+            });
+            console.log(selectedIds, 'selectedIds');
+            $.ajax({
+                type: "post",
+                url: "/products/select-items",
+                cache: false,
+                data: {
+                    group,
+                    selectedIds
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $("#popUpModal .modal-content").html(data.html);
+                        $("#popUpModal").modal();
+                    } else {
+                        alert("error");
+                    }
+                }
+            });
         });
-        $('body').on('click', '.single-item-wrapper .single-item', function() {
-            $(this).closest('.single-item-wrapper').toggleClass('active');
+
+        const popup_qty = function() {
+            let qty = 0;
+            $('.selected-items_popup').find('.popup_field-input').each(function() {
+                qty += Number($(this).val());
+            });
+            return qty;
+        };
+
+        $("body").on('click', ".single-item-wrapper .single-item", function(ev) {
+            console.log('*******', this);
+            console.log(popup_limit, $(".single-item-wrapper.active").length);
+            const id = $(this).closest(".single-item-wrapper").attr('data-id');
+            if(popup_limit > popup_qty() && !$(this).closest(".single-item-wrapper").hasClass('active')) {
+                console.log($(this).closest(".single-item-wrapper"));
+                $(this).closest(".single-item-wrapper").addClass('active');
+                $('.selected-items_popup').append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
+                              <div class="d-flex justify-content-between">
+                                <div class="align-self-center">
+                                  Pods
+                                </div>
+                                <div class="d-flex align-items-center justify-content-end">
+                                  <div class="mr-1">Qty</div>
+                                  <div class="continue-shp-wrapp_qty position-relative w-50 mr-0">
+                                    <!--minus qty-->
+                                    <span data-type="minus"
+                                          class="d-inline-block pointer position-absolute selected-item-popup_qty-minus qty-count">
+                                                    <svg viewBox="0 0 20 3" width="20px" height="3px">
+                                                        <path fill-rule="evenodd" fill="rgb(214, 217, 225)"
+                                                              d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
+                                                    </svg>
+                                                </span>
+                                    <input class="popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select" min="number" name=""
+                                           type="number" value="1">
+                                    <!--plus qty-->
+                                    <span data-type="plus"
+                                          class="d-inline-block pointer position-absolute selected-item-popup_qty-plus qty-count">
+                                                    <svg viewBox="0 0 20 20" width="20px" height="20px">
+                                                        <path fill-rule="evenodd" fill="rgb(211, 214, 223)"
+                                                              d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"></path>
+                                                    </svg>
+                                                </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>`);
+            } else if($(this).closest(".single-item-wrapper").hasClass('active')) {
+                $(`[data-id-popup="${id}"]`).remove();
+                $(this).closest(".single-item-wrapper").removeClass('active');
+            }
         });
+
+        $('body').on('click', '.selected-item-popup_qty-plus' , function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            if(popup_limit > popup_qty()) {
+                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
+            }
+        });
+
+        $('body').on('click', '.selected-item-popup_qty-minus' , function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
+        });
+
+        $('#popUpModal').on('click', '.b_close', function() {
+            $(".single-item-wrapper").removeClass('active');
+        });
+
         $('body').on('click', '.modal-footer .b_save', function() {
             const items_array = [];
             $('.modal-body').find('.single-item-wrapper').each(function() {
                 $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
             });
-            console.log(items_array)
+            console.log(items_array);
             fetch("/products/get-variation-menu-raws", {
                 method: "post",
                 headers: {
@@ -485,11 +582,28 @@ $(document).ready(function() {
                         console.log(qty, 'qty');
                     };
 
-
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').append(json.html);
+                    const popup_items_qty = [];
+                    $(`.selected-items_popup`).find('.popup_field-input').each(function() {
+                        popup_items_qty.push({
+                            id: $(this).closest('.selected-item_popup').attr('data-id-popup'),
+                            value: $(this).val()
+                        });
+                    });
+                    console.log(popup_items_qty)
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.field-input').each(function() {
+                        const d_id = $(this).attr('data-id');
+                        const value = popup_items_qty.find((el) => {
+                            return el.id === d_id;
+                        }).value;
+                        $(this).val(value);
+                        $(this).closest('.menu-item-selected').find('.price-placee')
+                            .html('$'+ Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
+                    });
                     $('#popUpModal').modal('hide');
+
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]').each(function(){
-                        prices += Number($(this).attr('data-price'));
+                        prices += Number($(this).attr('data-price'))*Number($(this).find('.field-input').val());
                     });
 console.log($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]'), prices)
                     const $total = $('.price-place-summary');

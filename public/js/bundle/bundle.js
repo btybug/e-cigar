@@ -3050,13 +3050,81 @@ $(document).ready(function () {
                 console.log('pppp');
             });
         });
+
+        //--------------------------------List end
         var dg = null;
-        $('body').on('click', '.popup-select', function () {
+        var popup_limit = 0;
+        $("body").on('click', '.popup-select', function () {
             dg = $(this).attr('data-group');
+            var group = $(this).attr('data-group');
+            popup_limit = $(this).closest('.limit').attr('data-limit');
+            var selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function (item) {
+                console.log($(item).attr('data-id'));
+                return $(item).attr('data-id');
+            });
+            console.log(selectedIds, 'selectedIds');
+            $.ajax({
+                type: "post",
+                url: "/products/select-items",
+                cache: false,
+                data: {
+                    group: group,
+                    selectedIds: selectedIds
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function success(data) {
+                    if (!data.error) {
+                        $("#popUpModal .modal-content").html(data.html);
+                        $("#popUpModal").modal();
+                    } else {
+                        alert("error");
+                    }
+                }
+            });
         });
-        $('body').on('click', '.single-item-wrapper .single-item', function () {
-            $(this).closest('.single-item-wrapper').toggleClass('active');
+
+        var popup_qty = function popup_qty() {
+            var qty = 0;
+            $('.selected-items_popup').find('.popup_field-input').each(function () {
+                qty += Number($(this).val());
+            });
+            return qty;
+        };
+
+        $("body").on('click', ".single-item-wrapper .single-item", function (ev) {
+            console.log('*******', this);
+            console.log(popup_limit, $(".single-item-wrapper.active").length);
+            var id = $(this).closest(".single-item-wrapper").attr('data-id');
+            if (popup_limit > popup_qty() && !$(this).closest(".single-item-wrapper").hasClass('active')) {
+                console.log($(this).closest(".single-item-wrapper"));
+                $(this).closest(".single-item-wrapper").addClass('active');
+                $('.selected-items_popup').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between\">\n                                <div class=\"align-self-center\">\n                                  Pods\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative w-50 mr-0\">\n                                    <!--minus qty-->\n                                    <span data-type=\"minus\"\n                                          class=\"d-inline-block pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span data-type=\"plus\"\n                                          class=\"d-inline-block pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                </div>\n                              </div>\n                            </div>");
+            } else if ($(this).closest(".single-item-wrapper").hasClass('active')) {
+                $("[data-id-popup=\"" + id + "\"]").remove();
+                $(this).closest(".single-item-wrapper").removeClass('active');
+            }
         });
+
+        $('body').on('click', '.selected-item-popup_qty-plus', function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            if (popup_limit > popup_qty()) {
+                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
+            }
+        });
+
+        $('body').on('click', '.selected-item-popup_qty-minus', function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
+        });
+
+        $('#popUpModal').on('click', '.b_close', function () {
+            $(".single-item-wrapper").removeClass('active');
+        });
+
         $('body').on('click', '.modal-footer .b_save', function () {
             var items_array = [];
             $('.modal-body').find('.single-item-wrapper').each(function () {
@@ -3090,9 +3158,26 @@ $(document).ready(function () {
                 };
 
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').append(json.html);
+                var popup_items_qty = [];
+                $(".selected-items_popup").find('.popup_field-input').each(function () {
+                    popup_items_qty.push({
+                        id: $(this).closest('.selected-item_popup').attr('data-id-popup'),
+                        value: $(this).val()
+                    });
+                });
+                console.log(popup_items_qty);
+                $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.field-input').each(function () {
+                    var d_id = $(this).attr('data-id');
+                    var value = popup_items_qty.find(function (el) {
+                        return el.id === d_id;
+                    }).value;
+                    $(this).val(value);
+                    $(this).closest('.menu-item-selected').find('.price-placee').html('$' + Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
+                });
                 $('#popUpModal').modal('hide');
+
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.menu-item-selected[data-price]').each(function () {
-                    prices += Number($(this).attr('data-price'));
+                    prices += Number($(this).attr('data-price')) * Number($(this).find('.field-input').val());
                 });
                 console.log($("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.menu-item-selected[data-price]'), prices);
                 var $total = $('.price-place-summary');

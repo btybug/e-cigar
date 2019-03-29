@@ -490,6 +490,7 @@
            <div class="modal-content">
 
            </div>
+
        </div>
    </div>
 @stop
@@ -1016,50 +1017,6 @@
             });
 
             $("#select_items").select2();
-
-            $("body").on('click','.popup-select',function () {
-                let group = $(this).attr('data-group');
-                const selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function(item) {
-                    console.log($(item).attr('data-id'));
-                    return $(item).attr('data-id');
-                });
-                console.log(selectedIds, 'selectedIds');
-                $.ajax({
-                    type: "post",
-                    url: "/products/select-items",
-                    cache: false,
-                    data: {
-                        group,
-                        selectedIds
-                    },
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            $("#popUpModal .modal-content").html(data.html);
-                            $("#popUpModal").modal();
-                        } else {
-                            alert("error");
-                        }
-                    }
-                })
-            });
-
-            $('#popUpModal').on('click', '.b_close', function() {
-                $(".single-item-wrapper").removeClass('active')
-            });
-
-            const item_limit = 2;
-
-            $(".single-item-wrapper").on('click', ".single-item", function(ev) {
-                console.log(ev.target, 'ev.target')
-                if(item_limit !== $(".single-item-wrapper.active").length && !$(this).closest(".single-item-wrapper").hasClass('active')) {
-                    $(this).closest(".single-item-wrapper").addClass('active');
-                } else if($(this).closest(".single-item-wrapper").hasClass('active')) {
-                    $(this).closest(".single-item-wrapper").removeClass('active');
-                }
-            });
         });
     </script>
 @stop
