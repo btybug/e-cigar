@@ -39,7 +39,11 @@
                         </span>
                        </a>
                        <span class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
-                        <span class="price-place-summary">$0</span>
+                        <span class="price-place-summary">
+                            @if($vape->type)
+                                {{ convert_price($vape->price,$currency)}}
+                            @endif
+                        </span>
                     </span>
                    </div>
                </div>
@@ -149,7 +153,7 @@
                                                    @endif
                                                    <h2 class="font-36 mb-0">{!! $vape->name !!}</h2>
                                                </div>
-                                               <input type="hidden" value="{{ $vape->id }}" id="vpid">
+                                               <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}" id="vpid">
                                                @include("admin.inventory._partials.render_price_form",['model' => $vape])
                                            </div>
                                        </div>
@@ -368,7 +372,9 @@
                                                                         </span>
                                                                        </div>
                                                                        <!--Price-->
-                                                                       <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">{{ convert_price($related_product->variations->first()->price,$currency)}}</span>
+                                                                       <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
+                                                                           {{ convert_price($related_product->variations->first()->price,$currency)}}
+                                                                       </span>
                                                                    </div>
                                                                </div>
                                                                <!--btn-->

@@ -38,7 +38,7 @@
 
             </div>
 
-            @if($vSettings->price_per == 'item')
+            @if($vSettings->price_per == 'item' && ! $vSettings->stock->type)
                 <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
                 <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
                     {{ convert_price($item->price,$currency) }}
@@ -48,7 +48,7 @@
         </div>
     @endforeach
 </div>
-@if($vSettings->price_per == 'product')
+@if($vSettings->price_per == 'product' && ! $vSettings->stock->type)
     <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
         <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
             {{ convert_price($vSettings->price,$currency) }}
