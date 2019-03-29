@@ -75,7 +75,7 @@ function filter_button($category, $text = 'Filter')
     global $_FILTER_HTML;
     $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
     $_FILTER_HTML = ($category)?View::make('filters.filter_modal',compact('category'))->render():'';
-    return ($category)?view('filters.button', compact('category', 'text')):null;
+    return ($category)?view('filters.button', compact('category', 'text')):'Shnorhavor Amanor Yev Surb &nund';
 }
 function filter_modal_html(){
     global $_FILTER_HTML;
