@@ -2879,12 +2879,12 @@ outline: none;
   box-shadow: 0 0 4px #999;
 }
 .selected-item-popup_qty-plus{
-    right: 10px;
+    right: 5px;
     height: 100%;
     top: 0;
 }
 .selected-item-popup_qty-minus{
-    left: 10px;
+    left: 5px;
     height: 100%;
     top: 0;
 }
@@ -2904,4 +2904,8 @@ outline: none;
 }
 .popup-modal-footer .selected-item_popup{
     margin-bottom: 5px;
+}
+.popup-modal-footer .continue-shp-wrapp_qty{
+    padding: 3px 20px;
+    width: 80px;
 }
