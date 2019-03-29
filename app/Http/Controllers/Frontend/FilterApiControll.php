@@ -23,9 +23,7 @@ class FilterApiControll extends Controller
         $category_id = $request->get('category_id');
         $category=Category::findOrFail($category_id);
         $filters = collect([]);
-        if(!count($children)){
-            $filters=$category->filters;
-        }
+
         foreach ($children as $key => $id) {
             if ($id) {
                 if ($key > 0) {
@@ -51,7 +49,7 @@ class FilterApiControll extends Controller
             unset($filters[$key]);
         };
 
-        $html = $this->view("filters", compact([ 'filters']))->render();
+        $html = $this->view("filters", compact([ 'filters','category']))->render();
         $wizard = $this->view("wizard", compact(['filters','category']))->render();
         return \Response::json(['error' => false, 'filters' => $html, 'wizard'=>$wizard,'items_html' => $items_html, 'type' => $type]);
     }
