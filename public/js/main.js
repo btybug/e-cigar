@@ -67,8 +67,7 @@ $(function () {
     });
 
 $('.select-2--no-search').select2({
-    minimumResultsForSearch: Infinity,
-    maximumSelectionLength: 1
+    minimumResultsForSearch: Infinity
 });
 
 $(document).ready(function() {
@@ -531,15 +530,16 @@ $(document).ready(function() {
             }
         });
 
-        $('body').on('click', '.selected-item-popup_qty-plus' , function (ev) {
+        $('body').on('click', '#popUpModal .selected-item-popup_qty-plus' , function (ev) {
             ev.stopImmediatePropagation();
             ev.preventDefault();
             if(popup_limit > popup_qty()) {
                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
+                console.log('1');
             }
         });
 
-        $('body').on('click', '.selected-item-popup_qty-minus' , function (ev) {
+        $('body').on('click', '#popUpModal .selected-item-popup_qty-minus' , function (ev) {
             ev.stopImmediatePropagation();
             ev.preventDefault();
             $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
