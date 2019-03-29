@@ -170,7 +170,7 @@ class StockService
                 $newData['common_price'] = ($datum['common_price'])??0;
                 if(isset($datum['variations']) && count($datum['variations'])){
                     foreach ($datum['variations'] as $item) {
-                        $newData['price'] = ($newData['price_per'] == 'product') ? $newData['common_price'] : (($item['price'])??0);
+                        $newData['price'] = ($datum['price_per'] == 'product') ? $newData['common_price'] : (($item['price'])??0);
                         $newData['item_id'] = $item['item_id'];
                         $newData['qty'] = $item['qty'];
                         $newData['image'] = $item['image'];
