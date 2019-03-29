@@ -855,6 +855,14 @@
     <script>
 
         $(document).ready(function () {
+            var value = $("#changeProductType").val();
+            var sections = $("body").find('.stock-page');
+            sections.each(function (k,v) {
+                var data_id = $(v).attr('data-unqiue');
+                section_prices(data_id, value);
+            })
+
+
            $(".tag-input-v").select2({width: '100%'});
             setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
@@ -1102,11 +1110,10 @@
 
                             parent.find('.type-place').html(res.html)
 
-                            var value = $("#changeProductType").val();
                             let sections = $("body").find('.stock-page');
                             sections.each(function (k,v) {
                                 var data_id = $(v).attr('data-unqiue');
-                                section_prices(data_id, value);
+                                section_prices(data_id, $("#changeProductType").val());
                             })
                         }
                     }

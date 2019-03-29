@@ -12,7 +12,7 @@
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        {!! Form::select("variations[$main_unique][type]",['' => 'Select','simple_product'=>'Single Product','package_product' => 'Multiple items','filter' => 'Filters'
+                        {!! Form::select("variations[$main_unique][type]",['' => 'Select','package_product' => 'Multiple items','filter' => 'Filters'
                ],($main) ? $main->type : null,
                ['class' => 'form-control variation-product-select']) !!}
                     </div>
