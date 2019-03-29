@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Filters;
 use Illuminate\Http\Request;
 
@@ -19,6 +20,8 @@ class FilterApiControll extends Controller
     public function postGetNext(Request $request)
     {
         $children = $request->get('filters', []);
+        $category_id = $request->get('category_id');
+        $category=Category::findOrFail($category_id);
         $filters = collect([]);
         foreach ($children as $key => $id) {
             if ($id) {
@@ -46,7 +49,7 @@ class FilterApiControll extends Controller
         };
 
         $html = $this->view("filters", compact([ 'filters']))->render();
-        $wizard = $this->view("wizard", compact(['children', 'filters']))->render();
+        $wizard = $this->view("wizard", compact(['filters','category']))->render();
         return \Response::json(['error' => false, 'filters' => $html, 'wizard'=>$wizard,'items_html' => $items_html, 'type' => $type]);
     }
 }
