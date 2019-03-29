@@ -2,11 +2,6 @@
     <div class="col-sm-12 pl-0 d-flex">
         @if(! $vSettings->is_required)
             {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
-            {{--<label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer " for="opt{{ $vSettings->id }}">--}}
-                {{--<h4>Select {{ $vSettings->count_limit }} items</h4>--}}
-            {{--</label>--}}
-        @else
-            {{--<h4>Select {{ $vSettings->count_limit }} items</h4>--}}
         @endif
     </div>
     @php
@@ -14,7 +9,11 @@
         $class = (($vSettings->count_limit > 1) ? "multi_v_select" : "");
     @endphp
     <button type="button" class="btn btn-primary rounded-0 popup-select" data-group="{{ $vSettings->variation_id }}" >
-        Select {{ $vSettings->count_limit }} items
+        @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
+            {{ $vSettings->title }} (you can select one option)
+        @else
+            {{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)
+        @endif
     </button>
 </div>
 

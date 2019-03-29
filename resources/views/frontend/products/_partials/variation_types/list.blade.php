@@ -2,10 +2,18 @@
     @if(! $vSettings->is_required)
         {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
         <label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer " for="opt{{ $vSettings->id }}">
-            <h4>Select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} items</h4>
+            @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
+                <h4>{{ $vSettings->title }} (you can select one option)</h4>
+            @else
+                <h4>{{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)</h4>
+            @endif
         </label>
     @else
-        <h4>Select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} items</h4>
+        @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
+            <h4>{{ $vSettings->title }} (you can select one option)</h4>
+        @else
+            <h4>{{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)</h4>
+        @endif
     @endif
 
 </div>

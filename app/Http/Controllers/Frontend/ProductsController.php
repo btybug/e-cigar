@@ -206,11 +206,15 @@ class ProductsController extends Controller
     public function postSelectItems(Request $request)
     {
         $items = StockVariation::where('variation_id',$request->group)->get();
-        $stickers = [];
+        if(count($items)){
+            $stickers = [];
+            $vSettings = $items->first();
+            $html = \view("frontend.products._partials.select_popup_items", compact(['items', 'stickers','vSettings']))->render();
 
-        $html = \view("frontend.products._partials.select_popup_items", compact(['items', 'stickers']))->render();
+            return \Response::json(['error' => false, 'html' => $html]);
+        }
+        return \Response::json(['error' => false, 'message' => "No options for select"]);
 
-        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function postSearchItems(Request $request)
