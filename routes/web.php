@@ -44,7 +44,7 @@ Route::get('mail-crone', function () {
 return view('mail.contact_us');
 });
 Route::get('error', function () {
-[].[];
+    file_put_contents(storage_path('logs'.DS.date('Y_m_d_H_i_s')),'test');
 });
 
 
