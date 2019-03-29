@@ -69,6 +69,7 @@
         </div>
     </div>
 </div>
+{!! Form::hidden('first_category_id',$category->id,['category_id']) !!}
 @push('javascript')
     <script>
         $('body').on('click', '.shopping-cart_wrapper .item-content', function () {
@@ -79,111 +80,113 @@
         $('body').on('click', '.shopping-cart_wrapper .content-wrap.confirm-wrapper .wrap-item', function () {
             $(this).toggleClass('active');
         });
-const first_category_id=$('[name="first_category_id"]').val()
-        
+
+
+
         const filter = [];
-
-
-        $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
-            e.preventDefault();
-            let active = $('.content-wrap').toArray().find(function(contentWrap) {
-                return !$(contentWrap).hasClass('d-none')
-            });
+        $('[data-target="#wizardViewModal"]').on('click', function (e) {
+            const first_category_id = $(this).attr('data-action');
+            $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
+                e.preventDefault();
+                let active = $('.content-wrap').toArray().find(function(contentWrap) {
+                    return !$(contentWrap).hasClass('d-none')
+                });
 //            console.log(active)
-            $(active).find('.active').toArray().map(function(actv) {
-                filter.push($(actv).closest('[data-id]').attr('data-id'))
-            });
+                $(active).find('.active').toArray().map(function(actv) {
+                    filter.push($(actv).closest('[data-id]').attr('data-id'))
+                });
 //            console.log(filter)
-            $(active).find('.active').length === 0 ? alert('select item') : $.ajax({
-                type: "post",
-                url: "/filters",
-                cache: false,
-                data: {
-                    category_id: first_category_id,
-                    filters: filter
-                },
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (!data.error) {
-                        console.log(data.wizard);
-                        $('.shopping-cart-head .nav-pills').empty()
-                        $('.shopping-cart-head .nav-pills').append(data.wizard);
-                        $('.back-btn').removeClass('d-none')
-                        if(data.type === "filter") {
-                            $('.contents-wrapper .content').html(data.filters);
-                        } else if(data.type === "items") {
-                            $('.contents-wrapper .content').html(data.items_html);
-                            $('.shopping-cart_wrapper .next-btn').addClass('d-none')
-                            $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none')
+                $(active).find('.active').length === 0 ? alert('select item') : $.ajax({
+                    type: "post",
+                    url: "/filters",
+                    cache: false,
+                    data: {
+                        category_id: first_category_id,
+                        filters: filter
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            console.log(data.wizard);
+                            $('.shopping-cart-head .nav-pills').empty()
+                            $('.shopping-cart-head .nav-pills').append(data.wizard);
+                            $('.back-btn').removeClass('d-none')
+                            if(data.type === "filter") {
+                                $('.contents-wrapper .content').html(data.filters);
+                            } else if(data.type === "items") {
+                                $('.contents-wrapper .content').html(data.items_html);
+                                $('.shopping-cart_wrapper .next-btn').addClass('d-none')
+                                $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none')
+                            }
+                            console.log(filter);
+                        } else {
+                            alert("error");
                         }
-                        console.log(filter);
-                    } else {
-                        alert("error");
+                    },
+                    error: function(error) {
+                        filter.pop();
                     }
-                },
-                error: function(error) {
-                    filter.pop();
-                }
-            })
-            // $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
-            // $($($('.shopping-cart-head').find('.active')[0]).closest('li').next().find('.item')[0]).addClass('active');
-            // $($('.shopping-cart-head').find('.active')[0]).removeClass('active');
-            //
-            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
-            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
-            //
-            // !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none');
-            // $('.back-btn').removeClass('d-none');
-        });
-        $('body').on('click', '.shopping-cart_wrapper .back-btn', function (e) {
-            e.preventDefault();
-            filter.pop()
-            console.log('back',filter);
+                })
+                // $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
+                // $($($('.shopping-cart-head').find('.active')[0]).closest('li').next().find('.item')[0]).addClass('active');
+                // $($('.shopping-cart-head').find('.active')[0]).removeClass('active');
+                //
+                // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).next().removeClass('d-none');
+                // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).addClass('d-none');
+                //
+                // !$('.content-wrap').last().hasClass('d-none') && $('.next-btn').addClass('d-none');
+                // $('.back-btn').removeClass('d-none');
+            });
+            $('body').on('click', '.shopping-cart_wrapper .back-btn', function (e) {
+                e.preventDefault();
+                filter.pop()
+                console.log('back',filter);
 
-            $.ajax({
-                type: "post",
-                url: "/filters",
-                cache: false,
-                data: {
-                    category_id: first_category_id,
-                    filters: filter
-                },
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (!data.error) {
+                $.ajax({
+                    type: "post",
+                    url: "/filters",
+                    cache: false,
+                    data: {
+                        category_id: first_category_id,
+                        filters: filter
+                    },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
 
-                        console.log(data.wizard);
-                        $('.shopping-cart-head .nav-pills').empty()
-                        $('.shopping-cart-head .nav-pills').append(data.wizard);
-                        if(data.type === "filter") {
-                            $('.contents-wrapper .content').html(data.filters);
-                            $('.shopping-cart_wrapper .next-btn').removeClass('d-none')
-                            $('.shopping-cart_wrapper .add-items-btn').addClass('d-none')
-                        } else if(data.type === "items") {
-                            $('.contents-wrapper .content').html(data.items_html);
+                            console.log(data.wizard);
+                            $('.shopping-cart-head .nav-pills').empty()
+                            $('.shopping-cart-head .nav-pills').append(data.wizard);
+                            if(data.type === "filter") {
+                                $('.contents-wrapper .content').html(data.filters);
+                                $('.shopping-cart_wrapper .next-btn').removeClass('d-none')
+                                $('.shopping-cart_wrapper .add-items-btn').addClass('d-none')
+                            } else if(data.type === "items") {
+                                $('.contents-wrapper .content').html(data.items_html);
+                            }
+                            if(filter.length ===0){
+                                console.log(55);
+                            }
+                            console.log('back',filter);
+                        } else {
+                            alert("error");
                         }
-                        if(filter.length ===0){
-                            console.log(55);
-                        }
-                        console.log('back',filter);
-                    } else {
-                        alert("error");
                     }
-                }
-            })
-            // $($('.shopping-cart-head').find('.active')[0]).removeClass('visited');
-            // $($($('.shopping-cart-head').find('.active')[0]).closest('li').prev().find('.item')[0]).addClass('active');
-            // $($('.shopping-cart-head').find('.active')[1]).removeClass('active');
-            //
-            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
-            // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
-            //
-            // !$('.content-wrap').first().hasClass('d-none') && $('.back-btn').addClass('d-none');
-            // $('.next-btn').removeClass('d-none');
+                })
+                // $($('.shopping-cart-head').find('.active')[0]).removeClass('visited');
+                // $($($('.shopping-cart-head').find('.active')[0]).closest('li').prev().find('.item')[0]).addClass('active');
+                // $($('.shopping-cart-head').find('.active')[1]).removeClass('active');
+                //
+                // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[0]).prev().removeClass('d-none');
+                // $($(this).closest('.contents-wrapper').find('.content-wrap:not(.d-none)')[1]).addClass('d-none');
+                //
+                // !$('.content-wrap').first().hasClass('d-none') && $('.back-btn').addClass('d-none');
+                // $('.next-btn').removeClass('d-none');
+            });
         });
     </script>
 @endpush
