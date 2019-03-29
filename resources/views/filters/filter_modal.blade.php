@@ -123,6 +123,9 @@ const first_category_id=$('[name="first_category_id"]').val()
                     } else {
                         alert("error");
                     }
+                },
+                error: function(error) {
+                    filter.pop();
                 }
             })
             // $($('.shopping-cart-head').find('.active')[0]).addClass('visited');
