@@ -426,6 +426,25 @@
                             </div>
                             <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
+                                    <div class="d-flex mb-2">
+                                        <div class="col-md-2">
+                                            <label>Price
+                                                per:</label>
+                                            <select name="" id="" class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label>Price:</label>
+                                            <div class="product_price" >
+                                                <select name="" id="" class="form-control">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="col-md-12 v-box">
                                         @if($model && isset($variations))
                                             @foreach($variations as $v)
