@@ -8,12 +8,13 @@
         $id = (($vSettings->count_limit > 1) ? "multi_v_select_$vSettings->id" : "single_v_select_$vSettings->id");
         $class = (($vSettings->count_limit > 1) ? "multi_v_select" : "");
     @endphp
+    @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
+        {{ $vSettings->title }} (you can select one option)
+    @else
+        {{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)
+    @endif
     <button type="button" class="btn btn-primary rounded-0 popup-select" data-group="{{ $vSettings->variation_id }}" >
-        @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
-            {{ $vSettings->title }} (you can select one option)
-        @else
-            {{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)
-        @endif
+       Select options
     </button>
 </div>
 
