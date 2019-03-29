@@ -6,7 +6,7 @@
                     <img src="{!! ($filter->image)?url($filter->image):null !!}" alt="photo">
                 </div>
                 <div class="item-title">
-                    <span>{!! $filter->first_child_label !!}</span>
+                    <span>{!! $filter->name !!}</span>
                 </div>
             </div>
         </li>
@@ -20,7 +20,7 @@
                         <img src="{!! ($filter->image)?url($filter->image):null !!}" alt="photo">
                     </div>
                     <div class="item-title">
-                        <span>{!! $filter->first_child_label !!}</span>
+                        <span>{!! $filter->name !!}</span>
                     </div>
                 </div>
             </li>
