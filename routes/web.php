@@ -43,6 +43,9 @@ Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
 Route::get('mail-crone', function () {
 return view('mail.contact_us');
 });
+Route::get('error', function () {
+[].[];
+});
 
 
 

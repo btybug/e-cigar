@@ -1,5 +1,5 @@
 <li class="nav-item col-md-3">
-    <a class="item visited d-flex align-items-center justify-content-between"
+    <a class="item {!! count($filters)?'visited':'active' !!} d-flex align-items-center justify-content-between"
        href="javascript:void(0);">
                                 <span
                                     class="name text-uppercase font-main-bold font-16 text-truncate">{!! $category->name !!}</span>
