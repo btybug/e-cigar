@@ -198,7 +198,7 @@
         {!! Form::close() !!}
     </div>
 @endif
-<div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column">
+<div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column p-0">
     @include('frontend._partials.shopping_cart_options')
 </div>
 @if(!Auth::check())
