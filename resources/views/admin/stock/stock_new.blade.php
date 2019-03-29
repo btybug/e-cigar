@@ -896,6 +896,7 @@
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('hide').addClass('show');
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
+                    package_product_price(data_id, $("body").find('[data-unqiue="' + data_id + '"]').find(".price_per").val());
                 }
             }
 
@@ -948,7 +949,10 @@
                     function (res) {
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
-                            package_product_price(data_id, $_this.find(".price_per").val());
+                            if($('#changeProductType').val() == 0){
+                                package_product_price(data_id, $_this.find(".price_per").val());
+                            }
+
                             $("#itemsModal").modal("hide");
                         }
                     }
@@ -979,6 +983,12 @@
                     function (res) {
                         if (!res.error) {
                             $('.v-box').append(res.html);
+                            var value = $("#changeProductType").val();
+                            let sections = $("body").find('.stock-page');
+                            sections.each(function (k,v) {
+                                var data_id = $(v).attr('data-unqiue');
+                                section_prices(data_id, value);
+                            })
                         }
                     }
                 );
@@ -1091,6 +1101,13 @@
                             }
 
                             parent.find('.type-place').html(res.html)
+
+                            var value = $("#changeProductType").val();
+                            let sections = $("body").find('.stock-page');
+                            sections.each(function (k,v) {
+                                var data_id = $(v).attr('data-unqiue');
+                                section_prices(data_id, value);
+                            })
                         }
                     }
                 );
