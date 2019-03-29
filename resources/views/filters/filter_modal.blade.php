@@ -141,11 +141,14 @@ const first_category_id=$('[name="first_category_id"]').val()
         $('body').on('click', '.shopping-cart_wrapper .back-btn', function (e) {
             e.preventDefault();
             filter.pop()
+            console.log('back',filter);
+
             $.ajax({
                 type: "post",
                 url: "/filters",
                 cache: false,
                 data: {
+                    category_id: first_category_id,
                     filters: filter
                 },
                 headers: {
@@ -163,6 +166,9 @@ const first_category_id=$('[name="first_category_id"]').val()
                             $('.shopping-cart_wrapper .add-items-btn').addClass('d-none')
                         } else if(data.type === "items") {
                             $('.contents-wrapper .content').html(data.items_html);
+                        }
+                        if(filter.length ===0){
+                            console.log(55);
                         }
                         console.log('back',filter);
                     } else {
