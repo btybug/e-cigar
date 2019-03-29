@@ -156,49 +156,34 @@ class StockService
         if (count($data)) {
             $deletableArray = [];
             foreach ($data as $variation_id => $datum) {
-                if($datum['type'] == 'package_product' || $datum['type'] == 'filter'){
-                    $newData = [];
-                    $newData['count_limit'] = ($datum['count_limit']) ?? 0;
-                    $newData['min_count_limit'] = ($datum['min_count_limit'])??0;
-                    $newData['title'] = $datum['title'];
-                    $newData['type'] = $datum['type'];
-                    $newData['is_required'] = $datum['is_required'];
-                    $newData['display_as'] = $datum['display_as'];
-                    $newData['price_per'] = $datum['price_per'];
-                    $newData['filter_category_id'] = $datum['filter_category_id'];
-                    $newData['common_price'] = ($datum['common_price'])??0;
-                    if(isset($datum['variations']) && count($datum['variations'])){
-                        foreach ($datum['variations'] as $item) {
-                            $newData['price'] = ($datum['price_per'] == 'product') ? $datum['common_price'] : $item['price'];
-                            $newData['item_id'] = $item['item_id'];
-                            $newData['qty'] = $item['qty'];
-                            $newData['image'] = $item['image'];
-                            $newData['name'] = $item['name'];
-                            $newData['variation_id'] = $variation_id;
-                            if (isset($item['id'])) {
-                                $variation = StockVariation::find($item['id']);
-                                $variation->update($newData);
-                            } else {
-                                $variation = $stock->variations()->create($newData);
-                            }
-                            $deletableArray[] = $variation->id;
-                        }
-                    }
-                }else{
-                    $datum['common_price'] = ($datum['common_price'])??0;
-                    $datum['count_limit'] = 0;
-                    $datum['min_count_limit'] = 0;
-                    $newData['title'] = $datum['title'];
-                    $datum['variation_id'] = $variation_id;
 
-                    if (isset($datum['id'])) {
-                        $variation = StockVariation::find($datum['id']);
-                        unset($datum['variations']);
-                        $variation->update($datum);
-                    } else {
-                        $variation = $stock->variations()->create($datum);
+                $newData = [];
+                $newData['count_limit'] = ($datum['count_limit']) ?? 0;
+                $newData['min_count_limit'] = ($datum['min_count_limit'])??0;
+//                dd($newData);
+                $newData['title'] = $datum['title'];
+                $newData['type'] = $datum['type'];
+                $newData['is_required'] = $datum['is_required'];
+                $newData['display_as'] = $datum['display_as'];
+                $newData['price_per'] = $datum['price_per'];
+                $newData['filter_category_id'] = $datum['filter_category_id'];
+                $newData['common_price'] = ($datum['common_price'])??0;
+                if(isset($datum['variations']) && count($datum['variations'])){
+                    foreach ($datum['variations'] as $item) {
+                        $newData['price'] = ($datum['price_per'] == 'product') ? $datum['common_price'] : $item['price'];
+                        $newData['item_id'] = $item['item_id'];
+                        $newData['qty'] = $item['qty'];
+                        $newData['image'] = $item['image'];
+                        $newData['name'] = $item['name'];
+                        $newData['variation_id'] = $variation_id;
+                        if (isset($item['id'])) {
+                            $variation = StockVariation::find($item['id']);
+                            $variation->update($newData);
+                        } else {
+                            $variation = $stock->variations()->create($newData);
+                        }
+                        $deletableArray[] = $variation->id;
                     }
-                    $deletableArray[] = $variation->id;
                 }
             }
             $stock->variations()->whereNotIn('id', $deletableArray)->delete();
