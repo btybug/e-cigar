@@ -577,3 +577,10 @@ label {
 #view-result .product-body{
     min-height: 250px;
 }
+.stock-page--head{
+    padding: 0;
+    height: 63px;
+}
+.stock-page--head .head-left{
+    align-self: center;
+}
