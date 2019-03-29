@@ -430,18 +430,17 @@
                                         <div class="col-md-2">
                                             <label>Price
                                                 per:</label>
-                                            <select name="" id="" class="form-control">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                            </select>
+                                            {!! Form::select('type',[
+                                                0 => 'Section',
+                                                1 => 'Whole Product'
+                                            ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                         </div>
                                         <div class="col-md-2">
-                                            <label>Price:</label>
-                                            <div class="product_price" >
-                                                <select name="" id="" class="form-control">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                </select>
+                                            <div class="product_price @if($model && $model->type) hide @endif">
+                                                <label>Price:</label>
+                                                <div>
+                                                    {!! Form::number('price',null,['class' => 'form-control']) !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -877,6 +876,27 @@
                 });
             });
 
+            $("body").on("change","#changeProductType",function () {
+                let value = $(this).val();
+                let sections = $("body").find('.stock-page');
+                sections.each(function (k,v) {
+                    var data_id = $(v).attr('data-unqiue');
+                    section_prices(data_id, value);
+                })
+            });
+
+            function section_prices(data_id, type) {
+                if (type == 1) {
+                    $("body").find('.product_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
+                } else {
+                    $("body").find('.product_price').removeClass('hide').addClass('show');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('hide').addClass('show');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
+                }
+            }
+
             $("body").on("change",".filter-select",function () {
                 let parent = $(this).closest('.stock-page');
                 let value = $(this).val();
@@ -999,6 +1019,8 @@
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
                 }
             }
+
+
 
             $("body").on('click', '.submit-form', function () {
                 $(".stock-form").submit();

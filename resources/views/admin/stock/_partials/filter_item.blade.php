@@ -15,11 +15,13 @@
                             'popup') !!}
                     </div>
                     <div class="col-md-2">
-                        Price
-                        per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
+                        <div class="section_price">
+                            Price
+                            per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
+                        </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="product_price @if($main && $main->price_per == 'item') hide @endif">
+                        <div class="section_price product_price @if($main && $main->price_per == 'item') hide @endif">
                             Price : {!! Form::text("variations[$main_unique][common_price]",
                                                                 ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
                         </div>
