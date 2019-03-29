@@ -23,6 +23,9 @@ class FilterApiControll extends Controller
         $category_id = $request->get('category_id');
         $category=Category::findOrFail($category_id);
         $filters = collect([]);
+        if(!count($children)){
+            $filters=$category->filters;
+        }
         foreach ($children as $key => $id) {
             if ($id) {
                 if ($key > 0) {
