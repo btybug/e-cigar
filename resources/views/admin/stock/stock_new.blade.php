@@ -436,7 +436,7 @@
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="product_price @if($model && $model->type) hide @endif">
+                                            <div class="product-price @if(! $model || ($model && ! $model->type)) hide @endif">
                                                 <label>Price:</label>
                                                 <div>
                                                     {!! Form::number('price',null,['class' => 'form-control']) !!}
@@ -887,13 +887,15 @@
 
             function section_prices(data_id, type) {
                 if (type == 1) {
-                    $("body").find('.product_price').removeClass('show').addClass('hide');
+                    $("body").find('.product-price').removeClass('hide').addClass('show');
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('show').addClass('hide');
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
                 } else {
-                    $("body").find('.product_price').removeClass('hide').addClass('show');
+                    $("body").find('.product-price').removeClass('show').addClass('hide');
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('hide').addClass('show');
                     $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
+                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
                 }
             }
 
