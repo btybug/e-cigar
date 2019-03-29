@@ -10,32 +10,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <div class="shopping-cart_wrapper">
-                            <div class="shopping-cart-head">
-                                <ul class="nav nav-pills">
+                <div class="shopping-cart_wrapper">
+                    <div class="shopping-cart-head">
+                        <ul class="nav nav-pills">
 
-                                </ul>
-                            </div>
-                            <div class="contents-wrapper">
-                                <div class="content-wrap shoping-card">
-                                    <ul class="d-flex flex-wrap content">
-
-                                    </ul>
-                                </div>
-
-                                <div class="d-flex flex-wrap justify-content-between border-top pt-2 footer-buttons">
-                                    <div class="back-item">
-                                        <button class="btn btn-secondary back-btn d-none">Back</button>
-                                    </div>
-                                    <div class="next-item">
-                                        <button class="btn btn-secondary next-btn">Next</button>
-                                        <button class="btn btn-primary add-items-btn d-none"><i
-                                                class="fa fa-plus"></i><span
-                                                class="ml-1">Add selected items</span></button>
-                                    </div>
-                                </div>
-                            </div>
+                        </ul>
                     </div>
+                    <div class="contents-wrapper">
+                        <div class="content-wrap shoping-card">
+                            <ul class="d-flex flex-wrap content">
+
+                            </ul>
+                        </div>
+
+                        <div class="d-flex flex-wrap justify-content-between border-top pt-2 footer-buttons">
+                            <div class="back-item">
+                                <button class="btn btn-secondary back-btn d-none">Back</button>
+                            </div>
+                            <div class="next-item">
+                                <button class="btn btn-secondary next-btn">Next</button>
+                                <button class="btn btn-primary add-items-btn d-none"><i
+                                            class="fa fa-plus"></i><span
+                                            class="ml-1">Add selected items</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -48,15 +48,34 @@
             $(this).addClass('active');
 
         });
-        $('body').on('click', '.shopping-cart_wrapper .content-wrap.confirm-wrapper .wrap-item', function () {
+        $('body').on('click', '.shopping-cart_wrapper .content-wrap .wrap-item', function () {
             $(this).toggleClass('active');
         });
-
 
 
         const filter = [];
         $('[data-target="#wizardViewModal"]').on('click', function (e) {
             const first_category_id = $(this).attr('data-action');
+            let selectMoreItems = [];
+            let selectSingelItems;
+
+            $('body').on('click', '.add-items-btn', function (e) {
+                e.stopImmediatePropagation();
+                if (Number($(this).attr('data-multiple')) === 1) {
+                    $(this).closest('.contents-wrapper').find('.wrap-item.active').each(function () {
+                        selectMoreItems.push($(this).attr('data-id'));
+                    })
+                    selectMoreItems.forEach((item)=>{
+                        $('body').append($('body').find(`[data-id="${item}"]`).closest('li'))
+                    })
+                } else {
+                    selectSingelItems = $(this).closest('.contents-wrapper').find('.wrap-item.active').attr('data-id')
+                    $('body').append($('body').find(`[data-id="${selectSingelItems}"]`).closest('li'))
+                }
+
+
+                $('#wizardViewModal').modal('hide')
+            });
 
             $.ajax({
                 type: "post",
@@ -71,12 +90,12 @@
                 },
                 success: function (data) {
                     if (!data.error) {
-                        console.log(data.wizard);
+//                        console.log(data.wizard);
                         $('.shopping-cart-head .nav-pills').empty()
                         $('.shopping-cart-head .nav-pills').append(data.wizard);
-                        if(data.type === "filter") {
+                        if (data.type === "filter") {
                             $('.contents-wrapper .content').html(data.filters);
-                        } else if(data.type === "items") {
+                        } else if (data.type === "items") {
                             $('.contents-wrapper .content').html(data.items_html);
                             $('.shopping-cart_wrapper .next-btn').addClass('d-none')
                             $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none')
@@ -86,7 +105,7 @@
                         alert("error");
                     }
                 },
-                error: function(error) {
+                error: function (error) {
                     filter.pop();
                 }
             })
@@ -94,11 +113,11 @@
             $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
                 e.stopImmediatePropagation();
                 e.preventDefault();
-                let active = $('.content-wrap').toArray().find(function(contentWrap) {
+                let active = $('.content-wrap').toArray().find(function (contentWrap) {
                     return !$(contentWrap).hasClass('d-none')
                 });
 //            console.log(active)
-                $(active).find('.active').toArray().map(function(actv) {
+                $(active).find('.active').toArray().map(function (actv) {
                     filter.push($(actv).closest('[data-id]').attr('data-id'))
                 });
 //            console.log(filter)
@@ -115,14 +134,13 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-                            console.log(data.filters);
+//                            console.log(data.filters);
                             $('.shopping-cart-head .nav-pills').empty()
                             $('.shopping-cart-head .nav-pills').append(data.wizard);
                             $('.back-btn').removeClass('d-none')
-                            if(data.type === "filter") {
-                                $('body').append(data.filters)
+                            if (data.type === "filter") {
                                 $('.contents-wrapper .content').html(data.filters);
-                            } else if(data.type === "items") {
+                            } else if (data.type === "items") {
                                 $('.contents-wrapper .content').html(data.items_html);
                                 $('.shopping-cart_wrapper .next-btn').addClass('d-none')
                                 $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none')
@@ -132,7 +150,7 @@
                             alert("error");
                         }
                     },
-                    error: function(error) {
+                    error: function (error) {
                         filter.pop();
                     }
                 })
@@ -170,14 +188,14 @@
                             console.log(data.wizard);
                             $('.shopping-cart-head .nav-pills').empty()
                             $('.shopping-cart-head .nav-pills').append(data.wizard);
-                            if(data.type === "filter") {
+                            if (data.type === "filter") {
                                 $('.contents-wrapper .content').html(data.filters);
                                 $('.shopping-cart_wrapper .next-btn').removeClass('d-none')
                                 $('.shopping-cart_wrapper .add-items-btn').addClass('d-none')
-                            } else if(data.type === "items") {
+                            } else if (data.type === "items") {
                                 $('.contents-wrapper .content').html(data.items_html);
                             }
-                            if(filter.length ===0){
+                            if (filter.length === 0) {
 //                                console.log(55);
                                 $('.shopping-cart_wrapper .back-btn').addClass('d-none')
                             }
@@ -186,7 +204,7 @@
                             alert("error");
                         }
                     },
-                    error: function(error) {
+                    error: function (error) {
                         console.log(error);
                     }
                 })
@@ -209,52 +227,67 @@
 
 @push('style')
     <style>
-        #wizardViewModal .modal-dialog{
+        #wizardViewModal .modal-dialog {
             max-width: 100%;
             margin: 0;
             height: 100%;
         }
-        #wizardViewModal{
+
+        #wizardViewModal .wrap-item.active {
+            border: 1px solid #000000;
+            box-shadow: 0px 0 4px 3px #f39c12;
+        }
+
+        #wizardViewModal {
             padding: 0 !important;
             z-index: 999999;
         }
-        #wizardViewModal .modal-content{
+
+        #wizardViewModal .modal-content {
             -webkit-border-radius: 0;
             -moz-border-radius: 0;
             border-radius: 0;
-            border:none;
+            border: none;
             height: 100%;
         }
-        #wizardViewModal .shopping-cart_wrapper{
+
+        #wizardViewModal .shopping-cart_wrapper {
             padding: 15px;
             height: 100%;
             display: flex;
             flex-direction: column;
         }
-        #wizardViewModal .modal-body{
+
+        #wizardViewModal .modal-body {
             padding: 0;
         }
-        #wizardViewModal .contents-wrapper{
+
+        #wizardViewModal .contents-wrapper {
             flex: 1;
             display: flex;
             flex-direction: column;
 
         }
-        #wizardViewModal .content-wrap{
+
+        #wizardViewModal .content-wrap {
             flex: 1;
             overflow: auto;
             min-height: calc(100% - 146px);
             height: 10px;
         }
-        #wizardViewModal .footer-buttons{
+
+        #wizardViewModal .footer-buttons {
             margin-top: auto;
         }
-        #wizardViewModal{
+
+        #wizardViewModal {
 
         }
-        .item-link img{
+
+        .item-link img {
             width: 100%;
         }
+
         .shopping-cart_wrapper .form-control:focus {
             -webkit-box-shadow: none;
             -moz-box-shadow: none;
@@ -385,6 +418,7 @@
             border: 1px solid #000000;
             box-shadow: 0px 0 4px 3px #f39c12;
         }
+
         .shopping-cart_wrapper .content-wrap.confirm-wrapper .wrap-item .item-img {
             height: 250px;
         }
