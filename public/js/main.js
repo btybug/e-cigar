@@ -470,6 +470,7 @@ $(document).ready(function() {
                 success: function (data) {
                     if (!data.error) {
                         $("#popUpModal .modal-content").html(data.html);
+                        $('.title_popup').text(`You can add ${popup_limit} product`);
                         $("#popUpModal").modal();
                     } else {
                         alert("error");
@@ -493,8 +494,9 @@ $(document).ready(function() {
             if(popup_limit > popup_qty() && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                 console.log($(this).closest(".single-item-wrapper"));
                 $(this).closest(".single-item-wrapper").addClass('active');
-                $('.selected-items_popup').append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
-                              <div class="d-flex justify-content-between">
+                $('.selected-items_popup')
+                    .append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
+                              <div class="d-flex justify-content-between selected-item_popup-wrapper">
                                 <div class="align-self-center">
                                   Pods
                                 </div>
@@ -503,7 +505,7 @@ $(document).ready(function() {
                                   <div class="continue-shp-wrapp_qty position-relative w-50 mr-0">
                                     <!--minus qty-->
                                     <span data-type="minus"
-                                          class="d-inline-block pointer position-absolute selected-item-popup_qty-minus qty-count">
+                                          class="d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count">
                                                     <svg viewBox="0 0 20 3" width="20px" height="3px">
                                                         <path fill-rule="evenodd" fill="rgb(214, 217, 225)"
                                                               d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
@@ -513,7 +515,7 @@ $(document).ready(function() {
                                            type="number" value="1">
                                     <!--plus qty-->
                                     <span data-type="plus"
-                                          class="d-inline-block pointer position-absolute selected-item-popup_qty-plus qty-count">
+                                          class="d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count">
                                                     <svg viewBox="0 0 20 20" width="20px" height="20px">
                                                         <path fill-rule="evenodd" fill="rgb(211, 214, 223)"
                                                               d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"></path>

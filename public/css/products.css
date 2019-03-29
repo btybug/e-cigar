@@ -2873,3 +2873,21 @@ outline: none;
 .product-card-thumbs--single .fs-carousel-viewport{
     width: 100%;
 }
+.selected-item_popup-wrapper{
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-shadow: 0 0 4px #999;
+}
+.selected-item-popup_qty-plus{
+    right: 10px;
+    height: 100%;
+    top: 0;
+}
+.selected-item-popup_qty-minus{
+    left: 10px;
+    height: 100%;
+    top: 0;
+}
+.selected-item_popup-wrapper .continue-shp-wrapp_qty{
+    height: 45px;
+}
