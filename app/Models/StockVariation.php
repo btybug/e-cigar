@@ -32,4 +32,9 @@ class StockVariation extends Model
     {
         return $this->hasOne(StockSales::class, 'variation_id');
     }
+
+    public function filter()
+    {
+        return $this->hasOne(Category::class, 'id','filter_category_id');
+    }
 }
