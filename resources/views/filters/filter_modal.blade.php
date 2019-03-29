@@ -69,6 +69,7 @@
         </div>
     </div>
 </div>
+{!! Form::hidden('first_category_id',$category->id,['category_id']) !!}
 @push('javascript')
     <script>
         $('body').on('click', '.shopping-cart_wrapper .item-content', function () {
