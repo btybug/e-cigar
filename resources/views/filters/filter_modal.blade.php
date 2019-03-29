@@ -10,9 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <main class="main-content py-3 bg-white">
                     <div class="shopping-cart_wrapper">
-                        <div class="container main-max-width mw-100">
                             <div class="shopping-cart-head">
                                 <ul class="nav nav-pills">
 
@@ -20,12 +18,12 @@
                             </div>
                             <div class="contents-wrapper">
                                 <div class="content-wrap shoping-card">
-                                    <ul class="row content">
+                                    <ul class="d-flex flex-wrap content">
 
                                     </ul>
                                 </div>
 
-                                <div class="d-flex flex-wrap justify-content-between border-top pt-2">
+                                <div class="d-flex flex-wrap justify-content-between border-top pt-2 footer-buttons">
                                     <div class="back-item">
                                         <button class="btn btn-secondary back-btn d-none">Back</button>
                                     </div>
@@ -37,9 +35,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
-                </main>
             </div>
         </div>
     </div>
@@ -78,7 +74,6 @@
                         console.log(data.wizard);
                         $('.shopping-cart-head .nav-pills').empty()
                         $('.shopping-cart-head .nav-pills').append(data.wizard);
-                        $('.back-btn').removeClass('d-none')
                         if(data.type === "filter") {
                             $('.contents-wrapper .content').html(data.filters);
                         } else if(data.type === "items") {
@@ -214,6 +209,49 @@
 
 @push('style')
     <style>
+        #wizardViewModal .modal-dialog{
+            max-width: 100%;
+            margin: 0;
+            height: 100%;
+        }
+        #wizardViewModal{
+            padding: 0 !important;
+            z-index: 999999;
+        }
+        #wizardViewModal .modal-content{
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            border:none;
+            height: 100%;
+        }
+        #wizardViewModal .shopping-cart_wrapper{
+            padding: 15px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        #wizardViewModal .modal-body{
+            padding: 0;
+        }
+        #wizardViewModal .contents-wrapper{
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+        }
+        #wizardViewModal .content-wrap{
+            flex: 1;
+            overflow: auto;
+            min-height: calc(100% - 146px);
+            height: 10px;
+        }
+        #wizardViewModal .footer-buttons{
+            margin-top: auto;
+        }
+        #wizardViewModal{
+
+        }
         .item-link img{
             width: 100%;
         }
@@ -347,11 +385,6 @@
             border: 1px solid #000000;
             box-shadow: 0px 0 4px 3px #f39c12;
         }
-
-        .shopping-cart_wrapper .content-wrap {
-            min-height: 408px;
-        }
-
         .shopping-cart_wrapper .content-wrap.confirm-wrapper .wrap-item .item-img {
             height: 250px;
         }
