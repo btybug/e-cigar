@@ -87,7 +87,7 @@ class ShoppingCartController extends Controller
 
     public function getCheckOut()
     {
-        $items = $this->cartService->getCartItems();
+        $items = Cart::getContent();
         if (!count($items)) return redirect('/');
 
         session()->forget('shipping_address', 'billing_address', 'payment_token');
@@ -106,7 +106,7 @@ class ShoppingCartController extends Controller
 
         if (\Auth::check()) {
             $user = \Auth::user();
-            $address = $user->addresses()->whereIn('type', ['address_book', 'default_shipping'])->pluck('company', 'id');
+            $address = $user->addresses()->whereIn('type', ['address_book', 'default_shipping'])->pluck('first_line_address', 'id');
 //            $billing_address=$user->addresses()->where('type','billing_address')->first();
             $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
@@ -154,7 +154,6 @@ class ShoppingCartController extends Controller
                     $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
                     $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
                     $geoZone = ($zone) ? $zone->geoZone : null;
-                    var_dump($default_shipping);exit();
                     if ($geoZone && count($geoZone->deliveries)) {
                         $subtotal = Cart::getSubTotal();
                         Cart::removeConditionsByType('shipping');

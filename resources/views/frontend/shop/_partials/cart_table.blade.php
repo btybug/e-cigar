@@ -143,7 +143,7 @@
 
                                     <td width="180" class="shp-cart-table_price-td">
                                         <span class="d-flex font-main-bold font-28 card--inner-product_price position-relative">
-                                            <span class="position-relative">{{ convert_price(\App\Services\CartService::getPriceSum($stock->id),$currency) }}
+                                            <span class="position-relative">{{ convert_price($item->getPriceSum(),$currency) }}
                                                 {{--<!--old price-->--}}
                                                 {{--<span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>--}}
                                             </span>
