@@ -234,7 +234,7 @@
                 !res.error
                 )
                 {
-                    window.location.reload();
+                    // window.location.reload();
                 }
             },
                 error =>

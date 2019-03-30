@@ -154,6 +154,7 @@ class ShoppingCartController extends Controller
                     $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
                     $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
                     $geoZone = ($zone) ? $zone->geoZone : null;
+                    var_dump($default_shipping);exit();
                     if ($geoZone && count($geoZone->deliveries)) {
                         $subtotal = Cart::getSubTotal();
                         Cart::removeConditionsByType('shipping');

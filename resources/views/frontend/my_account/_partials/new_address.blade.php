@@ -126,7 +126,8 @@
 <div class="d-flex flex-md-row flex-column align-items-md-center justify-content-between">
     <div class="d-flex align-items-center pl-md-0 pl-3 mb-md-0 mb-3">
         <div class="position-relative modal-accounts">
-            <input name="make_default" class="form-check-input register-form_input-check" type="checkbox" value="1" id="defaultCheckModal">
+            {!! Form::hidden('make_default',0) !!}
+            {!! Form::checkbox('make_default',1,null,['class' => 'form-check-input register-form_input-check','id'=>'defaultCheckModal']) !!}
             <label class="form-check-label text-gray-clr pointer" for="defaultCheckModal">
                 Set as default
                 <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
