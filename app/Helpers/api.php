@@ -1214,3 +1214,6 @@ function render_widgets($placeholder)
 
     return $html;
 }
+function getItemStockVariations($group,array $items=[]){
+    return \App\Models\StockVariation::where('variation_id',$group)->whereIn('item_id',$items)->get();
+}

@@ -42,7 +42,8 @@ class FilterApiControll extends Controller
         $type = 'filter';
         $items_html = '';
         if ($filters->count() && !$filters->last()->children()->exists()) {
-            $items = $filters->last()->items;
+
+            $items = getItemStockVariations($request->get('group'),$filters->last()->items->pluck('id')->toArray());
             $type = 'items';
             $items_html = $this->view("items", compact(['items']))->render();
             isset($filters[$key]);
