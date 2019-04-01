@@ -2848,8 +2848,7 @@ $(document).ready(function () {
                 //********************//
 
                 select.closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
+                    eventInitialDefault(ev);
                     new_qty(select);
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this');
@@ -3014,8 +3013,7 @@ $(document).ready(function () {
             console.log($(list));
             var qty = void 0;
             $("#products-list_" + list_id).on('click', '.package_checkbox_label', function (event) {
-                event.preventDefault();
-                event.stopPropagation();
+                eventInitialDefault(event);
                 var input = $(event.target).closest('.checkbox-wrap').find('.package_checkbox')[0];
                 var id = $(input).val();
                 var qty_input = $($(event.target).closest('.product-list-item').find('.list-qty')[0]);
@@ -3069,8 +3067,7 @@ $(document).ready(function () {
             });
 
             $("#products-list_" + list_id).on('click', '.product-count-minus', function (ev) {
-                ev.preventDefault();
-                ev.stopImmediatePropagation();
+                eventInitialDefault(ev);
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                 qty = new_qty($("#products-list_" + list_id));
@@ -3091,11 +3088,9 @@ $(document).ready(function () {
             });
 
             $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
-                ev.preventDefault();
-                ev.stopImmediatePropagation();
+                eventInitialDefault(ev);
                 qty = new_qty($("#products-list_" + list_id));
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                console.log(Number(input.val()), '<', Number(limit), '-', Number(qty), '+', Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
                 Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                 qty = new_qty($("#products-list_" + list_id));
 
@@ -3112,7 +3107,6 @@ $(document).ready(function () {
                 }) : 0;
                 var $total = $('.price-place-summary');
                 $total.html("$" + (per_price_value + total_price));
-                console.log('pppp');
             });
         });
 
@@ -3173,8 +3167,7 @@ $(document).ready(function () {
         });
 
         $('body').on('click', '#popUpModal .selected-item-popup_qty-plus', function (ev) {
-            ev.stopImmediatePropagation();
-            ev.preventDefault();
+            eventInitialDefault(ev);
             if (popup_limit > popup_qty()) {
                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                 console.log('1');
@@ -3182,8 +3175,7 @@ $(document).ready(function () {
         });
 
         $('body').on('click', '#popUpModal .selected-item-popup_qty-minus', function (ev) {
-            ev.stopImmediatePropagation();
-            ev.preventDefault();
+            eventInitialDefault(ev);
             $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
         });
 
@@ -3267,8 +3259,7 @@ $(document).ready(function () {
                 });
 
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
+                    eventInitialDefault(ev);
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     if (Number(input.val()) > 1) {
                         input.val(Number(input.val()) - 1);
@@ -3300,8 +3291,7 @@ $(document).ready(function () {
                 //********************//
 
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
+                    eventInitialDefault(ev);
                     new_qty();
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     console.log(Number(input.val()), Number(limit), Number(qty), Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
