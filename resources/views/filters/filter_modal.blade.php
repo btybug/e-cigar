@@ -70,11 +70,26 @@
                         selectMoreItems.push($(this).attr('data-id'));
                     })
                     selectMoreItems.forEach((item) => {
-                        $('body').find(`.${self.attr('id')}`).append($('body').find(`[data-id="${item}"]`).closest('li'))
+                        let inputHidden = document.createElement('input');
+                        $(inputHidden).attr({
+                            type:'hidden',
+                            name:self.attr('data-name'),
+                            value:item
+                        })
+//                        $('body').find(`.${self.attr('id')}`).append($('body').find(`[data-id="${item}"]`).closest('li'))
+                        $('body').find(`.${self.attr('id')}`).append($(inputHidden))
                     })
                 } else {
+                    let inputHidden = document.createElement('input');
+
                     selectSingelItems = $(this).closest('.contents-wrapper').find('.wrap-item.active').attr('data-id')
-                    $('body').find(`.${self.attr('id')}`).append($('body').find(`[data-id="${selectSingelItems}"]`).closest('li'))
+                    $(inputHidden).attr({
+                        type:'hidden',
+                        name:self.attr('data-name'),
+                        value:selectSingelItems
+                    })
+//                    $('body').find(`.${self.attr('id')}`).append($('body').find(`[data-id="${selectSingelItems}"]`).closest('li'))
+                    $('body').find(`.${self.attr('id')}`).append($(inputHidden))
                 }
 
 
