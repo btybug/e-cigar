@@ -2972,7 +2972,7 @@ $(document).ready(function () {
                             return accumulator + a;
                         }) : 0;
                         var $total = $('.price-place-summary');
-                        // $total.html(`$${per_price_value + price}`);
+                        $total.html("$" + (per_price_value + price));
                     }).catch(function (error) {
                         console.log(error);
                     });
