@@ -69,7 +69,7 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
     return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html']));
 }
 
-function filter_button($category, $text = 'Filter',$name=null,$is_multiple=true)
+function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_multiple=true)
 {
     enableFilter();
     global $_FILTER_HTML;
@@ -77,7 +77,7 @@ function filter_button($category, $text = 'Filter',$name=null,$is_multiple=true)
 
     $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
     $_FILTER_HTML = ($category)?View::make('filters.filter_modal',compact('category'))->render():'';
-    return ($category)?view('filters.button', compact('category', 'text','name','is_multiple','uniqId')):'Shnorhavor Amanor Yev Surb &nund';
+    return ($category)?view('filters.button', compact('category', 'text','group','name','is_multiple','uniqId')):'Shnorhavor Amanor Yev Surb &nund';
 }
 function filter_modal_html(){
     global $_FILTER_HTML;
