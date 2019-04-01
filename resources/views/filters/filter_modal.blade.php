@@ -101,6 +101,7 @@
                 url: "/filters",
                 cache: false,
                 data: {
+                    group: self.attr('data-group'),
                     category_id: first_category_id,
                     filters: filter
                 },
@@ -145,6 +146,7 @@
                     url: "/filters",
                     cache: false,
                     data: {
+                        group: self.attr('data-group'),
                         category_id: first_category_id,
                         filters: filter
                     },
@@ -195,6 +197,7 @@
                     url: "/filters",
                     cache: false,
                     data: {
+                        group: self.attr('data-group'),
                         category_id: first_category_id,
                         filters: filter
                     },
