@@ -131,7 +131,7 @@ $(document).ready(function() {
         });
         const $total = $('.price-place-summary');
         $total.html(`$${single_product_price}`);
-        var msd = $(".multi_v_select");
+        var msd = $(".select-2");
 //--------------------------------select
         msd && msd.each(function (i,e){
             let id = $(e).attr('data-id');
@@ -153,10 +153,11 @@ $(document).ready(function() {
                 })
                 .then(function (json) {
                     const limit = Number(json.limit);
-                    const group = $(`#multi_v_select_${id}`);
+                    const group = ($(`#single_v_select_${id}`).length !== 0 && $(`#single_v_select_${id}`)) || $(`#multi_v_select_${id}`);
                     group.select2({
                         minimumResultsForSearch: Infinity,
-                        maximumSelectionLength: Number(json.limit),
+                        maximumSelectionLength: $(`#single_v_select_${id}`).length !== 0 ? Infinity : Number(json.limit),
+                        placeholder: 'Select an option'
                         // language: {
                         //     noResults: function (params) {
                         //         return "That's a miss.";

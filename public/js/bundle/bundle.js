@@ -2761,7 +2761,7 @@ $(document).ready(function () {
         });
         var $total = $('.price-place-summary');
         $total.html("$" + single_product_price);
-        var msd = $(".multi_v_select");
+        var msd = $(".select-2");
         //--------------------------------select
         msd && msd.each(function (i, e) {
             var id = $(e).attr('data-id');
@@ -2780,10 +2780,11 @@ $(document).ready(function () {
                 return response.json();
             }).then(function (json) {
                 var limit = Number(json.limit);
-                var group = $("#multi_v_select_" + id);
+                var group = $("#single_v_select_" + id).length !== 0 && $("#single_v_select_" + id) || $("#multi_v_select_" + id);
                 group.select2({
                     minimumResultsForSearch: Infinity,
-                    maximumSelectionLength: Number(json.limit)
+                    maximumSelectionLength: $("#single_v_select_" + id).length !== 0 ? Infinity : Number(json.limit),
+                    placeholder: 'Select an option'
                     // language: {
                     //     noResults: function (params) {
                     //         return "That's a miss.";
