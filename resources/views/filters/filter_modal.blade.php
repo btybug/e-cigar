@@ -356,7 +356,8 @@
         });
 
 
-        $('body').on('click', '.modal-footer .b_save', function() {
+        //Vahag jan senc baner mi areq
+        $('body').on('click', '.modal-footer .b_save_XXXXXX', function() {
             const items_array = [];
             $('.modal-body').find('.single-item-wrapper').each(function() {
                 $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
