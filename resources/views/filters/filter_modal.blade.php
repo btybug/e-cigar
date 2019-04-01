@@ -43,34 +43,38 @@
 {!! Form::hidden('first_category_id',$category->id,['category_id']) !!}
 @push('javascript')
     <script>
-        $('body').on('click', '.shopping-cart_wrapper .item-content', function () {
-            $('.shopping-cart_wrapper .item-content').removeClass('active');
-            $(this).addClass('active');
-
-        });
-        $('body').on('click', '.shopping-cart_wrapper .content-wrap .wrap-item', function () {
-            $(this).toggleClass('active');
-        });
-
-
         const filter = [];
         $('[data-target="#wizardViewModal"]').on('click', function (e) {
+            $('body').on('click', '.shopping-cart_wrapper .item-content', function () {
+                $('.shopping-cart_wrapper .item-content').removeClass('active');
+                $(this).addClass('active');
+
+            });
+            $('body').on('click', '.shopping-cart_wrapper .content-wrap .wrap-item', function () {
+                if(Number($('[data-target="#wizardViewModal"]').attr('data-multiple'))===1){
+                    $(this).toggleClass('active');
+                }else{
+                    $('.shopping-cart_wrapper .wrap-item').removeClass('active');
+                    $(this).addClass('active');
+                }
+            });
+            
             const first_category_id = $(this).attr('data-action');
             let selectMoreItems = [];
             let selectSingelItems;
-
+            let self = $(this)
             $('body').on('click', '.add-items-btn', function (e) {
                 e.stopImmediatePropagation();
-                if (Number($(this).attr('data-multiple')) === 1) {
+                if (Number(self.attr('data-multiple')) === 1) {
                     $(this).closest('.contents-wrapper').find('.wrap-item.active').each(function () {
                         selectMoreItems.push($(this).attr('data-id'));
                     })
-                    selectMoreItems.forEach((item)=>{
-                        $('body').append($('body').find(`[data-id="${item}"]`).closest('li'))
+                    selectMoreItems.forEach((item) => {
+                        $('body').find(`.${self.attr('id')}`).append($('body').find(`[data-id="${item}"]`).closest('li'))
                     })
                 } else {
                     selectSingelItems = $(this).closest('.contents-wrapper').find('.wrap-item.active').attr('data-id')
-                    $('body').append($('body').find(`[data-id="${selectSingelItems}"]`).closest('li'))
+                    $('body').find(`.${self.attr('id')}`).append($('body').find(`[data-id="${selectSingelItems}"]`).closest('li'))
                 }
 
 
