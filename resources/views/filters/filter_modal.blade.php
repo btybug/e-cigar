@@ -23,9 +23,12 @@
                             </ul>
                         </div>
 
-                        <div class="d-flex flex-wrap justify-content-between border-top pt-2 footer-buttons">
+                        <div class="d-flex justify-content-between align-items-center border-top pt-2 footer-buttons">
                             <div class="back-item">
                                 <button class="btn btn-secondary back-btn d-none">Back</button>
+                            </div>
+                            <div class="row selected-items_popup w-100 main-scrollbar mx-1">
+
                             </div>
                             <div class="next-item">
                                 <button class="btn btn-secondary next-btn">Next</button>
@@ -52,10 +55,10 @@
             });
             $('body').on('click', '.shopping-cart_wrapper .content-wrap .wrap-item', function () {
                 if(Number($('[data-target="#wizardViewModal"]').attr('data-multiple'))===1){
-                    $(this).toggleClass('active');
+//                    $(this).toggleClass('active');
                 }else{
-                    $('.shopping-cart_wrapper .wrap-item').removeClass('active');
-                    $(this).addClass('active');
+//                    $('.shopping-cart_wrapper .wrap-item').removeClass('active');
+//                    $(this).addClass('active');
                 }
             });
 
@@ -247,11 +250,275 @@
                 $('.shopping-cart_wrapper .back-btn').addClass('d-none')
             $('.shopping-cart_wrapper .add-items-btn').addClass('d-none')
         })
+
+        //----------------new script-------------
+        let dg = null;
+        let popup_limit = 0;
+        $("body").on('click','.popup-select',function () {
+            dg = $(this).attr('data-group');
+            let group = $(this).attr('data-group');
+            popup_limit = $(this).closest('.limit').attr('data-limit');
+            const selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function(item) {
+                console.log($(item).attr('data-id'));
+                return $(item).attr('data-id');
+            });
+            console.log(selectedIds, 'selectedIds');
+            $.ajax({
+                type: "post",
+                url: "/products/select-items",
+                cache: false,
+                data: {
+                    group,
+                    selectedIds
+                },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $("#popUpModal .modal-content").html(data.html);
+                        $('.title_popup').text(`You can add ${popup_limit} product`);
+                        $("#popUpModal").modal();
+                    } else {
+                        alert("error");
+                    }
+                }
+            });
+        });
+
+        const popup_qty = function() {
+            let qty = 0;
+            $('.selected-items_popup').find('.popup_field-input').each(function() {
+                qty += Number($(this).val());
+            });
+            return qty;
+        };
+
+        $("body").on('click', ".shopping-cart_wrapper .wrap-item", function(ev) {
+            const id = $(this).attr('data-id');
+            const title = $(this).find('.name').text().trim();
+//            if(popup_limit > popup_qty() && !$(this).hasClass('active')) {
+            if(!$(this).hasClass('active')) {
+//                console.log($(this).closest(".single-item-wrapper"));
+                $(this).addClass('active');
+                $('.selected-items_popup')
+                    .append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
+                              <div class="d-flex justify-content-between selected-item_popup-wrapper">
+                                <div class="align-self-center text-truncate">
+                                  ${title}
+                                </div>
+                                <div class="d-flex align-items-center justify-content-end">
+                                  <div class="mr-1">Qty</div>
+                                  <div class="continue-shp-wrapp_qty position-relative mr-0">
+
+                        <span data-type="minus"
+                        class="d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count">
+                        <svg viewBox="0 0 20 3" width="12px" height="3px">
+                        <path fill-rule="evenodd" fill="rgb(214, 217, 225)"
+                        d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
+                        </svg>
+                        </span>
+                        <input class="popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select" min="number" name=""
+                        type="number" value="1">
+                        <span data-type="plus"
+                        class="d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count">
+                        <svg viewBox="0 0 20 20" width="15px" height="15px">
+                        <path fill-rule="evenodd" fill="rgb(211, 214, 223)"
+                        d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"></path>
+                        </svg>
+                        </span>
+                        </div>
+                        <div>
+                        <a href="javascript:void(0)" data-el-id="28" class="btn btn-sm delete-menu-item text-danger"><i class="fa fa-times"></i></a>
+                        </div>
+                        </div>
+                        </div>
+                        </div>`);
+                        } else if($(this).hasClass('active')) {
+                $(`[data-id-popup="${id}"]`).remove();
+                $(this).removeClass('active');
+            }
+        });
+
+        $('body').on('click', '#popUpModal .selected-item-popup_qty-plus' , function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            if(popup_limit > popup_qty()) {
+                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
+                console.log('1');
+            }
+        });
+
+        $('body').on('click', '#popUpModal .selected-item-popup_qty-minus' , function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
+        });
+
+
+        $('body').on('click', '.modal-footer .b_save', function() {
+            const items_array = [];
+            $('.modal-body').find('.single-item-wrapper').each(function() {
+                $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
+            });
+            console.log(items_array);
+            fetch("/products/get-variation-menu-raws", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({ids: items_array})
+            })
+                .then(function (response) {
+                    return response.json();
+
+                })
+                .then(function (json) {
+                    // console.log(json.html);
+                    let prices = 0;
+                    const limit = $($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.limit')[0]).attr('data-limit');
+                    let qty = 0;
+
+                    const new_qty = function() {
+                        qty = 0;
+                        $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty').each(function() {
+                            qty += Number($(this).val());
+                        });
+                        console.log(qty, 'qty');
+                    };
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').append(json.html);
+                    const popup_items_qty = [];
+                    $(`.selected-items_popup`).find('.popup_field-input').each(function() {
+                        popup_items_qty.push({
+                            id: $(this).closest('.selected-item_popup').attr('data-id-popup'),
+                            value: $(this).val()
+                        });
+                    });
+                    console.log(popup_items_qty)
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.field-input').each(function() {
+                        const d_id = $(this).attr('data-id');
+                        const value = popup_items_qty.find((el) => {
+                            return el.id === d_id;
+                        }).value;
+                        $(this).val(value);
+                        $(this).closest('.menu-item-selected').find('.price-placee')
+                            .html('$'+ Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
+                    });
+                    $('#popUpModal').modal('hide');
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]').each(function(){
+                        prices += Number($(this).attr('data-price'))*Number($(this).find('.field-input').val());
+                    });
+                    console.log($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]'), prices)
+                    const $total = $('.price-place-summary');
+                    $total.html(`$${Number($total.text().trim().slice(1)) + prices}`);
+                    console.log('dg', dg);
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click', '.delete-menu-item', function() {
+                        $total.html(`$${Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price'))}`);
+
+                        $(this).closest('.menu-item-selected').remove();
+
+                        // const prices_array = $('.product-qty').toArray().map(function(el) {
+                        //     const price = $(el).closest('[data-price]').attr('data-price');
+                        //     const count = $(el).val();
+                        //     return price * count;
+                        // });
+                        // const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                        //     return accumulator + a;
+                        // }) : 0;
+                        // const $total = $('.price-place-summary');
+                        // $total.html(`$${single_product_price + price}`);
+                    });
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+                        if(Number(input.val()) > 1) {
+                            input.val(Number(input.val()) - 1);
+                            const price = Number($(this).closest('[data-price]').attr('data-price'));
+                            $(this).closest('[data-price]').find('.price-placee').html(`$${price * Number(input.val())}`);
+
+                            const $total = $('.price-place-summary');
+                            $total.html(`$${Number($total.text().trim().slice(1)) - price}`);
+                        }
+
+                        // group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                        //
+
+
+
+                        // const prices_array = $('.product-qty').toArray().map(function(el) {
+                        //     const price = $(el).closest('[data-price]').attr('data-price');
+                        //     const count = $(el).val();
+                        //     return price * count;
+                        // });
+                        // const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                        //     return accumulator + a;
+                        // }) : 0;
+                        // const $total = $('.price-place-summary');
+                        // $total.html(`$${single_product_price + total_price}`);
+                    });
+
+                    //********************//
+                    //*******+plus+*******//
+                    //********************//
+
+                    $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
+                        ev.preventDefault();
+                        ev.stopImmediatePropagation();
+                        new_qty();
+                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+                        console.log(Number(input.val()), Number(limit), Number(qty), Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
+                        if(Number(input.val()) < Number(limit) - Number(qty) +
+                            Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())) {
+                            input.val(Number(input.val()) + 1);
+                            new_qty();
+                            const price = Number($(this).closest('[data-price]').attr('data-price'));
+                            $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+
+
+                            const $total = $('.price-place-summary');
+                            $total.html(`$${Number($total.text().trim().slice(1)) + price}`);
+                        };
+
+
+
+                        // const prices_array = $('.product-qty').toArray().map(function(el) {
+                        //     const price = $(el).closest('[data-price]').attr('data-price');
+                        //     const count = $(el).val();
+                        //     return price * count;
+                        // });
+                        // const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                        //     return accumulator + a;
+                        // }) : 0;
+                        // const $total = $('.price-place-summary');
+                        // $total.html(`$${single_product_price + total_price}`);
+                    });
+                });
+        });
+
     </script>
 @endpush
 
 @push('style')
     <style>
+        #wizardViewModal .continue-shp-wrapp_qty {
+            padding: 3px 20px;
+            width: 80px;
+        }
+        #wizardViewModal .selected-items_popup {
+            height: 62px;
+            align-items: center;
+        }
+        #wizardViewModal .selected-item_popup-wrapper{
+            margin-bottom: 5px;
+        }
         #wizardViewModal .modal-dialog {
             max-width: 100%;
             margin: 0;
