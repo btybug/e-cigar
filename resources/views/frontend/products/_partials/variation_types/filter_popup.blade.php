@@ -14,7 +14,7 @@
         {{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)
     @endif
 
-    {!! filter_button(@$vSettings->filter->slug,@$vSettings->filter->variation_id,'Select options') !!}
+    {!! filter_button(@$vSettings->filter->slug,@$vSettings->variation_id,'Select options') !!}
 
 </div>
 
