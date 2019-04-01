@@ -130,10 +130,9 @@ $(document).ready(function() {
         //     // const price =
         // });
 
-
         const new_qty = function(group) {
             let qty = 0;
-            group.closest('.product-single-info_row').find('.product-qty').each(function() {
+            group.closest('.product-single-info_row').find('.product-qty:not(.product-qty_per_price)').each(function() {
                 qty += Number($(this).val());
             });
             return qty;
@@ -144,10 +143,10 @@ $(document).ready(function() {
         };
 
         const $total = $('.price-place-summary');
-
+        let per_price_value = 0;
 
         //DELETE
-        $total.html(`$${0}`);
+        $total.html(`$${per_price_value}`);
         //DELETE
 
 
@@ -205,12 +204,12 @@ $(document).ready(function() {
                         const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                         Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                         new_qty(select);
-                        select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
+                        select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
 
                         const price = $(this).closest('[data-price]').attr('data-price');
                         $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
 
-                        const prices_array = $('.product-qty').toArray().map(function(el) {
+                        const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                             const price = $(el).closest('[data-price]').attr('data-price');
                             const count = $(el).val();
                             return price * count;
@@ -219,7 +218,7 @@ $(document).ready(function() {
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${total_price}`);
+                        $total.html(`$${per_price_value + total_price}`);
                     });
 
                                                 //********************//
@@ -232,15 +231,15 @@ $(document).ready(function() {
                         new_qty(select);
                         const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                         console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this' );
-                        Number(input.val()) < Number(limit) - Number(qty) +
+                        Number(input.val()) < Number(limit) - Number(new_qty(select)) +
                             Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                         new_qty(select);
-                        select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
+                        select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
 
                         const price = $(this).closest('[data-price]').attr('data-price');
                         $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
 
-                        const prices_array = $('.product-qty').toArray().map(function(el) {
+                        const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                             const price = $(el).closest('[data-price]').attr('data-price');
                             const count = $(el).val();
                             return price * count;
@@ -249,7 +248,7 @@ $(document).ready(function() {
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${total_price}`);
+                        $total.html(`$${per_price_value + total_price}`);
                     });
 
                                                 //******************//
@@ -287,9 +286,9 @@ $(document).ready(function() {
                                     select.val(values).trigger('change.select2');
                                     $(this).closest('.menu-item-selected').remove();
                                     new_qty(select);
-                                    select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
+                                    select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
 
-                                    const prices_array = $('.product-qty').toArray().map(function(el) {
+                                    const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                                         const price = $(el).closest('[data-price]').attr('data-price');
                                         const count = $(el).val();
                                         return price * count;
@@ -298,15 +297,15 @@ $(document).ready(function() {
                                         return accumulator + a;
                                     }) : 0;
                                     const $total = $('.price-place-summary');
-                                    $total.html(`$${price}`);
+                                    $total.html(`$${per_price_value + price}`);
                                 });
 
-                                const prices_array = select.attr('id').includes('single') ? $('.product-qty').toArray().map(function(el) {
+                                const prices_array = select.attr('id').includes('single') ? $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     console.log(price, 'map');
                                     const count = $(el).val();
                                     return price * count;
-                                }) : $('.product-qty').toArray().map(function(el) {
+                                }) : $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     console.log(price, 'map')
                                     const count = $(el).val();
@@ -316,7 +315,7 @@ $(document).ready(function() {
                                     return accumulator + a;
                                 }) : 0;
                                 const $total = $('.price-place-summary');
-                                $total.html(`$${price}`);
+                                $total.html(`$${per_price_value + price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -324,10 +323,11 @@ $(document).ready(function() {
                     });
 
                     select.attr('id') && select.attr('id').includes('single') && select.ready(function (e) {
+                        console.log('select select')
                         const _this = select;
                         const current_item_id = select.children().first().attr('data-select2-id');
-                        new_qty(select);
-console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'))
+                        // new_qty(select);
+// console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'))
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
                             headers: {
@@ -343,21 +343,19 @@ console.log(select.children(), select.children().first(), select.children().firs
                                 return response.json();
                             })
                             .then(function (json) {
-                                console.log('fuckkkkkkkkkkkkk',json)
-                                $('body').prepend(json.html)
                                 select.attr('id').includes('single') ? select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                               const prices_array = $('.product-qty').toArray().map(function(el) {
+                               const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     console.log(price, 'map')
                                     const count = $(el).val();
                                     return price * count;
                                 });
-                                console.log(prices_array)
+
                                 const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                                     return accumulator + a;
                                 }) : 0;
                                 const $total = $('.price-place-summary');
-                                $total.html(`$${price}`);
+                                $total.html(`$${per_price_value + price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -373,10 +371,10 @@ console.log(select.children(), select.children().first(), select.children().firs
                         $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
                         setTimeout(function() {
                             new_qty(select);
-                            select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
+                            select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
                         }, 0);
 
-                        const prices_array = $('.product-qty').toArray().map(function(el) {
+                        const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                             const price = $(el).closest('[data-price]').attr('data-price');
                             const count = $(el).val();
                             return price * count;
@@ -385,7 +383,7 @@ console.log(select.children(), select.children().first(), select.children().firs
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${price}`);
+                        $total.html(`$${per_price_value + price}`);
                     });
                 })
                 .catch(function (error) {
@@ -397,6 +395,8 @@ console.log(select.children(), select.children().first(), select.children().firs
         $('.products-list-wrap').each(function(index, list) {
             const list_id = $(list).attr('data-id');
             const limit = Number($(list).attr('data-limit'));
+            const per_price = $(list).attr('data-per-price') === 'product';
+            console.log($(list));
             let qty;
             $(`#products-list_${list_id}`).on('click', '.package_checkbox_label', function (event) {
                 event.preventDefault();
@@ -417,7 +417,7 @@ console.log(select.children(), select.children().first(), select.children().firs
                     const price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html(`$${price}`);
                 } else {
-                    qty_input.children().length === 0 && $(qty_input[0]).append(`<div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
+                    !per_price && qty_input.children().length === 0 && $(qty_input[0]).append(`<div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
                     <span class="d-flex align-items-center h-100 pointer position-absolute product-count-minus">
                     <svg viewBox="0 0 20 3" width="20px" height="3px">
                     <path fill-rule="evenodd" fill="rgb(214, 217, 225)" d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
@@ -430,11 +430,25 @@ console.log(select.children(), select.children().first(), select.children().firs
                     </svg>
                     </span>
                     </div>`);
+
+                    per_price && qty_input.children().length === 0 && $(qty_input[0]).append(`<div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
+                    <span class="d-flex align-items-center h-100 pointer position-absolute product-count-minus">
+                    <svg viewBox="0 0 20 3" width="20px" height="3px">
+                    <path fill-rule="evenodd" fill="rgb(214, 217, 225)" d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
+                    </svg>
+                    </span>
+                        <input name="qty" data-id="${id}" min="1" value="1" type="number" class="field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price"/>
+                    <span  class="d-flex align-items-center h-100 pointer position-absolute product-count-plus">
+                    <svg viewBox="0 0 20 20" width="20px" height="20px">
+                    <path fill-rule="evenodd" fill="rgb(211, 214, 223)" d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"></path>
+                    </svg>
+                    </span>
+                    </div>`)
                     $(this).closest('div').find('.package_checkbox')[0].click();
                 }
 
 
-                const prices_array = $('.product-qty').toArray().map(function(el) {
+                const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                     const price = $(el).closest('[data-price]').attr('data-price');
                     const count = $(el).val();
                     return price * count;
@@ -443,8 +457,23 @@ console.log(select.children(), select.children().first(), select.children().firs
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${price}`);
+                console.log(per_price, per_price_value, 'loging');
+                $total.html(`$${price + per_price_value}`);
             });
+
+
+            const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
+                const price = $(el).closest('[data-price]').attr('data-price');
+                const count = $(el).val();
+                return price * count;
+            });
+            const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                return accumulator + a;
+            }) : 0;
+            per_price_value += Number($(`#products-list_${list_id}`).attr('data-price'));
+            console.log('per_price_value', per_price_value);
+            const $total = $('.price-place-summary');
+            $total.html(`$${price + per_price_value}`);
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
                 return false;
@@ -455,12 +484,12 @@ console.log(select.children(), select.children().first(), select.children().firs
                 ev.stopImmediatePropagation();
                 const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                new_qty($(`#products-list_${list_id}`));
+                qty = new_qty($(`#products-list_${list_id}`));
 
                 const price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
 
-                const prices_array = $('.product-qty').toArray().map(function(el) {
+                const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                     const price = $(el).closest('[data-price]').attr('data-price');
                     const count = $(el).val();
                     return price * count;
@@ -469,7 +498,7 @@ console.log(select.children(), select.children().first(), select.children().firs
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${total_price}`);
+                $total.html(`$${per_price_value + total_price}`);
             });
 
 
@@ -477,6 +506,7 @@ console.log(select.children(), select.children().first(), select.children().firs
                 ev.preventDefault();
                 ev.stopImmediatePropagation();
                 new_qty($(`#products-list_${list_id}`));
+                qty = new_qty($(`#products-list_${list_id}`));
                 const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) < Number(limit) - Number(qty) +
                 Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())
@@ -486,7 +516,7 @@ console.log(select.children(), select.children().first(), select.children().firs
                 const price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
 
-                const prices_array = $('.product-qty').toArray().map(function(el) {
+                const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
                     const price = $(el).closest('[data-price]').attr('data-price');
                     const count = $(el).val();
                     return price * count;
@@ -495,7 +525,7 @@ console.log(select.children(), select.children().first(), select.children().firs
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${total_price}`);
+                $total.html(`$${per_price_value + total_price}`);
                 console.log('pppp');
 
             });
@@ -638,7 +668,7 @@ console.log(select.children(), select.children().first(), select.children().firs
 
                     const new_qty = function() {
                         qty = 0;
-                        $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty').each(function() {
+                        $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty:not(.product-qty_per_price)').each(function() {
                             qty += Number($(this).val());
                         });
                         console.log(qty, 'qty');

@@ -2760,10 +2760,9 @@ $(document).ready(function () {
         //     // const price =
         // });
 
-
         var new_qty = function new_qty(group) {
             var qty = 0;
-            group.closest('.product-single-info_row').find('.product-qty').each(function () {
+            group.closest('.product-single-info_row').find('.product-qty:not(.product-qty_per_price)').each(function () {
                 qty += Number($(this).val());
             });
             return qty;
@@ -2774,9 +2773,10 @@ $(document).ready(function () {
         };
 
         var $total = $('.price-place-summary');
+        var per_price_value = 0;
 
         //DELETE
-        $total.html("$" + 0);
+        $total.html("$" + per_price_value);
         //DELETE
 
 
@@ -2826,12 +2826,12 @@ $(document).ready(function () {
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
                     new_qty(select);
-                    select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
+                    select.select2({ maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
 
                     var price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 
-                    var prices_array = $('.product-qty').toArray().map(function (el) {
+                    var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                         var price = $(el).closest('[data-price]').attr('data-price');
                         var count = $(el).val();
                         return price * count;
@@ -2840,7 +2840,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + total_price);
+                    $total.html("$" + (per_price_value + total_price));
                 });
 
                 //********************//
@@ -2853,14 +2853,14 @@ $(document).ready(function () {
                     new_qty(select);
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this');
-                    Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
+                    Number(input.val()) < Number(limit) - Number(new_qty(select)) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                     new_qty(select);
-                    select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
+                    select.select2({ maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
 
                     var price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 
-                    var prices_array = $('.product-qty').toArray().map(function (el) {
+                    var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                         var price = $(el).closest('[data-price]').attr('data-price');
                         var count = $(el).val();
                         return price * count;
@@ -2869,7 +2869,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + total_price);
+                    $total.html("$" + (per_price_value + total_price));
                 });
 
                 //******************//
@@ -2907,9 +2907,9 @@ $(document).ready(function () {
                             select.val(values).trigger('change.select2');
                             $(this).closest('.menu-item-selected').remove();
                             new_qty(select);
-                            select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
+                            select.select2({ maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
 
-                            var prices_array = $('.product-qty').toArray().map(function (el) {
+                            var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                                 var price = $(el).closest('[data-price]').attr('data-price');
                                 var count = $(el).val();
                                 return price * count;
@@ -2918,15 +2918,15 @@ $(document).ready(function () {
                                 return accumulator + a;
                             }) : 0;
                             var $total = $('.price-place-summary');
-                            $total.html("$" + price);
+                            $total.html("$" + (per_price_value + price));
                         });
 
-                        var prices_array = select.attr('id').includes('single') ? $('.product-qty').toArray().map(function (el) {
+                        var prices_array = select.attr('id').includes('single') ? $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
                             console.log(price, 'map');
                             var count = $(el).val();
                             return price * count;
-                        }) : $('.product-qty').toArray().map(function (el) {
+                        }) : $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
                             console.log(price, 'map');
                             var count = $(el).val();
@@ -2936,17 +2936,18 @@ $(document).ready(function () {
                             return accumulator + a;
                         }) : 0;
                         var $total = $('.price-place-summary');
-                        $total.html("$" + price);
+                        $total.html("$" + (per_price_value + price));
                     }).catch(function (error) {
                         console.log(error);
                     });
                 });
 
                 select.attr('id') && select.attr('id').includes('single') && select.ready(function (e) {
+                    console.log('select select');
                     var _this = select;
                     var current_item_id = select.children().first().attr('data-select2-id');
-                    new_qty(select);
-                    console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'));
+                    // new_qty(select);
+                    // console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'))
                     fetch("/products/get-variation-menu-raw", {
                         method: "post",
                         headers: {
@@ -2960,21 +2961,19 @@ $(document).ready(function () {
                     }).then(function (response) {
                         return response.json();
                     }).then(function (json) {
-                        console.log('fuckkkkkkkkkkkkk', json);
-                        $('body').prepend(json.html);
                         select.attr('id').includes('single') ? select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                        var prices_array = $('.product-qty').toArray().map(function (el) {
+                        var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
                             console.log(price, 'map');
                             var count = $(el).val();
                             return price * count;
                         });
-                        console.log(prices_array);
+
                         var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
                             return accumulator + a;
                         }) : 0;
                         var $total = $('.price-place-summary');
-                        $total.html("$" + price);
+                        $total.html("$" + (per_price_value + price));
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -2988,10 +2987,10 @@ $(document).ready(function () {
                     $(this).closest('.product-single-info_row').find(".menu-item-selected[data-id=\"" + e.params.data.id + "\"]").remove();
                     setTimeout(function () {
                         new_qty(select);
-                        select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
+                        select.select2({ maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
                     }, 0);
 
-                    var prices_array = $('.product-qty').toArray().map(function (el) {
+                    var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                         var price = $(el).closest('[data-price]').attr('data-price');
                         var count = $(el).val();
                         return price * count;
@@ -3000,7 +2999,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + price);
+                    $total.html("$" + (per_price_value + price));
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -3011,6 +3010,8 @@ $(document).ready(function () {
         $('.products-list-wrap').each(function (index, list) {
             var list_id = $(list).attr('data-id');
             var limit = Number($(list).attr('data-limit'));
+            var per_price = $(list).attr('data-per-price') === 'product';
+            console.log($(list));
             var qty = void 0;
             $("#products-list_" + list_id).on('click', '.package_checkbox_label', function (event) {
                 event.preventDefault();
@@ -3031,11 +3032,13 @@ $(document).ready(function () {
                     var _price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html("$" + _price);
                 } else {
-                    qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
+                    !per_price && qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
+
+                    per_price && qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
                     $(this).closest('div').find('.package_checkbox')[0].click();
                 }
 
-                var prices_array = $('.product-qty').toArray().map(function (el) {
+                var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                     var price = $(el).closest('[data-price]').attr('data-price');
                     var count = $(el).val();
                     return price * count;
@@ -3044,8 +3047,22 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + price);
+                console.log(per_price, per_price_value, 'loging');
+                $total.html("$" + (price + per_price_value));
             });
+
+            var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
+                var price = $(el).closest('[data-price]').attr('data-price');
+                var count = $(el).val();
+                return price * count;
+            });
+            var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
+                return accumulator + a;
+            }) : 0;
+            per_price_value += Number($("#products-list_" + list_id).attr('data-price'));
+            console.log('per_price_value', per_price_value);
+            var $total = $('.price-place-summary');
+            $total.html("$" + (price + per_price_value));
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
                 return false;
@@ -3056,12 +3073,12 @@ $(document).ready(function () {
                 ev.stopImmediatePropagation();
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                new_qty($("#products-list_" + list_id));
+                qty = new_qty($("#products-list_" + list_id));
 
                 var price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 
-                var prices_array = $('.product-qty').toArray().map(function (el) {
+                var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                     var price = $(el).closest('[data-price]').attr('data-price');
                     var count = $(el).val();
                     return price * count;
@@ -3070,13 +3087,14 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + total_price);
+                $total.html("$" + (per_price_value + total_price));
             });
 
             $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
                 ev.preventDefault();
                 ev.stopImmediatePropagation();
                 new_qty($("#products-list_" + list_id));
+                qty = new_qty($("#products-list_" + list_id));
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
                 new_qty($("#products-list_" + list_id));
@@ -3084,7 +3102,7 @@ $(document).ready(function () {
                 var price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 
-                var prices_array = $('.product-qty').toArray().map(function (el) {
+                var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
                     var price = $(el).closest('[data-price]').attr('data-price');
                     var count = $(el).val();
                     return price * count;
@@ -3093,7 +3111,7 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + total_price);
+                $total.html("$" + (per_price_value + total_price));
                 console.log('pppp');
             });
         });
@@ -3199,7 +3217,7 @@ $(document).ready(function () {
 
                 var new_qty = function new_qty() {
                     qty = 0;
-                    $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.product-qty').each(function () {
+                    $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.product-qty:not(.product-qty_per_price)').each(function () {
                         qty += Number($(this).val());
                     });
                     console.log(qty, 'qty');

@@ -19,7 +19,7 @@
 </div>
 
 
-<div class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}" data-min-limit="{{ $vSettings->min_count_limit }}">
+<div data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}" class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}" data-min-limit="{{ $vSettings->min_count_limit }}">
     @foreach($variation as $item)
         <div class="d-flex flex-wrap mb-2" data-price="{{ $item->price }}">
             <div class="col-sm-10 align-self-center">
