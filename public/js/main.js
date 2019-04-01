@@ -354,7 +354,7 @@ $(document).ready(function() {
                                     return accumulator + a;
                                 }) : 0;
                                 const $total = $('.price-place-summary');
-                                $total.html(`$${per_price_value + price}`);
+                                // $total.html(`$${per_price_value + price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -395,7 +395,7 @@ $(document).ready(function() {
             const list_id = $(list).attr('data-id');
             const limit = Number($(list).attr('data-limit'));
             const per_price = $(list).attr('data-per-price') === 'product';
-            console.log($(list));
+            console.log($(list),7777);
             let qty;
             $(`#products-list_${list_id}`).on('click', '.package_checkbox_label', function (event) {
                 eventInitialDefault(event)
@@ -469,8 +469,11 @@ $(document).ready(function() {
                 return accumulator + a;
             }) : 0;
             per_price_value += Number($(`#products-list_${list_id}`).attr('data-price'));
-            console.log('per_price_value', per_price_value);
+
+            console.log('per_price_value', per_price_value,$(`#products-list_${list_id}`).attr('data-price'));
+            console.log(99999,price,per_price_value);
             const $total = $('.price-place-summary');
+
             $total.html(`$${price + per_price_value}`);
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {

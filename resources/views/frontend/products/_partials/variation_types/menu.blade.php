@@ -3,7 +3,9 @@
 @endphp
 @if($isSingle)
 
-  <div class="col-sm-12 pl-0 limit" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
+  <div class="col-sm-12 pl-0 limit products-list-wrap" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
+       id="products-list_{{ $vSettings->id }}"
+       data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
        data-min-limit="{{ $vSettings->min_count_limit }}">
     <div class="col-sm-12 pl-0 d-flex">
       @if(! $vSettings->is_required)
@@ -38,7 +40,10 @@
 
 @else
   {{--//multiple--}}
-  <div class="col-sm-10 pl-0 limit" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
+  <div class="col-sm-10 pl-0 limit products-list-wrap"
+       id="products-list_{{ $vSettings->id }}"
+       data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
+       data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
        data-min-limit="{{ $vSettings->min_count_limit }}">
     <div class="col-sm-12 pl-0 d-flex">
       @if(! $vSettings->is_required)
