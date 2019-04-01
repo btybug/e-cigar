@@ -288,7 +288,7 @@ $(document).ready(function() {
                                     $total.html(`$${single_product_price + price}`);
                                 });
 
-                                const prices_array = $('.product-qty').toArray().map(function(el) {
+                                const prices_array = group.closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     const count = $(el).val();
                                     return price * count;
@@ -303,7 +303,55 @@ $(document).ready(function() {
                                 console.log(error);
                             });
                     });
-                    group.attr('id') && group.attr('id').includes('single') && group.select2("val", "Mango");
+
+                    group.attr('id') && group.attr('id').includes('single') && group.ready(function (e) {
+                        const _this = group;
+                        const current_item_id = group.children().first().attr('data-select2-id');
+                        new_qty();
+console.log(group.children(), group.children().first(), group.children().first().attr('data-select2-id'))
+                        fetch("/products/get-variation-menu-raw", {
+                            method: "post",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Accept: "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                "X-CSRF-Token": $('input[name="_token"]').val()
+                            },
+                            credentials: "same-origin",
+                            body: JSON.stringify({id: group.children().first().attr('value'), selectElementId: current_item_id})
+                        })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (json) {
+                                console.log('fuckkkkkkkkkkkkk',json)
+                                $('body').prepend(json.html)
+                                group.attr('id').includes('single') ? group.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                                if(group.attr('id').includes('single')) {
+                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().remove();
+                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().addClass('invisible')
+                                    $(_this).closest('.product-single-info_row').addClass('d-flex')
+                                }
+
+                                const prices_array = group.closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
+                                    const price = $(el).closest('[data-price]').attr('data-price');
+                                    console.log(price, 'map')
+                                    const count = $(el).val();
+                                    return price * count;
+                                });
+                                console.log(prices_array)
+                                const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                                    return accumulator + a;
+                                }) : 0;
+                                const $total = $('.price-place-summary');
+                                console.log('total price = ', price, '; ', single_product_price)
+                                $total.html(`$${single_product_price + price}`);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    });
+
 
                                                 //********************//
                                                 //**select2:unselect**//
