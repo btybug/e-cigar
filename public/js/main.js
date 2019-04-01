@@ -110,31 +110,55 @@ $(document).ready(function() {
 
     $( "#singleProductPageCnt" ).fadeIn(function() {
 //--------------------------------single_product
-        let single_product_price = 0;
-        $('.simple_product').each(function(index, product) {
-            if($(product).find('input.custom-control-input').length === 0) {
-                single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
-            } else {
-                $($(product).find('input.custom-control-input')[0]).is(':checked') && (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
-                $($(product).find('input.custom-control-input')[0]).on('change', function() {
-                    const $total = $('.price-place-summary');
-                    if($(this).is(':checked')) {
-                        (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
-                        $total.html(`$${Number($total.text().trim().slice(1)) + Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
-                    } else {
-                        (single_product_price -= Number($($(product).find('[data-price]')[0]).attr('data-price')));
-                        $total.html(`$${Number($total.text().trim().slice(1)) - Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
-                    }
-                });
-            }
-            // const price =
-        });
+//         let single_product_price = 0;
+        // $('.simple_product').each(function(index, product) {
+        //     if($(product).find('input.custom-control-input').length === 0) {
+        //         single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
+        //     } else {
+        //         $($(product).find('input.custom-control-input')[0]).is(':checked') && (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
+        //         $($(product).find('input.custom-control-input')[0]).on('change', function() {
+        //             const $total = $('.price-place-summary');
+        //             if($(this).is(':checked')) {
+        //                 (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
+        //                 $total.html(`$${Number($total.text().trim().slice(1)) + Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
+        //             } else {
+        //                 (single_product_price -= Number($($(product).find('[data-price]')[0]).attr('data-price')));
+        //                 $total.html(`$${Number($total.text().trim().slice(1)) - Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
+        //             }
+        //         });
+        //     }
+        //     // const price =
+        // });
+
+
+        const new_qty = function(group) {
+            let qty = 0;
+            group.closest('.product-single-info_row').find('.product-qty').each(function() {
+                qty += Number($(this).val());
+            });
+            return qty;
+        };
+        const eventInitialDefault = (ev) => {
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+        };
+
         const $total = $('.price-place-summary');
-        $total.html(`$${single_product_price}`);
-        var msd = $(".select-2");
-//--------------------------------select
-        msd && msd.each(function (i,e){
-            let id = $(e).attr('data-id');
+
+
+        //DELETE
+        $total.html(`$${0}`);
+        //DELETE
+
+
+
+        const select2_products = $(".product-pack-select");
+
+
+
+        select2_products && select2_products.each(function (i,e){
+            const products_id = $(e).attr('data-id');
+            const select = $(e);
 
             fetch("/products/get-package-type-limit", {
                 method: "post",
@@ -145,7 +169,7 @@ $(document).ready(function() {
                     "X-CSRF-Token": $('input[name="_token"]').val()
                 },
                 credentials: "same-origin",
-                body: JSON.stringify({id: id})
+                body: JSON.stringify({id: products_id})
             })
                 .then(function (response) {
                     return response.json();
@@ -153,26 +177,19 @@ $(document).ready(function() {
                 })
                 .then(function (json) {
                     const limit = Number(json.limit);
-                    const group = ($(`#single_v_select_${id}`).length !== 0 && $(`#single_v_select_${id}`)) || $(`#multi_v_select_${id}`);
-                    group.select2({
+                    const isSingle = select.attr('id').includes('single');
+
+                    // const group = ($(`#single_v_select_${products_id}`).length !== 0 && $(`#single_v_select_${products_id}`)) || $(`#multi_v_select_${products_id}`);
+
+                    select.select2({
                         minimumResultsForSearch: Infinity,
-                        maximumSelectionLength: $(`#single_v_select_${id}`).length !== 0 ? Infinity : Number(json.limit),
+                        maximumSelectionLength: isSingle ? Infinity : Number(json.limit),
                         placeholder: 'Select an option'
-                        // language: {
-                        //     noResults: function (params) {
-                        //         return "That's a miss.";
-                        //     }
-                        // }
                     });
 
                     let qty = 0;
 
-                    const new_qty = function() {
-                        qty = 0;
-                        group.closest('.product-single-info_row').find('.product-qty').each(function() {
-                            qty += Number($(this).val());
-                        });
-                    };
+
 
                                                 //********************//
                                                 //*******minus-*******//
@@ -182,13 +199,13 @@ $(document).ready(function() {
                         return false;
                     });
 
-                    group.closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
-                        ev.preventDefault();
-                        ev.stopImmediatePropagation();
+                    select.closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
+                        eventInitialDefault(ev);
+
                         const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                         Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                        new_qty();
-                        group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                        new_qty(select);
+                        select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
 
                         const price = $(this).closest('[data-price]').attr('data-price');
                         $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
@@ -202,23 +219,23 @@ $(document).ready(function() {
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${single_product_price + total_price}`);
+                        $total.html(`$${total_price}`);
                     });
 
                                                 //********************//
                                                 //*******+plus+*******//
                                                 //********************//
 
-                    group.closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
+                    select.closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
                         ev.preventDefault();
                         ev.stopImmediatePropagation();
-                        new_qty();
+                        new_qty(select);
                         const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                         console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this' );
                         Number(input.val()) < Number(limit) - Number(qty) +
                             Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
-                        new_qty();
-                        group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                        new_qty(select);
+                        select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
 
                         const price = $(this).closest('[data-price]').attr('data-price');
                         $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
@@ -232,17 +249,17 @@ $(document).ready(function() {
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${single_product_price + total_price}`);
+                        $total.html(`$${total_price}`);
                     });
 
                                                 //******************//
                                                 //**select2:select**//
                                                 //******************//
 
-                    group.on('select2:select', function (e) {
+                    select.on('select2:select', function (e) {
                         const _this = this;
                         const current_item_id = $(e.params.data.element).attr('data-select2-id');
-                        new_qty();
+                        new_qty(select);
 
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
@@ -259,22 +276,18 @@ $(document).ready(function() {
                                 return response.json();
                             })
                             .then(function (json) {
-                                group.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                                if(group.attr('id').includes('single')) {
-                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().remove();
-                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().addClass('invisible')
-                                    $(_this).closest('.product-single-info_row').addClass('d-flex')
-                                }
+                                select.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+
                                 $('.delete-menu-item').on('click', function() {
                                     const s_id = $(this).attr('data-el-id');
                                     $(`.select2-selection__choice[data-select2-id="${s_id}"].select2-selection__choice__remove`).click();
-                                    $(`#multi_v_select_${id} option[data-select2-id="${s_id}"]`);
+                                    $(`#multi_v_select_${products_id} option[data-select2-id="${s_id}"]`);
                                     const deleted = $(this).closest('.menu-item-selected').attr('data-id');
-                                    const values = group.val().filter((value) => value !== deleted)
-                                    group.val(values).trigger('change.select2');
+                                    const values = select.val().filter((value) => value !== deleted)
+                                    select.val(values).trigger('change.select2');
                                     $(this).closest('.menu-item-selected').remove();
-                                    new_qty();
-                                    group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                                    new_qty(select);
+                                    select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
 
                                     const prices_array = $('.product-qty').toArray().map(function(el) {
                                         const price = $(el).closest('[data-price]').attr('data-price');
@@ -285,15 +298,15 @@ $(document).ready(function() {
                                         return accumulator + a;
                                     }) : 0;
                                     const $total = $('.price-place-summary');
-                                    $total.html(`$${single_product_price + price}`);
+                                    $total.html(`$${price}`);
                                 });
 
-                                const prices_array = group.attr('id').includes('single') ? $(`#single_v_select_${id}`).closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
+                                const prices_array = select.attr('id').includes('single') ? $('.product-qty').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     console.log(price, 'map');
                                     const count = $(el).val();
                                     return price * count;
-                                }) : $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
+                                }) : $('.product-qty').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     console.log(price, 'map')
                                     const count = $(el).val();
@@ -303,18 +316,18 @@ $(document).ready(function() {
                                     return accumulator + a;
                                 }) : 0;
                                 const $total = $('.price-place-summary');
-                                $total.html(`$${single_product_price + price}`);
+                                $total.html(`$${price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
                             });
                     });
 
-                    group.attr('id') && group.attr('id').includes('single') && group.ready(function (e) {
-                        const _this = group;
-                        const current_item_id = group.children().first().attr('data-select2-id');
-                        new_qty();
-console.log(group.children(), group.children().first(), group.children().first().attr('data-select2-id'))
+                    select.attr('id') && select.attr('id').includes('single') && select.ready(function (e) {
+                        const _this = select;
+                        const current_item_id = select.children().first().attr('data-select2-id');
+                        new_qty(select);
+console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'))
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
                             headers: {
@@ -324,7 +337,7 @@ console.log(group.children(), group.children().first(), group.children().first()
                                 "X-CSRF-Token": $('input[name="_token"]').val()
                             },
                             credentials: "same-origin",
-                            body: JSON.stringify({id: group.children().first().attr('value'), selectElementId: current_item_id})
+                            body: JSON.stringify({id: select.children().first().attr('value'), selectElementId: current_item_id})
                         })
                             .then(function (response) {
                                 return response.json();
@@ -332,14 +345,8 @@ console.log(group.children(), group.children().first(), group.children().first()
                             .then(function (json) {
                                 console.log('fuckkkkkkkkkkkkk',json)
                                 $('body').prepend(json.html)
-                                group.attr('id').includes('single') ? group.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                                if(group.attr('id').includes('single')) {
-                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().remove();
-                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().addClass('invisible')
-                                    $(_this).closest('.product-single-info_row').addClass('d-flex')
-                                }
-
-                                const prices_array = group.closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
+                                select.attr('id').includes('single') ? select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                               const prices_array = $('.product-qty').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
                                     console.log(price, 'map')
                                     const count = $(el).val();
@@ -350,8 +357,7 @@ console.log(group.children(), group.children().first(), group.children().first()
                                     return accumulator + a;
                                 }) : 0;
                                 const $total = $('.price-place-summary');
-                                console.log('total price = ', price, '; ', single_product_price)
-                                $total.html(`$${single_product_price + price}`);
+                                $total.html(`$${price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -363,11 +369,11 @@ console.log(group.children(), group.children().first(), group.children().first()
                                                 //**select2:unselect**//
                                                 //********************//
 
-                    $(`#multi_v_select_${id}`).on('select2:unselect', function (e) {
+                    $(`#multi_v_select_${products_id}`).on('select2:unselect', function (e) {
                         $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
                         setTimeout(function() {
-                            new_qty();
-                            group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
+                            new_qty(select);
+                            select.select2({maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
                         }, 0);
 
                         const prices_array = $('.product-qty').toArray().map(function(el) {
@@ -379,7 +385,7 @@ console.log(group.children(), group.children().first(), group.children().first()
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${single_product_price + price}`);
+                        $total.html(`$${price}`);
                     });
                 })
                 .catch(function (error) {
@@ -392,12 +398,6 @@ console.log(group.children(), group.children().first(), group.children().first()
             const list_id = $(list).attr('data-id');
             const limit = Number($(list).attr('data-limit'));
             let qty;
-            const new_qty = function() {
-                qty = 0;
-                $(`#products-list_${list_id}`).find('.product-qty').each(function() {
-                    qty += Number($(this).val());
-                });
-            };
             $(`#products-list_${list_id}`).on('click', '.package_checkbox_label', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -443,7 +443,7 @@ console.log(group.children(), group.children().first(), group.children().first()
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${single_product_price + price}`);
+                $total.html(`$${price}`);
             });
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
@@ -455,7 +455,7 @@ console.log(group.children(), group.children().first(), group.children().first()
                 ev.stopImmediatePropagation();
                 const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                new_qty();
+                new_qty($(`#products-list_${list_id}`));
 
                 const price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
@@ -469,19 +469,19 @@ console.log(group.children(), group.children().first(), group.children().first()
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${single_product_price + total_price}`);
+                $total.html(`$${total_price}`);
             });
 
 
             $(`#products-list_${list_id}`).on('click', '.product-count-plus', function (ev) {
                 ev.preventDefault();
                 ev.stopImmediatePropagation();
-                new_qty();
+                new_qty($(`#products-list_${list_id}`));
                 const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) < Number(limit) - Number(qty) +
                 Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())
                 && input.val(Number(input.val()) + 1);
-                new_qty();
+                new_qty($(`#products-list_${list_id}`));
 
                 const price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
@@ -495,7 +495,7 @@ console.log(group.children(), group.children().first(), group.children().first()
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${single_product_price + total_price}`);
+                $total.html(`$${total_price}`);
                 console.log('pppp');
 
             });
@@ -545,17 +545,16 @@ console.log(group.children(), group.children().first(), group.children().first()
         };
 
         $("body").on('click', ".single-item-wrapper .single-item", function(ev) {
-            console.log('*******', this);
-            console.log(popup_limit, $(".single-item-wrapper.active").length);
             const id = $(this).closest(".single-item-wrapper").attr('data-id');
+            const title = $(this).find('.name-item').text().trim();
             if(popup_limit > popup_qty() && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                 console.log($(this).closest(".single-item-wrapper"));
                 $(this).closest(".single-item-wrapper").addClass('active');
                 $('.selected-items_popup')
                     .append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
                               <div class="d-flex justify-content-between selected-item_popup-wrapper">
-                                <div class="align-self-center">
-                                  Pods
+                                <div class="align-self-center text-truncate">
+                                  ${title}
                                 </div>
                                 <div class="d-flex align-items-center justify-content-end">
                                   <div class="mr-1">Qty</div>
@@ -579,6 +578,9 @@ console.log(group.children(), group.children().first(), group.children().first()
                                                     </svg>
                                                 </span>
                                   </div>
+                                  <div>
+                                    <a href="javascript:void(0)" data-el-id="28" class="btn btn-sm delete-menu-item text-danger"><i class="fa fa-times"></i></a>
+                                </div>
                                 </div>
                               </div>
                             </div>`);

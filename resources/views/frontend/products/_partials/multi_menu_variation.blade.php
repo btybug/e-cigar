@@ -1,3 +1,21 @@
+@if($variation->count_limit ==1 && $variation->min_count_limit)
+  <div class="col-sm-12 pl-0 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ $variation->price }}">
+    <div class="d-flex flex-wrap align-items-center ">
+      <div class="invisible position-absolute" style="width: 0;height: 0">
+        <div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
+        {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty','data-id' => $variation->id,'min' => 1]) !!}
+        </div>
+      </div>
+      <div class="col-sm-12 pl-sm-3 p-0 text-sm-center">
+        @if($variation->price_per =='item' && ! $variation->stock->type)
+          <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
+              {{ convert_price($variation->price,$currency) }}
+            </span>
+        @endif
+      </div>
+    </div>
+  </div>
+@else
 <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ $variation->price }}">
     <div class="d-flex flex-wrap align-items-center ">
         <div class="col-sm-7">
@@ -30,3 +48,4 @@
         </div>
     </div>
 </div>
+@endif

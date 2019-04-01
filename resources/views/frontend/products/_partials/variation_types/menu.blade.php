@@ -16,17 +16,18 @@
         <h4>{{ $vSettings->title }} (you can select one option)</h4>
       @endif
     </div>
-    <div class="d-flex">
-      {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
+    <div class="d-flex flex-wrap">
+      <div class="col-sm-10 pl-0">
+        {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
     ['id' => "single_v_select_$vSettings->id",'class' => 'select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
     'multiple' => false,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
-
+      </div>
       <div class="col-sm-2 pl-sm-3 p-0 text-sm-center text-right">
-        <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
+        <div class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
           <div class="selected-menu-options">
               {{ convert_price($vSettings->price,$currency) }}
           </div>
-        </span>
+        </div>
       </div>
     </div>
 
@@ -57,7 +58,7 @@
       $class = "multi_v_select";
     @endphp
     {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
-    ['id' => $id,'class' => $class.' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
+    ['id' => $id,'class' => $class.'select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
     'multiple' => true,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
   </div>
 

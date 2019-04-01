@@ -2740,31 +2740,51 @@ $(document).ready(function () {
 
     $("#singleProductPageCnt").fadeIn(function () {
         //--------------------------------single_product
-        var single_product_price = 0;
-        $('.simple_product').each(function (index, product) {
-            if ($(product).find('input.custom-control-input').length === 0) {
-                single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
-            } else {
-                $($(product).find('input.custom-control-input')[0]).is(':checked') && (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
-                $($(product).find('input.custom-control-input')[0]).on('change', function () {
-                    var $total = $('.price-place-summary');
-                    if ($(this).is(':checked')) {
-                        single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
-                        $total.html("$" + (Number($total.text().trim().slice(1)) + Number($($(product).find('[data-price]')[0]).attr('data-price'))));
-                    } else {
-                        single_product_price -= Number($($(product).find('[data-price]')[0]).attr('data-price'));
-                        $total.html("$" + (Number($total.text().trim().slice(1)) - Number($($(product).find('[data-price]')[0]).attr('data-price'))));
-                    }
-                });
-            }
-            // const price =
-        });
+        //         let single_product_price = 0;
+        // $('.simple_product').each(function(index, product) {
+        //     if($(product).find('input.custom-control-input').length === 0) {
+        //         single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
+        //     } else {
+        //         $($(product).find('input.custom-control-input')[0]).is(':checked') && (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
+        //         $($(product).find('input.custom-control-input')[0]).on('change', function() {
+        //             const $total = $('.price-place-summary');
+        //             if($(this).is(':checked')) {
+        //                 (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
+        //                 $total.html(`$${Number($total.text().trim().slice(1)) + Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
+        //             } else {
+        //                 (single_product_price -= Number($($(product).find('[data-price]')[0]).attr('data-price')));
+        //                 $total.html(`$${Number($total.text().trim().slice(1)) - Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
+        //             }
+        //         });
+        //     }
+        //     // const price =
+        // });
+
+
+        var new_qty = function new_qty(group) {
+            var qty = 0;
+            group.closest('.product-single-info_row').find('.product-qty').each(function () {
+                qty += Number($(this).val());
+            });
+            return qty;
+        };
+        var eventInitialDefault = function eventInitialDefault(ev) {
+            ev.preventDefault();
+            ev.stopImmediatePropagation();
+        };
+
         var $total = $('.price-place-summary');
-        $total.html("$" + single_product_price);
-        var msd = $(".select-2");
-        //--------------------------------select
-        msd && msd.each(function (i, e) {
-            var id = $(e).attr('data-id');
+
+        //DELETE
+        $total.html("$" + 0);
+        //DELETE
+
+
+        var select2_products = $(".product-pack-select");
+
+        select2_products && select2_products.each(function (i, e) {
+            var products_id = $(e).attr('data-id');
+            var select = $(e);
 
             fetch("/products/get-package-type-limit", {
                 method: "post",
@@ -2775,31 +2795,22 @@ $(document).ready(function () {
                     "X-CSRF-Token": $('input[name="_token"]').val()
                 },
                 credentials: "same-origin",
-                body: JSON.stringify({ id: id })
+                body: JSON.stringify({ id: products_id })
             }).then(function (response) {
                 return response.json();
             }).then(function (json) {
                 var limit = Number(json.limit);
-                var group = $("#single_v_select_" + id).length !== 0 && $("#single_v_select_" + id) || $("#multi_v_select_" + id);
-                group.select2({
+                var isSingle = select.attr('id').includes('single');
+
+                // const group = ($(`#single_v_select_${products_id}`).length !== 0 && $(`#single_v_select_${products_id}`)) || $(`#multi_v_select_${products_id}`);
+
+                select.select2({
                     minimumResultsForSearch: Infinity,
-                    maximumSelectionLength: $("#single_v_select_" + id).length !== 0 ? Infinity : Number(json.limit),
+                    maximumSelectionLength: isSingle ? Infinity : Number(json.limit),
                     placeholder: 'Select an option'
-                    // language: {
-                    //     noResults: function (params) {
-                    //         return "That's a miss.";
-                    //     }
-                    // }
                 });
 
                 var qty = 0;
-
-                var new_qty = function new_qty() {
-                    qty = 0;
-                    group.closest('.product-single-info_row').find('.product-qty').each(function () {
-                        qty += Number($(this).val());
-                    });
-                };
 
                 //********************//
                 //*******minus-*******//
@@ -2809,13 +2820,13 @@ $(document).ready(function () {
                     return false;
                 });
 
-                group.closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
-                    ev.preventDefault();
-                    ev.stopImmediatePropagation();
+                select.closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
+                    eventInitialDefault(ev);
+
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                    new_qty();
-                    group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
+                    new_qty(select);
+                    select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
 
                     var price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
@@ -2829,22 +2840,22 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + (single_product_price + total_price));
+                    $total.html("$" + total_price);
                 });
 
                 //********************//
                 //*******+plus+*******//
                 //********************//
 
-                group.closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
+                select.closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
                     ev.preventDefault();
                     ev.stopImmediatePropagation();
-                    new_qty();
+                    new_qty(select);
                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                     console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this');
                     Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
-                    new_qty();
-                    group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
+                    new_qty(select);
+                    select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
 
                     var price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
@@ -2858,17 +2869,17 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + (single_product_price + total_price));
+                    $total.html("$" + total_price);
                 });
 
                 //******************//
                 //**select2:select**//
                 //******************//
 
-                group.on('select2:select', function (e) {
+                select.on('select2:select', function (e) {
                     var _this = this;
                     var current_item_id = $(e.params.data.element).attr('data-select2-id');
-                    new_qty();
+                    new_qty(select);
 
                     fetch("/products/get-variation-menu-raw", {
                         method: "post",
@@ -2883,24 +2894,20 @@ $(document).ready(function () {
                     }).then(function (response) {
                         return response.json();
                     }).then(function (json) {
-                        group.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                        if (group.attr('id').includes('single')) {
-                            $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().remove();
-                            $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().addClass('invisible');
-                            $(_this).closest('.product-single-info_row').addClass('d-flex');
-                        }
+                        select.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+
                         $('.delete-menu-item').on('click', function () {
                             var s_id = $(this).attr('data-el-id');
                             $(".select2-selection__choice[data-select2-id=\"" + s_id + "\"].select2-selection__choice__remove").click();
-                            $("#multi_v_select_" + id + " option[data-select2-id=\"" + s_id + "\"]");
+                            $("#multi_v_select_" + products_id + " option[data-select2-id=\"" + s_id + "\"]");
                             var deleted = $(this).closest('.menu-item-selected').attr('data-id');
-                            var values = group.val().filter(function (value) {
+                            var values = select.val().filter(function (value) {
                                 return value !== deleted;
                             });
-                            group.val(values).trigger('change.select2');
+                            select.val(values).trigger('change.select2');
                             $(this).closest('.menu-item-selected').remove();
-                            new_qty();
-                            group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
+                            new_qty(select);
+                            select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
 
                             var prices_array = $('.product-qty').toArray().map(function (el) {
                                 var price = $(el).closest('[data-price]').attr('data-price');
@@ -2911,15 +2918,15 @@ $(document).ready(function () {
                                 return accumulator + a;
                             }) : 0;
                             var $total = $('.price-place-summary');
-                            $total.html("$" + (single_product_price + price));
+                            $total.html("$" + price);
                         });
 
-                        var prices_array = group.attr('id').includes('single') ? $("#single_v_select_" + id).closest('.product-single-info_row').find('.product-qty').toArray().map(function (el) {
+                        var prices_array = select.attr('id').includes('single') ? $('.product-qty').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
                             console.log(price, 'map');
                             var count = $(el).val();
                             return price * count;
-                        }) : $("#multi_v_select_" + id).closest('.product-single-info_row').find('.product-qty').toArray().map(function (el) {
+                        }) : $('.product-qty').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
                             console.log(price, 'map');
                             var count = $(el).val();
@@ -2929,17 +2936,17 @@ $(document).ready(function () {
                             return accumulator + a;
                         }) : 0;
                         var $total = $('.price-place-summary');
-                        $total.html("$" + (single_product_price + price));
+                        $total.html("$" + price);
                     }).catch(function (error) {
                         console.log(error);
                     });
                 });
 
-                group.attr('id') && group.attr('id').includes('single') && group.ready(function (e) {
-                    var _this = group;
-                    var current_item_id = group.children().first().attr('data-select2-id');
-                    new_qty();
-                    console.log(group.children(), group.children().first(), group.children().first().attr('data-select2-id'));
+                select.attr('id') && select.attr('id').includes('single') && select.ready(function (e) {
+                    var _this = select;
+                    var current_item_id = select.children().first().attr('data-select2-id');
+                    new_qty(select);
+                    console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'));
                     fetch("/products/get-variation-menu-raw", {
                         method: "post",
                         headers: {
@@ -2949,20 +2956,14 @@ $(document).ready(function () {
                             "X-CSRF-Token": $('input[name="_token"]').val()
                         },
                         credentials: "same-origin",
-                        body: JSON.stringify({ id: group.children().first().attr('value'), selectElementId: current_item_id })
+                        body: JSON.stringify({ id: select.children().first().attr('value'), selectElementId: current_item_id })
                     }).then(function (response) {
                         return response.json();
                     }).then(function (json) {
                         console.log('fuckkkkkkkkkkkkk', json);
                         $('body').prepend(json.html);
-                        group.attr('id').includes('single') ? group.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                        if (group.attr('id').includes('single')) {
-                            $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().remove();
-                            $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().addClass('invisible');
-                            $(_this).closest('.product-single-info_row').addClass('d-flex');
-                        }
-
-                        var prices_array = group.closest('.product-single-info_row').find('.product-qty').toArray().map(function (el) {
+                        select.attr('id').includes('single') ? select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                        var prices_array = $('.product-qty').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
                             console.log(price, 'map');
                             var count = $(el).val();
@@ -2973,8 +2974,7 @@ $(document).ready(function () {
                             return accumulator + a;
                         }) : 0;
                         var $total = $('.price-place-summary');
-                        console.log('total price = ', price, '; ', single_product_price);
-                        $total.html("$" + (single_product_price + price));
+                        $total.html("$" + price);
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -2984,11 +2984,11 @@ $(document).ready(function () {
                 //**select2:unselect**//
                 //********************//
 
-                $("#multi_v_select_" + id).on('select2:unselect', function (e) {
+                $("#multi_v_select_" + products_id).on('select2:unselect', function (e) {
                     $(this).closest('.product-single-info_row').find(".menu-item-selected[data-id=\"" + e.params.data.id + "\"]").remove();
                     setTimeout(function () {
-                        new_qty();
-                        group.select2({ maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length });
+                        new_qty(select);
+                        select.select2({ maximumSelectionLength: Number(limit) - Number(qty) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
                     }, 0);
 
                     var prices_array = $('.product-qty').toArray().map(function (el) {
@@ -3000,7 +3000,7 @@ $(document).ready(function () {
                         return accumulator + a;
                     }) : 0;
                     var $total = $('.price-place-summary');
-                    $total.html("$" + (single_product_price + price));
+                    $total.html("$" + price);
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -3012,12 +3012,6 @@ $(document).ready(function () {
             var list_id = $(list).attr('data-id');
             var limit = Number($(list).attr('data-limit'));
             var qty = void 0;
-            var new_qty = function new_qty() {
-                qty = 0;
-                $("#products-list_" + list_id).find('.product-qty').each(function () {
-                    qty += Number($(this).val());
-                });
-            };
             $("#products-list_" + list_id).on('click', '.package_checkbox_label', function (event) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -3050,7 +3044,7 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + (single_product_price + price));
+                $total.html("$" + price);
             });
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
@@ -3062,7 +3056,7 @@ $(document).ready(function () {
                 ev.stopImmediatePropagation();
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                new_qty();
+                new_qty($("#products-list_" + list_id));
 
                 var price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
@@ -3076,16 +3070,16 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + (single_product_price + total_price));
+                $total.html("$" + total_price);
             });
 
             $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
                 ev.preventDefault();
                 ev.stopImmediatePropagation();
-                new_qty();
+                new_qty($("#products-list_" + list_id));
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
                 Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
-                new_qty();
+                new_qty($("#products-list_" + list_id));
 
                 var price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
@@ -3099,7 +3093,7 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                $total.html("$" + (single_product_price + total_price));
+                $total.html("$" + total_price);
                 console.log('pppp');
             });
         });
@@ -3148,13 +3142,12 @@ $(document).ready(function () {
         };
 
         $("body").on('click', ".single-item-wrapper .single-item", function (ev) {
-            console.log('*******', this);
-            console.log(popup_limit, $(".single-item-wrapper.active").length);
             var id = $(this).closest(".single-item-wrapper").attr('data-id');
+            var title = $(this).find('.name-item').text().trim();
             if (popup_limit > popup_qty() && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                 console.log($(this).closest(".single-item-wrapper"));
                 $(this).closest(".single-item-wrapper").addClass('active');
-                $('.selected-items_popup').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                <div class=\"align-self-center\">\n                                  Pods\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n                                    <!--minus qty-->\n                                    <span data-type=\"minus\"\n                                          class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span data-type=\"plus\"\n                                          class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                </div>\n                              </div>\n                            </div>");
+                $('.selected-items_popup').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                <div class=\"align-self-center text-truncate\">\n                                  " + title + "\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n                                    <!--minus qty-->\n                                    <span data-type=\"minus\"\n                                          class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span data-type=\"plus\"\n                                          class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                  <div>\n                                    <a href=\"javascript:void(0)\" data-el-id=\"28\" class=\"btn btn-sm delete-menu-item text-danger\"><i class=\"fa fa-times\"></i></a>\n                                </div>\n                                </div>\n                              </div>\n                            </div>");
             } else if ($(this).closest(".single-item-wrapper").hasClass('active')) {
                 $("[data-id-popup=\"" + id + "\"]").remove();
                 $(this).closest(".single-item-wrapper").removeClass('active');
