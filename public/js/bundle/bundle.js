@@ -2762,7 +2762,7 @@ $(document).ready(function () {
 
         var new_qty = function new_qty(group) {
             var qty = 0;
-            group.closest('.product-single-info_row').find('.product-qty:not(.product-qty_per_price)').each(function () {
+            group.closest('.product-single-info_row').find('.product-qty').each(function () {
                 qty += Number($(this).val());
             });
             return qty;
@@ -3093,11 +3093,11 @@ $(document).ready(function () {
             $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
                 ev.preventDefault();
                 ev.stopImmediatePropagation();
-                new_qty($("#products-list_" + list_id));
                 qty = new_qty($("#products-list_" + list_id));
                 var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+                console.log(Number(input.val()), '<', Number(limit), '-', Number(qty), '+', Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
                 Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
-                new_qty($("#products-list_" + list_id));
+                qty = new_qty($("#products-list_" + list_id));
 
                 var price = $(this).closest('[data-price]').attr('data-price');
                 $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
