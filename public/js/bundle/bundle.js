@@ -2796,11 +2796,9 @@ $(document).ready(function () {
 
                 var new_qty = function new_qty() {
                     qty = 0;
-                    console.log(id, 'package_productid');
                     group.closest('.product-single-info_row').find('.product-qty').each(function () {
                         qty += Number($(this).val());
                     });
-                    console.log(qty, 'qty');
                 };
 
                 //********************//
@@ -2885,7 +2883,7 @@ $(document).ready(function () {
                     }).then(function (response) {
                         return response.json();
                     }).then(function (json) {
-                        $(_this).closest('.product-single-info_row').append(json.html);
+                        group.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
 
                         $('.delete-menu-item').on('click', function () {
                             var s_id = $(this).attr('data-el-id');
@@ -2926,6 +2924,8 @@ $(document).ready(function () {
                         console.log(error);
                     });
                 });
+                group.attr('id') && group.attr('id').includes('single') && console.log('selected id', Number($(group.find('[data-select2-id]')[0]).attr('data-select2-id')));
+                group.attr('id') && group.attr('id').includes('single') && group.select2("val", "Mango");
 
                 //********************//
                 //**select2:unselect**//
