@@ -259,8 +259,12 @@ $(document).ready(function() {
                                 return response.json();
                             })
                             .then(function (json) {
-                                group.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-
+                                group.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                                if(group.attr('id').includes('single')) {
+                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().remove();
+                                    $(_this).closest('.product-single-info_row').find('.selected-menu-options').children().first().children().children().first().addClass('invisible')
+                                    $(_this).closest('.product-single-info_row').addClass('d-flex')
+                                }
                                 $('.delete-menu-item').on('click', function() {
                                     const s_id = $(this).attr('data-el-id');
                                     $(`.select2-selection__choice[data-select2-id="${s_id}"].select2-selection__choice__remove`).click();
@@ -299,7 +303,6 @@ $(document).ready(function() {
                                 console.log(error);
                             });
                     });
-                    group.attr('id') && group.attr('id').includes('single') && console.log('selected id', Number($(group.find('[data-select2-id]')[0]).attr('data-select2-id')))
                     group.attr('id') && group.attr('id').includes('single') && group.select2("val", "Mango");
 
                                                 //********************//
