@@ -288,11 +288,17 @@ $(document).ready(function() {
                                     $total.html(`$${single_product_price + price}`);
                                 });
 
-                                const prices_array = group.closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
+                                const prices_array = group.attr('id').includes('single') ? $(`#single_v_select_${id}`).closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
                                     const price = $(el).closest('[data-price]').attr('data-price');
+                                    console.log(price, 'map');
                                     const count = $(el).val();
                                     return price * count;
-                                });
+                                }) : $(`#multi_v_select_${id}`).closest('.product-single-info_row').find('.product-qty').toArray().map(function(el) {
+                                    const price = $(el).closest('[data-price]').attr('data-price');
+                                    console.log(price, 'map')
+                                    const count = $(el).val();
+                                    return price * count;
+                                })
                                 const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                                     return accumulator + a;
                                 }) : 0;

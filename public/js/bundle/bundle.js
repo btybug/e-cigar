@@ -2914,8 +2914,14 @@ $(document).ready(function () {
                             $total.html("$" + (single_product_price + price));
                         });
 
-                        var prices_array = group.closest('.product-single-info_row').find('.product-qty').toArray().map(function (el) {
+                        var prices_array = group.attr('id').includes('single') ? $("#single_v_select_" + id).closest('.product-single-info_row').find('.product-qty').toArray().map(function (el) {
                             var price = $(el).closest('[data-price]').attr('data-price');
+                            console.log(price, 'map');
+                            var count = $(el).val();
+                            return price * count;
+                        }) : $("#multi_v_select_" + id).closest('.product-single-info_row').find('.product-qty').toArray().map(function (el) {
+                            var price = $(el).closest('[data-price]').attr('data-price');
+                            console.log(price, 'map');
                             var count = $(el).val();
                             return price * count;
                         });
