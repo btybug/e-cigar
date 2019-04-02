@@ -24,9 +24,9 @@
     <div>
 
         <div class="product-body">
-            <ul class="get-all-attributes-tab row filter-children-items">
+            <div class="get-all-attributes-tab row filter-children-items">
 
-            </ul>
+            </div>
         </div>
 
     </div>
@@ -50,11 +50,7 @@
                                 break;
                             case 'items':
                                 $('.filter-children-selects').html(res.filters);
-                                $('.filter-children-items').html(res.items_html);
-                                $('#view-result .modal-footer').html('<div class="d-flex flex-wrap justify-content-between mb-1">\n' +
-                                    '<button type="button" class="btn btn-primary"><i class="fa fa-plus fa-sm mr-10"></i>Add</button>\n' +
-                                    '</div>');
-                                break;
+                                $('.filter-children-items').html(res.items_html);break;
                         }
                     }
                 });
