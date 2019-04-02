@@ -33,10 +33,18 @@
 @push('javascript')
     <script>
         (function() {
-            $("body").on('change', '.filter-select', function () {
+            $("body").on('change', '.filters-select-wizard', function () {
                 let data = $('form#filter-form').serialize();
-                AjaxCall("/filters", data, function (res) {
+//                const filter = [];
+//                console.log(data);
+                AjaxCall("/filters",{
+                    group: self.$(this).attr('data-group'),
+                    category_id: $(this).attr('data-action'),
+                    type:$(this).attr('data-type'),
+                    data,
+                }, function (res) {
                     if (!res.error) {
+
                         switch (res.type) {
                             case 'filter':
                                 $('.filter-children-items').empty();
