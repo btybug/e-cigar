@@ -294,7 +294,7 @@
             return qty;
         };
 
-        $("body").on('click', ".shopping-cart_wrapper .wrap-item", function(ev) {
+        $("body").on('click', "#wizardViewModal .shopping-cart_wrapper .wrap-item", function(ev) {
             const id = $(this).attr('data-id');
             const title = $(this).find('.name').text().trim();
 //            if(popup_limit > popup_qty() && !$(this).hasClass('active')) {
@@ -357,7 +357,7 @@
 
 
         //Vahag jan senc baner mi areq
-        $('body').on('click', '.modal-footer .b_save_XXXXXX', function() {
+        $('body').on('click', '#wizardViewModal .add-items-btn', function() {
             const items_array = [];
             $('.modal-body').find('.single-item-wrapper').each(function() {
                 $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
@@ -375,11 +375,12 @@
                 body: JSON.stringify({ids: items_array})
             })
                 .then(function (response) {
+                    console.log(response,'response');
                     return response.json();
 
                 })
                 .then(function (json) {
-                    // console.log(json.html);
+                     console.log(json.html,'fetch');
                     let prices = 0;
                     const limit = $($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.limit')[0]).attr('data-limit');
                     let qty = 0;
