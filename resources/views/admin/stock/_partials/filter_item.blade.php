@@ -18,7 +18,7 @@
                     <div class="col-md-2">
                         <div class="section_price">
                             Price
-                            per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Product','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
+                            per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Section','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
                         </div>
                     </div>
                     <div class="col-md-2">
