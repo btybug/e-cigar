@@ -10,9 +10,10 @@
                     <div class="col-md-2">
                         How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",
                                 ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
-
-                        {!! Form::hidden("variations[$main_unique][display_as]",
-                            'popup') !!}
+                    </div>
+                    <div class="col-md-2">
+                        Display as: {!! Form::select("variations[$main_unique][display_as]",
+                        ['select_filter' => 'select filters','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
                     <div class="col-md-2">
                         <div class="section_price">
