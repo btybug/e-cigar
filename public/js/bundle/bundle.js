@@ -2739,26 +2739,6 @@ $(document).ready(function () {
     });
 
     $("#singleProductPageCnt").fadeIn(function () {
-        //--------------------------------single_product
-        //         let single_product_price = 0;
-        // $('.simple_product').each(function(index, product) {
-        //     if($(product).find('input.custom-control-input').length === 0) {
-        //         single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price'));
-        //     } else {
-        //         $($(product).find('input.custom-control-input')[0]).is(':checked') && (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
-        //         $($(product).find('input.custom-control-input')[0]).on('change', function() {
-        //             const $total = $('.price-place-summary');
-        //             if($(this).is(':checked')) {
-        //                 (single_product_price += Number($($(product).find('[data-price]')[0]).attr('data-price')));
-        //                 $total.html(`$${Number($total.text().trim().slice(1)) + Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
-        //             } else {
-        //                 (single_product_price -= Number($($(product).find('[data-price]')[0]).attr('data-price')));
-        //                 $total.html(`$${Number($total.text().trim().slice(1)) - Number($($(product).find('[data-price]')[0]).attr('data-price'))}`);
-        //             }
-        //         });
-        //     }
-        //     // const price =
-        // });
 
         var new_qty = function new_qty(group) {
             var qty = 0;
@@ -2775,6 +2755,11 @@ $(document).ready(function () {
         var $total = $('.price-place-summary');
         var per_price_value = 0;
 
+        $('[data-per-price="product"]').each(function (index) {
+            console.log('index ', index, '---', Number($(this).attr('data-price')));
+            per_price_value += Number($(this).attr('data-price'));
+        });
+        console.log(per_price_value);
         //DELETE
         $total.html("$" + per_price_value);
         //DELETE
@@ -2812,10 +2797,6 @@ $(document).ready(function () {
 
                 var qty = 0;
 
-                //********************//
-                //*******minus-*******//
-                //********************//
-
                 $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
                     return false;
                 });
@@ -2843,10 +2824,6 @@ $(document).ready(function () {
                     $total.html("$" + (per_price_value + total_price));
                 });
 
-                //********************//
-                //*******+plus+*******//
-                //********************//
-
                 select.closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
                     eventInitialDefault(ev);
                     new_qty(select);
@@ -2870,10 +2847,6 @@ $(document).ready(function () {
                     var $total = $('.price-place-summary');
                     $total.html("$" + (per_price_value + total_price));
                 });
-
-                //******************//
-                //**select2:select**//
-                //******************//
 
                 select.on('select2:select', function (e) {
                     var _this = this;
@@ -2971,6 +2944,7 @@ $(document).ready(function () {
                         var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
                             return accumulator + a;
                         }) : 0;
+
                         var $total = $('.price-place-summary');
                         $total.html("$" + (per_price_value + price));
                     }).catch(function (error) {
@@ -3030,9 +3004,7 @@ $(document).ready(function () {
                     var _price = $(this).closest('[data-price]').attr('data-price');
                     $(this).closest('[data-price]').find('.price-placee').html("$" + _price);
                 } else {
-                    !per_price && qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
-
-                    per_price && qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
+                    qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty " + (per_price && "product-qty_per_price") + "\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
                     $(this).closest('div').find('.package_checkbox')[0].click();
                 }
 
@@ -3058,7 +3030,6 @@ $(document).ready(function () {
             var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
                 return accumulator + a;
             }) : 0;
-            per_price_value += Number($("#products-list_" + list_id).attr('data-price'));
 
             console.log('per_price_value', per_price_value, $("#products-list_" + list_id).attr('data-price'));
             console.log(99999, price, per_price_value);
@@ -3191,7 +3162,7 @@ $(document).ready(function () {
             $('.modal-body').find('.single-item-wrapper').each(function () {
                 $(this).hasClass('active') && items_array.push($(this).attr('data-id'));
             });
-            console.log(items_array);
+
             fetch("/products/get-variation-menu-raws", {
                 method: "post",
                 headers: {
@@ -3212,10 +3183,9 @@ $(document).ready(function () {
 
                 var new_qty = function new_qty() {
                     qty = 0;
-                    $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.product-qty:not(.product-qty_per_price)').each(function () {
+                    $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.product-qty').each(function () {
                         qty += Number($(this).val());
                     });
-                    console.log(qty, 'qty');
                 };
 
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').append(json.html);
@@ -3226,6 +3196,7 @@ $(document).ready(function () {
                         value: $(this).val()
                     });
                 });
+
                 console.log(popup_items_qty);
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.field-input').each(function () {
                     var d_id = $(this).attr('data-id');
@@ -3240,26 +3211,15 @@ $(document).ready(function () {
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.menu-item-selected[data-price]').each(function () {
                     prices += Number($(this).attr('data-price')) * Number($(this).find('.field-input').val());
                 });
-                console.log($("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.menu-item-selected[data-price]'), prices);
+
                 var $total = $('.price-place-summary');
-                $total.html("$" + (Number($total.text().trim().slice(1)) + prices));
-                console.log('dg', dg);
+                // console.log('$(`[data-group="${dg}"]`).find(\'[data-per-price]\').attr(\'data-per-price\')', $(`[data-group="${dg}"]`));
+                $("[data-group=\"" + dg + "\"]").closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html("$" + (Number($total.text().trim().slice(1)) + prices));
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').on('click', '.delete-menu-item', function () {
-                    console.log($(this).closest('[data-price]').find('.product-qty').val(), Number($(this).closest('[data-price]').attr('data-price')), 'nyushka');
-                    $total.html("$" + (Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price')) * $(this).closest('[data-price]').find('.product-qty').val()));
+
+                    $("[data-group=\"" + dg + "\"]").closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html("$" + (Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price')) * $(this).closest('[data-price]').find('.product-qty').val()));
 
                     $(this).closest('.menu-item-selected').remove();
-
-                    // const prices_array = $('.product-qty').toArray().map(function(el) {
-                    //     const price = $(el).closest('[data-price]').attr('data-price');
-                    //     const count = $(el).val();
-                    //     return price * count;
-                    // });
-                    // const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                    //     return accumulator + a;
-                    // }) : 0;
-                    // const $total = $('.price-place-summary');
-                    // $total.html(`$${single_product_price + price}`);
                 });
 
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
@@ -3271,28 +3231,10 @@ $(document).ready(function () {
                         $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 
                         var _$total = $('.price-place-summary');
-                        _$total.html("$" + (Number(_$total.text().trim().slice(1)) - price));
+                        console.log('$(`[data-group="${dg}"]`)', $("[data-group=\"" + dg + "\"]"));
+                        $("[data-group=\"" + dg + "\"]").closest('[data-per-price]').attr('data-per-price') !== "product" && _$total.html("$" + (Number(_$total.text().trim().slice(1)) - price));
                     }
-
-                    // group.select2({maximumSelectionLength: Number(limit) - Number(qty) + group.closest('.product-single-info_row').find('input[name="qty"]').length});
-                    //
-
-
-                    // const prices_array = $('.product-qty').toArray().map(function(el) {
-                    //     const price = $(el).closest('[data-price]').attr('data-price');
-                    //     const count = $(el).val();
-                    //     return price * count;
-                    // });
-                    // const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                    //     return accumulator + a;
-                    // }) : 0;
-                    // const $total = $('.price-place-summary');
-                    // $total.html(`$${single_product_price + total_price}`);
                 });
-
-                //********************//
-                //*******+plus+*******//
-                //********************//
 
                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
                     eventInitialDefault(ev);
@@ -3306,19 +3248,8 @@ $(document).ready(function () {
                         $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 
                         var _$total2 = $('.price-place-summary');
-                        _$total2.html("$" + (Number(_$total2.text().trim().slice(1)) + price));
+                        $("[data-group=\"" + dg + "\"]").closest('[data-per-price]').attr('data-per-price') !== "product" && _$total2.html("$" + (Number(_$total2.text().trim().slice(1)) + price));
                     };
-
-                    // const prices_array = $('.product-qty').toArray().map(function(el) {
-                    //     const price = $(el).closest('[data-price]').attr('data-price');
-                    //     const count = $(el).val();
-                    //     return price * count;
-                    // });
-                    // const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                    //     return accumulator + a;
-                    // }) : 0;
-                    // const $total = $('.price-place-summary');
-                    // $total.html(`$${single_product_price + total_price}`);
                 });
             });
         });
