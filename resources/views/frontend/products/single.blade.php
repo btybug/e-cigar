@@ -656,10 +656,12 @@
                 if (type == 'plus') {
                     qty = parseInt(qty) + 1;
                     $('.product-qty-select').val(qty)
+                    alert(5555555555)
                 } else {
                     if (qty > 1) {
                         qty -= 1;
                         $('.product-qty-select').val(qty)
+                        alert(-555555555555555)
                     }
                 }
             })
