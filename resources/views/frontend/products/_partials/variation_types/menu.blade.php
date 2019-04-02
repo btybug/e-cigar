@@ -29,7 +29,7 @@
             @if($vSettings->is_required)
               {{ convert_price($vSettings->price,$currency) }}
             @else
-              Nothing selected
+                Nothing selected
             @endif
           </div>
         </div>
