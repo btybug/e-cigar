@@ -696,7 +696,8 @@ console.log($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('
                     $total.html(`$${Number($total.text().trim().slice(1)) + prices}`);
                     console.log('dg', dg);
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click', '.delete-menu-item', function() {
-                        $total.html(`$${Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price'))}`);
+                      console.log($(this).closest('[data-price]').find('.product-qty').val(), Number($(this).closest('[data-price]').attr('data-price')), 'nyushka');
+                      $total.html(`$${Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price')) * $(this).closest('[data-price]').find('.product-qty').val()}`);
 
                         $(this).closest('.menu-item-selected').remove();
 
