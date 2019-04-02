@@ -4,8 +4,8 @@
     {!! Form::hidden('type',$type) !!}
     {!! Form::hidden('group',$group) !!}
     {!! Form::hidden('category_id', $category->id) !!}
-<div class="d-flex flex-wrap justify-content-center mb-2">
-    <div class="col-sm-3">
+<div class="row flex-column justify-content-center mb-2">
+    <div class="col-sm-6">
         <div class="form-group row">
             <label class="col-md-4 col-xs-12">{!! $category->name !!}</label>
             <div class="col-md-8">
@@ -13,12 +13,11 @@
             </div>
 
         </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="filter-children-selects row">
+        <div class="filter-children-selects row flex-column">
 
         </div>
     </div>
+
 </div>
 {!! Form::close() !!}
 <div class="releted__products-panel">
