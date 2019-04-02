@@ -80,7 +80,7 @@ function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_mu
         case'popup':$view='button';break;
         case'select_filter':$view='filter_select';break;
     }
-    return ($category)?view('filters.'.$view, compact('category', 'text','group','name','is_multiple','uniqId')):'Shnorhavor Amanor Yev Surb &nund';
+    return ($category)?view('filters.'.$view, compact('category', 'text','group','name','is_multiple','uniqId','type')):'Shnorhavor Amanor Yev Surb &nund';
 }
 function filter_modal_html(){
     global $_FILTER_HTML;

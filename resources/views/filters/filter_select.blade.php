@@ -1,3 +1,5 @@
+<div id="{!! $uniqId !!}" data-type="{!! $type !!}"  data-toggle="modal" data-group="{!! $group !!}" data-name="{!! $name.(($is_multiple)?'[]':null) !!}" data-multiple="{!! $is_multiple !!}"  data-action="{!! $category->id !!}">
+
 {!! Form::open(['id'=>'filter-form']) !!}
 <div class="d-flex flex-wrap justify-content-center mb-2">
     <div class="col-sm-3">
@@ -24,10 +26,7 @@
 
             </ul>
         </div>
-        {{--<div class="modal-footer justify-content-between">--}}
-        {{--<button type="button" class="btn btn-secondary">Back</button>--}}
-        {{--<span>Sone text</span>--}}
-        {{--<button type="button" class="btn btn-secondary">Next</button>--}}
-        {{--</div>--}}
+
     </div>
+</div>
 </div>
