@@ -26,7 +26,11 @@
       <div class="col-sm-2 pl-sm-3 p-0 text-sm-center text-right">
         <div class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
           <div class="selected-menu-options">
+            @if($vSettings->is_required)
               {{ convert_price($vSettings->price,$currency) }}
+            @else
+              Nothing selected
+            @endif
           </div>
         </div>
       </div>
@@ -68,7 +72,11 @@
   <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
     @if($vSettings->price_per == 'product' && ! $vSettings->stock->type)
       <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
+            @if($vSettings->is_required)
             {{ convert_price($vSettings->price,$currency) }}
+            @else
+              Nothing selected
+            @endif
         </span>
     @endif
   </div>

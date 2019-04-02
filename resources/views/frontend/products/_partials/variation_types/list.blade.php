@@ -51,7 +51,11 @@
 @if($vSettings->price_per == 'product' && ! $vSettings->stock->type)
     <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
         <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
-            {{ convert_price($vSettings->price,$currency) }}
+            @if($vSettings->is_required)
+              {{ convert_price($vSettings->price,$currency) }}
+            @else
+              Nothing selected
+            @endif
         </span>
     </div>
 @endif
