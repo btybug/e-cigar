@@ -254,7 +254,7 @@
         //----------------new script-------------
         let dg = null;
         let popup_limit = 0;
-        $("body").on('click','.popup-select',function () {
+        $("body").on('click','[data-target="#wizardViewModal"]',function () {
             dg = $(this).attr('data-group');
             let group = $(this).attr('data-group');
             popup_limit = $(this).closest('.limit').attr('data-limit');
@@ -262,7 +262,7 @@
                 console.log($(item).attr('data-id'));
                 return $(item).attr('data-id');
             });
-            console.log(selectedIds, 'selectedIds');
+            console.log(group, 'selectedIds');
             $.ajax({
                 type: "post",
                 url: "/products/select-items",
@@ -276,9 +276,7 @@
                 },
                 success: function (data) {
                     if (!data.error) {
-                        $("#popUpModal .modal-content").html(data.html);
-                        $('.title_popup').text(`You can add ${popup_limit} product`);
-                        $("#popUpModal").modal();
+                        $("#wizardViewModal").modal();
                     } else {
                         alert("error");
                     }
@@ -340,26 +338,27 @@
             }
         });
 
-        $('body').on('click', '#popUpModal .selected-item-popup_qty-plus' , function (ev) {
-            ev.stopImmediatePropagation();
-            ev.preventDefault();
-            if(popup_limit > popup_qty()) {
-                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
-                console.log('1');
-            }
-        });
-
-        $('body').on('click', '#popUpModal .selected-item-popup_qty-minus' , function (ev) {
-            ev.stopImmediatePropagation();
-            ev.preventDefault();
-            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
-        });
+//        $('body').on('click', '#popUpModal .selected-item-popup_qty-plus' , function (ev) {
+//            ev.stopImmediatePropagation();
+//            ev.preventDefault();
+//            if(popup_limit > popup_qty()) {
+//                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
+//                console.log('1');
+//            }
+//        });
+//
+//        $('body').on('click', '#popUpModal .selected-item-popup_qty-minus' , function (ev) {
+//            ev.stopImmediatePropagation();
+//            ev.preventDefault();
+//            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
+//        });
 
 
         //Vahag jan senc baner mi areq
         $('body').on('click', '#wizardViewModal .add-items-btn', function() {
             const items_array = [];
-            $('.modal-body').find('.single-item-wrapper').each(function() {
+
+            $('#wizardViewModal .modal-body').find('.wrap-item').each(function() {
                 $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
             });
             console.log(items_array);
@@ -375,12 +374,10 @@
                 body: JSON.stringify({ids: items_array})
             })
                 .then(function (response) {
-                    console.log(response,'response');
                     return response.json();
-
                 })
                 .then(function (json) {
-                     console.log(json.html,'fetch');
+//                     console.log(json.html,'---------');
                     let prices = 0;
                     const limit = $($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.limit')[0]).attr('data-limit');
                     let qty = 0;
@@ -395,13 +392,13 @@
 
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').append(json.html);
                     const popup_items_qty = [];
-                    $(`.selected-items_popup`).find('.popup_field-input').each(function() {
+                    $(`[data-id-popup].selected-item_popup`).find('.popup_field-input').each(function() {
                         popup_items_qty.push({
                             id: $(this).closest('.selected-item_popup').attr('data-id-popup'),
                             value: $(this).val()
                         });
                     });
-                    console.log(popup_items_qty)
+                    console.log(popup_items_qty,'---------')
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.field-input').each(function() {
                         const d_id = $(this).attr('data-id');
                         const value = popup_items_qty.find((el) => {
