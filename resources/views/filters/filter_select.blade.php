@@ -1,6 +1,9 @@
 <div class="filters-select-wizard" id="{!! $uniqId !!}" data-type="{!! $type !!}"  data-toggle="modal" data-group="{!! $group !!}" data-name="{!! $name.(($is_multiple)?'[]':null) !!}" data-multiple="{!! $is_multiple !!}"  data-action="{!! $category->id !!}">
 
 {!! Form::open(['id'=>'filter-form']) !!}
+    {!! Form::hidden('type',$type) !!}
+    {!! Form::hidden('group',$group) !!}
+    {!! Form::hidden('category_id', $category->id) !!}
 <div class="d-flex flex-wrap justify-content-center mb-2">
     <div class="col-sm-3">
         <div class="form-group row">
@@ -37,21 +40,17 @@
                 let data = $('form#filter-form').serialize();
 //                const filter = [];
 //                console.log(data);
-                AjaxCall("/filters",{
-                    group: self.$(this).attr('data-group'),
-                    category_id: $(this).attr('data-action'),
-                    type:$(this).attr('data-type'),
-                    data,
-                }, function (res) {
+                AjaxCall("/filters",
+                    data, function (res) {
                     if (!res.error) {
 
                         switch (res.type) {
                             case 'filter':
                                 $('.filter-children-items').empty();
-                                $('.filter-children-selects').html(res.html);
+                                $('.filter-children-selects').html(res.filters);
                                 break;
                             case 'items':
-                                $('.filter-children-selects').html(res.html);
+                                $('.filter-children-selects').html(res.filters);
                                 $('.filter-children-items').html(res.items_html);
                                 $('#view-result .modal-footer').html('<div class="d-flex flex-wrap justify-content-between mb-1">\n' +
                                     '<button type="button" class="btn btn-primary"><i class="fa fa-plus fa-sm mr-10"></i>Add</button>\n' +

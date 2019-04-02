@@ -39,19 +39,23 @@ class FilterApiControll extends Controller
                 };
             }
         }
+        switch ($request->get('type')){
+            case'popup':$view='button_types';break;
+            case'select_filter':$view='select_types';break;
+        }
         $type = 'filter';
         $items_html = '';
         if ($filters->count() && !$filters->last()->children()->exists()) {
 
             $items = getItemStockVariations($request->get('group'),$filters->last()->items->pluck('id')->toArray());
             $type = 'items';
-            $items_html = $this->view("items", compact(['items']))->render();
+            $items_html = $this->view($view.".items", compact(['items']))->render();
             isset($filters[$key]);
             unset($filters[$key]);
         };
 
-        $html = $this->view("filters", compact([ 'filters','category']))->render();
-        $wizard = $this->view("wizard", compact(['filters','category']))->render();
+        $html = $this->view($view.".filters", compact([ 'filters','category','children']))->render();
+        $wizard = $this->view($view.".wizard", compact(['filters','category']))->render();
         return \Response::json(['error' => false, 'filters' => $html, 'wizard'=>$wizard,'items_html' => $items_html, 'type' => $type]);
     }
 }
