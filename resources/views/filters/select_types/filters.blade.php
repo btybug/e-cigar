@@ -1,6 +1,6 @@
 @foreach($filters as $key=>$filter)
     @if($filter->children()->exists())
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="form-group row">
                 <label class="col-md-4 col-xs-12">{!! $filter->first_child_label !!}</label>
                 <div class="col-md-8">
