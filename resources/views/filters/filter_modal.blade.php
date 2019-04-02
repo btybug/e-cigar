@@ -253,11 +253,11 @@
 
         //----------------new script-------------
         let dg = null;
-        let popup_limit = 0;
+        let filter_limit = 0;
         $("body").on('click','[data-target="#wizardViewModal"]',function () {
             dg = $(this).attr('data-group');
             let group = $(this).attr('data-group');
-            popup_limit = $(this).closest('.limit').attr('data-limit');
+            filter_limit = $(this).closest('.limit').attr('data-limit');
             const selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function(item) {
                 console.log($(item).attr('data-id'));
                 return $(item).attr('data-id');
@@ -284,9 +284,9 @@
             });
         });
 
-        const popup_qty = function() {
+        const filter_qty = function() {
             let qty = 0;
-            $('.selected-items_popup').find('.popup_field-input').each(function() {
+            $('#wizardViewModal .selected-items_popup').find('.popup_field-input').each(function() {
                 qty += Number($(this).val());
             });
             return qty;
@@ -295,8 +295,7 @@
         $("body").on('click', "#wizardViewModal .shopping-cart_wrapper .wrap-item", function(ev) {
             const id = $(this).attr('data-id');
             const title = $(this).find('.name').text().trim();
-//            if(popup_limit > popup_qty() && !$(this).hasClass('active')) {
-            if(!$(this).hasClass('active')) {
+            if(filter_limit > filter_qty() && !$(this).hasClass('active')) {
 //                console.log($(this).closest(".single-item-wrapper"));
                 $(this).addClass('active');
                 $('.selected-items_popup')
@@ -338,20 +337,20 @@
             }
         });
 
-//        $('body').on('click', '#popUpModal .selected-item-popup_qty-plus' , function (ev) {
-//            ev.stopImmediatePropagation();
-//            ev.preventDefault();
-//            if(popup_limit > popup_qty()) {
-//                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
-//                console.log('1');
-//            }
-//        });
-//
-//        $('body').on('click', '#popUpModal .selected-item-popup_qty-minus' , function (ev) {
-//            ev.stopImmediatePropagation();
-//            ev.preventDefault();
-//            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
-//        });
+        $('body').on('click', '#wizardViewModal .selected-item-popup_qty-plus' , function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            if(filter_limit > filter_qty()) {
+                $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
+                console.log('1');
+            }
+        });
+
+        $('body').on('click', '#wizardViewModal .selected-item-popup_qty-minus' , function (ev) {
+            ev.stopImmediatePropagation();
+            ev.preventDefault();
+            $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
+        });
 
 
         //Vahag jan senc baner mi areq
@@ -408,7 +407,7 @@
                         $(this).closest('.menu-item-selected').find('.price-placee')
                             .html('$'+ Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
                     });
-                    $('#popUpModal').modal('hide');
+                    $('#wizardViewModal').modal('hide');
 
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.menu-item-selected[data-price]').each(function(){
                         prices += Number($(this).attr('data-price'))*Number($(this).find('.field-input').val());
