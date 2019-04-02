@@ -20,7 +20,7 @@
     <div class="d-flex flex-wrap">
       <div class="col-sm-10 pl-0">
         {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
-    ['id' => "single_v_select_$vSettings->id",'class' => 'select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
+    ['id' => "single_v_select_$vSettings->id",'class' => ' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
     'multiple' => false,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
       </div>
       <div class="col-sm-2 pl-sm-3 p-0 text-sm-center text-right">
@@ -61,7 +61,7 @@
       $class = "multi_v_select";
     @endphp
     {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
-    ['id' => $id,'class' => $class.'select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
+    ['id' => $id,'class' => $class.' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
     'multiple' => true,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
   </div>
 

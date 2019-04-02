@@ -30,7 +30,11 @@
                                 <path fill-rule="evenodd" fill="rgb(214, 217, 225)" d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
                             </svg>
                         </span>
-                {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty','data-id' => $variation->id,'min' => 1]) !!}
+                @if($variation->price_per == "product")
+                  {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price','data-id' => $variation->id,'min' => 1]) !!}
+                @else
+                  {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty','data-id' => $variation->id,'min' => 1]) !!}
+                @endif
                 <!--plus qty-->
                 <span  class="d-flex align-items-center h-100 pointer position-absolute product-count-plus">
                             <svg viewBox="0 0 20 20" width="20px" height="20px">
