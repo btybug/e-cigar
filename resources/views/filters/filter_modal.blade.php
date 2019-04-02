@@ -48,7 +48,7 @@
     <script>
         (function() {
             const filter = [];
-            $('[data-target="#wizardViewModal"]').on('click', function (e) {
+            $('.filters-modal-wizard').on('click', function (e) {
                 $('body').on('click', '.shopping-cart_wrapper .item-content', function () {
                     $('.shopping-cart_wrapper .item-content').removeClass('active');
                     $(this).addClass('active');
@@ -254,7 +254,7 @@
             //----------------new script-------------
             let dg = null;
             let filter_limit = 0;
-            $("body").on('click','[data-target="#wizardViewModal"]',function () {
+            $("body").on('click','.filters-modal-wizard"]',function () {
                 dg = $(this).attr('data-group');
                 let group = $(this).attr('data-group');
                 filter_limit = $(this).closest('.limit').attr('data-limit');
@@ -351,7 +351,6 @@
             });
 
 
-            //Vahag jan senc baner mi areq
             $('body').on('click', '#wizardViewModal .add-items-btn', function() {
                 const items_array = [];
 
