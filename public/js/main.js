@@ -125,10 +125,45 @@ $(document).ready(function() {
         const $total = $('.price-place-summary');
         let per_price_value = 0;
 
+
+        const isReq = (el) => {
+            const is_required = Number(el.closest('[data-req]').attr('data-req'));
+            const info_row = el.closest('.product-single-info_row');
+            !is_required && !info_row.find('.req_check').is(':checked') && info_row.find('.wall--wrapper').addClass('none-select');
+        };
+
+
         $('[data-per-price="product"]').each(function(index) {
             console.log('index ', index, '---', Number($(this).attr('data-price')))
-            per_price_value += Number($(this).attr('data-price'))
+            Number($(this).attr('data-req')) && (per_price_value += Number($(this).attr('data-price')));
         });
+
+        $('[data-req="0"]').each(function() {
+            isReq($(this));
+        });
+
+        $('body').on('change', '.req_check', function() {
+            const parent = $(this).closest('.product-single-info_row ')
+            const data_attr = parent.find('[data-per-price]')
+            const el = parent.find('.wall--wrapper');
+            if($(this).is(':checked')) {
+
+                if(data_attr.attr('data-per-price') === "product") {
+                    const price = data_attr.attr('data-price');
+                    parent.find('.price-placee').html(`$${price}`);
+                }
+
+                (el.removeClass('none-select'));
+            } else {
+                if(data_attr.attr('data-per-price') === "product") {
+                    const price = data_attr.attr('data-price');
+                    parent.find('.price-placee').html(`Nothing selected`);
+                }
+                (el.addClass('none-select'));
+            }
+
+        });
+
         console.log(per_price_value)
         //DELETE
         $total.html(`$${per_price_value}`);
@@ -143,7 +178,9 @@ $(document).ready(function() {
         select2_products && select2_products.each(function (i,e){
             const products_id = $(e).attr('data-id');
             const select = $(e);
+            // isReq($(this));
 
+            console.log($(this).closest('.product-single-info_row'));
             fetch("/products/get-package-type-limit", {
                 method: "post",
                 headers: {
@@ -281,7 +318,7 @@ $(document).ready(function() {
                                     console.log(price, 'map')
                                     const count = $(el).val();
                                     return price * count;
-                                })
+                                });
                                 const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
                                     return accumulator + a;
                                 }) : 0;
@@ -370,6 +407,9 @@ $(document).ready(function() {
             const limit = Number($(list).attr('data-limit'));
             const per_price = $(list).attr('data-per-price') === 'product';
             console.log($(list),7777);
+
+            // isReq($(list));
+
             let qty;
             $(`#products-list_${list_id}`).on('click', '.package_checkbox_label', function (event) {
                 eventInitialDefault(event)

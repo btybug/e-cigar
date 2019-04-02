@@ -1,6 +1,6 @@
 <div class="col-sm-12 pl-0 d-flex">
     @if(! $vSettings->is_required)
-        {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
+        {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input req_check ','id' => 'opt'.$vSettings->id]) !!}
         <label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer " for="opt{{ $vSettings->id }}">
             @if($vSettings->min_count_limit == 1 && $vSettings->count_limit == 1)
                 <h4>{{ $vSettings->title }} (you can select one option)</h4>
@@ -19,7 +19,8 @@
 </div>
 
 
-<div data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}" class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}" data-min-limit="{{ $vSettings->min_count_limit }}">
+<div data-req="{{ $vSettings->is_required }}" data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}" class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}" data-min-limit="{{ $vSettings->min_count_limit }}">
+  <div class="wall--wrapper">
     @foreach($variation as $item)
         <div class="d-flex flex-wrap mb-2" data-price="{{ $item->price }}">
             <div class="col-sm-10 align-self-center">
@@ -47,6 +48,7 @@
             @endif
         </div>
     @endforeach
+  </div>
 </div>
 @if($vSettings->price_per == 'product' && ! $vSettings->stock->type)
     <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">

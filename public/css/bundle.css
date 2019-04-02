@@ -19463,10 +19463,10 @@ a:hover {
     }
 }
 
-
-
-
-
+.none-select {
+    pointer-events: none;
+    opacity: 0.5;
+}
 .flag-icon-background {
   background-size: contain;
   background-position: 50%;

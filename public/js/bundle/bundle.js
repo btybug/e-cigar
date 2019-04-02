@@ -2755,10 +2755,42 @@ $(document).ready(function () {
         var $total = $('.price-place-summary');
         var per_price_value = 0;
 
+        var isReq = function isReq(el) {
+            var is_required = Number(el.closest('[data-req]').attr('data-req'));
+            var info_row = el.closest('.product-single-info_row');
+            !is_required && !info_row.find('.req_check').is(':checked') && info_row.find('.wall--wrapper').addClass('none-select');
+        };
+
         $('[data-per-price="product"]').each(function (index) {
             console.log('index ', index, '---', Number($(this).attr('data-price')));
-            per_price_value += Number($(this).attr('data-price'));
+            Number($(this).attr('data-req')) && (per_price_value += Number($(this).attr('data-price')));
         });
+
+        $('[data-req="0"]').each(function () {
+            isReq($(this));
+        });
+
+        $('body').on('change', '.req_check', function () {
+            var parent = $(this).closest('.product-single-info_row ');
+            var data_attr = parent.find('[data-per-price]');
+            var el = parent.find('.wall--wrapper');
+            if ($(this).is(':checked')) {
+
+                if (data_attr.attr('data-per-price') === "product") {
+                    var price = data_attr.attr('data-price');
+                    parent.find('.price-placee').html("$" + price);
+                }
+
+                el.removeClass('none-select');
+            } else {
+                if (data_attr.attr('data-per-price') === "product") {
+                    var _price = data_attr.attr('data-price');
+                    parent.find('.price-placee').html("Nothing selected");
+                }
+                el.addClass('none-select');
+            }
+        });
+
         console.log(per_price_value);
         //DELETE
         $total.html("$" + per_price_value);
@@ -2770,7 +2802,9 @@ $(document).ready(function () {
         select2_products && select2_products.each(function (i, e) {
             var products_id = $(e).attr('data-id');
             var select = $(e);
+            // isReq($(this));
 
+            console.log($(this).closest('.product-single-info_row'));
             fetch("/products/get-package-type-limit", {
                 method: "post",
                 headers: {
@@ -2985,6 +3019,9 @@ $(document).ready(function () {
             var limit = Number($(list).attr('data-limit'));
             var per_price = $(list).attr('data-per-price') === 'product';
             console.log($(list), 7777);
+
+            // isReq($(list));
+
             var qty = void 0;
             $("#products-list_" + list_id).on('click', '.package_checkbox_label', function (event) {
                 eventInitialDefault(event);
@@ -3001,8 +3038,8 @@ $(document).ready(function () {
                 } else if ($(input).is(':checked')) {
                     $(this).closest('div').find('.package_checkbox')[0].click();
                     qty_input.empty();
-                    var _price = $(this).closest('[data-price]').attr('data-price');
-                    $(this).closest('[data-price]').find('.price-placee').html("$" + _price);
+                    var _price2 = $(this).closest('[data-price]').attr('data-price');
+                    $(this).closest('[data-price]').find('.price-placee').html("$" + _price2);
                 } else {
                     qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty " + (per_price && "product-qty_per_price") + "\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
                     $(this).closest('div').find('.package_checkbox')[0].click();

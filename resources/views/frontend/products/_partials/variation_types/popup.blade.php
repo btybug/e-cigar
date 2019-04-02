@@ -1,10 +1,11 @@
 <div class="col-sm-10 pl-0 limit"
+     data-req="{{ $vSettings->is_required }}"
      data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
      data-limit="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
      data-min-limit="{{ $vSettings->min_count_limit }}">
     <div class="col-sm-12 pl-0 d-flex">
       @if(! $vSettings->is_required)
-        {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
+        {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input req_check ','id' => 'opt'.$vSettings->id]) !!}
         <label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer "
                for="opt{{ $vSettings->id }}">
           <h4>
@@ -28,11 +29,11 @@
           $class = (($vSettings->count_limit > 1) ? "multi_v_select" : "");
         @endphp
 
-        <button type="button" class="btn btn-primary rounded-0 popup-select" data-group="{{ $vSettings->variation_id }}" >
-          Select options
-        </button>
-    </div>
 
+    </div>
+  <button type="button" class="btn btn-primary rounded-0 popup-select wall--wrapper" data-group="{{ $vSettings->variation_id }}" >
+    Select options
+  </button>
 </div>
 
 <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
