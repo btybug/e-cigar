@@ -7,6 +7,6 @@
                 <span class="name">{!! $items->name !!}</span>
             </a>
             <input type="hidden" name="stocks[]" value="{{ $items->id }}">
-        </div></li>
+        </div>
+    </li>
 @endforeach
-
