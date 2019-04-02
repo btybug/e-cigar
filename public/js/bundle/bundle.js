@@ -3045,7 +3045,8 @@ $(document).ready(function () {
                     return accumulator + a;
                 }) : 0;
                 var $total = $('.price-place-summary');
-                console.log(per_price, per_price_value, 'loging');
+                console.log(per_price, per_price_value, 'loging---------------------');
+
                 $total.html("$" + (price + per_price_value));
             });
 
@@ -3062,7 +3063,6 @@ $(document).ready(function () {
             console.log('per_price_value', per_price_value, $("#products-list_" + list_id).attr('data-price'));
             console.log(99999, price, per_price_value);
             var $total = $('.price-place-summary');
-
             $total.html("$" + (price + per_price_value));
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
