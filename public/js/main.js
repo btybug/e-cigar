@@ -674,7 +674,6 @@ $(document).ready(function() {
                             console.log('$(`[data-group="${dg}"]`)', $(`[data-group="${dg}"]`));
                             $(`[data-group="${dg}"]`).closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html(`$${Number($total.text().trim().slice(1)) - price}`);
                         }
-
                     });
 
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
