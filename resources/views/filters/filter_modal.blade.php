@@ -254,7 +254,7 @@
             //----------------new script-------------
             let dg = null;
             let filter_limit = 0;
-            $("body").on('click','.filters-modal-wizard"]',function () {
+            $("body").on('click','.filters-modal-wizard',function () {
                 dg = $(this).attr('data-group');
                 let group = $(this).attr('data-group');
                 filter_limit = $(this).closest('.limit').attr('data-limit');
