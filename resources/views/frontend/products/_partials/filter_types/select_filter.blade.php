@@ -1,4 +1,4 @@
-<div class="col-sm-10 pl-0 limit" data-limit="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"  data-price="{{ $vSettings->price }}" data-min-limit="{{ $vSettings->min_count_limit }}">
+<div class="col-sm-10 pl-0 limit" data-limit="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"  data-price="{{ $vSettings->price }}" data-per-price="{{  $vSettings->price_per}}" data-min-limit="{{ $vSettings->min_count_limit }}">
     <div class="col-sm-12 pl-0 d-flex">
         @if(! $vSettings->is_required)
             {!! Form::checkbox('checkbox',1,null,['class' => 'custom-control-input ','id' => 'opt'.$vSettings->id]) !!}
