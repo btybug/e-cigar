@@ -68,7 +68,7 @@
                    <div class="container main-max-width single-product-dtls-wrap-outer pr-lg-0">
                        <div class="row">
                            <div class="col-md-10 col-12">
-                               <div class="single-product-dtls-wrap">
+                               <div class="single-product-dtls-wrap" id="requiredProducts">
                                    <div class="d-flex flex-xl-nowrap flex-wrap">
                                        <div class="product-single-view-outer">
                                            <div class="align-items-center single-product-main-title mb-3 d-none visible-on-small">
@@ -500,6 +500,44 @@
 
        </div>
    </div>
+
+   <div class="modal fade" id="extraModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel" aria-hidden="true">
+       <div class="modal-dialog" role="document">
+           <div class="modal-content">
+               @php
+               $model = $vape;
+                   $variations = collect($model->variations()->extra()->get())->groupBy('variation_id');
+               @endphp
+
+               @if(count($variations))
+                   @foreach($variations as $variation)
+                       @php
+                           $vSettings = $variation->first();
+                       @endphp
+                       @if($vSettings->type == 'filter')
+                           <div class="product-single-info_rowr options-group">
+                               <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
+                                   @include("frontend.products._partials.variation_types.filter_popup")
+                               </div>
+                               <div class="product-single-info_row-items">
+                               </div>
+                           </div>
+                       @else
+                           @if(\view::exists("frontend.products._partials.variation_types.$vSettings->display_as"))
+                               <div class="product-single-info_rowr options-group">
+                                   <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
+                                       @include("frontend.products._partials.variation_types.$vSettings->display_as")
+                                   </div>
+                                   <div class="product-single-info_row-items">
+                                   </div>
+                               </div>
+                           @endif
+                       @endif
+                   @endforeach
+               @endif
+           </div>
+       </div>
+   </div>
 @stop
 
 @section('css')
@@ -680,7 +718,7 @@
                 let all_validation = false;
                 console.log($('.product-qty-select').val())
                 let item_validation = 0;
-                $('.limit').each(function(index, gr) {
+                $('#requiredProducts .limit').each(function(index, gr) {
                     const $group = $(gr);
                     const group_id = Number($group.attr('data-id'));
                     const group_limit = Number($group.attr('data-limit'));
@@ -698,7 +736,7 @@
                         item_validation += 1;
                     }
                 });
-                item_validation === $('.limit').length && (all_validation = true)
+                item_validation === $('#requiredProducts .limit').length && (all_validation = true)
 
                 $('.product-qty').toArray().map(function(el) {
                     return {
@@ -711,7 +749,7 @@
 //
                     const product_id = $('#vpid').val();
                     const product_qty = $('.product-qty-select').val();
-                    const variations = $('[data-group-id]').toArray().map(function(el) {
+                    const variations = $('#requiredProducts [data-group-id]').toArray().map(function(el) {
                         const group_id = $(el).attr('data-group-id');
                         const products = [];
                         $(`[data-group-id="${group_id}"]`).toArray().map(function(gr) {
@@ -760,6 +798,7 @@
                                 $(".cart-count").html(data.count);
                                 $('#cartSidebar').html(data.headerHtml);
                                 $("#headerShopCartBtn").trigger('click');
+                                $("#extraModal").modal();
                             } else {
 
                             }

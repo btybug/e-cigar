@@ -2900,7 +2900,7 @@ $(document).ready(function () {
         var countPrices = function countPrices() {
             section_price = 0;
             item_price = 0;
-            $('[data-per-price]').each(function () {
+            $('#requiredProducts [data-per-price]').each(function () {
                 var $this = $(this);
                 if ($this.attr('data-per-price') === 'product') {
                     section_price += Number($this.attr('data-price'));
