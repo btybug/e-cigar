@@ -138,9 +138,9 @@ $(document).ready(function() {
         };
 
 //return true if optional is checked
-        const isCheckedOptional = (el) => {
-            return el.find('.req_check').is(':checked');
-        };
+//         const isCheckedOptional = (el) => {
+//             return el.find('.req_check').is(':checked');
+//         };
 
 //return true if argument is required
         const isReq = (el) => {
@@ -160,42 +160,42 @@ $(document).ready(function() {
         };
 
 //set hidden optional section which set in argument
-        const hideOptionalSection = (el) => {
-            const info_row = el.closest('.product-single-info_row');
-            if(!isReq(el) && !isCheckedOptional(info_row)) {
-                info_row.find('.wall--wrapper').addClass('none-select');
-                info_row.find('.product-single-info_row-items').addClass('none-select');
-            }
-        };
+//         const hideOptionalSection = (el) => {
+//             const info_row = el.closest('.product-single-info_row');
+//             if(!isReq(el) && !isCheckedOptional(info_row)) {
+//                 info_row.find('.wall--wrapper').addClass('none-select');
+//                 info_row.find('.product-single-info_row-items').addClass('none-select');
+//             }
+//         };
 
 //set show optional section which set in argument
 
-        const showOptionalSection = (el) => {
-            console.log(el, 'el');
-            const info_row = el.closest('.product-single-info_row');
-            if(!isReq(el) && isCheckedOptional(info_row)) {
-                info_row.find('.wall--wrapper').removeClass('none-select');
-                info_row.find('.product-single-info_row-items').removeClass('none-select');
-            }
-            if(!isReq(el) && !isSection(el)) {
-                el.find('select').trigger($.Event('select2:select', {
-                    params: {
-                        id: '17'
-                    }
-                }));
-            };
-        };
+        // const showOptionalSection = (el) => {
+        //     console.log(el, 'el');
+        //     const info_row = el.closest('.product-single-info_row');
+        //     if(!isReq(el) && isCheckedOptional(info_row)) {
+        //         info_row.find('.wall--wrapper').removeClass('none-select');
+        //         info_row.find('.product-single-info_row-items').removeClass('none-select');
+        //     }
+        //     if(!isReq(el) && !isSection(el)) {
+        //         el.find('select').trigger($.Event('select2:select', {
+        //             params: {
+        //                 id: '17'
+        //             }
+        //         }));
+        //     };
+        // };
 
 //add per_price of required product section on $per_price_value
-        const productTypeReqPerPrice = (data_el) => {
-            if(data_el.attr('data-per-price') === "product") {
-                if(data_el.attr('data-req') === "1") {
-                    per_price_value += Number(data_el.attr('data-price'));
-                } else {
-                    data_el.closest('.product-single-info_row').find('.req_check').is(':checked') && (per_price_value += Number(data_el.attr('data-price')));
-                }
-            }
-        };
+//         const productTypeReqPerPrice = (data_el) => {
+//             if(data_el.attr('data-per-price') === "product") {
+//                 if(data_el.attr('data-req') === "1") {
+//                     per_price_value += Number(data_el.attr('data-price'));
+//                 } else {
+//                     data_el.closest('.product-single-info_row').find('.req_check').is(':checked') && (per_price_value += Number(data_el.attr('data-price')));
+//                 }
+//             }
+//         };
 
 //set select2 max limit
         const select2MaxLimit = (section, limit) => {
@@ -236,45 +236,41 @@ $(document).ready(function() {
             plus_button.closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
         };
 
-        // $('[data-per-price="product"]').each(function() {
-        //     productTypeReqPerPrice($(this));
-        //     $total.html(per_price_value); //delete
+
+        // $('[data-req="0"]').each(function() {
+        //     hideOptionalSection($(this));
         // });
 
-        $('[data-req="0"]').each(function() {
-            hideOptionalSection($(this));
-        });
-
-        $('body').on('change', '.req_check', function() {
-            const parent = $(this).closest('.product-single-info_row ');
-            const data_attr = parent.find('[data-per-price]');
-            const hide_el = parent.find('.wall--wrapper');
-
-            if($(this).is(':checked')) {
-                if(data_attr.attr('data-per-price') === "product") {
-                    const price = data_attr.attr('data-price');
-                    parent.find('.price-placee').html(`$${price}`);
-
-                    per_price_value += Number(data_attr.attr('data-price'));
-
-                    // $total.html(per_price_value); //delete
-
-                }
-                showOptionalSection(hide_el);
-            } else {
-                if(data_attr.attr('data-per-price') === "product") {
-                    const price = data_attr.attr('data-price');
-                    parent.find('.price-placee').html(`Nothing selected`);
-
-                    per_price_value -= Number(data_attr.attr('data-price'));
-
-                    // $total.html(per_price_value); //delete
-
-                }
-                hideOptionalSection(hide_el);
-            }
-
-        });
+        // $('body').on('change', '.req_check', function() {
+        //     const parent = $(this).closest('.product-single-info_row ');
+        //     const data_attr = parent.find('[data-per-price]');
+        //     const hide_el = parent.find('.wall--wrapper');
+        //
+        //     if($(this).is(':checked')) {
+        //         if(data_attr.attr('data-per-price') === "product") {
+        //             const price = data_attr.attr('data-price');
+        //             parent.find('.price-placee').html(`$${price}`);
+        //
+        //             per_price_value += Number(data_attr.attr('data-price'));
+        //
+        //             // $total.html(per_price_value); //delete
+        //
+        //         }
+        //         showOptionalSection(hide_el);
+        //     } else {
+        //         if(data_attr.attr('data-per-price') === "product") {
+        //             const price = data_attr.attr('data-price');
+        //             parent.find('.price-placee').html(`Nothing selected`);
+        //
+        //             per_price_value -= Number(data_attr.attr('data-price'));
+        //
+        //             // $total.html(per_price_value); //delete
+        //
+        //         }
+        //         hideOptionalSection(hide_el);
+        //     }
+        //
+        // });
 
         const countPrices = () => {
             section_price = 0;
@@ -372,20 +368,12 @@ $(document).ready(function() {
                             })
                             .then(function (json) {
                                 if(isSingle(select)) {
-                                    if(!isSection(select)) {
-                                        $this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
-                                        setTotalPrice();
-                                    }
-                                    if(isReq(select) && !isSection(select)) {
-                                        // per_price_value += select.
-                                        // total_price += select.closest('.product-single-info_row').find('.menu-item-selected').find('[data-price]');
-                                        setTotalPrice();
-                                    }
+                                    !isSection(select) && ($this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html));
                                 } else {
                                     $this.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                                    setTotalPrice();
                                 }
                                 setTotalPrice();
+
                                 $('.delete-menu-item').on('click', function() {
                                     const $this = $(this);
                                     const s_id = $this.attr('data-el-id');
@@ -424,52 +412,17 @@ $(document).ready(function() {
                             })
                             .then(function (json) {
                                 if(isSingle(select)) {
-                                    if(isCheckedOptional(select)) {
-                                        select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
-                                        setTotalPrice();
-                                    }
-                                    if(isReq(select) && !isSection(select)) {
-                                        // per_price_value += select.
-                                        item_price += select.closest('.product-single-info_row').find('.menu-item-selected').find('[data-price]');
-                                        setTotalPrice();
-                                    }
+                                    !isSection(select) && (item_price += select.closest('.product-single-info_row').find('.menu-item-selected').find('[data-price]'));
                                 } else {
                                     select.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                                    setTotalPrice();
                                 }
 
                                 setTotalPrice();
-                                // if(isSingle(select)) {
-                                //     if(!isSection(select)) {
-                                //         $this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
-                                //     }
-                                // } else {
-                                //     $this.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                                // }
-
-                               // const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                               //      const price = $(el).closest('[data-price]').attr('data-price');
-                               //      console.log(price, 'map')
-                               //      const count = $(el).val();
-                               //      return price * count;
-                               //  });
-                               //
-                               //  const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                               //      return accumulator + a;
-                               //  }) : 0;
-                               //
-                               //  const $total = $('.price-place-summary');
-                               //  isReq(select) && $total.html(`$${per_price_value + price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
                             });
                     });
-
-
-                                                //********************//
-                                                //**select2:unselect**//
-                                                //********************//
 
                     $(`#multi_v_select_${products_id}`).on('select2:unselect', function (e) {
                         $(this).closest('.product-single-info_row').find(`.menu-item-selected[data-id="${e.params.data.id}"]`).remove();
@@ -479,15 +432,6 @@ $(document).ready(function() {
                             setTotalPrice();
                         }, 0);
 
-                        // const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                        //     const price = $(el).closest('[data-price]').attr('data-price');
-                        //     const count = $(el).val();
-                        //     return price * count;
-                        // });
-                        // const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                        //     return accumulator + a;
-                        // }) : 0;
-                        // const $total = $('.price-place-summary');
                     });
                 })
                 .catch(function (error) {
