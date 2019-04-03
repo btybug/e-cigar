@@ -33,7 +33,7 @@
                                                 <span data-uid="{{ $key }}"
                                                       class="shp-cart-product_remove font-13 pointer remove-from-cart">Remove</span>
                                             </div>
-                                            <div class="shp-cart-product_right">
+                                            <div class="shp-cart-product_right w-100">
                                                 <h2 class="shp-cart-product_right_title font-main-bold font-20 text-uppercase">
                                                     {!! $stock->name !!}
                                                 </h2>
@@ -105,6 +105,20 @@
                                                         {{--</span>--}}
                                                     {{--</li>--}}
                                                 </ul>
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <h3>Extra Options</h3>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button class="btn btn-info float-right">Add extra</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        Nothing added
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </td>
