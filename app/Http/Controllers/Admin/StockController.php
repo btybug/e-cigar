@@ -60,7 +60,8 @@ class StockController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $variations = collect($model->variations)->groupBy('variation_id');
+        $variations = collect($model->variations()->where('is_required',true)->get())->groupBy('variation_id');
+        $extraVariations = collect($model->variations()->where('is_required',false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
@@ -74,7 +75,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
+        return $this->view('stock_new', compact(['model', 'variations','extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
     public function postStock(ProductsRequest $request)
@@ -284,9 +285,11 @@ class StockController extends Controller
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $package_variation = null;
         $model = null;
+        $required = $request->required;
+//        dd($required);
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
-        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters']))->render();
+        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters','required']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

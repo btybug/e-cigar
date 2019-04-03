@@ -24,22 +24,23 @@
             </div>
         </div>
         <div class="col-md-6 d-flex pr-0 head-right justify-content-end">
+            {!! Form::hidden("variations[$main_unique][is_required]",$required) !!}
             <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-times"></i></button>
         </div>
+</div>
+<div class="card-body panel-body">
+<div class="row">
+<div class="col-sm-12 type-place">
+    <div class="product-wall">
+        @if($main && $main->type =='package_product')
+            @include('admin.stock._partials.package_item')
+        @elseif($main && $main->type =='filter')
+            @include('admin.stock._partials.filter_item')
+        @endif
     </div>
-    <div class="card-body panel-body">
-        <div class="row">
-            <div class="col-sm-12 type-place">
-                <div class="product-wall">
-                    @if($main && $main->type =='package_product')
-                        @include('admin.stock._partials.package_item')
-                    @elseif($main && $main->type =='filter')
-                        @include('admin.stock._partials.filter_item')
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
+</div>
+</div>
 </div>
 
 

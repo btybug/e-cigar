@@ -448,12 +448,12 @@
                                     <div class="col-md-12 v-box">
                                         @if($model && isset($variations))
                                             @foreach($variations as $v)
-                                                @include("admin.stock._partials.variation")
+                                                @include("admin.stock._partials.variation",['required' => 1])
                                             @endforeach
                                         @endif
                                     </div>
                                     <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add
+                                        <a class="btn btn-info text-white duplicate-v-options" data-required="1"><i class="fa fa-plus"></i> Add
                                             new option</a>
                                     </div>
                                 </div>
@@ -461,14 +461,14 @@
                             <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
                                 <div class="container-fluid p-25">
                                     <div class="col-md-12 v-box">
-                                        @if($model && isset($variations))
-                                            @foreach($variations as $v)
-                                                @include("admin.stock._partials.variation")
+                                        @if($model && isset($extraVariations))
+                                            @foreach($extraVariations as $v)
+                                                @include("admin.stock._partials.variation",['required' => 0])
                                             @endforeach
                                         @endif
                                     </div>
                                     <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add
+                                        <a class="btn btn-info text-white duplicate-v-options" data-required="0"><i class="fa fa-plus"></i> Add
                                             new option</a>
                                     </div>
                                 </div>
@@ -875,7 +875,8 @@
             var sections = $("body").find('.stock-page');
             sections.each(function (k,v) {
                 var data_id = $(v).attr('data-unqiue');
-                section_prices(data_id, value);
+                let parent = $(v).closest('.basic-details-tab');
+                section_prices(parent,data_id, value);
             })
 
 
@@ -902,25 +903,26 @@
 
             $("body").on("change","#changeProductType",function () {
                 let value = $(this).val();
-                let sections = $("body").find('.stock-page');
+                let sections = $("#variations").find('.stock-page');
+                let parent = $(this).closest('.basic-details-tab');
                 sections.each(function (k,v) {
                     var data_id = $(v).attr('data-unqiue');
-                    section_prices(data_id, value);
+                    section_prices(parent,data_id, value);
                 })
             });
 
-            function section_prices(data_id, type) {
+            function section_prices(parent,data_id, type) {
                 if (type == 1) {
-                    $("body").find('.product-price').removeClass('hide').addClass('show');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
+                    parent.find('.product-price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('show').addClass('hide');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
                 } else {
-                    $("body").find('.product-price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('hide').addClass('show');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
-                    package_product_price(data_id, $("body").find('[data-unqiue="' + data_id + '"]').find(".price_per").val());
+                    parent.find('.product-price').removeClass('show').addClass('hide');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
+                    package_product_price(parent,data_id, parent.find('[data-unqiue="' + data_id + '"]').find(".price_per").val());
                 }
             }
 
@@ -974,7 +976,9 @@
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
                             if($('#changeProductType').val() == 0){
-                                package_product_price(data_id, $_this.find(".price_per").val());
+                                let parent = $_this.closest('.basic-details-tab');
+
+                                package_product_price(parent,data_id, $_this.find(".price_per").val());
                             }
 
                             $("#itemsModal").modal("hide");
@@ -1001,17 +1005,19 @@
             });
 
             $("body").on('click', '.duplicate-v-options', function () {
+                let parent = $(this).closest('.basic-details-tab');
                 AjaxCall(
                     "/admin/stock/duplicate-v-options",
-                    {},
+                    {required: $(this).attr('data-required')},
                     function (res) {
                         if (!res.error) {
-                            $('.v-box').append(res.html);
+                            parent.find('.v-box').append(res.html);
                             var value = $("#changeProductType").val();
-                            let sections = $("body").find('.stock-page');
+                            let sections = parent.find('.stock-page');
+
                             sections.each(function (k,v) {
                                 var data_id = $(v).attr('data-unqiue');
-                                section_prices(data_id, value);
+                                section_prices(parent,data_id, value);
                             })
                         }
                     }
@@ -1041,18 +1047,19 @@
 
 
             $("body").on('change', '.price_per', function () {
-                let value = $(this).val();
-                let data_id = $(this).closest('.stock-page').data('unqiue');
-                package_product_price(data_id, value);
+                var parent = $(this).closest('.basic-details-tab');
+                var value = $(this).val();
+                var data_id = $(this).closest('.stock-page').data('unqiue');
+                package_product_price(parent,data_id, value);
             })
 
-            function package_product_price(data_id, type) {
+            function package_product_price(parent,data_id, type) {
                 if (type == 'product') {
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
                 } else {
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
-                    $("body").find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
                 }
             }
 
@@ -1129,7 +1136,9 @@
                             let sections = $("body").find('.stock-page');
                             sections.each(function (k,v) {
                                 var data_id = $(v).attr('data-unqiue');
-                                section_prices(data_id, $("#changeProductType").val());
+                                let parent = $(v).closest('.basic-details-tab');
+
+                                section_prices(parent,data_id, $("#changeProductType").val());
                             })
                         }
                     }
