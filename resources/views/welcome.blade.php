@@ -39,7 +39,7 @@
                                     <div class="info p-0 m-0 slider-logo w-100">
                                         <img src="/public/img/header-logo.png" class="header-logo-img" alt="">
                                         <img src="/public/img/header-logo-text.png" class="header-logo-text-img" alt="">
-                                        {!! filter_button('select-e-juice','5c9de18ab11d4','FILTER','filter',true,'select_filter') !!}
+                                        {!! filter_button('select-e-juice','5c9de18ab11d4','FILTER','filter',true,'popup') !!}
                                     </div>
 
                                     <img src="/public/img/temp/homepage-bg.jpg" alt="">

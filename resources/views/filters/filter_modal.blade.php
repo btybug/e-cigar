@@ -106,7 +106,8 @@
                     data: {
                         group: self.attr('data-group'),
                         category_id: first_category_id,
-                        filters: filter
+                        filters: filter,
+                        type: "popup"
                     },
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
@@ -151,7 +152,8 @@
                         data: {
                             group: self.attr('data-group'),
                             category_id: first_category_id,
-                            filters: filter
+                            filters: filter,
+                            type: "popup"
                         },
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
@@ -270,7 +272,8 @@
                     cache: false,
                     data: {
                         group,
-                        selectedIds
+                        selectedIds,
+                        type: "popup"
                     },
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
