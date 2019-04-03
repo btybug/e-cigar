@@ -75,9 +75,11 @@ function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_mu
     global $_FILTER_HTML;
     $uniqId = uniqid('filter_');
     $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
-    $_FILTER_HTML = ($category)?View::make('filters.filter_modal',compact('category'))->render():'';
+
     switch ($type){
-        case'popup':$view='button';break;
+        case'popup':
+            $_FILTER_HTML = (!$_FILTER_HTML && $category)?View::make('filters.filter_modal',compact('category'))->render():'';
+            $view='button';break;
         case'select_filter':$view='filter_select';break;
     }
     return ($category)?view('filters.'.$view, compact('category', 'text','group','name','is_multiple','uniqId','type')):'Shnorhavor Amanor Yev Surb &nund';
