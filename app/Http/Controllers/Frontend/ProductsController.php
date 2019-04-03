@@ -60,7 +60,7 @@ class ProductsController extends Controller
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
         if (! $vape) abort(404);
 
-        $variations = $vape->variations()->with('options')->get();
+        $variations = $vape->variations()->required()->with('options')->get();
 
         return $this->view('single', compact(['vape', 'variations', 'type']));
     }

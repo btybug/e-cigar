@@ -1,5 +1,5 @@
 @php
-$variations = collect($model->variations)->groupBy('variation_id');
+$variations = collect($model->variations()->required()->get())->groupBy('variation_id');
 @endphp
 
 @if(count($variations))

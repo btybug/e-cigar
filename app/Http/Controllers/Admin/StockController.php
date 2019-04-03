@@ -286,7 +286,6 @@ class StockController extends Controller
         $package_variation = null;
         $model = null;
         $required = $request->required;
-//        dd($required);
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
         $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters','required']))->render();

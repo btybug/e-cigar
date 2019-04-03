@@ -18,6 +18,16 @@ class StockVariation extends Model
 
     protected $dates = ['created_at','updated_at'];
 
+    public function scopeRequired($query)
+    {
+        return $query->where('is_required', 1);
+    }
+
+    public function scopeExtra($query)
+    {
+        return $query->where('is_required', 0);
+    }
+
     public function stock()
     {
         return $this->belongsTo(Stock::class, 'stock_id');
