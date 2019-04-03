@@ -20,7 +20,8 @@
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic Details</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Variations</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Required</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
                     </div>
@@ -444,6 +445,21 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12 v-box">
+                                        @if($model && isset($variations))
+                                            @foreach($variations as $v)
+                                                @include("admin.stock._partials.variation")
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="text-center m-4">
+                                        <a class="btn btn-info text-white duplicate-v-options"><i class="fa fa-plus"></i> Add
+                                            new option</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
+                                <div class="container-fluid p-25">
                                     <div class="col-md-12 v-box">
                                         @if($model && isset($variations))
                                             @foreach($variations as $v)
