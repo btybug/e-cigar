@@ -11,5 +11,5 @@
     {{--</li>--}}
 {{--@endforeach--}}
 <div class="col-sm-6">
-{!! Form::select('items[]',[null=>'Select Product']+$items->pluck('name','id')->toArray(),null,['class'=>'select-2 main-select main-select-2arrows single-product-select product--select-items select2-hidden-accessible','required'=>true,'style'=>'width:100%']) !!}
+{!! Form::select('items[]',[null=>null]+$items->pluck('name','id')->toArray(),null,['class'=>'select-2 main-select main-select-2arrows single-product-select product--select-items select2-hidden-accessible','required'=>true,'style'=>'width:100%']) !!}
 </div>
