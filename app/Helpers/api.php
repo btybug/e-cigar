@@ -71,13 +71,13 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
 
 function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_multiple=true,$type='popup')
 {
-    enableFilter();
     global $_FILTER_HTML;
     $uniqId = uniqid('filter_');
     $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
 
     switch ($type){
         case'popup':
+            enableFilter();
             $_FILTER_HTML = (!$_FILTER_HTML && $category)?View::make('filters.filter_modal',compact('category'))->render():'';
             $view='button';break;
         case'select_filter':$view='filter_select';break;
