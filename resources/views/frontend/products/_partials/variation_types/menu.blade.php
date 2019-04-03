@@ -29,7 +29,9 @@
             @if($vSettings->is_required)
               {{ convert_price($vSettings->price,$currency) }}
             @else
+              @if($vSettings->price_per == 'product')
                 Nothing selected
+              @endif
             @endif
           </div>
         </div>

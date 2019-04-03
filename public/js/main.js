@@ -110,6 +110,13 @@ $(document).ready(function() {
 
     $( "#singleProductPageCnt" ).fadeIn(function() {
 
+//total price element
+        const $total = $('.price-place-summary');
+
+//all required sections value
+        let per_price_value = 0;
+
+//counts qty for group
         const new_qty = function(group) {
             let qty = 0;
             group.closest('.product-single-info_row').find('.product-qty').each(function() {
@@ -117,59 +124,151 @@ $(document).ready(function() {
             });
             return qty;
         };
+
+//event default
         const eventInitialDefault = (ev) => {
             ev.preventDefault();
             ev.stopImmediatePropagation();
         };
 
-        const $total = $('.price-place-summary');
-        let per_price_value = 0;
-
-
-        const isReq = (el) => {
-            const is_required = Number(el.closest('[data-req]').attr('data-req'));
-            const info_row = el.closest('.product-single-info_row');
-            !is_required && !info_row.find('.req_check').is(':checked') && info_row.find('.wall--wrapper').addClass('none-select');
+//return true if optional is checked
+        const isCheckedOptional = (el) => {
+            return el.find('.req_check').is(':checked');
         };
 
+//return true if argument is required
+        const isReq = (el) => {
+            return Number(el.closest('[data-req]').attr('data-req'));
+        };
 
-        $('[data-per-price="product"]').each(function(index) {
-            console.log('index ', index, '---', Number($(this).attr('data-price')))
-            Number($(this).attr('data-req')) && (per_price_value += Number($(this).attr('data-price')));
+//return true if arguments is section and false if arguments is item
+        const isSection = (el) => {
+            return el.closest('[data-per-price]').attr('data-per-price') === "product";
+        };
+
+//return true if argument is single select
+        const isSingle = (select) => {
+            if(select.attr('id')) {
+                return select.attr('id').includes('single');
+            }
+        };
+
+//set hidden optional section which set in argument
+        const hideOptionalSection = (el) => {
+            const info_row = el.closest('.product-single-info_row');
+            if(!isReq(el) && !isCheckedOptional(info_row)) {
+                info_row.find('.wall--wrapper').addClass('none-select');
+                info_row.find('.product-single-info_row-items').addClass('none-select');
+            }
+        };
+
+//set show optional section which set in argument
+
+        const showOptionalSection = (el) => {
+            console.log(el, 'el');
+            const info_row = el.closest('.product-single-info_row');
+            if(!isReq(el) && isCheckedOptional(info_row)) {
+                info_row.find('.wall--wrapper').removeClass('none-select');
+                info_row.find('.product-single-info_row-items').removeClass('none-select');
+            }
+            if(!isReq(el) && !isSection(el)) {
+                el.find('select').trigger($.Event('select2:select', {
+                    params: {
+                        id: '17'
+                    }
+                }));
+            };
+        };
+
+//add per_price of required product section on $per_price_value
+        const productTypeReqPerPrice = (data_el) => {
+            if(data_el.attr('data-per-price') === "product") {
+                if(data_el.attr('data-req') === "1") {
+                    per_price_value += Number(data_el.attr('data-price'));
+                } else {
+                    data_el.closest('.product-single-info_row').find('.req_check').is(':checked') && (per_price_value += Number(data_el.attr('data-price')));
+                }
+            }
+        };
+
+//set select2 max limit
+        const select2MaxLimit = (section, limit) => {
+            section.select2({maximumSelectionLength:
+                    Number(limit)
+                    - Number(new_qty(section))
+                    + section.closest('.product-single-info_row').find('input[name="qty"]').length
+            });
+        };
+
+//product-count-minus event callback
+        const handleProductCountMinus = (minus_button, section, type, limit) => {
+            const input = $(minus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+
+            Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
+            new_qty(section);
+
+            if(type === 'select') {
+                select2MaxLimit(section, limit);
+            }
+
+            const price = minus_button.closest('[data-price]').attr('data-price');
+            minus_button.closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+        };
+//product-count-plus event callback
+        const handleProductCountPlus = (plus_button, section, type, limit) => {
+            const input = $(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+
+            new_qty(section);
+            Number(input.val()) < Number(limit) - Number(new_qty(section)) +
+            Number($(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
+            new_qty(section);
+            if(type === 'select') {
+                select2MaxLimit(section, limit);
+            }
+
+            const price = plus_button.closest('[data-price]').attr('data-price');
+            plus_button.closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
+        };
+
+        $('[data-per-price="product"]').each(function() {
+            productTypeReqPerPrice($(this));
+            $total.html(per_price_value); //delete
         });
 
         $('[data-req="0"]').each(function() {
-            isReq($(this));
+            hideOptionalSection($(this));
         });
 
         $('body').on('change', '.req_check', function() {
-            const parent = $(this).closest('.product-single-info_row ')
-            const data_attr = parent.find('[data-per-price]')
-            const el = parent.find('.wall--wrapper');
-            if($(this).is(':checked')) {
+            const parent = $(this).closest('.product-single-info_row ');
+            const data_attr = parent.find('[data-per-price]');
+            const hide_el = parent.find('.wall--wrapper');
 
+            if($(this).is(':checked')) {
                 if(data_attr.attr('data-per-price') === "product") {
                     const price = data_attr.attr('data-price');
                     parent.find('.price-placee').html(`$${price}`);
-                }
 
-                (el.removeClass('none-select'));
+                    per_price_value += Number(data_attr.attr('data-price'));
+
+                    $total.html(per_price_value); //delete
+
+                }
+                showOptionalSection(hide_el);
             } else {
                 if(data_attr.attr('data-per-price') === "product") {
                     const price = data_attr.attr('data-price');
                     parent.find('.price-placee').html(`Nothing selected`);
+
+                    per_price_value -= Number(data_attr.attr('data-price'));
+
+                    $total.html(per_price_value); //delete
+
                 }
-                (el.addClass('none-select'));
+                hideOptionalSection(hide_el);
             }
 
         });
-
-        console.log(per_price_value)
-        //DELETE
-        $total.html(`$${per_price_value}`);
-        //DELETE
-
-
 
         const select2_products = $(".product-pack-select");
 
@@ -178,9 +277,7 @@ $(document).ready(function() {
         select2_products && select2_products.each(function (i,e){
             const products_id = $(e).attr('data-id');
             const select = $(e);
-            // isReq($(this));
 
-            console.log($(this).closest('.product-single-info_row'));
             fetch("/products/get-package-type-limit", {
                 method: "post",
                 headers: {
@@ -198,17 +295,12 @@ $(document).ready(function() {
                 })
                 .then(function (json) {
                     const limit = Number(json.limit);
-                    const isSingle = select.attr('id').includes('single');
-
-                    // const group = ($(`#single_v_select_${products_id}`).length !== 0 && $(`#single_v_select_${products_id}`)) || $(`#multi_v_select_${products_id}`);
 
                     select.select2({
                         minimumResultsForSearch: Infinity,
-                        maximumSelectionLength: isSingle ? Infinity : Number(json.limit),
+                        maximumSelectionLength: isSingle(select) ? Infinity : Number(json.limit),
                         placeholder: 'Select an option'
                     });
-
-                    let qty = 0;
 
 
                     $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function() {
@@ -217,55 +309,18 @@ $(document).ready(function() {
 
                     select.closest('.product-single-info_row').on('click','.product-count-minus', function(ev){
                         eventInitialDefault(ev);
-
-                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                        Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                        new_qty(select);
-                        select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
-
-                        const price = $(this).closest('[data-price]').attr('data-price');
-                        $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
-
-                        const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                            const price = $(el).closest('[data-price]').attr('data-price');
-                            const count = $(el).val();
-                            return price * count;
-                        });
-                        const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                            return accumulator + a;
-                        }) : 0;
-                        const $total = $('.price-place-summary');
-                        $total.html(`$${per_price_value + total_price}`);
+                        handleProductCountMinus($(this), select, 'select', limit);
                     });
 
                     select.closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
-                        eventInitialDefault(ev)
-                        new_qty(select);
-                        const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                        console.log($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val(), 'this' );
-                        Number(input.val()) < Number(limit) - Number(new_qty(select)) +
-                            Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
-                        new_qty(select);
-                        select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
-
-                        const price = $(this).closest('[data-price]').attr('data-price');
-                        $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
-
-                        const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                            const price = $(el).closest('[data-price]').attr('data-price');
-                            const count = $(el).val();
-                            return price * count;
-                        });
-                        const total_price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                            return accumulator + a;
-                        }) : 0;
-                        const $total = $('.price-place-summary');
-                        $total.html(`$${per_price_value + total_price}`);
+                        eventInitialDefault(ev);
+                        handleProductCountPlus($(this), select, 'select', limit);
                     });
 
                     select.on('select2:select', function (e) {
-                        const _this = this;
+                        const $this = $(this);
                         const current_item_id = $(e.params.data.element).attr('data-select2-id');
+
                         new_qty(select);
 
                         fetch("/products/get-variation-menu-raw", {
@@ -283,59 +338,36 @@ $(document).ready(function() {
                                 return response.json();
                             })
                             .then(function (json) {
-                                select.attr('id').includes('single') ? $(_this).closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                                console.log('isSection(select.closest(\'.product-single-info_row\'))', isSection(select))
+                                if(isSingle(select)) {
+                                    if(!isSection(select)) {
+                                        $this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
+                                    }
+                                } else {
+                                    $this.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                                }
 
                                 $('.delete-menu-item').on('click', function() {
-                                    const s_id = $(this).attr('data-el-id');
+                                    const $this = $(this);
+                                    const s_id = $this.attr('data-el-id');
                                     $(`.select2-selection__choice[data-select2-id="${s_id}"].select2-selection__choice__remove`).click();
                                     $(`#multi_v_select_${products_id} option[data-select2-id="${s_id}"]`);
-                                    const deleted = $(this).closest('.menu-item-selected').attr('data-id');
-                                    const values = select.val().filter((value) => value !== deleted)
+                                    const deleted = $this.closest('.menu-item-selected').attr('data-id');
+                                    const values = select.val().filter((value) => value !== deleted);
                                     select.val(values).trigger('change.select2');
-                                    $(this).closest('.menu-item-selected').remove();
+                                    $this.closest('.menu-item-selected').remove();
                                     new_qty(select);
-                                    select.select2({maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length});
-
-                                    const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                                        const price = $(el).closest('[data-price]').attr('data-price');
-                                        const count = $(el).val();
-                                        return price * count;
-                                    });
-                                    const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                                        return accumulator + a;
-                                    }) : 0;
-                                    const $total = $('.price-place-summary');
-                                    $total.html(`$${per_price_value + price}`);
+                                    select2MaxLimit(select, limit);
                                 });
-
-                                const prices_array = select.attr('id').includes('single') ? $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                                    const price = $(el).closest('[data-price]').attr('data-price');
-                                    console.log(price, 'map');
-                                    const count = $(el).val();
-                                    return price * count;
-                                }) : $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                                    const price = $(el).closest('[data-price]').attr('data-price');
-                                    console.log(price, 'map')
-                                    const count = $(el).val();
-                                    return price * count;
-                                });
-                                const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                                    return accumulator + a;
-                                }) : 0;
-                                const $total = $('.price-place-summary');
-                                $total.html(`$${per_price_value + price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
                             });
                     });
 
-                    select.attr('id') && select.attr('id').includes('single') && select.ready(function (e) {
-                        console.log('select select')
-                        const _this = select;
+                    isSingle(select) && select.ready(function (e) {
                         const current_item_id = select.children().first().attr('data-select2-id');
-                        // new_qty(select);
-// console.log(select.children(), select.children().first(), select.children().first().attr('data-select2-id'))
+
                         fetch("/products/get-variation-menu-raw", {
                             method: "post",
                             headers: {
@@ -351,20 +383,35 @@ $(document).ready(function() {
                                 return response.json();
                             })
                             .then(function (json) {
-                                select.attr('id').includes('single') ? select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html) : $(_this).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-                               const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
-                                    const price = $(el).closest('[data-price]').attr('data-price');
-                                    console.log(price, 'map')
-                                    const count = $(el).val();
-                                    return price * count;
-                                });
+                                if(isSingle(select)) {
+                                    if(isCheckedOptional(select)) {
+                                        select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
+                                    }
+                                } else {
+                                    select.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                                }
 
-                                const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
-                                    return accumulator + a;
-                                }) : 0;
+                                // if(isSingle(select)) {
+                                //     if(!isSection(select)) {
+                                //         $this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
+                                //     }
+                                // } else {
+                                //     $this.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                                // }
 
-                                const $total = $('.price-place-summary');
-                                $total.html(`$${per_price_value + price}`);
+                               // const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
+                               //      const price = $(el).closest('[data-price]').attr('data-price');
+                               //      console.log(price, 'map')
+                               //      const count = $(el).val();
+                               //      return price * count;
+                               //  });
+                               //
+                               //  const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                               //      return accumulator + a;
+                               //  }) : 0;
+                               //
+                               //  const $total = $('.price-place-summary');
+                               //  isReq(select) && $total.html(`$${per_price_value + price}`);
                             })
                             .catch(function (error) {
                                 console.log(error);
@@ -392,7 +439,7 @@ $(document).ready(function() {
                             return accumulator + a;
                         }) : 0;
                         const $total = $('.price-place-summary');
-                        $total.html(`$${per_price_value + price}`);
+                        //nnn
                     });
                 })
                 .catch(function (error) {
@@ -408,7 +455,7 @@ $(document).ready(function() {
             const per_price = $(list).attr('data-per-price') === 'product';
             console.log($(list),7777);
 
-            // isReq($(list));
+            // hideOptionalSection($(list));
 
             let qty;
             $(`#products-list_${list_id}`).on('click', '.package_checkbox_label', function (event) {
@@ -457,7 +504,7 @@ $(document).ready(function() {
                 const $total = $('.price-place-summary');
                 console.log(per_price, per_price_value, 'loging---------------------');
 
-                $total.html(`$${price + per_price_value}`);
+                //nnn
             });
 
 
@@ -473,7 +520,7 @@ $(document).ready(function() {
             console.log('per_price_value', per_price_value,$(`#products-list_${list_id}`).attr('data-price'));
             console.log(99999,price,per_price_value);
             const $total = $('.price-place-summary');
-            $total.html(`$${price + per_price_value}`);
+            //nnn
 
             $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
                 return false;
@@ -497,7 +544,7 @@ $(document).ready(function() {
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${per_price_value + total_price}`);
+                //nnn
             });
 
 
@@ -522,7 +569,7 @@ $(document).ready(function() {
                     return accumulator + a;
                 }) : 0;
                 const $total = $('.price-place-summary');
-                $total.html(`$${per_price_value + total_price}`);
+                //nnn
             });
         });
 
@@ -691,12 +738,11 @@ $(document).ready(function() {
                         prices += Number($(this).attr('data-price'))*Number($(this).find('.field-input').val());
                     });
 
-                    const $total = $('.price-place-summary');
-                    // console.log('$(`[data-group="${dg}"]`).find(\'[data-per-price]\').attr(\'data-per-price\')', $(`[data-group="${dg}"]`));
-                    $(`[data-group="${dg}"]`).closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html(`$${Number($total.text().trim().slice(1)) + prices}`);
+
+                    //nnn
                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click', '.delete-menu-item', function() {
 
-                        $(`[data-group="${dg}"]`).closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html(`$${Number($total.text().trim().slice(1)) - Number($(this).closest('[data-price]').attr('data-price')) * $(this).closest('[data-price]').find('.product-qty').val()}`);
+                        //nnn
 
                         $(this).closest('.menu-item-selected').remove();
 
@@ -712,7 +758,7 @@ $(document).ready(function() {
 
                             const $total = $('.price-place-summary');
                             console.log('$(`[data-group="${dg}"]`)', $(`[data-group="${dg}"]`));
-                            $(`[data-group="${dg}"]`).closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html(`$${Number($total.text().trim().slice(1)) - price}`);
+                            //nnn
                         }
                     });
 
@@ -730,7 +776,7 @@ $(document).ready(function() {
 
 
                             const $total = $('.price-place-summary');
-                            $(`[data-group="${dg}"]`).closest('[data-per-price]').attr('data-per-price') !== "product" && $total.html(`$${Number($total.text().trim().slice(1)) + price}`);
+                            //nnn
                         };
 
                     });
