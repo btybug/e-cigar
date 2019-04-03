@@ -24,10 +24,7 @@
             </div>
         </div>
         <div class="col-md-6 d-flex pr-0 head-right justify-content-end">
-                {!! Form::select("variations[$main_unique][is_required]",[0 => 'Optional',1 => 'Required'],($main) ? $main->is_required : null,['class' => 'form-control mr-1 h-100 w-25']) !!}
-
             <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-times"></i></button>
-
         </div>
     </div>
     <div class="card-body panel-body">
