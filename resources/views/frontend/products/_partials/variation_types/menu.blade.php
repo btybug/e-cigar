@@ -26,12 +26,23 @@
       <div class="col-sm-2 pl-sm-3 p-0 text-sm-center text-right">
         <div class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
           <div class="selected-menu-options">
-            @if($vSettings->is_required)
+            @if($vSettings->price_per == 'product')
               {{ convert_price($vSettings->price,$currency) }}
             @else
-              @if($vSettings->price_per == 'product')
-                Nothing selected
-              @endif
+              <div class="col-sm-12 pl-0 menu-item-selected mb-2" data-id="{{ $vSettings->id }}" data-price="{{ $vSettings->price }}">
+                <div class="d-flex flex-wrap align-items-center ">
+                  <div class="invisible position-absolute" style="width: 0;height: 0">
+                    <div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
+                      {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty','data-id' => $vSettings->id,'min' => 1]) !!}
+                    </div>
+                  </div>
+                  <div class="col-sm-12 pl-sm-3 p-0 text-sm-center">
+                      <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
+                        {{ convert_price($vSettings->price,$currency) }}
+                      </span>
+                  </div>
+                </div>
+              </div>
             @endif
           </div>
         </div>

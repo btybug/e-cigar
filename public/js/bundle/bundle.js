@@ -2746,6 +2746,12 @@ $(document).ready(function () {
         //all required sections value
         var per_price_value = 0;
 
+        //item price
+        var item_price = 0;
+
+        //section price
+        var section_price = 0;
+
         //counts qty for group
         var new_qty = function new_qty(group) {
             var qty = 0;
@@ -2856,10 +2862,10 @@ $(document).ready(function () {
             plus_button.closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
         };
 
-        $('[data-per-price="product"]').each(function () {
-            productTypeReqPerPrice($(this));
-            $total.html(per_price_value); //delete
-        });
+        // $('[data-per-price="product"]').each(function() {
+        //     productTypeReqPerPrice($(this));
+        //     $total.html(per_price_value); //delete
+        // });
 
         $('[data-req="0"]').each(function () {
             hideOptionalSection($(this));
@@ -2877,7 +2883,7 @@ $(document).ready(function () {
 
                     per_price_value += Number(data_attr.attr('data-price'));
 
-                    $total.html(per_price_value); //delete
+                    // $total.html(per_price_value); //delete
                 }
                 showOptionalSection(hide_el);
             } else {
@@ -2887,13 +2893,37 @@ $(document).ready(function () {
 
                     per_price_value -= Number(data_attr.attr('data-price'));
 
-                    $total.html(per_price_value); //delete
+                    // $total.html(per_price_value); //delete
                 }
                 hideOptionalSection(hide_el);
             }
         });
 
-        var select2_products = $(".product-pack-select");
+        var countPrices = function countPrices() {
+            section_price = 0;
+            item_price = 0;
+            $('[data-per-price]').each(function () {
+                var $this = $(this);
+                if ($this.attr('data-per-price') === 'product') {
+                    section_price += Number($this.attr('data-price'));
+                } else if ($this.attr('data-per-price') === 'item') {
+                    $this.closest('.product-single-info_row').find('.product-qty').length !== 0 && $this.closest('.product-single-info_row').find('.product-qty').each(function () {
+                        var $product_qty_input = $(this);
+                        var qty = Number($product_qty_input.val());
+                        var price = Number($product_qty_input.closest('[data-price]').attr('data-price'));
+                        item_price = item_price + qty * price;
+                    });
+                }
+            });
+            return section_price + item_price;
+        };
+
+        var setTotalPrice = function setTotalPrice() {
+            $total.html("$" + countPrices());
+        };
+
+        setTotalPrice();
+        var select2_products = $('.product-pack-select');
 
         select2_products && select2_products.each(function (i, e) {
             var products_id = $(e).attr('data-id');
@@ -2927,11 +2957,13 @@ $(document).ready(function () {
                 select.closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
                     eventInitialDefault(ev);
                     handleProductCountMinus($(this), select, 'select', limit);
+                    setTotalPrice();
                 });
 
                 select.closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
                     eventInitialDefault(ev);
                     handleProductCountPlus($(this), select, 'select', limit);
+                    setTotalPrice();
                 });
 
                 select.on('select2:select', function (e) {
@@ -2953,15 +2985,21 @@ $(document).ready(function () {
                     }).then(function (response) {
                         return response.json();
                     }).then(function (json) {
-                        console.log('isSection(select.closest(\'.product-single-info_row\'))', isSection(select));
                         if (isSingle(select)) {
                             if (!isSection(select)) {
                                 $this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
+                                setTotalPrice();
+                            }
+                            if (isReq(select) && !isSection(select)) {
+                                // per_price_value += select.
+                                // total_price += select.closest('.product-single-info_row').find('.menu-item-selected').find('[data-price]');
+                                setTotalPrice();
                             }
                         } else {
                             $this.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                            setTotalPrice();
                         }
-
+                        setTotalPrice();
                         $('.delete-menu-item').on('click', function () {
                             var $this = $(this);
                             var s_id = $this.attr('data-el-id');
@@ -2975,6 +3013,7 @@ $(document).ready(function () {
                             $this.closest('.menu-item-selected').remove();
                             new_qty(select);
                             select2MaxLimit(select, limit);
+                            setTotalPrice();
                         });
                     }).catch(function (error) {
                         console.log(error);
@@ -3000,11 +3039,19 @@ $(document).ready(function () {
                         if (isSingle(select)) {
                             if (isCheckedOptional(select)) {
                                 select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
+                                setTotalPrice();
+                            }
+                            if (isReq(select) && !isSection(select)) {
+                                // per_price_value += select.
+                                item_price += select.closest('.product-single-info_row').find('.menu-item-selected').find('[data-price]');
+                                setTotalPrice();
                             }
                         } else {
                             select.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+                            setTotalPrice();
                         }
 
+                        setTotalPrice();
                         // if(isSingle(select)) {
                         //     if(!isSection(select)) {
                         //         $this.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
@@ -3040,18 +3087,18 @@ $(document).ready(function () {
                     setTimeout(function () {
                         new_qty(select);
                         select.select2({ maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
+                        setTotalPrice();
                     }, 0);
 
-                    var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
-                        var price = $(el).closest('[data-price]').attr('data-price');
-                        var count = $(el).val();
-                        return price * count;
-                    });
-                    var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
-                        return accumulator + a;
-                    }) : 0;
-                    var $total = $('.price-place-summary');
-                    //nnn
+                    // const prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function(el) {
+                    //     const price = $(el).closest('[data-price]').attr('data-price');
+                    //     const count = $(el).val();
+                    //     return price * count;
+                    // });
+                    // const price = prices_array.length !== 0 ? prices_array.reduce((accumulator, a) => {
+                    //     return accumulator + a;
+                    // }) : 0;
+                    // const $total = $('.price-place-summary');
                 });
             }).catch(function (error) {
                 console.log(error);
