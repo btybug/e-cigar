@@ -809,27 +809,27 @@ $(document).ready(function() {
                 });
 
 
-                // $.ajax({
-                //     type: "post",
-                //     url: "/add-to-cart",
-                //     cache: false,
-                //     datatype: "json",
-                //     data: product_data,
-                //     headers: {
-                //         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                //     },
-                //     success: function (data) {
-                //         console.log(data);
-                //         if (!data.error) {
-                //             $(".cart-count").html(data.count);
-                //             $('#cartSidebar').html(data.headerHtml);
-                //             $("#headerShopCartBtn").trigger('click');
-                //             $("#extraModal").modal();
-                //         } else {
-                //
-                //         }
-                //     }
-                // });
+                $.ajax({
+                    type: "post",
+                    url: "/add-to-cart",
+                    cache: false,
+                    datatype: "json",
+                    data: product_data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        if (!data.error) {
+                            $(".cart-count").html(data.count);
+                            $('#cartSidebar').html(data.headerHtml);
+                            $("#headerShopCartBtn").trigger('click');
+                            $("#extraModal").modal();
+                        } else {
+
+                        }
+                    }
+                });
             } else {
                 alert('Select available variation');
             }
