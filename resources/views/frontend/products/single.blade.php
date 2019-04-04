@@ -504,37 +504,7 @@
    <div class="modal fade" id="extraModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel" aria-hidden="true">
        <div class="modal-dialog" role="document">
            <div class="modal-content">
-               @php
-               $model = $vape;
-                   $variations = collect($model->variations()->extra()->get())->groupBy('variation_id');
-               @endphp
-
-               @if(count($variations))
-                   @foreach($variations as $variation)
-                       @php
-                           $vSettings = $variation->first();
-                       @endphp
-                       @if($vSettings->type == 'filter')
-                           <div class="product-single-info_rowr options-group">
-                               <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
-                                   @include("frontend.products._partials.variation_types.filter_popup")
-                               </div>
-                               <div class="product-single-info_row-items">
-                               </div>
-                           </div>
-                       @else
-                           @if(\view::exists("frontend.products._partials.variation_types.$vSettings->display_as"))
-                               <div class="product-single-info_rowr options-group">
-                                   <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
-                                       @include("frontend.products._partials.variation_types.$vSettings->display_as")
-                                   </div>
-                                   <div class="product-single-info_row-items">
-                                   </div>
-                               </div>
-                           @endif
-                       @endif
-                   @endforeach
-               @endif
+              
            </div>
        </div>
    </div>
@@ -615,7 +585,7 @@
     <script>
 
         $(document).ready(function () {
-
+            $("#extraModal").modal();
 //          ----start  video carousel----
 //             function Init () {
 //                 var checkbox = document.getElement("myCheckbox");
