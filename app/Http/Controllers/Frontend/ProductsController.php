@@ -233,7 +233,6 @@ class ProductsController extends Controller
     public function postExtraContent(Request $request)
     {
         $product = Stock::findOrFail($request->id);
-
         $variations = $product->variations()->extra()->with('options')->get();
         $html = \view("frontend.products._partials.extra_modal_content",compact(['variations','product']))->render();
 
@@ -245,9 +244,8 @@ class ProductsController extends Controller
         $product = Stock::findOrFail($request->id);
         $variation = $product->variations()->extra()->where('variation_id',$request->group)->get();
         $vSettings = $variation->first();
-
         $html = \view("frontend.products._partials.extra_section",compact(['vSettings','variation']))->with('vape',$product)->render();
 
-        return response()->json(['error' => false,'html' => $html]);
+        return response()->json(['error' => false,'html' => $html,'type' => $vSettings->display_as]);
     }
 }
