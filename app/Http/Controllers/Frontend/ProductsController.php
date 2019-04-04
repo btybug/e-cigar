@@ -247,7 +247,7 @@ class ProductsController extends Controller
         $variation = $product->variations()->extra()->where('variation_id',$request->group)->get();
         $vSettings = $variation->first();
 
-        $html = \view("frontend.products._partials.extra_section",compact(['vSettings','variation']))->render();
+        $html = \view("frontend.products._partials.extra_section",compact(['vSettings','variation']))->with('vape',$product)->render();
 
         return response()->json(['error' => false,'html' => $html]);
     }
