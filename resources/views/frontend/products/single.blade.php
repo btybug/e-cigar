@@ -527,58 +527,12 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal</h5>
+                    <h5 class="modal-title">Extra Options</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="d-flex">
-                        <div class="col-sm-2 pl-0">
-                            <div class="extra-content-left main-scrollbar">
-                                <ul class="list-unstyled">
-                                    <li>
-                                        <div class="item">
-                                            <span>Extra item</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item active">
-                                            <span>Extra item</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item">
-                                            <span>Extra item</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item">
-                                            <span>Extra item</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-sm-10 p-0">
-                            <div class="extra-content-right d-flex flex-column">
-                                <div class="extra-main-content main-scrollbar">
-                                    <p class="w-25">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid dolorum eligendi, enim error ex excepturi, illo illum, inventore molestiae molestias mollitia optio possimus quod sequi totam unde voluptates! Aperiam at atque cum dignissimos dolorem earum est excepturi, exercitationem hic id illum, impedit itaque iure magnam magni natus odio officia officiis optio qui recusandae rerum tenetur, veniam. Accusantium asperiores eaque eligendi enim, excepturi, explicabo impedit in incidunt iste molestiae mollitia neque quaerat quam qui ratione recusandae rem sequi! Amet earum error expedita id nisi officia rem sunt suscipit? Architecto asperiores commodi dignissimos dolore ea esse excepturi fugiat impedit incidunt molestiae nihil numquam officiis optio possimus quia quis repudiandae, soluta tempore totam, vitae! Asperiores, cum deleniti eius eligendi mollitia nisi omnis pariatur provident quis quod ratione repudiandae saepe tempora ut veritatis vitae voluptates voluptatum? A animi aperiam atque cupiditate deserunt ipsa iure laboriosam quia ratione repellendus! Ad alias aperiam autem consectetur, culpa eligendi fugiat inventore ipsam itaque iusto odit officia quam quidem saepe similique tempore tenetur veniam voluptatem! Ab beatae cum debitis dolore est excepturi ipsum molestias quae quas ratione. Aliquid asperiores nisi provident ratione voluptas? Consequuntur cupiditate delectus dolore eaque eveniet facere fugiat iste maxime modi molestiae mollitia, nihil non perspiciatis quae rem repellendus sunt veniam voluptates. Explicabo incidunt ipsa maxime molestias, nam nesciunt nihil non recusandae sit tempora. At consectetur cum eius molestias nobis possimus qui, sapiente. Ad, eius optio. Ex hic iste nam optio quaerat rem tenetur unde. Deserunt eveniet in, odit pariatur soluta tempora. Assumenda consequuntur eligendi excepturi illum odit placeat reprehenderit sed. A accusamus asperiores autem blanditiis commodi cum debitis deleniti dolor eum facilis fugiat harum illum ipsa, itaque iusto maxime modi, molestiae nobis odio officiis perferendis provident, quam quia quibusdam quisquam quod quos repellat repudiandae sequi suscipit unde ut veritatis voluptates. Commodi excepturi impedit non provident!</p>
-                                </div>
-                                <div class="modal-footer">
-                                    {{--<button type="button" class="btn btn-primary">Add</button>--}}
-                                    <a href="#" class="product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
-                                        <span class="product-card_btn-text">add to cart</span>
-                                        <span class="d-inline-block ml-auto">
-                            <svg viewBox="0 0 18 22" width="18px" height="22px">
-                                <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)" d="M14.305,3.679 L14.305,0.003 L3.694,0.003 L3.694,3.679 L-0.004,3.679 L-0.004,21.998 L18.003,21.998 L18.003,3.679 L14.305,3.679 ZM4.935,1.216 L13.064,1.216 L13.064,3.679 L4.935,3.679 L4.935,1.216 ZM16.761,20.785 L1.238,20.785 L1.238,4.891 L3.694,4.891 L3.694,7.329 L4.935,7.329 L4.935,4.891 L13.064,4.891 L13.064,7.329 L14.305,7.329 L14.305,4.891 L16.761,4.891 L16.761,20.785 Z"></path>
-                            </svg>
-                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
             </div>
@@ -708,7 +662,23 @@
     <script>
 
         $(document).ready(function () {
-            $("#extraModal").modal();
+            AjaxCall("/products/get-extra-content", {id:$("#vpid").val()}, function (res) {
+                if (!res.error) {
+                    $("#extraModal .modal-body").html(res.html)
+                    $("#extraModal").modal();
+                }
+            });
+
+
+            $("body").on('click',".select-extra",function () {
+                $("#extraModal").find(".select-extra").removeClass("active");
+                $(this).addClass("active");
+                AjaxCall("/products/get-extra-item", {id:$(this).attr('data-id'),group:$(this).attr('data-group')}, function (res) {
+                    if (!res.error) {
+                        $("#extraModal").find(".extra-main-content").html(res.html)
+                    }
+                });
+            });
 //          ----start  video carousel----
 //             function Init () {
 //                 var checkbox = document.getElement("myCheckbox");
