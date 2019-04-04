@@ -563,7 +563,7 @@ $(document).ready(function() {
                 const title = $(this).find('.name-item').text().trim();
                 if(limit > new_qty(null, true) && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                     $(this).closest(".single-item-wrapper").addClass('active');
-                    $('.selected-items_popup')
+                    $(this).closest('.modal').find('.selected-items_popup')
                         .append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
                               <div class="d-flex justify-content-between selected-item_popup-wrapper">
                                 <div class="align-self-center text-truncate">
@@ -590,7 +590,7 @@ $(document).ready(function() {
                                                 </span>
                                   </div>
                                   <div>
-                                    <a href="javascript:void(0)" data-el-id="28" class="btn btn-sm delete-menu-item text-danger"><i class="fa fa-times"></i></a>
+                                    <a href="javascript:void(0)" data-el-id="${id}" class="btn btn-sm delete-menu-item_popup text-danger"><i class="fa fa-times"></i></a>
                                 </div>
                                 </div>
                               </div>
@@ -601,15 +601,22 @@ $(document).ready(function() {
                 }
             });
 
+            $('body').on('click', '.delete-menu-item_popup', function() {
+                const id = $(this).attr('data-el-id');
+
+                $(this).closest('.modal').find(`.single-item-wrapper[data-id="${id}"]`).removeClass('active');
+                $(this).closest('.selected-item_popup').remove();
+            });
+
             $('body').on('click', '#popUpModal .selected-item-popup_qty-plus' , function (ev) {
-                eventInitialDefault(ev)
+                eventInitialDefault(ev);
                 if(limit > new_qty(null, true)) {
                     $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                 }
             });
 
             $('body').on('click', '#popUpModal .selected-item-popup_qty-minus' , function (ev) {
-                eventInitialDefault(ev)
+                eventInitialDefault(ev);
                 $(this).siblings(".popup_field-input").val() > 1 && $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) - 1);
             });
 
@@ -618,12 +625,16 @@ $(document).ready(function() {
             });
 
             $('#popUpModal').on('click', '.modal-footer .b_save', function() {
+                const items_value_array = [];
                 const items_array = [];
-
-                $('#popUpModal .modal-body').find('.single-item-wrapper').each(function() {
-                    $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
+                $('#popUpModal .modal-footer').find('.selected-item_popup').each(function() {
+                    items_value_array.push({
+                        id: $(this).attr('data-id-popup'),
+                        value: $(this).find('.selected-item-popup_qty-select').val()
+                    });
+                    items_array.push($(this).attr('data-id-popup'));
                 });
-
+console.log(items_array)
                 fetch("/products/get-variation-menu-raws", {
                     method: "post",
                     headers: {
@@ -633,7 +644,10 @@ $(document).ready(function() {
                         "X-CSRF-Token": $('input[name="_token"]').val()
                     },
                     credentials: "same-origin",
-                    body: JSON.stringify({ids: items_array})
+                    body: JSON.stringify({
+                        ids: items_array,
+                        items: items_value_array
+                    })
                 })
                     .then(function (response) {
                         return response.json();

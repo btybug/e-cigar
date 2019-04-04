@@ -3164,11 +3164,18 @@ $(document).ready(function () {
                 var title = $(this).find('.name-item').text().trim();
                 if (limit > new_qty(null, true) && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                     $(this).closest(".single-item-wrapper").addClass('active');
-                    $('.selected-items_popup').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                <div class=\"align-self-center text-truncate\">\n                                  " + title + "\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n                                    <!--minus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                  <div>\n                                    <a href=\"javascript:void(0)\" data-el-id=\"28\" class=\"btn btn-sm delete-menu-item text-danger\"><i class=\"fa fa-times\"></i></a>\n                                </div>\n                                </div>\n                              </div>\n                            </div>");
+                    $(this).closest('.modal').find('.selected-items_popup').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                <div class=\"align-self-center text-truncate\">\n                                  " + title + "\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n                                    <!--minus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                  <div>\n                                    <a href=\"javascript:void(0)\" data-el-id=\"" + id + "\" class=\"btn btn-sm delete-menu-item_popup text-danger\"><i class=\"fa fa-times\"></i></a>\n                                </div>\n                                </div>\n                              </div>\n                            </div>");
                 } else if ($(this).closest(".single-item-wrapper").hasClass('active')) {
                     $("[data-id-popup=\"" + id + "\"]").remove();
                     $(this).closest(".single-item-wrapper").removeClass('active');
                 }
+            });
+
+            $('body').on('click', '.delete-menu-item_popup', function () {
+                var id = $(this).attr('data-el-id');
+
+                $(this).closest('.modal').find(".single-item-wrapper[data-id=\"" + id + "\"]").removeClass('active');
+                $(this).closest('.selected-item_popup').remove();
             });
 
             $('body').on('click', '#popUpModal .selected-item-popup_qty-plus', function (ev) {
@@ -3188,12 +3195,16 @@ $(document).ready(function () {
             });
 
             $('#popUpModal').on('click', '.modal-footer .b_save', function () {
+                var items_value_array = [];
                 var items_array = [];
-
-                $('#popUpModal .modal-body').find('.single-item-wrapper').each(function () {
-                    $(this).hasClass('active') && items_array.push($(this).attr('data-id'));
+                $('#popUpModal .modal-footer').find('.selected-item_popup').each(function () {
+                    items_value_array.push({
+                        id: $(this).attr('data-id-popup'),
+                        value: $(this).find('.selected-item-popup_qty-select').val()
+                    });
+                    items_array.push($(this).attr('data-id-popup'));
                 });
-
+                console.log(items_array);
                 fetch("/products/get-variation-menu-raws", {
                     method: "post",
                     headers: {
@@ -3203,7 +3214,10 @@ $(document).ready(function () {
                         "X-CSRF-Token": $('input[name="_token"]').val()
                     },
                     credentials: "same-origin",
-                    body: JSON.stringify({ ids: items_array })
+                    body: JSON.stringify({
+                        ids: items_array,
+                        items: items_value_array
+                    })
                 }).then(function (response) {
                     return response.json();
                 }).then(function (json) {
