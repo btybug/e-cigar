@@ -2738,6 +2738,10 @@ $(document).ready(function () {
         });
     });
 
+    $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
+        return false;
+    });
+
     $("#singleProductPageCnt").fadeIn(function () {
 
         //total price element
@@ -2767,10 +2771,10 @@ $(document).ready(function () {
             ev.stopImmediatePropagation();
         };
 
-        //return true if optional is checked
-        //         const isCheckedOptional = (el) => {
-        //             return el.find('.req_check').is(':checked');
-        //         };
+        // return true if argument is checked
+        var isChecked = function isChecked(checkbox) {
+            return checkbox.is(':checked');
+        };
 
         //return true if argument is required
         var isReq = function isReq(el) {
@@ -2835,31 +2839,31 @@ $(document).ready(function () {
 
         //product-count-minus event callback
         var handleProductCountMinus = function handleProductCountMinus(minus_button, section, type, limit) {
-            var input = $(minus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+            var counter = $(minus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
 
-            Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
+            Number(counter.val()) > 1 && counter.val(Number(counter.val()) - 1);
             new_qty(section);
 
             if (type === 'select') {
                 select2MaxLimit(section, limit);
-            }
+            } else if (type === 'checkbox') {}
 
             var price = minus_button.closest('[data-price]').attr('data-price');
-            minus_button.closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
+            minus_button.closest('[data-price]').find('.price-placee').html("$" + price * Number(counter.val()));
         };
         //product-count-plus event callback
         var handleProductCountPlus = function handleProductCountPlus(plus_button, section, type, limit) {
-            var input = $(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
+            var counter = $(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
 
             new_qty(section);
-            Number(input.val()) < Number(limit) - Number(new_qty(section)) + Number($(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
+            Number(counter.val()) < Number(limit) - Number(new_qty(section)) + Number($(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && counter.val(Number(counter.val()) + 1);
             new_qty(section);
             if (type === 'select') {
                 select2MaxLimit(section, limit);
             }
 
             var price = plus_button.closest('[data-price]').attr('data-price');
-            plus_button.closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
+            plus_button.closest('[data-price]').find('.price-placee').html("$" + price * Number(counter.val()));
         };
 
         // $('[data-req="0"]').each(function() {
@@ -2900,7 +2904,7 @@ $(document).ready(function () {
         var countPrices = function countPrices() {
             section_price = 0;
             item_price = 0;
-            $('#requiredProducts [data-per-price]').each(function () {
+            $('[data-per-price]').each(function () {
                 var $this = $(this);
                 if ($this.attr('data-per-price') === 'product') {
                     section_price += Number($this.attr('data-price'));
@@ -2917,12 +2921,14 @@ $(document).ready(function () {
         };
 
         var setTotalPrice = function setTotalPrice() {
-            $total.html("$" + countPrices());
+            var total_price_count = Number($('.product-qty-select').val());
+            $total.html("$" + countPrices() * total_price_count);
         };
 
         setTotalPrice();
         var select2_products = $('.product-pack-select');
 
+        //--------------------------------select start
         select2_products && select2_products.each(function (i, e) {
             var products_id = $(e).attr('data-id');
             var select = $(e);
@@ -2946,10 +2952,6 @@ $(document).ready(function () {
                     minimumResultsForSearch: Infinity,
                     maximumSelectionLength: isSingle(select) ? Infinity : Number(json.limit),
                     placeholder: 'Select an option'
-                });
-
-                $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
-                    return false;
                 });
 
                 select.closest('.product-single-info_row').on('click', '.product-count-minus', function (ev) {
@@ -3042,7 +3044,7 @@ $(document).ready(function () {
                     $(this).closest('.product-single-info_row').find(".menu-item-selected[data-id=\"" + e.params.data.id + "\"]").remove();
                     setTimeout(function () {
                         new_qty(select);
-                        select.select2({ maximumSelectionLength: Number(limit) - Number(new_qty(select)) + select.closest('.product-single-info_row').find('input[name="qty"]').length });
+                        select2MaxLimit(select, limit);
                         setTotalPrice();
                     }, 0);
                 });
@@ -3050,116 +3052,55 @@ $(document).ready(function () {
                 console.log(error);
             });
         });
-        //--------------------------------List
+        //--------------------------------select end
 
-        $('.products-list-wrap').each(function (index, list) {
-            var list_id = $(list).attr('data-id');
-            var limit = Number($(list).attr('data-limit'));
-            var per_price = $(list).attr('data-per-price') === 'product';
-            console.log($(list), 7777);
+        //--------------------------------list start
+        var hasQtyCounter = function hasQtyCounter(qty_section) {
+            return qty_section.children().length !== 0;
+        };
 
-            // hideOptionalSection($(list));
+        var counterHtml = function counterHtml(id) {
+            return "<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                                        <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                                            <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                        </svg>\n                                    </span>\n                                    <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty\"/>\n                                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                                        <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                                            <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                        </svg>\n                                    </span>\n                                </div>";
+        };
 
-            var qty = void 0;
-            $("#products-list_" + list_id).on('click', '.package_checkbox_label', function (event) {
+        $('.products-list-wrap').each(function (index, data_el) {
+            var products_id = $(data_el).attr('data-id');
+            var limit = Number($(data_el).attr('data-limit'));
+
+            $("#products-list_" + products_id).on('click', '.package_checkbox_label', function (event) {
                 eventInitialDefault(event);
-                var input = $(event.target).closest('.checkbox-wrap').find('.package_checkbox')[0];
-                var id = $(input).val();
-                var qty_input = $($(event.target).closest('.product-list-item').find('.list-qty')[0]);
-                qty = 0;
-                $("#products-list_" + list_id + " .field-input").each(function (i, e) {
-                    qty += Number($(e).val());
-                });
-                if (qty === limit && !$(input).is(':checked')) {
-                    qty = 0;
+                var checkbox = $(event.target).closest('.checkbox-wrap').find('.package_checkbox')[0];
+                var id = $(checkbox).val();
+                var counter_wrap = $($(event.target).closest('.product-list-item').find('.list-qty')[0]);
+
+                if (new_qty(counter_wrap) === limit && !isChecked($(checkbox))) {
                     return false;
-                } else if ($(input).is(':checked')) {
-                    $(this).closest('div').find('.package_checkbox')[0].click();
-                    qty_input.empty();
-                    var _price = $(this).closest('[data-price]').attr('data-price');
-                    $(this).closest('[data-price]').find('.price-placee').html("$" + _price);
-                } else {
-                    qty_input.children().length === 0 && $(qty_input[0]).append("<div class=\"continue-shp-wrapp_qty position-relative product-counts-wrapper w-100\">\n                    <span class=\"d-flex align-items-center h-100 pointer position-absolute product-count-minus\">\n                    <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                    </svg>\n                    </span>\n                        <input name=\"qty\" data-id=\"" + id + "\" min=\"1\" value=\"1\" type=\"number\" class=\"field-input w-100 h-100 font-23 text-center border-0 form-control product-qty " + (per_price && "product-qty_per_price") + "\"/>\n                    <span  class=\"d-flex align-items-center h-100 pointer position-absolute product-count-plus\">\n                    <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                    </svg>\n                    </span>\n                    </div>");
-                    $(this).closest('div').find('.package_checkbox')[0].click();
                 }
-
-                var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
-                    var price = $(el).closest('[data-price]').attr('data-price');
-                    var count = $(el).val();
-                    return price * count;
-                });
-                var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
-                    return accumulator + a;
-                }) : 0;
-                var $total = $('.price-place-summary');
-                console.log(per_price, per_price_value, 'loging---------------------');
-
-                //nnn
+                if (!hasQtyCounter(counter_wrap)) {
+                    $(counter_wrap[0]).append(counterHtml(id));
+                    setTotalPrice();
+                } else {
+                    $(counter_wrap[0]).empty();
+                    setTotalPrice();
+                }
+                $(this).closest('div').find('.package_checkbox')[0].click();
             });
 
-            var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
-                var price = $(el).closest('[data-price]').attr('data-price');
-                var count = $(el).val();
-                return price * count;
-            });
-            var price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
-                return accumulator + a;
-            }) : 0;
-
-            console.log('per_price_value', per_price_value, $("#products-list_" + list_id).attr('data-price'));
-            console.log(99999, price, per_price_value);
-            var $total = $('.price-place-summary');
-            //nnn
-
-            $('body').on('keypress', '.continue-shp-wrapp_qty .field-input', function () {
-                return false;
-            });
-
-            $("#products-list_" + list_id).on('click', '.product-count-minus', function (ev) {
+            $("#products-list_" + products_id).on('click', '.product-count-minus', function (ev) {
                 eventInitialDefault(ev);
-                var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                Number(input.val()) > 1 && input.val(Number(input.val()) - 1);
-                qty = new_qty($("#products-list_" + list_id));
-
-                var price = $(this).closest('[data-price]').attr('data-price');
-                $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
-
-                var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
-                    var price = $(el).closest('[data-price]').attr('data-price');
-                    var count = $(el).val();
-                    return price * count;
-                });
-                var total_price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
-                    return accumulator + a;
-                }) : 0;
-                var $total = $('.price-place-summary');
-                //nnn
+                handleProductCountMinus($(this), $("#products-list_" + products_id), 'checkbox', limit);
+                setTotalPrice();
             });
 
-            $("#products-list_" + list_id).on('click', '.product-count-plus', function (ev) {
+            $("#products-list_" + products_id).on('click', '.product-count-plus', function (ev) {
                 eventInitialDefault(ev);
-                qty = new_qty($("#products-list_" + list_id));
-                var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && input.val(Number(input.val()) + 1);
-                qty = new_qty($("#products-list_" + list_id));
-
-                var price = $(this).closest('[data-price]').attr('data-price');
-                $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
-
-                var prices_array = $('.product-qty:not(.product-qty_per_price)').toArray().map(function (el) {
-                    var price = $(el).closest('[data-price]').attr('data-price');
-                    var count = $(el).val();
-                    return price * count;
-                });
-                var total_price = prices_array.length !== 0 ? prices_array.reduce(function (accumulator, a) {
-                    return accumulator + a;
-                }) : 0;
-                var $total = $('.price-place-summary');
-                //nnn
+                handleProductCountPlus($(this), $("#products-list_" + products_id), 'checkbox', limit);
+                setTotalPrice();
             });
         });
+        //--------------------------------list end
 
-        //--------------------------------List end
+
         var dg = null;
         var popup_limit = 0;
         $("body").on('click', '.popup-select', function () {
