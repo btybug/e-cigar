@@ -183,6 +183,22 @@ class ShoppingCartController extends Controller
         return \Response::json(['error' => true, 'message' => 'try again']);
     }
 
+    public function postAddExtraToCart(Request $request)
+    {
+        if(! Cart::isEmpty()){
+            $key = $request->key;
+            $product = Stock::where('status', true)->find($request->product_id);
+            if($product){
+                $parent = Cart::get($key);
+
+            }
+
+            return \Response::json(['error' => true, 'message' => 'Product not found']);
+        }
+
+        return \Response::json(['error' => true, 'message' => 'Cart is empty, you can\'t add extra']);
+    }
+
     public function postUpdateQty(Request $request)
     {
 
