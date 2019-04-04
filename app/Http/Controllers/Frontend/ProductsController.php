@@ -194,13 +194,12 @@ class ProductsController extends Controller
 
     public function getVariationMenuRaws(Request $request)
     {
-
-        $variations = StockVariation::whereIn('id',$request->get('ids',[]))->whereNotIn('id',$request->get('selectedIds',[]))->get();
+        $variations = StockVariation::whereIn('id',$request->get('ids',[]))->get();
 //      var_dump($variations);exit;
         $selectElementId = null;
         $html = \view("frontend.products._partials.render_variations",compact(['variations','selectElementId']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false,'html' => $html,'items' => $request->get('items',[])]);
     }
 
     public function postSelectItems(Request $request)
