@@ -197,13 +197,19 @@ class ShoppingCartController extends Controller
                         $attrs = $parent->attributes;
                         if( $parent->attributes->has('extra') )
                         {
-                            $attrs['extra'][] = $this->cartService->extras;
+                            $x = $attrs['extra'];
+                            $x[] = $this->cartService->extras;
                         }
                         else
                         {
-                            $attrs[] = ['extra' => $this->cartService->extras];
+
+                            $x = [];
+                            $x[] = $this->cartService->extras;
+                            $attrs['extra'] = $x;
+
                         }
 
+                        $attrs['extra'] = $x;
                         Cart::update($key, array(
                             'attributes' => $attrs
                         ));

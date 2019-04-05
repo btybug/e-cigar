@@ -201,17 +201,36 @@ class CartService
                     $data['group'] = $group;
                     $data['options'] = [];
                     $product_limit = 0;
+
                     if (isset($item['products']) && count($item['products'])) {
-                        foreach ($item['products'] as $p){
-                            $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
-                            if($option){
-                                $product_limit += $p['qty'];
-                                $this->price += $p['qty'] * $option->price;
-                                $data['options'][] = $option;
-                            }else{
-                                $error = true;
+                        if($group->price_per == 'product'){
+                            $data['price'] = $group->price;
+                            $this->price += $group->price;
+                            foreach ($item['products'] as $p){
+                                $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
+                                if($option){
+                                    $product_limit += $p['qty'];
+                                    $data['options'][] = $option;
+                                }else{
+                                    $error = true;
+                                }
                             }
+                        }else{
+                            $itemPrice = 0;
+                            foreach ($item['products'] as $p){
+                                $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
+                                if($option){
+                                    $product_limit += $p['qty'];
+                                    $this->price += $p['qty'] * $option->price;
+                                    $itemPrice += $p['qty'] * $option->price;
+                                    $data['options'][] = $option;
+                                }else{
+                                    $error = true;
+                                }
+                            }
+                            $data['price'] = $itemPrice;
                         }
+
                         if($group->min_count_limit > $product_limit || $group->count_limit < $product_limit){
                             $error = true;
                         }

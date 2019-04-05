@@ -87,23 +87,6 @@
                                                         </li>
                                                     @endforeach
 
-                                                    {{--<li class="shp-cart-product_row shp-cart-product_prd-1 d-flex justify-content-between">--}}
-                                                        {{--<p class="mb-0"><span>--}}
-                                                                {{--{{ $main->attributes->variation->name }}--}}
-                                                                {{--:</span>--}}
-                                                            {{--<span class="font-main-bold">--}}
-                                                                {{--@if($stock->type == 'variation_product')--}}
-                                                                    {{--@foreach($main->attributes->variation->options as $voption)--}}
-                                                                        {{--@if($voption->attribute_sticker)--}}
-                                                                            {{--{{ $voption->attribute_sticker->sticker->name }}--}}
-                                                                        {{--@endif--}}
-                                                                    {{--@endforeach--}}
-                                                                {{--@endif--}}
-                                                            {{--</span>--}}
-                                                        {{--</p>--}}
-                                                        {{--<span class="font-15 font-main-bold">{{ convert_price($main->price,$currency) }}--}}
-                                                        {{--</span>--}}
-                                                    {{--</li>--}}
                                                 </ul>
                                                 <div class="col-md-12">
                                                     <div class="row">
@@ -116,7 +99,13 @@
                                                     </div>
 
                                                     <div class="col-md-12">
-                                                        Nothing added
+                                                        @if($item->attributes->has('extra') && count($item->attributes->extra))
+                                                            @foreach($item->attributes->extra as $extra)
+                                                                {{--{!! dd($extra) !!}--}}
+                                                            @endforeach
+                                                        @else
+                                                            <p>Nothing added</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
