@@ -287,8 +287,9 @@ $(document).ready(function() {
         const countPrices = (modal) => {
             section_price = 0;
             item_price = 0;
-            $(`${modal ? '#extraModal' : ''} [data-per-price]`).each(function() {
+            $(`${modal ? '#extraModal' : '.single-product-dtls-wrap'} [data-per-price]`).each(function() {
                 const $this = $(this);
+                console.log($this);
                 if($this.attr('data-per-price') === 'product') {
                     section_price += Number($this.attr('data-price'));
                 } else if($this.attr('data-per-price') === 'item') {
@@ -745,7 +746,7 @@ $(document).ready(function() {
                 if (!res.error) {
                     $("#extraModal").find(".extra-main-content").html(res.html);
                     productsInit(true, res.type);
-                    $("#extraModal .modal-price-place-summary").html('$0');
+                    // $("#extraModal .modal-price-place-summary").html('$0');
                 }
             });
         });
