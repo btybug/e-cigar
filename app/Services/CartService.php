@@ -237,7 +237,6 @@ class CartService
     {
         $error = false;
         $data = [];
-//        dd($vdata);
         $group = $product->variations()->where('variation_id',$vdata['group_id'])->first();
         if($group){
             $data['group'] = $group;

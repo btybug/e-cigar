@@ -194,7 +194,6 @@ class ShoppingCartController extends Controller
                 if(! $error) {
                     $parent = Cart::get($key);
                     if($parent){
-                        dd($this->cartService->extras);
                         $attrs = $parent->attributes;
                         if( $parent->attributes->has('extra') )
                         {
