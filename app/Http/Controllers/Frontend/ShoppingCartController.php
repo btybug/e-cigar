@@ -194,7 +194,7 @@ class ShoppingCartController extends Controller
                 if(! $error) {
                     $parent = Cart::get($key);
                     if($parent){
-//                        dd($parent);
+                        dd($this->cartService->extras);
                         $attrs = $parent->attributes;
                         if( $parent->attributes->has('extra') )
                         {
@@ -208,6 +208,8 @@ class ShoppingCartController extends Controller
                         Cart::update($key, array(
                             'attributes' => $attrs
                         ));
+
+                        return \Response::json(['error' => false, 'message' => 'Extra Product added']);
                     }
                 }
             }

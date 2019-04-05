@@ -237,11 +237,13 @@ class CartService
     {
         $error = false;
         $data = [];
+//        dd($vdata);
         $group = $product->variations()->where('variation_id',$vdata['group_id'])->first();
         if($group){
             $data['group'] = $group;
             $data['options'] = [];
             $product_limit = 0;
+
             if (isset($vdata['products']) && count($vdata['products'])) {
                 foreach ($vdata['products'] as $p){
                     $option = $product->variations()->where('variation_id',$vdata['group_id'])->where('id',$p['id'])->first();
