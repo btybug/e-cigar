@@ -513,16 +513,15 @@
         </div>
     </div>
     <div class="modal fade" id="popUpModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel"
-         aria-hidden="true">
+         aria-hidden="true" style="z-index: 9999999;">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
             </div>
-
         </div>
     </div>
 
-    <div class="modal fade" id="extraModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel"
+    <div class="modal fade" id="extraModal" tabindex="-1" role="dialog" aria-labelledby="extraLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">

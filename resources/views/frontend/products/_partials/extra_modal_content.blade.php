@@ -30,7 +30,8 @@
             <div class="extra-main-content main-scrollbar">
                 @include("frontend.products._partials.extra_section",['vSettings' => @$firstRender])
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-between">
+                <div class="modal-price-place-summary font-sec-bold font-41 text-tert-clr lh-1 position-relative">$0</div>
                 <a href="#"
                    class="product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
                     <span class="product-card_btn-text">add to cart</span>

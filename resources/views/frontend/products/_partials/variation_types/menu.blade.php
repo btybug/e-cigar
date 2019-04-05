@@ -90,7 +90,7 @@
             @if($vSettings->is_required)
             {{ convert_price($vSettings->price,$currency) }}
             @else
-              Nothing selected
+              <span class="modal-price-place-summary font-sec-bold font-41 text-tert-clr lh-1 position-relative">{{ convert_price($vSettings->price,$currency) }}</span>
             @endif
         </span>
     @endif
