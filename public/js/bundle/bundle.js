@@ -2827,6 +2827,7 @@ $(document).ready(function () {
         //section price
         var section_price = 0;
 
+        var selectedGroupId = [];
         //counts qty for group
         var new_qty = function new_qty(group, popup) {
             var qty = 0;
@@ -3320,8 +3321,24 @@ $(document).ready(function () {
             AjaxCall("/products/get-extra-item", { id: $(this).attr('data-id'), group: $(this).attr('data-group') }, function (res) {
                 if (!res.error) {
                     $("#extraModal").find(".extra-main-content").html(res.html);
-                    productsInit(true, res.type);
                     // $("#extraModal .modal-price-place-summary").html('$0');
+                    var selectedExtra = selectedGroupId.find(function (_ref) {
+                        var group = _ref.group;
+
+                        return group === $("#extraModal [data-group-id]").attr('data-group-id');
+                    });
+
+                    if (selectedExtra) {
+                        $("#extraModal [data-group-id]").closest('.product-single-info_row ').addClass('pointer-events-none');
+                        $('#extraModal .product-card_btn').removeClass('d-inline-flex').addClass('d-none');
+                        $('#extraModal .product-card_edit').removeClass('d-none').addClass('d-inline-flex');
+                        $("#extraModal").find(".extra-main-content").html(selectedExtra.view);
+                        productsInit(true, res.type);
+                    } else {
+                        $('#extraModal .product-card_btn').removeClass('d-none').addClass('d-inline-flex');
+                        $('#extraModal .product-card_edit').removeClass('d-inline-flex').addClass('d-none');
+                        productsInit(true, res.type);
+                    }
                 }
             });
         });
@@ -3372,10 +3389,14 @@ $(document).ready(function () {
                     },
                     success: function success(data) {
                         if (!data.error) {
-                            // $(".cart-count").html(data.count)
-                            // $('#cartSidebar').html(data.headerHtml)
-                            // $("#headerShopCartBtn").trigger('click');
-                            alert(data.message);
+                            $("#extraModal [data-group-id]").closest('.product-single-info_row ').addClass('pointer-events-none');
+                            selectedGroupId.push({
+                                group: $("#extraModal [data-group-id]").attr('data-group-id'),
+                                view: $("#extraModal [data-group-id]").closest('.product-single-info_row ')
+                            });
+
+                            $('#extraModal .product-card_btn').removeClass('d-inline-flex').addClass('d-none');
+                            $('#extraModal .product-card_edit').removeClass('d-none').addClass('d-inline-flex');
                         } else {}
                     }
                 });
@@ -3385,6 +3406,8 @@ $(document).ready(function () {
         $('#extraModal').on('hidden.bs.modal', function () {
             $(this).find('.extra-main-content').empty();
             $("#extraModal .modal-price-place-summary").html('$0');
+            $('#headerShopCartBtn').click();
+            selectedGroupId.length = 0;
         });
 
         productsInit();
@@ -3482,10 +3505,10 @@ $(document).ready(function () {
                         if (!data.error) {
                             $(".cart-count").html(data.count);
                             $('#cartSidebar').html(data.headerHtml);
-                            $("#headerShopCartBtn").trigger('click');
-                            $("#extraModal").modal();
                             addDataKey.key = data.key;
                             addDataKey.product_id = data.product_id;
+                            $("#extraModal").modal();
+                            $('#extraModal .extra-content-left .select-extra.item.active').click();
                         } else {}
                     }
                 });

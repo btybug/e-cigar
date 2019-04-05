@@ -31,8 +31,8 @@
                 @include("frontend.products._partials.extra_section",['vSettings' => @$firstRender])
             </div>
             <div class="modal-footer">
-                <a href="#"
-                   class="product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
+                <button
+                   class="product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase" style=" cursor:pointer">
                     <span class="product-card_btn-text">add to cart</span>
                     <span class="d-inline-block ml-auto">
                         <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -40,7 +40,14 @@
                                   d="M14.305,3.679 L14.305,0.003 L3.694,0.003 L3.694,3.679 L-0.004,3.679 L-0.004,21.998 L18.003,21.998 L18.003,3.679 L14.305,3.679 ZM4.935,1.216 L13.064,1.216 L13.064,3.679 L4.935,3.679 L4.935,1.216 ZM16.761,20.785 L1.238,20.785 L1.238,4.891 L3.694,4.891 L3.694,7.329 L4.935,7.329 L4.935,4.891 L13.064,4.891 L13.064,7.329 L14.305,7.329 L14.305,4.891 L16.761,4.891 L16.761,20.785 Z"></path>
                         </svg>
                     </span>
-                </a>
+                </button>
+                <button
+                   class="product-card_edit d-none align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase " disabled>
+                    <span class="product-card_btn-text">Added</span>
+                    <span class="d-inline-block ml-auto">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </button>
             </div>
         </div>
     </div>

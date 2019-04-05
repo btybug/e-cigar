@@ -2909,3 +2909,20 @@ outline: none;
     padding: 3px 20px;
     width: 80px;
 }
+#extraModal .modal-footer .product-card_edit{
+    opacity: .5;
+    padding: 14px 40px;
+    width: 240px;
+    background-color: darkgreen;
+}
+#extraModal .modal-footer .product-card_edit:hover{
+    color: #ffffff;
+}
+#extraModal .modal-footer button{
+    border: none;
+}
+
+.pointer-events-none {
+    pointer-events: none;
+    opacity: .5;
+}
