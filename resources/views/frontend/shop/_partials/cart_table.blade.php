@@ -1,4 +1,4 @@
-<div class="shopping-cart-content">
+<div id="singleProductPageCnt" class="shopping-cart-content">
     <div class="shopping-cart-inner">
         <div class="d-flex flex-wrap">
             <div class="col-lg-9 pl-md-left">
@@ -94,7 +94,7 @@
                                                             <h3>Extra Options</h3>
                                                         </div>
                                                         <div class="col-md-6">
-                                                            <button class="btn btn-info float-right">Add extra</button>
+                                                            <button data-product-id="{{ $item->attributes->product->id }}" class="btn btn-info float-right extra-sections">Add extra</button>
                                                         </div>
                                                     </div>
 

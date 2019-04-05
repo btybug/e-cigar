@@ -3516,6 +3516,18 @@ $(document).ready(function () {
                 alert('Select available variation');
             }
         });
+
+        $("body").on("click", ".extra-sections", function () {
+            var id = $(this).attr('data-product-id');
+            AjaxCall("/products/get-extra-content", { id: id }, function (res) {
+                if (!res.error) {
+                    $("#extraModal .modal-body").html(res.html);
+                    productsInit();
+                    $("#extraModal").modal();
+                    $('#extraModal .extra-content-left .select-extra.item.active').click();
+                }
+            });
+        });
     });
 });
 

@@ -949,6 +949,17 @@ $(document).ready(function() {
             }
         });
 
+        $("body").on("click",".extra-sections",function () {
+            let id = $(this).attr('data-product-id');
+            AjaxCall("/products/get-extra-content", {id:id}, function (res) {
+                if (!res.error) {
+                    $("#extraModal .modal-body").html(res.html);
+                    productsInit();
+                    $("#extraModal").modal();
+                    $('#extraModal .extra-content-left .select-extra.item.active').click();
+                }
+            });
+        })
     });
 });
 

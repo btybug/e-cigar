@@ -512,31 +512,7 @@
             </main>
         </div>
     </div>
-    <div class="modal fade" id="popUpModal" tabindex="-1" role="dialog" aria-labelledby="popUpModalLabel"
-         aria-hidden="true" style="z-index: 9999999;">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
 
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="extraModal" tabindex="-1" role="dialog" aria-labelledby="extraLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Extra Options</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body p-0">
-
-                </div>
-            </div>
-        </div>
-    </div>
 @stop
 
 @section('css')
@@ -549,53 +525,7 @@
           href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css"/>
 
     <style>
-        /*extra modal start*/
-        #extraModal .modal-dialog {
-            max-width: 1400px;
-        }
 
-        #extraModal .extra-content-left {
-            height: 5px;
-            min-height: 420px;
-            padding: 15px;
-        }
-        #extraModal .extra-content-left .item{
-            display: flex;
-            height: 120px;
-            border: 1px solid #d7d7d7;
-            align-items: center;
-            justify-content: center;
-            transition: 0.5s ease;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        #extraModal .extra-content-left .item:hover,#extraModal .extra-content-left .item.active{
-            -webkit-box-shadow: 2px 9px 12px 0px rgba(16,16,20,0.2);
-            -moz-box-shadow: 2px 9px 12px 0px rgba(16,16,20,0.2);
-            box-shadow: 2px 9px 12px 0px rgba(16,16,20,0.2)
-        }
-       #extraModal .extra-content-right {
-           height: 5px;
-           min-height: 420px;
-        }
-        #extraModal .extra-main-content{
-            flex: 1;
-            padding: 15px;
-            padding-left: 0;
-        }
-        #extraModal .product-card_btn{
-            padding: 14px 40px;
-            width: 240px;
-        }
-        #extraModal .modal-header{
-            background-color: #353535;
-            color: #fff;
-        }
-        #extraModal .modal-header .close{
-            opacity: 1;
-            color: #ffffff;
-        }
-        /*extra modal end*/
         .share-social-btn {
             position: relative;
         }
