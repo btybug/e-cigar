@@ -41,7 +41,7 @@
                                                     @foreach($item->attributes->variations as $option)
                                                         <li class="shp-cart-product_row d-flex justify-content-between position-relative">
                                                             <p class="mb-0">
-                                                                <span>Option {{ $loop->iteration }}: </span>
+                                                                <span>{{ $option['group']->title }}: </span>
                                                                 <span class="font-main-bold">
                                                                     @if($option['group']->type == 'package_product' || $option['group']->type == 'filter')
                                                                         @if(count($option['options']))
@@ -101,7 +101,50 @@
                                                     <div class="col-md-12">
                                                         @if($item->attributes->has('extra') && count($item->attributes->extra))
                                                             @foreach($item->attributes->extra as $extra)
-                                                                {{--{!! dd($extra) !!}--}}
+                                                                <li class="shp-cart-product_row d-flex justify-content-between position-relative">
+                                                                    <p class="mb-0">
+                                                                        <span>{{ $extra['group']->title }}: </span>
+                                                                        <span class="font-main-bold">
+                                                                    @if($extra['group']->type == 'package_product' || $extra['group']->type == 'filter')
+                                                                        @if(count($extra['options']))
+                                                                            @foreach($extra['options'] as $voption)
+                                                                                <p>
+                                                                                <span class="font-15 font-main-bold">
+                                                                                    {{ $voption->name }}
+                                                                                </span>
+                                                                                    @if($extra['group']->price_per =='item')
+                                                                                        <span class="font-15 font-main-bold text-right">
+                                                                                      @php
+                                                                                          $promotionPrice = $stock->promotion_prices()
+                                                                                          ->where('variation_id',$voption->id)->first();
+                                                                                      @endphp
+                                                                                            {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption->price,$currency) !!}
+                                                                                    </span>
+                                                                                    @endif
+                                                                                </p>
+                                                                                @endforeach
+                                                                                @endif
+                                                                                @endif
+                                                                                </span>
+                                                                                </p>
+                                                                                @if($extra['group']->price_per =='product')
+                                                                                    <span class="font-15 font-main-bold">
+                                                                        @php
+                                                                            $promotionPrice = ($extra['group']) ? $stock->promotion_prices()
+                                                                            ->where('variation_id',$extra['group']->id)->first() : null;
+                                                                        @endphp
+                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($extra['group']) ? convert_price($extra['group']->price,$currency) : convert_price(0,$currency)) !!}
+                                                                </span>
+                                                                                @endif
+                                                                                    <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
+                                                                                          data-uid="{{ $extra['group']->variation_id }}">
+                                                                        <svg viewBox="0 0 8 8" width="8px" height="8px">
+                                                                            <path fill-rule="evenodd"
+                                                                                  fill="rgb(171, 168, 182)"
+                                                                                  d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
+                                                                    </svg>
+                                                                </span>
+                                                                </li>
                                                             @endforeach
                                                         @else
                                                             <p>Nothing added</p>
