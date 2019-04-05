@@ -3327,12 +3327,44 @@ $(document).ready(function () {
         });
 
         $("body").on('click', '#extraModal .product-card_btn', function () {
+
+            var variations = $('#extraModal [data-group-id]').toArray().map(function (el) {
+                var group_id = $(el).attr('data-group-id');
+                var products = [];
+                $("[data-group-id=\"" + group_id + "\"]").toArray().map(function (gr) {
+                    if ($(gr).closest('.product-single-info_row').find('.product-qty').length !== 0) {
+                        $(gr).closest('.product-single-info_row').find('.product-qty').toArray().map(function (qt) {
+                            products.push({
+                                id: $(qt).attr('data-id'),
+                                qty: $(qt).val()
+                            });
+                        });
+                    } else if ($(gr).find('.custom-control-input').length === 0 || $(gr).find('.custom-control-input').is(':checked')) {
+                        products.push({
+                            id: $($(gr).find('[data-id]')[0]).attr('data-id'),
+                            qty: 1
+                        });
+                    }
+                });
+                return {
+                    group_id: group_id,
+                    products: products
+                };
+            });
+
+            var filtered_variations = variations.filter(function (variation) {
+                return variation.products.length > 0;
+            });
+            var product_data = {
+                variations: filtered_variations
+            };
+
             $.ajax({
                 type: "post",
                 url: "/add-extra-to-cart",
                 cache: false,
                 datatype: "json",
-                data: { key: addDataKey.key, product_id: addDataKey.product_id, variations: $("#vpid").val() },
+                data: { key: addDataKey.key, product_id: addDataKey.product_id, variations: product_data },
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },

@@ -754,12 +754,45 @@ $(document).ready(function() {
         });
 
         $("body").on('click', '#extraModal .product-card_btn', function() {
+
+            const variations = $('#extraModal [data-group-id]').toArray().map(function (el) {
+                const group_id = $(el).attr('data-group-id');
+                const products = [];
+                $(`[data-group-id="${group_id}"]`).toArray().map(function (gr) {
+                    if ($(gr).closest('.product-single-info_row').find('.product-qty').length !== 0) {
+                        $(gr).closest('.product-single-info_row').find('.product-qty').toArray().map(function (qt) {
+                            products.push({
+                                id: $(qt).attr('data-id'),
+                                qty: $(qt).val()
+                            });
+                        });
+                    } else if ($(gr).find('.custom-control-input').length === 0 || $(gr).find('.custom-control-input').is(':checked')) {
+                        products.push({
+                            id: $($(gr).find('[data-id]')[0]).attr('data-id'),
+                            qty: 1
+                        });
+                    }
+                });
+                return {
+                    group_id,
+                    products
+                }
+            });
+
+            const filtered_variations = variations.filter((variation) => {
+                return variation.products.length > 0;
+            });
+            const product_data = {
+                variations: filtered_variations
+            };
+
+
             $.ajax({
                 type: "post",
                 url: "/add-extra-to-cart",
                 cache: false,
                 datatype: "json",
-                data: {key: addDataKey.key,product_id: addDataKey.product_id, variations: $("#vpid").val()},
+                data: {key: addDataKey.key,product_id: addDataKey.product_id, variations: product_data},
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
@@ -807,7 +840,7 @@ $(document).ready(function() {
                 }
             });
             // item_validation === $('#requiredProducts .limit').length && (all_validation = true)
-            all_validation = true
+            all_validation = true;
             $('.product-qty').toArray().map(function (el) {
                 return {
                     id: $(el).attr('data-id'),
@@ -834,7 +867,7 @@ $(document).ready(function() {
                             products.push({
                                 id: $($(gr).find('[data-id]')[0]).attr('data-id'),
                                 qty: 1
-                            })
+                            });
                         }
                     });
                     return {
