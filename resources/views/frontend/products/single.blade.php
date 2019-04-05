@@ -665,8 +665,35 @@
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
+  //esia 
+        // var variations = {
+        //     "group_id" : "5ca48c5f4401f",
+        //     "products" : [
+        //         {id:135,qty:1}
+        //     ]
+        // };
 
         $(document).ready(function () {
+            // $.ajax({
+            //     type: "post",
+            //     url: "/add-extra-to-cart",
+            //     cache: false,
+            //     datatype: "json",
+            //     data: {key: "5ca7011cc5a0a",product_id: $("#vpid").val(),variations:variations},
+            //     headers: {
+            //         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+            //     },
+            //     success: function (data) {
+            //         if (!data.error) {
+            //             $(".cart-count").html(data.count)
+            //             $('#cartSidebar').html(data.headerHtml)
+            //             $("#headerShopCartBtn").trigger('click');
+            //         } else {
+            //
+            //         }
+            //     }
+            // });
+
 //          ----start  video carousel----
 //             function Init () {
 //                 var checkbox = document.getElement("myCheckbox");

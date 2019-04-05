@@ -55,6 +55,7 @@ class ProductsController extends Controller
 
     public function getSingle ($type, $slug)
     {
+//        Cart::clear();
 //        $x = Cart::getContent();
 //        dd($x);
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();

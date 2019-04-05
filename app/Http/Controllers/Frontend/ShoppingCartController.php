@@ -175,7 +175,8 @@ class ShoppingCartController extends Controller
 
                 $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
 
-                return \Response::json(['error' => false, 'message' => 'added', 'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml]);
+                return \Response::json(['error' => false, 'message' => 'added', 'key' => $cart_id,'product_id' => $product->id,
+                    'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml]);
             }
 
         }
@@ -189,8 +190,26 @@ class ShoppingCartController extends Controller
             $key = $request->key;
             $product = Stock::where('status', true)->find($request->product_id);
             if($product){
-                $parent = Cart::get($key);
+                $error = $this->cartService->validateExtra($product, $request->variations);
+                if(! $error) {
+                    $parent = Cart::get($key);
+                    if($parent){
+//                        dd($parent);
+                        $attrs = $parent->attributes;
+                        if( $parent->attributes->has('extra') )
+                        {
+                            $attrs['extra'][] = $this->cartService->extras;
+                        }
+                        else
+                        {
+                            $attrs[] = ['extra' => $this->cartService->extras];
+                        }
 
+                        Cart::update($key, array(
+                            'attributes' => $attrs
+                        ));
+                    }
+                }
             }
 
             return \Response::json(['error' => true, 'message' => 'Product not found']);

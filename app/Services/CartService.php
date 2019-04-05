@@ -15,6 +15,7 @@ class CartService
 {
     public static $cartItems = [];
     public $variations = [];
+    public $extras = [];
     public $price = 0;
 
     public function getCartItems($id = null){
@@ -227,6 +228,43 @@ class CartService
             }
         }else{
             $error = true;
+        }
+
+        return $error;
+    }
+
+    public function validateExtra($product,$vdata)
+    {
+        $error = false;
+        $data = [];
+        $group = $product->variations()->where('variation_id',$vdata['group_id'])->first();
+        if($group){
+            $data['group'] = $group;
+            $data['options'] = [];
+            $product_limit = 0;
+            if (isset($vdata['products']) && count($vdata['products'])) {
+                foreach ($vdata['products'] as $p){
+                    $option = $product->variations()->where('variation_id',$vdata['group_id'])->where('id',$p['id'])->first();
+                    if($option){
+                        $product_limit += $p['qty'];
+                        $this->price += $p['qty'] * $option->price;
+                        $data['options'][] = $option;
+                    }else{
+                        $error = true;
+                    }
+                }
+                if($group->min_count_limit > $product_limit || $group->count_limit < $product_limit){
+                    $error = true;
+                }
+            }else{
+                $this->price += $group->price;
+            }
+        }else{
+            $error = true;
+        }
+
+        if(count($data)){
+            $this->extras = $data;
         }
 
         return $error;
