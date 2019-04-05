@@ -3289,7 +3289,7 @@ $(document).ready(function () {
                 listInit();
                 popupInit();
                 initCount++;
-            } else {
+            } else if (modal) {
                 console.log(modalType);
                 switch (modalType) {
                     case 'menu':
