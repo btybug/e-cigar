@@ -3303,14 +3303,11 @@ $(document).ready(function () {
                             $body.on('click', '#wizardViewModal .shopping-cart_wrapper .next-btn', function (e) {
                                 eventInitialDefault(e);
 
-                                var active = $('.content-wrap').toArray().find(function (contentWrap) {
-                                    return !$(contentWrap).hasClass('d-none');
-                                });
-
-                                $(active).find('.active').toArray().map(function (actv) {
+                                $('.content-wrap').find('.active').toArray().map(function (actv) {
                                     filter.push($(actv).closest('[data-id]').attr('data-id'));
                                 });
-                                $(active).find('.active').length === 0 ? alert('select item') : $.ajax({
+
+                                $('.content-wrap').find('.active').length === 0 ? alert('select item') : $.ajax({
                                     type: "post",
                                     url: "/filters",
                                     cache: false,
@@ -3325,13 +3322,15 @@ $(document).ready(function () {
                                     },
                                     success: function success(data) {
                                         if (!data.error) {
-                                            $('.shopping-cart-head .nav-pills').empty();
-                                            $('.shopping-cart-head .nav-pills').append(data.wizard);
-                                            $('.back-btn').removeClass('d-none');
+                                            var contantPlace = $('.contents-wrapper .content');
+                                            var wizardPlace = $('.shopping-cart-head .nav-pills');
+
+                                            wizardPlace.empty();
+                                            wizardPlace.append(data.wizard);
                                             if (data.type === "filter") {
-                                                $('.contents-wrapper .content').html(data.filters);
+                                                contantPlace.html(data.filters);
                                             } else if (data.type === "items") {
-                                                $('.contents-wrapper .content').html(data.items_html);
+                                                contantPlace.html(data.items_html);
                                                 $('.shopping-cart_wrapper .next-btn').addClass('d-none');
                                                 $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
                                             }
