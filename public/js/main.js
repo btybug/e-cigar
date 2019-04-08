@@ -709,14 +709,15 @@ $(document).ready(function() {
                                     if (!data.error) {
                                         const modal_group_id = self.attr('data-group');
                                         $('#wizardViewModal').attr('data-group', modal_group_id);
+                                        const contantPlace = $('.contents-wrapper .content');
                                         const wizardPlace = $('.shopping-cart-head .nav-pills');
 
                                         wizardPlace.empty();
                                         wizardPlace.append(data.wizard);
                                         if (data.type === "filter") {
-                                            $('.contents-wrapper .content').html(data.filters);
+                                            contantPlace.html(data.filters);
                                         } else if (data.type === "items") {
-                                            $('.contents-wrapper .content').html(data.items_html);
+                                            contantPlace.html(data.items_html);
                                             $('.shopping-cart_wrapper .next-btn').addClass('d-none');
                                             $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
                                         }
@@ -729,12 +730,13 @@ $(document).ready(function() {
                                 }
                             });
 
-                            $('body').on('click', '.shopping-cart_wrapper .next-btn', function (e) {
-                                e.stopImmediatePropagation();
-                                e.preventDefault();
+                            $body.on('click', '#wizardViewModal .shopping-cart_wrapper .next-btn', function (e) {
+                                eventInitialDefault(e);
+
                                 let active = $('.content-wrap').toArray().find(function (contentWrap) {
                                     return !$(contentWrap).hasClass('d-none');
                                 });
+
                                 $(active).find('.active').toArray().map(function (actv) {
                                     filter.push($(actv).closest('[data-id]').attr('data-id'));
                                 });
