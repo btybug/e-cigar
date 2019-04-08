@@ -15,7 +15,6 @@
             <h4>{{ $vSettings->title }} (select {{ $vSettings->min_count_limit }} - {{ $vSettings->count_limit }} options)</h4>
         @endif
     @endif
-
 </div>
 
 
