@@ -102,11 +102,11 @@
                                                             <h3>Extra Options</h3>
                                                         </div>
                                                         <div class="col-md-6 text-right">
-                                                            <button data-product-id="{{ $item->attributes->product->id }}" class="btn btn-info extra-sections">Add extra</button>
+                                                            <button data-product-id="{{ $item->attributes->product->id }}" data-key="{{ $key }}" class="btn btn-info extra-sections">Add extra</button>
                                                         </div>
                                                     </div>
 
-                                                    <div>
+                                                    <div class="extra-items" data-section="{{ key }}">
                                                         @if($item->attributes->has('extra') && count($item->attributes->extra))
                                                             @foreach($item->attributes->extra as $extra)
                                                                 <li class="shp-cart-product_row d-flex justify-content-between position-relative pr-0 py-2 border-bottom">
