@@ -45,7 +45,6 @@ class ShoppingCartController extends Controller
     public function getCart()
     {
         $items = Cart::getContent();
-
         $data = $this->cartService->getShipping($items);
 
         $default_shipping = $data['default_shipping'];
@@ -262,9 +261,14 @@ class ShoppingCartController extends Controller
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
-        if (\Auth::check()) {
-            $this->cartService->remove($request->uid);
 
+        if($request->section_id){
+             $this->cartService->removeExtra($request->uid,$request->section_id);
+        }else{
+            $this->cartService->remove($request->uid);
+        }
+
+        if (\Auth::check()) {
             $default_shipping = \Auth::user()->addresses()->where('type', 'default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
@@ -286,8 +290,6 @@ class ShoppingCartController extends Controller
                     $shipping = Cart::getCondition($geoZone->name);
                 }
             }
-        } else {
-            $this->cartService->remove($request->uid);
         }
 
         $items = Cart::getContent();

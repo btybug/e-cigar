@@ -57,13 +57,13 @@ class CartService
                     if(count($datum['options'])){
                         foreach ($datum['options'] as $option){
                             //add qty
-                            $price += $datum['group']->price;
+                            $price += $option['option']->price * $option['qty'];
                         }
                     }
                 }
             }
         }
-        return $price;
+        return ($cart) ?$price*$cart->quantity:$price;
     }
 
     public function remove($id,$user_id = null)
@@ -84,6 +84,30 @@ class CartService
                 Cart::session(Orders::ORDER_NEW_SESSION_ID)->remove($id);
             }else{
                 Cart::remove($id);
+            }
+        }
+    }
+
+    public function removeExtra($id,$section_id,$user_id = null)
+    {
+        $section = Cart::get($section_id);
+        if($section && $section->attributes->has('extra')){
+            $attrs = $section->attributes;
+            $extras = $attrs['extra'];
+            foreach ($extras as $key => $datum){
+                if($datum['key'] = $id){
+                    unset($extras[$key]);
+                }
+            }
+            $attrs['extra'] = $extras;
+            if($user_id){
+                Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($section_id, array(
+                    'attributes' => $attrs
+                ));
+            }else{
+                Cart::update($section_id, array(
+                    'attributes' => $attrs
+                ));
             }
         }
     }
@@ -220,7 +244,10 @@ class CartService
                                 $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
                                 if($option){
                                     $product_limit += $p['qty'];
-                                    $data['options'][] = $option;
+                                    $data['options'][] = [
+                                        'option' => $option,
+                                        'qty' => $p['qty'],
+                                    ];
                                 }else{
                                     $error = true;
                                 }
@@ -233,7 +260,10 @@ class CartService
                                     $product_limit += $p['qty'];
                                     $this->price += $p['qty'] * $option->price;
                                     $itemPrice += $p['qty'] * $option->price;
-                                    $data['options'][] = $option;
+                                    $data['options'][] = [
+                                        'option' => $option,
+                                        'qty' => $p['qty'],
+                                    ];
                                 }else{
                                     $error = true;
                                 }
@@ -269,22 +299,46 @@ class CartService
         $group = $product->variations()->where('variation_id',$vdata['group_id'])->first();
         if($group){
             $data['group'] = $group;
+            $data['key'] = uniqid();
             $data['options'] = [];
             $product_limit = 0;
 
             if (isset($vdata['products']) && count($vdata['products'])) {
-                foreach ($vdata['products'] as $p){
-                    $option = $product->variations()->where('variation_id',$vdata['group_id'])->where('id',$p['id'])->first();
-                    if($option){
-                        $product_limit += $p['qty'];
-                        $this->price += $p['qty'] * $option->price;
-                        $data['options'][] = $option;
-                    }else{
+                foreach ($vdata['products'] as $p) {
+                    if ($group->price_per == 'product') {
+                        $data['price'] = $group->price;
+                        $this->price += $group->price;
+
+                        $option = $product->variations()->where('variation_id', $vdata['group_id'])->where('id', $p['id'])->first();
+                        if ($option) {
+                            $product_limit += $p['qty'];
+                            $data['options'][] = [
+                                'option' => $option,
+                                'qty' => $p['qty'],
+                            ];
+                        } else {
+                            $error = true;
+                        }
+                    } else {
+                        $itemPrice = 0;
+                        $option = $product->variations()->where('variation_id', $vdata['group_id'])->where('id', $p['id'])->first();
+                        if ($option) {
+                            $product_limit += $p['qty'];
+                            $this->price += $p['qty'] * $option->price;
+                            $itemPrice += $p['qty'] * $option->price;
+                            $data['options'][] = [
+                                'option' => $option,
+                                'qty' => $p['qty'],
+                            ];
+                        } else {
+                            $error = true;
+                        }
+                        $data['price'] = $itemPrice;
+                    }
+
+                    if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
                         $error = true;
                     }
-                }
-                if($group->min_count_limit > $product_limit || $group->count_limit < $product_limit){
-                    $error = true;
                 }
             }else{
                 $this->price += $group->price;

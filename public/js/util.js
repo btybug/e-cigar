@@ -107,7 +107,7 @@ $(document).ready(function () {
     $("body").on('click','.remove-from-cart',function (e) {
         e.stopPropagation();
         var uid = $(this).data('uid');
-        console.log(44444)
+
         if(uid && uid != ''){
             $.ajax({
                 type: "post",
@@ -122,16 +122,46 @@ $(document).ready(function () {
                     if(! data.error){
                         $('.cart-area').html(data.html)
                         $('#cartSidebar').html(data.headerHtml)
-                        $(".cart-count").html(data.count)
+                        $(".cart-count").html(data.count);
                     }else{
-                        alert('error')
+                        alert('error');
                     }
                 }
             });
         }else{
             alert('Select available variation');
         }
-    })
+    });
+
+    $("body").on('click','.remove-extra-from-cart',function (e) {
+        e.stopPropagation();
+        var uid = $(this).data('uid');
+        var section_id = $(this).data('section-id');
+
+        if(uid && uid != '' && section_id && section_id != ''){
+            $.ajax({
+                type: "post",
+                url: "/remove-from-cart",
+                cache: false,
+                datatype: "json",
+                data: {  uid : uid,section_id :section_id },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function(data) {
+                    if(! data.error){
+                        $('.cart-area').html(data.html)
+                        $('#cartSidebar').html(data.headerHtml)
+                        $(".cart-count").html(data.count);
+                    }else{
+                        alert('error');
+                    }
+                }
+            });
+        }else{
+            alert('Select available variation');
+        }
+    });
 
     $("#change-currency").change(function () {
         let code = $(this).val();

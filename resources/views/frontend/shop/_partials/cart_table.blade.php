@@ -51,7 +51,7 @@
                                                                             @foreach($option['options'] as $voption)
                                                                                 <div class="row">
                                                                                 <div class="col-sm-6 font-15 font-main-bold">
-                                                                                    {{ $voption->name }}
+                                                                                    {{ $voption['option']->name }}
                                                                                 </div>
 
                                                                                     <div class="col-sm-2 font-main-bold
@@ -61,16 +61,16 @@
                                                                                             pl-qty
                                                                                         @endif
                                                                                             ">
-                                                                                        <span>x 1</span>
+                                                                                        <span>x {{ $voption['qty'] }}</span>
                                                                                     </div>
 
                                                                                 @if($option['group']->price_per =='item')
                                                                                     <div class="col-sm-4 font-15 font-main-bold text-right">
                                                                                       @php
                                                                                           $promotionPrice = $stock->promotion_prices()
-                                                                                          ->where('variation_id',$voption->id)->first();
+                                                                                          ->where('variation_id',$voption['option']->id)->first();
                                                                                       @endphp
-                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption->price,$currency) !!}
+                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption['option']->price,$currency) !!}
                                                                                     </div>
                                                                                 @endif
                                                                                 </div>
@@ -110,8 +110,8 @@
                                                         @if($item->attributes->has('extra') && count($item->attributes->extra))
                                                             @foreach($item->attributes->extra as $extra)
                                                                 <li class="shp-cart-product_row d-flex justify-content-between position-relative pr-0 py-2 border-bottom">
-                                                                                 <span class="pointer remove-from-cart"
-                                                                                       data-uid="{{ $extra['group']->variation_id }}">
+                                                                                 <span class="pointer remove-extra-from-cart"
+                                                                                       data-section-id="{{ $key }}" data-uid="{{ $extra['key'] }}">
                                                                         <svg viewBox="0 0 8 8" width="8px" height="8px">
                                                                             <path fill-rule="evenodd"
                                                                                   fill="rgb(171, 168, 182)"
@@ -131,7 +131,7 @@
                                                                             @foreach($extra['options'] as $voption)
                                                                                 <div class="row">
                                                                                 <div class="col-sm-6 pl-2 font-15 font-main-bold">
-                                                                                    {{ $voption->name }}
+                                                                                    {{ $voption['option']->name }}
                                                                                 </div>
 
                                                                                     <div class="col-sm-2
@@ -141,16 +141,16 @@
                                                                                             pl-qty
                                                                                         @endif
                                                                                         ">
-                                                                                        <span>x 1</span>
+                                                                                        <span>x {{ $voption['qty'] }}</span>
                                                                                     </div>
 
                                                                                     @if($extra['group']->price_per =='item')
                                                                                         <div class="col-sm-4 font-15 font-main-bold text-right">
                                                                                       @php
                                                                                           $promotionPrice = $stock->promotion_prices()
-                                                                                          ->where('variation_id',$voption->id)->first();
+                                                                                          ->where('variation_id',$voption['option']->id)->first();
                                                                                       @endphp
-                                                                                            {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption->price,$currency) !!}
+                                                                                            {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption['option']->price,$currency) !!}
                                                                                     </div>
                                                                                     @endif
                                                                                 </div>
@@ -247,7 +247,7 @@
                                 <div class="name">
                                     Sub Total
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(\Cart::getSubTotal(),$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getPriceSum(@$item->id)+\Cart::getSubTotal(),$currency) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
@@ -271,7 +271,7 @@
                                 <div class="name">
                                     Total
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(\Cart::getTotal(),$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getPriceSum(@$item->id)+\Cart::getTotal(),$currency) !!}</div>
                             </div>
                             <div class="coupon-code font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
