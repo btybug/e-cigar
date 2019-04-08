@@ -47,11 +47,20 @@ class CartService
 
     public static function getPriceSum($id)
     {
-        $data = (isset(self::$cartItems[$id])) ? self::$cartItems[$id] : [] ;
+        $cart = Cart::get($id);
         $price = 0;
-        if(count($data)){
-            foreach ($data as $datum){
-                $price += $datum->getPriceSum();
+        if($cart && $cart->attributes->has('extra')){
+            foreach ($cart->attributes['extra'] as $datum){
+                if($datum['group']->price_per == 'product'){
+                    $price += $datum['group']->price;
+                }else{
+                    if(count($datum['options'])){
+                        foreach ($datum['options'] as $option){
+                            //add qty
+                            $price += $datum['group']->price;
+                        }
+                    }
+                }
             }
         }
         return $price;
