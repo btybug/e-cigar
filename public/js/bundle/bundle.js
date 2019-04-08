@@ -3740,14 +3740,6 @@ $(document).ready(function () {
                     variations: filtered_variations
                 };
 
-                AjaxCall("/products/get-extra-content", { id: $("#vpid").val() }, function (res) {
-                    if (!res.error) {
-                        $("#extraModal .modal-body").html(res.html);
-                        productsInit();
-                        $("#extraModal").modal();
-                    }
-                });
-
                 $.ajax({
                     type: "post",
                     url: "/add-to-cart",
@@ -3763,9 +3755,18 @@ $(document).ready(function () {
                             $('#cartSidebar').html(data.headerHtml);
                             addDataKey.key = data.key;
                             addDataKey.product_id = data.product_id;
-                            $("#extraModal").modal();
+                            AjaxCall("/products/get-extra-content", { id: $("#vpid").val() }, function (res) {
+                                if (!res.error) {
+                                    $("#extraModal .modal-body").html(res.html);
+                                    productsInit();
+                                    $("#extraModal").modal();
+                                }
+                            });
+
                             $('#extraModal .extra-content-left .select-extra.item.active').click();
-                        } else {}
+                        } else {
+                            alert(data.message);
+                        }
                     }
                 });
             } else {

@@ -148,6 +148,7 @@ class ShoppingCartController extends Controller
                     'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml]);
             }
 
+            return \Response::json(['error' => true, 'message' => $error]);
         }
 
         return \Response::json(['error' => true, 'message' => 'try again']);

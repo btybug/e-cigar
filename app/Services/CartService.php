@@ -227,8 +227,10 @@ class CartService
     public function validateProduct($product,$vdata)
     {
         $error = false;
-        if ($vdata && count($vdata)) {
-            foreach ($vdata as $item) {
+        $extraVariations = $product->variations()->required()->groupby('stock_variations.variation_id')->count();
+
+        if ($vdata && count($vdata) == $extraVariations) {
+            foreach ($vdata as $k => $item) {
                 $data = [];
                 $group = $product->variations()->where('variation_id',$item['group_id'])->first();
                 if($group){
@@ -249,7 +251,7 @@ class CartService
                                         'qty' => $p['qty'],
                                     ];
                                 }else{
-                                    $error = true;
+                                    $error = "Option not found";
                                 }
                             }
                         }else{
@@ -265,20 +267,20 @@ class CartService
                                         'qty' => $p['qty'],
                                     ];
                                 }else{
-                                    $error = true;
+                                    $error = "Option not found";
                                 }
                             }
                             $data['price'] = $itemPrice;
                         }
 
                         if($group->min_count_limit > $product_limit || $group->count_limit < $product_limit){
-                            $error = true;
+                            $error = "Please select options according to limit";
                         }
                     }else{
                         $this->price += $group->price;
                     }
                 }else{
-                    $error = true;
+                    $error = "Section not found";
                 }
 
                 if(count($data)){
@@ -286,7 +288,7 @@ class CartService
                 }
             }
         }else{
-            $error = true;
+            $error = 'Select available options';
         }
 
         return $error;
