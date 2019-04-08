@@ -3,6 +3,7 @@
 use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\StockVariation;
+use App\Models\ZoneCountries;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 /**
@@ -288,5 +289,48 @@ class CartService
         }
 
         return $error;
+    }
+
+    public function getShipping($items)
+    {
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+            $geoZone = ($zone) ? $zone->geoZone : null;
+            if (!count($items)) {
+                Cart::removeConditionsByType('shipping');
+            } else {
+                if ($geoZone) {
+                    $shipping = Cart::getCondition($geoZone->name);
+                    if (!$shipping) {
+                        Cart::removeConditionsByType('shipping');
+                        if (count($geoZone->deliveries)) {
+                            $subtotal = Cart::getSubTotal();
+                            $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+                            if ($delivery && count($delivery->options)) {
+                                $shippingDefaultOption = $delivery->options->first();
+                                $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                                    'name' => $geoZone->name,
+                                    'type' => 'shipping',
+                                    'target' => 'total',
+                                    'value' => $shippingDefaultOption->cost,
+                                    'order' => 1,
+                                    'attributes' => $shippingDefaultOption
+                                ));
+                                Cart::condition($condition2);
+                                $shipping = Cart::getCondition($geoZone->name);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return [
+            'default_shipping' => (isset($default_shipping)? $default_shipping: null),
+            'shipping' => (isset($shipping)? $shipping: null),
+            'geoZone' => (isset($geoZone)? $geoZone: null)
+        ];
     }
 }

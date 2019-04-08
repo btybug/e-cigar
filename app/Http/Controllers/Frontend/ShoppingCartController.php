@@ -45,44 +45,14 @@ class ShoppingCartController extends Controller
     public function getCart()
     {
         $items = Cart::getContent();
-        $default_shipping = null;
-        $shipping = null;
-        $geoZone = null;
-        if (\Auth::check()) {
-            $user = \Auth::user();
-            $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
-            $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
-            $geoZone = ($zone) ? $zone->geoZone : null;
-            if (!count($items)) {
-                Cart::removeConditionsByType('shipping');
-            } else {
-                if ($geoZone) {
-                    $shipping = Cart::getCondition($geoZone->name);
-                    if (!$shipping) {
-                        Cart::removeConditionsByType('shipping');
-                        if (count($geoZone->deliveries)) {
-                            $subtotal = Cart::getSubTotal();
-                            $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                            if ($delivery && count($delivery->options)) {
-                                $shippingDefaultOption = $delivery->options->first();
-                                $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                                    'name' => $geoZone->name,
-                                    'type' => 'shipping',
-                                    'target' => 'total',
-                                    'value' => $shippingDefaultOption->cost,
-                                    'order' => 1,
-                                    'attributes' => $shippingDefaultOption
-                                ));
-                                Cart::condition($condition2);
-                                $shipping = Cart::getCondition($geoZone->name);
-                            }
-                        }
-                    }
-                }
-            }
-        }
 
-        return $this->view('cart', compact(['items', 'default_shipping', 'shipping', 'geoZone', 'shippingDefault']));
+        $data = $this->cartService->getShipping($items);
+
+        $default_shipping = $data['default_shipping'];
+        $shipping = $data['shipping'];
+        $geoZone = $data['geoZone'];
+
+        return $this->view('cart', compact(['items', 'default_shipping', 'shipping', 'geoZone']));
     }
 
     public function getCheckOut()
@@ -213,8 +183,17 @@ class ShoppingCartController extends Controller
                         Cart::update($key, array(
                             'attributes' => $attrs
                         ));
+                        if($request->cart){
+                            $data = $this->cartService->getShipping(Cart::getContent());
+                            $default_shipping = $data['default_shipping'];
+                            $shipping = $data['shipping'];
+                            $geoZone = $data['geoZone'];
+                            $html = \View("frontend.shop._partials.cart_table",compact(['default_shipping','shipping','geoZone']))->render();
+                        }
 
-                        return \Response::json(['error' => false, 'message' => 'Extra Product added']);
+                        return \Response::json(['error' => false, 'message' => 'Extra Product added',
+                            'html' => isset($html)?$html:null]);
+
                     }
                 }
             }
