@@ -576,12 +576,6 @@
         .video--carousel-thumb .fs-carousel-item {
             border: 2px solid transparent;
         }
-        #extraModal .products-list-wrap.limit{
-            padding: 0;
-        }
-        #extraModal .products-list-wrap.limit >.wall--wrapper{
-            padding-left: 25px;
-        }
     </style>
 @stop
 
