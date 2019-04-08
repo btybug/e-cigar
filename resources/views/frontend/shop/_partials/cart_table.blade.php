@@ -54,18 +54,16 @@
                                                                                     {{ $voption->name }}
                                                                                 </div>
 
-
-
-                                                                                    @if($option['group']->price_per =='product')
-                                                                                    <div class="col-sm-2 pl-prod-qty-opt font-main-bold">
+                                                                                    <div class="col-sm-2 font-main-bold
+                                                                                         @if($option['group']->price_per =='product')
+                                                                                            pl-prod-qty-opt
+                                                                                        @else
+                                                                                            pl-qty
+                                                                                        @endif
+                                                                                            ">
                                                                                         <span>x 1</span>
                                                                                     </div>
-                                                                                    @endif
-                                                                                    @if($option['group']->price_per =='item')
-                                                                                        <div class="col-sm-2 pl-qty font-main-bold">
-                                                                                            <span>x 1</span>
-                                                                                        </div>
-                                                                                    @endif
+
                                                                                 @if($option['group']->price_per =='item')
                                                                                     <div class="col-sm-4 font-15 font-main-bold text-right">
                                                                                       @php
@@ -136,17 +134,15 @@
                                                                                     {{ $voption->name }}
                                                                                 </div>
 
-
-                                                                                    @if($extra['group']->price_per =='product')
-                                                                                    <div class="col-sm-2 pl-prod-qty">
+                                                                                    <div class="col-sm-2
+                                                                                        @if($extra['group']->price_per=='product')
+                                                                                            pl-prod-qty
+                                                                                        @else
+                                                                                            pl-qty
+                                                                                        @endif
+                                                                                        ">
                                                                                         <span>x 1</span>
                                                                                     </div>
-                                                                                    @endif
-                                                                                    @if($extra['group']->price_per =='item')
-                                                                                        <div class="col-sm-2 pl-qty">
-                                                                                            <span>x 1</span>
-                                                                                        </div>
-                                                                                    @endif
 
                                                                                     @if($extra['group']->price_per =='item')
                                                                                         <div class="col-sm-4 font-15 font-main-bold text-right">
