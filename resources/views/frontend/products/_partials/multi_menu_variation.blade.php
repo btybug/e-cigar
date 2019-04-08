@@ -15,9 +15,9 @@
                             </svg>
                         </span>
           @if($variation->price_per == "product")
-            {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price','data-id' => $variation->id,'min' => 1]) !!}
+            {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price none-touchable','data-id' => $variation->id,'min' => 1]) !!}
           @else
-            {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty','data-id' => $variation->id,'min' => 1]) !!}
+            {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty none-touchable','data-id' => $variation->id,'min' => 1]) !!}
           @endif
           <!--plus qty-->
             <span  class="d-flex align-items-center h-100 pointer position-absolute product-count-plus">
@@ -70,9 +70,9 @@
                             </svg>
                         </span>
                 @if($variation->price_per == "product")
-                  {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price','data-id' => $variation->id,'min' => 1]) !!}
+                  {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty product-qty_per_price none-touchable','data-id' => $variation->id,'min' => 1]) !!}
                 @else
-                  {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty','data-id' => $variation->id,'min' => 1]) !!}
+                  {!! Form::number('qty',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 form-control product-qty none-touchable','data-id' => $variation->id,'min' => 1]) !!}
                 @endif
                 <!--plus qty-->
                 <span  class="d-flex align-items-center h-100 pointer position-absolute product-count-plus">

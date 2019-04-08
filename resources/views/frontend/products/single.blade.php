@@ -18,7 +18,7 @@
                                       d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"/>
                             </svg>
                         </span>
-                        {!! Form::number('',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 product-qty-select','min' => 'number']) !!}
+                        {!! Form::number('',1,['class' => 'field-input w-100 h-100 font-23 text-center border-0 product-qty-select none-touchable ','min' => 'number']) !!}
                         <!--plus qty-->
                             <span data-type="plus"
                                   class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count">
