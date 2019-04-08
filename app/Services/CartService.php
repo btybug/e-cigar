@@ -66,6 +66,31 @@ class CartService
         return ($cart) ?$price*$cart->quantity:$price;
     }
 
+    public static function getTotalPriceSum()
+    {
+        $data = Cart::getContent();
+        $price = 0;
+        foreach ($data as $cart){
+            $itemPrice =0;
+            if($cart->attributes->has('extra')){
+                foreach ($cart->attributes['extra'] as $datum){
+                    if($datum['group']->price_per == 'product'){
+                        $itemPrice += $datum['group']->price;
+                    }else{
+                        if(count($datum['options'])){
+                            foreach ($datum['options'] as $option){
+                                //add qty
+                                $itemPrice += $option['option']->price * $option['qty'];
+                            }
+                        }
+                    }
+                }
+            }
+            $price += $itemPrice*$cart->quantity;
+        }
+        return $price;
+    }
+
     public function remove($id,$user_id = null)
     {
         $list = $this->getCartItems($user_id);

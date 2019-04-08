@@ -247,7 +247,7 @@
                                 <div class="name">
                                     Sub Total
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getPriceSum(@$item->id)+\Cart::getSubTotal(),$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getSubTotal(),$currency) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
@@ -271,7 +271,7 @@
                                 <div class="name">
                                     Total
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getPriceSum(@$item->id)+\Cart::getTotal(),$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency) !!}</div>
                             </div>
                             <div class="coupon-code font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
