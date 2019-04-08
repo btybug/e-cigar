@@ -2760,17 +2760,22 @@ $(document).ready(function () {
         var selectedGroupId = [];
 
         //counts qty for group
-        var new_qty = function new_qty(group, popup) {
+        var new_qty = function new_qty(group, type) {
             var qty = 0;
-            if (!popup) {
-                group.closest('.product-single-info_row').find('.product-qty').each(function () {
-                    qty += Number($(this).val());
-                });
-            } else {
+            if (type === 'popup') {
                 $('.selected-items_popup').find('.popup_field-input').each(function () {
                     qty += Number($(this).val());
                 });
+            } else if (type === 'filter') {
+                $('#wizardViewModal .selected-items_filter').find('.popup_field-input').each(function () {
+                    qty += Number($(this).val());
+                });
+            } else {
+                group.closest('.product-single-info_row').find('.product-qty').each(function () {
+                    qty += Number($(this).val());
+                });
             }
+
             return qty;
         };
 
@@ -3126,7 +3131,7 @@ $(document).ready(function () {
                         $("body").on('click', "#popUpModal[data-group=\"" + data_group_id + "\"] .single-item-wrapper .single-item", function (ev) {
                             var id = $(this).closest(".single-item-wrapper").attr('data-id');
                             var title = $(this).find('.name-item').text().trim();
-                            if (limit > new_qty(null, true) && !$(this).closest(".single-item-wrapper").hasClass('active')) {
+                            if (limit > new_qty(null, 'popup') && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                                 $(this).closest(".single-item-wrapper").addClass('active');
                                 $(this).closest('.modal').find('.selected-items_popup').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                <div class=\"align-self-center text-truncate\">\n                                  " + title + "\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n                                    <!--minus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select none-touchable\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                  <div>\n                                    <a href=\"javascript:void(0)\" data-el-id=\"" + id + "\" class=\"btn btn-sm delete-menu-item_popup text-danger\"><i class=\"fa fa-times\"></i></a>\n                                </div>\n                                </div>\n                              </div>\n                            </div>");
                             } else if ($(this).closest(".single-item-wrapper").hasClass('active')) {
@@ -3144,7 +3149,7 @@ $(document).ready(function () {
 
                         $('body').on('click', "#popUpModal[data-group=\"" + data_group_id + "\"] .selected-item-popup_qty-plus", function (ev) {
                             eventInitialDefault(ev);
-                            if (limit > new_qty(null, true)) {
+                            if (limit > new_qty(null, 'popup')) {
                                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                             }
                         });
@@ -3242,7 +3247,8 @@ $(document).ready(function () {
                             var selectSingleItems = void 0;
 
                             $body.on('click', '#wizardViewModal .shopping-cart_wrapper .item-content', function () {
-                                $(this).removeClass('active').addClass('active');
+                                $('.shopping-cart_wrapper .item-content').removeClass('active');
+                                $(this).addClass('active');
                             });
 
                             $body.on('click', '.add-items-btn', function (e) {
@@ -3306,7 +3312,6 @@ $(document).ready(function () {
                                 $('.content-wrap').find('.active').toArray().map(function (actv) {
                                     filter.push($(actv).closest('[data-id]').attr('data-id'));
                                 });
-
                                 $('.content-wrap').find('.active').length === 0 ? alert('select item') : $.ajax({
                                     type: "post",
                                     url: "/filters",
@@ -3322,15 +3327,13 @@ $(document).ready(function () {
                                     },
                                     success: function success(data) {
                                         if (!data.error) {
-                                            var contantPlace = $('.contents-wrapper .content');
-                                            var wizardPlace = $('.shopping-cart-head .nav-pills');
-
-                                            wizardPlace.empty();
-                                            wizardPlace.append(data.wizard);
+                                            $('.shopping-cart-head .nav-pills').empty();
+                                            $('.shopping-cart-head .nav-pills').append(data.wizard);
+                                            $('.back-btn').removeClass('d-none');
                                             if (data.type === "filter") {
-                                                contantPlace.html(data.filters);
+                                                $('.contents-wrapper .content').html(data.filters);
                                             } else if (data.type === "items") {
-                                                contantPlace.html(data.items_html);
+                                                $('.contents-wrapper .content').html(data.items_html);
                                                 $('.shopping-cart_wrapper .next-btn').addClass('d-none');
                                                 $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
                                             }
@@ -3426,18 +3429,11 @@ $(document).ready(function () {
                             });
                         });
 
-                        var filter_qty = function filter_qty() {
-                            var qty = 0;
-                            $('#wizardViewModal .selected-items_filter').find('.popup_field-input').each(function () {
-                                qty += Number($(this).val());
-                            });
-                            return qty;
-                        };
-
-                        $("body").on('click', "#wizardViewModal .shopping-cart_wrapper .wrap-item", function (ev) {
+                        $("body").on('click', "#wizardViewModal[data-group=\"" + group_id + "\"] .shopping-cart_wrapper .wrap-item", function (ev) {
                             var id = $(this).attr('data-id');
                             var title = $(this).find('.name').text().trim();
-                            if (filter_limit > filter_qty() && !$(this).hasClass('active')) {
+                            console.log(filter_limit, new_qty(null, 'filter'), !$(this).hasClass('active'));
+                            if (filter_limit > new_qty(null, 'filter') && !$(this).hasClass('active')) {
                                 $(this).addClass('active');
                                 $('.selected-items_filter').append("<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                                          <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                            <div class=\"align-self-center text-truncate\">\n                                              " + title + "\n                                            </div>\n                                            <div class=\"d-flex align-items-center justify-content-end\">\n                                              <div class=\"mr-1\">Qty</div>\n                                              <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n\n                                            <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                            <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                            <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                            d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                            </svg>\n                                            </span>\n                                            <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select\" min=\"number\" name=\"\"\n                                            type=\"number\" value=\"1\">\n                                            <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                            <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                            <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                            d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                            </svg>\n                                            </span>\n                                            </div>\n                                            <div>\n                                            <a href=\"javascript:void(0)\" data-el-id=\"28\" class=\"btn btn-sm delete-menu-item text-danger\"><i class=\"fa fa-times\"></i></a>\n                                            </div>\n                                            </div>\n                                            </div>\n                                        </div>");
                             } else if ($(this).hasClass('active')) {
@@ -3449,7 +3445,7 @@ $(document).ready(function () {
                         $('body').on('click', '#wizardViewModal .selected-item-popup_qty-plus', function (ev) {
                             ev.stopImmediatePropagation();
                             ev.preventDefault();
-                            if (filter_limit > filter_qty()) {
+                            if (filter_limit > new_qty(null, 'filter')) {
                                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                             }
                         });
@@ -3484,13 +3480,13 @@ $(document).ready(function () {
                                 var limit = $($("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.limit')[0]).attr('data-limit');
                                 var qty = 0;
 
-                                var new_qty = function new_qty() {
-                                    qty = 0;
-                                    $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').find('.product-qty').each(function () {
-                                        qty += Number($(this).val());
-                                    });
-                                    console.log(qty, 'qty');
-                                };
+                                // const new_qty = function() {
+                                //     qty = 0;
+                                //     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty').each(function() {
+                                //         qty += Number($(this).val());
+                                //     });
+                                //     console.log(qty, 'qty');
+                                // };
 
                                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').append(json.html);
                                 var popup_items_qty = [];
@@ -3538,12 +3534,9 @@ $(document).ready(function () {
                                 $("[data-group=\"" + dg + "\"]").closest('.product-single-info_row').on('click', '.product-count-plus', function (ev) {
                                     ev.preventDefault();
                                     ev.stopImmediatePropagation();
-                                    new_qty();
                                     var input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                                    console.log(Number(input.val()), Number(limit), Number(qty), Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
-                                    if (Number(input.val()) < Number(limit) - Number(qty) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())) {
+                                    if (Number(input.val()) < Number(limit) - Number(new_qty($("[data-group=\"" + dg + "\"]"))) + Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())) {
                                         input.val(Number(input.val()) + 1);
-                                        new_qty();
                                         var price = Number($(this).closest('[data-price]').attr('data-price'));
                                         $(this).closest('[data-price]').find('.price-placee').html("$" + price * Number(input.val()));
 

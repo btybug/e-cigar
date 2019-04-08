@@ -128,17 +128,22 @@ $(document).ready(function() {
         const selectedGroupId = [];
 
 //counts qty for group
-        const new_qty = function(group, popup) {
+        const new_qty = function(group, type) {
             let qty = 0;
-            if(!popup) {
-                group.closest('.product-single-info_row').find('.product-qty').each(function() {
-                    qty += Number($(this).val());
-                });
-            } else {
+            if(type === 'popup') {
                 $('.selected-items_popup').find('.popup_field-input').each(function() {
                     qty += Number($(this).val());
                 });
+            } else if(type === 'filter') {
+                $('#wizardViewModal .selected-items_filter').find('.popup_field-input').each(function() {
+                    qty += Number($(this).val());
+                });
+            } else {
+                group.closest('.product-single-info_row').find('.product-qty').each(function() {
+                    qty += Number($(this).val());
+                });
             }
+
             return qty;
         };
 
@@ -522,7 +527,7 @@ $(document).ready(function() {
                         $("body").on('click', `#popUpModal[data-group="${data_group_id}"] .single-item-wrapper .single-item`, function(ev) {
                             const id = $(this).closest(".single-item-wrapper").attr('data-id');
                             const title = $(this).find('.name-item').text().trim();
-                            if(limit > new_qty(null, true) && !$(this).closest(".single-item-wrapper").hasClass('active')) {
+                            if(limit > new_qty(null, 'popup') && !$(this).closest(".single-item-wrapper").hasClass('active')) {
                                 $(this).closest(".single-item-wrapper").addClass('active');
                                 $(this).closest('.modal').find('.selected-items_popup')
                                     .append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
@@ -571,7 +576,7 @@ $(document).ready(function() {
 
                         $('body').on('click', `#popUpModal[data-group="${data_group_id}"] .selected-item-popup_qty-plus` , function (ev) {
                             eventInitialDefault(ev);
-                            if(limit > new_qty(null, true)) {
+                            if(limit > new_qty(null, 'popup')) {
                                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                             }
                         });
@@ -672,7 +677,8 @@ $(document).ready(function() {
                             let selectSingleItems;
 
                             $body.on('click', '#wizardViewModal .shopping-cart_wrapper .item-content', function () {
-                                $(this).removeClass('active').addClass('active');
+                                $('.shopping-cart_wrapper .item-content').removeClass('active');
+                                $(this).addClass('active');
                             });
 
                             $body.on('click', '.add-items-btn', function (e) {
@@ -736,7 +742,6 @@ $(document).ready(function() {
                                 $('.content-wrap').find('.active').toArray().map(function (actv) {
                                     filter.push($(actv).closest('[data-id]').attr('data-id'));
                                 });
-
                                 $('.content-wrap').find('.active').length === 0 ? alert('select item') : $.ajax({
                                     type: "post",
                                     url: "/filters",
@@ -752,17 +757,15 @@ $(document).ready(function() {
                                     },
                                     success: function (data) {
                                         if (!data.error) {
-                                            const contantPlace = $('.contents-wrapper .content');
-                                            const wizardPlace = $('.shopping-cart-head .nav-pills');
-
-                                            wizardPlace.empty();
-                                            wizardPlace.append(data.wizard);
+                                            $('.shopping-cart-head .nav-pills').empty()
+                                            $('.shopping-cart-head .nav-pills').append(data.wizard);
+                                            $('.back-btn').removeClass('d-none')
                                             if (data.type === "filter") {
-                                                contantPlace.html(data.filters);
+                                                $('.contents-wrapper .content').html(data.filters);
                                             } else if (data.type === "items") {
-                                                contantPlace.html(data.items_html);
-                                                $('.shopping-cart_wrapper .next-btn').addClass('d-none');
-                                                $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
+                                                $('.contents-wrapper .content').html(data.items_html);
+                                                $('.shopping-cart_wrapper .next-btn').addClass('d-none')
+                                                $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none')
                                             }
                                         } else {
                                             alert("error");
@@ -857,18 +860,11 @@ $(document).ready(function() {
                             });
                         });
 
-                        const filter_qty = function() {
-                            let qty = 0;
-                            $('#wizardViewModal .selected-items_filter').find('.popup_field-input').each(function() {
-                                qty += Number($(this).val());
-                            });
-                            return qty;
-                        };
-
-                        $("body").on('click', "#wizardViewModal .shopping-cart_wrapper .wrap-item", function(ev) {
+                        $("body").on('click', `#wizardViewModal[data-group="${group_id}"] .shopping-cart_wrapper .wrap-item`, function(ev) {
                             const id = $(this).attr('data-id');
                             const title = $(this).find('.name').text().trim();
-                            if(filter_limit > filter_qty() && !$(this).hasClass('active')) {
+                            console.log(filter_limit, new_qty(null, 'filter'), !$(this).hasClass('active'));
+                            if(filter_limit > new_qty(null, 'filter') && !$(this).hasClass('active')) {
                                 $(this).addClass('active');
                                 $('.selected-items_filter')
                                     .append(`<div class="col-md-2 col-sm-3 selected-item_popup" data-id-popup="${id}">
@@ -910,7 +906,7 @@ $(document).ready(function() {
                         $('body').on('click', '#wizardViewModal .selected-item-popup_qty-plus' , function (ev) {
                             ev.stopImmediatePropagation();
                             ev.preventDefault();
-                            if(filter_limit > filter_qty()) {
+                            if(filter_limit > new_qty(null, 'filter')) {
                                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                             }
                         });
@@ -948,13 +944,13 @@ $(document).ready(function() {
                                     const limit = $($(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.limit')[0]).attr('data-limit');
                                     let qty = 0;
 
-                                    const new_qty = function() {
-                                        qty = 0;
-                                        $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty').each(function() {
-                                            qty += Number($(this).val());
-                                        });
-                                        console.log(qty, 'qty');
-                                    };
+                                    // const new_qty = function() {
+                                    //     qty = 0;
+                                    //     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-qty').each(function() {
+                                    //         qty += Number($(this).val());
+                                    //     });
+                                    //     console.log(qty, 'qty');
+                                    // };
 
                                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').append(json.html);
                                     const popup_items_qty = [];
@@ -1004,16 +1000,12 @@ $(document).ready(function() {
                                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').on('click','.product-count-plus', function(ev){
                                         ev.preventDefault();
                                         ev.stopImmediatePropagation();
-                                        new_qty();
                                         const input = $($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
-                                        console.log(Number(input.val()), Number(limit), Number(qty), Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()));
-                                        if(Number(input.val()) < Number(limit) - Number(qty) +
+                                        if(Number(input.val()) < Number(limit) - Number(new_qty($(`[data-group="${dg}"]`))) +
                                             Number($($(this).closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val())) {
                                             input.val(Number(input.val()) + 1);
-                                            new_qty();
                                             const price = Number($(this).closest('[data-price]').attr('data-price'));
                                             $(this).closest('[data-price]').find('.price-placee').html(`$${price*Number(input.val())}`);
-
 
                                             const $total = $('.price-place-summary');
                                             $total.html(`$${Number($total.text().trim().slice(1)) + price}`);
