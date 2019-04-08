@@ -39,111 +39,144 @@
                                                 </h2>
                                                 <ul class="list-unstyled mb-0">
                                                     @foreach($item->attributes->variations as $option)
-                                                        <li class="shp-cart-product_row d-flex justify-content-between position-relative">
-                                                            <p class="mb-0">
-                                                                <span>{{ $option['group']->title }}: </span>
-                                                                <span class="font-main-bold">
+                                                        <li class="shp-cart-product_row d-flex justify-content-between position-relative pr-0 py-2 border-bottom">
+                                                            <div class="m-0 row w-100">
+                                                                <div class="col-sm-3 pl-0  font-main-bold">{{ $option['group']->title }}: </div>
+                                                                <div class="col-sm-9 pr-0">
+                                                                    <div class="d-flex justify-content-between">
+
+                                                                        <div class="w-100">
                                                                     @if($option['group']->type == 'package_product' || $option['group']->type == 'filter')
                                                                         @if(count($option['options']))
                                                                             @foreach($option['options'] as $voption)
-                                                                                <p>
-                                                                                <span class="font-15 font-main-bold">
+                                                                                <div class="row">
+                                                                                <div class="col-sm-6 font-15 font-main-bold">
                                                                                     {{ $voption->name }}
-                                                                                </span>
+                                                                                </div>
+
+
+
+                                                                                    @if($option['group']->price_per =='product')
+                                                                                    <div class="col-sm-2 pl-prod-qty-opt font-main-bold">
+                                                                                        <span>x 1</span>
+                                                                                    </div>
+                                                                                    @endif
+                                                                                    @if($option['group']->price_per =='item')
+                                                                                        <div class="col-sm-2 pl-qty font-main-bold">
+                                                                                            <span>x 1</span>
+                                                                                        </div>
+                                                                                    @endif
                                                                                 @if($option['group']->price_per =='item')
-                                                                                    <span class="font-15 font-main-bold text-right">
+                                                                                    <div class="col-sm-4 font-15 font-main-bold text-right">
                                                                                       @php
                                                                                           $promotionPrice = $stock->promotion_prices()
                                                                                           ->where('variation_id',$voption->id)->first();
                                                                                       @endphp
                                                                                         {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption->price,$currency) !!}
-                                                                                    </span>
+                                                                                    </div>
                                                                                 @endif
-                                                                                </p>
+                                                                                </div>
                                                                             @endforeach
                                                                         @endif
                                                                     @endif
-                                                                </span>
-                                                            </p>
-                                                            @if($option['group']->price_per =='product')
-                                                                <span class="font-15 font-main-bold">
-                                                                        @php
-                                                                            $promotionPrice = ($option['group']) ? $stock->promotion_prices()
-                                                                            ->where('variation_id',$option['group']->id)->first() : null;
-                                                                        @endphp
-                                                                    {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($option['group']) ? convert_price($option['group']->price,$currency) : convert_price(0,$currency)) !!}
-                                                                </span>
-                                                            @endif
-                                                            @if(! $option['group']->is_required)
-                                                                <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
-                                                                      data-uid="{{ $option['group']->variation_id }}">
+                                                                        </div>
+                                                                        @if($option['group']->price_per =='product')
+                                                                            <div class="font-15 font-main-bold align-self-center">
+
+                                                                                @php
+                                                                                    $promotionPrice = ($option['group']) ? $stock->promotion_prices()
+                                                                                    ->where('variation_id',$option['group']->id)->first() : null;
+                                                                                @endphp
+                                                                                {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($option['group']) ? convert_price($option['group']->price,$currency) : convert_price(0,$currency)) !!}
+                                                                            </div>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </li>
+                                                    @endforeach
+
+                                                </ul>
+                                                <div class="shp-cart-extra-products mt-2">
+                                                    <div class="row mb-2">
+                                                        <div class="col-md-6">
+                                                            <h3>Extra Options</h3>
+                                                        </div>
+                                                        <div class="col-md-6 text-right">
+                                                            <button data-product-id="{{ $item->attributes->product->id }}" class="btn btn-info extra-sections">Add extra</button>
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        @if($item->attributes->has('extra') && count($item->attributes->extra))
+                                                            @foreach($item->attributes->extra as $extra)
+                                                                <li class="shp-cart-product_row d-flex justify-content-between position-relative pr-0 py-2 border-bottom">
+                                                                                 <span class="pointer remove-from-cart"
+                                                                                       data-uid="{{ $extra['group']->variation_id }}">
                                                                         <svg viewBox="0 0 8 8" width="8px" height="8px">
                                                                             <path fill-rule="evenodd"
                                                                                   fill="rgb(171, 168, 182)"
                                                                                   d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
                                                                     </svg>
                                                                 </span>
-                                                            @endif
-                                                        </li>
-                                                    @endforeach
+                                                                    <div class="m-0 row w-100">
+                                                                        <div class="col-sm-3 pl-0  font-main-bold">{{ $extra['group']->title }}: </div>
+                                                                        <div class="col-sm-9 pr-0 font-main-bold">
+                                                                            <div class="d-flex justify-content-between">
 
-                                                </ul>
-                                                <div class="col-md-12">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <h3>Extra Options</h3>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <button data-product-id="{{ $item->attributes->product->id }}" class="btn btn-info float-right extra-sections">Add extra</button>
-                                                        </div>
-                                                    </div>
+<div class="w-100">
 
-                                                    <div class="col-md-12">
-                                                        @if($item->attributes->has('extra') && count($item->attributes->extra))
-                                                            @foreach($item->attributes->extra as $extra)
-                                                                <li class="shp-cart-product_row d-flex justify-content-between position-relative">
-                                                                    <p class="mb-0">
-                                                                        <span>{{ $extra['group']->title }}: </span>
-                                                                        <span class="font-main-bold">
+
                                                                     @if($extra['group']->type == 'package_product' || $extra['group']->type == 'filter')
                                                                         @if(count($extra['options']))
                                                                             @foreach($extra['options'] as $voption)
-                                                                                <p>
-                                                                                <span class="font-15 font-main-bold">
+                                                                                <div class="row">
+                                                                                <div class="col-sm-6 pl-2 font-15 font-main-bold">
                                                                                     {{ $voption->name }}
-                                                                                </span>
+                                                                                </div>
+
+
+                                                                                    @if($extra['group']->price_per =='product')
+                                                                                    <div class="col-sm-2 pl-prod-qty">
+                                                                                        <span>x 1</span>
+                                                                                    </div>
+                                                                                    @endif
                                                                                     @if($extra['group']->price_per =='item')
-                                                                                        <span class="font-15 font-main-bold text-right">
+                                                                                        <div class="col-sm-2 pl-qty">
+                                                                                            <span>x 1</span>
+                                                                                        </div>
+                                                                                    @endif
+
+                                                                                    @if($extra['group']->price_per =='item')
+                                                                                        <div class="col-sm-4 font-15 font-main-bold text-right">
                                                                                       @php
                                                                                           $promotionPrice = $stock->promotion_prices()
                                                                                           ->where('variation_id',$voption->id)->first();
                                                                                       @endphp
                                                                                             {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption->price,$currency) !!}
-                                                                                    </span>
+                                                                                    </div>
                                                                                     @endif
-                                                                                </p>
+                                                                                </div>
                                                                                 @endforeach
                                                                                 @endif
                                                                                 @endif
-                                                                                </span>
-                                                                                </p>
-                                                                                @if($extra['group']->price_per =='product')
-                                                                                    <span class="font-15 font-main-bold">
-                                                                        @php
-                                                                            $promotionPrice = ($extra['group']) ? $stock->promotion_prices()
-                                                                            ->where('variation_id',$extra['group']->id)->first() : null;
-                                                                        @endphp
-                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($extra['group']) ? convert_price($extra['group']->price,$currency) : convert_price(0,$currency)) !!}
-                                                                </span>
-                                                                                @endif
-                                                                                    <span class="shp-cart-product_close pointer position-absolute remove-from-cart"
-                                                                                          data-uid="{{ $extra['group']->variation_id }}">
-                                                                        <svg viewBox="0 0 8 8" width="8px" height="8px">
-                                                                            <path fill-rule="evenodd"
-                                                                                  fill="rgb(171, 168, 182)"
-                                                                                  d="M7.841,7.211 L4.615,3.985 L7.841,0.759 C8.015,0.585 8.015,0.304 7.841,0.130 C7.667,-0.044 7.386,-0.044 7.212,0.130 L3.985,3.356 L0.759,0.130 C0.584,-0.044 0.303,-0.044 0.129,0.130 C-0.045,0.304 -0.045,0.586 0.129,0.760 L3.356,3.985 L0.130,7.211 C-0.045,7.385 -0.045,7.666 0.130,7.840 C0.216,7.927 0.330,7.971 0.444,7.971 C0.558,7.971 0.672,7.927 0.759,7.840 L3.985,4.614 L7.212,7.840 C7.386,8.014 7.667,8.014 7.841,7.840 C7.928,7.753 7.972,7.639 7.972,7.526 C7.972,7.412 7.928,7.298 7.841,7.211 Z"/>
-                                                                    </svg>
-                                                                </span>
+</div>
+                                                                        @if($extra['group']->price_per =='product')
+                                                                            <div class="font-15 font-main-bold align-self-center">
+                                                                                    @php
+                                                                                        $promotionPrice = ($extra['group']) ? $stock->promotion_prices()
+                                                                                        ->where('variation_id',$extra['group']->id)->first() : null;
+                                                                                    @endphp
+                                                                                {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($extra['group']) ? convert_price($extra['group']->price,$currency) : convert_price(0,$currency)) !!}
+                                                                            </div>
+                                                                        @endif
+                                                                                </div>
+                                                                        </div>
+
+                                                                    </div>
+
+
                                                                 </li>
                                                             @endforeach
                                                         @else
@@ -155,7 +188,7 @@
                                         </div>
                                     </td>
 
-                                    <td width="180" class="text-center">
+                                    <td width="180" class="text-center qty-cell-wrapper">
                                         <div class="simple_select_wrapper">
                                             <div class="continue-shp-wrapp_qty position-relative"
                                                  style="margin-right: 0;">
@@ -188,7 +221,7 @@
 
 
                                     <td width="180" class="shp-cart-table_price-td">
-                                        <span class="d-flex font-main-bold font-28 card--inner-product_price position-relative">
+                                        <span class="d-flex justify-content-center font-main-bold font-28 card--inner-product_price position-relative">
                                             <span class="position-relative">{{ convert_price($item->getPriceSum(),$currency) }}
                                                 {{--<!--old price-->--}}
                                                 {{--<span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>--}}
