@@ -47,4 +47,9 @@ class StockVariation extends Model
     {
         return $this->hasOne(Category::class, 'id','filter_category_id');
     }
+
+    public function item()
+    {
+        return $this->belongsTo(Items::class, 'item_id');
+    }
 }

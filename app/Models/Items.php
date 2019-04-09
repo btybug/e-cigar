@@ -19,8 +19,15 @@ class Items extends Translatable
     public $translationModel = ItemTranslations::class;
     public $translatedAttributes = ['name', 'short_description', 'long_description'];
 
+    protected $appends = array('qty');
+
     const ACTIVE = 1;
     const DRAFT = 1;
+
+    public function getQtyAttribute()
+    {
+        return ($this->type=='simple')?$this->purchase()->sum('qty')-$this->others()->sum('qty'):0;
+    }
 
     public function scopeActive($query)
     {

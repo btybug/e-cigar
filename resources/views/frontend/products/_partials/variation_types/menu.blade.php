@@ -19,9 +19,21 @@
     </div>
     <div class="d-flex flex-wrap">
       <div class="col-sm-10 pl-0 wall--wrapper">
-        {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
-    ['id' => "single_v_select_$vSettings->id",'class' => ' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
-    'multiple' => false,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
+          <select name="variations[]" id="single_v_select_{{ $vSettings->id }}"
+                  data-count="{{ $vSettings->count_limit }}"  data-id="{{ $vSettings->id }}"
+                  class="select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible">
+              @foreach($variation as $item)
+                  <option value="{{ $item->id }}">
+                      {{ $item->name }}
+                      @if($item->item->qty <= 0)
+                          <b>(Out OF Stock)</b>
+                      @endif
+                  </option>
+              @endforeach
+          </select>
+        {{--{!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,--}}
+    {{--['id' => "single_v_select_$vSettings->id",'class' => ' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',--}}
+    {{--'multiple' => false,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}--}}
       </div>
       <div class="col-sm-2 pl-sm-3 p-0 text-sm-center text-right">
         <div class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
@@ -78,9 +90,22 @@
       $class = "multi_v_select";
     @endphp
       <div class="col-sm-10 pl-0 wall--wrapper">
-        {!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,
-        ['id' => $id,'class' => $class.' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',
-        'multiple' => true,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}
+          <select name="variations[]" id="single_v_select_{{ $vSettings->id }}" multiple="multiple"
+                  data-count="{{ $vSettings->count_limit }}"  data-id="{{ $vSettings->id }}"
+                  class="{{ $class }} select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible">
+              @foreach($variation as $item)
+                  <option value="{{ $item->id }}" data-out="@if($item->item->qty <= 0) 1 @else 0 @endif">
+                      {{ $item->name }}
+                      @if($item->item->qty <= 0)
+                          <b>(Out OF Stock)</b>
+                      @endif
+                  </option>
+              @endforeach
+          </select>
+
+        {{--{!! Form::select('variations[]',$variation->pluck('name','id')->all(),null,--}}
+        {{--['id' => $id,'class' => $class.' select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible',--}}
+        {{--'multiple' => true,'data-count' => $vSettings->count_limit,'data-id' => $vSettings->id]) !!}--}}
       </div>
   </div>
 
