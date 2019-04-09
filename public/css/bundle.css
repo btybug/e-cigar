@@ -16875,6 +16875,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     text-align: center !important;
     padding: 2px !important;
     font-size: 12px !important;
+    border: 1px solid #d7d7d7;
 }
 
 .product-card_thumb-img-holder {
