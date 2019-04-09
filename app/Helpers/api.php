@@ -78,7 +78,7 @@ function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_mu
   $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
 
   switch ($type){
-    case'popup':
+    case'filter_popup':
       enableFilter();
       $_FILTER_HTML = View::make('filters.filter_modal',compact('category'))->render();
       $view='button';break;
