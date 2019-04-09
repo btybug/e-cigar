@@ -252,9 +252,9 @@ class CartService
     public function validateProduct($product,$vdata)
     {
         $error = false;
-        $extraVariations = $product->variations()->required()->groupby('stock_variations.variation_id')->count();
+        $extraVariations = $product->variations()->required()->groupby('stock_variations.variation_id')->get();
 
-        if ($vdata && count($vdata) == $extraVariations) {
+        if ($vdata && count($vdata) == count($extraVariations)) {
             foreach ($vdata as $k => $item) {
                 $data = [];
                 $group = $product->variations()->where('variation_id',$item['group_id'])->first();
