@@ -71,7 +71,7 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
     return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html']));
 }
 
-function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_multiple=true,$type='popup')
+function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_multiple=true,$type='filter_popup')
 {
   global $_FILTER_HTML;
   $uniqId = uniqid('filter_');
