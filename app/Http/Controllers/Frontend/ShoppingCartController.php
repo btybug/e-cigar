@@ -44,6 +44,7 @@ class ShoppingCartController extends Controller
 
     public function getCart()
     {
+        enableFilter();
         $items = Cart::getContent();
         $data = $this->cartService->getShipping($items);
 
