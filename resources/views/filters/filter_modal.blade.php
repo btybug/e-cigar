@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-{!! Form::hidden('first_category_id',$category->id,['category_id']) !!}
+{!! Form::hidden('first_category_id',(isset($category))?$category->id:null,['category_id']) !!}
 
 @push('style')
     <style>

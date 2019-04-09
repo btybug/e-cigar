@@ -59,6 +59,8 @@ function enableMedia()
 function enableFilter()
 {
     global $_FILTER_BUTTON;
+    global $_FILTER_HTML;
+    $_FILTER_HTML = View::make('filters.filter_modal')->render();
     $_FILTER_BUTTON = true;
 }
 
