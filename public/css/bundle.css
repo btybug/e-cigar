@@ -16869,6 +16869,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 }
 
+.product-card_thumb-img-holder_more{
+    height: 50px !important;
+    width: 61px !important;
+    text-align: center !important;
+    padding: 2px !important;
+    font-size: 12px !important;
+}
+
 .product-card_thumb-img-holder {
     position: relative;
 }
@@ -18361,6 +18369,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .single-product-row-repeatable:not(:last-of-type) {
     margin-bottom: 25px;
 }
+
 /*Globals*/
 /*fonts*/
 .font-main-med {

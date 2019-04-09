@@ -193,8 +193,10 @@
                                                              alt="{{ $product->name }}">
                                                     </div>
                                                     @if($product->variations)
-                                                        @foreach($product->variations as $variation)
+                                                        @php $count = 0; @endphp
+                                                        @foreach($product->variations()->take(4)->get() as $variation)
                                                             @if($variation->image)
+                                                                @php $count++; @endphp
                                                                 <div class="product-card_thumb-img-holder pointer">
                                                                     <img class=""
                                                                          src="{{ (media_image_tmb($variation->image)) }}"
@@ -202,6 +204,11 @@
                                                                 </div>
                                                             @endif
                                                         @endforeach
+                                                        @if($count == 4)
+                                                            <div class="product-card_thumb-img-holder_more pointer">
+                                                                See More <i class="fa fa-plus"></i>
+                                                            </div>
+                                                        @endif
                                                     @endif
                                                 </div>
                                                 <div class="product-card_body-text">
