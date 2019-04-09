@@ -1016,12 +1016,12 @@ $(document).ready(function() {
               initPopupCount++;
             }
             break;
-          case 'filterModal': if(initFilterModalCount === 0) {
-              filterModalInit();
+          case 'filter_popup': if(initFilterModalCount === 0) {
+            filterModalInit();
               initFilterModalCount++;
             }
             break;
-          case 'filterSelect': if(initFilterSelectCount === 0) {
+          case 'select_filter': if(initFilterSelectCount === 0) {
               // filterSelectInit();
               initFilterSelectCount++;
             }
@@ -1249,6 +1249,22 @@ $(document).ready(function() {
           $('#extraModal .extra-content-left .select-extra.item.active').click();
         }
       });
+    });
+
+    $("body").on('click', '.qty-count', function () {
+      let qty = $('.product-qty-select').val();
+      let type = $(this).data('type');
+      if (type == 'plus') {
+        qty = parseInt(qty) + 1;
+        $('.product-qty-select').val(qty);
+        setTotalPrice();
+      } else {
+        if (qty > 1) {
+          qty -= 1;
+          $('.product-qty-select').val(qty);
+          setTotalPrice();
+        }
+      }
     });
   });
 });

@@ -688,19 +688,7 @@
                 }
 
             })
-            $("body").on('click', '.qty-count', function () {
-                let qty = $('.product-qty-select').val();
-                let type = $(this).data('type');
-                if (type == 'plus') {
-                    qty = parseInt(qty) + 1;
-                    $('.product-qty-select').val(qty)
-                } else {
-                    if (qty > 1) {
-                        qty -= 1;
-                        $('.product-qty-select').val(qty)
-                    }
-                }
-            })
+
 
             $("body").on('change', '.select-variation-option', function () {
                 get_price();
