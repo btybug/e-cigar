@@ -2747,9 +2747,6 @@ $(document).ready(function () {
     //data object for add-to-cart and extra
     var addDataKey = {};
 
-    //all required sections value
-    var per_price_value = 0;
-
     //item price
     var item_price = 0;
 
@@ -2906,7 +2903,6 @@ $(document).ready(function () {
     var initCount = 0,
         initPopupCount = 0,
         initFilterModalCount = 0;
-    // const select2_products = $('.product-pack-select');
 
     var productsInit = function productsInit(modal) {
       var modalType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'all';
@@ -3256,7 +3252,6 @@ $(document).ready(function () {
               var selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function (item) {
                 return $(item).attr('data-id');
               });
-              console.log(selectedIds, 'selectedIds');
               $.ajax({
                 type: "post",
                 url: "/products/select-items",
@@ -3275,7 +3270,6 @@ $(document).ready(function () {
                     $(".filter[data-group-id=\"" + group + "\"]").closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function (selectedItem) {
                       var selectedItemId = $(selectedItem).attr('data-id');
                       var selectedItemTitle = $(selectedItem).find('.delete-menu-item').parent().text().trim();
-                      console.log('item', selectedItemId, selectedItemTitle);
                       $("#wizardViewModal .selected-items_filter").append(makeSelectedItemModal(selectedItemId, selectedItemTitle, true));
                     });
                     $("#wizardViewModal").modal();
@@ -3289,7 +3283,6 @@ $(document).ready(function () {
             $("body").on('click', "#wizardViewModal[data-group=\"" + group_id + "\"] .shopping-cart_wrapper .wrap-item", function (ev) {
               var id = $(this).attr('data-id');
               var title = $(this).find('.name').text().trim();
-              console.log(filter_limit, new_qty(null, 'filter'), !$(this).hasClass('active'));
               if (filter_limit > new_qty(null, 'filter') && !$(this).hasClass('active')) {
                 $(this).addClass('active');
                 $('.selected-items_filter').append(makeSelectedItemModal(id, title, true));
@@ -3519,7 +3512,6 @@ $(document).ready(function () {
                   success: function success(data) {
                     if (!data.error) {
 
-                      console.log(data.wizard);
                       $('.shopping-cart-head .nav-pills').empty();
                       $('.shopping-cart-head .nav-pills').append(data.wizard);
                       if (data.type === "filter") {
@@ -3550,9 +3542,6 @@ $(document).ready(function () {
               $('#wizardViewModal .selected-items_filter').empty();
               $('#wizardViewModal .content-wrap .wrap-item').removeClass('active');
             });
-
-            //----------------new script-------------
-
           });
         })();
       };
@@ -3577,7 +3566,6 @@ $(document).ready(function () {
             }).then(function (response) {
               return response.json();
             }).then(function (json) {
-              console.log(id, selectElementId);
               var isMultiple = select.closest('[data-limit]').attr('data-limit') === '1' ? false : true;
               if (!isMultiple) {
                 el.closest('.product-single-info_row').find('.menu-item-selected').remove();
@@ -3631,7 +3619,6 @@ $(document).ready(function () {
                         setTimeout(function () {
                           var selectElementId = $(parentRow.find(".product--select-items").children()[0]).attr('data-select2-id');
                           var id = parentRow.find(".product--select-items").val();
-                          console.log('parentRow.find(".product--select-items").children().first()', $(parentRow.find(".product--select-items").children()[0]));
                           selectHandle(self, id, selectElementId, limit, parentRow.find(".product--select-items"));
                         }, 0);
                       }
@@ -3642,45 +3629,10 @@ $(document).ready(function () {
               });
             });
 
-            // isSingle(select) && select.ready(function (e) {
-            //   const current_item_id = select.children().first().attr('data-select2-id');
-            //
-            //   fetch("/products/get-variation-menu-raw", {
-            //     method: "post",
-            //     headers: {
-            //       "Content-Type": "application/json",
-            //       Accept: "application/json",
-            //       "X-Requested-With": "XMLHttpRequest",
-            //       "X-CSRF-Token": $('input[name="_token"]').val()
-            //     },
-            //     credentials: "same-origin",
-            //     body: JSON.stringify({
-            //       id: select.children().first().attr('value'),
-            //       selectElementId: current_item_id
-            //     })
-            //   })
-            //       .then(function (response) {
-            //         return response.json();
-            //       })
-            //       .then(function (json) {
-            //         if (isSingle(select)) {
-            //           !isSection(select) && (item_price += select.closest('.product-single-info_row').find('.menu-item-selected').find('[data-price]'));
-            //         } else {
-            //           select.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
-            //         }
-            //
-            //         setTotalPrice(modal);
-            //       })
-            //       .catch(function (error) {
-            //         console.log(error);
-            //       });
-            // });
-
             $("[data-group=\"" + group_id + "\"]").on('select2:select', '.product--select-items', function (e) {
               var id = e.params.data.id;
               var limit = $(this).closest('[data-limit]').attr('data-limit');
               var selectElementId = $(e.params.data.element).attr('data-select2-id');
-              console.log(limit, 'select limit', $(this));
               selectHandle($(e.target), id, selectElementId, limit, $(this));
             });
 
@@ -3769,21 +3721,12 @@ $(document).ready(function () {
       }
     };
 
-    // AjaxCall("/products/get-extra-content", {id:$("#vpid").val()}, function (res) {
-    //     if (!res.error) {
-    //         $("#extraModal .modal-body").html(res.html);
-    //         productsInit(true);
-    //         $("#extraModal").modal();
-    //     }
-    // });
-
     $("body").on('click', ".select-extra", function () {
       $("#extraModal").find(".select-extra").removeClass("active");
       $(this).addClass("active");
       AjaxCall("/products/get-extra-item", { id: $(this).attr('data-id'), group: $(this).attr('data-group') }, function (res) {
         if (!res.error) {
           $("#extraModal").find(".extra-main-content").html(res.html);
-          // $("#extraModal .modal-price-place-summary").html('$0');
           var selectedExtra = selectedGroupId.find(function (_ref) {
             var group = _ref.group;
 
@@ -3795,12 +3738,10 @@ $(document).ready(function () {
             $('#extraModal .product-card_btn').removeClass('d-inline-flex').addClass('d-none');
             $('#extraModal .product-card_edit').removeClass('d-none').addClass('d-inline-flex');
             $("#extraModal").find(".extra-main-content").html(selectedExtra.view);
-            console.log(res.type, 'type');
             productsInit(true, res.type);
           } else {
             $('#extraModal .product-card_btn').removeClass('d-none').addClass('d-inline-flex');
             $('#extraModal .product-card_edit').removeClass('d-inline-flex').addClass('d-none');
-            console.log(res.type, 'type');
             productsInit(true, res.type);
           }
         }
@@ -3894,7 +3835,6 @@ $(document).ready(function () {
           item_validation += 1;
         }
       });
-      // item_validation === $('#requiredProducts .limit').length && (all_validation = true)
       all_validation = true;
       $('.product-qty').toArray().map(function (el) {
         return {
@@ -3904,7 +3844,6 @@ $(document).ready(function () {
       });
 
       if (all_validation) {
-        //
         var product_id = $('#vpid').val();
         var product_qty = $('.product-qty-select').val();
         var variations = $('#requiredProducts [data-group-id]').toArray().map(function (el) {
