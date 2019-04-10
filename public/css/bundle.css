@@ -15399,8 +15399,11 @@ td.shp-cart-table_price-td {
 .shopping-cart-inner .shp-cart-table .qty-cell-wrapper,.shopping-cart-inner .shp-cart-table .shp-cart-table_price-td{
 vertical-align: middle;
 }
-.shopping-cart-inner .shp-cart-table .remove-from-cart {
+.shopping-cart-inner .shp-cart-table .remove-extra-from-cart {
     margin-right: 3px;
+}
+.shopping-cart-inner .shp-cart-table .remove-extra-from-cart:hover svg path{
+    fill: red;
 }
 .shopping-cart-inner .shp-cart-table .pl-qty{
     padding-left: 4px;

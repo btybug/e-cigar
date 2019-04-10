@@ -102,7 +102,7 @@
                                                             <h3>Extra Options</h3>
                                                         </div>
                                                         <div class="col-md-6 text-right">
-                                                            <button data-product-id="{{ $item->attributes->product->id }}" data-key="{{ $key }}" class="btn btn-info extra-sections">Add extra</button>
+                                                            <button data-product-id="{{ $item->attributes->product->id }}" data-key="{{ $key }}" class="btn btn-info extra-sections"><i class="fas fa-plus"></i></button>
                                                         </div>
                                                     </div>
 
