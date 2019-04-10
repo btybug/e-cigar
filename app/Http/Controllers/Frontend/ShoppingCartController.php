@@ -197,9 +197,12 @@ class ShoppingCartController extends Controller
 
                     }
                 }
+
+
+              return \Response::json(['error' => true, 'message' => $error]);
             }
 
-            return \Response::json(['error' => true, 'message' => 'Product not found']);
+          return \Response::json(['error' => true, 'message' => "product not found"]);
         }
 
         return \Response::json(['error' => true, 'message' => 'Cart is empty, you can\'t add extra']);
