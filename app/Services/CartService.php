@@ -120,7 +120,7 @@ class CartService
             $attrs = $section->attributes;
             $extras = $attrs['extra'];
             foreach ($extras as $key => $datum){
-                if($datum['key'] = $id){
+                if($datum['key'] == $id){
                     unset($extras[$key]);
                 }
             }
