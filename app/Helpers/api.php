@@ -1224,3 +1224,36 @@ function render_widgets($placeholder)
 function getItemStockVariations($group,array $items=[]){
     return \App\Models\StockVariation::where('variation_id',$group)->whereIn('item_id',$items)->get();
 }
+
+
+function out_of_stock($item){
+    if($item){
+        $qty = $item->item->qty;
+        $settings = new \App\Models\Settings();
+        $model = $settings->getEditableData('store_out_of_stock');
+
+        if($qty <= 0 && $model->out_of_stock_status == 0){
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+function out_of_stock_msg($item){
+    if($item){
+        $qty = $item->item->qty;
+        $settings = new \App\Models\Settings();
+        $model = $settings->getEditableData('store_out_of_stock');
+
+        if($qty <=0){
+            if($model->out_of_stock_status == 0){
+                return "(Out of stock)";
+            }else{
+                return "(Back order)";
+            }
+        }
+    }
+
+    return null;
+}

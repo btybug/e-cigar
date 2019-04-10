@@ -27,11 +27,9 @@
                 <div class="align-self-center checkbox-wrap">
                   <input type="checkbox" id="pv{{ $item->id }}" data-id="" class="custom-control-input package_checkbox"
                          name="package_v[{{ $vape->id }}][]"  value="{{ $item->id }}" >
-                  <label class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer package_checkbox_label" for="pv{{ $item->id }}">
+                  <label data-out="{{ out_of_stock($item) }}" class="product-single-info_check-label custom-control-label font-15 text-gray-clr pointer package_checkbox_label" for="pv{{ $item->id }}">
                     {{ $item->name }}
-                    @if($item->item->qty <= 0)
-                          <b>(Out OF Stock)</b>
-                    @endif
+                      <b>{{ out_of_stock_msg($item) }}</b>
                   </label>
                 </div>
                 <div style="max-width: 150px" class="list-qty">

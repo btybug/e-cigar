@@ -23,11 +23,9 @@
                   data-count="{{ $vSettings->count_limit }}"  data-id="{{ $vSettings->id }}"
                   class="select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible">
               @foreach($variation as $item)
-                  <option value="{{ $item->id }}">
+                  <option value="{{ $item->id }}" data-out="{{ out_of_stock($item) }}">
                       {{ $item->name }}
-                      @if($item->item->qty <= 0)
-                          <b>(Out OF Stock)</b>
-                      @endif
+                     <b>{{ out_of_stock_msg($item) }}</b>
                   </option>
               @endforeach
           </select>
@@ -94,11 +92,9 @@
                   data-count="{{ $vSettings->count_limit }}"  data-id="{{ $vSettings->id }}"
                   class="{{ $class }} select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible">
               @foreach($variation as $item)
-                  <option value="{{ $item->id }}" data-out="@if($item->item->qty <= 0) 1 @else 0 @endif">
+                  <option value="{{ $item->id }}" data-out="{{ out_of_stock($item) }}">
                       {{ $item->name }}
-                      @if($item->item->qty <= 0)
-                          <b>(Out OF Stock)</b>
-                      @endif
+                      <b>{{ out_of_stock_msg($item) }}</b>
                   </option>
               @endforeach
           </select>

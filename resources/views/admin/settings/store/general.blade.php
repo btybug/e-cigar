@@ -39,7 +39,7 @@
             </li>
         </ul>
         <div class="tab-content">
-            {!! Form::open(['class'=>'form-horizontal']) !!}
+            {!! Form::model($model,['class'=>'form-horizontal']) !!}
             <div class="card panel panel-default mb-3">
                 <div class="card-body panel-body">
                     <div class="form-group">
@@ -85,10 +85,10 @@
                                 </div>
                                 <div class="col-md-7">
                                     <label class="radio-inline mr-2">
-                                        <input type="radio" name="optradio" checked>Enable Back order
+                                        {!! Form::radio('out_of_stock_status',1,true) !!} Enable Back order
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="optradio">Disable order
+                                        {!! Form::radio('out_of_stock_status',0,null) !!} Disable order
                                     </label>
                                 </div>
                             </div>

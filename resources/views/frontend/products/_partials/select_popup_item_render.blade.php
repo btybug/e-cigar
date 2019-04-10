@@ -5,12 +5,10 @@
                 <div class="img-item">
                     <img src="{{ (media_image_tmb($item->image)) }}" class="img-fluid" alt="img">
                 </div>
-                <div class="name-item">
+                <div class="name-item" data-out="{{ out_of_stock($item) }}">
                     <span>
                         {{ $item->name }}
-                        @if($item->item->qty <= 0)
-                            <b>(Out OF Stock)</b>
-                        @endif
+                         <b>{{ out_of_stock_msg($item) }}</b>
                     </span>
                 </div>
             </div>

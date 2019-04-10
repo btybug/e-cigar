@@ -304,12 +304,13 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public function getStore(Currencies $currencies, SiteCurrencies $siteCurrencies, Request $request)
+    public function getStore(Currencies $currencies, SiteCurrencies $siteCurrencies,Settings $settings, Request $request)
     {
+        $model = $settings->getEditableData('store_out_of_stock');
         $siteCurrencies = $siteCurrencies->get();
         $currencies = $currencies->all()->pluck('name', 'currency');
 
-        return $this->view('store.general', compact('currencies', 'siteCurrencies'));
+        return $this->view('store.general', compact('currencies', 'siteCurrencies','model'));
     }
 
     public function currencyGetLive(Request $request, \App\Models\GetForexData $forexData)
@@ -333,8 +334,10 @@ class SettingsController extends Controller
         return \Response::json(['error' => true]);
     }
 
-    public function postStore(Request $request, SiteCurrencies $siteCurrencies)
+    public function postStore(Request $request, SiteCurrencies $siteCurrencies,Settings $settings)
     {
+        $settings->updateOrCreateSettings('store_out_of_stock', ['out_of_stock_status' => $request->get('out_of_stock_status')]);
+
         $data = $request->get('currencies');
         $notDeletable = [];
         if (count($data)) {
