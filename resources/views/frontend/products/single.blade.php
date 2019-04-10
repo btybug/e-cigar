@@ -109,7 +109,7 @@
                                                     </div>
                                                 @endif
                                                 @if($vape->variations && count($vape->variations))
-                                                    @foreach($vape->variations as $variation)
+                                                    @foreach($vape->variations()->required()->get() as $variation)
                                                         @if(isset($variation['image']))
                                                             <div class="product-card_thumb-img-holder pointer"
                                                                  data-id="{{ $variation['id'] }}">
