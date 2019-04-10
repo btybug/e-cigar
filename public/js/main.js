@@ -304,6 +304,18 @@ $(document).ready(function() {
                             </div>`);
     };
 
+    const makeOutOfStockSelectOption = (select, type) => {
+      if(type === "select") {
+        select.find('[data-out="1"]').attr('disabled', 'disabled');
+      } else if(type === "list") {
+        select.find('[data-out="1"]').addClass('none-touchable-op');
+      } else if(type === "popup") {
+        select.find('[data-out="1"]').closest('.single-item-wrapper').addClass('none-touchable-op');
+      } else if(type === "filter") {
+        console.log('filter stock', select);
+        select.find('[data-out="1"]').closest('.wrap-item').addClass('none-touchable-op');
+      }
+    };
 
     setTotalPrice();
 
@@ -317,6 +329,7 @@ $(document).ready(function() {
       const selectInit = () => {
         (function() {
           $(`${getParentId} .product-pack-select`) && $(`${getParentId} .product-pack-select`).each(function (i, e) {
+            makeOutOfStockSelectOption($(this), 'select');
             const products_id = $(e).attr('data-id');
             const select = $(e);
             fetch("/products/get-package-type-limit", {
@@ -482,6 +495,7 @@ $(document).ready(function() {
           };
 
           $(`${getParentId} .products-list-wrap`).each(function (index, data_el) {
+            makeOutOfStockSelectOption($(this), 'list');
             const products_id = $(data_el).attr('data-id');
             const limit = Number($(data_el).attr('data-limit'));
 
@@ -549,6 +563,7 @@ $(document).ready(function() {
                     $('#popUpModal .title_popup').text(`You can add ${limit} product`);
                     makeSelectedItem(data_group_id);
                     $("#popUpModal").attr('data-group', data_group_id);
+                    makeOutOfStockSelectOption($("#popUpModal .modal-content"), 'popup');
                     $("#popUpModal").modal();
                   } else {
                     console.log(data.error);
@@ -870,6 +885,7 @@ $(document).ready(function() {
                       contantPlace.html(data.filters);
                     } else if (data.type === "items") {
                       contantPlace.html(data.items_html);
+                      makeOutOfStockSelectOption($('#wizardViewModal'), 'filter');
                       $('.shopping-cart_wrapper .next-btn').addClass('d-none');
                       $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
                     }

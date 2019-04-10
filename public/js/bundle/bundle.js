@@ -2898,6 +2898,19 @@ $(document).ready(function () {
       return "<div class=\"col-md-2 col-sm-3 selected-item_popup\" data-id-popup=\"" + id + "\">\n                              <div class=\"d-flex justify-content-between selected-item_popup-wrapper\">\n                                <div class=\"align-self-center text-truncate\">\n                                  " + title + "\n                                </div>\n                                <div class=\"d-flex align-items-center justify-content-end\">\n                                  <div class=\"mr-1\">Qty</div>\n                                  <div class=\"continue-shp-wrapp_qty position-relative mr-0\">\n                                    <!--minus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count\">\n                                                    <svg viewBox=\"0 0 20 3\" width=\"12px\" height=\"3px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\"\n                                                              d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                    <input class=\"popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select none-touchable\" min=\"number\" name=\"\"\n                                           type=\"number\" value=\"1\">\n                                    <!--plus qty-->\n                                    <span class=\"d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count\">\n                                                    <svg viewBox=\"0 0 20 20\" width=\"15px\" height=\"15px\">\n                                                        <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\"\n                                                              d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                                    </svg>\n                                                </span>\n                                  </div>\n                                  <div>\n                                    <a href=\"javascript:void(0)\" data-el-id=\"" + id + "\" class=\"btn btn-sm delete-menu-item" + (!filter ? '_popup' : '') + " text-danger\"><i class=\"fa fa-times\"></i></a>\n                                </div>\n                                </div>\n                              </div>\n                            </div>";
     };
 
+    var makeOutOfStockSelectOption = function makeOutOfStockSelectOption(select, type) {
+      if (type === "select") {
+        select.find('[data-out="1"]').attr('disabled', 'disabled');
+      } else if (type === "list") {
+        select.find('[data-out="1"]').addClass('none-touchable-op');
+      } else if (type === "popup") {
+        select.find('[data-out="1"]').closest('.single-item-wrapper').addClass('none-touchable-op');
+      } else if (type === "filter") {
+        console.log('filter stock', select);
+        select.find('[data-out="1"]').closest('.wrap-item').addClass('none-touchable-op');
+      }
+    };
+
     setTotalPrice();
 
     var initCount = 0,
@@ -2912,6 +2925,7 @@ $(document).ready(function () {
       var selectInit = function selectInit() {
         (function () {
           $(getParentId + " .product-pack-select") && $(getParentId + " .product-pack-select").each(function (i, e) {
+            makeOutOfStockSelectOption($(this), 'select');
             var products_id = $(e).attr('data-id');
             var select = $(e);
             fetch("/products/get-package-type-limit", {
@@ -3055,6 +3069,7 @@ $(document).ready(function () {
           };
 
           $(getParentId + " .products-list-wrap").each(function (index, data_el) {
+            makeOutOfStockSelectOption($(this), 'list');
             var products_id = $(data_el).attr('data-id');
             var limit = Number($(data_el).attr('data-limit'));
 
@@ -3122,6 +3137,7 @@ $(document).ready(function () {
                     $('#popUpModal .title_popup').text("You can add " + limit + " product");
                     makeSelectedItem(data_group_id);
                     $("#popUpModal").attr('data-group', data_group_id);
+                    makeOutOfStockSelectOption($("#popUpModal .modal-content"), 'popup');
                     $("#popUpModal").modal();
                   } else {
                     console.log(data.error);
@@ -3435,6 +3451,7 @@ $(document).ready(function () {
                       contantPlace.html(data.filters);
                     } else if (data.type === "items") {
                       contantPlace.html(data.items_html);
+                      makeOutOfStockSelectOption($('#wizardViewModal'), 'filter');
                       $('.shopping-cart_wrapper .next-btn').addClass('d-none');
                       $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
                     }
