@@ -313,7 +313,7 @@ $(document).ready(function() {
         select.find('[data-out="1"]').closest('.single-item-wrapper').addClass('none-touchable-op');
       } else if(type === "filter") {
         console.log('filter stock', select);
-        select.find('[data-out="1"]').closest('.wrap-item').addClass('none-touchable-op');
+        select.find('[data-out="1"]').addClass('none-touchable-op');
       }
     };
 
@@ -930,6 +930,7 @@ $(document).ready(function() {
                           $(this).closest('#wizardViewModal').find(`.wrap-item[data-id="${$(this).attr('data-id-popup')}"]`).length > 0
                             && $(this).closest('#wizardViewModal').find(`.wrap-item[data-id="${$(this).attr('data-id-popup')}"]`).addClass('active');
                         });
+                        makeOutOfStockSelectOption($('#wizardViewModal'), 'filter');
                         $('.shopping-cart_wrapper .next-btn').addClass('d-none');
                         $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
                       }
@@ -1074,6 +1075,7 @@ $(document).ready(function() {
                             multiple: isMultiple,
                             placeholder: "Select Products",
                           });
+                          makeOutOfStockSelectOption(parentRow.find(".product--select-items"), 'select');
                           if(isMultiple) {
                             select2MaxLimit(parentRow.find('.product--select-items'), limit);
                           } else {
