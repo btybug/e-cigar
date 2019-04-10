@@ -50,7 +50,7 @@ class ItemsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes','bundle','categories'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories'));
     }
 
     public function getNewBundle()
@@ -60,20 +60,20 @@ class ItemsController extends Controller
         $barcodes = $this->barcodeService->getUnsedCodes();
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs','barcodes','bundle'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle'));
     }
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image','barcode_id','type','status');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status');
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
-        $this->savePackages($item,$request->get('packages',[]));
+        $this->savePackages($item, $request->get('packages', []));
 
         $item->suppliers()->sync($request->get('suppliers'));
-        $item->specificationsPivot()->sync($request->get('specifications',[]));
+        $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
 
@@ -83,7 +83,7 @@ class ItemsController extends Controller
     public function getEdit($id)
     {
         $model = Items::findOrFail($id);
-        $bundle = ($model->type != 'bundle')? false:true;
+        $bundle = ($model->type != 'bundle') ? false : true;
         $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
@@ -91,7 +91,7 @@ class ItemsController extends Controller
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 
-        return $this->view('new', compact('model', 'allAttrs','barcodes','items','bundle','categories','data','checkedCategories'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle', 'categories', 'data', 'checkedCategories'));
     }
 
     private function savePackages($item, array $data = [])
@@ -99,7 +99,7 @@ class ItemsController extends Controller
         $deletableArray = [];
         if (count($data)) {
             foreach ($data as $datum) {
-                $existing = $item->packages()->where('id',$datum['id'])->first();
+                $existing = $item->packages()->where('id', $datum['id'])->first();
 
                 if ($existing) {
                     $package = ItemsPackages::find($datum['id']);
@@ -242,19 +242,19 @@ class ItemsController extends Controller
 
     public function getSpecificationByCategory(Request $request)
     {
-        $selecteds = Attributes::leftJoin('attribute_categories','attributes.id','attribute_categories.attribute_id')
-            ->whereIn('attribute_categories.categories_id',$request->get('ids',[]))
+        $selecteds = Attributes::leftJoin('attribute_categories', 'attributes.id', 'attribute_categories.attribute_id')
+            ->whereIn('attribute_categories.categories_id', $request->get('ids', []))
             ->select('attributes.*')
             ->groupBy('attributes.id')
             ->get();
 
         $html = '';
-        if(count($selecteds)){
+        if (count($selecteds)) {
             $allAttrs = Attributes::with('stickers')->whereNull('parent_id')->get();
             $html = \View("admin.items._partials.specification_group", compact(['selecteds', 'allAttrs']))->render();
         }
 
 
-        return \Response::json(['error' => false, 'html' => $html,'data' => $selecteds]);
+        return \Response::json(['error' => false, 'html' => $html, 'data' => $selecteds]);
     }
 }

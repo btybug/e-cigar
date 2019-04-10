@@ -21,28 +21,28 @@ class ProductsController extends Controller
 {
     protected $view = 'frontend.products';
 
-    public function index (Request $request,$type = null)
+    public function index(Request $request, $type = null)
     {
-        $category = Category::where('type','stocks')->whereNull('parent_id')->where('slug',$type)->first();
-        if(! $category && $type != null) abort(404);
+        $category = Category::where('type', 'stocks')->whereNull('parent_id')->where('slug', $type)->first();
+        if (!$category && $type != null) abort(404);
 
-        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
-        $products = ProductSearch::apply($request,$category);
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
+        $products = ProductSearch::apply($request, $category);
 //        $products = ProductSearch::apply($request,$category,true);
 //        dd($products);
-        $filters = Attributes::where('filter',true)->get();
+        $filters = Attributes::where('filter', true)->get();
 
-        $data =  $request->except('_token');
+        $data = $request->except('_token');
         $selecteds = [];
-        if(isset($data['select_filter']) && count($data['select_filter'])){
-            foreach ($data['select_filter'] as $k => $v){
-                if($v && is_array($v)){
-                    foreach ($v as $key => $value){
+        if (isset($data['select_filter']) && count($data['select_filter'])) {
+            foreach ($data['select_filter'] as $k => $v) {
+                if ($v && is_array($v)) {
+                    foreach ($v as $key => $value) {
                         $attr = Attributes::getById($key);
                         $sticker = Stickers::getById($value);
-                        $selecteds[$k.",".$value] = $sticker;
+                        $selecteds[$k . "," . $value] = $sticker;
                     }
-                }elseif ($v){
+                } elseif ($v) {
                     $sticker = Stickers::getById($v);
                     $attr = Attributes::getById($k);
                     $selecteds[$k] = $sticker;
@@ -50,24 +50,24 @@ class ProductsController extends Controller
             }
         }
 
-        return $this->view('index', compact('categories','category','products','filters','selecteds','type'))->with('filterModel',$request->all());
+        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type'))->with('filterModel', $request->all());
     }
 
-    public function getSingle ($type, $slug)
+    public function getSingle($type, $slug)
     {
 //        Cart::clear();
 //        $x = Cart::getContent();
 //        dd($x);
         enableFilter();
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
-        if (! $vape) abort(404);
+        if (!$vape) abort(404);
 
         $variations = $vape->variations()->required()->with('options')->get();
 
         return $this->view('single', compact(['vape', 'variations', 'type']));
     }
 
-    public function getPrice (Request $request)
+    public function getPrice(Request $request)
     {
         $stock = Stock::find($request->uid);
         $attributes = [];
@@ -84,7 +84,7 @@ class ProductsController extends Controller
             $variation = null;
             if ($stock->type == 'variation_product') {
                 $option = StockVariationOption::select('stock_variation_options.*', \DB::raw('count(*) as total'))
-                    ->leftJoin('attributes_stickers','stock_variation_options.attribute_sticker_id','attributes_stickers.id')
+                    ->leftJoin('attributes_stickers', 'stock_variation_options.attribute_sticker_id', 'attributes_stickers.id')
                     ->whereIn('attributes_stickers.attributes_id', $attributes)
                     ->whereIn('attributes_stickers.sticker_id', $options)
                     ->whereIn('variation_id', $stock->variations()->pluck('id')->all())
@@ -102,26 +102,26 @@ class ProductsController extends Controller
 
                 if ($request->promotion) {
                     $main = Stock::find($request->stock_id);
-                    $promotionPrice = ($main) ?$main->promotion_prices()->where('variation_id', $variation->id)->first():null;
+                    $promotionPrice = ($main) ? $main->promotion_prices()->where('variation_id', $variation->id)->first() : null;
                     $price = ($promotionPrice) ? $promotionPrice->price : $price;
-                } elseif(count($stock->active_sales)) {
+                } elseif (count($stock->active_sales)) {
                     $promotionPrice = $stock->active_sales()->where('variation_id', $variation->id)->first();
                     $price = ($promotionPrice) ? $promotionPrice->price : $price;
                 }
                 $isFavorite = false;
 
-                if(\Auth::check()) {
-                    $isFavorite = \Auth::user()->favorites()->where('favorites.variation_id',$variation->id)->exists();
+                if (\Auth::check()) {
+                    $isFavorite = \Auth::user()->favorites()->where('favorites.variation_id', $variation->id)->exists();
                 }
 
-                if(! $request->promotion){
+                if (!$request->promotion) {
 //                    $requriedItems = $stock->promotions()->where('type',true)->pluck('variation_id');
                 }
 
                 if ($variation->qty > 0) {
-                    return \Response::json(['price' => convert_price($price,get_currency()), 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
+                    return \Response::json(['price' => convert_price($price, get_currency()), 'variation_id' => $variation->id, 'error' => false, 'isFavorite' => $isFavorite]);
                 } else {
-                    return \Response::json(['message' => 'Out of stock', 'price' => convert_price($price,get_currency()), 'variation_id' => $variation->id, 'error' => false,'isFavorite' => $isFavorite]);
+                    return \Response::json(['message' => 'Out of stock', 'price' => convert_price($price, get_currency()), 'variation_id' => $variation->id, 'error' => false, 'isFavorite' => $isFavorite]);
                 }
             }
         }
@@ -132,7 +132,7 @@ class ProductsController extends Controller
     public function getPackageTypeLimit(Request $request)
     {
         $variation = StockVariation::findOrFail($request->id);
-        return response()->json(['error' => false,'limit' => $variation->count_limit]);
+        return response()->json(['error' => false, 'limit' => $variation->count_limit]);
 
     }
 
@@ -140,33 +140,33 @@ class ProductsController extends Controller
     {
         $variation = StockVariation::find($request->uid);
 
-        if($variation){
+        if ($variation) {
             $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
             $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
             $optionalItems = $request->get('optionalItems');
-            if($optionalItems && count($optionalItems)){
-                foreach ($optionalItems as $opv){
+            if ($optionalItems && count($optionalItems)) {
+                foreach ($optionalItems as $opv) {
                     $optpVariation = StockVariation::find($opv);
-                    if($optpVariation){
+                    if ($optpVariation) {
                         $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
-                        $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
-                        $price+=$reqPrice;
+                        $reqPrice = ($promotionPrice) ? $promotionPrice->price : $optpVariation->price;
+                        $price += $reqPrice;
                     }
                 }
             }
             $requiredItems = $request->get('requiredItems');
-            if($requiredItems && count($requiredItems)){
-                foreach ($requiredItems as $opv){
+            if ($requiredItems && count($requiredItems)) {
+                foreach ($requiredItems as $opv) {
                     $optpVariation = StockVariation::find($opv);
-                    if($optpVariation){
+                    if ($optpVariation) {
                         $promotionPrice = $variation->stock->promotion_prices()->where('variation_id', $optpVariation->id)->first();
-                        $reqPrice = ($promotionPrice) ? $promotionPrice->price:$optpVariation->price;
-                        $price+=$reqPrice;
+                        $reqPrice = ($promotionPrice) ? $promotionPrice->price : $optpVariation->price;
+                        $price += $reqPrice;
                     }
                 }
             }
 
-            return \Response::json(['price' => convert_price($price,get_currency()), 'error' => false]);
+            return \Response::json(['price' => convert_price($price, get_currency()), 'error' => false]);
         }
 
         return \Response::json(['message' => 'See available options', 'error' => true]);
@@ -177,11 +177,11 @@ class ProductsController extends Controller
     {
         $model = Stock::with(['variations', 'stockAttrs'])->find($request->id);
 
-        if (! $model) return \Response::json(['error' => true]);
+        if (!$model) return \Response::json(['error' => true]);
 
-        $html = \View('frontend.products._partials.add_to_card_modal_content',compact(['model']))->render();
+        $html = \View('frontend.products._partials.add_to_card_modal_content', compact(['model']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function getVariationMenuRaw(Request $request)
@@ -189,28 +189,28 @@ class ProductsController extends Controller
         $variation = StockVariation::findOrFail($request->id);
 
         $selectElementId = $request->get('selectElementId');
-        $html = \view("frontend.products._partials.multi_menu_variation",compact(['variation','selectElementId']))->render();
+        $html = \view("frontend.products._partials.multi_menu_variation", compact(['variation', 'selectElementId']))->render();
 
-        return \Response::json(['error' => false,'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
     public function getVariationMenuRaws(Request $request)
     {
-        $variations = StockVariation::whereIn('id',$request->get('ids',[]))->get();
+        $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
 //      var_dump($variations);exit;
         $selectElementId = null;
-        $html = \view("frontend.products._partials.render_variations",compact(['variations','selectElementId']))->render();
+        $html = \view("frontend.products._partials.render_variations", compact(['variations', 'selectElementId']))->render();
 
-        return \Response::json(['error' => false,'html' => $html,'items' => $request->get('items',[])]);
+        return \Response::json(['error' => false, 'html' => $html, 'items' => $request->get('items', [])]);
     }
 
     public function postSelectItems(Request $request)
     {
-        $items = StockVariation::where('variation_id',$request->group)->get();
-        if(count($items)){
+        $items = StockVariation::where('variation_id', $request->group)->get();
+        if (count($items)) {
             $stickers = [];
             $vSettings = $items->first();
-            $html = \view("frontend.products._partials.select_popup_items", compact(['items', 'stickers','vSettings']))->render();
+            $html = \view("frontend.products._partials.select_popup_items", compact(['items', 'stickers', 'vSettings']))->render();
 
             return \Response::json(['error' => false, 'html' => $html]);
         }
@@ -236,18 +236,18 @@ class ProductsController extends Controller
     {
         $product = Stock::findOrFail($request->id);
         $variations = $product->variations()->extra()->with('options')->get();
-        $html = \view("frontend.products._partials.extra_modal_content",compact(['variations','product']))->render();
+        $html = \view("frontend.products._partials.extra_modal_content", compact(['variations', 'product']))->render();
 
-        return response()->json(['error' => false,'html' => $html]);
+        return response()->json(['error' => false, 'html' => $html]);
     }
 
     public function postExtraItem(Request $request)
     {
         $product = Stock::findOrFail($request->id);
-        $variation = $product->variations()->extra()->where('variation_id',$request->group)->get();
+        $variation = $product->variations()->extra()->where('variation_id', $request->group)->get();
         $vSettings = $variation->first();
-        $html = \view("frontend.products._partials.extra_section",compact(['vSettings','variation']))->with('vape',$product)->render();
+        $html = \view("frontend.products._partials.extra_section", compact(['vSettings', 'variation']))->with('vape', $product)->render();
 
-        return response()->json(['error' => false,'html' => $html,'type' => $vSettings->display_as]);
+        return response()->json(['error' => false, 'html' => $html, 'type' => $vSettings->display_as]);
     }
 }

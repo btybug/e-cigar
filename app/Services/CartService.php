@@ -19,13 +19,14 @@ class CartService
     public $extras = [];
     public $price = 0;
 
-    public function getCartItems($id = null){
+    public function getCartItems($id = null)
+    {
         $cartCollection = ($id) ? Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent() : Cart::getContent();
 
         $items = [];
         $empty = ($id) ? Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() : Cart::isEmpty();
-        if(! $empty){
-            foreach($cartCollection as $key => $value){
+        if (!$empty) {
+            foreach ($cartCollection as $key => $value) {
                 $items[$value->name][$key] = $value;
             }
         }
@@ -35,12 +36,13 @@ class CartService
         return $items;
     }
 
-    public function getCount() {
+    public function getCount()
+    {
         $cartCollection = count($this->getCartItems());
         return $cartCollection;
     }
 
-    public static function getVariation ($id)
+    public static function getVariation($id)
     {
         return StockVariation::find($id);
     }
@@ -49,13 +51,13 @@ class CartService
     {
         $cart = Cart::get($id);
         $price = 0;
-        if($cart && $cart->attributes->has('extra')){
-            foreach ($cart->attributes['extra'] as $datum){
-                if($datum['group']->price_per == 'product'){
+        if ($cart && $cart->attributes->has('extra')) {
+            foreach ($cart->attributes['extra'] as $datum) {
+                if ($datum['group']->price_per == 'product') {
                     $price += $datum['group']->price;
-                }else{
-                    if(count($datum['options'])){
-                        foreach ($datum['options'] as $option){
+                } else {
+                    if (count($datum['options'])) {
+                        foreach ($datum['options'] as $option) {
                             //add qty
                             $price += $option['option']->price * $option['qty'];
                         }
@@ -63,22 +65,22 @@ class CartService
                 }
             }
         }
-        return ($cart) ?$price*$cart->quantity:$price;
+        return ($cart) ? $price * $cart->quantity : $price;
     }
 
     public static function getTotalPriceSum()
     {
         $data = Cart::getContent();
         $price = 0;
-        foreach ($data as $cart){
-            $itemPrice =0;
-            if($cart->attributes->has('extra')){
-                foreach ($cart->attributes['extra'] as $datum){
-                    if($datum['group']->price_per == 'product'){
+        foreach ($data as $cart) {
+            $itemPrice = 0;
+            if ($cart->attributes->has('extra')) {
+                foreach ($cart->attributes['extra'] as $datum) {
+                    if ($datum['group']->price_per == 'product') {
                         $itemPrice += $datum['group']->price;
-                    }else{
-                        if(count($datum['options'])){
-                            foreach ($datum['options'] as $option){
+                    } else {
+                        if (count($datum['options'])) {
+                            foreach ($datum['options'] as $option) {
                                 //add qty
                                 $itemPrice += $option['option']->price * $option['qty'];
                             }
@@ -86,50 +88,50 @@ class CartService
                     }
                 }
             }
-            $price += $itemPrice*$cart->quantity;
+            $price += $itemPrice * $cart->quantity;
         }
         return $price;
     }
 
-    public function remove($id,$user_id = null)
+    public function remove($id, $user_id = null)
     {
         $list = $this->getCartItems($user_id);
-        $data = (isset($list[$id])) ? $list[$id] : [] ;
+        $data = (isset($list[$id])) ? $list[$id] : [];
 
-        if(count($data)){
-            foreach ($data as $datum){
-                if($user_id){
+        if (count($data)) {
+            foreach ($data as $datum) {
+                if ($user_id) {
                     Cart::session(Orders::ORDER_NEW_SESSION_ID)->remove($datum->id);
-                }else{
+                } else {
                     Cart::remove($datum->id);
                 }
             }
-        }else{
-            if($user_id){
+        } else {
+            if ($user_id) {
                 Cart::session(Orders::ORDER_NEW_SESSION_ID)->remove($id);
-            }else{
+            } else {
                 Cart::remove($id);
             }
         }
     }
 
-    public function removeExtra($id,$section_id,$user_id = null)
+    public function removeExtra($id, $section_id, $user_id = null)
     {
         $section = Cart::get($section_id);
-        if($section && $section->attributes->has('extra')){
+        if ($section && $section->attributes->has('extra')) {
             $attrs = $section->attributes;
             $extras = $attrs['extra'];
-            foreach ($extras as $key => $datum){
-                if($datum['key'] == $id){
+            foreach ($extras as $key => $datum) {
+                if ($datum['key'] == $id) {
                     unset($extras[$key]);
                 }
             }
             $attrs['extra'] = $extras;
-            if($user_id){
+            if ($user_id) {
                 Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($section_id, array(
                     'attributes' => $attrs
                 ));
-            }else{
+            } else {
                 Cart::update($section_id, array(
                     'attributes' => $attrs
                 ));
@@ -137,33 +139,33 @@ class CartService
         }
     }
 
-    public function update($id,$qty,$condition,$value,$user_id = null)
+    public function update($id, $qty, $condition, $value, $user_id = null)
     {
         $list = $this->getCartItems($user_id);
-        $data = (isset($list[$id])) ? $list[$id] : [] ;
+        $data = (isset($list[$id])) ? $list[$id] : [];
 
-        if(count($data)){
-            foreach ($data as $datum){
-                if($condition == 'inner'){
-                    if($user_id){
+        if (count($data)) {
+            foreach ($data as $datum) {
+                if ($condition == 'inner') {
+                    if ($user_id) {
                         Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($datum->id, array(
                             'quantity' => array(
                                 'relative' => false,
                                 'value' => $value
                             )));
-                    }else{
+                    } else {
                         Cart::update($datum->id, array(
                             'quantity' => array(
                                 'relative' => false,
                                 'value' => $value
                             )));
                     }
-                }else{
-                    if($user_id){
+                } else {
+                    if ($user_id) {
                         Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($datum->id, array(
                             'quantity' => $qty
                         ));
-                    }else{
+                    } else {
                         Cart::update($datum->id, array(
                             'quantity' => $qty
                         ));
@@ -173,7 +175,7 @@ class CartService
         }
     }
 
-    public function saveOrderItems($items,$order)
+    public function saveOrderItems($items, $order)
     {
         foreach ($items as $variation_id => $item) {
             $main = $item[$variation_id];
@@ -222,8 +224,8 @@ class CartService
 //                }
 //            }
 
-            if(count($item)){
-                foreach($item as $vid){
+            if (count($item)) {
+                foreach ($item as $vid) {
                     $variationOpt = $vid->attributes->variation;
 
                     $options = [];
@@ -249,7 +251,7 @@ class CartService
         }
     }
 
-    public function validateProduct($product,$vdata)
+    public function validateProduct($product, $vdata)
     {
         $error = false;
         $extraVariations = $product->variations()->required()->groupby('stock_variations.variation_id')->get();
@@ -257,33 +259,33 @@ class CartService
         if ($vdata && count($vdata) == count($extraVariations)) {
             foreach ($vdata as $k => $item) {
                 $data = [];
-                $group = $product->variations()->where('variation_id',$item['group_id'])->first();
-                if($group){
+                $group = $product->variations()->where('variation_id', $item['group_id'])->first();
+                if ($group) {
                     $data['group'] = $group;
                     $data['options'] = [];
                     $product_limit = 0;
 
                     if (isset($item['products']) && count($item['products'])) {
-                        if($group->price_per == 'product'){
+                        if ($group->price_per == 'product') {
                             $data['price'] = $group->price;
                             $this->price += $group->price;
-                            foreach ($item['products'] as $p){
-                                $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
-                                if($option){
+                            foreach ($item['products'] as $p) {
+                                $option = $product->variations()->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
+                                if ($option) {
                                     $product_limit += $p['qty'];
                                     $data['options'][] = [
                                         'option' => $option,
                                         'qty' => $p['qty'],
                                     ];
-                                }else{
+                                } else {
                                     $error = "Option not found";
                                 }
                             }
-                        }else{
+                        } else {
                             $itemPrice = 0;
-                            foreach ($item['products'] as $p){
-                                $option = $product->variations()->where('variation_id',$item['group_id'])->where('id',$p['id'])->first();
-                                if($option){
+                            foreach ($item['products'] as $p) {
+                                $option = $product->variations()->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
+                                if ($option) {
                                     $product_limit += $p['qty'];
                                     $this->price += $p['qty'] * $option->price;
                                     $itemPrice += $p['qty'] * $option->price;
@@ -291,40 +293,40 @@ class CartService
                                         'option' => $option,
                                         'qty' => $p['qty'],
                                     ];
-                                }else{
+                                } else {
                                     $error = "Option not found";
                                 }
                             }
                             $data['price'] = $itemPrice;
                         }
 
-                        if($group->min_count_limit > $product_limit || $group->count_limit < $product_limit){
+                        if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
                             $error = "Please select options according to limit";
                         }
-                    }else{
+                    } else {
                         $this->price += $group->price;
                     }
-                }else{
+                } else {
                     $error = "Section not found";
                 }
 
-                if(count($data)){
+                if (count($data)) {
                     $this->variations[] = $data;
                 }
             }
-        }else{
+        } else {
             $error = 'Select available options';
         }
 
         return $error;
     }
 
-    public function validateExtra($product,$vdata)
+    public function validateExtra($product, $vdata)
     {
         $error = false;
         $data = [];
-        $group = $product->variations()->where('variation_id',$vdata['group_id'])->first();
-        if($group){
+        $group = $product->variations()->where('variation_id', $vdata['group_id'])->first();
+        if ($group) {
             $data['group'] = $group;
             $data['key'] = uniqid();
             $data['options'] = [];
@@ -366,17 +368,17 @@ class CartService
 
                 }
 
-              if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
-                $error = "Please select options according to limit";
-              }
-            }else{
+                if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
+                    $error = "Please select options according to limit";
+                }
+            } else {
                 $this->price += $group->price;
             }
-        }else{
+        } else {
             $error = "section not found";
         }
 
-        if(count($data)){
+        if (count($data)) {
             $this->extras = $data;
         }
 
@@ -420,9 +422,9 @@ class CartService
         }
 
         return [
-            'default_shipping' => (isset($default_shipping)? $default_shipping: null),
-            'shipping' => (isset($shipping)? $shipping: null),
-            'geoZone' => (isset($geoZone)? $geoZone: null)
+            'default_shipping' => (isset($default_shipping) ? $default_shipping : null),
+            'shipping' => (isset($shipping) ? $shipping : null),
+            'geoZone' => (isset($geoZone) ? $geoZone : null)
         ];
     }
 }
