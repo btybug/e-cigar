@@ -90,7 +90,7 @@
       $class = "multi_v_select";
     @endphp
       <div class="col-sm-10 pl-0 wall--wrapper">
-          <select name="variations[]" id="single_v_select_{{ $vSettings->id }}" multiple="multiple"
+          <select name="variations[]" id="{{ $id }}" multiple="multiple"
                   data-count="{{ $vSettings->count_limit }}"  data-id="{{ $vSettings->id }}"
                   class="{{ $class }} select-variation-option select-2 main-select main-select-2arrows single-product-select product-pack-select select2-hidden-accessible">
               @foreach($variation as $item)

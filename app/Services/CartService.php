@@ -344,7 +344,7 @@ class CartService
                                 'qty' => $p['qty'],
                             ];
                         } else {
-                            $error = true;
+                            $error = "Option invalid";
                         }
                     } else {
                         $itemPrice = 0;
@@ -358,20 +358,21 @@ class CartService
                                 'qty' => $p['qty'],
                             ];
                         } else {
-                            $error = true;
+                            $error = "Option invalid";
+
                         }
                         $data['price'] = $itemPrice;
                     }
 
                     if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
-                        $error = true;
+                        $error = "Please select options according to limit";
                     }
                 }
             }else{
                 $this->price += $group->price;
             }
         }else{
-            $error = true;
+            $error = "section not found";
         }
 
         if(count($data)){
