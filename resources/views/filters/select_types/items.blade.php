@@ -1,15 +1,11 @@
-{{--@foreach($items as $items)--}}
-    {{--<li data-id="{{ $items->id }}"--}}
-        {{--class="option-elm-attributes col-md-3">--}}
-        {{--<div class="wrap-item">--}}
-            {{--<a href="#">--}}
-                {{--<span><img src="{!! url($items->image) !!}" alt=""></span>--}}
-                {{--<span class="name">{!! $items->name !!}</span>--}}
-            {{--</a>--}}
-            {{--<input type="hidden" name="stocks[]" value="{{ $items->id }}">--}}
-        {{--</div>--}}
-    {{--</li>--}}
-{{--@endforeach--}}
 <div class="col-sm-6">
-{!! Form::select('items[]',[null=>null]+$items->pluck('name','id')->toArray(),null,['class'=>'select-2 main-select main-select-2arrows single-product-select product--select-items select2-hidden-accessible','required'=>true,'style'=>'width:100%']) !!}
+    <select name="items[]" required style="width: 100%;"
+            class="select-2 main-select main-select-2arrows single-product-select product--select-items select2-hidden-accessible">
+        @foreach($items as $item)
+            <option value="{{ $item->id }}" data-out="{{ out_of_stock($item) }}">
+                {{ $item->name }}
+                <b>{{ out_of_stock_msg($item) }}</b>
+            </option>
+        @endforeach
+    </select>
 </div>
