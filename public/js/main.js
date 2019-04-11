@@ -1069,6 +1069,9 @@ $(document).ready(function() {
                         case 'filter':
                           parentRow.find('.filter-children-items').empty();
                           parentRow.find('.filter-children-selects').html(res.filters);
+                          Number(parentRow.find('.limit[data-limit]').attr('data-limit')) === 1
+                            && parentRow.find('.limit[data-per-price]').attr('data-per-price') !== 'product'
+                            && parentRow.find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').empty();
                           break;
                         case 'items':
                           const isMultiple = self.closest('[data-limit]').attr('data-limit')=== '1' ? false : true;
