@@ -3235,3 +3235,16 @@ outline: none;
   border: 1px solid #000000;
   box-shadow: 0px 0 4px 3px #f39c12;
 }
+.product-single-info_row-items .menu-item-selected{
+    padding-right: 0;
+}
+.product-single-info_row .limit{
+    padding-right: 0;
+}
+.product-single-info_row .products-list-wrap .product-list-item .list-qty{
+    max-width: 171px!important;
+}
+.product-single-info_row .products-list-wrap .product-list-item{
+    padding: 0 !important;
+    margin: 0 !important;
+}
