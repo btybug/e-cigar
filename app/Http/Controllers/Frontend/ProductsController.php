@@ -176,9 +176,7 @@ class ProductsController extends Controller
     public function getVariations(Request $request)
     {
         $model = Stock::with(['variations', 'stockAttrs'])->find($request->id);
-
         if (!$model) return \Response::json(['error' => true]);
-
         $html = \View('frontend.products._partials.add_to_card_modal_content', compact(['model']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
@@ -187,7 +185,6 @@ class ProductsController extends Controller
     public function getVariationMenuRaw(Request $request)
     {
         $variation = StockVariation::findOrFail($request->id);
-
         $selectElementId = $request->get('selectElementId');
         $html = \view("frontend.products._partials.multi_menu_variation", compact(['variation', 'selectElementId']))->render();
 
@@ -197,7 +194,6 @@ class ProductsController extends Controller
     public function getVariationMenuRaws(Request $request)
     {
         $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
-//      var_dump($variations);exit;
         $selectElementId = null;
         $html = \view("frontend.products._partials.render_variations", compact(['variations', 'selectElementId']))->render();
 
@@ -225,7 +221,6 @@ class ProductsController extends Controller
             ->whereIn('item_specifications.sticker_id', $request->get('stickers', []))
             ->where('status', Items::ACTIVE)
             ->select('items.*')->get();
-//        $items = Items::whereNotIn('id', $request->get('items', []))->get();
 
         $html = \view("admin.stock._partials.items_render", compact(['items']))->render();
 
