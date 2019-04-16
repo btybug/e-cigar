@@ -2901,6 +2901,37 @@ $(document).ready(function () {
     var makeOutOfStockSelectOption = function makeOutOfStockSelectOption(select, type) {
       if (type === "select") {
         select.find('[data-out="1"]').attr('disabled', 'disabled');
+
+        var current_item_id = $(select.find('[data-out="0"]')[0]).attr('data-select2-id');
+        new_qty(select);
+        if (isSingle(select)) {
+          select.find('[data-out="0"]').length > 0 && select.val($(select.find('[data-out="0"]')[0]).val());
+          fetch("/products/get-variation-menu-raw", {
+            method: "post",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-Token": $('input[name="_token"]').val()
+            },
+            credentials: "same-origin",
+            body: JSON.stringify({
+              id: $(select.find('[data-out="0"]')[0]).val(),
+              selectElementId: current_item_id
+            })
+          }).then(function (response) {
+            return response.json();
+          }).then(function (json) {
+            if (isSingle(select)) {
+              !isSection(select) && select.closest('.product-single-info_row').find('.selected-menu-options').html(json.html);
+            } else {
+              select.closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
+            }
+            setTotalPrice(false);
+          }).catch(function (error) {
+            console.log(error);
+          });
+        }
       } else if (type === "list") {
         select.find('[data-out="1"]').addClass('none-touchable-op');
       } else if (type === "popup") {
@@ -2964,7 +2995,7 @@ $(document).ready(function () {
               select.on('select2:select', function (e) {
                 var $this = $(this);
                 var current_item_id = $(e.params.data.element).attr('data-select2-id');
-
+                console.log(current_item_id, e.params.data.id, 55555555555555555555555555);
                 new_qty(select);
 
                 fetch("/products/get-variation-menu-raw", {
