@@ -26,7 +26,7 @@ class Items extends Translatable
 
     public function getQtyAttribute()
     {
-        return ($this->type=='simple')?$this->purchase()->sum('qty')-$this->others()->sum('qty'):0;
+        return ($this->type == 'simple') ? $this->purchase()->sum('qty') - $this->others()->sum('qty') : 0;
     }
 
     public function scopeActive($query)
@@ -36,17 +36,17 @@ class Items extends Translatable
 
     public function purchase()
     {
-        return $this->hasMany(Purchase::class,'item_id');
+        return $this->hasMany(Purchase::class, 'item_id');
     }
 
     public function barcode()
     {
-        return $this->belongsTo(Barcodes::class,'barcode_id');
+        return $this->belongsTo(Barcodes::class, 'barcode_id');
     }
 
     public function media()
     {
-        return $this->hasMany(ItemsMedia::class,'item_id');
+        return $this->hasMany(ItemsMedia::class, 'item_id');
     }
 
     public function suppliers()
@@ -56,12 +56,12 @@ class Items extends Translatable
 
     public function packages()
     {
-        return $this->hasMany(ItemsPackages::class,'item_id');
+        return $this->hasMany(ItemsPackages::class, 'item_id');
     }
 
     public function others()
     {
-        return $this->hasMany(Others::class,'item_id');
+        return $this->hasMany(Others::class, 'item_id');
     }
 
     public function specificationsPivot()
