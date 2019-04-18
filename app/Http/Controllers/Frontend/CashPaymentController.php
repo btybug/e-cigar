@@ -28,10 +28,9 @@ use Darryldecode\Cart\Facades\CartFacade as Cart;
 use PragmaRX\Countries\Package\Countries;
 
 
-
 class CashPaymentController extends Controller
 {
-    protected $view= 'frontend.shop';
+    protected $view = 'frontend.shop';
 
     private $statuses;
     private $settings;
@@ -51,24 +50,24 @@ class CashPaymentController extends Controller
         $shippingId = session()->get('shipping_address');
         $billingId = session()->get('billing_address');
         $geoZone = null;
-        $this->amount = CartService::getTotalPriceSum()+ Cart::getTotal();
+        $this->amount = CartService::getTotalPriceSum() + Cart::getTotal();
 
 
-        if(\Auth::check()){
+        if (\Auth::check()) {
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
             $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-        $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone,$region) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order_number = get_order_number();
 
             $order = Orders::create([
                 'user_id' => \Auth::id(),
-                'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
+                'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
@@ -80,7 +79,7 @@ class CashPaymentController extends Controller
 
             $status = $setting = $this->settings->getData('order', 'open');
             $historyData['user_id'] = \Auth::id();
-            $historyData['status_id'] = ($status)?$status->val : $this->statuses->where('type','order')->first()->id;
+            $historyData['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'order')->first()->id;
             $historyData['note'] = 'Order made';
 
             $order->history()->create($historyData);
@@ -94,34 +93,34 @@ class CashPaymentController extends Controller
             unset($shippingAddress['updated_at']);
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
-            foreach ($items as $variation_id => $item){
+            foreach ($items as $variation_id => $item) {
                 $options = [];
-                foreach ($item->attributes->variations as $variation){
+                foreach ($item->attributes->variations as $variation) {
                     $dataV = [];
-                    $dataV['price'] =  $variation['price'];
+                    $dataV['price'] = $variation['price'];
                     $dataV['options'] = [];
-                    foreach ($variation['options'] as $option){
+                    foreach ($variation['options'] as $option) {
                         $dataV['options'][] = [
-                          'qty' => $option['qty'],
-                          'name' => $option['option']->title,
-                          'id' => $option['option']->id,
-                          'image' => $option['option']->image,
+                            'qty' => $option['qty'],
+                            'name' => $option['option']->title,
+                            'id' => $option['option']->id,
+                            'image' => $option['option']->image,
                         ];
                     }
                     $options[$variation['group']->variation_id] = $dataV;
                 }
 
                 $extras = [];
-                foreach ($item->attributes->extra as $extra){
+                foreach ($item->attributes->extra as $extra) {
                     $dataV = [];
-                    $dataV['price'] =  $extra['price'];
+                    $dataV['price'] = $extra['price'];
                     $dataV['options'] = [];
-                    foreach ($extra['options'] as $option){
+                    foreach ($extra['options'] as $option) {
                         $dataV['options'][] = [
-                          'qty' => $option['qty'],
-                          'name' => $option['option']->title,
-                          'id' => $option['option']->id,
-                          'image' => $option['option']->image,
+                            'qty' => $option['qty'],
+                            'name' => $option['option']->title,
+                            'id' => $option['option']->id,
+                            'image' => $option['option']->image,
                         ];
                     }
                     $extras[$extra['group']->variation_id] = $dataV;
@@ -136,26 +135,26 @@ class CashPaymentController extends Controller
                     'qty' => $item->quantity,
                     'amount' => $item->price * $item->quantity,
                     'image' => $item->attributes->product->image,
-                    'options' => ['options' => $options,'extras' => $extras]
+                    'options' => ['options' => $options, 'extras' => $extras]
                 ]);
             }
 
             OrdersJob::makeNew($order->id);
-            event(new OrderSubmitted(\Auth::getUser(),$order));
+            event(new OrderSubmitted(\Auth::getUser(), $order));
 
             return $order;
         });
 
-        return \Response::json(['error' => false,'url' => route('cash_order_success',$order->id)]);
+        return \Response::json(['error' => false, 'url' => route('cash_order_success', $order->id)]);
     }
 
-    public function success (Request $request,$id)
+    public function success(Request $request, $id)
     {
         $order = Orders::findOrFail($id);
-        
-        if(! Cart::isEmpty() && session()->has('shipping_address') &&  session()->has('billing_address') && $order){
-            session()->forget('shipping_address','billing_address');
-            session()->forget('shipping_address_id','billing_address_id');
+
+        if (!Cart::isEmpty() && session()->has('shipping_address') && session()->has('billing_address') && $order) {
+            session()->forget('shipping_address', 'billing_address');
+            session()->forget('shipping_address_id', 'billing_address_id');
             session()->forget('payment_token');
             Cart::clear();
             Cart::removeConditionsByType('shipping');
