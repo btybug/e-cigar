@@ -21,6 +21,7 @@ use App\Models\Statuses;
 use App\Models\Settings;
 use App\Models\ZoneCountries;
 use App\Models\ZoneCountryRegions;
+use App\Services\CartService;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -34,6 +35,7 @@ class CashPaymentController extends Controller
 
     private $statuses;
     private $settings;
+    private $amount;
 
     public function __construct(
         Statuses $statuses,
@@ -49,6 +51,9 @@ class CashPaymentController extends Controller
         $shippingId = session()->get('shipping_address');
         $billingId = session()->get('billing_address');
         $geoZone = null;
+        $this->amount = CartService::getTotalPriceSum()+ Cart::getTotal();
+
+
         if(\Auth::check()){
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
@@ -64,7 +69,7 @@ class CashPaymentController extends Controller
             $order = Orders::create([
                 'user_id' => \Auth::id(),
                 'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
-                'amount' => Cart::getTotal(),
+                'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
                 'payment_method' => 'cash',
@@ -91,24 +96,52 @@ class CashPaymentController extends Controller
             $order->shippingAddress()->create($shippingAddress);
             foreach ($items as $variation_id => $item){
                 $options = [];
-                foreach ($item->attributes->variation->options as $option){
-                    $options[$option->attribute_sticker->attr->name] = $option->attribute_sticker->sticker->name;
+                foreach ($item->attributes->variations as $variation){
+                    $dataV = [];
+                    $dataV['price'] =  $variation['price'];
+                    $dataV['options'] = [];
+                    foreach ($variation['options'] as $option){
+                        $dataV['options'][] = [
+                          'qty' => $option['qty'],
+                          'name' => $option['option']->title,
+                          'id' => $option['option']->id,
+                          'image' => $option['option']->image,
+                        ];
+                    }
+                    $options[$variation['group']->variation_id] = $dataV;
+                }
+
+                $extras = [];
+                foreach ($item->attributes->extra as $extra){
+                    $dataV = [];
+                    $dataV['price'] =  $extra['price'];
+                    $dataV['options'] = [];
+                    foreach ($extra['options'] as $option){
+                        $dataV['options'][] = [
+                          'qty' => $option['qty'],
+                          'name' => $option['option']->title,
+                          'id' => $option['option']->id,
+                          'image' => $option['option']->image,
+                        ];
+                    }
+                    $extras[$extra['group']->variation_id] = $dataV;
                 }
 
                 OrderItem::create([
                     'order_id' => $order->id,
-                    'name' => $item->attributes->variation->stock->name,
-                    'sku' => $item->name,
+                    'name' => $item->attributes->product->name,
+                    'sku' => '',
                     'variation_id' => $variation_id,
                     'price' => $item->price,
                     'qty' => $item->quantity,
                     'amount' => $item->price * $item->quantity,
-                    'image' => $item->attributes->variation->stock->image,
-                    'options' => $options
+                    'image' => $item->attributes->product->image,
+                    'options' => ['options' => $options,'extras' => $extras]
                 ]);
-                OrdersJob::makeNew($order->id);
-                event(new OrderSubmitted(\Auth::getUser(),$order));
             }
+
+            OrdersJob::makeNew($order->id);
+            event(new OrderSubmitted(\Auth::getUser(),$order));
 
             return $order;
         });
