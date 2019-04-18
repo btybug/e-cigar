@@ -20,6 +20,7 @@ use App\Models\StripePayments;
 use App\Models\Transaction;
 use App\Models\ZoneCountries;
 use App\Models\ZoneCountryRegions;
+use App\Services\CartService;
 use Cartalyst\Stripe\Exception\StripeException;
 use Cartalyst\Stripe\Stripe;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class StripePaymentController extends Controller
     protected $view = 'frontend.shop';
     private $statuses;
     private $settings;
+    private $amount;
 
     public function __construct(
         Statuses $statuses,
@@ -49,9 +51,10 @@ class StripePaymentController extends Controller
 
 // This is a $20.00 charge in US Dollar.
         try {
+            $this->amount = CartService::getTotalPriceSum()+ Cart::getTotal();
             $charge = $stripe->charges()->create(
                 array(
-                    'amount' => Cart::getTotal(),
+                    'amount' => $this->amount,
                     'currency' => 'usd',
                     'source' => $request->get('stripeToken')
                 )
@@ -122,7 +125,7 @@ class StripePaymentController extends Controller
                 'user_id' => \Auth::id(),
 //                'transaction_id' => $transaction->id,
                 'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
-                'amount' => Cart::getTotal(),
+                'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
                 'payment_method' => 'stripe',
@@ -149,6 +152,7 @@ class StripePaymentController extends Controller
             unset($shippingAddress['updated_at']);
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
+
             foreach ($items as $variation_id => $item) {
                 $options = [];
                 foreach ($item->attributes->variation->options as $option) {
