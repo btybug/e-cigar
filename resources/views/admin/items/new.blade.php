@@ -584,7 +584,7 @@
                         themes: {
                             responsive: !1
                         },
-                        data: {!! json_encode($data) !!}
+                        data: {!! json_encode('{}') !!}
                     },
                     types: {
                         "default": {
