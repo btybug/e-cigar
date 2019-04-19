@@ -16,6 +16,7 @@ use App\Models\OrderAddresses;
 use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\OrdersJob;
+use App\Models\Others;
 use App\Models\StripePayments;
 use App\Models\Statuses;
 use App\Models\Settings;
@@ -50,24 +51,24 @@ class CashPaymentController extends Controller
         $shippingId = session()->get('shipping_address');
         $billingId = session()->get('billing_address');
         $geoZone = null;
-        $this->amount = CartService::getTotalPriceSum() + Cart::getTotal();
+        $this->amount = CartService::getTotalPriceSum()+ Cart::getTotal();
 
 
-        if (\Auth::check()) {
+        if(\Auth::check()){
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
             $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region) {
+        $order = \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone,$region) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order_number = get_order_number();
 
             $order = Orders::create([
                 'user_id' => \Auth::id(),
-                'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
+                'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
@@ -79,7 +80,7 @@ class CashPaymentController extends Controller
 
             $status = $setting = $this->settings->getData('order', 'open');
             $historyData['user_id'] = \Auth::id();
-            $historyData['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'order')->first()->id;
+            $historyData['status_id'] = ($status)?$status->val : $this->statuses->where('type','order')->first()->id;
             $historyData['note'] = 'Order made';
 
             $order->history()->create($historyData);
@@ -93,18 +94,26 @@ class CashPaymentController extends Controller
             unset($shippingAddress['updated_at']);
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
-            foreach ($items as $variation_id => $item) {
+
+            $sales = [];
+            foreach ($items as $variation_id => $item){
                 $options = [];
-                foreach ($item->attributes->variations as $variation) {
+                foreach ($item->attributes->variations as $variation){
                     $dataV = [];
-                    $dataV['price'] = $variation['price'];
+                    $dataV['price'] =  $variation['price'];
                     $dataV['options'] = [];
-                    foreach ($variation['options'] as $option) {
+                    foreach ($variation['options'] as $option){
+                        if(isset($sales[$option['option']->item_id])){
+                            $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
+                        }else{
+                            $sales[$option['option']->item_id] = $option['qty'];
+                        }
+
                         $dataV['options'][] = [
-                            'qty' => $option['qty'],
-                            'name' => $option['option']->title,
-                            'id' => $option['option']->id,
-                            'image' => $option['option']->image,
+                          'qty' => $option['qty'],
+                          'name' => $option['option']->title,
+                          'id' => $option['option']->id,
+                          'image' => $option['option']->image,
                         ];
                     }
                     $options[$variation['group']->variation_id] = $dataV;
@@ -115,15 +124,33 @@ class CashPaymentController extends Controller
                     $dataV = [];
                     $dataV['price'] = $extra['price'];
                     $dataV['options'] = [];
-                    foreach ($extra['options'] as $option) {
+                    foreach ($extra['options'] as $option){
+                        if(isset($sales[$option['option']->item_id])){
+                            $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
+                        }else{
+                            $sales[$option['option']->item_id] = $option['qty'];
+                        }
+
                         $dataV['options'][] = [
-                            'qty' => $option['qty'],
-                            'name' => $option['option']->title,
-                            'id' => $option['option']->id,
-                            'image' => $option['option']->image,
+                          'qty' => $option['qty'],
+                          'name' => $option['option']->title,
+                          'id' => $option['option']->id,
+                          'image' => $option['option']->image,
                         ];
                     }
                     $extras[$extra['group']->variation_id] = $dataV;
+                }
+
+                if(count($sales)){
+                    foreach ($sales as $item_id => $sale){
+                        Others::create([
+                            'item_id' => $item_id,
+                            'user_id' => \Auth::id(),
+                            'qty' => (int)$sale,
+                            'reason' => 'sold',
+                            'grouped' => $order->id,
+                        ]);
+                    }
                 }
 
                 OrderItem::create([

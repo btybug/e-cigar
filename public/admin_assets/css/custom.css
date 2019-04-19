@@ -1093,3 +1093,8 @@ div.remover-container .remover-container-zone .file {
     height: 100%;
     width: 100%;
 }
+
+.fade:not(.show) {
+    opacity: 0;
+    display: none;
+}
