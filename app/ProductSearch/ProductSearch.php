@@ -125,7 +125,7 @@ class ProductSearch
                 );
             })
 
-            ->leftJoin('attributes_stickers', 'stock_variation_options.attribute_sticker_id', '=', 'attributes_stickers.id')
+            ->leftJoin('stock_attributes', 'stocks.id', '=', 'stock_attributes.stock_id')
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale', app()->getLocale())
             ->where('stocks.status', true);
