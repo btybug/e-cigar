@@ -119,8 +119,6 @@ class StockService
 
     public function saveVariations($stock, array $data = [])
     {
-//        $stock->variations()->delete();
-
         if (count($data)) {
             $deletableArray = [];
             foreach ($data as $variation_id => $data) {
@@ -156,21 +154,19 @@ class StockService
         if (count($data)) {
             $deletableArray = [];
             foreach ($data as $variation_id => $datum) {
-
                 $newData = [];
                 $newData['count_limit'] = ($datum['count_limit']) ?? 0;
-                $newData['min_count_limit'] = ($datum['min_count_limit'])??0;
-//                dd($newData);
+                $newData['min_count_limit'] = ($datum['min_count_limit']) ?? 0;
                 $newData['title'] = $datum['title'];
                 $newData['type'] = $datum['type'];
                 $newData['is_required'] = $datum['is_required'];
                 $newData['display_as'] = $datum['display_as'];
                 $newData['price_per'] = $datum['price_per'];
                 $newData['filter_category_id'] = $datum['filter_category_id'];
-                $newData['common_price'] = ($datum['common_price'])??0;
-                if(isset($datum['variations']) && count($datum['variations'])){
+                $newData['common_price'] = ($datum['common_price']) ?? 0;
+                if (isset($datum['variations']) && count($datum['variations'])) {
                     foreach ($datum['variations'] as $item) {
-                        $newData['price'] = ($datum['price_per'] == 'product') ? $newData['common_price'] : (($item['price'])??0);
+                        $newData['price'] = ($datum['price_per'] == 'product') ? $newData['common_price'] : (($item['price']) ?? 0);
                         $newData['item_id'] = $item['item_id'];
                         $newData['qty'] = $item['qty'];
                         $newData['image'] = $item['image'];

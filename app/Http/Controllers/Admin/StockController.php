@@ -60,8 +60,8 @@ class StockController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $variations = collect($model->variations()->where('is_required',true)->get())->groupBy('variation_id');
-        $extraVariations = collect($model->variations()->where('is_required',false)->get())->groupBy('variation_id');
+        $variations = collect($model->variations()->where('is_required', true)->get())->groupBy('variation_id');
+        $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
@@ -75,7 +75,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations','extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
+        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
     public function postStock(ProductsRequest $request)
@@ -85,7 +85,7 @@ class StockController extends Controller
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
             'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
-        $data['price'] = ($data['price'])??0;
+        $data['price'] = ($data['price']) ?? 0;
 //        dd($request->get('promotions'),array_values($request->get('promotions')));
         $stock = Stock::updateOrCreate($request->id, $data);
 
@@ -288,7 +288,7 @@ class StockController extends Controller
         $required = $request->required;
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
-        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters','required']))->render();
+        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters', 'required']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
