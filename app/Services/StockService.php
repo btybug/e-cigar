@@ -212,6 +212,7 @@ class StockService
     public function saveSingleVariation($stock, array $data = [])
     {
         if (count($data)) {
+
             $data['stock_id'] = $stock->id;
             if (isset($data['id'])) {
                 $variation = StockVariation::find($data['id']);

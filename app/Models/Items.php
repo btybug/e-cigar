@@ -15,8 +15,11 @@ use App\Models\Translations\ItemTranslations;
 class Items extends Translatable
 {
     protected $table = 'items';
+
     protected $guarded = ['id'];
+
     public $translationModel = ItemTranslations::class;
+    
     public $translatedAttributes = ['name', 'short_description', 'long_description'];
 
     protected $appends = array('qty');
