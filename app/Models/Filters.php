@@ -120,9 +120,7 @@ class Filters extends Translatable
                 foreach ($item->items as $v){
                     $data[] = $v;
                 }
-
             }
-
 
             if (count($item->children)) {
                 $data = self::getRecursiveItems($item->children, 0, $data);
