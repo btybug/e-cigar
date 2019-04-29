@@ -95,8 +95,7 @@ class FiltersController extends Controller
             $items = $filters->last()->items()->skip(0)->take(10)->get();
             $type = 'items';
             $items_html = $this->view("items", compact(['items']))->render();
-            isset($filters[$key]);
-            unset($filters[$key]);
+            if (isset($filters[$key])) unset($filters[$key]);
         };
 
         $html = $this->view("filters", compact(['children', 'filters']))->render();
