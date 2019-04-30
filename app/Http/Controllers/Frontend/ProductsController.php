@@ -140,6 +140,9 @@ class ProductsController extends Controller
     {
         $variation = StockVariation::find($request->uid);
 
+
+
+        
         if ($variation) {
             $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
             $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;

@@ -12,8 +12,6 @@
 */
 Route::get('/', function () {
     // Get all tickets
-
-//    dd(\Zendesk::tickets()->findAll());
 //
 //// Create a new ticket
 //    \Zendesk::tickets()->create([
