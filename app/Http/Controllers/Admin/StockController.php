@@ -18,6 +18,9 @@ use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
+use App\Models\StockAttribute;
+use App\Models\StockOfferProducts;
+use App\Models\StockSales;
 use App\Models\StockSeo;
 use App\Services\StockService;
 use Illuminate\Http\Request;
@@ -40,11 +43,21 @@ class StockController extends Controller
         return $this->view('stock');
     }
 
+    public function stockOffers()
+    {
+        return $this->view('offers');
+    }
+
     public function stockNew()
     {
         $model = null;
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
+
         $data = Category::recursiveItems($categories);
+        $dataOffers = Category::recursiveItems($offers);
+
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
@@ -54,7 +67,8 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
+        return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs','offers','dataOffers',
+            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
     }
 
     public function getStockEdit($id)
@@ -64,8 +78,13 @@ class StockController extends Controller
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
+        $checkedOffers = $model->offers()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
+        $dataOffers = Category::recursiveItems($offers, 0, [], $checkedOffers);
+
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
@@ -75,119 +94,129 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
+        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands','offers','dataOffers',
+            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
     public function postStock(ProductsRequest $request)
     {
-//        dd($request->get('variations', []));
-        $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
-            'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
-            'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
+        $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications','offer_products',
+            'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation',
+            'extra_product', 'promotion_prices', 'promotion_type','categories', 'offers', 'general', 'related_products',
+            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads');
         $data['user_id'] = \Auth::id();
         $data['price'] = ($data['price']) ?? 0;
-//        dd($request->get('promotions'),array_values($request->get('promotions')));
         $stock = Stock::updateOrCreate($request->id, $data);
-
-//        if ($data['type'] == 'variation_product') {
-//            $this->stockService->saveVariations($stock, $request->get('variations', []));
-//        } elseif ($data['type'] == 'simple_product') {
-//            $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
-//        } elseif ($data['type'] == 'package_product') {
-//            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []));
-//        }
 
         $this->stockService->savePackageVariation($stock, $request->get('variations', []));
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->specifications()->sync($request->get('specifications'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
-        $stock->specifications()->syncWithoutDetaching($options);
-
-
-        //-------------------//
-        $stock->categories()->sync(json_decode($request->get('categories', [])));
-        $stock->related_products()->sync($request->get('related_products'));
-
-        $stock->promotions()->detach();
-
-        if ($request->promotions && count($request->promotions)) {
-            foreach ($request->promotions as $promotion) {
-                $stock->promotions()->attach($promotion['id'], ['type' => $promotion['type']]);
+//        dd($options);
+        if($options && count($options)){
+            foreach ($options as $option){
+                StockAttribute::create([
+                    'attributes_id' => $option['attributes_id'],
+                    'sticker_id' => $option['sticker_id'],
+                    'parent_id' => $option['parent_id'],
+                    'stock_id' => $stock->id,
+                ]);
             }
         }
 
-        $stock->stickers()->sync($request->get('stickers'));
-        $this->stockService->savePromotionPrices($stock, $request->get('promotion_prices', []));
+        $offer_products = $request->get('offer_products',[]);
 
+        if($stock->is_offer){
+            if($stock->offer_type){
+                $notDeletableProducts = [];
+                if($offer_products && count($offer_products)){
+                    foreach ($offer_products as $offer_product){
+                        $product = StockOfferProducts::where('stock_id',$offer_product)
+                        ->where('offer_id',$stock->id)->first();
+                        if(! $product){
+                            StockOfferProducts::create([
+                               'stock_id' =>  $offer_product,
+                               'offer_id' =>  $stock->id,
+                            ]);
+                        }
+                        $notDeletableProducts[] = $offer_product;
+                    }
+                }
+
+                StockOfferProducts::where('offer_id',$stock->id)->whereNotIn('stock_id',$notDeletableProducts)->delete();
+                $stock->offers()->detach();
+            }else{
+                $categories = json_decode($request->get('offers', []), true);
+                $stock->offers()->sync($categories);
+
+                StockOfferProducts::where('offer_id',$stock->id)->delete();
+            }
+
+        }else{
+            $categories = json_decode($request->get('categories', []), true);
+            $stock->categories()->sync($categories);
+            $stock->special_offers()->sync($offer_products);
+        }
+
+        $stock->related_products()->sync($request->get('related_products'));
+        $stock->stickers()->sync($request->get('stickers'));
         $this->createOrUpdateSeo($request, $stock->id);
 
-        //-------------------//
         return redirect()->back();
     }
 
-    public function getPromotionEdit($id, Request $request)
+    public function delete(Request $request)
+    {
+        $stock = Stock::findOrFail($request->slug);
+        $stock->delete();
+
+        return response()->json(['error' => false]);
+    }
+
+    public function offerNew()
+    {
+        $model = null;
+        $offer = true;
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
+        $dataOffers = Category::recursiveItems($offers);
+
+        $general = $this->settings->getEditableData('seo_stocks')->toArray();
+        $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
+        $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_stocks');
+
+        return $this->view('stock_new', compact(['model','brands', 'general','offers','dataOffers',
+            'twitterSeo', 'fbSeo', 'robot','offer']));
+    }
+
+    public function getOfferEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $type = $request->get('type', 'all');
-        $now = strtotime(today()->toDateString());
+        $offer = true;
+        $variations = collect($model->variations()->where('is_required', true)->get())->groupBy('variation_id');
 
-        if ($type == 'all') {
-            $sales = $model->sales()->groupBy('slug')->get();
-        } else if ($type == 'archived') {
-            $sales = $model->sales()->where('canceled', true)->groupBy('slug')->get();
-        } else if ($type == 'coming') {
-            $sales = $model->sales()->where('canceled', false)->where('start_date', '>', $now)->groupBy('slug')->get();
-        } else if ($type == 'current') {
-            $sales = $model->sales()->where('canceled', false)->where('start_date', '<=', $now)->where('end_date', '>=', $now)->groupBy('slug')->get();
-        }
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
+        $checkedOffers = $model->offers()->pluck('id')->all();
+        $dataOffers = Category::recursiveItems($offers, 0, [], $checkedOffers);
 
-        return $this->view('stock_promotions', compact(['model', 'sales', 'type']));
+        $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+        $stockItems = Items::active()->get()->pluck('name', 'id')->all();
 
+        $general = $this->settings->getEditableData('seo_stocks')->toArray();
+        $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
+        $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
+        $robot = $this->settings->getEditableData('seo_robot_stocks');
+//dd($model->offer_products);
+
+        return $this->view('stock_new', compact(['model', 'variations','brands','offers','dataOffers','offer','checkedOffers',
+            'filters','stockItems',
+            'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot']));
     }
 
-    public function getPromotionVariations(Request $request)
-    {
-        $stock = Stock::find($request->stock_id);
-        $model = Stock::findOrFail($request->id);
-        $type = $request->type;
-        $price = json_decode($request->price, true);
-//        dd($price);
-
-        $html = \View("admin.inventory._partials.extra_item", compact(['model', 'type', 'price', 'stock']))->render();
-//        dd($html);
-//        dd(\Response::json(['error' => false, 'html' => $html]));
-        return \Response::json(['error' => false, 'html' => $html]);
-    }
-
-    public function savePromotion(Request $request)
-    {
-        $data = $request->except('extra_product', 'stock_id');
-        $stock = Stock::findOrFail($request->stock_id);
-
-        $sale = $stock->sales()->where('canceled', false)->where('start_date', '<=', strtotime($data['start_date']))->where('end_date', '>=', strtotime($data['start_date']))
-            ->orWhere(function ($query) use ($data) {
-                $query->where('canceled', false)->where('start_date', '<=', strtotime($data['end_date']))->where('end_date', '>=', strtotime($data['end_date']));
-            })
-            ->first();
-
-        if ($sale) return \Response::json(['error' => true, 'message' => 'Please select another dates for promotion, we have active promotion with these dates...']);
-
-        if ($request->get('extra_product') && count($request->get('extra_product'))) {
-            foreach ($request->get('extra_product') as $key => $item) {
-                $sale = $stock->sales()->where('variation_id', $key)->where('slug', $data['slug'])->first();
-                $data['variation_id'] = $key;
-                $data['price'] = $item['price'];
-                if ($sale) {
-                    $sale->update($data);
-                } else {
-                    $stock->sales()->create($data);
-                }
-            }
-        }
-
-        return \Response::json(['error' => false]);
-    }
 
     private function createOrUpdateSeo($request, $stock_id)
     {
@@ -205,13 +234,6 @@ class StockController extends Controller
         }
     }
 
-    public function cancelSale(Request $request)
-    {
-        $stock = Stock::findOrFail($request->stock_id);
-        $stock->sales()->where('slug', $request->slug)->update(['canceled' => true]);
-
-        return \Response::json(['error' => false]);
-    }
 
     public function linkAll($data)
     {
@@ -363,9 +385,29 @@ class StockController extends Controller
     public function getStocks(Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Stock::whereNotIn('id', $request->get('arr', []))->get();
+        $attr = Stock::where('is_offer',false)->whereNotIn('id', $request->get('arr', []))->get();
 
         return \Response::json(['error' => false, 'data' => $attr]);
+    }
+
+    public function getSpecialOffers(Request $request)
+    {
+        $promotion = ($request->get("promotion")) ? true : false;
+        $attr = Stock::where('is_offer',true)->where('offer_type',true)->whereNotIn('id', $request->get('arr', []))->get();
+
+        return \Response::json(['error' => false, 'data' => $attr]);
+    }
+
+    public function addSpecialOffers(Request $request)
+    {
+        $error = true;
+        $html = '';
+        $offer = Stock::where('is_offer',true)->where('offer_type',true)->where('id', $request->get('id'))->first();
+        if($offer){
+            $error = false;
+            $html = view("admin.stock._partials.special_offer_item",compact(['offer']))->render();
+        }
+        return \Response::json(['error' => $error, 'html' => $html]);
     }
 
     public function postItemByID(Request $request)
@@ -423,7 +465,7 @@ class StockController extends Controller
         $main_unique = $request->get('uniqueId');
         $main = null;
         $html = '';
-        if ($request->type == 'simple_product') {
+        if ($request->type == 'single') {
             $html = \view("admin.stock._partials.simple_item", compact(['stockItems', 'main_unique', 'main']))->render();
         } elseif ($request->type == 'package_product') {
             $html = \view("admin.stock._partials.package_item", compact(['stockItems', 'main_unique', 'main']))->render();
@@ -433,5 +475,60 @@ class StockController extends Controller
 
 
         return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function postSpecificationByCategory(Request $request)
+    {
+        $html = '';
+        $existingCategories = [];
+        $data = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+            ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
+            ->where('attribute_categories.categories_id', $request->id);
+        if ($request->selected == "true") {
+            $data = $data->whereNotIn('attributes.id', $request->get('attrs', []));
+        }
+        $data = $data->where('attributes_translations.locale', app()->getLocale())
+            ->select('attributes.*', 'attributes_translations.name')->get();
+//            dd($data->pluck('id','id')->all());
+        if ($request->selected == "true") {
+            $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+            $html = View("admin.inventory._partials.loop_specifications", compact(['data', 'allAttrs']))->with('by_category', true)->render();
+        } else {
+            $existingCategories = $this->getCategoriesAttrs($request->categories, $request->id)->pluck('id', 'id')->all();
+        }
+
+        return \Response::json(['error' => false, 'data' => $data->pluck('id', 'id')->all(), 'existingAttributes' => $existingCategories, 'html' => $html]);
+    }
+
+    public function getCategoriesAttrs($categories, $id)
+    {
+        $categories = json_decode($categories, true);
+        $categoryData = [];
+        if (count($categories)) {
+            foreach ($categories as $category) {
+                if ($category != $id) {
+                    $categoryData[] = $category;
+                }
+            }
+        }
+        $data = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+            ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
+            ->whereIn('attribute_categories.categories_id', $categoryData)
+            ->where('attributes_translations.locale', app()->getLocale())
+            ->select('attributes.*', 'attributes_translations.name', 'attribute_categories.categories_id as CATEGORY')->get();
+
+        return $data;
+    }
+
+    public function applyDiscount(Request $request)
+    {
+        $type = $request->discount_type;
+        $main_unique = $request->main;
+        $uniqueID = $request->group;
+        $data = $request->get('discount');
+
+        $html = view("admin.stock._partials.discount_data",compact(['data','type','main_unique','uniqueID']))->render();
+
+        return response()->json(['error' => false,'html' => $html]);
     }
 }

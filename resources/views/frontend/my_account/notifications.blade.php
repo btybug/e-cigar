@@ -28,7 +28,7 @@
 
             {{--acoount sidebar--}}
             <div class="profile-sidebar profile-sidebar--inner-pages d-flex flex-column align-items-center">
-                @include('frontend.my_account._partials.left_bar')
+                @include('frontend.my_account._partials.left_bar',['active'=>'notifications'])
 
                 <div class="mt-auto">
                     {!! Form::open(['url'=>route('logout')]) !!}
@@ -52,26 +52,28 @@
                             <a href="javascript:void(0)" class="btn btn-transp mark-us-unread rounded-0 mr-3">Mark us <span class="text-uppercase">Unread</span></a>
                             <a href="javascript:void(0)" class="btn btn-transp mark-us-read rounded-0">Mark us <span class="text-uppercase">Read</span></a>
                         </div>
-                        <table class="table table-striped table-ntfs">
-                            <thead>
-                            <tr>
-                                <th scope="col">
-                                    <input name="notifications-all" id="message-checkbox-all" type="checkbox">
-                                </th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Notification</th>
-                                <th scope="col">Type</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody id="notification-list">
-                            @include('frontend.my_account._partials.notification_list')
-                            </tbody>
-                        </table>
-
+                        <div class="table-responsive">
+                            <table class="table table-striped table-ntfs">
+                                <thead>
+                                <tr>
+                                    <th scope="col">
+                                        <input name="notifications-all" id="message-checkbox-all" type="checkbox">
+                                    </th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Notification</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody id="notification-list">
+                                @include('frontend.my_account._partials.notification_list')
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
             </div>
             {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
+        </div>
         </div>
     </main>
 

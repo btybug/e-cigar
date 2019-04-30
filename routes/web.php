@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,29 +9,50 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    // Get all tickets
 
-//    dd(\Zendesk::tickets()->findAll());
-//
-//// Create a new ticket
-//    \Zendesk::tickets()->create([
-//        'subject' => 'Subject',
-//        'comment' => [
-//            'body' => 'Ticket content.'
-//        ],
-//        'priority' => 'normal'
-//    ]);
-//
-//// Update multiple tickets
-//    \Zendesk::ticket([123, 456])->update([
-//        'status' => 'urgent'
-//    ]);
-//
-//// Delete a ticket
-//    \Zendesk::ticket(123)->delete();
-    return view('welcome');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/verification-wholesaler', 'HomeController@verifyWholesaler')
+    ->middleware(['auth','verified','wholesaler','is_not_verifyed_wholesaler'])->name('verification_wholesaler');
+
+Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','wholesaler','verifyed_wholesaler']], function () {
+    Route::get('/', 'Frontend\WholesalerController@index')->name('wholesaler');
+    Route::post('/add-to-cart', 'Frontend\WholesalerController@addToCart')->name('wholesaler_add_to_cart');
+    Route::get('/my-cart', 'Frontend\WholesalerController@getCart')->name('wholesaler_my_cart');
+    Route::get('/check-out', 'Frontend\WholesalerController@getCheckOut')->name('wholesaler_check_out');
+    Route::get('/payment/{token}', 'Frontend\WholesalerController@getPayment')->name('wholesaler_payment');
+    Route::post('/update-cart', 'Frontend\WholesalerController@postUpdateQty')->name('wholesaler_update_cart');
+    Route::post('/remove-from-cart', 'Frontend\WholesalerController@postRemoveFromCart')->name('wholesaler_remove_from_cart');
+    Route::post('/change-shipping-method', 'Frontend\WholesalerController@postChangeShippingMethod')->name('wholesaler_change_shipping_method');
+    Route::post('/get-payment-options', 'Frontend\WholesalerController@postPaymentOptions')->name('wholesaler_get_payment_options');
+    Route::post('/cash-order', 'Frontend\CashPaymentController@wholesalerOrder')->name('wholesaler_cash_order');
+    Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@wholesalerSuccess')->name('wholesaler_cash_order_success');
+    Route::post('/apply-coupon', 'Frontend\WholesalerController@postApplyCoupon')->name('wholesaler_apply_coupon');
+    Route::post('/stripe-charge', 'Frontend\StripePaymentController@wholesalerStripeCharge');
+
+});
+
+//Route::get('/', function () {
+//    // Get all tickets
+////
+////// Create a new ticket
+////    \Zendesk::tickets()->create([
+////        'subject' => 'Subject',
+////        'comment' => [
+////            'body' => 'Ticket content.'
+////        ],
+////        'priority' => 'normal'
+////    ]);
+////
+////// Update multiple tickets
+////    \Zendesk::ticket([123, 456])->update([
+////        'status' => 'urgent'
+////    ]);
+////
+////// Delete a ticket
+////    \Zendesk::ticket(123)->delete();
+//    return view('welcome');
+//})->name('home');
 
 Route::post('/stripe-charge', 'Frontend\StripePaymentController@stripeCharge');
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {
@@ -48,7 +68,10 @@ Route::get('error', function () {
     file_put_contents(storage_path('logs'.DS.date('Y_m_d_H_i_s').'.log'));
 });
 
-
+Route::get('order-success/{id}', function ($id) {
+    $order = \App\Models\Orders::find($id);
+    return view("frontend.shop._partials.cash_success",compact(['order']));
+});
 
 Auth::routes();
 Auth::routes(['verify' => true]);
@@ -57,15 +80,36 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'Frontend\BlogController@index')->name('blog');
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
+Route::group(['prefix' => 'brands'], function () {
+    Route::get('/{type?}', 'Frontend\BrandsController@index')->name('brands');
+});
+Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
+Route::post('/get-category-products', 'Frontend\BrandsController@postCategoryProducts')->name('post_category_products');
+
+Route::group(['prefix' => 'offers'], function () {
+    Route::get('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers');
+});
+Route::post('/get-offer', 'Frontend\OffersController@postOffer')->name('post_offers');
+
+Route::group(['prefix' => 'stickers'], function () {
+    Route::get('/{type?}', 'Frontend\StickersController@index')->name('stickers');
+});
+Route::post('/get-sticker', 'Frontend\StickersController@postSticker')->name('post_sticker');
+Route::post('/get-category-products-stickers', 'Frontend\StickersController@postCategoryProducts')->name('post_category_products_stickers');
+
+
 Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
 
 
 Route::group(['prefix' => 'products'], function () {
     Route::post('/get-price', 'Frontend\ProductsController@getPrice')->name('product_get_price');
+    Route::post('/add-offer', 'Frontend\ProductsController@addOffer')->name('product_add_offer');
     Route::post('/get-package-type-limit', 'Frontend\ProductsController@getPackageTypeLimit')->name('product_get_package_type_limit');
     Route::post('/get-subtotal-price', 'Frontend\ProductsController@getSubtotalPrice')->name('product_get_subtotal_price');
     Route::post('/get-product-variations', 'Frontend\ProductsController@getVariations')->name('product_get_variations');
     Route::post('/get-variation-menu-raw', 'Frontend\ProductsController@getVariationMenuRaw')->name('product_get_variation_menu_raw');
+    Route::post('/get-offer-menu-raw', 'Frontend\ProductsController@getOfferMenuRaw')->name('product_get_offer_menu_raw');
+    Route::post('/get-offer-menu-raws', 'Frontend\ProductsController@getOfferMenuRaws')->name('product_get_offer_menu_raws');
     Route::post('/get-variation-menu-raws', 'Frontend\ProductsController@getVariationMenuRaws')->name('product_get_variation_menu_raws');
     Route::post('/add-to-favorites', 'Frontend\ProductsController@attachFavorite')->name('product_add_to_favorites');
     Route::post('/remove-from-favorites', 'Frontend\ProductsController@detachFavorite')->name('product_remove_from_favorites');
@@ -73,7 +117,9 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/search-items', 'Frontend\ProductsController@postSearchItems')->name('product_search_items');
     Route::post('/get-extra-content', 'Frontend\ProductsController@postExtraContent')->name('product_extra_content');
     Route::post('/get-extra-item', 'Frontend\ProductsController@postExtraItem')->name('product_extra_item');
+    Route::post('/get-discount-price', 'Frontend\ProductsController@getDiscountPrice')->name('product_discount_price');
     Route::get('/{type?}', 'Frontend\ProductsController@index')->name('categories_front');
+    Route::post('/{type?}', 'Frontend\ProductsController@index')->name('categories_front_post');
     Route::group(['prefix' => '{type}'], function () {
         Route::get('/{slug}', 'Frontend\ProductsController@getSingle')->name('product_single');
     });
@@ -88,7 +134,8 @@ Route::group(['prefix' => 'products'], function () {
 //    });
 //});
 
-Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
+
+
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
 Route::post('/change-currency', 'Frontend\CommonController@changeCurrency')->name('change_currency');
 Route::group(['prefix' => '/support'], function () {
@@ -109,6 +156,9 @@ Route::group(['prefix' => '/support'], function () {
         Route::post('/contact-us', 'GuestController@postContactUs')->name('post_contact_us');
     }
 });
+
+Route::get('/landings/{url}', 'GuestController@landings')->name('landings');
+
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 Route::get('/about-us', 'Frontend\CommonController@getAboutUs')->name('about_us');
 Route::post('/get-regions-by-country', 'GuestController@getRegionsByCountry')->name('get_regions_by_country');
@@ -119,6 +169,7 @@ Route::post('/subscribe-to-newsletter', 'Frontend\CommonController@postSubscribe
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShoppingCartController@index')->name('shop');
 Route::get('/my-cart', 'Frontend\ShoppingCartController@getCart')->name('shop_my_cart');
+Route::post('/my-cart-special-offer', 'Frontend\ShoppingCartController@postSpecialOfferModal')->name('shop_my_cart_special_offer_modal');
 Route::get('/check-out', 'Frontend\ShoppingCartController@getCheckOut')->name('shop_check_out');
 Route::get('/payment/{token}', 'Frontend\ShoppingCartController@getPayment')->name('shop_payment');
 Route::post('/add-to-cart', 'Frontend\ShoppingCartController@postAddToCart')->name('shop_add_to_cart');
@@ -129,11 +180,15 @@ Route::post('/change-shipping-method', 'Frontend\ShoppingCartController@postChan
 Route::post('/get-payment-options', 'Frontend\ShoppingCartController@postPaymentOptions')->name('get_payment_options');
 Route::post('/cash-order', 'Frontend\CashPaymentController@order')->name('cash_order');
 Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@success')->name('cash_order_success');
+Route::post('/apply-coupon', 'Frontend\ShoppingCartController@postApplyCoupon')->name('apply_coupon');
+
 
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
     Route::post('/', 'Frontend\UserController@saveMyAccount')->name('my_account_save_data');
     Route::post('/contact', 'Frontend\UserController@saveMyAccountContact')->name('my_account_save_contact_data');
+    Route::post('/profile-image', 'Frontend\UserController@postProfileImageUpload')->name('profile_image_upload');
+    Route::post('/delete-avatar', 'Frontend\UserController@postProfileImageDelete')->name('profile_image_delete');
 
     Route::get('/messages', 'Frontend\UserController@getNotifications')->name('messages');
     Route::post('/notifications', 'Frontend\UserController@getNotificationsContent')->name('notifications_content');
@@ -181,5 +236,8 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
 });
 Route::group(['prefix' => 'filters'], function () {
     Route::post('/', 'Frontend\FilterApiControll@postGetNext');
+});
+Route::group(['prefix' => 'search'], function () {
+    Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
 });
 

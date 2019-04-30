@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
              DeliveryCostsTypesTableSeeder::class,
              CategoryTableSeeder::class,
              CurrenciesTableSeeder::class,
+             StatusTableSeeder::class,
          ]);
     }
 }

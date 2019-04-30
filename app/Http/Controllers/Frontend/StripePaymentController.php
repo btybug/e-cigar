@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Events\OrderSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\OrderItem;
@@ -68,6 +69,9 @@ class StripePaymentController extends Controller
         }
 
         $order = $this->order($charge);
+//        dd($order);
+//        event(new OrderSubmitted($order->user,$order));
+
         if (!Cart::isEmpty() && session()->has('shipping_address') && session()->has('billing_address') && $order) {
             session()->forget('shipping_address', 'billing_address');
             session()->forget('shipping_address_id', 'billing_address_id');
@@ -75,7 +79,43 @@ class StripePaymentController extends Controller
             Cart::clear();
             Cart::removeConditionsByType('shipping');
 
-            return $this->view('_partials.cash_success');
+            return $this->view('_partials.cash_success',compact(['order']));
+        }
+    }
+
+    public function wholesalerStripeCharge(Request $request)
+    {
+        putenv('STRIPE_API_KEY=' . stripe_secret());
+        putenv('STRIPE_API_VERSION=2016-07-06');
+        $stripe = new Stripe();
+
+// This is a $20.00 charge in US Dollar.
+        try {
+            $this->amount = Cart::session('wholesaler')->getTotal();
+            $charge = $stripe->charges()->create(
+                array(
+                    'amount' => $this->amount,
+                    'currency' => 'usd',
+                    'source' => $request->get('stripeToken')
+                )
+            );
+        } catch (StripeException $exception) {
+            return redirect()->back()->with('error', $exception->getMessage());
+        }
+
+        $order = $this->orderWholesaler($charge);
+//        dd($order);
+//        event(new OrderSubmitted($order->user,$order));
+
+        if (!Cart::session('wholesaler')->isEmpty() && session()->has('shipping_address_wholesale')
+            && session()->has('billing_address_wholesale') && $order) {
+            session()->forget('shipping_address_wholesale', 'billing_address_wholesale');
+            session()->forget('shipping_address_wholesaler_id', 'billing_address_wholesaler_id');
+            session()->forget('payment_token_wholesale');
+            Cart::session('wholesaler')->clear();
+            Cart::session('wholesaler')->removeConditionsByType('shipping');
+
+            return View('frontend.wholesaler._partials.cash_success',compact('order'));
         }
     }
 
@@ -109,9 +149,19 @@ class StripePaymentController extends Controller
 
     private function order($transaction)
     {
+        $this->paymentService->method = 'stripe';
         $order = $this->paymentService->call();
         $this->makeTransaction($transaction, $order);
 
-        return \Response::json(['error' => false, 'url' => route('cash_order_success', $order->id)]);
+        return $order;
+    }
+
+    private function orderWholesaler($transaction)
+    {
+        $this->paymentService->method = 'stripe';
+        $order = $this->paymentService->callWholesaler();
+        $this->makeTransaction($transaction, $order);
+
+        return $order;
     }
 }

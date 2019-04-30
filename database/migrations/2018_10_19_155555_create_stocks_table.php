@@ -16,6 +16,7 @@ class CreateStocksTable extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
+            $table->integer('brand_id')->unsigned()->nullable();
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('is_promotion')->default(0);
             $table->string('slug')->unique();
@@ -27,10 +28,15 @@ class CreateStocksTable extends Migration
             $table->text('videos')->nullable();
             $table->tinyInteger('faq_tab')->default(0);
             $table->tinyInteger('reviews_tab')->default(0);
+            $table->tinyInteger('is_offer')->default(0);
+            $table->tinyInteger('offer_type')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
                 ->on('users')->onDelete('CASCADE');
+
+            $table->foreign('brand_id')->references('id')
+                ->on('categories')->onDelete('CASCADE');
         });
     }
 

@@ -70,6 +70,9 @@
                             </li>
                         @endforeach
                     </ul>
+                    <div class="text-right">
+                        <a href="{!! route('admin_settings_courier_create') !!}" class="btn btn-primary">Create new</a>
+                    </div>
                 </div>
             </div>
         </div>

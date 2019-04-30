@@ -8,9 +8,9 @@
                 <div class="d-flex align-items-center position-relative">
                     @include('frontend._partials.individual_left_bar',['type' => 'news'])
 
-                    <button class="btn d-md-none toggler ml-auto pointer bg-transparent" data-toggle="collapse" data-target="#sortBySelects">Sort By:</button>
+                    <div class="btn d-md-none toggler ml-auto pointer bg-transparent pointer" data-toggle="collapse" data-target="#sortBySelects">Sort By:</div>
 
-                    <div  id="sortBySelects" class="sort-by-selects collapse d-md-flex align-items-center ml-sm-auto">
+                    <div  id="sortBySelects" class="sort-by-selects news_sort_by_select collapse d-md-flex align-items-center ml-sm-auto">
                         <div class="product-grid-list d-flex align-self-center">
                             <span id="dispGrid" class="d-inline-block pointer display-icon active">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" idth="15px" height="15px" viewBox="0 0 15 15">
@@ -30,7 +30,7 @@
                             <label for="sortByLimit" class="text-main-clr mb-0 text-uppercase">LIMIT: </label>
                             <div class="select-wall">
                                 {!! Form::select('per-page',[
-                                    '' => "Select",
+                                    '8' => "Select",
                                     '5' =>'5 per page',
                                     '10' =>'10 per page',
                                     '15' =>'15 per page',
@@ -71,7 +71,7 @@
                             <span class="news-card main-transition position-relative">
                                 <span class="news-card_view d-block position-relative">
                                     <!--news main image-->
-                                        <img class="card-img-top"  src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="{!! ($post->image)?getImage($post->image)->seo_alt:'' !!}">
+                                        <img class="card-img-top"  src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="{!! ($post->image && getImage($post->image))? getImage($post->image)->seo_alt:'' !!}">
                                     <!--share icon-->
                                     <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
                                     <svg iewBox="0 0 20 21" width="20px" height="21px">

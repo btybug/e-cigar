@@ -16,8 +16,10 @@ use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Category;
 use App\Models\Items;
+use App\Models\ItemsLocations;
 use App\Models\ItemsPackages;
 use App\Models\Suppliers;
+use App\Models\Warehouse;
 use App\Services\BarcodesService;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
@@ -46,36 +48,44 @@ class ItemsController extends Controller
     {
         $model = null;
         $bundle = false;
-        $barcodes = $this->barcodeService->getUnsedCodes();
+        $barcodes = $this->barcodeService->getPluck();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories','warehouses','racks','shelves'));
     }
 
     public function getNewBundle()
     {
         $model = null;
         $bundle = true;
-        $barcodes = $this->barcodeService->getUnsedCodes();
+        $barcodes = $this->barcodeService->getPluck();
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','warehouses','racks','shelves'));
     }
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price');
+//        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
         $this->savePackages($item, $request->get('packages', []));
 
+
         $item->suppliers()->sync($request->get('suppliers'));
         $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
+
 
         return redirect()->route('admin_items');
     }
@@ -84,14 +94,18 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($id);
         $bundle = ($model->type != 'bundle') ? false : true;
-        $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
+        $barcodes = $this->barcodeService->getPluck();
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
 
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle', 'categories', 'data', 'checkedCategories'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
+            'categories', 'data', 'checkedCategories','warehouses','racks','shelves'));
     }
 
     private function savePackages($item, array $data = [])
@@ -113,6 +127,27 @@ class ItemsController extends Controller
         }
 
         $item->packages()->whereNotIn('id', $deletableArray)->delete();
+    }
+
+    private function saveLocations($item, array $data = [])
+    {
+        $deletableArray = [];
+        if (count($data)) {
+            foreach ($data as $datum) {
+                $existing = $item->locations()->where('id', $datum['id'])->first();
+
+                if ($existing) {
+                    $location = ItemsLocations::find($datum['id']);
+                    $location->update($datum);
+                    $deletableArray[] = $location->id;
+                } else {
+                    $location = $item->locations()->create($datum);
+                    $deletableArray[] = $location->id;
+                }
+            }
+        }
+
+        $item->locations()->whereNotIn('id', $deletableArray)->delete();
     }
 
     private function saveImages(Request $request, $item)
@@ -231,6 +266,17 @@ class ItemsController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function addLocation(Request $request)
+    {
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
+
+        $html = \View('admin.items._partials.location', compact(['warehouses', 'racks','shelves']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function getSpecification(Request $request)
     {
         $selected = Attributes::find($request->id);
@@ -256,5 +302,40 @@ class ItemsController extends Controller
 
 
         return \Response::json(['error' => false, 'html' => $html, 'data' => $selecteds]);
+    }
+
+    public function transfer()
+    {
+        $items = Items::all()->pluck('name', 'id')->all();
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
+        return $this->view('transfer.index',compact(['items','warehouses','racks','shelves']));
+    }
+
+    public function PostTransfer(Request $request)
+    {
+        $model = Items::findOrFail($request->item_id);
+        $from = ItemsLocations::findOrFail($request->from);
+        $to = ItemsLocations::findOrFail($request->to);
+        if($from->qty < $request->qty){
+            return redirect()->back()->with('error',"Max qty that you can transfer is $from->qty");
+        }
+
+        $from->update(['qty'=>($from->qty - $request->qty)]);
+        $to->update(['qty'=> ($to->qty + $request->qty)]);
+
+        return redirect()->back()->with('message',"Successfully transfered");
+
+    }
+
+    public function postItemLocations(Request $request)
+    {
+        $model = Items::findOrFail($request->item_id);
+        $data = $model->locations()->get()->pluck('transfer_location','id')->all();
+
+        $html = View("admin.items.transfer.locations", compact('model','data'))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 }

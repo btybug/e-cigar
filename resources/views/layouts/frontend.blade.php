@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-recaptcha-key" content="{!!env('GOOGLE_RECAPTCHA_KEY')!!}">
-    <meta name="google-site-verification" content="bL1v6h4GP0iNIf9ZppzmsC5oHymM-Ne6I1SrO9jop1I"/>
+    <meta name="google-site-verification" content="bYambdrAC-nymmiVMr-A2jiKeKW8gEsCcCRozCLDp4o" />
     @yield('meta')
     <title>Document</title>
     <!-- Start of ukdevplus Zendesk Widget script -->
@@ -47,6 +47,7 @@
     {{--<link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />--}}
     {{--<link href="{{asset('public/css/custom.css')}}" rel="stylesheet" />--}}
     {{--*****packed in public/css/bundle.css***** --}}
+    <link href="{{asset('public/css/invoice.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('public/css/bundle.css?v='.rand(111,999))}}">
     {{-- ********************************************* --}}
     {{-- <script src={{asset("public/js/jQuery3.3.1.js")}}></script> --}}
@@ -64,10 +65,10 @@
     <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
     <!--<![endif]-->
-
-
+{{--    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons"></script>--}}
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=custom-share-buttons"></script>
+    <script src={{asset("public/plugins/autocomplete/jquery.autocomplete.min.js")}}></script>
     @if(!Auth::check())
-
         <script
             src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render={!! env('GOOGLE_RECAPTCHA_KEY') !!}"
             async defer></script>
@@ -126,7 +127,7 @@
 {{--<script src={{asset("public/js/login.js")}}></script>--}}
 {{--<script src={{asset("public/js/register.js")}}></script>--}}
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
-<script src={{asset("public/js/bundle/bundle.js?v".rand(111,999))}}></script>
+<script src={{asset("public/js/bundle/bundle.js?v=".rand(111,999))}}></script>
 
 @stack('style')
 

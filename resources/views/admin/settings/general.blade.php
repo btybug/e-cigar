@@ -5,44 +5,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="row flex-column">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                @ok('admin_settings_general')
-                <li class="nav-item ">
-                    <a class="nav-link active" id="info-tab" href="{!! route('admin_settings_general') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Info</a>
-                </li>
-                @endok
-                @ok('admin_settings_accounts')
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_accounts') !!}" role="tab"
-                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Accounts</a>
-                </li>
-                @endok
-                @ok('admin_settings_footer')
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_footer') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Footer</a>
-                </li>
-                @endok
-                @ok('admin_settings_tc')
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tc') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">T&C</a>
-                </li>
-                @endok
-                @ok('admin_settings_connections')
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_connections') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Connections</a>
-                </li>
-                @endok
-                @ok('admin_settings_about_us')
-                <li class="nav-item ">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_settings_about_us') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">About us</a>
-                </li>
-                @endok
-            </ul>
+            @include("admin.settings._partials.menu",['active' => 'general'])
+
             <div class="tab-content">
                 {!! Form::model($model) !!}
 
@@ -184,6 +148,7 @@
                                                 {!! Form::text('second_address',null,['class'=>'form-control']) !!}
                                             </div>
                                             <div class="form-group">
+                                                
                                                 <label for="country">Country</label>
                                                 {!! Form::select('country',$countries,null,['class'=>'form-control','id' => 'first_line_country']) !!}
 
@@ -199,10 +164,24 @@
                                                 <label for="postCode">Post Code</label>
                                                 {!! Form::text('post_code',null,['class'=>'form-control']) !!}
                                             </div>
+                                            <div class="form-group">
+                                                <label for="postCode">Phone</label>
+                                                {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="postCode">Email</label>
+                                                {!! Form::email('email',null,['class'=>'form-control']) !!}
+                                            </div>
 
                                         </div>
                                         <div class="offset-md-1 col-md-6">
-                                            <div class="settings-map-outer"></div>
+                                            <div class="settings-map-outer">
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed/v1/place?key=&q=Armenia"
+                                                    {{--{{ $settings->first_address. '+'.$settings->second_address. '+'.$settings->city. '+'.$settings->post_code. '+'.$settings->country }}"--}}
+                                                    width="100%" height="100%" frameborder="0" style="border:0"
+                                                    allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                     </div>
 

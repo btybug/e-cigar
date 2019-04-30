@@ -40,6 +40,11 @@ class AdminController extends Controller
         return view('admin.dashboard', compact(['widgets']));
     }
 
+    public function find()
+    {
+        return view('admin.find', compact([]));
+    }
+
     public function saveDashboardWidgets(Request $request)
     {
         $placeholderItems = Dashboard::where('placeholder', $request->placeholder)->where('user_id', \Auth::id())->get();

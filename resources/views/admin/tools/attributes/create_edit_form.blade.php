@@ -52,6 +52,14 @@
                                                            {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                        </div>
                                                    </div>
+                                                   <div class="form-group row">
+                                                       <label class="col-md-2 control-label"><span data-toggle="tooltip"
+                                                                                                   title=""
+                                                                                                   data-original-title="Attribute description">Attribute Description</span></label>
+                                                       <div class="col-md-10">
+                                                           {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
+                                                       </div>
+                                                   </div>
                                                </div>
                                            @endforeach
                                        @endif
@@ -65,14 +73,6 @@
                                        </div>
                                        <div class="col-md-1 text-center font-icon-added">
                                            <i id="font-show-area"></i>
-                                       </div>
-                                   </div>
-                                   <div class="form-group row">
-                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                                     title=""
-                                                                                                     data-original-title="Available for blog Desc">Available for blog</span></label>
-                                       <div class="col-md-10">
-                                           {!! Form::select("name",['Blog','Tickets','Products','Stock'],null,['class'=>'form-control']) !!}
                                        </div>
                                    </div>
 
@@ -259,12 +259,18 @@
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="search-attr" class="col-sm-2 col-form-label">Search</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control search-attr"  placeholder="Search">
+                        </div>
+                    </div>
                     <ul class="all-list modal-stickers--list">
 
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

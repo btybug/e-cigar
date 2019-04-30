@@ -25,7 +25,7 @@
                         <div class="form-group row">
                             <label for="text" class="control-label col-sm-3">Image</label>
                             <div class="col-sm-9">
-                                {{--{!! media_button('image',$model) !!}--}}
+                                {!! media_button('image',$model) !!}
                             </div>
                         </div>
 

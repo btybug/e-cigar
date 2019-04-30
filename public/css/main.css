@@ -4,9 +4,9 @@
     font-family: 'Montserrat Medium', sans-serif;
 }
 
-.font-main-light {
-    font-family: 'Montserrat Light', sans-serif;
-}
+/*.font-main-light {*/
+/*    font-family: 'Montserrat Light', sans-serif;*/
+/*}*/
 
 .fnz-18 {
     font-size: 18px
@@ -58,7 +58,7 @@ html {
 }
 
 body {
-    color: #222423;
+    /*color: #222423;*/
     height: 100%;
     overflow-x: hidden;
 }
@@ -1463,3 +1463,18 @@ a:hover {
     color: #ffffff;
 }
 /*extra modal end*/
+
+/*[data-network] {*/
+/*    display: block !important;*/
+/*}*/
+
+#search-product + span,
+#search-for-filter + span {
+    cursor: pointer;
+}
+
+.user-non-select {
+    pointer-events: none;
+    /*touch-action: none;*/
+    opacity: 0.3;
+}

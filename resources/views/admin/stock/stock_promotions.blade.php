@@ -87,6 +87,9 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
+        .form-control{
+            height: auto;
+        }
         .btn-coming {
             background-color: #0f4de0;
             border-color: #0f4de0;
@@ -159,7 +162,7 @@
                 let form = $(this).closest('form');
                 AjaxCall(form.attr('action'), form.serialize(), function (res) {
                     if (!res.error) {
-//                        location.reload();
+                       location.reload();
                     }else{
                         alert(res.message)
                     }
@@ -169,7 +172,7 @@
             $("body").on('click', '.add-promotions', function () {
                 let stock_id = $("#stock-id").val();
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
-                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id}, function (res) {
+                AjaxCall("/admin/stock/get-promotion", {stock_id: stock_id}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                         runDatepicker();
@@ -200,7 +203,7 @@
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
 
-                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id,slug : slug}, function (res) {
+                AjaxCall("/admin/stock/get-promotion", {stock_id: stock_id,slug : slug}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                         runDatepicker();
@@ -211,7 +214,7 @@
             $("body").on('click', '.cancel-promotion', function () {
                 let slug = $(this).data('slug');
                 let stock_id = $("#stock-id").val();
-                AjaxCall("/admin/inventory/stock/cancel-promotion", {stock_id: stock_id,slug : slug}, function (res) {
+                AjaxCall("/admin/stock/cancel-promotion", {stock_id: stock_id,slug : slug}, function (res) {
                     if (!res.error) {
                         location.reload();
                     }

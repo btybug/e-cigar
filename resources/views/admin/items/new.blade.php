@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
     <div class="card panel panel-default">
         {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
         <div class="card-header panel-heading d-flex">
@@ -39,6 +38,7 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#locations">Locations</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -144,7 +144,7 @@
                                                         <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Default price</label>
 
                                                         <div class="col-sm-8">
-                                                            {!! Form::number('default_price', 0,['class' => 'form-control','step'=>0.1,'min'=>0]) !!}
+                                                            {!! Form::number('default_price',null,['class' => 'form-control','min'=>0]) !!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -183,11 +183,102 @@
                                         <div id="images" class="tab-pane fade">
                                             {!! media_button('other_images',$model,true) !!}
                                         </div>
+                                        <div id="locations" class="tab-pane fade">
+                                            <div class="form-group row">
+                                                <div class="col-md-2">
+                                                    Locations
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <table class="table table--store-settings">
+                                                        <thead>
+                                                        <tr class="">
+                                                            <th colspan="4" class="text-left pl-2">Locations</th>
+
+                                                        </tr>
+                                                        <tr class="bg-my-light-pink">
+                                                            <th>Warehouse</th>
+                                                            <th>Rack</th>
+                                                            <th>Shelve</th>
+                                                            <th>Qty</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody class="v-options-list-locations">
+                                                        @if($model && $model->locations)
+                                                            @foreach($model->locations as $location)
+                                                                <tr class="v-options-list-item location-item">
+                                                                    <td>
+                                                                        <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        @if($location->rack)
+                                                                            @php
+                                                                                $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
+                                                                            @endphp
+                                                                            <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td colspan="2" class="text-right">
+                                                                        <div class="form-control">{{ $location->qty }}</div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                         <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
                                             <div class="row">
-                                                <div class="col-md-5">
+                                                <div class="col-md-12">
                                                     <fieldset>
                                                         <legend class="border-bottom">Packaging Size</legend>
+                                                        <div class="form-group row">
+                                                            <label for="packaging_length"
+                                                                   class=" col-sm-2">Length</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_length" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="packaging_width"
+                                                                   class="col-sm-2">Width</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_width" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="packaging_height"
+                                                                   class="col-sm-2">Height</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_height" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="packaging_weight"
+                                                                   class="col-sm-2">Weight</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name=""
+                                                                       id="packaging_weight" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <fieldset>
+                                                        <legend class="border-bottom">Item size</legend>
                                                         <div class="form-group row">
                                                             <label for="packaging_length"
                                                                    class=" col-sm-2">Length</label>
@@ -379,12 +470,18 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="search-attr" class="col-sm-2 col-form-label">Search</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="search-attr" placeholder="Search">
+                        </div>
+                    </div>
                     <ul class="all-list modal-stickers--list">
 
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -406,6 +503,57 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $("body").on('change','.warehouse',function () {
+                let w_id = $(this).val();
+                let parent = $(this).closest(".location-item");
+                render_racks(w_id,parent)
+            })
+
+            $("body").on('change','.rack',function () {
+                let r_id = $(this).val();
+                let parent = $(this).closest(".location-item");
+
+                render_shelves(r_id,parent)
+            })
+
+            function render_racks(w_id,parent){
+                parent.find(".rack").html('<option value="0">Select Rack</option>');
+                parent.find(".shelve").html('<option value="0">Select Shelve</option>');
+                if(w_id){
+                    AjaxCall("{{ route('admin_warehouses_rack_by_warehouse') }}", {w_id: w_id}, function (res) {
+                        if (!res.error) {
+                            parent.find(".rack").empty();
+                            var html = '<option value="0">Select Rack</option>';
+                            for (var prop in res.data) {
+                                html += '<option value="'+res.data[prop].id+'">'+res.data[prop].name+'</option>';
+                            }
+
+                            parent.find(".rack").append(html);
+                        }
+                    });
+                }
+
+            }
+
+            function render_shelves(r_id,parent){
+                parent.find(".shelve").html('<option value="0">Select Shelve</option>');
+                if(r_id){
+                    AjaxCall("{{ route('admin_warehouses_shelve_by_rack') }}", {r_id: r_id}, function (res) {
+                        if (!res.error) {
+                            parent.find(".shelve").empty();
+
+                            var html = '<option value="0">Select Shelve</option>';
+                            for (var prop in res.data) {
+                                html += '<option value="'+res.data[prop].id+'">'+res.data[prop].name+'</option>';
+                            }
+
+                            parent.find(".shelve").append(html);
+                        }
+                    });
+                }
+            }
+
+
             $("body").on('click', '.delete-v-option_button', function () {
                 $(this).closest('tr').remove();
             });
@@ -417,6 +565,18 @@
                     function (res) {
                         if (!res.error) {
                             $('.package-variation-box').append(res.html)
+                        }
+                    }
+                );
+            });
+
+            $("body").on('click', '.add-location', function () {
+                AjaxCall(
+                    "/admin/inventory/items/add-location",
+                    {},
+                    function (res) {
+                        if (!res.error) {
+                            $('.v-options-list-locations').append(res.html)
                         }
                     }
                 );

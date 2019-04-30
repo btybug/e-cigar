@@ -4,11 +4,9 @@
             <a class="btn btn-danger delete-button text-white" data-key="{{ $model->id }}" data-href="{{ route('admin_store_categories_delete',$type) }}">Delete</a>
         </div>
     @endif
-        @ok('admin_store_categories_form')
     <div class="form-group">
         {!! Form::submit('Save',['class' => 'btn btn-info btn-submit-form']) !!}
     </div>
-    @endok
 </div>
 
 {!! Form::model($model,['url' => route('admin_store_categories_new_or_update',$type),'class' => 'updated-form']) !!}
@@ -55,18 +53,21 @@
         {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
     </div>
 </div>
+
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Custom classes</label>
     <div class="col-md-10 col-xs-12">
         {!! Form::text('classes',null,['class'=>'form-control']) !!}
     </div>
 </div>
+@if($type !='brand')
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Parent</label>
     <div class="col-md-10 col-xs-12">
         {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
     </div>
 </div>
+@endif
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Select stickers</label>
     <div class="col-md-10 col-xs-12">

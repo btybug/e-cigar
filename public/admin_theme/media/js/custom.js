@@ -35,7 +35,7 @@ shortAjax = function(url, data, success, error) {
 function App() {
     var self = this;
     var prevFolder = [];
-    var globalFolderId = 1;
+    var globalFolderId = document.getElementById('core-folder').value;
     this.multipleImages = [];
     this.htmlMaker = {
         makeFolder: function(data) {
@@ -863,18 +863,42 @@ function App() {
             }
         },
         open_images(elm, e) {
+
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
                 let urlValue = document.querySelector(".file-realtive-url")
                     .value;
                 console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
-                document.querySelector(`.${inputId}`).value = urlValue;
-                document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                const exArray = urlValue.match(/[^\.]+/g);
+                const ex = exArray[exArray.length - 1];
+
+                if(ex === 'html' || ex === 'Html' || ex === 'HTML') {
+                    document.querySelector(`.${inputId}`).value = urlValue;
+                    console.log('files', document.getElementById('uploader').files);
+                    console.log(location)
+
+
+                    if(document.querySelector(`.${inputId}_media_single_img`)) {
+                        document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
+                        document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
+                        });
+                    }
+
+                } else {
+                    document.querySelector(`.${inputId}`).value = urlValue;
+                    tinymce.activeEditor.uploadImages(function(success) {
+                        $.post(`${location.origin}${urlValue}`, tinymce.activeEditor.getContent()).done(function() {
+                            console.log("Uploaded images and posted content as an ajax request.");
+                        });
+                    });
+                    document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                }
                 // document.querySelector(`.${inputId}`).value = urlValue;
             }
             document.querySelector(".file-realtive-url").value = "";
             self.helpers.hideAllActiveImages();
+
         },
         modal_load_image(elm, e) {
             if (!e.target.closest("button").disabled) {
@@ -986,7 +1010,7 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 
 $("body").on("click", ".bestbetter-modal-open button", function() {
     app.requests.drawingItems({
-        folder_id: 1,
+        folder_id: document.getElementById('core-folder').value,
         files: true,
         access_token: "string"
     });

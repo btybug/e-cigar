@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+    <input type="hidden" id="core-folder" value="{!! $folder->id !!}">
   <div id="page-wrapper" class="gray-bg">
 
     <div class="wrapper wrapper-content h-100">
@@ -8,19 +9,6 @@
           <div class="ibox scrollbar_custom float-e-margins over-auto">
             <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
               <div class="file-manager">
-
-                {{--<h5>Show:</h5>--}}
-                {{--<a href="#" class="file-control active">Ale</a>--}}
-                {{--<a href="#" class="file-control">Documents</a>--}}
-                {{--<a href="#" class="file-control">Audio</a>--}}
-                {{--<a href="#" class="file-control">Images</a>--}}
-                {{--<div class="hr-line-dashed"></div>--}}
-                {{--<button class="btn btn-info btn-block upload-file_button {!! $settings['uploadbutton']??null !!}">--}}
-                {{--Upload Files--}}
-                {{--</button>--}}
-                {{--<div class="hr-line-dashed">--}}
-
-                {{--</div>--}}
 
                 <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"
                        role="button" href="#createFolder">
@@ -38,36 +26,16 @@
                   </div><!-- /input-group -->
                 </div>
                 <script>
-                  // $('.new-folder-input').addEventListener('keypress', function(ev) {
-                  //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
-                  // })
                 </script>
-                <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -50px; cursor: pointer">DRIVE</div>
+                <div bb-media-click="get_folder_items" data-core="true" class="dd-item" draggable="true" data-id="{!! $folder->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -49px; cursor: pointer">{!! strtoupper($folder->name) !!}</div>
                 <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
                   <ol class="dd-list sortable" id="fff">
 
                   </ol>
                 </div>
-                {{--<h5 class="tag-title">Tags</h5>--}}
-                {{--<ul class="tag-list" style="padding: 0">--}}
-                {{--<li><a href="">Family</a></li>--}}
-                {{--<li><a href="">Work</a></li>--}}
-                {{--<li><a href="">Home</a></li>--}}
-                {{--<li><a href="">Children</a></li>--}}
-                {{--<li><a href="">Holidays</a></li>--}}
-                {{--<li><a href="">Music</a></li>--}}
-                {{--<li><a href="">Photography</a></li>--}}
-                {{--<li><a href="">Film</a></li>--}}
-                {{--</ul>--}}
                 <div class="clearfix"></div>
               </div>
 
-            </div>
-
-
-
-            <div class="trash-icon-btn">
-              <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
             </div>
           </div>
 
@@ -76,11 +44,6 @@
           <div class="over-auto scrollbar_custom right--media-col-wrapper">
             <div class="row m-0">
               <div class="col-lg-12 m-b-10 text-right d-flex" style="justify-content: space-between;">
-                {{--<ul class="multiple-actions">--}}
-                {{--<li><button class="btn btn-danger"><i class="fa fa-trash"></i></button></li>--}}
-                {{--<li><button class="btn btn-info"><i class="fa fa-share"></i></button></li>--}}
-                {{--<li><button class="btn btn-primary"><i class="fa fa-clone"></i></button></li>--}}
-                {{--</ul>--}}
                 <div class="upload-content" style="width: 100%;">
                   <div class="upload--head  mb-20 mt15">
                       <button class="btn btn-danger delete_items" >Delete</button>

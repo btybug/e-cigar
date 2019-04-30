@@ -1,3 +1,5 @@
+
+<input type="hidden" id="core-folder" value="{!! $id !!}">
 <div class="bestbetter-modal">
     <!-- Trigger the modal with a button -->
     <div class="bestbetter-modal-open">

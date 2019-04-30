@@ -9,7 +9,13 @@ function onRecaptchaLoadCallback() {
     });
 }
 (function(){
-
+    $('body').on('change','.wholesaler_radio', function(ev) {
+        if($(this).val() == 1){
+            $("body").find(".wholesaler-box").addClass('show').removeClass('d-none');
+        }else{
+            $("body").find(".wholesaler-box").addClass('d-none').removeClass('show');
+        }
+    });
 
 
     $('#register-form-1').on('submit', function(ev) {
@@ -29,6 +35,9 @@ function onRecaptchaLoadCallback() {
                     const emailEl = $('#e-mail');
                     const phoneEl = $('#phoneNumber');
                     const passwordEl = $('#password');
+                    const wholesaler_radio = $('.wholesaler_radio');
+                    const companyName = $('#companyName');
+                    const companyNumber = $('#companyNumber');
 
                     const errorHandler = (fieldElement, errorObject, message, fieldElementName) => {
                         const change = (fieldElementChange, fieldElementNameChange) => {
@@ -44,7 +53,7 @@ function onRecaptchaLoadCallback() {
                             fieldElement.addClass('transition-horizontal input-error');
                             setTimeout(() => {
                                 fieldElement.removeClass('transition-horizontal');
-                            }, 500)
+                            }, 500);
                         }
                         fieldElement.on('keypress', () => change(fieldElement, fieldElementName));
                         fieldElement.on('change', () => change(fieldElement, fieldElementName));
@@ -67,7 +76,7 @@ function onRecaptchaLoadCallback() {
                         },
                         success: (data) => {
                             if (!data.error) {
-                                console.log(data);
+                                window.location = data.redirectPath;
                             }
                         },
                         error: (error) => {
@@ -77,6 +86,13 @@ function onRecaptchaLoadCallback() {
                             errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#e-mail');
                             errorHandler(phoneEl, error.responseJSON.errors, error.responseJSON.errors.phone, '#phoneNumber');
                             errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#password');
+                            console.log(wholesaler_radio.val(), typeof wholesaler_radio.val())
+                            if(wholesaler_radio.val()){
+
+                                errorHandler(companyName, error.responseJSON.errors, error.responseJSON.errors.company_name, '#companyName');
+                                errorHandler(companyNumber, error.responseJSON.errors, error.responseJSON.errors.company_number, '#companyNumber');
+
+                            }
                         }
                     });
                 });

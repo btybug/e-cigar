@@ -6,7 +6,10 @@
     <div class="card panel panel-default">
 
         <div class="card-header panel-heading clearfix">
-            <h2 class="m-0 pull-left">Users</h2>
+            <div class="pull-left">
+                <h2 class="m-0">Users</h2>
+            </div>
+            <div class="pull-right"><a href="{!! route('admin_customers_new') !!}" class="btn btn-info">Create new customer</a></div>
         </div>
         <div class="card-body panel-body">
             <div class="table-responsive">
@@ -41,6 +44,10 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'name'},

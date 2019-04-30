@@ -42,7 +42,7 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'order_is_Canceled','from'=>'hr@hook.am','module'=>'orders']);
+        $email = new \App\Models\MailTemplates(['slug' => 'order_is_canceled','from'=>'hr@hook.am','module'=>'orders']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
         $email->translateOrNew($locale)->content = '';
@@ -93,6 +93,12 @@ class EmailsTableSeeder extends Seeder
         $email = new \App\Models\MailTemplates(['slug' => 'referral_bonus','from'=>'hr@hook.am']);
         $email->save();
         $email->translateOrNew($locale)->subject = 'Bonus from your referral';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
+
+        $email = new \App\Models\MailTemplates(['slug' => 'new_contact_us','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'New contact us message';
         $email->translateOrNew($locale)->content = '';
         $email->save();
     }

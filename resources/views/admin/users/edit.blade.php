@@ -18,10 +18,44 @@
 
                 <div class="form-group pull-right">
                     {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                    {!! Form::hidden('email',$user->email) !!}
-                    <button type="submit" class="btn btn-warning">Send reset password email</button>
+                        {!! Form::hidden('email',$user->email) !!}
+                        <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
                 </div>
+
+                @if(! $user->email_verified_at)
+                    <div class="form-group ">
+                        {!! Form::open(['url'=>route('admin_users_approve')]) !!}
+                            {!! Form::hidden('id',$user->id) !!}
+                            <button type="submit" class="btn btn-success">Verify</button>
+                        {!! Form::close() !!}
+                    </div>
+                @else
+                    <div class="form-group ">
+                        {!! Form::open(['url'=>route('admin_users_reject')]) !!}
+                        {!! Form::hidden('id',$user->id) !!}
+                        <button type="submit" class="btn btn-danger">Block</button>
+                        {!! Form::close() !!}
+                    </div>
+                @endif
+
+                @if($user->isWholeseler())
+                    @if(! $user->wholesaler_status)
+                        <div class="form-group ">
+                            {!! Form::open(['url'=>route('admin_users_wholesaler_approve')]) !!}
+                                {!! Form::hidden('id',$user->id) !!}
+                                <button type="submit" class="btn btn-success">Approve Wholesaler</button>
+                            {!! Form::close() !!}
+                        </div>
+                    @else
+                        <div class="form-group ">
+                            {!! Form::open(['url'=>route('admin_users_wholesaler_reject')]) !!}
+                            {!! Form::hidden('id',$user->id) !!}
+                            <button type="submit" class="btn btn-danger">Block Wholesaler</button>
+                            {!! Form::close() !!}
+                        </div>
+                    @endif
+                @endif
 
                 <div class="pull-right mr-10">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#msgModal">Send
@@ -65,7 +99,7 @@
                                 <a class="nav-link rounded-0 active" href="#users_account" data-toggle="tab">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link rounded-0" href="#users_messages" data-toggle="tab">Messages</a>
+                                <a class="nav-link rounded-0" href="#users_logs" data-toggle="tab">Logs</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link rounded-0" href="#users_favourites" data-toggle="tab">Favourites</a>
@@ -84,6 +118,10 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link rounded-0" href="#users_offer" data-toggle="tab">Special Offer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_special-note" data-toggle="tab">Special
+                                    note</a>
                             </li>
                         </ul>
 
@@ -216,7 +254,7 @@
                             </div>
 
                         </div>
-                        <div id="users_messages" class="tab-pane fade">
+                        <div id="users_logs" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
                                 <div class="card-body panel-body">
                                     <table id="users-table" class="table table-style table-bordered" cellspacing="0"
@@ -302,7 +340,8 @@
                                                 {!! Form::hidden('user_id',$user->id) !!}
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Name</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Name</label>
                                                         <div class="col-sm-8">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
@@ -317,7 +356,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Company
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Company
                                                             name</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('company',null,['class'=>'form-control']) !!}
@@ -326,7 +366,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">1st Line
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">1st
+                                                            Line
                                                             address</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
@@ -335,7 +377,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">2nd line
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">2nd
+                                                            line
                                                             address</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
@@ -344,7 +388,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Country</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Country</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
                                                         </div>
@@ -352,7 +397,8 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Regions</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Regions</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('region',null,['class'=>'form-control']) !!}
                                                         </div>
@@ -360,7 +406,8 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">City</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">City</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('city',null,['class'=>'form-control']) !!}
                                                         </div>
@@ -368,7 +415,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Post
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Post
                                                             Code</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('post_code',null,['class'=>'form-control']) !!}
@@ -452,6 +500,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="users_special-note" class="tab-pane fade">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body ">
+                                    <div class="special-note-wall-box">
+                                        @include('admin.users._partials.user_notes')
+                                    </div>
+
+                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#specialAddNoteModal">
+                                        <i class="fa fa-plus mr-10"></i>Add note
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
 
                         <!-- /.tab-pane -->
                     </div>
@@ -481,6 +543,26 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="specialAddNoteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Add note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @include("admin.users._partials.new_note")
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save-note">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
@@ -496,6 +578,21 @@
 
     <script>
         $(function () {
+            $("body").on('click', '.save-note', function () {
+                let form = $("#specialAddNoteModal form");
+                AjaxCall(
+                    "{{ route('admin_notes_form_save') }}",
+                    form.serialize(),
+                    function (res) {
+                        if(!res.error){
+                            $(".special-note-wall-box").html(res.html);
+                            document.getElementById('noteForm').reset();
+                            $("#specialAddNoteModal").modal('hide');
+                        }
+                    }
+                );
+            });
+
             $("body").on('click', '.reject-verify', function () {
                 var user_id = $("#userID").val()
                 AjaxCall(
@@ -684,6 +781,10 @@
 
             $('#users-table').DataTable({
                 ajax: "{!! route('datatable_user_activity',$user->id) !!}",
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'url', name: 'url'},
@@ -703,6 +804,10 @@
 
             $('#orders-table').DataTable({
                 ajax: "{!! route('datatable_user_orders',$user->id) !!}",
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'user', name: 'user'},

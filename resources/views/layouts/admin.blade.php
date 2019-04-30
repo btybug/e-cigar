@@ -31,6 +31,7 @@
 {!! Html::style("public/admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.css") !!}
 <!-- bootstrap wysihtml5 - text editor -->
   {!! Html::style("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
+  {!! Html::style("public/plugins/bootstrap-select/bootstrap-select.min.css") !!}
 
 
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
@@ -150,7 +151,7 @@
 {!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
 {!! Html::script("public/plugins/tree/jquery.mjs.nestedSortable.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-
+{!! Html::script("public/plugins/bootstrap-select/bootstrap-select.min.js")!!}
 
 <script>
   $.widget.bridge('uibutton', $.ui.button);

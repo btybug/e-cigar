@@ -11,6 +11,7 @@ use App\Models\Products;
 use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockVariation;
+use App\Models\StockVariationDiscount;
 use App\Models\StockVariationOption;
 use App\ProductSearch\ProductSearch;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -30,10 +31,10 @@ class ProductsController extends Controller
         $products = ProductSearch::apply($request, $category);
 //        $products = ProductSearch::apply($request,$category,true);
 //        dd($products);
-        $filters = Attributes::where('filter', true)->get();
-
+        $filters = (new Attributes)->getFiltersByCategory($type);
         $data = $request->except('_token');
         $selecteds = [];
+        $selectedBrands = [];
         if (isset($data['select_filter']) && count($data['select_filter'])) {
             foreach ($data['select_filter'] as $k => $v) {
                 if ($v && is_array($v)) {
@@ -50,14 +51,27 @@ class ProductsController extends Controller
             }
         }
 
-        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type'))->with('filterModel', $request->all());
+        if(isset($data['brands']) && count($data['brands'])){
+            foreach ($data['brands'] as $k => $v) {
+                $cat = Category::find($v);
+                if($cat){
+                    $selectedBrands[$v] = $cat->name;
+                }
+            }
+        }
+
+        if($request->ajax()){
+            $html = View('frontend.products._partials.products_render',compact(['products','selectedBrands','selecteds']))->with('all_products',true)->render();
+           return response()->json(['error' => false, 'html' => $html]);
+        }
+        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type','selectedBrands'))->with('filterModel', $request->all());
     }
 
     public function getSingle($type, $slug)
     {
 //        Cart::clear();
 //        $x = Cart::getContent();
-//        dd($x);
+
         enableFilter();
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
         if (!$vape) abort(404);
@@ -140,6 +154,9 @@ class ProductsController extends Controller
     {
         $variation = StockVariation::find($request->uid);
 
+
+
+        
         if ($variation) {
             $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
             $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;
@@ -184,9 +201,36 @@ class ProductsController extends Controller
 
     public function getVariationMenuRaw(Request $request)
     {
-        $variation = StockVariation::findOrFail($request->id);
-        $selectElementId = $request->get('selectElementId');
-        $html = \view("frontend.products._partials.multi_menu_variation", compact(['variation', 'selectElementId']))->render();
+        $id = $request->get("id",null);
+        if($id){
+            $variation = StockVariation::where('variation_id',$id)->get();
+            $selected = $vSettings = $variation->first();
+            $html = \view("frontend.products._partials.stock_variation_option_box", compact(['variation', 'selected','vSettings']))->render();
+        }else{
+            $selected = StockVariation::findOrFail($request->select_element_id);
+            $variation = $selected->stock->variations()->where('variation_id',$selected->variation_id)->get();
+            $vSettings = $variation->first();
+            $html = \view("frontend.products._partials.stock_variation_option", compact(['variation', 'selected','vSettings']))->render();
+        }
+
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function getOfferMenuRaw(Request $request)
+    {
+        $id = $request->get("id",null);
+        if($id){
+            $variation = StockVariation::where('variation_id',$id)->get();
+            $selected = $vSettings = $variation->first();
+            $html = \view("frontend.products._partials.offer_option_box", compact(['variation', 'selected','vSettings']))->render();
+        }else{
+            $selected = StockVariation::findOrFail($request->select_element_id);
+            $variation = $selected->stock->variations()->where('variation_id',$selected->variation_id)->get();
+            $vSettings = $variation->first();
+            $html = \view("frontend.products._partials.offer_option", compact(['variation', 'selected','vSettings']))->render();
+        }
+
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -194,15 +238,24 @@ class ProductsController extends Controller
     public function getVariationMenuRaws(Request $request)
     {
         $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
-        $selectElementId = null;
-        $html = \view("frontend.products._partials.render_variations", compact(['variations', 'selectElementId']))->render();
+        $vSettings = $variations->first();
+        $html = \view("frontend.products._partials.render_variations", compact(['variations', 'vSettings']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html, 'items' => $request->get('items', [])]);
+    }
+
+    public function getOfferMenuRaws(Request $request)
+    {
+        $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
+        $vSettings = $variations->first();
+        $html = \view("frontend.products._partials.render_offers", compact(['variations', 'vSettings']))->render();
 
         return \Response::json(['error' => false, 'html' => $html, 'items' => $request->get('items', [])]);
     }
 
     public function postSelectItems(Request $request)
     {
-        $items = StockVariation::where('variation_id', $request->group)->get();
+        $items = StockVariation::where('variation_id', $request->group)->whereNotIn('id',$request->get('ids',[]))->get();
         if (count($items)) {
             $stickers = [];
             $vSettings = $items->first();
@@ -244,5 +297,35 @@ class ProductsController extends Controller
         $html = \view("frontend.products._partials.extra_section", compact(['vSettings', 'variation']))->with('vape', $product)->render();
 
         return response()->json(['error' => false, 'html' => $html, 'type' => $vSettings->display_as]);
+    }
+
+    public function getDiscountPrice(Request $request)
+    {
+        $qty = $request->get('qty');
+        $discount_id = $request->get('discount_id');
+        if($qty != null){
+            $variation = StockVariation::findOrFail($request->variation_id);
+            $discount = $variation->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
+            if($discount){
+                $price = $discount->price * $qty;
+                return response()->json(['error' => false,'price' => $price]);
+            }
+        }elseif($discount_id != null){
+            $discount = StockVariationDiscount::findOrFail($discount_id);
+            if($discount){
+                return response()->json(['error' => false,'price' => $discount->price]);
+            }
+        }
+
+        return response()->json(['error' => true]);
+    }
+
+    public function addOffer(Request $request)
+    {
+        $offer = Stock::findOrFail($request->id);
+        $price = $request->price;
+        $html = view("frontend.products._partials.add_offer",compact(['offer','price']))->render();
+
+        return response()->json(['error' => false,'html' => $html]);
     }
 }

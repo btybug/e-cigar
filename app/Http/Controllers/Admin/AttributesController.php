@@ -30,8 +30,9 @@ class AttributesController extends Controller
     {
         $model = null;
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories, 0, [], []);
 
-        return $this->view('create_edit_form', compact(['model','categories']));
+        return $this->view('create_edit_form', compact(['model','categories','data']));
     }
 
     public function postAttributesCreate(Request $request)

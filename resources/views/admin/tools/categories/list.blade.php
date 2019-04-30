@@ -38,6 +38,19 @@
                     </div>
                     @ok('admin_store_categories')<a href="{!! route('admin_store_categories','notifications') !!} " class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>@endok
                 </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="stripe_paymant"  class="title font-weight-bold">Brands</label>
+                    </div>
+                    @ok('admin_store_categories')<a href="{!! route('admin_store_categories','brands') !!} " class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>@endok
+                </li>
+
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="stripe_paymant"  class="title font-weight-bold">Offers</label>
+                    </div>
+                    @ok('admin_store_categories')<a href="{!! route('admin_store_categories','offers') !!} " class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>@endok
+                </li>
             </ul>
         </div>
 

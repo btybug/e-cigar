@@ -5,7 +5,13 @@
  * Date: 08.02.2018
  * Time: 10:39
  */
+
+
+use App\Models\Media\Folders;
+
 $_MEDIA_BUTTON = false;
+$_MEDIA_SLUG = null;
+$_MEDIA_FOLDER = null;
 $_FILTER_BUTTON = false;
 $_FILTER_HTML = '';
 global $_MODEL_BOOTED;
@@ -50,9 +56,13 @@ function is_enabled_filter_modal()
 
 }
 
-function enableMedia()
+function enableMedia($slug=null)
 {
     global $_MEDIA_BUTTON;
+    if($slug){
+        global $_MEDIA_SLUG;
+        $_MEDIA_SLUG=$slug;
+    }
     $_MEDIA_BUTTON = true;
 }
 
@@ -66,27 +76,47 @@ function enableFilter()
 
 function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null)
 {
+    $folder = App\Models\Media\Folders::where('name', $slug)->where('parent_id', 0)->first(['id', 'name']);
+
     enableMedia();
+    $id = $folder->id;
+    global $_MEDIA_FOLDER;
+    $_MEDIA_FOLDER = $folder;
     $uniqId = uniqid('media_');
-    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html']));
+    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id']));
 }
 
-function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_multiple=true,$type='filter_popup')
+function get_media_folder()
 {
-  global $_FILTER_HTML;
-  $uniqId = uniqid('filter_');
-  $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
-
-  switch ($type){
-    case'filter_popup':
-      enableFilter();
-      $_FILTER_HTML = View::make('filters.filter_modal',compact('category'))->render();
-      $view='button';break;
-    case'select_filter':$view='filter_select';break;
-  }
-  return ($category && isset($view))?view('filters.'.$view, compact('category', 'text','group','name','is_multiple','uniqId','type')):'Shnorhavor Amanor Yev Surb &nund';
+    global $_MEDIA_FOLDER;
+    global $_MEDIA_SLUG;
+    if(!$_MEDIA_FOLDER && $_MEDIA_SLUG){
+        $_MEDIA_FOLDER = App\Models\Media\Folders::where('name', $_MEDIA_SLUG)->where('parent_id', 0)->first(['id', 'name']);
+    }
+    return $_MEDIA_FOLDER;
 }
-function filter_modal_html(){
+
+function filter_button($category, $group = null, $text = 'Filter', $name = null, $is_multiple = true, $type = 'filter_popup')
+{
+    global $_FILTER_HTML;
+    $uniqId = uniqid('filter_');
+    $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
+
+    switch ($type) {
+        case'filter_popup':
+            enableFilter();
+            $_FILTER_HTML = View::make('filters.filter_modal', compact('category'))->render();
+            $view = 'button';
+            break;
+        case'select_filter':
+            $view = 'filter_select';
+            break;
+    }
+    return ($category && isset($view)) ? view('filters.' . $view, compact('category', 'text', 'group', 'name', 'is_multiple', 'uniqId', 'type')) : 'Shnorhavor Amanor Yev Surb &nund';
+}
+
+function filter_modal_html()
+{
     global $_FILTER_HTML;
     return $_FILTER_HTML;
 }
@@ -95,7 +125,7 @@ function get_site_logo()
 {
     $settings = new \App\Models\Settings();
     $logo = $settings->getData('admin_general_settings', 'siteLogo');
-    return ($logo) ? $logo->val : '';
+    return ($logo && $logo->val) ? $logo->val : '/public/images/no_image.png';
 }
 
 function get_site_name()
@@ -134,9 +164,13 @@ function BBgetDateFormat($date, $format = null)
  * @param $time
  * @return bool|string
  */
-function BBgetTimeFormat($time)
+function BBgetTimeFormat($time,$format = null)
 {
     if (!$time) null;
+
+    if($format){
+        return date($format, strtotime($time));
+    }
 
     $model = new \App\Models\Settings();
     $settings = $model->getData('admin_general_settings', 'date_format');
@@ -352,7 +386,6 @@ function receiver_name($user)
 {
     return $user->name;
 }
-
 function receiver_last_name($user)
 {
     return $user->last_name;
@@ -437,6 +470,13 @@ function cartCount()
     $cartService = new \App\Services\CartService();
 
     return $cartService->getCount();
+}
+
+
+function cartCountItems()
+{
+    $cart = \Cart::session('wholesaler')->getContent();
+    return count($cart);
 }
 
 function getRegions($country, $all = false)
@@ -748,6 +788,19 @@ function time_ago($datetime, $full = false)
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
+function stockSeo($stock)
+{
+    $seoes = $stock->seo;
+    $HTML = '';
+    if ($stock->image) {
+        $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
+    }
+    foreach ($seoes as $seo) {
+        $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
+    }
+    return $HTML;
+}
+
 function meta($object, $type = 'seo_posts')
 {
 
@@ -798,7 +851,7 @@ function mergeCollections($collection1, $collection2)
         $collection->push($col1);
     foreach ($collection2 as $col2)
         $collection->push($col2);
-    $data = $collection->sortByDesc('created_at');
+    $data = $collection->sortBy('created_at');
     return $data->merge([]);
 }
 
@@ -1074,6 +1127,15 @@ function get_currency()
         : (($default) ? $default->code : null);
 }
 
+function get_symbol()
+{
+    $default = site_default_currency();
+    $code = (\Cookie::get('currency')) ? \Cookie::get('currency')
+        : (($default) ? $default->code : null);
+
+    return (new \App\Models\SiteCurrencies())->where('code', $code)->value('symbol');
+}
+
 [['code' => 'referral_name', 'description' => 'Invited user name'],
     ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
     ['code' => 'referral_email', 'description' => 'Invited user name'],
@@ -1159,13 +1221,13 @@ function user_avatar($id = null)
         $user = $userRepo->find($id);
         if ($user) {
             if ($user->avatar) {
-                return "/public/images/users/" . $user->avatar;
+                return "/storage/app/images/$user->email/" . $user->avatar;
             }
         }
     } else {
         if (Auth::check()) {
             if (Auth::user()->avatar) {
-                return "/public/images/users/" . Auth::user()->avatar;
+                return "/storage/app/images/".Auth::user()->email . "/" . Auth::user()->avatar;
             }
         }
     }
@@ -1221,18 +1283,21 @@ function render_widgets($placeholder)
 
     return $html;
 }
-function getItemStockVariations($group,array $items=[]){
-    return \App\Models\StockVariation::where('variation_id',$group)->whereIn('item_id',$items)->get();
+
+function getItemStockVariations($group, array $items = [])
+{
+    return \App\Models\StockVariation::where('variation_id', $group)->whereIn('item_id', $items)->get();
 }
 
 
-function out_of_stock($item){
-    if($item){
+function out_of_stock($item)
+{
+    if ($item) {
         $qty = $item->item->qty;
         $settings = new \App\Models\Settings();
         $model = $settings->getEditableData('store_out_of_stock');
 
-        if($qty <= 0 && $model->out_of_stock_status == 0){
+        if ($qty <= 0 && $model->out_of_stock_status == 0) {
             return 1;
         }
     }
@@ -1240,16 +1305,17 @@ function out_of_stock($item){
     return 0;
 }
 
-function out_of_stock_msg($item){
-    if($item){
+function out_of_stock_msg($item)
+{
+    if ($item) {
         $qty = $item->item->qty;
         $settings = new \App\Models\Settings();
         $model = $settings->getEditableData('store_out_of_stock');
 
-        if($qty <=0){
-            if($model->out_of_stock_status == 0){
+        if ($qty <= 0) {
+            if ($model->out_of_stock_status == 0) {
                 return "(Out of stock)";
-            }else{
+            } else {
                 return "(Back order)";
             }
         }
@@ -1257,3 +1323,70 @@ function out_of_stock_msg($item){
 
     return null;
 }
+
+function get_breadcrumb_previous_url($breadcrumbs)
+{
+    $length = count($breadcrumbs);
+    return $breadcrumbs[$length - 2]->url;
+}
+
+function getClient()
+{
+    $client = new Google_Client();
+    $client->setClientId(env('GOOGLE_CLIENT_ID', 'client_id'));
+    $client->setClientSecret(env('GOOGLE_CLIENT_SECRET', 'client_secret'));
+    $client->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
+    $client->setApplicationName('Google Classroom API PHP Quickstart');
+    $client->setScopes(Google_Service_Classroom::CLASSROOM_COURSES_READONLY);
+
+    $client->setAccessType('offline');
+    $client->setPrompt('select_account consent');
+    foreach (config('gmail.scopes') as $scopes) {
+        $client->addScope($scopes);
+    }
+    foreach (config('gmail.additional_scopes') as $scopes) {
+        $client->addScope($scopes);
+    }
+    $client->addScope(Google_Service_Oauth2::USERINFO_EMAIL);
+    $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_GROUP);
+    $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_USER_ALIAS);
+    $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_CUSTOMER);
+    $accessToken = Gmail::refreshToken();
+    if (is_array($accessToken)) {
+        $client->setAccessToken($accessToken);
+    }
+    return $client;
+}
+
+function getGoogleAlians()
+{
+    // Get the API client and construct the service object.
+    if (!\App\Models\Gmail::check()) return collect([]);
+    $client = getClient();
+    $service = new Google_Service_Directory($client);
+
+// Print the first 10 users in the domain.
+    $optParams = array(
+        'customer' => 'my_customer',
+        'maxResults' => 10,
+        'orderBy' => 'email',
+    );
+    $results = $service->users->listUsers($optParams);
+    $users = [];
+    $emails = [];
+    if (count($results->getUsers()) == 0) {
+        return [];
+    } else {
+        foreach ($results->getUsers() as $user) {
+            $users[$user->getPrimaryEmail()] = $user->aliases;
+        }
+        if (is_array($users[Gmail::user()])) {
+
+            foreach ($users[Gmail::user()] as $email) {
+                $emails[$email] = $email;
+            }
+        }
+        return collect($emails);
+    }
+}
+

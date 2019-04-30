@@ -3,14 +3,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-2">
-                        Min Limit : {!! Form::number("variations[$main_unique][min_count_limit]",
-                                ($main) ? $main->min_count_limit : null,['class' => 'form-control']) !!}
-                    </div>
-                    <div class="col-md-2">
-                        How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",
-                                ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
-                    </div>
+                    {{--<div class="col-md-2">--}}
+                        {{--Min Limit : {!! Form::number("variations[$main_unique][min_count_limit]",--}}
+                                {{--($main) ? $main->min_count_limit : null,['class' => 'form-control']) !!}--}}
+                    {{--</div>--}}
+                    {{--<div class="col-md-2">--}}
+                        {{--How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",--}}
+                                {{--($main) ? $main->count_limit : null,['class' => 'form-control']) !!}--}}
+                    {{--</div>--}}
                     <div class="col-md-2">
                         Display as: {!! Form::select("variations[$main_unique][display_as]",
                         ['select_filter' => 'select filters','filter_popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
