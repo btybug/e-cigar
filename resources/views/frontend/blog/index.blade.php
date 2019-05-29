@@ -10,7 +10,7 @@
 
                     <div class="btn d-md-none toggler ml-auto pointer bg-transparent pointer" data-toggle="collapse" data-target="#sortBySelects">Sort By:</div>
 
-                    <div  id="sortBySelects" class="sort-by-selects collapse d-md-flex align-items-center ml-sm-auto">
+                    <div  id="sortBySelects" class="sort-by-selects news_sort_by_select collapse d-md-flex align-items-center ml-sm-auto">
                         <div class="product-grid-list d-flex align-self-center">
                             <span id="dispGrid" class="d-inline-block pointer display-icon active">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" idth="15px" height="15px" viewBox="0 0 15 15">

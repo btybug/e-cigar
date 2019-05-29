@@ -1627,7 +1627,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     .sort-by-selects {
         position: absolute;
         right: 0;
-        top: 120%;
+        top: 101%;
         display: flex;
         padding: 10px 5px;
         width: 100%;
@@ -1688,6 +1688,12 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
     .product-single-share-col .ml-auto {
         margin-left: 0 !important;
+    }
+    .news_sort_by_select{
+        justify-content: space-between;
+    }
+    .news_sort_by_select .sort-by_select:not(:last-of-type){
+        margin: 0;
     }
 
 }

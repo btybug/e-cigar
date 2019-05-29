@@ -951,6 +951,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
         max-width: 170px;
         margin-left: 0;
     }
+    .news_sort_by_select .sort-by_select{
+        max-width: 100%;
+    }
 }
 
 @media screen and (max-width: 350px) {
