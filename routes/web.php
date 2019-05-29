@@ -131,6 +131,8 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::get('/', 'Frontend\UserController@index')->name('my_account');
     Route::post('/', 'Frontend\UserController@saveMyAccount')->name('my_account_save_data');
     Route::post('/contact', 'Frontend\UserController@saveMyAccountContact')->name('my_account_save_contact_data');
+    Route::post('/profile-image', 'Frontend\UserController@postProfileImageUpload')->name('profile_image_upload');
+    Route::post('/delete-avatar', 'Frontend\UserController@postpaymentProfileImageDelete')->name('profile_image_delete');
 
     Route::get('/messages', 'Frontend\UserController@getNotifications')->name('messages');
     Route::post('/notifications', 'Frontend\UserController@getNotificationsContent')->name('notifications_content');
