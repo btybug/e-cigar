@@ -20,7 +20,7 @@ class CreateMailTemplatesTable extends Migration
             $table->string('to')->nullable();
             $table->string('module')->nullable();
             $table->tinyInteger('is_active')->default(0);
-            $table->unsignedInteger('category_id');
+            $table->unsignedInteger('category_id')->nullable();
             $table->tinyInteger('is_for_admin')->default(0);
             $table->timestamps();
 
