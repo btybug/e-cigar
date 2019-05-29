@@ -73,6 +73,7 @@
             </div>
             {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
         </div>
+        </div>
     </main>
 
     {{-- Modal --}}
