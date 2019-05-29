@@ -3616,15 +3616,14 @@ $(document).ready(function () {
               return response.json();
             }).then(function (json) {
               var isMultiple = select.closest('[data-limit]').attr('data-limit') === '1' ? false : true;
-              if (!isMultiple) {
+              if (isMultiple) {
+                el.closest('.product-single-info_row').find('.filter-children-items').append(json.html);
+                select2MaxLimit(select, limit);
+              } else {
                 el.closest('.product-single-info_row').find('.menu-item-selected').remove();
                 el.closest('.product-single-info_row').find('.filter-children-items').append(json.html);
-                el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
+                // el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
                 $(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]).remove();
-              } else {
-                el.closest('.product-single-info_row').find('.filter-children-items').append(json.html);
-
-                select2MaxLimit(select, limit);
               }
               setTotalPrice(modal);
             }).catch(function (error) {
