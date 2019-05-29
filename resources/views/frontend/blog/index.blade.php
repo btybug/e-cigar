@@ -8,7 +8,7 @@
                 <div class="d-flex align-items-center position-relative">
                     @include('frontend._partials.individual_left_bar',['type' => 'news'])
 
-                    <button class="btn d-md-none toggler ml-auto pointer bg-transparent" data-toggle="collapse" data-target="#sortBySelects">Sort By:</button>
+                    <div class="btn d-md-none toggler ml-auto pointer bg-transparent pointer" data-toggle="collapse" data-target="#sortBySelects">Sort By:</div>
 
                     <div  id="sortBySelects" class="sort-by-selects collapse d-md-flex align-items-center ml-sm-auto">
                         <div class="product-grid-list d-flex align-self-center">
