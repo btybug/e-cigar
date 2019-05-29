@@ -63,10 +63,19 @@
                                         <div class="row">
                                             <div class="col-xl-3 col-lg-4">
                                                 <div class="profile-info_avatar-holder position-relative mb-3 mx-md-0 mx-auto">
-                                                    <img class="img-fluid" src="img/profile.png" alt="">
-                                                    <a href="#"
-                                                       class="d-flex align-items-center justify-content-center profile-info_change-avatar-btn font-13 main-transition position-absolute">Change</a>
+                                                    {!! Form::open() !!}
+                                                    <div class="dropzone"
+                                                         data-image="{!! user_avatar() !!}" data-width="200" data-height="200" data-originalsize="false"
+                                                         data-url="{!! route('profile_image_upload') !!}">
+                                                        <input type="file" name="thumb"/>
+                                                    </div>
+                                                    {!! Form::close() !!}
                                                 </div>
+                                                {{--                                                  <div class="profile-info_avatar-holder position-relative mb-3 mx-md-0 mx-auto">--}}
+                                                {{--                                                      <img class="img-fluid" src="img/profile.png" alt="">--}}
+                                                {{--                                                      <a href="#"--}}
+                                                {{--                                                         class="d-flex align-items-center justify-content-center profile-info_change-avatar-btn font-13 main-transition position-absolute">Change</a>--}}
+                                                {{--                                                  </div>--}}
 
                                             </div>
                                             <div class="col-xl-9 col-lg-8">
@@ -512,11 +521,48 @@
 
 @stop
 @section('css')
+    {!! Html::style('public/css/demo.html5imageupload.css') !!}
+    <style>
+        .table-tr-border-bottom-white {
+            border-bottom: 1px solid #ffffff !important;
+        }
+        .profile-info_avatar-holder .dropzone{
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .profile-info_avatar-holder .dropzone img.preview{
+            height: 100%;
+            object-fit: cover;
+        }
+        .profile-info_avatar-holder .dropzone.smalltext:after{
+            content: 'Change';
+            bottom: 0;
+            height: 30px;
+            background-color: #6a92e1;
+            color: #fff;
+            font-size: 13px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-transition: all .5s;
+            -moz-transition: all .5s;
+            -ms-transition: all .5s;
+            -o-transition: all .5s;
+            transition: all .5s;
+        }
+        .profile-info_avatar-holder .dropzone.smalltext:hover:after{
+            height: 100%;
+            color: #fff;
+        }
+    </style>
     {!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
 @stop
 
 @section('js')
     {!! Html::script("public/admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
+    {!! Html::script('public/js/html5imageupload.js') !!}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
@@ -563,7 +609,7 @@
                 AjaxCall(
                     "/get-regions-by-country",
                     {country: value},
-                    res = > {
+                    res => {
                     let select = document.getElementById('regions');
                 select.innerText = null;
                 if (!res.error) {
@@ -584,7 +630,7 @@
                 AjaxCall(
                     "/my-account/address-book-form",
                     {},
-                    res = > {
+                    res => {
                     if (
                 !res.error
                 )
@@ -603,7 +649,7 @@
                 AjaxCall(
                     "/my-account/address-book-form",
                     {id: id},
-                    res = > {
+                    res => {
                     if (
                 !res.error
                 )
@@ -622,7 +668,7 @@
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
-                    res = > {
+                    res => {
                     let select = document.getElementById('geo_region');
                 select.innerText = null;
                 if (!res.error) {
@@ -645,7 +691,7 @@
                 AjaxCall(
                     "/my-account/select-address-book",
                     {id: value},
-                    res = > {
+                    res => {
                     if (
                 !res.error
             )
@@ -675,11 +721,11 @@
                 AjaxCall(
                     "/get-regions-by-geozone",
                     {country: value},
-                    res = > {
+                    res => {
                     let select = $_this.closest('.address-book-form').find('.geo_region_book');
-                $(select).empty()
+                $(select).empty();
                 if (!res.error) {
-                    console.log($(select).val())
+                    console.log($(select).val());
                     var opt = document.createElement('option');
                     $.each(res.data, function (k, v) {
                         var option = $(opt).clone();
@@ -692,7 +738,7 @@
                 )
                 ;
             });
-        })
+        });
 
 
         $(function () {
@@ -707,4 +753,5 @@
             });
         });
     </script>
+{{--    {!! Html::script('public/js/my_account.js') !!}--}}
 @stop
