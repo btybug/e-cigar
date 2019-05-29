@@ -527,9 +527,13 @@
             border-bottom: 1px solid #ffffff !important;
         }
         .profile-info_avatar-holder .dropzone{
+            width: 100% !important;
+            height: 100% !important;
+            border: none;
+        }
+        .profile-info_avatar-holder > form {
             width: 100%;
             height: 100%;
-            border: none;
         }
         .profile-info_avatar-holder .dropzone img.preview{
             height: 100%;
@@ -753,5 +757,5 @@
             });
         });
     </script>
-{{--    {!! Html::script('public/js/my_account.js') !!}--}}
+    {!! Html::script('public/js/my_account.js') !!}
 @stop
