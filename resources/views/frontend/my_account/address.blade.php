@@ -39,7 +39,8 @@
 
                 {{--acoount sidebar--}}
                 <div class="profile-sidebar profile-sidebar--inner-pages d-flex flex-column align-items-center">
-                    @include('frontend.my_account._partials.left_bar')
+                    @include('frontend.my_account._partials.left_bar',['active'=>'my_account_address'])
+                    {{--@include('frontend.my_account._partials.left_bar')--}}
                     <div class="mt-auto">
                         {!! Form::open(['url'=>route('logout')]) !!}
                         <div class="text-center">

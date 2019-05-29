@@ -28,7 +28,7 @@
 
             {{--acoount sidebar--}}
             <div class="profile-sidebar profile-sidebar--inner-pages d-flex flex-column align-items-center">
-                @include('frontend.my_account._partials.left_bar')
+                @include('frontend.my_account._partials.left_bar',['active'=>'notifications'])
 
                 <div class="mt-auto">
                     {!! Form::open(['url'=>route('logout')]) !!}

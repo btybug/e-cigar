@@ -26,7 +26,7 @@
         </div>
         <div class="d-flex">
             <div class="profile-sidebar profile-sidebar--inner-pages d-flex flex-column align-items-center">
-                @include('frontend.my_account._partials.left_bar')
+                @include('frontend.my_account._partials.left_bar',['active'=>'my_account_tickets'])
                 <div class="mt-auto">
                     {!! Form::open(['url'=>route('logout')]) !!}
                     <div class="text-center">
