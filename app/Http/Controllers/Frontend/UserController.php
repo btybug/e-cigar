@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Events\Tickets;
+use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Frontend\Requests\ChangePasswordRequest;
 use App\Http\Controllers\Frontend\Requests\MyAccountContactRequest;
@@ -24,6 +25,7 @@ use App\Models\Ticket;
 use App\Models\Settings;
 use App\Models\ZoneCountries;
 use App\Services\FileService;
+use App\Services\UserService;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -467,6 +469,18 @@ class UserController extends Controller
         Newsletter::whereNotIn('category_id', $emailSettings)->where('user_id', \Auth::id())->delete();
 
         return redirect()->back();
+    }
+
+    public function postProfileImageUpload(UserAvaratRequest $request, UserService $userService)
+    {
+        $result = $userService->avatarUpload($request->except('_token'));
+        return response()->json($result);
+    }
+
+    public function postProfileImageDelete(Request $request, UserService $userService)
+    {
+        $result = $userService->avatarDelete();
+        return response()->json($result);
     }
 }
 
