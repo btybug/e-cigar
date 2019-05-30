@@ -3252,3 +3252,21 @@ outline: none;
     padding: 0 !important;
     margin: 0 !important;
 }
+.related-sliders .realated-slider .display-grid{
+    height: 100%;
+}
+.related-sliders .realated-slider .display-grid>a{
+    height: 100%;
+}
+
+.related-sliders .realated-slider .display-grid .news-card_view{
+flex: none;
+}
+
+.related-sliders .realated-slider .display-grid .news-card_body{
+    flex: 1;
+}
+
+.related-sliders .realated-slider .display-grid .news-card_footer{
+    margin-top: auto;
+}
