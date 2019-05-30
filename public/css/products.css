@@ -3270,3 +3270,6 @@ flex: none;
 .related-sliders .realated-slider .display-grid .news-card_footer{
     margin-top: auto;
 }
+.related-sliders .realated-slider .display-grid .news-card{
+    height: 100%;
+}
