@@ -17121,7 +17121,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     box-shadow: 0px 0px 5px rgba(0,0,0,.2);
     z-index: 9999;
 }
-
+.continue-shp-wrapp .continue-shp-wrapp_right .product-card_price{
+    width: 195px;
+}
 .continue-shp-wrapp .product-card_btn {
     padding: 14px 40px;
     margin-right: 60px;
@@ -18194,6 +18196,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     .continue-shp-wrapp .product-card_price {
         font-size: 30px;
         padding-left: 44px;
+        width: auto !important;
     }
 
     .product-card_old-price {
