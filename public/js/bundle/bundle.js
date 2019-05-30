@@ -4062,8 +4062,7 @@ $('body').on('click', '.display-icon', function (e) {
 localStorage.getItem('display-grid') == "list" && $('#displVertBtn').click();
 
 // scroll top button
-$('#scrollTopBtn').on('click', function () {
-
+$('body').on('click', '#scrollTopBtn', function () {
   if ($('#singleProductPageCnt').length) {
     $('#singleProductPageCnt').animate({
       scrollTop: 0
