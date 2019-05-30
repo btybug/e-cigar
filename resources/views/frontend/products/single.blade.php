@@ -76,7 +76,7 @@
                                             <div class="align-items-center single-product-main-title mb-3 d-none visible-on-small">
                                                 <!--like icon-->
                                                 @if(Auth::check())
-                                                    <span class="like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
+                                                    <span data-id="{{ $vape->id }}" class="like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
                                                     <svg viewBox="0 0 20 18" width="20px" height="18px">
                                                         <path fill-rule="evenodd" opacity="0.949"
                                                               fill="rgb(255, 255, 255)"
@@ -149,8 +149,8 @@
                                                 <div class="d-flex align-items-center single-product-main-title">
                                                     <!--like icon-->
                                                     @if(Auth::check())
-                                                        <span data-id=""
-                                                              class="add-fav-variation product-card_like-icon like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer d-none"> <!--gets class active-->
+                                                        <span data-id="{{ $vape->id }}"
+                                                              class="add-fav-variation product-card_like-icon like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer d-none @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
                                                         <svg viewBox="0 0 20 18" width="20px" height="18px">
                                                     <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
                                                           d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
@@ -917,14 +917,15 @@
             call_subtotal(500);
 
             $("body").on('click', '.product-card_like-icon', function () {
+
                 let url;
                 let is_active = $(this).hasClass("active");
 
                 url = (is_active) ? "/my-account/delete_favourites" : "/my-account/add_favourites";
 
-                let variation_id = $(this).data("id");
+                let variation_id = $(this).attr("data-id");
                 let _this = $(this);
-
+                console.log(`${variation_id}  ---->  `, _this);
                 if (variation_id) {
                     $.ajax({
                         type: "post",
