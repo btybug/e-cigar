@@ -17754,6 +17754,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .profile-sidebar--inner-pages {
     width: 150px;
     padding-top: 38px;
+    flex: none;
 }
 
 .profile-sidebar--inner-pages .profile-sidebar-menu_link{
