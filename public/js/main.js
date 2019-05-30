@@ -1514,18 +1514,16 @@ localStorage.getItem('display-grid') == "list" && $('#displVertBtn').click();
 
 
 // scroll top button
-$('#scrollTopBtn').on('click', function () {
-
-  if ($('#singleProductPageCnt').length) {
-    $('#singleProductPageCnt').animate({
-      scrollTop: 0
-    }, 800);
-  } else {
-    $('html, body').animate({
-      scrollTop: 0
-    }, 800);
-  }
-
+$('body').on('click', '#scrollTopBtn', function () {
+    if ($('#singleProductPageCnt').length) {
+        $('#singleProductPageCnt').animate({
+            scrollTop: 0
+        }, 800);
+    } else {
+        $('html, body').animate({
+            scrollTop: 0
+        }, 800);
+    }
 });
 
 // product range count
