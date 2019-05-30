@@ -73,9 +73,7 @@
         <div class="col-md-8">
             <label for="orderNotes" class="text-gray-clr mb-4">Special Notes</label>
             <div class="position-relative">
-                        <textarea name="" id="orderNotes" class="oreder-notes-area w-100">
-
-                        </textarea>
+                        <textarea name="" id="orderNotes" class="oreder-notes-area w-100"></textarea>
                 <span class="msg-textarea position-absolute font-12 text-gray-clr">Max 500 character</span>
             </div>
         </div>
