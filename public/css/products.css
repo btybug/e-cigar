@@ -555,6 +555,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     font-family: 'Oswald-Medium', sans-serif;
     padding: 0;
     text-transform: uppercase;
+    width: calc(100% - 20px);
 }
 
 .top-filters .main-filters {
