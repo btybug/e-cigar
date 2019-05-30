@@ -169,7 +169,7 @@
                                                          src="{{ (media_image_tmb($product->image)) }}" alt="">
                                                 </div>
                                                 <!--like icon-->
-                                                <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute {{ (! $product->is_favorite)?:'active' }}"
+                                                <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute {{ ( $product->is_favorite)?'active':null}}"
                                                       data-id="{{ $product->variation_id }}"> <!--gets class active-->
                                                 <svg viewBox="0 0 20 18" width="20px" height="18px">
                                                     <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
