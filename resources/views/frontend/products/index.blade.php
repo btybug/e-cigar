@@ -187,14 +187,14 @@
                                             </div>
                                             <div class="product-card_body">
                                                 <!--product image thumbs-->
-                                                <div class="d-flex product-card-thumbs flex-wrap">
+                                                <div class="d-flex product-card-thumbs product_cart-thumbs-nowrap">
                                                     <div class="product-card_thumb-img-holder pointer active_slider">
                                                         <img src="{{ (media_image_tmb($product->image)) }}"
                                                              alt="{{ $product->name }}">
                                                     </div>
                                                     @if($product->variations)
                                                         @php $count = 0; @endphp
-                                                        @foreach($product->variations()->take(4)->get() as $variation)
+                                                        @foreach($product->variations()->take(3)->get() as $variation)
                                                             @if($variation->image)
                                                                 @php $count++; @endphp
                                                                 <div class="product-card_thumb-img-holder pointer">
@@ -204,7 +204,7 @@
                                                                 </div>
                                                             @endif
                                                         @endforeach
-                                                        @if($count == 4)
+                                                        @if($count == 3)
                                                             <div class="product-card_thumb-img-holder_more pointer">
                                                                 See More <i class="fa fa-plus"></i>
                                                             </div>
