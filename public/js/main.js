@@ -102,6 +102,44 @@ $(document).ready(function() {
       });
 
     });
+
+      //                    start carousel tabs
+      let activeTab = $('#carousel-tabs-wrap a').filter('.active');
+      $('#carousel-tabs-wrap a').on('click', function (e) {
+          e.preventDefault();
+          activeTab.removeClass('active');
+          $(activeTab.attr('href')).removeClass('active');
+          activeTab = $(this);
+          activeTab.addClass("active");
+          $(activeTab.attr('href')).addClass('active');
+      })
+      $(".carousel-tabs").carousel({
+          show: {
+              "740px": 2,
+              "980px": 3,
+              "1220px": 2
+          },
+          matchWidth: false,
+          controls: false,
+          pagination: false
+      });
+      if ($(window).width() > 1400) {
+          $(".carousel-tabs .fs-touch-element").touch("destroy");
+      }
+      else {
+          $(".carousel-tabs .fs-touch-element").touch();
+      }
+      $(window).resize(function () {
+          if ($(window).width() > 1400) {
+              $(".carousel-tabs .fs-touch-element").touch("destroy");
+          }
+          else {
+              $(".carousel-tabs .fs-touch-element").touch();
+          }
+      });
+
+
+//                    end carousel tabs
   });
 
 
