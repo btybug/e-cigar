@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ContactUsRequest;
 use App\Mail\ContactUs;
 use App\Models\Category;
+use App\Models\Common;
 use App\Models\Faq;
 use App\Models\GeoZones;
 use App\Models\Gmail;
