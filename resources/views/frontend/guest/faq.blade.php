@@ -40,6 +40,7 @@
                             {!! renderCategory($categories) !!}
                         </div>
                     </div>
+                    @if($category)
                     <div class="col-md-9">
                         <div class="accord">
                             <div class="offset-top-66 offset-lg-top-0">
@@ -57,6 +58,7 @@
                             </div>
                         </div>
                     </div>
+                        @endif
                 </div>
             </div>
         </div>
