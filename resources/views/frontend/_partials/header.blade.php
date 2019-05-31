@@ -62,7 +62,7 @@
                         </span>
                                 </a>
 
-                                <div class="nav-item--has-dropdown_dropdown">
+                                <div class="nav-item--has-dropdown_dropdown main-scrollbar">
                                     <div class="products-menu-item row">
                                         @include("frontend._partials.header_menu_products")
                                     </div>
