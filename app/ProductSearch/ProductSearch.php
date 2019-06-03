@@ -91,11 +91,11 @@ class ProductSearch
                 $ordering = 'asc';
                 break;
             case "price_desc":
-                $defaultCol = 'price';
+                $defaultCol = 'stock_variations.price';
                 $ordering = 'desc';
                 break;
             case "price_asc":
-                $defaultCol = 'price';
+                $defaultCol = 'stock_variations.price';
                 $ordering = 'asc';
                 break;
             default:
