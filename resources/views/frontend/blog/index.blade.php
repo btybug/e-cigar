@@ -30,7 +30,7 @@
                             <label for="sortByLimit" class="text-main-clr mb-0 text-uppercase">LIMIT: </label>
                             <div class="select-wall">
                                 {!! Form::select('per-page',[
-                                    '' => "Select",
+                                    '8' => "Select",
                                     '5' =>'5 per page',
                                     '10' =>'10 per page',
                                     '15' =>'15 per page',
