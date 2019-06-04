@@ -1257,3 +1257,8 @@ function out_of_stock_msg($item){
 
     return null;
 }
+
+function get_breadcrumb_previous_url($breadcrumbs){
+    $length = count($breadcrumbs);
+    return $breadcrumbs[$length - 2]->url;
+}
