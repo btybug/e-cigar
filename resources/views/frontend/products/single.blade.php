@@ -347,15 +347,22 @@
                                                                         </div>
 
                                                                         @if($related_product->variations)
-                                                                            @foreach($related_product->variations as $related_product_v)
+                                                                            @php $count = 0; @endphp
+                                                                            @foreach($related_product->variations()->take(3)->get() as $related_product_v)
                                                                                 @if($related_product_v->image)
+                                                                                    @php $count++; @endphp
                                                                                     <div class="product-card_thumb-img-holder pointer">
                                                                                         <img class=""
-                                                                                             src="{{ checkImage($related_product_v->image) }}"
+                                                                                             src="{{ (media_image_tmb($related_product_v->image)) }}"
                                                                                              alt="{{ $related_product_v->name }}">
                                                                                     </div>
                                                                                 @endif
                                                                             @endforeach
+                                                                            @if($count == 3)
+                                                                                <div class="product-card_thumb-img-holder_more pointer">
+                                                                                    See More <i class="fa fa-plus"></i>
+                                                                                </div>
+                                                                            @endif
                                                                         @endif
                                                                     </div>
                                                                     <div class="product-card_body-text">
