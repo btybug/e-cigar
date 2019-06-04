@@ -366,9 +366,11 @@
                                                                         @endif
                                                                     </div>
                                                                     <div class="product-card_body-text">
-                                                                        <h2 class="card-title font-21 font-sec-bold">{{$related_product->name}}</h2>
+                                                                        <h2 class="card-title font-21 font-sec-bold">
+                                                                            {{ str_limit($related_product->name,20) }}
+                                                                        </h2>
                                                                         <p class="card-text font-main-light font-15 text-light-clr">
-                                                                            {{$related_product->short_description}}
+                                                                            {{ str_limit($related_product->short_description,30) }}
                                                                         </p>
                                                                         <div class="product-card_icons-outer d-flex justify-content-between align-items-center">
                                                                             <!--icons-->
