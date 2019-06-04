@@ -214,7 +214,7 @@
                                                 <div class="product-card_body-text">
                                                     <h2 class="card-title font-21 font-sec-bold">
                                                     <span class="text-tert-clr">
-                                                        {{ str_limit($product->name,30) }}
+                                                        {{ str_limit($product->name,20) }}
                                                     </span>
                                                     </h2>
                                                     <p class="card-text font-main-light font-15 text-light-clr">
