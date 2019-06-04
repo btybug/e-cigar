@@ -131,7 +131,7 @@
                                                 {!! Form::text("currencies[$currency->id][name]",$currency->name,['class'=>'form-control c-name']) !!}
                                             </td>
                                             <td>
-                                                {!! Form::text("currencies[$currency->id][symbol]",$currency->symbol,['class'=>'form-control c-symbol','disabled' =>true]) !!}
+                                                {!! Form::text("currencies[$currency->id][symbol]",$currency->symbol,['class'=>'form-control c-symbol','readonly' =>true]) !!}
                                             </td>
                                             <td>
                                                 {!! Form::text("currencies[$currency->id][rate]",$currency->rate,['class'=>'form-control c-rate']) !!}
