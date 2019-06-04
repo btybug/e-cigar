@@ -142,6 +142,10 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .product-card_body-text .card-title {
     padding-right: 80px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #5184ea;
 }
 
 .display-grid .product-card_body-text .card-title {
@@ -1511,7 +1515,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
     .display-grid .products-wrap_col:hover,
     .display-grid .products-wrap:hover {
-        z-index: 99;
+        z-index: 9;
     }
 
     .display-grid .product-card:hover .product-card_btn {
