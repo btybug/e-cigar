@@ -1080,7 +1080,7 @@ function get_symbol()
     $code = (\Cookie::get('currency')) ? \Cookie::get('currency')
         : (($default) ? $default->code : null);
 
-    return (new \App\Models\SiteCurrencies())->where('code', $code)->first()->symbol;
+    return (new \App\Models\SiteCurrencies())->where('code', $code)->value('symbol');
 }
 
 [['code' => 'referral_name', 'description' => 'Invited user name'],
