@@ -1074,6 +1074,15 @@ function get_currency()
         : (($default) ? $default->code : null);
 }
 
+function get_symbol()
+{
+    $default = site_default_currency();
+    $code = (\Cookie::get('currency')) ? \Cookie::get('currency')
+        : (($default) ? $default->code : null);
+
+    return (new \App\Models\SiteCurrencies())->where('code', $code)->first()->symbol;
+}
+
 [['code' => 'referral_name', 'description' => 'Invited user name'],
     ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
     ['code' => 'referral_email', 'description' => 'Invited user name'],

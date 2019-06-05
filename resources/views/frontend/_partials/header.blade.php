@@ -155,7 +155,7 @@
                            'class' =>'select-2 currency--select-2 main-select',
                            'id' => 'change-currency'
                        ]) !!}
-                        {!! Form::hidden('currency_symbol',@$currency,['id' => 'symbol']) !!}
+                        {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}
                     </div>
 
 
