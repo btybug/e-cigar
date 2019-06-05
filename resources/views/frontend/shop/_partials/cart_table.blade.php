@@ -70,7 +70,7 @@
                                                                                           $promotionPrice = $stock->promotion_prices()
                                                                                           ->where('variation_id',$voption['option']->id)->first();
                                                                                       @endphp
-                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption['option']->price,$currency) !!}
+                                                                                        {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency, false) : convert_price($voption['option']->price,$currency, false) !!}
                                                                                     </div>
                                                                                 @endif
                                                                                 </div>
@@ -85,7 +85,7 @@
                                                                                     $promotionPrice = ($option['group']) ? $stock->promotion_prices()
                                                                                     ->where('variation_id',$option['group']->id)->first() : null;
                                                                                 @endphp
-                                                                                {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($option['group']) ? convert_price($option['group']->price,$currency) : convert_price(0,$currency)) !!}
+                                                                                {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency, false) : (($option['group']) ? convert_price($option['group']->price,$currency, false) : convert_price(0,$currency, false)) !!}
                                                                             </div>
                                                                         @endif
                                                                     </div>
@@ -150,7 +150,7 @@
                                                                                           $promotionPrice = $stock->promotion_prices()
                                                                                           ->where('variation_id',$voption['option']->id)->first();
                                                                                       @endphp
-                                                                                            {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : convert_price($voption['option']->price,$currency) !!}
+                                                                                            {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency, false) : convert_price($voption['option']->price,$currency, false) !!}
                                                                                     </div>
                                                                                     @endif
                                                                                 </div>
@@ -164,7 +164,7 @@
                                                                                         $promotionPrice = ($extra['group']) ? $stock->promotion_prices()
                                                                                         ->where('variation_id',$extra['group']->id)->first() : null;
                                                                                     @endphp
-                                                                                {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency) : (($extra['group']) ? convert_price($extra['group']->price,$currency) : convert_price(0,$currency)) !!}
+                                                                                {!! ($promotionPrice) ? convert_price($promotionPrice->price,$currency, false) : (($extra['group']) ? convert_price($extra['group']->price,$currency, false) : convert_price(0,$currency, false)) !!}
                                                                             </div>
                                                                         @endif
                                                                                 </div>
@@ -218,7 +218,7 @@
 
                                     <td width="180" class="shp-cart-table_price-td">
                                         <span class="d-flex justify-content-center font-main-bold font-28 card--inner-product_price position-relative">
-                                            <span class="position-relative">{{ convert_price(\App\Services\CartService::getPriceSum($item->id)+$item->getPriceSum(),$currency) }}
+                                            <span class="position-relative">{{ convert_price(\App\Services\CartService::getPriceSum($item->id)+$item->getPriceSum(),$currency, false) }}
                                                 {{--<!--old price-->--}}
                                                 {{--<span class="position-absolute align-self-end font-16 text-gray-clr card--inner-product_old-price old-price-bottom">$100</span>--}}
                                             </span>
@@ -247,31 +247,31 @@
                                 <div class="name">
                                     Sub Total
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getSubTotal(),$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getSubTotal(),$currency, false) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Tax
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(0,$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(0,$currency, false) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
                                 </div>
-                                <div class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency) : convert_price(0,$currency) !!}</div>
+                                <div class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency, false) : convert_price(0,$currency, false) !!}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Discount (Coupon)
                                 </div>
-                                <div class="price font-main-bold">{{ convert_price(0,$currency) }}</div>
+                                <div class="price font-main-bold">{{ convert_price(0,$currency, false) }}</div>
                             </div>
                             <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">
                                     Total
                                 </div>
-                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency) !!}</div>
+                                <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency, false) !!}</div>
                             </div>
                             <div class="coupon-code font-17 d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="name">

@@ -21,32 +21,32 @@
                     <div class="name">
                         Sub Total
                     </div>
-                    <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum() + \Cart::getSubTotal(),$currency) !!}</div>
+                    <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum() + \Cart::getSubTotal(),$currency, false) !!}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Tax
                     </div>
-                    <div class="price font-main-bold">{!! convert_price(0,$currency) !!}</div>
+                    <div class="price font-main-bold">{!! convert_price(0,$currency, false) !!}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
                     </div>
                     <div
-                        class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency) : convert_price(0,$currency) !!}</div>
+                        class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency, false) : convert_price(0,$currency, false) !!}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Discount (Coupon)
                     </div>
-                    <div class="price font-main-bold">{{ convert_price(0,$currency) }}</div>
+                    <div class="price font-main-bold">{{ convert_price(0,$currency, false) }}</div>
                 </div>
                 <div class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">
                         Total
                     </div>
-                    <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum() + \Cart::getTotal(),$currency) !!}</div>
+                    <div class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum() + \Cart::getTotal(),$currency, false) !!}</div>
                 </div>
                 <div class="coupon-code font-17 d-flex flex-wrap justify-content-between align-items-center">
                     <div class="name">

@@ -873,7 +873,7 @@ $(document).ready(function() {
                         return el.id === d_id;
                       }).value;
                       $(this).val(value);
-                      $(this).closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
+                      $(this).closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + $(this).closest('.menu-item-selected').attr('data-price') * Number($(this).val()));
                     });
                     $('#wizardViewModal').modal('hide');
 

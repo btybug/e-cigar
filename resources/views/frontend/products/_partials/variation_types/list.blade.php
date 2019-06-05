@@ -21,7 +21,7 @@
 <div data-req="{{ $vSettings->is_required }}" data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}" class="col-sm-{{ ($vSettings->price_per == 'product')? '10' : '12' }} products-list-wrap limit" id="products-list_{{ $vSettings->id }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}" data-min-limit="{{ $vSettings->min_count_limit }}">
   <div class="wall--wrapper">
     @foreach($variation as $item)
-        <div class="d-flex flex-wrap mb-2" data-price="{{ $item->price }}">
+        <div class="d-flex flex-wrap mb-2" data-price="{{ convert_price($item->price,$currency,false,true) }}">
             <div class="col-sm-10 align-self-center">
               <div class="row justify-content-between product-list-item">
                 <div class="align-self-center checkbox-wrap">
@@ -42,7 +42,7 @@
             @if($vSettings->price_per == 'item' && ! $vSettings->stock->type)
                 <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
                 <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
-                    {{ convert_price($item->price,$currency) }}
+                    {{ convert_price($item->price,$currency, false) }}
                 </span>
                 </div>
             @endif
@@ -54,7 +54,7 @@
     <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
         <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
             @if($vSettings->is_required)
-              {{ convert_price($vSettings->price,$currency) }}
+              {{ convert_price($vSettings->price,$currency, false) }}
             @else
               Nothing selected
             @endif

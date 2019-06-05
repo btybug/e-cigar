@@ -37,9 +37,9 @@
         <div class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
           <div class="selected-menu-options">
             @if($vSettings->price_per == 'product')
-              {{ convert_price($vSettings->price,$currency) }}
+              {{ convert_price($vSettings->price,$currency, false) }}
             @else
-              <div class="col-sm-12 pl-0 menu-item-selected mb-2" data-id="{{ $vSettings->id }}" data-price="{{ $vSettings->price }}">
+              <div class="col-sm-12 pl-0 menu-item-selected mb-2" data-id="{{ $vSettings->id }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}">
                 <div class="d-flex flex-wrap align-items-center ">
                   <div class="invisible position-absolute" style="width: 0;height: 0">
                     <div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
@@ -48,7 +48,7 @@
                   </div>
                   <div class="col-sm-12 pl-sm-3 p-0 text-sm-center">
                       <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
-                        {{ convert_price($vSettings->price,$currency) }}
+                        {{ convert_price($vSettings->price,$currency, false) }}
                       </span>
                   </div>
                 </div>
@@ -109,9 +109,9 @@
     @if($vSettings->price_per == 'product' && ! $vSettings->stock->type)
       <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee">
             @if($vSettings->is_required)
-            {{ convert_price($vSettings->price,$currency) }}
+            {{ convert_price($vSettings->price,$currency, false) }}
             @else
-              <span class="modal-price-place-summary font-sec-bold font-41 text-tert-clr lh-1 position-relative">{{ convert_price($vSettings->price,$currency) }}</span>
+              <span class="modal-price-place-summary font-sec-bold font-41 text-tert-clr lh-1 position-relative">{{ convert_price($vSettings->price,$currency, false) }}</span>
             @endif
         </span>
     @endif

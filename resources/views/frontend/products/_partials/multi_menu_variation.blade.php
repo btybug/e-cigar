@@ -1,6 +1,6 @@
 @if($variation->count_limit ==1 && $variation->min_count_limit)
   @if($variation->display_as == "popup")
-    <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ $variation->price }}">
+    <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ convert_price($variation->price,$currency,false,true) }}">
       <div class="d-flex flex-wrap align-items-center ">
         <div class="col-sm-7">
           <a href="javascript:void(0)" data-el-id="{{ $selectElementId }}" class="btn btn-sm delete-menu-item cl-red"><i class="fa fa-times"></i></a>
@@ -30,14 +30,14 @@
         <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
           @if($variation->price_per =='item' && ! $variation->stock->type)
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
-              {{ convert_price($variation->price,$currency) }}
+              {{ convert_price($variation->price,$currency, false) }}
             </span>
           @endif
         </div>
       </div>
     </div>
     @else
-    <div class="col-sm-12 pl-0 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ $variation->price }}">
+    <div class="col-sm-12 pl-0 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ convert_price($variation->price,$currency,false,true) }}">
       <div class="d-flex flex-wrap align-items-center ">
         <div class="invisible position-absolute" style="width: 0;height: 0">
           <div class="continue-shp-wrapp_qty position-relative product-counts-wrapper w-100">
@@ -47,7 +47,7 @@
         <div class="col-sm-12 pl-sm-3 p-0 text-sm-center">
           @if($variation->price_per =='item' && !$variation->stock->type)
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
-              {{ convert_price($variation->price,$currency) }}
+              {{ convert_price($variation->price,$currency, false) }}
             </span>
           @endif
         </div>
@@ -55,7 +55,7 @@
     </div>
     @endif
 @else
-<div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ $variation->price }}">
+<div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}" data-price="{{ convert_price($variation->price,$currency,false,true) }}">
     <div class="d-flex flex-wrap align-items-center ">
         <div class="col-sm-7">
             <a href="javascript:void(0)" data-el-id="{{ $selectElementId }}" class="btn btn-sm delete-menu-item cl-red"><i class="fa fa-times"></i></a>
@@ -85,7 +85,7 @@
         <div class="col-sm-2 pl-sm-3 p-0 text-sm-center">
             @if($variation->price_per =='item' && ! $variation->stock->type)
             <span class="d-inline-block font-35 font-sec-bold text-uppercase ml-auto price-placee lh-1">
-              {{ convert_price($variation->price,$currency) }}
+              {{ convert_price($variation->price,$currency, false) }}
             </span>
             @endif
         </div>
