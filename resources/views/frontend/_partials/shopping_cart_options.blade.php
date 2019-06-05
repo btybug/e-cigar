@@ -39,7 +39,7 @@
                     </div>
                     <div class="col-7">
                         <span class="d-block cart-product-price font-24 font-sec-bold cart-product-price">
-                            {{ convert_price(\App\Services\CartService::getPriceSum(@$item->id)+$item->price,@$currency) }}
+                            {{ convert_price(\App\Services\CartService::getPriceSum(@$item->id)+$item->price,@$currency, false) }}
                         </span>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
 <div class="mt-auto w-100 p-3">
     <div class="d-flex align-items-center justify-content-end w-100 mb-4">
         <span class="d-inline-block font-18 text-sec-clr mr-3">Subtotal:</span>
-        <span class="d-block cart-product-price font-24 font-sec-reg text-sec-clr">{{  convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getSubTotal(),@$currency) }}</span>
+        <span class="d-block cart-product-price font-24 font-sec-reg text-sec-clr">{{  convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getSubTotal(),@$currency, false) }}</span>
     </div>
     <!--cart btn-s-->
     <div class="d-flex justify-content-between w-100">

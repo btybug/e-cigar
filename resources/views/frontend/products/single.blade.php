@@ -41,7 +41,7 @@
                         <span class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
                         <span class="price-place-summary">
                             @if($vape->type)
-                                {{ convert_price($vape->price,$currency)}}
+                                {{ convert_price($vape->price,$currency, false)}}
                             @endif
                         </span>
                     </span>
@@ -402,7 +402,7 @@
                                                                             </div>
                                                                             <!--Price-->
                                                                             <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
-                                                                           {{ convert_price($related_product->variations->first()->price,$currency)}}
+                                                                           {{ convert_price($related_product->variations->first()->price,$currency, false)}}
                                                                        </span>
                                                                         </div>
                                                                     </div>
