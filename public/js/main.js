@@ -230,6 +230,10 @@ $(document).ready(function() {
       });
     };
 
+    const getCurrencySymbol = () => {
+        return $('.header-bottom #symbol').val();
+    };
+
 //product-count-minus event callback
     const handleProductCountMinus = (minus_button, section, type, limit) => {
       const counter = $(minus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
@@ -244,7 +248,7 @@ $(document).ready(function() {
       }
 
       const price = minus_button.closest('[data-price]').attr('data-price');
-      minus_button.closest('[data-price]').find('.price-placee').html(`$${price*Number(counter.val())}`);
+      minus_button.closest('[data-price]').find('.price-placee').html(`${getCurrencySymbol()}${price*Number(counter.val())}`);
     };
 
 //product-count-plus event callback
@@ -260,7 +264,7 @@ $(document).ready(function() {
       }
 
       const price = plus_button.closest('[data-price]').attr('data-price');
-      plus_button.closest('[data-price]').find('.price-placee').html(`$${price*Number(counter.val())}`);
+      plus_button.closest('[data-price]').find('.price-placee').html(`${getCurrencySymbol()}${price*Number(counter.val())}`);
     };
 
 //create hidden input and take data for filter modal
@@ -298,7 +302,7 @@ $(document).ready(function() {
       const total_price_count = Number($('.product-qty-select').val());
       //total price element
       const $total = modal ? $('.modal-price-place-summary') : $('.price-place-summary');
-      $total.html(`$${countPrices(modal)*total_price_count}`);
+      $total.html(`${getCurrencySymbol()}${countPrices(modal)*total_price_count}`);
     };
 
     const makeSelectedItem = (data_group) => {
@@ -445,7 +449,6 @@ $(document).ready(function() {
                   select.on('select2:select', function (e) {
                     const $this = $(this);
                     const current_item_id = $(e.params.data.element).attr('data-select2-id');
-console.log(current_item_id, e.params.data.id, 55555555555555555555555555)
                     new_qty(select);
 
                     fetch("/products/get-variation-menu-raw", {
@@ -587,7 +590,7 @@ console.log(current_item_id, e.params.data.id, 55555555555555555555555555)
                 $(counter_wrap[0]).append(counterHtml(id));
                 setTotalPrice(modal);
               } else {
-                $(counter_wrap[0]).closest('[data-price]').find('.price-placee').html(`$${price}`);
+                $(counter_wrap[0]).closest('[data-price]').find('.price-placee').html(`${getCurrencySymbol()}${price}`);
                 $(counter_wrap[0]).empty();
                 setTotalPrice(modal);
               }
@@ -718,7 +721,7 @@ console.log(current_item_id, e.params.data.id, 55555555555555555555555555)
                     json.items.map((item) => {
                       const item_price = Number(selected_product_wrapper.find(`.menu-item-selected[data-id="${item.id}"]`).attr('data-price'));
                       selected_product_wrapper.find(`.menu-item-selected[data-id="${item.id}"]`).find('.product-qty').val(Number(item.value));
-                      selected_product_wrapper.find(`.menu-item-selected[data-id="${item.id}"]`).find('.price-placee').html(`$${item_price * Number(item.value)}`);
+                      selected_product_wrapper.find(`.menu-item-selected[data-id="${item.id}"]`).find('.price-placee').html(`${getCurrencySymbol()}${item_price * Number(item.value)}`);
                     });
 
                     setTotalPrice(modal);
@@ -870,7 +873,7 @@ console.log(current_item_id, e.params.data.id, 55555555555555555555555555)
                         return el.id === d_id;
                       }).value;
                       $(this).val(value);
-                      $(this).closest('.menu-item-selected').find('.price-placee').html('$'+ Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
+                      $(this).closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + Number($(this).closest('.menu-item-selected').attr('data-price')) * Number($(this).val()));
                     });
                     $('#wizardViewModal').modal('hide');
 
@@ -1343,13 +1346,12 @@ console.log(current_item_id, e.params.data.id, 55555555555555555555555555)
 
     $('#extraModal').on('hidden.bs.modal', function () {
       $(this).find('.extra-main-content').empty();
-      $("#extraModal .modal-price-place-summary").html('$0');
+      $("#extraModal .modal-price-place-summary").html(getCurrencySymbol() + '0');
       !isCartPage() && $('#headerShopCartBtn').click();
       selectedGroupId.length = 0;
     });
 
     productsInit();
-
     $("body").on('click', '.btn-add-to-cart', function () {
       var variationId = $(this).data("id");
       let all_validation = false;
