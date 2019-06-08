@@ -22,7 +22,7 @@ use App\Models\GeoZones;
 
 class UserController extends Controller
 {
-         use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails;
     protected $redirectTo = '/home';
 
     protected $view = 'admin.users';
@@ -53,6 +53,7 @@ class UserController extends Controller
         $roles = Roles::where('type', 'backend')->pluck('title', 'id')->toArray();
         return $this->view('staff.new', compact('countries', 'roles'));
     }
+
     //TODO create validation
     public function postStaff(Request $request)
     {
@@ -68,8 +69,8 @@ class UserController extends Controller
         $roles = Roles::where('type', 'frontend')->pluck('title', 'id')->toArray();
         $billing_address = $user->addresses()->where('type', 'billing_address')->first();
         $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
-        $address = $user->addresses()->where(function ($query){
-           $query->where('type','address_book')->orWhere('type','default_shipping');
+        $address = $user->addresses()->where(function ($query) {
+            $query->where('type', 'address_book')->orWhere('type', 'default_shipping');
         })->pluck('first_line_address', 'id');
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
@@ -77,8 +78,9 @@ class UserController extends Controller
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
 //        dd();
-        return $this->view('edit', compact('user', 'countries', 'roles','billing_address','default_shipping','address','countriesShipping'));
+        return $this->view('edit', compact('user', 'countries', 'roles', 'billing_address', 'default_shipping', 'address', 'countriesShipping'));
     }
+
     public function editStaff(Request $request, Countries $countries)
     {
         $user = User::find($request->id);
@@ -86,24 +88,24 @@ class UserController extends Controller
         $roles = Roles::where('type', 'backend')->pluck('title', 'id')->toArray();
         $billing_address = $user->addresses()->where('type', 'billing_address')->first();
         $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
-        $address = $user->addresses()->where(function ($query){
-           $query->where('type','address_book')->orWhere('type','default_shipping');
+        $address = $user->addresses()->where(function ($query) {
+            $query->where('type', 'address_book')->orWhere('type', 'default_shipping');
         })->pluck('first_line_address', 'id');
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        return $this->view('staff.edit', compact('user', 'countries', 'roles','billing_address','default_shipping','address','countriesShipping'));
+        return $this->view('staff.edit', compact('user', 'countries', 'roles', 'billing_address', 'default_shipping', 'address', 'countriesShipping'));
     }
 
-    public function postEditStaff($id,AdminProfileRequest $request)
+    public function postEditStaff($id, AdminProfileRequest $request)
     {
         $user = User::findOrFail($id);
 
         $user->update($request->except('_token'));
 
-        return redirect()->back()->with('message',"Profile Updated successfully");
+        return redirect()->back()->with('message', "Profile Updated successfully");
     }
 
     public function postAddressBookForm(Request $request)
@@ -167,7 +169,7 @@ class UserController extends Controller
     public function postReject(Request $request)
     {
         $user = User::findOrFail($request->user_id);
-        if($user->email_verified_at && ! $user->status) {
+        if ($user->email_verified_at && !$user->status) {
             $user->update([
                 'verification_type' => null,
                 'verification_image' => null
@@ -181,7 +183,7 @@ class UserController extends Controller
     public function postApprove(Request $request)
     {
         $user = User::findOrFail($request->user_id);
-        if($user->email_verified_at && ! $user->status) {
+        if ($user->email_verified_at && !$user->status) {
             $user->update([
                 'status' => true
             ]);
