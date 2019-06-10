@@ -112,7 +112,7 @@
         </a>
     </li>
     <li class="profile-sidebar-menu_item ">
-        <a href="#"
+        <a href="{{ route('my_account_referrals') }}"
            class="profile-sidebar-menu_link d-inline-flex align-items-center font-15">
                 <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                       <svg  x="0px" y="0px"
@@ -170,7 +170,7 @@
         </a>
     </li>
     <li class="profile-sidebar-menu_item ">
-        <a href="#"
+        <a href="{{ route('my_account_special_offers') }}"
            class="profile-sidebar-menu_link d-inline-flex align-items-center font-15">
                 <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg viewBox="-91 0 512 512.001">
