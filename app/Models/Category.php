@@ -89,4 +89,9 @@ class Category extends Translatable
     {
     return $this->hasMany(Filters::class,'category_id');
     }
+
+    public function stocks()
+    {
+        return $this->belongsToMany(Stock::class, 'stock_categories', 'categories_id', 'stock_id');
+    }
 }
