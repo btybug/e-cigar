@@ -54,6 +54,9 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('/', 'Frontend\BlogController@index')->name('blog');
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
+Route::group(['prefix' => 'brands'], function () {
+    Route::get('/', 'Frontend\BrandsController@index')->name('brands');
+});
 Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
 
 
