@@ -2,7 +2,7 @@
 
 use App\Models\Category;
 
-$categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
+$categories = Category::where('type', 'stocks')->where('is_brand',0)->whereNull('parent_id')->get();
 
 @endphp
 

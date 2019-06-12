@@ -74,6 +74,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{!! route('blog') !!}">News</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{!! route('brands') !!}">Brands</a>
+                            </li>
                             {{--<li class="nav-item nav-item--has-dropdown position-relative">--}}
                                 {{--<a class="nav-link" href="{!! route('blog') !!}">--}}
                                     {{--Community--}}

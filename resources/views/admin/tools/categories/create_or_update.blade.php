@@ -55,6 +55,14 @@
         {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
     </div>
 </div>
+@if($type=='stocks')
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Is Brand Type</label>
+    <div class="col-md-10 col-xs-12">
+        {!! Form::checkbox('is_brand') !!}
+    </div>
+</div>
+@endif
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Custom classes</label>
     <div class="col-md-10 col-xs-12">
