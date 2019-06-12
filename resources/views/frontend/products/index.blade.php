@@ -50,56 +50,56 @@
 
 
                     </div>
-                    <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">
-                        <div class="d-flex arrow-filters pointer">
+                    {{--<div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">--}}
+                        {{--<div class="d-flex arrow-filters pointer">--}}
 
-                            <span class="mr-2 text-uppercase">Advanced Filters</span>
-                            <span class="icon pointer arrow main-transition">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-        width="12px" height="15px">
-<path fill-rule="evenodd" fill="rgb(81, 132, 229)"
-      d="M5.998,7.783 L5.991,7.790 L-0.001,1.336 L1.239,-0.000 L5.998,5.126 L10.756,-0.000 L11.997,1.336 L6.005,7.790 L5.998,7.783 ZM5.998,12.335 L10.756,7.209 L11.997,8.545 L6.005,15.000 L5.998,14.992 L5.991,15.000 L-0.001,8.545 L1.239,7.209 L5.998,12.335 Z"/>
-</svg>
-</span>
-                        </div>
+                            {{--<span class="mr-2 text-uppercase">Advanced Filters</span>--}}
+                            {{--<span class="icon pointer arrow main-transition">--}}
+    {{--<svg--}}
+        {{--xmlns="http://www.w3.org/2000/svg"--}}
+        {{--xmlns:xlink="http://www.w3.org/1999/xlink"--}}
+        {{--width="12px" height="15px">--}}
+{{--<path fill-rule="evenodd" fill="rgb(81, 132, 229)"--}}
+      {{--d="M5.998,7.783 L5.991,7.790 L-0.001,1.336 L1.239,-0.000 L5.998,5.126 L10.756,-0.000 L11.997,1.336 L6.005,7.790 L5.998,7.783 ZM5.998,12.335 L10.756,7.209 L11.997,8.545 L6.005,15.000 L5.998,14.992 L5.991,15.000 L-0.001,8.545 L1.239,7.209 L5.998,12.335 Z"/>--}}
+{{--</svg>--}}
+{{--</span>--}}
+                        {{--</div>--}}
 
-                        <div class="nav-item--has-dropdown_dropdown">
-                            <div class="all-filters row">
-                                <div class="col-lg-5 col-md-12 filter-left-col">
-                                    @foreach($filters as $filter)
-                                        @if(in_array($filter->display_as,['select','multy_select']))
-                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
-                                                @include('frontend.products._partials.filters.'.$filter->display_as)
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </div>
-                                <div class="col-lg-3 col-md-12">
-                                    @foreach($filters as $filter)
-                                        @if($filter->display_as == 'color')
-                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
-                                                @include('frontend.products._partials.filters.'.$filter->display_as)
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </div>
-                                <div class="col-lg-4 col-md-12">
-                                    @foreach($filters as $filter)
-                                        @if(in_array($filter->display_as,['radio','checkbox']))
-                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
-                                                @include('frontend.products._partials.filters.'.$filter->display_as)
-                                            @endif
-                                        @endif
-                                    @endforeach
-                                </div>
-                                <div class="col-12 text-right">
-                                    <button class="btn save-filter-btn">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {{--<div class="nav-item--has-dropdown_dropdown">--}}
+                            {{--<div class="all-filters row">--}}
+                                {{--<div class="col-lg-5 col-md-12 filter-left-col">--}}
+                                    {{--@foreach($filters as $filter)--}}
+                                        {{--@if(in_array($filter->display_as,['select','multy_select']))--}}
+                                            {{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
+                                                {{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
+                                            {{--@endif--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</div>--}}
+                                {{--<div class="col-lg-3 col-md-12">--}}
+                                    {{--@foreach($filters as $filter)--}}
+                                        {{--@if($filter->display_as == 'color')--}}
+                                            {{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
+                                                {{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
+                                            {{--@endif--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</div>--}}
+                                {{--<div class="col-lg-4 col-md-12">--}}
+                                    {{--@foreach($filters as $filter)--}}
+                                        {{--@if(in_array($filter->display_as,['radio','checkbox']))--}}
+                                            {{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
+                                                {{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
+                                            {{--@endif--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
+                                {{--</div>--}}
+                                {{--<div class="col-12 text-right">--}}
+                                    {{--<button class="btn save-filter-btn">Search</button>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -159,62 +159,21 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="filter-sidebar-wrapper">
-                                <div class="filter-single-wall">
-                                    <div class="d-flex justify-content-between head">
-                                        <h5 class="font-main-bold">Filter 1</h5>
-                                        <span>
-                                            <i class="fas fa-plus"></i>
-                                        </span>
+                                @foreach($filters as $filter)
+                                    <div class="filter-single-wall">
+                                        <div class="d-flex justify-content-between head">
+                                            <h5 class="font-main-bold">{{ $filter->name }}</h5>
+                                            <span>
+                                                <i class="fas fa-plus"></i>
+                                            </span>
+                                        </div>
+                                        <ul class="list-filter">
+                                            @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
+                                                @include('frontend.products._partials.filters.'.$filter->display_as)
+                                            @endif
+                                        </ul>
                                     </div>
-                                    <ul class="list-filter">
-                                        <li>
-                                            <div class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                <input class="custom-control-input" id="check1" name="check1" type="checkbox" value="">
-                                                <label class="custom-control-label text-gray-clr font-15" for="check1">Item 1 (15)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                <input class="custom-control-input" id="check1" name="check1" type="checkbox" value="">
-                                                <label class="custom-control-label text-gray-clr font-15" for="check1">Item 1 item 2 (15)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                <input class="custom-control-input" id="check1" name="check1" type="checkbox" value="">
-                                                <label class="custom-control-label text-gray-clr font-15" for="check1">Item 1 (15)</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="filter-single-wall">
-                                    <div class="d-flex justify-content-between align-items-center head">
-                                        <h5 class="font-main-bold">Filter 2</h5>
-                                        <span>
-                                            <i class="fas fa-plus"></i>
-                                        </span>
-                                    </div>
-                                    <ul class="list-filter">
-                                        <li>
-                                            <div class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                <input class="custom-control-input" id="check1" name="check1" type="checkbox" value="">
-                                                <label class="custom-control-label text-gray-clr font-15" for="check1">Item 1 (15)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                <input class="custom-control-input" id="check1" name="check1" type="checkbox" value="">
-                                                <label class="custom-control-label text-gray-clr font-15" for="check1">Item 1 item 2 (15)</label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                <input class="custom-control-input" id="check1" name="check1" type="checkbox" value="">
-                                                <label class="custom-control-label text-gray-clr font-15" for="check1">Item 1 (15)</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="col-md-10">
