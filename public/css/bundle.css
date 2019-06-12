@@ -18152,6 +18152,46 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     color: #353535;
 }
 /*filter sidebar end*/
+/*brands page start*/
+.brands-page-wrapper{
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+.brands-wrapper .brand-single{
+    padding: 10px;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    transition: 0.5s ease;
+}
+.brands-wrapper .brand-single:not(:last-of-type){
+    border-bottom: 1px solid #ccc;
+}
+.brands-wrapper .brand-single.active,.brands-wrapper .brand-single:hover{
+    box-shadow: 2px 4px 3px #ccc;
+}
+.brands-wrapper .brand-single.active a,.brands-wrapper .brand-single:hover a{
+    color: black;
+}
+.brands-wrapper .brand-link{
+    display: block;
+    text-align: center;
+}
+.brands-wrapper .brand-logo{
+    width: 100%;
+    max-width: 100px;
+    height: 100px;
+    object-fit: contain;
+    font-family: "object-fit: contain;";
+}
+.brands-wrapper .brand-name{
+    margin-top: 5px;
+}
+.brands-wrapper{
+    border: 1px solid #e3e6ed;
+}
+/*brands page end*/
 @media (min-width: 769px) {
 
     .display-grid .product-card:hover .product-card_view,
