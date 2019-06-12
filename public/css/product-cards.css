@@ -1487,6 +1487,66 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     flex: none;
 }
 
+/*filter sidebar start*/
+.filter-sidebar-wrapper .head h5{
+    margin: 0;
+}
+.filter-sidebar-wrapper .head{
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+}
+.filter-sidebar-wrapper .filter-single-wall:not(:first-of-type){
+    padding-top: 5px;
+}
+.filter-sidebar-wrapper .filter-single-wall .list-filter{
+    padding: 15px 0 25px 10px;
+    display: none;
+}
+.top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-control-inline {
+    margin-right: 0;
+    padding-left: 0;
+}
+
+.filter-sidebar-wrapper .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+    background-size: 12px;
+    opacity: .8;
+}
+
+.filter-sidebar-wrapper .custom-control-label::before {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+    left: -2.5rem;
+    border: 1px solid #d7d7d7;
+    background: #fff;
+}
+
+.filter-sidebar-wrapper .custom-control-label::after {
+    width: 20px;
+    height: 20px;
+    left: -2.5rem;
+}
+
+.filter-sidebar-wrapper .custom-control-label {
+    cursor: pointer;
+    line-height: 25px;
+    margin-left: 40px;
+}
+
+.filter-sidebar-wrapper .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+    background-color: #5184e5;
+    left: -2.5rem;
+}
+
+.filter-sidebar-wrapper .custom-checkbox .amount {
+    margin-left: 10px;
+}
+
+.filter-sidebar-wrapper .custom-checkbox .custom-control-input:checked ~ .custom-control-label {
+    color: #353535;
+}
+/*filter sidebar end*/
 @media (min-width: 769px) {
 
     .display-grid .product-card:hover .product-card_view,
