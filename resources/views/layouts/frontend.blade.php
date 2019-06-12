@@ -66,7 +66,6 @@
     <!--<![endif]-->
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons"></script>
     @if(!Auth::check())
-
         <script
             src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render={!! env('GOOGLE_RECAPTCHA_KEY') !!}"
             async defer></script>
