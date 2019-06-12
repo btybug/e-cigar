@@ -13,10 +13,12 @@ class BrandsController extends Controller
 
     protected $view = 'frontend.brands';
 
-    public function index()
+    public function index($slug=null)
     {
         $brands=Category::where('is_brand',1)->whereNotNull('parent_id')->get();
-        return $this->view('index',compact('brands'));
+        $slug=($slug || !$brands->count())?$slug:$brands->first()->slug;
+        $current=($slug)?Category::where('slug',$slug)->first():null;
+        return $this->view('index',compact('brands','slug','current'));
     }
 
 }
