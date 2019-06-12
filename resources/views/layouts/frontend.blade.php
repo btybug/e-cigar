@@ -64,8 +64,7 @@
     <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
     <!--<![endif]-->
-    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons' async='async'></script>
-
+    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons"></script>
     @if(!Auth::check())
 
         <script
