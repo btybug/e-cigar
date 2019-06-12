@@ -20,8 +20,8 @@
                     </div>
                     <div class="col-sm-10">
                         @if($current)
-                        @include('frontend.brands._partials.brand',['brand'=>$current])
-                            @endif
+                            @include('frontend.brands._partials.brand',['brand'=>$current])
+                        @endif
                     </div>
                 </div>
             </div>

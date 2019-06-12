@@ -25,7 +25,7 @@
     <div class="brand-content-products">
         <div class="products-wrap change-display-wrap display-grid">
             <div class="row justify-content-md-start justify-content-center">
-                @foreach($brand->stocks as $product)
+                @foreach($brand->products as $product)
                     <div class="products-wrap_col two-links-wrap product--single">
                         <div class="product-card position-relative">
                             <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}"
