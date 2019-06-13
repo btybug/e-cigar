@@ -15,7 +15,7 @@ class BrandsController extends Controller
 
     public function index($slug = null)
     {
-        $brands = Category::where('is_brand', 1)->whereNotNull('parent_id')->get();
+        $brands = Category::where('type', 'brands')->get();
         $slug = ($slug || !$brands->count()) ? $slug : $brands->first()->slug;
         $current = ($slug) ? Category::where('slug', $slug)->first() : null;
 

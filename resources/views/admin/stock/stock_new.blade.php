@@ -17,10 +17,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs admin-profile-left">
-                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic Details</a>
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic
+                                    Details</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a></li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Required</a></li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Required</a>
+                            </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
@@ -41,10 +44,11 @@
                                                             <ul class="nav nav-tabs">
                                                                 @foreach(get_languages() as $language)
                                                                     <li class="nav-item"><a
-                                                                                class="nav-link @if($loop->first) active @endif"
-                                                                                data-toggle="tab"
-                                                                                href="#{{ strtolower($language->code) }}">
-                                                                            <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                            class="nav-link @if($loop->first) active @endif"
+                                                                            data-toggle="tab"
+                                                                            href="#{{ strtolower($language->code) }}">
+                                                                            <span
+                                                                                class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                                                                         </a></li>
                                                                 @endforeach
                                                             </ul>
@@ -55,19 +59,21 @@
                                                                     <div id="{{ strtolower($language->code) }}"
                                                                          class="tab-pane fade  @if($loop->first) in active show @endif">
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                        data-toggle="tooltip"
-                                                                                        title=""
-                                                                                        data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                            <label
+                                                                                class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                    data-toggle="tooltip"
+                                                                                    title=""
+                                                                                    data-original-title="Attribute Name Title">Product Name</span></label>
                                                                             <div class="col-sm-10">
                                                                                 {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
-                                                                            <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                        data-toggle="tooltip"
-                                                                                        title=""
-                                                                                        data-original-title="Short Description">Short Description</span></label>
+                                                                            <label
+                                                                                class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                    data-toggle="tooltip"
+                                                                                    title=""
+                                                                                    data-original-title="Short Description">Short Description</span></label>
                                                                             <div class="col-sm-10">
                                                                                 {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                                             </div>
@@ -151,15 +157,23 @@
 
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-5">
-
-                                                            </div>
+                                                            <div class="col-md-5"></div>
                                                             <div class="col-md-7">
-                                                                <div class="form-group">
-                                                                    <label class="col-sm-2 control-label pl-sm-0">Categories</label>
-                                                                    {!! Form::hidden('categories',(isset($checkedCategories))
-                                                                    ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                                    <div id="treeview_json"></div>
+                                                                <div class="col-md-7">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-12 control-label pl-sm-0">Categories</label>
+                                                                        {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                        ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                        <div id="treeview_json"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-12 control-label pl-sm-0">Brands</label>
+                                                                        {!! Form::hidden('brands',(isset($checkedCategories))
+                                                                        ? json_encode($checkedCategories) : null,['id' => 'brands_tree']) !!}
+                                                                        <div id="brands_treeview_json"></div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
 
@@ -181,8 +195,10 @@
                                             <div class="basic-left basic-wall h-100">
                                                 <div class="all-list">
                                                     <ul class="nav nav-tabs media-list">
-                                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab"
-                                                                                href="#long_desc">Long Description</a></li>
+                                                        <li class="nav-item"><a class="nav-link active"
+                                                                                data-toggle="tab"
+                                                                                href="#long_desc">Long Description</a>
+                                                        </li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#mediastickers">Stickers</a></li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -223,12 +239,14 @@
                                                                  style="display: flex;flex-wrap: wrap">
                                                                 @if(isset($model->videos) && $model->videos && count($model->videos))
                                                                     @foreach($model->videos as $video)
-                                                                        <div class="video-single-item" style="display: flex">
+                                                                        <div class="video-single-item"
+                                                                             style="display: flex">
                                                                             <iframe width="200" height="200"
                                                                                     src="https://www.youtube.com/embed/{{ $video }}">
                                                                             </iframe>
                                                                             <div>
-                                                                                <button class="btn btn-danger remove-video-single-item btn-sm">
+                                                                                <button
+                                                                                    class="btn btn-danger remove-video-single-item btn-sm">
                                                                                     <i class="fa fa-trash"></i></button>
                                                                             </div>
                                                                             <input type="hidden" name="videos[]"
@@ -241,18 +259,21 @@
 
                                                     </div>
                                                     <div id="mediastickers" class="tab-pane fade ">
-                                                        <div class="panel-heading d-flex justify-content-between align-items-center">
+                                                        <div
+                                                            class="panel-heading d-flex justify-content-between align-items-center">
                                                             <h4>
                                                                 Stickers
                                                             </h4>
-                                                            <button type="button" class="btn btn-info select-stickers">Select
+                                                            <button type="button" class="btn btn-info select-stickers">
+                                                                Select
                                                             </button>
                                                         </div>
                                                         <div class="panel-body product-body">
                                                             <ul class="get-all-stickers-tab stickers--all--lists">
                                                                 @if(isset($model) && count($model->stickers))
                                                                     @foreach($model->stickers as $sticker)
-                                                                        <li style="display: flex" data-id="{{ $sticker->id }}"
+                                                                        <li style="display: flex"
+                                                                            data-id="{{ $sticker->id }}"
                                                                             class="option-elm-attributes">
                                                                             <a href="#"
                                                                                class="stick--link">{!! $sticker->name !!}</a>
@@ -270,11 +291,13 @@
                                                         </div>
                                                     </div>
                                                     <div id="mediarelatedproducts" class="tab-pane fade ">
-                                                        <div class="panel-heading d-flex justify-content-between align-items-center">
+                                                        <div
+                                                            class="panel-heading d-flex justify-content-between align-items-center">
                                                             <h4>
                                                                 Related Products
                                                             </h4>
-                                                            <button type="button" class="btn btn-info select-products">Select
+                                                            <button type="button" class="btn btn-info select-products">
+                                                                Select
                                                             </button>
                                                         </div>
                                                         <div class="panel-body product-body">
@@ -291,7 +314,8 @@
                                                                                    class="remove-all-attributes btn btn-sm btn-danger">
                                                                                     <i class="fa fa-trash"></i></a>
                                                                             </div>
-                                                                            <input type="hidden" name="related_products[]"
+                                                                            <input type="hidden"
+                                                                                   name="related_products[]"
                                                                                    value="{{ $related_product->id }}">
                                                                         </li>
                                                                     @endforeach
@@ -324,7 +348,7 @@
                                                                         <button type="button"
                                                                                 class="btn btn-primary add-specification_button">
                                                                             <i
-                                                                                    class="fa fa-plus-circle add-specification"></i>
+                                                                                class="fa fa-plus-circle add-specification"></i>
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -340,10 +364,11 @@
                                                                         <ul class="nav nav-tabs">
                                                                             @foreach(get_languages() as $language)
                                                                                 <li class="nav-item"><a
-                                                                                            class="nav-link @if($loop->first) active @endif"
-                                                                                            data-toggle="tab"
-                                                                                            href="#{{ strtolower($language->code) }}">
-                                                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                                        class="nav-link @if($loop->first) active @endif"
+                                                                                        data-toggle="tab"
+                                                                                        href="#{{ strtolower($language->code) }}">
+                                                                                        <span
+                                                                                            class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                                                                                     </a></li>
                                                                             @endforeach
                                                                         </ul>
@@ -351,13 +376,15 @@
                                                                     <div class="tab-content">
                                                                         @if(count(get_languages()))
                                                                             @foreach(get_languages() as $language)
-                                                                                <div id="{{ strtolower($language->code) }}"
-                                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                                <div
+                                                                                    id="{{ strtolower($language->code) }}"
+                                                                                    class="tab-pane fade  @if($loop->first) in active show @endif">
                                                                                     <div class="form-group row">
-                                                                                        <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                                    data-toggle="tooltip"
-                                                                                                    title=""
-                                                                                                    data-original-title="what_is_content">Content</span></label>
+                                                                                        <label
+                                                                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                                data-toggle="tooltip"
+                                                                                                title=""
+                                                                                                data-original-title="what_is_content">Content</span></label>
                                                                                         <div class="col-sm-10">
                                                                                             {!! Form::textarea('translatable['.strtolower($language->code).'][what_is_content]',get_translated($model,strtolower($language->code),'what_is_content'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                                         </div>
@@ -388,10 +415,11 @@
                                                                         <ul class="nav nav-tabs">
                                                                             @foreach(get_languages() as $language)
                                                                                 <li class="nav-item"><a
-                                                                                            class="nav-link @if($loop->first) active @endif"
-                                                                                            data-toggle="tab"
-                                                                                            href="#{{ strtolower($language->code) }}">
-                                                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                                        class="nav-link @if($loop->first) active @endif"
+                                                                                        data-toggle="tab"
+                                                                                        href="#{{ strtolower($language->code) }}">
+                                                                                        <span
+                                                                                            class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                                                                                     </a></li>
                                                                             @endforeach
                                                                         </ul>
@@ -399,13 +427,15 @@
                                                                     <div class="tab-content">
                                                                         @if(count(get_languages()))
                                                                             @foreach(get_languages() as $language)
-                                                                                <div id="{{ strtolower($language->code) }}"
-                                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                                <div
+                                                                                    id="{{ strtolower($language->code) }}"
+                                                                                    class="tab-pane fade  @if($loop->first) in active show @endif">
                                                                                     <div class="form-group row">
-                                                                                        <label class="col-sm-2 control-label col-form-label text-right"><span
-                                                                                                    data-toggle="tooltip"
-                                                                                                    title=""
-                                                                                                    data-original-title="Short Description">Long Description</span></label>
+                                                                                        <label
+                                                                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                                data-toggle="tooltip"
+                                                                                                title=""
+                                                                                                data-original-title="Short Description">Long Description</span></label>
                                                                                         <div class="col-sm-10">
                                                                                             {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                                         </div>
@@ -437,7 +467,8 @@
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                         </div>
                                         <div class="col-md-2">
-                                            <div class="product-price @if(! $model || ($model && ! $model->type)) hide @endif">
+                                            <div
+                                                class="product-price @if(! $model || ($model && ! $model->type)) hide @endif">
                                                 <label>Price:</label>
                                                 <div>
                                                     {!! Form::number('price',null,['class' => 'form-control']) !!}
@@ -453,7 +484,8 @@
                                         @endif
                                     </div>
                                     <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options" data-required="1"><i class="fa fa-plus"></i> Add
+                                        <a class="btn btn-info text-white duplicate-v-options" data-required="1"><i
+                                                class="fa fa-plus"></i> Add
                                             new option</a>
                                     </div>
                                 </div>
@@ -468,7 +500,8 @@
                                         @endif
                                     </div>
                                     <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options" data-required="0"><i class="fa fa-plus"></i> Add
+                                        <a class="btn btn-info text-white duplicate-v-options" data-required="0"><i
+                                                class="fa fa-plus"></i> Add
                                             new option</a>
                                     </div>
                                 </div>
@@ -484,7 +517,8 @@
                                                     <div class="card-body panel-body">
                                                         <div class="form-group p-0-15">
                                                             <div class="row">
-                                                                <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook
+                                                                <label for="seo-facebook-title"
+                                                                       class="col-md-2 col-xs-12">Facebook
                                                                     Title</label>
                                                                 <div class="col-md-5 col-xs-12">
                                                                     {!! Form::text('fb[og:title]',($model)?$model->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$model)]) !!}
@@ -493,7 +527,8 @@
                                                         </div>
                                                         <div class="form-group p-0-15">
                                                             <div class="row">
-                                                                <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook
+                                                                <label for="seo-facebook-desc"
+                                                                       class="col-md-2 col-xs-12">Facebook
                                                                     Description</label>
                                                                 <div class="col-md-5 col-xs-12">
                                                                     {!! Form::text('fb[og:description]',($model)?$model->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$model)]) !!}
@@ -517,7 +552,8 @@
                                                     <div class="card-body panel-body">
                                                         <div class="form-group p-0-15">
                                                             <div class="row">
-                                                                <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter
+                                                                <label for="seo-twitter-title"
+                                                                       class="col-md-2 col-xs-12">Twitter
                                                                     Title</label>
                                                                 <div class="col-md-5 col-xs-12">
                                                                     {!! Form::text('twitter[og:title]',($model)?$model->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
@@ -527,7 +563,8 @@
                                                         </div>
                                                         <div class="form-group p-0-15">
                                                             <div class="row">
-                                                                <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter
+                                                                <label for="seo-twitter-desc"
+                                                                       class="col-md-2 col-xs-12">Twitter
                                                                     Description</label>
                                                                 <div class="col-md-5 col-xs-12">
                                                                     {!! Form::text('twitter[og:description]',($model)?$model->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
@@ -571,7 +608,8 @@
                                                                         <br>
                                                                         <div>
                                                                             <p><span class="wrong">Warning:</span>
-                                                                                Title display in Google is limited to a fixed
+                                                                                Title display in Google is limited to a
+                                                                                fixed
                                                                                 width, yours is too long.
                                                                             </p>
                                                                         </div>
@@ -579,13 +617,15 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">
-                                                                        <label for="seo_metadesc">Meta description:</label>
+                                                                        <label for="seo_metadesc">Meta
+                                                                            description:</label>
                                                                         <img src="/public/images/question-mark.png"
                                                                              alt="question">
                                                                     </th>
                                                                     <td>
                                                                         {!! Form::textarea('general[og:description]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$model)]) !!}
-                                                                        <div>The <code>meta</code> description will be limited
+                                                                        <div>The <code>meta</code> description will be
+                                                                            limited
                                                                             to 156 chars, 156 chars left.
                                                                         </div>
                                                                     </td>
@@ -612,10 +652,13 @@
                                                                         <input type="radio" checked="checked"
                                                                                id="seo_meta-robots-nofollow_0"
                                                                                value="0">
-                                                                        <label for="seo_meta-robots-nofollow_0">Follow</label>
-                                                                        <input type="radio" id="seo_meta-robots-nofollow_1"
+                                                                        <label
+                                                                            for="seo_meta-robots-nofollow_0">Follow</label>
+                                                                        <input type="radio"
+                                                                               id="seo_meta-robots-nofollow_1"
                                                                                value="1">
-                                                                        <label for="seo_meta-robots-nofollow_1">Nofollow</label>
+                                                                        <label
+                                                                            for="seo_meta-robots-nofollow_1">Nofollow</label>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -628,29 +671,37 @@
                                                                                 style="height: 144px;"
                                                                                 id="seo_meta-robots-adv"
                                                                                 class="">
-                                                                            <option selected="selected" value="-">Site-wide
+                                                                            <option selected="selected" value="-">
+                                                                                Site-wide
                                                                                 default: None
                                                                             </option>
                                                                             <option value="none">None</option>
                                                                             <option value="noodp">NO ODP</option>
                                                                             <option value="noydir">NO YDIR</option>
-                                                                            <option value="noimageindex">No Image Index</option>
-                                                                            <option value="noarchive">No Archive</option>
-                                                                            <option value="nosnippet">No Snippet</option>
+                                                                            <option value="noimageindex">No Image
+                                                                                Index
+                                                                            </option>
+                                                                            <option value="noarchive">No Archive
+                                                                            </option>
+                                                                            <option value="nosnippet">No Snippet
+                                                                            </option>
                                                                         </select>
-                                                                        <div>Advanced <code>meta</code> robots settings for this
+                                                                        <div>Advanced <code>meta</code> robots settings
+                                                                            for this
                                                                             page.
                                                                         </div>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th scope="row">
-                                                                        <label for="seo_canonical">Canonical URL:</label>
+                                                                        <label for="seo_canonical">Canonical
+                                                                            URL:</label>
                                                                     </th>
                                                                     <td>
                                                                         <input type="text" id="seo_canonical" value=""
                                                                                class="form-control"><br>
-                                                                        <div>The canonical URL that this page should point to,
+                                                                        <div>The canonical URL that this page should
+                                                                            point to,
                                                                             leave empty to default to
                                                                             permalink. <a target="_blank"
                                                                                           href="#">Cross
@@ -681,22 +732,6 @@
         </div>
     </div>
     {!! Form::close() !!}
-    {{--<section class="content-top">--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-md-4">--}}
-                {{--<input type="text" placeholder="Product Name" class="form-control" value="{{ @$model->name }}" readonly>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-4">--}}
-                {{--<input type="text" placeholder="SKU" class="form-control" value="{{ @$model->sku }}" readonly>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-4">--}}
-                {{--{!! Form::submit('Save',['class' => 'btn btn-info pull-right']) !!}--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</section>--}}
-
-
-
     <!-- Modal -->
     <div id="myExtraTabModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -724,7 +759,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Add Options</h4>
                 </div>
                 <div class="modal-body">
@@ -744,7 +779,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Select Products</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <ul class="all-list modal-stickers--list">
@@ -764,7 +799,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Select Stickers</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <ul class="all-list modal-stickers--list">
@@ -784,7 +819,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title">Variation form</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body variation-box">
 
@@ -812,9 +847,10 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
-        #itemsModal .items-box{
-            flex:1;
+        #itemsModal .items-box {
+            flex: 1;
         }
+
         .package-box > div:not(:first-child) {
             margin-top: 20px;
         }
@@ -873,14 +909,14 @@
         $(document).ready(function () {
             var value = $("#changeProductType").val();
             var sections = $("body").find('.stock-page');
-            sections.each(function (k,v) {
+            sections.each(function (k, v) {
                 var data_id = $(v).attr('data-unqiue');
                 let parent = $(v).closest('.basic-details-tab');
-                section_prices(parent,data_id, value);
+                section_prices(parent, data_id, value);
             })
 
 
-           $(".tag-input-v").select2({width: '100%'});
+            $(".tag-input-v").select2({width: '100%'});
             setTimeout(function () {
                 $('.get-all-extra-tab').find('.promotion-elm').first().trigger('click')
             }, 5);
@@ -889,10 +925,13 @@
                 let parent = $(this).closest('.stock-page');
                 let existings = [];
                 parent.find('.v-item-change')
-                    .each(function (i,e) {
+                    .each(function (i, e) {
                         existings.push($(e).val());
                     });
-                AjaxCall("{{ route('admin_stock_package_variation_items') }}", {items:existings,uniqueId:parent.attr('data-unqiue') }, function (res) {
+                AjaxCall("{{ route('admin_stock_package_variation_items') }}", {
+                    items: existings,
+                    uniqueId: parent.attr('data-unqiue')
+                }, function (res) {
                     if (!res.error) {
                         $("#itemsModal .modal-content").html(res.html);
                         $("#itemsModal #searchStickers").select2();
@@ -901,17 +940,17 @@
                 });
             });
 
-            $("body").on("change","#changeProductType",function () {
+            $("body").on("change", "#changeProductType", function () {
                 let value = $(this).val();
                 let sections = $("#variations").find('.stock-page');
                 let parent = $(this).closest('.basic-details-tab');
-                sections.each(function (k,v) {
+                sections.each(function (k, v) {
                     var data_id = $(v).attr('data-unqiue');
-                    section_prices(parent,data_id, value);
+                    section_prices(parent, data_id, value);
                 })
             });
 
-            function section_prices(parent,data_id, type) {
+            function section_prices(parent, data_id, type) {
                 if (type == 1) {
                     parent.find('.product-price').removeClass('hide').addClass('show');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('show').addClass('hide');
@@ -922,63 +961,69 @@
                     parent.find('[data-unqiue="' + data_id + '"]').find('.section_price').removeClass('hide').addClass('show');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
-                    package_product_price(parent,data_id, parent.find('[data-unqiue="' + data_id + '"]').find(".price_per").val());
+                    package_product_price(parent, data_id, parent.find('[data-unqiue="' + data_id + '"]').find(".price_per").val());
                 }
             }
 
-            $("body").on("change",".filter-select",function () {
+            $("body").on("change", ".filter-select", function () {
                 let parent = $(this).closest('.stock-page');
                 let value = $(this).val();
-                AjaxCall("{{ route('admin_stock_filter_items') }}", {id:value,uniqueId:parent.attr('data-unqiue')}, function (res) {
+                AjaxCall("{{ route('admin_stock_filter_items') }}", {
+                    id: value,
+                    uniqueId: parent.attr('data-unqiue')
+                }, function (res) {
                     if (!res.error) {
                         parent.find(".filter-variation-box").html(res.html);
                     }
                 });
             });
 
-            $("body").on("change","#itemsModal #searchStickers",function () {
+            $("body").on("change", "#itemsModal #searchStickers", function () {
                 let stickers = $(this).val();
                 let data_id = $(this).attr('data-section-id');
 
-                let $_this = $('body').find('[data-unqiue="'+data_id+'"]');
+                let $_this = $('body').find('[data-unqiue="' + data_id + '"]');
                 let existings = [];
                 $_this.find('.v-item-change')
-                    .each(function (i,e) {
+                    .each(function (i, e) {
                         existings.push($(e).val());
                     });
-                AjaxCall("{{ route('admin_stock_search_items') }}", {items:existings,stickers:stickers }, function (res) {
+                AjaxCall("{{ route('admin_stock_search_items') }}", {
+                    items: existings,
+                    stickers: stickers
+                }, function (res) {
                     if (!res.error) {
                         $("#itemsModal .modal-stickers--list").html(res.html);
                     }
                 });
             })
 
-            $('body').on('click','#itemsModal .option-elm-modal',function () {
+            $('body').on('click', '#itemsModal .option-elm-modal', function () {
                 $(this).toggleClass('active')
             })
 
             $("body").on('click', '.add-package-items', function () {
                 let current = $(this);
                 let data_id = current.attr('data-section-id');
-                let $_this = $('body').find('[data-unqiue="'+data_id+'"]');
+                let $_this = $('body').find('[data-unqiue="' + data_id + '"]');
                 let existings = [];
                 $(".items-box").find('.option-elm-modal')
-                    .each(function (i,e) {
-                        if($(e).hasClass('active')){
+                    .each(function (i, e) {
+                        if ($(e).hasClass('active')) {
                             existings.push($(e).attr('data-id'));
                         }
                     });
 
                 AjaxCall(
                     "/admin/stock/add-package-variation",
-                    {main_unique: data_id,items: existings},
+                    {main_unique: data_id, items: existings},
                     function (res) {
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
-                            if($('#changeProductType').val() == 0){
+                            if ($('#changeProductType').val() == 0) {
                                 let parent = $_this.closest('.basic-details-tab');
 
-                                package_product_price(parent,data_id, $_this.find(".price_per").val());
+                                package_product_price(parent, data_id, $_this.find(".price_per").val());
                             }
 
                             $("#itemsModal").modal("hide");
@@ -992,12 +1037,12 @@
                 var value = $(this).val();
                 AjaxCall(
                     "/admin/stock/get-item-by-id",
-                    {id:value},
+                    {id: value},
                     function (res) {
                         if (!res.error) {
                             parent.find('.v-name').val(res.data.name);
                             parent.find('.modal-input-path').val(res.data.image);
-                            parent.find('.img').attr('src',res.data.image).attr('alt',res.data.image);
+                            parent.find('.img').attr('src', res.data.image).attr('alt', res.data.image);
                             parent.find('.v-price').val(res.data.price);
                         }
                     }
@@ -1015,9 +1060,9 @@
                             var value = $("#changeProductType").val();
                             let sections = parent.find('.stock-page');
 
-                            sections.each(function (k,v) {
+                            sections.each(function (k, v) {
                                 var data_id = $(v).attr('data-unqiue');
-                                section_prices(parent,data_id, value);
+                                section_prices(parent, data_id, value);
                             })
                         }
                     }
@@ -1045,15 +1090,14 @@
             });
 
 
-
             $("body").on('change', '.price_per', function () {
                 var parent = $(this).closest('.basic-details-tab');
                 var value = $(this).val();
                 var data_id = $(this).closest('.stock-page').data('unqiue');
-                package_product_price(parent,data_id, value);
+                package_product_price(parent, data_id, value);
             })
 
-            function package_product_price(parent,data_id, type) {
+            function package_product_price(parent, data_id, type) {
                 if (type == 'product') {
                     parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
@@ -1062,7 +1106,6 @@
                     parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
                 }
             }
-
 
 
             $("body").on('click', '.submit-form', function () {
@@ -1121,7 +1164,7 @@
                 let parent = $(this).closest('.stock-page');
                 AjaxCall(
                     "/admin/stock/variation-option-view",
-                    {type: value,uniqueId:parent.attr('data-unqiue')},
+                    {type: value, uniqueId: parent.attr('data-unqiue')},
                     function (res) {
                         if (!res.error) {
                             if (value == 'filter') {
@@ -1134,11 +1177,11 @@
                             parent.find('.type-place').html(res.html)
 
                             let sections = $("body").find('.stock-page');
-                            sections.each(function (k,v) {
+                            sections.each(function (k, v) {
                                 var data_id = $(v).attr('data-unqiue');
                                 let parent = $(v).closest('.basic-details-tab');
 
-                                section_prices(parent,data_id, $("#changeProductType").val());
+                                section_prices(parent, data_id, $("#changeProductType").val());
                             })
                         }
                     }
@@ -1482,16 +1525,41 @@
             })
         }
 
+        function render_brands_tree() {
+            $("#brands_treeview_json").jstree({
+                "checkbox": {
+                    "three_state": false,
+                    "cascade": 'undetermined',
+                    "keep_selected_style": false
+                },
+                plugins: ["wholerow", "checkbox", "types"],
+                core: {
+                    themes: {
+                        responsive: !1
+                    },
+                    data: {!! json_encode($brandsData) !!}
+                },
+                types: {
+                    "default": {
+                        icon: "fa fa-folder text-primary fa-lg"
+                    },
+                    file: {
+                        icon: "fa fa-file text-success fa-lg"
+                    }
+                }
+            })
+        }
+
         $('#treeview_json').on("changed.jstree", function (e, data) {
             if (data.node) {
-                var selectedNode = $('#treeview_json').jstree(true).get_selected(true)
-                var dataArr = [];
-                for (var i = 0, j = selectedNode.length; i < j; i++) {
+                let selectedNode = $('#treeview_json').jstree(true).get_selected(true)
+                let dataArr = [];
+                for (let i = 0, j = selectedNode.length; i < j; i++) {
                     dataArr.push(selectedNode[i].id);
                     dataArr.push(selectedNode[i].parent);
                 }
 
-                var uniqueNames = [];
+                let uniqueNames = [];
 
                 if (dataArr.length > 0) {
                     $.each(dataArr, function (i, el) {
@@ -1499,7 +1567,7 @@
                     });
                 }
 
-                var index = uniqueNames.indexOf("#");
+                let index = uniqueNames.indexOf("#");
                 if (index > -1) {
                     uniqueNames.splice(index, 1);
                 }
@@ -1507,8 +1575,34 @@
                 $("#categories_tree").val(JSON.stringify(uniqueNames));
             }
         });
+        $('#brands_treeview_json').on("changed.jstree", function (e, data) {
+            if (data.node) {
+                let selectedNode = $('#brands_tree').jstree(true).get_selected(true)
+                let dataArr = [];
+                for (let i = 0, j = selectedNode.length; i < j; i++) {
+                    dataArr.push(selectedNode[i].id);
+                    dataArr.push(selectedNode[i].parent);
+                }
 
-        render_categories_tree()
+                let uniqueNames = [];
+
+                if (dataArr.length > 0) {
+                    $.each(dataArr, function (i, el) {
+                        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                    });
+                }
+
+                let index = uniqueNames.indexOf("#");
+                if (index > -1) {
+                    uniqueNames.splice(index, 1);
+                }
+
+                $("#brands_tree").val(JSON.stringify(uniqueNames));
+            }
+        });
+
+        render_categories_tree();
+        render_brands_tree();
 
         function removeA(arr) {
             var what, a = arguments, L = a.length, ax;
