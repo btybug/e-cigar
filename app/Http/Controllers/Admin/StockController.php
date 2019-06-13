@@ -64,10 +64,14 @@ class StockController extends Controller
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-        $brands = Category::where('type', 'brands')->get();
-        $checkedCategories = $model->categories()->pluck('id')->all();
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+
+        $checkedCategories = $model->categories()->where('type', 'stocks')->pluck('id')->all();
+        $checkedbrandCategories = $model->categories()->where('type', 'brands')->pluck('id')->all();
+
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
-        $brandsData = Category::recursiveItems($brands, 0, [], $checkedCategories);
+        $brandsData = Category::recursiveItems($brands, 0, [], $checkedbrandCategories);
+
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
@@ -77,7 +81,8 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model','brands','brandsData', 'variations', 'extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
+        return $this->view('stock_new', compact(['model','brands','brandsData', 'variations', 'extraVariations',
+            'checkedCategories','checkedbrandCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
     public function postStock(ProductsRequest $request)
@@ -100,7 +105,10 @@ class StockController extends Controller
         //-------------------//
         $types=json_decode($request->get('categories', []),true);
         $brands=json_decode($request->get('brands', []),true);
+//        dd($request->get('brands', []),$types,$brands);
+
         $categories=array_merge($types,$brands);
+
         $stock->categories()->sync($categories);
         $stock->related_products()->sync($request->get('related_products'));
 
