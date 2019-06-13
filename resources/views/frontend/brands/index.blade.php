@@ -10,7 +10,7 @@
                                 @foreach($brands as $brand)
                                 <li class="brand-single @if($slug==$brand->slug) active @endif">
                                     <a href="{!! route('brands',$brand->slug) !!}" class="brand-link font-main-bold">
-                                        <img src="{!! url($brand->image) !!}" class="brand-logo" alt="logo">
+                                        <img src="{!! ($brand->image)?url($brand->image):'#' !!}" class="brand-logo" alt="logo">
                                         <div class="brand-name">{!! $brand->name !!}</div>
                                     </a>
                                 </li>
