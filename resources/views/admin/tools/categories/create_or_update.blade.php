@@ -55,26 +55,21 @@
         {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
     </div>
 </div>
-@if($type=='stocks')
-<div class="form-group row">
-    <label class="col-md-2 col-xs-12">Is Brand Type</label>
-    <div class="col-md-10 col-xs-12">
-        {!! Form::checkbox('is_brand') !!}
-    </div>
-</div>
-@endif
+
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Custom classes</label>
     <div class="col-md-10 col-xs-12">
         {!! Form::text('classes',null,['class'=>'form-control']) !!}
     </div>
 </div>
+@if($type !='brand')
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Parent</label>
     <div class="col-md-10 col-xs-12">
         {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
     </div>
 </div>
+@endif
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Select stickers</label>
     <div class="col-md-10 col-xs-12">

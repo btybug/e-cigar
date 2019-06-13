@@ -64,8 +64,10 @@ class StockController extends Controller
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $brands = Category::where('type', 'brands')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
+        $brandsData = Category::recursiveItems($brands, 0, [], $checkedCategories);
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
@@ -75,27 +77,17 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
+        return $this->view('stock_new', compact(['model','brands','brandsData', 'variations', 'extraVariations', 'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
     public function postStock(ProductsRequest $request)
     {
-//        dd($request->get('variations', []));
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
-            'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
+            'categories','brands', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
         $data['price'] = ($data['price']) ?? 0;
-//        dd($request->get('promotions'),array_values($request->get('promotions')));
         $stock = Stock::updateOrCreate($request->id, $data);
-
-//        if ($data['type'] == 'variation_product') {
-//            $this->stockService->saveVariations($stock, $request->get('variations', []));
-//        } elseif ($data['type'] == 'simple_product') {
-//            $this->stockService->saveSingleVariation($stock, $request->get('variation_single', []));
-//        } elseif ($data['type'] == 'package_product') {
-//            $this->stockService->savePackageVariation($stock, $request->get('package_variation', []));
-//        }
 
         $this->stockService->savePackageVariation($stock, $request->get('variations', []));
 
@@ -106,7 +98,10 @@ class StockController extends Controller
 
 
         //-------------------//
-        $stock->categories()->sync(json_decode($request->get('categories', [])));
+        $types=json_decode($request->get('categories', []),true);
+        $brands=json_decode($request->get('brands', []),true);
+        $categories=array_merge($types,$brands);
+        $stock->categories()->sync($categories);
         $stock->related_products()->sync($request->get('related_products'));
 
         $stock->promotions()->detach();
