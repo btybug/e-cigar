@@ -170,8 +170,8 @@
                                                                 <div class="col-md-7">
                                                                     <div class="form-group">
                                                                         <label class="col-sm-12 control-label pl-sm-0">Brands</label>
-                                                                        {!! Form::hidden('brands',(isset($checkedCategories))
-                                                                        ? json_encode($checkedCategories) : null,['id' => 'brands_tree']) !!}
+                                                                        {!! Form::hidden('brands',(isset($checkedbrandCategories))
+                                                                        ? json_encode($checkedbrandCategories) : null,['id' => 'brands_tree']) !!}
                                                                         <div id="brands_treeview_json"></div>
                                                                     </div>
                                                                 </div>
@@ -1575,9 +1575,10 @@
                 $("#categories_tree").val(JSON.stringify(uniqueNames));
             }
         });
+
         $('#brands_treeview_json').on("changed.jstree", function (e, data) {
             if (data.node) {
-                let selectedNode = $('#brands_tree').jstree(true).get_selected(true)
+                let selectedNode = $('#brands_treeview_json').jstree(true).get_selected(true)
                 let dataArr = [];
                 for (let i = 0, j = selectedNode.length; i < j; i++) {
                     dataArr.push(selectedNode[i].id);
@@ -1597,6 +1598,7 @@
                     uniqueNames.splice(index, 1);
                 }
 
+                console.log(uniqueNames)
                 $("#brands_tree").val(JSON.stringify(uniqueNames));
             }
         });
