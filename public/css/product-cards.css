@@ -82,11 +82,17 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     width: 930px;
 }
 
-.display-grid .products-wrap_col,
+
 .display-grid .news-wrap_col {
     margin-left: 0;
     margin-right: 0;
     width:20%;
+}
+
+.display-grid .products-wrap_col{
+    margin-left: 0;
+    margin-right: 0;
+    width:25%;
 }
 
 .product-card-thumbs,
