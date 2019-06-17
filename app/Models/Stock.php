@@ -21,7 +21,7 @@ class Stock extends Translatable
 
     public $translationModel = StockTranslation::class;
 
-    public $translatedAttributes = ['name', 'short_description', 'long_description','what_is_content'];
+    public $translatedAttributes = ['name', 'short_description', 'long_description', 'what_is_content'];
     /**
      * @var array
      */
@@ -137,10 +137,10 @@ class Stock extends Translatable
     public function active_sales()
     {
         $now = strtotime(now());
-        return $this->hasMany(StockSales::class, 'stock_id')->where('canceled',false)
+        return $this->hasMany(StockSales::class, 'stock_id')->where('canceled', false)
             ->whereRaw("stock_sales.start_date <= ? AND stock_sales.end_date >= ?",
-            array($now, $now)
-        );
+                array($now, $now)
+            );
     }
 
     public function faqs()
