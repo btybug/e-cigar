@@ -33,27 +33,28 @@ class PaymentService
         $this->settings = $settings;
     }
 
-    public function call(){
+    public function call()
+    {
         $shippingId = session()->get('shipping_address');
         $billingId = session()->get('billing_address');
-        $this->amount = CartService::getTotalPriceSum()+ Cart::getTotal();
+        $this->amount = CartService::getTotalPriceSum() + Cart::getTotal();
         $geoZone = null;
 
-        if(\Auth::check()){
+        if (\Auth::check()) {
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
             $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             $shipping = Cart::getCondition($geoZone->name);
         }
-        return \DB::transaction(function () use ($billingId,$shippingId,$geoZone,$shippingAddress,$zone,$region) {
+        return \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region) {
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order_number = get_order_number();
 
             $order = Orders::create([
                 'user_id' => \Auth::id(),
-                'code'=>getUniqueCode('orders','code',Countries::where('name.common', $zone->name)->first()->cca2),
+                'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
@@ -65,7 +66,7 @@ class PaymentService
 
             $status = $setting = $this->settings->getData('order', 'open');
             $historyData['user_id'] = \Auth::id();
-            $historyData['status_id'] = ($status)?$status->val : $this->statuses->where('type','order')->first()->id;
+            $historyData['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'order')->first()->id;
             $historyData['note'] = 'Order made';
 
             $order->history()->create($historyData);
@@ -81,16 +82,16 @@ class PaymentService
             $order->shippingAddress()->create($shippingAddress);
 
             $sales = [];
-            foreach ($items as $variation_id => $item){
+            foreach ($items as $variation_id => $item) {
                 $options = [];
-                foreach ($item->attributes->variations as $variation){
+                foreach ($item->attributes->variations as $variation) {
                     $dataV = [];
-                    $dataV['price'] =  $variation['price'];
+                    $dataV['price'] = $variation['price'];
                     $dataV['options'] = [];
-                    foreach ($variation['options'] as $option){
-                        if(isset($sales[$option['option']->item_id])){
+                    foreach ($variation['options'] as $option) {
+                        if (isset($sales[$option['option']->item_id])) {
                             $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
-                        }else{
+                        } else {
                             $sales[$option['option']->item_id] = $option['qty'];
                         }
 
@@ -110,10 +111,10 @@ class PaymentService
                     $dataV = [];
                     $dataV['price'] = $extra['price'];
                     $dataV['options'] = [];
-                    foreach ($extra['options'] as $option){
-                        if(isset($sales[$option['option']->item_id])){
+                    foreach ($extra['options'] as $option) {
+                        if (isset($sales[$option['option']->item_id])) {
                             $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
-                        }else{
+                        } else {
                             $sales[$option['option']->item_id] = $option['qty'];
                         }
 
@@ -128,8 +129,8 @@ class PaymentService
                     $extras[$extra['group']->variation_id] = $dataV;
                 }
 
-                if(count($sales)){
-                    foreach ($sales as $item_id => $sale){
+                if (count($sales)) {
+                    foreach ($sales as $item_id => $sale) {
                         Others::create([
                             'item_id' => $item_id,
                             'user_id' => \Auth::id(),
