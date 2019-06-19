@@ -1,5 +1,5 @@
 <div class="options-form">
-    <div class="col-md-8 col-md-offset-1">
+
         {!! Form::model($model,['url'=>route('post_admin_stock_statuses_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
         @if(count(get_languages()))
@@ -20,7 +20,7 @@
             @if(count(get_languages()))
                 @foreach(get_languages() as $language)
                     <div id="{{ strtolower($language->code) }}"
-                         class="tab-pane fade  @if($loop->first) in active @endif">
+                         class="tab-pane @if($loop->first) in active @endif">
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-10">
@@ -141,6 +141,4 @@
         {{--</div>--}}
 
         {!! Form::close() !!}
-
-    </div>
 </div>

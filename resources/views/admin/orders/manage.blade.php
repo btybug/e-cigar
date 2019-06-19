@@ -179,58 +179,61 @@
                                                                 </div>
                                                             </td>
                                                             <td class="stock-price">
+                                                                @php
+                                                                    $options=$item->options;
+                                                                        $lastElement = end($options);
+                                                                @endphp
+
                                                                 <div class="stock-row">
-                                                                    <div class="left">
-                                                                        <div class="stock-name">
-                                                                            <span>{{ $item->name }}</span>
+                                                                    @foreach($options['options'] as $key=>$option)
+                                                                        @if(count($option['options']))
+                                                                        <div class="left">
+                                                                            
+                                                                            <div class="d-flex flex-wrap">
+                                                                                @foreach($option['options'] as $key=>$op)
+                                                                                    <div class="h5 mr-1 inline-el"><span
+                                                                                            class="badge badge-secondary">{{ $op['name'] }}</span>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="d-flex flex-wrap">
-                                                                            {{--@if(count($item->options))--}}
-                                                                                {{--@foreach($item->options as $option)--}}
-                                                                                    {{--<div class="h5 mr-1 inline-el"><span--}}
-                                                                                                {{--class="badge badge-secondary">{{ $option }}</span>--}}
-                                                                                    {{--</div>--}}
-                                                                                {{--@endforeach--}}
-                                                                            {{--@endif--}}
+                                                                        <div class="right">
+                                                                            <div class="stock-count">
+                                                                                <span>
+                                                                                    {{ convert_price($option['price'],'usd') }}
+                                                                                </span>
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <div class="stock-count">
-                                                                            <span>${{ $item->price }}</span>
-                                                                        </div>
-                                                                    </div>
+                                                                        @endif
+                                                                    @endforeach
                                                                 </div>
 
                                                                 <div class="extra-stock">
                                                                     <h4>Extra</h4>
-                                                                    @if(count($item->required_items))
-                                                                        @foreach($item->required_items as  $required_item)
-                                                                            {{--<div class="stock-row row">--}}
-                                                                                {{--<div class="col-md-8">--}}
-                                                                                    {{--<div class="stock-name">--}}
-                                                                                        {{--<span>{{ $required_item->name }}</span>--}}
-                                                                                    {{--</div>--}}
-                                                                                    {{--<div class="d-flex flex-wrap">--}}
-                                                                                        {{--@if(count($required_item->options))--}}
-                                                                                            {{--@foreach($required_item->options as $option)--}}
-                                                                                                {{--<div class="h5 mr-1 inline-el">--}}
-                                                                                                    {{--<span class="badge badge-secondary">{{ $option }}</span>--}}
-                                                                                                {{--</div>--}}
-                                                                                            {{--@endforeach--}}
-                                                                                        {{--@endif--}}
-                                                                                    {{--</div>--}}
-                                                                                {{--</div>--}}
-                                                                                {{--<div class="col-md-4 extra-del">--}}
-                                                                                    {{--<div class="stock-count">--}}
-                                                                                        {{--<span> qty: {{ $required_item->qty }}</span>--}}
-                                                                                    {{--</div>--}}
-                                                                                    {{--<div class="stock-count">--}}
-                                                                                        {{--<span> ${{ $required_item->price }}</span>--}}
-                                                                                    {{--</div>--}}
-                                                                                {{--</div>--}}
-                                                                            {{--</div>--}}
-                                                                        @endforeach
-                                                                    @endif
+                                                                    @foreach($options['extras'] as $key=>$option)
+                                                                        @if(count($option['options']))
+                                                                            <div class="left">
+                                                                                <div class="stock-name">
+                                                                                    <span>{{ $item->name }}</span>
+                                                                                </div>
+                                                                                <div class="d-flex flex-wrap">
+                                                                                    @foreach($option['options'] as $key=>$op)
+
+                                                                                        <div class="h5 mr-1 inline-el"><span
+                                                                                                class="badge badge-secondary">{{ $op['name'] }}</span>
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <div class="stock-count">
+                                                                                <span>
+                                                                                    {{ convert_price($option['price'],"usd") }}
+                                                                                </span>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    @endforeach
                                                                 </div>
 
                                                             </td>
