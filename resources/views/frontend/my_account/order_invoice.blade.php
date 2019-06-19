@@ -22,7 +22,7 @@
                        <thead>
                        <tr>
                            <td class="text-left">Product</td>
-                           <td class="text-left">SKU</td>
+                           <td class="text-left">Items</td>
                            <td class="text-right">Quantity</td>
                            <td class="text-right">Unit Price</td>
                            <td class="text-right">Total</td>
@@ -35,34 +35,70 @@
                                    <a class="font-20 text-tert-clr main-transition" href="">{!! $item->name !!}</a>
                                </td>
                                <td class="text-left">
-                                   {!! $item->sku !!}<br>
+
                                    @php
                                        $options=$item->options;
                                            $lastElement = end($options);
                                    @endphp
+
                                    <b>
-                                       @foreach($options as $key=>$option)
-                                           {!! $key !!}: {!! $option !!} @if($option!=$lastElement) , @endif
+                                       @foreach($options['options'] as $key=>$option)
+                                           <div class="row">
+                                               @if(count($option['options']))
+                                                   <div class="col-md-8">
+                                                       @foreach($option['options'] as $op)
+                                                           <p>
+                                                               {{ @$op['name'] }}
+                                                           </p>
+                                                       @endforeach
+                                                   </div>
+                                                   <div class="col-md-4">
+                                                       {{ convert_price($option['price'],$currency) }}
+                                                   </div>
+                                               @endif
+                                           </div>
                                        @endforeach
                                    </b>
-
+                                   <p>
+                                       <b>
+                                           @foreach($options['extras'] as $key=>$option)
+                                               <div class="col-md-12">
+                                                   <h3>Extras</h3>
+                                               </div>
+                                               <div class="row">
+                                                    @if(count($option['options']))
+                                                       <div class="col-md-8">
+                                                           @foreach($option['options'] as $op)
+                                                               <p>
+                                                                   {{ $op['name'] }}
+                                                               </p>
+                                                           @endforeach
+                                                        </div>
+                                                       <div class="col-md-4">
+                                                           {{ convert_price($option['price'],$currency) }}
+                                                       </div>
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        </b>
+                                   </p>
                                </td>
                                <td class="text-right">{!! $item->qty !!}</td>
-                               <td class="text-right">$@convert($item->amount/$item->qty)</td>
-                               <td class="text-right">$@convert($item->amount)</td>
+                               <td class="text-right">{!! convert_price($item->amount/$item->qty,$currency) !!}</td>
+                               <td class="text-right">{!! convert_price($item->amount,$currency) !!}</td>
                            </tr>
                        @endforeach
                        <tr>
                            <td colspan="4" class="text-right">Sub-Total</td>
-                           <td class="text-right">$@convert($order->amount-$order->shipping_price)</td>
+                           <td class="text-right">{!! convert_price($order->amount-$order->shipping_price,$currency) !!} </td>
                        </tr>
                        <tr>
                            <td colspan="4" class="text-right">Shipping ({!! $order->shipping_method !!})</td>
-                           <td class="text-right">$@convert($order->shipping_price)</td>
+                           <td class="text-right">{!! convert_price($order->shipping_price,$currency) !!}</td>
                        </tr>
                        <tr>
                            <td colspan="4" class="text-right">Total</td>
-                           <td class="text-right">$@convert($order->amount)</td>
+                           <td class="text-right">{!! convert_price($order->amount,$currency) !!}</td>
                        </tr>
                        </tbody>
                    </table>

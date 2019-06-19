@@ -96,7 +96,8 @@ class PaymentService
 
                         $dataV['options'][] = [
                             'qty' => $option['qty'],
-                            'name' => $option['option']->title,
+                            'name' => $option['option']->name,
+                            'title' => $option['option']->title,
                             'id' => $option['option']->id,
                             'image' => $option['option']->image,
                         ];
@@ -118,7 +119,8 @@ class PaymentService
 
                         $dataV['options'][] = [
                             'qty' => $option['qty'],
-                            'name' => $option['option']->title,
+                            'name' => $option['option']->name,
+                            'title' => $option['option']->title,
                             'id' => $option['option']->id,
                             'image' => $option['option']->image,
                         ];
