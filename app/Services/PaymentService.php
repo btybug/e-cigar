@@ -107,27 +107,30 @@ class PaymentService
                 }
 
                 $extras = [];
-                foreach ($item->attributes->extra as $extra) {
-                    $dataV = [];
-                    $dataV['price'] = $extra['price'];
-                    $dataV['options'] = [];
-                    foreach ($extra['options'] as $option) {
-                        if (isset($sales[$option['option']->item_id])) {
-                            $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
-                        } else {
-                            $sales[$option['option']->item_id] = $option['qty'];
-                        }
+                if($item->attributes->extra && isset($item->attributes->extra)){
+                    foreach ($item->attributes->extra as $extra) {
+                        $dataV = [];
+                        $dataV['price'] = $extra['price'];
+                        $dataV['options'] = [];
+                        foreach ($extra['options'] as $option) {
+                            if (isset($sales[$option['option']->item_id])) {
+                                $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
+                            } else {
+                                $sales[$option['option']->item_id] = $option['qty'];
+                            }
 
-                        $dataV['options'][] = [
-                            'qty' => $option['qty'],
-                            'name' => $option['option']->name,
-                            'title' => $option['option']->title,
-                            'id' => $option['option']->id,
-                            'image' => $option['option']->image,
-                        ];
+                            $dataV['options'][] = [
+                                'qty' => $option['qty'],
+                                'name' => $option['option']->name,
+                                'title' => $option['option']->title,
+                                'id' => $option['option']->id,
+                                'image' => $option['option']->image,
+                            ];
+                        }
+                        $extras[$extra['group']->variation_id] = $dataV;
                     }
-                    $extras[$extra['group']->variation_id] = $dataV;
                 }
+
 
                 if (count($sales)) {
                     foreach ($sales as $item_id => $sale) {
