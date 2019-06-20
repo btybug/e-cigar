@@ -3,7 +3,7 @@
     <main class="main-content products-page position-relative">
         <div class="top-filters">
             <div class="container main-max-width">
-                {!! Form::model($filterModel,['url' => route('categories_front'),'method' => 'GET','id' => 'filter-form']) !!}
+
                 <div class="d-flex align-items-center position-relative">
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
@@ -13,44 +13,11 @@
                             'id' => 'choose_product'
                         ]) !!}
                     </div>
-                    {{--<div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">--}}
-                    {{--<span class="btn btn--filter text-tert-clr pointer">Filters</span>--}}
-                    {{--</div>--}}
-                    <div class="main-filters d-flex closed-mobile">
-                        @if(count($selecteds))
-                            <div
-                                class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
-                                <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
-                                <div class="select-wall">
-                                    {!! Form::select('',$selecteds,array_keys($selecteds),
-                                    ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
-                                    'multiple' =>true,'id' => 'brandSelect']) !!}
-                                </div>
-
-                                <span class="arrow-select"><b></b></span>
-                            </div>
-
-                            <div class="align-self-center reset-wrapper">
-                                <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
-                            </div>
-                        @endif
-                        <div class="slider-range d-flex flex-wrap align-items-center mr-4">
-                            <div class="col-lg-2 col-2 ">
-                                Price
-                            </div>
-                            <div id="slider-range" class="col-lg-6 col-5"></div>
-                            <div class="amount col-lg-4 col-5">
-
-                                <input type="hidden" id="amount_range" name="amount"
-                                       value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
-                                <input type="text" id="amount" name="" readonly
-                                       class="font-main-bold font-16 w-100 border-0">
-                            </div>
-                        </div>
-
-
+                    <div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">
+                    <span class="btn btn--filter text-tert-clr pointer">Filters</span>
                     </div>
-                    {{--<div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">--}}
+
+                    <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">
                         {{--<div class="d-flex arrow-filters pointer">--}}
 
                             {{--<span class="mr-2 text-uppercase">Advanced Filters</span>--}}
@@ -99,9 +66,8 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                         {{--</div>--}}
-                    {{--</div>--}}
+                    </div>
                 </div>
-                {!! Form::close() !!}
             </div>
         </div>
         <div class="main-content-wrapper">
@@ -157,8 +123,42 @@
             <div class="products-wrap change-display-wrap display-grid">
                 <div class="container main-max-width">
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-4">
+                            {!! Form::model($filterModel,['url' => route('categories_front'),'method' => 'GET','id' => 'filter-form']) !!}
+                            <div class="main-filters d-flex closed-mobile">
+                                @if(count($selecteds))
+                                    <div
+                                        class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
+                                        <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
+                                        <div class="select-wall">
+                                            {!! Form::select('',$selecteds,array_keys($selecteds),
+                                            ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
+                                            'multiple' =>true,'id' => 'brandSelect']) !!}
+                                        </div>
+
+                                        <span class="arrow-select"><b></b></span>
+                                    </div>
+
+                                    <div class="align-self-center reset-wrapper">
+                                        <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
+                                    </div>
+                                @endif
+                            </div>
                             <div class="filter-sidebar-wrapper">
+                                <div class="slider-range d-flex flex-wrap align-items-center mr-4">
+                                    <div class="col-lg-2 col-2 ">
+                                        Price
+                                    </div>
+                                    <div id="slider-range" class="col-lg-6 col-5"></div>
+                                    <div class="amount col-lg-4 col-5">
+
+                                        <input type="hidden" id="amount_range" name="amount"
+                                               value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
+                                        <input type="text" id="amount" name="" readonly
+                                               class="font-main-bold font-16 w-100 border-0">
+                                    </div>
+                                </div>
+                                <div class="all-filters">
                                 @foreach($filters as $filter)
                                     <div class="filter-single-wall">
                                         <div class="d-flex justify-content-between head">
@@ -174,9 +174,14 @@
                                         </ul>
                                     </div>
                                 @endforeach
+                                </div>
                             </div>
+                            <div class="col-12 text-right">
+                                <button class="btn save-filter-btn">Search</button>
+                            </div>
+                            {!! Form::close() !!}
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-8">
                             <div class="row justify-content-md-start justify-content-center">
                                 @if(count($products))
                                     @foreach($products as $product)
