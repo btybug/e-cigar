@@ -39,6 +39,7 @@ use App\Models\Ticket;
 use App\Models\Transaction;
 use App\Models\Translations;
 use App\Models\TranslationsEntry;
+use App\Models\Warehouse;
 use App\User;
 use function foo\func;
 use Illuminate\Http\Request;
@@ -817,5 +818,24 @@ class DatatableController extends Controller
                 class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
             return $html .= "<a class='badge btn-warning' href='" . route('admin_tools_filters_manage', $attr->id) . "'><i class='fa fa-edit'></i></a>";
         })->rawColumns(['actions'])->make(true);
+    }
+
+    public function getAllWarehouses()
+    {
+        return Datatables::of(
+            Warehouse::query()
+        )->editColumn('created_at', function ($faq) {
+            return BBgetDateFormat($faq->created_at);
+        })
+            ->editColumn('image', function ($attr) {
+                return ($attr->image) ? "<img src='$attr->image' class='img img-responsive' width='100px'/>" : "No image";
+            })
+            ->addColumn('actions', function ($attr) {
+            $html = '<a href="'.route("admin_warehouses_manage",$attr->id).'" 
+                class="badge btn-info" ><i class="fa fa-eye"></i></a>';
+            $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete",$attr->id).'" 
+                class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
+            return $html .= "<a class='badge btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
+        })->rawColumns(['actions','image'])->make(true);
     }
 }

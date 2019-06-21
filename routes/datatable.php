@@ -50,6 +50,9 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/settings/get-all-transactions','Admin\DatatableController@getAllTransactions')->name('datatable_all_transactions');
     Route::get('/inventory/get-all-barcodes','Admin\DatatableController@getAllBarcodes')->name('datatable_all_barcodes');
     Route::get('/inventory/get-all-filters','Admin\DatatableController@getAllFilters')->name('datatable_all_filters');
+
+    Route::get('/inventory/get-all-warehouses','Admin\DatatableController@getAllWarehouses')->name('datatable_all_warehouses');
+
 });
 
 
