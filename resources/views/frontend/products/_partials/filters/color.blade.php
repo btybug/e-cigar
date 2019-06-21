@@ -7,8 +7,8 @@
                     <div class="custom-control custom-radio custom-control-inline" style="position: relative">
                         {!! Form::radio("select_filter[$filter->id]",$sticker->id,null,['class' => 'custom-control-input','id' => 'customColor'.$filter->id.$sticker->id]) !!}
                         <label class="custom-control-label pointer position-relative"
-                               for="customColor{{ $filter->id.$sticker->id }}" data-filter-color="{{ $sticker->color }}" style="background: {{ $sticker->color }}">
-
+                               for="customColor{{ $filter->id.$sticker->id }}">
+<span class="color-label-custom" style="background: {{ $sticker->color }}"></span>
                             <span class="d-inline-block custom-control-label-txt text-capitalize position-absolute"> {{ $sticker->name }}</span>
 
                         </label>
