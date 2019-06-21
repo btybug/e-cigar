@@ -1,10 +1,12 @@
 @extends('layouts.frontend')
 @section('content')
     <main class="main-content products-page position-relative">
-        <div class="top-filters">
+        <div class="top-filters main-content-wrapper">
             <div class="container main-max-width">
-
-                <div class="d-flex align-items-center position-relative">
+                <div class="content-head d-flex flex-wrap justify-content-between align-items-center position-relative">
+                    <div class="left-head d-flex align-items-center mb-lg-0 mb-2">
+                        {{ Breadcrumbs::render('categories_front',$type) }}
+                    </div>
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
                         [
@@ -12,69 +14,6 @@
                             'style' =>'width: 100%',
                             'id' => 'choose_product'
                         ]) !!}
-                    </div>
-                    <div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">
-                    <span class="btn btn--filter text-tert-clr pointer">Filters</span>
-                    </div>
-
-                    <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">
-                        {{--<div class="d-flex arrow-filters pointer">--}}
-
-                            {{--<span class="mr-2 text-uppercase">Advanced Filters</span>--}}
-                            {{--<span class="icon pointer arrow main-transition">--}}
-    {{--<svg--}}
-        {{--xmlns="http://www.w3.org/2000/svg"--}}
-        {{--xmlns:xlink="http://www.w3.org/1999/xlink"--}}
-        {{--width="12px" height="15px">--}}
-{{--<path fill-rule="evenodd" fill="rgb(81, 132, 229)"--}}
-      {{--d="M5.998,7.783 L5.991,7.790 L-0.001,1.336 L1.239,-0.000 L5.998,5.126 L10.756,-0.000 L11.997,1.336 L6.005,7.790 L5.998,7.783 ZM5.998,12.335 L10.756,7.209 L11.997,8.545 L6.005,15.000 L5.998,14.992 L5.991,15.000 L-0.001,8.545 L1.239,7.209 L5.998,12.335 Z"/>--}}
-{{--</svg>--}}
-{{--</span>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="nav-item--has-dropdown_dropdown">--}}
-                            {{--<div class="all-filters row">--}}
-                                {{--<div class="col-lg-5 col-md-12 filter-left-col">--}}
-                                    {{--@foreach($filters as $filter)--}}
-                                        {{--@if(in_array($filter->display_as,['select','multy_select']))--}}
-                                            {{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
-                                                {{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
-                                            {{--@endif--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-3 col-md-12">--}}
-                                    {{--@foreach($filters as $filter)--}}
-                                        {{--@if($filter->display_as == 'color')--}}
-                                            {{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
-                                                {{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
-                                            {{--@endif--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
-                                {{--<div class="col-lg-4 col-md-12">--}}
-                                    {{--@foreach($filters as $filter)--}}
-                                        {{--@if(in_array($filter->display_as,['radio','checkbox']))--}}
-                                            {{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
-                                                {{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
-                                            {{--@endif--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
-                                {{--</div>--}}
-                                {{--<div class="col-12 text-right">--}}
-                                    {{--<button class="btn save-filter-btn">Search</button>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="main-content-wrapper">
-            <div class="container main-max-width">
-                <div class="content-head d-flex flex-wrap justify-content-between">
-                    <div class="left-head d-flex align-items-center mb-lg-0 mb-2">
-                        {{ Breadcrumbs::render('categories_front',$type) }}
                     </div>
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
 
@@ -120,10 +59,76 @@
 
                 </div>
             </div>
-            <div class="products-wrap change-display-wrap display-grid">
+            <div>
+{{--                <div class="container main-max-width">--}}
+
+{{--                    <div class="d-flex align-items-center position-relative">--}}
+
+{{--                        <div class="filters-for-mobile d-lg-none d-flex align-self-stretch align-items-center justify-content-center">--}}
+{{--                            <span class="btn btn--filter text-tert-clr pointer">Filters</span>--}}
+{{--                        </div>--}}
+
+{{--                        <div class="arrow-wrap d-flex align-items-center nav-item--has-dropdown">--}}
+{{--                            --}}{{--<div class="d-flex arrow-filters pointer">--}}
+
+{{--                            --}}{{--<span class="mr-2 text-uppercase">Advanced Filters</span>--}}
+{{--                            --}}{{--<span class="icon pointer arrow main-transition">--}}
+{{--                            --}}{{--<svg--}}
+{{--                            --}}{{--xmlns="http://www.w3.org/2000/svg"--}}
+{{--                            --}}{{--xmlns:xlink="http://www.w3.org/1999/xlink"--}}
+{{--                            --}}{{--width="12px" height="15px">--}}
+{{--                            --}}{{--<path fill-rule="evenodd" fill="rgb(81, 132, 229)"--}}
+{{--                            --}}{{--d="M5.998,7.783 L5.991,7.790 L-0.001,1.336 L1.239,-0.000 L5.998,5.126 L10.756,-0.000 L11.997,1.336 L6.005,7.790 L5.998,7.783 ZM5.998,12.335 L10.756,7.209 L11.997,8.545 L6.005,15.000 L5.998,14.992 L5.991,15.000 L-0.001,8.545 L1.239,7.209 L5.998,12.335 Z"/>--}}
+{{--                            --}}{{--</svg>--}}
+{{--                            --}}{{--</span>--}}
+{{--                            --}}{{--</div>--}}
+
+{{--                            --}}{{--<div class="nav-item--has-dropdown_dropdown">--}}
+{{--                            --}}{{--<div class="all-filters row">--}}
+{{--                            --}}{{--<div class="col-lg-5 col-md-12 filter-left-col">--}}
+{{--                            --}}{{--@foreach($filters as $filter)--}}
+{{--                            --}}{{--@if(in_array($filter->display_as,['select','multy_select']))--}}
+{{--                            --}}{{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
+{{--                            --}}{{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
+{{--                            --}}{{--@endif--}}
+{{--                            --}}{{--@endif--}}
+{{--                            --}}{{--@endforeach--}}
+{{--                            --}}{{--</div>--}}
+{{--                            --}}{{--<div class="col-lg-3 col-md-12">--}}
+{{--                            --}}{{--@foreach($filters as $filter)--}}
+{{--                            --}}{{--@if($filter->display_as == 'color')--}}
+{{--                            --}}{{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
+{{--                            --}}{{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
+{{--                            --}}{{--@endif--}}
+{{--                            --}}{{--@endif--}}
+{{--                            --}}{{--@endforeach--}}
+{{--                            --}}{{--</div>--}}
+{{--                            --}}{{--<div class="col-lg-4 col-md-12">--}}
+{{--                            --}}{{--@foreach($filters as $filter)--}}
+{{--                            --}}{{--@if(in_array($filter->display_as,['radio','checkbox']))--}}
+{{--                            --}}{{--@if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))--}}
+{{--                            --}}{{--@include('frontend.products._partials.filters.'.$filter->display_as)--}}
+{{--                            --}}{{--@endif--}}
+{{--                            --}}{{--@endif--}}
+{{--                            --}}{{--@endforeach--}}
+{{--                            --}}{{--</div>--}}
+{{--                            --}}{{--<div class="col-12 text-right">--}}
+{{--                            --}}{{--<button class="btn save-filter-btn">Search</button>--}}
+{{--                            --}}{{--</div>--}}
+{{--                            --}}{{--</div>--}}
+{{--                            --}}{{--</div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+            </div>
+
+        </div>
+        <div class="main-content-wrapper">
+
+            <div class="products-wrap change-display-wrap display-grid products__page-main">
                 <div class="container main-max-width">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             {!! Form::model($filterModel,['url' => route('categories_front'),'method' => 'GET','id' => 'filter-form']) !!}
                             <div class="main-filters d-flex closed-mobile">
                                 @if(count($selecteds))
@@ -145,27 +150,38 @@
                                 @endif
                             </div>
                             <div class="filter-sidebar-wrapper">
-                                <div class="slider-range d-flex flex-wrap align-items-center mr-4">
-                                    <div class="col-lg-2 col-2 ">
-                                        Price
-                                    </div>
-                                    <div id="slider-range" class="col-lg-6 col-5"></div>
-                                    <div class="amount col-lg-4 col-5">
-
-                                        <input type="hidden" id="amount_range" name="amount"
-                                               value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
-                                        <input type="text" id="amount" name="" readonly
-                                               class="font-main-bold font-16 w-100 border-0">
-                                    </div>
+                                <div class="d-flex justify-content-between align-items-center head filter-main__head">
+                                    <h5 class="font-main-bold">Filters</h5>
+                                    <span>
+                                                <i class="fas fa-minus"></i>
+                                            </span>
                                 </div>
                                 <div class="all-filters">
+                                    <div class="filter-single-wall top-filters border-0">
+                                        <div class="main-filters border-0 p-0">
+                                            <div class="filter-single-wall">
+                                                <div class="d-flex justify-content-between head">
+                                                    <h5 class="font-main-bold">Price</h5>
+                                                </div>
+                                                <div class="list-filter d-block">
+                                                    <div class="slider-range d-flex flex-wrap align-items-center mr-4">
+                                                        <div id="slider-range" class="col-lg-7 col-6"></div>
+                                                        <div class="amount col-lg-5 col-6">
+
+                                                            <input type="hidden" id="amount_range" name="amount"
+                                                                   value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
+                                                            <input type="text" id="amount" name="" readonly
+                                                                   class="font-main-bold font-16 w-100 border-0">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 @foreach($filters as $filter)
                                     <div class="filter-single-wall">
                                         <div class="d-flex justify-content-between head">
                                             <h5 class="font-main-bold">{{ $filter->name }}</h5>
-                                            <span>
-                                                <i class="fas fa-plus"></i>
-                                            </span>
                                         </div>
                                         <ul class="list-filter">
                                             @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
@@ -174,14 +190,16 @@
                                         </ul>
                                     </div>
                                 @endforeach
+                                    <div class="my-2 text-right">
+                                        <button class="btn save-filter-btn">Search</button>
+                                    </div>
                                 </div>
+
                             </div>
-                            <div class="col-12 text-right">
-                                <button class="btn save-filter-btn">Search</button>
-                            </div>
+
                             {!! Form::close() !!}
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <div class="row justify-content-md-start justify-content-center">
                                 @if(count($products))
                                     @foreach($products as $product)
@@ -681,7 +699,7 @@
                     })
                 }
             });
-
+            
         });
     </script>
 
