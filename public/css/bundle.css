@@ -18275,6 +18275,15 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     margin: 0;
     padding-left: 10px;
 }
+.products__page-main .filter-sidebar-wrapper .filter-wall.colors .color-label-custom {
+    width: 20px;
+     height: 20px;
+     border-radius: 0;
+     left: -2.5rem;
+     border: 1px solid #d7d7d7;
+     position: absolute;
+     bottom: 0;
+}
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head{
         border-bottom: 1px solid #d7d7d7;
