@@ -2645,13 +2645,13 @@ $(function () {
     $(window).resize(function () {
         heightBlock('.main-left-tabs .nav', '.main-left-tabs .nav a');
     });
-    $('body').on('click', '.filter-sidebar-wrapper .filter-single-wall .head', function () {
-        var blockId = $(this).parent().find('.list-filter');
+    $('body').on('click', '.filter-sidebar-wrapper .head.filter-main__head', function () {
+        var blockId = $(this).parent().find('.all-filters');
         if ($(blockId).css('display') == 'none') {
-            $(blockId).animate({ height: 'show' }, 100);
+            $(blockId).animate({ height: 'show' }, 400);
             $(this).find('i').toggleClass('fa-plus fa-minus');
         } else {
-            $(blockId).animate({ height: 'hide' }, 100);
+            $(blockId).animate({ height: 'hide' }, 400);
             $(this).find('i').toggleClass('fa-minus fa-plus');
         }
     });
