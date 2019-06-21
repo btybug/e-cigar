@@ -2746,7 +2746,7 @@ $(document).ready(function () {
             });
         });
 
-        //                    start carousel tabs
+        // start carousel tabs
         var activeTab = $('#carousel-tabs-wrap a').filter('.active');
         $('#carousel-tabs-wrap a').on('click', function (e) {
             e.preventDefault();

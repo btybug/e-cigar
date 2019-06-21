@@ -8,14 +8,14 @@ $(function () {
         if ($(blockId).css('display') == 'none')
         {
             $(blockId).animate({height: 'show'}, 400);
-            $(this).find('i').toggleClass('fa-plus fa-minus')
+            $(this).find('i').toggleClass('fa-plus fa-minus');
         }
         else
         {
             $(blockId).animate({height: 'hide'}, 400);
-            $(this).find('i').toggleClass('fa-minus fa-plus')
+            $(this).find('i').toggleClass('fa-minus fa-plus');
         }
-    })
+    });
 
     // // remove cart-info from cart sidbar
     // $('.cart-item-close').on('click', function (e) {
@@ -113,7 +113,7 @@ $(document).ready(function () {
 
         });
 
-        //                    start carousel tabs
+        // start carousel tabs
         let activeTab = $('#carousel-tabs-wrap a').filter('.active');
         $('#carousel-tabs-wrap a').on('click', function (e) {
             e.preventDefault();
