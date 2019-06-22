@@ -294,6 +294,9 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/update-parent/{id}', 'Admin\WarehouseController@postCategoryUpdateParent')->name('admin_warehouses_categories_update_parent');
         Route::post('/create-or-update/{id}', 'Admin\WarehouseController@postCreateOrUpdateCategory')->name('admin_warehouses_categories_new_or_update');
         Route::post('/delete/{id}', 'Admin\WarehouseController@postDeleteCategory')->name('admin_warehouses_categories_delete');
+
+        Route::post('/get-racks-by-warehouse', 'Admin\WarehouseController@postGetRacksByWarehouse')->name('admin_warehouses_rack_by_warehouse');
+        Route::post('/get-shelves-by-rack', 'Admin\WarehouseController@postGetShelvesByRack')->name('admin_warehouses_shelve_by_rack');
     });
     Route::group(['prefix' => 'purchase'], function () {
         Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_inventory_purchase');
