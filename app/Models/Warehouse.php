@@ -25,4 +25,9 @@ class Warehouse extends Translatable
     {
         return $this->belongsToMany(Items::class, 'filter_items', 'filter_id', 'item_id');
     }
+
+    public function categories()
+    {
+        return $this->hasMany(WarehouseRacks::class,'warehouse_id');
+    }
 }

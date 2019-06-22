@@ -290,11 +290,10 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/edit/{id}', 'Admin\WarehouseController@edit')->name('admin_warehouses_edit');
         Route::get('/manage/{id}', 'Admin\WarehouseController@getManage')->name('admin_warehouses_manage');
 
-        Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_store_categories');
-        Route::post('/get-form/{type}', 'Admin\CategoriesController@postCategoryForm')->name('admin_store_categories_form');
-        Route::post('/update-parent/{type}', 'Admin\CategoriesController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
-        Route::post('/create-or-update/{type}', 'Admin\CategoriesController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');
-        Route::post('/delete/{type}', 'Admin\CategoriesController@postDeleteCategory')->name('admin_store_categories_delete');
+        Route::post('/get-form/{id}', 'Admin\WarehouseController@postCategoryForm')->name('admin_warehouses_categories_form');
+        Route::post('/update-parent/{id}', 'Admin\WarehouseController@postCategoryUpdateParent')->name('admin_warehouses_categories_update_parent');
+        Route::post('/create-or-update/{id}', 'Admin\WarehouseController@postCreateOrUpdateCategory')->name('admin_warehouses_categories_new_or_update');
+        Route::post('/delete/{id}', 'Admin\WarehouseController@postDeleteCategory')->name('admin_warehouses_categories_delete');
     });
     Route::group(['prefix' => 'purchase'], function () {
         Route::get('/', 'Admin\StoreController@getPurchase')->name('admin_inventory_purchase');

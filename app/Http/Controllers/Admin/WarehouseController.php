@@ -11,7 +11,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Requests\WarehouseRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreRacksRequest;
+use App\Models\Stickers;
 use App\Models\Warehouse;
+use App\Models\WarehouseRacks;
 use PragmaRX\Countries\Package\Countries;
 
 use Illuminate\Http\Request;
@@ -64,7 +67,55 @@ class WarehouseController extends Controller
     public function getManage($id)
     {
         $model = Warehouse::findOrFail($id);
+        $categories = $model->categories;
+//        dd($categories);
+        enableMedia();
+        return $this->view('manage', compact('categories', 'model', 'type'));
+    }
 
-        return $this->view('manage', compact('model'));
+    public function postCategoryForm(Request $request, $w_id)
+    {
+        $id = $request->get('id', 0);
+        $warehouse = Warehouse::findOrFail($w_id);
+
+        $model = $warehouse->categories()->where('id', $id)->first();
+
+        $allCategories = $warehouse->categories()->where('id','!=' ,$id)->get();
+        $stickers = Stickers::all()->pluck('name', 'id');
+        $html = $this->view("create_or_update", compact(['allCategories', 'model','warehouse' ,'stickers']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function postCategoryUpdateParent(Request $request, $w_id)
+    {
+        $warehouse = Warehouse::findOrFail($w_id);
+
+        $model = $warehouse->categories()->where('id', $request->get('id'))->first();
+        if ($model) {
+            $model->parent_id = $request->get('parentId');
+            $model->save();
+        }
+
+        return \Response::json(['error' => false]);
+    }
+
+    public function postCreateOrUpdateCategory(StoreRacksRequest $request, $w_id)
+    {
+        $data = $request->except('_token', 'translatable');
+        $warehouse = Warehouse::findOrFail($w_id);
+        $data['warehouse_id'] = $warehouse->id;
+        $category = WarehouseRacks::updateOrCreate($request->id, $data,$request->get('translatable'));
+
+        return redirect()->back();
+    }
+
+    public function postDeleteCategory(Request $request, $w_id)
+    {
+        $warehouse = Warehouse::findOrFail($w_id);
+        $model = $warehouse->categories()->where('id', $request->get('slug'))->first();
+        $model->delete();
+
+        return response()->json(['error' => false]);
     }
 }

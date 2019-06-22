@@ -15,14 +15,14 @@ class CreateWarehouseRackTranslationsTable extends Migration
     {
         Schema::create('warehouse_rack_translations', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('warehouse_rack_id')->unsigned();
+            $table->integer('warehouse_racks_id')->unsigned();
             $table->string('locale')->index();
 
             $table->string('name');
             $table->text('description')->nullable();
 
-            $table->unique(['warehouse_rack_id','locale']);
-            $table->foreign('warehouse_rack_id')->references('id')->on('warehouse_racks')->onDelete('cascade');
+            $table->unique(['warehouse_racks_id','locale']);
+            $table->foreign('warehouse_racks_id')->references('id')->on('warehouse_racks')->onDelete('cascade');
         });
     }
 
