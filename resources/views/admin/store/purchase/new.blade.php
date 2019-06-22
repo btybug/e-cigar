@@ -60,9 +60,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-3 control-label" for="warehouse">Location</label>
-                    <div class="col-sm-3">
-                        {!! Form::select('warehouse_id',['' => 'Select Warehouse'],null,['class'=> 'form-control','id' => 'warehouse']) !!}
+                    <label class="col-sm-2 control-label" for="warehouse">Location</label>
+                    <div class="col-sm-4">
+                        {!! Form::select('warehouse_id',['' => 'Select Warehouse'] + $warehouses,null,['class'=> 'form-control','id' => 'warehouse']) !!}
                     </div>
                     <div class="col-sm-3">
                         {!! Form::select('rack_id',['' => 'Select Rack'],null,['class'=> 'form-control','id' => 'rack']) !!}
@@ -124,5 +124,55 @@
                 }
             });
         }
+
+        $("body").on('change','#warehouse',function () {
+            let w_id = $(this).val();
+            render_racks(w_id)
+        })
+
+        $("body").on('change','#rack',function () {
+            let r_id = $(this).val();
+            render_shelves(r_id)
+        })
+
+        function render_racks(w_id){
+            $("#rack").html('<option value="0">Select Rack</option>');
+            $("#shelve").html('<option value="0">Select Shelve</option>');
+            if(w_id){
+                AjaxCall("{{ route('admin_warehouses_rack_by_warehouse') }}", {w_id: w_id}, function (res) {
+                    if (!res.error) {
+                        $("#rack").empty();
+                        var html = '<option value="0">Select Rack</option>';
+                        for (var prop in res.data) {
+                            html += '<option value="'+res.data[prop].id+'">'+res.data[prop].name+'</option>';
+                        }
+
+                        $("#rack").append(html);
+                    }
+                });
+            }
+
+        }
+
+        function render_shelves(r_id){
+            $("#shelve").html('<option value="0">Select Shelve</option>');
+            if(r_id){
+                AjaxCall("{{ route('admin_warehouses_shelve_by_rack') }}", {r_id: r_id}, function (res) {
+                    if (!res.error) {
+                        $("#shelve").empty();
+
+                        var html = '<option value="0">Select Shelve</option>';
+                        for (var prop in res.data) {
+                            html += '<option value="'+res.data[prop].id+'">'+res.data[prop].name+'</option>';
+                        }
+
+                        $("#shelve").append(html);
+                    }
+                });
+            }
+
+        }
+
+
     </script>
 @stop

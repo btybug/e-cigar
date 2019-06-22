@@ -118,4 +118,16 @@ class WarehouseController extends Controller
 
         return response()->json(['error' => false]);
     }
+
+    public function postGetRacksByWarehouse(Request $request)
+    {
+        $warehouse = Warehouse::findOrFail($request->get('w_id'));
+        return response()->json(['error' => false,'data' => $warehouse->categories()->whereNull('parent_id')->get()]);
+    }
+
+    public function postGetShelvesByRack(Request $request)
+    {
+        $rack = WarehouseRacks::findOrFail($request->get('r_id'));
+        return response()->json(['error' => false,'data' => $rack->children]);
+    }
 }

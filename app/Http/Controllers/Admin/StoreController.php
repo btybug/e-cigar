@@ -24,6 +24,8 @@ use App\Models\ShippingZones;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\Suppliers;
+use App\Models\Warehouse;
+use App\Models\WarehouseRacks;
 use App\Services\UserService;
 use App\User;
 use Carbon\Carbon;
@@ -170,8 +172,8 @@ class StoreController extends Controller
         $model = null;
         $items = Items::where('type','simple')->get()->pluck('name', 'id');
         $suppliers = Suppliers::all()->pluck('name', 'id');
-
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses'));
     }
 
     public function postSaveOrUpdate(PurchaseRequest $request)
