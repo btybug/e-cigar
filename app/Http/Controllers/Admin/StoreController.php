@@ -173,7 +173,9 @@ class StoreController extends Controller
         $items = Items::where('type','simple')->get()->pluck('name', 'id');
         $suppliers = Suppliers::all()->pluck('name', 'id');
         $warehouses = Warehouse::all()->pluck('name','id')->all();
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses'));
+        $racks = [];
+        $shelves = [];
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses','racks','shelves'));
     }
 
     public function postSaveOrUpdate(PurchaseRequest $request)
@@ -190,7 +192,10 @@ class StoreController extends Controller
         $model = Purchase::findOrFail($id);
         $items = Items::where('type','simple')->get()->pluck('name', 'id');
         $suppliers = Suppliers::all()->pluck('name', 'id');
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id',$model->warehouse_id)->get()->pluck('name','id')->all();
+        $shelves = WarehouseRacks::where('warehouse_id',$model->warehouse_id)->where('parent_id',$model->rack_id)->get()->pluck('name','id')->all();
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses','racks','shelves'));
     }
 
 

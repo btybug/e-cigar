@@ -65,10 +65,10 @@
                         {!! Form::select('warehouse_id',['' => 'Select Warehouse'] + $warehouses,null,['class'=> 'form-control','id' => 'warehouse']) !!}
                     </div>
                     <div class="col-sm-3">
-                        {!! Form::select('rack_id',['' => 'Select Rack'],null,['class'=> 'form-control','id' => 'rack']) !!}
+                        {!! Form::select('rack_id',['' => 'Select Rack']+$racks,null,['class'=> 'form-control','id' => 'rack']) !!}
                     </div>
                     <div class="col-sm-3">
-                        {!! Form::select('shelve_id',['' => 'Select Shelve'],null,['class'=> 'form-control','id' => 'shelve']) !!}
+                        {!! Form::select('shelve_id',['' => 'Select Shelve']+$shelves,null,['class'=> 'form-control','id' => 'shelve']) !!}
                     </div>
                 </div>
 
