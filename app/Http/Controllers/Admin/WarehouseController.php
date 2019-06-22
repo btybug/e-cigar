@@ -80,7 +80,7 @@ class WarehouseController extends Controller
 
         $model = $warehouse->categories()->where('id', $id)->first();
 
-        $allCategories = $warehouse->categories()->where('id','!=' ,$id)->get();
+        $allCategories = $warehouse->categories()->whereNull('parent_id')->get();
         $stickers = Stickers::all()->pluck('name', 'id');
         $html = $this->view("create_or_update", compact(['allCategories', 'model','warehouse' ,'stickers']))->render();
 
