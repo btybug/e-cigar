@@ -60,6 +60,19 @@
                 </div>
 
                 <div class="form-group row">
+                    <label class="col-sm-3 control-label" for="warehouse">Location</label>
+                    <div class="col-sm-3">
+                        {!! Form::select('warehouse_id',['' => 'Select Warehouse'],null,['class'=> 'form-control','id' => 'warehouse']) !!}
+                    </div>
+                    <div class="col-sm-3">
+                        {!! Form::select('rack_id',['' => 'Select Rack'],null,['class'=> 'form-control','id' => 'rack']) !!}
+                    </div>
+                    <div class="col-sm-3">
+                        {!! Form::select('shelve_id',['' => 'Select Shelve'],null,['class'=> 'form-control','id' => 'shelve']) !!}
+                    </div>
+                </div>
+
+                <div class="form-group row">
                     <label class="col-sm-2 control-label" for="input-status"></label>
                     <div class="col-sm-10 text-right">
                         {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
