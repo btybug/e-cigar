@@ -178,7 +178,6 @@ class StoreController extends Controller
 
     public function postSaveOrUpdate(PurchaseRequest $request)
     {
-        dd($request->all());
         $data = $request->except('_token');
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
