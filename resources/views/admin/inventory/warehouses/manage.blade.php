@@ -19,7 +19,7 @@
                     <div class="col-md-8">
                         <div class="content-area category-form-place">
                             {{--@include('admin.store.categories.create_or_update')--}}
-                            <h4 class="text-center dddd">New Category</h4>
+                            <h4 class="text-center">New Category</h4>
                         </div>
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -63,16 +63,20 @@
         $('body').on('click', '.del-save--btn .btn-submit-form', function () {
             $('.category-form-place .updated-form').submit()
         })
+
+
         $("#select-stickers").select2();
-        {{--$("body").on('click', '.add-category', function () {--}}
-            {{--AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: null}, function (res) {--}}
-                {{--if (!res.error) {--}}
-                    {{--$(".category-form-place").html(res.html);--}}
-                    {{--$('.icon-picker').iconpicker();--}}
-                    {{--$("#select-stickers").select2();--}}
-                {{--}--}}
-            {{--});--}}
-        {{--});--}}
+
+        $("body").on('click', '.add-category', function () {
+
+            AjaxCall("/admin/inventory/warehouses/get-form/{{ $model->id }}", {id: null}, function (res) {
+                if (!res.error) {
+                    $(".category-form-place").html(res.html);
+                    $('.icon-picker').iconpicker();
+                    $("#select-stickers").select2();
+                }
+            });
+        });
 
 
 
@@ -106,35 +110,31 @@
             });
         };
 
-        var data = {!! json_encode(\App\Models\Category::recursiveItems($categories),true) !!};
+        var data = {!! json_encode(\App\Models\WarehouseRacks::recursiveItems($categories),true) !!};
 
         $("#tree1").tree({
             data: data,
-            //   dataUrl: {
-            //     url: '/example_data.json',
-            //     headers: {'abc': 'def'}
-            // },
             autoOpen: true,
             saveState: true,
             dragAndDrop: true,
             onDragStop: function (e, node) {
                 let id = e.id
                 let parentId = e.parent.id
-                AjaxCall("/admin/tools/filters/update-parent", {id, parentId}, function (res) {
+                AjaxCall("/admin/inventory/warehouses/update-parent", {id, parentId}, function (res) {
                     $(".category-form-place").html('');
                 });
             }
         });
 
         $("#tree1").bind("tree.click", function (e) {
-            {{--AjaxCall("/admin/tools/categories/get-form/{{ $type }}", {id: e.node.id}, function (res) {--}}
-                {{--if (!res.error) {--}}
-                    {{--$(".category-form-place").html(res.html);--}}
-                    {{--$('.icon-picker').iconpicker();--}}
-                    {{--$("#select-stickers").select2();--}}
+            AjaxCall("/admin/inventory/warehouses/get-form/{{ $model->id }}", {id: e.node.id}, function (res) {
+                if (!res.error) {
+                    $(".category-form-place").html(res.html);
+                    $('.icon-picker').iconpicker();
+                    $("#select-stickers").select2();
 
-                {{--}--}}
-            {{--});--}}
+                }
+            });
         });
     </script>
 @stop
