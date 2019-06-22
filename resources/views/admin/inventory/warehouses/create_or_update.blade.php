@@ -51,6 +51,12 @@
     </div>
 </div>
 
+<div class="form-group row">
+    <label class="col-md-2 col-xs-12">Parent</label>
+    <div class="col-md-10 col-xs-12">
+        {!! Form::select('parent_id',[''=>'No Parent'] + get_pluck($allCategories,'id','name'),null,['class'=>'form-control']) !!}
+    </div>
+</div>
 
 <div class="form-group row">
     <label class="col-md-2 col-xs-12">Image</label>

@@ -67,7 +67,7 @@ class WarehouseController extends Controller
     public function getManage($id)
     {
         $model = Warehouse::findOrFail($id);
-        $categories = $model->categories;
+        $categories = $model->categories()->whereNull('parent_id')->get();
 //        dd($categories);
         enableMedia();
         return $this->view('manage', compact('categories', 'model', 'type'));
