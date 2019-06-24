@@ -833,7 +833,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($attr) {
             $html = '<a href="'.route("admin_warehouses_manage",$attr->id).'" 
                 class="badge btn-info" ><i class="fa fa-eye"></i></a>';
-            $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete",$attr->id).'" 
+            $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'" 
                 class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
             return $html .= "<a class='badge btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
         })->rawColumns(['actions','image'])->make(true);

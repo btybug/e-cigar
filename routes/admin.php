@@ -286,7 +286,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/new','Admin\WarehouseController@getNew')->name('admin_warehouses_new');
         Route::post('/save','Admin\WarehouseController@postSave')->name('admin_warehouses_save');
 
-        Route::post('/delete/{id}', 'Admin\WarehouseController@delete')->name('admin_warehouses_delete');
+        Route::post('/delete', 'Admin\WarehouseController@delete')->name('admin_warehouses_delete');
         Route::get('/edit/{id}', 'Admin\WarehouseController@edit')->name('admin_warehouses_edit');
         Route::get('/manage/{id}', 'Admin\WarehouseController@getManage')->name('admin_warehouses_manage');
 
