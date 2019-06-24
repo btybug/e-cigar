@@ -769,7 +769,7 @@ $(document).ready(function () {
                 (function () {
                     const $body = $('body');
 
-                    $(`${getParentId} .filters-modal-wizard`).each(function () {
+                    $(`${getParentId} .filters-modal-wizard`).each(function (index) {
                         const group_id = $(this).attr('data-group');
                         const filter = [];
 
@@ -783,6 +783,7 @@ $(document).ready(function () {
                             const selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function (item) {
                                 return $(item).attr('data-id');
                             });
+                            console.log('index',index);
                             $.ajax({
                                 type: "post",
                                 url: "/products/select-items",
@@ -814,6 +815,7 @@ $(document).ready(function () {
                         $("body").on('click', `#wizardViewModal[data-group="${group_id}"] .shopping-cart_wrapper .wrap-item`, function (ev) {
                             const id = $(this).attr('data-id');
                             const title = $(this).find('.name').text().trim();
+                            filter_limit = $(`.filters-modal-wizard[data-group="${$(this).closest('[data-group]').attr('data-group')}"]`).closest('.limit').attr('data-limit');
                             if (filter_limit > new_qty(null, 'filter') && !$(this).hasClass('active')) {
                                 $(this).addClass('active');
                                 $('.selected-items_filter').append(makeSelectedItemModal(id, title, true));
@@ -830,6 +832,7 @@ $(document).ready(function () {
 
                         $('body').on('click', '#wizardViewModal .selected-item-popup_qty-plus', function (ev) {
                             eventInitialDefault(ev);
+                            filter_limit = $(`.filters-modal-wizard[data-group="${$(this).closest('[data-group]').attr('data-group')}"]`).closest('.limit').attr('data-limit');
                             if (filter_limit > new_qty(null, 'filter')) {
                                 $(this).siblings(".popup_field-input").val(Number($(this).siblings(".popup_field-input").val()) + 1);
                             }
@@ -844,10 +847,22 @@ $(document).ready(function () {
 
                         $('body').on('click', `#wizardViewModal[data-group="${group_id}"] .add-items-btn`, function () {
                             const items_array = [];
+                            console.log(2, '*****************************')
 
                             $('#wizardViewModal .modal-body').find('.wrap-item').each(function () {
                                 $(this).hasClass('active') && (items_array.push($(this).attr('data-id')));
                             });
+
+                            const popup_items_qty = [];
+                            console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
+                            $(`[data-id-popup].selected-item_popup`).find('.popup_field-input').each(function () {
+                                const $this = $(this);
+                                popup_items_qty.push({
+                                    id: $this.closest('.selected-item_popup').attr('data-id-popup'),
+                                    value: $this.val()
+                                });
+                            });
+
                             fetch("/products/get-variation-menu-raws", {
                                 method: "post",
                                 headers: {
@@ -866,18 +881,9 @@ $(document).ready(function () {
 
                                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.product-single-info_row-items').append(json.html);
 
-                                    const popup_items_qty = [];
-
-                                    $(`[data-id-popup].selected-item_popup`).find('.popup_field-input').each(function () {
-                                        const $this = $(this);
-                                        popup_items_qty.push({
-                                            id: $this.closest('.selected-item_popup').attr('data-id-popup'),
-                                            value: $this.val()
-                                        });
-                                    });
                                     $(`[data-group="${dg}"]`).closest('.product-single-info_row').find('.field-input').each(function () {
                                         const d_id = $(this).attr('data-id');
-                                        const value = popup_items_qty.find((el) => {
+                                        const value = popup_items_qty.length > 0 && popup_items_qty.find((el) => {
                                             return el.id === d_id;
                                         }).value;
                                         $(this).val(value);
@@ -926,6 +932,7 @@ $(document).ready(function () {
 
                             $body.on('click', `#wizardViewModal[data-group="${group_id}"] .add-items-btn`, function (e) {
                                 eventInitialDefault(e);
+                                console.log(1, '*****************************')
 
                                 $(`.filter[data-group-id="${group_id}"]`).closest('.product-single-info_row').find('.product-single-info_row-items').empty();
 
@@ -985,10 +992,11 @@ $(document).ready(function () {
 
                             $body.on('click', `#wizardViewModal[data-group="${group_id}"] .shopping-cart_wrapper .next-btn`, function (e) {
                                 eventInitialDefault(e);
-
                                 $('.content-wrap').find('.active').toArray().map(function (actv) {
                                     filter.push($(actv).closest('[data-id]').attr('data-id'));
                                 });
+                                console.log(filter)
+
                                 $('.content-wrap').find('.active').length === 0 ? alert('select item') : $.ajax({
                                     type: "post",
                                     url: "/filters",
@@ -1033,7 +1041,7 @@ $(document).ready(function () {
                                 e.stopImmediatePropagation();
 
                                 filter.pop();
-
+                                console.log(filter)
                                 $.ajax({
                                     type: "post",
                                     url: "/filters",
@@ -1042,7 +1050,7 @@ $(document).ready(function () {
                                         group: self.attr('data-group'),
                                         category_id: first_category_id,
                                         filters: filter,
-                                        type: self.attr('data-type')
+                                        type: 'popup'   //self.attr('data-type')
                                     },
                                     headers: {
                                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
