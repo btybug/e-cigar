@@ -50,9 +50,9 @@ class WarehouseController extends Controller
         return redirect()->route('admin_warehouses');
     }
 
-    public function delete(Request $request,$id)
+    public function delete(Request $request)
     {
-        $warehouse = Warehouse::findOrFail($id);
+        $warehouse = Warehouse::findOrFail($request->slug);
         $warehouse->delete();
 
         return response()->json(['success' => true]);
