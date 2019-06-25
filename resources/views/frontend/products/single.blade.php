@@ -1,4 +1,7 @@
 @extends('layouts.frontend')
+@section('meta')
+    {!! stockSeo($vape) !!}
+    @stop
 @section('content')
     <div class="main-content">
         <!--shopping dtls fixed at the bottom-->

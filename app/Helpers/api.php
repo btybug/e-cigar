@@ -71,22 +71,27 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
     return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html']));
 }
 
-function filter_button($category,$group=null, $text = 'Filter',$name=null,$is_multiple=true,$type='filter_popup')
+function filter_button($category, $group = null, $text = 'Filter', $name = null, $is_multiple = true, $type = 'filter_popup')
 {
-  global $_FILTER_HTML;
-  $uniqId = uniqid('filter_');
-  $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
+    global $_FILTER_HTML;
+    $uniqId = uniqid('filter_');
+    $category = \App\Models\Category::where('type', 'filter')->where('slug', $category)->first();
 
-  switch ($type){
-    case'filter_popup':
-      enableFilter();
-      $_FILTER_HTML = View::make('filters.filter_modal',compact('category'))->render();
-      $view='button';break;
-    case'select_filter':$view='filter_select';break;
-  }
-  return ($category && isset($view))?view('filters.'.$view, compact('category', 'text','group','name','is_multiple','uniqId','type')):'Shnorhavor Amanor Yev Surb &nund';
+    switch ($type) {
+        case'filter_popup':
+            enableFilter();
+            $_FILTER_HTML = View::make('filters.filter_modal', compact('category'))->render();
+            $view = 'button';
+            break;
+        case'select_filter':
+            $view = 'filter_select';
+            break;
+    }
+    return ($category && isset($view)) ? view('filters.' . $view, compact('category', 'text', 'group', 'name', 'is_multiple', 'uniqId', 'type')) : 'Shnorhavor Amanor Yev Surb &nund';
 }
-function filter_modal_html(){
+
+function filter_modal_html()
+{
     global $_FILTER_HTML;
     return $_FILTER_HTML;
 }
@@ -748,6 +753,19 @@ function time_ago($datetime, $full = false)
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
+function stockSeo($stock)
+{
+    $seoes = $stock->seo;
+    $HTML = '';
+    foreach ($seoes as $seo) {
+        if ($stock->image) {
+            $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
+        }
+        $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
+    }
+    return $HTML;
+}
+
 function meta($object, $type = 'seo_posts')
 {
 
@@ -1230,18 +1248,21 @@ function render_widgets($placeholder)
 
     return $html;
 }
-function getItemStockVariations($group,array $items=[]){
-    return \App\Models\StockVariation::where('variation_id',$group)->whereIn('item_id',$items)->get();
+
+function getItemStockVariations($group, array $items = [])
+{
+    return \App\Models\StockVariation::where('variation_id', $group)->whereIn('item_id', $items)->get();
 }
 
 
-function out_of_stock($item){
-    if($item){
+function out_of_stock($item)
+{
+    if ($item) {
         $qty = $item->item->qty;
         $settings = new \App\Models\Settings();
         $model = $settings->getEditableData('store_out_of_stock');
 
-        if($qty <= 0 && $model->out_of_stock_status == 0){
+        if ($qty <= 0 && $model->out_of_stock_status == 0) {
             return 1;
         }
     }
@@ -1249,16 +1270,17 @@ function out_of_stock($item){
     return 0;
 }
 
-function out_of_stock_msg($item){
-    if($item){
+function out_of_stock_msg($item)
+{
+    if ($item) {
         $qty = $item->item->qty;
         $settings = new \App\Models\Settings();
         $model = $settings->getEditableData('store_out_of_stock');
 
-        if($qty <=0){
-            if($model->out_of_stock_status == 0){
+        if ($qty <= 0) {
+            if ($model->out_of_stock_status == 0) {
                 return "(Out of stock)";
-            }else{
+            } else {
                 return "(Back order)";
             }
         }
@@ -1267,7 +1289,8 @@ function out_of_stock_msg($item){
     return null;
 }
 
-function get_breadcrumb_previous_url($breadcrumbs){
+function get_breadcrumb_previous_url($breadcrumbs)
+{
     $length = count($breadcrumbs);
     return $breadcrumbs[$length - 2]->url;
 }
