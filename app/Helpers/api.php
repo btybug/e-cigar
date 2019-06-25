@@ -757,10 +757,11 @@ function stockSeo($stock)
 {
     $seoes = $stock->seo;
     $HTML = '';
+    if ($stock->image) {
+        $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
+    }
     foreach ($seoes as $seo) {
-        if ($stock->image) {
-            $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
-        }
+
         $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
     }
     return $HTML;
