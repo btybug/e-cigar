@@ -761,7 +761,6 @@ function stockSeo($stock)
         $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
     }
     foreach ($seoes as $seo) {
-
         $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
     }
     return $HTML;
