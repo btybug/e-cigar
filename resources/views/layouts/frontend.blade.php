@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-recaptcha-key" content="{!!env('GOOGLE_RECAPTCHA_KEY')!!}">
-    <meta name="google-site-verification" content="i7Q2cogkZrJSzyrSwnSXF7IotbrWMzlFnaNXvIXH3Cg" />
+    <meta name="google-site-verification" content="bYambdrAC-nymmiVMr-A2jiKeKW8gEsCcCRozCLDp4o" />
     @yield('meta')
     <title>Document</title>
     <!-- Start of ukdevplus Zendesk Widget script -->
