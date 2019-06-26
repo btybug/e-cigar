@@ -32,7 +32,7 @@ class Attributes extends Translatable
         return $this->belongsTo(self::class, 'parent_id');
     }
 
-    public static function getById($id,$col = 'name')
+    public static function getById($id, $col = 'name')
     {
         $attribute = self::find($id);
         return ($attribute && isset($attribute->{$col})) ? $attribute->{$col} : null;
@@ -40,7 +40,7 @@ class Attributes extends Translatable
 
     public function stickers()
     {
-        return $this->belongsToMany(Stickers::class, 'attributes_stickers', 'attributes_id','sticker_id');
+        return $this->belongsToMany(Stickers::class, 'attributes_stickers', 'attributes_id', 'sticker_id');
     }
 
     public function categories()
@@ -77,14 +77,17 @@ class Attributes extends Translatable
     {
         $lang = \Lang::getLocale();
 
-        return Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
-            ->leftJoin("attribute_categories",'attributes.id', '=', 'attribute_categories.attribute_id')
-            ->leftJoin("categories",'attribute_categories.categories_id', '=', 'categories.id')
+        $attrs = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+            ->leftJoin("attribute_categories", 'attributes.id', '=', 'attribute_categories.attribute_id')
+            ->leftJoin("categories", 'attribute_categories.categories_id', '=', 'categories.id')
             ->select('attributes.*', 'attributes_translations.name')
             ->where('attributes.filter', true)
             ->where('attributes_translations.locale', $lang)
-            ->where('categories.type', 'stocks')
-            ->where('categories.slug', $slug)
-            ->get();
+            ->where('categories.type', 'stocks');
+        if ($slug) {
+            $attrs = $attrs->where('categories.slug', $slug);
+        }
+
+        return $attrs->get();
     }
 }
