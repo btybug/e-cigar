@@ -72,4 +72,19 @@ class Attributes extends Translatable
             return $data;
         }
     }
+
+    public function getFiltersByCategory($slug)
+    {
+        $lang = \Lang::getLocale();
+
+        return Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+            ->leftJoin("attribute_categories",'attributes.id', '=', 'attribute_categories.attribute_id')
+            ->leftJoin("categories",'attribute_categories.categories_id', '=', 'categories.id')
+            ->select('attributes.*', 'attributes_translations.name')
+            ->where('attributes.filter', true)
+            ->where('attributes_translations.locale', $lang)
+            ->where('categories.type', 'stocks')
+            ->where('categories.slug', $slug)
+            ->get();
+    }
 }
