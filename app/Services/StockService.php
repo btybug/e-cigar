@@ -162,16 +162,17 @@ class StockService
                 $newData['is_required'] = $datum['is_required'];
                 $newData['display_as'] = $datum['display_as'];
                 $newData['price_per'] = $datum['price_per'];
-                $newData['filter_category_id'] = $datum['filter_category_id'];
+                $newData['filter_category_id'] = ($datum['filter_category_id']) ?? 0;
                 $newData['common_price'] = ($datum['common_price']) ?? 0;
                 if (isset($datum['variations']) && count($datum['variations'])) {
                     foreach ($datum['variations'] as $item) {
                         $newData['price'] = ($datum['price_per'] == 'product') ? $newData['common_price'] : (($item['price']) ?? 0);
                         $newData['item_id'] = $item['item_id'];
-                        $newData['qty'] = $item['qty'];
+                        $newData['qty'] = ($item['qty']) ?? 0;
                         $newData['image'] = $item['image'];
                         $newData['name'] = $item['name'];
                         $newData['variation_id'] = $variation_id;
+//                        $newData['filter_category_id'] = $datum['filter_category_id'];
                         if (isset($item['id'])) {
                             $variation = StockVariation::find($item['id']);
                             $variation->update($newData);
