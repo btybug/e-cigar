@@ -74,6 +74,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/get-extra-content', 'Frontend\ProductsController@postExtraContent')->name('product_extra_content');
     Route::post('/get-extra-item', 'Frontend\ProductsController@postExtraItem')->name('product_extra_item');
     Route::get('/{type?}', 'Frontend\ProductsController@index')->name('categories_front');
+    Route::post('/{type?}', 'Frontend\ProductsController@index')->name('categories_front_post');
     Route::group(['prefix' => '{type}'], function () {
         Route::get('/{slug}', 'Frontend\ProductsController@getSingle')->name('product_single');
     });
