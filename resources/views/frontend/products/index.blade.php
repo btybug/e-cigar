@@ -130,22 +130,40 @@
                     <div class="row">
                         <div class="col-md-3">
                             {!! Form::model($filterModel,['url' => route('categories_front'),'method' => 'GET','id' => 'filter-form']) !!}
-                            <div class="main-filters d-flex closed-mobile">
+                            <div class="selected_filter-sidebar-wrapper">
                                 @if(count($selecteds))
-                                    <div
-                                        class="brand_select d-flex align-items-center position-relative select_with-tag-wrapper">
-                                        <label for="brandSelect" class="text-main-clr mb-0">SELECTED</label>
-                                        <div class="select-wall">
-                                            {!! Form::select('',$selecteds,array_keys($selecteds),
-                                            ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',
-                                            'multiple' =>true,'id' => 'brandSelect']) !!}
-                                        </div>
-
-                                        <span class="arrow-select"><b></b></span>
-                                    </div>
-
-                                    <div class="align-self-center reset-wrapper">
+                                    <div class="d-flex justify-content-between head">
+                                        <h5 class="font-main-bold">SELECTED</h5>
                                         <a href="javascript:void(0)" class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
+                                    </div>
+                                    <div class="selected_filter-sidebar-items">
+{{--                                        <div class="select-wall">--}}
+{{--                                            {!! Form::select('',$selecteds,array_keys($selecteds),--}}
+{{--                                            ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',--}}
+{{--                                            'multiple' =>true,'id' => 'brandSelect']) !!}--}}
+{{--                                        </div>--}}
+<ul class="d-inline-block">
+    <li class="selected_filter-sidebar-item position-relative">
+        <span class="selection_remove" role="presentation">×</span>
+        item 1
+    </li>
+    <li class="selected_filter-sidebar-item position-relative">
+        <span class="selection_remove" role="presentation">×</span>
+        item 2
+    </li>
+    <li class="selected_filter-sidebar-item position-relative">
+        <span class="selection_remove" role="presentation">×</span>
+        item 3
+    </li>
+    <li class="selected_filter-sidebar-item position-relative">
+        <span class="selection_remove" role="presentation">×</span>
+        item 4
+    </li>
+    <li class="selected_filter-sidebar-item position-relative">
+        <span class="selection_remove" role="presentation">×</span>
+        item 5
+    </li>
+</ul>
                                     </div>
                                 @endif
                             </div>
@@ -346,7 +364,7 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    NO Results
+                                   NO Results
                                 @endif
                             </div>
                         </div>
