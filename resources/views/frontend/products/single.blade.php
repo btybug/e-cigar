@@ -249,16 +249,16 @@
                                                     Specification</h3>
 
                                                 <table class="tecnical_spf-table table font-16 w-100">
-                                                    {{--@foreach($vape->stockAttrs as $stockAttr)--}}
-                                                    {{--<tr>--}}
-                                                    {{--<th class="text-tert-clr">{{ $stockAttr->attr->name }}</th>--}}
-                                                    {{--<td>--}}
-                                                    {{--@foreach($stockAttr->children as $child)--}}
-                                                    {{--{{ $child->sticker->name }} @if(! $loop->last) , @endif--}}
-                                                    {{--@endforeach--}}
-                                                    {{--</td>--}}
-                                                    {{--</tr>--}}
-                                                    {{--@endforeach--}}
+                                                    @foreach($vape->stockAttrs as $stockAttr)
+                                                    <tr>
+                                                    <th class="text-tert-clr">{{ $stockAttr->attr->name }}</th>
+                                                    <td>
+                                                    @foreach($stockAttr->children as $child)
+                                                    {{ $child->sticker->name }} @if(! $loop->last) , @endif
+                                                    @endforeach
+                                                    </td>
+                                                    </tr>
+                                                    @endforeach
                                                 </table>
                                             </div>
                                             <div class="tecnical_gallery tecnical_row">
