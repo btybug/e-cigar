@@ -171,6 +171,14 @@ class StockController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function getPromotion(Request $request)
+    {
+        $model = Stock::findOrFail($request->stock_id);
+        $promotion = ($request->get('slug')) ? StockSales::where('slug', $request->get('slug'))->first() : null;
+        $html = \View("admin.inventory._partials.promotion_item", compact(['model', 'promotion']))->render();
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function savePromotion(Request $request)
     {
         $data = $request->except('extra_product', 'stock_id');
