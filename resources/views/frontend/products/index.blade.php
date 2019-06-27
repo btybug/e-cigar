@@ -178,6 +178,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="filter-single-wall">
+                                        <div class="d-flex justify-content-between head">
+                                            <h5 class="font-main-bold">Brands</h5>
+                                        </div>
+                                        <ul class="list-filter">
+                                            @include('frontend.products._partials.filters.checkbox_brand')
+                                        </ul>
+                                    </div>
                                 @foreach($filters as $filter)
                                     <div class="filter-single-wall">
                                         <div class="d-flex justify-content-between head">
