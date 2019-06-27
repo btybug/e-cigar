@@ -1679,6 +1679,35 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
      position: absolute;
      bottom: 0;
 }
+
+.products__page-main .selected_filter-sidebar-wrapper .selected_filter-sidebar-items{
+    padding: 20px 10px;
+    background-color: #e3e6ed6b;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.products__page-main .selected_filter-sidebar-wrapper .selected_filter-sidebar-item{
+    background-color: #e3e6ed;
+    border: none;
+    border-radius: 0;
+    padding: 4px 10px;
+    font-size: 13px;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.products__page-main .selected_filter-sidebar-wrapper .selected_filter-sidebar-item .selection_remove{
+    float: right;
+    margin-right: 0;
+    margin-left: 14px;
+    font-size: 20px;
+    line-height: 1;
+    color: #7c7c7c;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+}
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head{
         border-bottom: 1px solid #d7d7d7;
