@@ -452,28 +452,76 @@
                 }
             })
 
+            // function doSubmitForm() {
+            //     let form = $("#filter-form");
+            //     let category = $('.all_categories').val();
+            //     let search_text = $("#search-product").val();
+            //     let sort_by = $("#sortBy").val();
+            //     let url = "/products/" + category;
+            //
+            //     if (search_text) {
+            //         var input = $("<input>")
+            //             .attr("type", "hidden")
+            //             .attr("name", "q").val(search_text);
+            //         form.append(input);
+            //     }
+            //     if (sort_by) {
+            //         var input = $("<input>")
+            //             .attr("type", "hidden")
+            //             .attr("name", "sort_by").val(sort_by);
+            //         form.append(input);
+            //     }
+            //     form.attr('action', url);
+            //     form.submit();
+            // }
+
+            $("body").change("#filter-form", function() {
+                $(this).closest('form').data('changed', true);
+                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+                doSubmitForm()
+            });
             function doSubmitForm() {
                 let form = $("#filter-form");
-                let category = $('.all_categories').val();
-                let search_text = $("#search-product").val();
-                let sort_by = $("#sortBy").val();
-                let url = "/products/" + category;
 
-                if (search_text) {
-                    var input = $("<input>")
-                        .attr("type", "hidden")
-                        .attr("name", "q").val(search_text);
-                    form.append(input);
-                }
-                if (sort_by) {
-                    var input = $("<input>")
-                        .attr("type", "hidden")
-                        .attr("name", "sort_by").val(sort_by);
-                    form.append(input);
-                }
-                form.attr('action', url);
-                form.submit();
+                    let category = $('.all_categories').val();
+                    // let search_text = $("#search-product").val();
+                    // let sort_by = $("#sortBy").val();
+                    let url = "/products";
+                    // let url = "/products/" + category;
+                // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
+
+
+                let serializeValue = form.serialize();
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    cache: false,
+                    datatype: "json",
+                    data: serializeValue,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        // if (!data.error) {
+                        //     $("#addToCardModal").find('.modal-body').html(data.html);
+                        //     get_price();
+                        //
+                        //     var plist = $(".poptions-group");
+                        //     for (var i = 0; i < plist.length; i++) {
+                        //         get_promotion_price($(plist[i]).data('promotion'))
+                        //     }
+                        //     $("#addToCardModal").modal();
+                        // } else {
+                        //
+                        // }
+                    },
+                    error: function() {
+
+                    }
+                });
             }
+
+
 
             var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,".(convert_price(500,$currency,false,true)) }}";
             console.log(rangeDataString);
@@ -488,20 +536,20 @@
                     $("#amount_range").val(ui.values[0] + "," + ui.values[1]);
                 },
                 change: function (event, ui) {
-                    doSubmitForm();
+                    doSubmitForm()
                 }
             });
 
             $("#amount").val($("#slider-range").slider("values", 0) +
                 " - " + $("#slider-range").slider("values", 1));
 
-            $("body").on('click', '.save-filter-btn', function () {
-                doSubmitForm();
-            });
+            // $("body").on('click', '.save-filter-btn', function () {
+            //     doSubmitForm();
+            // });
 
-            $("body").on('change', '.select-filter', function () {
-                doSubmitForm();
-            });
+            // $("body").on('change', '.select-filter', function () {
+            //     doSubmitForm();
+            // });
 
             $("body").on('click', '.reset-form', function () {
                 $(location).attr("href", "/products/" + $("#choose_product").val())
