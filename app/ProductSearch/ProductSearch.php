@@ -108,11 +108,19 @@ class ProductSearch
 
     private static function createObject($category = null, $request)
     {
+//        $builder->whereIn('stock_categories.categories_id',$value);
+
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
+        $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id');
 
         if ($category) {
-            $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
-                ->where('stock_categories.categories_id', $category->id);
+//            $categoryData = $request->get('brands',[]);
+//            if($category){
+////                $categoryData[] = $category->id;
+//            }
+
+            $query->where('stock_categories.categories_id', $category->id);
+//            $query->whereIn('stock_categories.categories_id', $categoryData);
         }
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
             ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')

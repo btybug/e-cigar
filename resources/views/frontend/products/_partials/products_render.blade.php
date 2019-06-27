@@ -1,6 +1,5 @@
 @if(count($products))
-    @foreach($products as $product)
-        <div class="row justify-content-md-start justify-content-center">
+    <div class="row justify-content-md-start justify-content-center">
             @foreach($products as $product)
                 <div class="products-wrap_col two-links-wrap product--single">
                     <div class="product-card position-relative">
@@ -139,7 +138,6 @@
                 </div>
             @endforeach
         </div>
-    @endforeach
 @else
     <div class="d-flex justify-content-center product-no_result">
         <span class="text-tert-clr font-25 font-main-bold">NO Results</span>
