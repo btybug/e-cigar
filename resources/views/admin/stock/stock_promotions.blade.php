@@ -159,7 +159,7 @@
                 let form = $(this).closest('form');
                 AjaxCall(form.attr('action'), form.serialize(), function (res) {
                     if (!res.error) {
-//                        location.reload();
+                       location.reload();
                     }else{
                         alert(res.message)
                     }
@@ -169,7 +169,7 @@
             $("body").on('click', '.add-promotions', function () {
                 let stock_id = $("#stock-id").val();
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
-                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id}, function (res) {
+                AjaxCall("/admin/stock/get-promotion", {stock_id: stock_id}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                         runDatepicker();
@@ -200,7 +200,7 @@
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
 
-                AjaxCall("/admin/inventory/stock/get-promotion", {stock_id: stock_id,slug : slug}, function (res) {
+                AjaxCall("/admin/stock/get-promotion", {stock_id: stock_id,slug : slug}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                         runDatepicker();
@@ -211,7 +211,7 @@
             $("body").on('click', '.cancel-promotion', function () {
                 let slug = $(this).data('slug');
                 let stock_id = $("#stock-id").val();
-                AjaxCall("/admin/inventory/stock/cancel-promotion", {stock_id: stock_id,slug : slug}, function (res) {
+                AjaxCall("/admin/stock/cancel-promotion", {stock_id: stock_id,slug : slug}, function (res) {
                     if (!res.error) {
                         location.reload();
                     }
