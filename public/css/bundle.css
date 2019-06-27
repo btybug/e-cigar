@@ -20193,6 +20193,10 @@ a:hover {
 /*    display: block !important;*/
 /*}*/
 
+#search-product + span {
+    cursor: pointer;
+}
+
 .flag-icon-background {
   background-size: contain;
   background-position: 50%;
