@@ -18313,6 +18313,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     display: inline-block;
     font-weight: bold;
 }
+.products__page-main .product-no_result{
+    /*height: 100%;*/
+}
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head{
         border-bottom: 1px solid #d7d7d7;

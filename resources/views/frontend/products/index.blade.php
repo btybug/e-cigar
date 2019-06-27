@@ -370,8 +370,8 @@
                                     </div>
                                 @endforeach
                             @else
-                                <div>
-                                    NO Results
+                                <div class="d-flex justify-content-center product-no_result">
+                                    <span class="text-tert-clr font-25 font-main-bold">NO Results</span>
                                 </div>
                             @endif
 
