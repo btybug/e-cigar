@@ -50,6 +50,10 @@ class ProductsController extends Controller
             }
         }
 
+        if($request->ajax()){
+            $html = View('frontend.products._partials.products_render',compact(['products']))->render();
+           return response()->json(['error' => false, 'html' => $html]);
+        }
         return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type'))->with('filterModel', $request->all());
     }
 
