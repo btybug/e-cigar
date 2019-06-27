@@ -330,28 +330,49 @@
 
             $("body").change("#filter-form", function() {
                 $(this).closest('form').data('changed', true);
-                console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
                 doSubmitForm()
             });
 
-            function doSubmitForm() {
-                let form = $("#filter-form");
+            // $("body").change("#sortBy", function() {
+            //     doSubmitForm()
+            // });
 
+            if($('#filter-form .filter-sidebar-wrapper').length !== 0) {
+                $("body").on('keyup', "#search-product", function(e) {
+                    var code = e.keyCode || e.which;
+                    if(code == 13) {
+                        doSubmitForm();
+                    }
+                });
+
+                $('body').on('click', '#search-product + span', function() {
+                    doSubmitForm();
+                })
+            }
+
+            function doSubmitForm() {
+                $('.products-box').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
+                    '            <div class="lds-dual-ring"></div>\n' +
+                    '        </div>');
+                let form = $("#filter-form");
+                let serializeValue = form.serialize();
                     let category = $('.all_categories').val();
                     let search_text = $("#search-product").val();
                     let sort_by = $("#sortBy").val();
 
                     let url = "/products/" + category;
                     // let url = "/products/" + category;
+                // console.log(typeof serializeValue)
+                // console.log(window.location.origin + window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`)
+                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
 
-                let serializeValue = form.serialize();
                 $.ajax({
                     type: "post",
                     url: url,
                     cache: false,
                     datatype: "json",
-                    data: serializeValue +"&q="+search_text+"&sort_by="+sort_by,
+                    data: `${serializeValue}&sort_by=${sort_by}&q=${search_text}`,
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
@@ -361,7 +382,7 @@
                         }
                     },
                     error: function() {
-
+                        $(".products-box").html('Error')
                     }
                 });
             }
@@ -434,7 +455,6 @@
                     alert('Select available variation');
                 }
             });
-
 
             $("body").on('change', '.select-variation-option', function () {
                 get_price();

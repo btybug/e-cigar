@@ -24,29 +24,31 @@ window.AjaxCall = function postSendAjax(url, data, success, error) {
 };
 
 $(document).ready(function () {
-    document.getElementById("search-product")
-        .addEventListener("keyup", function(event) {
-            event.preventDefault();
-            if (event.keyCode === 13) {
-                var form = $("#filter-form");
-                var category = $('.all_categories').val();
-                var search_text = $("#search-product").val();
-                var url = "/products/"+category;
+    if($('#filter-form .filter-sidebar-wrapper').length === 0) {
+        document.getElementById("search-product")
+            .addEventListener("keyup", function(event) {
+                event.preventDefault();
+                if (event.keyCode === 13) {
+                    var form = $("#filter-form");
+                    var category = $('.all_categories').val();
+                    var search_text = $("#search-product").val();
+                    var url = "/products/"+category;
 
-                if(form.length > 0){
-                    if(search_text){
-                        var input = $("<input>")
-                            .attr("type", "hidden")
-                            .attr("name", "q").val(search_text);
-                        form.append(input);
+                    if(form.length > 0){
+                        if(search_text){
+                            var input = $("<input>")
+                                .attr("type", "hidden")
+                                .attr("name", "q").val(search_text);
+                            form.append(input);
+                        }
+                        form.attr('action',url);
+                        form.submit();
+                    }else{
+                        window.location = "/products/"+category +"?q="+$(this).val();
                     }
-                    form.attr('action',url);
-                    form.submit();
-                }else{
-                    window.location = "/products/"+category +"?q="+$(this).val();
                 }
-            }
-        });
+            });
+    }
 
     $("body").on('click','.qtycount',function () {
         var uid = $(this).data('uid');

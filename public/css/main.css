@@ -1467,3 +1467,7 @@ a:hover {
 /*[data-network] {*/
 /*    display: block !important;*/
 /*}*/
+
+#search-product + span {
+    cursor: pointer;
+}
