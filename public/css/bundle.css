@@ -18284,7 +18284,16 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
      position: absolute;
      bottom: 0;
 }
-
+.products__page-main .filter-sidebar-wrapper .filter-wall .radio--packs.custom-radio .custom-control-label::after {
+    width: 20px !important;
+    height: 20px !important;
+    left: -2.5rem !important;
+}
+.products__page-main .filter-sidebar-wrapper .filter-wall .radio--packs.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    width: 8px !important;
+    height: 8px !important;
+    left: -2.1rem !important;
+}
 .products__page-main .selected_filter-sidebar-wrapper .selected_filter-sidebar-items{
     padding: 20px 10px;
     background-color: #e3e6ed6b;
