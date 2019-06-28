@@ -5,12 +5,12 @@
 @section('content')
    <div class="card panel panel-default">
        <div class="card-header panel-heading d-flex justify-content-between">
-           <h2 class="m-0"> New Staff</h2>
+           <h2 class="m-0"> New Customer</h2>
            <nav aria-label="breadcrumb m-0 d-inline-flex">
                <ol class="breadcrumb mb-0 bg-transparent">
-                   <li class="breadcrumb-item"><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i>
+                   <li class="breadcrumb-item"><a href="/admin"><i class="fa fa-dashboard"></i>
                            Dashboard</a></li>
-                   <li class="breadcrumb-item active" aria-current="page">New Staff</li>
+                   <li class="breadcrumb-item active" aria-current="page">New Customer</li>
                </ol>
            </nav>
        </div>

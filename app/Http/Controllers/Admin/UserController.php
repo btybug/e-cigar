@@ -43,6 +43,22 @@ class UserController extends Controller
         return $this->view('index');
     }
 
+    public function getNew(Countries $countries)
+    {
+        $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
+        $roles = Roles::where('type', 'frontend')->pluck('title', 'id')->toArray();
+        return $this->view('new', compact('countries', 'roles'));
+    }
+
+    public function postNew(StaffRequest $request)
+    {
+        $data = $request->except('_token');
+        $data['customer_number'] = generate_number("AMC");
+        User::create($data);
+        return redirect()->route('admin_customers');
+    }
+
+
     public function showStaff()
     {
         return $this->view('staff');
