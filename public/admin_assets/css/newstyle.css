@@ -593,13 +593,7 @@ label {
     align-self: center;
 }
 /*find page Start*/
-.admin-find-wrapper{
-    /*max-width: 800px;*/
-    /*margin: 0 auto;*/
-}
-.admin-find-wrapper .find-wrapper-results{
 
-}
 .admin-find-wrapper .find-wrapper-results .card-img{
     height: 100%;
     object-fit: cover;
