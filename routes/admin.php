@@ -143,6 +143,9 @@ Route::group(['prefix' => 'emails-notifications'], function () {
 
 Route::group(['prefix' => 'users'], function () {
     Route::get('/', 'Admin\UserController@index')->name('admin_customers');
+    Route::get('/new', 'Admin\UserController@getNew')->name('admin_customers_new');
+    Route::post('/new', 'Admin\UserController@postNew')->name('admin_customers_new_post');
+
     Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
     Route::get('/staff/new', 'Admin\UserController@newStaff')->name('admin_staff_new');
     Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new_post');
