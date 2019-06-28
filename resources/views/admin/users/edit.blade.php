@@ -65,7 +65,7 @@
                                 <a class="nav-link rounded-0 active" href="#users_account" data-toggle="tab">Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link rounded-0" href="#users_messages" data-toggle="tab">Messages</a>
+                                <a class="nav-link rounded-0" href="#users_logs" data-toggle="tab">Logs</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link rounded-0" href="#users_favourites" data-toggle="tab">Favourites</a>
@@ -220,7 +220,7 @@
                             </div>
 
                         </div>
-                        <div id="users_messages" class="tab-pane fade">
+                        <div id="users_logs" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
                                 <div class="card-body panel-body">
                                     <table id="users-table" class="table table-style table-bordered" cellspacing="0"
