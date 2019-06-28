@@ -1311,7 +1311,9 @@ $(document).ready(function () {
             const variations = $('#extraModal [data-group-id]').toArray().map(function (el) {
                 const group_id = $(el).attr('data-group-id');
                 const products = [];
-                $(`[data-group-id="${group_id}"]`).toArray().map(function (gr) {
+                $(`#extraModal [data-group-id="${group_id}"]`).toArray().map(function (gr) {
+                    console.log($(gr).find('.custom-control-input'))
+
                     if ($(gr).closest('.product-single-info_row').find('.product-qty').length !== 0) {
                         $(gr).closest('.product-single-info_row').find('.product-qty').toArray().map(function (qt) {
                             products.push({
@@ -1320,6 +1322,13 @@ $(document).ready(function () {
                             });
                         });
                     } else if ($(gr).find('.custom-control-input').length === 0 || $(gr).find('.custom-control-input').is(':checked')) {
+
+                        products.push({
+                            id: $($(gr).find('[data-id]')[0]).attr('data-id'),
+                            qty: 1
+                        });
+                        console.log(products, 'products')
+                    } else {
                         products.push({
                             id: $($(gr).find('[data-id]')[0]).attr('data-id'),
                             qty: 1
@@ -1335,7 +1344,7 @@ $(document).ready(function () {
             const filtered_variations = variations.filter((variation) => {
                 return variation.products.length > 0;
             });
-
+            console.log('filtered_variations', filtered_variations);
             if (filtered_variations.length > 0) {
                 $.ajax({
                     type: "post",

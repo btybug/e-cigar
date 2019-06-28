@@ -15,6 +15,7 @@
 </template>
 
 <script>
+    console.log('hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
     export default {
         mounted() {
             console.log('Component mounted.')
