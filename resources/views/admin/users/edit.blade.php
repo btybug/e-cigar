@@ -85,6 +85,10 @@
                             <li class="nav-item">
                                 <a class="nav-link rounded-0" href="#users_offer" data-toggle="tab">Special Offer</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link rounded-0" href="#users_special-note" data-toggle="tab">Special
+                                    note</a>
+                            </li>
                         </ul>
 
                     </div>
@@ -302,7 +306,8 @@
                                                 {!! Form::hidden('user_id',$user->id) !!}
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Name</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Name</label>
                                                         <div class="col-sm-8">
                                                             <div class="row">
                                                                 <div class="col-sm-6">
@@ -317,7 +322,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Company
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Company
                                                             name</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('company',null,['class'=>'form-control']) !!}
@@ -326,7 +332,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">1st Line
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">1st
+                                                            Line
                                                             address</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
@@ -335,7 +343,9 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">2nd line
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">2nd
+                                                            line
                                                             address</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
@@ -344,7 +354,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Country</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Country</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
                                                         </div>
@@ -352,7 +363,8 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Regions</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Regions</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('region',null,['class'=>'form-control']) !!}
                                                         </div>
@@ -360,7 +372,8 @@
                                                 </div>
                                                 <div class="form-group ">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">City</label>
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">City</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('city',null,['class'=>'form-control']) !!}
                                                         </div>
@@ -368,7 +381,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="text" class="control-label col-sm-4 col-form-label text-right">Post
+                                                        <label for="text"
+                                                               class="control-label col-sm-4 col-form-label text-right">Post
                                                             Code</label>
                                                         <div class="col-sm-8">
                                                             {!! Form::text('post_code',null,['class'=>'form-control']) !!}
@@ -452,6 +466,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="users_special-note" class="tab-pane fade">
+                            <div class="card panel panel-default mb-0">
+                                <div class="card-body panel-body">
+                                    <div class="special-note-wall border mb-2 p-3">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="special-note-left-info">
+                                                    <h5 class="special-note-title">Note 1</h5>
+                                                    <p class="special-note-desc">Description</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="special-note-right-info float-right">
+                                                    <div>
+                                                        <span class="d-block">1/1/20</span>
+                                                        <span class="d-block">12:55</span>
+                                                        <span class="d-block">added by abokamal</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="special-note-wall border mb-3 p-3">
+
+                                    </div>
+                                    <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#specialAddNoteModal">
+                                        <i class="fa fa-plus mr-10"></i>Add note
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- /.tab-pane -->
                     </div>
@@ -477,6 +523,26 @@
                 </div>
                 <div class="modal-body address-form">
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="specialAddNoteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, vitae.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>

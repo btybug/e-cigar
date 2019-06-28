@@ -607,3 +607,8 @@ header.main-header .logo .logo-img{
     overflow: auto;
 }
 /*find page End*/
+
+#users_special-note .special-note-wall{
+    min-height: 70px;
+}
+
