@@ -48,5 +48,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Date</label>
+                <div class="col-sm-10">
+                    <div class="input-group">
+                        <input type="text" id="find-date__ranged" name="date" class="form-control" value="" placeholder="Date" aria-label="Recipient's date with two button addons" aria-describedby="button-addon4">
+                        <div class="input-group-append" id="button-addon4">
+                            <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
+                                    title="Date range">
+                                <i class="fa fa-calendar"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {!! Form::close() !!}
