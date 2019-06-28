@@ -1717,8 +1717,13 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     display: inline-block;
     font-weight: bold;
 }
-.products__page-main .product-no_result{
-    /*height: 100%;*/
+.products__page-main .filter-sidebar-wrapper .all-filters .search-filters input:focus{
+    border-color: #ced4da;
+}
+.products__page-main .filter-sidebar-wrapper .all-filters .search-filters .search-icon{
+    right: 22px;
+    top: 0;
+    height: 100%;
 }
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head{
