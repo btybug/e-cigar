@@ -26,6 +26,7 @@
 @stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
     <script>
         function call_find(option){
             AjaxCall("/admin/find/call-find", {key: option}, function (res) {
@@ -62,6 +63,39 @@
         function call_products() {
             $("body").find(".categories").select2();
             $("body").find(".brands").select2();
+
+            // for date rang
+            (function (w, d, s, g, js, fs) {
+                g = w.gapi || (w.gapi = {});
+                g.analytics = {
+                    q: [], ready: function (f) {
+                        this.q.push(f);
+                    }
+                };
+                js = d.createElement(s);
+                fs = d.getElementsByTagName(s)[0];
+                js.src = 'https://apis.google.com/js/platform.js';
+                fs.parentNode.insertBefore(js, fs);
+                js.onload = function () {
+                    g.load('analytics');
+                };
+            }(window, document, 'script'));
+            $('.daterange').daterangepicker({
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            }, function (start, end) {
+                $('#find-date__ranged').val(`${start.format('MMMM D, YYYY')} - ${end.format('MMMM D, YYYY')}`)
+                // window.alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            });
+
         }
 
         function doSubmitForm() {
