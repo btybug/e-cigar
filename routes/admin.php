@@ -6,7 +6,13 @@
  * Time: 00:09
  */
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
-Route::get('/find', 'Admin\AdminController@find')->name('admin_find');
+
+Route::group(['prefix' => 'find'], function () {
+    Route::get('/', 'Admin\FindController@getIndex')->name('admin_find');
+    Route::post('/call-find', 'Admin\FindController@postCallFind')->name('admin_find_call');
+    Route::post('/products-find', 'Admin\FindController@postProductResults')->name('find_product_results');
+});
+
 Route::get('/profile', 'Admin\AdminController@getProfile')->name('admin_dashboard_profile');
 Route::post('/profile', 'Admin\AdminController@postProfile')->name('admin_dashboard_profile_post');
 Route::post('/profile-image', 'Admin\AdminController@postProfileImageUpload')->name('user_profile_image_upload');

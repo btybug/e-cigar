@@ -13,14 +13,17 @@ class Amount implements Filter
     {
         $builder->where(function ($query) use ($value) {
             $currencyCode = get_currency();
+            $value[0] = ($value[0]) ?? 0;
+            $value[1] = ($value[1]) ?? 1000;
+
             if($currencyCode != 'USD'){
                 $changed = (new \App\Models\SiteCurrencies())->where('code',get_currency())->first();
                 $value = explode(',', $value);
                 $value[0] = $value[0] / $changed->rate;
                 $value[1] = $value[1] / $changed->rate;
-            }else{
-                $value = explode(',', $value);
             }
+
+
 
             $query->whereBetween('stock_sales.price', $value)
                 ->orWhere(function ($query) use ($value) {
