@@ -20198,7 +20198,8 @@ a:hover {
 /*    display: block !important;*/
 /*}*/
 
-#search-product + span {
+#search-product + span,
+#search-for-filter + span {
     cursor: pointer;
 }
 

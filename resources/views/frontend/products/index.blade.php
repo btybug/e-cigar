@@ -177,7 +177,7 @@
                                 </div>
                                 <div class="all-filters">
                                     <div class="search-filters position-relative">
-                                        <input type="search" class="form-control" placeholder="Serach for anything">
+                                        <input type="search" class="form-control"  id="search-for-filter" placeholder="Serach for anything">
                                         <span class="position-absolute d-flex align-items-center search-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px">
 <path fill-rule="evenodd" fill="rgb(121, 121, 121)" d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"></path>
@@ -225,9 +225,6 @@
                                             </ul>
                                         </div>
                                     @endforeach
-                                    <div class="my-2 text-right">
-                                        <button class="btn save-filter-btn">Search</button>
-                                    </div>
                                 </div>
 
                             </div>
@@ -310,52 +307,32 @@
                         arrowLink.find('.icon.arrow').removeClass('opened')
                     }
                 }
-            })
+            });
 
-            // function doSubmitForm() {
-            //     let form = $("#filter-form");
-            //     let category = $('.all_categories').val();
-            //     let search_text = $("#search-product").val();
-            //     let sort_by = $("#sortBy").val();
-            //     let url = "/products/" + category;
-            //
-            //     if (search_text) {
-            //         var input = $("<input>")
-            //             .attr("type", "hidden")
-            //             .attr("name", "q").val(search_text);
-            //         form.append(input);
-            //     }
-            //     if (sort_by) {
-            //         var input = $("<input>")
-            //             .attr("type", "hidden")
-            //             .attr("name", "sort_by").val(sort_by);
-            //         form.append(input);
-            //     }
-            //     form.attr('action', url);
-            //     form.submit();
-            // }
-
-            $("body").change("#filter-form", function() {
+            $("body").on("change", "#filter-form", function() {
                 $(this).closest('form').data('changed', true);
                 doSubmitForm()
             });
 
-            // $("body").change("#sortBy", function() {
-            //     doSubmitForm()
-            // });
+            $("body").change("#sortBy", function() {
+                doSubmitForm()
+            });
 
-            if($('#filter-form .filter-sidebar-wrapper').length !== 0) {
-                $("body").on('keyup', "#search-product", function(e) {
+            // if($('#filter-form .filter-sidebar-wrapper').length !== 0) {
+                $("body").on('keyup', "#search-for-filter", function(e) {
+                    e.preventDefault();
                     var code = e.keyCode || e.which;
                     if(code == 13) {
                         doSubmitForm();
                     }
+
                 });
 
-                $('body').on('click', '#search-product + span', function() {
+                $('body').on('click', '#search-for-filter + span', function(e) {
+                    e.preventDefault();
                     doSubmitForm();
                 })
-            }
+            // }
 
             function doSubmitForm() {
                 $('.products-box').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
@@ -364,14 +341,15 @@
                 let form = $("#filter-form");
                 let serializeValue = form.serialize();
                     let category = $('.all_categories').val();
-                    let search_text = $("#search-product").val();
+                    let search_text = $("#search-for-filter").val();
                     let sort_by = $("#sortBy").val();
 
-                    let url = "/products/" + category;
+                    let url = category === '' ? "/products" : "/products/" + category;
+                    console.log(typeof category)
                     // let url = "/products/" + category;
                 // console.log(typeof serializeValue)
                 // console.log(window.location.origin + window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`)
-                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`);
+                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text || ''}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
 
                 $.ajax({
@@ -379,7 +357,7 @@
                     url: url,
                     cache: false,
                     datatype: "json",
-                    data: `${serializeValue}&sort_by=${sort_by}&q=${search_text}`,
+                    data: `${serializeValue}&sort_by=${sort_by}&q=${search_text || ''}`,
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
@@ -650,7 +628,12 @@
                     })
                 }
             });
-
+            $("form").keypress(function(e) {
+                //Enter key
+                if (e.which == 13) {
+                    return false;
+                }
+            });
         });
     </script>
 
