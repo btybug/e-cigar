@@ -49,38 +49,41 @@
         </div>
         <div class="find-wrapper-results mt-5">
             <h3 class="border-bottom pb-2">Results</h3>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="row no-gutters h-100">
-                            <div class="col-md-4">
-                                <img src="http://drdenarobinson.com/wp-content/uploads/2018/08/bigstock-Vaping-Girl-Young-Hipster-Wom-239880340.jpg" class="card-img" alt="photo">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mongo Harmony</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet facilis fuga labore minus modi optio, quo ratione rerum veniam voluptate!</p>
+            <div class="find-wrapper-results-content row">
+                <div class="d-flex flex-wrap">
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="row no-gutters h-100">
+                                <div class="col-md-4">
+                                    <img src="http://drdenarobinson.com/wp-content/uploads/2018/08/bigstock-Vaping-Girl-Young-Hipster-Wom-239880340.jpg" class="card-img" alt="photo">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Mongo Harmony</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet facilis fuga labore minus modi optio, quo ratione rerum veniam voluptate!</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <div class="card h-100">
-                        <div class="row no-gutters h-100">
-                            <div class="col-md-4">
-                                <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/vape-girl-renee-bruch.jpg" class="card-img" alt="photo">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mongo Harmony</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet facilis fuga labore minus modi optio, quo ratione rerum veniam voluptate!</p>
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="row no-gutters h-100">
+                                <div class="col-md-4">
+                                    <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/vape-girl-renee-bruch.jpg" class="card-img" alt="photo">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Mongo Harmony</h5>
+                                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet facilis fuga labore minus modi optio, quo ratione rerum veniam voluptate!</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 @stop
