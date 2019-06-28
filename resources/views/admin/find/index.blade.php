@@ -92,8 +92,8 @@
                 startDate: moment().subtract(29, 'days'),
                 endDate: moment()
             }, function (start, end) {
-                $('#find-date__ranged').val(`${start.format('MMMM D, YYYY')} - ${end.format('MMMM D, YYYY')}`)
-                // window.alert('You chose: ' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                $('#find-date__ranged').val(`${start.format('MMMM D, YYYY')} - ${end.format('MMMM D, YYYY')}`);
+                doSubmitForm();
             });
 
         }
