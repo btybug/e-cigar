@@ -21,9 +21,9 @@ class Amount implements Filter
                 $value = explode(',', $value);
                 $value[0] = $value[0] / $changed->rate;
                 $value[1] = $value[1] / $changed->rate;
+            }elseif (is_string($value)){
+                $value = explode(',',$value);
             }
-
-
 
             $query->whereBetween('stock_sales.price', $value)
                 ->orWhere(function ($query) use ($value) {
