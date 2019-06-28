@@ -14,7 +14,8 @@
         </a>
         <div class="main-header_nav-middle">
             <ul class="d-flex flex-wrap list-unstyled main-header_nav-middle-list">
-                <li class="find-link"><a href="{{ route('admin_find') }}" class="text-white">
+                <li class="find-link"><a href="{{ route('admin_find') }}" class="btn btn-primary text-white">
+                        <span class="mr-1">Find</span>
                         <i class="fa fa-search"></i></a>
                 </li>
                 <li class="dropdown">
