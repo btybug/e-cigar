@@ -592,6 +592,10 @@ label {
     padding: 0 80px;
     align-self: center;
 }
+header.main-header .logo .logo-img{
+    max-width: 100px;
+    filter: brightness(5);
+}
 /*find page Start*/
 
 .admin-find-wrapper .find-wrapper-results .card-img{
