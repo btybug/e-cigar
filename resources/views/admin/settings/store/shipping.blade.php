@@ -80,6 +80,10 @@
         $(function () {
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_all_geo_zones') !!}",
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'id',name: 'id'},
                     {data: 'name', name: 'name'},

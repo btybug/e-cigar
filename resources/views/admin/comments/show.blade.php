@@ -37,6 +37,10 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'post_id', name: 'post_id'},
                     {data: 'parent_id', name: 'parent_id'},

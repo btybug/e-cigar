@@ -35,6 +35,10 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'author', name: 'author'},
                     {data: 'comment', name: 'comment'},
