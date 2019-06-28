@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
+use App\Http\Controllers\Admin\Requests\StaffRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
@@ -54,8 +55,7 @@ class UserController extends Controller
         return $this->view('staff.new', compact('countries', 'roles'));
     }
 
-    //TODO create validation
-    public function postStaff(Request $request)
+    public function postStaff(StaffRequest $request)
     {
         $data = $request->except('_token');
         User::create($data);
@@ -99,7 +99,7 @@ class UserController extends Controller
         return $this->view('staff.edit', compact('user', 'countries', 'roles', 'billing_address', 'default_shipping', 'address', 'countriesShipping'));
     }
 
-    public function postEditStaff($id, AdminProfileRequest $request)
+    public function postEditStaff($id, StaffRequest $request)
     {
         $user = User::findOrFail($id);
 
