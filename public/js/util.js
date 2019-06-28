@@ -24,7 +24,7 @@ window.AjaxCall = function postSendAjax(url, data, success, error) {
 };
 
 $(document).ready(function () {
-    if($('#filter-form .filter-sidebar-wrapper').length === 0) {
+    // if($('#filter-form .filter-sidebar-wrapper').length === 0) {
         document.getElementById("search-product")
             .addEventListener("keyup", function(event) {
                 event.preventDefault();
@@ -48,7 +48,7 @@ $(document).ready(function () {
                     }
                 }
             });
-    }
+    // }
 
     $("body").on('click','.qtycount',function () {
         var uid = $(this).data('uid');
