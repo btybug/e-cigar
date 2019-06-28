@@ -46,6 +46,10 @@
         $(function () {
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_backend_activity') !!}",
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'user',name: 'user'},
                     {data: 'url',name: 'url'},

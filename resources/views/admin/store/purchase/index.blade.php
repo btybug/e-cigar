@@ -35,21 +35,25 @@
     <script>
         $(function () {
             $('#categories-table').DataTable({
-            ajax:  "{!! route('datatable_all_purchases') !!}",
-            "processing": true,
-            "serverSide": true,
-            "bPaginate": true,
-            columns: [
-                {data: 'id',name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'sku', name: 'sku'},
-                {data: 'user_id',name: 'user_id'},
-                {data: 'qty', name: 'qty'},
-                {data: 'price', name: 'price'},
-                {data: 'purchase_date', name: 'purchase_date'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'actions', name: 'actions'}
-            ]
+                ajax: "{!! route('datatable_all_purchases') !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'qty', name: 'qty'},
+                    {data: 'price', name: 'price'},
+                    {data: 'purchase_date', name: 'purchase_date'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'actions', name: 'actions'}
+                ]
             });
         });
 
