@@ -46,6 +46,10 @@
                        }
                    })
                 },
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
                 columns: [
                     {data: 'options', name: 'options'},
                     {data: 'name', name: 'name'},

@@ -176,6 +176,10 @@
     <script>
         var table=  $('#orders-table').DataTable({
             ajax: "{!! route('datatable_all_channel_customers') !!}",
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ],
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'customer_number', name: 'customer_number'},
