@@ -268,4 +268,10 @@
         </ul>
     </section>
     <!-- /.sidebar -->
+    <section>
+        <ul>
+            <li><a href="{{ route('admin_find') }}"><i class="fa fa-download" aria-hidden="true"></i>
+                    <span>Find</span></a></li>
+        </ul>
+    </section>
 </aside>
