@@ -12,6 +12,24 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+        <div class="main-header_nav-middle">
+            <ul class="d-flex flex-wrap list-unstyled main-header_nav-middle-list">
+                <li class="find-link"><a href="{{ route('admin_find') }}" class="text-white">
+                        <i class="fa fa-search"></i></a>
+                </li>
+                <li class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i>Create new</button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="{!! route('admin_staff_new') !!}" class="dropdown-item">Staff</a>
+                        <a href="#" class="dropdown-item">Customer</a>
+                        <a href="{!! route('admin_stock_new') !!}" class="dropdown-item">Product</a>
+                        <a href="http://e-cigar.com/admin/tools/attributes/new" class="dropdown-item">Item</a>
+                        <a href="{!! route('admin_blog_create') !!}" class="dropdown-item">Post</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
 
         <div class="navbar-custom-menu">
             {{--<div>--}}

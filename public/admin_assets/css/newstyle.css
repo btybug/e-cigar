@@ -584,3 +584,12 @@ label {
 .stock-page--head .head-left{
     align-self: center;
 }
+.main-header_nav-middle{
+    flex: 1;
+}
+
+.main-header_nav-middle .main-header_nav-middle-list .find-link{
+    padding: 0 80px;
+    align-self: center;
+}
+
