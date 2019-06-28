@@ -58,6 +58,7 @@ class UserController extends Controller
     public function postStaff(StaffRequest $request)
     {
         $data = $request->except('_token');
+        $data['customer_number'] = generate_number("AMC");
         User::create($data);
         return redirect()->route('admin_staff');
     }
