@@ -44,7 +44,7 @@ function onRecaptchaLoadCallback() {
                             fieldElement.addClass('transition-horizontal input-error');
                             setTimeout(() => {
                                 fieldElement.removeClass('transition-horizontal');
-                            }, 500)
+                            }, 500);
                         }
                         fieldElement.on('keypress', () => change(fieldElement, fieldElementName));
                         fieldElement.on('change', () => change(fieldElement, fieldElementName));
