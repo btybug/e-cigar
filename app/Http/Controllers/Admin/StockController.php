@@ -453,4 +453,25 @@ class StockController extends Controller
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function postSpecificationByCategory(Request $request)
+    {
+        $html = '';
+        $data = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+            ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
+            ->where('attribute_categories.categories_id', $request->id);
+            if($request->selected == "true"){
+                $data = $data->whereNotIn('attributes.id', $request->attrs);
+            }
+
+        $data = $data->where('attributes_translations.locale', app()->getLocale())
+            ->select('attributes.*', 'attributes_translations.name')->get();
+//            dd($data->pluck('id','id')->all());
+        if($request->selected == true){
+            $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+            $html = View("admin.inventory._partials.loop_specifications",compact(['data','allAttrs']))->with('by_category',true)->render();
+        }
+
+        return \Response::json(['error' => false, 'data' => $data->pluck('id','id')->all(),'html' => $html]);
+    }
 }

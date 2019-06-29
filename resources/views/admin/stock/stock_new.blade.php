@@ -335,11 +335,11 @@
                                                                 </thead>
 
                                                                 <tbody class="v-options-list">
-                                                                @if($model && $model->stockAttrs)
-                                                                    @foreach($model->stockAttrs as $selected)
-                                                                        @include('admin.inventory._partials.specifications')
-                                                                    @endforeach
-                                                                @endif
+                                                                    @if($model && $model->stockAttrs)
+                                                                        @foreach($model->stockAttrs as $selected)
+                                                                            @include('admin.inventory._partials.specifications')
+                                                                        @endforeach
+                                                                    @endif
                                                                 </tbody>
 
                                                                 <tfoot>
@@ -1524,6 +1524,48 @@
                 }
             })
         }
+
+        $('#treeview_json').on('changed.jstree', function (e, data) {
+
+            let attributes = $("body").find(".select-specification");
+            let attrData = [];
+
+            attributes.map(function (i,e) {
+                var value = $(e).val();
+                if(value != 'Select' && value != null){
+                    attrData.push($(e).val());
+                }
+            });
+
+            var categories = $("#categories_tree").val();
+            AjaxCall("{{ route('admin_stock_specif_by_category') }}", {id: data.node.id,
+                selected: data.node.state.selected,attrs:attrData,categories:categories}, function (res) {
+                if (!res.error) {
+                    if(data.node.state.selected == true){
+                        $("#mediaspecifications").find("table").find(".v-options-list").append(res.html);
+                        $(".tag-input-v").select2({width: '100%'});
+                    }else{
+                        attributes.map(function (i,e) {
+                            var value = $(e).val();
+                            if($.inArray(value,data.data)){
+                                $(e).closest('.v-options-list-item').remove();
+                            }
+                        });
+                    }
+                }
+            });
+
+            if(data.node.state.selected == true){
+
+            }else{
+                attributes.map(function (i,e) {
+                    var value = $(e).val();
+                    if(value != 'Select' && value != null){
+                        attrData.push($(e).val());
+                    }
+                });
+            }
+        });
 
         function render_brands_tree() {
             $("#brands_treeview_json").jstree({

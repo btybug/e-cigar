@@ -42,7 +42,10 @@
                 {!! Form::select("options[$selected->attributes_id][]",$type_optionArray,$type_options,['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
 
             @else
-                {!! Form::select("options[$selected->id][]",$type_optionArray,$type_options,['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
+
+                {!! Form::select("options[$selected->id][]",$type_optionArray,
+                (isset($by_category)) ? [] :$type_options,
+                ['class' => "tag-input-v input-items-value v-input-$uniqueID form-control",'multiple' => true]) !!}
 
             @endif
         @else
