@@ -380,6 +380,9 @@ Route::group(['prefix' => 'stock'], function () {
     Route::post('/edit-variation', 'Admin\StockController@editVariation')->name('admin_stock_variation_add');
     Route::post('/get-option-by-id', 'Admin\StockController@getOptionById')->name('admin_stock_variation_get_option');
     Route::post('/get-specifications', 'Admin\StockController@getSpecification')->name('admin_stock_variation_get_specification');
+    Route::post('/get-specifications-by-category', 'Admin\StockController@postSpecificationByCategory')->name('admin_stock_specif_by_category');
+
+
     Route::post('/render-variation-new-options', 'Admin\StockController@postRenderVariationNewOptions')->name('admin_stock_variation_render_new_option');
     Route::post('/get-by-id', 'Admin\StockController@getById')->name('admin_stock_get_by_id');
     Route::post('/get-variations-by-id', 'Admin\StockController@getVariationsById')->name('admin_stock_get_variations_by_id');
