@@ -1547,6 +1547,7 @@
                     }else{
                         attributes.map(function (i,e) {
                             var value = $(e).val();
+                            // console.log($.inArray(value,data.data))
                             if($.inArray(value,data.data)){
                                 $(e).closest('.v-options-list-item').remove();
                             }
