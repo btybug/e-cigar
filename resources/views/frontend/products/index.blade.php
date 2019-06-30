@@ -309,17 +309,17 @@
                 }
             });
 
-            $("body").on("change", "#filter-form", function() {
+            $("#filter-form").on("change", function() {
                 $(this).closest('form').data('changed', true);
                 doSubmitForm()
             });
 
-            $("body").change("#sortBy", function() {
+            $("#sortBy").on("change", function() {
                 doSubmitForm()
             });
 
             // if($('#filter-form .filter-sidebar-wrapper').length !== 0) {
-                $("body").on('keyup', "#search-for-filter", function(e) {
+                $("#search-for-filter").on('keyup', function(e) {
                     e.preventDefault();
                     var code = e.keyCode || e.which;
                     if(code == 13) {
@@ -328,7 +328,7 @@
 
                 });
 
-                $('body').on('click', '#search-for-filter + span', function(e) {
+                $('#search-for-filter + span').on('click', function(e) {
                     e.preventDefault();
                     doSubmitForm();
                 })
