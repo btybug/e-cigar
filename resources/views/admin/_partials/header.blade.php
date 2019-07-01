@@ -268,7 +268,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">testProfile</a>
+                                <a href="{{ route('admin_staff') }}" class="btn btn-default btn-flat">Staff</a>
                             </div>
                             <div class="pull-right">
                                 {!! Form::open(['url'=>route('logout')]) !!}
