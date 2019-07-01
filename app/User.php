@@ -15,6 +15,7 @@ use App\Models\Roles;
 use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\Ticket;
+use App\Models\UserNotes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -151,4 +152,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Dashboard::class, 'user_id');
     }
 
+    public function notes()
+    {
+        return $this->hasMany(UserNotes::class, 'user_id');
+    }
 }

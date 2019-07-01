@@ -183,6 +183,12 @@ Route::group(['prefix' => 'users'], function () {
         Route::post('/edit/{id}', 'Admin\CampaignController@postEdit')->name('admin_campaign_edit_post');
         Route::post('/delete', 'Admin\CampaignController@postDelete')->name('admin_campaign_delete');
     });
+
+    Route::group(['prefix' => 'notes'], function () {
+        Route::post('/get-form', 'Admin\UserController@postNoteForm')->name('admin_notes_form_post');
+        Route::post('/save', 'Admin\UserController@postSaveNote')->name('admin_notes_form_save');
+        Route::post('/delete', 'Admin\UserController@postDeleteNote')->name('admin_notes_delete');
+    });
 });
 Route::group(['prefix' => 'store'], function () {
 

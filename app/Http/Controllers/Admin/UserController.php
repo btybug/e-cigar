@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
 use App\Models\Roles;
+use App\Models\UserNotes;
 use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
@@ -223,6 +224,37 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->slug);
         $user->delete();
+
+        return response()->json(['error' => false]);
+    }
+
+    public function postNoteForm(Request $request)
+    {
+        $model = UserNotes::find($request->id);
+        $html = view("admin.users._partials.new_note",compact(['model']))->render();
+
+        return response()->json(['error' => false,'html' => $html]);
+    }
+
+    public function postSaveNote(Request $request)
+    {
+        $note = UserNotes::find($request->id);
+        if($note){
+            $note->update($request->except('_token','id'));
+        }else{
+            $data = $request->except('_token');
+            $data['author_id'] = \Auth::id();
+            $note = UserNotes::create($data);
+        }
+
+        $html = view('admin.users._partials.user_notes')->with('user',$note->user)->render();
+        return response()->json(['error' => false,'html' => $html]);
+    }
+
+    public function postDeleteNote(Request $request)
+    {
+        $note = UserNotes::findOrFail($request->slug);
+        $note->delete();
 
         return response()->json(['error' => false]);
     }
