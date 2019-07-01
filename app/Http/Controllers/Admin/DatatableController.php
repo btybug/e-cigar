@@ -145,7 +145,7 @@ class DatatableController extends Controller
             ->editColumn('icon', function ($attr) {
                 return ($attr->icon) ? "<i class='$attr->icon'></i>" : "No Icon";
             })
-            ->editColumn('created_at', function ($attr) {
+            ->editColumn('attributes.created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($attr) {
