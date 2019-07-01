@@ -34,84 +34,95 @@
     <script>
         $(document).ready(function() {
 
-            if(!localStorage.getItem("stock_table")) {
-                localStorage.setItem("stock_table", JSON.stringify([
+            function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
+                if(!localStorage.getItem(storageName)) {
+                    localStorage.setItem(storageName, JSON.stringify(selectData))
+                }
+                JSON.parse(localStorage.getItem(storageName)).map((el) => {
+                    $(selectId).find(`[data-name="${el.name}"]`).attr('selected', 'selected')
+                });
+                $(selectId).select2({
+                    multiple: true,
+                    initSelection: function (element, callback) {
+                        var selected_items = JSON.parse(localStorage.getItem(storageName));
+
+                        callback(selected_items);
+                    }
+                });
+
+                var tableHeadArray = tableData;
+
+                tableArray = tableHeadArray.map((head) => {
+                    const id = head.data;
+                    var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
+                        return el.name === id;
+                    });
+                    if(visible) {
+                        return head;
+                    } else {
+                        return {
+                            ...head,
+                            visible: false
+                        };
+                    }
+                });
+                var table = $(tableId).DataTable({
+                    ajax: ajaxUrl,
+                    "processing": true,
+                    "serverSide": true,
+                    "bPaginate": true,
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'csv', 'excel', 'pdf', 'print'
+                    ],
+                    columns: tableHeadArray
+                });
+
+                function init() {
+                    var selected_items = [];
+                    $(`${selectId} option`).each(function() {
+                        var column = table.column($(this).attr('data-column'));
+                        if($(this).is(':selected')) {
+                            selected_items.push({
+                                id: $(this).val(),
+                                text: $(this).val(),
+                                name: $(this).attr("data-name")
+                            });
+                            column.visible(true);
+                        } else {
+                            column.visible(false);
+                        }
+                    });
+                    localStorage.setItem(storageName, JSON.stringify(selected_items))
+                }
+
+                init();
+
+                $(selectId).on('change.select2', function (e) {
+                    init();
+                });
+            }
+
+            tableInit(
+                "stock_table",
+                [
                     {id: '#', text: '#', name: 'id'},
                     {id: 'Name', text: 'Name', name: 'name'},
                     {id: 'Image', text: 'Image', name: 'image'},
                     {id: 'Added/Last Modified Date', text: 'Added/Last Modified Date', name: 'created_at'},
                     {id: 'Actions', text: 'Actions', name: 'actions'}
-                ]))
-            }
-            JSON.parse(localStorage.getItem("stock_table")).map((el) => {
-                $('#table_head_id').find(`[data-name="${el.name}"]`).attr('selected', 'selected')
-            });
-            $('#table_head_id').select2({
-                multiple: true,
-                initSelection: function (element, callback) {
-                    var selected_items = JSON.parse(localStorage.getItem("stock_table"));
-
-                    callback(selected_items);
-                }
-            });
-
-            var tableHeadArray = [
-                {data: 'id', name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'image', name: 'image'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'actions', name: 'actions'}
-            ];
-
-            tableArray = tableHeadArray.map((head) => {
-                const id = head.data;
-                var visible = JSON.parse(localStorage.getItem("stock_table")).find((el) => {
-                    return el.name === id;
-                });
-                if(visible) {
-                    return head;
-                } else {
-                    return {
-                        ...head,
-                        visible: false
-                    };
-                }
-            });
-            var table = $('#stocks-table').DataTable({
-                ajax: "{!! route('datatable_all_stocks') !!}",
-                "processing": true,
-                "serverSide": true,
-                "bPaginate": true,
-                dom: 'Bfrtip',
-                buttons: [
-                    'csv', 'excel', 'pdf', 'print'
                 ],
-                columns: tableHeadArray
-            });
-
-            function init() {
-                var selected_items = [];
-                $("#table_head_id option").each(function() {
-                    var column = table.column($(this).attr('data-column'));
-                    if($(this).is(':selected')) {
-                        selected_items.push({
-                            id: $(this).val(),
-                            text: $(this).val(),
-                            name: $(this).attr("data-name")
-                        });
-                        column.visible(true);
-                    } else {
-                        column.visible(false);
-                    }
-                });
-                localStorage.setItem("stock_table", JSON.stringify(selected_items))
-            }
-
-            init();
-
-            $('#table_head_id').on('change.select2', function (e) {
-                init();
-            });
+                '#table_head_id',
+                [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'image', name: 'image'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'actions', name: 'actions'}
+                ],
+                '#stocks-table',
+                "{!! route('datatable_all_stocks') !!}"
+            )
         });
 
     </script>
