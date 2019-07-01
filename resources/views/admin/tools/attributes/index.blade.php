@@ -57,7 +57,7 @@
                 ],
                 columns: [
                     {data: 'id',name: 'id'},
-                    {data: 'name', name: 'name'},
+                    {data: 'name', name: 'attributes_translations.name'},
                     {data: 'category', name: 'category'},
                     {data: 'image', name: 'image'},
                     {data: 'icon', name: 'icon'},
