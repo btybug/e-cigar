@@ -55,7 +55,7 @@
                                class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
                         {!! Form::number('',1,['class' => 'product-qty-select mr-3','min' => '1','style'=> 'width: 85px;']) !!}
 
-                        <button class="btn btn-add-to-cart rounded-0 fnz-20">
+                        <button class="btn btn-primary btn-add-to-cart rounded-0 fnz-20">
                                                     <span class="icon">
                                                         <svg width="24px" height="31px">
                                                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
