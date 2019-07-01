@@ -9,7 +9,7 @@
            @ok('admin_store_attributes_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_store_attributes_new') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
-            <table id="attributes-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+            <table id="attributes-table" class="table table-style table-bordered " cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>#</th>
@@ -23,18 +23,7 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>Is Filter</th>
-                    <th>Render Style</th>
-                    <th>Added/Last Modified Date</th>
-                </tr>
-                </tfoot>
+
             </table>
         </div>
     </div>
@@ -42,7 +31,22 @@
 @section('js')
     <script>
         $(function () {
-            $('#attributes-table').DataTable({
+            $('#attributes-table thead tr').clone(true).appendTo( '#attributes-table thead' );
+            $('#attributes-table thead tr:eq(1) th').each( function (i) {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+                $( 'input', this ).on( 'keyup change', function () {
+                    if ( table.column(i).search() !== this.value ) {
+                        table
+                            .column(i)
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
+
+            var table = $('#attributes-table').DataTable({
                 ajax:  "{!! route('datatable_all_attributes') !!}",
                 "processing": true,
                 "serverSide": true,
@@ -62,26 +66,8 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ],
-                initComplete: function () {
-                    this.api().columns().every( function () {
-                        var column = this;
-                        var select = $('<select><option value=""></option></select>')
-                            .appendTo( $(column.footer()).empty() )
-                            .on( 'change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
-
-                                column
-                                    .search( val ? '^'+val+'$' : '', true, false )
-                                    .draw();
-                            } );
-
-                        column.data().unique().sort().each( function ( d, j ) {
-                            select.append( '<option value="'+d+'">'+d+'</option>' )
-                        } );
-                    } );
-                }
+                orderCellsTop: true,
+                fixedHeader: true
             });
         });
 

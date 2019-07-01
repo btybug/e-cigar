@@ -123,7 +123,7 @@ class DatatableController extends Controller
             Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
                 ->leftJoin("attribute_categories", 'attributes.id', '=', 'attribute_categories.attribute_id')
                 ->leftJoin("categories", 'attribute_categories.categories_id', '=', 'categories.id')
-                ->select('attributes.*', 'attributes_translations.name')
+                ->select('attributes.*','attributes.created_at', 'attributes_translations.name')
                 ->where('attributes_translations.locale', \Lang::getLocale())
                     ->whereNull('attributes.parent_id')
         )
@@ -145,7 +145,7 @@ class DatatableController extends Controller
             ->editColumn('icon', function ($attr) {
                 return ($attr->icon) ? "<i class='$attr->icon'></i>" : "No Icon";
             })
-            ->editColumn('attributes.created_at', function ($attr) {
+            ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);
             })
             ->addColumn('actions', function ($attr) {
