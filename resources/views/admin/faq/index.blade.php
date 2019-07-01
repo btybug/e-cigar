@@ -70,7 +70,7 @@
                         };
                     }
                 });
-                
+
                 var table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
