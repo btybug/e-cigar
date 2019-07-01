@@ -457,6 +457,7 @@ class StockController extends Controller
     public function postSpecificationByCategory(Request $request)
     {
         $html = '';
+        $existingCategories = [];
         $data = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
             ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
             ->where('attribute_categories.categories_id', $request->id);
@@ -469,17 +470,11 @@ class StockController extends Controller
         if($request->selected == "true"){
             $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
             $html = View("admin.inventory._partials.loop_specifications",compact(['data','allAttrs']))->with('by_category',true)->render();
+        } else{
+            $existingCategories = $this->getCategoriesAttrs($request->categories,$request->id)->pluck('id','id')->all();
         }
 
-//        else{
-//
-//            $existingCategories = $this->getCategoriesAttrs($request->categories,$request->id);
-////            $data = array_diff($existingCategories->pluck('id','id')->all(),$data->pluck('id','id')->all());
-//            dd($existingCategories->pluck('id','id')->all(),$data->pluck('id','id')->all());
-//
-//        }
-
-        return \Response::json(['error' => false, 'data' => $data->pluck('id','id')->all(),'html' => $html]);
+        return \Response::json(['error' => false, 'data' => $data->pluck('id','id')->all(), 'existingAttributes' => $existingCategories,'html' => $html]);
     }
 
     public function getCategoriesAttrs($categories,$id)
@@ -497,7 +492,7 @@ class StockController extends Controller
             ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
             ->whereIn('attribute_categories.categories_id',$categoryData )
             ->where('attributes_translations.locale', app()->getLocale())
-            ->select('attributes.*', 'attributes_translations.name')->get();
+            ->select('attributes.*', 'attributes_translations.name','attribute_categories.categories_id as CATEGORY')->get();
 
         return $data;
     }
