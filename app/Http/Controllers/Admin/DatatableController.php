@@ -123,6 +123,15 @@ class DatatableController extends Controller
             ->editColumn('name', function ($attr) {
                 return $attr->name;
             })
+            ->editColumn('category', function ($attr) {
+                $html = '';
+                if(count($attr->categories)){
+                    foreach ($attr->categories as $category){
+                        $html .= '<p>'.$category->name .'</p>';
+                    }
+                }
+                return $html;
+            })
             ->editColumn('image', function ($attr) {
                 return ($attr->image) ? "<img src='$attr->image' width='50px'/>" : "No image";
             })
@@ -136,7 +145,7 @@ class DatatableController extends Controller
 
                 return (userCan('admin_store_attributes_delete') ? '<a href="javascript:void(0)" class="btn btn-danger delete-button" data-href="' . route("admin_store_attributes_delete") . '" data-key="' . $attr->id . '">Delete</a>' : null) . (userCan('admin_store_attributes_edit') ? '
                     <a href="' . route("admin_store_attributes_edit", $attr->id) . '" class="btn btn-warning">Edit</a>' : null);
-            })->rawColumns(['actions', 'image', 'icon', 'created_at'])
+            })->rawColumns(['actions', 'image', 'icon', 'created_at','category'])
             ->make(true);
     }
 
