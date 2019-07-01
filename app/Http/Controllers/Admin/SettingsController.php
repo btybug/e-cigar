@@ -560,4 +560,16 @@ class SettingsController extends Controller
             ->with(['alert' => ['message' => 'New SMTP service connection made successfully!!!', 'class' => 'success']]);
     }
 
+    public function getHomePage()
+    {
+        $model = Common::where('type','home_page')->first();
+
+        return $this->view('home_page',compact(['model']));
+    }
+
+    public function postHomePage(Request $request)
+    {
+
+    }
+
 }
