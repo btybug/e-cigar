@@ -12,7 +12,7 @@ class Brands implements Filter
     public static function apply(Builder $builder, $value)
     {
         $builder->where(function ($query) use ($value) {
-            $query->whereIn('stock_categories.categories_id', $value);
+            $query->whereIn('stocks.brand_id', $value);
         });
 
         return $builder;
