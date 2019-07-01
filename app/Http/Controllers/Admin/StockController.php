@@ -123,6 +123,14 @@ class StockController extends Controller
         return redirect()->back();
     }
 
+    public function delete(Request $request)
+    {
+        $stock = Stock::findOrFail($request->slug);
+        $stock->delete();
+
+        return response()->json(['error' => false]);
+    }
+
     public function getPromotionEdit($id, Request $request)
     {
         $model = Stock::findOrFail($id);
