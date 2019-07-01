@@ -67,14 +67,6 @@
                                            <i id="font-show-area"></i>
                                        </div>
                                    </div>
-                                   <div class="form-group row">
-                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
-                                                                                                     title=""
-                                                                                                     data-original-title="Available for blog Desc">Available for blog</span></label>
-                                       <div class="col-md-10">
-                                           {!! Form::select("name",['Blog','Tickets','Products','Stock'],null,['class'=>'form-control']) !!}
-                                       </div>
-                                   </div>
 
                                    <div class="form-group row">
                                        <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
