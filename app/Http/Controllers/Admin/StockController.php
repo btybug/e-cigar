@@ -81,7 +81,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations','brands',
+        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands',
             'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
@@ -455,38 +455,38 @@ class StockController extends Controller
         $data = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
             ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
             ->where('attribute_categories.categories_id', $request->id);
-            if($request->selected == "true"){
-                $data = $data->whereNotIn('attributes.id', $request->get('attrs',[]));
-            }
+        if ($request->selected == "true") {
+            $data = $data->whereNotIn('attributes.id', $request->get('attrs', []));
+        }
         $data = $data->where('attributes_translations.locale', app()->getLocale())
             ->select('attributes.*', 'attributes_translations.name')->get();
 //            dd($data->pluck('id','id')->all());
-        if($request->selected == "true"){
+        if ($request->selected == "true") {
             $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-            $html = View("admin.inventory._partials.loop_specifications",compact(['data','allAttrs']))->with('by_category',true)->render();
-        } else{
-            $existingCategories = $this->getCategoriesAttrs($request->categories,$request->id)->pluck('id','id')->all();
+            $html = View("admin.inventory._partials.loop_specifications", compact(['data', 'allAttrs']))->with('by_category', true)->render();
+        } else {
+            $existingCategories = $this->getCategoriesAttrs($request->categories, $request->id)->pluck('id', 'id')->all();
         }
 
-        return \Response::json(['error' => false, 'data' => $data->pluck('id','id')->all(), 'existingAttributes' => $existingCategories,'html' => $html]);
+        return \Response::json(['error' => false, 'data' => $data->pluck('id', 'id')->all(), 'existingAttributes' => $existingCategories, 'html' => $html]);
     }
 
-    public function getCategoriesAttrs($categories,$id)
+    public function getCategoriesAttrs($categories, $id)
     {
-        $categories = json_decode($categories,true);
+        $categories = json_decode($categories, true);
         $categoryData = [];
-        if(count($categories)){
-            foreach ($categories as $category){
-                if($category != $id){
-                    $categoryData[] =  $category;
+        if (count($categories)) {
+            foreach ($categories as $category) {
+                if ($category != $id) {
+                    $categoryData[] = $category;
                 }
             }
         }
         $data = Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
             ->leftJoin('attribute_categories', 'attributes.id', '=', 'attribute_categories.attribute_id')
-            ->whereIn('attribute_categories.categories_id',$categoryData )
+            ->whereIn('attribute_categories.categories_id', $categoryData)
             ->where('attributes_translations.locale', app()->getLocale())
-            ->select('attributes.*', 'attributes_translations.name','attribute_categories.categories_id as CATEGORY')->get();
+            ->select('attributes.*', 'attributes_translations.name', 'attribute_categories.categories_id as CATEGORY')->get();
 
         return $data;
     }

@@ -25,7 +25,7 @@ Route::post('/dashboard-delete', 'Admin\AdminController@deleteDashboardWidget')-
 Route::get('/menu-manager', function () {
     return view('admin.menu_manager');
 });
-Route::get('/gmail-call-back','GmailController@callBack');
+Route::get('/gmail-call-back', 'GmailController@callBack');
 
 Route::post('/search', 'Admin\SearchController@filter')->name('admin_search');
 
@@ -299,11 +299,11 @@ Route::group(['prefix' => 'orders'], function () {
 });
 
 Route::group(['prefix' => 'inventory'], function () {
-    Route::get('/','Admin\InventoryController@inventory')->name('admin_inventory');
+    Route::get('/', 'Admin\InventoryController@inventory')->name('admin_inventory');
     Route::group(['prefix' => 'warehouses'], function () {
-        Route::get('/','Admin\WarehouseController@index')->name('admin_warehouses');
-        Route::get('/new','Admin\WarehouseController@getNew')->name('admin_warehouses_new');
-        Route::post('/save','Admin\WarehouseController@postSave')->name('admin_warehouses_save');
+        Route::get('/', 'Admin\WarehouseController@index')->name('admin_warehouses');
+        Route::get('/new', 'Admin\WarehouseController@getNew')->name('admin_warehouses_new');
+        Route::post('/save', 'Admin\WarehouseController@postSave')->name('admin_warehouses_save');
 
         Route::post('/delete', 'Admin\WarehouseController@delete')->name('admin_warehouses_delete');
         Route::get('/edit/{id}', 'Admin\WarehouseController@edit')->name('admin_warehouses_edit');
@@ -326,21 +326,21 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/get-stock-by-sku', 'Admin\StoreController@getStockBySku')->name('admin_inventory_purchase_get_stock_by_sku');
     });
     Route::group(['prefix' => 'suppliers'], function () {
-        Route::get('/','Admin\ItemsController@getSuppliers')->name('admin_suppliers');
-        Route::get('/new','Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
-        Route::get('/edit/{id}','Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
-        Route::post('/new','Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
-        Route::post('/select-suppliers','Admin\ItemsController@getList')->name('post_admin_suppliers_list');
-        Route::post('/sync-suppliers','Admin\ItemsController@syncSupplier')->name('post_admin_suppliers_sync');
-        Route::post('/delete-item-suppliers','Admin\ItemsController@deleteSupplier')->name('post_admin_suppliers_item_delete');
+        Route::get('/', 'Admin\ItemsController@getSuppliers')->name('admin_suppliers');
+        Route::get('/new', 'Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
+        Route::get('/edit/{id}', 'Admin\ItemsController@getSuppliersEdit')->name('admin_suppliers_edit');
+        Route::post('/new', 'Admin\ItemsController@postSuppliers')->name('post_admin_suppliers');
+        Route::post('/select-suppliers', 'Admin\ItemsController@getList')->name('post_admin_suppliers_list');
+        Route::post('/sync-suppliers', 'Admin\ItemsController@syncSupplier')->name('post_admin_suppliers_sync');
+        Route::post('/delete-item-suppliers', 'Admin\ItemsController@deleteSupplier')->name('post_admin_suppliers_item_delete');
         Route::post('/get-list', 'Admin\ItemsController@postSuppliersList')->name('post_admin_suppliers_list');
 
     });
 
     Route::group(['prefix' => 'other'], function () {
-        Route::get('/','Admin\OtherController@getIndex')->name('admin_inventory_other');
-        Route::get('/manage/{id?}','Admin\OtherController@getNew')->name('admin_inventory_others_new');
-        Route::post('/new','Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
+        Route::get('/', 'Admin\OtherController@getIndex')->name('admin_inventory_other');
+        Route::get('/manage/{id?}', 'Admin\OtherController@getNew')->name('admin_inventory_others_new');
+        Route::post('/new', 'Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
     });
 
     Route::group(['prefix' => 'items'], function () {
@@ -361,8 +361,6 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/view/{id}', 'Admin\BarcodesController@getBarcodeView')->name('admin_inventory_barcode_view');
         Route::post('/delete', 'Admin\BarcodesController@deteleBarcode')->name('admin_inventory_barcode_delete');
     });
-
-
 });
 
 Route::group(['prefix' => 'stock'], function () {
@@ -557,10 +555,10 @@ Route::group(['prefix' => 'gmail'], function () {
     Route::get('/settings', 'Admin\GmailController@settings')->name('admin_gmail_settings');
     Route::post('/settings', 'Admin\GmailController@postSettings')->name('post_admin_gmail_settings');
 
-    Route::get('analytics-login','Admin\Google\GoogleController@getAuthorization')->name('analytics_login');
-    Route::get('/oauth/callback','Admin\Google\GoogleController@getAnalyticCallBack');
+    Route::get('analytics-login', 'Admin\Google\GoogleController@getAuthorization')->name('analytics_login');
+    Route::get('/oauth/callback', 'Admin\Google\GoogleController@getAnalyticCallBack');
 
-    Route::get('/oauth/gmail/logout', function (){
+    Route::get('/oauth/gmail/logout', function () {
         LaravelGmail::logout(); //It returns exception if fails
         return redirect()->route('admin_settings_connections');
     })->name('google_log_out');
