@@ -611,4 +611,10 @@ header.main-header .logo .logo-img{
 #users_special-note .special-note-wall{
     min-height: 70px;
 }
-
+.search-attributes-scrolled{
+    overflow: auto;
+    max-height: 544px;
+}
+.search-attributes-scrolled>.row {
+    margin: 0;
+}
