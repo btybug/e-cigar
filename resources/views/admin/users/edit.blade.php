@@ -468,34 +468,16 @@
                         </div>
                         <div id="users_special-note" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
-                                <div class="card-body panel-body">
-                                    <div class="special-note-wall border mb-2 p-3">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <div class="special-note-left-info">
-                                                    <h5 class="special-note-title">Note 1</h5>
-                                                    <p class="special-note-desc">Description</p>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="special-note-right-info float-right">
-                                                    <div>
-                                                        <span class="d-block">1/1/20</span>
-                                                        <span class="d-block">12:55</span>
-                                                        <span class="d-block">added by abokamal</span>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="card-body panel-body ">
+                                    <div class="special-note-wall-box">
+                                        @include('admin.users._partials.user_notes')
                                     </div>
-                                    <div class="special-note-wall border mb-3 p-3">
 
-                                    </div>
                                     <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#specialAddNoteModal">
                                         <i class="fa fa-plus mr-10"></i>Add note
                                     </button>
                                 </div>
+
                             </div>
                         </div>
 
@@ -532,17 +514,17 @@
         <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Add note</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, vitae.
+                    @include("admin.users._partials.new_note")
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary save-note">Save changes</button>
                 </div>
             </div>
         </div>
@@ -562,6 +544,21 @@
 
     <script>
         $(function () {
+            $("body").on('click', '.save-note', function () {
+                let form = $("#specialAddNoteModal form");
+                AjaxCall(
+                    "{{ route('admin_notes_form_save') }}",
+                    form.serialize(),
+                    function (res) {
+                        if(!res.error){
+                            $(".special-note-wall-box").html(res.html);
+                            document.getElementById('noteForm').reset();
+                            $("#specialAddNoteModal").modal('hide');
+                        }
+                    }
+                );
+            });
+
             $("body").on('click', '.reject-verify', function () {
                 var user_id = $("#userID").val()
                 AjaxCall(
