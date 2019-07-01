@@ -1526,7 +1526,6 @@
         }
 
         $('#treeview_json').on('changed.jstree', function (e, data) {
-
             let attributes = $("body").find(".select-specification");
             let attrData = [];
 
@@ -1545,27 +1544,15 @@
                         $("#mediaspecifications").find("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({width: '100%'});
                     }else{
-                        attributes.map(function (i,e) {
-                            var value = $(e).val();
-                            // console.log($.inArray(value,data.data))
-                            if($.inArray(value,data.data)){
-                                $(e).closest('.v-options-list-item').remove();
+                        for(let i of Object.keys(res.data)){
+                            if(Object.keys(res.existingAttributes).indexOf(i) === -1){
+                                $(`.select-specification option[value="${i}"]:selected`).closest('.v-options-list-item').remove();
                             }
-                        });
+
+                        }
                     }
                 }
             });
-
-            if(data.node.state.selected == true){
-
-            }else{
-                attributes.map(function (i,e) {
-                    var value = $(e).val();
-                    if(value != 'Select' && value != null){
-                        attrData.push($(e).val());
-                    }
-                });
-            }
         });
 
         function render_brands_tree() {
