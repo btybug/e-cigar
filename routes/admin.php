@@ -369,6 +369,9 @@ Route::group(['prefix' => 'stock'], function () {
     Route::get('/', 'Admin\StockController@stock')->name('admin_stock');
     Route::get('/new', 'Admin\StockController@stockNew')->name('admin_stock_new');
     Route::get('/edit/{id}', 'Admin\StockController@getStockEdit')->name('admin_stock_edit');
+    Route::post('/delete', 'Admin\StockController@delete')->name('admin_stock_delete');
+
+
     Route::get('/promotions/{id}', 'Admin\StockController@getPromotionEdit')->name('admin_stock_promotion_edit');
     Route::post('/get-promotion', 'Admin\StockController@getPromotion')->name('admin_stock_get_promotion');
     Route::post('/promotion-save', 'Admin\StockController@savePromotion')->name('admin_stock_sales_save');
