@@ -170,9 +170,24 @@
                                                                 <div class="col-md-7">
                                                                     <div class="form-group">
                                                                         <label class="col-sm-12 control-label pl-sm-0">Brands</label>
-                                                                        {!! Form::hidden('brands',(isset($checkedbrandCategories))
-                                                                        ? json_encode($checkedbrandCategories) : null,['id' => 'brands_tree']) !!}
-                                                                        <div id="brands_treeview_json"></div>
+                                                                        <div id="brands_treeview_json">
+                                                                            <div class="filter-wall cat-name row">
+                                                                                <div class="col-12 p-sm-0">
+                                                                                    @foreach($brands as $brand)
+                                                                                        <div class="single-wrap">
+                                                                                            <div class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                                {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                                <label class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                       for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                                    {{--<span class="amount">(189)</span>--}}
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1555,31 +1570,6 @@
             });
         });
 
-        function render_brands_tree() {
-            $("#brands_treeview_json").jstree({
-                "checkbox": {
-                    "three_state": false,
-                    "cascade": 'undetermined',
-                    "keep_selected_style": false
-                },
-                plugins: ["wholerow", "checkbox", "types"],
-                core: {
-                    themes: {
-                        responsive: !1
-                    },
-                    data: {!! json_encode($brandsData) !!}
-                },
-                types: {
-                    "default": {
-                        icon: "fa fa-folder text-primary fa-lg"
-                    },
-                    file: {
-                        icon: "fa fa-file text-success fa-lg"
-                    }
-                }
-            })
-        }
-
         $('#treeview_json').on("changed.jstree", function (e, data) {
             if (data.node) {
                 let selectedNode = $('#treeview_json').jstree(true).get_selected(true)
@@ -1606,35 +1596,7 @@
             }
         });
 
-        $('#brands_treeview_json').on("changed.jstree", function (e, data) {
-            if (data.node) {
-                let selectedNode = $('#brands_treeview_json').jstree(true).get_selected(true)
-                let dataArr = [];
-                for (let i = 0, j = selectedNode.length; i < j; i++) {
-                    dataArr.push(selectedNode[i].id);
-                    dataArr.push(selectedNode[i].parent);
-                }
-
-                let uniqueNames = [];
-
-                if (dataArr.length > 0) {
-                    $.each(dataArr, function (i, el) {
-                        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
-                    });
-                }
-
-                let index = uniqueNames.indexOf("#");
-                if (index > -1) {
-                    uniqueNames.splice(index, 1);
-                }
-
-                console.log(uniqueNames)
-                $("#brands_tree").val(JSON.stringify(uniqueNames));
-            }
-        });
-
         render_categories_tree();
-        render_brands_tree();
 
         function removeA(arr) {
             var what, a = arguments, L = a.length, ax;

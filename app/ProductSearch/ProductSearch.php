@@ -114,13 +114,7 @@ class ProductSearch
         $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id');
 
         if ($category) {
-//            $categoryData = $request->get('brands',[]);
-//            if($category){
-////                $categoryData[] = $category->id;
-//            }
-
             $query->where('stock_categories.categories_id', $category->id);
-//            $query->whereIn('stock_categories.categories_id', $categoryData);
         }
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
             ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')
